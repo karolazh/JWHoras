@@ -1,0 +1,129 @@
+30-01-2017 09:25:51 - Error System : <h2></h2><h3>Error!!! Peticion no encontrada</h3>
+30-01-2017 09:54:54 - Error System : <h2></h2><h3>Error!!! Peticion no encontrada</h3>
+30-01-2017 09:55:22 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 09:55:24 - Error System : <h2></h2><h3>Error!!! Peticion no encontrada</h3>
+30-01-2017 09:55:25 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 09:55:29 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 09:57:15 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 09:57:17 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 09:57:31 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 09:57:38 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 09:57:39 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 09:59:59 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:00:01 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:00:02 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:00:02 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:00:02 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:03:45 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:03:46 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:05:02 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:11:25 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:15:50 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:20:54 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:22:01 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:22:03 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:26:55 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:26:57 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:26:59 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:26:59 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:26:59 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:26:59 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:30:15 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:33:40 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:37:55 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:38:16 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:38:18 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:38:18 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:38:18 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:38:18 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:38:18 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:38:22 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:38:24 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:41:33 - Error System : <h2></h2><h3>Error!!! Peticion no encontrada</h3>
+30-01-2017 10:41:59 - Error System : <h2></h2><h3>Error!!! Peticion no encontrada</h3>
+30-01-2017 10:48:34 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:51:26 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:51:40 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:51:41 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:51:48 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:53:01 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:53:16 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:53:30 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:53:39 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:56:38 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:57:21 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:57:22 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:57:23 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:57:23 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:57:23 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:57:23 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:57:23 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:57:24 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:57:24 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 10:57:24 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 11:03:08 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 11:14:58 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 11:15:02 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 11:15:05 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 11:17:23 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:17:28 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:17:35 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:17:50 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:20:11 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:20:11 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:20:12 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:20:13 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:20:13 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:20:15 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:20:19 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:20:23 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:20:31 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:20:32 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:33:50 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:33:53 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'usrmidas'@'192.168.0.110' (using password: YES)
+30-01-2017 11:52:50 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 11:57:01 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 11:58:05 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:00:32 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:06:29 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:06:34 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:06:35 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:08:13 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:09:04 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:10:57 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:12:39 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:12:40 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:13:31 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:13:32 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:13:32 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:14:20 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:14:21 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:18:15 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:18:30 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:20:35 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:20:36 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:29:06 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:29:22 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:30:00 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:30:16 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:30:32 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:30:44 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:30:58 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:31:11 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:31:24 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:31:46 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:32:48 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:33:10 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:33:20 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:33:30 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:33:53 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:34:26 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:34:28 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:34:54 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:39:30 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:42:44 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 12:42:46 - Error System : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+30-01-2017 15:37:11 - Error System : <h2></h2><h3>Error!!! Peticion no encontrada</h3>
+30-01-2017 15:37:59 - Error System : <h2></h2><h3>Error!!! Peticion no encontrada</h3>
+30-01-2017 17:06:43 - Error System : <h2></h2><h3>Error!!! Peticion no encontrada</h3>
+30-01-2017 17:09:07 - Error System : <h2></h2><h3>Error!!! Peticion no encontrada</h3>
