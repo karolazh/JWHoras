@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2017-02-09 18:53:41
-         compiled from "/var/www/html/prevencion/app/views/templates/home/dashboard.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1794375807589cd397df3816-64507997%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.18, created on 2017-02-13 12:11:34
+         compiled from "/srv/http/prevencion/app/views/templates/home/dashboard.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:134380100858a1cca622eb83-41703811%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '05283b5e7daa74f4f20738252a6a434ca46450e2' => 
+    '1a88c427bd86c97b45022f5a78367964aa9fe3d0' => 
     array (
-      0 => '/var/www/html/prevencion/app/views/templates/home/dashboard.tpl',
-      1 => 1486677219,
+      0 => '/srv/http/prevencion/app/views/templates/home/dashboard.tpl',
+      1 => 1486994086,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1794375807589cd397df3816-64507997',
+  'nocache_hash' => '134380100858a1cca622eb83-41703811',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_589cd397e1ac58_50009951',
   'variables' => 
   array (
     'arrResultado' => 0,
@@ -24,8 +22,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'base_url' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_58a1cca629a537_92703391',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_589cd397e1ac58_50009951')) {function content_589cd397e1ac58_50009951($_smarty_tpl) {?><link href="<?php echo @constant('STATIC_FILES');?>
+<?php if ($_valid && !is_callable('content_58a1cca629a537_92703391')) {function content_58a1cca629a537_92703391($_smarty_tpl) {?><link href="<?php echo @constant('STATIC_FILES');?>
 template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo @constant('STATIC_FILES');?>
 template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />

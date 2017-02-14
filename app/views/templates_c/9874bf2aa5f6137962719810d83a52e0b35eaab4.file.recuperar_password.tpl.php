@@ -1,9 +1,37 @@
-<!DOCTYPE html>
+<?php /* Smarty version Smarty-3.1.18, created on 2017-02-14 15:36:59
+         compiled from "/srv/http/prevencion/app/views/templates/login/recuperar_password.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:52725248958a1ccbb9cb255-91345225%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '9874bf2aa5f6137962719810d83a52e0b35eaab4' => 
+    array (
+      0 => '/srv/http/prevencion/app/views/templates/login/recuperar_password.tpl',
+      1 => 1487097416,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '52725248958a1ccbb9cb255-91345225',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_58a1ccbba2ceb8_77204688',
+  'variables' => 
+  array (
+    'base_url' => 0,
+    'static' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_58a1ccbba2ceb8_77204688')) {function content_58a1ccbba2ceb8_77204688($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="es">
 <head>
-    {include file="layout/css.tpl"}
+    <?php echo $_smarty_tpl->getSubTemplate ("layout/css.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
     <script>
-           var BASE_URI = '{$base_url}' + '/';
+           var BASE_URI = '<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+' + '/';
     </script>
 </head>
 <body class="body-login">
@@ -13,7 +41,8 @@
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-banner text-center">
                         <br/>
-                        <img src="{$static}images/logo_minsal.png" />
+                        <img src="<?php echo $_smarty_tpl->tpl_vars['static']->value;?>
+images/logo_minsal.png" />
                         <br/>
                         <h1 class="text-center">Prevenci&oacute;n de Femicidios</h1>
                     </div>
@@ -22,11 +51,13 @@
                             <div id="form-success" class="hidden">
                                 <div id="mensaje-modificacion" class="alert alert-success">
                                 </div>
-                                <button onclick="location.href='{$base_url}'" class="btn btn-lg btn-primary btn-block" 
+                                <button onclick="location.href='<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+'" class="btn btn-lg btn-primary btn-block" 
                                         type="button">Continuar <i class="fa fa-forward"></i></button>
                             </div>
                             <div id="form-contenedor">
-                            <form role="form" action="{$base_url}/Login/procesar" method="post" id="form">
+                            <form role="form" action="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+/Login/procesar" method="post" id="form">
                                 <fieldset>
                                     <div class="alert alert-warning">
                                         Para recuperar su contraseña, ingrese su Rut.
@@ -56,6 +87,7 @@
                 </div>
             </div>
         </div>
-        {include file="layout/js.tpl"}
+        <?php echo $_smarty_tpl->getSubTemplate ("layout/js.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
     </body>
-</html>
+</html><?php }} ?>

@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2017-02-01 14:16:21
-         compiled from "/var/www/html/mordedores/app/views/templates/login/actualizar2.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:816753831588f9cf692c321-18520635%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.18, created on 2017-02-13 12:11:42
+         compiled from "/srv/http/prevencion/app/views/templates/login/actualizar.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:86631664658a1ccaebcb7c5-43627726%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '10a410a643db49a5dff63fb070ab9d0ea52cbb5f' => 
+    '539526f8bd35c8bcc3efb9c55f04f1fe4f270287' => 
     array (
-      0 => '/var/www/html/mordedores/app/views/templates/login/actualizar2.tpl',
-      1 => 1485969378,
+      0 => '/srv/http/prevencion/app/views/templates/login/actualizar.tpl',
+      1 => 1486994086,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '816753831588f9cf692c321-18520635',
+  'nocache_hash' => '86631664658a1ccaebcb7c5-43627726',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_588f9cf6948fb5_53595447',
   'variables' => 
   array (
     'nombre' => 0,
@@ -31,9 +29,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'base_url' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_58a1ccaec44cc3_31572836',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_588f9cf6948fb5_53595447')) {function content_588f9cf6948fb5_53595447($_smarty_tpl) {?><section class="content-header">
-    <h1>Cuenta</h1>
+<?php if ($_valid && !is_callable('content_58a1ccaec44cc3_31572836')) {function content_58a1ccaec44cc3_31572836($_smarty_tpl) {?><section class="content-header">
+    <h1><i class="fa fa-user"></i> <span>Cuenta</span></h1>
 </section>
 
 <section class="content">
@@ -86,6 +86,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <h3 class="box-title">Actualización de Contraseña</h3>
                 </div>
                 <div class="box-body">
+                    
+                    
                     <form  id="form" name="form" enctype="application/x-www-form-urlencoded" action="" method="post">
                         <input type="hidden" name="id" id="id" value="<?php echo $_smarty_tpl->tpl_vars['item']->value->id;?>
 "/>

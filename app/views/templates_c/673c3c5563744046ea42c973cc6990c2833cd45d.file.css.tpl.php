@@ -1,30 +1,30 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2017-02-10 16:46:30
-         compiled from "/var/www/html/prevencion/app/views/templates/layout/css.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1766590617589cc4e7149d01-97090251%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.18, created on 2017-02-13 11:18:50
+         compiled from "/srv/http/prevencion/app/views/templates/layout/css.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:153612701758a1c04a794648-61935082%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '871b87cc7f3ddcb1b50f1e6150c2db5f5b46c27d' => 
+    '673c3c5563744046ea42c973cc6990c2833cd45d' => 
     array (
-      0 => '/var/www/html/prevencion/app/views/templates/layout/css.tpl',
-      1 => 1486755989,
+      0 => '/srv/http/prevencion/app/views/templates/layout/css.tpl',
+      1 => 1486994086,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1766590617589cc4e7149d01-97090251',
+  'nocache_hash' => '153612701758a1c04a794648-61935082',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_589cc4e7156633_18542891',
   'variables' => 
   array (
     'static' => 0,
     'css' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_58a1c04a7a4d17_19402582',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_589cc4e7156633_18542891')) {function content_589cc4e7156633_18542891($_smarty_tpl) {?><meta charset="utf-8">
+<?php if ($_valid && !is_callable('content_58a1c04a7a4d17_19402582')) {function content_58a1c04a7a4d17_19402582($_smarty_tpl) {?><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Minsal :: Prevenci&oacute;n de Femicidios</title>
 <!-- Tell the browser to be responsive to screen width -->

@@ -1,31 +1,31 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2017-02-13 10:03:19
-         compiled from "/var/www/html/prevencion/app/views/templates/template.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:193709559589cd397e1db89-66402753%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.18, created on 2017-02-13 12:11:34
+         compiled from "/srv/http/prevencion/app/views/templates/template.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:189696061058a1cca629f0e0-91339412%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '7529302081c3a1a86ed633a90762def034979887' => 
+    'd7f16d7fa8f634b0f72523ddc33f9f1d9963e57d' => 
     array (
-      0 => '/var/www/html/prevencion/app/views/templates/template.tpl',
-      1 => 1486756038,
+      0 => '/srv/http/prevencion/app/views/templates/template.tpl',
+      1 => 1486994086,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '193709559589cd397e1db89-66402753',
+  'nocache_hash' => '189696061058a1cca629f0e0-91339412',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_589cd397e47389_87241541',
   'variables' => 
   array (
     'static' => 0,
     'content' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_58a1cca62d9fd1_95133639',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_589cd397e47389_87241541')) {function content_589cd397e47389_87241541($_smarty_tpl) {?><?php if (!is_callable('smarty_function_htmlBoxUsuario')) include '/var/www/html/prevencion/app/views/plugins/function.htmlBoxUsuario.php';
-if (!is_callable('smarty_function_htmlMenu')) include '/var/www/html/prevencion/app/views/plugins/function.htmlMenu.php';
+<?php if ($_valid && !is_callable('content_58a1cca62d9fd1_95133639')) {function content_58a1cca62d9fd1_95133639($_smarty_tpl) {?><?php if (!is_callable('smarty_function_htmlBoxUsuario')) include '/srv/http/prevencion/app/views/plugins/function.htmlBoxUsuario.php';
+if (!is_callable('smarty_function_htmlMenu')) include '/srv/http/prevencion/app/views/plugins/function.htmlMenu.php';
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
