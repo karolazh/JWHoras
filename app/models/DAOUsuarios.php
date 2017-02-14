@@ -66,6 +66,21 @@ class DAOUsuarios extends Model{
         }
     }
     
+     /*
+     * 20170201 - Setea Password de Usuario
+     */
+    public function setUltimoLogin($datos){
+        $query = "UPDATE tab_usuarios
+                  SET    usr_ultimo_login = ?
+                  WHERE  usr_id = ? ";
+
+        if ($this->db->execQuery($query, $datos)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     /*
      * 20170201 - Setea Password de Usuario
      */

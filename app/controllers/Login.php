@@ -48,13 +48,13 @@ class Login extends Controller{
     public function procesar() {
         $rut      = trim($this->_request->getParam("rut"));
         $password = trim($this->_request->getParam("password"));
-        $recordar = trim($this->_request->getParam("recordar"));
+        //$recordar = trim($this->_request->getParam("recordar"));
         $usuario = $this->_DAOUsuarios->getByRut($rut);
-        $salt = $usuario->usr_salt;
         //a mayores iteraciones es mas lento adivinar la contraseña
         $iteraciones = 1000000;
         $valido = false;
         if (!is_null($usuario)) {
+            $salt = $usuario->usr_salt;
             if ($usuario->usr_password == (hash_pbkdf2('sha512',$password,$salt,$iteraciones))) {
                 $valido = true;
             }
@@ -65,8 +65,10 @@ class Login extends Controller{
             $session->id = $usuario->usr_id;
             $session->nombre = $usuario->usr_nombres . " " . $usuario->usr_apellidos;
             $session->mail = $usuario->usr_email;
-            
-            
+            $ultimo_login = date('Y-m-d H:i:s');
+            $datos = array($ultimo_login, $session->id);
+            $upd = $this->_DAOUsuarios->setUltimoLogin($datos);
+
 //            $comuna = "";
 //            $region = "";
 //            $provincia = "";
