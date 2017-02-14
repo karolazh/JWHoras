@@ -1,5 +1,0 @@
-19-01-2017 16:50:05 - Error System : cache_dir "/var/www/html/mordedores/app//../tmp/cache" must be a directory
-19-01-2017 16:50:05 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
-19-01-2017 16:50:06 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
-19-01-2017 16:50:06 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
-19-01-2017 16:50:07 - Error SQL : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
