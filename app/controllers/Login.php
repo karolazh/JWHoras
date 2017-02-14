@@ -53,32 +53,14 @@ class Login extends Controller {
         //a mayores iteraciones es mas lento adivinar la contraseña
         $iteraciones = 1000000;
         $valido = FALSE;
-        $primer_login = FALSE;
-        print_r('<br>password :');
-        print_r($password.'<br>');
-        $salt = $usuario->usr_salt;
-        print_r('salt : <br>');
-        print_r($salt.'<br>');
-        print_r('iteraciones : <br>');
-        print_r($iteraciones.'<br>');
-        $cadenahash = hash_pbkdf2('sha512', $password, $salt, $iteraciones);
-        print_r('cadenahash : <br>');
-        print_r($cadenahash.'<br>');
-        $usr_password = $usuario->usr_password;
-        print_r('$usuario->usr_password : ');
-        print_r($usr_password);
-        
+        $primer_login = FALSE;        
         if (!is_null($usuario)) {
             $salt = $usuario->usr_salt;
             if ($usuario->usr_ultimo_login === NULL) {
                 $primer_login = TRUE;
-                print_r('$primer_login : ');
-                print_r($primer_login);
             }
             if ($usuario->usr_password == (hash_pbkdf2('sha512', $password, $salt, $iteraciones))) {
                 $valido = true;
-                print_r('$valido : ');
-                print_r($valido);
             }
         }
         if ($valido and $rut != "" and $password != "") {
