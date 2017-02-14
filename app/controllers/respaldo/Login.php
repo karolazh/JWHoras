@@ -49,68 +49,68 @@ class Login extends Controller{
         $rut      = trim($this->_request->getParam("rut"));
         $password = trim($this->_request->getParam("password"));
         //$recordar = trim($this->_request->getParam("recordar"));
+
         $usuario = $this->_DAOUsuarios->getByRut($rut);
-        //a mayores iteraciones es mas lento adivinar la contraseña
-        $iteraciones = 1000000;
+        
+        //echo ($usuario->usr_rut."<br/>");
+        
         $valido = false;
         if (!is_null($usuario)) {
-            $salt = $usuario->usr_salt;
-            if ($usuario->usr_password == (hash_pbkdf2('sha512',$password,$salt,$iteraciones))) {
+            //if ($usuario->usr_password == sha1($password)) {
                 $valido = true;
-            }
+            //}
+            //echo ($usuario->usr_password."<br/>".sha1($password));
         }
+
         if($valido and $rut!="" and $password != ""){
             $session = New Zend_Session_Namespace("usuario_carpeta");
             $session->id = $usuario->usr_id;
             $session->nombre = $usuario->usr_nombres . " " . $usuario->usr_apellidos;
             $session->mail = $usuario->usr_email;
-
-            $ultimo_login = date('Y-m-d H:i:s');
-            $datos = array($ultimo_login, $session->id);
-            $upd = $this->_DAOUsuarios->setUltimoLogin($datos);
-            $comuna = "";
-            $region = "";
-            $provincia = "";
             
-            $id_comuna = $usuario->usr_com_id;
-            echo $id_comuna;
-            /* obtiene nombre de comuna */
-            if ($id_comuna) {
-                $result = $this->_DAOComuna->getComuna($id_comuna);
-                if ($result){
-                    $comuna = $result->com_nombre;
-                    $id_provincia = $result->com_pro_id;
-                    
-                    /* obtiene código de región a través de provincia */
-                    $result2 = $this->_DAOProvincias->getProvincia($id_provincia);
-                    if ($result2){
-                        $provincia = $result2->pro_nombre;
-                        $id_region = $result2->pro_reg_id;
-                        
-                        /* obtiene nombre de región */
-                        $result3 = $this->_DAORegion->getRegion($id_region);
-                        if($result3){
-                            $cod = $result3->reg_codigo;
-                            $nom = $result3->reg_nombre;
-                            $region = $cod ." - ". $nom;
-                        }
-                    }
-                    //if(!is_null($result2))
-                }
-                //if(!is_null($result))
-            }
-            //if(!is_null($id_comuna))       
+//            $comuna = "";
+//            $region = "";
+//            $provincia = "";
+//            
+//            $id_comuna = $usuario->usr_com_id;
+//            echo $id_comuna;
+//            /* obtiene nombre de comuna */
+//            if ($id_comuna) {
+//                $result = $this->_DAOComuna->getComuna($id_comuna);
+//                if ($result){
+//                    $comuna = $result->com_nombre;
+//                    $id_provincia = $result->com_pro_id;
+//                    
+//                    /* obtiene código de región a través de provincia */
+//                    $result2 = $this->_DAOProvincias->getProvincia($id_provincia);
+//                    if ($result2){
+//                        $provincia = $result2->pro_nombre;
+//                        $id_region = $result2->pro_reg_id;
+//                        
+//                        /* obtiene nombre de región */
+//                        $result3 = $this->_DAORegion->getRegion($id_region);
+//                        if($result3){
+//                            $cod = $result3->reg_codigo;
+//                            $nom = $result3->reg_nombre;
+//                            $region = $cod ." - ". $nom;
+//                        }
+//                    }
+//                    //if(!is_null($result2))
+//                }
+//                //if(!is_null($result))
+//            }
+//            //if(!is_null($id_comuna))
             
             $_SESSION['id']        = $usuario->usr_id;
             $_SESSION['perfil']    = $usuario->usr_pfl_id;
             $_SESSION['nombre']    = $usuario->usr_nombres." ".$usuario->usr_apellidos;
             $_SESSION['rut']       = $usuario->usr_rut;
             $_SESSION['mail']      = $usuario->usr_email;
-            $_SESSION['fono']      = $usuario->usr_fono;
-            $_SESSION['celular']   = $usuario->usr_celular;
-            $_SESSION['comuna']    = $comuna;
-            $_SESSION['provincia'] = $provincia;
-            $_SESSION['region']    = $region;
+            //$_SESSION['fono']      = $usuario->usr_fono;
+            //$_SESSION['celular']   = $usuario->usr_celular;
+            //$_SESSION['comuna']    = $comuna;
+            //$_SESSION['provincia'] = $provincia;
+            //$_SESSION['region']    = $region;
             
             if($recordar == 1){
                 setcookie('datos_usuario_carpeta', $usuario->usr_id, time() + 365 * 24 * 60 * 60);
@@ -119,7 +119,7 @@ class Login extends Controller{
             //if($usuario->usr_password==1){
                 header('Location: '.BASE_URI.'/Home/dashboard');
             //}else{
-            //   header('Location: '.BASE_URI.'/Login/actualizar');
+            //    header('Location: '.BASE_URI.'/Login/actualizar');
             //}
         }
         else{
@@ -248,42 +248,38 @@ class Login extends Controller{
         
     }
 
-    public function recuperar_password_rut() {
+    public function recuperar_password_email() {
         header('Content-type: application/json');
-        $rut = "";
+        $email = "";
         $correcto = false;
-        $error = array();
-        if (trim($this->_request->getParam("rut")) != "") {
-            $usuario = $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
+        if (trim($this->_request->getParam("email")) != "") {
+            $usuario = $this->_DAOUsuarios->getByMail($this->_request->getParam("email"));
             if (!is_null($usuario)) {
                 $correcto = true;
                 $cadena = Seguridad::randomPass(12);
-                $bin = openssl_random_pseudo_bytes(64);
-                $salt =  bin2hex($bin);
-                $iteraciones = 1000000;
-                $cadenahash = hash_pbkdf2('sha512', $cadena, $salt,$iteraciones);
+                $cadenasha512 = Seguridad::generar_sha512($cadena);
                 $this->smarty->assign("nombre", $usuario->usr_nombres . " " . $usuario->usr_apellidos);
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);
+
                 $this->_DAOUsuarios->update(
-                        array("usr_password" => $cadenahash, "usr_salt" => $salt), $usuario->usr_id, "usr_id"
+                        array("usr_password" => $cadenasha512), $usuario->usr_id, "usr_id"
                 );
 
-                $this->load->lib('Rut', false);
+                $this->load->lib('Email', false);
                 $remitente = "midas@minsal.cl";
-                $nombre_remitente = "Prevención de Femicidios";
-                $destinatario = $usuario->usr_rut;
+                $nombre_remitente = "Facturacion";
+                $destinatario = $usuario->usr_email;
 
-                $asunto = "PREDEFEM - Recuperar contraseña";
-                $mensaje = $this->smarty->fetch("login/recuperar_password_rut.tpl");
+                $asunto = "SIRAM - Recuperar contraseña";
+                $mensaje = $this->smarty->fetch("login/recuperar_password_email.tpl");
                 Email::sendEmail($destinatario, $remitente, $nombre_remitente, $asunto, $mensaje);
             } else {
                 $correcto = false;
-                $error['rut']= "El email no existe en nuestra base de datos";
             }
         }
 
-        $salida = array("rut" => $rut,"error" => $error,
+        $salida = array("email" => $email,
             "correcto" => $correcto);
 
         $json = Zend_Json::encode($salida);
