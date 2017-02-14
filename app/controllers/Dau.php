@@ -3,8 +3,8 @@
 /* 
 !IniHeaderDoc
 *****************************************************************************
-!NombreObjeto 		: Administracion.php
-!Sistema 	  	: PREVENCION
+!NombreObjeto 		: Dau.php
+!Sistema 	  	: PREVENCIÓN
 !Modulo 	  	: NA
 !Descripcion  		: 	
 !Plataforma   		: !PHP
@@ -31,33 +31,57 @@
 */
 
 //** clase Admnistracion ***//
-class Administracion extends Controller{
+class Dau extends Controller{
 	
-    protected $_DAOAdministracion;
+    protected $_DAODau;
 
     //funcion construct
     function __construct(){
         parent::__construct();
         //Acceso::set("ADMINISTRADOR");
-        $this->_DAOAdministracion = $this->load->model("DAOAdministracion");
-        //$this->smarty->addPluginsDir(APP_PATH . "views/templates/MantenedorPlanificacion/Mantenedores/plugins/");
+        $this->_DAODau = $this->load->model("DAODau");
     }
     
     /*
-     * Mantenedor de Noticias
+     * Index
      */
-    public function noticias(){
-        $sesion = New Zend_Session_Namespace("usuario_carpeta");        
+    public function index(){
+        $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
         $this->smarty->assign("rut", $sesion->rut);
         $this->smarty->assign("usuario", $sesion->usuario);
         
-        //llamada al _DAOAdministracion para listar regiones
-        //$arr = $this->_DAOAdministracion->getListaRegiones();
-        //$this->smarty->assign('arrResultado', $arr);
+        /*
+         * Si tengo perfil 1="ADMIN" / 3="GESTOR NACIONAL" puedo ver todas las DAU
+         * Si tengo perfil 2="ENFERMERA" puedo ver solo las DAU ingresadas en mi institución
+         * Si tengo perfil 4="GESTOR REGIONAL" puedo ver solo las DAU correspondientes a la región
+         * REALIZAR FUNCIÓN PARA LISTAR SEGÚN PERFIL
+         */
+        $arr = $this->_DAODau->getListaDAU();
+        $this->smarty->assign('arrResultado', $arr);
         
         //llamado al template
-        $this->_display('Administracion/Noticias/index.tpl');
+        $this->_display('DAU/index.tpl');
+    }
+    
+    public function nuevaDau(){
+        $sesion = New Zend_Session_Namespace("usuario_carpeta");
+        $this->smarty->assign("id_usuario", $sesion->id);
+        $this->smarty->assign("rut", $sesion->rut);
+        $this->smarty->assign("usuario", $sesion->usuario);
+        
+        //llamado al template
+        $this->_display('DAU/nueva_dau.tpl');
+    }
+    
+    public function verDau(){
+        $sesion = New Zend_Session_Namespace("usuario_carpeta");
+        $this->smarty->assign("id_usuario", $sesion->id);
+        $this->smarty->assign("rut", $sesion->rut);
+        $this->smarty->assign("usuario", $sesion->usuario);
+        
+        //llamado al template
+        $this->_display('DAU/ver_dau.tpl');
     }
     
     //*** REGIONES ***//

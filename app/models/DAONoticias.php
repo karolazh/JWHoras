@@ -4,7 +4,7 @@
 !IniHeaderDoc
 *****************************************************************************
 !NombreObjeto 		: DAONoticias.php
-!Sistema 	  	: SIRAM
+!Sistema 	  	: PREVENCIÓN
 !Modulo 	  	: NA
 !Descripcion  		: 	
 !Plataforma   		: !PHP
@@ -12,7 +12,7 @@
 !Itinerado    		: NA
 !Uso          		: NA
 !Autor        		: Carolina Zamora Hormazábal
-!Creacion     		: 01/02/2017
+!Creacion     		: 14/02/2017
 !Retornos/Salidas 	: NA
 !OrigenReq        	: NA
 =============================================================================

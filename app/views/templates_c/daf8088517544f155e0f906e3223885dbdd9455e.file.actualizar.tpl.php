@@ -1,4 +1,38 @@
-<section class="content-header">
+<?php /* Smarty version Smarty-3.1.18, created on 2017-02-14 16:30:20
+         compiled from "/var/www/html/prevencion/app/views/templates/login/actualizar.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:979685433589cd3abce30f2-01466439%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'daf8088517544f155e0f906e3223885dbdd9455e' => 
+    array (
+      0 => '/var/www/html/prevencion/app/views/templates/login/actualizar.tpl',
+      1 => 1487100612,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '979685433589cd3abce30f2-01466439',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_589cd3abd044c6_31623423',
+  'variables' => 
+  array (
+    'nombre' => 0,
+    'rut' => 0,
+    'mail' => 0,
+    'fono' => 0,
+    'celular' => 0,
+    'comuna' => 0,
+    'provincia' => 0,
+    'region' => 0,
+    'item' => 0,
+    'base_url' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_589cd3abd044c6_31623423')) {function content_589cd3abd044c6_31623423($_smarty_tpl) {?><section class="content-header">
     <h1><i class="fa fa-user"></i> <span>Cuenta</span></h1>
 </section>
 
@@ -11,28 +45,36 @@
                 </div>
                 <div class="box-body">
                     <label class="control-label required">Nombre</label><br>
-                    {$nombre}
+                    <?php echo $_smarty_tpl->tpl_vars['nombre']->value;?>
+
                     <br/><br/>
                     <label class="control-label required">RUT</label><br>
-                    {$rut}
+                    <?php echo $_smarty_tpl->tpl_vars['rut']->value;?>
+
                     <br/><br/>
                     <label class="control-label required">Email</label><br>
-                    {$mail}
+                    <?php echo $_smarty_tpl->tpl_vars['mail']->value;?>
+
                     <br/><br/>
                     <label class="control-label required">Fono</label><br>
-                    {$fono}
+                    <?php echo $_smarty_tpl->tpl_vars['fono']->value;?>
+
                     <br/><br/>
                     <label class="control-label required">Celular</label><br>
-                    {$celular}
+                    <?php echo $_smarty_tpl->tpl_vars['celular']->value;?>
+
                     <br/><br/>
                     <label class="control-label required">Comuna</label><br>
-                    {$comuna}
+                    <?php echo $_smarty_tpl->tpl_vars['comuna']->value;?>
+
                     <br/><br/>
                     <label class="control-label required">Provincia</label><br>
-                    {$provincia}
+                    <?php echo $_smarty_tpl->tpl_vars['provincia']->value;?>
+
                     <br/><br/>
                     <label class="control-label required">Regi&oacute;n</label><br>
-                    {$region}
+                    <?php echo $_smarty_tpl->tpl_vars['region']->value;?>
+
                     <br/><br/>
                 </div>
             </div>
@@ -51,7 +93,8 @@
                     </div>
                     
                     <form  id="form" name="form" enctype="application/x-www-form-urlencoded" action="" method="post">
-                        <input type="hidden" name="id" id="id" value="{$item->id}"/>
+                        <input type="hidden" name="id" id="id" value="<?php echo $_smarty_tpl->tpl_vars['item']->value->id;?>
+"/>
                         <div class="col-md-6 text-left">
                             <div class="form-group clearfix">
                                 <label for="password" class="control-label required">Nueva contraseña (*)</label>
@@ -79,7 +122,8 @@
                             <button type="button" id="guardar" class="btn btn-success btn-sm">
                                 <i class="fa fa-save"></i> Guardar
                             </button>
-                            <button type="button" id="cancelar" onclick="location.href='{$base_url}/Home/dashboard'" class="btn btn-default btn-sm">
+                            <button type="button" id="cancelar" onclick="location.href='<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+/Home/dashboard'" class="btn btn-default btn-sm">
                                 <i class="fa fa-remove"></i> Cancelar 
                             </button>
                             <br/><br/>
@@ -90,4 +134,4 @@
             </div>
         </div>
     </div>
-</section>
+</section><?php }} ?>

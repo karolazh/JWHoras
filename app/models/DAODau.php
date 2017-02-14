@@ -1,17 +1,18 @@
 <?php
+
 /* 
 !IniHeaderDoc
 *****************************************************************************
-!NombreObjeto 		: OtrosRegistros.php
-!Sistema 	  	: SIRAM
+!NombreObjeto 		: DAODau.php
+!Sistema 	  	: PREVENCIÓN
 !Modulo 	  	: NA
-!Descripcion  		: 
+!Descripcion  		: 	
 !Plataforma   		: !PHP
 !Perfil       		: 
 !Itinerado    		: NA
 !Uso          		: NA
-!Autor        		: Orlando Vázquez
-!Creacion     		: 02/02/2017
+!Autor        		: Carolina Zamora Hormazábal
+!Creacion     		: 14/02/2017
 !Retornos/Salidas 	: NA
 !OrigenReq        	: NA
 =============================================================================
@@ -29,31 +30,49 @@
 !EndHeaderDoc 
 */
 
-//** clase OtrosRegistros ***//
-class OtrosRegistros extends Controller{
-	
-    protected $_DAORegistroMordedores;
-    /*
+class DAODau extends Model{
+    /**
+     * @var string 
+     */
+    protected $_tabla = "tab_dau";
+    protected $_primaria = "dau_id";
+    
+    /**
      * Constructor
      */
-    function __construct(){
+    function __construct()
+    {
         parent::__construct();
-        $this->_DAORegistroMordedores = $this->load->model("DAORegistroMordedores");
     }
-    
 
     /*
-     * Otros Registros
+     * Lista DAU
      */
-    public function otrosRegistros(){
-        $sesion = New Zend_Session_Namespace("usuario_carpeta");
-        $this->load->css(STATIC_FILES . 'template/plugins/datatables/jquery.dataTables.min.css');
-        $this->load->css(STATIC_FILES . 'template/plugins/datatables/dataTables.bootstrap.css');
-        $this->_display('OtrosRegistros/otros_registros.tpl');
+    public function getListaDAU(){
+        $query = $this->db->select("*")->from("tab_dau");
+        $resultado = $query->getResult();
+
+        if($resultado->numRows>0){
+            return $resultado->rows;
+        }else{
+            return NULL;
+        }
     }
     
-    public function nuevo(){
-        $sesion = New Zend_Session_Namespace("usuario_carpeta");
-        $this->_display('OtrosRegistros/nuevo.tpl');
+    /*
+     * Ver DAU
+     */
+    public function getDAU($id_dau){
+        $query = "select * from tab_dau 
+                  where dau_id = ?";
+
+        $consulta = $this->db->getQuery($query,array($id_dau));
+        if($consulta->numRows > 0){
+            return $consulta->rows->row_0;
+        }else{
+            return null;
+        }
     }
 }
+
+?>
