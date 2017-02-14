@@ -3,7 +3,7 @@
         <i class="fa fa-home"></i> <span>Inicio</span></a>
 </li>
 <li>
-    <a href="{$base_url}/Home/dashboard">
+    <a href="{$base_url}/Dau/index">
         <i class="fa fa-plus"></i> <span>DAU</span></a>
 </li>
 <li>

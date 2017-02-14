@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2017-02-14 16:06:58
+<?php /* Smarty version Smarty-3.1.18, created on 2017-02-14 17:35:06
          compiled from "/var/www/html/prevencion/app/views/plugins/view/menu.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1608956436589cd397e61669-39292186%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ef5ae1b176eeb4197c0222ce15c4c2b88d1ec447' => 
     array (
       0 => '/var/www/html/prevencion/app/views/plugins/view/menu.tpl',
-      1 => 1487099215,
+      1 => 1487104501,
       2 => 'file',
     ),
   ),
@@ -30,7 +30,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </li>
 <li>
     <a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-/Home/dashboard">
+/Dau/index">
         <i class="fa fa-plus"></i> <span>DAU</span></a>
 </li>
 <li>

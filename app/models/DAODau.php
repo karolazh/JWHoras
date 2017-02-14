@@ -3,7 +3,7 @@
 /* 
 !IniHeaderDoc
 *****************************************************************************
-!NombreObjeto 		: DAONoticias.php
+!NombreObjeto 		: DAODau.php
 !Sistema 	  	: PREVENCIÓN
 !Modulo 	  	: NA
 !Descripcion  		: 	
@@ -30,12 +30,12 @@
 !EndHeaderDoc 
 */
 
-class DAONoticias extends Model{
+class DAODau extends Model{
     /**
      * @var string 
      */
-    protected $_tabla = "tab_noticias";
-    protected $_primaria = "not_id";
+    protected $_tabla = "tab_dau";
+    protected $_primaria = "dau_id";
     
     /**
      * Constructor
@@ -46,10 +46,10 @@ class DAONoticias extends Model{
     }
 
     /*
-     * Lista Noticias
+     * Lista DAU
      */
-    public function getListaNoticias(){
-        $query = $this->db->select("*")->from("tab_noticias");
+    public function getListaDAU(){
+        $query = $this->db->select("*")->from("tab_dau");
         $resultado = $query->getResult();
 
         if($resultado->numRows>0){
@@ -60,13 +60,13 @@ class DAONoticias extends Model{
     }
     
     /*
-     * Ver Noticia
+     * Ver DAU
      */
-    public function getNoticia($id_noticia){
-        $query = "select * from tab_noticias 
-                  where not_id = ?";
+    public function getDAU($id_dau){
+        $query = "select * from tab_dau 
+                  where dau_id = ?";
 
-        $consulta = $this->db->getQuery($query,array($id_noticia));
+        $consulta = $this->db->getQuery($query,array($id_dau));
         if($consulta->numRows > 0){
             return $consulta->rows->row_0;
         }else{
