@@ -12,7 +12,7 @@
             <i  class="fa fa-user fa-3x img-circle" alt="User Image"></i>
             <p>
                 {*{$usuario} <br/> {$rut}*}
-                <a href="{$smarty.const.BASE_URI}/Login/actualizar2" class="h4">
+                <a href="{$smarty.const.BASE_URI}/Login/actualizar" class="h4">
                     {$usuario} <br/> {$rut}
                 </a>
             </p>

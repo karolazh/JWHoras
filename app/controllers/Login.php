@@ -105,7 +105,7 @@ class Login extends Controller {
                 //if(!is_null($result))
             }
             //if(!is_null($id_comuna))       
-
+            
             $_SESSION['id'] = $usuario->usr_id;
             $_SESSION['perfil'] = $usuario->usr_pfl_id;
             $_SESSION['nombre'] = $usuario->usr_nombres . " " . $usuario->usr_apellidos;
@@ -116,7 +116,7 @@ class Login extends Controller {
             $_SESSION['comuna'] = $comuna;
             $_SESSION['provincia'] = $provincia;
             $_SESSION['region'] = $region;
-
+            $_SESSION['primer_login'] = $primer_login;
             if ($recordar == 1) {
                 setcookie('datos_usuario_carpeta', $usuario->usr_id, time() + 365 * 24 * 60 * 60);
             }
@@ -150,6 +150,7 @@ class Login extends Controller {
         $this->smarty->assign("comuna",$_SESSION['comuna']);
         $this->smarty->assign("provincia",$_SESSION['provincia']);
         $this->smarty->assign("region",$_SESSION['region']);
+        $this->smarty->assign("primer_login",$_SESSION['primer_login']);
         $this->smarty->assign("hidden","hidden");
         $this->_addJavascript(STATIC_FILES.'js/templates/login/actualizar_password.js');
         $this->_display('login/actualizar.tpl');
@@ -182,11 +183,21 @@ class Login extends Controller {
 
         if ($validar->isValid()) {
             //$date = date('Y-m-d H:i:s');
+            $iteraciones = 1000000;
+            $bin = openssl_random_pseudo_bytes(64);
+            $salt = bin2hex($bin);
+            $fecha_login = 
             $password = sha1($this->_request->getParam("password"));
-
-            $datos = array($password, $session->id);
+            $password = hash_pbkdf2('sha512', $this->_request->getParam("password"), $salt, $iteraciones);
+            $ultimo_login = date('Y-m-d H:i:s');
+            $datos = array($password, $salt, $ultimo_login, $session->id);
 
             $upd = $this->_DAOUsuarios->setPassword($datos);
+            if ($upd) {
+               $primer_login = FALSE; 
+               $_SESSION['primer_login'] = $primer_login;
+            }
+            
         }
 
         $salida = array("error" => $validar->getErrores(),
