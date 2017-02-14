@@ -48,16 +48,18 @@ class Login extends Controller{
     public function procesar() {
         $rut      = trim($this->_request->getParam("rut"));
         $password = trim($this->_request->getParam("password"));
-        $recordar = trim($this->_request->getParam("recordar"));
+        //$recordar = trim($this->_request->getParam("recordar"));
+
         $usuario = $this->_DAOUsuarios->getByRut($rut);
-        $salt = $usuario->usr_salt;
-        //a mayores iteraciones es mas lento adivinar la contraseña
-        $iteraciones = 1000000;
+        
+        //echo ($usuario->usr_rut."<br/>");
+        
         $valido = false;
         if (!is_null($usuario)) {
-            if ($usuario->usr_password == (hash_pbkdf2('sha512',$password,$salt,$iteraciones))) {
+            //if ($usuario->usr_password == sha1($password)) {
                 $valido = true;
-            }
+            //}
+            //echo ($usuario->usr_password."<br/>".sha1($password));
         }
 
         if($valido and $rut!="" and $password != ""){
@@ -65,7 +67,6 @@ class Login extends Controller{
             $session->id = $usuario->usr_id;
             $session->nombre = $usuario->usr_nombres . " " . $usuario->usr_apellidos;
             $session->mail = $usuario->usr_email;
-            
             
 //            $comuna = "";
 //            $region = "";
@@ -110,14 +111,15 @@ class Login extends Controller{
             //$_SESSION['comuna']    = $comuna;
             //$_SESSION['provincia'] = $provincia;
             //$_SESSION['region']    = $region;
-            //if($recordar == 1){
-            //    setcookie('datos_usuario_carpeta', $usuario->usr_id, time() + 365 * 24 * 60 * 60);
-            //}
+            
+            if($recordar == 1){
+                setcookie('datos_usuario_carpeta', $usuario->usr_id, time() + 365 * 24 * 60 * 60);
+            }
             
             //if($usuario->usr_password==1){
                 header('Location: '.BASE_URI.'/Home/dashboard');
             //}else{
-            //   header('Location: '.BASE_URI.'/Login/actualizar');
+            //    header('Location: '.BASE_URI.'/Login/actualizar');
             //}
         }
         else{

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2017-02-09 17:39:51
+<?php /* Smarty version Smarty-3.1.18, created on 2017-02-14 14:40:08
          compiled from "/var/www/html/prevencion/app/views/plugins/view/box_usuario.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1625109280589cd397e504b8-26843880%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2cc67ef7a158c95ea998b3dae2d4a8e5af99cb8e' => 
     array (
       0 => '/var/www/html/prevencion/app/views/plugins/view/box_usuario.tpl',
-      1 => 1485975491,
+      1 => 1486994782,
       2 => 'file',
     ),
   ),
@@ -15,14 +15,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_589cd397e5e334_98490971',
   'variables' => 
   array (
     'usuario' => 0,
     'rut' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_589cd397e5e334_98490971',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_589cd397e5e334_98490971')) {function content_589cd397e5e334_98490971($_smarty_tpl) {?><li class="dropdown user user-menu">
     <!-- Menu Toggle Button -->
