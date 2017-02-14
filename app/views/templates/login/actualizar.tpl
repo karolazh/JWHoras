@@ -44,11 +44,11 @@
                     <h3 class="box-title">Actualización de Contraseña</h3>
                 </div>
                 <div class="box-body">
-                    {*<div class="col-sm-12">
+                    <div class="col-sm-12">
                         <div class="alert alert-warning">
                             <i class="fa fa-info-circle"></i> No ha actualizado su contraseña inicial.
                         </div>
-                    </div>*}
+                    </div>
                     
                     <form  id="form" name="form" enctype="application/x-www-form-urlencoded" action="" method="post">
                         <input type="hidden" name="id" id="id" value="{$item->id}"/>
