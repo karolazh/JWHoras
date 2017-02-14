@@ -141,35 +141,37 @@ class Login extends Controller {
 
     //*** 20170127 - Formulario Actualiza Password ***//
 
-    public function actualizar() {
-        $this->smarty->assign("nombre", $_SESSION['nombre']);
-        $this->smarty->assign("rut", $_SESSION['rut']);
-        $this->smarty->assign("mail", $_SESSION['mail']);
-        $this->smarty->assign("fono", $_SESSION['fono']);
-        $this->smarty->assign("celular", $_SESSION['celular']);
-        $this->smarty->assign("comuna", $_SESSION['comuna']);
-        $this->smarty->assign("provincia", $_SESSION['provincia']);
-        $this->smarty->assign("region", $_SESSION['region']);
-        $this->smarty->assign("hidden", "hidden");
-        $this->_addJavascript(STATIC_FILES . 'js/templates/login/actualizar_password.js');
+    public function actualizar(){
+        $this->smarty->assign("nombre",$_SESSION['nombre']);
+        $this->smarty->assign("rut",$_SESSION['rut']);
+        $this->smarty->assign("mail",$_SESSION['mail']);
+        $this->smarty->assign("fono",$_SESSION['fono']);
+        $this->smarty->assign("celular",$_SESSION['celular']);
+        $this->smarty->assign("comuna",$_SESSION['comuna']);
+        $this->smarty->assign("provincia",$_SESSION['provincia']);
+        $this->smarty->assign("region",$_SESSION['region']);
+        $this->smarty->assign("hidden","hidden");
+        $this->_addJavascript(STATIC_FILES.'js/templates/login/actualizar_password.js');
         $this->_display('login/actualizar.tpl');
     }
 
     //*** 20170127 - Formulario Actualiza Password ***//
-//    public function actualizar2(){
-//        $this->smarty->assign("nombre",$_SESSION['nombre']);
-//        $this->smarty->assign("rut",$_SESSION['rut']);
-//        $this->smarty->assign("mail",$_SESSION['mail']);
-//        $this->smarty->assign("fono",$_SESSION['fono']);
-//        $this->smarty->assign("celular",$_SESSION['celular']);
-//        $this->smarty->assign("comuna",$_SESSION['comuna']);
-//        $this->smarty->assign("provincia",$_SESSION['provincia']);
-//        $this->smarty->assign("region",$_SESSION['region']);
-//
-//        $this->smarty->assign("hidden","hidden");
-//        $this->_addJavascript(STATIC_FILES.'js/templates/login/actualizar_password.js');
-//        $this->_display('login/actualizar2.tpl');
-//    }
+
+    public function actualizar2(){
+        $this->smarty->assign("nombre",$_SESSION['nombre']);
+        $this->smarty->assign("rut",$_SESSION['rut']);
+        $this->smarty->assign("mail",$_SESSION['mail']);
+        $this->smarty->assign("fono",$_SESSION['fono']);
+        $this->smarty->assign("celular",$_SESSION['celular']);
+        $this->smarty->assign("comuna",$_SESSION['comuna']);
+        $this->smarty->assign("provincia",$_SESSION['provincia']);
+        $this->smarty->assign("region",$_SESSION['region']);
+
+        $this->smarty->assign("hidden","hidden");
+        $this->_addJavascript(STATIC_FILES.'js/templates/login/actualizar_password.js');
+        $this->_display('login/actualizar2.tpl');
+    }
+    
     //*** 20170201 - Funcion guarda nueva password ***//
     public function ajax_guardar_nuevo_password() {
         header('Content-type: application/json');
@@ -256,6 +258,8 @@ class Login extends Controller {
         $rut = "";
         $correcto = false;
         $error = array();
+        $rutparam = $this->_request->getParam("rut");
+        $rutparam = $rutparam.str_replace(".", "", $rutparam);
         if (trim($this->_request->getParam("rut")) != "") {
             $usuario = $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
             if (!is_null($usuario)) {
@@ -264,7 +268,9 @@ class Login extends Controller {
                 $bin = openssl_random_pseudo_bytes(64);
                 $salt = bin2hex($bin);
                 $iteraciones = 1000000;
-                $cadenahash = hash_pbkdf2('sha512', $cadena, $salt, $iteraciones);
+
+                $cadenahash = hash_pbkdf2('sha512', $cadena, $salt,$iteraciones);
+                //$cadenahash = Seguridad::generar_sha512($cadena);
                 $this->smarty->assign("nombre", $usuario->usr_nombres . " " . $usuario->usr_apellidos);
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);

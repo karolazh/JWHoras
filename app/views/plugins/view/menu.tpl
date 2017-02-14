@@ -3,7 +3,7 @@
         <i class="fa fa-home"></i> <span>Inicio</span></a>
 </li>
 <li>
-    <a href="{$base_url}/Home/dashboard">
+    <a href="{$base_url}/Dau/index">
         <i class="fa fa-plus"></i> <span>DAU</span></a>
 </li>
 <li>
@@ -32,7 +32,7 @@
                     <i class="fa fa-plus-circle"></i> <span>Mantenedores</span></a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="{$base_url}/Administracion/regiones">
+                            <a href="{$base_url}/Administracion/noticias">
                                 <i class="fa fa-plus-circle"></i> <span>Noticias</span></a>
                         </li>
                     </ul>
