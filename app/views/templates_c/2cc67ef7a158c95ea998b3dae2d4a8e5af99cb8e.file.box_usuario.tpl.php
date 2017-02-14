@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2017-02-14 14:40:08
+<?php /* Smarty version Smarty-3.1.18, created on 2017-02-14 16:49:29
          compiled from "/var/www/html/prevencion/app/views/plugins/view/box_usuario.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1625109280589cd397e504b8-26843880%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2cc67ef7a158c95ea998b3dae2d4a8e5af99cb8e' => 
     array (
       0 => '/var/www/html/prevencion/app/views/plugins/view/box_usuario.tpl',
-      1 => 1486994782,
+      1 => 1487101751,
       2 => 'file',
     ),
   ),
@@ -40,7 +40,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <p>
                 
                 <a href="<?php echo @constant('BASE_URI');?>
-/Login/actualizar" class="h4">
+/Login/actualizar2" class="h4">
                     <?php echo $_smarty_tpl->tpl_vars['usuario']->value;?>
  <br/> <?php echo $_smarty_tpl->tpl_vars['rut']->value;?>
 

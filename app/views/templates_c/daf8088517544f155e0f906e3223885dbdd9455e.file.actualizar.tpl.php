@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2017-02-14 14:45:08
+<?php /* Smarty version Smarty-3.1.18, created on 2017-02-14 16:30:20
          compiled from "/var/www/html/prevencion/app/views/templates/login/actualizar.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:979685433589cd3abce30f2-01466439%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'daf8088517544f155e0f906e3223885dbdd9455e' => 
     array (
       0 => '/var/www/html/prevencion/app/views/templates/login/actualizar.tpl',
-      1 => 1486994782,
+      1 => 1487100612,
       2 => 'file',
     ),
   ),
@@ -86,7 +86,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <h3 class="box-title">Actualización de Contraseña</h3>
                 </div>
                 <div class="box-body">
-                    
+                    <div class="col-sm-12">
+                        <div class="alert alert-warning">
+                            <i class="fa fa-info-circle"></i> No ha actualizado su contraseña inicial.
+                        </div>
+                    </div>
                     
                     <form  id="form" name="form" enctype="application/x-www-form-urlencoded" action="" method="post">
                         <input type="hidden" name="id" id="id" value="<?php echo $_smarty_tpl->tpl_vars['item']->value->id;?>

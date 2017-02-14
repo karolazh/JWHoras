@@ -133,7 +133,6 @@ class Login extends Controller{
     }
 
     //*** 20170127 - Formulario Actualiza Password ***//
-
     public function actualizar(){
         $this->smarty->assign("nombre",$_SESSION['nombre']);
         $this->smarty->assign("rut",$_SESSION['rut']);
@@ -149,21 +148,20 @@ class Login extends Controller{
     }
 
     //*** 20170127 - Formulario Actualiza Password ***//
+    public function actualizar2(){
+        $this->smarty->assign("nombre",$_SESSION['nombre']);
+        $this->smarty->assign("rut",$_SESSION['rut']);
+        $this->smarty->assign("mail",$_SESSION['mail']);
+        $this->smarty->assign("fono",$_SESSION['fono']);
+        $this->smarty->assign("celular",$_SESSION['celular']);
+        $this->smarty->assign("comuna",$_SESSION['comuna']);
+        $this->smarty->assign("provincia",$_SESSION['provincia']);
+        $this->smarty->assign("region",$_SESSION['region']);
 
-//    public function actualizar2(){
-//        $this->smarty->assign("nombre",$_SESSION['nombre']);
-//        $this->smarty->assign("rut",$_SESSION['rut']);
-//        $this->smarty->assign("mail",$_SESSION['mail']);
-//        $this->smarty->assign("fono",$_SESSION['fono']);
-//        $this->smarty->assign("celular",$_SESSION['celular']);
-//        $this->smarty->assign("comuna",$_SESSION['comuna']);
-//        $this->smarty->assign("provincia",$_SESSION['provincia']);
-//        $this->smarty->assign("region",$_SESSION['region']);
-//
-//        $this->smarty->assign("hidden","hidden");
-//        $this->_addJavascript(STATIC_FILES.'js/templates/login/actualizar_password.js');
-//        $this->_display('login/actualizar2.tpl');
-//    }
+        $this->smarty->assign("hidden","hidden");
+        $this->_addJavascript(STATIC_FILES.'js/templates/login/actualizar_password.js');
+        $this->_display('login/actualizar2.tpl');
+    }
     
     //*** 20170201 - Funcion guarda nueva password ***//
     public function ajax_guardar_nuevo_password(){

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2017-02-14 14:40:08
+<?php /* Smarty version Smarty-3.1.18, created on 2017-02-14 16:06:58
          compiled from "/var/www/html/prevencion/app/views/plugins/view/menu.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1608956436589cd397e61669-39292186%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ef5ae1b176eeb4197c0222ce15c4c2b88d1ec447' => 
     array (
       0 => '/var/www/html/prevencion/app/views/plugins/view/menu.tpl',
-      1 => 1486994782,
+      1 => 1487099215,
       2 => 'file',
     ),
   ),
@@ -66,7 +66,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <ul class="treeview-menu">
                         <li>
                             <a href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-/Administracion/regiones">
+/Administracion/noticias">
                                 <i class="fa fa-plus-circle"></i> <span>Noticias</span></a>
                         </li>
                     </ul>
