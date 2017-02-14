@@ -2,6 +2,9 @@
 <html lang="es">
 <head>
     {include file="layout/css.tpl"}
+    <script>
+           var BASE_URI = '{$base_url}' + '/';
+    </script>
 </head>
 <body class="body-login">
         <br/><br/><br/>
@@ -16,22 +19,28 @@
                     </div>
                     <div class="portlet portlet-green">
                         <div class="portlet-body">
-                            <form role="form" action="{$base_url}/Login/procesar" method="post" id="loginForm">
+                            <div id="form-success" class="hidden">
+                                <div id="mensaje-modificacion" class="alert alert-success">
+                                </div>
+                                <button onclick="location.href='{$base_url}'" class="btn btn-lg btn-primary btn-block" 
+                                        type="button">Continuar <i class="fa fa-forward"></i></button>
+                            </div>
+                            <div id="form-contenedor">
+                            <form role="form" action="{$base_url}/Login/procesar" method="post" id="form">
                                 <fieldset>
                                     <div class="alert alert-warning">
                                         Para recuperar su contraseña, ingrese su Rut.
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control mailbox-attachment" 
-                                               name="mail" id="mail" placeholder="Ingrese su Rut"/>
-                                    </div>
+                                        <input type="text" class="form-control" maxlength="13"
+                                               onkeyup="formateaRut(this),validaRut(this)"
+                                               name="rut" id="rut" placeholder="Ingrese su Rut"/>
                                     <br>
                                     <div id="form-error" class="alert alert-danger hidden">
                                         <i class="fa fa-warning fa-2x"></i> &nbsp; No se encontro un usuario para el Rut ingresado.
                                     </div>
-                                    
-                                    <button id="enviar" class="btn btn-lg btn-primary btn-block" type="button">Enviar</button>                                    
-                                    {*<button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>*}
+                                    </div>
+                                    <button id="enviar" class="btn btn-lg btn-primary btn-block" type="button">Enviar</button>   
                                 </fieldset>
                                 <br>
                                 
@@ -41,6 +50,7 @@
                                     </p>
                                 </div>
                             </form>
+                            </div>
                         </div>
                     </div>
                 </div>

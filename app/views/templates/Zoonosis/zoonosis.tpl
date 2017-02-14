@@ -1,40 +1,10 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2017-02-07 10:18:14
-         compiled from "/var/www/html/mordedores/app/views/templates/Zoonosis/zoonosis.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:3133530415898c565eeb245-74747132%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-$_valid = $_smarty_tpl->decodeProperties(array (
-  'file_dependency' => 
-  array (
-    '1ab1282240c4b121d12222ceb9c30c51a2331738' => 
-    array (
-      0 => '/var/www/html/mordedores/app/views/templates/Zoonosis/zoonosis.tpl',
-      1 => 1486471669,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '3133530415898c565eeb245-74747132',
-  'function' => 
-  array (
-  ),
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_5898c565f02149_77602024',
-  'variables' => 
-  array (
-    'base_url' => 0,
-    'arrResultado' => 0,
-    'item' => 0,
-  ),
-  'has_nocache_code' => false,
-),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5898c565f02149_77602024')) {function content_5898c565f02149_77602024($_smarty_tpl) {?><link href="<?php echo @constant('STATIC_FILES');?>
-template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo @constant('STATIC_FILES');?>
-template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
 <section class="content-header">
     <h1><i class="fa fa-envelope"></i><span>&nbsp;Notificaciones de Zoonosis</span></h1>
     <div class="col-md-12 text-right">
-        <button type="button" id="notificar" onclick="location.href='<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-/Zoonosis/notificar'"
+        <button type="button" id="notificar" onclick="location.href='{$base_url}/Zoonosis/notificar'"
                 class="btn btn-success">
             <i class="fa fa-envelope"></i>&nbsp;&nbsp;Notificar Zoonosis
         </button>
@@ -55,9 +25,12 @@ template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="tex
                         <div class="form-group" align="right">
                             <div class="form-group col-md-12">
                                 <div class="form-group col-md-3">
-                                    <label for="region" class="control-label required">Región</label>
+                                    <label for="region" class="control-label required">Región {$prueba}</label>
                                     <select for="region" class="form-control">
-                                            <option selected="selected">Todas las Regiones</option>
+                                            <option>Todas las Regiones</option>
+                                            {foreach $arrRegiones as $item} 
+                                                <option value="{$item->reg_id}" >{$item->reg_nombre}</option>
+                                            {/foreach}
                                     </select>
                                 </div>
                                 
@@ -111,39 +84,27 @@ template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="tex
                                 </thead>
 
                                 <tbody>
-                                <?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['arrResultado']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['item']->key => $_smarty_tpl->tpl_vars['item']->value) {
-$_smarty_tpl->tpl_vars['item']->_loop = true;
-?>
+                                {foreach $arrResultado as $item}
                                     <tr>
-                                        <td align="center"><?php echo $_smarty_tpl->tpl_vars['item']->value->vac_fec_crea;?>
-</td>
-                                        <td align="center"><?php echo $_smarty_tpl->tpl_vars['item']->value->vac_agno;?>
-</td>
-                                        <td align="center"><?php echo $_smarty_tpl->tpl_vars['item']->value->vac_periodo;?>
-</td>
-                                        
-                                        <td align="center"><?php echo $_smarty_tpl->tpl_vars['item']->value->com_nombre;?>
-</td>
-                                        <td align="center"><?php echo $_smarty_tpl->tpl_vars['item']->value->esp_nombre;?>
-</td>
-                                        <td align="center"><?php echo $_smarty_tpl->tpl_vars['item']->value->ins_nombre;?>
-</td>
-                                        
-                                        <td align="center"><?php echo $_smarty_tpl->tpl_vars['item']->value->vac_cantidad;?>
-</td>
+                                        <td align="center">{$item->vac_fec_crea}</td>
+                                        <td align="center">{$item->vac_agno}</td>
+                                        <td align="center">{$item->vac_periodo}</td>
+                                        {*<td align="center">{$item->vac_fec_ini}</td>
+                                        <td align="center">{$item->vac_fec_ter}</td>*}
+                                        <td align="center">{$item->com_nombre}</td>
+                                        <td align="center">{$item->esp_nombre}</td>
+                                        <td align="center">{$item->ins_nombre}</td>
+                                        {*<td align="center">{$item->usr_nombres}</td>*}
+                                        <td align="center">{$item->vac_cantidad}</td>
                                         <td align="center">
                                             <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                                    onClick="location.href='<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-/Vacunas/verRegistro/<?php echo $_smarty_tpl->tpl_vars['item']->value->vac_id;?>
-'" 
+                                                    onClick="location.href='{$base_url}/Vacunas/verRegistro/{$item->vac_id}'" 
                                                     data-toggle="tooltip" title="Ver Vacuna">
                                                 <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver
                                             </button>
                                         </td>
                                     </tr>
-                                <?php } ?>
+                                {/foreach}
                                 </tbody>
                             </table>
                             <br/>
@@ -155,4 +116,4 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
         </form>
         
     </div>
-</section><?php }} ?>
+</section>

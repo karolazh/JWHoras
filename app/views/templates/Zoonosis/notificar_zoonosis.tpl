@@ -1,29 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2017-02-07 10:20:36
-         compiled from "/var/www/html/mordedores/app/views/templates/Zoonosis/notificar_zoonosis.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:3030540105899c9a49574b6-72150693%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-$_valid = $_smarty_tpl->decodeProperties(array (
-  'file_dependency' => 
-  array (
-    '5ba79d19e6bef0b84820a71f4bb916dc990d09aa' => 
-    array (
-      0 => '/var/www/html/mordedores/app/views/templates/Zoonosis/notificar_zoonosis.tpl',
-      1 => 1486471669,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '3030540105899c9a49574b6-72150693',
-  'function' => 
-  array (
-  ),
-  'variables' => 
-  array (
-    'base_url' => 0,
-  ),
-  'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_5899c9a4969d84_17654219',
-),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5899c9a4969d84_17654219')) {function content_5899c9a4969d84_17654219($_smarty_tpl) {?><section class="content-header">
+<section class="content-header">
     <h1><i class="fa fa-envelope"></i><span>&nbsp;Notificación de Zoonosis</span></h1>
 </section>
 
@@ -59,7 +34,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                 <div class="form-group clearfix col-md-6">
                                     <label for="patologia" class="control-label required">Patología</label>
                                     <select for="patologia" class="form-control">
-                                        <option selected="selected">Seleccione una Patología</option>
+                                        <option>Seleccione una Patología</option>
+                                        {foreach $arrPatologia as $item} 
+                                                <option value="{$item->pat_id}" >{$item->pat_nombre}</option>
+                                        {/foreach}
                                     </select>
                                 </div>
                             </div>
@@ -221,7 +199,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                     <div class="form-group clearfix col-md-6">
                                         <label for="especie" class="control-label required">Especie</label>
                                         <select for="especie" class="form-control">
-                                            <option selected="selected">Seleccione una Especie</option>
+                                            <option>Seleccione una Especie</option>
+                                            {foreach $arrEspecie as $item} 
+                                                <option value="{$item->esp_id}" >{$item->esp_nombre}</option>
+                                        {/foreach}
                                         </select>
                                     </div>
                                 </div>
@@ -247,8 +228,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                             <i class="fa fa-save"></i>  Guardar
                                         </button>
                                         <button type="button" id="cancelar"  class="btn btn-default"
-                                                onclick="location.href='<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-/Zoonosis/zoonosis'">
+                                                onclick="location.href='{$base_url}/Zoonosis/zoonosis'">
                                             <i class="fa fa-remove"></i>  Cancelar
                                         </button>
                                         <br/><br/>
@@ -262,4 +242,4 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </form>
                              
     </div>
-</section><?php }} ?>
+</section>

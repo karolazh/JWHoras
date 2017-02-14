@@ -48,24 +48,26 @@ class Login extends Controller{
     public function procesar() {
         $rut      = trim($this->_request->getParam("rut"));
         $password = trim($this->_request->getParam("password"));
-        $recordar = trim($this->_request->getParam("recordar"));
+        //$recordar = trim($this->_request->getParam("recordar"));
         $usuario = $this->_DAOUsuarios->getByRut($rut);
-        $salt = $usuario->usr_salt;
         //a mayores iteraciones es mas lento adivinar la contraseña
         $iteraciones = 1000000;
         $valido = false;
         if (!is_null($usuario)) {
+            $salt = $usuario->usr_salt;
             if ($usuario->usr_password == (hash_pbkdf2('sha512',$password,$salt,$iteraciones))) {
                 $valido = true;
             }
         }
-
         if($valido and $rut!="" and $password != ""){
             $session = New Zend_Session_Namespace("usuario_carpeta");
             $session->id = $usuario->usr_id;
             $session->nombre = $usuario->usr_nombres . " " . $usuario->usr_apellidos;
             $session->mail = $usuario->usr_email;
-            
+
+            $ultimo_login = date('Y-m-d H:i:s');
+            $datos = array($ultimo_login, $session->id);
+            $upd = $this->_DAOUsuarios->setUltimoLogin($datos);
             $comuna = "";
             $region = "";
             $provincia = "";
@@ -244,38 +246,42 @@ class Login extends Controller{
         
     }
 
-    public function recuperar_password_email() {
+    public function recuperar_password_rut() {
         header('Content-type: application/json');
-        $email = "";
+        $rut = "";
         $correcto = false;
-        if (trim($this->_request->getParam("email")) != "") {
-            $usuario = $this->_DAOUsuarios->getByMail($this->_request->getParam("email"));
+        $error = array();
+        if (trim($this->_request->getParam("rut")) != "") {
+            $usuario = $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
             if (!is_null($usuario)) {
                 $correcto = true;
                 $cadena = Seguridad::randomPass(12);
-                $cadenasha512 = Seguridad::generar_sha512($cadena);
+                $bin = openssl_random_pseudo_bytes(64);
+                $salt =  bin2hex($bin);
+                $iteraciones = 1000000;
+                $cadenahash = hash_pbkdf2('sha512', $cadena, $salt,$iteraciones);
                 $this->smarty->assign("nombre", $usuario->usr_nombres . " " . $usuario->usr_apellidos);
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);
-
                 $this->_DAOUsuarios->update(
-                        array("usr_password" => $cadenasha512), $usuario->usr_id, "usr_id"
+                        array("usr_password" => $cadenahash, "usr_salt" => $salt), $usuario->usr_id, "usr_id"
                 );
 
-                $this->load->lib('Email', false);
+                $this->load->lib('Rut', false);
                 $remitente = "midas@minsal.cl";
-                $nombre_remitente = "Facturacion";
-                $destinatario = $usuario->usr_email;
+                $nombre_remitente = "Prevención de Femicidios";
+                $destinatario = $usuario->usr_rut;
 
-                $asunto = "SIRAM - Recuperar contraseña";
-                $mensaje = $this->smarty->fetch("login/recuperar_password_email.tpl");
+                $asunto = "PREDEFEM - Recuperar contraseña";
+                $mensaje = $this->smarty->fetch("login/recuperar_password_rut.tpl");
                 Email::sendEmail($destinatario, $remitente, $nombre_remitente, $asunto, $mensaje);
             } else {
                 $correcto = false;
+                $error['rut']= "El email no existe en nuestra base de datos";
             }
         }
 
-        $salida = array("email" => $email,
+        $salida = array("rut" => $rut,"error" => $error,
             "correcto" => $correcto);
 
         $json = Zend_Json::encode($salida);
