@@ -59,62 +59,62 @@ class Login extends Controller{
                 $valido = true;
             }
         }
-
         if($valido and $rut!="" and $password != ""){
             $session = New Zend_Session_Namespace("usuario_carpeta");
             $session->id = $usuario->usr_id;
             $session->nombre = $usuario->usr_nombres . " " . $usuario->usr_apellidos;
             $session->mail = $usuario->usr_email;
+
             $ultimo_login = date('Y-m-d H:i:s');
             $datos = array($ultimo_login, $session->id);
             $upd = $this->_DAOUsuarios->setUltimoLogin($datos);
-
-//            $comuna = "";
-//            $region = "";
-//            $provincia = "";
-//            
-//            $id_comuna = $usuario->usr_com_id;
-//            echo $id_comuna;
-//            /* obtiene nombre de comuna */
-//            if ($id_comuna) {
-//                $result = $this->_DAOComuna->getComuna($id_comuna);
-//                if ($result){
-//                    $comuna = $result->com_nombre;
-//                    $id_provincia = $result->com_pro_id;
-//                    
-//                    /* obtiene código de región a través de provincia */
-//                    $result2 = $this->_DAOProvincias->getProvincia($id_provincia);
-//                    if ($result2){
-//                        $provincia = $result2->pro_nombre;
-//                        $id_region = $result2->pro_reg_id;
-//                        
-//                        /* obtiene nombre de región */
-//                        $result3 = $this->_DAORegion->getRegion($id_region);
-//                        if($result3){
-//                            $cod = $result3->reg_codigo;
-//                            $nom = $result3->reg_nombre;
-//                            $region = $cod ." - ". $nom;
-//                        }
-//                    }
-//                    //if(!is_null($result2))
-//                }
-//                //if(!is_null($result))
-//            }
-//            //if(!is_null($id_comuna))
+            $comuna = "";
+            $region = "";
+            $provincia = "";
+            
+            $id_comuna = $usuario->usr_com_id;
+            echo $id_comuna;
+            /* obtiene nombre de comuna */
+            if ($id_comuna) {
+                $result = $this->_DAOComuna->getComuna($id_comuna);
+                if ($result){
+                    $comuna = $result->com_nombre;
+                    $id_provincia = $result->com_pro_id;
+                    
+                    /* obtiene código de región a través de provincia */
+                    $result2 = $this->_DAOProvincias->getProvincia($id_provincia);
+                    if ($result2){
+                        $provincia = $result2->pro_nombre;
+                        $id_region = $result2->pro_reg_id;
+                        
+                        /* obtiene nombre de región */
+                        $result3 = $this->_DAORegion->getRegion($id_region);
+                        if($result3){
+                            $cod = $result3->reg_codigo;
+                            $nom = $result3->reg_nombre;
+                            $region = $cod ." - ". $nom;
+                        }
+                    }
+                    //if(!is_null($result2))
+                }
+                //if(!is_null($result))
+            }
+            //if(!is_null($id_comuna))       
             
             $_SESSION['id']        = $usuario->usr_id;
             $_SESSION['perfil']    = $usuario->usr_pfl_id;
             $_SESSION['nombre']    = $usuario->usr_nombres." ".$usuario->usr_apellidos;
             $_SESSION['rut']       = $usuario->usr_rut;
             $_SESSION['mail']      = $usuario->usr_email;
-            //$_SESSION['fono']      = $usuario->usr_fono;
-            //$_SESSION['celular']   = $usuario->usr_celular;
-            //$_SESSION['comuna']    = $comuna;
-            //$_SESSION['provincia'] = $provincia;
-            //$_SESSION['region']    = $region;
-            //if($recordar == 1){
-            //    setcookie('datos_usuario_carpeta', $usuario->usr_id, time() + 365 * 24 * 60 * 60);
-            //}
+            $_SESSION['fono']      = $usuario->usr_fono;
+            $_SESSION['celular']   = $usuario->usr_celular;
+            $_SESSION['comuna']    = $comuna;
+            $_SESSION['provincia'] = $provincia;
+            $_SESSION['region']    = $region;
+            
+            if($recordar == 1){
+                setcookie('datos_usuario_carpeta', $usuario->usr_id, time() + 365 * 24 * 60 * 60);
+            }
             
             //if($usuario->usr_password==1){
                 header('Location: '.BASE_URI.'/Home/dashboard');
