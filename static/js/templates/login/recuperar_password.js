@@ -35,7 +35,10 @@ function formateaRut(rut0)
         var rut1 = rut0.value;
         while (rut1.indexOf(".") != -1)
             rut1 = rut1.replace(".","");
-        rut1 = rut1.replace("-", "");
+        while (rut1.indexOf("-") != -1)
+            rut1 = rut1.replace("-","");
+        //Validar tambien que solo pueda entrar Numeros y letra K
+        
         format = "-" + rut1.substring(rut1.length - 1);
         for (var i = rut1.length - 2; i >= 0; i--) {
             format = rut1.substring(i, i + 1) + format;

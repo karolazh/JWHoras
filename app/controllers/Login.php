@@ -253,6 +253,8 @@ class Login extends Controller{
         $rut = "";
         $correcto = false;
         $error = array();
+        $rutparam = $this->_request->getParam("rut");
+        $rutparam = $rutparam.str_replace(".", "", $rutparam);
         if (trim($this->_request->getParam("rut")) != "") {
             $usuario = $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
             if (!is_null($usuario)) {
@@ -262,6 +264,7 @@ class Login extends Controller{
                 $salt =  bin2hex($bin);
                 $iteraciones = 1000000;
                 $cadenahash = hash_pbkdf2('sha512', $cadena, $salt,$iteraciones);
+                //$cadenahash = Seguridad::generar_sha512($cadena);
                 $this->smarty->assign("nombre", $usuario->usr_nombres . " " . $usuario->usr_apellidos);
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);
@@ -269,10 +272,10 @@ class Login extends Controller{
                         array("usr_password" => $cadenahash, "usr_salt" => $salt), $usuario->usr_id, "usr_id"
                 );
 
-                $this->load->lib('Rut', false);
+                $this->load->lib('Email', false);
                 $remitente = "midas@minsal.cl";
                 $nombre_remitente = "Prevención de Femicidios";
-                $destinatario = $usuario->usr_rut;
+                $destinatario = $usuario->usr_email;
 
                 $asunto = "PREDEFEM - Recuperar contraseña";
                 $mensaje = $this->smarty->fetch("login/recuperar_password_rut.tpl");
