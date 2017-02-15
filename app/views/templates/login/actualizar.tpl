@@ -58,7 +58,7 @@
                             <div class="form-group clearfix">
                                 <label for="password" class="control-label required">Nueva contraseña (*)</label>
                                 <input type="password" name="password" id="password" value="" class="form-control"/>
-                                <span class="help-block hidden"></span>
+                                <span class="help-block" id="result">Incluya números, mayúsculas, minúsculas y símbolos</span>
                             </div>
                         </div>
                         <div class="col-md-6 text-left">

@@ -156,6 +156,7 @@ class Login extends Controller {
         $this->smarty->assign("primer_login", $_SESSION['primer_login']);
         $this->smarty->assign("hidden", "hidden");
         $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
+        $this->_addJavascript(STATIC_FILES . 'js/lib/passwordscheck.js');
         $this->_addJavascript(STATIC_FILES . 'js/templates/login/actualizar_password.js');
         $this->_display('login/actualizar.tpl');
     }
