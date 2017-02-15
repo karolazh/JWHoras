@@ -5,7 +5,6 @@ function soloLetras(e) {
     tecla = String.fromCharCode(key).toString();
     letras = "kK0123456789";//Se define todo el abecedario que se quiere que se muestre.
     especiales = [8, 37, 39, 46, 9]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
-
     tecla_especial = false;
     for(var i in especiales) {
         if(key == especiales[i]) {
@@ -38,10 +37,6 @@ function formateaRut(rut0)
         for (var i = rut1.length - 2; i >= 0; i--) {
             format = rut1.substring(i, i + 1) + format;
             cont++;
-            if (cont == 3 && i != 0) {
-                format = "." + format;
-                cont = 0;
-            }
         }
         document.getElementById("rut").value = format;
 }
