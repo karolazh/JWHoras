@@ -28,24 +28,27 @@
                         <th align="center" width="10%">Acciones</th>
                     </tr>
                 </thead>
-                {*<tbody>
-                    {foreach $arrResultado as $itm}
+                <tbody>
+                    {foreach $arrResultado as $item}
                         <tr>
-                            <td nowrap width="100px" align="center"> {$itm->id_actividad} </td>
-                            <td nowrap width="100px" align="center"> {$itm->actividad} </td>
-                            <td class="text-center">{$itm->fecha_creacion_actividad}</td>
-                            <td nowrap width="100px" align="center">{$itm->nombres} {$itm->apellidos}</td>           
-                            <td class="text-center" style="width:100px;">				
+                            <td nowrap width="100px" align="center"> {$item->dau_id} </td>
+                            <td nowrap width="100px" align="center"> {$item->dau_pac_id} </td>
+                            <td class="text-center">{$item->dau_fec_ingreso}</td>
+                            <td class="text-center">{$item->dau_hora_ingreso}</td>
+                            <td class="text-center">{$item->dau_hora_egreso}</td>
+                            <td class="text-center">{$item->dau_cas_egr_id}</td>
+                            <td class="text-center" style="width:100px;">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                            onClick="location.href='{$base_url}/MantenedorActividades/revisarActividad/{$itm->id_actividad}'" 
+                                            onClick="location.href='{$base_url}/Dau/verDau/{$item->dau_id}'" 
                                             data-toggle="tooltip" title="Ver Actividad">
-                                        <i class="fa fa-file-o"></i></button>
+                                        <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver
+                                    </button>
                                 </div>			
                            </td>          
                         </tr>
                     {/foreach}
-                </tbody>*}
+                </tbody>
             </table>
 
         </div>
