@@ -41,7 +41,7 @@
                                         <i class="fa fa-warning fa-2x"></i> &nbsp; No se encontro un usuario para el Rut ingresado.
                                     </div>
                                     </div>
-                                    <button id="enviar" class="btn btn-lg btn-primary btn-block" type="button">Enviar</button>   
+                                    <button id="enviar" class="btn btn-lg btn-primary btn-block" type="button">Enviar&nbsp;&nbsp;<i class="fa fa-send"></i></button>   
                                 </fieldset>
                                 <br>
                                 

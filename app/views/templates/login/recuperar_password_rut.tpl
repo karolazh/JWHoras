@@ -1,4 +1,4 @@
-Estimado(a) {$nombre}, <br><br>
+Estimad@ {$nombre}, <br><br>
 
 Ud. ha solicitado una nueva contraseña para ingresar al sistema. La nueva constraseña es <strong>{$pass}</strong>.
 <br/><br/>

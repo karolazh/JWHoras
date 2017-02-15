@@ -41,11 +41,11 @@
                                         <i class="fa fa-warning fa-2x"></i> &nbsp; Los datos ingresados no son válidos.
                                     </div>
                                     <br>
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+                                    <button id="ingresar" class="btn btn-lg btn-primary btn-block" type="submit" onClick="xModal.info('Iniciando Sesion');">Ingresar&nbsp;&nbsp;<i></i></button>
                                 </fieldset>
                                 <br>
-                                <div class="loader">
-                                </div>
+                                <script>
+                                 </script>   
                                 <div class="form-group">
                                     <p class="text-center">
                                         <a href="{$base_url}/Login/recuperar_password">¿Olvidó su contraseña?</a>
