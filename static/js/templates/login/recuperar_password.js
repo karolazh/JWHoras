@@ -17,7 +17,7 @@ $(document).ready(function() {
                 if(data.correcto){
                     $("#form-contenedor").addClass("hidden");
                     $("#form-success").removeClass("hidden");
-                    $("#mensaje-modificacion").html("Se han enviado los datos para recuperar contraseña al correo del rut usuario: <strong>" + data.rut + "</strong>");
+                    $("#mensaje-modificacion").html("Se han enviado los datos para recuperar contraseña al correo del Usuario");
                 } else {
                     procesaErrores(data.error);
                     $("#form-error").removeClass("hidden");
@@ -26,6 +26,26 @@ $(document).ready(function() {
         }); 
     }); 
 });
+
+
+function soloLetras(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toString();
+    letras = "kK0123456789";//Se define todo el abecedario que se quiere que se muestre.
+    especiales = [8, 37, 39, 46, 9]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+
+    tecla_especial = false;
+    for(var i in especiales) {
+        if(key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if(letras.indexOf(tecla) == -1 && !tecla_especial){
+        return false;
+      }
+}
 
 //Formateo Rut
 function formateaRut(rut0)
@@ -37,9 +57,11 @@ function formateaRut(rut0)
             rut1 = rut1.replace(".","");
         while (rut1.indexOf("-") != -1)
             rut1 = rut1.replace("-","");
-        //Validar tambien que solo pueda entrar Numeros y letra K
-        
-        format = "-" + rut1.substring(rut1.length - 1);
+        if (rut1 != "" && rut1.length > 1){
+               format = "-" + rut1.substring(rut1.length - 1);
+       } else {
+               format = "" + rut1.substring(rut1.length - 1);
+       }
         for (var i = rut1.length - 2; i >= 0; i--) {
             format = rut1.substring(i, i + 1) + format;
             cont++;
