@@ -1,7 +1,11 @@
-<<<<<<< HEAD
-/tmp/
+
+*/config/development
+*/logs/log-*.php
+!*/logs/index.html
+*/cache/*
+!*/cache/index.html
+!*/cache/.htaccess
+/nbproject/private/
+/sys/Config.php
 /app/views/templates_c/
-=======
-/app/views/templates_c/
-/tmp/
->>>>>>> 7ddf47c7af489a0718efb4d16c832d2e944d02be
+/tmp/logs/
