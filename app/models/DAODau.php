@@ -49,8 +49,11 @@ class DAODau extends Model{
      * Lista DAU
      */
     public function getListaDAU(){
-        $query = $this->db->select("*")->from("tab_dau");
-        $resultado = $query->getResult();
+//        $query = $this->db->select("*")->from("tab_dau");
+//        $resultado = $query->getResult();
+        
+        $query = "select * from tab_dau";
+        $resultado = $this->db->getQuery($query);
 
         if($resultado->numRows>0){
             return $resultado->rows;

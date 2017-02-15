@@ -11,6 +11,7 @@
 </section>
 
 <form id="form">
+
 <section class="content">
     <div class="box box-primary">
         <div class="box-body">
@@ -304,18 +305,15 @@
                 </div>
 
                 <div class="form-group clearfix col-md-12 text-right">
-                    {*<div class="col-md-12 text-right">*}
-                        <button type="button" id="guardar" class="btn btn-success">
-                            <i class="fa fa-save"></i>  Guardar
-                        </button>&nbsp;
-                        <button type="button" id="cancelar"  class="btn btn-default" 
-                                onclick="location.href='{$base_url}/Dau/index'">
-                            <i class="fa fa-remove"></i>  Cancelar
-                        </button>
-                        <br/><br/>
-                    {*</div>*}
+                    <button type="button" id="guardar" class="btn btn-success">
+                        <i class="fa fa-save"></i>  Guardar
+                    </button>&nbsp;
+                    <button type="button" id="cancelar"  class="btn btn-default" 
+                            onclick="location.href='{$base_url}/Dau/index'">
+                        <i class="fa fa-remove"></i>  Cancelar
+                    </button>
+                    <br/><br/>
                 </div>
-                {*</div>*}
             </div>
 
         </div>
