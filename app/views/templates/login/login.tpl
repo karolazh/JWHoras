@@ -23,8 +23,9 @@
                                         <input class="form-control rut" name="rut" id="rut" type="text" placeholder="Escriba su RUT"/>
                                     </div>*}
                                     <div class="form-group">
-                                        <input type="text" class="form-control mailbox-attachment" 
-                                               name="rut" id="mail" placeholder="Ingrese su Rut"/>
+                                        <input type="text" class="form-control" maxlength="13"
+                                               onkeyup="formateaRut(this),validaRut(this)"
+                                               name="rut" id="rut" placeholder="Ingrese su Rut"/>
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control" 
