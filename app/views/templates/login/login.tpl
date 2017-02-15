@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    {include file="layout/css.tpl"}
-</head>
+    <head>
+        {include file="layout/css.tpl"}
+    </head>
     <body class="body-login">
         <br/><br/><br/>
         <div class="container">
+         
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-banner text-center">
@@ -20,11 +21,13 @@
                             <form role="form" action="{$base_url}/Login/procesar" method="post" id="loginForm">
                                 <fieldset>
                                     {*<div class="form-group">
-                                        <input class="form-control rut" name="rut" id="rut" type="text" placeholder="Escriba su RUT"/>
+                                    <input class="form-control rut" name="rut" id="rut" type="text" placeholder="Escriba su RUT"/>
                                     </div>*}
                                     <div class="form-group">
-                                        <input type="text" class="form-control mailbox-attachment" 
-                                               name="rut" id="mail" placeholder="Ingrese su Rut"/>
+                                        <input type="text" class="form-control" maxlength="13" 
+                                               onkeyup="formateaRut(this), validaRut(this), this.value = this.value.toUpperCase()"
+                                               onkeypress ="return soloLetras(event)"
+                                               name="rut" id="rut" placeholder="Ingrese su Rut"/>
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control" 
@@ -41,22 +44,23 @@
                                     <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
                                 </fieldset>
                                 <br>
-                                
+                                <div class="loader">
+                                </div>
                                 <div class="form-group">
                                     <p class="text-center">
                                         <a href="{$base_url}/Login/recuperar_password">¿Olvidó su contraseña?</a>
                                     </p>
                                     {*<table style="width:100%;">
-                                        <tr>
-                                            <td>
-                                                
-                                            </td>
-                                            <td>
-                                                <p class="text-right">
-                                                    
-                                                </p>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                    <p class="text-right">
+                                        
+                                    </p>
+                                    </td>
+                                    </tr>
                                     </table>*}
                                 </div>
                             </form>
