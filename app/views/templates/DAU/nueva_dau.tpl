@@ -2,79 +2,77 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
 <section class="content-header">
-    <h1><i class="fa fa-plus"></i> DAU</h1>
+    <h1><i class="fa fa-plus"></i> Ingresar DAU</h1>
         <ol class="breadcrumb">
             <li><a href="{$base_url}/Administracion/noticias">
-            <i class="fa fa-folder-open"></i>DAU</a></li>
-            <li class="active">DAU</li>
+            <i class="fa fa-folder-open"></i> DAU</a></li>
+            <li class="active"> Ingresar DAU</li>
         </ol>
 </section>
 
 <section class="content">
     <div class="box box-primary">
         <div class="box-body">
+            
+            <form id="form">
+                <div class="form-group">
+                    <div class="form-group col-md-12">
+                        <div class="form-group col-md-3">
+                            <label for="region" class="control-label required">Rut Paciente (*)</label>
+                            <input type="text" name="rut" id="rut" value="" 
+                                   placeholder="Rut paciente" class="form-control"/>
+                            <span class="help-block hidden"></span>
+                        </div>
 
-            <form role="form" class="form-horizontal">
-                <div class="col-md-12">
-                    <label  class="control-label required">T&iacute;tulo (*)</label>
-                    <div class="form-group">                        
-                        <div class="col-md-12">
-                            <input class="form-control" 
-                                   name="nombre" id="titulo" placeholder="Título noticia"></input>
+                        <div class="form-group col-md-1">
+                            <label for="busqueda" class="control-label required">&nbsp;</label>
+                            <button type="button" id="buscar" class="btn btn-info btn-sm form-control">
+                                    <i class="fa fa-search"></i>
+                            </button>
                         </div>
                     </div>
-                   
-                    <label  class="control-label required">Resumen (*)</label>
-                    <div class="form-group">                        
-                        <div class="col-md-12">
-                            <input class="form-control" 
-                                   name="nombre" id="resumen" placeholder="Resumen noticia"></input>
+                    
+                    <div class="form-group col-md-12">
+                        <div class="form-group clearfix col-md-6">
+                            <label for="agno" class="control-label required">Nombres (*)</label>
+                            <input type="text" name="agno" id="fecha" value=""
+                                   placeholder="Nombres" class="form-control"/>
+                            <span class="help-block hidden"></span>
                         </div>
-                    </div>
-                   
-                    <label  class="control-label required">Cuerpo (*)</label>
-                    <div class="form-group">                        
-                        <div class="col-md-12">
-                            <input class="form-control" 
-                                   name="nombre" id="cuerpo" placeholder="Cuerpo Noticia"></input>
-                        </div>
-                    </div>
 
-                    <button type="button" class="btn btn-success btn-flat" 
-                            accesskey=""onclick="">Guardar</button>
-                    <br><br><br>
+                        <div class="form-group clearfix col-md-6">
+                            <label for="semestre" class="control-label required">Apellidos (*)</label>
+                            <input type="text" name="Semestre" id="rut" value="" 
+                                   placeholder="Apellidos" class="form-control"/>
+                            <span class="help-block hidden"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-12">
+                        <div class="form-group clearfix col-md-6">
+                            <label for="agno" class="control-label required">Fecha Nacimiento (*)</label>
+                            <input type="text" name="agno" id="fecha" value=""
+                                   placeholder="Nombres" class="form-control"/>
+                            <span class="help-block hidden"></span>
+                        </div>
+
+                        <div class="form-group clearfix col-md-3">
+                            <label for="semestre" class="control-label required">Edad (*)</label>
+                            <input type="text" name="Semestre" id="rut" value="" 
+                                   placeholder="Apellidos" class="form-control"/>
+                            <span class="help-block hidden"></span>
+                        </div>
+                        
+                        <div class="form-group clearfix col-md-3">
+                            <label for="semestre" class="control-label required">G&eacute;nero (*)</label>
+                            <input type="text" name="Semestre" id="rut" value="" 
+                                   placeholder="Apellidos" class="form-control"/>
+                            <span class="help-block hidden"></span>
+                        </div>
+                    </div>
                 </div>
 
             </form>
-
-            <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
-                <thead>
-                    <tr role="row">
-                        <th align="center" width="10%">#ID</th>
-                        <th align="center" width="40%">T&iacute;tulo</th>
-                        <th align="center" width="40%">Resumen</th>
-                        <th align="center" width="10%">Acciones</th>
-                    </tr>
-                </thead>
-                {*<tbody>
-                    {foreach $arrResultado as $itm}
-                        <tr>
-                            <td nowrap width="100px" align="center"> {$itm->id_actividad} </td>
-                            <td nowrap width="100px" align="center"> {$itm->actividad} </td>
-                            <td class="text-center">{$itm->fecha_creacion_actividad}</td>
-                            <td nowrap width="100px" align="center">{$itm->nombres} {$itm->apellidos}</td>           
-                            <td class="text-center" style="width:100px;">				
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                            onClick="location.href='{$base_url}/MantenedorActividades/revisarActividad/{$itm->id_actividad}'" 
-                                            data-toggle="tooltip" title="Ver Actividad">
-                                        <i class="fa fa-file-o"></i></button>
-                                </div>			
-                           </td>          
-                        </tr>
-                    {/foreach}
-                </tbody>*}
-            </table>
 
         </div>
     </div>    

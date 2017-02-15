@@ -282,9 +282,7 @@ class Login extends Controller {
                 $bin = openssl_random_pseudo_bytes(64);
                 $salt = bin2hex($bin);
                 $iteraciones = 1000000;
-
                 $cadenahash = hash_pbkdf2('sha512', $cadena, $salt,$iteraciones);
-                //$cadenahash = Seguridad::generar_sha512($cadena);
                 $this->smarty->assign("nombre", $usuario->usr_nombres . " " . $usuario->usr_apellidos);
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);
