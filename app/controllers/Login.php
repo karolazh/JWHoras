@@ -273,7 +273,6 @@ class Login extends Controller {
         $correcto = false;
         $error = array();
         $rutparam = $this->_request->getParam("rut");
-        $rutparam = $rutparam.str_replace(".", "", $rutparam);
         if (trim($this->_request->getParam("rut")) != "") {
             $usuario = $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
             if (!is_null($usuario)) {

@@ -1,7 +1,9 @@
 $(document).ready(function() {
     $("#enviar").on('click', function(e) {
         var button_process = buttonStartProcess($(this), e);
-        var parametros = $("#form").serialize();
+        var parametros = $('#form').serialize();
+        while (parametros.indexOf(".") != -1)
+            parametros = parametros.replace(".","");
         $.ajax({         
             dataType: "json",
             cache:false,
