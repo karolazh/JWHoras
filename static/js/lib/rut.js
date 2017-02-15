@@ -1,52 +1,3 @@
-$(document).ready(function() {
-    $("#enviar").on('click', function(e) {
-        var button_process = buttonStartProcess($(this), e);
-        var parametros = $("#form").serialize();
-        $.ajax({         
-            dataType: "json",
-            cache:false,
-            async: true,
-            data: parametros,
-            type: "post",
-            url: BASE_URI + "index.php/Login/recuperar_password_rut", 
-            error: function(xhr, textStatus, errorThrown){
-
-            },
-            success:function(data){
-                buttonEndProcess(button_process);
-                if(data.correcto){
-                    $("#form-contenedor").addClass("hidden");
-                    $("#form-success").removeClass("hidden");
-                    $("#mensaje-modificacion").html("Se han enviado los datos para recuperar contraseña al correo del Usuario");
-                } else {
-                    procesaErrores(data.error);
-                    $("#form-error").removeClass("hidden");
-                }
-            }
-        }); 
-    }); 
-});
-
-
-function soloLetras(e) {
-    key = e.keyCode || e.which;
-    tecla = String.fromCharCode(key).toString();
-    letras = "kK0123456789";//Se define todo el abecedario que se quiere que se muestre.
-    especiales = [8, 37, 39, 46, 9]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
-
-    tecla_especial = false;
-    for(var i in especiales) {
-        if(key == especiales[i]) {
-            tecla_especial = true;
-            break;
-        }
-    }
-
-    if(letras.indexOf(tecla) == -1 && !tecla_especial){
-        return false;
-      }
-}
-
 //Formateo Rut
 function formateaRut(rut0)
 {
@@ -57,7 +8,7 @@ function formateaRut(rut0)
             rut1 = rut1.replace(".","");
         while (rut1.indexOf("-") != -1)
             rut1 = rut1.replace("-","");
-//Validar tambien que solo pueda entrar Numeros y letra K
+        //Validar tambien que solo pueda entrar Numeros y letra K
         if (rut1 != "" && rut1.length > 1){
         	format = "-" + rut1.substring(rut1.length - 1);
         } else {
