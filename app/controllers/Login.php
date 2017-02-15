@@ -34,6 +34,7 @@ class Login extends Controller {
         }
 
         $this->smarty->assign("hidden", "hidden");
+        $this->_addJavascript(STATIC_FILES . 'js/lib/rut.js');
         $this->smarty->display('login/login.tpl');
     }
 
@@ -41,6 +42,7 @@ class Login extends Controller {
 
     public function recuperar_password() {
         $this->_addJavascript(STATIC_FILES . 'js/templates/login/recuperar_password.js');
+        $this->_addJavascript(STATIC_FILES . 'js/lib/rut.js');
         $this->_display('login/recuperar_password.tpl', false);
     }
 
@@ -129,6 +131,7 @@ class Login extends Controller {
             }
         } else {
             $this->smarty->assign("hidden", "");
+            $this->_addJavascript(STATIC_FILES . 'js/lib/rut.js');
             $this->smarty->display('login/login.tpl');
         }
     }
@@ -270,7 +273,6 @@ class Login extends Controller {
         $correcto = false;
         $error = array();
         $rutparam = $this->_request->getParam("rut");
-        $rutparam = $rutparam.str_replace(".", "", $rutparam);
         if (trim($this->_request->getParam("rut")) != "") {
             $usuario = $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
             if (!is_null($usuario)) {
@@ -283,8 +285,9 @@ class Login extends Controller {
                 $this->smarty->assign("nombre", $usuario->usr_nombres . " " . $usuario->usr_apellidos);
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);
+                $ultimo_login = NULL;
                 $this->_DAOUsuarios->update(
-                        array("usr_password" => $cadenahash, "usr_salt" => $salt), $usuario->usr_id, "usr_id"
+                        array("usr_password" => $cadenahash, "usr_salt" => $salt, "usr_ultimo_login" => $ultimo_login), $usuario->usr_id, "usr_id"
                 );
 
                 $this->load->lib('Email', false);
@@ -297,7 +300,7 @@ class Login extends Controller {
                 Email::sendEmail($destinatario, $remitente, $nombre_remitente, $asunto, $mensaje);
             } else {
                 $correcto = false;
-                $error['rut'] = "El email no existe en nuestra base de datos";
+                $error['rut'] = "";
             }
         }
 

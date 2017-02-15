@@ -45,7 +45,7 @@
                 </div>
                 
                 <div class="box-body">
-                    {if $primer_login === 1}
+                    {if $primer_login == 1}
                     <div class="col-sm-12">
                         <div class="alert alert-warning">
                             <i class="fa fa-info-circle"></i> No ha actualizado su contraseña inicial.
