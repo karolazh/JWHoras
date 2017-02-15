@@ -1,7 +1,5 @@
 <?php
 
-require_once (APP_PATH . 'libs/Seguridad.php');
-
 class Login extends Controller {
     /*     * * @var ** */
 
@@ -14,6 +12,7 @@ class Login extends Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->lib('Seguridad', false);
         $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
         $this->_DAORegion = $this->load->model("DAORegion");
         $this->_DAOComuna = $this->load->model("DAOComuna");
@@ -32,7 +31,7 @@ class Login extends Controller {
                 die();
             }
         }
-
+        $_SESSION['autenticado'] = FALSE;
         $this->smarty->assign("hidden", "hidden");
         $this->_addJavascript(STATIC_FILES . 'js/lib/rut.js');
         $this->smarty->display('login/login.tpl');
@@ -55,7 +54,7 @@ class Login extends Controller {
         //a mayores iteraciones es mas lento adivinar la contraseña
         $iteraciones = 1000000;
         $valido = FALSE;
-        $primer_login = FALSE;        
+        $primer_login = FALSE;
         if (!is_null($usuario)) {
             $salt = $usuario->usr_salt;
             if ($usuario->usr_ultimo_login === NULL) {
@@ -107,7 +106,7 @@ class Login extends Controller {
                 //if(!is_null($result))
             }
             //if(!is_null($id_comuna))       
-            
+
             $_SESSION['id'] = $usuario->usr_id;
             $_SESSION['perfil'] = $usuario->usr_pfl_id;
             $_SESSION['nombre'] = $usuario->usr_nombres . " " . $usuario->usr_apellidos;
@@ -119,14 +118,13 @@ class Login extends Controller {
             $_SESSION['provincia'] = $provincia;
             $_SESSION['region'] = $region;
             $_SESSION['primer_login'] = $primer_login;
+            $_SESSION['autenticado'] = TRUE;
             if ($recordar == 1) {
                 setcookie('datos_usuario_carpeta', $usuario->usr_id, time() + 365 * 24 * 60 * 60);
             }
-
             if ($primer_login) {
                 header('Location: ' . BASE_URI . '/Login/actualizar');
             } else {
-
                 header('Location: ' . BASE_URI . '/Home/dashboard');
             }
         } else {
@@ -143,39 +141,42 @@ class Login extends Controller {
     }
 
     //*** 20170127 - Formulario Actualiza Password ***//
-
-    public function actualizar(){
-        $this->smarty->assign("nombre",$_SESSION['nombre']);
-        $this->smarty->assign("rut",$_SESSION['rut']);
-        $this->smarty->assign("mail",$_SESSION['mail']);
-        $this->smarty->assign("fono",$_SESSION['fono']);
-        $this->smarty->assign("celular",$_SESSION['celular']);
-        $this->smarty->assign("comuna",$_SESSION['comuna']);
-        $this->smarty->assign("provincia",$_SESSION['provincia']);
-        $this->smarty->assign("region",$_SESSION['region']);
-        $this->smarty->assign("primer_login",$_SESSION['primer_login']);
-        $this->smarty->assign("hidden","hidden");
-        $this->_addJavascript(STATIC_FILES.'js/templates/login/actualizar_password.js');
+    public function actualizar() {
+        //Seguridad::validar_sesion($this->smarty);
+        Acceso::redireccionUnlogged($this->smarty);
+        $this->smarty->assign("nombre", $_SESSION['nombre']);
+        $this->smarty->assign("rut", $_SESSION['rut']);
+        $this->smarty->assign("mail", $_SESSION['mail']);
+        $this->smarty->assign("fono", $_SESSION['fono']);
+        $this->smarty->assign("celular", $_SESSION['celular']);
+        $this->smarty->assign("comuna", $_SESSION['comuna']);
+        $this->smarty->assign("provincia", $_SESSION['provincia']);
+        $this->smarty->assign("region", $_SESSION['region']);
+        $this->smarty->assign("primer_login", $_SESSION['primer_login']);
+        $this->smarty->assign("hidden", "hidden");
+        $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
+        $this->_addJavascript(STATIC_FILES . 'js/templates/login/actualizar_password.js');
         $this->_display('login/actualizar.tpl');
     }
+/*
+    /*** 20170127 - Formulario Actualiza Password ***/
+/*
+    public function actualizar2() {
+        $this->smarty->assign("nombre", $_SESSION['nombre']);
+        $this->smarty->assign("rut", $_SESSION['rut']);
+        $this->smarty->assign("mail", $_SESSION['mail']);
+        $this->smarty->assign("fono", $_SESSION['fono']);
+        $this->smarty->assign("celular", $_SESSION['celular']);
+        $this->smarty->assign("comuna", $_SESSION['comuna']);
+        $this->smarty->assign("provincia", $_SESSION['provincia']);
+        $this->smarty->assign("region", $_SESSION['region']);
 
-    //*** 20170127 - Formulario Actualiza Password ***//
-
-    public function actualizar2(){
-        $this->smarty->assign("nombre",$_SESSION['nombre']);
-        $this->smarty->assign("rut",$_SESSION['rut']);
-        $this->smarty->assign("mail",$_SESSION['mail']);
-        $this->smarty->assign("fono",$_SESSION['fono']);
-        $this->smarty->assign("celular",$_SESSION['celular']);
-        $this->smarty->assign("comuna",$_SESSION['comuna']);
-        $this->smarty->assign("provincia",$_SESSION['provincia']);
-        $this->smarty->assign("region",$_SESSION['region']);
-
-        $this->smarty->assign("hidden","hidden");
-        $this->_addJavascript(STATIC_FILES.'js/templates/login/actualizar_password.js');
+        $this->smarty->assign("hidden", "hidden");
+        $this->_addJavascript(STATIC_FILES . 'js/templates/login/actualizar_password.js');
         $this->_display('login/actualizar2.tpl');
     }
-    
+
+    */
     //*** 20170201 - Funcion guarda nueva password ***//
     public function ajax_guardar_nuevo_password() {
         header('Content-type: application/json');
@@ -189,18 +190,16 @@ class Login extends Controller {
             $iteraciones = 1000000;
             $bin = openssl_random_pseudo_bytes(64);
             $salt = bin2hex($bin);
-            $fecha_login = 
-            $password = sha1($this->_request->getParam("password"));
+            $fecha_login = $password = sha1($this->_request->getParam("password"));
             $password = hash_pbkdf2('sha512', $this->_request->getParam("password"), $salt, $iteraciones);
             $ultimo_login = date('Y-m-d H:i:s');
             $datos = array($password, $salt, $ultimo_login, $session->id);
 
             $upd = $this->_DAOUsuarios->setPassword($datos);
             if ($upd) {
-               $primer_login = FALSE; 
-               $_SESSION['primer_login'] = $primer_login;
+                $primer_login = FALSE;
+                $_SESSION['primer_login'] = $primer_login;
             }
-            
         }
 
         $salida = array("error" => $validar->getErrores(),
@@ -223,7 +222,7 @@ class Login extends Controller {
         //session_destroy();
         header('Location:' . BASE_URI);
     }
-
+/*
     public function crear_cuenta_nueva() {
         header('Content-type: application/json');
         //echo $this->_request->getParam("nombre");
@@ -266,7 +265,7 @@ class Login extends Controller {
     private function validarArchivo() {
         
     }
-
+*/
     public function recuperar_password_rut() {
         header('Content-type: application/json');
         $rut = "";
@@ -281,7 +280,7 @@ class Login extends Controller {
                 $bin = openssl_random_pseudo_bytes(64);
                 $salt = bin2hex($bin);
                 $iteraciones = 1000000;
-                $cadenahash = hash_pbkdf2('sha512', $cadena, $salt,$iteraciones);
+                $cadenahash = hash_pbkdf2('sha512', $cadena, $salt, $iteraciones);
                 $this->smarty->assign("nombre", $usuario->usr_nombres . " " . $usuario->usr_apellidos);
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);

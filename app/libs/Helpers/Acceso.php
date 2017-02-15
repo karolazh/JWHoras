@@ -80,5 +80,18 @@ Class Acceso{
         //echo $id_user;
         return $this->_DAOUsuarios->getById($id_user);
     }
+    
+    public static function redireccionUnlogged($smarty) {
+        //COMPRUEBA QUE EL USUARIO ESTA AUTENTICADO
+        if (!isset($_SESSION['autenticado'])) {
+            $_SESSION["autenticado"] = FALSE;
+        }
+        if (!$_SESSION['autenticado']) {
+            //si no exihttp://localhost/prevencion/index.php/Login/actualizarste, va a la página de autenticacion
+            $smarty->assign("texto_error", "Debes iniciar sesión para ver esta página");
+            $smarty->display('login/login.tpl');        //salimos de este script
+            exit();
+        }
+    }
 }
 

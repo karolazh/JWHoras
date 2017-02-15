@@ -38,7 +38,7 @@
                                         Recordarme en este equipo
                                     </div>
                                     <div id="form-error" class="alert alert-danger {$hidden}">
-                                        <i class="fa fa-warning fa-2x"></i> &nbsp; Los datos ingresados no son válidos.
+                                        <i class="fa fa-warning fa-2x"></i> &nbsp; {$texto_error}
                                     </div>
                                     <br>
                                     <button id="ingresar" class="btn btn-lg btn-primary btn-block" type="submit" onClick="xModal.info('Iniciando Sesion');">Ingresar&nbsp;&nbsp;<i></i></button>

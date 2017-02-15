@@ -34,7 +34,7 @@ class Home extends Controller{
      */
     public function dashboard(){
         //validar session...
-        
+        Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         
 //        $arr = $this->_DAONoticias->getListaNoticias();

@@ -47,6 +47,7 @@ class Administracion extends Controller{
      * Mantenedor de Noticias
      */
     public function noticias(){
+        Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");        
         $this->smarty->assign("id_usuario", $sesion->id);
         $this->smarty->assign("rut", $sesion->rut);

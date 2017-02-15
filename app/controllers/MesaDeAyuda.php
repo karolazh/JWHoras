@@ -17,6 +17,7 @@ class MesaDeAyuda extends Controller{
      * Otros Registros
      */
     public function Inicio(){
+        Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("rut",$_SESSION['rut']);
         $this->_display('MesaDeAyuda/mesa_de_ayuda.tpl');
