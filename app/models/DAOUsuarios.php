@@ -86,14 +86,16 @@ class DAOUsuarios extends Model{
      */
     public function setPassword($datos){
         $query = "UPDATE tab_usuarios
-                  SET    usr_password = ?
+                  SET    usr_password = ? , usr_salt = ? , usr_ultimo_login = ?
                   WHERE  usr_id = ? ";
-
+/*
         $parametros = array(
             $password,
+            $salt,
+            $ultimo_login,
             $id_usuario
         );
-
+*/
         if ($this->db->execQuery($query, $datos)) {
             return true;
         } else {
