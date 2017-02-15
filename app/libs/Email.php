@@ -34,7 +34,7 @@ class Email{
 		$mail->CharSet = 'utf-8';
 		$mail->IsHTML(true);
 		$mail->From = $nombre_remitente;
-		$mail->FromName = 'Minsal - Finanzas';
+		$mail->FromName = 'Minsal - PREDEFEM';
 		$mail->Subject = $asunto;
 		$mail->AddAddress($destinatario);
 		$mail->Body = $mensaje;
