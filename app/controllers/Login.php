@@ -129,6 +129,7 @@ class Login extends Controller {
             }
         } else {
             $this->smarty->assign("hidden", "");
+            $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
             $this->_addJavascript(STATIC_FILES . 'js/lib/rut.js');
             $this->smarty->display('login/login.tpl');
         }
