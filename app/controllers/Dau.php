@@ -72,6 +72,7 @@ class Dau extends Controller{
         $this->smarty->assign("rut", $sesion->rut);
         $this->smarty->assign("usuario", $sesion->usuario);
         
+        $this->_addJavascript(STATIC_FILES . 'js/lib/rut.js');
         //llamado al template
         $this->_display('DAU/nueva_dau.tpl');
     }

@@ -23,7 +23,9 @@
                 <div class="form-group col-md-12">
                     <div class="form-group col-md-3">
                         <label for="region" class="control-label required">Rut Paciente (*)</label>
-                        <input type="text" name="rut" id="rut" value="" 
+                        <input type="text" name="rut" id="rut" value=""
+                               onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()"
+                               onkeypress ="return soloLetras(event)"
                                placeholder="Rut paciente" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
