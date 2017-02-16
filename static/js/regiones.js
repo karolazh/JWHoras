@@ -1,23 +1,27 @@
-var Regiones ={
+/* global BASE_URI */
 
-cargarComunasPorRegion : function(region,combo,provincias){		 
+var Dau ={
+    
+cargarComunasPorRegion : function(region,combo,comuna){
+            console.log(region);
 		if(region != 0){
-			$.post(BASE_URI + 'index.php/MantenedorPlanificacion/cargarComunasPorRegion',{region:region},function(response){
-				  if(response.length > 0){
-					var total = response.length;					
-					var options = '<option value="0">-- Seleccione --</option>';
+			$.post(BASE_URI+'index.php/Dau/cargarComunasPorRegion',{region:region},function(response){
+				if(response.length > 0){
+					var total = response.length;
+					var options = '<option value="0">Seleccione una Comuna</option>';
 					for(var i=0; i<total; i++){
-						if(provincias == response[i].id_provincia){
-							options += '<option value="'+response[i].id_provincia+'" selected >'+response[i].nombre_provincias+'</option>';	
+						if(comuna == response[i].id_comuna){
+							options += '<option value="'+response[i].id_comuna+'" selected >'+response[i].nombre_comuna+'</option>';	
 						}else{
-							options += '<option value="'+response[i].id_provincia+'">'+response[i].nombre_provincias+'</option>';
-						}						
+							options += '<option value="'+response[i].id_comuna+'">'+response[i].nombre_comuna+'</option>';
+						}
+						
 					}
 					$('#'+combo).html(options);
 				}
 			},'json');
 		}else{
-			$('#'+combo).html('').trigger('onchange');
+                    $('#'+combo).html('<option value="0">Seleccione una Comuna</option>');
 		}
 	},
 	

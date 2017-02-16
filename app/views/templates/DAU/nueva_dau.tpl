@@ -23,11 +23,11 @@
                 <div class="form-group col-md-12">
                     <div class="form-group col-md-3">
                         <label for="region" class="control-label required">Rut Paciente (*)</label>
-                        <input type="text" name="rut" id="rut" value=""
+                        <input type="text" name="rut" id="rut" maxlength="12"
                                onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()"
-                               onkeypress ="return soloLetras(event)"
+                               onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut')"
                                placeholder="Rut paciente" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
 
                     <div class="form-group col-md-1">
@@ -41,55 +41,79 @@
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-6">
                         <label for="nombres" class="control-label required">Nombres (*)</label>
-                        <input type="text" name="nombres" id="fecha" value=""
+                        <input type="text" name="nombres" id="nombres" 
+                               onblur="validarVacio(this,'Por favor Ingrese Nombres')"
+                               onkeyup="validarVacio(this,'Por favor Ingrese Nombres')"
                                placeholder="Nombres" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
 
                     <div class="form-group clearfix col-md-6">
                         <label for="apellidos" class="control-label required">Apellidos (*)</label>
-                        <input type="text" name="apellidos" id="rut" value="" 
+                        <input type="text" name="apellidos" id="apellidos"
+                               onblur="validarVacio(this,'Por favor Ingrese Apellidos')"
+                               onkeyup="validarVacio(this,'Por favor Ingrese Apellidos')"
                                placeholder="Apellidos" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
 
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-6">
                         <label for="fecnacimiento" class="control-label required">Fecha Nacimiento (*)</label>
-                        <input type="text" name="fecnacimiento" id="fecha" value=""
-                               placeholder="Fecha Nacimiento" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="date" class="form-control datepicker"
+                                   onblur="validarVacio(this,'Por favor Ingrese Fecha'),calcularEdad(this.value)"
+                                   name="fecnacim" id="fecnacim">
+                            <span class="help-block hidden fa fa-warning"></span>
+                        </div>
                     </div>
 
                     <div class="form-group clearfix col-md-3">
                         <label for="edad" class="control-label required">Edad (*)</label>
-                        <input type="text" name="edad" id="rut" value="" 
-                               placeholder="Edad" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <input type="text" name="edad" id="edad" value=""
+                               placeholder="Edad" class="form-control" disabled/>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
 
                     <div class="form-group clearfix col-md-3">
                         <label for="genero" class="control-label required">G&eacute;nero (*)</label>
-                        <input type="text" name="genero" id="rut" value="" 
-                               placeholder="Genero" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <select for="genero" class="form-control" id="genero" name="genero"
+                                onblur="validarVacio(this,'Por favor Seleccione un Género')">
+                                <option>Seleccione un Género</option>
+                                <option>1. Femenino</option>
+                                <option>2. Masculino</option>
+                        </select>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
 
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-6">
                         <label for="prevision" class="control-label required">Previsión (*)</label>
-                        <input type="text" name="prevision" id="fecha" value=""
-                               placeholder="Previsión" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <select for="prevision" class="form-control" id="prevision" name="prevision"
+                                onblur="validarVacio(this,'Por favor Seleccione una Previsión')">
+                                <option>Seleccione una Previsión</option>
+                                <option>1. FONASA</option>
+                                <option>2. ISAPRE</option>
+                                <option>3. Otra</option>
+                        </select>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
 
                     <div class="form-group clearfix col-md-6">
                         <label for="convenio" class="control-label required">Convenio (*)</label>
-                        <input type="text" name="convenio" id="rut" value="" 
-                               placeholder="Convenio" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <select for="convenio" class="form-control" id="convenio" name="convenio"
+                                onblur="validarVacio(this,'Por favor Seleccione una Convenio')">
+                                <option>Seleccione un Convenio</option>
+                                <option>1. Convenio1</option>
+                                <option>2. Convenio2</option>
+                                <option>3. Otro</option>
+                        </select>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
             </div>
@@ -108,46 +132,59 @@
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-12">
                         <label for="direccion" class="control-label required">Dirección (*)</label>
-                        <input type="text" name="direccion" id="fecha" value=""
+                        <input type="text" name="direccion" id="direccion" value=""
+                               onblur="validarVacio(this,'Por favor Ingrese Dirección')"
+                               onkeyup="validarVacio(this,'Por favor Ingrese Dirección')"
                                placeholder="Dirección" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
                 
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-6">
-                        <label for="region" class="control-label required">Región (*)</label>
-                        <input type="text" name="region" id="fecha" value=""
-                               placeholder="Región" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <label class="control-label required">Región (*)</label>
+                        <select for="region" class="form-control" id="region" name="region"
+                                onchange="Dau.cargarComunasPorRegion(this.value,'comuna')"
+                                onblur="validarVacio(this,'Por favor Seleccione una Región')">
+                                <option>Seleccione una Región</option>
+                                {foreach $arrRegiones as $item}
+                                        <option value="{$item->reg_id}" >{$item->reg_nombre}</option>
+                                {/foreach}
+                        </select>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
 
                     <div class="form-group clearfix col-md-6">
-                        <label for="comuna" class="control-label required">Comuna (*)</label>
-                        <input type="text" name="comuna" id="rut" value="" 
-                               placeholder="Comuna" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <label class="control-label required">Comuna (*)</label>
+                        <select for="comuna" class="form-control" id="comuna" name="comuna"
+                                onblur="validarVacio(this,'Por favor Seleccione una Comuna')">
+                                <option value="0">Seleccione una Comuna</option>
+                        </select>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
 
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-3">
                         <label for="fono" class="control-label required">Fono</label>
-                        <input type="text" name="fono" id="rut" value="" 
+                        <input type="text" name="fono" id="fono" value="" maxlength="11"
+                               onKeyPress="return soloNumeros(event)"
                                placeholder="Fono" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
 
                     <div class="form-group clearfix col-md-3">
                         <label for="celular" class="control-label required">Celular</label>
-                        <input type="text" name="celular" id="rut" value="" 
+                        <input type="text" name="celular" id="celular" value="" maxlength="11"
+                               onKeyPress="return soloNumeros(event)"
                                placeholder="Celular" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
                     
                     <div class="form-group clearfix col-md-6">
                         <label for="email" class="control-label required">E-mail</label>
-                        <input type="text" name="email" id="fecha" value=""
+                        <input type="text" name="email" id="email" value=""
+                               onblur="validaEmail(this,'Correo Inválido!')"
                                placeholder="E-mail" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
@@ -157,12 +194,13 @@
                     <div class="form-group clearfix col-md-3">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"><strong>Extranjero</strong>
+                                <input id="extranjero" type="checkbox" onchange="showContent('upDoc','extranjero')">
+                                <strong>Extranjero</strong>
                             </label>
                         </div>
                     </div>
                     
-                    <div class="form-group clearfix col-md-6">
+                    <div class="form-group clearfix col-md-6" id="upDoc" style="display: none">
                         <label for="upDoc">Subir documento</label>
                         <input type="file" id="upDoc">
                     </div>
@@ -183,92 +221,113 @@
             <div class="form-group">
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-3">
-                        <label for="fecing" class="control-label required">Fecha ingreso</label>
-                        <input type="text" name="fecing" id="rut" value="" 
-                               placeholder="Fecha ingreso" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <label for="fecing" class="control-label required">Fecha ingreso (*)</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="date" class="form-control datepicker"
+                                   onblur="validarVacio(this,'Por favor Ingrese Fecha'),calcularEdad(this.value)"
+                                   name="fechaing" id="fechaing">
+                            <span class="help-block hidden fa fa-warning"></span>
+                        </div>
                     </div>
 
                     <div class="form-group clearfix col-md-3">
-                        <label for="horaing" class="control-label required">Hora ingreso</label>
-                        <input type="text" name="horaing" id="rut" value="" 
+                        <label for="horaing" class="control-label required">Hora ingreso (*)</label>
+                        <input type="time" name="horaing" id="horaing" value="" 
+                               onblur="validarVacio(this,'Por favor Ingrese Hora Ingreso')"
                                placeholder="Hora ingreso" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
                 
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-12">
-                        <label>Motivo consulta</label>
-                        <textarea class="form-control" rows="3" id="motivo"
-                            placeholder="Ingrese motivo de consulta">
-                        </textarea>
+                        <label>Motivo consulta (*)</label>
+                        <textarea class="form-control" rows="3" id="motivo" value=""
+                                  onblur="validarVacio(this,'Por favor Ingrese el Motivo de la Consulta')"
+                                  placeholder="Ingrese motivo de consulta"></textarea>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
                 
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-12">
-                        <label>Historia de la enfermedad actual</label>
-                        <textarea class="form-control" rows="3" id="historia"
-                            placeholder="Ingrese historia de la enfermedad actual">
-                        </textarea>
+                        <label>Historia de la enfermedad actual (*)</label>
+                        <textarea class="form-control" rows="3" id="historia" value=""
+                                  onblur="validarVacio(this,'Por favor Ingrese Historia de la Enfermedad Actual')"
+                                  placeholder="Ingrese historia de la enfermedad actual"></textarea>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
                 
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-3">
                         <label for="codcie10" class="control-label required">Cod. CIE-10 (*)</label>
-                        <input type="text" name="codcie10" id="rut" value="" 
+                        <input type="text" name="codcie10" id="rut" value=""
+                               onblur="validarVacio(this,'Por favor Seleccione un Cod. CIE-10')"
                                placeholder="Cod." class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                     
                     <div class="form-group clearfix col-md-6">
                         <label for="clasificacion" class="control-label required">Clasificación diagnóstica (*)</label>
-                        <input type="text" name="clasificacion" id="fecha" value=""
+                        <input type="text" name="clasificacion" id="clasificacion" value=""
+                               onblur="validarVacio(this,'Por favor Seleccione Clasificación Diagnóstica')"
                                placeholder="Clasificación diagnóstica" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                     
                     <div class="form-group clearfix col-md-3">
                         <label for="estado" class="control-label required">Estado(*)</label>
-                        <input type="text" name="estado" id="rut" value="" 
+                        <input type="text" name="estado" id="estado" value=""
+                               onblur="validarVacio(this,'Por favor Ingrese Estado')"
                                placeholder="Estado" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
                 
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-12">
-                        <label>Diagn&oacute;stico</label>
+                        <label>Diagn&oacute;stico (*)</label>
                         <textarea class="form-control" rows="3" id="diagnostico"
-                            placeholder="Diagnóstico">
-                        </textarea>
+                                  onblur="validarVacio(this,'Por favor Ingrese Diagnóstico')"
+                                  placeholder="Diagnóstico"></textarea>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
                 
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-12">
-                        <label>Indicaci&oacute;n m&eacute;dica</label>
+                        <label>Indicaci&oacute;n m&eacute;dica (*)</label>
                         <textarea class="form-control" rows="3" id="indicacion"
-                            placeholder="Ingrese motivo de consulta">
-                        </textarea>
+                                  onblur="validarVacio(this,'Por favor Ingrese Indicación Médica')"
+                                  placeholder="Ingrese motivo de consulta"></textarea>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
                 
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-3">
-                        <label for="horaegr" class="control-label required">Hora egreso</label>
-                        <input type="text" name="horaegr" id="rut" value="" 
+                        <label for="horaegr" class="control-label required">Hora egreso (*)</label>
+                        <input type="time" name="horaegr" id="rut" value="" 
+                               onblur="validarVacio(this,'Por favor Ingrese Hora Egreso')"
                                placeholder="Hora egreso" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                     
                     <div class="form-group clearfix col-md-6">
                         <label for="casoegreso" class="control-label required">Caso de egreso (*)</label>
-                        <input type="text" name="casoegreso" id="fecha" value=""
-                               placeholder="Caso de egreso" class="form-control"/>
-                        <span class="help-block hidden"></span>
+                        <select for="casoegreso" class="form-control" id="casoegreso" name="casoegreso"
+                                onchange="Dau.cargarComunasPorRegion(this.value,'comuna')"
+                                onblur="validarVacio(this,'Por favor Seleccione un Caso de Egreso')">
+                                <option>Seleccione un Caso de Egreso</option>
+                                {foreach $arrCasoEgreso as $item}
+                                        <option value="{$item->cas_egr_id}" >{$item->cas_egr_nombre}</option>
+                                {/foreach}
+                        </select>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
                 
@@ -276,31 +335,37 @@
                     <div class="form-group clearfix col-md-3">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" id="chkSospecha"><strong>Sospecha</strong>
+                                <input type="checkbox" id="chkSospecha"
+                                       onchange="showContent('acepta','chkSospecha')">
+                                <strong>Sospecha</strong>
                             </label>
                         </div>
                     </div>
                     
-                    <div class="form-group clearfix col-md-3">
+                    <div class="form-group clearfix col-md-3" id="reconoce">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" id="chkReconoce"><strong>Reconoce</strong>
+                                <input type="checkbox" id="chkReconoce"
+                                       onchange="showContent('acepta','chkReconoce')">
+                                <strong>Reconoce</strong>
                             </label>
                         </div>
                     </div>
                     
                 </div>
                 
-                <div class="form-group col-md-12">    
+                <div class="form-group col-md-12" id="acepta" style="display: none">    
                     <div class="form-group clearfix col-md-3">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" id="chkAcepta"><strong>Acepta Programa</strong>
+                                <input type="checkbox" id="chkAcepta"
+                                       onchange="showContent('upDoc2','chkAcepta')">
+                                <strong>Acepta Programa</strong>
                             </label>
                         </div>
                     </div>
                     
-                    <div class="form-group clearfix col-md-3">
+                    <div class="form-group clearfix col-md-3" id="upDoc2" style="display: none">
                         <label for="upDoc2">Subir consentimiento</label>
                         <input type="file" id="upDoc2">
                     </div>

@@ -39,7 +39,10 @@ class Dau extends Controller{
     function __construct(){
         parent::__construct();
         //Acceso::set("ADMINISTRADOR");
+        $this->_DAORegion = $this->load->model("DAORegion");
+        $this->_DAOComuna = $this->load->model("DAOComuna");
         $this->_DAODau = $this->load->model("DAODau");
+        $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
     }
     
     /*
@@ -72,9 +75,15 @@ class Dau extends Controller{
         $this->smarty->assign("rut", $sesion->rut);
         $this->smarty->assign("usuario", $sesion->usuario);
         
-        $this->_addJavascript(STATIC_FILES . 'js/lib/rut.js');
+        $arrRegiones = $this->_DAORegion->getListaRegiones();
+        $this->smarty->assign("arrRegiones",$arrRegiones);
+        
+        $arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
+        $this->smarty->assign("arrCasoEgreso",$arrCasoEgreso);
+        
         //llamado al template
         $this->_display('DAU/nueva_dau.tpl');
+        $this->load->javascript(STATIC_FILES."js/regiones.js");
     }
     
     public function verDau(){
@@ -86,6 +95,23 @@ class Dau extends Controller{
         
         //llamado al template
         $this->_display('DAU/ver_dau.tpl');
+    }
+    
+    public function cargarComunasPorRegion(){
+            $region = $_POST['region'];
+
+            $daoRegion = $this->load->model('DAORegion');
+            $comunas = $daoRegion->obtComunasPorRegion($region)->rows;
+
+            $json = array();
+            $i = 0;
+            foreach($comunas as $comuna){
+                    $json[$i]['id_comuna'] = $comuna->com_id;
+                    $json[$i]['nombre_comuna'] = $comuna->com_nombre;
+                    $i++;
+            }
+
+            echo json_encode($json);
     }
     
     //*** REGIONES ***//
