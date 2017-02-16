@@ -15,11 +15,14 @@ $(document).ready(function() {
             success:function(data){
                 buttonEndProcess(button_process);
                 if(data.correcto){
-                    //$("#password").val("");
-                    //$("#password_repetido").val("");
+                    $("#password").val("");
+                    $("#password_repetido").val("");
                     //$("#form-ok").removeClass("hidden");
-                    location.href = BASE_URI + "index.php/Home/dashboard";
-                    //location.href = BASE_URI + "index.php/Login/actualizar";
+                    //location.href = BASE_URI + "index.php/Home/dashboard";
+                    limpiaErrores(data.error);
+                    $("#form-error").addClass("hidden");
+                    xModal.info('Contraseña Actualizada').freeze();
+                    location.href = BASE_URI + "index.php/Login/actualizar";
                 } else {
                     procesaErrores(data.error);
                     $("#form-error").removeClass("hidden");

@@ -73,10 +73,10 @@
                             <i class="fa fa-warning fa-2x"></i> &nbsp; 
                             <strong> ¡Error! </strong> Existen problemas en los datos, revise los campos en rojo.
                         </div>
-                        <div id="form-ok" class="alert alert-warning hidden">
+                    <!--    <div id="form-ok" class="alert alert-warning hidden">
                             <i class="fa fa-info-circle"></i> &nbsp; 
                             La contraseña ha sido actualizada.
-                        </div>
+                        </div> -->
                         <div class="col-md-12 text-right">
                             <button type="button" id="guardar" class="btn btn-success btn-sm">
                                 <i class="fa fa-save"></i> Guardar
