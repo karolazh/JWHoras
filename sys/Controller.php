@@ -94,7 +94,6 @@ abstract class Controller
     protected function _display($template, $layout = true){
         $this->smarty->assign("js", $this->js);
         $this->smarty->assign("css", $this->css);
-        Acceso::redireccionUnlogged($this->smarty);
         if($layout){
             $this->smarty->assign("content", $this->smarty->fetch($template));
             $this->smarty->display("template.tpl");

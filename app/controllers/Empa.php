@@ -64,6 +64,7 @@ class Empa extends Controller{
     }
     
     public function nuevoEmpa(){
+        Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
         $this->smarty->assign("rut", $sesion->rut);
@@ -83,6 +84,7 @@ class Empa extends Controller{
     }
     
     public function verEmpa(){
+        Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
         $this->smarty->assign("rut", $sesion->rut);
