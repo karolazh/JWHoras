@@ -169,7 +169,7 @@ function procesaErrores(errores) {
 }
 
 function limpiaErrores(errores) {
-    $.each(errores, function (i, valor) {
+    $.each(errores, function (i) {
         var parent = getFormParent($("#" + i).parent(), 1);
 
         if (parent != null) {

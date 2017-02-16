@@ -185,7 +185,6 @@ class Login extends Controller {
             $iteraciones = 1000000;
             $bin = openssl_random_pseudo_bytes(64);
             $salt = bin2hex($bin);
-            $fecha_login = $password = sha1($this->_request->getParam("password"));
             $password = hash_pbkdf2('sha512', $this->_request->getParam("password"), $salt, $iteraciones);
             $ultimo_login = date('Y-m-d H:i:s');
             $datos = array($password, $salt, $ultimo_login, $session->id);
@@ -197,8 +196,8 @@ class Login extends Controller {
             }
         }
 
-        $salida = array("error" => $validar->getErrores(),
-            "correcto" => $validar->getCorrecto());
+        $salida = array("error"    => $validar->getErrores(),
+                        "correcto" => $validar->getCorrecto());
         $this->smarty->assign("hidden", "");
         $json = Zend_Json::encode($salida);
         echo $json;
@@ -266,7 +265,6 @@ class Login extends Controller {
         $rut = "";
         $correcto = false;
         $error = array();
-        $rutparam = $this->_request->getParam("rut");
         if (trim($this->_request->getParam("rut")) != "") {
             $usuario = $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
             if (!is_null($usuario)) {
