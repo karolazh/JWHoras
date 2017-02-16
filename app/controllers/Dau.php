@@ -84,6 +84,11 @@ class Dau extends Controller{
         $this->smarty->assign("rut", $sesion->rut);
         $this->smarty->assign("usuario", $sesion->usuario);
         
+        $parametros = $this->request->getParametros();
+        $id_dau = $parametros[0];
+        
+        $this->smarty->assign("id_dau", $id_dau);
+        
         //llamado al template
         $this->_display('DAU/ver_dau.tpl');
     }

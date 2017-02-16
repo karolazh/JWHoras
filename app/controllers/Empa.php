@@ -69,6 +69,9 @@ class Empa extends Controller{
         $this->smarty->assign("rut", $sesion->rut);
         $this->smarty->assign("usuario", $sesion->usuario);
         
+        $parametros = $this->request->getParametros();
+        $id_dau = $parametros[0];
+        
         //llamado al template
         $this->_display('Empa/nuevo_empa.tpl');
     }
