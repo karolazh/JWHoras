@@ -9,13 +9,15 @@ class Regiones extends Controller{
 	function __construct(){
 		parent::__construct();
 		
-		$this->_DAORegiones = $this->load->model('DAORegiones');
+		$this->_DAORegiones = $this->load->model('DAORegion');
+                $this->_DAOComuna = $this->load->model("DAOComuna");
+
 }
 
 public function cargarComunasPorRegion(){
 		$region = $_POST['region'];
 
-		$daoRegiones = $this->load->model('DAORegiones');
+		$daoRegiones = $this->load->model('DAORegion');
 		$comunas = $daoRegiones->obtComunasPorRegion($region)->getRows();
 
 		$json = array();
