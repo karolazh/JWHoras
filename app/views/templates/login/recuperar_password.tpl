@@ -47,7 +47,7 @@
                                 
                                 <div class="form-group">
                                     <p class="text-center">
-                                        <a href="javascript:history.back();">Volver</a>
+                                        <a href="javascript:location.href='{$base_url}';">Volver</a>
                                     </p>
                                 </div>
                             </form>
