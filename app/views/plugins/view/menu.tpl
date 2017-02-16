@@ -7,12 +7,12 @@
         <i class="fa fa-plus"></i> <span>DAU</span></a>
 </li>
 <li>
-    <a href="{$base_url}/Home/dashboard">
+    <a href="{$base_url}/Empa/index">
         <i class="fa fa-medkit"></i> <span>EMPA</span></a>
 </li>
 <li>
     <a href="{$base_url}/Home/dashboard">
-        <i class="fa fa-hospital-o"></i> <span>Ficha</span></a>
+        <i class="fa fa-hospital-o"></i> <span>Ficha Paciente</span></a>
 </li>
 <li>
     <a href="{$base_url}/Home/dashboard">

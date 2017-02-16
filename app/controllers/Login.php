@@ -33,7 +33,6 @@ class Login extends Controller {
         }
         $_SESSION['autenticado'] = FALSE;
         $this->smarty->assign("hidden", "hidden");
-        $this->_addJavascript(STATIC_FILES . 'js/lib/validador.js');
         $this->smarty->display('login/login.tpl');
     }
 
@@ -41,7 +40,6 @@ class Login extends Controller {
 
     public function recuperar_password() {
         $this->_addJavascript(STATIC_FILES . 'js/templates/login/recuperar_password.js');
-        $this->_addJavascript(STATIC_FILES . 'js/lib/validador.js');
         $this->_display('login/recuperar_password.tpl', false);
     }
 
@@ -130,7 +128,6 @@ class Login extends Controller {
         } else {
             $this->smarty->assign("hidden", "");
             $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
-            $this->_addJavascript(STATIC_FILES . 'js/lib/validador.js');
             $this->smarty->display('login/login.tpl');
         }
     }
@@ -143,8 +140,6 @@ class Login extends Controller {
 
     //*** 20170127 - Formulario Actualiza Password ***//
     public function actualizar() {
-        //Seguridad::validar_sesion($this->smarty);
-        Acceso::redireccionUnlogged($this->smarty);
         $this->smarty->assign("nombre", $_SESSION['nombre']);
         $this->smarty->assign("rut", $_SESSION['rut']);
         $this->smarty->assign("mail", $_SESSION['mail']);
@@ -155,8 +150,6 @@ class Login extends Controller {
         $this->smarty->assign("region", $_SESSION['region']);
         $this->smarty->assign("primer_login", $_SESSION['primer_login']);
         $this->smarty->assign("hidden", "hidden");
-        $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
-        $this->_addJavascript(STATIC_FILES . 'js/lib/validador.js');
         $this->_addJavascript(STATIC_FILES . 'js/templates/login/actualizar_password.js');
         $this->_display('login/actualizar.tpl');
     }
@@ -192,7 +185,6 @@ class Login extends Controller {
             $iteraciones = 1000000;
             $bin = openssl_random_pseudo_bytes(64);
             $salt = bin2hex($bin);
-            $fecha_login = $password = sha1($this->_request->getParam("password"));
             $password = hash_pbkdf2('sha512', $this->_request->getParam("password"), $salt, $iteraciones);
             $ultimo_login = date('Y-m-d H:i:s');
             $datos = array($password, $salt, $ultimo_login, $session->id);
@@ -204,9 +196,9 @@ class Login extends Controller {
             }
         }
 
-        $salida = array("error" => $validar->getErrores(),
-            "correcto" => $validar->getCorrecto());
-
+        $salida = array("error"    => $validar->getErrores(),
+                        "correcto" => $validar->getCorrecto());
+        $this->smarty->assign("hidden", "");
         $json = Zend_Json::encode($salida);
         echo $json;
     }
@@ -273,7 +265,6 @@ class Login extends Controller {
         $rut = "";
         $correcto = false;
         $error = array();
-        $rutparam = $this->_request->getParam("rut");
         if (trim($this->_request->getParam("rut")) != "") {
             $usuario = $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
             if (!is_null($usuario)) {

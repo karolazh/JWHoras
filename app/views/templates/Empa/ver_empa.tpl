@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1><i class="fa fa-plus"></i> Detalle DAU</h1>
     <div class="col-md-12 text-right">
-        <button type="button" id="ingresar" onclick="location.href='{$base_url}/Empa/nuevoEmpa/{$id_dau}'"
+        <button type="button" id="ingresar" onclick="location.href='{$base_url}/Dau/nuevaDau'"
                 class="btn btn-danger">
             <i class="fa fa-plus"></i>&nbsp;&nbsp;Ingresar EMPA
         </button>

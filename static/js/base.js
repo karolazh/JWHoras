@@ -168,6 +168,19 @@ function procesaErrores(errores) {
     });
 }
 
+function limpiaErrores(errores) {
+    $.each(errores, function (i) {
+        var parent = getFormParent($("#" + i).parent(), 1);
+
+        if (parent != null) {
+                $(parent).removeClass("has-error");
+                $(parent).children(".help-block").addClass("hidden");
+                $(parent).children(".help-block").html("");
+        }
+    });
+}
+
+
 function getFormParent(parent, intento) {
     if (intento > 4) {
         return null;

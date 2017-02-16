@@ -3,7 +3,7 @@
 /* 
 !IniHeaderDoc
 *****************************************************************************
-!NombreObjeto 		: Dau.php
+!NombreObjeto 		: Empa.php
 !Sistema 	  	: PREVENCIÓN
 !Modulo 	  	: NA
 !Descripcion  		: 	
@@ -11,8 +11,8 @@
 !Perfil       		: 
 !Itinerado    		: NA
 !Uso          		: NA
-!Autor        		: Carolina Zamora Hormazábal
-!Creacion     		: 14/02/2017
+!Autor        		: 
+!Creacion     		: 16/02/2017
 !Retornos/Salidas 	: NA
 !OrigenReq        	: NA
 =============================================================================
@@ -30,26 +30,21 @@
 !EndHeaderDoc 
 */
 
-//** clase Admnistracion ***//
-class Dau extends Controller{
+class Empa extends Controller{
 	
-    protected $_DAODau;
+    protected $_DAOEmpa;
 
     //funcion construct
     function __construct(){
         parent::__construct();
         //Acceso::set("ADMINISTRADOR");
-        $this->_DAORegion = $this->load->model("DAORegion");
-        $this->_DAOComuna = $this->load->model("DAOComuna");
-        $this->_DAODau = $this->load->model("DAODau");
-        $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
+        $this->_DAOEmpa = $this->load->model("DAOEmpa");
     }
     
     /*
      * Index
      */
     public function index(){
-        Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
         $this->smarty->assign("rut", $sesion->rut);
@@ -61,33 +56,14 @@ class Dau extends Controller{
          * Si tengo perfil 4="GESTOR REGIONAL" puedo ver solo las DAU correspondientes a la región
          * REALIZAR FUNCIÓN PARA LISTAR SEGÚN PERFIL
          */
-        $arr = $this->_DAODau->getListaDAU();
-        $this->smarty->assign('arrResultado', $arr);
+        //$arr = $this->_DAODau->getListaDAU();
+        //$this->smarty->assign('arrResultado', $arr);
         
         //llamado al template
-        $this->_display('DAU/index.tpl');
+        $this->_display('Empa/index.tpl');
     }
     
-    public function nuevaDau(){
-        Acceso::redireccionUnlogged($this->smarty);
-        $sesion = New Zend_Session_Namespace("usuario_carpeta");
-        $this->smarty->assign("id_usuario", $sesion->id);
-        $this->smarty->assign("rut", $sesion->rut);
-        $this->smarty->assign("usuario", $sesion->usuario);
-        
-        $arrRegiones = $this->_DAORegion->getListaRegiones();
-        $this->smarty->assign("arrRegiones",$arrRegiones);
-        
-        $arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
-        $this->smarty->assign("arrCasoEgreso",$arrCasoEgreso);
-        
-        //llamado al template
-        $this->_display('DAU/nueva_dau.tpl');
-        $this->load->javascript(STATIC_FILES."js/regiones.js");
-    }
-    
-    public function verDau(){
-        Acceso::redireccionUnlogged($this->smarty);
+    public function nuevoEmpa(){
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
         $this->smarty->assign("rut", $sesion->rut);
@@ -96,27 +72,24 @@ class Dau extends Controller{
         $parametros = $this->request->getParametros();
         $id_dau = $parametros[0];
         
+        /* Obtener id de paciente a través de id de dau */
+        $id_pac = 1;
+        
         $this->smarty->assign("id_dau", $id_dau);
+        $this->smarty->assign("id_pac", $id_pac);
         
         //llamado al template
-        $this->_display('DAU/ver_dau.tpl');
+        $this->_display('Empa/nuevo_empa.tpl');
     }
     
-    public function cargarComunasPorRegion(){
-            $region = $_POST['region'];
-
-            $daoRegion = $this->load->model('DAORegion');
-            $comunas = $daoRegion->obtComunasPorRegion($region)->rows;
-
-            $json = array();
-            $i = 0;
-            foreach($comunas as $comuna){
-                    $json[$i]['id_comuna'] = $comuna->com_id;
-                    $json[$i]['nombre_comuna'] = $comuna->com_nombre;
-                    $i++;
-            }
-
-            echo json_encode($json);
+    public function verEmpa(){
+        $sesion = New Zend_Session_Namespace("usuario_carpeta");
+        $this->smarty->assign("id_usuario", $sesion->id);
+        $this->smarty->assign("rut", $sesion->rut);
+        $this->smarty->assign("usuario", $sesion->usuario);
+        
+        //llamado al template
+        $this->_display('Empa/ver_empa.tpl');
     }
     
     //*** REGIONES ***//
