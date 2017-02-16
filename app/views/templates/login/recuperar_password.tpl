@@ -34,7 +34,7 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control" maxlength="13" 
                                                onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()"
-                                               onkeypress ="return soloLetras(event)"
+                                               onkeypress ="return soloNumerosYK(event)"
                                                name="rut" id="rut" placeholder="Ingrese su Rut"/>
                                     <br>
                                     <div id="form-error" class="alert alert-danger hidden">
@@ -47,7 +47,7 @@
                                 
                                 <div class="form-group">
                                     <p class="text-center">
-                                        <a href="javascript:history.back();">Volver</a>
+                                        <a href="javascript:location.href='{$base_url}';">Volver</a>
                                     </p>
                                 </div>
                             </form>

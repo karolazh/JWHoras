@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/http/prevencion/app/views/templates/login/recuperar_password.tpl</file>
-            <file>file:/srv/http/prevencion/static/js/templates/login/recuperar_password.js</file>
-            <file>file:/srv/http/prevencion/app/controllers/Login.php</file>
-            <file>file:/srv/http/prevencion/app/models/DAOUsuarios.php</file>
+            <file>file:/var/www/html/prevencion/static/js/lib/passwordscheck.js</file>
+            <file>file:/var/www/html/prevencion/app/views/templates/login/login.tpl</file>
+            <file>file:/var/www/html/prevencion/app/controllers/Login.php</file>
+            <file>file:/var/www/html/prevencion/app/views/templates/login/actualizar.tpl</file>
         </group>
     </open-files>
 </project-private>

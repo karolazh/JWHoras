@@ -3,4 +3,4 @@ table.table >thead>tr>th{text-align: center !important;background-color: #3C8DBC
 table.table>tbody>tr>td{vertical-align: middle !important; border-color: #ccc}
 table.bordered > thead > tr > th, table.bordered > tbody > tr > td{border-color: #aaa !important}
 table.dataTable>thead>tr>th{text-align: center !important;background-color: #3C8DBC !important;color:#fff !important;vertical-align: middle !important;}
-table.dataTable>tbody>tr>td{vertical-align: middle !important; border-color: #ccc}
+table.dataTable>tbody>tr>td{vertical-align: middle !important; border-color: #ccc}z

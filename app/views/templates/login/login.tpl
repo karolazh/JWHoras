@@ -26,7 +26,7 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control" maxlength="13" 
                                                onkeyup="formateaRut(this), validaRut(this), this.value = this.value.toUpperCase()"
-                                               onkeypress ="return soloLetras(event)"
+                                               onkeypress ="return soloNumerosYK(event)"
                                                name="rut" id="rut" placeholder="Ingrese su Rut"/>
                                     </div>
                                     <div class="form-group">
@@ -38,7 +38,7 @@
                                         Recordarme en este equipo
                                     </div>
                                     <div id="form-error" class="alert alert-danger {$hidden}">
-                                        <i class="fa fa-warning fa-2x"></i> &nbsp; Los datos ingresados no son válidos.
+                                        <i class="fa fa-warning fa-2x"></i> &nbsp; {$texto_error}
                                     </div>
                                     <br>
                                     <button id="ingresar" class="btn btn-lg btn-primary btn-block" type="submit" onClick="xModal.info('Iniciando Sesion');">Ingresar&nbsp;&nbsp;<i></i></button>
