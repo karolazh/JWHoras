@@ -33,7 +33,7 @@ class Login extends Controller {
         }
         $_SESSION['autenticado'] = FALSE;
         $this->smarty->assign("hidden", "hidden");
-        $this->_addJavascript(STATIC_FILES . 'js/lib/rut.js');
+        $this->_addJavascript(STATIC_FILES . 'js/lib/validador.js');
         $this->smarty->display('login/login.tpl');
     }
 
@@ -41,7 +41,7 @@ class Login extends Controller {
 
     public function recuperar_password() {
         $this->_addJavascript(STATIC_FILES . 'js/templates/login/recuperar_password.js');
-        $this->_addJavascript(STATIC_FILES . 'js/lib/rut.js');
+        $this->_addJavascript(STATIC_FILES . 'js/lib/validador.js');
         $this->_display('login/recuperar_password.tpl', false);
     }
 
@@ -130,7 +130,7 @@ class Login extends Controller {
         } else {
             $this->smarty->assign("hidden", "");
             $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
-            $this->_addJavascript(STATIC_FILES . 'js/lib/rut.js');
+            $this->_addJavascript(STATIC_FILES . 'js/lib/validador.js');
             $this->smarty->display('login/login.tpl');
         }
     }
@@ -156,7 +156,7 @@ class Login extends Controller {
         $this->smarty->assign("primer_login", $_SESSION['primer_login']);
         $this->smarty->assign("hidden", "hidden");
         $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
-        $this->_addJavascript(STATIC_FILES . 'js/lib/passwordscheck.js');
+        $this->_addJavascript(STATIC_FILES . 'js/lib/validador.js');
         $this->_addJavascript(STATIC_FILES . 'js/templates/login/actualizar_password.js');
         $this->_display('login/actualizar.tpl');
     }

@@ -17,7 +17,7 @@
 	<script type="text/javascript" src="{$static}js/plugins/jquery.colorbox.js"></script>
     <script type="text/javascript" src="{$static}js/plugins/xmodal.js"></script>
     <script type="text/javascript" src="{$static}js/base.js"></script>
-    <script type="text/javascript" src="{$static}js/lib/rut.js"></script>
+    <script type="text/javascript" src="{$static}js/lib/validador.js"></script>
 
     {js}
     {$js}

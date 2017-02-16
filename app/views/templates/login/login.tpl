@@ -26,7 +26,7 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control" maxlength="13" 
                                                onkeyup="formateaRut(this), validaRut(this), this.value = this.value.toUpperCase()"
-                                               onkeypress ="return soloLetras(event)"
+                                               onkeypress ="return soloNumerosYK(event)"
                                                name="rut" id="rut" placeholder="Ingrese su Rut"/>
                                     </div>
                                     <div class="form-group">
