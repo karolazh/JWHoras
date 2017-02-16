@@ -72,6 +72,12 @@ class Empa extends Controller{
         $parametros = $this->request->getParametros();
         $id_dau = $parametros[0];
         
+        /* Obtener id de paciente a través de id de dau */
+        $id_pac = 1;
+        
+        $this->smarty->assign("id_dau", $id_dau);
+        $this->smarty->assign("id_pac", $id_pac);
+        
         //llamado al template
         $this->_display('Empa/nuevo_empa.tpl');
     }
