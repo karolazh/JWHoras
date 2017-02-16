@@ -32,7 +32,7 @@
                                         Para recuperar su contraseña, ingrese su Rut.
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" maxlength="13" 
+                                        <input type="text" class="form-control" maxlength="12" 
                                                onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()"
                                                onkeypress ="return soloNumerosYK(event)"
                                                name="rut" id="rut" placeholder="Ingrese su Rut"/>

@@ -28,6 +28,13 @@ return 'Fuerte'
 }
 });
 
+//Validar que Solo sean Numeros
+function soloNumeros(e){
+	var key = window.Event ? e.which : e.keyCode
+	return (key >= 48 && key <= 57)
+}
+
+//Validar que solo sean Numeros y K para RUT
 function soloNumerosYK(e) {
     key = e.keyCode || e.which;
     tecla = String.fromCharCode(key).toString();
@@ -40,7 +47,6 @@ function soloNumerosYK(e) {
             break;
         }
     }
-
     if(letras.indexOf(tecla) == -1 && !tecla_especial){
         return false;
       }
@@ -136,4 +142,55 @@ function validaRut(objetoRut){
                 $('#rut').parent().addClass('has-success');
                 return false;
 	}
+}
+
+//Validar Email
+function validaEmail(email,mensaje_error) {
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    //Se muestra un texto a modo de ejemplo, luego va a ser un icono     
+    if (emailRegex.test(email.value)) {
+        if($(email).parent().hasClass('has-error')){
+            $(email).parent().removeClass('has-error');
+        }
+        $(email).parent().addClass('has-success');
+        $(email).parent().find('span.help-block').addClass("hidden");
+    }else{
+        $(email).parent().addClass('has-error');
+        $(email).parent().find('span.help-block').html(mensaje_error);
+        $(email).parent().find('span.help-block').removeClass("hidden");
+  }
+}
+
+ //Valida campo vacío
+function validarVacio(metodo, mensaje_error){
+    if ((metodo.value=="") || (/Seleccione/.test(metodo.value)) || (metodo.value ==0)){
+        $(metodo).parent().find('span.help-block').html(mensaje_error);
+        $(metodo).parent().find('span.help-block').removeClass("hidden");
+        $(metodo).parent().addClass('has-error');
+    }else{
+        if($(metodo).parent().hasClass('has-error')){
+            $(metodo).parent().removeClass('has-error');
+        }
+        $(metodo).parent().addClass('has-success');
+        $(metodo).parent().find('span.help-block').addClass("hidden");
+    }
+}
+
+//Calcular Edad
+function calcularEdad(Fecha){
+    fecha = new Date(Fecha);
+    hoy = new Date();
+    ed = parseInt((hoy -fecha)/365/24/60/60/1000);
+    if (ed >= 0)
+     {document.getElementById('edad').value = ed;}
+}
+
+//Mostrar DIV con checkbox
+function showContent(element,check) {
+    if (document.getElementById(check).checked) {
+        document.getElementById(element).style.display='block';
+    }
+    else {
+        document.getElementById(element).style.display='none';
+    }
 }

@@ -46,4 +46,13 @@ class DAORegion extends Model{
             return NULL;
         }
     }
+    
+    public function obtComunasPorRegion($region){
+            $query = "select comunas.com_nombre, comunas.com_id from tab_comunas comunas
+                                    left join tab_provincias prov on comunas.com_pro_id = prov.pro_id
+                                    left join tab_regiones reg on prov.pro_reg_id = reg.reg_id
+                                    where reg.reg_id = ?";
+
+            return $this->db->getQuery($query,array($region));
+    }
 }
