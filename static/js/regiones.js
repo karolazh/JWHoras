@@ -1,11 +1,11 @@
 /* global BASE_URI */
 
-var Dau ={
+var Region ={
     
 cargarComunasPorRegion : function(region,combo,comuna){
             console.log(region);
 		if(region != 0){
-			$.post(BASE_URI+'index.php/Dau/cargarComunasPorRegion',{region:region},function(response){
+			$.post(BASE_URI+'index.php/Regiones/cargarComunasPorRegion',{region:region},function(response){
 				if(response.length > 0){
 					var total = response.length;
 					var options = '<option value="0">Seleccione una Comuna</option>';

@@ -144,7 +144,7 @@
                     <div class="form-group clearfix col-md-6">
                         <label class="control-label required">Región (*)</label>
                         <select for="region" class="form-control" id="region" name="region"
-                                onchange="Dau.cargarComunasPorRegion(this.value,'comuna')"
+                                onchange="Region.cargarComunasPorRegion(this.value,'comuna')"
                                 onblur="validarVacio(this,'Por favor Seleccione una Región')">
                                 <option>Seleccione una Región</option>
                                 {foreach $arrRegiones as $item}
