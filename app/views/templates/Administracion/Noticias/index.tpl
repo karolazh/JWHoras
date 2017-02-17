@@ -46,7 +46,11 @@
                 </div>
 
             </form>
-
+        </div>
+    </div>
+    
+    <div class="box box-primary">
+        <div class="box-body">
             <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
                 <thead>
                     <tr role="row">
