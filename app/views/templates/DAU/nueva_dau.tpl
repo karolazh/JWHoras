@@ -10,53 +10,54 @@
         </ol>
 </section>
 
-<form id="form">
+<form id="form" class="form-horizontal">
 
 <section class="content">
-    <div class="box box-primary">
-        <div class="box-body">
-            <div class="box-header">
-                <h3 class="box-title">Datos del Paciente</h3>
-            </div>
-            
-            <div class="form-group">
-                <div class="form-group col-md-12">
-                    <div class="form-group col-md-3">
-                        <label for="region" class="control-label required">Rut Paciente (*)</label>
-                        <input type="text" name="rut" id="rut" maxlength="12"
-                               onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()"
-                               onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut')"
-                               placeholder="Rut paciente" class="form-control"/>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
+    <div class="panel panel-primary">
+		<div class="panel-heading">
+			Datos del Paciente
+        </div>
+        <div class="panel-body">
+			<div class="form-group">
+				<label for="region" class="col-sm-2 control-label required">Rut Paciente (*)</label>
+				<div class="col-sm-2">
+					<input type="text" name="rut" id="rut" maxlength="12" class="form-control"
+						   onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()"
+						   onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut')"
+						   placeholder="Rut paciente" class="form-control"/>
+					<span class="help-block hidden fa fa-warning"></span>
+				</div>
+				<div class="form-group col-md-1">
+					<button type="button" id="buscar" class="btn btn-info btn-sm form-control">
+							<i class="fa fa-search"></i>
+					</button>
+				</div>				
+			</div>
 
-                    <div class="form-group col-md-1">
-                        <label for="buscar" class="control-label required">&nbsp;</label>
-                        <button type="button" id="buscar" class="btn btn-info btn-sm form-control">
-                                <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+				<div class="form-group">
+					<label for="nombres" class="control-label col-sm-2 required">Nombres (*)</label>
+					<div class="col-sm-2">					
+						<input type="text" name="nombres" id="nombres" 
+							   onblur="validarVacio(this,'Por favor Ingrese Nombres')"
+							   onkeyup="validarVacio(this,'Por favor Ingrese Nombres')"
+							   placeholder="Nombres" class="form-control"/>
+						<span class="help-block hidden fa fa-warning"></span>
+					</div>	
+					<label for="apellidos" class="control-label col-sm-1 required">Apellidos (*)</label>					
+					<div class="col-sm-2">					
+										<input type="text" name="apellidos" id="apellidos"
+						   onblur="validarVacio(this,'Por favor Ingrese Apellidos')"
+						   onkeyup="validarVacio(this,'Por favor Ingrese Apellidos')"
+						   placeholder="Apellidos" class="form-control"/>
+					<span class="help-block hidden fa fa-warning"></span>
+					</div>
+				</div>
 
-                <div class="form-group col-md-12">
-                    <div class="form-group clearfix col-md-6">
-                        <label for="nombres" class="control-label required">Nombres (*)</label>
-                        <input type="text" name="nombres" id="nombres" 
-                               onblur="validarVacio(this,'Por favor Ingrese Nombres')"
-                               onkeyup="validarVacio(this,'Por favor Ingrese Nombres')"
-                               placeholder="Nombres" class="form-control"/>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
+				<div class="form-group clearfix col-md-6">
 
-                    <div class="form-group clearfix col-md-6">
-                        <label for="apellidos" class="control-label required">Apellidos (*)</label>
-                        <input type="text" name="apellidos" id="apellidos"
-                               onblur="validarVacio(this,'Por favor Ingrese Apellidos')"
-                               onkeyup="validarVacio(this,'Por favor Ingrese Apellidos')"
-                               placeholder="Apellidos" class="form-control"/>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-                </div>
+
+				</div>
+
 
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-6">
@@ -116,7 +117,7 @@
                         <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
-            </div>
+            
         </div>
     </div>    
 </section>
