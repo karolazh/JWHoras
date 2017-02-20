@@ -113,12 +113,8 @@
                         <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
-            
         </div>
-    </div>    
-</section>
-                
-<section class="content">
+
     <div class="box box-primary">
         <div class="box-body">
             <div class="box-header">
