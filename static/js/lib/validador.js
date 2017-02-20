@@ -164,16 +164,30 @@ function validaEmail(email,mensaje_error) {
  //Valida campo vacío
 function validarVacio(metodo, mensaje_error){
     if ((metodo.value=="") || (/Seleccione/.test(metodo.value)) || (metodo.value ==0)){
+        //En caso de que sea tipo FECHA porque tiene un parent mas
+        if(/fec/.test(metodo.id)){
+            $(metodo).parent().parent().find('span.help-block').html(mensaje_error);
+            $(metodo).parent().parent().find('span.help-block').removeClass("hidden");
+            $(metodo).parent().parent().addClass('has-error');
+        }else{
         $(metodo).parent().find('span.help-block').html(mensaje_error);
         $(metodo).parent().find('span.help-block').removeClass("hidden");
-        $(metodo).parent().addClass('has-error');
+        $(metodo).parent().addClass('has-error');}
     }else{
-        if($(metodo).parent().hasClass('has-error')){
-            $(metodo).parent().removeClass('has-error');
-        }
-        $(metodo).parent().addClass('has-success');
-        $(metodo).parent().find('span.help-block').addClass("hidden");
-    }
+        //En caso de que sea tipo FECHA porque tiene un parent mas
+        if(/fec/.test(metodo.id)){
+            if($(metodo).parent().parent().hasClass('has-error')){
+                $(metodo).parent().parent().removeClass('has-error');
+            }
+            $(metodo).parent().parent().addClass('has-success');
+            $(metodo).parent().parent().find('span.help-block').addClass("hidden");
+        }else{
+            if($(metodo).parent().hasClass('has-error')){
+                $(metodo).parent().removeClass('has-error');
+            }
+            $(metodo).parent().addClass('has-success');
+            $(metodo).parent().find('span.help-block').addClass("hidden");
+        }}
 }
 
 //Calcular Edad

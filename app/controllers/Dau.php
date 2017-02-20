@@ -43,6 +43,7 @@ class Dau extends Controller{
         $this->_DAOComuna = $this->load->model("DAOComuna");
         $this->_DAODau = $this->load->model("DAODau");
         $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
+        $this->_DAOPaciente = $this->load->model("DAOPaciente");
     }
     
     /*
@@ -84,6 +85,7 @@ class Dau extends Controller{
         //llamado al template
         $this->_display('DAU/nueva_dau.tpl');
         $this->load->javascript(STATIC_FILES."js/regiones.js");
+        $this->load->javascript(STATIC_FILES."js/templates/dau/nueva_dau.js");
     }
     
     public function verDau(){
@@ -115,6 +117,24 @@ class Dau extends Controller{
                     $json[$i]['nombre_comuna'] = $comuna->com_nombre;
                     $i++;
             }
+
+            echo json_encode($json);
+    }
+    
+    public function cargarPaciente(){
+            header('Content-type: application/json');
+            $rut = $_POST['rut'];
+            $daoPaciente = $this->load->model('DAOPaciente');
+            $paciente = $daoPaciente->getPaciente($rut);
+            $json = array();
+                    $json[0]['rut'] = $paciente->pac_rut;
+                    $json[0]['nombres'] = $paciente->pac_nombres;
+                    $json[0]['apellidos'] = $paciente->pac_apellidos;
+                    $json[0]['fec_nac'] = $paciente->pac_fec_nac;
+                    $json[0]['edad'] = $paciente->pac_edad;
+                    $json[0]['genero'] = $paciente->pac_sexo;
+                    $json[0]['prevision'] = $paciente->pac_prevision;
+                    $json[0]['convenio'] = $paciente->pac_convenio;
 
             echo json_encode($json);
     }
