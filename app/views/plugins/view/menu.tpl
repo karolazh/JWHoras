@@ -3,8 +3,8 @@
         <i class="fa fa-home"></i> <span>Inicio</span></a>
 </li>
 <li>
-    <a href="{$base_url}/Dau/index">
-        <i class="fa fa-plus"></i> <span>Registro</span></a>
+    <a href="{$base_url}/Registro/index">
+        <i class="fa fa-book"></i> <span>Registro</span></a>
 </li>
 <li>
     <a href="{$base_url}/Empa/index">

@@ -3,7 +3,7 @@
 /* 
 !IniHeaderDoc
 *****************************************************************************
-!NombreObjeto 		: Dau.php
+!NombreObjeto 		: Registro.php
 !Sistema 	  	: PREVENCIÓN
 !Modulo 	  	: NA
 !Descripcion  		: 	
@@ -11,7 +11,7 @@
 !Perfil       		: 
 !Itinerado    		: NA
 !Uso          		: NA
-!Autor        		: Carolina Zamora Hormazábal
+!Autor        		: Carolina Zamora Hormazábal, Orlando Vázquez
 !Creacion     		: 14/02/2017
 !Retornos/Salidas 	: NA
 !OrigenReq        	: NA
@@ -31,9 +31,9 @@
 */
 
 //** clase Admnistracion ***//
-class Dau extends Controller{
+class Registro extends Controller{
 	
-    protected $_DAODau;
+    protected $_DAORegistro;
 
     //funcion construct
     function __construct(){
@@ -41,7 +41,7 @@ class Dau extends Controller{
         //Acceso::set("ADMINISTRADOR");
         $this->_DAORegion = $this->load->model("DAORegion");
         $this->_DAOComuna = $this->load->model("DAOComuna");
-        $this->_DAODau = $this->load->model("DAODau");
+        $this->_DAORegistro = $this->load->model("DAORegistro");
         $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
         $this->_DAOPaciente = $this->load->model("DAOPaciente");
     }
@@ -62,14 +62,14 @@ class Dau extends Controller{
          * Si tengo perfil 4="GESTOR REGIONAL" puedo ver solo las DAU correspondientes a la región
          * REALIZAR FUNCIÓN PARA LISTAR SEGÚN PERFIL
          */
-        $arr = $this->_DAODau->getListaDAU();
+        $arr = $this->_DAORegistro->getListaRegistro();
         $this->smarty->assign('arrResultado', $arr);
         
         //llamado al template
-        $this->_display('DAU/index.tpl');
+        $this->_display('Registro/index.tpl');
     }
     
-    public function nuevaDau(){
+    public function nuevo(){
         Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
@@ -83,12 +83,13 @@ class Dau extends Controller{
         $this->smarty->assign("arrCasoEgreso",$arrCasoEgreso);
         
         //llamado al template
-        $this->_display('DAU/nueva_dau.tpl');
+        $this->_display('Registro/nuevo.tpl');
         $this->load->javascript(STATIC_FILES."js/regiones.js");
-        $this->load->javascript(STATIC_FILES."js/templates/dau/nueva_dau.js");
+        $this->load->javascript(STATIC_FILES."js/templates/registro/nuevo.js");
+        $this->load->javascript(STATIC_FILES."js/lib/validador.js");
     }
     
-    public function verDau(){
+    public function ver(){
         Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
@@ -96,12 +97,12 @@ class Dau extends Controller{
         $this->smarty->assign("usuario", $sesion->usuario);
         
         $parametros = $this->request->getParametros();
-        $id_dau = $parametros[0];
+        $id_registro = $parametros[0];
         
-        $this->smarty->assign("id_dau", $id_dau);
+        $this->smarty->assign("id_registro", $id_registro);
         
         //llamado al template
-        $this->_display('DAU/ver_dau.tpl');
+        $this->_display('Registro/ver.tpl');
     }
     
     public function cargarComunasPorRegion(){
@@ -131,7 +132,7 @@ class Dau extends Controller{
                     $json[0]['nombres'] = $paciente->pac_nombres;
                     $json[0]['apellidos'] = $paciente->pac_apellidos;
                     $json[0]['fec_nac'] = $paciente->pac_fec_nac;
-                    $json[0]['edad'] = $paciente->pac_edad;
+                    //$json[0]['edad'] = $paciente->pac_edad;
                     $json[0]['genero'] = $paciente->pac_sexo;
                     $json[0]['prevision'] = $paciente->pac_prevision;
                     $json[0]['convenio'] = $paciente->pac_convenio;

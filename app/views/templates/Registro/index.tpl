@@ -2,11 +2,11 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
 <section class="content-header">
-    <h1><i class="fa fa-plus"></i> DAU</h1>
+    <h1><i class="fa fa-book"></i>&nbsp; Registros</h1>
     <div class="col-md-12 text-right">
-        <button type="button" id="ingresar" onclick="location.href='{$base_url}/Dau/nuevaDau'"
+        <button type="button" id="ingresar" onclick="location.href='{$base_url}/Registro/nuevo'"
                 class="btn btn-danger">
-            <i class="fa fa-plus"></i>&nbsp;&nbsp;Ingresar DAU
+            <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Registro
         </button>
     </div>
     <br/><br/>
@@ -31,16 +31,16 @@
                 <tbody>
                     {foreach $arrResultado as $item}
                         <tr>
-                            <td nowrap width="100px" align="center"> {$item->dau_id} </td>
-                            <td nowrap width="100px" align="center"> {$item->dau_pac_id} </td>
-                            <td class="text-center">{$item->dau_fec_ingreso}</td>
-                            <td class="text-center">{$item->dau_hora_ingreso}</td>
-                            <td class="text-center">{$item->dau_hora_egreso}</td>
-                            <td class="text-center">{$item->dau_cas_egr_id}</td>
+                            <td nowrap width="100px" align="center"> {$item->reg_id} </td>
+                            <td nowrap width="100px" align="center"> {$item->reg_pac_id} </td>
+                            <td class="text-center">{$item->reg_fec_ingreso}</td>
+                            <td class="text-center">{$item->reg_hora_ingreso}</td>
+                            <td class="text-center">{$item->reg_hora_egreso}</td>
+                            <td class="text-center">{$item->reg_cas_egr_id}</td>
                             <td class="text-center" style="width:100px;">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                            onClick="location.href='{$base_url}/Dau/verDau/{$item->dau_id}'" 
+                                            onClick="location.href='{$base_url}/Registro/ver/{$item->reg_id}'" 
                                             data-toggle="tooltip" title="Ver Actividad">
                                         <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver
                                     </button>

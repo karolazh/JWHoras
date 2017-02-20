@@ -19,9 +19,10 @@ $(document).ready(function() {
                 if(data.correcto){
                     $("#form-contenedor").addClass("hidden");
                     $("#form-success").removeClass("hidden");
-                    email = data.correo;
                     //dar formato a correo ejemxxxxx.com
-                    $("#mensaje-modificacion").html("Se han enviado los datos para recuperar contraseña al correo asociado a su rut</strong>"+ email);
+                    correo = data.correo;
+                    correo = correo.substring(0,1)+"xxxxxxx"+correo.substring(correo.lastIndexOf('@'));
+                    $("#mensaje-modificacion").html("Se han enviado los datos para recuperar contraseña al correo asociado a su rut: <strong>" + correo + "</strong>");
 
                 } else {
                     procesaErrores(data.error);

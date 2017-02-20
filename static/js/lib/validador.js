@@ -165,29 +165,30 @@ function validaEmail(email,mensaje_error) {
 function validarVacio(metodo, mensaje_error){
     if ((metodo.value=="") || (/Seleccione/.test(metodo.value)) || (metodo.value ==0)){
         //En caso de que sea tipo FECHA porque tiene un parent mas
-        if(/fec/.test(metodo.id)){
+       /*if(/fec/.test(metodo.id)){
             $(metodo).parent().parent().find('span.help-block').html(mensaje_error);
             $(metodo).parent().parent().find('span.help-block').removeClass("hidden");
             $(metodo).parent().parent().addClass('has-error');
-        }else{
+        }else{*/
         $(metodo).parent().find('span.help-block').html(mensaje_error);
         $(metodo).parent().find('span.help-block').removeClass("hidden");
-        $(metodo).parent().addClass('has-error');}
+        $(metodo).parent().addClass('has-error');//}
     }else{
         //En caso de que sea tipo FECHA porque tiene un parent mas
-        if(/fec/.test(metodo.id)){
+       /* if(/fec/.test(metodo.id)){
             if($(metodo).parent().parent().hasClass('has-error')){
                 $(metodo).parent().parent().removeClass('has-error');
             }
             $(metodo).parent().parent().addClass('has-success');
             $(metodo).parent().parent().find('span.help-block').addClass("hidden");
-        }else{
+        }else{*/
             if($(metodo).parent().hasClass('has-error')){
                 $(metodo).parent().removeClass('has-error');
             }
             $(metodo).parent().addClass('has-success');
             $(metodo).parent().find('span.help-block').addClass("hidden");
-        }}
+        //}
+    }
 }
 
 //Calcular Edad
@@ -200,11 +201,17 @@ function calcularEdad(Fecha){
 }
 
 //Mostrar DIV con checkbox
-function showContent(element,check) {
+function showChkExtranjero(elemento,check,otroelemento) {
     if (document.getElementById(check).checked) {
-        document.getElementById(element).style.display='block';
+        document.getElementById(elemento).style.display='block';
+        document.getElementById('btnbuscarex').style.display='block';
+        document.getElementById(otroelemento).disabled='true';
+        document.getElementById('buscar').disabled='true';
     }
     else {
-        document.getElementById(element).style.display='none';
+        document.getElementById(elemento).style.display='none';
+        document.getElementById('btnbuscarex').style.display='none';
+        document.getElementById(otroelemento).removeAttribute('disabled');
+        document.getElementById('buscar').removeAttribute('disabled');
     }
 }
