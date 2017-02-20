@@ -117,16 +117,14 @@
                         <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
-            
         </div>
+
     </div>    
 </section>
                 
 <section class="content">
     <div class="panel panel-primary">
-	            <div class="panel-heading">
-                Datos de Contacto
-            </div>
+	            <div class="panel-heading">Datos de Contacto</div>
         <div class="panel-body">
             
             <div class="form-group">
