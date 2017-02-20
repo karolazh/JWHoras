@@ -265,6 +265,7 @@ class Login extends Controller {
         $rut = trim($this->_request->getParam("rut"));
         $correcto = false;
         $error = array();
+        $destinatario = "";
         if (trim($this->_request->getParam("rut")) != "") {
             $usuario = $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
             if (!is_null($usuario)) {
@@ -295,9 +296,8 @@ class Login extends Controller {
                 $error['rut'] = "";
             }
         }
-
         $salida = ["rut" => $rut, "error" => $error,
-            "correcto" => $correcto, "correo" => $usuario->usr_email];
+    "correcto" => $correcto, "correo" => $destinatario];
 
         $json = Zend_Json::encode($salida);
         echo $json;
