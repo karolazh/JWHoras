@@ -23,10 +23,15 @@ cargarPaciente : function(){
 				if(response.length > 0){
                                         document.getElementById('nombres').value = response[0].nombres;
                                         document.getElementById('apellidos').value = response[0].apellidos;
-                                        fecha = response[0].fec_nac;
-                                        fecha = formattedDate(fecha);
-                                        //document.getElementById('fec_nacim').value = "18/05/1997";
-                                        document.getElementById('edad').value = response[0].edad;
+                                        //Llenar DataPicker con Fecha Nacimiento Paciente
+                                        alert(document.getElementById('fecnacim').value);
+                                        fecha1 = formattedDate(response[0].fec_nac);
+                                        document.getElementById('fecnacim').value = "1992-09-25";
+                                        //Convertir Edad
+                                        fecha = new Date(response[0].fec_nac);
+                                        hoy = new Date();
+                                        ed = parseInt((hoy -fecha)/365/24/60/60/1000);
+                                        if (ed >= 0){document.getElementById('edad').value = ed;}
                                 }else{
                                     alert("No se encontró Paciente con rut: "+rut);
                                 }

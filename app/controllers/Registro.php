@@ -132,7 +132,7 @@ class Registro extends Controller{
                     $json[0]['nombres'] = $paciente->pac_nombres;
                     $json[0]['apellidos'] = $paciente->pac_apellidos;
                     $json[0]['fec_nac'] = $paciente->pac_fec_nac;
-                    $json[0]['edad'] = $paciente->pac_edad;
+                    //$json[0]['edad'] = $paciente->pac_edad;
                     $json[0]['genero'] = $paciente->pac_sexo;
                     $json[0]['prevision'] = $paciente->pac_prevision;
                     $json[0]['convenio'] = $paciente->pac_convenio;
