@@ -8,7 +8,7 @@
 </li>
 <li>
     <a href="{$base_url}/Empa/index">
-        <i class="fa fa-medkit"></i> <span>EMPA</span></a>
+        <i class="fa fa-medkit"></i> <span>Atención</span></a>
 </li>
 {*<li>
     <a href="{$base_url}/Home/dashboard">
