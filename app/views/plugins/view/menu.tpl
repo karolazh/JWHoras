@@ -4,24 +4,24 @@
 </li>
 <li>
     <a href="{$base_url}/Dau/index">
-        <i class="fa fa-plus"></i> <span>DAU</span></a>
+        <i class="fa fa-plus"></i> <span>Registro</span></a>
 </li>
 <li>
     <a href="{$base_url}/Empa/index">
         <i class="fa fa-medkit"></i> <span>EMPA</span></a>
 </li>
-<li>
+{*<li>
     <a href="{$base_url}/Home/dashboard">
         <i class="fa fa-hospital-o"></i> <span>Ficha Paciente</span></a>
-</li>
-<li>
+</li>*}
+{*<li>
     <a href="{$base_url}/Home/dashboard">
         <i class="fa fa-bar-chart"></i> <span>Reportes</span></a>
-</li>
-<li>
+</li>*}
+{*<li>
     <a href="{$base_url}/Home/dashboard">
         <i class="fa  fa-file-text-o"></i> <span>Exámenes</span></a>
-</li>
+</li>*}
 {if $smarty.session.perfil == 1}
 <li>
     <a href="{$base_url}/Home/dashboard">
