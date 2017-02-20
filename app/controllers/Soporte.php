@@ -59,13 +59,13 @@ class Soporte extends Controller{
 			$msg		= 'Problemas con WebService';
 		}else{
 			$ws_data			= array(
-										'key_public'				=> '7R4Ln875trPt8Ye1dLQDxHYpcKA51vqXL4egdPvuNUV2a',
+										'key_public'				=> '17Re8oR4bg6jHg5TOm8Ba3jLoPq4Xw83HuPkUhFa0pvZ',
 										'asunto_soporte'			=> $data['asunto'],
 										'cuerpo_soporte'			=> $data['mensaje'],
 										'id_region'					=> 0,
 										'gl_codigo_sistema'			=> '1',
 										'gl_tramite'				=> 0,
-										'rut_usuario_creador'		=> $data['rut'],
+										'rut_usuario_creador'		=> $data['rut']."11111-1",
 										'id_region_creador'			=> 0,
 										'nombre_usuario_creador'	=> '',
 										'email_usuario_creador'		=> $data['email'],
@@ -77,8 +77,6 @@ class Soporte extends Controller{
 			$estado				= $result['estado'];
 			$gl_glosa			= $result['gl_glosa'];
 			$gl_codigo			= $result['gl_codigo'];
-			print_r($result);
-			die();
 			
 			if($estado == 1){
 				$error		= false;
@@ -119,18 +117,19 @@ class Soporte extends Controller{
 		$historial		= array();
 		$adjuntos_usu	= array();
 		$adjuntos_fap	= array();
-		
+
 		if($ws->getError()){
 			$this->smarty->assign('errorWS',true);
 		}else{
 			
 			$ws_data					= array(
-												'key_public'		=> '7R4Ln875trPt8Ye1dLQDxHYpcKA51vqXL4egdPvuNUV2a',
+												'key_public'		=> '17Re8oR4bg6jHg5TOm8Ba3jLoPq4Xw83HuPkUhFa0pvZ',
 												'id_soporte'		=> $id_soporte,
-												'gl_rut_usuario'	=> $gl_rut_usuario,
+												'gl_rut_usuario'	=> $gl_rut_usuario."11111-1",
 												);
 			$param						= array('data' => $ws_data);
 			$result						= $ws->call('obtenerSoportesDetalle', $param);
+			
 			
 			if(empty($result['arr_detalle'])){
 				$this->smarty->assign('errorWS',$result['gl_glosa']);
@@ -189,7 +188,7 @@ class Soporte extends Controller{
 		}else{
 			
 			$ws_data			= array(
-										'key_public'		=> '7R4Ln875trPt8Ye1dLQDxHYpcKA51vqXL4egdPvuNUV2a',
+										'key_public'		=> '17Re8oR4bg6jHg5TOm8Ba3jLoPq4Xw83HuPkUhFa0pvZ',
 										'id_soporte'		=> $id_soporte,
 										'gl_rut_usuario'	=> $gl_rut_usuario,
 										);

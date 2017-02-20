@@ -20,8 +20,8 @@
 			
 		}else{
 			$ws_data			= array(
-										'key_public'	=> '7R4Ln875trPt8Ye1dLQDxHYpcKA51vqXL4egdPvuNUV2a',
-										'rut_usuario'	=> $sesion->rut,
+										'key_public'	=> '17Re8oR4bg6jHg5TOm8Ba3jLoPq4Xw83HuPkUhFa0pvZ',
+										'rut_usuario'	=> $sesion->rut."11111-1",
 										);
 			$param				= array('data' => $ws_data);
 			$result				= $ws->call('obtenerSoportesUsuario', $param);

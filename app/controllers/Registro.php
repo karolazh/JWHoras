@@ -86,6 +86,7 @@ class Registro extends Controller{
         $this->_display('Registro/nuevo.tpl');
         $this->load->javascript(STATIC_FILES."js/regiones.js");
         $this->load->javascript(STATIC_FILES."js/templates/registro/nuevo.js");
+        $this->load->javascript(STATIC_FILES."js/lib/validador.js");
     }
     
     public function ver(){

@@ -28,7 +28,7 @@
 								<td>{$item['gl_nombre_estado']}</td>
 								<td align="center">{$item['dias_bandeja']}</td>
 								<td align="center">
-									<a title="VER" class="btn btn-xs btn-default btn-opcion glyphicon glyphicon-info-sign" onclick="xModal.open('{$smarty.const.HOST}index.php/Soporte/verDetalleSoporte/{$item['id_soporte']}/','Detalle Soporte #{$item['gl_codigo_soporte']} MIDAS','lg');"></a>	
+									<a title="VER" class="btn btn-xs btn-default btn-opcion glyphicon glyphicon-info-sign" onclick="xModal.open('{$base_url}/Soporte/verDetalleSoporte/{$item['id_soporte']}/','Detalle Soporte #{$item['gl_codigo_soporte']} MIDAS','lg');"></a>	
 								</td>
 							</tr>
 						{/if}
@@ -61,7 +61,7 @@
 								<td>{$item['gl_nombre_estado']}</td>
 								<td align="center">{$item['dias_bandeja']}</td>
 								<td align="center">
-									<a title="VER" class="btn btn-xs btn-default btn-opcion glyphicon glyphicon-info-sign" onclick="xModal.open('{$smarty.const.HOST}index.php/Soporte/verDetalleSoporte/{$item['id_soporte']}/','Detalle Soporte #{$item['gl_codigo_soporte']} MIDAS','lg');"></a>	
+									<a title="VER" class="btn btn-xs btn-default btn-opcion glyphicon glyphicon-info-sign" onclick="xModal.open('{$base_url}/Soporte/verDetalleSoporte/{$item['id_soporte']}/','Detalle Soporte #{$item['gl_codigo_soporte']} MIDAS','lg');"></a>	
 								</td>
 							</tr>
 						{/if}

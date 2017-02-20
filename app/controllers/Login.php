@@ -262,7 +262,7 @@ class Login extends Controller {
 */
     public function recuperar_password_rut() {
         header('Content-type: application/json');
-        $rut = "";
+        $rut = trim($this->_request->getParam("rut"));
         $correcto = false;
         $error = array();
         if (trim($this->_request->getParam("rut")) != "") {
@@ -286,7 +286,6 @@ class Login extends Controller {
                 $remitente = "midas@minsal.cl";
                 $nombre_remitente = "Prevención de Femicidios";
                 $destinatario = $usuario->usr_email;
-                $correo = $usuario->usr_email;
 
                 $asunto = "PREDEFEM - Recuperar contraseña";
                 $mensaje = $this->smarty->fetch("login/recuperar_password_rut.tpl");
@@ -297,8 +296,8 @@ class Login extends Controller {
             }
         }
 
-        $salida = array("rut" => $rut, "error" => $error,
-            "correcto" => $correcto, "correo" => $correo);
+        $salida = ["rut" => $rut, "error" => $error,
+            "correcto" => $correcto, "correo" => $usuario->usr_email];
 
         $json = Zend_Json::encode($salida);
         echo $json;
