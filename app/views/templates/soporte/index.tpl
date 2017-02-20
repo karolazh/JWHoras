@@ -1,15 +1,13 @@
 <div class="row">
     <div class="col-xs-12">
-        <legend>SOPORTES</legend>
-
-		<ol class="breadcrumb hidden">
-            <li><i class="fa fa-angle-right"></i> <strong>Soportes</strong></li>
-        </ol>
+		<section class="content-header">
+			<h1><i class="fa fa-life-ring"></i> <span>Mesa de ayuda</span></h1>
+		</section>
                     
         <div id="accordion" class="panel">
             <div class="panel-heading margin-remove">
                 <a class="btn btn-xs btn-success" style="color: #fff !important;" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-					<i class="fa fa-plus"></i> Nuevo Soporte
+					<i class="fa fa-plus"></i> Nuevo ticket
                 </a>
                 <div class="clearfix"></div>
             </div>
@@ -61,7 +59,7 @@
                         <div class="form-group">
 							<label for="mensaje" class="col-sm-2 control-label">&nbsp;</label>
 							<div class="col-sm-10">
-								<a type="button" id="addfileButton" class="btn btn-xs btn-info" onclick="xModal.open('{$base_url}/Soporte/cargarAdjunto','Cargar Adjunto','',true,'200');">Adjuntar Archivo</a>
+								<a type="button" id="addfileButton" class="btn btn-xs btn-default" onclick="xModal.open('{$base_url}/Soporte/cargarAdjunto','Cargar Adjunto','',true,'200');">Adjuntar Archivo</a>
                             </div>
 							<span class="help-block hidden"></span>
                         </div>						
