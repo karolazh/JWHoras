@@ -200,11 +200,15 @@ function calcularEdad(Fecha){
 }
 
 //Mostrar DIV con checkbox
-function showContent(element,check) {
+function showChkExtranjero(elemento,check,otroelemento) {
     if (document.getElementById(check).checked) {
-        document.getElementById(element).style.display='block';
+        document.getElementById(elemento).style.display='block';
+        document.getElementById(otroelemento).disabled='true';
+        document.getElementById('buscar').disabled='true';
     }
     else {
-        document.getElementById(element).style.display='none';
+        document.getElementById(elemento).style.display='none';
+        document.getElementById(otroelemento).removeAttribute('disabled');
+        document.getElementById('buscar').removeAttribute('disabled');
     }
 }

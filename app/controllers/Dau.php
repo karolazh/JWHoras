@@ -85,6 +85,7 @@ class Dau extends Controller{
         //llamado al template
         $this->_display('DAU/nueva_dau.tpl');
         $this->load->javascript(STATIC_FILES."js/regiones.js");
+        $this->load->javascript(STATIC_FILES."js/lib/validador.js");
         $this->load->javascript(STATIC_FILES."js/templates/dau/nueva_dau.js");
     }
     

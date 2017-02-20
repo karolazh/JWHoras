@@ -21,17 +21,40 @@
 			<div class="form-group">
 				<label for="region" class="col-sm-2 control-label required">Rut Paciente (*)</label>
 				<div class="col-sm-2">
-					<input type="text" name="rut" id="rut" maxlength="12" class="form-control"
+					<input type="text" name="rut" id="rut" maxlength="12"
 						   onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()"
 						   onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut')"
 						   placeholder="Rut paciente" class="form-control"/>
 					<span class="help-block hidden fa fa-warning"></span>
 				</div>
-				<div class="form-group col-md-1">
+				<div class="form-group col-sm-1">
 					<button type="button" id="buscar" class="btn btn-info btn-sm form-control">
 							<i class="fa fa-search"></i>
 					</button>
-				</div>				
+				</div>	
+                                <div class="col-sm-1"></div>
+                                <div class="form-group col-sm-1">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="chkextranjero" type="checkbox" 
+                                                   onchange="showChkExtranjero('extranjero','chkextranjero','rut')">
+                                            <strong>Extranjero</strong>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-2" id="extranjero" style="display: none">
+                                    <input type="text" name="inputextranjero" id="inputextranjero" maxlength="12"
+                                           id="upDoc" class="form-control" placeholder="Ingrese N°/Pasaporte Extranjero"
+                                           onblur="validarVacio(this,'Por favor Ingrese N°/Pasaporte Extranjero')">
+                                    <span class="help-block hidden fa fa-warning"></span>
+                                </div>
+                                <div class="form-group col-sm-1">
+                                    <button type="button" id="buscarex" class="btn btn-info btn-sm form-control">
+                                                    <i class="fa fa-search"></i>
+                                    </button>
+                                </div>	
+                                
 			</div>
 
 				<div class="form-group">
@@ -45,7 +68,7 @@
 					</div>	
 					<label for="apellidos" class="control-label col-sm-1 required">Apellidos (*)</label>					
 					<div class="col-sm-2">					
-										<input type="text" name="apellidos" id="apellidos"
+						<input type="text" name="apellidos" id="apellidos"
 						   onblur="validarVacio(this,'Por favor Ingrese Apellidos')"
 						   onkeyup="validarVacio(this,'Por favor Ingrese Apellidos')"
 						   placeholder="Apellidos" class="form-control"/>
@@ -189,21 +212,6 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-12">
-                    <div class="form-group clearfix col-md-3">
-                        <div class="checkbox">
-                            <label>
-                                <input id="extranjero" type="checkbox" onchange="showContent('upDoc','extranjero')">
-                                <strong>Extranjero</strong>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group clearfix col-md-6" id="upDoc" style="display: none">
-                        <label for="upDoc">Subir documento</label>
-                        <input type="file" id="upDoc">
-                    </div>
-                </div>
                 <div class="form-group clearfix col-md-12 text-right">
                     <button type="button" id="guardar" class="btn btn-success">
                         <i class="fa fa-save"></i>  Guardar
