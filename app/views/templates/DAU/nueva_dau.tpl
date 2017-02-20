@@ -123,11 +123,11 @@
 </section>
                 
 <section class="content">
-    <div class="box box-primary">
-        <div class="box-body">
-            <div class="box-header">
-                <h3 class="box-title">Datos de Contacto</h3>
+    <div class="panel panel-primary">
+	            <div class="panel-heading">
+                Datos de Contacto
             </div>
+        <div class="panel-body">
             
             <div class="form-group">
                 <div class="form-group col-md-12">
@@ -206,172 +206,6 @@
                         <input type="file" id="upDoc">
                     </div>
                 </div>
-            </div>
-
-        </div>
-    </div>    
-</section>
-            
-<section class="content">
-    <div class="box box-primary">
-        <div class="box-body">
-            <div class="box-header">
-                <h3 class="box-title">Datos de Urgencia</h3>
-            </div>
-            
-            <div class="form-group">
-                <div class="form-group col-md-12">
-                    <div class="form-group clearfix col-md-3">
-                        <label for="fecing" class="control-label required">Fecha ingreso (*)</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="date" class="form-control datepicker"
-                                   onblur="validarVacio(this,'Por favor Ingrese Fecha'),calcularEdad(this.value)"
-                                   name="fechaing" id="fechaing">
-                            <span class="help-block hidden fa fa-warning"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group clearfix col-md-3">
-                        <label for="horaing" class="control-label required">Hora ingreso (*)</label>
-                        <input type="time" name="horaing" id="horaing" value="" 
-                               onblur="validarVacio(this,'Por favor Ingrese Hora Ingreso')"
-                               placeholder="Hora ingreso" class="form-control"/>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-12">
-                    <div class="form-group clearfix col-md-12">
-                        <label>Motivo consulta (*)</label>
-                        <textarea class="form-control" rows="3" id="motivo" value=""
-                                  onblur="validarVacio(this,'Por favor Ingrese el Motivo de la Consulta')"
-                                  placeholder="Ingrese motivo de consulta"></textarea>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-12">
-                    <div class="form-group clearfix col-md-12">
-                        <label>Historia de la enfermedad actual (*)</label>
-                        <textarea class="form-control" rows="3" id="historia" value=""
-                                  onblur="validarVacio(this,'Por favor Ingrese Historia de la Enfermedad Actual')"
-                                  placeholder="Ingrese historia de la enfermedad actual"></textarea>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-12">
-                    <div class="form-group clearfix col-md-3">
-                        <label for="codcie10" class="control-label required">Cod. CIE-10 (*)</label>
-                        <input type="text" name="codcie10" id="rut" value=""
-                               onblur="validarVacio(this,'Por favor Seleccione un Cod. CIE-10')"
-                               placeholder="Cod." class="form-control"/>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-                    
-                    <div class="form-group clearfix col-md-6">
-                        <label for="clasificacion" class="control-label required">Clasificación diagnóstica (*)</label>
-                        <input type="text" name="clasificacion" id="clasificacion" value=""
-                               onblur="validarVacio(this,'Por favor Seleccione Clasificación Diagnóstica')"
-                               placeholder="Clasificación diagnóstica" class="form-control"/>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-                    
-                    <div class="form-group clearfix col-md-3">
-                        <label for="estado" class="control-label required">Estado(*)</label>
-                        <input type="text" name="estado" id="estado" value=""
-                               onblur="validarVacio(this,'Por favor Ingrese Estado')"
-                               placeholder="Estado" class="form-control"/>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-12">
-                    <div class="form-group clearfix col-md-12">
-                        <label>Diagn&oacute;stico (*)</label>
-                        <textarea class="form-control" rows="3" id="diagnostico"
-                                  onblur="validarVacio(this,'Por favor Ingrese Diagnóstico')"
-                                  placeholder="Diagnóstico"></textarea>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-12">
-                    <div class="form-group clearfix col-md-12">
-                        <label>Indicaci&oacute;n m&eacute;dica (*)</label>
-                        <textarea class="form-control" rows="3" id="indicacion"
-                                  onblur="validarVacio(this,'Por favor Ingrese Indicación Médica')"
-                                  placeholder="Ingrese motivo de consulta"></textarea>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-12">
-                    <div class="form-group clearfix col-md-3">
-                        <label for="horaegr" class="control-label required">Hora egreso (*)</label>
-                        <input type="time" name="horaegr" id="rut" value="" 
-                               onblur="validarVacio(this,'Por favor Ingrese Hora Egreso')"
-                               placeholder="Hora egreso" class="form-control"/>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-                    
-                    <div class="form-group clearfix col-md-6">
-                        <label for="casoegreso" class="control-label required">Caso de egreso (*)</label>
-                        <select for="casoegreso" class="form-control" id="casoegreso" name="casoegreso"
-                                onchange="Dau.cargarComunasPorRegion(this.value,'comuna')"
-                                onblur="validarVacio(this,'Por favor Seleccione un Caso de Egreso')">
-                                <option>Seleccione un Caso de Egreso</option>
-                                {foreach $arrCasoEgreso as $item}
-                                        <option value="{$item->cas_egr_id}" >{$item->cas_egr_nombre}</option>
-                                {/foreach}
-                        </select>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-                </div>
-                
-                <div class="form-group col-md-12">
-                    <div class="form-group clearfix col-md-3">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" id="chkSospecha"
-                                       onchange="showContent('acepta','chkSospecha')">
-                                <strong>Sospecha</strong>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group clearfix col-md-3" id="reconoce">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" id="chkReconoce"
-                                       onchange="showContent('acepta','chkReconoce')">
-                                <strong>Reconoce</strong>
-                            </label>
-                        </div>
-                    </div>
-                    
-                </div>
-                
-                <div class="form-group col-md-12" id="acepta" style="display: none">    
-                    <div class="form-group clearfix col-md-3">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" id="chkAcepta"
-                                       onchange="showContent('upDoc2','chkAcepta')">
-                                <strong>Acepta Programa</strong>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group clearfix col-md-3" id="upDoc2" style="display: none">
-                        <label for="upDoc2">Subir consentimiento</label>
-                        <input type="file" id="upDoc2">
-                    </div>
-                </div>
-
                 <div class="form-group clearfix col-md-12 text-right">
                     <button type="button" id="guardar" class="btn btn-success">
                         <i class="fa fa-save"></i>  Guardar
@@ -381,11 +215,12 @@
                         <i class="fa fa-remove"></i>  Cancelar
                     </button>
                     <br/><br/>
-                </div>
+                </div>				
             </div>
 
         </div>
     </div>    
 </section>
+          
                 
 </form>
