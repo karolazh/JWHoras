@@ -19,7 +19,7 @@ cargarPaciente : function(){
             rut = document.getElementById('rut').value;
             console.log(rut);
 		if(rut != ""){
-			$.post(BASE_URI+'index.php/Dau/cargarPaciente',{rut:rut},function(response){
+			$.post(BASE_URI+'index.php/Registro/cargarPaciente',{rut:rut},function(response){
 				if(response.length > 0){
                                         document.getElementById('nombres').value = response[0].nombres;
                                         document.getElementById('apellidos').value = response[0].apellidos;

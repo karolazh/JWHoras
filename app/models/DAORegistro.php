@@ -3,7 +3,7 @@
 /* 
 !IniHeaderDoc
 *****************************************************************************
-!NombreObjeto 		: DAODau.php
+!NombreObjeto 		: DAORegistro.php
 !Sistema 	  	: PREVENCIÓN
 !Modulo 	  	: NA
 !Descripcion  		: 	
@@ -11,7 +11,7 @@
 !Perfil       		: 
 !Itinerado    		: NA
 !Uso          		: NA
-!Autor        		: Carolina Zamora Hormazábal
+!Autor        		: Carolina Zamora Hormazábal, Orlando Vázquez G.
 !Creacion     		: 14/02/2017
 !Retornos/Salidas 	: NA
 !OrigenReq        	: NA
@@ -30,12 +30,12 @@
 !EndHeaderDoc 
 */
 
-class DAODau extends Model{
+class DAORegistro extends Model{
     /**
      * @var string 
      */
-    protected $_tabla = "tab_dau";
-    protected $_primaria = "dau_id";
+    protected $_tabla = "tab_registro";
+    protected $_primaria = "registro_id";
     
     /**
      * Constructor
@@ -46,13 +46,11 @@ class DAODau extends Model{
     }
 
     /*
-     * Lista DAU
+     * Lista Registro
      */
-    public function getListaDAU(){
-//        $query = $this->db->select("*")->from("tab_dau");
-//        $resultado = $query->getResult();
-        
-        $query = "select * from tab_dau";
+    public function getListaRegistro(){
+
+        $query = "select * from tab_registro";
         $resultado = $this->db->getQuery($query);
 
         if($resultado->numRows>0){
@@ -63,13 +61,13 @@ class DAODau extends Model{
     }
     
     /*
-     * Ver DAU
+     * Ver Registro
      */
-    public function getDAU($id_dau){
-        $query = "select * from tab_dau 
-                  where dau_id = ?";
+    public function getRegistro($id_registro){
+        $query = "select * from tab_registro
+                  where registro_id = ?";
 
-        $consulta = $this->db->getQuery($query,array($id_dau));
+        $consulta = $this->db->getQuery($query,array($id_registro));
         if($consulta->numRows > 0){
             return $consulta->rows->row_0;
         }else{

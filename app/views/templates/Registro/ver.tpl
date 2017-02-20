@@ -2,9 +2,9 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
 <section class="content-header">
-    <h1><i class="fa fa-plus"></i> Detalle DAU</h1>
+    <h1><i class="fa fa-plus"></i> Detalle Registro</h1>
     <div class="col-md-12 text-right">
-        <button type="button" id="ingresar" onclick="location.href='{$base_url}/Empa/nuevoEmpa/{$id_dau}'"
+        <button type="button" id="ingresar" onclick="location.href='{$base_url}/Empa/nuevoEmpa/{$id_registro}'"
                 class="btn btn-danger">
             <i class="fa fa-plus"></i>&nbsp;&nbsp;Ingresar EMPA
         </button>
@@ -252,7 +252,7 @@
                 </div>
                     
                 <div class="col-md-12 text-right">
-                    <button type="button" id="aceptar" onclick="location.href='{$base_url}/Dau/index'"
+                    <button type="button" id="aceptar" onclick="location.href='{$base_url}/Registro/index'"
                             class="btn btn-success btn-sm">
                         <i class="fa fa-check"></i>&nbsp;&nbsp;Aceptar
                     </button>

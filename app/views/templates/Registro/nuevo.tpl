@@ -2,11 +2,11 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
 <section class="content-header">
-    <h1><i class="fa fa-plus"></i> Ingresar DAU</h1>
+    <h1><i class="fa fa-plus"></i>Nuevo</h1>
         <ol class="breadcrumb">
             <li><a href="{$base_url}/Administracion/noticias">
-            <i class="fa fa-folder-open"></i> DAU</a></li>
-            <li class="active"> Ingresar DAU</li>
+            <i class="fa fa-folder-open"></i>&nbsp;Registros</a></li>
+            <li class="active"> &nbsp;Nuevo Registro</li>
         </ol>
 </section>
 
@@ -209,7 +209,7 @@
                         <i class="fa fa-save"></i>  Guardar
                     </button>&nbsp;
                     <button type="button" id="cancelar"  class="btn btn-default" 
-                            onclick="location.href='{$base_url}/Dau/index'">
+                            onclick="location.href='{$base_url}/Registro/index'">
                         <i class="fa fa-remove"></i>  Cancelar
                     </button>
                     <br/><br/>

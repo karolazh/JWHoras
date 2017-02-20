@@ -71,8 +71,8 @@
                     </div>
                     
                     <div class="form-group col-md-3">
-                        <label class="control-label required">Nro. DAU</label><br>
-                        {$id_dau}
+                        <label class="control-label required">Nro. Registro</label><br>
+                        {$id_registro}
                     </div>
                 </div>
             </div>
