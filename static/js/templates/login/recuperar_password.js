@@ -19,7 +19,9 @@ $(document).ready(function() {
                 if(data.correcto){
                     $("#form-contenedor").addClass("hidden");
                     $("#form-success").removeClass("hidden");
-                    $("#mensaje-modificacion").html("Se han enviado los datos para recuperar contraseña al correo asociado a su rut</strong>");
+                    email = data.correo;
+                    //dar formato a correo ejemxxxxx.com
+                    $("#mensaje-modificacion").html("Se han enviado los datos para recuperar contraseña al correo asociado a su rut</strong>"+ email);
 
                 } else {
                     procesaErrores(data.error);
