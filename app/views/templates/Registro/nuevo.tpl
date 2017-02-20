@@ -19,115 +19,94 @@
         </div>
         <div class="panel-body">
 			<div class="form-group">
-				<label for="rut" class="col-sm-1 control-label required">Rut Paciente (*)</label>
-				<div class="col-sm-1">
-					<input type="text" name="rut" id="rut" maxlength="12"
-						   onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()"
-						   onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut')"
-						   placeholder="Rut paciente" class="form-control"/>
+				<label for="rut" class="col-sm-2 control-label required">Rut Paciente (*)</label>
+				<div class="col-sm-2">
+					<input type="text" name="rut" id="rut" maxlength="12" onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut')" placeholder="Rut paciente" class="form-control"/>
 					<span class="help-block hidden fa fa-warning"></span>
 				</div>
 				<div class="col-sm-1">
-					<button type="button" id="buscar" class="btn btn-info btn-sm form-control"
-                                                onclick="Pacientes.cargarPaciente()">
-							<i class="fa fa-search"></i>
+					<button type="button" id="buscar" class="btn btn-info btn-sm form-control" onclick="Pacientes.cargarPaciente()"><i class="fa fa-search"></i></button>
+				</div>
+				<div class="form-group">
+					<div class="checkbox">
+						<label>
+							<input id="chkextranjero" type="checkbox"
+								   onchange="showChkExtranjero('extranjero','chkextranjero','rut')">
+							<strong>Extranjero</strong>
+						</label>
+					</div>
+				</div>
+				<div class="col-sm-1" id="extranjero" style="display: none">
+					<input type="text" name="inputextranjero" id="inputextranjero" maxlength="12" id="upDoc" class="form-control" placeholder="Ingrese N°/Pasaporte Extranjero" onblur="validarVacio(this,'Por favor Ingrese N°/Pasaporte Extranjero')">
+					<span class="help-block hidden fa fa-warning"></span>
+				</div>
+				<div class="form-group col-sm-1" id="btnbuscarex" style="display: none">
+					<button type="button" id="buscarex" 
+							class="btn btn-info btn-sm form-control">
+									<i class="fa fa-search"></i>
 					</button>
 				</div>
-                                <div class="col-sm-1"></div>
-                                <div class="form-group col-sm-1">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input id="chkextranjero" type="checkbox"
-                                                   onchange="showChkExtranjero('extranjero','chkextranjero','rut')">
-                                            <strong>Extranjero</strong>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-1" id="extranjero" style="display: none">
-                                    <input type="text" name="inputextranjero" id="inputextranjero" maxlength="12"
-                                           id="upDoc" class="form-control" placeholder="Ingrese N°/Pasaporte Extranjero"
-                                           onblur="validarVacio(this,'Por favor Ingrese N°/Pasaporte Extranjero')">
-                                    <span class="help-block hidden fa fa-warning"></span>
-                                </div>
-                                <div class="form-group col-sm-1" id="btnbuscarex" style="display: none">
-                                    <button type="button" id="buscarex" 
-                                            class="btn btn-info btn-sm form-control">
-                                                    <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
 			</div>
-				<div class="form-group">
-					<label for="nombres" class="control-label col-sm-1 required">Nombres (*)</label>
-					<div class="col-sm-2">
-						<input type="text" name="nombres" id="nombres" 
-							   onblur="validarVacio(this,'Por favor Ingrese Nombres')"
-							   onkeyup="validarVacio(this,'Por favor Ingrese Nombres')"
-							   placeholder="Nombres" class="form-control"/>
-                                                <span class="help-block hidden fa fa-warning"></span>
-					</div>
-					<label for="apellidos" class="control-label col-sm-1 required">Apellidos (*)</label>			
-					<div class="col-sm-2">
-						<input type="text" name="apellidos" id="apellidos"
-						   onblur="validarVacio(this,'Por favor Ingrese Apellidos')"
-						   onkeyup="validarVacio(this,'Por favor Ingrese Apellidos')"
-						   placeholder="Apellidos" class="form-control"/>
+			<div class="form-group">
+				<label for="nombres" class="control-label col-sm-2 required">Nombres (*)</label>
+				<div class="col-sm-3">
+					<input type="text" name="nombres" id="nombres" onblur="validarVacio(this,'Por favor Ingrese Nombres')" onkeyup="validarVacio(this,'Por favor Ingrese Nombres')" placeholder="Nombres" class="form-control"/>
 					<span class="help-block hidden fa fa-warning"></span>
-					</div>
 				</div>
-
-                                <div class="form-group col-md-12">
-					<label for="fecnacim" class="control-label col-sm-1 required">Fecha Nacimiento(*)</label>
-					<div class="input-group col-md-2">
-                                            <input type="date" class="form-control"
-                                                   onblur="validarVacio(this,'Por favor Ingrese Fecha'),calcularEdad(this.value)"
-                                                   name="fecnacim" id="fecnacim">
-                                            <span class="help-block hidden fa fa-warning"></span>
-                                        </div>
-                                </div>        
-                                <div class="form-group col-md-12">
-					<label for="edad" class="control-label col-sm-1 required">Edad (*)</label>					
-					<div class="col-sm-2">					
-						<input type="text" name="edad" id="edad"
-						   placeholder="Edad" class="form-control" disabled/>
+				<label for="apellidos" class="control-label col-sm-2 required">Apellidos (*)</label>			
+				<div class="col-sm-3">
+					<input type="text" name="apellidos" id="apellidos" onblur="validarVacio(this,'Por favor Ingrese Apellidos')" onkeyup="validarVacio(this,'Por favor Ingrese Apellidos')" placeholder="Apellidos" class="form-control"/>
 					<span class="help-block hidden fa fa-warning"></span>
-					</div>
-                                        <label for="edad" class="control-label col-sm-1 required">Género(*)</label>					
-					<div class="col-sm-2">					
-						<select for="genero" class="form-control" disabled id="genero" name="genero">
-                                                        <option>Femenino</option>
-                                                </select>
-					<span class="help-block hidden fa fa-warning"></span>
-					</div>
 				</div>
+			</div>
 
-                <div class="form-group col-md-12">
-                    
-                        <label for="prevision" class="control-label col-sm-1">Previsión (*)</label>
-                    <div class="form-group col-sm-2">
-                        <select for="prevision" class="form-control" id="prevision" name="prevision"
-                                onblur="validarVacio(this,'Por favor Seleccione una Previsión')">
-                                <option>Seleccione una Previsión</option>
-                                <option>1. FONASA</option>
-                                <option>2. ISAPRE</option>
-                                <option>3. Otra</option>
-                        </select>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-
-                    
-                        <label for="convenio" class="control-label col-sm-1">Convenio (*)</label>
-                    <div class="form-group col-sm-2">
-                        <select for="convenio" class="form-control" id="convenio" name="convenio"
-                                onblur="validarVacio(this,'Por favor Seleccione una Convenio')">
-                                <option>Seleccione un Convenio</option>
-                                <option>1. Convenio1</option>
-                                <option>2. Convenio2</option>
-                        </select>
-                        <span class="help-block hidden fa fa-warning"></span>
-                    </div>
-                </div>
+			<div class="form-group">
+				<label for="fecnacim" class="control-label col-sm-2 required">Fecha Nacimiento(*)</label>
+				<div class="col-sm-3">
+					<input type="date" class="form-control col-sm-2" onblur="validarVacio(this,'Por favor Ingrese Fecha'),calcularEdad(this.value)" name="fecnacim" id="fecnacim">
+					<span class="help-block hidden fa fa-warning"></span>
+				</div>
+				<label for="edad" class="control-label col-sm-2 required">Edad (*)</label>					
+				<div class="col-sm-2">					
+					<input type="text" name="edad" id="edad" placeholder="Edad" class="form-control" disabled/>
+					<span class="help-block hidden fa fa-warning"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="edad" class="control-label col-sm-2 required">Género(*)</label>					
+				<div class="col-sm-3">					
+					<select for="genero" class="form-control" disabled id="genero" name="genero">
+						<option>Femenino</option>
+					</select>
+					<span class="help-block hidden fa fa-warning"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="prevision" class="control-label col-sm-2">Previsión (*)</label>
+				<div class="col-sm-3">
+					<select for="prevision" class="form-control" id="prevision" name="prevision"
+							onblur="validarVacio(this,'Por favor Seleccione una Previsión')">
+							<option>Seleccione una Previsión</option>
+							<option>1. FONASA</option>
+							<option>2. ISAPRE</option>
+							<option>3. Otra</option>
+					</select>
+					<span class="help-block hidden fa fa-warning"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="convenio" class="control-label col-sm-2">Convenio (*)</label>
+				<div class="col-sm-3">
+					<select for="convenio" class="form-control" id="convenio" name="convenio"
+							onblur="validarVacio(this,'Por favor Seleccione una Convenio')">
+							<option>Seleccione un Convenio</option>
+							<option>1. Convenio1</option>
+							<option>2. Convenio2</option>
+					</select>
+					<span class="help-block hidden fa fa-warning"></span>
+				</div>
+			</div>
         </div>
-
     </div>    
 </section>
                 
@@ -135,69 +114,64 @@
     <div class="panel panel-primary">
 	            <div class="panel-heading">Datos de Contacto</div>
         <div class="panel-body">
-            
+            <div class="col-sm-6">
             <div class="form-group">
-                <label for="direccion" class="control-label required col-sm-1">Dirección (*)</label>
-                <div class="form-group col-sm-4">
-                        <input type="text" name="direccion" id="direccion" value=""
-                               onblur="validarVacio(this,'Por favor Ingrese Dirección')"
-                               onkeyup="validarVacio(this,'Por favor Ingrese Dirección')"
-                               placeholder="Dirección" class="form-control"/>
+                <label for="direccion" class="control-label required col-sm-3">Dirección (*)</label>
+                <div class="col-sm-9">
+                        <input type="text" name="direccion" id="direccion" value="" onblur="validarVacio(this,'Por favor Ingrese Dirección')" onkeyup="validarVacio(this,'Por favor Ingrese Dirección')" placeholder="Dirección" class="form-control"/>
                         <span class="help-block hidden fa fa-warning"></span>
                 </div>
-                
-                <div class="form-group col-md-12">
-                    <label class="control-label required col-sm-1">Región (*)</label>
-                    <div class="form-group clearfix col-sm-2">
-                        
-                        <select for="region" class="form-control" id="region" name="region"
-                                onchange="Region.cargarComunasPorRegion(this.value,'comuna')"
-                                onblur="validarVacio(this,'Por favor Seleccione una Región')">
-                                <option>Seleccione una Región</option>
-                                {foreach $arrRegiones as $item}
-                                        <option value="{$item->reg_id}" >{$item->reg_nombre}</option>
-                                {/foreach}
+			</div>	
+                <div class="form-group">
+                    <label class="control-label required col-sm-3">Región (*)</label>
+                    <div class="col-sm-6">
+                        <select for="region" class="form-control" id="region" name="region" onchange="Region.cargarComunasPorRegion(this.value,'comuna')" onblur="validarVacio(this,'Por favor Seleccione una Región')">
+							<option>Seleccione una Región</option>
+							{foreach $arrRegiones as $item}
+									<option value="{$item->reg_id}" >{$item->reg_nombre}</option>
+							{/foreach}
                         </select>
                         <span class="help-block hidden fa fa-warning"></span>
                     </div>
-                        
-                    <label class="control-label required col-sm-1">Comuna (*)</label>
-                    <div class="form-group clearfix col-sm-2">
-                        
-                        <select for="comuna" class="form-control" id="comuna" name="comuna"
-                                onblur="validarVacio(this,'Por favor Seleccione una Comuna')">
+				</div>
+                <div class="form-group"> 
+                    <label class="control-label required col-sm-3">Comuna (*)</label>
+                    <div class="col-sm-6">
+                        <select for="comuna" class="form-control" id="comuna" name="comuna" onblur="validarVacio(this,'Por favor Seleccione una Comuna')">
                                 <option value="0">Seleccione una Comuna</option>
                         </select>
                         <span class="help-block hidden fa fa-warning"></span>
                     </div>
                 </div>
 
-                <div class="form-group col-md-12">
-                    <label for="fono" class="control-label required col-sm-1">Fono</label>
-                    <div class="form-group clearfix col-md-3">
-                        <input type="text" name="fono" id="fono" value="" maxlength="11"
-                               onKeyPress="return soloNumeros(event)"
-                               placeholder="Fono" class="form-control"/>
+                <div class="form-group">
+                    <label for="fono" class="control-label required col-sm-3">Fono</label>
+                    <div class="col-md-5">
+                        <input type="text" name="fono" id="fono" value="" maxlength="11" onKeyPress="return soloNumeros(event)" placeholder="Fono" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
-                    
-                    <label for="celular" class="control-label required col-sm-1">Celular</label>
-                    <div class="form-group clearfix col-sm-2">
-                        <input type="text" name="celular" id="celular" value="" maxlength="11"
-                               onKeyPress="return soloNumeros(event)"
-                               placeholder="Celular" class="form-control"/>
+				</div>
+                <div class="form-group">    
+                    <label for="celular" class="control-label required col-sm-3">Celular</label>
+                    <div class="col-sm-5">
+                        <input type="text" name="celular" id="celular" value="" maxlength="11" onKeyPress="return soloNumeros(event)" placeholder="Celular" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
-                    
-                    <label for="email" class="control-label required col-sm-1">E-mail</label>
-                    <div class="form-group clearfix col-sm-2">
-                        <input type="text" name="email" id="email" value=""
-                               onblur="validaEmail(this,'Correo Inválido!')"
-                               placeholder="E-mail" class="form-control"/>
+                    </div>
+                <div class="form-group">    
+                    <label for="email" class="control-label required col-sm-3">E-mail</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="email" id="email" value="" onblur="validaEmail(this,'Correo Inválido!')" placeholder="E-mail" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
                 </div>
 
+
+            </div>
+			<div class="col-sm-6">
+				Mapa
+            </div>
+			
                 <div class="form-group clearfix col-md-12 text-right">
                     <button type="button" id="guardar" class="btn btn-success">
                         <i class="fa fa-save"></i>  Guardar
@@ -208,9 +182,8 @@
                     </button>
                     <br/><br/>
                 </div>				
-            </div>
-
         </div>
+		
     </div>    
 </section>
           
