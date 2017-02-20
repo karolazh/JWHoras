@@ -107,9 +107,9 @@
                         <select for="prevision" class="form-control" id="prevision" name="prevision"
                                 onblur="validarVacio(this,'Por favor Seleccione una Previsión')">
                                 <option>Seleccione una Previsión</option>
-                                <option>1. FONASA</option>
-                                <option>2. ISAPRE</option>
-                                <option>3. Otra</option>
+                                <option>FONASA</option>
+                                <option>ISAPRE</option>
+                                <option>Otra</option>
                         </select>
                         <span class="help-block hidden fa fa-warning"></span>
                     </div>
@@ -120,8 +120,9 @@
                         <select for="convenio" class="form-control" id="convenio" name="convenio"
                                 onblur="validarVacio(this,'Por favor Seleccione una Convenio')">
                                 <option>Seleccione un Convenio</option>
-                                <option>1. Convenio1</option>
-                                <option>2. Convenio2</option>
+                                <option>CONVENIO</option>
+                                <option>SIN CONVENIO</option>
+                                <option>NN</option>
                         </select>
                         <span class="help-block hidden fa fa-warning"></span>
                     </div>
@@ -136,7 +137,6 @@
 	            <div class="panel-heading">Datos de Contacto</div>
         <div class="panel-body">
             
-            <div class="form-group">
                 <label for="direccion" class="control-label required col-sm-1">Dirección (*)</label>
                 <div class="form-group col-sm-4">
                         <input type="text" name="direccion" id="direccion" value=""
@@ -174,7 +174,7 @@
 
                 <div class="form-group col-md-12">
                     <label for="fono" class="control-label required col-sm-1">Fono</label>
-                    <div class="form-group clearfix col-md-3">
+                    <div class="form-group clearfix col-md-2">
                         <input type="text" name="fono" id="fono" value="" maxlength="11"
                                onKeyPress="return soloNumeros(event)"
                                placeholder="Fono" class="form-control"/>
@@ -197,7 +197,25 @@
                         <span class="help-block hidden"></span>
                     </div>
                 </div>
-
+                        
+                <div class="form-group col-md-12">
+                    <label for="centrosalud" class="control-label required col-sm-1">Centro de Salud</label>
+                    <div class="form-group clearfix col-md-2">
+                        <input type="text" name="centrosalud" id="centrosalud" value="" maxlength="11"
+                               onblur="validarVacio(this,'Por favor Seleccione un Centro de Salud')"
+                               placeholder="Centro de Salud" class="form-control"/>
+                        <span class="help-block hidden"></span>
+                    </div>
+                    
+                    <label for="motivoconsulta" class="control-label required col-sm-1">Motivo de Consulta</label>
+                    <div class="form-group clearfix col-sm-2">
+                        <textarea type="text" name="motivoconsulta" id="motivoconsulta" value="" maxlength="11"
+                               onblur="validarVacio(this,'Por favor Seleccione Motivo de Consulta')"
+                               placeholder="Motivo de Consulta" class="form-control"/></textarea>
+                        <span class="help-block hidden"></span>
+                    </div>
+                </div>
+                        
                 <div class="form-group clearfix col-md-12 text-right">
                     <button type="button" id="guardar" class="btn btn-success">
                         <i class="fa fa-save"></i>  Guardar
@@ -206,10 +224,8 @@
                             onclick="location.href='{$base_url}/Registro/index'">
                         <i class="fa fa-remove"></i>  Cancelar
                     </button>
-                    <br/><br/>
-                </div>				
+                    <br/><br/>			
             </div>
-
         </div>
     </div>    
 </section>
