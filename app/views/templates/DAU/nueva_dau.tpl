@@ -1,5 +1,6 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="{$smarty.const.STATIC_FILES}template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
 
 <section class="content-header">
     <h1><i class="fa fa-plus"></i> Ingresar DAU</h1>
@@ -32,7 +33,8 @@
 
                     <div class="form-group col-md-1">
                         <label for="buscar" class="control-label required">&nbsp;</label>
-                        <button type="button" id="buscar" class="btn btn-info btn-sm form-control">
+                        <button type="button" id="buscar" class="btn btn-info btn-sm form-control"
+                                onclick="Pacientes.cargarPaciente(this.value)">
                                 <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -59,7 +61,7 @@
                 </div>
 
                 <div class="form-group col-md-12">
-                    <div class="form-group clearfix col-md-6">
+                    <div class="form-group clearfix col-md-3">
                         <label for="fecnacimiento" class="control-label required">Fecha Nacimiento (*)</label>
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -68,24 +70,21 @@
                             <input type="date" class="form-control datepicker"
                                    onblur="validarVacio(this,'Por favor Ingrese Fecha'),calcularEdad(this.value)"
                                    name="fecnacim" id="fecnacim">
-                            <span class="help-block hidden fa fa-warning"></span>
                         </div>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
 
                     <div class="form-group clearfix col-md-3">
                         <label for="edad" class="control-label required">Edad (*)</label>
-                        <input type="text" name="edad" id="edad" value=""
+                        <input type="text" name="edad" id="edad"
                                placeholder="Edad" class="form-control" disabled/>
                         <span class="help-block hidden fa fa-warning"></span>
                     </div>
 
                     <div class="form-group clearfix col-md-3">
                         <label for="genero" class="control-label required">G&eacute;nero (*)</label>
-                        <select for="genero" class="form-control" id="genero" name="genero"
-                                onblur="validarVacio(this,'Por favor Seleccione un Género')">
-                                <option>Seleccione un Género</option>
-                                <option>1. Femenino</option>
-                                <option>2. Masculino</option>
+                        <select for="genero" class="form-control" id="genero" name="genero" disabled>
+                                <option>Femenino</option>
                         </select>
                         <span class="help-block hidden fa fa-warning"></span>
                     </div>
@@ -94,12 +93,9 @@
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-6">
                         <label for="prevision" class="control-label required">Previsión (*)</label>
-                        <select for="prevision" class="form-control" id="prevision" name="prevision"
-                                onblur="validarVacio(this,'Por favor Seleccione una Previsión')">
-                                <option>Seleccione una Previsión</option>
-                                <option>1. FONASA</option>
-                                <option>2. ISAPRE</option>
-                                <option>3. Otra</option>
+                        <select for="prevision" class="form-control" 
+                                id="prevision" name="prevision" disabled>
+                                <option>FONASA</option>
                         </select>
                         <span class="help-block hidden fa fa-warning"></span>
                     </div>
@@ -228,9 +224,9 @@
                             </div>
                             <input type="date" class="form-control datepicker"
                                    onblur="validarVacio(this,'Por favor Ingrese Fecha'),calcularEdad(this.value)"
-                                   name="fechaing" id="fechaing">
-                            <span class="help-block hidden fa fa-warning"></span>
+                                   name="fecing" id="fecing">
                         </div>
+                        <span class="help-block hidden fa fa-warning"></span>
                     </div>
 
                     <div class="form-group clearfix col-md-3">
@@ -265,7 +261,7 @@
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-3">
                         <label for="codcie10" class="control-label required">Cod. CIE-10 (*)</label>
-                        <input type="text" name="codcie10" id="rut" value=""
+                        <input type="text" name="codcie10" id="codcie10" value=""
                                onblur="validarVacio(this,'Por favor Seleccione un Cod. CIE-10')"
                                placeholder="Cod." class="form-control"/>
                         <span class="help-block hidden fa fa-warning"></span>
@@ -311,7 +307,7 @@
                 <div class="form-group col-md-12">
                     <div class="form-group clearfix col-md-3">
                         <label for="horaegr" class="control-label required">Hora egreso (*)</label>
-                        <input type="time" name="horaegr" id="rut" value="" 
+                        <input type="time" name="horaegr" id="horaegr" value="" 
                                onblur="validarVacio(this,'Por favor Ingrese Hora Egreso')"
                                placeholder="Hora egreso" class="form-control"/>
                         <span class="help-block hidden fa fa-warning"></span>
