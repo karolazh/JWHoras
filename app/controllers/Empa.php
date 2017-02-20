@@ -83,6 +83,17 @@ class Empa extends Controller{
         $this->_display('Empa/nuevo_empa.tpl');
     }
     
+    public function nuevoEmpa2(){
+        Acceso::redireccionUnlogged($this->smarty);
+        $sesion = New Zend_Session_Namespace("usuario_carpeta");
+        $this->smarty->assign("id_usuario", $sesion->id);
+        $this->smarty->assign("rut", $sesion->rut);
+        $this->smarty->assign("usuario", $sesion->usuario);
+        
+        //llamado al template
+        $this->_display('Empa/nuevo_empa2.tpl');
+    }
+    
     public function verEmpa(){
         Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
