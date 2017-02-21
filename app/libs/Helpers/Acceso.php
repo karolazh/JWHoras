@@ -1,6 +1,6 @@
 <?php
 
-require_once (APP_PATH . 'models/DAOPerfil.php');
+//require_once (APP_PATH . 'models/DAOPerfil.php');
 require_once (APP_PATH . 'models/DAOUsuarios.php');
 
 Class Acceso{
@@ -25,7 +25,7 @@ Class Acceso{
         }
         
         if($nombre_tipo_usuario == "ADMINISTRADOR"){
-            $acceso->validarTipo(DAOPerfil::ADMINSTRADOR);
+            //$acceso->validarTipo(DAOPerfil::ADMINSTRADOR);
         }
     }
     
