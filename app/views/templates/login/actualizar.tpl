@@ -48,7 +48,7 @@
                     {if $primer_login == 1}
                     <div class="col-sm-12">
                         <div class="alert alert-warning">
-                             No ha actualizado su contraseña inicial.
+                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No ha actualizado su contraseña inicial.
                         </div>
                     </div>
                     {/if}
@@ -70,7 +70,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <div id="form-error" class="alert alert-danger hidden">
-                            <i class="fa fa-warning fa-2x"></i> &nbsp; 
+                            <i class="fa fa-warning fa-2x"></i> &nbsp;
                             <strong> ¡Error! </strong> Existen problemas en los datos, revise los campos en rojo.
                         </div>
                         <div class="col-md-12 text-right">

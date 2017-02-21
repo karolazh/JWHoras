@@ -155,7 +155,8 @@ class Login extends Controller {
         }
 
         $salida = array("error" => $validar->getErrores(),
-            "correcto" => $validar->getCorrecto());
+            "correct  ￼ Cancelar  
+o" => $validar->getCorrecto());
         $this->smarty->assign("hidden", "");
         $json = Zend_Json::encode($salida);
         echo $json;

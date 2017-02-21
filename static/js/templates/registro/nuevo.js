@@ -128,14 +128,6 @@ $(document).ready(function() {
             mapa.seteaLongitud("-70.6504492");
             mapa.seteaLatitud("-33.4378305");			
             mapa.seteaZoom(12);
-				
-            mapa.seteaPlaceInput("direccion");
-            /*alert("OK");*/
-			/*
-            if($("#longitud").val() != "" && $("#latitud").val() != ""){
-
-            }
-            */
             mapa.inicio();
             mapa.cargaMapa();
 
