@@ -131,7 +131,7 @@
                         <select for="region" class="form-control" id="region" name="region" onchange="Region.cargarComunasPorRegion(this.value,'comuna')" onblur="validarVacio(this,'Por favor Seleccione una Región')">
                                             <option>Seleccione una Región</option>
                                             {foreach $arrRegiones as $item}
-                                                            <option value="{$item->reg_id}" >{$item->reg_nombre}</option>
+                                                            <option value="{$item->id_region}" >{$item->gl_nombre}</option>
                                             {/foreach}
                         </select>
                         <span class="help-block hidden fa fa-warning"></span>
