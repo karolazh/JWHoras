@@ -23,8 +23,8 @@ class Regiones extends Controller{
             $json = array();
             $i = 0;
             foreach($comunas as $comuna){
-                    $json[$i]['id_comuna'] = $comuna->com_id;
-                    $json[$i]['nombre_comuna'] = $comuna->com_nombre;
+                    $json[$i]['id_comuna'] = $comuna->id_comuna;
+                    $json[$i]['nombre_comuna'] = $comuna->gl_nombre_comuna;
                     $i++;
             }
 
