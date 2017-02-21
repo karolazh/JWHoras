@@ -96,23 +96,9 @@
 					<span class="help-block hidden fa fa-warning"></span>
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="convenio" class="control-label col-sm-2">Convenio (*)</label>
-				<div class="col-sm-3">
-					<select for="convenio" class="form-control" id="convenio" name="convenio"
-							onblur="validarVacio(this,'Por favor Seleccione una Convenio')">
-							<option>Seleccione un Convenio</option>
-							<option>1. Convenio1</option>
-							<option>2. Convenio2</option>
-					</select>
-					<span class="help-block hidden fa fa-warning"></span>
-				</div>
-			</div>
-               
         </div>
     </div>    
-</section>
-                
+</section>  
 <section class="content">
     <div class="panel panel-primary">
 	            <div class="panel-heading">Datos de Contacto</div>
@@ -129,9 +115,9 @@
                     <label class="control-label required col-sm-3">Región (*)</label>
                     <div class="col-sm-6">
                         <select for="region" class="form-control" id="region" name="region" onchange="Region.cargarComunasPorRegion(this.value,'comuna')" onblur="validarVacio(this,'Por favor Seleccione una Región')">
-                                            <option>Seleccione una Región</option>
+                                            <option value="0">Seleccione una Región</option>
                                             {foreach $arrRegiones as $item}
-                                                            <option value="{$item->reg_id}" >{$item->reg_nombre}</option>
+                                                            <option value="{$item->id_region}" >{$item->gl_nombre}</option>
                                             {/foreach}
                         </select>
                         <span class="help-block hidden fa fa-warning"></span>
@@ -143,7 +129,7 @@
                         <select for="comuna" class="form-control" id="comuna" name="comuna" 
                                 onchange="Registro.cargarCentroSaludporComuna(this.value,'centrosalud')"
                                 onblur="validarVacio(this,'Por favor Seleccione una Comuna')">
-                                <option>Seleccione una Comuna</option>
+                                <option value="0">Seleccione una Comuna</option>
                         </select>
                         <span class="help-block hidden fa fa-warning"></span>
                     </div>
@@ -182,7 +168,7 @@
                 <div class="form-group">    
                     <label for="motivoconsulta" class="control-label required col-sm-3">Motivo de la Consulta</label>
                     <div class="col-sm-6">
-                        <input type="text" name="motivoconsulta" id="motivoconsulta" value="" onblur="validarVacio(this,'Por favor Ingrese Motivo de Consulta')" placeholder="Motivo de la Consulta" class="form-control"/>
+                        <textarea type="text" style="resize: none" name="motivoconsulta" id="motivoconsulta" value="" onblur="validarVacio(this,'Por favor Ingrese Motivo de Consulta')" placeholder="Motivo de la Consulta" class="form-control"></textarea>
                         <span class="help-block hidden"></span>
                     </div>
                 </div>
