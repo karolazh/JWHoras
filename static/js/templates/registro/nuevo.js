@@ -1,5 +1,32 @@
 /* global BASE_URI */
 
+$(document).ready(function() {
+    $("#guardar").on('click', function(e) {
+        var button_process = buttonStartProcess($(this), e);
+        var parametros = $("#form").serialize();
+        $.ajax({         
+            dataType: "json",
+            cache:false,
+            async: true,
+            data: parametros,
+            type: "post",
+            url: BASE_URI + "index.php/Registro/GuardarRegistro", 
+            error: function(xhr, textStatus, errorThrown){
+                xModal.info('Error: No se pudo Ingresar un nuevo Registro');
+            },
+            success:function(data){
+                buttonEndProcess(button_process);
+                if(data.correcto){
+                    xModal.success('Éxito: Se Ingresó nuevo Registro!');
+                    location.href = BASE_URI + "index.php/Registro";
+                } else {
+                    xModal.info('Error: No se pudo Ingresar un nuevo Registro');
+                }
+            }
+        }); 
+    });
+});
+
 //Formatea Fecha
 function formattedDate(date) {
     var d = new Date(date || Date.now()),

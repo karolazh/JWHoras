@@ -121,6 +121,24 @@ class DAORegistro extends Model{
             return null;
         }
     }
+    
+    public function insertarRegistro($parametros){
+        $query = "INSERT INTO pre_registro
+                    (gl_rut, gl_nombres, gl_apellidos, fc_nacimiento, gl_sexo, id_prevision, gl_direccion,
+                    id_comuna, gl_fono, gl_celular, gl_email, id_institucion, gl_latitud, gl_longitud)
+                    VALUES('".$parametros['rut']."','".$parametros['nombres']."','".$parametros['apellidos']."',
+                            '".$parametros['fc_nacimiento']."','F',".$parametros['prevision'].",
+                            '".$parametros['direccion']."',".$parametros['comuna'].",".$parametros['fono'].",
+                            ".$parametros['celular'].",'".$parametros['email']."',".$parametros['centrosalud'].",
+                            '".$parametros['gl_latitud']."','".$parametros['gl_longitud']."')
+                    ";
+                  
+        if ($this->db->execQuery($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>
