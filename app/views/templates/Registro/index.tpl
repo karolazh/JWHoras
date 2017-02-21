@@ -19,24 +19,20 @@
             <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
                 <thead>
                     <tr role="row">
-                        <th align="center" width="5%">#ID</th>
-                        <th align="center" width="10%">RUT Paciente</th>
-                        <th align="center" width="10%">Fecha Ingreso</th>
-                        <th align="center" width="10%">Hora Ingreso</th>
-                        <th align="center" width="10%">Hora Egreso</th>
-                        <th align="center" width="">Caso Egreso</th>
-                        <th align="center" width="10%">Acciones</th>
+                        <th align="center" width="10%">#ID</th>
+                        <th align="center" width="22%">RUT Paciente</th>
+                        <th align="center" width="22%">Nombres</th>
+                        <th align="center" width="22%">Apellidos</th>
+                        <th align="center" width="23%">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {foreach $arrResultado as $item}
                         <tr>
-                            <td nowrap width="100px" align="center"> {$item->reg_id} </td>
-                            <td nowrap width="100px" align="center"> {$item->pac_rut} </td>
-                            <td class="text-center">{$item->reg_fec_ingreso}</td>
-                            <td class="text-center">{$item->reg_hora_ingreso}</td>
-                            <td class="text-center">{$item->reg_hora_egreso}</td>
-                            <td class="text-center">{$item->reg_cas_egr_id}</td>
+                            <td nowrap width="100em" align="center"> {$item->reg_id} </td>
+                            <td nowrap width="100em" align="center"> {$item->reg_rut} </td>
+                            <td class="text-center">{$item->reg_nombres}</td>
+                            <td class="text-center">{$item->reg_apellidos}</td>
                             <td class="text-center" style="width:100px;">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-success btn-flat" 

@@ -34,15 +34,21 @@
 class Registro extends Controller{
 	
     protected $_DAORegistro;
-
+    protected $_DAOComuna;
+    protected $_DAOCasoEgreso;
+    protected $_DAORegion;
+    protected $_DAOPrevision;
+    
     //funcion construct
     function __construct(){
         parent::__construct();
         //Acceso::set("ADMINISTRADOR");
+        $this->load->lib('Fechas', false);
         $this->_DAORegion = $this->load->model("DAORegion");
         $this->_DAOComuna = $this->load->model("DAOComuna");
         $this->_DAORegistro = $this->load->model("DAORegistro");
         $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
+        $this->_DAOPrevision = $this->load->model("DAOPrevision");
     }
     
     /*
@@ -62,6 +68,7 @@ class Registro extends Controller{
          * REALIZAR FUNCIÓN PARA LISTAR SEGÚN PERFIL
          */
         $arr = $this->_DAORegistro->getListaRegistro();
+        print_r($arr);
         $this->smarty->assign('arrResultado', $arr);
         
         //llamado al template
@@ -93,15 +100,25 @@ class Registro extends Controller{
         Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
-        $this->smarty->assign("rut", $sesion->rut);
         $this->smarty->assign("usuario", $sesion->usuario);
         
         $parametros = $this->request->getParametros();
         $id_registro = $parametros[0];
-        
         $this->smarty->assign("id_registro", $id_registro);
+        $registro = $this->_DAORegistro->getRegistro($id_registro);
+        $prevision = $this->_DAOPrevision->getPrevision($registro->reg_id_prev);
+        $comuna = $this->_DAOComuna->getComuna($registro->reg_com_id);
+        $comuna_region = $this->_DAOComuna->getComunaRegion($comuna->com_id);
+        $id_region = $comuna_region->id_region;
+        $region = $this->_DAORegion->getRegion($id_region);
+        $edad = Fechas::calcularEdadInv($registro->reg_fec_nac);
         
-        //llamado al template
+        $this->smarty->assign('registro', $registro);
+        $this->smarty->assign('previson', $prevision->prev_nombre);
+        $this->smarty->assign('comuna', $comuna->com_nombre);
+        $this->smarty->assign('region', $region->gl_nombre);
+        $this->smarty->assign('edad', $edad);
+//llamado al template
         $this->_display('Registro/ver.tpl');
     }
     

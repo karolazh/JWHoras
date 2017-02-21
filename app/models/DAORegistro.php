@@ -52,7 +52,9 @@ class DAORegistro extends Model{
 
         $query = "select "
                 . "reg_id, "
-                . "reg_rut "
+                . "reg_rut, "
+                . "reg_nombres, "
+                . "reg_apellidos "
                 . "from tab_registro r "
                 ;
         $resultado = $this->db->getQuery($query);
@@ -88,10 +90,36 @@ class DAORegistro extends Model{
     
     /*
      * Ver Registro
-     */
+     */	
     public function getRegistro($id_registro){
-        $query = "select * from tab_registro
-                  where registro_id = ?";
+        $query = "select "
+                . "reg_id, "
+                . "reg_rut, "
+                . "reg_extranjero, "
+                . "reg_run_pass, "
+                . "reg_nombres, "
+                . "reg_apellidos, "
+                . "date_format(reg_fec_nac,'%d-%m-%Y') as reg_fec_nac, "
+                . "reg_sexo, "
+                . "reg_id_prev, "
+                . "reg_direccion, "
+                . "reg_com_id, "
+                . "reg_fono, "
+                . "reg_celular, "
+                . "reg_email, "
+                . "reg_fec_act, "
+                . "reg_latitud, "
+                . "reg_longitud, "
+                . "reg_reconoce, "
+                . "reg_acepta_programa, "
+                . "reg_adj_id_aut, "
+                . "reg_seguimiento, "
+                . "reg_est_cas_id, "
+                . "reg_ins_id,"
+                . "reg_usr_id_crea, "
+                . "reg_fec_crea "
+                . "from tab_registro "
+                . "where reg_id = ?";
 
         $consulta = $this->db->getQuery($query,array($id_registro));
         if($consulta->numRows > 0){

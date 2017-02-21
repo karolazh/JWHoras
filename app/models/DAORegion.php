@@ -23,7 +23,7 @@ class DAORegion extends Model{
     /*** 20170131 - Funcion obtiene datos de una región ***/
     public function getRegion($cod_region){
 	$query = "select * from tab_regiones 
-                  where reg_id = ?";
+                  where id_region = ?";
 
         $consulta = $this->db->getQuery($query,array($cod_region));
         if($consulta->numRows > 0){
