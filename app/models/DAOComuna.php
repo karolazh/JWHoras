@@ -62,4 +62,11 @@ class DAOComuna extends Model{
                     return null;
                 }
     }
+        public function obtCentroSaludporComuna($comuna){
+            $query = "select e.nombre_establecimiento, e.id_establecimiento from tab_establecimientos_salud e
+                                    left join tab_comunas c on c.com_id = e.comuna_establecimiento
+                                    where c.com_id = ?";
+
+            return $this->db->getQuery($query,array($comuna));
+    }
 }
