@@ -145,6 +145,7 @@ class DAORegistro extends Model{
 					FROM pre_registro 
 					WHERE gl_rut = ?";
 
+
 		$param		= array($rut_registro);
         $consulta	= $this->db->getQuery($query,$param);
 

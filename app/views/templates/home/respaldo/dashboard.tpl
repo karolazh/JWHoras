@@ -61,13 +61,22 @@
                         <tbody>
                         {foreach $arrResultado as $item}
                             <tr>
-                                <td nowrap width="100px" align="center"> {$item->id_noticia} </td>
-                                <td class="text-center">{$item->gl_titulo}</td>
+                                <td nowrap width="100px" align="center"> {$item->not_id} </td>
+                                {*<td class="text-center">{$item->asunto|truncate:60:"...":true}</td>*}
+                                <td class="text-center">{$item->not_titulo}</td>
                                 <td class="text-center">?</td>
                                 <td align="center">
-
+                                    {*<button data-toggle="tooltip" type="button" class="btn btn-sm btn-success btn-flat" title="Ver Detalle" 
+                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Solicitudes/revisarSolicitud/{$item->id_solicitud}',
+                                                                 'Revisar Solicitud',85);">
+                                        <i class="fa fa-edit"></i>&nbsp;&nbsp;Ver
+                                    </button>*}
+                                    {*<button data-toggle="tooltip" type="button" class="btn btn-sm btn-success btn-flat" title="Ver Detalle" 
+                                            onClick="">
+                                        <i class="fa fa-edit"></i>&nbsp;&nbsp;Ver
+                                    </button>*}
                                     <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                            onClick="location.href='{$base_url}/Home/verNoticia/{$item->id_noticia}'" 
+                                            onClick="location.href='{$base_url}/Home/verNoticia/{$item->not_id}'" 
                                             data-toggle="tooltip" title="Ver Noticia">
                                         <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver
                                     </button>
@@ -77,6 +86,12 @@
                         </tbody>
                     </table>
                     <br/>
+                    {*<div class="col-xs-7">
+                        <canvas id="graficoB"></canvas>
+                    </div>
+                    <div class="col-xs-5">
+                        <div id="graficoB_legend"></div>
+                    </div>*}
                 </div>
             </div>
         </div>
