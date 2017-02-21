@@ -162,62 +162,73 @@
 							</select>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="motivoconsulta" class="control-label required col-sm-3">Motivo de la Consulta</label>
-						<div class="col-sm-6">
-							<textarea type="text" style="resize: none" name="motivoconsulta" id="motivoconsulta" value="" onblur="validarVacio(this,'Por favor Ingrese Motivo de Consulta')" placeholder="Motivo de la Consulta" class="form-control"></textarea>
-							<span class="help-block hidden"></span>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="fechaingreso" class="control-label required col-sm-3">Fecha y Hora Ingreso</label>
-						<div class="col-sm-6">
-							<input type="input" name="fechaingreso" id="fechaingreso" value="" onblur="validarVacio(this,'Por favor Ingrese Fecha y Hora de Ingreso')" placeholder="Fecha y Hora de Ingreso" class="form-control"/>
-							<span class="help-block hidden"></span>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="chkAcepta" class="control-label required col-sm-3">¿Consiente Participar?</label>
-						<div class="col-sm-1">
-							<input id="chkAcepta" type="checkbox" value='1' onchange="showChk('files','chkAcepta','','')">
-						</div>
-					</div>
-					<div class="form-group" id="files" style="display: none">
-						<label for="descarga" class="control-label required col-sm-3">Descargue Consentimiento y Suba Archivo Firmado</label>
-						<div class="col-sm-3" id="descargar">
-							<input type="submit" id="descarga" class="BotonDown" value="Descargar Consentimiento">
-							<input type="file" value="Subir Firma">
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div id="map" data-editable="1" style="width:100%;height:300px;"></div>
-					<div class="form-group top-spaced">
-						<label for="email" class="control-label required col-sm-3">Latitud</label>
-						<div class="col-sm-3">
-							<input type="text" name="gl_latitud" id="gl_latitud" value="" placeholder="latitud" class="form-control"/>
-						</div>
-						<label for="email" class="control-label required col-sm-1">Longitud</label>
-						<div class="col-sm-3">
-							<input type="text" name="gl_longitud"  id="gl_longitud" value="" placeholder="Longitud" class="form-control"/>
-						</div>
-					</div>
-				</div>
+                                        <div class="form-group">    
+                                            <label for="motivoconsulta" class="control-label required col-sm-3">Motivo de la Consulta</label>
+                                            <div class="col-sm-6">
+                                                <textarea type="text" style="resize: none" name="motivoconsulta" id="motivoconsulta" value="" onblur="validarVacio(this,'Por favor Ingrese Motivo de Consulta')" placeholder="Motivo de la Consulta" class="form-control"></textarea>
+                                                <span class="help-block hidden"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">    
+                                            <label for="fechaingreso" class="control-label required col-sm-3">Fecha Ingreso</label>
+                                            <div class="col-sm-6">
+                                                <input type="date" name="fechaingreso" id="fechaingreso" value="" onblur="validarVacio(this,'Por favor Ingrese Fecha y Hora de Ingreso')" placeholder="Fecha y Hora de Ingreso" class="form-control"/>
+                                                <span class="help-block hidden"></span>
+                                            </div>
+                                        </div>   
+                                        <div class="form-group">    
+                                            <label for="horaingreso" class="control-label required col-sm-3">Hora Ingreso</label>
+                                            <div class="col-sm-6">
+                                                <input type="time" name="horaingreso" id="horaingreso" value="" onblur="validarVacio(this,'Por favor Ingrese Fecha y Hora de Ingreso')" placeholder="Fecha y Hora de Ingreso" class="form-control"/>
+                                                <span class="help-block hidden"></span>
+                                            </div>
+                                        </div> 
+                                        <div class="form-group">
+                                            <label for="chkAcepta" class="control-label required col-sm-3">¿Consiente Participar?</label>
+                                                <div class="col-sm-1">
+                                                    <input id="chkAcepta" type="checkbox" onchange="showChk('files','chkAcepta','','')">
+                                                </div>
+                                        </div>
+                                        <div class="form-group" id="files" style="display: none">
+                                            <label class="control-label required col-sm-3">Descargue Consentimiento y Suba Archivo Firmado</label>
+                                                <div class="col-sm-3">
+                                                    <input type="submit" id="descarga" class="BotonDown" value="Descargar Consentimiento">
+                                                    <input type="file" value="Subir Firma">
+                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="chkReconoce" class="control-label required col-sm-3">¿Reconoce Maltrato?</label>
+                                                <div class="col-sm-1">
+                                                    <input id="chkReconoce" type="checkbox">
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                                        <div id="map" data-editable="1" style="width:100%;height:300px;"></div>
+                                        <div class="form-group">    
+                                            <label for="email" class="control-label required col-sm-3">Latitud</label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="gl_latitud" id="gl_latitud" value="" placeholder="latitud" class="form-control"/>
+                                            </div>
+                                            <label for="email" class="control-label required col-sm-1">Longitud</label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="gl_longitud"  id="gl_longitud" value="" placeholder="Longitud" class="form-control"/>
+                                            </div>					
+                                        </div>				
+                                    </div>
 
-				<div class="clearfix"></div>
-				<div class="form-group top-spaced col-md-12 text-right">
-					<button type="button" id="guardar" class="btn btn-success">
-						<i class="fa fa-save"></i>  Guardar
-					</button>&nbsp;
-					<button type="button" id="cancelar"  class="btn btn-default" 
-							onclick="location.href='{$base_url}/Registro/index'">
-						<i class="fa fa-remove"></i>  Cancelar
-					</button>
-					<br/><br/>
-				</div>
-			</div>
-			
-		</div>
-	</section>
-
+                                        <div class="form-group clearfix col-md-12 text-right">
+                                            <button type="button" id="guardar" class="btn btn-success">
+                                                <i class="fa fa-save"></i>  Guardar
+                                            </button>&nbsp;
+                                            <button type="button" id="cancelar"  class="btn btn-default" 
+                                                    onclick="location.href='{$base_url}/Registro/index'">
+                                                <i class="fa fa-remove"></i>  Cancelar
+                                            </button>
+                                            <br/><br/>
+                                        </div>				
+        </div>
+		
+    </div>    
+</section>
 </form>

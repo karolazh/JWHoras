@@ -162,6 +162,7 @@ class DAORegistro extends Model{
 
     
     public function insertarRegistro($parametros){
+
         $query	= "	INSERT INTO pre_registro
 						(
 						id_institucion,
@@ -210,6 +211,7 @@ class DAORegistro extends Model{
 						'".date('Y-m-d H:i:s')."',
 						".$_SESSION['id']."
 						)
+
                     ";
                   
         if ($this->db->execQuery($query)) {
