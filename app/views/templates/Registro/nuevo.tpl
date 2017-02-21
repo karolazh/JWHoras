@@ -28,14 +28,13 @@
 				<div class="col-sm-1">
 					<button type="button" id="buscar" class="btn btn-info btn-sm form-control" onclick="Registro.cargarRegistro()"><i class="fa fa-search"></i></button>
 				</div>
-                                <div class="checkbox">
-                                        <label>
-                                                <input id="chkextranjero" type="checkbox"
-                                                           onchange="showChk('extranjero','chkextranjero','rut')">
-                                                <strong>Extranjero</strong>
-                                        </label>
-                                </div>
-                        </div>  
+				<div>
+					<label>
+						<input id="chkextranjero" type="checkbox" onchange="showChk('extranjero','chkextranjero','rut')">
+						<strong>Extranjero</strong>
+					</label>
+				</div>
+			</div>  
  
 			<div class="form-group" style="display: none" id="extranjero">
                                 <label for="nombres" class="control-label col-sm-2 required">N°/Pasaporte Extranjero</label>
