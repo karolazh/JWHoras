@@ -50,8 +50,9 @@ class Login extends Controller {
         //$recordar = trim($this->_request->getParam("recordar"));
         $usuario = $this->_DAOUsuarios->getByRut($rut);
         //a mayores iteraciones es mas lento adivinar la contraseña
-        $valido = FALSE;
-        $primer_login = FALSE;
+        $valido			= FALSE;
+        $primer_login	= FALSE;
+
         if (!is_null($usuario)) {
             $salt = $usuario->usr_salt;
             if ($usuario->usr_ultimo_login === NULL) {
@@ -62,21 +63,22 @@ class Login extends Controller {
             }
         }
         if ($valido and $rut != "" and $password != "") {
-            $session = New Zend_Session_Namespace("usuario_carpeta");
-            $session->id = $usuario->usr_id;
-            $session->nombre = $usuario->usr_nombres . " " . $usuario->usr_apellidos;
-            $session->mail = $usuario->usr_email;
-            if (!$primer_login) {
-                $ultimo_login = date('Y-m-d H:i:s');
-                $datos = array($ultimo_login, $session->id);
-                $upd = $this->_DAOUsuarios->setUltimoLogin($datos);
+            $session			= New Zend_Session_Namespace("usuario_carpeta");
+            $session->id		= $usuario->usr_id;
+            $session->nombre	= $usuario->usr_nombres . " " . $usuario->usr_apellidos;
+            $session->mail		= $usuario->usr_email;
+           
+			if (!$primer_login) {
+                $ultimo_login	= date('Y-m-d H:i:s');
+                $datos			= array($ultimo_login, $session->id);
+                $upd			= $this->_DAOUsuarios->setUltimoLogin($datos);
             }
-            $comuna = "";
-            $region = "";
-            $provincia = "";
+            $comuna		= "";
+            $region		= "";
+            $provincia	= "";
 
-            $id_comuna = $usuario->usr_com_id;
-            echo $id_comuna;
+            $id_comuna	= $usuario->usr_com_id;
+
             /* obtiene nombre de comuna */
             if ($id_comuna) {
                 $result = $this->_DAOComuna->getComuna($id_comuna);
@@ -98,24 +100,22 @@ class Login extends Controller {
                             $region = $cod . " - " . $nom;
                         }
                     }
-                    //if(!is_null($result2))
                 }
-                //if(!is_null($result))
-            }
-            //if(!is_null($id_comuna))       
+            }     
 
-            $_SESSION['id'] = $usuario->usr_id;
-            $_SESSION['perfil'] = $usuario->usr_pfl_id;
-            $_SESSION['nombre'] = $usuario->usr_nombres . " " . $usuario->usr_apellidos;
-            $_SESSION['rut'] = $usuario->usr_rut;
-            $_SESSION['mail'] = $usuario->usr_email;
-            $_SESSION['fono'] = $usuario->usr_fono;
-            $_SESSION['celular'] = $usuario->usr_celular;
-            $_SESSION['comuna'] = $comuna;
-            $_SESSION['provincia'] = $provincia;
-            $_SESSION['region'] = $region;
-            $_SESSION['primer_login'] = $primer_login;
-            $_SESSION['autenticado'] = TRUE;
+            $_SESSION['id']				= $usuario->usr_id;
+            $_SESSION['perfil']			= $usuario->usr_pfl_id;
+            $_SESSION['nombre']			= $usuario->usr_nombres . " " . $usuario->usr_apellidos;
+            $_SESSION['rut']			= $usuario->usr_rut;
+            $_SESSION['mail']			= $usuario->usr_email;
+            $_SESSION['fono']			= $usuario->usr_fono;
+            $_SESSION['celular']		= $usuario->usr_celular;
+            $_SESSION['comuna']			= $comuna;
+            $_SESSION['provincia']		= $provincia;
+            $_SESSION['region']			= $region;
+            $_SESSION['primer_login']	= $primer_login;
+            $_SESSION['autenticado']	= TRUE;
+
             if ($recordar == 1) {
                 setcookie('datos_usuario_carpeta', $usuario->usr_id, time() + 365 * 24 * 60 * 60);
             }
