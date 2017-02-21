@@ -45,83 +45,65 @@ class Login extends Controller {
 
     //*** 20170127 - Procesa Login de Usuario***//
     public function procesar() {
-        $rut = trim($this->_request->getParam("rut"));
-        $password = trim($this->_request->getParam("password"));
-        $usuario = $this->_DAOUsuarios->getByRut($rut);
-        $valido = FALSE;
-        $primer_login = FALSE;
+        $rut			= trim($this->_request->getParam("rut"));
+        $password		= Seguridad::generar_sha512($this->_request->getParam("password"));
+        //$recordar		= trim($this->_request->getParam("recordar"));
+        $recordar		= 0;
+		$primer_login	= FALSE;
+		$comuna			= "";
+		$region			= "";
+		$provincia		= "";
 
-        if (!is_null($usuario)) {
-            if ($usuario->fc_ultimo_login === NULL) {
-                $primer_login = TRUE;
-            }
-            if ($usuario->gl_password == Seguridad::generar_sha512($password)) {
-                $valido = true;
-            }
-        }
-        if ($valido and $rut != "" and $password != "") {
-            $session = New Zend_Session_Namespace("usuario_carpeta");
-            $session->id = $usuario->id_usuario;
-            $session->nombre = $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-            $session->mail = $usuario->gl_email;
+        $usuario		= $this->_DAOUsuarios->getLogin($rut, $password);
 
-            if (!$primer_login) {
-                $ultimo_login = date('Y-m-d H:i:s');
-                $datos = array($ultimo_login, $session->id);
-                $upd = $this->_DAOUsuarios->setUltimoLogin($datos);
-            }
-            $comuna = "";
-            $region = "";
-            $provincia = "";
+        if (empty($usuario->fc_ultimo_login)) {
+			$primer_login = TRUE;
+		}
 
-            $id_comuna = $usuario->id_comuna;
+        if ($usuario) {
+			if($usuario->bo_activo == 1){
+				$session			= New Zend_Session_Namespace("usuario_carpeta");
+				$session->id		= $usuario->id_usuario;
+				$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+				$session->mail		= $usuario->gl_email;
 
-            /* obtiene nombre de comuna */
-            if ($id_comuna) {
-                $result = $this->_DAOComuna->getComuna($id_comuna);
-                if ($result) {
-                    $comuna = $result->gl_nombre_comuna;
-                    $id_provincia = $result->id_provincia;
+				if (!$primer_login) {
+					$ultimo_login	= date('Y-m-d H:i:s');
+					$datos			= array($ultimo_login, $session->id);
+					$upd			= $this->_DAOUsuarios->setUltimoLogin($datos);
+				}
 
-                    /* obtiene código de región a través de provincia */
-                    $result2 = $this->_DAOProvincias->getProvincia($id_provincia);
-                    if ($result2) {
-                        $provincia = $result2->gl_nombre_provincia;
-                        $id_region = $result2->id_region;
+				$_SESSION['id']				= $usuario->id_usuario;
+				$_SESSION['perfil']			= $usuario->id_perfil;
+				$_SESSION['id_institucion']	= $usuario->id_institucion;
+				$_SESSION['nombre']			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+				$_SESSION['rut']			= $usuario->gl_rut;
+				$_SESSION['mail']			= $usuario->gl_email;
+				$_SESSION['fono']			= $usuario->gl_fono;
+				$_SESSION['celular']		= $usuario->gl_celular;
+				$_SESSION['comuna']			= $usuario->gl_nombre_comuna;
+				$_SESSION['provincia']		= $usuario->gl_nombre_provincia;
+				$_SESSION['region']			= $usuario->gl_nombre_region;
+				$_SESSION['id_comuna']		= $usuario->id_comuna;
+				$_SESSION['id_provincia']	= $usuario->id_provincia;
+				$_SESSION['id_region']		= $usuario->id_region;
+				$_SESSION['primer_login']	= $primer_login;
+				$_SESSION['autenticado']	= TRUE;
 
-                        /* obtiene nombre de región */
-                        $result3 = $this->_DAORegion->getRegion($id_region);
-                        if ($result3) {
-                            $cod = $result3->gl_cod_region;
-                            $nom = $result3->gl_nombre_region;
-                            $region = $cod . " - " . $nom;
-                        }
-                    }
-                }
-            }
-
-            $_SESSION['id'] = $usuario->id_usuario;
-            $_SESSION['perfil'] = $usuario->id_perfil;
-            $_SESSION['nombre'] = $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-            $_SESSION['rut'] = $usuario->gl_rut;
-            $_SESSION['mail'] = $usuario->gl_email;
-            $_SESSION['fono'] = $usuario->gl_fono;
-            $_SESSION['celular'] = $usuario->gl_celular;
-            $_SESSION['comuna'] = $comuna;
-            $_SESSION['provincia'] = $provincia;
-            $_SESSION['region'] = $region;
-            $_SESSION['primer_login'] = $primer_login;
-            $_SESSION['autenticado'] = TRUE;
-
-            if ($recordar == 1) {
-                setcookie('datos_usuario_carpeta', $usuario->id_usuario, time() + 365 * 24 * 60 * 60);
-            }
-            if ($primer_login) {
-                header('Location: ' . BASE_URI . '/Login/actualizar');
-            } else {
-                header('Location: ' . BASE_URI . '/Home/dashboard');
-            }
-        } else {
+				if ($recordar == 1) {
+					setcookie('datos_usuario_carpeta', $usuario->id_usuario, time() + 365 * 24 * 60 * 60);
+				}
+				if($primer_login) {
+					header('Location: ' . BASE_URI . '/Login/actualizar');
+				}else{
+					header('Location: ' . BASE_URI . '/Home/dashboard');
+				}
+			}else{
+				$this->smarty->assign("hidden", "");
+				$this->smarty->assign("texto_error", "Usuario se encuentra Inhabilitado.");
+				$this->smarty->display('login/login.tpl');				
+			}
+        }else{
             $this->smarty->assign("hidden", "");
             $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
             $this->smarty->display('login/login.tpl');
