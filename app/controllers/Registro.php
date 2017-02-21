@@ -116,6 +116,25 @@ class Registro extends Controller {
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }
 
+    public function GuardarRegistro() {
+        header('Content-type: application/json');
+        $parametros = $this->_request->getParams();
+        $resultado = $this->_DAORegistro->insertarRegistro($parametros);
+        $correcto = false;
+        $error = false;
+        if ($resultado){
+            $correcto = true;
+        }else{
+            $error = true;
+        }
+        
+        $salida = array("error" => $error,
+            "correcto" => $correcto);
+        $this->smarty->assign("hidden", "");
+        $json = Zend_Json::encode($salida);
+        echo $json;
+    }
+    
     public function ver() {
         Acceso::redireccionUnlogged($this->smarty);
         $parametros = $this->request->getParametros();

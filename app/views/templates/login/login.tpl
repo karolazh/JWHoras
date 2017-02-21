@@ -38,7 +38,8 @@
                                         <i class="fa fa-warning fa-2x"></i> &nbsp; {$texto_error}
                                     </div>
                                     <br>
-                                    <button id="ingresar" class="btn btn-lg btn-primary btn-block" type="submit">Ingresar&nbsp;&nbsp;<i></i></button>
+
+                                    <button id="ingresar" class="btn btn-lg btn-primary btn-block" type="submit">Ingresar &nbsp;&nbsp;<i></i></button>
                                 </fieldset>
                                 <br>
                                 <script>
