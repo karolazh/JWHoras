@@ -34,8 +34,8 @@ class DAOPrevision extends Model{
     /**
      * @var string 
      */
-    protected $_tabla = "tab_prevision";
-    protected $_primaria = "prev_id";
+    protected $_tabla = "pre_prevision";
+    protected $_primaria = "id_prevision";
     protected $_transaccional = false;
     /*
      * Constructor
@@ -48,9 +48,9 @@ class DAOPrevision extends Model{
 
     public function getPrevision($cod_prevision){
         $query = "select "
-                . "prev_nombre "
-                . "from tab_prevision "
-                . "where prev_id = ?";
+                . "gl_nombre_prevision "
+                . "from pre_prevision "
+                . "where id_prevision = ?";
 
         $consulta = $this->db->getQuery($query,array($cod_prevision));
         if($consulta->numRows > 0){
@@ -61,7 +61,7 @@ class DAOPrevision extends Model{
     }
     
     public function getListaPrevision(){
-        $query = "select * from tab_prevision";
+        $query = "select * from pre_prevision";
         $resultado = $this->db->getQuery($query);
 
         if($resultado->numRows>0){

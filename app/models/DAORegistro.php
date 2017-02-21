@@ -34,8 +34,8 @@ class DAORegistro extends Model{
     /**
      * @var string 
      */
-    protected $_tabla		= "tab_registro";
-    protected $_primaria	= "registro_id";
+    protected $_tabla		= "pre_registro";
+    protected $_primaria	= "id_registro";
     
     /**
      * Constructor
@@ -51,11 +51,11 @@ class DAORegistro extends Model{
     public function getListaRegistro(){
 
         $query = "select "
-                . "reg_id, "
-                . "reg_rut, "
-                . "reg_nombres, "
-                . "reg_apellidos "
-                . "from tab_registro r "
+                . "id_registro, "
+                . "gl_rut, "
+                . "gl_nombres, "
+                . "gl_apellidos "
+                . "from pre_registro r "
                 ;
 
         $resultado = $this->db->getQuery($query);
@@ -94,33 +94,33 @@ class DAORegistro extends Model{
      */	
     public function getRegistro($id_registro){
         $query = "select "
-                . "reg_id, "
-                . "reg_rut, "
-                . "reg_extranjero, "
-                . "reg_run_pass, "
-                . "reg_nombres, "
-                . "reg_apellidos, "
-                . "date_format(reg_fec_nac,'%d-%m-%Y') as reg_fec_nac, "
-                . "reg_sexo, "
-                . "reg_id_prev, "
-                . "reg_direccion, "
-                . "reg_com_id, "
-                . "reg_fono, "
-                . "reg_celular, "
-                . "reg_email, "
-                . "reg_fec_act, "
-                . "reg_latitud, "
-                . "reg_longitud, "
-                . "reg_reconoce, "
-                . "reg_acepta_programa, "
-                . "reg_adj_id_aut, "
-                . "reg_seguimiento, "
-                . "reg_est_cas_id, "
-                . "reg_ins_id,"
-                . "reg_usr_id_crea, "
-                . "reg_fec_crea "
-                . "from tab_registro "
-                . "where reg_id = ?";
+                . "id_registro, "
+                . "gl_rut, "
+                . "gl_extranjero, "
+                . "gl_run_pass, "
+                . "gl_nombres, "
+                . "gl_apellidos, "
+                . "date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento, "
+                . "gl_sexo, "
+                . "id_prevision, "
+                . "gl_direccion, "
+                . "id_comuna, "
+                . "gl_fono, "
+                . "gl_celular, "
+                . "gl_email, "
+                . "fc_act, "
+                . "gl_latitud, "
+                . "gl_longitud, "
+                . "gl_reconoce, "
+                . "gl_acepta_programa, "
+                . "id_adjunto, "
+                . "gl_seguimiento, "
+                . "id_estado_caso, "
+                . "id_institucion,"
+                . "id_usuario_crea, "
+                . "fc_crea "
+                . "from pre_registro "
+                . "where id_registro = ?";
 
 
         if($consulta->numRows > 0){
@@ -133,18 +133,17 @@ class DAORegistro extends Model{
     public function getRegistro1($rut_registro){
 
         $query	= "	SELECT 
-						reg_id,
-						reg_nombres,
-						reg_apellidos,
-						date_format(reg_fec_nac,'%d-%m-%Y') as reg_fec_nac,
-						reg_prevision,
-						reg_convenio,
-						reg_direccion,
-						reg_fono,
-						reg_email,
-						reg_celular
-					FROM tab_registro 
-					WHERE reg_rut = ?";
+						id_registro,
+						gl_nombres,
+						gl_apellidos,
+						date_format(fc_nac,'%d-%m-%Y') as fc_nac,
+						id_prevision,
+						gl_direccion,
+						gl_fono,
+						gl_email,
+						gl_celular
+					FROM pre_registro 
+					WHERE gl_rut = ?";
 
 		$param		= array($rut_registro);
         $consulta	= $this->db->getQuery($query,$param);

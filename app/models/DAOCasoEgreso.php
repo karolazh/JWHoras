@@ -34,8 +34,8 @@ class DAOCasoEgreso extends Model{
     /**
      * @var string 
      */
-    protected $_tabla = "tab_casos_egreso";
-    protected $_primaria = "cas_egr_id";
+    protected $_tabla = "pre_casos_egreso";
+    protected $_primaria = "id_caso_egreso";
     
     /**
      * Constructor
@@ -49,7 +49,7 @@ class DAOCasoEgreso extends Model{
      * Lista Casos de Egreso
      */
     public function getListaCasoEgreso(){
-        $query = "select * from tab_casos_egreso";
+        $query = "select * from pre_casos_egreso";
         $resultado = $this->db->getQuery($query);
 
         if($resultado->numRows>0){
@@ -63,8 +63,8 @@ class DAOCasoEgreso extends Model{
      * Ver Caso de Egreso
      */
     public function getCasoEgreso($id_cas_egr){
-        $query = "select * from tab_casos_egreso 
-                  where cas_egr_id = ?";
+        $query = "select * from pre_casos_egreso 
+                  where id_caso_egreso = ?";
 
         $consulta = $this->db->getQuery($query,array($id_cas_egr));
         if($consulta->numRows > 0){

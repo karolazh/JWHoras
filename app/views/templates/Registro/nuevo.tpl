@@ -90,7 +90,7 @@
 							onblur="validarVacio(this,'Por favor Seleccione una Previsión')">
 							<option>Seleccione una Previsión</option>
                                                         {foreach $arrPrevision as $item}
-                                                                        <option value="{$item->prev_id}" >{$item->prev_nombre}</option>
+                                                                        <option value="{$item->id_prevision}" >{$item->gl_nombre_prevision}</option>
                                                         {/foreach}
 					</select>
 					<span class="help-block hidden fa fa-warning"></span>
@@ -117,7 +117,7 @@
                         <select for="region" class="form-control" id="region" name="region" onchange="Region.cargarComunasPorRegion(this.value,'comuna')" onblur="validarVacio(this,'Por favor Seleccione una Región')">
                                             <option value="0">Seleccione una Región</option>
                                             {foreach $arrRegiones as $item}
-                                                            <option value="{$item->id_region}" >{$item->gl_nombre}</option>
+                                                            <option value="{$item->id_region}" >{$item->gl_nombre_region}</option>
                                             {/foreach}
                         </select>
                         <span class="help-block hidden fa fa-warning"></span>

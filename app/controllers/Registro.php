@@ -118,16 +118,16 @@ class Registro extends Controller {
         $id_registro = $parametros[0];
         $this->smarty->assign("id_registro", $id_registro);
         $registro = $this->_DAORegistro->getRegistro($id_registro);
-        $prevision = $this->_DAOPrevision->getPrevision($registro->reg_id_prev);
-        $comuna = $this->_DAOComuna->getComuna($registro->reg_com_id);
-        $comuna_region = $this->_DAOComuna->getComunaRegion($comuna->com_id);
+        $prevision = $this->_DAOPrevision->getPrevision($registro->id_prevision);
+        $comuna = $this->_DAOComuna->getComuna($registro->id_comuna);
+        $comuna_region = $this->_DAOComuna->getComunaRegion($comuna->id_comuna);
         $id_region = $comuna_region->id_region;
         $region = $this->_DAORegion->getRegion($id_region);
-        $edad = Fechas::calcularEdadInv($registro->reg_fec_nac);
+        $edad = Fechas::calcularEdadInv($registro->fc_nac);
         $this->smarty->assign('registro', $registro);
-        $this->smarty->assign('previson', $prevision->prev_nombre);
-        $this->smarty->assign('comuna', $comuna->com_nombre);
-        $this->smarty->assign('region', $region->gl_nombre);
+        $this->smarty->assign('previson', $prevision->gl_nombre_prevision);
+        $this->smarty->assign('comuna', $comuna->gl_nombre_comuna);
+        $this->smarty->assign('region', $region->gl_nombre_region);
         $this->smarty->assign('edad', $edad);
         $this->_display('avanzados/ver.tpl');
     }
@@ -141,8 +141,8 @@ class Registro extends Controller {
         $json = array();
         $i = 0;
         foreach ($comunas as $comuna) {
-            $json[$i]['id_comuna'] = $comuna->com_id;
-            $json[$i]['nombre_comuna'] = $comuna->com_nombre;
+            $json[$i]['id_comuna'] = $comuna->id_comuna;
+            $json[$i]['nombre_comuna'] = $comuna->gl_nombre_comuna;
             $i++;
         }
 
@@ -173,20 +173,19 @@ class Registro extends Controller {
         $daoRegistro = $this->load->model('DAORegistro');
         $registro = $daoRegistro->getRegistro1($rut);
         //Datos de Tablas Comuna y Region
-        $id_comuna = $registro->reg_com_id;
+        $id_comuna = $registro->id_comuna;
         $daoComuna = $this->load->model('DAOComuna');
         $comunaRegion = $daoComuna->getComunaRegion($id_comuna);
         $json = array();
-        $json[0]['rut'] = $registro->reg_rut;
-        $json[0]['nombres'] = $registro->reg_nombres;
-        $json[0]['apellidos'] = $registro->reg_apellidos;
-        $json[0]['fec_nac'] = $registro->reg_fec_nac;
+        $json[0]['rut'] = $registro->gl_rut;
+        $json[0]['nombres'] = $registro->gl_nombres;
+        $json[0]['apellidos'] = $registro->gl_apellidos;
+        $json[0]['fec_nac'] = $registro->fc_nac;
         //$json[0]['edad'] = $registro->reg_edad;
-        $json[0]['genero'] = $registro->reg_sexo;
-        $json[0]['prevision'] = $registro->reg_prevision;
-        $json[0]['convenio'] = $registro->reg_convenio;
-        $json[0]['region'] = $comunaRegion->reg_id;
-        $json[0]['comuna'] = $comunaRegion->com_id;
+        $json[0]['genero'] = $registro->gl_sexo;
+        $json[0]['prevision'] = $registro->id_prevision;
+        $json[0]['region'] = $comunaRegion->id_region;
+        $json[0]['comuna'] = $comunaRegion->id_comuna;
 
         echo json_encode($json);
     }
