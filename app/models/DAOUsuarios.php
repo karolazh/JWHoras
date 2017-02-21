@@ -2,18 +2,10 @@
 
 class DAOUsuarios extends Model{
 
-    /**
-     *
-     * @var string 
-     */
-    //protected $_tabla = "usuario";
-    protected $_tabla		= "pre_usuarios";
-    protected $_primaria	= "id_usuario";
-    
-    
-    /**
-     * Constructor
-     */
+    protected $_tabla			= "pre_usuarios";
+    protected $_primaria		= "id_usuario";
+    protected $_transaccional	= false;
+
     function __construct(){
         parent::__construct();       
     }
@@ -97,7 +89,7 @@ class DAOUsuarios extends Model{
      * 20170201 - Setea Password de Usuario
      */
     public function setUltimoLogin($datos){
-        $query = "UPDATE".$this->_tabla."
+        $query = "UPDATE ".$this->_tabla."
                   SET    fc_ultimo_login = ?
                   WHERE  ".$this->_primaria." = ? ";
 
@@ -112,7 +104,7 @@ class DAOUsuarios extends Model{
      * 20170201 - Setea Password de Usuario
      */
     public function setPassword($datos){
-        $query = "UPDATE".$this->_tabla."
+        $query = "UPDATE ".$this->_tabla."
                   SET    gl_password = ? , fc_ultimo_login = ?
                   WHERE  ".$this->_primaria." = ? ";
 /*
