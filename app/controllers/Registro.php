@@ -38,6 +38,7 @@ class Registro extends Controller {
     protected $_DAOCasoEgreso;
     protected $_DAORegion;
     protected $_DAOPrevision;
+    protected $_DAOMotivoConsulta;
 
     //funcion construct
     function __construct() {
@@ -49,6 +50,7 @@ class Registro extends Controller {
         $this->_DAORegistro = $this->load->model("DAORegistro");
         $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
         $this->_DAOPrevision = $this->load->model("DAOPrevision");
+        $this->_DAOMotivoConsulta = $this->load->model("DAOMotivoConsulta");
     }
 
     /*
@@ -116,9 +118,11 @@ class Registro extends Controller {
         header('Content-type: application/json');
         $parametros = $this->_request->getParams();
         $resultado = $this->_DAORegistro->insertarRegistro($parametros);
+        $id_registro = $this->_DAORegistro->getRegistroxRut($parametros['rut']);
+        $resultado2 = $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
         $correcto = false;
         $error = false;
-        if ($resultado){
+        if ($resultado && $resultado2){
             $correcto = true;
         }else{
             $error = true;

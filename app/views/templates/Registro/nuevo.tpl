@@ -82,8 +82,6 @@
 					</select>
 					<span class="help-block hidden fa fa-warning"></span>
 				</div>
-			</div>
-			<div class="form-group">
 				<label for="prevision" class="control-label col-sm-2">Previsión (*)</label>
 				<div class="col-sm-3">
 					<select for="prevision" class="form-control" id="prevision" name="prevision" 
@@ -173,12 +171,19 @@
                     </div>
                 </div>
                 <div class="form-group">    
-                    <label for="fechaingreso" class="control-label required col-sm-3">Fecha y Hora Ingreso</label>
+                    <label for="fechaingreso" class="control-label required col-sm-3">Fecha Ingreso</label>
                     <div class="col-sm-6">
-                        <input type="input" name="fechaingreso" id="fechaingreso" value="" onblur="validarVacio(this,'Por favor Ingrese Fecha y Hora de Ingreso')" placeholder="Fecha y Hora de Ingreso" class="form-control"/>
+                        <input type="date" name="fechaingreso" id="fechaingreso" value="" onblur="validarVacio(this,'Por favor Ingrese Fecha y Hora de Ingreso')" placeholder="Fecha y Hora de Ingreso" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
-                </div>       
+                </div>   
+                <div class="form-group">    
+                    <label for="horaingreso" class="control-label required col-sm-3">Hora Ingreso</label>
+                    <div class="col-sm-6">
+                        <input type="time" name="horaingreso" id="horaingreso" value="" onblur="validarVacio(this,'Por favor Ingrese Fecha y Hora de Ingreso')" placeholder="Fecha y Hora de Ingreso" class="form-control"/>
+                        <span class="help-block hidden"></span>
+                    </div>
+                </div> 
                 <div class="form-group">
                     <label for="chkAcepta" class="control-label required col-sm-3">¿Consiente Participar?</label>
                         <div class="col-sm-1">
@@ -186,12 +191,18 @@
                         </div>
 		</div>
                 <div class="form-group" id="files" style="display: none">
-                    <label for="descarga" class="control-label required col-sm-3">Descargue Consentimiento y Suba Archivo Firmado</label>
-                        <div class="col-sm-3" id="descargar">
+                    <label class="control-label required col-sm-3">Descargue Consentimiento y Suba Archivo Firmado</label>
+                        <div class="col-sm-3">
                             <input type="submit" id="descarga" class="BotonDown" value="Descargar Consentimiento">
                             <input type="file" value="Subir Firma">
                         </div>
-                </div>        
+                </div>
+                <div class="form-group">
+                    <label for="chkReconoce" class="control-label required col-sm-3">¿Reconoce Maltrato?</label>
+                        <div class="col-sm-1">
+                            <input id="chkReconoce" type="checkbox">
+                        </div>
+		</div>
             </div>
             <div class="col-sm-6">
 				<div id="map" data-editable="1" style="width:100%;height:300px;"></div>
@@ -206,7 +217,7 @@
                     </div>					
                 </div>				
             </div>
-			
+            
                 <div class="form-group clearfix col-md-12 text-right">
                     <button type="button" id="guardar" class="btn btn-success">
                         <i class="fa fa-save"></i>  Guardar
