@@ -71,7 +71,6 @@ class Registro extends Controller {
          * REALIZAR FUNCIÓN PARA LISTAR SEGÚN PERFIL
          */
         $arr = $this->_DAORegistro->getListaRegistro();
-        print_r($arr);
         $this->smarty->assign('arrResultado', $arr);
 
         //llamado al template
@@ -116,22 +115,30 @@ class Registro extends Controller {
 
     public function GuardarRegistro() {
         header('Content-type: application/json');
-        $parametros = $this->_request->getParams();
-        $resultado = $this->_DAORegistro->insertarRegistro($parametros);
+        $parametros		= $this->_request->getParams();
+        $correcto		= false;
+        $error			= false;
+		$gl_grupo_tipo	= 'Control';
+
+		if($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1){
+			$gl_grupo_tipo	= 'Seguimiento';
+		}
+		$parametros['gl_grupo_tipo']	= $gl_grupo_tipo;
+		
+        $resultado		= $this->_DAORegistro->insertarRegistro($parametros);
         $id_registro = $this->_DAORegistro->getRegistroxRut($parametros['rut']);
         $resultado2 = $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
-        $correcto = false;
-        $error = false;
         if ($resultado && $resultado2){
-            $correcto = true;
+            $correcto	= true;
         }else{
-            $error = true;
+            $error		= true;
         }
-        
-        $salida = array("error" => $error,
+
+        $salida	= array("error" => $error,
             "correcto" => $correcto);
         $this->smarty->assign("hidden", "");
-        $json = Zend_Json::encode($salida);
+        $json	= Zend_Json::encode($salida);
+		
         echo $json;
     }
     
@@ -152,7 +159,8 @@ class Registro extends Controller {
         $this->smarty->assign('comuna', $comuna->gl_nombre_comuna);
         $this->smarty->assign('region', $region->gl_nombre_region);
         $this->smarty->assign('edad', $edad);
-        $this->_display('avanzados/ver.tpl');
+		
+		$this->smarty->display('avanzados/ver.tpl');
     }
 
     public function cargarComunasPorRegion() {

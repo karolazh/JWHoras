@@ -123,41 +123,56 @@ class DAORegistro extends Model{
     }
     
     public function insertarRegistro($parametros){
-        
-        $query = "INSERT INTO pre_registro
-                            (   gl_rut, 
-                                gl_nombres, 
-                                gl_apellidos, 
-                                fc_nacimiento, 
-                                gl_sexo, 
-                                id_prevision, 
-                                gl_direccion,
-                                id_comuna, 
-                                gl_fono, 
-                                gl_celular, 
-                                gl_email, 
-                                id_institucion, 
-                                gl_latitud, 
-                                gl_longitud, 
-                                fc_crea, 
-                                id_usuario_crea     )
-                        
-                    VALUES(     '".$parametros['rut']."',
-                                '".$parametros['nombres']."',
-                                '".$parametros['apellidos']."',
-                                '".$parametros['fc_nacimiento']."',
-                                'F',
-                                ".$parametros['prevision'].",
-                                '".$parametros['direccion']."',
-                                ".$parametros['comuna'].",
-                                ".$parametros['fono'].",
-                                ".$parametros['celular'].",
-                                '".$parametros['email']."',
-                                '".$parametros['centrosalud']."',
-                                '".$parametros['gl_latitud']."',
-                                '".$parametros['gl_longitud']."', 
-                                now(),
-                                '".$_SESSION['id']."'       )
+
+        $query	= "	INSERT INTO pre_registro
+						(
+						id_institucion,
+						id_comuna,
+						id_prevision,
+						id_adjunto,
+						gl_grupo_tipo,
+						gl_rut,
+						bo_extranjero,
+						gl_run_pass,
+						gl_nombres,
+						gl_apellidos,
+						fc_nacimiento,
+						gl_direccion,
+						gl_fono,
+						gl_celular,
+						gl_email,
+						gl_latitud,
+						gl_longitud,
+						bo_reconoce,
+						bo_acepta_programa,
+						fc_crea,
+						id_usuario_crea
+						)
+					VALUES
+						(
+						".$parametros['centrosalud'].",
+						".$parametros['comuna'].",
+						".$parametros['prevision'].",
+						0,
+						'".$parametros['gl_grupo_tipo']."',
+						'".$parametros['rut']."',
+						'".$parametros['chkextranjero']."',
+						'".$parametros['inputextranjero']."',
+						'".$parametros['nombres']."',
+						'".$parametros['apellidos']."',
+						'".$parametros['fc_nacimiento']."',
+						'".$parametros['direccion']."',
+						'".$parametros['fono']."',
+						'".$parametros['celular']."',
+						'".$parametros['email']."',
+						'".$parametros['gl_latitud']."',
+						'".$parametros['gl_longitud']."',
+						0,
+						".$parametros['chkAcepta'].",
+						'".date('Y-m-d H:i:s')."',
+						".$_SESSION['id']."
+						)
+
                     ";
                   
         if ($this->db->execQuery($query)) {

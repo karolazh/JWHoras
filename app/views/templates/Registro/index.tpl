@@ -29,21 +29,21 @@
                 <tbody>
                     {foreach $arrResultado as $item}
                         <tr>
-                            <td nowrap width="100em" align="center"> {$item->reg_id} </td>
-                            <td nowrap width="100em" align="center"> {$item->reg_rut} </td>
-                            <td class="text-center">{$item->reg_nombres}</td>
-                            <td class="text-center">{$item->reg_apellidos}</td>
+                            <td nowrap width="100em" align="center"> {$item->id_registro} </td>
+                            <td nowrap width="100em" align="center"> {$item->gl_rut} </td>
+                            <td class="text-center">{$item->gl_nombres}</td>
+                            <td class="text-center">{$item->gl_apellidos}</td>
                             <td class="text-center" style="width:100px;">
                                 <div class="btn-group">
                                     <button href='javascript:void(0)'
-                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/ver/{$item->reg_id}', 'Registro número : {$item->reg_id}', 85);" 
+                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/ver/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
                                             data-toggle="tooltip" 
                                             class="btn btn-sm btn-success btn-flat"
                                             title="Ver Registro">
                                         <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver
                                     </button>
                                     <button href='javascript:void(0)' 
-                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/detalleRegistro/{$item->reg_rut}', 'Bitácora paciente RUT : {$item->reg_rut}', 85);" 
+                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/detalleRegistro/{$item->gl_rut}', 'Bitácora paciente RUT : {$item->gl_rut}', 85);" 
                                             data-toggle="tooltip" 
                                             title="Bitácora" 
                                             class="btn btn-sm btn-flat btn-primary" 
