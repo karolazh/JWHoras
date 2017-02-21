@@ -125,17 +125,24 @@ class Registro extends Controller{
     public function cargarPaciente(){
             header('Content-type: application/json');
             $rut = $_POST['rut'];
+            //Datos de Tabla Pacientes
             $daoPaciente = $this->load->model('DAOPaciente');
             $paciente = $daoPaciente->getPaciente($rut);
+            //Datos de Tablas Comuna y Region
+            $id_comuna = $paciente->pac_com_id;
+            $daoComuna = $this->load->model('DAOComuna');
+            $comunaRegion = $daoComuna->getComunaRegion($id_comuna);
             $json = array();
-                    $json[0]['rut'] = $paciente->pac_rut;
-                    $json[0]['nombres'] = $paciente->pac_nombres;
-                    $json[0]['apellidos'] = $paciente->pac_apellidos;
-                    $json[0]['fec_nac'] = $paciente->pac_fec_nac;
-                    //$json[0]['edad'] = $paciente->pac_edad;
-                    $json[0]['genero'] = $paciente->pac_sexo;
-                    $json[0]['prevision'] = $paciente->pac_prevision;
-                    $json[0]['convenio'] = $paciente->pac_convenio;
+                $json[0]['rut'] = $paciente->pac_rut;
+                $json[0]['nombres'] = $paciente->pac_nombres;
+                $json[0]['apellidos'] = $paciente->pac_apellidos;
+                $json[0]['fec_nac'] = $paciente->pac_fec_nac;
+                //$json[0]['edad'] = $paciente->pac_edad;
+                $json[0]['genero'] = $paciente->pac_sexo;
+                $json[0]['prevision'] = $paciente->pac_prevision;
+                $json[0]['convenio'] = $paciente->pac_convenio;
+                $json[0]['region'] = $comunaRegion->reg_id;
+                $json[0]['comuna'] = $comunaRegion->com_id;
 
             echo json_encode($json);
     }

@@ -26,6 +26,9 @@ cargarPaciente : function(){
                                         document.getElementById('fecnacim').value = response[0].fec_nac;
                                         document.getElementById('prevision').value = response[0].prevision;
                                         document.getElementById('convenio').value = response[0].convenio;
+                                        document.getElementById('region').value = response[0].region;
+                                        Region.cargarComunasPorRegion(response[0].region,'comuna');
+                                        document.getElementById('comuna').value = response[0].comuna;
                                         //Convertir Edad
                                         fecha = new Date(response[0].fec_nac);
                                         hoy = new Date();
