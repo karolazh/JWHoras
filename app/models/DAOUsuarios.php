@@ -2,18 +2,10 @@
 
 class DAOUsuarios extends Model{
 
-    /**
-     *
-     * @var string 
-     */
-    //protected $_tabla = "usuario";
-    protected $_tabla		= "pre_usuarios";
-    protected $_primaria	= "id_usuario";
-    
-    
-    /**
-     * Constructor
-     */
+    protected $_tabla			= "pre_usuarios";
+    protected $_primaria		= "id_usuario";
+    protected $_transaccional	= false;
+
     function __construct(){
         parent::__construct();       
     }
