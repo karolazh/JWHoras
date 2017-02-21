@@ -19,7 +19,7 @@
 			Datos del Paciente
         </div>
         <div class="panel-body">
-			<div class="form-group" id="ingresorut">
+			<div class="form-group">
 				<label for="rut" class="control-label col-sm-2 required">Rut Paciente (*)</label>
 				<div class="col-sm-2">
 					<input type="text" name="rut" id="rut" maxlength="12" onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut')" placeholder="Rut paciente" class="form-control">
@@ -28,15 +28,14 @@
 				<div class="col-sm-1">
 					<button type="button" id="buscar" class="btn btn-info btn-sm form-control" onclick="Pacientes.cargarPaciente()"><i class="fa fa-search"></i></button>
 				</div>
-
-                        </div>  
-                        <div class="checkbox">
+                                <div class="checkbox">
                                         <label>
                                                 <input id="chkextranjero" type="checkbox"
-                                                           onchange="showChkExtranjero('extranjero','chkextranjero','ingresorut')">
+                                                           onchange="showChk('extranjero','chkextranjero','rut')">
                                                 <strong>Extranjero</strong>
                                         </label>
-                        </div>
+                                </div>
+                        </div>  
  
 			<div class="form-group" style="display: none" id="extranjero">
                                 <label for="nombres" class="control-label col-sm-2 required">N°/Pasaporte Extranjero</label>

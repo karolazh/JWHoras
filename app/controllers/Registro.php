@@ -43,7 +43,6 @@ class Registro extends Controller{
         $this->_DAOComuna = $this->load->model("DAOComuna");
         $this->_DAORegistro = $this->load->model("DAORegistro");
         $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
-        $this->_DAOPaciente = $this->load->model("DAOPaciente");
     }
     
     /*
