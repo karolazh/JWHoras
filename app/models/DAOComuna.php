@@ -54,7 +54,7 @@ class DAOComuna extends Model {
     }
 
     public function getComunaRegion($id_comuna) {
-        $query = "select c.id_comuna, r.id_region from pre_comunas c
+        $query = "select c.id_comuna, r.id_region, r.gl_nombre_region from pre_comunas c
                                     left join pre_provincias p on c.id_provincia = p.id_provincia
                                     left join pre_regiones r on p.id_region = r.id_region
                                     where c.id_comuna = ?";
