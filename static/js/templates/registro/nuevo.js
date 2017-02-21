@@ -50,8 +50,8 @@ $(document).ready(function() {
 
             var mapa = new MapaFormulario("map");
             mapa.seteaIcono("static/images/referencia.png");
-            mapa.seteaLongitud("-58.7183713");
-            mapa.seteaLatitud("-34.4369238");			
+            mapa.seteaLongitud("-70.6504492");
+            mapa.seteaLatitud("-33.4378305");			
             mapa.seteaZoom(12);
 				
             mapa.seteaPlaceInput("direccion");
@@ -62,8 +62,7 @@ $(document).ready(function() {
             }
             */
             mapa.inicio();
-            mapa.cargaMapa(); 
-            
+            mapa.cargaMapa();
 
             //if($("#eme_id").val()!=""){
                 mapa.setMarkerInputs();
