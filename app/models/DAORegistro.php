@@ -52,13 +52,8 @@ class DAORegistro extends Model{
 
         $query = "select "
                 . "reg_id, "
-                . "p.pac_rut, "
-                . "r.reg_fec_ingreso, "
-                . "r.reg_hora_ingreso, "
-                . "r.reg_hora_egreso, "
-                . "r.reg_cas_egr_id "
+                . "reg_rut "
                 . "from tab_registro r "
-                . "left join tab_pacientes p on pac_id=reg_pac_id"
                 ;
         $resultado = $this->db->getQuery($query);
 
