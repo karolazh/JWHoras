@@ -13,13 +13,13 @@ function formattedDate(date) {
     return [day, month, year].join('/');
 }
 
-var Pacientes ={
+var Registro ={
     
-cargarPaciente : function(){
+cargarRegistro : function(){
             rut = document.getElementById('rut').value;
             console.log(rut);
 		if(rut != ""){
-			$.post(BASE_URI+'index.php/Registro/cargarPaciente',{rut:rut},function(response){
+			$.post(BASE_URI+'index.php/Registro/cargarRegistro',{rut:rut},function(response){
 				if(response.length > 0){
                                         document.getElementById('nombres').value = response[0].nombres;
                                         document.getElementById('apellidos').value = response[0].apellidos;
@@ -42,8 +42,31 @@ cargarPaciente : function(){
 		}else{
                     alert("No se ha ingresado rut");
 		}
+            },
+            
+cargarCentroSaludporComuna : function(comuna,combo,centrosalud){
+            console.log(comuna);
+		if(comuna != 0){
+			$.post(BASE_URI+'index.php/Registro/cargarCentroSaludporComuna',{comuna:comuna},function(response){
+				if(response.length > 0){
+					var total = response.length;
+					var options = '<option value="0">Seleccione un Centro de Salud</option>';
+					for(var i=0; i<total; i++){
+						if(centrosalud == response[i].id_establecimiento){
+							options += '<option value="'+response[i].id_establecimiento+'" selected >'+response[i].nombre_establecimiento+'</option>';	
+						}else{
+							options += '<option value="'+response[i].id_establecimiento+'">'+response[i].nombre_establecimiento+'</option>';
+						}
+						
+					}
+					$('#'+combo).html(options);
+				}
+			},'json');
+		}else{
+                    $('#'+combo).html('<option value="0">Seleccione un Centro de Salud</option>');
+		}
 	}
-    }
+};       
     
 $(document).ready(function() {
 

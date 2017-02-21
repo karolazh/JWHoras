@@ -43,6 +43,7 @@ class Registro extends Controller{
         $this->_DAOComuna = $this->load->model("DAOComuna");
         $this->_DAORegistro = $this->load->model("DAORegistro");
         $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
+        $this->_DAOPrevision = $this->load->model("DAOPrevision");
     }
     
     /*
@@ -77,6 +78,9 @@ class Registro extends Controller{
         
         $arrRegiones = $this->_DAORegion->getListaRegiones();
         $this->smarty->assign("arrRegiones",$arrRegiones);
+        
+        $arrPrevision = $this->_DAOPrevision->getListaPrevision();
+        $this->smarty->assign("arrPrevision",$arrPrevision);
         
         $arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
         $this->smarty->assign("arrCasoEgreso",$arrCasoEgreso);
@@ -121,26 +125,43 @@ class Registro extends Controller{
 
             echo json_encode($json);
     }
+    public function cargarCentroSaludporComuna(){
+            $comuna = $_POST['comuna'];
+
+            $daoComuna = $this->load->model('DAOComuna');
+            $centrosalud = $daoComuna->obtCentroSaludporComuna($comuna)->rows;
+
+            $json = array();
+            $i = 0;
+            foreach($centrosalud as $cSalud){
+                    $json[$i]['id_establecimiento'] = $cSalud->id_establecimiento;
+                    $json[$i]['nombre_establecimiento'] = $cSalud->nombre_establecimiento;
+                    $i++;
+            }
+
+            echo json_encode($json);
+    }    
     
-    public function cargarPaciente(){
+    
+    public function cargarRegistro(){
             header('Content-type: application/json');
             $rut = $_POST['rut'];
-            //Datos de Tabla Pacientes
-            $daoPaciente = $this->load->model('DAOPaciente');
-            $paciente = $daoPaciente->getPaciente($rut);
+            //Datos de Tabla Registros
+            $daoRegistro = $this->load->model('DAORegistro');
+            $registro = $daoRegistro->getRegistro1($rut);
             //Datos de Tablas Comuna y Region
-            $id_comuna = $paciente->pac_com_id;
+            $id_comuna = $registro->reg_com_id;
             $daoComuna = $this->load->model('DAOComuna');
             $comunaRegion = $daoComuna->getComunaRegion($id_comuna);
             $json = array();
-                $json[0]['rut'] = $paciente->pac_rut;
-                $json[0]['nombres'] = $paciente->pac_nombres;
-                $json[0]['apellidos'] = $paciente->pac_apellidos;
-                $json[0]['fec_nac'] = $paciente->pac_fec_nac;
-                //$json[0]['edad'] = $paciente->pac_edad;
-                $json[0]['genero'] = $paciente->pac_sexo;
-                $json[0]['prevision'] = $paciente->pac_prevision;
-                $json[0]['convenio'] = $paciente->pac_convenio;
+                $json[0]['rut'] = $registro->reg_rut;
+                $json[0]['nombres'] = $registro->reg_nombres;
+                $json[0]['apellidos'] = $registro->reg_apellidos;
+                $json[0]['fec_nac'] = $registro->reg_fec_nac;
+                //$json[0]['edad'] = $registro->reg_edad;
+                $json[0]['genero'] = $registro->reg_sexo;
+                $json[0]['prevision'] = $registro->reg_prevision;
+                $json[0]['convenio'] = $registro->reg_convenio;
                 $json[0]['region'] = $comunaRegion->reg_id;
                 $json[0]['comuna'] = $comunaRegion->com_id;
 

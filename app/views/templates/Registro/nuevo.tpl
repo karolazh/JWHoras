@@ -26,7 +26,7 @@
 					<span class="help-block hidden fa fa-warning"></span>
 				</div>
 				<div class="col-sm-1">
-					<button type="button" id="buscar" class="btn btn-info btn-sm form-control" onclick="Pacientes.cargarPaciente()"><i class="fa fa-search"></i></button>
+					<button type="button" id="buscar" class="btn btn-info btn-sm form-control" onclick="Registro.cargarRegistro()"><i class="fa fa-search"></i></button>
 				</div>
                                 <div class="checkbox">
                                         <label>
@@ -87,12 +87,12 @@
 			<div class="form-group">
 				<label for="prevision" class="control-label col-sm-2">Previsión (*)</label>
 				<div class="col-sm-3">
-					<select for="prevision" class="form-control" id="prevision" name="prevision"
+					<select for="prevision" class="form-control" id="prevision" name="prevision" 
 							onblur="validarVacio(this,'Por favor Seleccione una Previsión')">
 							<option>Seleccione una Previsión</option>
-							<option>1. FONASA</option>
-							<option>2. ISAPRE</option>
-							<option>3. Otra</option>
+                                                        {foreach $arrPrevision as $item}
+                                                                        <option value="{$item->prev_id}" >{$item->prev_nombre}</option>
+                                                        {/foreach}
 					</select>
 					<span class="help-block hidden fa fa-warning"></span>
 				</div>
@@ -130,10 +130,10 @@
                     <label class="control-label required col-sm-3">Región (*)</label>
                     <div class="col-sm-6">
                         <select for="region" class="form-control" id="region" name="region" onchange="Region.cargarComunasPorRegion(this.value,'comuna')" onblur="validarVacio(this,'Por favor Seleccione una Región')">
-							<option>Seleccione una Región</option>
-							{foreach $arrRegiones as $item}
-									<option value="{$item->reg_id}" >{$item->reg_nombre}</option>
-							{/foreach}
+                                            <option>Seleccione una Región</option>
+                                            {foreach $arrRegiones as $item}
+                                                            <option value="{$item->reg_id}" >{$item->reg_nombre}</option>
+                                            {/foreach}
                         </select>
                         <span class="help-block hidden fa fa-warning"></span>
                     </div>
@@ -141,7 +141,9 @@
                 <div class="form-group"> 
                     <label class="control-label required col-sm-3">Comuna (*)</label>
                     <div class="col-sm-6">
-                        <select for="comuna" class="form-control" id="comuna" name="comuna" onblur="validarVacio(this,'Por favor Seleccione una Comuna')">
+                        <select for="comuna" class="form-control" id="comuna" name="comuna" 
+                                onchange="Registro.cargarCentroSaludporComuna(this.value,'centrosalud')"
+                                onblur="validarVacio(this,'Por favor Seleccione una Comuna')">
                                 <option>Seleccione una Comuna</option>
                         </select>
                         <span class="help-block hidden fa fa-warning"></span>
@@ -172,8 +174,10 @@
                 <div class="form-group">    
                     <label for="centrosalud" class="control-label required col-sm-3">Centro de Salud</label>
                     <div class="col-sm-6">
-                        <textarea type="text" name="centrosalud" id="centrosalud" value="" onblur="validarVacio(this,'Por favor Ingrese Centro de Salud')" placeholder="Centro de Salud" class="form-control"/></textarea>
-                        <span class="help-block hidden"></span>
+                        <select for="centrosalud" class="form-control" id="centrosalud" name="centrosalud" 
+                                onblur="validarVacio(this,'Por favor Seleccione una Comuna')">
+                                <option>Seleccione un Centro de Salud</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">    
