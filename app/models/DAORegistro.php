@@ -49,10 +49,15 @@ class DAORegistro extends Model{
      * Lista Registro
      */
     public function getListaRegistro(){
-        $query	= "	SELECT
-						reg_id,
-						reg_rut
-					FROM tab_registro r " ;
+
+        $query = "select "
+                . "reg_id, "
+                . "reg_rut, "
+                . "reg_nombres, "
+                . "reg_apellidos "
+                . "from tab_registro r "
+                ;
+
         $resultado = $this->db->getQuery($query);
 
         if($resultado->numRows>0){
@@ -86,14 +91,37 @@ class DAORegistro extends Model{
     
     /*
      * Ver Registro
-     */
+     */	
     public function getRegistro($id_registro){
-        $query	= "	SELECT * 
-					FROM tab_registro
-					WHERE registro_id = ?";
+        $query = "select "
+                . "reg_id, "
+                . "reg_rut, "
+                . "reg_extranjero, "
+                . "reg_run_pass, "
+                . "reg_nombres, "
+                . "reg_apellidos, "
+                . "date_format(reg_fec_nac,'%d-%m-%Y') as reg_fec_nac, "
+                . "reg_sexo, "
+                . "reg_id_prev, "
+                . "reg_direccion, "
+                . "reg_com_id, "
+                . "reg_fono, "
+                . "reg_celular, "
+                . "reg_email, "
+                . "reg_fec_act, "
+                . "reg_latitud, "
+                . "reg_longitud, "
+                . "reg_reconoce, "
+                . "reg_acepta_programa, "
+                . "reg_adj_id_aut, "
+                . "reg_seguimiento, "
+                . "reg_est_cas_id, "
+                . "reg_ins_id,"
+                . "reg_usr_id_crea, "
+                . "reg_fec_crea "
+                . "from tab_registro "
+                . "where reg_id = ?";
 
-		$param		= array($id_registro);
-        $consulta	= $this->db->getQuery($query,$param);
 
         if($consulta->numRows > 0){
             return $consulta->rows->row_0;
@@ -103,6 +131,7 @@ class DAORegistro extends Model{
     }
     
     public function getRegistro1($rut_registro){
+
         $query	= "	SELECT 
 						reg_id,
 						reg_nombres,
@@ -119,6 +148,7 @@ class DAORegistro extends Model{
 
 		$param		= array($rut_registro);
         $consulta	= $this->db->getQuery($query,$param);
+
 
         if($consulta->numRows > 0){
             return $consulta->rows->row_0;

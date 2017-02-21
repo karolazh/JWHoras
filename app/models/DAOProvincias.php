@@ -5,8 +5,8 @@ class DAOProvincias extends Model{
     /**
      * @var string 
      */
-    protected $_tabla = "tab_provincias";
-    protected $_primaria = "pro_id";
+    protected $_tabla = "pre_provincias";
+    protected $_primaria = "id_provincia";
     
     /**
      * @var boolean 
@@ -21,11 +21,11 @@ class DAOProvincias extends Model{
     }
     
     /*** 20170131 - Funcion obtiene datos de una provincia ***/
-    public function getProvincia($cod_provincia){
-	$query = "select * from tab_provincias 
-                  where pro_id = ?";
+    public function getProvincia($id_provincia){
+	$query = "select * from ".$this->_tabla."
+                  where id_provincia = ?";
 
-        $consulta = $this->db->getQuery($query,array($cod_provincia));
+        $consulta = $this->db->getQuery($query,array($id_provincia));
         if($consulta->numRows > 0){
             return $consulta->rows->row_0;
         }else{
@@ -37,8 +37,8 @@ class DAOProvincias extends Model{
      * 20170203 - Lista Provincias
      */
     public function getListaProvincias($id_region){
-        $query = "select * from tab_provincias 
-                  where pro_reg_id = ?";
+        $query = "select * from ".$this->_tabla." 
+                  where id_region = ?";
 
         $resultado = $this->db->getQuery($query,array($id_region));
         

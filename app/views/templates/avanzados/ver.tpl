@@ -1,16 +1,9 @@
-<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<head>
+    {include file="layout/css.tpl"}
+    <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+</head>
 
-<section class="content-header">
-    <h1><i class="fa fa-plus"></i> Detalle Registro</h1>
-    <div class="col-md-12 text-right">
-        <button type="button" id="ingresar" onclick="location.href='{$base_url}/Empa/nuevoEmpa/{$id_registro}'"
-                class="btn btn-danger">
-            <i class="fa fa-plus"></i>&nbsp;&nbsp;Ingresar EMPA
-        </button>
-    </div>
-    <br/><br/>
-</section>
 
 <form id="form">
 
@@ -21,7 +14,7 @@
                 <h3 class="box-title">Datos del Paciente</h3>
             </div>
             <div class="form-group">
-                {if ($registro->reg_extranjero == "N" || $registro->reg_extranjero == "") && $registro->reg_rut != ""}
+                {if (!$registro->reg_extranjero || $registro->reg_extranjero == "") && $registro->reg_rut != ""}
                 <div class="form-group col-md-12">
                     <div class="form-group col-md-3">
                         <label class="control-label required">Rut Paciente : </label>&nbsp;&nbsp;{$registro->reg_rut}<br>

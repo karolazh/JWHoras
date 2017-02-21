@@ -94,12 +94,23 @@ class Fechas{
 
 
 	/**
-	 * calcula la edad de una persona segun su fecha de nacimiento en formato AAAA-MM-DD
+	 * calcula la edad de una persona segun su fecha de nacimiento en formato DD-MM-AAAA
 	 * @param  [type] $fecha_nacimiento [description]
 	 * @return [type]                   [description]
 	 */
-	public function calcularEdad($fecha_nacimiento){
-		list($ano,$mes,$dia) = explode("-",$fechanacimiento);
+        public static function calcularEdadInv($fecha_nacimiento){
+		list($dia,$mes,$ano) = explode("-",$fecha_nacimiento);
+	    $ano_diferencia  = date("Y") - $ano;
+	    $mes_diferencia = date("m") - $mes;
+	    $dia_diferencia   = date("d") - $dia;
+	    if ($dia_diferencia < 0 || $mes_diferencia < 0){
+	        $ano_diferencia--;
+            }
+	    return $ano_diferencia;
+	}
+        
+	public static function calcularEdad($fecha_nacimiento){
+		list($ano,$mes,$dia) = explode("-",$fecha_nacimiento);
 	    $ano_diferencia  = date("Y") - $ano;
 	    $mes_diferencia = date("m") - $mes;
 	    $dia_diferencia   = date("d") - $dia;
@@ -108,7 +119,7 @@ class Fechas{
 	    return $ano_diferencia;
 	}
 
-	public function fechaHoy(){
+	public static function fechaHoy(){
 		$fechaHoy = date("Y-m-d");
 		return $fechaHoy;
 	}

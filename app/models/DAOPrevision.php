@@ -36,18 +36,30 @@ class DAOPrevision extends Model{
      */
     protected $_tabla = "tab_prevision";
     protected $_primaria = "prev_id";
-    
-    /**
+    protected $_transaccional = false;
+    /*
      * Constructor
      */
+    
     function __construct()
     {
         parent::__construct();
     }
 
-    /*
-     * Lista Empa (todos)
-     */
+    public function getPrevision($cod_prevision){
+        $query = "select "
+                . "prev_nombre "
+                . "from tab_prevision "
+                . "where prev_id = ?";
+
+        $consulta = $this->db->getQuery($query,array($cod_prevision));
+        if($consulta->numRows > 0){
+            return $consulta->rows->row_0;
+        }else{
+            return null;
+        }
+    }
+    
     public function getListaPrevision(){
         $query = "select * from tab_prevision";
         $resultado = $this->db->getQuery($query);
@@ -56,21 +68,6 @@ class DAOPrevision extends Model{
             return $resultado->rows;
         }else{
             return NULL;
-        }
-    }
-    
-    /*
-     * Ver Empa
-     */
-    public function getPrevision($id_previ){
-        $query = "select * from tab_prevision
-                  where prev_id = ?";
-
-        $consulta = $this->db->getQuery($query,array($id_previ));
-        if($consulta->numRows > 0){
-            return $consulta->rows->row_0;
-        }else{
-            return null;
         }
     }
 }
