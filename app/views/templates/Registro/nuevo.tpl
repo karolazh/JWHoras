@@ -30,7 +30,7 @@
 				</div>
 				<div>
 					<label>
-						<input id="chkextranjero" type="checkbox" onchange="showChk('extranjero','chkextranjero','rut')">
+						<input id="chkextranjero" type="checkbox" onchange="showChk('extranjero','chkextranjero','rut','buscar')">
 						<strong>Extranjero</strong>
 					</label>
 				</div>
@@ -39,7 +39,7 @@
 			<div class="form-group" style="display: none" id="extranjero">
                                 <label for="nombres" class="control-label col-sm-2 required">N°/Pasaporte Extranjero</label>
 				<div class="col-sm-2">
-					<input type="text" name="inputextranjero" id="inputextranjero" maxlength="12" id="upDoc" class="form-control" placeholder="Ingrese N°/Pasaporte Extranjero" onblur="validarVacio(this,'Por favor Ingrese N°/Pasaporte Extranjero')">
+					<input type="text" name="inputextranjero" id="inputextranjero" maxlength="12" id="inputextranjero" class="form-control" placeholder="Ingrese N°/Pasaporte Extranjero" onblur="validarVacio(this,'Por favor Ingrese N°/Pasaporte Extranjero')">
 					<span class="help-block hidden fa fa-warning"></span>
 				</div>
 				<div class="col-sm-1" id="btnbuscarex">
@@ -178,9 +178,22 @@
                         <input type="input" name="fechaingreso" id="fechaingreso" value="" onblur="validarVacio(this,'Por favor Ingrese Fecha y Hora de Ingreso')" placeholder="Fecha y Hora de Ingreso" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
-                </div>
+                </div>       
+                <div class="form-group">
+                    <label for="chkAcepta" class="control-label required col-sm-3">¿Consiente Participar?</label>
+                        <div class="col-sm-1">
+                            <input id="chkAcepta" type="checkbox" onchange="showChk('files','chkAcepta','','')">
+                        </div>
+		</div>
+                <div class="form-group" id="files" style="display: none">
+                    <label for="descarga" class="control-label required col-sm-3">Descargue Consentimiento y Suba Archivo Firmado</label>
+                        <div class="col-sm-3" id="descargar">
+                            <input type="submit" id="descarga" class="BotonDown" value="Descargar Consentimiento">
+                            <input type="file" value="Subir Firma">
+                        </div>
+                </div>        
             </div>
-			<div class="col-sm-6">
+            <div class="col-sm-6">
 				<div id="map" data-editable="1" style="width:100%;height:300px;"></div>
                 <div class="form-group">    
                     <label for="email" class="control-label required col-sm-3">Latitud</label>
