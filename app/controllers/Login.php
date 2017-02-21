@@ -50,7 +50,6 @@ class Login extends Controller {
         //$recordar = trim($this->_request->getParam("recordar"));
         $usuario = $this->_DAOUsuarios->getByRut($rut);
         //a mayores iteraciones es mas lento adivinar la contraseña
-        $iteraciones = 1000000;
         $valido = FALSE;
         $primer_login = FALSE;
         if (!is_null($usuario)) {
@@ -58,7 +57,7 @@ class Login extends Controller {
             if ($usuario->usr_ultimo_login === NULL) {
                 $primer_login = TRUE;
             }
-            if ($usuario->usr_password == (hash_pbkdf2('sha512', $password, $salt, $iteraciones))) {
+            if ($usuario->usr_password == Seguridad::generar_sha512($password)) {
                 $valido = true;
             }
         }
@@ -182,12 +181,9 @@ class Login extends Controller {
 
         if ($validar->isValid()) {
             //$date = date('Y-m-d H:i:s');
-            $iteraciones = 1000000;
-            $bin = openssl_random_pseudo_bytes(64);
-            $salt = bin2hex($bin);
-            $password = hash_pbkdf2('sha512', $this->_request->getParam("password"), $salt, $iteraciones);
+            $password = Seguridad::generar_sha512($this->_request->getParam("password"));
             $ultimo_login = date('Y-m-d H:i:s');
-            $datos = array($password, $salt, $ultimo_login, $session->id);
+            $datos = array($password, $ultimo_login, $session->id);
 
             $upd = $this->_DAOUsuarios->setPassword($datos);
             if ($upd) {
@@ -271,16 +267,13 @@ class Login extends Controller {
             if (!is_null($usuario)) {
                 $correcto = true;
                 $cadena = Seguridad::randomPass(12);
-                $bin = openssl_random_pseudo_bytes(64);
-                $salt = bin2hex($bin);
-                $iteraciones = 1000000;
-                $cadenahash = hash_pbkdf2('sha512', $cadena, $salt, $iteraciones);
+                $cadenahash = Seguridad::generar_sha512($cadena);
                 $this->smarty->assign("nombre", $usuario->usr_nombres . " " . $usuario->usr_apellidos);
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);
                 $ultimo_login = NULL;
                 $this->_DAOUsuarios->update(
-                        array("usr_password" => $cadenahash, "usr_salt" => $salt, "usr_ultimo_login" => $ultimo_login), $usuario->usr_id, "usr_id"
+                        array("usr_password" => $cadenahash, "usr_ultimo_login" => $ultimo_login), $usuario->usr_id, "usr_id"
                 );
 
                 $this->load->lib('Email', false);
