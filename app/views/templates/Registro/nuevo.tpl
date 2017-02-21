@@ -88,7 +88,7 @@
 				<div class="col-sm-3">
 					<select for="prevision" class="form-control" id="prevision" name="prevision" 
 							onblur="validarVacio(this,'Por favor Seleccione una Previsión')">
-							<option>Seleccione una Previsión</option>
+							<option value="0">Seleccione una Previsión</option>
                                                         {foreach $arrPrevision as $item}
                                                                         <option value="{$item->id_prevision}" >{$item->gl_nombre_prevision}</option>
                                                         {/foreach}
@@ -161,7 +161,7 @@
                     <div class="col-sm-6">
                         <select for="centrosalud" class="form-control" id="centrosalud" name="centrosalud" 
                                 onblur="validarVacio(this,'Por favor Seleccione una Comuna')">
-                                <option>Seleccione un Centro de Salud</option>
+                                <option value="0">Seleccione un Centro de Salud</option>
                         </select>
                     </div>
                 </div>

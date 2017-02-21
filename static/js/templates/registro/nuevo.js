@@ -13,6 +13,7 @@ $(document).ready(function() {
             url: BASE_URI + "index.php/Registro/GuardarRegistro", 
             error: function(xhr, textStatus, errorThrown){
                 xModal.info('Error: No se pudo Ingresar un nuevo Registro');
+                buttonEndProcess(button_process);
             },
             success:function(data){
                 buttonEndProcess(button_process);
@@ -21,6 +22,7 @@ $(document).ready(function() {
                     location.href = BASE_URI + "index.php/Registro";
                 } else {
                     xModal.info('Error: No se pudo Ingresar un nuevo Registro');
+                    buttonEndProcess(button_process);
                 }
             }
         }); 
