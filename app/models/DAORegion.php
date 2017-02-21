@@ -6,6 +6,7 @@ class DAORegion extends Model{
      * @var string 
      */
     protected $_tabla = "pre_regiones";
+
     protected $_primaria = "id_region";
     
     /**
@@ -23,6 +24,7 @@ class DAORegion extends Model{
     /*** 20170131 - Funcion obtiene datos de una región ***/
     public function getRegion($cod_region){
 	$query = "select * from ".$this->_tabla." 
+
                   where id_region = ?";
 
         $consulta = $this->db->getQuery($query,array($cod_region));
