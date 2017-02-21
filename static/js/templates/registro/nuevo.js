@@ -26,6 +26,9 @@ cargarPaciente : function(){
                                         document.getElementById('fecnacim').value = response[0].fec_nac;
                                         document.getElementById('prevision').value = response[0].prevision;
                                         document.getElementById('convenio').value = response[0].convenio;
+                                        document.getElementById('region').value = response[0].region;
+                                        Region.cargarComunasPorRegion(response[0].region,'comuna');
+                                        document.getElementById('comuna').value = response[0].comuna;
                                         //Convertir Edad
                                         fecha = new Date(response[0].fec_nac);
                                         hoy = new Date();
@@ -42,34 +45,34 @@ cargarPaciente : function(){
 	}
     }
     
-/*$(document).ready(function() {
-    $("#buscar").on('click', function(e) {
-        var button_process = buttonStartProcess($(this), e);
-        var parametros = new FormData(document.getElementById('rut'));
-        console.log(parametros);
-        $.ajax({         
-            dataType: "json",
-            cache:false,
-            contentType: false,
-            processData:false,
-            async: true,
-            data: parametros,
-            type: "post",
-            url: BASE_URI + "index.php/Dau/cargarPaciente", 
-            error: function(xhr, textStatus, errorThrown){
+$(document).ready(function() {
 
-            },
-            success:function(data){
-                buttonEndProcess(button_process);
-                if(data.correcto){
-                    alert("if correcto");
-                } else {
-                    procesaErrores(data.error);
-                    alert("else incorrecto")
-                }
+
+            var mapa = new MapaFormulario("map");
+            mapa.seteaIcono("static/images/referencia.png");
+            mapa.seteaLongitud("-58.7183713");
+            mapa.seteaLatitud("-34.4369238");			
+            mapa.seteaZoom(12);
+				
+            mapa.seteaPlaceInput("direccion");
+            /*alert("OK");*/
+			/*
+            if($("#longitud").val() != "" && $("#latitud").val() != ""){
+
             }
-        }); 
-    }); 
+            */
+            mapa.inicio();
+            mapa.cargaMapa(); 
+            
+
+            //if($("#eme_id").val()!=""){
+                mapa.setMarkerInputs();
+            //}
+
+
+
 });
 
-*/
+
+
+

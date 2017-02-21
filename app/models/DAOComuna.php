@@ -48,4 +48,18 @@ class DAOComuna extends Model{
             return NULL;
         }
     }
+    
+     public function getComunaRegion($id_comuna){
+            $query = "select c.com_id, r.reg_id from tab_comunas c
+                                    left join tab_provincias p on c.com_pro_id = p.pro_id
+                                    left join tab_regiones r on p.pro_reg_id = r.reg_id
+                                    where c.com_id = ?";
+
+                    $consulta = $this->db->getQuery($query,array($id_comuna));
+                if($consulta->numRows > 0){
+                    return $consulta->rows->row_0;
+                }else{
+                    return null;
+                }
+    }
 }
