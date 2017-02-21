@@ -63,7 +63,18 @@ class DAOPaciente extends Model{
      * Obtener Paciente por Rut
      */
     public function getPaciente($rut_paciente){
-        $query = "select * from tab_pacientes 
+        $query = "select 
+                    pac_id,
+                    pac_nombres,
+                    pac_apellidos,
+                    date_format(pac_fec_nac,'%d-%m-%Y') as pac_fec_nac,
+                    pac_prevision,
+                    pac_convenio,
+                    pac_direccion,
+                    pac_fono,
+                    pac_email,
+                    pac_celular
+                    from tab_pacientes 
                   where pac_rut = ?";
 
         $consulta = $this->db->getQuery($query,array($rut_paciente));

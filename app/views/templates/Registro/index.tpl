@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1><i class="fa fa-book"></i>&nbsp; Registros</h1>
     <div class="col-md-12 text-right">
-        <button type="button" id="ingresar" onclick="location.href='{$base_url}/Registro/nuevo'"
+        <button type="button" id="ingresar" onclick="location.href = '{$base_url}/Registro/nuevo'"
                 class="btn btn-danger">
             <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Registro
         </button>
@@ -32,7 +32,7 @@
                     {foreach $arrResultado as $item}
                         <tr>
                             <td nowrap width="100px" align="center"> {$item->reg_id} </td>
-                            <td nowrap width="100px" align="center"> {$item->reg_pac_id} </td>
+                            <td nowrap width="100px" align="center"> {$item->pac_rut} </td>
                             <td class="text-center">{$item->reg_fec_ingreso}</td>
                             <td class="text-center">{$item->reg_hora_ingreso}</td>
                             <td class="text-center">{$item->reg_hora_egreso}</td>
@@ -40,12 +40,19 @@
                             <td class="text-center" style="width:100px;">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                            onClick="location.href='{$base_url}/Registro/ver/{$item->reg_id}'" 
+                                            onClick="location.href = '{$base_url}/Registro/ver/{$item->reg_id}'" 
                                             data-toggle="tooltip" title="Ver Actividad">
                                         <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver
                                     </button>
+                                    <button href='javascript:void(0)' 
+                                            onClick="xModal.open('{$smarty.const.BASE_URI}/DetalleRegistro/detalleRegistro/{$item->pac_rut}', 'Bitácora paciente RUT : {$item->pac_rut}', 85);" 
+                                            data-toggle="tooltip" 
+                                            title="Bitácora" 
+                                            class="btn btn-sm btn-flat btn-primary" 
+                                            title="Ver Detalle">
+                                        <i class="fa fa-search">&nbsp;&nbsp;Detalles</i></button>
                                 </div>			
-                           </td>          
+                            </td>          
                         </tr>
                     {/foreach}
                 </tbody>
