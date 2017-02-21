@@ -70,7 +70,7 @@ class DAOUsuarios extends Model{
      * 20170201 - Setea Password de Usuario
      */
     public function setUltimoLogin($datos){
-        $query = "UPDATE".$this->_tabla."
+        $query = "UPDATE ".$this->_tabla."
                   SET    fc_ultimo_login = ?
                   WHERE  ".$this->_primaria." = ? ";
 
@@ -85,7 +85,7 @@ class DAOUsuarios extends Model{
      * 20170201 - Setea Password de Usuario
      */
     public function setPassword($datos){
-        $query = "UPDATE".$this->_tabla."
+        $query = "UPDATE ".$this->_tabla."
                   SET    gl_password = ? , fc_ultimo_login = ?
                   WHERE  ".$this->_primaria." = ? ";
 /*
