@@ -5,8 +5,8 @@ class DAORegion extends Model{
     /**
      * @var string 
      */
-    protected $_tabla = "tab_regiones";
-    protected $_primaria = "reg_id";
+    protected $_tabla = "pre_regiones";
+    protected $_primaria = "id_region";
     
     /**
      * @var boolean 
@@ -22,7 +22,7 @@ class DAORegion extends Model{
     
     /*** 20170131 - Funcion obtiene datos de una región ***/
     public function getRegion($cod_region){
-	$query = "select * from tab_regiones 
+	$query = "select * from ".$this->_tabla." 
                   where id_region = ?";
 
         $consulta = $this->db->getQuery($query,array($cod_region));
@@ -37,7 +37,7 @@ class DAORegion extends Model{
      * 20170203 - Lista Regiones
      */
     public function getListaRegiones(){
-        $query = $this->db->select("*")->from("tab_regiones");
+        $query = $this->db->select("*")->from($this->_tabla);
         $resultado = $query->getResult();
 
         if($resultado->numRows>0){
@@ -48,10 +48,13 @@ class DAORegion extends Model{
     }
     
     public function obtComunasPorRegion($region){
-            $query = "select comunas.com_nombre, comunas.com_id from tab_comunas comunas
-                                    left join tab_provincias prov on comunas.com_pro_id = prov.pro_id
-                                    left join tab_regiones reg on prov.pro_reg_id = reg.id_region
-                                    where reg.id_region = ?";
+            $query = "select 
+                       comunas.gl_nombre_comuna, 
+                       comunas.id_comuna 
+                       from pre_comunas comunas
+                                    left join pre_provincias prov on comunas.id_provincia = prov.id_provincia
+                                    left join pre_regiones reg on prov.id_region = reg.id_region
+                         where reg.id_region = ?";
 
             return $this->db->getQuery($query,array($region));
     }

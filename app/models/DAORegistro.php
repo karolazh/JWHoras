@@ -135,8 +135,7 @@ class DAORegistro extends Model{
                     reg_nombres,
                     reg_apellidos,
                     date_format(reg_fec_nac,'%d-%m-%Y') as reg_fec_nac,
-                    reg_prevision,
-                    reg_convenio,
+                    reg_id_prev,
                     reg_direccion,
                     reg_fono,
                     reg_email,
@@ -144,7 +143,7 @@ class DAORegistro extends Model{
                     from tab_registro 
                   where reg_rut = ?";
 
-        $consulta = $this->db->getQuery($query,array($rut_registr));
+        $consulta = $this->db->getQuery($query,array($rut_registro));
         if($consulta->numRows > 0){
             return $consulta->rows->row_0;
         }else{

@@ -35,18 +35,19 @@
                             <td class="text-center">{$item->reg_apellidos}</td>
                             <td class="text-center" style="width:100px;">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                            onClick="location.href = '{$base_url}/Registro/ver/{$item->reg_id}'" 
-                                            data-toggle="tooltip" title="Ver Actividad">
+                                    <button href='javascript:void(0)'
+                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/ver/{$item->reg_id}', 'Registro número : {$item->reg_id}', 85);" 
+                                            data-toggle="tooltip" 
+                                            class="btn btn-sm btn-success btn-flat"
+                                            title="Ver Registro">
                                         <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver
                                     </button>
                                     <button href='javascript:void(0)' 
-                                            onClick="xModal.open('{$smarty.const.BASE_URI}/DetalleRegistro/detalleRegistro/{$item->pac_rut}', 'Bitácora paciente RUT : {$item->pac_rut}', 85);" 
+                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/detalleRegistro/{$item->reg_rut}', 'Bitácora paciente RUT : {$item->reg_rut}', 85);" 
                                             data-toggle="tooltip" 
                                             title="Bitácora" 
                                             class="btn btn-sm btn-flat btn-primary" 
-                                            title="Ver Detalle">
-                                        <i class="fa fa-search">&nbsp;&nbsp;Detalles</i></button>
+                                        <i class="fa fa-search">&nbsp;&nbsp;Bitácora</i></button>
                                 </div>			
                             </td>          
                         </tr>

@@ -7,8 +7,8 @@ class DAOUsuarios extends Model{
      * @var string 
      */
     //protected $_tabla = "usuario";
-    protected $_tabla = "tab_usuarios";
-    protected $_primaria = "usr_id";
+    protected $_tabla = "pre_usuarios";
+    protected $_primaria = "id_usuario";
     
     
     /**
@@ -27,11 +27,11 @@ class DAOUsuarios extends Model{
     public function getByMail($mail, $not_in = array()){
 
         $query = $this->db->select("u.*")
-                          ->from("tab_usuarios u")
-                          ->whereAND("u.usr_email" , $mail);
+                          ->from($this->_tabla." u")
+                          ->whereAND("u.gl_email" , $mail);
         
         if(count($not_in)>0){
-            $query->whereAND("u.usr_id", $not_in, "NOT IN");
+            $query->whereAND("u.".$this->_primaria, $not_in, "NOT IN");
         }
         
         $resultado = $query->getResult();
@@ -51,11 +51,11 @@ class DAOUsuarios extends Model{
     public function getByRut($rut, $not_in = array()){
 
         $query = $this->db->select("u.*")
-                          ->from("tab_usuarios u")
-                          ->whereAND("u.usr_rut" , $rut);
+                          ->from($this->_tabla." u")
+                          ->whereAND("u.gl_rut" , $rut);
         
         if(count($not_in)>0){
-            $query->whereAND("u.usr_id", $not_in, "NOT IN");
+            $query->whereAND("u.".$this->_primaria, $not_in, "NOT IN");
         }
         
         $resultado = $query->getResult();
@@ -70,9 +70,9 @@ class DAOUsuarios extends Model{
      * 20170201 - Setea Password de Usuario
      */
     public function setUltimoLogin($datos){
-        $query = "UPDATE tab_usuarios
-                  SET    usr_ultimo_login = ?
-                  WHERE  usr_id = ? ";
+        $query = "UPDATE".$this->_tabla."
+                  SET    fc_ultimo_login = ?
+                  WHERE  ".$this->_primaria." = ? ";
 
         if ($this->db->execQuery($query, $datos)) {
             return true;
@@ -85,9 +85,9 @@ class DAOUsuarios extends Model{
      * 20170201 - Setea Password de Usuario
      */
     public function setPassword($datos){
-        $query = "UPDATE tab_usuarios
-                  SET    usr_password = ? , usr_ultimo_login = ?
-                  WHERE  usr_id = ? ";
+        $query = "UPDATE".$this->_tabla."
+                  SET    gl_password = ? , fc_ultimo_login = ?
+                  WHERE  ".$this->_primaria." = ? ";
 /*
         $parametros = array(
             $password,
