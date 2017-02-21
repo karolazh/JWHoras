@@ -142,9 +142,9 @@ class Login extends Controller {
 
         if ($validar->isValid()) {
             //$date = date('Y-m-d H:i:s');
-            $password = Seguridad::generar_sha512($this->_request->getParam("password"));
-            $ultimo_login = date('Y-m-d H:i:s');
-            $datos = array($password, $ultimo_login, $session->id);
+            $password		= Seguridad::generar_sha512($this->_request->getParam("password"));
+            $ultimo_login	= date('Y-m-d H:i:s');
+            $datos			= array($password, $ultimo_login, $session->id);
 
             $upd = $this->_DAOUsuarios->setPassword($datos);
             if ($upd) {
