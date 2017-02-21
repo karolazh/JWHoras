@@ -20,9 +20,6 @@
                         <div class="portlet-body">
                             <form role="form" action="{$base_url}/Login/procesar" method="post" id="loginForm">
                                 <fieldset>
-                                    {*<div class="form-group">
-                                    <input class="form-control rut" name="rut" id="rut" type="text" placeholder="Escriba su RUT"/>
-                                    </div>*}
                                     <div class="form-group">
                                         <input type="text" class="form-control" maxlength="13" 
                                                onkeyup="formateaRut(this), validaRut(this), this.value = this.value.toUpperCase()"
@@ -50,18 +47,6 @@
                                     <p class="text-center">
                                         <a href="{$base_url}/Login/recuperar_password">¿Olvidó su contraseña?</a>
                                     </p>
-                                    {*<table style="width:100%;">
-                                    <tr>
-                                    <td>
-                                        
-                                    </td>
-                                    <td>
-                                    <p class="text-right">
-                                        
-                                    </p>
-                                    </td>
-                                    </tr>
-                                    </table>*}
                                 </div>
                             </form>
                         </div>

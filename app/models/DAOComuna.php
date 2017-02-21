@@ -25,7 +25,7 @@ class DAOComuna extends Model {
     public function getComuna($cod_comuna) {
         $query = "select * from "
                 . $this->_tabla .
-                " where com_id = ?";
+                " where id_comuna = ?";
 
         $consulta = $this->db->getQuery($query, array($cod_comuna));
         if ($consulta->numRows > 0) {

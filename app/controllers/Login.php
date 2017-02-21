@@ -47,9 +47,7 @@ class Login extends Controller {
     public function procesar() {
         $rut = trim($this->_request->getParam("rut"));
         $password = trim($this->_request->getParam("password"));
-        //$recordar = trim($this->_request->getParam("recordar"));
         $usuario = $this->_DAOUsuarios->getByRut($rut);
-        //a mayores iteraciones es mas lento adivinar la contraseña
         $valido = FALSE;
         $primer_login = FALSE;
 
@@ -82,20 +80,20 @@ class Login extends Controller {
             if ($id_comuna) {
                 $result = $this->_DAOComuna->getComuna($id_comuna);
                 if ($result) {
-                    $comuna = $result->com_nombre;
-                    $id_provincia = $result->com_pro_id;
+                    $comuna = $result->gl_nombre_comuna;
+                    $id_provincia = $result->id_provincia;
 
                     /* obtiene código de región a través de provincia */
                     $result2 = $this->_DAOProvincias->getProvincia($id_provincia);
                     if ($result2) {
-                        $provincia = $result2->pro_nombre;
-                        $id_region = $result2->pro_reg_id;
+                        $provincia = $result2->gl_nombre_provincia;
+                        $id_region = $result2->id_region;
 
                         /* obtiene nombre de región */
                         $result3 = $this->_DAORegion->getRegion($id_region);
                         if ($result3) {
-                            $cod = $result3->reg_codigo;
-                            $nom = $result3->reg_nombre;
+                            $cod = $result3->gl_cod_region;
+                            $nom = $result3->gl_nombre_region;
                             $region = $cod . " - " . $nom;
                         }
                     }
@@ -116,7 +114,7 @@ class Login extends Controller {
             $_SESSION['autenticado'] = TRUE;
 
             if ($recordar == 1) {
-                setcookie('datos_usuario_carpeta', $usuario->usr_id, time() + 365 * 24 * 60 * 60);
+                setcookie('datos_usuario_carpeta', $usuario->id_usuario, time() + 365 * 24 * 60 * 60);
             }
             if ($primer_login) {
                 header('Location: ' . BASE_URI . '/Login/actualizar');
@@ -151,27 +149,7 @@ class Login extends Controller {
         $this->_addJavascript(STATIC_FILES . 'js/templates/login/actualizar_password.js');
         $this->_display('login/actualizar.tpl');
     }
-
-    /*
-      /*** 20170127 - Formulario Actualiza Password ** */
-    /*
-      public function actualizar2() {
-      $this->smarty->assign("nombre", $_SESSION['nombre']);
-      $this->smarty->assign("rut", $_SESSION['rut']);
-      $this->smarty->assign("mail", $_SESSION['mail']);
-      $this->smarty->assign("fono", $_SESSION['fono']);
-      $this->smarty->assign("celular", $_SESSION['celular']);
-      $this->smarty->assign("comuna", $_SESSION['comuna']);
-      $this->smarty->assign("provincia", $_SESSION['provincia']);
-      $this->smarty->assign("region", $_SESSION['region']);
-
-      $this->smarty->assign("hidden", "hidden");
-      $this->_addJavascript(STATIC_FILES . 'js/templates/login/actualizar_password.js');
-      $this->_display('login/actualizar2.tpl');
-      }
-
-     */
-
+            /* obtiene nombre de comuna */
     //*** 20170201 - Funcion guarda nueva password ***//
     public function ajax_guardar_nuevo_password() {
         header('Content-type: application/json');
@@ -200,9 +178,7 @@ class Login extends Controller {
         echo $json;
     }
 
-    /**
-     * 
-     */
+    
     public function logoutUsuario() {
         if (isset($_COOKIE['datos_usuario_carpeta'])) {
             unset($_COOKIE['datos_usuario_carpeta']);
@@ -213,52 +189,7 @@ class Login extends Controller {
         //session_destroy();
         header('Location:' . BASE_URI);
     }
-
-    /*
-      public function crear_cuenta_nueva() {
-      header('Content-type: application/json');
-      //echo $this->_request->getParam("nombre");
-      //print_r($_FILES);die();
-
-      $validar = $this->load->lib("Helpers/Validar/Usuario", true, "Validar_Usuario", $this->_request->getParams());
-      $correcto = false;
-      if ($validar->isValid()) {
-      $email = trim($this->_request->getParam("email"));
-      $rut = trim($this->_request->getParam("rut"));
-      $nombres = trim($this->_request->getParam("nombre"));
-      $apellidos = trim($this->_request->getParam("apellido"));
-
-      if (!in_array("", array($apellidos, $email, $rut, $nombres))) {
-      $data = array("usr_usuario" => $email,
-      "usr_usuario_canon" => $email,
-      "usr_rut" => $rut,
-      "usr_nombres" => $nombres,
-      "usr_apellidos" => $apellidos,
-      "usr_email" => $email,
-      "usr_password" => "cambiame",
-      "usr_salt" => "sal",
-      "usr_perfil" => "a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}"
-      );
-      $data["usr_password"] = Seguridad::generar_sha1($data["usr_password"]);
-      $id = $this->_DAOUsuarios->insert($data);
-
-      $correcto = true;
-      } else {
-      $correcto = false;
-      }
-      }
-      $salida = array("error" => $validar->getErrores(),
-      "correcto" => $validar->getCorrecto());
-
-      $json = Zend_Json::encode($salida);
-      echo $json;
-      }
-
-      private function validarArchivo() {
-
-      }
-     */
-
+    
     public function recuperar_password_rut() {
         header('Content-type: application/json');
         $rut = trim($this->_request->getParam("rut"));
@@ -271,18 +202,18 @@ class Login extends Controller {
                 $correcto = true;
                 $cadena = Seguridad::randomPass(12);
                 $cadenahash = Seguridad::generar_sha512($cadena);
-                $this->smarty->assign("nombre", $usuario->usr_nombres . " " . $usuario->usr_apellidos);
+                $this->smarty->assign("nombre", $usuario->gl_nombres . " " . $usuario->gl_apellidos);
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);
                 $ultimo_login = NULL;
                 $this->_DAOUsuarios->update(
-                        array("usr_password" => $cadenahash, "usr_ultimo_login" => $ultimo_login), $usuario->usr_id, "usr_id"
+                        array("gl_password" => $cadenahash, "fc_ultimo_login" => $ultimo_login), $usuario->id_usuario, "id_usuario"
                 );
 
                 $this->load->lib('Email', false);
                 $remitente = "midas@minsal.cl";
                 $nombre_remitente = "Prevención de Femicidios";
-                $destinatario = $usuario->usr_email;
+                $destinatario = $usuario->gl_email;
 
                 $asunto = "PREDEFEM - Recuperar contraseña";
                 $mensaje = $this->smarty->fetch("login/recuperar_password_rut.tpl");
@@ -298,66 +229,5 @@ class Login extends Controller {
         $json = Zend_Json::encode($salida);
         echo $json;
     }
-
-    /*
-      public function validaRutMidas(){
-      $parametros   = $this->request->getParametros();
-      $json         = array();
-
-      print_r($parametros);
-      die();
-
-      if(isset($parametros[0])){
-      $url = trim($parametros[0],'?');
-      $url = explode("=",$url);
-      $rut = trim($url[1]);
-
-      if(is_null($rut) or empty($rut)){
-      die();
-      }
-
-      $usuario = $this->_DAOUsuarios->getByRut($rut);
-
-      if(count($usuario) > 0){
-      $json['rut']       = $usuario->rut;
-      $json['nombres']   = $usuario->nombres;
-      $json['apellidos'] = $usuario->apellidos;
-      $json['email']     = $usuario->email;
-
-      echo json_encode($json);
-      }
-      }else{
-      echo false;
-      }
-      }
-     */
-
-    /*
-      function loginRemoto(){
-      $rut   = $this->_request->getParam('rut');
-      $json         = array();
-
-      if(isset($rut)){
-
-      $usuario = $this->_DAOUsuarios->getByRut($rut);
-      //print_r($usuario);die;
-      $session 			        = New Zend_Session_Namespace("usuario_carpeta");
-      $session->id 		        = $usuario->id;
-      $session->region 		    = $usuario->id_region;
-      $session->gl_ocultar_tour   = $usuario->gl_ocultar_tour;
-      $session->rut 		        = $usuario->rut;
-      $session->usuario 	        = $usuario->nombres." ".$usuario->apellidos;
-
-      setcookie('datos_usuario_carpeta', $usuario->id, time() + 365 * 24 * 60 * 60);
-      if($usuario->bo_password==1){
-      header('Location: '.BASE_URI.'/Home/dashboard');
-      }else{
-      header('Location: '.BASE_URI.'/Login/actualizar');
-      }
-      }else{
-      $this->smarty->assign("hidden","");
-      $this->smarty->display('login/login.tpl');
-      }
-      }
-     */
+    
 }

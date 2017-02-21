@@ -132,19 +132,16 @@ class DAORegistro extends Model{
     
     public function getRegistro1($rut_registro){
 
-        $query	= "	SELECT 
-						reg_id,
-						reg_nombres,
-						reg_apellidos,
-						date_format(reg_fec_nac,'%d-%m-%Y') as reg_fec_nac,
-						reg_prevision,
-						reg_convenio,
-						reg_direccion,
-						reg_fono,
-						reg_email,
-						reg_celular
-					FROM tab_registro 
-					WHERE reg_rut = ?";
+        $query	= "SELECT "
+                . "reg_id,reg_nombres,"
+                . "reg_apellidos,"
+                . "date_format(reg_fec_nac,'%d-%m-%Y') as reg_fec_nac,"
+                . "reg_prevision,"
+                . "reg_convenio,"
+                . "reg_direccion,reg_fono, "
+                . "reg_email,"
+                . "reg_celular"
+                . "FROM tab_registro WHERE reg_rut = ?";
 
 		$param		= array($rut_registro);
         $consulta	= $this->db->getQuery($query,$param);

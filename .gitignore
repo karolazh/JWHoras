@@ -5,8 +5,7 @@
 */cache/*
 !*/cache/index.html
 !*/cache/.htaccess
-/nbproject/private/
+/nbproject/*
 /sys/Config.php
 /app/views/templates_c/
 /tmp/logs/
-/nbproject/
