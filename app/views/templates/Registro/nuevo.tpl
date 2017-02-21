@@ -1,5 +1,6 @@
-<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="{$base_url}/template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<link href="{$base_url}/template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+
 
 <section class="content-header">
     <h1><i class="fa fa-plus"></i>Nuevo</h1>
@@ -169,7 +170,17 @@
 
             </div>
 			<div class="col-sm-6">
-				Mapa
+				<div id="map" data-editable="1" style="width:100%;height:300px;"></div>
+                <div class="form-group">    
+                    <label for="email" class="control-label required col-sm-3">Latitud</label>
+                    <div class="col-sm-3">
+                        <input type="text" name="gl_latitud" id="gl_latitud" value="" placeholder="latitud" class="form-control"/>
+                    </div>
+                    <label for="email" class="control-label required col-sm-1">Longitud</label>
+                    <div class="col-sm-3">
+                        <input type="text" name="gl_longitud"  id="gl_longitud" value="" placeholder="Longitud" class="form-control"/>
+                    </div>					
+                </div>				
             </div>
 			
                 <div class="form-group clearfix col-md-12 text-right">
