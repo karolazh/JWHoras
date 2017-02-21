@@ -75,6 +75,7 @@ class Login extends Controller {
 
 				$_SESSION['id']				= $usuario->id_usuario;
 				$_SESSION['perfil']			= $usuario->id_perfil;
+				$_SESSION['gl_grupo_tipo']	= $usuario->gl_grupo_tipo;
 				$_SESSION['id_institucion']	= $usuario->id_institucion;
 				$_SESSION['nombre']			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
 				$_SESSION['rut']			= $usuario->gl_rut;

@@ -118,20 +118,28 @@ class Registro extends Controller {
 
     public function GuardarRegistro() {
         header('Content-type: application/json');
-        $parametros = $this->_request->getParams();
-        $resultado = $this->_DAORegistro->insertarRegistro($parametros);
-        $correcto = false;
-        $error = false;
+        $parametros		= $this->_request->getParams();
+        $correcto		= false;
+        $error			= false;
+		$gl_grupo_tipo	= 'Control';
+
+		if($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1){
+			$gl_grupo_tipo	= 'Seguimiento';
+		}
+		$parametros['gl_grupo_tipo']	= $gl_grupo_tipo;
+		
+        $resultado		= $this->_DAORegistro->insertarRegistro($parametros);
         if ($resultado){
-            $correcto = true;
+            $correcto	= true;
         }else{
-            $error = true;
+            $error		= true;
         }
-        
-        $salida = array("error" => $error,
+
+        $salida	= array("error" => $error,
             "correcto" => $correcto);
         $this->smarty->assign("hidden", "");
-        $json = Zend_Json::encode($salida);
+        $json	= Zend_Json::encode($salida);
+		
         echo $json;
     }
     
@@ -182,6 +190,7 @@ class Registro extends Controller {
         $this->smarty->display('Registro/ver.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/ver.js");
+
     }
 
     public function cargarComunasPorRegion() {
