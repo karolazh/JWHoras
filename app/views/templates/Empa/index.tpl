@@ -65,17 +65,17 @@
                         <td class="text-center" style="width:100px;">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn btn-danger btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/verEmpa/{$item->emp_id}'" 
+                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_id}'" 
                                         data-toggle="tooltip" title="Ver DAU">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;DAU
                                 </button>&nbsp;
                                 <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/verEmpa/{$item->emp_dau_id}'" 
+                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_dau_id}'" 
                                         data-toggle="tooltip" title="Ver EMPA">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;EMPA
                                 </button>&nbsp;
                                 <button type="button" class="btn btn-sm btn-info btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/verEmpa/{$item->emp_pac_id}'" 
+                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_pac_id}'" 
                                         data-toggle="tooltip" title="Ver Paciente">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;Paciente
                                 </button>
@@ -95,17 +95,17 @@
                         <td class="text-center" style="width:100px;">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn btn-danger btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/verEmpa/{$item->emp_id}'" 
+                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_id}'" 
                                         data-toggle="tooltip" title="Ver DAU">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;DAU
                                 </button>&nbsp;
                                 <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/verEmpa/{$item->emp_dau_id}'" 
+                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_dau_id}'" 
                                         data-toggle="tooltip" title="Ver EMPA">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;EMPA
                                 </button>&nbsp;
                                 <button type="button" class="btn btn-sm btn-info btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/verEmpa/{$item->emp_pac_id}'" 
+                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_pac_id}'" 
                                         data-toggle="tooltip" title="Ver Paciente">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;Paciente
                                 </button>
@@ -125,17 +125,17 @@
                         <td class="text-center" style="width:100px;">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn btn-danger btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/verEmpa/{$item->emp_id}'" 
+                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_id}'" 
                                         data-toggle="tooltip" title="Ver DAU">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;DAU
                                 </button>&nbsp;
                                 <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/verEmpa/{$item->emp_dau_id}'" 
+                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_dau_id}'" 
                                         data-toggle="tooltip" title="Ver EMPA">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;EMPA
                                 </button>&nbsp;
                                 <button type="button" class="btn btn-sm btn-info btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/verEmpa/{$item->emp_pac_id}'" 
+                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_pac_id}'" 
                                         data-toggle="tooltip" title="Ver Paciente">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;Paciente
                                 </button>
