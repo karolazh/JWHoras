@@ -1,186 +1,260 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
-<section class="content-header">
-    <h1><i class="fa fa-book"></i> Detalle Registro</h1>
-</section>
-
 <form id="form">
-
     <section class="content">
-        <div class="box box-primary">
-            <div class="box-body">
-                <div class="box-header">
-                    <h3 class="box-title">Datos del Paciente</h3>
-                </div>
-                <div class="form-group">
-                    {if $extranjero }
-                        <div class="form-group col-md-12">
-                            <div class="form-group col-md-3">
-                                <label class="control-label required">Pasaporte Paciente : </label>&nbsp;&nbsp;{$extranjero}<br>
-                            </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h5 class="box-title">Datos de Seguimiento</h5>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="clearfix col-md-6">
+                        <div class="col-md-4">
+                            <label class="control-label required">Registrado por : </label>
                         </div>
-                        <div class="form-group col-md-12">
-                            <div class="form-group clearfix col-md-6">
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="">Descargar documento identificación extranjero</a>
+                        <div class="col-md-8">
+                            <input type="text"  value="{$nombre_registrador}" class="form-control" readonly>
+                        </div>
+
+                    </div>
+                    <div class="clearfix col-md-6">
+                        <div class="col-md-4">
+                            <label class="control-label required">Estado : </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" value="{$estado_caso}" class="form-control"  readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="clearfix col-md-6">
+                        <div class="col-md-4">
+                            <label class="control-label required">Institución : </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text"value="{$institucion}" class="form-control"  readonly>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="clearfix col-md-3">
+                        <div class="checkbox">
+                            <label>
+                                &nbsp;&nbsp;&nbsp;<input type="checkbox" id="chkReconoce" {if $reconoce}checked="checked"{/if} disabled="disabled">
+                                <strong>Reconoce maltrato</strong>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="clearfix col-md-3">
+                        <div class="checkbox">
+                            <label>
+                                &nbsp;&nbsp;&nbsp;<input type="checkbox" id="chkAcepta" {if $acepta}checked="checked"{/if} disabled="disabled">
+                                <strong>Acepta Programa</strong>
+                                    
+                                
+                            </label>
+                        </div>
+                    </div>
+                             <div class="clearfix col-md-3">
+                            {if $ruta_adjunto != ""}
+                            <a class="btn btn-sm btn-primary" id="btnDescarga" href = '{$smarty.const.DIR_BASE}{$ruta_adjunto}' target="_blank"><i class="fa fa-download"></i>Descargar Consentimiento</a>
+                             {/if}
+                            </div>
+                             <div class="clearfix col-md-3">
+                                 
+                             </div>
+                </div>
+                <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
+                    <thead>
+                        <tr role="row">
+                            <th align="center" width="35%">Motivo Consulta</th>
+                            <th align="center" width="35%">Registrador</th>
+                            <th align="center" width="30%">Fecha Ingreso</th>
+                            <th align="center" width="0%" class="hidden">Fecha Registro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $arrMotivosConsulta as $item}
+                            <tr>
+                                <td nowrap align="center"> {$item->gl_motivo_consulta} </td>
+                                <td nowrap align="center">{$item->gl_nombres}&nbsp;{$item->gl_apellidos}</td>
+                                <td nowrap align="center">{$item->fc_ingreso}&nbsp;{$item->gl_hora_ingreso}</td>
+                                <td nowrap align="center" class="hidden">{$item->fc_crea}</td> 
+                            </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+            </div>
+        </div>  
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h5 class="box-title">Datos del Paciente</h5>
+            </div>
+            <div class="panel-body">
+                    {if $extranjero }
+                        <div class="form-group">
+                            <div class="clearfix col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label required">Pasaporte Paciente :</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text"  value="{$extranjero}" class="form-control" readonly>
+                                </div>
+
+                            </div>
+                            <div class="clearfix col-md-6">
+                                <div class="col-md-6">
+                                    <a href="">Descargar documento identificación extranjero</a>
+                                </div>
                             </div>
                         </div>
                     {else}
-                        <div class="form-group col-md-12">
-                            <div class="form-group col-md-3">
-                                <label class="control-label required">Rut Paciente : </label>&nbsp;&nbsp;{$rut}<br>
+                        <div class="form-group">
+                            <div class="clearfix col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label required">Rut Paciente : </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text"  value="{$rut}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="clearfix col-md-6">
+                                <div class="col-md-4">
+                                    <label class="control-label required">Previsión : </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text"  value="{$prevision}" class="form-control" readonly>
+                                </div>
                             </div>
                         </div>
                     {/if}
-                    <div class="form-group col-md-12">
-                        <div class="form-group clearfix col-md-6">
-                            <label class="control-label required">Nombres : </label>&nbsp;&nbsp;{$nombres}<br>
-                        </div>
-
-                        <div class="form-group clearfix col-md-6">
-                            <label class="control-label required">Apellidos : </label>&nbsp;&nbsp;{$apellidos}<br>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <div class="form-group clearfix col-md-6">
-                            <label class="control-label required">Fecha Nacimiento : </label>&nbsp;&nbsp;{$fecha_nacimiento}<br>
-                        </div>
-
-                        <div class="form-group clearfix col-md-3">
-                            <label class="control-label required">Edad : </label>&nbsp;&nbsp;{$edad}<br>
-                        </div>
-
-                    </div>
-                    <div class="form-group col-md-12">
-                        <div class="form-group clearfix col-md-6">
-                            <label class="control-label required">Previsión : </label>&nbsp;&nbsp;{$prevision}<br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>    
-    </section>
-
-    <section class="content">
-        <div class="box box-primary">
-            <div class="box-body">
-                <div class="box-header">
-                    <h3 class="box-title">Datos de Contacto</h3>
-                </div>
-
-                <div class="form-group">
-                    <div class="form-group col-md-12">
-                        <div class="form-group clearfix col-md-12">
-                            <label class="control-label required">Direcci&oacute;n : </label>&nbsp;&nbsp;{$direccion}<br>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <div class="form-group clearfix col-md-6">
-                            <label class="control-label required">Regi&oacute;n : </label>&nbsp;&nbsp;{$region}<br>
-
-                        </div>
-
-                        <div class="form-group clearfix col-md-6">
-                            <label class="control-label required">Comuna : </label>&nbsp;&nbsp;{$comuna}<br>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <div class="form-group clearfix col-md-6">
-                            <label class="control-label required">Fono : </label>&nbsp;&nbsp;{$fono}<br>
-                        </div>
-
-                        <div class="form-group clearfix col-md-6">
-                            <label class="control-label required">Celular : </label>&nbsp;&nbsp;{$celular}<br>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <div class="form-group clearfix col-md-6">
-                            <label class="control-label required">E-mail : </label>&nbsp;&nbsp;{$email}<br>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div id="map" data-editable="1" style="width:100%;height:300px;"></div>
-                        <div class="form-group">    
-                            <label for="email" class="control-label required col-sm-3">Latitud</label>
-                            <div class="col-sm-3">
-                                <input type="text" name="gl_latitud" id="gl_latitud" value="{$latitud}" placeholder="latitud" class="form-control"/>
+                    <div class="form-group">
+                        <div class="clearfix col-md-6">
+                            <div class="col-md-4">
+                                <label class="control-label required">Nombres : </label>
                             </div>
-                            <label for="email" class="control-label required col-sm-1">Longitud</label>
-                            <div class="col-sm-3">
-                                <input type="text" name="gl_longitud"  id="gl_longitud" value="{$longitud}" placeholder="Longitud" class="form-control"/>
-                            </div>					
-                        </div>				
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-        </div>    
-    </section>
-
-    <section class="content">
-        <div class="box box-primary">
-            <div class="box-body">
-                <div class="box-header">
-                    <h3 class="box-title">Datos de Seguimiento</h3>
-                </div>
-
-                <div class="form-group">              
-                    <div class="form-group col-md-12">
-                        <div class="form-group clearfix col-md-12">
-                            <label class="control-label required">Registrado por : </label>&nbsp;&nbsp;{$nombre_registrador} <br>
-
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <div class="form-group clearfix col-md-6">
-                            <label class="control-label required">Estado : </label>&nbsp;&nbsp;{$estado_caso}<br>
-                        </div>
-                        <div class="form-group clearfix col-md-6">
-                            <label class="control-label required">Institución : </label>&nbsp;&nbsp;{$institucion}<br>
-                        </div>
-
-                    </div>
-
-                    <div class="form-group col-md-12">
-
-                        <div class="form-group clearfix col-md-6">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" id="chkReconoce" {if $reconoce}checked="checked"{/if} disabled="disabled">
-                                    <strong>Reconoce</strong>
-                                </label>
+                            <div class="col-md-8">
+                                <input type="text"  value="{$nombres}" class="form-control" readonly>
                             </div>
                         </div>
-                        <div class="form-group clearfix col-md-6">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" id="chkAcepta" {if $acepta}checked="checked"{/if} disabled="disabled">
-                                    <strong>Acepta Programa</strong>
-                                    <a href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Descargar consentimiento</a>
-                                </label>
+                        <div class="clearfix col-md-6">
+                            <div class="col-md-4">
+                                <label class="control-label required">Apellidos : </label>
                             </div>
+                            <div class="col-md-8">
+                                <input type="text"  value="{$apellidos}" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="clearfix col-md-6">
+                            <div class="col-md-4">
+                                <label class="control-label required">Fecha Nacimiento : </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text"  value="{$fecha_nacimiento}" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="clearfix col-md-6">
+                            <div class="col-md-4">
+                                <label class="control-label required">Edad : </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text"  value="{$edad}" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+            </div>    
+            <div class="panel-footer">
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h5 class="box-title">Datos de Contacto</h5>
+                </div>
+                <div class="box-body">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label required">Direcci&oacute;n : </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text"  value="{$direccion}" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label required">Regi&oacute;n : </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text"  value="{$region}" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label required">Comuna : </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text"  value="{$comuna}" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label required">Fono : </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text"  value="{$fono}" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label required">Celular : </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text"  value="{$celular}" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label required">E-mail : </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text"  value="{$email}" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <div class="col-sm-6 col-md-12">
+                            <div id="map" data-editable="1" style="width:100%;height:300px;"></div>
+                            <div class="form-group">    
+                                <div class="col-sm-3">
+                                    <input type="text" name="gl_latitud" id="gl_latitud" value="{$latitud}" placeholder="latitud" class="form-control hidden"/>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="text" name="gl_longitud"  id="gl_longitud" value="{$longitud}" placeholder="Longitud" class="form-control hidden"/>
+                                </div>					
+                            </div>				
                         </div>
 
                     </div>
 
-                    <div class="col-md-12 text-right">
-                        <button type="button" id="aceptar" onclick="location.href = '{$base_url}/Registro/index'"
-                                class="btn btn-success btn-sm">
-                            <i class="fa fa-check"></i>&nbsp;&nbsp;Aceptar
-                        </button>
-                        <br/><br/>
-                    </div>
-                </div>
 
+
+
+
+                </div>
+            <div class="panel-footer">
+            </div>
             </div>
         </div>    
+
+
     </section>
 
 </form>

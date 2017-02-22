@@ -1,4 +1,10 @@
 /* global BASE_URI */
+$(document).ready(function() {
+    $("#chkReconoce").on('change', function(e) {
+        alert($('#chkReconoce').val());
+    });
+});
+
 
     $("#guardar").on('click', function(e) {
         var button_process	= buttonStartProcess($(this), e);

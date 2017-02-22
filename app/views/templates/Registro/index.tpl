@@ -36,7 +36,7 @@
                             <td class="text-center" style="width:100px;">
                                 <div class="btn-group">
                                     <button href='javascript:void(0)'
-                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/ver/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
+                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/ver/{$item->id_registro}', 'Detalle Registro', 85);" 
                                             data-toggle="tooltip" 
                                             class="btn btn-sm btn-success btn-flat"
                                             title="Ver Registro">
