@@ -1,39 +1,37 @@
 <?php
 
-class DAOMotivoConsulta extends Model {
+class DAOMotivoConsulta extends Model{
 
-    protected $_tabla = "pre_motivo_consulta";
-    protected $_primaria = "id_motivo_consulta";
-    protected $_transaccional = false;
+    protected $_tabla			= "pre_motivo_consulta";
+    protected $_primaria		= "id_motivo_consulta";
+    protected $_transaccional	= false;
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
-    public function getListaMotivoConsulta() {
-        $query = "	SELECT * FROM pre_motivo_consulta";
+    public function getListaMotivoConsulta(){
+        $query		= "	SELECT * FROM pre_motivo_consulta";
+        $resultado	= $this->db->getQuery($query);
 
-        $resultado = $this->db->getQuery($query);
-
-        if ($resultado->numRows > 0) {
+        if($resultado->numRows>0){
             return $resultado->rows;
-        } else {
+        }else{
             return NULL;
         }
     }
 
-    public function getMotivoConsulta($id_motivo_consulta) {
-        $query = "SELECT " .
-                "*" .
-                "FROM pre_motivo_consulta " .
-                "WHERE id_motivo_consulta = ?";
+    public function getMotivoConsulta($id_motivo_consulta){
+        $query	= "	SELECT * FROM pre_motivo_consulta
+					WHERE id_motivo_consulta = ?";
 
-        $param = array($id_motivo_consulta);
-        $resultado = $this->db->getQuery($query, $param);
-
-        if ($resultado->numRows > 0) {
+		$param		= array($id_motivo_consulta);
+        $resultado	= $this->db->getQuery($query,$param);
+		
+        if($resultado->numRows > 0){
             return $resultado->rows->row_0;
-        } else {
+        }else{
             return null;
         }
     }
@@ -81,11 +79,11 @@ class DAOMotivoConsulta extends Model {
                                             now(),
                                             '" . $_SESSION['id'] . "')";
 
-        if ($this->db->execQuery($query)) {
+		if ($this->db->execQuery($query)) {
             return true;
-        } else {
+		}else{
             return false;
-        }
+		}
     }
 
 }
