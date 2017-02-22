@@ -42,22 +42,32 @@ class Registro extends Controller {
     protected $_DAOUsuarios;
     protected $_DAOEstadoCaso;
     protected $_DAOInstitucion;
+
+    protected $_DAOEventosTipo;
+    protected $_DAOAdjuntos;
+    protected $_DAOAdjuntosTipo;
+    protected $_DAOEmpa;
+    protected $_DAOExamenRegistro;
     protected $_DAOAdjuntos;
 
-    //funcion construct
     function __construct() {
         parent::__construct();
         $this->load->lib('Fechas', false);
-        $this->_DAORegion			= $this->load->model("DAORegion");
-        $this->_DAOComuna			= $this->load->model("DAOComuna");
-        $this->_DAORegistro			= $this->load->model("DAORegistro");
-        $this->_DAOCasoEgreso		= $this->load->model("DAOCasoEgreso");
-        $this->_DAOEstadoCaso		= $this->load->model("DAOEstadoCaso");
-        $this->_DAOPrevision		= $this->load->model("DAOPrevision");
-        $this->_DAOMotivoConsulta	= $this->load->model("DAOMotivoConsulta");
-        $this->_DAOUsuarios			= $this->load->model("DAOUsuarios");
-        $this->_DAOInstitucion		= $this->load->model("DAOInstitucion");
+        $this->_DAORegion = $this->load->model("DAORegion");
+        $this->_DAOComuna = $this->load->model("DAOComuna");
+        $this->_DAORegistro = $this->load->model("DAORegistro");
+        $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
+        $this->_DAOEstadoCaso = $this->load->model("DAOEstadoCaso");
+        $this->_DAOPrevision = $this->load->model("DAOPrevision");
+        $this->_DAOMotivoConsulta = $this->load->model("DAOMotivoConsulta");
+        $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
+        
+        $this->_DAOInstitucion = $this->load->model("DAOInstitucion");
+        $this->_DAOEventosTipo = $this->load->model("DAOEventosTipo");
         $this->_DAOAdjuntos = $this->load->model("DAOAdjuntos");
+        $this->_DAOAdjuntosTipo = $this->load->model("DAOAdjuntosTipo");
+        $this->_DAOEmpa = $this->load->model("DAOEmpa");
+        $this->_DAOExamenRegistro = $this->load->model("DAOExamenRegistro");
     }
 
     /*
@@ -87,9 +97,88 @@ class Registro extends Controller {
     public function detalleRegistro() {
 
         $parametros = $this->request->getParametros();
-        $detReg = $this->_DAORegistro->getRegistroByRut($parametros[0]);
+        $idReg = $parametros[0];
+        $detReg = $this->_DAORegistro->getRegistroxId($idReg);
+        
         if (!is_null($detReg)) {
-            $this->smarty->assign("detReg", $detReg);
+            //$this->smarty->assign("detReg", $detReg);
+            
+            $run = "";
+            $ext = "NO";
+            if (!is_null($detReg->rut))
+            {
+                $run = $detReg->rut;
+            }
+            else {
+                $run = $detReg->run_pass;
+                $ext = "SI";
+            }
+            $this->smarty->assign("run", $run);
+            $this->smarty->assign("ext", $ext);
+            $this->smarty->assign("nombres", $detReg->nombres);
+            $this->smarty->assign("apellidos", $detReg->apellidos);
+            
+            $this->smarty->assign("fecha_nac", $detReg->fc_nacimiento);
+            $this->smarty->assign("genero", $detReg->genero);
+            $this->smarty->assign("prevision", $detReg->prevision);
+            
+            $this->smarty->assign("direccion", $detReg->direccion);
+            $this->smarty->assign("fono", $detReg->fono);
+            $this->smarty->assign("celular", $detReg->celular);
+            
+            $this->smarty->assign("region", $detReg->region);
+            $this->smarty->assign("provincia", $detReg->provincia);
+            $this->smarty->assign("comuna", $detReg->comuna);
+            
+            $this->smarty->assign("email", $detReg->email);
+            $this->smarty->assign("estado", $detReg->estado);
+            $this->smarty->assign("grupo", $detReg->grupo);
+            
+            $reconoce = "NO";
+            if (!is_null($detReg->reconoce))
+            {
+                if ($detReg->reconoce)
+                {
+                    $reconoce = "SI";
+                }                
+            }
+            $acepta = "NO";
+            if (!is_null($detReg->acepta))
+            {
+                if ($detReg->acepta)
+                {
+                    $acepta = "SI";
+                }                
+            }
+            $this->smarty->assign("reconoce", $reconoce);
+            $this->smarty->assign("acepta", $acepta);
+            $this->smarty->assign("fecha_reg", $detReg->fc_crea);
+            
+            //Tipos de Eventos
+            $arrTipoEvento = $this->_DAOEventosTipo->getListaEventosTipo();
+            $this->smarty->assign('arrTipoEvento', $arrTipoEvento);
+            
+            //Grilla Bitácora
+            $arrHistorial = $this->_DAORegistro->getEventosRegistro($idReg);
+            $this->smarty->assign('arrHistorial', $arrHistorial);
+            
+            //Tipos de Adjuntos
+            $arrTipoDocumento = $this->_DAOAdjuntosTipo->getListaAdjuntosTipo();
+            $this->smarty->assign('arrTipoDocumento', $arrTipoDocumento);
+            
+            //Grilla Adjuntos
+            $arrAdjuntos = $this->_DAOAdjuntos->getListaAdjuntosRegistro($idReg);
+            $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
+            
+            //Grilla Empa
+            $arrEmpa = $this->_DAOEmpa->getEmpaGrilla($idReg);
+            $this->smarty->assign('arrEmpa', $arrEmpa);
+            
+            //Grilla Exámenes x Registro
+            $arrExamenes = $this->_DAOExamenRegistro->getListaExamenRegistroxId($idReg);
+            $this->smarty->assign('arrExamenes', $arrExamenes);
+            
+            //
             $this->smarty->display('avanzados/detalle.tpl');
         } else {
             throw new Exception("El historial que está buscando no existe");
