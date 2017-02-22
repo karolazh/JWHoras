@@ -42,6 +42,7 @@ class Registro extends Controller {
     protected $_DAOUsuarios;
     protected $_DAOEstadoCaso;
     protected $_DAOInstitucion;
+    protected $_DAOAdjuntos;
 
     //funcion construct
     function __construct() {
@@ -56,6 +57,7 @@ class Registro extends Controller {
         $this->_DAOMotivoConsulta = $this->load->model("DAOMotivoConsulta");
         $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
         $this->_DAOInstitucion = $this->load->model("DAOInstitucion");
+        $this->_DAOAdjuntos = $this->load->model("DAOAdjuntos");
     }
 
     /*
@@ -148,7 +150,6 @@ class Registro extends Controller {
     }
 
     public function ver() {
-        Acceso::redireccionUnlogged($this->smarty);
         $parametros = $this->request->getParametros();
         $id_registro = $parametros[0];
         $this->smarty->assign("id_registro", $id_registro);
@@ -170,6 +171,12 @@ class Registro extends Controller {
             $longitud_registro = $obj_registro->gl_longitud;
             $bo_reconoce_violencia_registro = $obj_registro->bo_reconoce;
             $bo_acepta_programa_registro = $obj_registro->bo_acepta_programa;
+            $obj_adjunto = $this->_DAOAdjuntos->getAdjuntoByRegistro($obj_registro->id_registro);
+            if (!is_null($obj_adjunto)){
+                $ruta_adjunto = $obj_adjunto->gl_path;
+            } else {
+                $ruta_adjunto = "";
+            }
             $obj_prevision = $this->_DAOPrevision->getPrevision($obj_registro->id_prevision);
             if (!is_null($obj_prevision)) {
                 $nombre_prevision = $obj_prevision->gl_nombre_prevision;
@@ -204,6 +211,7 @@ class Registro extends Controller {
             } else {
                 $institucion = "N/D";
             }
+            
             $arrMotivosConsulta = $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($obj_registro->id_registro);
         } else {
             $id_registro = "N/D";
@@ -228,6 +236,7 @@ class Registro extends Controller {
             $nombre_region = "N/D";
             $nombre_registrador = "N/D";
             $institucion = "N/D";
+            $ruta_adjunto = "";
         }
         $this->smarty->assign('id_registro', $id_registro);
         $this->smarty->assign('rut', $rut_registro);
@@ -253,6 +262,7 @@ class Registro extends Controller {
         $this->smarty->assign('estado_caso', $nombre_estado_caso);
         $this->smarty->assign('institucion', $institucion);
         $this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
+        $this->smarty->assign('ruta_adjunto', $ruta_adjunto);
         $this->smarty->display('Registro/ver.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/ver.js");

@@ -41,7 +41,7 @@ class DAOMotivoConsulta extends Model {
     public function getListaMotivoConsultaByRegistro($id_registro) {
         $query = "SELECT 
                         mot.id_motivo_consulta, 
-                        mot.fc_ingreso, 
+                        date_format(mot.fc_ingreso, '%d-%m-%Y') as fc_ingreso,
                         mot.gl_hora_ingreso, 
                         mot.gl_motivo_consulta,
                         mot.fc_crea, 
