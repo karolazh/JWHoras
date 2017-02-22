@@ -63,7 +63,7 @@ class Empa extends Controller{
         $this->_display('Empa/index.tpl');
     }
     
-    public function nuevoEmpa(){
+    public function nuevo(){
         Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
@@ -80,7 +80,7 @@ class Empa extends Controller{
         $this->smarty->assign("id_pac", $id_pac);
         
         //llamado al template
-        $this->_display('Empa/nuevo_empa.tpl');
+        $this->_display('Empa/nuevo.tpl');
     }
     
     public function nuevoEmpa2(){
@@ -94,7 +94,7 @@ class Empa extends Controller{
         $this->_display('Empa/nuevo_empa2.tpl');
     }
     
-    public function verEmpa(){
+    public function ver(){
         Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
@@ -102,7 +102,7 @@ class Empa extends Controller{
         $this->smarty->assign("usuario", $sesion->usuario);
         
         //llamado al template
-        $this->_display('Empa/ver_empa.tpl');
+        $this->_display('Empa/ver.tpl');
     }
     
     //*** REGIONES ***//

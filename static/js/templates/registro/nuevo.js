@@ -1,4 +1,10 @@
 /* global BASE_URI */
+$(document).ready(function() {
+    $("#chkReconoce").on('change', function(e) {
+        alert($('#chkReconoce').val());
+    });
+});
+
 
 $(document).ready(function() {
     $("#guardar").on('click', function(e) {
