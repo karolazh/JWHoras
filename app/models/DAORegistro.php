@@ -92,7 +92,9 @@ class DAORegistro extends Model{
             return null;
         }
     }
-            //funcion repetida
+	
+	//funcion repetida
+	/*
     public function getRegistroxRut($rut_registro){
         $query	= "	SELECT 
 						pre_registro.*,
@@ -109,13 +111,30 @@ class DAORegistro extends Model{
             return null;
         }
     }
-
+	*/
     
+	public function countRegistroxRegion($id_region){
+        $query	= "	SELECT 
+						*
+					FROM pre_registro 
+					WHERE id_region = ?";
+
+		$param		= array($id_region);
+        $consulta	= $this->db->getQuery($query,$param);
+
+        if($consulta->numRows > 0){
+            return $consulta->numRows;
+        } else {
+            return 0;
+        }
+    }
+
     public function insertarRegistro($parametros){
 
         $query	= "	INSERT INTO pre_registro
 						(
 						id_institucion,
+						id_region,
 						id_comuna,
 						id_prevision,
 						id_adjunto,
@@ -130,6 +149,7 @@ class DAORegistro extends Model{
 						gl_fono,
 						gl_celular,
 						gl_email,
+						id_centro_salud,
 						gl_latitud,
 						gl_longitud,
 						bo_reconoce,
@@ -139,7 +159,8 @@ class DAORegistro extends Model{
 						)
 					VALUES
 						(
-						".$parametros['centrosalud'].",
+						".$_SESSION['id_institucion'].",
+						".$parametros['region'].",
 						".$parametros['comuna'].",
 						".$parametros['prevision'].",
 						0,
@@ -154,18 +175,18 @@ class DAORegistro extends Model{
 						'".$parametros['fono']."',
 						'".$parametros['celular']."',
 						'".$parametros['email']."',
+						'".$parametros['centrosalud']."',
 						'".$parametros['gl_latitud']."',
 						'".$parametros['gl_longitud']."',
-						0,
+						'".$parametros['chkReconoce']."',
 						".$parametros['chkAcepta'].",
 						'".date('Y-m-d H:i:s')."',
 						".$_SESSION['id']."
 						)
-
                     ";
                   
         if ($this->db->execQuery($query)) {
-            return true;
+            return $this->db->getLastId();
         } else {
             return false;
         }

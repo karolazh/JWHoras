@@ -47,15 +47,15 @@ class Registro extends Controller {
     function __construct() {
         parent::__construct();
         $this->load->lib('Fechas', false);
-        $this->_DAORegion = $this->load->model("DAORegion");
-        $this->_DAOComuna = $this->load->model("DAOComuna");
-        $this->_DAORegistro = $this->load->model("DAORegistro");
-        $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
-        $this->_DAOEstadoCaso = $this->load->model("DAOEstadoCaso");
-        $this->_DAOPrevision = $this->load->model("DAOPrevision");
-        $this->_DAOMotivoConsulta = $this->load->model("DAOMotivoConsulta");
-        $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
-        $this->_DAOInstitucion = $this->load->model("DAOInstitucion");
+        $this->_DAORegion			= $this->load->model("DAORegion");
+        $this->_DAOComuna			= $this->load->model("DAOComuna");
+        $this->_DAORegistro			= $this->load->model("DAORegistro");
+        $this->_DAOCasoEgreso		= $this->load->model("DAOCasoEgreso");
+        $this->_DAOEstadoCaso		= $this->load->model("DAOEstadoCaso");
+        $this->_DAOPrevision		= $this->load->model("DAOPrevision");
+        $this->_DAOMotivoConsulta	= $this->load->model("DAOMotivoConsulta");
+        $this->_DAOUsuarios			= $this->load->model("DAOUsuarios");
+        $this->_DAOInstitucion		= $this->load->model("DAOInstitucion");
     }
 
     /*
@@ -124,17 +124,17 @@ class Registro extends Controller {
         $correcto		= false;
         $error			= false;
 		$gl_grupo_tipo	= 'Control';
+        $count			= $this->_DAORegistro->countRegistroxRegion($_SESSION['id_region']);
 
-		if($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1){
+		if($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50){
 			$gl_grupo_tipo	= 'Seguimiento';
 		}
 		$parametros['gl_grupo_tipo']	= $gl_grupo_tipo;
-		
-        $resultado		= $this->_DAORegistro->insertarRegistro($parametros);
-        $id_registro = $this->_DAORegistro->getRegistroxRut($parametros['rut']);
-        $resultado2 = $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
-        if ($resultado && $resultado2){
-            $correcto	= true;
+
+        $id_registro	= $this->_DAORegistro->insertarRegistro($parametros);
+        if($id_registro){
+			$resultado2	= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
+			$correcto	= true;
         }else{
             $error		= true;
         }
@@ -143,7 +143,7 @@ class Registro extends Controller {
             "correcto" => $correcto);
         $this->smarty->assign("hidden", "");
         $json	= Zend_Json::encode($salida);
-		
+
         echo $json;
     }
     
@@ -198,16 +198,15 @@ class Registro extends Controller {
     }
 
     public function cargarComunasPorRegion() {
-        $region = $_POST['region'];
+        $region		= $_POST['region'];
+        $daoRegion	= $this->load->model('DAORegion');
+        $comunas	= $daoRegion->obtComunasPorRegion($region)->rows;
 
-        $daoRegion = $this->load->model('DAORegion');
-        $comunas = $daoRegion->obtComunasPorRegion($region)->rows;
-
-        $json = array();
-        $i = 0;
+        $json		= array();
+        $i			= 0;
         foreach ($comunas as $comuna) {
-            $json[$i]['id_comuna'] = $comuna->id_comuna;
-            $json[$i]['nombre_comuna'] = $comuna->gl_nombre_comuna;
+            $json[$i]['id_comuna']		= $comuna->id_comuna;
+            $json[$i]['nombre_comuna']	= $comuna->gl_nombre_comuna;
             $i++;
         }
 
@@ -215,16 +214,15 @@ class Registro extends Controller {
     }
 
     public function cargarCentroSaludporComuna() {
-        $comuna = $_POST['comuna'];
+        $comuna			= $_POST['comuna'];
+        $daoComuna		= $this->load->model('DAOComuna');
+        $centrosalud	= $daoComuna->obtCentroSaludporComuna($comuna)->rows;
 
-        $daoComuna = $this->load->model('DAOComuna');
-        $centrosalud = $daoComuna->obtCentroSaludporComuna($comuna)->rows;
-
-        $json = array();
-        $i = 0;
+        $json			= array();
+        $i				= 0;
         foreach ($centrosalud as $cSalud) {
-            $json[$i]['id_establecimiento'] = $cSalud->id_establecimiento;
-            $json[$i]['nombre_establecimiento'] = $cSalud->nombre_establecimiento;
+            $json[$i]['id_establecimiento']		= $cSalud->id_establecimiento;
+            $json[$i]['nombre_establecimiento']	= $cSalud->nombre_establecimiento;
             $i++;
         }
 
@@ -233,23 +231,23 @@ class Registro extends Controller {
 
     public function cargarRegistro() {
         header('Content-type: application/json');
-        $rut = $_POST['rut'];
-        //Datos de Tabla Registros
-        $daoRegistro = $this->load->model('DAORegistro');
-        $registro = $daoRegistro->getRegistroByRut($rut);
-        //Datos de Tablas Comuna y Region
-        $id_comuna = $registro->id_comuna;
-        $daoComuna = $this->load->model('DAOComuna');
-        $comunaRegion = $daoComuna->getComunaRegion($id_comuna);
-        $json = array();
-        $json[0]['rut'] = $registro->gl_rut;
-        $json[0]['nombres'] = $registro->gl_nombres;
-        $json[0]['apellidos'] = $registro->gl_apellidos;
-        $json[0]['fec_nac'] = $registro->fc_nac;
-        $json[0]['genero'] = $registro->gl_sexo;
-        $json[0]['prevision'] = $registro->id_prevision;
-        $json[0]['region'] = $comunaRegion->id_region;
-        $json[0]['comuna'] = $comunaRegion->id_comuna;
+        $rut			= $_POST['rut'];
+
+        $daoRegistro	= $this->load->model('DAORegistro');
+        $registro		= $daoRegistro->getRegistroByRut($rut);
+        $id_comuna		= $registro->id_comuna;
+        $daoComuna		= $this->load->model('DAOComuna');
+        $comunaRegion	= $daoComuna->getComunaRegion($id_comuna);
+        $json			= array();
+
+        $json[0]['rut']			= $registro->gl_rut;
+        $json[0]['nombres']		= $registro->gl_nombres;
+        $json[0]['apellidos']	= $registro->gl_apellidos;
+        $json[0]['fec_nac']		= $registro->fc_nac;
+        $json[0]['genero']		= $registro->gl_sexo;
+        $json[0]['prevision']	= $registro->id_prevision;
+        $json[0]['region']		= $comunaRegion->id_region;
+        $json[0]['comuna']		= $comunaRegion->id_comuna;
 
         echo json_encode($json);
     }

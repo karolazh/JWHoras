@@ -182,7 +182,13 @@
                                                 <input type="time" name="horaingreso" id="horaingreso" value="" onblur="validarVacio(this,'Por favor Ingrese Fecha y Hora de Ingreso')" placeholder="Fecha y Hora de Ingreso" class="form-control"/>
                                                 <span class="help-block hidden"></span>
                                             </div>
-                                        </div> 
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="chkReconoce" class="control-label required col-sm-3">¿Reconoce Maltrato?</label>
+											<div class="col-sm-1">
+												<input id="chkReconoce" value="1" type="checkbox">
+											</div>
+                                        </div>
                                         <div class="form-group">
                                             <label for="chkAcepta" class="control-label required col-sm-3">¿Consiente Participar?</label>
                                                 <div class="col-sm-1">
@@ -194,12 +200,6 @@
                                                 <div class="col-sm-3">
                                                     <input type="submit" id="descarga" class="BotonDown" value="Descargar Consentimiento">
                                                     <input type="file" value="Subir Firma">
-                                                </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="chkReconoce" class="control-label required col-sm-3">¿Reconoce Maltrato?</label>
-                                                <div class="col-sm-1">
-                                                    <input id="chkReconoce" type="checkbox">
                                                 </div>
                                         </div>
                                     </div>
