@@ -11,7 +11,7 @@
   !Perfil       		:
   !Itinerado    		: NA
   !Uso          		: NA
-  !Autor        		: Carolina Zamora Hormazábal
+  !Autor        		: Carolina Zamora Hormazábal, Orlando Vázquez
   !Creacion     		: 14/02/2017
   !Retornos/Salidas 	: NA
   !OrigenReq        	: NA
