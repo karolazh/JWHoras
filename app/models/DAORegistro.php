@@ -68,33 +68,9 @@ class DAORegistro extends Model{
     }
 	*/
 
-    public function getRegistroByRut($rut_registro) {
 
-        $query	= "	SELECT 
-						id_registro,
-						gl_nombres,
-						gl_apellidos,
-						date_format(fc_nac,'%d-%m-%Y') as fc_nac,
-						id_prevision,
-						gl_direccion,
-						gl_fono,
-						gl_email,
-						gl_celular
-					FROM pre_registro 
-					WHERE gl_rut = ?";
-
-        $param		= array($rut_registro);
-        $consulta	= $this->db->getQuery($query, $param);
-
-        if ($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
-        } else {
-            return null;
-        }
-    }
-            //funcion repetida
     public function getRegistroxRut($rut_registro){
-        $query	= "	SELECT 
+        $query	= "SELECT 
 						pre_registro.*,
 						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento
 					FROM pre_registro 

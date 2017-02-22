@@ -43,7 +43,7 @@
                                         <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver
                                     </button>
                                     <button href='javascript:void(0)' 
-                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/detalleRegistro/{$item->gl_rut}', 'Bitácora paciente RUT : {$item->gl_rut}', 85);" 
+                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$item->gl_rut}', 'Bitácora paciente RUT : {$item->gl_rut}', 85);" 
                                             data-toggle="tooltip" 
                                             title="Bitácora" 
                                             class="btn btn-sm btn-flat btn-primary" 

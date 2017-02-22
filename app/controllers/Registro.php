@@ -84,16 +84,46 @@ class Registro extends Controller {
         $this->_display('Registro/index.tpl');
     }
 
-    public function detalleRegistro() {
-
+    public function bitacora() {
         $parametros = $this->request->getParametros();
-        $detReg = $this->_DAORegistro->getRegistroByRut($parametros[0]);
-        if (!is_null($detReg)) {
-            $this->smarty->assign("detReg", $detReg);
-            $this->smarty->display('avanzados/detalle.tpl');
+        $rut_registro = $parametros[0];
+        $obj_registro = $this->_DAORegistro->getRegistroxRut($rut_registro);
+        if (!is_null($obj_registro)) {
+            $rut_registro = $obj_registro->gl_rut;
+            $bo_extranjero = $obj_registro->bo_extranjero;
+            $run_extranjero = $obj_registro->gl_run_pass;
+            $nombres_registro = $obj_registro->gl_nombres;
+            $apellido_registro = $obj_registro->gl_apellidos;
+            $fecha_nacimiento_registro = $obj_registro->fc_nacimiento;
+            $obj_prevision = $this->_DAOPrevision->getPrevision($obj_registro->id_prevision);
+            $edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
+            if (!is_null($obj_prevision)) {
+                $nombre_prevision = $obj_prevision->gl_nombre_prevision;
+            } else {
+                $nombre_prevision = "N/D";
+            }
+            
         } else {
-            throw new Exception("El historial que está buscando no existe");
+            $rut_registro = "N/D";
+            $bo_extranjero = "N/D";
+            $run_extranjero = "N/D";
+            $nombres_registro = "N/D";
+            $apellido_registro = "N/D";
+            $fecha_nacimiento_registro = "XX/XX/XXXX";
+            $edad = "0";
+            $nombre_prevision = "N/D";
         }
+        $parametros = $this->request->getParametros();
+        $this->smarty->assign('rut', $rut_registro);
+        $this->smarty->assign('extranjero', $bo_extranjero);
+        $this->smarty->assign('run_pass', $run_extranjero);
+        $this->smarty->assign('nombres', $nombres_registro);
+        $this->smarty->assign('apellidos', $apellido_registro);
+        $this->smarty->assign('fecha_nacimiento', $fecha_nacimiento_registro);
+        $this->smarty->assign('prevision', $nombre_prevision);
+        $this->smarty->assign('edad', $edad);
+        $this->smarty->display('Registro/bitacora.tpl');
+
     }
 
     public function nuevo() {
@@ -172,7 +202,7 @@ class Registro extends Controller {
             $bo_reconoce_violencia_registro = $obj_registro->bo_reconoce;
             $bo_acepta_programa_registro = $obj_registro->bo_acepta_programa;
             $obj_adjunto = $this->_DAOAdjuntos->getAdjuntoByRegistro($obj_registro->id_registro);
-            if (!is_null($obj_adjunto)){
+            if (!is_null($obj_adjunto)) {
                 $ruta_adjunto = $obj_adjunto->gl_path;
             } else {
                 $ruta_adjunto = "";
@@ -200,7 +230,7 @@ class Registro extends Controller {
             }
             $edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
             $obj_estado_caso = $this->_DAOEstadoCaso->getEstadoCaso($obj_registro->id_estado_caso);
-            if (!is_null($obj_estado_caso)){
+            if (!is_null($obj_estado_caso)) {
                 $nombre_estado_caso = $obj_estado_caso->gl_nombre_estado_caso;
             } else {
                 $nombre_estado_caso = "N/D";
@@ -211,7 +241,7 @@ class Registro extends Controller {
             } else {
                 $institucion = "N/D";
             }
-            
+
             $arrMotivosConsulta = $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($obj_registro->id_registro);
         } else {
             $id_registro = "N/D";
@@ -262,7 +292,7 @@ class Registro extends Controller {
         $this->smarty->assign('estado_caso', $nombre_estado_caso);
         $this->smarty->assign('institucion', $institucion);
         $this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
-        $this->smarty->assign('ruta_adjunto', $ruta_adjunto);
+        $this->smarty->assign('ruta_consentimiento', $ruta_consentimiento);
         $this->smarty->display('Registro/ver.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/ver.js");
