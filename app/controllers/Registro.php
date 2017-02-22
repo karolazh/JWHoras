@@ -120,81 +120,142 @@ class Registro extends Controller {
 
     public function GuardarRegistro() {
         header('Content-type: application/json');
-        $parametros		= $this->_request->getParams();
-        $correcto		= false;
-        $error			= false;
-		$gl_grupo_tipo	= 'Control';
+        $parametros = $this->_request->getParams();
+        $correcto = false;
+        $error = false;
+        $gl_grupo_tipo = 'Control';
 
-		if($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1){
-			$gl_grupo_tipo	= 'Seguimiento';
-		}
-		$parametros['gl_grupo_tipo']	= $gl_grupo_tipo;
-		
-        $resultado		= $this->_DAORegistro->insertarRegistro($parametros);
+        if ($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1) {
+            $gl_grupo_tipo = 'Seguimiento';
+        }
+        $parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
+
+        $resultado = $this->_DAORegistro->insertarRegistro($parametros);
         $id_registro = $this->_DAORegistro->getRegistroxRut($parametros['rut']);
-        $resultado2 = $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
-        if ($resultado && $resultado2){
-            $correcto	= true;
-        }else{
-            $error		= true;
+        $resultado2 = $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros, $id_registro);
+        if ($resultado && $resultado2) {
+            $correcto = true;
+        } else {
+            $error = true;
         }
 
-        $salida	= array("error" => $error,
+        $salida = array("error" => $error,
             "correcto" => $correcto);
         $this->smarty->assign("hidden", "");
-        $json	= Zend_Json::encode($salida);
-		
+        $json = Zend_Json::encode($salida);
+
         echo $json;
     }
-    
+
     public function ver() {
         Acceso::redireccionUnlogged($this->smarty);
         $parametros = $this->request->getParametros();
         $id_registro = $parametros[0];
         $this->smarty->assign("id_registro", $id_registro);
-        $registro = $this->_DAORegistro->getRegistroById($id_registro);
-        $prevision = $this->_DAOPrevision->getPrevision($registro->id_prevision);
-        $comuna = $this->_DAOComuna->getComuna($registro->id_comuna);
-        $comuna_region = $this->_DAOComuna->getComunaRegion($comuna->id_comuna);
-        $region = $comuna_region->gl_nombre_region;
-        $obj_usuario = $this->_DAOUsuarios->getById($registro->id_usuario_crea);
-        $nombre_registrador = "  ". $obj_usuario->gl_nombres. " " . $obj_usuario->gl_apellidos;
-        $edad = Fechas::calcularEdadInv($registro->fc_nacimiento);
-        $estado_caso = $this->_DAOEstadoCaso->getEstadoCaso($registro->id_estado_caso);
-        $nombre_estado_caso = $estado_caso->gl_nombre_estado_caso;
-        $obj_institucion = $this->_DAOInstitucion->getInstitucion($registro->id_institucion);
-        if(!is_null($obj_institucion)){
-        $institucion = $obj_institucion->gl_nombre;
+        $obj_registro = $this->_DAORegistro->getRegistroById($id_registro);
+        if (!is_null($obj_registro)) {
+            $id_registro = $obj_registro->id_registro;
+            $rut_registro = $obj_registro->gl_rut;
+            $bo_extranjero = $obj_registro->bo_extranjero;
+            $run_extranjero = $obj_registro->gl_run_pass;
+            $nombres_registro = $obj_registro->gl_nombres;
+            $apellido_registro = $obj_registro->gl_apellidos;
+            $fecha_nacimiento_registro = $obj_registro->fc_nacimiento;
+            $sexo_registro = $obj_registro->gl_sexo;
+            $direccion_registro = $obj_registro->gl_direccion;
+            $fono_registro = $obj_registro->gl_fono;
+            $celular_registro = $obj_registro->gl_celular;
+            $email_registro = $obj_registro->gl_email;
+            $latitud_registro = $obj_registro->gl_latitud;
+            $longitud_registro = $obj_registro->gl_longitud;
+            $bo_reconoce_violencia_registro = $obj_registro->bo_reconoce;
+            $bo_acepta_programa_registro = $obj_registro->bo_acepta_programa;
+            $obj_prevision = $this->_DAOPrevision->getPrevision($obj_registro->id_prevision);
+            if (!is_null($obj_prevision)) {
+                $nombre_prevision = $obj_prevision->gl_nombre_prevision;
+            } else {
+                $nombre_prevision = "N/D";
+            }
+            $obj_comuna = $this->_DAOComuna->getComuna($obj_registro->id_comuna);
+            if (!is_null($obj_comuna)) {
+                $obj_comuna_region = $this->_DAOComuna->getComunaRegion($obj_comuna->id_comuna);
+                $nombre_comuna = $obj_comuna->gl_nombre_comuna;
+                $nombre_region = $obj_comuna_region->gl_nombre_region;
+            } else {
+                $nombre_comuna = "N/D";
+                $nombre_region = "N/D";
+            }
+            $obj_usuario = $this->_DAOUsuarios->getById($obj_registro->id_usuario_crea);
+            if (!is_null($obj_usuario)) {
+                $nombre_registrador = "  " . $obj_usuario->gl_nombres . " " . $obj_usuario->gl_apellidos;
+            } else {
+                $nombre_registrador = "N/D";
+            }
+            $edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
+            $obj_estado_caso = $this->_DAOEstadoCaso->getEstadoCaso($obj_registro->id_estado_caso);
+            if (!is_null($obj_estado_caso)){
+                $nombre_estado_caso = $obj_estado_caso->gl_nombre_estado_caso;
+            } else {
+                $nombre_estado_caso = "N/D";
+            }
+            $obj_institucion = $this->_DAOInstitucion->getInstitucion($obj_registro->id_institucion);
+            if (!is_null($obj_institucion)) {
+                $institucion = $obj_institucion->gl_nombre;
+            } else {
+                $institucion = "N/D";
+            }
+            $arrMotivosConsulta = $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($obj_registro->id_registro);
         } else {
-            $institucion = "Sin Institucion";
+            $id_registro = "N/D";
+            $rut_registro = "N/D";
+            $bo_extranjero = "N/D";
+            $run_extranjero = "N/D";
+            $nombres_registro = "N/D";
+            $apellido_registro = "N/D";
+            $fecha_nacimiento_registro = "XX/XX/XXXX";
+            $edad = "0";
+            $sexo_registro = "N/D";
+            $direccion_registro = "N/D";
+            $fono_registro = "N/D";
+            $celular_registro = "N/D";
+            $email_registro = "N/D";
+            $latitud_registro = "N/D";
+            $longitud_registro = "N/D";
+            $bo_reconoce_violencia_registro = false;
+            $bo_acepta_programa_registro = false;
+            $nombre_prevision = "N/D";
+            $nombre_comuna = "N/D";
+            $nombre_region = "N/D";
+            $nombre_registrador = "N/D";
+            $institucion = "N/D";
         }
-        $this->smarty->assign('id_registro', $registro->id_registro);
-        $this->smarty->assign('rut', $registro->gl_rut);
-        $this->smarty->assign('extranjero', $registro->bo_extranjero);
-        $this->smarty->assign('run_pass', $registro->gl_run_pass);
-        $this->smarty->assign('nombres', $registro->gl_nombres);
-        $this->smarty->assign('apellidos', $registro->gl_apellidos);
-        $this->smarty->assign('fecha_nacimiento', $registro->fc_nacimiento);
-        $this->smarty->assign('sexo', $registro->gl_sexo);
-        $this->smarty->assign('direccion', $registro->gl_direccion);
-        $this->smarty->assign('fono', $registro->gl_fono);
-        $this->smarty->assign('celular', $registro->gl_celular);
-        $this->smarty->assign('email', $registro->gl_email);
-        $this->smarty->assign('latitud', $registro->gl_latitud);
-        $this->smarty->assign('longitud', $registro->gl_longitud);
-        $this->smarty->assign('reconoce', $registro->bo_reconoce);
-        $this->smarty->assign('acepta', $registro->bo_acepta_programa);
-        $this->smarty->assign('prevision', $prevision->gl_nombre_prevision);
-        $this->smarty->assign('comuna', $comuna->gl_nombre_comuna);
-        $this->smarty->assign('region', $region);
+        $this->smarty->assign('id_registro', $id_registro);
+        $this->smarty->assign('rut', $rut_registro);
+        $this->smarty->assign('extranjero', $bo_extranjero);
+        $this->smarty->assign('run_pass', $run_extranjero);
+        $this->smarty->assign('nombres', $nombres_registro);
+        $this->smarty->assign('apellidos', $apellido_registro);
+        $this->smarty->assign('fecha_nacimiento', $fecha_nacimiento_registro);
+        $this->smarty->assign('sexo', $sexo_registro);
+        $this->smarty->assign('direccion', $direccion_registro);
+        $this->smarty->assign('fono', $fono_registro);
+        $this->smarty->assign('celular', $celular_registro);
+        $this->smarty->assign('email', $email_registro);
+        $this->smarty->assign('latitud', $latitud_registro);
+        $this->smarty->assign('longitud', $longitud_registro);
+        $this->smarty->assign('reconoce', $bo_reconoce_violencia_registro);
+        $this->smarty->assign('acepta', $bo_acepta_programa_registro);
+        $this->smarty->assign('prevision', $nombre_prevision);
+        $this->smarty->assign('comuna', $nombre_comuna);
+        $this->smarty->assign('region', $nombre_region);
         $this->smarty->assign('edad', $edad);
         $this->smarty->assign('nombre_registrador', $nombre_registrador);
         $this->smarty->assign('estado_caso', $nombre_estado_caso);
         $this->smarty->assign('institucion', $institucion);
+        $this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
         $this->smarty->display('Registro/ver.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/ver.js");
-
     }
 
     public function cargarComunasPorRegion() {
