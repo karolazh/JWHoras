@@ -71,16 +71,13 @@ class DAORegistro extends Model{
     public function getRegistroByRut($rut_registro) {
 
         $query	= "	SELECT 
-						id_registro,
-						gl_nombres,
-						gl_apellidos,
-						date_format(fc_nac,'%d-%m-%Y') as fc_nac,
-						id_prevision,
-						gl_direccion,
-						gl_fono,
-						gl_email,
-						gl_celular
+						pre_registro.*,
+						c.gl_nombre_comuna,
+						e.nombre_establecimiento as gl_centro_salud,
+						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento_vista
 					FROM pre_registro 
+                        LEFT JOIN pre_comunas c ON pre_registro.id_comuna = c.id_comuna
+                        LEFT JOIN pre_establecimientos_salud e ON pre_registro.id_centro_salud = e.id_establecimiento
 					WHERE gl_rut = ?";
 
         $param		= array($rut_registro);

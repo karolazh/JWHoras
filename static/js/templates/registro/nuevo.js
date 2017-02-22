@@ -42,7 +42,7 @@
 				});
 			}
 
-			$.ajax({         
+			$.ajax({
 				dataType: "json",
 				cache	:false,
 				async	: true,
@@ -83,30 +83,66 @@
 		cargarRegistro : function(){
 			var rut = $("#rut").val();
 			if(rut != ""){
-				$("#nombres").val('OK');
 				
-				/*
-				$.post(BASE_URI+'index.php/Registro/cargarRegistro',{rut:rut},function(response){
-					if(response.length > 0){
-											document.getElementById('nombres').value = response[0].nombres;
-											document.getElementById('apellidos').value = response[0].apellidos;
-											document.getElementById('fecnacim').value = response[0].fec_nac;
-											document.getElementById('prevision').value = response[0].prevision;
-											document.getElementById('convenio').value = response[0].convenio;
-											document.getElementById('region').value = response[0].region;
-											Region.cargarComunasPorRegion(response[0].region,'comuna');
-											document.getElementById('comuna').value = response[0].comuna;
-											//Convertir Edad
-											fecha = new Date(response[0].fec_nac);
-											hoy = new Date();
-											ed = parseInt((hoy -fecha)/365/24/60/60/1000);
-											if (ed >= 0)
-												{document.getElementById('edad').value = ed;}
-									}else{
-										xModal.danger("No se encontró Paciente con rut: "+rut);
+				
+				$.ajax({
+					dataType: "json",
+					cache	:false,
+					async	: true,
+					data	: {rut:rut},
+					type	: "post",
+					url		: BASE_URI + "index.php/Registro/cargarRegistro", 
+					error	: function(xhr, textStatus, errorThrown){
+								xModal.danger('Error al Buscar');
+					},
+					success	: function(data){
+								if(data.correcto){
+									xModal.success('Paciente ya Registro.<br>Se procede a cargar la información.');
+									
+									$("#nombres").val(data.gl_nombres);
+									$("#apellidos").val(data.gl_apellidos);
+									$("#fc_nacimiento").val(data.fc_nacimiento);
+									$("#fc_nacimiento").trigger('blur');
+									$("#prevision").val(data.id_prevision);
+									$("#direccion").val(data.gl_direccion);
+									$("#region").val(data.id_region);									
+									$("#gl_latitud").val(data.gl_latitud);
+									$("#gl_longitud").val(data.gl_longitud);
+									$("#gl_longitud").trigger('change');
+
+									$("#fono").val(data.gl_fono);
+									$("#celular").val(data.gl_celular);
+									$("#email").val(data.gl_email);
+									
+									if(data.bo_reconoce == '1'){
+										$("#chkReconoce").prop("checked", true);
 									}
-				},'json');
-				*/
+									if(data.bo_acepta_programa == '1'){
+										$("#chkAcepta").prop("checked", true);
+									}
+									if(data.id_comuna != '0'){
+										var comuna = '<option value="'+data.id_comuna+'">'+data.gl_nombre_comuna+'</option>';
+										$("#comuna").html(comuna);
+									}else{
+										$("#region").trigger('change');
+									}
+
+									if(data.id_centro_salud != '0'){
+										var centro_salud = '<option value="'+data.id_centro_salud+'">'+data.gl_centro_salud+'</option>';
+										$("#centrosalud").html(centro_salud);
+									}else{
+										$("#comuna").trigger('change');
+									}
+
+									$('#form').find('input, textarea, checkbox, select').attr('disabled',true);									
+									$( "#motivoconsulta" ).prop( "disabled", false );
+									$( "#fechaingreso" ).prop( "disabled", false );
+									$( "#horaingreso" ).prop( "disabled", false );
+								} else {
+									xModal.info('Error al Buscar');
+								}
+					}
+				});
 			}else{
 				xModal.info("Debe ingresar un RUT");
 			}

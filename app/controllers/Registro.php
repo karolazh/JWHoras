@@ -232,22 +232,33 @@ class Registro extends Controller {
     public function cargarRegistro() {
         header('Content-type: application/json');
         $rut			= $_POST['rut'];
-
-        $daoRegistro	= $this->load->model('DAORegistro');
-        $registro		= $daoRegistro->getRegistroByRut($rut);
-        $id_comuna		= $registro->id_comuna;
-        $daoComuna		= $this->load->model('DAOComuna');
-        $comunaRegion	= $daoComuna->getComunaRegion($id_comuna);
+        $registro		= $this->_DAORegistro->getRegistroByRut($rut);
         $json			= array();
 
-        $json[0]['rut']			= $registro->gl_rut;
-        $json[0]['nombres']		= $registro->gl_nombres;
-        $json[0]['apellidos']	= $registro->gl_apellidos;
-        $json[0]['fec_nac']		= $registro->fc_nac;
-        $json[0]['genero']		= $registro->gl_sexo;
-        $json[0]['prevision']	= $registro->id_prevision;
-        $json[0]['region']		= $comunaRegion->id_region;
-        $json[0]['comuna']		= $comunaRegion->id_comuna;
+		if($registro){
+			$json['correcto']			= TRUE;
+			$json['gl_nombres']			= $registro->gl_nombres;
+			$json['gl_apellidos']		= $registro->gl_apellidos;
+			$json['fc_nacimiento']		= $registro->fc_nacimiento;
+			$json['id_prevision']		= $registro->id_prevision;
+			$json['gl_direccion']		= $registro->gl_direccion;
+			$json['id_region']			= $registro->id_region;
+			$json['gl_nombre_comuna']	= $registro->gl_nombre_comuna;
+			$json['id_comuna']			= $registro->id_comuna;
+			$json['gl_centro_salud']	= $registro->gl_centro_salud;
+			$json['id_centro_salud']	= $registro->id_centro_salud;
+			$json['bo_reconoce']		= $registro->bo_reconoce;
+			$json['bo_acepta_programa']	= $registro->bo_acepta_programa;
+			$json['gl_latitud']			= $registro->gl_latitud;
+			$json['gl_longitud']		= $registro->gl_longitud;
+			
+			$json['gl_fono']			= $registro->gl_fono;
+			$json['gl_celular']			= $registro->gl_celular;
+			$json['gl_email']			= $registro->gl_email;
+
+		}else{
+			$json['correcto']	= FALSE;
+		}
 
         echo json_encode($json);
     }
