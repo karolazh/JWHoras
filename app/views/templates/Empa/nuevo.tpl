@@ -485,20 +485,18 @@
                                 <!-- Si Deriva, muestra listado de especialidades a las que puede derivar -->
                             </div>
                         </div>
+                        <div class="form-group col-sm-11" align="right">
+                            <button type="button" id="guardar" class="btn btn-success">
+                                <i class="fa fa-save"></i>  Guardar
+                            </button>&nbsp;
+                            <button type="button" id="cancelar"  class="btn btn-default" 
+                                    onclick="location.href = '{$base_url}/Empa/index'">
+                                <i class="fa fa-remove"></i>  Cancelar
+                            </button>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="form-group text-right">
-                    <button type="button" id="guardar" class="btn btn-success">
-                        <i class="fa fa-save"></i>  Guardar
-                    </button>&nbsp;
-                    <button type="button" id="cancelar"  class="btn btn-default" 
-                            onclick="location.href = '{$base_url}/Empa/index'">
-                        <i class="fa fa-remove"></i>  Cancelar
-                    </button>
                 </div>
             </div>
         </div> 
     </section>
-
 </form>
