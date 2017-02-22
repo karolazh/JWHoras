@@ -5,21 +5,18 @@
     <div id="div_tabla" class="table-responsive small"> 
         <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
             <thead>
-                
                 <th align="center" width="10%">Usuario</th>
                 <th align="center" width="10%">Fecha</th>
                 <th align="center" width="20%">Tipo</th>
-                <th align="center" width="30">Nombre Documento</th>
-                <th align="center" width="30">Comentario</th>
+                <th align="center" width="">Comentario</th>
             </thead>
             <tbody>
-            {foreach $arrAdjuntos as $adj}
+            {foreach $arrHistorial as $his}
                 <tr>
-                    <td>{$adj->rut}</td>
-                    <td>{$adj->fc_crea}</td>
-                    <td>{$adj->nombre_tipo_adjunto}</td>
-                    <td>{$adj->path}</td>
-                    <td>{$adj->glosa}</td>
+                    <td>{$his->rut}</td>
+                    <td>{$his->fc_crea}</td>
+                    <td>{$his->nombre_evento}</td>
+                    <td>{$his->glosa}</td>
                 </tr>
             {/foreach}
             </tbody>
