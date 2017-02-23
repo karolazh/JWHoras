@@ -101,6 +101,8 @@ class Registro extends Controller {
         if (!is_null($detReg)) {
             //$this->smarty->assign("detReg", $detReg);
             
+            $this->smarty->assign("idreg", $idReg);
+            
             $run = "";
             $ext = "NO";
             if (!is_null($detReg->rut))
@@ -118,7 +120,8 @@ class Registro extends Controller {
             $nombres = $detReg->nombres.' '.$detReg->apellidos;
             $this->smarty->assign("nombres", $nombres);
             
-            $edad = "";
+            //$edad = "";
+            $edad = Fechas::calcularEdadInv($detReg->fc_nacimiento);
             $this->smarty->assign("fecha_nac", $detReg->fc_nacimiento);
             $this->smarty->assign("edad", $edad);
             
