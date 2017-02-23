@@ -31,7 +31,6 @@ class DAORegistro extends Model{
         }
     }
 
-    
     public function getRegistroById($id_registro) {
         $query	= "	SELECT
 						pre_registro.*,
@@ -50,7 +49,7 @@ class DAORegistro extends Model{
     }
    
     //funcion repetida, usar getRegistroById
-    /*
+	/*
     public function getRegistro($id_registro){
         $query	= "	SELECT
 						pre_registro.*,
@@ -67,9 +66,51 @@ class DAORegistro extends Model{
             return null;
         }
     }
-    */
+	*/
+
+    public function getRegistroByRut($rut_registro) {
+
+        $query	= "	SELECT 
+						pre_registro.*,
+						c.gl_nombre_comuna,
+						e.nombre_establecimiento as gl_centro_salud,
+						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento_vista
+					FROM pre_registro 
+                        LEFT JOIN pre_comunas c ON pre_registro.id_comuna = c.id_comuna
+                        LEFT JOIN pre_establecimientos_salud e ON pre_registro.id_centro_salud = e.id_establecimiento
+					WHERE gl_rut = ?";
+
+        $param		= array($rut_registro);
+        $consulta	= $this->db->getQuery($query, $param);
+
+        if ($consulta->numRows > 0) {
+            return $consulta->rows->row_0;
+        } else {
+            return null;
+        }
+    }
+	
+	//funcion repetida
+	/*
+    public function getRegistroxRut($rut_registro){
+        $query	= "	SELECT 
+						pre_registro.*,
+						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento
+					FROM pre_registro 
+					WHERE gl_rut = ?";
+
+		$param		= array($rut_registro);
+        $consulta	= $this->db->getQuery($query,$param);
+
+        if($consulta->numRows > 0){
+            return $consulta->rows->row_0;
+        } else {
+            return null;
+        }
+    }
+	*/
     
-    public function countRegistroxRegion($id_region){
+	public function countRegistroxRegion($id_region){
         $query	= "	SELECT 
 						*
 					FROM pre_registro 
