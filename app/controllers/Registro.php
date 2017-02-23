@@ -61,11 +61,11 @@ class Registro extends Controller {
         $this->_DAOMotivoConsulta	= $this->load->model("DAOMotivoConsulta");
         $this->_DAOUsuarios			= $this->load->model("DAOUsuarios");
         $this->_DAOInstitucion		= $this->load->model("DAOInstitucion");
-        $this->_DAOEventosTipo = $this->load->model("DAOEventosTipo");
-        $this->_DAOAdjuntos = $this->load->model("DAOAdjuntos");
-        $this->_DAOAdjuntosTipo = $this->load->model("DAOAdjuntosTipo");
-        $this->_DAOEmpa = $this->load->model("DAOEmpa");
-        $this->_DAOExamenRegistro = $this->load->model("DAOExamenRegistro");
+        $this->_DAOEventosTipo		= $this->load->model("DAOEventosTipo");
+        $this->_DAOAdjuntos			= $this->load->model("DAOAdjuntos");
+        $this->_DAOAdjuntosTipo		= $this->load->model("DAOAdjuntosTipo");
+        $this->_DAOEmpa				= $this->load->model("DAOEmpa");
+        $this->_DAOExamenRegistro	= $this->load->model("DAOExamenRegistro");
     }
 
     /*
@@ -412,6 +412,7 @@ class Registro extends Controller {
 
 		if($registro){
 			$json['correcto']			= TRUE;
+                        $json['id_registro']			= $registro->id_registro;
 			$json['gl_nombres']			= $registro->gl_nombres;
 			$json['gl_apellidos']		= $registro->gl_apellidos;
 			$json['fc_nacimiento']		= $registro->fc_nacimiento;

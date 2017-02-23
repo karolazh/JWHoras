@@ -19,6 +19,7 @@
 			</div>
 			<div class="panel-body">
 				<div class="form-group">
+                                    <input type="text" value="0" id="id_registro" name="id_registro" class="hidden">
 					<label for="rut" class="control-label col-sm-2 required">Rut Paciente (*)</label>
 					<div class="col-sm-2">
 						<input type="text" name="rut" id="rut" maxlength="12" onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut')" placeholder="Rut paciente" class="form-control">
