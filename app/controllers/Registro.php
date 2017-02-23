@@ -102,6 +102,8 @@ class Registro extends Controller {
         if (!is_null($detReg)) {
             //$this->smarty->assign("detReg", $detReg);
             
+            $this->smarty->assign("idreg", $idReg);
+            
             $run = "";
             $ext = "NO";
             if (!is_null($detReg->rut))
@@ -114,24 +116,34 @@ class Registro extends Controller {
             }
             $this->smarty->assign("run", $run);
             $this->smarty->assign("ext", $ext);
-            $this->smarty->assign("nombres", $detReg->nombres);
-            $this->smarty->assign("apellidos", $detReg->apellidos);
+            //$this->smarty->assign("nombres", $detReg->nombres);
+            //$this->smarty->assign("apellidos", $detReg->apellidos);
+            $nombres = $detReg->nombres.' '.$detReg->apellidos;
+            $this->smarty->assign("nombres", $nombres);
             
+            //$edad = "";
+            $edad = Fechas::calcularEdadInv($detReg->fc_nacimiento);
             $this->smarty->assign("fecha_nac", $detReg->fc_nacimiento);
-            $this->smarty->assign("genero", $detReg->genero);
+            $this->smarty->assign("edad", $edad);
+            
+            $genero = "FEMENINO"; //obtener de BD y validad a futuro
+            $this->smarty->assign("genero", $genero);
+            $this->smarty->assign("estado", $detReg->estado);
+            
             $this->smarty->assign("prevision", $detReg->prevision);
+            $this->smarty->assign("grupo", $detReg->grupo);
             
             $this->smarty->assign("direccion", $detReg->direccion);
             $this->smarty->assign("fono", $detReg->fono);
+            
             $this->smarty->assign("celular", $detReg->celular);
+            $this->smarty->assign("email", $detReg->email);
+            
+            $this->smarty->assign("comuna", $detReg->comuna);
+            $this->smarty->assign("provincia", $detReg->provincia);
             
             $this->smarty->assign("region", $detReg->region);
-            $this->smarty->assign("provincia", $detReg->provincia);
-            $this->smarty->assign("comuna", $detReg->comuna);
-            
-            $this->smarty->assign("email", $detReg->email);
-            $this->smarty->assign("estado", $detReg->estado);
-            $this->smarty->assign("grupo", $detReg->grupo);
+            $this->smarty->assign("fecha_reg", $detReg->fc_crea);
             
             $reconoce = "NO";
             if (!is_null($detReg->reconoce))
@@ -151,7 +163,6 @@ class Registro extends Controller {
             }
             $this->smarty->assign("reconoce", $reconoce);
             $this->smarty->assign("acepta", $acepta);
-            $this->smarty->assign("fecha_reg", $detReg->fc_crea);
             
             //Tipos de Eventos
             $arrTipoEvento = $this->_DAOEventosTipo->getListaEventosTipo();
