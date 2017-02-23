@@ -92,7 +92,7 @@ class Registro extends Controller {
         $this->_display('Registro/index.tpl');
     }
 
-    public function bitacora() {
+    public function detalleRegistro() {
         $parametros = $this->request->getParametros();
         $idReg = $parametros[0];
         $detReg = $this->_DAORegistro->getRegistroxId($idReg);

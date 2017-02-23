@@ -58,7 +58,7 @@ class Administracion extends Controller{
         //$this->smarty->assign('arrResultado', $arr);
         
         //llamado al template
-        $this->_display('Administracion/Noticias/index.tpl');
+        print_r("Hola Mundo!");
     }
     
     //*** REGIONES ***//
