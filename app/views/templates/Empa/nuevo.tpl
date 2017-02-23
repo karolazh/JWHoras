@@ -456,11 +456,13 @@
                     <div class="panel-heading">Observaciones</div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <div class="col-sm-12">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-10">
                                 <label>Observaciones</label>
-                                <textarea class="form-control" rows="3" id="gl_observaciones_empa" nombre="gl_observaciones_empa"
+                                <textarea class="form-control col-sm-10" rows="5" id="gl_observaciones_empa" nombre="gl_observaciones_empa"
                                           placeholder="Ingrese Observaciones" style="resize: none"></textarea>
                             </div>
+                            <div class="col-sm-1"></div>
                         </div>
 
 
@@ -476,7 +478,7 @@
                             <div class="col-sm-3">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" id="chkReconoce">&nbsp;&nbsp;<strong>Reconoce</strong>
+                                        <input type="checkbox" id="chkReconoce">&nbsp;&nbsp;<strong>Reconoce Maltrato</strong>
                                     </label>
                                 </div>
                             </div>

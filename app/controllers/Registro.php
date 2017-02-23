@@ -48,7 +48,6 @@ class Registro extends Controller {
     protected $_DAOAdjuntosTipo;
     protected $_DAOEmpa;
     protected $_DAOExamenRegistro;
-    protected $_DAOAdjuntos;
 
     function __construct() {
         parent::__construct();
@@ -396,6 +395,7 @@ class Registro extends Controller {
 
 		if($registro){
 			$json['correcto']			= TRUE;
+                        $json['id_registro']			= $registro->id_registro;
 			$json['gl_nombres']			= $registro->gl_nombres;
 			$json['gl_apellidos']		= $registro->gl_apellidos;
 			$json['fc_nacimiento']		= $registro->fc_nacimiento;

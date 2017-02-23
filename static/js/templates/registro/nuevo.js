@@ -99,6 +99,7 @@
 								if(data.correcto){
 									xModal.success('Paciente ya Registro.<br>Se procede a cargar la información.');
 									
+                                                                        $("#id_registro").val(data.id_registro);
 									$("#nombres").val(data.gl_nombres);
 									$("#apellidos").val(data.gl_apellidos);
 									$("#fc_nacimiento").val(data.fc_nacimiento);
