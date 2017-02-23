@@ -48,8 +48,7 @@ class Registro extends Controller {
     protected $_DAOAdjuntosTipo;
     protected $_DAOEmpa;
     protected $_DAOExamenRegistro;
-    protected $_DAOAdjuntos;
-
+    
     function __construct() {
         parent::__construct();
         $this->load->lib('Fechas', false);
@@ -178,7 +177,11 @@ class Registro extends Controller {
             $arrExamenes = $this->_DAOExamenRegistro->getListaExamenRegistroxId($idReg);
             $this->smarty->assign('arrExamenes', $arrExamenes);
             
-            //
+            //Grilla Motivos de Consulta
+            $arrConsultas = $this->_DAOMotivoConsulta->getMotivosConsultaGrilla($idReg);
+            $this->smarty->assign('arrConsultas', $arrConsultas);
+            
+            //muestra template
             $this->smarty->display('avanzados/detalle.tpl');
         } else {
             throw new Exception("El historial que está buscando no existe");

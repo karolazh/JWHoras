@@ -1,272 +1,324 @@
-<head>
-    {include file="layout/css.tpl"}
-    {*<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-    <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />*}
-    
-    <link href="{$base_url}/template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-    <link href="{$base_url}/template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-</head>
+<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
-<div class="box box-primary">
-    <div class="box-header">
-        <i class="fa fa-list fa-fw"></i>  DATOS DEL PACIENTE
-    </div>
-    <div class="box-body">
-        <div class="col-md-6">
-            <div class="form-group">
-                    <label for="Nombres" class="control-label">Nombres : </label>
-                    &nbsp;&nbsp;{$nombres}&nbsp;{$apellidos}
-                </div>
+<form id="form">
+    <section class="content">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                    Datos del Paciente
             </div>
+            <div class="panel-body">
+                <div class="box-body">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <label for="Nombres" class="control-label">Nombres : </label>
+                                &nbsp;&nbsp;{$nombres}&nbsp;{$apellidos}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Run" class="control-label">RUN : </label>
-                    &nbsp;&nbsp;{$run}
-                </div>
-            </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Run" class="control-label">RUN : </label>
+                                &nbsp;&nbsp;{$run}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Run" class="control-label">Extrajero : </label>
-                    &nbsp;&nbsp;{$ext}
-                </div>
-            </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Run" class="control-label">Extrajero : </label>
+                                &nbsp;&nbsp;{$ext}
+                            </div>
+                        </div>
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="Nombres" class="control-label">Fecha Nacimiento : </label>
-                    &nbsp;&nbsp;{$fecha_nac}
-                </div>
-            </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Nombres" class="control-label">Fecha Nacimiento : </label>
+                                &nbsp;&nbsp;{$fecha_nac}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Run" class="control-label">Género : </label>
-                    &nbsp;&nbsp;{$genero}
-                </div>
-            </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Run" class="control-label">Género : </label>
+                                &nbsp;&nbsp;{$genero}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Run" class="control-label">Previsión : </label>
-                    &nbsp;&nbsp;{$prevision}
-                </div>
-            </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Run" class="control-label">Previsión : </label>
+                                &nbsp;&nbsp;{$prevision}
+                            </div>
+                        </div>
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="Nombres" class="control-label">Dirección : </label>
-                    &nbsp;&nbsp;{$direccion}
-                </div>
-            </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Nombres" class="control-label">Dirección : </label>
+                                &nbsp;&nbsp;{$direccion}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Run" class="control-label">Fono : </label>
-                    &nbsp;&nbsp;{$fono}
-                </div>
-            </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Run" class="control-label">Fono : </label>
+                                &nbsp;&nbsp;{$fono}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Run" class="control-label">Celular : </label>
-                    &nbsp;&nbsp;{$celular}
-                </div>
-            </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Run" class="control-label">Celular : </label>
+                                &nbsp;&nbsp;{$celular}
+                            </div>
+                        </div>
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="Nombres" class="control-label">Regi&oacute;n : </label>
-                    &nbsp;&nbsp;{$region}
-                </div>
-            </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Nombres" class="control-label">Regi&oacute;n : </label>
+                                &nbsp;&nbsp;{$region}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Run" class="control-label">Provincia : </label>
-                    &nbsp;&nbsp;{$provincia}
-                </div>
-            </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Run" class="control-label">Provincia : </label>
+                                &nbsp;&nbsp;{$provincia}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Run" class="control-label">Comuna : </label>
-                    &nbsp;&nbsp;{$comuna}
-                </div>
-            </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Run" class="control-label">Comuna : </label>
+                                &nbsp;&nbsp;{$comuna}
+                            </div>
+                        </div>
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">E-mail : </label>
-                    &nbsp;&nbsp;{$email}
-                </div>
-            </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">E-mail : </label>
+                                &nbsp;&nbsp;{$email}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label">Estado : </label>
-                    &nbsp;&nbsp;{$estado}
-                </div>
-            </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Estado : </label>
+                                &nbsp;&nbsp;{$estado}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label">Grupo : </label>
-                    &nbsp;&nbsp;{$grupo}
-                </div>
-            </div>
-                
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">Reconoce : </label>
-                    &nbsp;&nbsp;{$reconoce}
-                </div>
-            </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Grupo : </label>
+                                &nbsp;&nbsp;{$grupo}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label">Acepta Programa : </label>
-                    &nbsp;&nbsp;{$acepta}
-                </div>
-            </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Reconoce : </label>
+                                &nbsp;&nbsp;{$reconoce}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label">Fecha : </label>
-                    &nbsp;&nbsp;{$fecha_reg}
-                </div>
-            </div>
-             
-        {*<div class="row"> 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="NombresPaciente" class="control-label">Nombres : </label>
-                    {$detPac->nombres_registro}&nbsp;&nbsp;{$detPac->apellidos_registro}
-                </div>
-            </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Acepta Programa : </label>
+                                &nbsp;&nbsp;{$acepta}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="ApellidosPaciente" class="control-label">Apellidos : </label>
-                    &nbsp;&nbsp;{$detPac->gl_apellidos}
-                </div>
-            </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Fecha : </label>
+                                &nbsp;&nbsp;{$fecha_reg}
+                            </div>
+                        </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="fechaNacimiento" class="control-label">Fecha Nacimiento : </label>
-                    &nbsp;&nbsp;{$detPac->fc_nacimiento}
+                    {*<div class="row"> 
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="NombresPaciente" class="control-label">Nombres : </label>
+                                {$detPac->nombres_registro}&nbsp;&nbsp;{$detPac->apellidos_registro}
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="ApellidosPaciente" class="control-label">Apellidos : </label>
+                                &nbsp;&nbsp;{$detPac->gl_apellidos}
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="fechaNacimiento" class="control-label">Fecha Nacimiento : </label>
+                                &nbsp;&nbsp;{$detPac->fc_nacimiento}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="prevision" class="control-label">Previsión : </label>
+                                &nbsp;&nbsp;{$detPac->id_prevision}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="direccion" class="control-label">Dirección : </label>&nbsp;&nbsp;{$detPac->gl_direccion}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="fono" class="control-label">fono : </label>&nbsp;&nbsp;{$detPac->gl_fono}
+                            </div>
+                        </div>  
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="email" class="control-label">email : </label>&nbsp;&nbsp;{$detPac->gl_email}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="celular" class="control-label">celular : </label>&nbsp;&nbsp;{$detPac->gl_celular}
+                            </div>
+                        </div>
+                    </div>*}           
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="prevision" class="control-label">Previsión : </label>
-                    &nbsp;&nbsp;{$detPac->id_prevision}
-                </div>
-            </div>
+        
+        <div class="top-spaced"></div>
+        
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#historial">HISTORIAL</a></li>
+                    <li><a data-toggle="tab" href="#bitacora">BIT&Aacute;CORA</a></li>
+                    <li><a data-toggle="tab" href="#empa">EMPA</a></li>
+                    <li><a data-toggle="tab" href="#consultas">MOTIVO DE CONSULTA</a></li>
+                    <li><a data-toggle="tab" href="#documentos">DOCUMENTOS</a></li>
+                    <li><a data-toggle="tab" href="#adjuntos">ADJUNTOS</a></li>
+                    <li><a data-toggle="tab" href="#examenes">EX&Aacute;MENES</a></li>
+                </ul>
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="direccion" class="control-label">Dirección : </label>&nbsp;&nbsp;{$detPac->gl_direccion}
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="fono" class="control-label">fono : </label>&nbsp;&nbsp;{$detPac->gl_fono}
-                </div>
-            </div>  
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="email" class="control-label">email : </label>&nbsp;&nbsp;{$detPac->gl_email}
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="celular" class="control-label">celular : </label>&nbsp;&nbsp;{$detPac->gl_celular}
-                </div>
-            </div>
-        </div>*}           
-    </div>
-</div>
-    
-<div class="box box-primary">
-    <div class="box-header">
-        <i class="fa fa-list fa-fw"></i>  BITACORA
-    </div>
-    <div class="box-body">
-        <div class="col-md-12">
-            <div class="btn-group">
-                <button type="button" id="aceptar" onclick="habilitar()"
-                        class="btn btn-primary btn-sm">
-                    <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo comentario
-                </button>
-            </div>
-            
-            <div class="form-group">
-                
-                <section class="content-header" >
-                    <form id="form" name="form-inline" enctype="application/x-www-form-urlencoded" action="" method="post">
-                        <input value="{$p->id_ticket}" id="ticket" name="ticket" type="hidden">
-                        <div id="seccionComentario" style="display:none">
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Tipo de evento</label>
-                                            <select for="tipoEv" class="form-control" id="tipoEv" 
-                                                    name="tipoEv" onblur="validarVacio(this,'Seleccione Tipo de evento')">
-                                                <option value="0">Seleccione Tipo de Evento</option>
-                                                {foreach $arrTipoEvento as $tipoeve}
-                                                        <option value="{$tipoeve->id_evento_tipo}">
-                                                            {$tipoeve->gl_nombre_evento_tipo}
-                                                        </option>
-                                                {/foreach}
-                                            </select>
-                                            <span class="help-block hidden fa fa-warning"></span>
-                                            
-                                            <br>
-                                            <label for="nuevo_comentario" class="control-label">Nuevo Comentario</label>
-                                            <textarea class="form-control" name="nuevo_comentario" id="nuevo_comentario" 
-                                                style="resize:none" rows="10">
-                                            </textarea> 
-                                        </div>
-                                        
-                                        <div class="btn-group">
-                                            <div id="div_tabla" class="table-responsive small"> 
-                                                <button type="button" class="form-control btn btn-success" 
-                                                        onclick="Comentario.guardarComentario(this.form, this)">Guardar</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                <div class="tab-content">
+
+                    <!-- HISTORIAL -->
+                    <div id="historial" class="tab-pane fade in active">
+                        <div class="box-body">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {include file='avanzados/grillaHistorial.tpl'}
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </section>
+                    </div>
+
+                    <!-- BITACORA -->
+                    <div id="bitacora" class="tab-pane fade">
+                        <div class="box-body">
+                            <div class="col-md-12">
+                                <div class="btn-group">
+                                    <button type="button" id="aceptar" onclick="habilitar()"
+                                            class="btn btn-primary btn-sm">
+                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo comentario
+                                    </button>
+                                </div>
+
+                                <div class="form-group">
+                                    <section class="content-header" >
+                                        <form id="form" name="form-inline" enctype="application/x-www-form-urlencoded" action="" method="post">
+                                            <input value="{$p->id_ticket}" id="ticket" name="ticket" type="hidden">
+                                            <div id="seccionComentario" style="display:none">
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Tipo de evento</label>
+                                                                <select for="tipoEv" class="form-control" id="tipoEv" 
+                                                                        name="tipoEv" onblur="validarVacio(this,'Seleccione Tipo de evento')">
+                                                                    <option value="0">Seleccione Tipo de Evento</option>
+                                                                    {foreach $arrTipoEvento as $tipoeve}
+                                                                            <option value="{$tipoeve->id_evento_tipo}">
+                                                                                {$tipoeve->gl_nombre_evento_tipo}
+                                                                            </option>
+                                                                    {/foreach}
+                                                                </select>
+                                                                <span class="help-block hidden fa fa-warning"></span>
+
+                                                                <br>
+                                                                <label for="nuevo_comentario" class="control-label">Nuevo Comentario</label>
+                                                                <textarea class="form-control" name="nuevo_comentario" id="nuevo_comentario" 
+                                                                    style="resize:none" rows="10">
+                                                                </textarea> 
+                                                            </div>
+
+                                                            <div class="btn-group">
+                                                                <div id="div_tabla" class="table-responsive small"> 
+                                                                    <button type="button" class="form-control btn btn-success" 
+                                                                            onclick="Comentario.guardarComentario(this.form, this)">Guardar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </section>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EMPA  -->
+                    <div id="empa" class="tab-pane fade">
+                        <div class="box-body">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {include file='avanzados/grillaEmpa.tpl'}
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    
+                    <!-- MOTIVO DE CONSULTA -->
+                    <div id="consultas" class="tab-pane fade">
+                        <div class="box-body">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {include file='avanzados/grillaConsultas.tpl'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!--  -->
+                    <div id="adjuntos" class="tab-pane fade">
+                        333
+                    </div>
+                    
+                    <!--  -->
+                    <div id="examenes" class="tab-pane fade">
+                        333
+                    </div>
+                    
+                </div>
                 
+                <div class="top-spaced"></div>
             </div>
         </div>
-    </div>
-</div>
-    
-<div class="box box-primary">
-    <div class="box-header">
-        <i class="fa fa-list fa-fw"></i>  HISTORIAL
-    </div>
-    <div class="box-body">
-        <div class="col-md-12">
-            <div class="form-group">
-                {include file='avanzados/grillaHistorial.tpl'}
-            </div>
-        </div>
-    </div>
-</div>
-            
+
+        <div class="top-spaced"></div>
+    </section>
+</form>
+                                
 <div class="box box-primary">
     <div class="box-header">
         <i class="fa fa-list fa-fw"></i>  ADJUNTOS
@@ -367,19 +419,6 @@
         <div class="col-md-12">
             <div class="form-group">
                 {include file='avanzados/grillaAdjuntos.tpl'}
-            </div>
-        </div>
-    </div>
-</div>
-            
-<div class="box box-primary">
-    <div class="box-header">
-        <i class="fa fa-list fa-fw"></i>  EMPA
-    </div>
-    <div class="box-body">
-        <div class="col-md-12">
-            <div class="form-group">
-                {include file='avanzados/grillaEmpa.tpl'}
             </div>
         </div>
     </div>

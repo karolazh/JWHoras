@@ -86,4 +86,34 @@ class DAOMotivoConsulta extends Model{
 		}
     }
 
+    /*
+     * Ver Motivos para Grilla
+     */
+    public function getMotivosConsultaGrilla($id_registro){
+        $query =    "SELECT
+                        mot.id_motivo_consulta AS id_motivo,
+                        mot.id_registro AS id_registro,
+                        mot.id_institucion AS id_institucion,
+                        ins.gl_nombre AS institucion,
+                        mot.fc_ingreso AS fc_ingreso,
+                        mot.gl_hora_ingreso AS hora_ingreso,
+                        mot.gl_motivo_consulta AS motivo_consulta,
+                        mot.fc_crea AS fc_crea,
+                        mot.id_usuario_crea AS id_usuario_crea,
+                        usr.gl_rut AS rut
+                    FROM pre_motivo_consulta mot
+                    LEFT JOIN pre_institucion ins ON ins.id_institucion = mot.id_institucion
+                    LEFT JOIN pre_usuarios usr ON usr.id_usuario = mot.id_usuario_crea
+                    WHERE mot.id_registro = ?
+                    ORDER BY mot.fc_ingreso DESC";
+
+        $params		= array($id_registro);
+        $resultado	= $this->db->getQuery($query, $params);
+
+        if($resultado->numRows>0){
+            return $resultado->rows;
+        }else{
+            return NULL;
+        }
+    }
 }
