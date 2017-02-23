@@ -108,6 +108,11 @@ class DAOAdjuntos extends Model{
         $params		= array($id_registro);
         $resultado	= $this->db->getQuery($query, $params);
 
+        if($resultado->numRows>0){
+            return $resultado->rows;
+        }else{
+            return NULL;
+        }
     }
 
 }

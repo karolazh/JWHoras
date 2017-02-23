@@ -62,9 +62,9 @@
                     <td>{$exa->nombre_examen}</td>
                     <td>{$exa->nombre_laboratorio}</td>
                     <td>{$exa->resultado}</td>
-                    {*<td class="text-center" style="width:100px;">
+                    <td class="text-center" style="width:100px;">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn btn-danger btn-flat" 
+                            {*<button type="button" class="btn btn-sm btn btn-danger btn-flat" 
                                     onClick="xModal.open('{$base_url}/Registro/ver/{$item->id_empa}', 'Registro número : {$item->id_registro}', 85);" 
                                     data-toggle="tooltip" title="Ver Examen">
                                 <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver
@@ -73,9 +73,9 @@
                                     onClick="xModal.open('{$base_url}/Empa/verEmpa/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
                                     data-toggle="tooltip" title="Editar Exámen">
                                 <i class="fa fa-eye"></i>&nbsp;&nbsp;Editar
-                            </button>&nbsp;
+                            </button>&nbsp;*}
                         </div>
-                    </td>*}
+                    </td>
                 </tr>
             {/foreach}
             </tbody>

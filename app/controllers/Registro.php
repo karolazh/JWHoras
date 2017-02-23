@@ -92,7 +92,7 @@ class Registro extends Controller {
         $this->_display('Registro/index.tpl');
     }
 
-    public function detalleRegistro() {
+    public function bitacora() {
 
         $parametros = $this->request->getParametros();
         $idReg = $parametros[0];
@@ -176,8 +176,12 @@ class Registro extends Controller {
             $arrExamenes = $this->_DAOExamenRegistro->getListaExamenRegistroxId($idReg);
             $this->smarty->assign('arrExamenes', $arrExamenes);
             
-            //
-            $this->smarty->display('avanzados/detalle.tpl');
+            //Grilla Motivos de Consulta
+            $arrConsultas = $this->_DAOMotivoConsulta->getMotivosConsultaGrilla($idReg);
+            $this->smarty->assign('arrConsultas', $arrConsultas);
+            
+            //muestra template
+            $this->smarty->display('Registro/bitacora.tpl');
         } else {
             throw new Exception("El historial que está buscando no existe");
         }
@@ -259,10 +263,10 @@ class Registro extends Controller {
             $bo_reconoce_violencia_registro = $obj_registro->bo_reconoce;
             $bo_acepta_programa_registro = $obj_registro->bo_acepta_programa;
             $obj_adjunto = $this->_DAOAdjuntos->getAdjuntoByRegistro($obj_registro->id_registro);
-            if (!is_null($obj_adjunto)){
-                $ruta_adjunto = $obj_adjunto->gl_path;
+            if (!is_null($obj_adjunto)) {
+                $ruta_consentimiento = $obj_adjunto->gl_path;
             } else {
-                $ruta_adjunto = "";
+                $ruta_consentimiento = "";
             }
             $obj_prevision = $this->_DAOPrevision->getPrevision($obj_registro->id_prevision);
             if (!is_null($obj_prevision)) {
@@ -287,7 +291,7 @@ class Registro extends Controller {
             }
             $edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
             $obj_estado_caso = $this->_DAOEstadoCaso->getEstadoCaso($obj_registro->id_estado_caso);
-            if (!is_null($obj_estado_caso)){
+            if (!is_null($obj_estado_caso)) {
                 $nombre_estado_caso = $obj_estado_caso->gl_nombre_estado_caso;
             } else {
                 $nombre_estado_caso = "N/D";
@@ -298,7 +302,7 @@ class Registro extends Controller {
             } else {
                 $institucion = "N/D";
             }
-            
+
             $arrMotivosConsulta = $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($obj_registro->id_registro);
         } else {
             $id_registro = "N/D";
@@ -349,7 +353,7 @@ class Registro extends Controller {
         $this->smarty->assign('estado_caso', $nombre_estado_caso);
         $this->smarty->assign('institucion', $institucion);
         $this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
-        $this->smarty->assign('ruta_adjunto', $ruta_adjunto);
+        $this->smarty->assign('ruta_consentimiento', $ruta_consentimiento);
         $this->smarty->display('Registro/ver.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/ver.js");
