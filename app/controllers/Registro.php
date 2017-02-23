@@ -101,6 +101,8 @@ class Registro extends Controller {
         if (!is_null($detReg)) {
             //$this->smarty->assign("detReg", $detReg);
             
+            $this->smarty->assign("idreg", $idReg);
+            
             $run = "";
             $ext = "NO";
             if (!is_null($detReg->rut))

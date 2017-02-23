@@ -240,7 +240,7 @@
                                 <div class="form-group">
                                     <section class="content-header" >
                                         <form id="form" name="form-inline" enctype="application/x-www-form-urlencoded" action="" method="post">
-                                            <input value="{$p->id_ticket}" id="ticket" name="ticket" type="hidden">
+                                            <input type="hidden" name="idreg" id="idreg" value="{$idreg}" >
                                             <div id="seccionComentario" style="display:none">
                                                 <div class="box-body">
                                                     <div class="row">
@@ -334,7 +334,7 @@
                                     <section class="content-header" >
                                         <form id="form" role="form" name="form-inline" enctype="multipart/form-data" 
                                               action="{$smarty.const.BASE_URI}/Solicitudes/guardarNuevoAdjunto" method="post">
-                                            <input value="{$p->id_ticket}" id="ticket" name="ticket" type="hidden">
+                                            <input type="hidden" name="idreg" id="idreg" value="{$idreg}" >
                                             <div id="seccionAdjunto" style="display:none">
                                                 <div class="box-body">
                                                     <div class="row">
@@ -355,7 +355,6 @@
                                                                 <br>
                                                                 <label class="control-label">Adjuntar documento</label>
                                                                 <input type="file" name="archivo" id="archivo" class="form-control"/>
-                                                                {*<input type="hidden" value="{$p->id_ticket}" name="id_ticket" id="id_ticket">*}
 
                                                                 <br>
                                                                 <label class="control-label">Comentario (opcional)</label>
