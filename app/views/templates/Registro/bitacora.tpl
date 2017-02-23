@@ -262,7 +262,8 @@
                                                                 <label for="nuevo_comentario" class="control-label">Nuevo Comentario</label>
                                                                 <textarea class="form-control" name="nuevo_comentario" id="nuevo_comentario" 
                                                                     style="resize:none" rows="10">
-                                                                </textarea> 
+                                                                </textarea>
+                                                                <br>
                                                             </div>
 
                                                             <div class="btn-group">
@@ -362,6 +363,7 @@
                                                                           id="comentario_adjunto" 
                                                                           name="comentario_adjunto">
                                                                 </textarea>
+                                                                <br>
                                                             </div>
 
                                                             <div class="btn-group">
