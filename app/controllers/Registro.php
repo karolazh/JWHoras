@@ -52,6 +52,7 @@ class Registro extends Controller {
     function __construct() {
         parent::__construct();
         $this->load->lib('Fechas', false);
+        $this->load->lib('Boton', false);
         $this->_DAORegion			= $this->load->model("DAORegion");
         $this->_DAOComuna			= $this->load->model("DAOComuna");
         $this->_DAORegistro			= $this->load->model("DAORegistro");
@@ -202,6 +203,8 @@ class Registro extends Controller {
 
         $arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
         $this->smarty->assign("arrCasoEgreso", $arrCasoEgreso);
+		
+        $this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.'));
 
         //llamado al template
         $this->_display('Registro/nuevo.tpl');

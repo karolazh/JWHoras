@@ -251,6 +251,7 @@
 
 		$(this).qtip({
 			show	: 'click',
+			hide	: 'click',
 			content	: {
 						button	: true,
 						title	: titulo,
