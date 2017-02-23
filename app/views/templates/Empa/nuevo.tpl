@@ -26,17 +26,17 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2 required">Comuna</label>
                     <div class="col-sm-3">
-                        <input type="text" name="id_comuna" id="id_comuna" value="{$id_comuna}" 
+                        <input type="text" name="gl_comuna" id="gl_comuna" value="{$gl_comuna}" 
                                placeholder="Comuna" class="form-control" disabled/>
                         <span class="help-block hidden"></span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="id_institucion" class="control-label col-sm-2 required">Centro de Salud (*)</label>
+                    <label for="gl_institucion" class="control-label col-sm-2 required">Centro de Salud (*)</label>
                     <div class="col-sm-3">
-                        <input type="text" name="id_institucion" id="id_institucion" value=""
-                               placeholder="Institución" class="form-control"/>
+                        <input type="text" name="gl_institucion" id="gl_institucion" value="{$gl_institucion}"
+                               placeholder="Institución" class="form-control" disabled/>
                         <span class="help-block hidden"></span>
                     </div>
                     <label for="nr_ficha" class="control-label col-sm-2 required">N° de Ficha (*)</label>
@@ -58,7 +58,7 @@
 
                     <label for="fc_empa" class="control-label col-sm-2 required">Fecha (*)</label>
                     <div class="col-sm-3">
-                        <input type="date" name="fc_emp" id="fc_emp" value="" 
+                        <input type="date" name="fc_emp" id="fc_emp" value="{$fc_emp}" 
                                placeholder="Fecha" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2 required">Nro. Registro</label>
                     <div class="col-sm-3">
-                        <input type="text" name="id_registro" id="id_registro" value="{$id_registro}" 
+                        <input type="text" name="nro_registro" id="nro_registro" value="" 
                                placeholder="N° Registro" class="form-control" disabled/>
                     </div>
                 </div>
@@ -74,35 +74,37 @@
             </div>
         </div>
 
-        <div class="top-spaced"></div>   
-
+        <div class="top-spaced"></div> 
+        
+        
+<!-- Datos del Paciente -->
         <div class="panel panel-primary">
             <div class="panel-heading">Datos del Paciente</div>
 
-            <!-- Datos del Paciente -->
+            
             <div class="panel-body">
                 <div class="form-group">
                     <label class="control-label col-sm-2 required">Rut Paciente</label>
                     <div class="col-sm-3">
-                        {$rut} 1-9
+                        {$gl_rut}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2 required">Nombres</label>
                     <div class="col-sm-3">
-                        {$nombres} Nombre Paciente
+                        {$gl_nombres}
                     </div>
                     <label class="control-label col-sm-2 required">Apellidos</label>
                     <div class="col-sm-3">
-                        {$apellidos} Apellidos Paciente
+                        {$gl_apellidos}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2 required">Fecha Nacimiento</label>
                     <div class="col-sm-3">
-                        {$fecnacimiento} dd/mm/aaaa
+                        {$fc_nacimiento}
                     </div>
                     <label class="control-label col-sm-2 required">Edad</label>
                     <div class="col-sm-3">
@@ -113,29 +115,29 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2 required">G&eacute;nero</label>
                     <div class="col-sm-3">
-                        {$genero} Femenino
+                        Femenino
                     </div>
                     <label class="control-label col-sm-2 required">Direcci&oacute;n</label>
                     <div class="col-sm-3">
-                        {$direccion} Dirección
+                        {$gl_direccion}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2 required">Fono</label>
                     <div class="col-sm-3">
-                        {$fono} 9900000000
+                        {$gl_fono}
                     </div>
                     <label class="control-label col-sm-2 required">Celular</label>
                     <div class="col-sm-3">
-                        {$celular} +56900000000
+                        {$gl_celular}
                     </div>
                 </div>
 
                 <div class="form-group">    
                     <label class="control-label col-sm-2 required">E-mail</label>
                     <div class="col-sm-3">
-                        {$email} E-mail
+                        {$gl_email}
                     </div>
                 </div>    
             </div>
