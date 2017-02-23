@@ -30,15 +30,15 @@
 		$(".select2").select2();
 
 		$("table.dataTable").DataTable({
-			pageLength: 10,
-			/*sorting: [],*/
-			language: {
-				"url": url_base + "static/js/plugins/DataTables/lang/es.json"
-			},
+			pageLength	: 10,
+			/*sorting	: [],*/
+			language	: {
+							"url": url_base + "static/js/plugins/DataTables/lang/es.json"
+						},
 			fnDrawCallback: function (oSettings) {
 				$(this).fadeIn("slow");
 			},
-			dom: 'Bfrtip',
+			dom			: 'Bfrtip',
 			buttons: [
 				{
 					extend: 'excelHtml5',
@@ -268,6 +268,60 @@
 		});
 	});
 
+	//datatable con Funcionalidad de Elegir Columnas a Exportar, Titulo del archivo
+    $(".datatable.paginada").livequery(function(){
+        
+        if($(this).parent().hasAttr('data-row')) {
+            var filas = parseInt($(this).parent().attr("data-row"));
+        } else {
+            var filas = 10;
+        }
+        
+        var id			= $(this).attr("id");
+		var columnas	= ':visible';
+		var titulo		= 'Prevencion_de_Femicidios';
+        var buttons		= [];
+
+		if($(this).hasAttr('data-exportar')) {
+            columnas	= $(this).attr("data-exportar");
+        }
+		if($(this).hasAttr('data-titulo')) {
+            titulo		+= ' - '+$(this).attr("data-titulo");
+        }
+
+		buttons	= [
+					{
+						extend	: 'excelHtml5',
+						title	: titulo,
+						exportOptions: {
+							columns: [columnas]
+						}
+					},
+					{
+						extend	: 'pdfHtml5',
+						title	: titulo,
+						exportOptions: {
+							columns: [columnas]
+						}
+					}
+				];
+
+        var tb = $(this).DataTable({
+            "lengthMenu"	: [[5,10, 20, 25, 50, 100], [5, 10, 20, 25, 50, 100]],
+            "pageLength"	: filas,
+            "destroy"		: true,
+            "aaSorting"		: [],
+            "deferRender"	: true,
+            dom				: 'Bfrtip',
+            buttons			: buttons,
+            language		: {
+								"url": url_base + "static/js/plugins/DataTables/lang/es.json"
+							 },
+            "fnDrawCallback": function( oSettings ) {
+                $("#" + id).removeClass("hidden");
+             }
+        });
+    });
 
     //boton para exportar tabla a excel
     $(".buttons-excel").livequery(function(){
