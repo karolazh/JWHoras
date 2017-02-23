@@ -118,7 +118,8 @@ class Registro extends Controller {
             $nombres = $detReg->nombres.' '.$detReg->apellidos;
             $this->smarty->assign("nombres", $nombres);
             
-            $edad = "";
+            //$edad = "";
+            $edad = Fechas::calcularEdadInv($detReg->fc_nacimiento);
             $this->smarty->assign("fecha_nac", $detReg->fc_nacimiento);
             $this->smarty->assign("edad", $edad);
             
