@@ -277,9 +277,9 @@ class Registro extends Controller {
             $bo_acepta_programa_registro = $obj_registro->bo_acepta_programa;
             $obj_adjunto = $this->_DAOAdjuntos->getAdjuntoByRegistro($obj_registro->id_registro);
             if (!is_null($obj_adjunto)) {
-                $ruta_adjunto = $obj_adjunto->gl_path;
+                $ruta_consentimiento = $obj_adjunto->gl_path;
             } else {
-                $ruta_adjunto = "";
+                $ruta_consentimiento = "";
             }
             $obj_prevision = $this->_DAOPrevision->getPrevision($obj_registro->id_prevision);
             if (!is_null($obj_prevision)) {
