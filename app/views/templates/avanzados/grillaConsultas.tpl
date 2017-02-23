@@ -9,7 +9,7 @@
                     <th align="center" width="10%">Fecha Ing</th>
                     <th align="center" width="10%">Hora Ing</th>
                     <th align="center" width="">Motivo Consulta</th>
-                    <th align="center" width="15%">Usuario Responsable</th>
+                    <th align="center" width="15%">Usuario</th>
                 </tr>
             </thead>
             <tbody>
