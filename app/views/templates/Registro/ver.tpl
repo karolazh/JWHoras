@@ -39,11 +39,11 @@
                 </div>
 
 
-                <div class="col-md-12">
+                <div class="form-group">
                     <div class="clearfix col-md-3">
                         <div class="checkbox">
                             <label>
-                                &nbsp;&nbsp;&nbsp;<input type="checkbox" id="chkReconoce" {if $reconoce}checked="checked"{/if} disabled="disabled">
+                                <input type="checkbox" id="chkReconoce" {if $reconoce}checked="checked"{/if} disabled="disabled">
                                 <strong>Reconoce maltrato</strong>
                             </label>
                         </div>
@@ -51,7 +51,7 @@
                     <div class="clearfix col-md-3">
                         <div class="checkbox">
                             <label>
-                                &nbsp;&nbsp;&nbsp;<input type="checkbox" id="chkAcepta" {if $acepta}checked="checked"{/if} disabled="disabled">
+                                <input type="checkbox" id="chkAcepta" {if $acepta}checked="checked"{/if} disabled="disabled">
                                 <strong>Acepta Programa</strong>
                                     
                                 
@@ -60,7 +60,7 @@
                     </div>
                              <div class="clearfix col-md-3">
                             {if $ruta_adjunto != ""}
-                            <a class="btn btn-sm btn-primary" id="btnDescarga" href = '{$smarty.const.DIR_BASE}{$ruta_adjunto}' target="_blank"><i class="fa fa-download"></i>Descargar Consentimiento</a>
+                            <a class="btn btn-sm btn-primary" id="btnDescarga" href = '{$smarty.const.DIR_BASE}{$ruta_consentimiento}' target="_blank"><i class="fa fa-download"></i>Descargar Consentimiento</a>
                              {/if}
                             </div>
                              <div class="clearfix col-md-3">
@@ -103,7 +103,7 @@
                                     <label class="control-label required">Pasaporte Paciente :</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text"  value="{$extranjero}" class="form-control" readonly>
+                                    <input type="text" value="{$run_pass}" class="form-control" readonly>
                                 </div>
 
                             </div>

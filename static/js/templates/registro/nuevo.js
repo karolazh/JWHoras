@@ -1,10 +1,4 @@
 /* global BASE_URI */
-$(document).ready(function() {
-    $("#chkReconoce").on('change', function(e) {
-        alert($('#chkReconoce').val());
-    });
-});
-
 
     $("#guardar").on('click', function(e) {
         var button_process	= buttonStartProcess($(this), e);
@@ -105,6 +99,7 @@ $(document).ready(function() {
 								if(data.correcto){
 									xModal.success('Paciente ya Registro.<br>Se procede a cargar la información.');
 									
+                                                                        $("#id_registro").val(data.id_registro);
 									$("#nombres").val(data.gl_nombres);
 									$("#apellidos").val(data.gl_apellidos);
 									$("#fc_nacimiento").val(data.fc_nacimiento);

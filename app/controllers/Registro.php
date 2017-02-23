@@ -48,25 +48,24 @@ class Registro extends Controller {
     protected $_DAOAdjuntosTipo;
     protected $_DAOEmpa;
     protected $_DAOExamenRegistro;
-    
+
     function __construct() {
         parent::__construct();
         $this->load->lib('Fechas', false);
-        $this->_DAORegion = $this->load->model("DAORegion");
-        $this->_DAOComuna = $this->load->model("DAOComuna");
-        $this->_DAORegistro = $this->load->model("DAORegistro");
-        $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
-        $this->_DAOEstadoCaso = $this->load->model("DAOEstadoCaso");
-        $this->_DAOPrevision = $this->load->model("DAOPrevision");
-        $this->_DAOMotivoConsulta = $this->load->model("DAOMotivoConsulta");
-        $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
-        
-        $this->_DAOInstitucion = $this->load->model("DAOInstitucion");
-        $this->_DAOEventosTipo = $this->load->model("DAOEventosTipo");
-        $this->_DAOAdjuntos = $this->load->model("DAOAdjuntos");
-        $this->_DAOAdjuntosTipo = $this->load->model("DAOAdjuntosTipo");
-        $this->_DAOEmpa = $this->load->model("DAOEmpa");
-        $this->_DAOExamenRegistro = $this->load->model("DAOExamenRegistro");
+        $this->_DAORegion			= $this->load->model("DAORegion");
+        $this->_DAOComuna			= $this->load->model("DAOComuna");
+        $this->_DAORegistro			= $this->load->model("DAORegistro");
+        $this->_DAOCasoEgreso		= $this->load->model("DAOCasoEgreso");
+        $this->_DAOEstadoCaso		= $this->load->model("DAOEstadoCaso");
+        $this->_DAOPrevision		= $this->load->model("DAOPrevision");
+        $this->_DAOMotivoConsulta	= $this->load->model("DAOMotivoConsulta");
+        $this->_DAOUsuarios			= $this->load->model("DAOUsuarios");
+        $this->_DAOInstitucion		= $this->load->model("DAOInstitucion");
+        $this->_DAOEventosTipo		= $this->load->model("DAOEventosTipo");
+        $this->_DAOAdjuntos			= $this->load->model("DAOAdjuntos");
+        $this->_DAOAdjuntosTipo		= $this->load->model("DAOAdjuntosTipo");
+        $this->_DAOEmpa				= $this->load->model("DAOEmpa");
+        $this->_DAOExamenRegistro	= $this->load->model("DAOExamenRegistro");
     }
 
     /*
@@ -264,10 +263,10 @@ class Registro extends Controller {
             $bo_reconoce_violencia_registro = $obj_registro->bo_reconoce;
             $bo_acepta_programa_registro = $obj_registro->bo_acepta_programa;
             $obj_adjunto = $this->_DAOAdjuntos->getAdjuntoByRegistro($obj_registro->id_registro);
-            if (!is_null($obj_adjunto)){
-                $ruta_adjunto = $obj_adjunto->gl_path;
+            if (!is_null($obj_adjunto)) {
+                $ruta_consentimiento = $obj_adjunto->gl_path;
             } else {
-                $ruta_adjunto = "";
+                $ruta_consentimiento = "";
             }
             $obj_prevision = $this->_DAOPrevision->getPrevision($obj_registro->id_prevision);
             if (!is_null($obj_prevision)) {
@@ -292,7 +291,7 @@ class Registro extends Controller {
             }
             $edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
             $obj_estado_caso = $this->_DAOEstadoCaso->getEstadoCaso($obj_registro->id_estado_caso);
-            if (!is_null($obj_estado_caso)){
+            if (!is_null($obj_estado_caso)) {
                 $nombre_estado_caso = $obj_estado_caso->gl_nombre_estado_caso;
             } else {
                 $nombre_estado_caso = "N/D";
@@ -303,7 +302,7 @@ class Registro extends Controller {
             } else {
                 $institucion = "N/D";
             }
-            
+
             $arrMotivosConsulta = $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($obj_registro->id_registro);
         } else {
             $id_registro = "N/D";
@@ -354,7 +353,7 @@ class Registro extends Controller {
         $this->smarty->assign('estado_caso', $nombre_estado_caso);
         $this->smarty->assign('institucion', $institucion);
         $this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
-        $this->smarty->assign('ruta_adjunto', $ruta_adjunto);
+        $this->smarty->assign('ruta_consentimiento', $ruta_consentimiento);
         $this->smarty->display('Registro/ver.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/ver.js");
@@ -400,6 +399,7 @@ class Registro extends Controller {
 
 		if($registro){
 			$json['correcto']			= TRUE;
+                        $json['id_registro']			= $registro->id_registro;
 			$json['gl_nombres']			= $registro->gl_nombres;
 			$json['gl_apellidos']		= $registro->gl_apellidos;
 			$json['fc_nacimiento']		= $registro->fc_nacimiento;
