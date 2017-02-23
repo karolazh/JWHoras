@@ -268,7 +268,8 @@
 
                                                             <div class="btn-group">
                                                                 <div id="div_tabla" class="table-responsive small"> 
-                                                                    <button type="button" class="form-control btn btn-success" 
+                                                                    <button id="guardar1" type="button" 
+                                                                            class="form-control btn btn-success" 
                                                                             onclick="Comentario.guardarComentario(this.form, this)">Guardar</button>
                                                                 </div>
                                                             </div>
@@ -367,7 +368,8 @@
 
                                                             <div class="btn-group">
                                                                 <div id="div_tabla" class="table-responsive small"> 
-                                                                    <button type="button" class="form-control btn btn-success" 
+                                                                    <button id="guardar2" type="button" 
+                                                                            class="form-control btn btn-success" 
                                                                             onclick="Comentario.guardarComentario(this.form, this)">Guardar</button>
                                                                 </div>
                                                             </div>
