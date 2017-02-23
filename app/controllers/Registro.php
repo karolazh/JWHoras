@@ -53,16 +53,15 @@ class Registro extends Controller {
     function __construct() {
         parent::__construct();
         $this->load->lib('Fechas', false);
-        $this->_DAORegion = $this->load->model("DAORegion");
-        $this->_DAOComuna = $this->load->model("DAOComuna");
-        $this->_DAORegistro = $this->load->model("DAORegistro");
-        $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
-        $this->_DAOEstadoCaso = $this->load->model("DAOEstadoCaso");
-        $this->_DAOPrevision = $this->load->model("DAOPrevision");
-        $this->_DAOMotivoConsulta = $this->load->model("DAOMotivoConsulta");
-        $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
-        
-        $this->_DAOInstitucion = $this->load->model("DAOInstitucion");
+        $this->_DAORegion			= $this->load->model("DAORegion");
+        $this->_DAOComuna			= $this->load->model("DAOComuna");
+        $this->_DAORegistro			= $this->load->model("DAORegistro");
+        $this->_DAOCasoEgreso		= $this->load->model("DAOCasoEgreso");
+        $this->_DAOEstadoCaso		= $this->load->model("DAOEstadoCaso");
+        $this->_DAOPrevision		= $this->load->model("DAOPrevision");
+        $this->_DAOMotivoConsulta	= $this->load->model("DAOMotivoConsulta");
+        $this->_DAOUsuarios			= $this->load->model("DAOUsuarios");
+        $this->_DAOInstitucion		= $this->load->model("DAOInstitucion");
         $this->_DAOEventosTipo = $this->load->model("DAOEventosTipo");
         $this->_DAOAdjuntos = $this->load->model("DAOAdjuntos");
         $this->_DAOAdjuntosTipo = $this->load->model("DAOAdjuntosTipo");
