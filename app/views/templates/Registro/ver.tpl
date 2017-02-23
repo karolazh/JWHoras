@@ -59,7 +59,7 @@
                         </div>
                     </div>
                              <div class="clearfix col-md-3">
-                            {if $ruta_adjunto != ""}
+                            {if $ruta_consentimiento != ""}
                             <a class="btn btn-sm btn-primary" id="btnDescarga" href = '{$smarty.const.DIR_BASE}{$ruta_consentimiento}' target="_blank"><i class="fa fa-download"></i>Descargar Consentimiento</a>
                              {/if}
                             </div>
