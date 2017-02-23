@@ -19,8 +19,8 @@
                     <i class="fa fa-plus-circle"></i> <span>Mantenedores</span></a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="{$base_url}/Administracion/noticias">
-                                <i class="fa fa-plus-circle"></i> <span>Noticias</span></a>
+                            <a href="{$base_url}/Administracion/perfiles">
+                                <i class="fa fa-plus-circle"></i> <span>Perfiles</span></a>
                         </li>
                     </ul>
             </li>
