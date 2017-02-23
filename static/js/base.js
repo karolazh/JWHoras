@@ -228,7 +228,7 @@
 	}
 
 	$(".infoTip").livequery(function(){
-		var titulo	= 'Explicación de la Funcionalidad';
+		var titulo	= 'ExplicaciÃ³n de la Funcionalidad';
 		var texto	= '';
         var pos = '';
 
@@ -269,4 +269,22 @@
 	});
 
 
+    //boton para exportar tabla a excel
+    $(".buttons-excel").livequery(function(){
+       $(this).html("<i class=\"fa fa-download\"></i> Exportar a EXCEL");
+       $(this).removeClass("dt-button");
+       $(this).addClass("btn btn-primary btn-xs");
+    });
+    
+    $(".buttons-pdf").livequery(function(){
+       $(this).html("<i class=\"fa fa-file-pdf-o\"></i> EXPORTAR a PDF");
+       $(this).removeClass("dt-button");
+       $(this).addClass("btn btn-success btn-xs");
+    });
+    
+    $(".buttons-print").livequery(function(){
+       $(this).html("<i class=\"fa fa-print\"></i> Imprimir");
+       $(this).removeClass("dt-button");
+       $(this).addClass("btn btn-default btn-xs");
+    });
 
