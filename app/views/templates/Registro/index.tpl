@@ -44,7 +44,7 @@
                                     </button>
                                     <button href='javascript:void(0)' 
 
-                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/detalleRegistro/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
+                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
                                             {*onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/detalleRegistro/{$item->gl_rut}', 'Bitácora paciente RUT : {$item->gl_rut}', 85);" *}
                                             data-toggle="tooltip" 
                                             title="Bitácora" 

@@ -92,7 +92,7 @@ class Registro extends Controller {
         $this->_display('Registro/index.tpl');
     }
 
-    public function detalleRegistro() {
+    public function bitacora() {
 
         $parametros = $this->request->getParametros();
         $idReg = $parametros[0];
@@ -181,7 +181,7 @@ class Registro extends Controller {
             $this->smarty->assign('arrConsultas', $arrConsultas);
             
             //muestra template
-            $this->smarty->display('avanzados/detalle.tpl');
+            $this->smarty->display('Registro/bitacora.tpl');
         } else {
             throw new Exception("El historial que está buscando no existe");
         }
