@@ -16,11 +16,18 @@ class DAORegistro extends Model{
      */
     public function getListaRegistro(){
         $query	= "	SELECT
-						id_registro,
-						gl_rut,
-						gl_nombres,
-						gl_apellidos
-					FROM pre_registro r ";
+						r.id_registro,
+						r.gl_rut,
+                                                r.fc_crea,
+						r.gl_nombres,
+						r.gl_apellidos,
+                                                i.gl_nombre,
+                                                c.gl_nombre_comuna,
+                                                e.gl_nombre_estado_caso
+					FROM pre_registro r 
+                                        LEFT JOIN pre_institucion i ON i.id_institucion = r.id_institucion
+                                        LEFT JOIN pre_comunas c ON c.id_comuna = r.id_comuna
+                                        LEFT JOIN pre_estados_caso e ON e.id_estado_caso = r.id_estado_caso";
 
         $resultado	= $this->db->getQuery($query);
 
@@ -33,9 +40,9 @@ class DAORegistro extends Model{
 
     public function getRegistroById($id_registro) {
         $query	= "	SELECT
-						pre_registro.*,
+						r.*,
 						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento
-					FROM pre_registro 
+					FROM pre_registro r
 					WHERE id_registro = ?";
 
         $param = array($id_registro);

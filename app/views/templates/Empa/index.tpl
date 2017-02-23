@@ -39,132 +39,51 @@
             <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
                 <thead>
                     <tr role="row">
-                        <th align="center" width="5%">#ID EMPA</th>
+                        <th align="center" width="5%">#ID REGISTRO</th>
                         <th align="center" width="5%">Fecha</th>
                         <th align="center" width="5%">RUT Paciente</th>
+                        <th align="center" width="">Nombres</th>
                         <th align="center" width="">Comuna</th>
                         <th align="center" width="">Centro Salud</th>
-                        <th align="center" width="5%">#ID DAU</th>
-                        <th align="center" width="5%">Estado DAU</th>
+                        <th align="center" width="5%">Estado Caso</th>
                         <th align="center" width="20%">Acciones</th>
                     </tr>
                 </thead>
                 
-                <!-- PRUEBA -->
-                <tbody>
-                    <tr>
-                        <td nowrap align="center"> ?</td>
-                        <td nowrap align="center"> dd/mm/aaaa</td>
-                        <td nowrap align="center"> 99999999-9</td>
-                        <td nowrap align="center"> ?</td>
-                        <td class="text-center"> ?</td>
-                        <td class="text-center"> ?</td>
-                        <td class="text-center">
-                            <span class="label label-success">ABIERTO</span>
-                        </td>
-                        <td class="text-center" style="width:100px;">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn btn-danger btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_id}'" 
-                                        data-toggle="tooltip" title="Ver DAU">
-                                    <i class="fa fa-eye"></i>&nbsp;&nbsp;DAU
-                                </button>&nbsp;
-                                <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_dau_id}'" 
-                                        data-toggle="tooltip" title="Ver EMPA">
-                                    <i class="fa fa-eye"></i>&nbsp;&nbsp;EMPA
-                                </button>&nbsp;
-                                <button type="button" class="btn btn-sm btn-info btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_pac_id}'" 
-                                        data-toggle="tooltip" title="Ver Paciente">
-                                    <i class="fa fa-eye"></i>&nbsp;&nbsp;Paciente
-                                </button>
-                            </div>			
-                       </td>          
-                    </tr>
-                    <tr>
-                        <td nowrap align="center"> ?</td>
-                        <td nowrap align="center"> dd/mm/aaaa</td>
-                        <td nowrap align="center"> 99999999-9</td>
-                        <td nowrap align="center"> ?</td>
-                        <td class="text-center"> ?</td>
-                        <td class="text-center"> ?</td>
-                        <td class="text-center">
-                            <span class="label label-danger">CERRADO</span>
-                        </td>
-                        <td class="text-center" style="width:100px;">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn btn-danger btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_id}'" 
-                                        data-toggle="tooltip" title="Ver DAU">
-                                    <i class="fa fa-eye"></i>&nbsp;&nbsp;DAU
-                                </button>&nbsp;
-                                <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_dau_id}'" 
-                                        data-toggle="tooltip" title="Ver EMPA">
-                                    <i class="fa fa-eye"></i>&nbsp;&nbsp;EMPA
-                                </button>&nbsp;
-                                <button type="button" class="btn btn-sm btn-info btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_pac_id}'" 
-                                        data-toggle="tooltip" title="Ver Paciente">
-                                    <i class="fa fa-eye"></i>&nbsp;&nbsp;Paciente
-                                </button>
-                            </div>			
-                       </td>          
-                    </tr>
-                    <tr>
-                        <td nowrap align="center"> ?</td>
-                        <td nowrap align="center"> dd/mm/aaaa</td>
-                        <td nowrap align="center"> 99999999-9</td>
-                        <td nowrap align="center"> ?</td>
-                        <td class="text-center"> ?</td>
-                        <td class="text-center"> ?</td>
-                        <td class="text-center">
-                            <span class="label label-warning">SIN ESTADO</span>
-                        </td>
-                        <td class="text-center" style="width:100px;">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn btn-danger btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_id}'" 
-                                        data-toggle="tooltip" title="Ver DAU">
-                                    <i class="fa fa-eye"></i>&nbsp;&nbsp;DAU
-                                </button>&nbsp;
-                                <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_dau_id}'" 
-                                        data-toggle="tooltip" title="Ver EMPA">
-                                    <i class="fa fa-eye"></i>&nbsp;&nbsp;EMPA
-                                </button>&nbsp;
-                                <button type="button" class="btn btn-sm btn-info btn-flat" 
-                                        onClick="location.href='{$base_url}/Empa/ver/{$item->emp_pac_id}'" 
-                                        data-toggle="tooltip" title="Ver Paciente">
-                                    <i class="fa fa-eye"></i>&nbsp;&nbsp;Paciente
-                                </button>
-                            </div>			
-                       </td>          
-                    </tr>
-                </tbody>
+
                 
-                {*<tbody>
+                <tbody>
                     {foreach $arrResultado as $item}
                         <tr>
-                            <td nowrap width="100px" align="center"> {$item->emp_id} </td>
-                            <td nowrap width="100px" align="center"> {$item->emp_dau_id} </td>
-                            <td nowrap width="100px" align="center"> {$item->emp_fec} </td>
-                            <td nowrap width="100px" align="center"> {$item->emp_pac_id} ?</td>
-                            <td class="text-center">?</td>
-                            <td class="text-center">?</td>
+                            <td nowrap width="100px" align="center"> {$item->id_registro} </td>
+                            <td nowrap width="100px" align="center"> {$item->fc_crea} </td>
+                            <td nowrap width="100px" align="center"> {$item->gl_rut} </td>
+                            <td nowrap width="100px" align="center"> {$item->gl_nombres} </td>
+                            <td nowrap width="100px" align="center"> {$item->gl_nombre_comuna} </td>
+                            <td nowrap width="100px" align="center"> {$item->gl_nombre} </td>
+                            <td nowrap width="100px" align="center"> {$item->gl_nombre_estado_caso} </td>
                             <td class="text-center" style="width:100px;">
                                 <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn btn-danger btn-flat" 
+                                        onClick="location.href='{$base_url}/Empa/ver/{$item->id_registro}'" 
+                                        data-toggle="tooltip" title="DAU">
+                                    <i class="fa fa-eye"></i>&nbsp;&nbsp;DAU
+                                    </button>&nbsp;
                                     <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                            onClick="location.href='{$base_url}/Empa/verEmpa/{$item->emp_id}'" 
-                                            data-toggle="tooltip" title="Ver Actividad">
-                                        <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver
+                                            onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_registro}'" 
+                                            data-toggle="tooltip" title="Empa">
+                                        <i class="fa fa-eye"></i>&nbsp;&nbsp;EMPA
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-info btn-flat" 
+                                        onClick="location.href='{$base_url}/Empa/ver/{$item->id_registro}'" 
+                                        data-toggle="tooltip" title="Ver Paciente">
+                                    <i class="fa fa-eye"></i>&nbsp;&nbsp;Paciente
                                     </button>
                                 </div>			
                            </td>          
                         </tr>
                     {/foreach}
-                </tbody>*}
+                </tbody>
             </table>
 
         </div>
