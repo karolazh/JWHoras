@@ -14,7 +14,7 @@ Class Boton{
 	 * @param string $class_posicion 'pull-left', 'pull-right' o '' 
 	 * @return string html
 	 */
-	function botonAyuda($explicacion, $titulo='', $class_posicion="pull-right", $class_color="btn-primary"){
+	public static function botonAyuda($explicacion, $titulo='', $class_posicion="pull-right", $class_color="btn-primary"){
 		
 		return '<span class="btn btn-xs '.$class_color.' '.$class_posicion.' infoTip" data-pos="'.$class_posicion.'" data-titulo="'.$titulo.'" data-texto="'.$explicacion.'">
 					<li class="fa fa-question-circle"></li>
