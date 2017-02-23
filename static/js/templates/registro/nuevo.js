@@ -1,150 +1,187 @@
 /* global BASE_URI */
-$(document).ready(function() {
-    $("#chkReconoce").on('change', function(e) {
-        alert($('#chkReconoce').val());
-    });
-});
 
-
-$(document).ready(function() {
     $("#guardar").on('click', function(e) {
         var button_process	= buttonStartProcess($(this), e);
         var parametros		= $("#form").serializeArray();
+        var gl_rut			= $("#rut").val();
 
-		if($('#chkextranjero').is(':checked')){
-			parametros.push({
-				"name"  : 'chkextranjero',
-				"value" : 1
-			});
+		if(gl_rut == ''){
+			xModal.danger('- El campo RUT es Obligatorio');
 		}else{
-			parametros.push({
-				"name"  : 'chkextranjero',
-				"value" : 0
-			});
-		}
-		if($('#chkAcepta').is(':checked')){
-			parametros.push({
-				"name"  : 'chkAcepta',
-				"value" : 1
-			});
-		}else{
-			parametros.push({
-				"name"  : 'chkAcepta',
-				"value" : 0
-			});
-		}
-        $.ajax({         
-            dataType: "json",
-            cache	:false,
-            async	: true,
-            data	: parametros,
-            type	: "post",
-            url		: BASE_URI + "index.php/Registro/GuardarRegistro", 
-            error	: function(xhr, textStatus, errorThrown){
-						buttonEndProcess(button_process);
-						xModal.info('Error: No se pudo Ingresar un nuevo Registro');
-            },
-            success	: function(data){
-						buttonEndProcess(button_process);
-						if(data.correcto){
-							xModal.success('Éxito: Se Ingresó nuevo Registro!');
-							location.href = BASE_URI + "index.php/Registro";
-						} else {
-							buttonEndProcess(button_process);
-							xModal.info('Error: No se pudo Ingresar un nuevo Registro');
-						}
-            }
-        }); 
-    });
-});
+			if($('#chkextranjero').is(':checked')){
+				parametros.push({
+					"name"  : 'chkextranjero',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'chkextranjero',
+					"value" : 0
+				});
+			}
+			if($('#chkAcepta').is(':checked')){
+				parametros.push({
+					"name"  : 'chkAcepta',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'chkAcepta',
+					"value" : 0
+				});
+			}
+			if($('#chkReconoce').is(':checked')){
+				parametros.push({
+					"name"  : 'chkReconoce',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'chkReconoce',
+					"value" : 0
+				});
+			}
 
-//Formatea Fecha
-function formattedDate(date) {
-    var d = new Date(date || Date.now()),
-        day = '' + d.getDate(),
-        month = '' + (d.getMonth() + 1),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [day, month, year].join('/');
-}
-
-var Registro ={
-    
-cargarRegistro : function(){
-            rut = document.getElementById('rut').value;
-            console.log(rut);
-		if(rut != ""){
-			$.post(BASE_URI+'index.php/Registro/cargarRegistro',{rut:rut},function(response){
-				if(response.length > 0){
-                                        document.getElementById('nombres').value = response[0].nombres;
-                                        document.getElementById('apellidos').value = response[0].apellidos;
-                                        document.getElementById('fecnacim').value = response[0].fec_nac;
-                                        document.getElementById('prevision').value = response[0].prevision;
-                                        document.getElementById('convenio').value = response[0].convenio;
-                                        document.getElementById('region').value = response[0].region;
-                                        Region.cargarComunasPorRegion(response[0].region,'comuna');
-                                        document.getElementById('comuna').value = response[0].comuna;
-                                        //Convertir Edad
-                                        fecha = new Date(response[0].fec_nac);
-                                        hoy = new Date();
-                                        ed = parseInt((hoy -fecha)/365/24/60/60/1000);
-                                        if (ed >= 0)
-                                            {document.getElementById('edad').value = ed;}
-                                }else{
-                                    alert("No se encontró Paciente con rut: "+rut);
-                                }
-			},'json');
-		}else{
-                    alert("No se ha ingresado rut");
-		}
-            },
-            
-cargarCentroSaludporComuna : function(comuna,combo,centrosalud){
-            console.log(comuna);
-		if(comuna != 0){
-			$.post(BASE_URI+'index.php/Registro/cargarCentroSaludporComuna',{comuna:comuna},function(response){
-				if(response.length > 0){
-					var total = response.length;
-					var options = '<option value="0">Seleccione un Centro de Salud</option>';
-					for(var i=0; i<total; i++){
-						if(centrosalud == response[i].id_establecimiento){
-							options += '<option value="'+response[i].id_establecimiento+'" selected >'+response[i].nombre_establecimiento+'</option>';	
-						}else{
-							options += '<option value="'+response[i].id_establecimiento+'">'+response[i].nombre_establecimiento+'</option>';
-						}
-						
-					}
-					$('#'+combo).html(options);
+			$.ajax({
+				dataType: "json",
+				cache	:false,
+				async	: true,
+				data	: parametros,
+				type	: "post",
+				url		: BASE_URI + "index.php/Registro/GuardarRegistro", 
+				error	: function(xhr, textStatus, errorThrown){
+							xModal.danger('Error: No se pudo Ingresar un nuevo Registro');
+				},
+				success	: function(data){
+							if(data.correcto){
+								xModal.success('Éxito: Se Ingresó nuevo Registro!');
+								location.href = BASE_URI + "index.php/Registro";
+							} else {
+								xModal.info('Error: No se pudo Ingresar un nuevo Registro');
+							}
 				}
-			},'json');
-		}else{
-                    $('#'+combo).html('<option value="0">Seleccione un Centro de Salud</option>');
+			});
 		}
+		buttonEndProcess(button_process);
+		
+    });
+
+	//Formatea Fecha
+	function formattedDate(date) {
+		var d		= new Date(date || Date.now()),
+			day		= '' + d.getDate(),
+			month	= '' + (d.getMonth() + 1),
+			year	= d.getFullYear();
+
+		if (month.length < 2) month = '0' + month;
+		if (day.length < 2) day = '0' + day;
+
+		return [day, month, year].join('/');
 	}
-};       
+
+	var Registro = {
+		cargarRegistro : function(){
+			var rut = $("#rut").val();
+			if(rut != ""){
+				
+				
+				$.ajax({
+					dataType: "json",
+					cache	:false,
+					async	: true,
+					data	: {rut:rut},
+					type	: "post",
+					url		: BASE_URI + "index.php/Registro/cargarRegistro", 
+					error	: function(xhr, textStatus, errorThrown){
+								xModal.danger('Error al Buscar');
+					},
+					success	: function(data){
+								if(data.correcto){
+									xModal.success('Paciente ya Registro.<br>Se procede a cargar la información.');
+									
+									$("#nombres").val(data.gl_nombres);
+									$("#apellidos").val(data.gl_apellidos);
+									$("#fc_nacimiento").val(data.fc_nacimiento);
+									$("#fc_nacimiento").trigger('blur');
+									$("#prevision").val(data.id_prevision);
+									$("#direccion").val(data.gl_direccion);
+									$("#region").val(data.id_region);									
+									$("#gl_latitud").val(data.gl_latitud);
+									$("#gl_longitud").val(data.gl_longitud);
+									$("#gl_longitud").trigger('change');
+
+									$("#fono").val(data.gl_fono);
+									$("#celular").val(data.gl_celular);
+									$("#email").val(data.gl_email);
+									
+									if(data.bo_reconoce == '1'){
+										$("#chkReconoce").prop("checked", true);
+									}
+									if(data.bo_acepta_programa == '1'){
+										$("#chkAcepta").prop("checked", true);
+									}
+									if(data.id_comuna != '0'){
+										var comuna = '<option value="'+data.id_comuna+'">'+data.gl_nombre_comuna+'</option>';
+										$("#comuna").html(comuna);
+									}else{
+										$("#region").trigger('change');
+									}
+
+									if(data.id_centro_salud != '0'){
+										var centro_salud = '<option value="'+data.id_centro_salud+'">'+data.gl_centro_salud+'</option>';
+										$("#centrosalud").html(centro_salud);
+									}else{
+										$("#comuna").trigger('change');
+									}
+
+									$('#form').find('input, textarea, checkbox, select').attr('disabled',true);									
+									$( "#motivoconsulta" ).prop( "disabled", false );
+									$( "#fechaingreso" ).prop( "disabled", false );
+									$( "#horaingreso" ).prop( "disabled", false );
+								} else {
+									xModal.info('Error al Buscar');
+								}
+					}
+				});
+			}else{
+				xModal.info("Debe ingresar un RUT");
+			}
+		},
+				
+		cargarCentroSaludporComuna : function(comuna,combo,centrosalud){
+			if(comuna != 0){
+				$.post(BASE_URI+'index.php/Registro/cargarCentroSaludporComuna',{comuna:comuna},function(response){
+					if(response.length > 0){
+						var total = response.length;
+						var options = '<option value="0">Seleccione un Centro de Salud</option>';
+						for(var i=0; i<total; i++){
+							if(centrosalud == response[i].id_establecimiento){
+								options += '<option value="'+response[i].id_establecimiento+'" selected >'+response[i].nombre_establecimiento+'</option>';	
+							}else{
+								options += '<option value="'+response[i].id_establecimiento+'">'+response[i].nombre_establecimiento+'</option>';
+							}
+							
+						}
+						$('#'+combo).html(options);
+					}
+				},'json');
+			}else{
+						$('#'+combo).html('<option value="0">Seleccione un Centro de Salud</option>');
+			}
+		}
+	};
     
-$(document).ready(function() {
+	$(document).ready(function() {
 
+		var mapa = new MapaFormulario("map");
+		mapa.seteaIcono("static/images/referencia.png");
+		mapa.seteaLongitud("-70.6504492");
+		mapa.seteaLatitud("-33.4378305");
+		mapa.seteaZoom(12);
+		mapa.seteaPlaceInput("direccion");
+		mapa.inicio();
+		mapa.cargaMapa();
 
-            var mapa = new MapaFormulario("map");
-            mapa.seteaIcono("static/images/referencia.png");
-            mapa.seteaLongitud("-70.6504492");
-            mapa.seteaLatitud("-33.4378305");			
-            mapa.seteaZoom(12);
-            mapa.inicio();
-            mapa.cargaMapa();
+		mapa.setMarkerInputs();
 
-            //if($("#eme_id").val()!=""){
-                mapa.setMarkerInputs();
-            //}
-
-
-
-});
-
-
-
-
+	});

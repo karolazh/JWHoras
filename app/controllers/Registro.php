@@ -42,22 +42,30 @@ class Registro extends Controller {
     protected $_DAOUsuarios;
     protected $_DAOEstadoCaso;
     protected $_DAOInstitucion;
-    protected $_DAOAdjuntos;
 
-    //funcion construct
+    protected $_DAOEventosTipo;
+    protected $_DAOAdjuntos;
+    protected $_DAOAdjuntosTipo;
+    protected $_DAOEmpa;
+    protected $_DAOExamenRegistro;
+
     function __construct() {
         parent::__construct();
         $this->load->lib('Fechas', false);
-        $this->_DAORegion = $this->load->model("DAORegion");
-        $this->_DAOComuna = $this->load->model("DAOComuna");
-        $this->_DAORegistro = $this->load->model("DAORegistro");
-        $this->_DAOCasoEgreso = $this->load->model("DAOCasoEgreso");
-        $this->_DAOEstadoCaso = $this->load->model("DAOEstadoCaso");
-        $this->_DAOPrevision = $this->load->model("DAOPrevision");
-        $this->_DAOMotivoConsulta = $this->load->model("DAOMotivoConsulta");
-        $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
-        $this->_DAOInstitucion = $this->load->model("DAOInstitucion");
+        $this->_DAORegion			= $this->load->model("DAORegion");
+        $this->_DAOComuna			= $this->load->model("DAOComuna");
+        $this->_DAORegistro			= $this->load->model("DAORegistro");
+        $this->_DAOCasoEgreso		= $this->load->model("DAOCasoEgreso");
+        $this->_DAOEstadoCaso		= $this->load->model("DAOEstadoCaso");
+        $this->_DAOPrevision		= $this->load->model("DAOPrevision");
+        $this->_DAOMotivoConsulta	= $this->load->model("DAOMotivoConsulta");
+        $this->_DAOUsuarios			= $this->load->model("DAOUsuarios");
+        $this->_DAOInstitucion		= $this->load->model("DAOInstitucion");
+        $this->_DAOEventosTipo = $this->load->model("DAOEventosTipo");
         $this->_DAOAdjuntos = $this->load->model("DAOAdjuntos");
+        $this->_DAOAdjuntosTipo = $this->load->model("DAOAdjuntosTipo");
+        $this->_DAOEmpa = $this->load->model("DAOEmpa");
+        $this->_DAOExamenRegistro = $this->load->model("DAOExamenRegistro");
     }
 
     /*
@@ -86,23 +94,89 @@ class Registro extends Controller {
 
     public function bitacora() {
         $parametros = $this->request->getParametros();
-        $rut_registro = $parametros[0];
-        $obj_registro = $this->_DAORegistro->getRegistroxRut($rut_registro);
-        if (!is_null($obj_registro)) {
-            $rut_registro = $obj_registro->gl_rut;
-            $bo_extranjero = $obj_registro->bo_extranjero;
-            $run_extranjero = $obj_registro->gl_run_pass;
-            $nombres_registro = $obj_registro->gl_nombres;
-            $apellido_registro = $obj_registro->gl_apellidos;
-            $fecha_nacimiento_registro = $obj_registro->fc_nacimiento;
-            $obj_prevision = $this->_DAOPrevision->getPrevision($obj_registro->id_prevision);
-            $edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
-            if (!is_null($obj_prevision)) {
-                $nombre_prevision = $obj_prevision->gl_nombre_prevision;
-            } else {
-                $nombre_prevision = "N/D";
-            }
+        $idReg = $parametros[0];
+        $detReg = $this->_DAORegistro->getRegistroxId($idReg);
+        
+        if (!is_null($detReg)) {
+            //$this->smarty->assign("detReg", $detReg);
             
+            $run = "";
+            $ext = "NO";
+            if (!is_null($detReg->rut))
+            {
+                $run = $detReg->rut;
+            }
+            else {
+                $run = $detReg->run_pass;
+                $ext = "SI";
+            }
+            $this->smarty->assign("run", $run);
+            $this->smarty->assign("ext", $ext);
+            $this->smarty->assign("nombres", $detReg->nombres);
+            $this->smarty->assign("apellidos", $detReg->apellidos);
+            
+            $this->smarty->assign("fecha_nac", $detReg->fc_nacimiento);
+            $this->smarty->assign("genero", $detReg->genero);
+            $this->smarty->assign("prevision", $detReg->prevision);
+            
+            $this->smarty->assign("direccion", $detReg->direccion);
+            $this->smarty->assign("fono", $detReg->fono);
+            $this->smarty->assign("celular", $detReg->celular);
+            
+            $this->smarty->assign("region", $detReg->region);
+            $this->smarty->assign("provincia", $detReg->provincia);
+            $this->smarty->assign("comuna", $detReg->comuna);
+            
+            $this->smarty->assign("email", $detReg->email);
+            $this->smarty->assign("estado", $detReg->estado);
+            $this->smarty->assign("grupo", $detReg->grupo);
+            
+            $reconoce = "NO";
+            if (!is_null($detReg->reconoce))
+            {
+                if ($detReg->reconoce)
+                {
+                    $reconoce = "SI";
+                }                
+            }
+            $acepta = "NO";
+            if (!is_null($detReg->acepta))
+            {
+                if ($detReg->acepta)
+                {
+                    $acepta = "SI";
+                }                
+            }
+            $this->smarty->assign("reconoce", $reconoce);
+            $this->smarty->assign("acepta", $acepta);
+            $this->smarty->assign("fecha_reg", $detReg->fc_crea);
+            
+            //Tipos de Eventos
+            $arrTipoEvento = $this->_DAOEventosTipo->getListaEventosTipo();
+            $this->smarty->assign('arrTipoEvento', $arrTipoEvento);
+            
+            //Grilla Bitácora
+            $arrHistorial = $this->_DAORegistro->getEventosRegistro($idReg);
+            $this->smarty->assign('arrHistorial', $arrHistorial);
+            
+            //Tipos de Adjuntos
+            $arrTipoDocumento = $this->_DAOAdjuntosTipo->getListaAdjuntosTipo();
+            $this->smarty->assign('arrTipoDocumento', $arrTipoDocumento);
+            
+            //Grilla Adjuntos
+            $arrAdjuntos = $this->_DAOAdjuntos->getListaAdjuntosRegistro($idReg);
+            $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
+            
+            //Grilla Empa
+            $arrEmpa = $this->_DAOEmpa->getEmpaGrilla($idReg);
+            $this->smarty->assign('arrEmpa', $arrEmpa);
+            
+            //Grilla Exámenes x Registro
+            $arrExamenes = $this->_DAOExamenRegistro->getListaExamenRegistroxId($idReg);
+            $this->smarty->assign('arrExamenes', $arrExamenes);
+            
+            //
+            $this->smarty->display('avanzados/detalle.tpl');
         } else {
             $rut_registro = "N/D";
             $bo_extranjero = "N/D";
@@ -152,29 +226,29 @@ class Registro extends Controller {
 
     public function GuardarRegistro() {
         header('Content-type: application/json');
-        $parametros = $this->_request->getParams();
-        $correcto = false;
-        $error = false;
-        $gl_grupo_tipo = 'Control';
+        $parametros		= $this->_request->getParams();
+        $correcto		= false;
+        $error			= false;
+		$gl_grupo_tipo	= 'Control';
+        $count			= $this->_DAORegistro->countRegistroxRegion($_SESSION['id_region']);
 
-        if ($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1) {
-            $gl_grupo_tipo = 'Seguimiento';
+		if($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50){
+			$gl_grupo_tipo	= 'Seguimiento';
+		}
+		$parametros['gl_grupo_tipo']	= $gl_grupo_tipo;
+
+        $id_registro	= $this->_DAORegistro->insertarRegistro($parametros);
+        if($id_registro){
+			$resultado2	= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
+			$correcto	= true;
+        }else{
+            $error		= true;
         }
-        $parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
 
-        $resultado = $this->_DAORegistro->insertarRegistro($parametros);
-        $id_registro = $this->_DAORegistro->getRegistroxRut($parametros['rut']);
-        $resultado2 = $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros, $id_registro);
-        if ($resultado && $resultado2) {
-            $correcto = true;
-        } else {
-            $error = true;
-        }
-
-        $salida = array("error" => $error,
+        $salida	= array("error" => $error,
             "correcto" => $correcto);
         $this->smarty->assign("hidden", "");
-        $json = Zend_Json::encode($salida);
+        $json	= Zend_Json::encode($salida);
 
         echo $json;
     }
@@ -299,16 +373,15 @@ class Registro extends Controller {
     }
 
     public function cargarComunasPorRegion() {
-        $region = $_POST['region'];
+        $region		= $_POST['region'];
+        $daoRegion	= $this->load->model('DAORegion');
+        $comunas	= $daoRegion->obtComunasPorRegion($region)->rows;
 
-        $daoRegion = $this->load->model('DAORegion');
-        $comunas = $daoRegion->obtComunasPorRegion($region)->rows;
-
-        $json = array();
-        $i = 0;
+        $json		= array();
+        $i			= 0;
         foreach ($comunas as $comuna) {
-            $json[$i]['id_comuna'] = $comuna->id_comuna;
-            $json[$i]['nombre_comuna'] = $comuna->gl_nombre_comuna;
+            $json[$i]['id_comuna']		= $comuna->id_comuna;
+            $json[$i]['nombre_comuna']	= $comuna->gl_nombre_comuna;
             $i++;
         }
 
@@ -316,16 +389,15 @@ class Registro extends Controller {
     }
 
     public function cargarCentroSaludporComuna() {
-        $comuna = $_POST['comuna'];
+        $comuna			= $_POST['comuna'];
+        $daoComuna		= $this->load->model('DAOComuna');
+        $centrosalud	= $daoComuna->obtCentroSaludporComuna($comuna)->rows;
 
-        $daoComuna = $this->load->model('DAOComuna');
-        $centrosalud = $daoComuna->obtCentroSaludporComuna($comuna)->rows;
-
-        $json = array();
-        $i = 0;
+        $json			= array();
+        $i				= 0;
         foreach ($centrosalud as $cSalud) {
-            $json[$i]['id_establecimiento'] = $cSalud->id_establecimiento;
-            $json[$i]['nombre_establecimiento'] = $cSalud->nombre_establecimiento;
+            $json[$i]['id_establecimiento']		= $cSalud->id_establecimiento;
+            $json[$i]['nombre_establecimiento']	= $cSalud->nombre_establecimiento;
             $i++;
         }
 
@@ -334,23 +406,34 @@ class Registro extends Controller {
 
     public function cargarRegistro() {
         header('Content-type: application/json');
-        $rut = $_POST['rut'];
-        //Datos de Tabla Registros
-        $daoRegistro = $this->load->model('DAORegistro');
-        $registro = $daoRegistro->getRegistroByRut($rut);
-        //Datos de Tablas Comuna y Region
-        $id_comuna = $registro->id_comuna;
-        $daoComuna = $this->load->model('DAOComuna');
-        $comunaRegion = $daoComuna->getComunaRegion($id_comuna);
-        $json = array();
-        $json[0]['rut'] = $registro->gl_rut;
-        $json[0]['nombres'] = $registro->gl_nombres;
-        $json[0]['apellidos'] = $registro->gl_apellidos;
-        $json[0]['fec_nac'] = $registro->fc_nac;
-        $json[0]['genero'] = $registro->gl_sexo;
-        $json[0]['prevision'] = $registro->id_prevision;
-        $json[0]['region'] = $comunaRegion->id_region;
-        $json[0]['comuna'] = $comunaRegion->id_comuna;
+        $rut			= $_POST['rut'];
+        $registro		= $this->_DAORegistro->getRegistroByRut($rut);
+        $json			= array();
+
+		if($registro){
+			$json['correcto']			= TRUE;
+			$json['gl_nombres']			= $registro->gl_nombres;
+			$json['gl_apellidos']		= $registro->gl_apellidos;
+			$json['fc_nacimiento']		= $registro->fc_nacimiento;
+			$json['id_prevision']		= $registro->id_prevision;
+			$json['gl_direccion']		= $registro->gl_direccion;
+			$json['id_region']			= $registro->id_region;
+			$json['gl_nombre_comuna']	= $registro->gl_nombre_comuna;
+			$json['id_comuna']			= $registro->id_comuna;
+			$json['gl_centro_salud']	= $registro->gl_centro_salud;
+			$json['id_centro_salud']	= $registro->id_centro_salud;
+			$json['bo_reconoce']		= $registro->bo_reconoce;
+			$json['bo_acepta_programa']	= $registro->bo_acepta_programa;
+			$json['gl_latitud']			= $registro->gl_latitud;
+			$json['gl_longitud']		= $registro->gl_longitud;
+			
+			$json['gl_fono']			= $registro->gl_fono;
+			$json['gl_celular']			= $registro->gl_celular;
+			$json['gl_email']			= $registro->gl_email;
+
+		}else{
+			$json['correcto']	= FALSE;
+		}
 
         echo json_encode($json);
     }

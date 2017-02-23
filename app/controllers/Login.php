@@ -1,15 +1,13 @@
 <?php
 
 class Login extends Controller {
-    /*     * * @var ** */
 
     protected $_DAOUsuarios;
     protected $_DAORegion;
     protected $_DAOComuna;
     protected $_DAOProvincias;
 
-    /*     * * Constructor ** */
-
+    /*** Constructor ***/
     function __construct() {
         parent::__construct();
         $this->load->lib('Seguridad', false);
@@ -18,8 +16,6 @@ class Login extends Controller {
         $this->_DAOComuna = $this->load->model("DAOComuna");
         $this->_DAOProvincias = $this->load->model("DAOProvincias");
     }
-
-    /*     * * Formulario de logeo ** */
 
     public function index() {
         $session = New Zend_Session_Namespace("usuario_carpeta");
@@ -36,14 +32,13 @@ class Login extends Controller {
         $this->smarty->display('login/login.tpl');
     }
 
-    /*     * * Recuperar Password ** */
-
+    /*** Recuperar Password ***/
     public function recuperar_password() {
         $this->_addJavascript(STATIC_FILES . 'js/templates/login/recuperar_password.js');
         $this->_display('login/recuperar_password.tpl', false);
     }
 
-    //*** 20170127 - Procesa Login de Usuario***//
+    /*** 20170127 - Procesa Login de Usuario***/
     public function procesar() {
         $rut			= trim($this->_request->getParam("rut"));
         $password		= Seguridad::generar_sha512($this->_request->getParam("password"));
@@ -77,14 +72,14 @@ class Login extends Controller {
 				$_SESSION['perfil']			= $usuario->id_perfil;
 				$_SESSION['gl_grupo_tipo']	= $usuario->gl_grupo_tipo;
 				$_SESSION['id_institucion']	= $usuario->id_institucion;
-				$_SESSION['nombre']		= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-				$_SESSION['rut']		= $usuario->gl_rut;
-				$_SESSION['mail']		= $usuario->gl_email;
-				$_SESSION['fono']		= $usuario->gl_fono;
+				$_SESSION['nombre']			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+				$_SESSION['rut']			= $usuario->gl_rut;
+				$_SESSION['mail']			= $usuario->gl_email;
+				$_SESSION['fono']			= $usuario->gl_fono;
 				$_SESSION['celular']		= $usuario->gl_celular;
-				$_SESSION['comuna']		= $usuario->gl_nombre_comuna;
+				$_SESSION['comuna']			= $usuario->gl_nombre_comuna;
 				$_SESSION['provincia']		= $usuario->gl_nombre_provincia;
-				$_SESSION['region']		= $usuario->gl_nombre_region;
+				$_SESSION['region']			= $usuario->gl_nombre_region;
 				$_SESSION['id_comuna']		= $usuario->id_comuna;
 				$_SESSION['id_provincia']	= $usuario->id_provincia;
 				$_SESSION['id_region']		= $usuario->id_region;
@@ -175,16 +170,19 @@ class Login extends Controller {
     
     public function recuperar_password_rut() {
         header('Content-type: application/json');
-        $rut = trim($this->_request->getParam("rut"));
-        $correcto = false;
-        $error = array();
-        $destinatario = "";
+        $rut			= trim($this->_request->getParam("rut"));
+        $correcto		= false;
+        $error			= array();
+        $destinatario	= "";
+
         if (trim($this->_request->getParam("rut")) != "") {
-            $usuario = $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
+            $usuario	= $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
+
             if (!is_null($usuario)) {
-                $correcto = true;
-                $cadena = Seguridad::randomPass(12);
-                $cadenahash = Seguridad::generar_sha512($cadena);
+                $correcto	= true;
+                $cadena		= Seguridad::randomPass(12);
+                $cadenahash	= Seguridad::generar_sha512($cadena);
+
                 $this->smarty->assign("nombre", $usuario->gl_nombres . " " . $usuario->gl_apellidos);
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);
@@ -194,16 +192,16 @@ class Login extends Controller {
                 );
 
                 $this->load->lib('Email', false);
-                $remitente = "midas@minsal.cl";
-                $nombre_remitente = "Prevención de Femicidios";
-                $destinatario = $usuario->gl_email;
+                $remitente			= "midas@minsal.cl";
+                $nombre_remitente	= "Prevención de Femicidios";
+                $destinatario		= $usuario->gl_email;
 
-                $asunto = "PREDEFEM - Recuperar contraseña";
-                $mensaje = $this->smarty->fetch("login/recuperar_password_rut.tpl");
+                $asunto				= "PREDEFEM - Recuperar contraseña";
+                $mensaje			= $this->smarty->fetch("login/recuperar_password_rut.tpl");
                 Email::sendEmail($destinatario, $remitente, $nombre_remitente, $asunto, $mensaje);
             } else {
-                $correcto = false;
-                $error['rut'] = "";
+                $correcto		= false;
+                $error['rut']	= "";
             }
         }
         $salida = ["rut" => $rut, "error" => $error,
