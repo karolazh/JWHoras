@@ -1,10 +1,10 @@
 /* global BASE_URI */
 
-    $("#guardar1").on('click', function(e) {
+    $("#guardarArchivo").on('click', function(e) {
         xModal.danger('PRUEBA GUARDA COMENTARIO');
     });
     
-    $("#guardar2").on('click', function(e) {
+    $("#guardarEvento").on('click', function(e) {
         xModal.danger('PRUEBA ADJUNTA ARCHIVO');
     });
 
