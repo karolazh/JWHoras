@@ -11,20 +11,14 @@
         <i class="fa fa-medkit"></i> <span>Atención</span></a>
 </li>
 <li>
-    <a href="">
-        <i class="fa fa-cog"></i> <span>Administración</span></a>
-        <ul class="treeview-menu">
-            <li>
-                <a href="">
-                    <i class="fa fa-plus-circle"></i> <span>Mantenedores</span></a>
-                    <ul class="treeview-menu">
-                        <li>
-                            <a href="{$base_url}/Administracion/perfiles">
-                                <i class="fa fa-plus-circle"></i> <span>Perfiles</span></a>
-                        </li>
-                    </ul>
-            </li>
-        </ul>
+	<a href="">
+		<i class="fa fa-plus-circle"></i> <span>Mantenedores</span></a>
+		<ul class="treeview-menu">
+			<li>
+				<a href="">
+					<i class="fa fa-plus-circle"></i> <span>Usuarios</span></a>
+			</li>
+		</ul>
 </li>
 
 <li>
