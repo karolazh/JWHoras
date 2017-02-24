@@ -108,7 +108,7 @@
                     </div>
                     <label class="control-label col-sm-2 required">Edad</label>
                     <div class="col-sm-3">
-                        {$edad} XX
+                        {$edad}
                     </div>
                 </div>
 
@@ -156,22 +156,22 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label class="control-label col-sm-2 required">¿Consume bebidas alcoh&oacute;licas?</label>
-                            <div class="col-sm-2">
-                                <label><input type="radio" name="bo_consume_alcohol" 
+                            <div class="col-sm-1">
+                                <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol" 
                                               id="bo_consume_alcohol" value="0">NO</label>
                                 &nbsp;&nbsp;
-                                <label><input type="radio" name="bo_consume_alcohol" 
+                                <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol" 
                                               id="bo_consume_alcohol" value="1">SI</label>
                             </div>
-                            <label class="control-label col-sm-1 required">AUDIT (pts.)</label>
                             <div class="col-sm-1">
-                                    <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value="" 
-                                           placeholder="AUDIT Puntos" class="form-control"/>
-                                    <span class="help-block hidden"></span>
-
+                                <button type="button" id="btnaudit" class="btn btn-sm btn-info hidden">
+                                    <i class="fa fa-file-text-o"></i> AUDIT</button>
                             </div>
-
-                            <div class="col-sm-2">
+                            <div class="col-sm-1">
+                                <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value="" 
+                                           placeholder="AUDIT Puntos" class="form-control hidden"  disabled/> 
+                            </div>    
+                            <div class="col-sm-2" hidden>
                                 <span class=" fa fa-question-circle" >(*) Consejer&iacute;a seg&uacute;n tipo de consumo</span>
                             </div>
                         </div>
@@ -184,14 +184,14 @@
                     <div class="panel-body">   
                         <div class="form-group">
                             <label class="control-label required col-sm-2">¿Usted fuma?</label>
-                            <div class="col-sm-2">
-                                    <label><input type="radio" name="bo_fuma" 
+                            <div class="col-sm-1">
+                                    <label><input class="bo_fuma" type="radio" name="bo_fuma" 
                                                id="bo_fuma" value="0">NO</label>
                                     &nbsp;&nbsp;
-                                    <label><input type="radio" name="bo_fuma" 
+                                    <label><input class="bo_fuma" type="radio" name="bo_fuma" 
                                                id="bo_fuma" value="1">SI</label>
                             </div>
-                                <label class="control-label required col-sm-1">(*) Consejer&iacute;a breve</label>
+                                <label class="control-label required col-sm-1 hidden" id="lbl_fuma">(*) Consejer&iacute;a breve</label>
                         </div>
                     </div>
                 </div>
@@ -202,27 +202,31 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label class="control-label required col-sm-2">Peso (Kg)</label>
-                            <div class="col-sm-2">
-                                    <input type="text" name="gl_peso" id="gl_peso" 
+                            <div class="col-sm-1">
+                                    <input type="text" name="gl_peso" id="gl_peso" maxlength="5"
                                            value="" placeholder="" class="form-control"/>
                                     <span class="help-block hidden"></span>
                             </div>
-                            <label class="control-label required col-sm-1">Estatura (cm)</label>
-                            <div class="col-sm-2">
-                                    <input type="text" name="gl_estatura" id="gl_estatura" 
+                        </div> 
+                        <div class="form-group">   
+                            <label class="control-label required col-sm-2">Estatura (cm)</label>
+                            <div class="col-sm-1">
+                                    <input type="text" name="gl_estatura" id="gl_estatura" maxlength="5"
                                            value="" placeholder="" class="form-control"/>
                                     <span class="help-block hidden"></span>
                             </div>
                         </div>
                         <div class="form-group">   
                             <label class="control-label required col-sm-2">Circunferencia Abdominal</label>
-                            <div class="col-sm-2">
-                                <input type="text" name="gl_circunferencia_abdominal" id="gl_circunferencia_abdominal" 
+                            <div class="col-sm-1">
+                                <input type="text" name="gl_circunferencia_abdominal" id="gl_circunferencia_abdominal" maxlength="5"
                                        value="" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>
-                            <label class="control-label required col-sm-1">IMC</label>
-                            <div class="col-sm-3">
+                        </div>
+                        <div class="form-group">     
+                            <label class="control-label required col-sm-2">IMC</label>
+                            <div class="col-sm-1">
                                 <input type="text" name="gl_imc" id="gl_imc" 
                                        value="" placeholder="" class="form-control" disabled/>
                                 <span class="help-block hidden"></span>
@@ -271,7 +275,7 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <div class="col-sm-6">
-                                <label>(Mayor de 40 años, obeso o antecedente de DM en padre o hermanos)</label>
+                                <label>(Mayor de 40 años, IMC >= 30 o antecedente de DM en padre o hermanos)</label>
                             </div>
                         </div>   
                         <div class="form-group">
@@ -295,31 +299,31 @@
                         <div class="form-group">
                                 <label class="control-label required col-sm-2">¿Es trabajadora sexual o persona en centro de reclusión?</label>
                             <div class="col-sm-2">
-                                    <label><input type="radio" name="bo_trabajadora_reclusa" 
+                                    <label><input class="bo_trabajadora_reclusa" type="radio" name="bo_trabajadora_reclusa" 
                                                id="bo_trabajadora_reclusa" value="0">No</label>
                                     &nbsp;&nbsp;
-                                    <label><input type="radio" name="bo_trabajadora_reclusa" 
+                                    <label><input class="bo_trabajadora_reclusa" type="radio" name="bo_trabajadora_reclusa" 
                                                id="bo_trabajadora_reclusa" value="1">Si</label>
                             </div>
                         </div>  
-                        <div class="form-group">
+                        <div class="form-group hidden" id="id_vdrl_rpr">
                                 <label class="control-label required col-sm-2">¿Examen VDRL?</label>
                             <div class="col-sm-2">
-                                    <label><input type="radio" name="bo_vdrl" 
+                                    <label><input class="bo_vdrl" type="radio" name="bo_vdrl" 
                                                id="bo_vdrl" value="0">Negativo</label>
                                     &nbsp;&nbsp;
-                                    <label><input type="radio" name="bo_vdrl" 
+                                    <label><input class="bo_vdrl" type="radio" name="bo_vdrl" 
                                                id="bo_vdrl" value="1">Positivo</label>
                             </div>
                                 <label class="control-label required col-sm-1">¿Examen RPR?</label>
                             <div class="col-sm-2">
-                                    <label><input type="radio" name="bo_rpr" 
+                                    <label><input class="bo_rpr" type="radio" name="bo_rpr" 
                                                id="bo_rpr" value="0">Negativo</label>
                                     &nbsp;&nbsp;
-                                    <label><input type="radio" name="bo_rpr" 
+                                    <label><input class="bo_rpr" type="radio" name="bo_rpr" 
                                                id="bo_rpr" value="1">Positivo</label>
                             </div>
-                                <label class="control-label required col-sm-2">(*) Referir a programa ITS</label>
+                                <label class="control-label required col-sm-2 hidden" id="lbl_its">(*) Referir a programa ITS</label>
                         </div>
                     </div>
                 </div>
@@ -331,23 +335,25 @@
                         <div class="form-group">
                                 <label class="control-label required col-sm-2">¿Ha tenido tos productiva por m&aacute;s de 15 d&iacute;as?</label>
                             <div class="col-sm-2">
-                                    <label><input type="radio" name="bo_tos_productiva" 
+                                    <label><input class="bo_tos_productiva" type="radio" name="bo_tos_productiva" 
                                                id="bo_tos_productiva" value="0">NO</label>
                                     &nbsp;&nbsp;
-                                    <label><input type="radio" name="bo_tos_productiva" 
+                                    <label><input class="bo_tos_productiva" type="radio" name="bo_tos_productiva" 
                                                id="bo_tos_productiva" value="1">SI</label>
                             </div>
-                                <label class="control-label required col-sm-1">¿Basiloscopia?</label>
+                        </div>
+                        <div class="form-group hidden" id="id_baciloscopia">
+                                <label class="control-label required col-sm-1">Basiloscopia</label>
                             <div class="col-sm-2">
-                                    <label><input type="radio" name="bo_baciloscopia_toma" 
+                                    <label><input class="bo_baciloscopia_toma" type="radio" name="bo_baciloscopia_toma" 
                                                id="bo_baciloscopia_toma" value="0">Negativo</label>
                                     &nbsp;&nbsp;
-                                    <label><input type="radio" name="bo_baciloscopia_toma" 
+                                    <label><input class="bo_baciloscopia_toma" type="radio" name="bo_baciloscopia_toma" 
                                                id="bo_baciloscopia_toma" value="1">Positivo</label>
                             </div>
                         </div>
                         <div class="form-group">
-                                <label class="control-label required col-sm-6">(1ra muestra de inmediato y entrega de una caja para muestra
+                                <label class="control-label required col-sm-5">(1ra muestra de inmediato y entrega de una caja para muestra
                                     del d&iacute;a siguiente al despertar)</label>
                         </div>
                     </div>
@@ -360,31 +366,47 @@
                         <div class="form-group">
                                 <label class="control-label required col-sm-2">¿Se ha realizado PAP?</label>
                             <div class="col-sm-2">
-                                    <label><input type="radio" name="bo_pap_realizado" 
+                                    <label><input class="bo_pap_realizado" type="radio" name="bo_pap_realizado" 
                                                id="bo_pap_realizado" value="0">NO</label>
                                     &nbsp;&nbsp;
-                                    <label><input type="radio" name="bo_pap_realizado" 
+                                    <label><input class="bo_pap_realizado" type="radio" name="bo_pap_realizado" 
                                                id="bo_pap_realizado" value="1">SI</label>
                             </div>
-                                <label class="control-label required col-sm-1">Fecha &uacute;ltimo Papanicolau</label>
+                        </div>
+                        <div class="form-group hidden" id="ultimo_pap">         
+                                <label class="control-label required col-sm-2">Fecha &uacute;ltimo PAP</label>
                             <div class="col-sm-2">
                                 <input type="date" name="fc_ultimo_pap" id="fc_ultimo_pap" 
                                            value="" placeholder="" class="form-control"/>
                                     <span class="help-block hidden"></span>
                             </div>
                         </div>
-                        <div class="form-group">    
+                        <div class="form-group" style="display: none" id="pap_vigente">    
                                 <label class="control-label required col-sm-2">PAP Vigente</label>
                             <div class="col-sm-2">
-                                    <label><input type="radio" name="bo_pap_vigente" 
-                                               id="bo_pap_vigente" value="0">NO</label>
+                                    <label><input class="bo_pap_vigente"  type="radio" name="bo_pap_vigente" 
+                                               id="bo_pap_vigente" value="0" disabled>NO</label>
                                     &nbsp;&nbsp;
-                                    <label><input type="radio" name="bo_pap_vigente" 
-                                               id="bo_pap_vigente" value="1">SI</label>
+                                    <label><input class="bo_pap_vigente" type="radio" name="bo_pap_vigente" 
+                                               id="bo_pap_vigente" value="1" disabled>SI</label>
                             </div>
+                        </div>
+                        <div class="form-group hidden" id="tomar_fecha">         
+                                <label class="control-label required col-sm-2">Tomar Fecha para PAP</label>
                             <div class="col-sm-2">
-                                    <input type="checkbox" id="bo_pap_toma">
-                                    <label for="bo_pap_toma" class="control-label required">Toma de PAP</label>
+                                <input type="date" name="fc_tomar_pap" id="fc_tomar_pap" 
+                                           value="" placeholder="" class="form-control"/>
+                                    <span class="help-block hidden"></span>
+                            </div>
+                        </div>
+                        <div class="form-group" id="resultado_pap">
+                            <label for="bo_pap_toma" class="control-label required col-sm-2">Resultado PAP</label>
+                            <div class="col-sm-2">
+                                    <label><input class="resultado_pap"  type="radio" name="resultado_pap" 
+                                               id="resultado_pap" value="0">Alterado</label>
+                                    &nbsp;&nbsp;
+                                    <label><input class="resultado_pap" type="radio" name="resultado_pap" 
+                                               id="resultado_pap" value="1">Normal</label>
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" id="verPAP" class="btn btn-sm btn-info">
@@ -428,25 +450,64 @@
                         <div class="form-group">
                                 <label class="control-label required col-sm-2">¿Se ha realizado Examen de Mamografía?</label>
                             <div class="col-sm-2">
-                                    <label><input type="radio" name="bo_mamografia_realizada" 
-                                               id="bo_mamografia_realizada" value="1">NO</label>
+                                    <label><input class="bo_mamografia_realizada" type="radio" name="bo_mamografia_realizada" 
+                                               id="bo_mamografia_realizada" value="0">NO</label>
                                     &nbsp;&nbsp;
-                                    <label><input type="radio" name="bo_mamografia_realizada" 
-                                               id="bo_mamografia_realizada" value="2">SI</label>
+                                    <label><input class="bo_mamografia_realizada" type="radio" name="bo_mamografia_realizada" 
+                                               id="bo_mamografia_realizada" value="1">SI</label>
                             </div>
-                                <label class="control-label required col-sm-1">¿Mamografía Vigente?</label>
+                        </div>
+                        <div class="form-group" id="fecha_mamografia" style="display: none">
+                            <label class="control-label required col-sm-2">Fecha Mamografía</label>
                             <div class="col-sm-2">
-                                    <label><input type="radio" name="bo_mamografia_vigente" 
-                                               id="bo_mamografia_vigente" value="1">NO</label>
+                                <input type="date" name="fc_mamografia" id="fc_mamografia" value="" 
+                                           placeholder="" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group" id="mam_vigente" style="display: none">    
+                                <label class="control-label required col-sm-2">¿Mamografía Vigente?</label>
+                            <div class="col-sm-2">
+                                    <label><input class="bo_mamografia_vigente" type="radio" name="bo_mamografia_vigente" 
+                                               id="bo_mamografia_vigente_0" value="0" readonly>NO</label>
                                     &nbsp;&nbsp;
-                                    <label><input type="radio" name="bo_mamografia_vigente" 
-                                               id="bo_mamografia_vigente" value="2">SI</label>
+                                    <label><input class="bo_mamografia_vigente" type="radio" name="bo_mamografia_vigente" 
+                                               id="bo_mamografia_vigente_1" value="1" readonly>SI</label>
+                            </div>
+                        </div>
+                        <div class="form-group" id="mam_resultado" style="display: none"> 
+                                <label class="control-label required col-sm-2">Resultado Mamografía</label>
+                            <div class="col-sm-2">
+                                    <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
+                                               id="bo_mamografia_resultado" value="0">Alterado</label>
+                                    &nbsp;&nbsp;
+                                    <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
+                                               id="bo_mamografia_resultado" value="1">Normal</label>
+                            </div>
+                        </div>
+                        <div class="form-group" id="mam_requiere" style="display: none"> 
+                                <label class="control-label required col-sm-2">¿Requiere otra Mamografía?</label>
+                            <div class="col-sm-2">
+                                    <label><input class="bo_mamografia_requiere" type="radio" name="bo_mamografia_requiere" 
+                                               id="bo_mamografia_requiere" value="0">NO</label>
+                                    &nbsp;&nbsp;
+                                    <label><input class="bo_mamografia_requiere" type="radio" name="bo_mamografia_requiere" 
+                                               id="bo_mamografia_requiere" value="1">SI</label>
                             </div>
                             <div class="col-sm-3">
                                         <input type="checkbox" id="bo_mamografia_toma">
                                         <label class="control-label required">Toma Mamograf&iacute;a</label>
                             </div>
-                        </div>    
+                        </div>
+                        <div class="form-group" id="mam_resultado2" style="display: none"> 
+                                <label class="control-label required col-sm-2">Resultado Mamografía</label>
+                            <div class="col-sm-2">
+                                    <label><input class="bo_mamografia_resultado2" type="radio" name="bo_mamografia_resultado2" 
+                                               id="bo_mamografia_resultado2" value="0">Alterado</label>
+                                    &nbsp;&nbsp;
+                                    <label><input class="bo_mamografia_resultado2" type="radio" name="bo_mamografia_resultado2" 
+                                               id="bo_mamografia_resultado2" value="1">Normal</label>
+                            </div>
+                        </div>
                         <div class="form-group">    
                             <label class="control-label required">Mamograf&iacute;a a otras edades</label>
                         </div>
