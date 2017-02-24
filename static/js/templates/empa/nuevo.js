@@ -104,18 +104,20 @@ $(".bo_mamografia_realizada").on('change', function (e) {
 });
 
 //Examen Cancer de mama vigente?
-$("#fc_mamografia").on('change', function(e) {
-    var edad = calcularYear($("#fc_mamografia").val());
-    if(edad<=1){
-        //check Si
-        $('#bo_mamografia_vigente_1').attr('checked',true);
-    }else{
-        //check No
-        $('#bo_mamografia_vigente_0').attr('checked',true);
-    }
-    $('#mam_vigente').show();
-    $('#mam_resultado').show();
-    $('#mam_requiere').show();
+$("#fc_mamografia").livequery(function(){
+	$(this).on('change', function(e) {
+		var edad = calcularYear($(this).val());
+		if(edad<=1){
+			//check Si
+			$('#bo_mamografia_vigente_1').prop('checked',true);
+		}else{
+			//check No
+			$('#bo_mamografia_vigente_0').prop('checked',true);
+		}
+		$('#mam_vigente').show();
+		$('#mam_resultado').show();
+		$('#mam_requiere').show();
+	});
 });
 
 //Si requiere otra Mamografía Mostrar Resultado
