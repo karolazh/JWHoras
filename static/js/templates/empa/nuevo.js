@@ -1,3 +1,61 @@
+//Calcular IMC segun Peso y Altura
+function calculaIMC()
+{
+//hacemos la llamada a los datos introducidos
+    var peso = $('#gl_peso').val();
+    var altura = $('#gl_estatura').val()/100;
+    var mensaje = "";
+//calculamos el imc
+    var imc = peso / (altura * altura);
+    imc = imc.toFixed(2);
+//calculamos circunferencia abdominal
+    //Bajo peso
+    if (imc < 18.50){
+        if (imc < 16.00){
+            mensaje = "Bajo Peso / Delgadez Severa";
+        }
+        if (imc >= 16.00 && imc < 17.00){
+            mensaje = "Bajo Peso / Delgadez Moderada";
+        }
+        if (imc >= 17.00 && imc < 18.50){
+            mensaje = "Bajo Peso / Delgadez Aceptable";
+        }
+    }
+    //Peso Normal
+    if (imc >= 18.50 && imc <= 24.99){
+            mensaje = "Peso Normal";
+    }
+    //Sobre Peso
+    if (imc >= 25.00 && imc < 30.00){
+            mensaje = "Sobrepeso / Pre Obeso (riesgo)";
+    }
+    //Obeso
+    if (imc >= 30.00){
+        if (imc >= 30.00 && imc < 35.00){
+            mensaje = "Obeso / Obeso Tipo I (riesgo moderado)";
+        }
+        if (imc >= 35.00 && imc < 40.00){
+            mensaje = "Obeso / Obeso Tipo II (riesgo severo)";
+        }
+        if (imc >= 40.00){
+            mensaje = "Obeso / Obeso Tipo III (riesgo muy severo)";
+        }
+    }
+    alert(imc+mensaje);
+//enviamos resultados a la caja correspondiente
+    $('#gl_imc').val(imc);
+    $('#gl_imc').parent().find('span.help-block').html(mensaje);
+    $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
+} 
+//Si Circunferencia Abdominal es mayor o igual a 88cm -> Consejería
+$("#gl_circunferencia_abdominal").on('blur', function (e) {
+    if ($("#gl_circunferencia_abdominal").val() >= 88){
+        $('#gl_circunferencia_abdominal').parent().find('span.help-block').html("Mayor/Igual a 90 (Consejería Alimentación Sana y Actividad Física)");
+        $('#gl_circunferencia_abdominal').parent().find('span.help-block').removeClass("hidden");
+    }else{
+        $('#gl_circunferencia_abdominal').parent().find('span.help-block').addClass("hidden");
+    }
+});
 
 // Si Consume Alcohol muestra Boton para Hacer Cuestionario AUDIT
 $(".bo_consume_alcohol").on('change', function (e) {
@@ -10,9 +68,9 @@ $(".bo_consume_alcohol").on('change', function (e) {
     }
 });
 
-//Según tipo de consumo mostrar Consejería
+//Según tipo de consumo mostrar Consejería AUDIT
 $("#gl_puntos_audit").on('change', function (e) {
-    if ($('#bo_consume_alcohol').val() > 0) {
+    if ($('#gl_puntos_audit').val() > 0) {
 
     } else {
 
@@ -29,12 +87,37 @@ $(".bo_fuma").on('change', function (e) {
 });
 
 //Si PAS es >= 140 o PAD >= 90 Activar Funcionalidad de Agenda de Profesional
-
-
+$("#gl_pas").on('keyup', function (e) {
+    if ($("#gl_pas").val() >= 140){
+        $('#gl_pas').parent().find('span.help-block').html("Mayor/Igual a 140 Referir a...");
+        $('#gl_pas').parent().find('span.help-block').removeClass("hidden");
+    }else{
+        $('#gl_pas').parent().find('span.help-block').addClass("hidden");
+    }
+});
+$("#gl_pad").on('keyup', function (e) {
+    if ($("#gl_pad").val() >= 90){
+        $('#gl_pad').parent().find('span.help-block').html("Mayor/Igual a 90 Referir a...");
+        $('#gl_pad').parent().find('span.help-block').removeClass("hidden");
+    }else{
+        $('#gl_pad').parent().find('span.help-block').addClass("hidden");
+    }
+});
 
 //(Si Examen de Glicemia es = 100-125 mh/dl consejería alimentacion) (Si valor >= 126 Referir confirmación diagnóstica)
-
-
+$("#gl_glicemia").on('keyup', function (e) {
+    if ($("#gl_glicemia").val() >= 100 && $("#gl_glicemia").val() <= 125) {
+        $('#div_glicemia_toma').show();
+    } else {
+        $('#div_glicemia_toma').hide();
+    }
+    if ($("#gl_glicemia").val() > 125) {
+        $('#gl_glicemia').parent().find('span.help-block').html("Referir Agenda Profesional");
+        $('#gl_glicemia').parent().find('span.help-block').removeClass("hidden");
+    } else {
+        $('#gl_glicemia').parent().find('span.help-block').addClass("hidden");
+    }
+});
 
 //Si es trabajadora sexual o persona en centro reclusión -> mostrar VDRL y RPR
 $(".bo_trabajadora_reclusa").on('change', function (e) {
@@ -48,16 +131,16 @@ $(".bo_trabajadora_reclusa").on('change', function (e) {
 //Si VDRL o RPR es positivo -> Activar Funcionalidad de Agenda para ITS
 $(".bo_rpr").on('change', function (e) {
     if ($('#bo_rpr').is(':checked')) {
-        $('#lbl_its').addClass('hidden');
+        $('#lbl_its1').hide();
     } else {
-        $('#lbl_its').removeClass('hidden');
+        $('#lbl_its1').show();
     }
 });
 $(".bo_vdrl").on('change', function (e) {
     if ($('#bo_vdrl').is(':checked')) {
-        $('#lbl_its').addClass('hidden');
+        $('#lbl_its2').hide();
     } else {
-        $('#lbl_its').removeClass('hidden');
+        $('#lbl_its2').show();
     }
 });
 

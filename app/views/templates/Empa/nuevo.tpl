@@ -4,9 +4,13 @@
 <section class="content-header">
     <h1><i class="fa fa-medkit"></i> Ingresar EMPA</h1>
     <div class="col-md-12 text-right">
-        <button type="button" id="ingresar" class="btn btn-success"
-                onclick="location.href = '{$base_url}/Paciente/index/{$id_pac}'">
-            <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver Ficha Paciente
+        <button type="button"
+                href='javascript:void(0)' 
+                onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
+                data-toggle="tooltip" 
+                title="Bitácora" 
+                class="btn btn-danger">
+                <i class="fa fa-eye"></i>&nbsp;&nbsp;Bitácora
         </button>
     </div>
     <br/><br/>
@@ -164,9 +168,8 @@
                             </div>
                             <div class="col-sm-1">
                                 <button href='javascript:void(0)'
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Empa/audit/{$item->id_registro}', 'Detalle Registro', 85);"
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Empa/audit/{$item->id_registro}', 'AUDIT (Auto-diagnostico sobre Riesgos en el Uso de Alcohol)', 80);"
                                         data-toggle="tooltip"
-                                        class="btn btn-sm btn-success btn-flat"
                                         title="Ver Registro"
                                         type="button" id="btnaudit" class="btn btn-sm btn-info hidden btn-flat">
                                     <i class="fa fa-file-text-o"></i>&nbsp;AUDIT
@@ -209,6 +212,7 @@
                             <label class="control-label required col-sm-2">Peso (Kg)</label>
                             <div class="col-sm-1">
                                     <input type="text" name="gl_peso" id="gl_peso" maxlength="5"
+                                           onKeyPress="return soloNumeros(event)"
                                            value="" placeholder="" class="form-control"/>
                                     <span class="help-block hidden"></span>
                             </div>
@@ -217,14 +221,16 @@
                             <label class="control-label required col-sm-2">Estatura (cm)</label>
                             <div class="col-sm-1">
                                     <input type="text" name="gl_estatura" id="gl_estatura" maxlength="5"
+                                           onKeyPress="return soloNumeros(event)"
                                            value="" placeholder="" class="form-control"/>
                                     <span class="help-block hidden"></span>
                             </div>
                         </div>
                         <div class="form-group">   
-                            <label class="control-label required col-sm-2">Circunferencia Abdominal</label>
+                            <label class="control-label required col-sm-2">Circunferencia Abdominal (cm)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_circunferencia_abdominal" id="gl_circunferencia_abdominal" maxlength="5"
+                                       onKeyPress="return soloNumeros(event)"
                                        value="" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>
@@ -235,6 +241,10 @@
                                 <input type="text" name="gl_imc" id="gl_imc" 
                                        value="" placeholder="" class="form-control" disabled/>
                                 <span class="help-block hidden"></span>
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="button" id="calcular" onclick="calculaIMC()" class="btn btn-sm btn-success">
+                                    <i class="fa fa-success"></i> Calcular IMC</button>
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" id="ver" class="btn btn-sm btn-info">
@@ -258,15 +268,15 @@
                         <div class="form-group">
                             <label class="control-label required col-sm-2">PAS (mm/Hg)</label>
                             <div class="col-sm-1">
-                                <input type="text" name="gl_pas" id="gl_pas" 
-                                           value="" placeholder="" class="form-control"/>
-                                    <span class="help-block hidden"></span>
+                                <input type="text" name="gl_pas" id="gl_pas" maxlength="4" onKeyPress="return soloNumeros(event)"
+                                       value="" placeholder="" class="form-control"/>
+                                <span class="help-block hidden"></span>
                             </div>
                             <label class="control-label required col-sm-2">PAD (mm/Hg)</label>
                             <div class="col-sm-1">
-                                <input type="text" name="gl_pad" id="gl_pad" value="" 
-                                           placeholder="" class="form-control"/>
-                                    <span class="help-block hidden"></span>
+                                <input type="text" name="gl_pad" id="gl_pad" maxlength="4" onKeyPress="return soloNumeros(event)" 
+                                       value="" placeholder="" class="form-control"/>
+                                <span class="help-block hidden"></span>
                             </div>
                         </div>    
                         <div class="form-group">
@@ -286,11 +296,11 @@
                         <div class="form-group">
                             <label class="control-label required col-sm-2">Glicemia en Ayunas (mg/dl)</label>
                             <div class="col-sm-3">
-                                <input type="text" name="gl_glicemia" id="gl_glicemia" value="" 
+                                <input type="text" name="gl_glicemia" maxlength="5" id="gl_glicemia" value="" 
                                            placeholder="" class="form-control"/>
                                     <span class="help-block hidden"></span>
                             </div>   
-                            <div class="col-sm-3">
+                            <div class="col-sm-3" style="display: none" id="div_glicemia_toma">
                                     <input type="checkbox" id="bo_glicemia_toma">
                                     <label for="bo_glicemia_toma" class="control-label required">Toma de Glicemia</label>
                             </div>
@@ -328,7 +338,7 @@
                                     <label><input class="bo_rpr" type="radio" name="bo_rpr" 
                                                id="bo_rpr" value="1">Positivo</label>
                             </div>
-                                <label class="control-label required col-sm-2 hidden" id="lbl_its">(*) Referir a programa ITS</label>
+                                <label class="control-label required col-sm-2" style="display: none" id="lbl_its">(*) Referir a programa ITS</label>
                         </div>
                     </div>
                 </div>
@@ -348,7 +358,7 @@
                             </div>
                         </div>
                         <div class="form-group hidden" id="id_baciloscopia">
-                                <label class="control-label required col-sm-1">Basiloscopia</label>
+                                <label class="control-label required col-sm-2">Basiloscopia</label>
                             <div class="col-sm-2">
                                     <label><input class="bo_baciloscopia_toma" type="radio" name="bo_baciloscopia_toma" 
                                                id="bo_baciloscopia_toma" value="0">Negativo</label>
