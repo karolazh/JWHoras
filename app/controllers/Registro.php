@@ -259,13 +259,13 @@ class Registro extends Controller {
     }
 
     public function ver() {
-        $parametros = $this->request->getParametros();
-        $id_registro = $parametros[0];
-        $this->smarty->assign("id_registro", $id_registro);
-        $obj_registro = $this->_DAORegistro->selVerInfoById($id_registro);
+        $parametros		= $this->request->getParametros();
+        $id_registro	= $parametros[0];
+        $obj_registro	= $this->_DAORegistro->verInfoById($id_registro);
+		
         if (!is_null($obj_registro)) {
-            $edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
-            $arrMotivosConsulta = $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($obj_registro->id_registro);
+            $edad				= Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
+            $arrMotivosConsulta	= $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($obj_registro->id_registro);
         }
         $this->smarty->assign('id_registro', $obj_registro->id_registro);
         $this->smarty->assign('rut', $obj_registro->gl_rut);

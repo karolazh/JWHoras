@@ -43,26 +43,8 @@ class DAORegistro extends Model{
 
     public function getRegistroById($id_registro) {
         $query	= "	SELECT
-						IFNULL(r.id_registro,0) as id_registro,
-						IFNULL(r.id_prevision,0) as id_prevision,
-						IFNULL(r.gl_rut,'N/D') as gl_rut,
-						IFNULL(r.bo_extranjero,0) as bo_extranjero,
-						IFNULL(r.gl_run_pass,'N/D') as gl_run_pass,
-						IFNULL(r.gl_nombres,'N/D') as gl_nombres,
-						IFNULL(r.gl_apellidos,'N/D') as gl_apellidos,
-						IFNULL(r.fc_nacimiento,'00-00-1900') as fc_nacimiento,
-						IFNULL(r.gl_sexo,'N/D') as gl_sexo,
-						IFNULL(r.gl_direccion,'N/D') as gl_direccion,
-						IFNULL(r.gl_fono,'N/D') as gl_fono,
-						IFNULL(r.gl_celular,'N/D') as gl_celular,
-						IFNULL(r.gl_email,'N/D') as gl_email,
-						IFNULL(r.gl_latitud,'N/D') as gl_latitud,
-						IFNULL(r.gl_longitud,'N/D') as gl_longitud,
-						IFNULL(r.bo_reconoce,0) as bo_reconoce,
-						IFNULL(r.bo_acepta_programa,0) as bo_acepta_programa
-						IFNULL(a.gl_path,'') as gl_path
+						*
 					FROM pre_registro r
-						LEFT JOIN pre_adjuntos a ON a.id_registro = r.id_registro
 					WHERE id_registro = ?";
 
         $param = array($id_registro);
@@ -75,7 +57,7 @@ class DAORegistro extends Model{
         }
     }
 
-	    public function selVerInfoById($id_registro) {
+	public function verInfoById($id_registro) {
         $query	= "SELECT 
 						IFNULL(rg.id_registro,0) as id_registro,
 						IFNULL(rg.id_prevision,0) as id_prevision,
@@ -90,8 +72,8 @@ class DAORegistro extends Model{
 						IFNULL(rg.gl_fono,'N/D') as gl_fono,
 						IFNULL(rg.gl_celular,'N/D') as gl_celular,
 						IFNULL(rg.gl_email,'N/D') as gl_email,
-						IFNULL(rg.gl_latitud,0) as gl_latitud,
-						IFNULL(rg.gl_longitud,0) as gl_longitud,
+						IFNULL(rg.gl_latitud,'') as gl_latitud,
+						IFNULL(rg.gl_longitud,'') as gl_longitud,
 						IFNULL(bo_reconoce,0) as bo_reconoce,
 						IFNULL(bo_acepta_programa,0) as bo_acepta_programa,
 						IFNULL(a.gl_path,'') as gl_path,
