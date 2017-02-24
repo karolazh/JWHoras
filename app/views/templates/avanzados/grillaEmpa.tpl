@@ -7,10 +7,10 @@
             <thead>
                 <tr role="row">
                     <th align="center" width="10%">Fecha</th>
-                    <th align="center" width="">Comuna</th>
-                    <th align="center" width="">Institucion</th>
+                    <th align="center" width="40">Institucion</th>
+                    <th align="center" width="30">Comuna</th>
                     <th align="center" width="10%">Usuario</th>
-                    <th align="center" width="20%">Acciones</th>
+                    <th align="center" width="10%">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,15 +45,11 @@
                     <td class="text-center" style="width:100px;">
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn btn-danger btn-flat" 
-                                    onClick="xModal.open('{$base_url}/Empa/ver/{$item->id_empa}', 'Registro número : {$item->id_registro}', 85);" 
+                                    {*onClick="xModal.open('{$base_url}/Empa/nuevo/{$emp->id_registro}', 'Registro número : {$item->id_registro}', 85);" *}
+                                    onClick="location.href='{$base_url}/Empa/nuevo/{$emp->id_registro}'" 
                                     data-toggle="tooltip" title="Ver EMPA">
                                 <i class="fa fa-eye"></i>&nbsp;&nbsp;EMPA
-                            </button>&nbsp;
-                            <button type="button" class="btn btn-sm btn-success btn-flat" 
-                                    onClick="xModal.open('{$base_url}/Registro/ver/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
-                                    data-toggle="tooltip" title="Ver Registro">
-                                <i class="fa fa-eye"></i>&nbsp;&nbsp;REGISTRO
-                            </button>&nbsp;
+                            </button>
                         </div>
                     </td>
                 </tr>
