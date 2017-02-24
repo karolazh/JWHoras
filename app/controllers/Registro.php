@@ -42,7 +42,7 @@ class Registro extends Controller {
     protected $_DAOUsuarios;
     protected $_DAOEstadoCaso;
     protected $_DAOInstitucion;
-
+	protected $_DAOEventos;
     protected $_DAOEventosTipo;
     protected $_DAOAdjuntos;
     protected $_DAOAdjuntosTipo;
@@ -63,6 +63,7 @@ class Registro extends Controller {
         $this->_DAOUsuarios			= $this->load->model("DAOUsuarios");
         $this->_DAOInstitucion		= $this->load->model("DAOInstitucion");
         $this->_DAOEventosTipo		= $this->load->model("DAOEventosTipo");
+		$this->_DAOEventos			= $this->load->model("DAOEventos");
         $this->_DAOAdjuntos			= $this->load->model("DAOAdjuntos");
         $this->_DAOAdjuntosTipo		= $this->load->model("DAOAdjuntosTipo");
         $this->_DAOEmpa				= $this->load->model("DAOEmpa");
@@ -232,9 +233,10 @@ class Registro extends Controller {
     public function GuardarRegistro() {
         header('Content-type: application/json');
         $parametros		= $this->_request->getParams();
-        $correcto		= false;
+		$correcto		= false;
         $error			= false;
 		$gl_grupo_tipo	= 'Control';
+		$datos_evento	= array(); 
         $count			= $this->_DAORegistro->countRegistroxRegion($_SESSION['id_region']);
 
 		if($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50){
@@ -245,7 +247,23 @@ class Registro extends Controller {
         $id_registro	= $this->_DAORegistro->insertarRegistro($parametros);
         if($id_registro){
 			$resultado2	= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
-			$correcto	= true;
+			$session = New Zend_Session_Namespace("usuario_carpeta");
+			$datos_evento['eventos_tipo'] = 1;
+			$datos_evento['id_registro'] = $id_registro;
+			$datos_evento['gl_descripcion'] = "Registro creado el : ".Fechas::fechaHoy(); 
+			$datos_evento['bo_estado'] = 1; 
+			$datos_evento['id_usuario_crea'] = $session->id;
+			$correcto = $this->_DAOEventos->insEvento($datos_evento);
+			if ($parametros['chkAcepta']){
+				$datos_evento['eventos_tipo'] = 4;
+				$datos_evento['gl_descripcion'] = "Acepta el programa con fecha : ".Fechas::fechaHoy();
+				$correcto = $this->_DAOEventos->insEvento($datos_evento);
+			}
+			if ($parametros['chkReconoce']){
+				$datos_evento['eventos_tipo'] = 5;
+				$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : ".Fechas::fechaHoy();
+				$correcto = $this->_DAOEventos->insEvento($datos_evento);
+			}
         }else{
             $error		= true;
         }
