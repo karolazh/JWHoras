@@ -38,11 +38,12 @@ class Empa extends Controller{
     function __construct(){
         parent::__construct();
         //Acceso::set("ADMINISTRADOR");
-        $this->_DAOEmpa = $this->load->model("DAOEmpa");
-        $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
-        $this->_DAOComuna = $this->load->model("DAOComuna");
-        $this->_DAOInstitucion = $this->load->model("DAOInstitucion");
-        $this->_DAORegistro = $this->load->model("DAORegistro");
+        $this->_DAOEmpa			= $this->load->model("DAOEmpa");
+        $this->_DAOUsuarios		= $this->load->model("DAOUsuarios");
+        $this->_DAOComuna		= $this->load->model("DAOComuna");
+        $this->_DAOInstitucion	= $this->load->model("DAOInstitucion");
+        $this->_DAORegistro		= $this->load->model("DAORegistro");
+        $this->_DAOAlcoholismo	= $this->load->model("DAOAlcoholismo");
     }
     
     /*
@@ -158,44 +159,13 @@ class Empa extends Controller{
         //llamado al template
         $this->_display('Empa/ver.tpl');
     }
-    
-    public function audit(){
-        //llamado al template
-        $this->_display('Empa/audit.tpl');
-    }
-    //*** REGIONES ***//
-//    public function regiones(){
-//        $sesion = New Zend_Session_Namespace("usuario_carpeta");        
-//        $this->smarty->assign("id_usuario", $sesion->id);
-//        $this->smarty->assign("rut", $sesion->rut);
-//        $this->smarty->assign("usuario", $sesion->usuario);
-//        
-//        //llamada al _DAOAdministracion para listar regiones
-//        $arr = $this->_DAOAdministracion->getListaRegiones();
-//        $this->smarty->assign('arrResultado', $arr);
-//        
-//        //llamado al template
-//        $this->_display('Administracion/Regiones/index.tpl');
-//    }
-    
-    //creada por BC
-//    public function guardarRegion(){
-//            $session = New Zend_Session_Namespace("usuario_carpeta");
-//            $data = array();
-//            parse_str($_POST['data'], $data);
-//
-//            $this->load->lib('Constantes', false);
-//
-//            $json = array();
-//            $datos = $data;
-//            $datos['nr_estado'] =1;
-//            $insertar = $this->_DAOAdministracion->insRegion($datos);
-//
-//            if ($insertar) {
-//                $id_solicitud = $insertar;
-//                $json['estado'] = true;
-//                $json['mensaje'] = 'Proyecto ingresado correctamente';
-//            }
-//            echo json_encode($json);
-//    }	
+
+	public function audit(){
+		Acceso::redireccionUnlogged($this->smarty);
+
+        $registro          = $this->_DAOAlcoholismo->getAll();
+        $this->smarty->assign("registro", $registro);
+		$this->smarty->display('Empa/audit.tpl');
+	}
+
 }
