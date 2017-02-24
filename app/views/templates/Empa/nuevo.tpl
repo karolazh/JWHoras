@@ -24,7 +24,7 @@
             <div class="panel-body">  
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2 required">Comuna</label>
+                    <label class="control-label col-sm-2">Comuna</label>
                     <div class="col-sm-3">
                         <input type="text" name="gl_comuna" id="gl_comuna" value="{$gl_comuna}" 
                                placeholder="Comuna" class="form-control" disabled/>
@@ -33,13 +33,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="gl_institucion" class="control-label col-sm-2 required">Centro de Salud (*)</label>
+                    <label for="gl_institucion" class="control-label col-sm-2">Centro de Salud (*)</label>
                     <div class="col-sm-3">
                         <input type="text" name="gl_institucion" id="gl_institucion" value="{$gl_institucion}"
                                placeholder="Institución" class="form-control" disabled/>
                         <span class="help-block hidden"></span>
                     </div>
-                    <label for="nr_ficha" class="control-label col-sm-2 required">N° de Ficha (*)</label>
+                    <label for="nr_ficha" class="control-label col-sm-2">N° de Ficha (*)</label>
                     <div class="col-sm-3">
                         <input type="text" name="nr_ficha" id="nr_ficha" value="" 
                                placeholder="N° de Ficha" class="form-control"/>
@@ -49,14 +49,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="id_sector" class="control-label col-sm-2 required">Sector (*)</label>
+                    <label for="id_sector" class="control-label col-sm-2">Sector (*)</label>
                     <div class="col-sm-3">
                         <input type="text" name="id_sector" id="id_sector" value="" 
                                placeholder="Sector" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
 
-                    <label for="fc_empa" class="control-label col-sm-2 required">Fecha (*)</label>
+                    <label for="fc_empa" class="control-label col-sm-2">Fecha (*)</label>
                     <div class="col-sm-3">
                         <input type="date" name="fc_emp" id="fc_emp" value="{$fc_emp}" 
                                placeholder="Fecha" class="form-control"/>
@@ -64,7 +64,7 @@
                     </div>
                 </div>    
                 <div class="form-group">
-                    <label class="control-label col-sm-2 required">Nro. Registro</label>
+                    <label class="control-label col-sm-2">Nro. Registro</label>
                     <div class="col-sm-3">
                         <input type="text" name="nro_registro" id="nro_registro" value="" 
                                placeholder="N° Registro" class="form-control" disabled/>
@@ -84,62 +84,61 @@
             
             <div class="panel-body">
                 <div class="form-group">
-                    <label class="control-label col-sm-2 required">Rut Paciente</label>
-                    <div class="col-sm-3">
-                        {$gl_rut}
+                    <label class="control-label col-sm-2 ">Rut Paciente</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$gl_rut}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2 required">Nombres</label>
-                    <div class="col-sm-3">
-                        {$gl_nombres}
+                    <label class="control-label col-sm-2">Nombres</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$gl_nombres}</span>
                     </div>
-                    <label class="control-label col-sm-2 required">Apellidos</label>
-                    <div class="col-sm-3">
-                        {$gl_apellidos}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-2 required">Fecha Nacimiento</label>
-                    <div class="col-sm-3">
-                        {$fc_nacimiento}
-                    </div>
-                    <label class="control-label col-sm-2 required">Edad</label>
-                    <div class="col-sm-3">
-                        {$edad}
+                    <label class="control-label col-sm-2">Apellidos</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$gl_apellidos}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2 required">G&eacute;nero</label>
-                    <div class="col-sm-3">
-                        Femenino
+                    <label class="control-label col-sm-2">Fecha Nacimiento</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$fc_nacimiento}</span>
                     </div>
-                    <label class="control-label col-sm-2 required">Direcci&oacute;n</label>
-                    <div class="col-sm-3">
-                        {$gl_direccion}
+                    <label class="control-label col-sm-2">Edad</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$edad}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2 required">Fono</label>
-                    <div class="col-sm-3">
-                        {$gl_fono}
-                    </div>
-                    <label class="control-label col-sm-2 required">Celular</label>
-                    <div class="col-sm-3">
-                        {$gl_celular}
+                    <label class="control-label col-sm-2">G&eacute;nero</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>Femenino</span>
+                    </div>   
+                    <label class="control-label col-sm-2">E-mail</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$gl_email}</span>
                     </div>
                 </div>
 
-                <div class="form-group">    
-                    <label class="control-label col-sm-2 required">E-mail</label>
-                    <div class="col-sm-3">
-                        {$gl_email}
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Fono</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$gl_fono}</span>
                     </div>
-                </div>    
+                    <label class="control-label col-sm-2">Celular</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$gl_celular}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Direcci&oacute;n</label>
+                    <div class="col-lg-8 col-sm-10">
+						<span class="form-control" disabled>{$gl_direccion}</span>
+                    </div>
+                </div>
             </div>
         </div>
 
