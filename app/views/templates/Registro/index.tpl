@@ -44,11 +44,11 @@
 										<button type="button" 
 												onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/ver/{$item->id_registro}', 'Detalle Registro', 85);" 
 												data-toggle="tooltip" 
-												class="btn btn-sm btn-info btn-flat"
+												class="btn btn-xs btn-info btn-flat"
 												title="Ver Registro">
-											<i class="fa fa-info"></i>&nbsp;&nbsp;Ver
+											<i class="fa fa-search"></i>&nbsp;&nbsp;Ver
 										</button>
-                                        <button type="button" class="btn btn-sm btn-success btn-flat" 
+                                        <button type="button" class="btn btn-xs btn-success btn-flat" 
                                                 onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_registro}'" 
                                                 data-toggle="tooltip" title="Empa">
                                             <i class="fa fa-eye"></i>&nbsp;&nbsp;EMPA
@@ -58,8 +58,9 @@
 												{*onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/detalleRegistro/{$item->gl_rut}', 'Bitácora paciente RUT : {$item->gl_rut}', 85);" *}
 												data-toggle="tooltip" 
 												title="Bitácora" 
-												class="btn btn-sm btn-flat btn-primary" 
-											<i class="fa fa-search">&nbsp;&nbsp;Bitácora</i></button>
+												class="btn btn-xs btn-flat btn-primary">
+											<i class="fa fa-info-circle">&nbsp;&nbsp;Bitácora</i>
+										</button>
 									</div>			
 								</td>          
 							</tr>
