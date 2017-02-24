@@ -211,7 +211,7 @@
                         <div class="form-group">
                             <label class="control-label required col-sm-2">Peso (Kg)</label>
                             <div class="col-sm-1">
-                                    <input type="text" name="gl_peso" id="gl_peso" maxlength="5"
+                                    <input type="text" name="gl_peso" id="gl_peso" maxlength="4"
                                            onKeyPress="return soloNumeros(event)"
                                            value="" placeholder="" class="form-control"/>
                                     <span class="help-block hidden"></span>
@@ -220,7 +220,7 @@
                         <div class="form-group">   
                             <label class="control-label required col-sm-2">Estatura (cm)</label>
                             <div class="col-sm-1">
-                                    <input type="text" name="gl_estatura" id="gl_estatura" maxlength="5"
+                                    <input type="text" name="gl_estatura" id="gl_estatura" maxlength="4"
                                            onKeyPress="return soloNumeros(event)"
                                            value="" placeholder="" class="form-control"/>
                                     <span class="help-block hidden"></span>
@@ -230,7 +230,7 @@
                             <label class="control-label required col-sm-2">Circunferencia Abdominal (cm)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_circunferencia_abdominal" id="gl_circunferencia_abdominal" maxlength="5"
-                                       onKeyPress="return soloNumeros(event)"
+                                       onKeyPress="return soloNumeros(event)" maxlength="4"
                                        value="" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>
@@ -338,7 +338,8 @@
                                     <label><input class="bo_rpr" type="radio" name="bo_rpr" 
                                                id="bo_rpr" value="1">Positivo</label>
                             </div>
-                                <label class="control-label required col-sm-2" style="display: none" id="lbl_its">(*) Referir a programa ITS</label>
+                                <label class="control-label required col-sm-2" style="display: none" id="lbl_its1">(*) Referir a programa ITS</label>
+                                <label class="control-label required col-sm-2" style="display: none" id="lbl_its2">(*) Referir a programa ITS</label>
                         </div>
                     </div>
                 </div>
@@ -435,25 +436,16 @@
                     <div class="panel-heading">Dislipidemia (Mujeres de 40 años y mas)</div>
                     <div class="panel-body">  
                         <div class="form-group">   
-                            <label class="control-label required col-sm-2">Colesterol total (mm/dl)</label>
+                            <label class="control-label required col-sm-2">Colesterol total (mg/dl)</label>
                             <div class="col-sm-2">
-                                    <input type="text" name="gl_colesterol" id="gl_colesterol" value="" 
-                                           placeholder="" class="form-control"/>
+                                    <input type="text" name="gl_colesterol" id="gl_colesterol" maxlength="4"
+                                           onKeyPress="return soloNumeros(event)"
+                                           value="" placeholder="" class="form-control"/>
                                     <span class="help-block hidden"></span>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3" style="display: none" id="div_colesterol">
                                         <input type="checkbox" id="bo_colesterol_toma">
                                         <label for="bo_colesterol_toma" class="control-label required">Toma de Colesterol</label>
-                            </div>
-                        </div>   
-                        <div class="form-group">     
-                            <div class="col-sm-4">
-                                <label>(*) Consejer&iacute;a en alimentaci&oacute;n saludable y actividad f&iacute;sica</label>
-                            </div>
-                        </div>   
-                        <div class="form-group">     
-                            <div class="col-sm-4">
-                                <label>(*) Referir a confirmaci&oacute;n diagn&oacute;stica</label>
                             </div>
                         </div>
                     </div>
@@ -510,7 +502,7 @@
                             </div>
                             <div class="col-sm-3">
                                         <input type="checkbox" id="bo_mamografia_toma">
-                                        <label class="control-label required">Toma Mamograf&iacute;a</label>
+                                        <label for="bo_mamografia_toma" class="control-label required">Toma Mamograf&iacute;a</label>
                             </div>
                         </div>
                         <div class="form-group" id="mam_resultado2" style="display: none"> 
