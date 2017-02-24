@@ -262,116 +262,36 @@ class Registro extends Controller {
         $parametros = $this->request->getParametros();
         $id_registro = $parametros[0];
         $this->smarty->assign("id_registro", $id_registro);
-        $obj_registro = $this->_DAORegistro->getRegistroById($id_registro);
+        $obj_registro = $this->_DAORegistro->selVerInfoById($id_registro);
         if (!is_null($obj_registro)) {
-            $id_registro = $obj_registro->id_registro;
-            $rut_registro = $obj_registro->gl_rut;
-            $bo_extranjero = $obj_registro->bo_extranjero;
-            $run_extranjero = $obj_registro->gl_run_pass;
-            $nombres_registro = $obj_registro->gl_nombres;
-            $apellido_registro = $obj_registro->gl_apellidos;
-            $fecha_nacimiento_registro = $obj_registro->fc_nacimiento;
-            $sexo_registro = $obj_registro->gl_sexo;
-            $direccion_registro = $obj_registro->gl_direccion;
-            $fono_registro = $obj_registro->gl_fono;
-            $celular_registro = $obj_registro->gl_celular;
-            $email_registro = $obj_registro->gl_email;
-            $latitud_registro = $obj_registro->gl_latitud;
-            $longitud_registro = $obj_registro->gl_longitud;
-            $bo_reconoce_violencia_registro = $obj_registro->bo_reconoce;
-            $bo_acepta_programa_registro = $obj_registro->bo_acepta_programa;
-            $obj_adjunto = $this->_DAOAdjuntos->getAdjuntoByRegistro($obj_registro->id_registro);
-            if (!is_null($obj_adjunto)) {
-                $ruta_consentimiento = $obj_adjunto->gl_path;
-            } else {
-                $ruta_consentimiento = "";
-            }
-            $obj_prevision = $this->_DAOPrevision->getPrevision($obj_registro->id_prevision);
-            if (!is_null($obj_prevision)) {
-                $nombre_prevision = $obj_prevision->gl_nombre_prevision;
-            } else {
-                $nombre_prevision = "N/D";
-            }
-            $obj_comuna = $this->_DAOComuna->getComuna($obj_registro->id_comuna);
-            if (!is_null($obj_comuna)) {
-                $obj_comuna_region = $this->_DAOComuna->getComunaRegion($obj_comuna->id_comuna);
-                $nombre_comuna = $obj_comuna->gl_nombre_comuna;
-                $nombre_region = $obj_comuna_region->gl_nombre_region;
-            } else {
-                $nombre_comuna = "N/D";
-                $nombre_region = "N/D";
-            }
-            $obj_usuario = $this->_DAOUsuarios->getById($obj_registro->id_usuario_crea);
-            if (!is_null($obj_usuario)) {
-                $nombre_registrador = "  " . $obj_usuario->gl_nombres . " " . $obj_usuario->gl_apellidos;
-            } else {
-                $nombre_registrador = "N/D";
-            }
             $edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
-            $obj_estado_caso = $this->_DAOEstadoCaso->getEstadoCaso($obj_registro->id_estado_caso);
-            if (!is_null($obj_estado_caso)) {
-                $nombre_estado_caso = $obj_estado_caso->gl_nombre_estado_caso;
-            } else {
-                $nombre_estado_caso = "N/D";
-            }
-            $obj_institucion = $this->_DAOInstitucion->getInstitucion($obj_registro->id_institucion);
-            if (!is_null($obj_institucion)) {
-                $institucion = $obj_institucion->gl_nombre;
-            } else {
-                $institucion = "N/D";
-            }
-
             $arrMotivosConsulta = $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($obj_registro->id_registro);
-        } else {
-            $id_registro = "N/D";
-            $rut_registro = "N/D";
-            $bo_extranjero = "N/D";
-            $run_extranjero = "N/D";
-            $nombres_registro = "N/D";
-            $apellido_registro = "N/D";
-            $fecha_nacimiento_registro = "XX/XX/XXXX";
-            $edad = "0";
-            $sexo_registro = "N/D";
-            $direccion_registro = "N/D";
-            $fono_registro = "N/D";
-            $celular_registro = "N/D";
-            $email_registro = "N/D";
-            $latitud_registro = "N/D";
-            $longitud_registro = "N/D";
-            $bo_reconoce_violencia_registro = false;
-            $bo_acepta_programa_registro = false;
-            $nombre_prevision = "N/D";
-            $nombre_comuna = "N/D";
-            $nombre_region = "N/D";
-            $nombre_registrador = "N/D";
-            $institucion = "N/D";
-            $ruta_adjunto = "";
         }
-        $this->smarty->assign('id_registro', $id_registro);
-        $this->smarty->assign('rut', $rut_registro);
-        $this->smarty->assign('extranjero', $bo_extranjero);
-        $this->smarty->assign('run_pass', $run_extranjero);
-        $this->smarty->assign('nombres', $nombres_registro);
-        $this->smarty->assign('apellidos', $apellido_registro);
-        $this->smarty->assign('fecha_nacimiento', $fecha_nacimiento_registro);
-        $this->smarty->assign('sexo', $sexo_registro);
-        $this->smarty->assign('direccion', $direccion_registro);
-        $this->smarty->assign('fono', $fono_registro);
-        $this->smarty->assign('celular', $celular_registro);
-        $this->smarty->assign('email', $email_registro);
-        $this->smarty->assign('latitud', $latitud_registro);
-        $this->smarty->assign('longitud', $longitud_registro);
-        $this->smarty->assign('reconoce', $bo_reconoce_violencia_registro);
-        $this->smarty->assign('acepta', $bo_acepta_programa_registro);
-        $this->smarty->assign('prevision', $nombre_prevision);
-        $this->smarty->assign('comuna', $nombre_comuna);
-        $this->smarty->assign('region', $nombre_region);
+        $this->smarty->assign('id_registro', $obj_registro->id_registro);
+        $this->smarty->assign('rut', $obj_registro->gl_rut);
+        $this->smarty->assign('extranjero', $obj_registro->bo_extranjero);
+        $this->smarty->assign('run_pass', $obj_registro->gl_run_pass);
+        $this->smarty->assign('nombres', $obj_registro->gl_nombres);
+        $this->smarty->assign('apellidos', $obj_registro->gl_apellidos);
+        $this->smarty->assign('fecha_nacimiento', $obj_registro->fc_nacimiento);
+        $this->smarty->assign('sexo', $obj_registro->gl_sexo);
+        $this->smarty->assign('direccion', $obj_registro->gl_direccion);
+        $this->smarty->assign('fono', $obj_registro->gl_fono);
+        $this->smarty->assign('celular', $obj_registro->gl_celular);
+        $this->smarty->assign('email', $obj_registro->gl_email);
+        $this->smarty->assign('latitud', $obj_registro->gl_latitud);
+        $this->smarty->assign('longitud', $obj_registro->gl_longitud);
+        $this->smarty->assign('reconoce', $obj_registro->bo_reconoce);
+        $this->smarty->assign('acepta', $obj_registro->bo_acepta_programa);
+        $this->smarty->assign('prevision', $obj_registro->gl_nombre_prevision);
+        $this->smarty->assign('comuna', $obj_registro->gl_nombre_comuna);
+        $this->smarty->assign('region', $obj_registro->gl_nombre_region);
         $this->smarty->assign('edad', $edad);
-        $this->smarty->assign('nombre_registrador', $nombre_registrador);
-        $this->smarty->assign('estado_caso', $nombre_estado_caso);
-        $this->smarty->assign('institucion', $institucion);
+        $this->smarty->assign('nombre_registrador', $obj_registro->gl_nombre_usuario_crea);
+        $this->smarty->assign('estado_caso', $obj_registro->gl_nombre_estado_caso);
+        $this->smarty->assign('institucion', $obj_registro->gl_nombre_institucion);
         $this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
-        $this->smarty->assign('ruta_consentimiento', $ruta_consentimiento);
+        $this->smarty->assign('ruta_consentimiento', $obj_registro->gl_path);
         $this->smarty->display('Registro/ver.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/registro/ver.js");
     }
