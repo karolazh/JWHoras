@@ -26,14 +26,14 @@ class DAOEventos extends Model{
     }
 
     public function selListaEventos(){
-        $query		= "SELECT "
-					. "id_evento,"
-					. "id_evento_tipo,"
-					. "id_registro,"
-					. "gl_descripcion,"
-					. "fc_crea,"
-					. "id_usuario_crea "
-					. "FROM pre_eventos";
+        $query		= "SELECT 
+							id_evento,
+							id_evento_tipo,
+							id_registro,
+							gl_descripcion,
+							fc_crea,
+							id_usuario_crea
+						FROM pre_eventos";
         $resultado	= $this->db->getQuery($query);
 
         if($resultado->numRows>0){
@@ -59,11 +59,11 @@ class DAOEventos extends Model{
     }
 
 	public function selBusquedaEventos($parametros){
-	        $query = $this->db->select(		" e.id_evento, "
-										.	"gl_descripcion, "
-										.	"id_evento_tipo, "
-										.	"date_format(fc_crea,'%d-%m-%Y') as fc_crea, "
-										.	"id_registro ")
+	        $query = $this->db->select(	"	e.id_evento, 
+											gl_descripcion, 
+											id_evento_tipo, 
+											date_format(fc_crea,'%d-%m-%Y') as fc_crea, 
+											id_registro ")
 	                          ->from($this->_tabla . " e ");    
 	        if(!empty($parametros["gl_descripcion"])){
 	            $query->whereAND(" e.gl_descripcion " , "%" . $parametros["gl_descripcion"] . "%", "LIKE");
