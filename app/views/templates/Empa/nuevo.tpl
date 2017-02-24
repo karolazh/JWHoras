@@ -4,9 +4,13 @@
 <section class="content-header">
     <h1><i class="fa fa-medkit"></i> Ingresar EMPA</h1>
     <div class="col-md-12 text-right">
-        <button type="button" id="ingresar" class="btn btn-success"
-                onclick="location.href = '{$base_url}/Paciente/index/{$id_pac}'">
-            <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver Ficha Paciente
+        <button type="button"
+                href='javascript:void(0)' 
+                onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
+                data-toggle="tooltip" 
+                title="Bitácora" 
+                class="btn btn-danger">
+                <i class="fa fa-eye"></i>&nbsp;&nbsp;Bitácora
         </button>
     </div>
     <br/><br/>
@@ -24,7 +28,7 @@
             <div class="panel-body">  
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2 required">Comuna</label>
+                    <label class="control-label col-sm-2">Comuna</label>
                     <div class="col-sm-3">
                         <input type="text" name="gl_comuna" id="gl_comuna" value="{$gl_comuna}" 
                                placeholder="Comuna" class="form-control" disabled/>
@@ -33,13 +37,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="gl_institucion" class="control-label col-sm-2 required">Centro de Salud (*)</label>
+                    <label for="gl_institucion" class="control-label col-sm-2">Centro de Salud (*)</label>
                     <div class="col-sm-3">
                         <input type="text" name="gl_institucion" id="gl_institucion" value="{$gl_institucion}"
                                placeholder="Institución" class="form-control" disabled/>
                         <span class="help-block hidden"></span>
                     </div>
-                    <label for="nr_ficha" class="control-label col-sm-2 required">N° de Ficha (*)</label>
+                    <label for="nr_ficha" class="control-label col-sm-2">N° de Ficha (*)</label>
                     <div class="col-sm-3">
                         <input type="text" name="nr_ficha" id="nr_ficha" value="" 
                                placeholder="N° de Ficha" class="form-control"/>
@@ -49,14 +53,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="id_sector" class="control-label col-sm-2 required">Sector (*)</label>
+                    <label for="id_sector" class="control-label col-sm-2">Sector (*)</label>
                     <div class="col-sm-3">
                         <input type="text" name="id_sector" id="id_sector" value="" 
                                placeholder="Sector" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
 
-                    <label for="fc_empa" class="control-label col-sm-2 required">Fecha (*)</label>
+                    <label for="fc_empa" class="control-label col-sm-2">Fecha (*)</label>
                     <div class="col-sm-3">
                         <input type="date" name="fc_emp" id="fc_emp" value="{$fc_emp}" 
                                placeholder="Fecha" class="form-control"/>
@@ -64,7 +68,7 @@
                     </div>
                 </div>    
                 <div class="form-group">
-                    <label class="control-label col-sm-2 required">Nro. Registro</label>
+                    <label class="control-label col-sm-2">Nro. Registro</label>
                     <div class="col-sm-3">
                         <input type="text" name="nro_registro" id="nro_registro" value="" 
                                placeholder="N° Registro" class="form-control" disabled/>
@@ -84,62 +88,61 @@
             
             <div class="panel-body">
                 <div class="form-group">
-                    <label class="control-label col-sm-2 required">Rut Paciente</label>
-                    <div class="col-sm-3">
-                        {$gl_rut}
+                    <label class="control-label col-sm-2 ">Rut Paciente</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$gl_rut}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2 required">Nombres</label>
-                    <div class="col-sm-3">
-                        {$gl_nombres}
+                    <label class="control-label col-sm-2">Nombres</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$gl_nombres}</span>
                     </div>
-                    <label class="control-label col-sm-2 required">Apellidos</label>
-                    <div class="col-sm-3">
-                        {$gl_apellidos}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-2 required">Fecha Nacimiento</label>
-                    <div class="col-sm-3">
-                        {$fc_nacimiento}
-                    </div>
-                    <label class="control-label col-sm-2 required">Edad</label>
-                    <div class="col-sm-3">
-                        {$edad}
+                    <label class="control-label col-sm-2">Apellidos</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$gl_apellidos}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2 required">G&eacute;nero</label>
-                    <div class="col-sm-3">
-                        Femenino
+                    <label class="control-label col-sm-2">Fecha Nacimiento</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$fc_nacimiento}</span>
                     </div>
-                    <label class="control-label col-sm-2 required">Direcci&oacute;n</label>
-                    <div class="col-sm-3">
-                        {$gl_direccion}
+                    <label class="control-label col-sm-2">Edad</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$edad}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2 required">Fono</label>
-                    <div class="col-sm-3">
-                        {$gl_fono}
-                    </div>
-                    <label class="control-label col-sm-2 required">Celular</label>
-                    <div class="col-sm-3">
-                        {$gl_celular}
+                    <label class="control-label col-sm-2">G&eacute;nero</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>Femenino</span>
+                    </div>   
+                    <label class="control-label col-sm-2">E-mail</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$gl_email}</span>
                     </div>
                 </div>
 
-                <div class="form-group">    
-                    <label class="control-label col-sm-2 required">E-mail</label>
-                    <div class="col-sm-3">
-                        {$gl_email}
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Fono</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$gl_fono}</span>
                     </div>
-                </div>    
+                    <label class="control-label col-sm-2">Celular</label>
+                    <div class="col-md-4 col-sm-3">
+						<span class="form-control" disabled>{$gl_celular}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Direcci&oacute;n</label>
+                    <div class="col-lg-8 col-sm-10">
+						<span class="form-control" disabled>{$gl_direccion}</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -148,7 +151,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Examen</div>
 
-            <!-- Examen -->
+    <!-- Examen -->
             <div class="panel-body">
                 <!-- a. Alcoholismo -->
                 <div class="panel panel-success">
@@ -164,8 +167,13 @@
                                               id="bo_consume_alcohol" value="1">SI</label>
                             </div>
                             <div class="col-sm-1">
-                                <button type="button" id="btnaudit" class="btn btn-sm btn-info hidden">
-                                    <i class="fa fa-file-text-o"></i> AUDIT</button>
+                                <button href='javascript:void(0)'
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Empa/audit/{$item->id_registro}', 'AUDIT (Auto-diagnostico sobre Riesgos en el Uso de Alcohol)', 80);"
+                                        data-toggle="tooltip"
+                                        title="Ver Registro"
+                                        type="button" id="btnaudit" class="btn btn-sm btn-info hidden btn-flat">
+                                    <i class="fa fa-file-text-o"></i>&nbsp;AUDIT
+                                </button>
                             </div>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value="" 
@@ -204,6 +212,7 @@
                             <label class="control-label required col-sm-2">Peso (Kg)</label>
                             <div class="col-sm-1">
                                     <input type="text" name="gl_peso" id="gl_peso" maxlength="5"
+                                           onKeyPress="return soloNumeros(event)"
                                            value="" placeholder="" class="form-control"/>
                                     <span class="help-block hidden"></span>
                             </div>
@@ -212,14 +221,16 @@
                             <label class="control-label required col-sm-2">Estatura (cm)</label>
                             <div class="col-sm-1">
                                     <input type="text" name="gl_estatura" id="gl_estatura" maxlength="5"
+                                           onKeyPress="return soloNumeros(event)"
                                            value="" placeholder="" class="form-control"/>
                                     <span class="help-block hidden"></span>
                             </div>
                         </div>
                         <div class="form-group">   
-                            <label class="control-label required col-sm-2">Circunferencia Abdominal</label>
+                            <label class="control-label required col-sm-2">Circunferencia Abdominal (cm)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_circunferencia_abdominal" id="gl_circunferencia_abdominal" maxlength="5"
+                                       onKeyPress="return soloNumeros(event)"
                                        value="" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>
@@ -230,6 +241,10 @@
                                 <input type="text" name="gl_imc" id="gl_imc" 
                                        value="" placeholder="" class="form-control" disabled/>
                                 <span class="help-block hidden"></span>
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="button" id="calcular" onclick="calculaIMC()" class="btn btn-sm btn-success">
+                                    <i class="fa fa-success"></i> Calcular IMC</button>
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" id="ver" class="btn btn-sm btn-info">
@@ -253,15 +268,15 @@
                         <div class="form-group">
                             <label class="control-label required col-sm-2">PAS (mm/Hg)</label>
                             <div class="col-sm-1">
-                                <input type="text" name="gl_pas" id="gl_pas" 
-                                           value="" placeholder="" class="form-control"/>
-                                    <span class="help-block hidden"></span>
+                                <input type="text" name="gl_pas" id="gl_pas" maxlength="4" onKeyPress="return soloNumeros(event)"
+                                       value="" placeholder="" class="form-control"/>
+                                <span class="help-block hidden"></span>
                             </div>
                             <label class="control-label required col-sm-2">PAD (mm/Hg)</label>
                             <div class="col-sm-1">
-                                <input type="text" name="gl_pad" id="gl_pad" value="" 
-                                           placeholder="" class="form-control"/>
-                                    <span class="help-block hidden"></span>
+                                <input type="text" name="gl_pad" id="gl_pad" maxlength="4" onKeyPress="return soloNumeros(event)" 
+                                       value="" placeholder="" class="form-control"/>
+                                <span class="help-block hidden"></span>
                             </div>
                         </div>    
                         <div class="form-group">
@@ -281,11 +296,11 @@
                         <div class="form-group">
                             <label class="control-label required col-sm-2">Glicemia en Ayunas (mg/dl)</label>
                             <div class="col-sm-3">
-                                <input type="text" name="gl_glicemia" id="gl_glicemia" value="" 
+                                <input type="text" name="gl_glicemia" maxlength="5" id="gl_glicemia" value="" 
                                            placeholder="" class="form-control"/>
                                     <span class="help-block hidden"></span>
                             </div>   
-                            <div class="col-sm-3">
+                            <div class="col-sm-3" style="display: none" id="div_glicemia_toma">
                                     <input type="checkbox" id="bo_glicemia_toma">
                                     <label for="bo_glicemia_toma" class="control-label required">Toma de Glicemia</label>
                             </div>
@@ -323,7 +338,7 @@
                                     <label><input class="bo_rpr" type="radio" name="bo_rpr" 
                                                id="bo_rpr" value="1">Positivo</label>
                             </div>
-                                <label class="control-label required col-sm-2 hidden" id="lbl_its">(*) Referir a programa ITS</label>
+                                <label class="control-label required col-sm-2" style="display: none" id="lbl_its">(*) Referir a programa ITS</label>
                         </div>
                     </div>
                 </div>
@@ -343,7 +358,7 @@
                             </div>
                         </div>
                         <div class="form-group hidden" id="id_baciloscopia">
-                                <label class="control-label required col-sm-1">Basiloscopia</label>
+                                <label class="control-label required col-sm-2">Basiloscopia</label>
                             <div class="col-sm-2">
                                     <label><input class="bo_baciloscopia_toma" type="radio" name="bo_baciloscopia_toma" 
                                                id="bo_baciloscopia_toma" value="0">Negativo</label>
@@ -385,10 +400,10 @@
                                 <label class="control-label required col-sm-2">PAP Vigente</label>
                             <div class="col-sm-2">
                                     <label><input class="bo_pap_vigente"  type="radio" name="bo_pap_vigente" 
-                                               id="bo_pap_vigente" value="0" disabled>NO</label>
+                                               id="bo_pap_vigente_0" value="0" readonly>NO</label>
                                     &nbsp;&nbsp;
                                     <label><input class="bo_pap_vigente" type="radio" name="bo_pap_vigente" 
-                                               id="bo_pap_vigente" value="1" disabled>SI</label>
+                                               id="bo_pap_vigente_1" value="1" readonly>SI</label>
                             </div>
                         </div>
                         <div class="form-group hidden" id="tomar_fecha">         
@@ -530,6 +545,7 @@
 
 
                         <div class="form-group">
+                            <div class="col-sm-1"></div>
                             <div class="col-sm-3">
                                 <div class="checkbox">
                                     <label>
@@ -541,7 +557,7 @@
                             <div class="col-sm-3">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" id="chkReconoce">&nbsp;&nbsp;<strong>Reconoce Maltrato</strong>
+                                        <input type="checkbox" {$check} id="chkReconoce">&nbsp;&nbsp;<strong>Reconoce Maltrato</strong>
                                     </label>
                                 </div>
                             </div>
