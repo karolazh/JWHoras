@@ -4,13 +4,13 @@
 </li>
 <li>
     <a href="{$base_url}/Registro/index">
-        <i class="fa fa-book"></i> <span>Registro</span></a>
+        <i class="fa fa-book"></i> <span>Ficha</span></a>
 </li>
-<li>
+<!--li>
     <a href="{$base_url}/Empa/index">
         <i class="fa fa-medkit"></i> <span>Atención</span></a>
-</li>
-<li>
+</li -->
+<!-- li>
 	<a href="">
 		<i class="fa fa-plus-circle"></i> <span>Mantenedores</span></a>
 		<ul class="treeview-menu">
@@ -19,7 +19,7 @@
 					<i class="fa fa-plus-circle"></i> <span>Usuarios</span></a>
 			</li>
 		</ul>
-</li>
+</li -->
 
 <li>
     <a href="{$base_url}/Soporte/">
