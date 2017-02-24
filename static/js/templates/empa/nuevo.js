@@ -10,27 +10,47 @@ function calculaIMC()
     imc = imc.toFixed(2);
 //calculamos circunferencia abdominal
     //Bajo peso
-    if (imc < 18.50){
-        if (imc < 16.00){
+    if (imc < 18.50) {
+        $('#gl_imc').css("borderColor","");
+        $('#gl_imc').parent().find("span.help-block").css("color","");
+        $('#gl_imc').parent().removeClass("has-error");
+        $('#gl_imc').parent().removeClass("has-success");
+        $('#gl_imc').css("borderColor","#BDB76B");
+        $('#gl_imc').parent().find("span.help-block").css("color","#BDB76B");
+        if (imc < 16.00) {
             mensaje = "Bajo Peso / Delgadez Severa";
         }
-        if (imc >= 16.00 && imc < 17.00){
+        if (imc >= 16.00 && imc < 17.00) {
             mensaje = "Bajo Peso / Delgadez Moderada";
         }
-        if (imc >= 17.00 && imc < 18.50){
+        if (imc >= 17.00 && imc < 18.50) {
             mensaje = "Bajo Peso / Delgadez Aceptable";
         }
     }
     //Peso Normal
-    if (imc >= 18.50 && imc <= 24.99){
-            mensaje = "Peso Normal";
+    if (imc >= 18.50 && imc <= 24.99) {
+        $('#gl_imc').css("borderColor","");
+        $('#gl_imc').parent().find("span.help-block").css("color","");
+        $('#gl_imc').parent().removeClass("has-error");
+        $('#gl_imc').parent().addClass("has-success");
+        mensaje = "Peso Normal";
     }
     //Sobre Peso
-    if (imc >= 25.00 && imc < 30.00){
-            mensaje = "Sobrepeso / Pre Obeso (riesgo)";
+    if (imc >= 25.00 && imc < 30.00) {
+        $('#gl_imc').css("borderColor","");
+        $('#gl_imc').parent().find("span.help-block").css("color","");
+        $('#gl_imc').parent().removeClass("has-error");
+        $('#gl_imc').parent().removeClass("has-success");
+        $('#gl_imc').css("borderColor","#FF4500");
+        $('#gl_imc').parent().find("span.help-block").css("color","#FF4500");
+        mensaje = "Sobrepeso / Pre Obeso (riesgo)";
     }
     //Obeso
     if (imc >= 30.00){
+        $('#gl_imc').css("borderColor","");
+        $('#gl_imc').parent().find("span.help-block").css("color","");
+        $('#gl_imc').parent().removeClass("has-success");
+        $('#gl_imc').parent().addClass("has-error");
         if (imc >= 30.00 && imc < 35.00){
             mensaje = "Obeso / Obeso Tipo I (riesgo moderado)";
         }
@@ -41,14 +61,18 @@ function calculaIMC()
             mensaje = "Obeso / Obeso Tipo III (riesgo muy severo)";
         }
     }
-    alert(imc+mensaje);
+    //mensaje si no tiene valores y dar valor="" a gl_imc
+    if ((peso == "") || (altura == "")){
+        xModal.danger("Ingrese Peso y Altura");
+        imc = "";
+    }
 //enviamos resultados a la caja correspondiente
     $('#gl_imc').val(imc);
     $('#gl_imc').parent().find('span.help-block').html(mensaje);
     $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
 } 
 //Si Circunferencia Abdominal es mayor o igual a 88cm -> Consejería
-$("#gl_circunferencia_abdominal").on('blur', function (e) {
+$("#gl_circunferencia_abdominal").on('keyup', function (e) {
     if ($("#gl_circunferencia_abdominal").val() >= 88){
         $('#gl_circunferencia_abdominal').parent().find('span.help-block').html("Mayor/Igual a 90 (Consejería Alimentación Sana y Actividad Física)");
         $('#gl_circunferencia_abdominal').parent().find('span.help-block').removeClass("hidden");
@@ -130,17 +154,18 @@ $(".bo_trabajadora_reclusa").on('change', function (e) {
 
 //Si VDRL o RPR es positivo -> Activar Funcionalidad de Agenda para ITS
 $(".bo_rpr").on('change', function (e) {
-    if ($('#bo_rpr').is(':checked')) {
-        $('#lbl_its1').hide();
+    if (($('#bo_rpr').is(':checked')) && ($('#bo_vdrl').is(':checked'))) {
+            $('#lbl_its1').hide();
     } else {
         $('#lbl_its1').show();
     }
 });
+
 $(".bo_vdrl").on('change', function (e) {
-    if ($('#bo_vdrl').is(':checked')) {
-        $('#lbl_its2').hide();
+    if (($('#bo_rpr').is(':checked')) && ($('#bo_vdrl').is(':checked'))) {
+            $('#lbl_its1').hide();
     } else {
-        $('#lbl_its2').show();
+        $('#lbl_its1').show();
     }
 });
 
@@ -178,7 +203,23 @@ $("#fc_ultimo_pap").livequery(function(){
 		$('#pap_vigente').show();
 	});
 });
-//
+//Si valor colesterlo >= 200 y < 239 (Consejería Alimentaria y Actividad Fisica
+//Si valor colesterol >= 240 (Referir a confirmación diagnóstica
+$("#gl_colesterol").on('keyup', function (e) {
+    var valor_colesterol = $('#gl_colesterol').val();
+    if (valor_colesterol > 199 && valor_colesterol < 240) {
+        $('#div_colesterol').show();
+        $('#gl_colesterol').parent().find('span.help-block').html("Consejería Alimentaria y Actividad Física");
+        $('#gl_colesterol').parent().find('span.help-block').removeClass("hidden");
+    } else if (valor_colesterol >= 240){
+        $('#div_colesterol').show();
+        $('#gl_colesterol').parent().find('span.help-block').html("Referir a Confirmación Diagnóstica");
+        $('#gl_colesterol').parent().find('span.help-block').removeClass("hidden");
+    } else {
+        $('#gl_colesterol').parent().find('span.help-block').addClass("hidden");
+        $('#div_colesterol').hide();
+    }
+});
 
 //Si realizo Examen Cancer de mama Mostrar -> Ingrese Fecha
 $(".bo_mamografia_realizada").on('change', function (e) {
