@@ -38,55 +38,58 @@
                     </div>
                 </div>
 
-
-                <div class="form-group">
-                    <div class="clearfix col-md-3">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" id="chkReconoce" {if $reconoce}checked="checked"{/if} disabled="disabled">
-                                <strong>Reconoce maltrato</strong>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="clearfix col-md-3">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" id="chkAcepta" {if $acepta}checked="checked"{/if} disabled="disabled">
-                                <strong>Acepta Programa</strong>
-                                    
-                                
-                            </label>
-                        </div>
-                    </div>
-                             <div class="clearfix col-md-3">
-                            {if $ruta_adjunto != ""}
-                            <a class="btn btn-sm btn-primary" id="btnDescarga" href = '{$smarty.const.DIR_BASE}{$ruta_consentimiento}' target="_blank"><i class="fa fa-download"></i>Descargar Consentimiento</a>
-                             {/if}
-                            </div>
-                             <div class="clearfix col-md-3">
-                                 
-                             </div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<div class="clearfix col-md-3">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="chkReconoce" {if $reconoce}checked="checked"{/if} disabled="disabled">
+									<strong>Reconoce maltrato</strong>
+								</label>
+							</div>
+						</div>
+						<div class="clearfix col-md-3">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="chkAcepta" {if $acepta}checked="checked"{/if} disabled="disabled">
+									<strong>Acepta Programa</strong>
+										
+									
+								</label>
+							</div>
+						</div>
+								 <div class="clearfix col-md-3">
+								{if $ruta_adjunto != ""}
+								<a class="btn btn-sm btn-primary" id="btnDescarga" href = '{$smarty.const.DIR_BASE}{$ruta_consentimiento}' target="_blank"><i class="fa fa-download"></i>Descargar Consentimiento</a>
+								 {/if}
+								</div>
+								 <div class="clearfix col-md-3">
+									 
+								 </div>
+					</div>
                 </div>
-                <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
-                    <thead>
-                        <tr role="row">
-                            <th align="center" width="35%">Motivo Consulta</th>
-                            <th align="center" width="35%">Registrador</th>
-                            <th align="center" width="30%">Fecha Ingreso</th>
-                            <th align="center" width="0%" class="hidden">Fecha Registro</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {foreach $arrMotivosConsulta as $item}
-                            <tr>
-                                <td nowrap align="center"> {$item->gl_motivo_consulta} </td>
-                                <td nowrap align="center">{$item->gl_nombres}&nbsp;{$item->gl_apellidos}</td>
-                                <td nowrap align="center">{$item->fc_ingreso}&nbsp;{$item->gl_hora_ingreso}</td>
-                                <td nowrap align="center" class="hidden">{$item->fc_crea}</td> 
-                            </tr>
-                        {/foreach}
-                    </tbody>
-                </table>
+				<div class="table-responsive col-lg-12" data-row="10">
+					<table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
+						<thead>
+							<tr role="row">
+								<th align="center" width="35%">Motivo Consulta</th>
+								<th align="center" width="35%">Registrador</th>
+								<th align="center" width="30%">Fecha Ingreso</th>
+								<th align="center" width="0%" class="hidden">Fecha Registro</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach $arrMotivosConsulta as $item}
+								<tr>
+									<td nowrap align="center"> {$item->gl_motivo_consulta} </td>
+									<td nowrap align="center">{$item->gl_nombres}&nbsp;{$item->gl_apellidos}</td>
+									<td nowrap align="center">{$item->fc_ingreso}&nbsp;{$item->gl_hora_ingreso}</td>
+									<td nowrap align="center" class="hidden">{$item->fc_crea}</td> 
+								</tr>
+							{/foreach}
+						</tbody>
+					</table>
+				</div>
             </div>
             <div class="panel-footer">
             </div>

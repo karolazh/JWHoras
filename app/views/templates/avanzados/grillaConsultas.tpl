@@ -2,14 +2,16 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
 <div class="box-body">
-    <div id="div_tabla" class="table-responsive small"> 
+    <div id="div_tabla" class="table-responsive small col-lg-12">
+        <br>
         <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
             <thead>
                 <tr role="row">
                     <th align="center" width="10%">Fecha Ing</th>
                     <th align="center" width="10%">Hora Ing</th>
                     <th align="center" width="">Motivo Consulta</th>
-                    <th align="center" width="15%">Usuario Responsable</th>
+                    <th align="center" width="20%">Instituci&oacute;n</th>
+                    <th align="center" width="15%">Usuario</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,6 +20,7 @@
                     <td>{$con->fc_ingreso}</td>
                     <td>{$con->hora_ingreso}</td>
                     <td>{$con->motivo_consulta}</td>
+                    <td>{$con->institucion}</td>
                     <td>{$con->rut}</td>
                 </tr>
             {/foreach}

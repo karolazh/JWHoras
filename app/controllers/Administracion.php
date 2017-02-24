@@ -38,62 +38,15 @@ class Administracion extends Controller{
     //funcion construct
     function __construct(){
         parent::__construct();
-        //Acceso::set("ADMINISTRADOR");
         $this->_DAOAdministracion = $this->load->model("DAOAdministracion");
-        //$this->smarty->addPluginsDir(APP_PATH . "views/templates/MantenedorPlanificacion/Mantenedores/plugins/");
     }
     
     /*
      * Mantenedor de Noticias
      */
-    public function noticias(){
+    public function perfiles(){
         Acceso::redireccionUnlogged($this->smarty);
-        $sesion = New Zend_Session_Namespace("usuario_carpeta");        
-        $this->smarty->assign("id_usuario", $sesion->id);
-        $this->smarty->assign("rut", $sesion->rut);
-        $this->smarty->assign("usuario", $sesion->usuario);
-        
-        //llamada al _DAOAdministracion para listar regiones
-        //$arr = $this->_DAOAdministracion->getListaRegiones();
-        //$this->smarty->assign('arrResultado', $arr);
-        
-        //llamado al template
-        print_r("Hola Mundo!");
+        print_r("TODO // Administrador Perfiles");
     }
-    
-    //*** REGIONES ***//
-//    public function regiones(){
-//        $sesion = New Zend_Session_Namespace("usuario_carpeta");        
-//        $this->smarty->assign("id_usuario", $sesion->id);
-//        $this->smarty->assign("rut", $sesion->rut);
-//        $this->smarty->assign("usuario", $sesion->usuario);
-//        
-//        //llamada al _DAOAdministracion para listar regiones
-//        $arr = $this->_DAOAdministracion->getListaRegiones();
-//        $this->smarty->assign('arrResultado', $arr);
-//        
-//        //llamado al template
-//        $this->_display('Administracion/Regiones/index.tpl');
-//    }
-    
-    //creada por BC
-//    public function guardarRegion(){
-//            $session = New Zend_Session_Namespace("usuario_carpeta");
-//            $data = array();
-//            parse_str($_POST['data'], $data);
-//
-//            $this->load->lib('Constantes', false);
-//
-//            $json = array();
-//            $datos = $data;
-//            $datos['nr_estado'] =1;
-//            $insertar = $this->_DAOAdministracion->insRegion($datos);
-//
-//            if ($insertar) {
-//                $id_solicitud = $insertar;
-//                $json['estado'] = true;
-//                $json['mensaje'] = 'Proyecto ingresado correctamente';
-//            }
-//            echo json_encode($json);
-//    }	
+
 }
