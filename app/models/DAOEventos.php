@@ -82,10 +82,11 @@ class DAOEventos extends Model{
 	    }
 
 	public function insEvento($data){
-        $query = "insert into pre_evento values(null,?,?,?,CURRENT_TIMESTAMP,?)";
+        $query = "insert into pre_eventos values(null,?,?,?,?,CURRENT_TIMESTAMP,?)";
         $parametros = array($data['eventos_tipo'], 
 							$data['id_registro'], 
 							$data['gl_descripcion'], 
+							$data['bo_estado'],
 							$data['id_usuario_crea']);
         if ($this->db->execQuery($query, $parametros)) {
             return true;
