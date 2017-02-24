@@ -91,6 +91,8 @@ class Registro extends Controller {
 
         //llamado al template
         $this->_display('Registro/index.tpl');
+        $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
+
     }
 
     public function bitacora() {
@@ -348,7 +350,6 @@ class Registro extends Controller {
         $this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
         $this->smarty->assign('ruta_consentimiento', $ruta_consentimiento);
         $this->smarty->display('Registro/ver.tpl');
-        $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/ver.js");
     }
 
