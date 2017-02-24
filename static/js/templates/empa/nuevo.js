@@ -66,7 +66,15 @@ function calculaIMC()
         xModal.danger("Ingrese Peso y Altura");
         imc = "";
     }
-//enviamos resultados a la caja correspondiente
+    
+    //Si IMC es mayor a 30 Mostrar Diabetes
+    if (imc > 30){
+        $("#diabetes").show();
+    } else {
+        $("#diabetes").hide();
+    }
+    
+    //enviamos resultados a la caja correspondiente
     $('#gl_imc').val(imc);
     $('#gl_imc').parent().find('span.help-block').html(mensaje);
     $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
@@ -114,19 +122,17 @@ $(".bo_fuma").on('change', function (e) {
 
 //Si PAS es >= 140 o PAD >= 90 Activar Funcionalidad de Agenda de Profesional
 $("#gl_pas").on('keyup', function (e) {
-    if ($("#gl_pas").val() >= 140){
-        $('#gl_pas').parent().find('span.help-block').html("Mayor/Igual a 140 Referir a...");
-        $('#gl_pas').parent().find('span.help-block').removeClass("hidden");
+    if ($("#gl_pad").val() >= 90 || $("#gl_pas").val() >= 140){
+        $('#verAgendaHipertension').show();
     }else{
-        $('#gl_pas').parent().find('span.help-block').addClass("hidden");
+        $('#verAgendaHipertension').hide();
     }
 });
 $("#gl_pad").on('keyup', function (e) {
-    if ($("#gl_pad").val() >= 90){
-        $('#gl_pad').parent().find('span.help-block').html("Mayor/Igual a 90 Referir a...");
-        $('#gl_pad').parent().find('span.help-block').removeClass("hidden");
+    if ($("#gl_pad").val() >= 90 || $("#gl_pas").val() >= 140){
+        $('#verAgendaHipertension').show();
     }else{
-        $('#gl_pad').parent().find('span.help-block').addClass("hidden");
+        $('#verAgendaHipertension').hide();
     }
 });
 
@@ -138,10 +144,9 @@ $("#gl_glicemia").on('keyup', function (e) {
         $('#div_glicemia_toma').hide();
     }
     if ($("#gl_glicemia").val() > 125) {
-        $('#gl_glicemia').parent().find('span.help-block').html("Referir Agenda Profesional");
-        $('#gl_glicemia').parent().find('span.help-block').removeClass("hidden");
+        $('#verAgendaDiabetes').show();
     } else {
-        $('#gl_glicemia').parent().find('span.help-block').addClass("hidden");
+        $('#verAgendaDiabetes').hide();
     }
 });
 
@@ -157,17 +162,17 @@ $(".bo_trabajadora_reclusa").on('change', function (e) {
 //Si VDRL o RPR es positivo -> Activar Funcionalidad de Agenda para ITS
 $(".bo_rpr").on('change', function (e) {
     if (($('#bo_rpr').is(':checked')) && ($('#bo_vdrl').is(':checked'))) {
-            $('#lbl_its1').hide();
+            $('#verAgendaSifilis').hide();
     } else {
-        $('#lbl_its1').show();
+        $('#verAgendaSifilis').show();
     }
 });
 
 $(".bo_vdrl").on('change', function (e) {
     if (($('#bo_rpr').is(':checked')) && ($('#bo_vdrl').is(':checked'))) {
-            $('#lbl_its1').hide();
+            $('#verAgendaSifilis').hide();
     } else {
-        $('#lbl_its1').show();
+        $('#verAgendaSifilis').show();
     }
 });
 
@@ -210,16 +215,14 @@ $("#fc_ultimo_pap").livequery(function(){
 $("#gl_colesterol").on('keyup', function (e) {
     var valor_colesterol = $('#gl_colesterol').val();
     if (valor_colesterol > 199 && valor_colesterol < 240) {
+        $('#verAgendaDislipidemia').hide();
         $('#div_colesterol').show();
         $('#gl_colesterol').parent().find('span.help-block').html("Consejería Alimentaria y Actividad Física");
         $('#gl_colesterol').parent().find('span.help-block').removeClass("hidden");
     } else if (valor_colesterol >= 240){
-        $('#div_colesterol').show();
-        $('#gl_colesterol').parent().find('span.help-block').html("Referir a Confirmación Diagnóstica");
-        $('#gl_colesterol').parent().find('span.help-block').removeClass("hidden");
-    } else {
         $('#gl_colesterol').parent().find('span.help-block').addClass("hidden");
         $('#div_colesterol').hide();
+        $('#verAgendaDislipidemia').show();
     }
 });
 
@@ -252,8 +255,10 @@ $("#fc_mamografia").livequery(function(){
 //Si requiere otra Mamografía Mostrar Resultado
 $(".bo_mamografia_requiere").on('change', function (e) {
     if ($('#bo_mamografia_requiere').is(':checked')) {
+        $('#verAgendaMamografia').hide();
         $('#mam_resultado2').hide();
     } else {
+        $('#verAgendaMamografia').show();
         $('#mam_resultado2').show();
     }
 });

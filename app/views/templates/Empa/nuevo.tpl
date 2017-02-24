@@ -246,18 +246,6 @@
                                 <button type="button" id="calcular" onclick="calculaIMC()" class="btn btn-sm btn-success">
                                     <i class="fa fa-success"></i> Calcular IMC</button>
                             </div>
-                            <div class="col-sm-1">
-                                <button type="button" id="ver" class="btn btn-sm btn-info">
-                                    <i class="fa fa-info"></i> Ver</button>
-                            </div>
-                        </div>  
-                        <div class="form-group">
-                                <label class="control-label required col-sm-6">
-                                    Mujer >= 88 cm. Circunferencia abdominal (Punto medio entre margen inferior de 
-                                    la &uacute;ltima costilla y la cresta iliaca)</label>
-                        </div>
-                        <div class="form-group">
-                                <label class="control-label required col-sm-6">(*) Consejería en alimentación y actividad física</label>
                         </div>
                     </div>
                 </div>
@@ -278,14 +266,13 @@
                                        value="" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>
-                        </div>    
-                        <div class="form-group">
-                                <label class="control-label required col-sm-6">(*) Referir a perfil de presi&oacute;n arterial</label>
+                            <div class="col-sm-1"></div>
+                            <button type="button" id="verAgendaHipertension" style="display: none" class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
                     </div>
                 </div>
                 <!-- e. Diabetes Mellitus (DM) -->
-                <div class="panel panel-success">
+                <div class="panel panel-success" id="diabetes" style="{$diabetes}">
                     <div class="panel-heading">Diabetes Mellitus (DM)</div>
                     <div class="panel-body">
                         <div class="form-group">
@@ -297,53 +284,56 @@
                             <label class="control-label required col-sm-2">Glicemia en Ayunas (mg/dl)</label>
                             <div class="col-sm-3">
                                 <input type="text" name="gl_glicemia" maxlength="5" id="gl_glicemia" value="" 
-                                           placeholder="" class="form-control"/>
-                                    <span class="help-block hidden"></span>
+                                       placeholder="" class="form-control"/>
+                                <span class="help-block hidden"></span>
                             </div>   
                             <div class="col-sm-3" style="display: none" id="div_glicemia_toma">
-                                    <input type="checkbox" id="bo_glicemia_toma">
-                                    <label for="bo_glicemia_toma" class="control-label required">Toma de Glicemia</label>
+                                <input type="checkbox" id="bo_glicemia_toma">
+                                <label for="bo_glicemia_toma" class="control-label required">Toma de Glicemia</label>
                             </div>
+                            <div class="col-sm-2"></div>
+                            <button type="button" id="verAgendaDiabetes" style="display: none" class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
                     </div>
                 </div>
+                    
                 <!-- f. Sífilis -->
                 <div class="panel panel-success">
                     <div class="panel-heading">Sifilis en población de riesgo</div>
                     <div class="panel-body">    
                         <div class="form-group">
-                                <label class="control-label required col-sm-2">¿Es trabajadora sexual o persona en centro de reclusión?</label>
+                            <label class="control-label required col-sm-2">¿Es trabajadora sexual o persona en centro de reclusión?</label>
                             <div class="col-sm-2">
-                                    <label><input class="bo_trabajadora_reclusa" type="radio" name="bo_trabajadora_reclusa" 
-                                               id="bo_trabajadora_reclusa" value="0">No</label>
-                                    &nbsp;&nbsp;
-                                    <label><input class="bo_trabajadora_reclusa" type="radio" name="bo_trabajadora_reclusa" 
-                                               id="bo_trabajadora_reclusa" value="1">Si</label>
+                                <label><input class="bo_trabajadora_reclusa" type="radio" name="bo_trabajadora_reclusa" 
+                                              id="bo_trabajadora_reclusa" value="0">No</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_trabajadora_reclusa" type="radio" name="bo_trabajadora_reclusa" 
+                                              id="bo_trabajadora_reclusa" value="1">Si</label>
                             </div>
                         </div>  
                         <div class="form-group hidden" id="id_vdrl_rpr">
-                                <label class="control-label required col-sm-2">¿Examen VDRL?</label>
+                            <label class="control-label required col-sm-2">¿Examen VDRL?</label>
                             <div class="col-sm-2">
-                                    <label><input class="bo_vdrl" type="radio" name="bo_vdrl" 
-                                               id="bo_vdrl" value="0">Negativo</label>
-                                    &nbsp;&nbsp;
-                                    <label><input class="bo_vdrl" type="radio" name="bo_vdrl" 
-                                               id="bo_vdrl" value="1">Positivo</label>
+                                <label><input class="bo_vdrl" type="radio" name="bo_vdrl" 
+                                              id="bo_vdrl" value="0">Negativo</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_vdrl" type="radio" name="bo_vdrl" 
+                                              id="bo_vdrl" value="1">Positivo</label>
                             </div>
-                                <label class="control-label required col-sm-1">¿Examen RPR?</label>
+                            <label class="control-label required col-sm-1">¿Examen RPR?</label>
                             <div class="col-sm-2">
-                                    <label><input class="bo_rpr" type="radio" name="bo_rpr" 
-                                               id="bo_rpr" value="0">Negativo</label>
-                                    &nbsp;&nbsp;
-                                    <label><input class="bo_rpr" type="radio" name="bo_rpr" 
-                                               id="bo_rpr" value="1">Positivo</label>
+                                <label><input class="bo_rpr" type="radio" name="bo_rpr" 
+                                              id="bo_rpr" value="0">Negativo</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_rpr" type="radio" name="bo_rpr" 
+                                              id="bo_rpr" value="1">Positivo</label>
                             </div>
-                                <label class="control-label required col-sm-2" style="display: none" id="lbl_its1">(*) Referir a programa ITS</label>
-                                <label class="control-label required col-sm-2" style="display: none" id="lbl_its2">(*) Referir a programa ITS</label>
+                            <button type="button" id="verAgendaSifilis" style="display: none" 
+                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- g. Tuberculósis -->
                 <div class="panel panel-success">
                     <div class="panel-heading">Tuberculosis</div>
@@ -375,8 +365,8 @@
                     </div>
                 </div>
                 
-                <!-- h. Mujeres de 25 a 64 años -->
-                <div class="panel panel-success">
+                <!-- h. PAP -->
+                <div class="panel panel-success" style="{$pap}">
                     <div class="panel-heading">PAP (Mujeres de 25 a 64 años Cáncer Cervicouterino)</div>
                     <div class="panel-body">  
                         <div class="form-group">
@@ -408,12 +398,15 @@
                             </div>
                         </div>
                         <div class="form-group hidden" id="tomar_fecha">         
-                                <label class="control-label required col-sm-2">Tomar Fecha para PAP</label>
+                            <label class="control-label required col-sm-2">Tomar Fecha para PAP</label>
                             <div class="col-sm-2">
                                 <input type="date" name="fc_tomar_pap" id="fc_tomar_pap" 
-                                           value="" placeholder="" class="form-control"/>
-                                    <span class="help-block hidden"></span>
+                                       value="" placeholder="" class="form-control"/>
+                                <span class="help-block hidden"></span>
                             </div>
+                            &nbsp;&nbsp;
+                            <button type="button" id="verAgendaPap" 
+                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
                         <div class="form-group" id="resultado_pap">
                             <label for="bo_pap_toma" class="control-label required col-sm-2">Resultado PAP</label>
@@ -431,9 +424,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- i. Personas de 40 años y más -->
-                <div class="panel panel-success">
-                    <div class="panel-heading">Dislipidemia (Mujeres de 40 años y mas)</div>
+                <!-- Dislipidemia -->
+                <div class="panel panel-success" style="{$dislipidemia}">
+                    <div class="panel-heading">Dislipidemia (Mujeres de 40 años o mas)</div>
                     <div class="panel-body">  
                         <div class="form-group">   
                             <label class="control-label required col-sm-2">Colesterol total (mg/dl)</label>
@@ -447,6 +440,8 @@
                                         <input type="checkbox" id="bo_colesterol_toma">
                                         <label for="bo_colesterol_toma" class="control-label required">Toma de Colesterol</label>
                             </div>
+                            <div class="col-sm-3"></div>
+                            <button type="button" id="verAgendaDislipidemia" style="display: none" class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
                     </div>
                 </div>
@@ -491,8 +486,8 @@
                                                id="bo_mamografia_resultado" value="1">Normal</label>
                             </div>
                         </div>
-                        <div class="form-group" id="mam_requiere" style="display: none"> 
-                                <label class="control-label required col-sm-2">¿Requiere otra Mamografía?</label>
+                        <div class="form-group" id="mam_requiere"> 
+                                <label class="control-label required col-sm-2">¿Requiere Mamografía?</label>
                             <div class="col-sm-2">
                                     <label><input class="bo_mamografia_requiere" type="radio" name="bo_mamografia_requiere" 
                                                id="bo_mamografia_requiere" value="0">NO</label>
@@ -504,6 +499,8 @@
                                         <input type="checkbox" id="bo_mamografia_toma">
                                         <label for="bo_mamografia_toma" class="control-label required">Toma Mamograf&iacute;a</label>
                             </div>
+                            <button type="button" id="verAgendaMamografia" style="display: none" class="btn btn-sm btn-success">
+                                <i class="fa fa-file-o"></i> Agenda</button>
                         </div>
                         <div class="form-group" id="mam_resultado2" style="display: none"> 
                                 <label class="control-label required col-sm-2">Resultado Mamografía</label>
@@ -514,9 +511,6 @@
                                     <label><input class="bo_mamografia_resultado2" type="radio" name="bo_mamografia_resultado2" 
                                                id="bo_mamografia_resultado2" value="1">Normal</label>
                             </div>
-                        </div>
-                        <div class="form-group">    
-                            <label class="control-label required">Mamograf&iacute;a a otras edades</label>
                         </div>
                     </div>
                 </div>

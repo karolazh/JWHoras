@@ -110,6 +110,22 @@ class Empa extends Controller{
             list($Y, $m, $d ) = explode("-", $fc_nacimiento);
             $edad = ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );
         $this->smarty->assign("edad", $edad);
+        //Mostrar/Ocultar Panel Dislipidemia segun Edad
+        if ($edad > 40) {
+            $dislipidemia = "display: block";
+            $diabetes = "display: block";
+        } else {
+            $dislipidemia = "display: none";
+            $diabetes = "display: none";
+        }
+        if ($edad > 24 && $edad < 65){
+            $pap = "display: block";
+        } else {
+            $pap = "display: none";
+        }
+        $this->smarty->assign("pap", $pap);
+        $this->smarty->assign("diabetes", $diabetes);
+        $this->smarty->assign("dislipidemia", $dislipidemia);
         $this->smarty->assign("gl_fono", $registro->gl_fono);
         $this->smarty->assign("gl_celular", $registro->gl_celular);
         $this->smarty->assign("gl_email", $registro->gl_email);
