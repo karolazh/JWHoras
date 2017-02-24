@@ -289,7 +289,7 @@
 	});
 
 	//datatable con Funcionalidad de Elegir Columnas a Exportar, Titulo del archivo
-    $(".datatable.paginada").livequery(function(){
+    $(".datatable.datatableNew").livequery(function(){
         
         if($(this).parent().hasAttr('data-row')) {
             var filas = parseInt($(this).parent().attr("data-row"));

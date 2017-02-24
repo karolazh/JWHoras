@@ -81,28 +81,28 @@ class DAOEmpa extends Model{
     /*
      * Ver Empa para Grilla
      */
-    public function getEmpaGrilla($id_empa){
+    public function getEmpaGrilla($id_registro){
         $query =    "SELECT 
                         emp.id_empa AS id_empa,
+                        emp.id_registro AS id_registro,
                         date_format(emp.fc_empa,'%d-%m-%Y') AS fc_empa,
                         reg.gl_rut AS rut,
                         com.gl_nombre_comuna AS comuna,
                         ins.gl_nombre AS institucion,
-                        emp.id_registro AS id_registro,
                         usr.gl_rut AS rut
                     FROM pre_empa emp
                     LEFT JOIN pre_registro reg ON reg.id_registro = emp.id_registro
                     LEFT JOIN pre_comunas com ON com.id_comuna = emp.id_comuna
                     LEFT JOIN pre_institucion ins ON ins.id_institucion = emp.id_institucion
-		    LEFT JOIN pre_usuarios usr ON usr.id_usuario = emp.id_usuario_crea
+                    LEFT JOIN pre_usuarios usr ON usr.id_usuario = emp.id_usuario_crea
                     WHERE emp.id_registro =  ?
                     ORDER BY emp.fc_empa DESC";
 
-        $consulta = $this->db->getQuery($query,array($id_empa));
+        $consulta = $this->db->getQuery($query,array($id_registro));
         if($consulta->numRows > 0){
-            return $consulta->rows->row_0;
+            return $consulta->rows;
         }else{
-            return null;
+            return NULL;
         }
     }
 }

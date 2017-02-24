@@ -3,7 +3,7 @@
 
 <form id="form">
     <section class="content">
-        <!-- CARO -->
+        <!-- DATOS DE REGISTRO -->
         <div class="panel panel-primary">
             <div class="panel-heading">
                     Datos del Paciente
@@ -240,7 +240,7 @@
 
                     <!-- EVENTOS -->
                     <div id="eventos" class="tab-pane fade">
-                        {include file='avanzados/agregarEvento.tpl'}
+                        {*{include file='avanzados/agregarEvento.tpl'}*}
                         <div class="box-body">
                             <div class="col-md-12">
                                 <div class="form-group">
