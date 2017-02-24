@@ -98,6 +98,13 @@ class Empa extends Controller{
         $this->smarty->assign("gl_nombres", $registro->gl_nombres);
         $this->smarty->assign("gl_apellidos", $registro->gl_apellidos);
         $this->smarty->assign("fc_nacimiento", $registro->fc_nacimiento);
+        $reconoce = $registro->bo_reconoce;
+        if ($reconoce == 1){
+            $check ="checked disabled";
+        }else{
+            $check="";
+        }
+        $this->smarty->assign("check", $check);
             //calculo edad
             $fc_nacimiento = $registro->fc_nacimiento;
             list($d, $m, $Y ) = explode("-", $fc_nacimiento);
@@ -136,13 +143,7 @@ class Empa extends Controller{
         $this->_display('Empa/ver.tpl');
     }
     
-        public function audit(){
-        Acceso::redireccionUnlogged($this->smarty);
-        $sesion = New Zend_Session_Namespace("usuario_carpeta");
-        $this->smarty->assign("id_usuario", $sesion->id);
-        $this->smarty->assign("rut", $sesion->rut);
-        $this->smarty->assign("usuario", $sesion->usuario);
-        
+    public function audit(){
         //llamado al template
         $this->_display('Empa/audit.tpl');
     }

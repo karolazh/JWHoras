@@ -166,8 +166,10 @@
                             <div class="col-sm-1">
                                 <button href='javascript:void(0)'
                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Empa/audit/{$item->id_registro}', 'Detalle Registro', 85);"
-                                        data-toggle="tooltip" 
-                                        type="button" id="btnaudit" class="btn btn-sm btn-info hidden">
+                                        data-toggle="tooltip"
+                                        class="btn btn-sm btn-success btn-flat"
+                                        title="Ver Registro"
+                                        type="button" id="btnaudit" class="btn btn-sm btn-info hidden btn-flat">
                                     <i class="fa fa-file-text-o"></i>&nbsp;AUDIT
                                 </button>
                             </div>
@@ -389,10 +391,10 @@
                                 <label class="control-label required col-sm-2">PAP Vigente</label>
                             <div class="col-sm-2">
                                     <label><input class="bo_pap_vigente"  type="radio" name="bo_pap_vigente" 
-                                               id="bo_pap_vigente" value="0" disabled>NO</label>
+                                               id="bo_pap_vigente_0" value="0" readonly>NO</label>
                                     &nbsp;&nbsp;
                                     <label><input class="bo_pap_vigente" type="radio" name="bo_pap_vigente" 
-                                               id="bo_pap_vigente" value="1" disabled>SI</label>
+                                               id="bo_pap_vigente_1" value="1" readonly>SI</label>
                             </div>
                         </div>
                         <div class="form-group hidden" id="tomar_fecha">         
@@ -546,7 +548,7 @@
                             <div class="col-sm-3">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" id="chkReconoce">&nbsp;&nbsp;<strong>Reconoce Maltrato</strong>
+                                        <input type="checkbox" {$check} id="chkReconoce">&nbsp;&nbsp;<strong>Reconoce Maltrato</strong>
                                     </label>
                                 </div>
                             </div>

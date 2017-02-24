@@ -82,16 +82,19 @@ $(".bo_pap_realizado").on('change', function (e) {
 });
 
 //PAP Vigente? (automático Calculando si es <=3 años) SI -> Vigente   NO -> No Vigente (Tomar hora para otro)
-$("#fc_ultimo_pap").on('change', function(e) {
-    var edad = calcularYear($("#fc_ultimo_pap").val());
-    if(edad<=3){
-        $("#pap_vigente").value=0;
-    }else{
-	$("#pap_vigente").value=1;
-    }
-    $('#pap_vigente').show();
+$("#fc_ultimo_pap").livequery(function(){
+	$(this).on('change', function(e) {
+		var edad = calcularYear($(this).val());
+		if(edad<=3){
+			//check Si
+			$('#bo_pap_vigente_1').prop('checked',true);
+		}else{
+			//check No
+			$('#bo_pap_vigente_0').prop('checked',true);
+		}
+		$('#pap_vigente').show();
+	});
 });
-
 //
 
 //Si realizo Examen Cancer de mama Mostrar -> Ingrese Fecha
@@ -104,7 +107,6 @@ $(".bo_mamografia_realizada").on('change', function (e) {
 });
 
 //Examen Cancer de mama vigente?
-
 $("#fc_mamografia").livequery(function(){
 	$(this).on('change', function(e) {
 		var edad = calcularYear($(this).val());
