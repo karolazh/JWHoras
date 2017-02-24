@@ -166,6 +166,18 @@ class Registro extends Controller {
             $this->smarty->assign("reconoce", $reconoce);
             $this->smarty->assign("acepta", $acepta);
             
+            //Grilla Motivos de Consulta
+            $arrConsultas = $this->_DAOMotivoConsulta->getMotivosConsultaGrilla($idReg);
+            $this->smarty->assign('arrConsultas', $arrConsultas);
+            
+            //Grilla Empa
+            $arrEmpa = $this->_DAOEmpa->getEmpaGrilla($idReg);
+            $this->smarty->assign('arrEmpa', $arrEmpa);
+            
+            //Grilla Exámenes x Registro
+            $arrExamenes = $this->_DAOExamenRegistro->getListaExamenRegistroxId($idReg);
+            $this->smarty->assign('arrExamenes', $arrExamenes);
+            
             //Tipos de Eventos
             $arrTipoEvento = $this->_DAOEventosTipo->getListaEventosTipo();
             $this->smarty->assign('arrTipoEvento', $arrTipoEvento);
@@ -181,18 +193,6 @@ class Registro extends Controller {
             //Grilla Adjuntos
             $arrAdjuntos = $this->_DAOAdjuntos->getListaAdjuntosRegistro($idReg);
             $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
-            
-            //Grilla Empa
-            $arrEmpa = $this->_DAOEmpa->getEmpaGrilla($idReg);
-            $this->smarty->assign('arrEmpa', $arrEmpa);
-            
-            //Grilla Exámenes x Registro
-            $arrExamenes = $this->_DAOExamenRegistro->getListaExamenRegistroxId($idReg);
-            $this->smarty->assign('arrExamenes', $arrExamenes);
-            
-            //Grilla Motivos de Consulta
-            $arrConsultas = $this->_DAOMotivoConsulta->getMotivosConsultaGrilla($idReg);
-            $this->smarty->assign('arrConsultas', $arrConsultas);
             
             //muestra template
             $this->smarty->display('Registro/bitacora.tpl');

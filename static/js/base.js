@@ -227,6 +227,25 @@
 		});
 	}
 
+    $("[data-toggle='tooltip']").livequery(function(){
+        var my		= "bottom center";
+        var at		= "top center";
+		var texto	= '';
+
+		if($(this).attr("title") != "" && $(this).attr("title") != "undefined"){
+            texto = $(this).attr("title");
+        }
+        $(this).qtip({ 
+            position: {
+                my: my,
+                at: at
+            },
+			content	: {
+						text	: texto
+					},
+        });
+    });
+
 	$(".infoTip").livequery(function(){
 		var titulo	= 'Explicación de la Funcionalidad';
 		var texto	= '';

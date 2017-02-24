@@ -18,21 +18,24 @@ class DAORegistro extends Model{
         $query	= "	SELECT
 						r.id_registro,
 						r.gl_rut,
-                        r.fc_crea,
+
+						r.gl_run_pass,
+						IFNULL(r.gl_rut,r.gl_run_pass) as gl_identificacion,
+						date_format(r.fc_crea,'%d-%m-%Y') as fc_crea,
 						r.gl_nombres,
 						r.gl_apellidos,
-                        i.gl_nombre,
-                        c.gl_nombre_comuna,
-                        e.gl_nombre_estado_caso
+						i.gl_nombre as gl_institucion,
+						c.gl_nombre_comuna,
+						e.gl_nombre_estado_caso
 					FROM pre_registro r 
-                        LEFT JOIN pre_institucion i ON i.id_institucion = r.id_institucion
-                        LEFT JOIN pre_comunas c ON c.id_comuna = r.id_comuna
-                        LEFT JOIN pre_estados_caso e ON e.id_estado_caso = r.id_estado_caso";
+						LEFT JOIN pre_institucion i ON i.id_institucion = r.id_institucion
+						LEFT JOIN pre_comunas c ON c.id_comuna = r.id_comuna
+						LEFT JOIN pre_estados_caso e ON e.id_estado_caso = r.id_estado_caso";
 
         $resultado	= $this->db->getQuery($query);
 
         if($resultado->numRows>0){
-            return $resultado->rows;
+			return $resultado->rows;
         }else{
             return NULL;
         }

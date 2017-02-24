@@ -15,47 +15,58 @@
 <section class="content">
     <div class="box box-primary">
         <div class="box-body">
-
-            <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
-                <thead>
-                    <tr role="row">
-                        <th align="center" width="10%">#ID</th>
-                        <th align="center" width="22%">RUT Paciente</th>
-                        <th align="center" width="22%">Nombres</th>
-                        <th align="center" width="22%">Apellidos</th>
-                        <th align="center" width="23%">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {foreach $arrResultado as $item}
-                        <tr>
-                            <td nowrap width="100em" align="center"> {$item->id_registro} </td>
-                            <td nowrap width="100em" align="center"> {$item->gl_rut} </td>
-                            <td class="text-center">{$item->gl_nombres}</td>
-                            <td class="text-center">{$item->gl_apellidos}</td>
-                            <td class="text-center" style="width:100px;">
-                                <div class="btn-group">
-                                    <button href='javascript:void(0)'
-                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/ver/{$item->id_registro}', 'Detalle Registro', 85);" 
-                                            data-toggle="tooltip" 
-                                            class="btn btn-sm btn-success btn-flat"
-                                            title="Ver Registro">
-                                        <i class="fa fa-eye"></i>&nbsp;&nbsp;Ver
-                                    </button>
-                                    <button href='javascript:void(0)' 
-
-                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
-                                            {*onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/detalleRegistro/{$item->gl_rut}', 'Bitácora paciente RUT : {$item->gl_rut}', 85);" *}
-                                            data-toggle="tooltip" 
-                                            title="Bitácora" 
-                                            class="btn btn-sm btn-flat btn-primary" 
-                                        <i class="fa fa-search">&nbsp;&nbsp;Bitácora</i></button>
-                                </div>			
-                            </td>          
-                        </tr>
-                    {/foreach}
-                </tbody>
-            </table>
+			<div class="table-responsive col-lg-12" data-row="10">
+				<table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
+					<thead>
+						<tr role="row">
+							<th class="text-center hidden" width="5%">ID</th>
+							<th class="text-center" width="10%">RUT Paciente</th>
+							<th class="text-center" width="5%">Fecha Registro</th>
+							<th class="text-center" width="25%">Nombre</th>
+							<th class="text-center" width="10%">Comuna</th>
+							<th class="text-center" width="25%">Centro Salud</th>
+							<th class="text-center" width="10%">Estado Caso</th>
+							<th class="text-center">Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach $arrResultado as $item}
+							<tr>
+								<td class="text-center hidden" nowrap> {$item->id_registro} </td>
+								<td class="text-center" nowrap> {$item->gl_identificacion} </td>
+								<td class="text-center"> {$item->fc_crea} </td>
+								<td class="text-center"> {$item->gl_nombres} {$item->gl_apellidos} </td>
+								<td class="text-center"> {$item->gl_nombre_comuna} </td>
+								<td class="text-center"> {$item->gl_nombre} </td>
+								<td class="text-center" nowrap> {$item->gl_nombre_estado_caso} </td>
+								<td class="text-center" style="width:100px;">
+									<div class="btn-group">
+										<button type="button" 
+												onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/ver/{$item->id_registro}', 'Detalle Registro', 85);" 
+												data-toggle="tooltip" 
+												class="btn btn-sm btn-info btn-flat"
+												title="Ver Registro">
+											<i class="fa fa-info"></i>&nbsp;&nbsp;Ver
+										</button>
+                                        <button type="button" class="btn btn-sm btn-success btn-flat" 
+                                                onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_registro}'" 
+                                                data-toggle="tooltip" title="Empa">
+                                            <i class="fa fa-eye"></i>&nbsp;&nbsp;EMPA
+                                        </button>
+										<button type="button" 
+												onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
+												{*onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/detalleRegistro/{$item->gl_rut}', 'Bitácora paciente RUT : {$item->gl_rut}', 85);" *}
+												data-toggle="tooltip" 
+												title="Bitácora" 
+												class="btn btn-sm btn-flat btn-primary" 
+											<i class="fa fa-search">&nbsp;&nbsp;Bitácora</i></button>
+									</div>			
+								</td>          
+							</tr>
+						{/foreach}
+					</tbody>
+				</table>
+			</div>
 
         </div>
     </div>    
