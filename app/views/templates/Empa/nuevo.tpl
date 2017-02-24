@@ -6,7 +6,7 @@
     <div class="col-md-12 text-right">
         <button type="button"
                 href='javascript:void(0)' 
-                onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
+                onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$id_registro}', 'Registro número : {$id_registro}', 85);" 
                 data-toggle="tooltip" 
                 title="Bitácora" 
                 class="btn btn-danger">
