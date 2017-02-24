@@ -111,6 +111,7 @@ class Empa extends Controller{
         //llamado al template
         $this->_display('Empa/nuevo.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
+        $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }
     
     public function nuevoEmpa2(){

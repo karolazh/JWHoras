@@ -192,6 +192,16 @@ function validarVacio(metodo, mensaje_error){
 }
 
 //Calcular Edad
+function calcularYear(Fecha){
+    fecha = new Date(Fecha);
+    hoy = new Date();
+    ed = parseInt((hoy -fecha)/365/24/60/60/1000);
+    if (ed >= 0)
+     {return ed;}
+     else{return null;}
+}
+
+//Calcular Edad
 function calcularEdad(Fecha){
     fecha = new Date(Fecha);
     hoy = new Date();
