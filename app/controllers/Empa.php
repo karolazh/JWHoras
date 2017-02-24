@@ -136,6 +136,16 @@ class Empa extends Controller{
         $this->_display('Empa/ver.tpl');
     }
     
+        public function audit(){
+        Acceso::redireccionUnlogged($this->smarty);
+        $sesion = New Zend_Session_Namespace("usuario_carpeta");
+        $this->smarty->assign("id_usuario", $sesion->id);
+        $this->smarty->assign("rut", $sesion->rut);
+        $this->smarty->assign("usuario", $sesion->usuario);
+        
+        //llamado al template
+        $this->_display('Empa/audit.tpl');
+    }
     //*** REGIONES ***//
 //    public function regiones(){
 //        $sesion = New Zend_Session_Namespace("usuario_carpeta");        

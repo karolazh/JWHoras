@@ -148,7 +148,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Examen</div>
 
-            <!-- Examen -->
+    <!-- Examen -->
             <div class="panel-body">
                 <!-- a. Alcoholismo -->
                 <div class="panel panel-success">
@@ -164,8 +164,12 @@
                                               id="bo_consume_alcohol" value="1">SI</label>
                             </div>
                             <div class="col-sm-1">
-                                <button type="button" id="btnaudit" class="btn btn-sm btn-info hidden">
-                                    <i class="fa fa-file-text-o"></i> AUDIT</button>
+                                <button href='javascript:void(0)'
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Empa/audit/{$item->id_registro}', 'Detalle Registro', 85);"
+                                        data-toggle="tooltip" 
+                                        type="button" id="btnaudit" class="btn btn-sm btn-info hidden">
+                                    <i class="fa fa-file-text-o"></i>&nbsp;AUDIT
+                                </button>
                             </div>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value="" 
@@ -530,6 +534,7 @@
 
 
                         <div class="form-group">
+                            <div class="col-sm-1"></div>
                             <div class="col-sm-3">
                                 <div class="checkbox">
                                     <label>
