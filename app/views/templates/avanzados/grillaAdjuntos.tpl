@@ -11,7 +11,7 @@
                 <th align="center" width="30">Documento</th>
                 <th align="center" width="30">Comentario</th>
                 <th align="center" width="10%">Usuario</th>
-                {*<th align="center" width="10%">Descargar</th>*}
+                <th align="center" width="10%">Descargar</th>
             </thead>
             <tbody>
             {foreach $arrAdjuntos as $adj}
@@ -21,7 +21,11 @@
                     <td>{$adj->path}</td>
                     <td>{$adj->glosa}</td>
                     <td>{$adj->rut}</td>
-                    {*<td>?</td>*}
+                    <td align="center">
+                        <a class="btn btn-sm btn-primary" id="btnDescarga" href = '{$smarty.const.DIR_BASE}archivos/{$adj->path}' target="_blank">
+                            <i class="fa fa-download"></i>
+                            Descargar</a>
+                    </td>
                 </tr>
             {/foreach}
             </tbody>

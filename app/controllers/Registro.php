@@ -106,6 +106,7 @@ class Registro extends Controller {
             
             $this->smarty->assign("idreg", $idReg);
             
+            //Datos de Registro
             $run = "";
             $ext = "NO";
             if (!is_null($detReg->rut))
@@ -196,6 +197,7 @@ class Registro extends Controller {
             
             //muestra template
             $this->smarty->display('Registro/bitacora.tpl');
+            $this->_addJavascript(STATIC_FILES . 'js/templates/registro/bitacora.js');
         } else {
             throw new Exception("El historial que está buscando no existe");
         }
