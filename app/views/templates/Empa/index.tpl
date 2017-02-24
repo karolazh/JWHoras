@@ -65,21 +65,17 @@
                                 <td nowrap width="100px" align="center"> {$item->gl_nombre_estado_caso} </td>
                                 <td class="text-center" style="width:100px;">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn btn-danger btn-flat" 
-                                                onClick="location.href='{$base_url}/Empa/ver/{$item->id_registro}'" 
-                                                data-toggle="tooltip" title="DAU">
-                                            <i class="fa fa-eye"></i>&nbsp;&nbsp;DAU
-                                        </button>&nbsp;
                                         <button type="button" class="btn btn-sm btn-success btn-flat" 
                                                 onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_registro}'" 
                                                 data-toggle="tooltip" title="Empa">
                                             <i class="fa fa-eye"></i>&nbsp;&nbsp;EMPA
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-info btn-flat" 
-                                                onClick="location.href='{$base_url}/Empa/ver/{$item->id_registro}'" 
-                                                data-toggle="tooltip" title="Ver Paciente">
-                                            <i class="fa fa-eye"></i>&nbsp;&nbsp;Paciente
-                                        </button>
+                                        <button href='javascript:void(0)' 
+                                            onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
+                                            data-toggle="tooltip" 
+                                            title="Bitácora" 
+                                            class="btn btn-sm btn-flat btn-primary">
+                                        <i class="fa fa-eye">&nbsp;&nbsp;Bitácora</i></button>
                                     </div>			
                                 </td>          
                             </tr>
