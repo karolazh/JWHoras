@@ -40,9 +40,24 @@ class DAORegistro extends Model{
 
     public function getRegistroById($id_registro) {
         $query	= "	SELECT
-						r.*,
-						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento
-					FROM pre_registro r
+						IFNULL(id_registro,0) as id_registro,
+						IFNULL(id_prevision,0 as id_prevision),
+						IFNULL(gl_rut,'N/D') as gl_rut,
+						IFNULL(bo_extranjero,0) as bo_extranjedo,
+						IFNULL(gl_run_pass,'N/D' as gl_run_pass),
+						IFNULL(gl_nombres,'N/D') as gl_nombres,
+						IFNULL(gl_apellidos,'N/D') as gl_apellidos,
+						IFNULL(fc_nacimiento,'00-00-1900') as fc_nacimiento,
+						IFNULL(gl_sexo,'N/D') as gl_sexo,
+						IFNULL(gl_direccion,'N/D'),
+						IFNULL(gl_fono,'N/D'),
+						IFNULL(gl_celular,'N/D'),
+						IFNULL(gl_email,'N/D'),
+						IFNULL(gl_latitud,'N/D'),
+						IFNULL(gl_longitud,'N/D'),
+						IFNULL(bo_reconoce,0),
+						IFNULL(bo_acepta_programa,0)
+					FROM pre_registro 
 					WHERE id_registro = ?";
 
         $param = array($id_registro);

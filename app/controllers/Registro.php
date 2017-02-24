@@ -259,6 +259,7 @@ class Registro extends Controller {
         $id_registro = $parametros[0];
         $this->smarty->assign("id_registro", $id_registro);
         $obj_registro = $this->_DAORegistro->getRegistroById($id_registro);
+		print_r($obj_registro);die();
         if (!is_null($obj_registro)) {
             $id_registro = $obj_registro->id_registro;
             $rut_registro = $obj_registro->gl_rut;
@@ -319,29 +320,7 @@ class Registro extends Controller {
 
             $arrMotivosConsulta = $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($obj_registro->id_registro);
         } else {
-            $id_registro = "N/D";
-            $rut_registro = "N/D";
-            $bo_extranjero = "N/D";
-            $run_extranjero = "N/D";
-            $nombres_registro = "N/D";
-            $apellido_registro = "N/D";
-            $fecha_nacimiento_registro = "XX/XX/XXXX";
-            $edad = "0";
-            $sexo_registro = "N/D";
-            $direccion_registro = "N/D";
-            $fono_registro = "N/D";
-            $celular_registro = "N/D";
-            $email_registro = "N/D";
-            $latitud_registro = "N/D";
-            $longitud_registro = "N/D";
-            $bo_reconoce_violencia_registro = false;
-            $bo_acepta_programa_registro = false;
-            $nombre_prevision = "N/D";
-            $nombre_comuna = "N/D";
-            $nombre_region = "N/D";
-            $nombre_registrador = "N/D";
-            $institucion = "N/D";
-            $ruta_adjunto = "";
+			print_r("FUCK YOU!");
         }
         $this->smarty->assign('id_registro', $id_registro);
         $this->smarty->assign('rut', $rut_registro);
