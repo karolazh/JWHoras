@@ -39,8 +39,8 @@
 								<td class="text-center"> {$item->gl_nombre_comuna} </td>
 								<td class="text-center"> {$item->gl_nombre} </td>
 								<td class="text-center" nowrap> {$item->gl_nombre_estado_caso} </td>
-								<td class="text-center" style="width:100px;">
-									<div class="btn-group">
+								<td class="text-center" style="width:150px;">
+									
 										<button type="button" 
 												onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/ver/{$item->id_registro}', 'Detalle Registro', 85);" 
 												data-toggle="tooltip" 
@@ -61,7 +61,7 @@
 												class="btn btn-xs btn-primary">
 											<i class="fa fa-info-circle">&nbsp;&nbsp;Bitácora</i>
 										</button>
-									</div>			
+												
 								</td>          
 							</tr>
 						{/foreach}
