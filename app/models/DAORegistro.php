@@ -18,16 +18,16 @@ class DAORegistro extends Model{
         $query	= "	SELECT
 						r.id_registro,
 						r.gl_rut,
-                                                r.fc_crea,
+                        r.fc_crea,
 						r.gl_nombres,
 						r.gl_apellidos,
-                                                i.gl_nombre,
-                                                c.gl_nombre_comuna,
-                                                e.gl_nombre_estado_caso
+                        i.gl_nombre,
+                        c.gl_nombre_comuna,
+                        e.gl_nombre_estado_caso
 					FROM pre_registro r 
-                                        LEFT JOIN pre_institucion i ON i.id_institucion = r.id_institucion
-                                        LEFT JOIN pre_comunas c ON c.id_comuna = r.id_comuna
-                                        LEFT JOIN pre_estados_caso e ON e.id_estado_caso = r.id_estado_caso";
+                        LEFT JOIN pre_institucion i ON i.id_institucion = r.id_institucion
+                        LEFT JOIN pre_comunas c ON c.id_comuna = r.id_comuna
+                        LEFT JOIN pre_estados_caso e ON e.id_estado_caso = r.id_estado_caso";
 
         $resultado	= $this->db->getQuery($query);
 
@@ -40,24 +40,26 @@ class DAORegistro extends Model{
 
     public function getRegistroById($id_registro) {
         $query	= "	SELECT
-						IFNULL(id_registro,0) as id_registro,
-						IFNULL(id_prevision,0 as id_prevision),
-						IFNULL(gl_rut,'N/D') as gl_rut,
-						IFNULL(bo_extranjero,0) as bo_extranjedo,
-						IFNULL(gl_run_pass,'N/D' as gl_run_pass),
-						IFNULL(gl_nombres,'N/D') as gl_nombres,
-						IFNULL(gl_apellidos,'N/D') as gl_apellidos,
-						IFNULL(fc_nacimiento,'00-00-1900') as fc_nacimiento,
-						IFNULL(gl_sexo,'N/D') as gl_sexo,
-						IFNULL(gl_direccion,'N/D'),
-						IFNULL(gl_fono,'N/D'),
-						IFNULL(gl_celular,'N/D'),
-						IFNULL(gl_email,'N/D'),
-						IFNULL(gl_latitud,'N/D'),
-						IFNULL(gl_longitud,'N/D'),
-						IFNULL(bo_reconoce,0),
-						IFNULL(bo_acepta_programa,0)
-					FROM pre_registro 
+						IFNULL(r.id_registro,0) as id_registro,
+						IFNULL(r.id_prevision,0) as id_prevision,
+						IFNULL(r.gl_rut,'N/D') as gl_rut,
+						IFNULL(r.bo_extranjero,0) as bo_extranjero,
+						IFNULL(r.gl_run_pass,'N/D') as gl_run_pass,
+						IFNULL(r.gl_nombres,'N/D') as gl_nombres,
+						IFNULL(r.gl_apellidos,'N/D') as gl_apellidos,
+						IFNULL(r.fc_nacimiento,'00-00-1900') as fc_nacimiento,
+						IFNULL(r.gl_sexo,'N/D') as gl_sexo,
+						IFNULL(r.gl_direccion,'N/D') as gl_direccion,
+						IFNULL(r.gl_fono,'N/D') as gl_fono,
+						IFNULL(r.gl_celular,'N/D') as gl_celular,
+						IFNULL(r.gl_email,'N/D') as gl_email,
+						IFNULL(r.gl_latitud,'N/D') as gl_latitud,
+						IFNULL(r.gl_longitud,'N/D') as gl_longitud,
+						IFNULL(r.bo_reconoce,0) as bo_reconoce,
+						IFNULL(r.bo_acepta_programa,0) as bo_acepta_programa
+						IFNULL(a.gl_path,'') as gl_path
+					FROM pre_registro r
+						LEFT JOIN pre_adjuntos a ON a.id_registro = r.id_registro
 					WHERE id_registro = ?";
 
         $param = array($id_registro);
@@ -69,26 +71,50 @@ class DAORegistro extends Model{
             return null;
         }
     }
-   
-    //funcion repetida, usar getRegistroById
-	/*
-    public function getRegistro($id_registro){
-        $query	= "	SELECT
-						pre_registro.*,
-						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento
-					FROM pre_registro
-					WHERE id_registro = ?";
 
-		$param		= array($id_registro);
-        $resultado	= $this->db->getQuery($query,$param);
-		
-        if($consulta->numRows > 0){
+	    public function selVerInfoById($id_registro) {
+        $query	= "SELECT 
+						IFNULL(rg.id_registro,0) as id_registro,
+						IFNULL(rg.id_prevision,0) as id_prevision,
+						IFNULL(rg.gl_rut,'N/D') as gl_rut,
+						IFNULL(rg.bo_extranjero,0) as bo_extranjero,
+						IFNULL(rg.gl_run_pass,'N/D') as gl_run_pass,
+						IFNULL(rg.gl_nombres,'N/D') as gl_nombres,
+						IFNULL(rg.gl_apellidos,'N/D') as gl_apellidos,
+						IFNULL(rg.fc_nacimiento,'00-00-1900') as fc_nacimiento,
+						IFNULL(rg.gl_sexo,'N/D') as gl_sexo,
+						IFNULL(rg.gl_direccion,'N/D') as gl_direccion,
+						IFNULL(rg.gl_fono,'N/D') as gl_fono,
+						IFNULL(rg.gl_celular,'N/D') as gl_celular,
+						IFNULL(rg.gl_email,'N/D') as gl_email,
+						IFNULL(rg.gl_latitud,0) as gl_latitud,
+						IFNULL(rg.gl_longitud,0) as gl_longitud,
+						IFNULL(bo_reconoce,0) as bo_reconoce,
+						IFNULL(bo_acepta_programa,0) as bo_acepta_programa,
+						IFNULL(a.gl_path,'') as gl_path,
+						IFNULL(p.gl_nombre_prevision, 'N/D') as gl_nombre_prevision,
+						IFNULL(c.gl_nombre_comuna, 'N/D') as gl_nombre_comuna,
+						IFNULL(r.gl_nombre_region, 'N/D') as gl_nombre_region,
+                        IFNULL(CONCAT(u.gl_nombres, ' ',u.gl_apellidos),'N/D') as gl_nombre_usuario_crea,
+						IFNULL(ec.gl_nombre_estado_caso, 'N/D') as gl_nombre_estado_caso,
+						IFNULL(i.gl_nombre, 'N/D') as gl_nombre_institucion
+					FROM pre_registro AS rg
+						LEFT JOIN pre_adjuntos AS a USING (id_adjunto)
+						LEFT JOIN pre_prevision AS p USING (id_prevision)
+						LEFT JOIN pre_comunas AS c USING (id_comuna)
+						LEFT JOIN pre_regiones AS r USING (id_region)
+						LEFT JOIN pre_usuarios AS u ON rg.id_usuario_crea = u.id_usuario
+						LEFT JOIN pre_estados_caso AS ec USING (id_estado_caso)
+                        LEFT JOIN pre_institucion AS i ON rg.id_institucion = i.id_institucion
+					WHERE rg.id_registro = ?";
+        $param = array($id_registro);
+		$consulta = $this->db->getQuery($query, $param);
+		if ($consulta->numRows > 0) {
             return $consulta->rows->row_0;
         } else {
             return null;
         }
     }
-	*/
 
     public function getRegistroByRut($rut_registro) {
 
@@ -112,25 +138,7 @@ class DAORegistro extends Model{
         }
     }
 	
-	//funcion repetida
-	/*
-    public function getRegistroxRut($rut_registro){
-        $query	= "	SELECT 
-						pre_registro.*,
-						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento
-					FROM pre_registro 
-					WHERE gl_rut = ?";
 
-		$param		= array($rut_registro);
-        $consulta	= $this->db->getQuery($query,$param);
-
-        if($consulta->numRows > 0){
-            return $consulta->rows->row_0;
-        } else {
-            return null;
-        }
-    }
-	*/
     
 	public function countRegistroxRegion($id_region){
         $query	= "	SELECT 
@@ -273,7 +281,7 @@ class DAORegistro extends Model{
                         usr.gl_rut AS rut
                     FROM pre_eventos eve
                     LEFT JOIN pre_eventos_tipo tip ON tip.id_evento_tipo = eve.id_evento_tipo
-                    LEFT JOIN pre_usuarios usr ON usr.id_usuario = eve.id_usuario_crea 
+                    LEFT JOIN pre_usuarios usr ON usr.id_usuario = eve.id_usuario_crea
                     WHERE eve.id_registro = ?";
 
 	$param		= array($id_registro);
