@@ -9,7 +9,7 @@
                 onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
                 data-toggle="tooltip" 
                 title="Bitácora" 
-                class="btn btn-danger">
+                class="btn btn-info">
                 <i class="fa fa-eye"></i>&nbsp;&nbsp;Bitácora
         </button>
     </div>

@@ -3,7 +3,7 @@ function calculaIMC()
 {
 //hacemos la llamada a los datos introducidos
     var peso = $('#gl_peso').val();
-    var altura = $('#gl_estatura').val()/100;
+    var altura = $('#gl_estatura').val() / 100;
     var mensaje = "";
 //calculamos el imc
     var imc = peso / (altura * altura);
@@ -11,12 +11,12 @@ function calculaIMC()
 //calculamos circunferencia abdominal
     //Bajo peso
     if (imc < 18.50) {
-        $('#gl_imc').css("borderColor","");
-        $('#gl_imc').parent().find("span.help-block").css("color","");
+        $('#gl_imc').css("borderColor", "");
+        $('#gl_imc').parent().find("span.help-block").css("color", "");
         $('#gl_imc').parent().removeClass("has-error");
         $('#gl_imc').parent().removeClass("has-success");
-        $('#gl_imc').css("borderColor","#BDB76B");
-        $('#gl_imc').parent().find("span.help-block").css("color","#BDB76B");
+        $('#gl_imc').css("borderColor", "#BDB76B");
+        $('#gl_imc').parent().find("span.help-block").css("color", "#BDB76B");
         if (imc < 16.00) {
             mensaje = "Bajo Peso / Delgadez Severa";
         }
@@ -29,40 +29,40 @@ function calculaIMC()
     }
     //Peso Normal
     if (imc >= 18.50 && imc <= 24.99) {
-        $('#gl_imc').css("borderColor","");
-        $('#gl_imc').parent().find("span.help-block").css("color","");
+        $('#gl_imc').css("borderColor", "");
+        $('#gl_imc').parent().find("span.help-block").css("color", "");
         $('#gl_imc').parent().removeClass("has-error");
         $('#gl_imc').parent().addClass("has-success");
         mensaje = "Peso Normal";
     }
     //Sobre Peso
     if (imc >= 25.00 && imc < 30.00) {
-        $('#gl_imc').css("borderColor","");
-        $('#gl_imc').parent().find("span.help-block").css("color","");
+        $('#gl_imc').css("borderColor", "");
+        $('#gl_imc').parent().find("span.help-block").css("color", "");
         $('#gl_imc').parent().removeClass("has-error");
         $('#gl_imc').parent().removeClass("has-success");
-        $('#gl_imc').css("borderColor","#FF4500");
-        $('#gl_imc').parent().find("span.help-block").css("color","#FF4500");
+        $('#gl_imc').css("borderColor", "#FF4500");
+        $('#gl_imc').parent().find("span.help-block").css("color", "#FF4500");
         mensaje = "Sobrepeso / Pre Obeso (riesgo)";
     }
     //Obeso
-    if (imc >= 30.00){
-        $('#gl_imc').css("borderColor","");
-        $('#gl_imc').parent().find("span.help-block").css("color","");
+    if (imc >= 30.00) {
+        $('#gl_imc').css("borderColor", "");
+        $('#gl_imc').parent().find("span.help-block").css("color", "");
         $('#gl_imc').parent().removeClass("has-success");
         $('#gl_imc').parent().addClass("has-error");
-        if (imc >= 30.00 && imc < 35.00){
+        if (imc >= 30.00 && imc < 35.00) {
             mensaje = "Obeso / Obeso Tipo I (riesgo moderado)";
         }
-        if (imc >= 35.00 && imc < 40.00){
+        if (imc >= 35.00 && imc < 40.00) {
             mensaje = "Obeso / Obeso Tipo II (riesgo severo)";
         }
-        if (imc >= 40.00){
+        if (imc >= 40.00) {
             mensaje = "Obeso / Obeso Tipo III (riesgo muy severo)";
         }
     }
     //mensaje si no tiene valores y dar valor="" a gl_imc
-    if ((peso == "") || (altura == "")){
+    if ((peso == "") || (altura == "")) {
         xModal.danger("Ingrese Peso y Altura");
         imc = "";
     }
@@ -71,6 +71,8 @@ function calculaIMC()
     $('#gl_imc').parent().find('span.help-block').html(mensaje);
     $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
 } 
+
+
 //Si Circunferencia Abdominal es mayor o igual a 88cm -> Consejería
 $("#gl_circunferencia_abdominal").on('keyup', function (e) {
     if ($("#gl_circunferencia_abdominal").val() >= 88){

@@ -107,7 +107,7 @@ class Empa extends Controller{
         $this->smarty->assign("check", $check);
             //calculo edad
             $fc_nacimiento = $registro->fc_nacimiento;
-            list($d, $m, $Y ) = explode("-", $fc_nacimiento);
+            list($Y, $m, $d ) = explode("-", $fc_nacimiento);
             $edad = ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );
         $this->smarty->assign("edad", $edad);
         $this->smarty->assign("gl_fono", $registro->gl_fono);
