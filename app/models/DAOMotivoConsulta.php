@@ -72,7 +72,7 @@ class DAOMotivoConsulta extends Model{
                                             id_usuario_crea
                                         )
                                 VALUES  (   " . $id_registro . ",
-                                            " . $parametros['centrosalud'] . ",
+                                            " .$_SESSION['id_institucion']. ",
                                             '" . $parametros['fechaingreso'] . "',
                                             '" . $parametros['horaingreso'] . "',
                                             '" . $parametros['motivoconsulta'] . "',
