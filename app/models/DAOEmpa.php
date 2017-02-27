@@ -89,7 +89,8 @@ class DAOEmpa extends Model{
                         reg.gl_rut AS rut,
                         com.gl_nombre_comuna AS comuna,
                         ins.gl_nombre AS institucion,
-                        usr.gl_rut AS rut
+                        usr.gl_rut AS rut,
+                        concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
                     FROM pre_empa emp
                     LEFT JOIN pre_registro reg ON reg.id_registro = emp.id_registro
                     LEFT JOIN pre_comunas com ON com.id_comuna = emp.id_comuna

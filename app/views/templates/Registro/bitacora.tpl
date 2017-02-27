@@ -1,7 +1,7 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
-<form id="form">
+{*<form id="form">*}
     <section class="content">
         <!-- DATOS DE REGISTRO -->
         <div class="panel panel-primary">
@@ -270,7 +270,7 @@
 
         <div class="top-spaced"></div>
     </section>
-</form>
+{*</form>*}
 
 <script type="text/javascript">
     function habilitar() {
