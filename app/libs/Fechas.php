@@ -117,4 +117,9 @@ class Fechas{
 		$fechaHoy	= date("Y-m-d");
 		return $fechaHoy;
 	}
+	
+	public static function fechaHoyVista(){
+		$fechaHoy = date("d-m-Y");
+		return $fechaHoy;
+	}
 }

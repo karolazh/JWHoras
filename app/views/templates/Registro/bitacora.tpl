@@ -6,7 +6,7 @@
         <!-- DATOS DE REGISTRO -->
         <div class="panel panel-primary">
             <div class="panel-heading">
-                    Datos del Paciente
+                    Datos del Paciente {$botonAyudaPaciente}
             </div>
             
             <div class="panel-body">
