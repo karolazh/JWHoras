@@ -291,11 +291,9 @@ $(".bo_mamografia_requiere").on('change', function (e) {
 });
 
 //Boton Guardar AUDIT
-$(document).ready(function () {
-    $("#guardaraudit").on('click', function (e) {
-        $("#gl_puntos_audit").val($("#total").val());
-        xModal.close();
-    });
+ $("#guardaraudit").on('click', function (e) {
+	$("#gl_puntos_audit").val($("#total").val());
+	xModal.close();
 });
 
 
