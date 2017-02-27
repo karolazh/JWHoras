@@ -54,6 +54,7 @@
 				},
 				success	: function(data){
 							if(data.correcto){
+
 								xModal.success('Éxito: Se Ingresó nuevo Registro!');
 								location.href = BASE_URI + "index.php/Registro";
 							} else {
@@ -63,7 +64,7 @@
 			});
 		}
 		buttonEndProcess(button_process);
-		
+
     });
 
 	//Formatea Fecha
@@ -83,8 +84,7 @@
 		cargarRegistro : function(){
 			var rut = $("#rut").val();
 			if(rut != ""){
-				
-				
+
 				$.ajax({
 					dataType: "json",
 					cache	:false,
@@ -98,8 +98,8 @@
 					success	: function(data){
 								if(data.correcto){
 									xModal.success('Paciente ya Registro.<br>Se procede a cargar la información.');
-									
-                                                                        $("#id_registro").val(data.id_registro);
+
+									$("#id_registro").val(data.id_registro);
 									$("#nombres").val(data.gl_nombres);
 									$("#apellidos").val(data.gl_apellidos);
 									$("#fc_nacimiento").val(data.fc_nacimiento);
@@ -114,7 +114,7 @@
 									$("#fono").val(data.gl_fono);
 									$("#celular").val(data.gl_celular);
 									$("#email").val(data.gl_email);
-									
+
 									if(data.bo_reconoce == '1'){
 										$("#chkReconoce").prop("checked", true);
 									}
@@ -140,7 +140,7 @@
 									$( "#fechaingreso" ).prop( "disabled", false );
 									$( "#horaingreso" ).prop( "disabled", false );
 								} else {
-									xModal.info('Error al Buscar');
+									xModal.info('Nuevo Paciente');
 								}
 					}
 				});
@@ -171,7 +171,7 @@
 			}
 		}
 	};
-    
+
 	$(document).ready(function() {
 
 		var mapa = new MapaFormulario("map");

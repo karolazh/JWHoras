@@ -2,7 +2,6 @@
 
 class Fechas{
 
-
 	public static function formatearBaseDatos($fecha,$separador="-"){
 		if(empty($fecha)){
 			return '';
@@ -18,7 +17,6 @@ class Fechas{
 
 	}
 
-
 	public static function formatearHtml($fecha,$separador="/"){
 		if(empty($fecha)){
 			return '';
@@ -33,11 +31,9 @@ class Fechas{
 		
 	}
 
-
 	public static function traducirFecha($fecha){
 		return str_replace('day','día',str_replace('mon','mes',str_replace('mons','meses',str_replace('year','año',$fecha))));
 	}
-
 
 	public static function fechaLiteral($fecha){
 		$fecha = strftime("%e de %B de %Y",strtotime($fecha));
@@ -49,10 +45,10 @@ class Fechas{
 
 	public static function diffDias($fecha_i,$fecha_f,$solo_dias=false){
 		if($solo_dias){
-			$fecha_i = explode(" ",$fecha_i);
-			$fecha_f = explode(" ",$fecha_f);
-			$dias	= (strtotime($fecha_i[0])-strtotime($fecha_f[0]))/86400;
-			$dias 	= abs($dias); $dias = floor($dias);		
+			$fecha_i	= explode(" ",$fecha_i);
+			$fecha_f	= explode(" ",$fecha_f);
+			$dias		= (strtotime($fecha_i[0])-strtotime($fecha_f[0]))/86400;
+			$dias		= abs($dias); $dias = floor($dias);		
 			return $dias;
 		}
 		$dias	= (strtotime($fecha_i)-strtotime($fecha_f))/86400;
@@ -61,48 +57,46 @@ class Fechas{
 	}
 
 	public static function diffDiasTickets($fecha_creacion,$fecha_entrega){
-        $creacion = date_create($fecha_creacion);
-        $entrega = date_create($fecha_entrega);
-        $diferencia = date_diff($creacion, $entrega);
+        $creacion	= date_create($fecha_creacion);
+        $entrega	= date_create($fecha_entrega);
+        $diferencia	= date_diff($creacion, $entrega);
         if($diferencia->invert == 1){
-            $diferencia_dias = ($diferencia->days * -1); 
+            $diferencia_dias	= ($diferencia->days * -1); 
         }else{
-            $diferencia_dias = $diferencia->days;
+            $diferencia_dias	= $diferencia->days;
         }       
 		return $diferencia_dias;
 	}
 
 	public static function diffDiasAlerta($fecha_creacion,$fecha_entrega){
-		$creacion = date_create($fecha_creacion);
-        $entrega = date_create($fecha_entrega);
-        $diferencia = date_diff($creacion, $entrega);
-        $diferencia_dias = $diferencia->days;
+		$creacion			= date_create($fecha_creacion);
+        $entrega			= date_create($fecha_entrega);
+        $diferencia			= date_diff($creacion, $entrega);
+        $diferencia_dias	= $diferencia->days;
 
 		if($diferencia_dias >= 30){
-        	$alerta = "verde.png";
+        	$alerta	= "verde.png";
         }
         if($diferencia_dias < 30 && $diferencia_dias >7){
-        	$alerta = "amarillo.png";
+        	$alerta	= "amarillo.png";
         }
         if($diferencia_dias <=7){
-        	$alerta = "rojo.png";
+        	$alerta	= "rojo.png";
         }
 
 		return $alerta;
 	}
-	
-
 
 	/**
 	 * calcula la edad de una persona segun su fecha de nacimiento en formato DD-MM-AAAA
 	 * @param  [type] $fecha_nacimiento [description]
 	 * @return [type]                   [description]
 	 */
-        public static function calcularEdadInv($fecha_nacimiento){
-		list($dia,$mes,$ano) = explode("-",$fecha_nacimiento);
-	    $ano_diferencia  = date("Y") - $ano;
-	    $mes_diferencia = date("m") - $mes;
-	    $dia_diferencia   = date("d") - $dia;
+	public static function calcularEdadInv($fecha_nacimiento){
+		list($dia,$mes,$ano)	= explode("-",$fecha_nacimiento);
+	    $ano_diferencia			= date("Y") - $ano;
+	    $mes_diferencia			= date("m") - $mes;
+	    $dia_diferencia			= date("d") - $dia;
 	    if ($dia_diferencia < 0 || $mes_diferencia < 0){
 	        $ano_diferencia--;
             }
@@ -110,17 +104,17 @@ class Fechas{
 	}
         
 	public static function calcularEdad($fecha_nacimiento){
-		list($ano,$mes,$dia) = explode("-",$fecha_nacimiento);
-	    $ano_diferencia  = date("Y") - $ano;
-	    $mes_diferencia = date("m") - $mes;
-	    $dia_diferencia   = date("d") - $dia;
+		list($ano,$mes,$dia)	= explode("-",$fecha_nacimiento);
+	    $ano_diferencia			= date("Y") - $ano;
+	    $mes_diferencia			= date("m") - $mes;
+	    $dia_diferencia			= date("d") - $dia;
 	    if ($dia_diferencia < 0 || $mes_diferencia < 0)
 	        $ano_diferencia--;
 	    return $ano_diferencia;
 	}
 
 	public static function fechaHoy(){
-		$fechaHoy = date("Y-m-d");
+		$fechaHoy	= date("Y-m-d");
 		return $fechaHoy;
 	}
 	
