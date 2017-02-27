@@ -70,19 +70,22 @@
 					<table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
 						<thead>
 							<tr role="row">
-								<th align="center" width="35%">Motivo Consulta</th>
-								<th align="center" width="35%">Registrador</th>
-								<th align="center" width="30%">Fecha Ingreso</th>
-								<th align="center" width="0%" class="hidden">Fecha Registro</th>
+								<th align="center" width="10%">Fecha Ingreso</th>
+								<th align="center" width="10%">Hora Ingreso</th>
+								<th align="center" width="">Motivo</th>
+								<th align="center" width="20%">Institución</th>
+								<th align="center" width="15%">Funcionario</th>
+								
 							</tr>
 						</thead>
 						<tbody>
 							{foreach $arrMotivosConsulta as $item}
 								<tr>
-									<td nowrap align="center"> {$item->gl_motivo_consulta} </td>
-									<td nowrap align="center">{$item->gl_nombres}&nbsp;{$item->gl_apellidos}</td>
-									<td nowrap align="center">{$item->fc_ingreso}&nbsp;{$item->gl_hora_ingreso}</td>
-									<td nowrap align="center" class="hidden">{$item->fc_crea}</td> 
+									<td>{$item->fc_ingreso}</td>
+									<td>{$item->gl_hora_ingreso}</td>
+									<td>{$item->gl_motivo_consulta} </td>
+									<td>{$item->gl_nombre_institucion} </td>
+									<td>{$item->gl_nombres}&nbsp;{$item->gl_apellidos}</td>
 								</tr>
 							{/foreach}
 						</tbody>
