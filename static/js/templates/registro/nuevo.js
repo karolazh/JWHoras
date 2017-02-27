@@ -78,6 +78,16 @@
 
     });
 
+	$("#chkextranjero").on('click', function(e) {
+		if($('#chkextranjero').is(':checked')){
+			$('#nacional').hide();
+			$('#extranjero').show();
+		}else{
+			$('#nacional').show();
+			$('#extranjero').hide();
+		}
+	});
+
 	$("#chkAcepta").on('click', function(e) {
 		if($('#chkAcepta').is(':checked')){
 			$('#files').show();
