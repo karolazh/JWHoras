@@ -77,7 +77,19 @@ class DAOEmpa extends Model{
             return null;
         }
     }
-    
+
+    public function getEmpaByIdRegistro($id_registro){
+        $query = "select * from pre_empa 
+                  where id_registro = ?
+                  and nr_orden = 1";
+
+        $consulta = $this->db->getQuery($query,array($id_registro));
+        if($consulta->numRows > 0){
+            return $consulta->rows->row_0;
+        }else{
+            return null;
+        }
+    }    
     /*
      * Ver Empa para Grilla
      */
@@ -110,9 +122,55 @@ class DAOEmpa extends Model{
     public function updateEmpa($parametros){
 
         $query	= "	UPDATE pre_empa SET
-						id_comuna                       =       ".$parametros['id_comuna'].",
+						id_comuna                       =       ".$_SESSION['id_comuna'].",
 						id_sector                       =       ".$parametros['id_sector'].",
-						id_institucion                  =       ".$parametros['id_institucion'].",
+						id_institucion                  =       ".$_SESSION['id_institucion'].",
+						nr_ficha                        =       ".$parametros['nr_ficha'].",
+						fc_empa                         =       '".$parametros['fc_empa']."',
+						bo_consume_alcohol              =       ".$parametros['bo_consume_alcohol'].",
+						gl_puntos_audit                 =       ".$parametros['gl_puntos_audit'].",
+						bo_fuma                         =       ".$parametros['bo_fuma'].",
+						gl_peso                         =       '".$parametros['gl_peso']."',
+						gl_estatura                     =       '".$parametros['gl_estatura']."',
+						gl_imc                          =       '".$parametros['gl_imc']."',
+						gl_circunferencia_abdominal     =       '".$parametros['gl_circunferencia_abdominal']."',
+						id_clasificacion_imc            =       '".$parametros['id_clasificacion_imc']."',
+						gl_pas                          =       '".$parametros['gl_pas']."',
+						gl_pad                          =       '".$parametros['gl_pad']."',
+                                                gl_glicemia                     =       '".$parametros['gl_peso']."',
+						bo_glicemia_toma                =       ".$parametros['bo_glicemia_toma'].",
+						bo_trabajadora_reclusa          =       ".$parametros['bo_trabajadora_reclusa'].",
+						bo_vdrl                         =       ".$parametros['bo_vdrl'].",
+						bo_rpr                          =       ".$parametros['bo_rpr'].",
+                                                bo_tos_productiva               =       ".$parametros['bo_tos_productiva'].",
+                                                bo_baciloscopia_toma            =       ".$parametros['bo_baciloscopia_toma'].",
+                                                bo_pap_realizado                =       ".$parametros['bo_pap_realizado'].",
+                                                fc_ultimo_pap                   =       '".$parametros['fc_ultimo_pap']."',
+                                                bo_pap_vigente                  =       ".$parametros['bo_pap_vigente'].",
+                                                bo_pap_toma                     =       ".$parametros['bo_pap_toma'].",
+                                                gl_colesterol                   =       '".$parametros['gl_colesterol']."',
+                                                bo_colesterol_toma              =       ".$parametros['bo_colesterol_toma'].",
+                                                bo_mamografia_realizada         =       ".$parametros['bo_mamografia_realizada'].",
+                                                bo_mamografia_vigente           =       ".$parametros['bo_mamografia_vigente'].",
+                                                bo_mamografia_toma              =       ".$parametros['bo_mamografia_toma'].",
+                                                gl_observaciones_empa           =       '".$parametros['gl_observaciones_empa']."',
+                                                fc_actualiza                    =       '".date('Y-m-d H:i:s')."',
+                                                id_usuario_act                  =       ".$_SESSION['id']."
+                        WHERE id_empa   = ".$parametros['id_empa']."
+                    ";
+                  
+        if ($this->db->execQuery($query)) {
+            return $this->db->getLastId();
+        } else {
+            return false;
+        }
+    }
+    
+    //Parametros para usar despues mas completo con id's de examenes
+    /*
+                                                id_comuna                       =       ".$_SESSION['id_comuna'].",
+						id_sector                       =       ".$parametros['id_sector'].",
+						id_institucion                  =       ".$_SESSION['id_institucion'].",
 						nr_ficha                        =       ".$parametros['nr_ficha'].",
 						fc_empa                         =       '".$parametros['fc_empa']."',
 						bo_consume_alcohol              =       ".$parametros['bo_consume_alcohol'].",
@@ -151,18 +209,7 @@ class DAOEmpa extends Model{
                                                 gl_observaciones_empa           =       '".$parametros['gl_observaciones_empa']."',
                                                 fc_crea                         =       '".$parametros['fc_crea']."',
                                                 fc_actualiza                    =       '".$parametros['fc_actualiza']."',
-                                                id_usuario_crea                 =       ".$parametros['id_usuario_crea'].",
-                                                id_usuario_act                  =       ".$parametros['id_usuario_act']."
-                        WHERE id_registro    = ".$parametros['id_registro']."
-                         AND  nr_orden       = ".$parametros['nr_orden']."
-                    ";
-                  
-        if ($this->db->execQuery($query)) {
-            return $this->db->getLastId();
-        } else {
-            return false;
-        }
-    }
+                                                id_usuario_act                  =       ".$_SESSION['id_usuario']." */
     
     	public function verInfoById($parametros) {
         $query	= "SELECT 

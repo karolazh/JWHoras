@@ -17,7 +17,7 @@
 </section>
 
 <form id="form" class="form-horizontal">
-    <input type="text" value="0" id="id_empa" name="id_empa" class="hidden">
+    <input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden">
     <section class="content">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -62,7 +62,7 @@
 
                     <label for="fc_empa" class="control-label col-sm-2">Fecha (*)</label>
                     <div class="col-sm-3">
-                        <input type="date" name="fc_emp" id="fc_emp" value="{$fc_emp}" 
+                        <input type="date" name="fc_empa" id="fc_empa" value="{$fc_emp}" 
                                placeholder="Fecha" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
@@ -176,8 +176,8 @@
                                 </button>
                             </div>
                             <div class="col-sm-1">
-                                <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value="" 
-									   placeholder="AUDIT Puntos" class="form-control hidden"  disabled/>
+                                <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value=""
+									   placeholder="AUDIT Puntos" class="form-control hidden" readonly/>
 								<label class="control-label required col-sm-1 hidden" id="lbl_toma">{$botonAyudaAlcoholico}</label>
                             </div>  
 
@@ -245,13 +245,15 @@
                             <label class="control-label required col-sm-2">IMC</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_imc" id="gl_imc" 
-                                       value="" placeholder="" class="form-control" disabled/>
+                                       value="" placeholder="" class="form-control" readonly/>
                                 <span class="help-block hidden"></span>
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" id="calcular" onclick="calculaIMC()" class="btn btn-sm btn-success">
                                     <i class="fa fa-success"></i> Calcular IMC</button>
                             </div>
+                            <input type="text" name="id_clasificacion_imc" id="id_clasificacion_imc" 
+                                       value="" placeholder="" class="form-control hidden"/>
 							<div class="col-sm-1">
 								{$botonAyudaIMC}
 							</div>
@@ -494,10 +496,10 @@
 							<label class="control-label required col-sm-2">¿Se ha realizado Examen de Mamografía?</label>
                             <div class="col-sm-2">
 								<label><input class="bo_mamografia_realizada" type="radio" name="bo_mamografia_realizada" 
-											  id="bo_mamografia_realizada" value="0">NO</label>
+											  id="bo_mamografia_realizada_0" value="0">NO</label>
 								&nbsp;&nbsp;
 								<label><input class="bo_mamografia_realizada" type="radio" name="bo_mamografia_realizada" 
-											  id="bo_mamografia_realizada" value="1">SI</label>
+											  id="bo_mamografia_realizada_1" value="1">SI</label>
                             </div>
                         </div>
                         <div class="form-group" id="fecha_mamografia" style="display: none">
@@ -511,10 +513,10 @@
 							<label class="control-label required col-sm-2">¿Mamografía Vigente?</label>
                             <div class="col-sm-2">
 								<label><input class="bo_mamografia_vigente" type="radio" name="bo_mamografia_vigente" 
-											  id="bo_mamografia_vigente_0" value="0" readonly disabled>NO</label>
+											  id="bo_mamografia_vigente_0" value="0" readonly>NO</label>
 								&nbsp;&nbsp;
 								<label><input class="bo_mamografia_vigente" type="radio" name="bo_mamografia_vigente" 
-											  id="bo_mamografia_vigente_1" value="1" readonly disabled>SI</label>
+											  id="bo_mamografia_vigente_1" value="1" readonly>SI</label>
                             </div>
 							<div class="col-sm-1">
 								{$botonAyudaMamografiaVigente}
