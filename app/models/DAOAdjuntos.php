@@ -96,6 +96,7 @@ class DAOAdjuntos extends Model{
                                 adj.id_registro AS id_registro,
                                 adj.id_tipo_adjunto AS id_tipo_adjunto,
                                 tip.gl_nombre_tipo_adjunto AS nombre_tipo_adjunto,
+                                substring_index(substring_index(adj.gl_path,'/',-1),'/',1) AS archivo,
                                 adj.gl_path AS path,
                                 adj.gl_glosa AS glosa,
                                 date_format(adj.fc_crea,'%d-%m-%Y') AS fc_crea,
