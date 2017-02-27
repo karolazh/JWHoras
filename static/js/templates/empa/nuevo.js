@@ -263,6 +263,8 @@ $("#gl_colesterol").on('keyup', function (e) {
 $(".bo_mamografia_realizada").on('change', function (e) {
     if ($('#bo_mamografia_realizada_0').is(':checked')) {
         $('#fecha_mamografia').hide();
+        $('#mam_vigente').hide();
+        $('#mam_resultado').hide();
     } else {
         $('#fecha_mamografia').show();
     }
@@ -403,13 +405,13 @@ $("#guardar").on('click', function (e) {
                         if($('#gl_colesterol').val() == ""){
 				parametros.push({
 					"name"  : 'gl_colesterol',
-					"value" : 0
+					"value" : ""
 				});
 			}
                         if($('#gl_observaciones_empa').val() == ""){
 				parametros.push({
 					"name"  : 'gl_observaciones_empa',
-					"value" : 0
+					"value" : ""
 				});
 			}
 			if($('#bo_glicemia_toma').is(':checked')){

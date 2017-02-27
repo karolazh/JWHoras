@@ -572,7 +572,7 @@
                             <div class="col-sm-1"></div>
                             <div class="col-sm-10">
                                 <label>Observaciones</label>
-                                <textarea class="form-control col-sm-10" rows="5" id="gl_observaciones_empa" nombre="gl_observaciones_empa"
+                                <textarea type="text" class="form-control col-sm-10" rows="5" id="gl_observaciones_empa" nombre="gl_observaciones_empa"
                                           placeholder="Ingrese Observaciones" style="resize: none"></textarea>
                             </div>
                             <div class="col-sm-1"></div>
