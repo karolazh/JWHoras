@@ -99,7 +99,7 @@
 		
 		<div class="top-spaced"></div>
 		<div class="panel panel-primary">
-					<div class="panel-heading">Datos de Contacto</div>
+					<div class="panel-heading">Datos de Contacto {$botonAyudaContacto}</div>
 			<div class="panel-body">
 				<div class="col-sm-6">
 					<div class="form-group">

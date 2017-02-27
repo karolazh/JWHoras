@@ -5,7 +5,7 @@
     <section class="content">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h5 class="box-title">Datos de Seguimiento</h5>
+                Datos de Seguimiento {$botonAyudaSeguimiento}
             </div>
             <div class="panel-body">
                 <div class="col-md-12">
@@ -94,7 +94,7 @@
         </div>  
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h5 class="box-title">Datos del Paciente</h5>
+                Datos del Paciente {$botonAyudaPaciente}
             </div>
             <div class="panel-body">
 				{if $extranjero }
@@ -175,7 +175,7 @@
             </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h5 class="box-title">Datos de Contacto</h5>
+                    Datos de Contacto {$botonAyudaContacto}
                 </div>
                 <div class="box-body">
 

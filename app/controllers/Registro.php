@@ -196,6 +196,8 @@ class Registro extends Controller {
             $arrAdjuntos = $this->_DAOAdjuntos->getListaAdjuntosRegistro($idReg);
             $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
             
+			$this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Datos personales y de exámenes del paciente.','Información'));
+			
             //muestra template
             $this->smarty->display('Registro/bitacora.tpl');
             $this->_addJavascript(STATIC_FILES . 'js/templates/registro/bitacora.js');
@@ -220,8 +222,8 @@ class Registro extends Controller {
         $arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
         $this->smarty->assign("arrCasoEgreso", $arrCasoEgreso);
 		
-        $this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.'));
-
+        $this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese datos personales del paciente.','Ayuda'));
+		$this->smarty->assign("botonAyudaContacto", Boton::botonAyuda('Ingrese datos de contacto del paciente.','Ayuda'));
         //llamado al template
         $this->_display('Registro/nuevo.tpl');
         $this->load->javascript(STATIC_FILES . "js/regiones.js");
@@ -250,18 +252,18 @@ class Registro extends Controller {
 			$session = New Zend_Session_Namespace("usuario_carpeta");
 			$datos_evento['eventos_tipo'] = 1;
 			$datos_evento['id_registro'] = $id_registro;
-			$datos_evento['gl_descripcion'] = "Registro creado el : ".Fechas::fechaHoy(); 
+			$datos_evento['gl_descripcion'] = "Registro creado el : ".Fechas::fechaHoyVista(); 
 			$datos_evento['bo_estado'] = 1; 
 			$datos_evento['id_usuario_crea'] = $session->id;
 			$correcto = $this->_DAOEventos->insEvento($datos_evento);
 			if ($parametros['chkAcepta']){
 				$datos_evento['eventos_tipo'] = 4;
-				$datos_evento['gl_descripcion'] = "Acepta el programa con fecha : ".Fechas::fechaHoy();
+				$datos_evento['gl_descripcion'] = "Acepta el programa con fecha : ".Fechas::fechaHoyVista();
 				$correcto = $this->_DAOEventos->insEvento($datos_evento);
 			}
 			if ($parametros['chkReconoce']){
 				$datos_evento['eventos_tipo'] = 5;
-				$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : ".Fechas::fechaHoy();
+				$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : ".Fechas::fechaHoyVista();
 				$correcto = $this->_DAOEventos->insEvento($datos_evento);
 			}
         }else{
@@ -310,6 +312,9 @@ class Registro extends Controller {
         $this->smarty->assign('institucion', $obj_registro->gl_nombre_institucion);
         $this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
         $this->smarty->assign('ruta_consentimiento', $obj_registro->gl_path);
+		$this->smarty->assign("botonAyudaSeguimiento", Boton::botonAyuda('Datos sobre el registro al paciente y motivos de consulta.','Información'));
+		$this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Datos personales del paciente.','Información'));
+		$this->smarty->assign("botonAyudaContacto", Boton::botonAyuda('Datos para contactar al paciente.','Información'));
         $this->smarty->display('Registro/ver.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/registro/ver.js");
     }
@@ -354,7 +359,7 @@ class Registro extends Controller {
 
 		if($registro){
 			$json['correcto']			= TRUE;
-                        $json['id_registro']			= $registro->id_registro;
+			$json['id_registro']		= $registro->id_registro;
 			$json['gl_nombres']			= $registro->gl_nombres;
 			$json['gl_apellidos']		= $registro->gl_apellidos;
 			$json['fc_nacimiento']		= $registro->fc_nacimiento;
@@ -369,7 +374,6 @@ class Registro extends Controller {
 			$json['bo_acepta_programa']	= $registro->bo_acepta_programa;
 			$json['gl_latitud']			= $registro->gl_latitud;
 			$json['gl_longitud']		= $registro->gl_longitud;
-			
 			$json['gl_fono']			= $registro->gl_fono;
 			$json['gl_celular']			= $registro->gl_celular;
 			$json['gl_email']			= $registro->gl_email;

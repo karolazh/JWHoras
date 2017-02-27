@@ -38,6 +38,7 @@ class Empa extends Controller{
     function __construct(){
         parent::__construct();
         //Acceso::set("ADMINISTRADOR");
+		$this->load->lib('Boton', false);
         $this->_DAOEmpa			= $this->load->model("DAOEmpa");
         $this->_DAOUsuarios		= $this->load->model("DAOUsuarios");
         $this->_DAOComuna		= $this->load->model("DAOComuna");
@@ -131,8 +132,22 @@ class Empa extends Controller{
         $this->smarty->assign("gl_celular", $registro->gl_celular);
         $this->smarty->assign("gl_email", $registro->gl_email);
         $this->smarty->assign("gl_direccion", $registro->gl_direccion);
-
-        //llamado al template
+		$this->smarty->assign("botonAyudaAlcoholico", Boton::botonAyuda("Evitar el uso de bebidas alcohólicas","Consejería","pull-left","btn-danger"));
+		$this->smarty->assign("botonAyudaFumador", Boton::botonAyuda("Evitar el uso de tabaco","Consejería","pull-left","btn-danger"));
+		$this->smarty->assign("botonAyudaCircunferenciaAbdominal", Boton::botonAyuda("Punto medio entre margen inferior de la ultima costilla y la cresta iliaca.","Información","pull-left","btn-info"));
+		$this->smarty->assign("botonAyudaIMC", Boton::botonAyuda("Medida de asociación entre la masa y la talla de un individuo","Información","pull-left","btn-info"));        
+		$this->smarty->assign("botonAyudaPAS", Boton::botonAyuda("si >= 140 es hipertensión","Información","pull-left","btn-info"));
+		$this->smarty->assign("botonAyudaPAD", Boton::botonAyuda("si >= 90 es hipertensión","Información","pull-left","btn-info"));
+		$this->smarty->assign("botonAyudaGlicemia", Boton::botonAyuda("en ayunas de 8 horas como mínimo","Indicaciones","pull-left","btn-warning"));
+		$this->smarty->assign("botonConsejeriaGlicemia", Boton::botonAyuda("Reducir ingesta de azúcares y realizar actividad física (controlada)","Consejería","pull-right","btn-danger"));
+		$this->smarty->assign("botonAyudaBasiloscopia", Boton::botonAyuda("1ra muestra de inmediato y entrega de una caja para muestra del día siguiente al despertar","Indicaciones","pull-left","btn-warning"));
+		$this->smarty->assign("botonAyudaPAPVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 3 años","Información","pull-left","btn-info"));
+		$this->smarty->assign("botonAyudaMamografiaVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 3 años","Información","pull-left","btn-info"));
+		$this->smarty->assign("botonConsejeriaColesterol", Boton::botonAyuda("Reducir ingesta calorías y realizar actividad física (controlada)","Consejería","pull-right","btn-danger"));
+		$this->smarty->assign("botonInformacionAgenda", Boton::botonAyuda("Referir confirmación diagnóstica con profesional de la salud.","Consejeria","pull-right","btn-danger"));
+		$this->smarty->assign("botonInformacionAgendaITS", Boton::botonAyuda("Referir a profesional de ITS.","Consejeria","pull-right","btn-danger"));
+		$this->smarty->assign("botonInformacionAgendaMamografia", Boton::botonAyuda("Agendar nueva mamografía.","Información","pull-right","btn-info"));
+		//llamado al template
         $this->_display('Empa/nuevo.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
