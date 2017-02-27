@@ -18,17 +18,21 @@ function calculaIMC()
         $('#gl_imc').css("borderColor", "#BDB76B");
         $('#gl_imc').parent().find("span.help-block").css("color", "#BDB76B");
         if (imc < 16.00) {
+            $("#id_clasificacion_imc").val(1);
             mensaje = "Bajo Peso / Delgadez Severa";
         }
         if (imc >= 16.00 && imc < 17.00) {
+            $("#id_clasificacion_imc").val(2);
             mensaje = "Bajo Peso / Delgadez Moderada";
         }
         if (imc >= 17.00 && imc < 18.50) {
+            $("#id_clasificacion_imc").val(3);
             mensaje = "Bajo Peso / Delgadez Aceptable";
         }
     }
     //Peso Normal
     if (imc >= 18.50 && imc <= 24.99) {
+        $("#id_clasificacion_imc").val(4);
         $('#gl_imc').css("borderColor", "");
         $('#gl_imc').parent().find("span.help-block").css("color", "");
         $('#gl_imc').parent().removeClass("has-error");
@@ -37,6 +41,7 @@ function calculaIMC()
     }
     //Sobre Peso
     if (imc >= 25.00 && imc < 30.00) {
+        $("#id_clasificacion_imc").val(5);
         $('#gl_imc').css("borderColor", "");
         $('#gl_imc').parent().find("span.help-block").css("color", "");
         $('#gl_imc').parent().removeClass("has-error");
@@ -52,12 +57,15 @@ function calculaIMC()
         $('#gl_imc').parent().removeClass("has-success");
         $('#gl_imc').parent().addClass("has-error");
         if (imc >= 30.00 && imc < 35.00) {
+            $("#id_clasificacion_imc").val(6);
             mensaje = "Obeso / Obeso Tipo I (riesgo moderado)";
         }
         if (imc >= 35.00 && imc < 40.00) {
+            $("#id_clasificacion_imc").val(7);
             mensaje = "Obeso / Obeso Tipo II (riesgo severo)";
         }
         if (imc >= 40.00) {
+            $("#id_clasificacion_imc").val(8); 
             mensaje = "Obeso / Obeso Tipo III (riesgo muy severo)";
         }
     }
@@ -253,7 +261,7 @@ $("#gl_colesterol").on('keyup', function (e) {
 
 //Si realizo Examen Cancer de mama Mostrar -> Ingrese Fecha
 $(".bo_mamografia_realizada").on('change', function (e) {
-    if ($('#bo_mamografia_realizada').is(':checked')) {
+    if ($('#bo_mamografia_realizada_0').is(':checked')) {
         $('#fecha_mamografia').hide();
     } else {
         $('#fecha_mamografia').show();
@@ -301,6 +309,261 @@ $(".bo_mamografia_requiere").on('change', function (e) {
 $("#guardar").on('click', function (e) {
         var button_process	= buttonStartProcess($(this), e);
         var parametros		= $("#form").serializeArray();
+                        
+                        if($('#bo_consume_alcohol_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_consume_alcohol',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_consume_alcohol',
+					"value" : 0
+				});
+			}
+                        if($('#gl_puntos_audit').val() == ""){
+				parametros.push({
+					"name"  : 'gl_puntos_audit',
+					"value" : 0
+				});
+			}
+			if($('#bo_fuma_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_fuma',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_fuma',
+					"value" : 0
+				});
+			}
+                        if($('#gl_peso').val() == ""){
+				parametros.push({
+					"name"  : 'gl_peso',
+					"value" : ""
+				});
+			}
+                        if($('#gl_estatura').val() == ""){
+				parametros.push({
+					"name"  : 'gl_estatura',
+					"value" : ""
+				});
+			}
+                        if($('#gl_circunferencia_abdominal').val() == ""){
+				parametros.push({
+					"name"  : 'gl_circunferencia_abdominal',
+					"value" : ""
+				});
+			}
+                        if($('#gl_imc').val() == ""){
+				parametros.push({
+					"name"  : 'gl_imc',
+					"value" : ""
+				});
+			}
+                        if($('#nr_ficha').val() == ""){
+				parametros.push({
+					"name"  : 'nr_ficha',
+					"value" : 0
+				});
+			}
+                        if($('#id_sector').val() == ""){
+				parametros.push({
+					"name"  : 'id_sector',
+					"value" : 0
+				});
+			}
+                        if($('#gl_pad').val() == ""){
+				parametros.push({
+					"name"  : 'gl_pad',
+					"value" : ""
+				});
+			}
+                        if($('#gl_pas').val() == ""){
+				parametros.push({
+					"name"  : 'gl_pas',
+					"value" : ""
+				});
+			}
+                        if($('#gl_glicemia').val() == ""){
+				parametros.push({
+					"name"  : 'gl_glicemia',
+					"value" : ""
+				});
+			}
+                        if($('#fc_ultimo_pap').val() == ""){
+				parametros.push({
+					"name"  : 'fc_ultimo_pap',
+					"value" : ""
+				});
+			}
+                        if($('#gl_colesterol').val() == ""){
+				parametros.push({
+					"name"  : 'gl_colesterol',
+					"value" : 0
+				});
+			}
+                        if($('#gl_observaciones_empa').val() == ""){
+				parametros.push({
+					"name"  : 'gl_observaciones_empa',
+					"value" : 0
+				});
+			}
+			if($('#bo_glicemia_toma').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_glicemia_toma',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_glicemia_toma',
+					"value" : 0
+				});
+			}
+                        if($('#bo_trabajadora_reclusa_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_trabajadora_reclusa',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_trabajadora_reclusa',
+					"value" : 0
+				});
+			}
+                        if($('#bo_vdrl_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_vdrl',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_vdrl',
+					"value" : 0
+				});
+			}
+                        if($('#bo_rpr_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_rpr',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_rpr',
+					"value" : 0
+				});
+			}
+                        if($('#bo_tos_productiva_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_tos_productiva',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_tos_productiva',
+					"value" : 0
+				});
+			}
+                        if($('#bo_baciloscopia_toma_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_baciloscopia_toma',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_baciloscopia_toma',
+					"value" : 0
+				});
+			}
+                        if($('#bo_pap_realizado_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_pap_realizado',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_pap_realizado',
+					"value" : 0
+				});
+			}
+                        if($('#bo_pap_vigente_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_pap_vigente',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_pap_vigente',
+					"value" : 0
+				});
+			}
+                        if($('#fc_tomar_pap').val()){
+				parametros.push({
+					"name"  : 'bo_pap_toma',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_pap_toma',
+					"value" : 0
+				});
+			}
+                        if($('#bo_colesterol_toma').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_colesterol_toma',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_colesterol_toma',
+					"value" : 0
+				});
+			}
+                        if($('#bo_mamografia_realizada_1').val()){
+				parametros.push({
+					"name"  : 'bo_mamografia_realizada',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_mamografia_realizada',
+					"value" : 0
+				});
+			}
+                        if($('#bo_mamografia_vigente_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_mamografia_vigente',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_mamografia_vigente',
+					"value" : 0
+				});
+			}
+                        if($('#bo_mamografia_toma').val()){
+				parametros.push({
+					"name"  : 'bo_mamografia_toma',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_mamografia_toma',
+					"value" : 0
+				});
+			}
+                        if($('#bo_mamografia_vigente_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_mamografia_vigente',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_mamografia_vigente',
+					"value" : 0
+				});
+			}
 			$.ajax({
 				dataType:   "json",
 				cache	:   false,

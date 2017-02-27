@@ -83,12 +83,13 @@ class Empa extends Controller{
         $parametros = $this->request->getParametros();
         $id_registro = $parametros[0];
         $this->smarty->assign("id_registro", $id_registro);
+        $id_empa    = $this->_DAOEmpa->getEmpaByIdRegistro($id_registro);
+        $this->smarty->assign("id_empa", $id_empa -> id_empa);
         /* Obtener id de paciente a través de id de dau */
         $id_pac = 1;
         //Cargar Datos Enfermera
         $gl_comuna          = $this->_DAOComuna->getComuna($_SESSION['id_comuna']);
         $gl_institucion     = $this->_DAOInstitucion->getInstitucion($_SESSION['id_institucion']);
-        
         
         $this->smarty->assign("gl_comuna", $gl_comuna->gl_nombre_comuna);
         $this->smarty->assign("gl_institucion",  $gl_institucion->gl_nombre);
@@ -194,11 +195,17 @@ class Empa extends Controller{
 
     public function guardar(){
         header('Content-type: application/json');
+        Acceso::redireccionUnlogged($this->smarty);
+        $sesion = New Zend_Session_Namespace("usuario_carpeta");
+        $this->smarty->assign("id_usuario", $sesion->id);
+        $this->smarty->assign("rut", $sesion->rut);
+        $this->smarty->assign("usuario", $sesion->usuario);
+        
         $parametros		= $this->_request->getParams();
 	$correcto		= false;
         $error			= false;
-        //$id_registro            = $this->_DAOEmpa->updateEmpa($parametros);
-        $id_registro            = false;
+        $id_registro            = $this->_DAOEmpa->updateEmpa($parametros);
+        
         if($id_registro){
 			$correcto       = true;
         }else{
