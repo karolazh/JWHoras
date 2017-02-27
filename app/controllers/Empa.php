@@ -38,11 +38,13 @@ class Empa extends Controller{
     function __construct(){
         parent::__construct();
         //Acceso::set("ADMINISTRADOR");
-        $this->_DAOEmpa = $this->load->model("DAOEmpa");
-        $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
-        $this->_DAOComuna = $this->load->model("DAOComuna");
-        $this->_DAOInstitucion = $this->load->model("DAOInstitucion");
-        $this->_DAORegistro = $this->load->model("DAORegistro");
+        $this->load->lib('Boton', false);
+        $this->_DAOEmpa             = $this->load->model("DAOEmpa");
+        $this->_DAOUsuarios         = $this->load->model("DAOUsuarios");
+        $this->_DAOComuna           = $this->load->model("DAOComuna");
+        $this->_DAOInstitucion      = $this->load->model("DAOInstitucion");
+        $this->_DAORegistro         = $this->load->model("DAORegistro");
+        $this->_DAOAlcoholismo      = $this->load->model("DAOAlcoholismo");
     }
     
     /*
@@ -81,12 +83,13 @@ class Empa extends Controller{
         $parametros = $this->request->getParametros();
         $id_registro = $parametros[0];
         $this->smarty->assign("id_registro", $id_registro);
+        $id_empa    = $this->_DAOEmpa->getEmpaByIdRegistro($id_registro);
+        $this->smarty->assign("id_empa", $id_empa -> id_empa);
         /* Obtener id de paciente a través de id de dau */
         $id_pac = 1;
         //Cargar Datos Enfermera
         $gl_comuna          = $this->_DAOComuna->getComuna($_SESSION['id_comuna']);
         $gl_institucion     = $this->_DAOInstitucion->getInstitucion($_SESSION['id_institucion']);
-        
         
         $this->smarty->assign("gl_comuna", $gl_comuna->gl_nombre_comuna);
         $this->smarty->assign("gl_institucion",  $gl_institucion->gl_nombre);
@@ -99,6 +102,12 @@ class Empa extends Controller{
         $this->smarty->assign("gl_apellidos", $registro->gl_apellidos);
         $this->smarty->assign("fc_nacimiento", $registro->fc_nacimiento);
         $reconoce = $registro->bo_reconoce;
+        
+        //Cargar Datos DAU Examen
+        //$param = array("id_registro" => $id_registro);
+        //$obj_empa	= $this->_DAOEmpa->verInfoById($param);
+        //$this->smarty->assign("gl_peso", $obj_empa->gl_peso);
+        
         if ($reconoce == 1){
             $check ="checked disabled";
         }else{
@@ -107,15 +116,48 @@ class Empa extends Controller{
         $this->smarty->assign("check", $check);
             //calculo edad
             $fc_nacimiento = $registro->fc_nacimiento;
-            list($d, $m, $Y ) = explode("-", $fc_nacimiento);
+            list($Y, $m, $d ) = explode("-", $fc_nacimiento);
             $edad = ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );
         $this->smarty->assign("edad", $edad);
+        //Mostrar/Ocultar Panel Dislipidemia segun Edad
+        if ($edad > 40) {
+            $dislipidemia = "display: block";
+            $diabetes = "display: block";
+            $antecedentes = "display: none";
+        } else {
+            $dislipidemia = "display: none";
+            $diabetes = "display: none";
+            $antecedentes = "display: block";
+        }
+        if ($edad > 24 && $edad < 65){
+            $pap = "display: block";
+        } else {
+            $pap = "display: none";
+        }
+        $this->smarty->assign("pap", $pap);
+        $this->smarty->assign("diabetes", $diabetes);
+        $this->smarty->assign("antecedentes", $antecedentes);
+        $this->smarty->assign("dislipidemia", $dislipidemia);
         $this->smarty->assign("gl_fono", $registro->gl_fono);
         $this->smarty->assign("gl_celular", $registro->gl_celular);
         $this->smarty->assign("gl_email", $registro->gl_email);
         $this->smarty->assign("gl_direccion", $registro->gl_direccion);
-
-        //llamado al template
+		$this->smarty->assign("botonAyudaAlcoholico", Boton::botonAyuda("Evitar el uso de bebidas alcohólicas","Consejería","pull-left","btn-danger"));
+		$this->smarty->assign("botonAyudaFumador", Boton::botonAyuda("Evitar el uso de tabaco","Consejería","pull-left","btn-danger"));
+		$this->smarty->assign("botonAyudaCircunferenciaAbdominal", Boton::botonAyuda("Punto medio entre margen inferior de la ultima costilla y la cresta iliaca.","Información","pull-left","btn-info"));
+		$this->smarty->assign("botonAyudaIMC", Boton::botonAyuda("Medida de asociación entre la masa y la talla de un individuo","Información","pull-left","btn-info"));        
+		$this->smarty->assign("botonAyudaPAS", Boton::botonAyuda("si >= 140 es hipertensión","Información","pull-left","btn-info"));
+		$this->smarty->assign("botonAyudaPAD", Boton::botonAyuda("si >= 90 es hipertensión","Información","pull-left","btn-info"));
+		$this->smarty->assign("botonAyudaGlicemia", Boton::botonAyuda("en ayunas de 8 horas como mínimo","Indicaciones","pull-left","btn-warning"));
+		$this->smarty->assign("botonConsejeriaGlicemia", Boton::botonAyuda("Reducir ingesta de azúcares y realizar actividad física (controlada)","Consejería","pull-right","btn-danger"));
+		$this->smarty->assign("botonAyudaBasiloscopia", Boton::botonAyuda("1ra muestra de inmediato y entrega de una caja para muestra del día siguiente al despertar","Indicaciones","pull-left","btn-warning"));
+		$this->smarty->assign("botonAyudaPAPVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 3 años","Información","pull-left","btn-info"));
+		$this->smarty->assign("botonAyudaMamografiaVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 3 años","Información","pull-left","btn-info"));
+		$this->smarty->assign("botonConsejeriaColesterol", Boton::botonAyuda("Reducir ingesta calorías y realizar actividad física (controlada)","Consejería","pull-right","btn-danger"));
+		$this->smarty->assign("botonInformacionAgenda", Boton::botonAyuda("Referir confirmación diagnóstica con profesional de la salud.","Consejeria","pull-right","btn-danger"));
+		$this->smarty->assign("botonInformacionAgendaITS", Boton::botonAyuda("Referir a profesional de ITS.","Consejeria","pull-right","btn-danger"));
+		$this->smarty->assign("botonInformacionAgendaMamografia", Boton::botonAyuda("Agendar nueva mamografía.","Información","pull-right","btn-info"));
+		//llamado al template
         $this->_display('Empa/nuevo.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
@@ -143,43 +185,38 @@ class Empa extends Controller{
         $this->_display('Empa/ver.tpl');
     }
     
-    public function audit(){
-        //llamado al template
-        $this->_display('Empa/audit.tpl');
+    public function audit() {
+        Acceso::redireccionUnlogged($this->smarty);
+        $registro = $this->_DAOAlcoholismo->getAll();
+        $this->smarty->assign("registro", $registro);
+        $this->smarty->display('Empa/audit.tpl');
+        $this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
     }
-    //*** REGIONES ***//
-//    public function regiones(){
-//        $sesion = New Zend_Session_Namespace("usuario_carpeta");        
-//        $this->smarty->assign("id_usuario", $sesion->id);
-//        $this->smarty->assign("rut", $sesion->rut);
-//        $this->smarty->assign("usuario", $sesion->usuario);
-//        
-//        //llamada al _DAOAdministracion para listar regiones
-//        $arr = $this->_DAOAdministracion->getListaRegiones();
-//        $this->smarty->assign('arrResultado', $arr);
-//        
-//        //llamado al template
-//        $this->_display('Administracion/Regiones/index.tpl');
-//    }
-    
-    //creada por BC
-//    public function guardarRegion(){
-//            $session = New Zend_Session_Namespace("usuario_carpeta");
-//            $data = array();
-//            parse_str($_POST['data'], $data);
-//
-//            $this->load->lib('Constantes', false);
-//
-//            $json = array();
-//            $datos = $data;
-//            $datos['nr_estado'] =1;
-//            $insertar = $this->_DAOAdministracion->insRegion($datos);
-//
-//            if ($insertar) {
-//                $id_solicitud = $insertar;
-//                $json['estado'] = true;
-//                $json['mensaje'] = 'Proyecto ingresado correctamente';
-//            }
-//            echo json_encode($json);
-//    }	
+
+    public function guardar(){
+        header('Content-type: application/json');
+        Acceso::redireccionUnlogged($this->smarty);
+        $sesion = New Zend_Session_Namespace("usuario_carpeta");
+        $this->smarty->assign("id_usuario", $sesion->id);
+        $this->smarty->assign("rut", $sesion->rut);
+        $this->smarty->assign("usuario", $sesion->usuario);
+        
+        $parametros		= $this->_request->getParams();
+	$correcto		= false;
+        $error			= false;
+        $id_registro            = $this->_DAOEmpa->updateEmpa($parametros);
+        
+        if($id_registro){
+			$correcto       = true;
+        }else{
+            $error		= true;
+        }
+
+        $salida	= array("error" => $error,
+                        "correcto" => $correcto);
+        $this->smarty->assign("hidden", "");
+        $json	= Zend_Json::encode($salida);
+
+        echo $json;
+    }
 }

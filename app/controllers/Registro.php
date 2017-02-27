@@ -42,7 +42,7 @@ class Registro extends Controller {
     protected $_DAOUsuarios;
     protected $_DAOEstadoCaso;
     protected $_DAOInstitucion;
-
+	protected $_DAOEventos;
     protected $_DAOEventosTipo;
     protected $_DAOAdjuntos;
     protected $_DAOAdjuntosTipo;
@@ -63,6 +63,7 @@ class Registro extends Controller {
         $this->_DAOUsuarios			= $this->load->model("DAOUsuarios");
         $this->_DAOInstitucion		= $this->load->model("DAOInstitucion");
         $this->_DAOEventosTipo		= $this->load->model("DAOEventosTipo");
+		$this->_DAOEventos			= $this->load->model("DAOEventos");
         $this->_DAOAdjuntos			= $this->load->model("DAOAdjuntos");
         $this->_DAOAdjuntosTipo		= $this->load->model("DAOAdjuntosTipo");
         $this->_DAOEmpa				= $this->load->model("DAOEmpa");
@@ -226,15 +227,17 @@ class Registro extends Controller {
         $this->load->javascript(STATIC_FILES . "js/regiones.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/nuevo.js");
+        $this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }
 
     public function GuardarRegistro() {
         header('Content-type: application/json');
         $parametros		= $this->_request->getParams();
-        $correcto		= false;
+		$correcto		= false;
         $error			= false;
 		$gl_grupo_tipo	= 'Control';
+		$datos_evento	= array(); 
         $count			= $this->_DAORegistro->countRegistroxRegion($_SESSION['id_region']);
 
 		if($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50){
@@ -244,8 +247,69 @@ class Registro extends Controller {
 
         $id_registro	= $this->_DAORegistro->insertarRegistro($parametros);
         if($id_registro){
-			$resultado2	= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
-			$correcto	= true;
+			$correcto						= true;
+			$resultado2						= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
+			$resultado3						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>1));
+			$resultado4						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>2));
+
+			$session						= New Zend_Session_Namespace("usuario_carpeta");
+			$datos_evento['eventos_tipo']	= 1;
+			$datos_evento['id_registro']	= $id_registro;
+			$datos_evento['gl_descripcion']	= "Registro creado el : ".Fechas::fechaHoy(); 
+			$datos_evento['bo_estado']		= 1; 
+			$datos_evento['id_usuario_crea']= $session->id;
+			$resp							= $this->_DAOEventos->insEvento($datos_evento);
+
+			if ($parametros['chkAcepta']){
+				$datos_evento['eventos_tipo']	= 4;
+				$datos_evento['gl_descripcion']	= "Acepta el programa con fecha : ".Fechas::fechaHoy();
+				$resp							= $this->_DAOEventos->insEvento($datos_evento);
+			}
+			if ($parametros['chkReconoce']){
+				$datos_evento['eventos_tipo']	= 5;
+				$datos_evento['gl_descripcion']	= "Reconoce violencia con fecha : ".Fechas::fechaHoy();
+				$resp							= $this->_DAOEventos->insEvento($datos_evento);
+			}
+        }else{
+            $error		= true;
+        }
+
+        $salida	= array("error" => $error,
+            "correcto" => $correcto);
+        $this->smarty->assign("hidden", "");
+        $json	= Zend_Json::encode($salida);
+
+        echo $json;
+    }
+
+    public function GuardarMotivo() {
+        header('Content-type: application/json');
+        $parametros		= $this->_request->getParams();
+		$correcto		= false;
+        $error			= false;
+		$datos_evento	= array(); 
+
+        $id_registro	= $parametros['id_registro'];
+        if($id_registro){
+			$correcto						= true;
+			$resultado2						= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
+
+			$session							= New Zend_Session_Namespace("usuario_carpeta");
+			$datos_evento['id_registro']		= $id_registro;
+			$datos_evento['bo_estado']			= 1; 
+			$datos_evento['id_usuario_crea']	= $session->id;
+			if ($parametros['chkAcepta']){
+				$resp							= $this->_DAORegistro->update(array('bo_acepta_programa'=>1), $id_registro, 'id_registro');
+				$datos_evento['eventos_tipo']	= 4;
+				$datos_evento['gl_descripcion']	= "Acepta el programa con fecha : ".Fechas::fechaHoy();
+				$resp							= $this->_DAOEventos->insEvento($datos_evento);
+			}
+			if ($parametros['chkReconoce']){
+				$resp							= $this->_DAORegistro->update(array('bo_reconoce'=>1), $id_registro, 'id_registro');
+				$datos_evento['eventos_tipo']	= 5;
+				$datos_evento['gl_descripcion']	= "Reconoce violencia con fecha : ".Fechas::fechaHoy();
+				$resp							= $this->_DAOEventos->insEvento($datos_evento);
+			}
         }else{
             $error		= true;
         }
@@ -259,13 +323,13 @@ class Registro extends Controller {
     }
 
     public function ver() {
-        $parametros = $this->request->getParametros();
-        $id_registro = $parametros[0];
-        $this->smarty->assign("id_registro", $id_registro);
-        $obj_registro = $this->_DAORegistro->selVerInfoById($id_registro);
+        $parametros		= $this->request->getParametros();
+        $id_registro	= $parametros[0];
+        $obj_registro	= $this->_DAORegistro->verInfoById($id_registro);
+		
         if (!is_null($obj_registro)) {
-            $edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
-            $arrMotivosConsulta = $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($obj_registro->id_registro);
+            $edad				= Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
+            $arrMotivosConsulta	= $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($obj_registro->id_registro);
         }
         $this->smarty->assign('id_registro', $obj_registro->id_registro);
         $this->smarty->assign('rut', $obj_registro->gl_rut);

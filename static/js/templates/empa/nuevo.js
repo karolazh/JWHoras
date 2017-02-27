@@ -3,52 +3,93 @@ function calculaIMC()
 {
 //hacemos la llamada a los datos introducidos
     var peso = $('#gl_peso').val();
-    var altura = $('#gl_estatura').val()/100;
+    var altura = $('#gl_estatura').val() / 100;
     var mensaje = "";
 //calculamos el imc
     var imc = peso / (altura * altura);
     imc = imc.toFixed(2);
 //calculamos circunferencia abdominal
     //Bajo peso
-    if (imc < 18.50){
-        if (imc < 16.00){
+    if (imc < 18.50) {
+        $('#gl_imc').css("borderColor", "");
+        $('#gl_imc').parent().find("span.help-block").css("color", "");
+        $('#gl_imc').parent().removeClass("has-error");
+        $('#gl_imc').parent().removeClass("has-success");
+        $('#gl_imc').css("borderColor", "#BDB76B");
+        $('#gl_imc').parent().find("span.help-block").css("color", "#BDB76B");
+        if (imc < 16.00) {
+            $("#id_clasificacion_imc").val(1);
             mensaje = "Bajo Peso / Delgadez Severa";
         }
-        if (imc >= 16.00 && imc < 17.00){
+        if (imc >= 16.00 && imc < 17.00) {
+            $("#id_clasificacion_imc").val(2);
             mensaje = "Bajo Peso / Delgadez Moderada";
         }
-        if (imc >= 17.00 && imc < 18.50){
+        if (imc >= 17.00 && imc < 18.50) {
+            $("#id_clasificacion_imc").val(3);
             mensaje = "Bajo Peso / Delgadez Aceptable";
         }
     }
     //Peso Normal
-    if (imc >= 18.50 && imc <= 24.99){
-            mensaje = "Peso Normal";
+    if (imc >= 18.50 && imc <= 24.99) {
+        $("#id_clasificacion_imc").val(4);
+        $('#gl_imc').css("borderColor", "");
+        $('#gl_imc').parent().find("span.help-block").css("color", "");
+        $('#gl_imc').parent().removeClass("has-error");
+        $('#gl_imc').parent().addClass("has-success");
+        mensaje = "Peso Normal";
     }
     //Sobre Peso
-    if (imc >= 25.00 && imc < 30.00){
-            mensaje = "Sobrepeso / Pre Obeso (riesgo)";
+    if (imc >= 25.00 && imc < 30.00) {
+        $("#id_clasificacion_imc").val(5);
+        $('#gl_imc').css("borderColor", "");
+        $('#gl_imc').parent().find("span.help-block").css("color", "");
+        $('#gl_imc').parent().removeClass("has-error");
+        $('#gl_imc').parent().removeClass("has-success");
+        $('#gl_imc').css("borderColor", "#FF4500");
+        $('#gl_imc').parent().find("span.help-block").css("color", "#FF4500");
+        mensaje = "Sobrepeso / Pre Obeso (riesgo)";
     }
     //Obeso
-    if (imc >= 30.00){
-        if (imc >= 30.00 && imc < 35.00){
+    if (imc >= 30.00) {
+        $('#gl_imc').css("borderColor", "");
+        $('#gl_imc').parent().find("span.help-block").css("color", "");
+        $('#gl_imc').parent().removeClass("has-success");
+        $('#gl_imc').parent().addClass("has-error");
+        if (imc >= 30.00 && imc < 35.00) {
+            $("#id_clasificacion_imc").val(6);
             mensaje = "Obeso / Obeso Tipo I (riesgo moderado)";
         }
-        if (imc >= 35.00 && imc < 40.00){
+        if (imc >= 35.00 && imc < 40.00) {
+            $("#id_clasificacion_imc").val(7);
             mensaje = "Obeso / Obeso Tipo II (riesgo severo)";
         }
-        if (imc >= 40.00){
+        if (imc >= 40.00) {
+            $("#id_clasificacion_imc").val(8); 
             mensaje = "Obeso / Obeso Tipo III (riesgo muy severo)";
         }
     }
-    alert(imc+mensaje);
-//enviamos resultados a la caja correspondiente
+    //mensaje si no tiene valores y dar valor="" a gl_imc
+    if ((peso == "") || (altura == "")) {
+        xModal.danger("Ingrese Peso y Altura");
+        imc = "";
+    }
+    
+    //Si IMC es mayor a 30 Mostrar Diabetes
+    if (imc > 30){
+        $("#glicemia").show();
+        $("#antecedentes").hide();
+    }
+    
+    //enviamos resultados a la caja correspondiente
     $('#gl_imc').val(imc);
     $('#gl_imc').parent().find('span.help-block').html(mensaje);
     $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
 } 
+
+
 //Si Circunferencia Abdominal es mayor o igual a 88cm -> Consejería
-$("#gl_circunferencia_abdominal").on('blur', function (e) {
+$("#gl_circunferencia_abdominal").on('keyup', function (e) {
     if ($("#gl_circunferencia_abdominal").val() >= 88){
         $('#gl_circunferencia_abdominal').parent().find('span.help-block').html("Mayor/Igual a 90 (Consejería Alimentación Sana y Actividad Física)");
         $('#gl_circunferencia_abdominal').parent().find('span.help-block').removeClass("hidden");
@@ -59,12 +100,15 @@ $("#gl_circunferencia_abdominal").on('blur', function (e) {
 
 // Si Consume Alcohol muestra Boton para Hacer Cuestionario AUDIT
 $(".bo_consume_alcohol").on('change', function (e) {
-    if ($('#bo_consume_alcohol').is(':checked')) {
+    if ($('#bo_consume_alcohol_0').is(':checked')) {
         $('#btnaudit').addClass('hidden');
         $('#gl_puntos_audit').addClass('hidden');
+		$('#btnaudit').addClass('hidden');
+		$('#div_consejeria_alcohol').addClass('hidden');
     } else {
         $('#btnaudit').removeClass('hidden');
         $('#gl_puntos_audit').removeClass('hidden');
+		$('#div_consejeria_alcohol').removeClass('hidden');
     }
 });
 
@@ -79,7 +123,7 @@ $("#gl_puntos_audit").on('change', function (e) {
 
 //Si Fuma muestra Consejería
 $(".bo_fuma").on('change', function (e) {
-    if ($('#bo_fuma').is(':checked')) {
+    if ($('#bo_fuma_0').is(':checked')) {
         $('#lbl_fuma').addClass('hidden');
     } else {
         $('#lbl_fuma').removeClass('hidden');
@@ -88,19 +132,26 @@ $(".bo_fuma").on('change', function (e) {
 
 //Si PAS es >= 140 o PAD >= 90 Activar Funcionalidad de Agenda de Profesional
 $("#gl_pas").on('keyup', function (e) {
-    if ($("#gl_pas").val() >= 140){
-        $('#gl_pas').parent().find('span.help-block').html("Mayor/Igual a 140 Referir a...");
-        $('#gl_pas').parent().find('span.help-block').removeClass("hidden");
+    if ($("#gl_pad").val() >= 90 || $("#gl_pas").val() >= 140){
+        $('#verAgendaHipertension').show();
     }else{
-        $('#gl_pas').parent().find('span.help-block').addClass("hidden");
+        $('#verAgendaHipertension').hide();
     }
 });
 $("#gl_pad").on('keyup', function (e) {
-    if ($("#gl_pad").val() >= 90){
-        $('#gl_pad').parent().find('span.help-block').html("Mayor/Igual a 90 Referir a...");
-        $('#gl_pad').parent().find('span.help-block').removeClass("hidden");
+    if ($("#gl_pad").val() >= 90 || $("#gl_pas").val() >= 140){
+        $('#verAgendaHipertension').show();
     }else{
-        $('#gl_pad').parent().find('span.help-block').addClass("hidden");
+        $('#verAgendaHipertension').hide();
+    }
+});
+
+// Si tiene Antecedentes de Diabetes Mellitus mostrar/ocultar Examen Glicemia
+$(".bo_antecedente").on('change', function (e) {
+    if ($('#bo_antecedente_0').is(':checked')) {
+        $('#glicemia').hide();
+    } else {
+        $('#glicemia').show();
     }
 });
 
@@ -112,16 +163,17 @@ $("#gl_glicemia").on('keyup', function (e) {
         $('#div_glicemia_toma').hide();
     }
     if ($("#gl_glicemia").val() > 125) {
-        $('#gl_glicemia').parent().find('span.help-block').html("Referir Agenda Profesional");
-        $('#gl_glicemia').parent().find('span.help-block').removeClass("hidden");
+        $('#verAgendaDiabetes').show();
+		$('#div_glicemia_agenda').show()
     } else {
-        $('#gl_glicemia').parent().find('span.help-block').addClass("hidden");
+        $('#verAgendaDiabetes').hide();
+		$('#div_glicemia_agenda').hide()
     }
 });
 
 //Si es trabajadora sexual o persona en centro reclusión -> mostrar VDRL y RPR
 $(".bo_trabajadora_reclusa").on('change', function (e) {
-    if ($('#bo_trabajadora_reclusa').is(':checked')) {
+    if ($('#bo_trabajadora_reclusa_0').is(':checked')) {
         $('#id_vdrl_rpr').addClass('hidden');
     } else {
         $('#id_vdrl_rpr').removeClass('hidden');
@@ -130,23 +182,28 @@ $(".bo_trabajadora_reclusa").on('change', function (e) {
 
 //Si VDRL o RPR es positivo -> Activar Funcionalidad de Agenda para ITS
 $(".bo_rpr").on('change', function (e) {
-    if ($('#bo_rpr').is(':checked')) {
-        $('#lbl_its1').hide();
+    if (($('#bo_rpr_0').is(':checked')) && ($('#bo_vdrl_0').is(':checked'))) {
+            $('#verAgendaSifilis').hide();
+			$('#div_ITS_agenda').hide();
     } else {
-        $('#lbl_its1').show();
+        $('#verAgendaSifilis').show();
+		$('#div_ITS_agenda').show();
     }
 });
+
 $(".bo_vdrl").on('change', function (e) {
-    if ($('#bo_vdrl').is(':checked')) {
-        $('#lbl_its2').hide();
+    if (($('#bo_rpr_0').is(':checked')) && ($('#bo_vdrl_0').is(':checked'))) {
+            $('#verAgendaSifilis').hide();
+			$('#div_ITS_agenda').hide();
     } else {
-        $('#lbl_its2').show();
+        $('#verAgendaSifilis').show();
+		$('#div_ITS_agenda').show();
     }
 });
 
 //Si ha tenido Tos por + 15 dias -> mostrar Baciloscopia
 $(".bo_tos_productiva").on('change', function (e) {
-    if ($('#bo_tos_productiva').is(':checked')) {
+    if ($('#bo_tos_productiva_0').is(':checked')) {
         $('#id_baciloscopia').addClass('hidden');
     } else {
         $('#id_baciloscopia').removeClass('hidden');
@@ -155,7 +212,7 @@ $(".bo_tos_productiva").on('change', function (e) {
 
 //Se ha realizado PAP? Si -> Muestra ultima fecha ; No -> Muestra Input para tomar fecha
 $(".bo_pap_realizado").on('change', function (e) {
-    if ($('#bo_pap_realizado').is(':checked')) {
+    if ($('#bo_pap_realizado_0').is(':checked')) {
         $('#tomar_fecha').removeClass('hidden');
         $('#ultimo_pap').addClass('hidden');
     } else {
@@ -178,11 +235,33 @@ $("#fc_ultimo_pap").livequery(function(){
 		$('#pap_vigente').show();
 	});
 });
-//
+//Si valor colesterlo >= 200 y < 239 (Consejería Alimentaria y Actividad Fisica
+//Si valor colesterol >= 240 (Referir a confirmación diagnóstica
+$("#gl_colesterol").on('keyup', function (e) {
+    var valor_colesterol = $('#gl_colesterol').val();
+    if (valor_colesterol > 199 && valor_colesterol < 240) {
+        $('#verAgendaDislipidemia').hide();
+        $('#div_colesterol').show();
+		$('#div_consejeria_colesterol').show();
+        $('#gl_colesterol').parent().find('span.help-block').removeClass("hidden");
+    } else if (valor_colesterol >= 240){
+        $('#gl_colesterol').parent().find('span.help-block').addClass("hidden");
+        $('#div_colesterol').hide();
+		$('#div_consejeria_colesterol').hide();
+        $('#verAgendaDislipidemia').show();
+		$('#div_colesterol_agenda').show();
+    } else {
+		$('#gl_colesterol').parent().find('span.help-block').addClass("hidden");
+        $('#div_colesterol').hide();
+		$('#div_consejeria_colesterol').hide();
+        $('#verAgendaDislipidemia').hide();
+		$('#div_colesterol_agenda').hide()
+	}
+});
 
 //Si realizo Examen Cancer de mama Mostrar -> Ingrese Fecha
 $(".bo_mamografia_realizada").on('change', function (e) {
-    if ($('#bo_mamografia_realizada').is(':checked')) {
+    if ($('#bo_mamografia_realizada_0').is(':checked')) {
         $('#fecha_mamografia').hide();
     } else {
         $('#fecha_mamografia').show();
@@ -209,8 +288,299 @@ $("#fc_mamografia").livequery(function(){
 //Si requiere otra Mamografía Mostrar Resultado
 $(".bo_mamografia_requiere").on('change', function (e) {
     if ($('#bo_mamografia_requiere').is(':checked')) {
+        $('#verAgendaMamografia').hide();
+		$('#div_mamografia_agenda').hide();
         $('#mam_resultado2').hide();
     } else {
+        $('#verAgendaMamografia').show();
+		$('#div_mamografia_agenda').show();
         $('#mam_resultado2').show();
     }
+});
+
+//Boton Guardar AUDIT
+ $("#guardaraudit").on('click', function (e) {
+	$("#gl_puntos_audit").val($("#total").val());
+	xModal.close();
+});
+
+
+//Boton Guardar EMPA
+$("#guardar").on('click', function (e) {
+        var button_process	= buttonStartProcess($(this), e);
+        var parametros		= $("#form").serializeArray();
+                        
+                        if($('#bo_consume_alcohol_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_consume_alcohol',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_consume_alcohol',
+					"value" : 0
+				});
+			}
+                        if($('#gl_puntos_audit').val() == ""){
+				parametros.push({
+					"name"  : 'gl_puntos_audit',
+					"value" : 0
+				});
+			}
+			if($('#bo_fuma_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_fuma',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_fuma',
+					"value" : 0
+				});
+			}
+                        if($('#gl_peso').val() == ""){
+				parametros.push({
+					"name"  : 'gl_peso',
+					"value" : ""
+				});
+			}
+                        if($('#gl_estatura').val() == ""){
+				parametros.push({
+					"name"  : 'gl_estatura',
+					"value" : ""
+				});
+			}
+                        if($('#gl_circunferencia_abdominal').val() == ""){
+				parametros.push({
+					"name"  : 'gl_circunferencia_abdominal',
+					"value" : ""
+				});
+			}
+                        if($('#gl_imc').val() == ""){
+				parametros.push({
+					"name"  : 'gl_imc',
+					"value" : ""
+				});
+			}
+                        if($('#nr_ficha').val() == ""){
+				parametros.push({
+					"name"  : 'nr_ficha',
+					"value" : 0
+				});
+			}
+                        if($('#id_sector').val() == ""){
+				parametros.push({
+					"name"  : 'id_sector',
+					"value" : 0
+				});
+			}
+                        if($('#gl_pad').val() == ""){
+				parametros.push({
+					"name"  : 'gl_pad',
+					"value" : ""
+				});
+			}
+                        if($('#gl_pas').val() == ""){
+				parametros.push({
+					"name"  : 'gl_pas',
+					"value" : ""
+				});
+			}
+                        if($('#gl_glicemia').val() == ""){
+				parametros.push({
+					"name"  : 'gl_glicemia',
+					"value" : ""
+				});
+			}
+                        if($('#fc_ultimo_pap').val() == ""){
+				parametros.push({
+					"name"  : 'fc_ultimo_pap',
+					"value" : ""
+				});
+			}
+                        if($('#gl_colesterol').val() == ""){
+				parametros.push({
+					"name"  : 'gl_colesterol',
+					"value" : 0
+				});
+			}
+                        if($('#gl_observaciones_empa').val() == ""){
+				parametros.push({
+					"name"  : 'gl_observaciones_empa',
+					"value" : 0
+				});
+			}
+			if($('#bo_glicemia_toma').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_glicemia_toma',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_glicemia_toma',
+					"value" : 0
+				});
+			}
+                        if($('#bo_trabajadora_reclusa_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_trabajadora_reclusa',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_trabajadora_reclusa',
+					"value" : 0
+				});
+			}
+                        if($('#bo_vdrl_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_vdrl',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_vdrl',
+					"value" : 0
+				});
+			}
+                        if($('#bo_rpr_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_rpr',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_rpr',
+					"value" : 0
+				});
+			}
+                        if($('#bo_tos_productiva_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_tos_productiva',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_tos_productiva',
+					"value" : 0
+				});
+			}
+                        if($('#bo_baciloscopia_toma_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_baciloscopia_toma',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_baciloscopia_toma',
+					"value" : 0
+				});
+			}
+                        if($('#bo_pap_realizado_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_pap_realizado',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_pap_realizado',
+					"value" : 0
+				});
+			}
+                        if($('#bo_pap_vigente_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_pap_vigente',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_pap_vigente',
+					"value" : 0
+				});
+			}
+                        if($('#fc_tomar_pap').val()){
+				parametros.push({
+					"name"  : 'bo_pap_toma',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_pap_toma',
+					"value" : 0
+				});
+			}
+                        if($('#bo_colesterol_toma').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_colesterol_toma',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_colesterol_toma',
+					"value" : 0
+				});
+			}
+                        if($('#bo_mamografia_realizada_1').val()){
+				parametros.push({
+					"name"  : 'bo_mamografia_realizada',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_mamografia_realizada',
+					"value" : 0
+				});
+			}
+                        if($('#bo_mamografia_vigente_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_mamografia_vigente',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_mamografia_vigente',
+					"value" : 0
+				});
+			}
+                        if($('#bo_mamografia_toma').val()){
+				parametros.push({
+					"name"  : 'bo_mamografia_toma',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_mamografia_toma',
+					"value" : 0
+				});
+			}
+                        if($('#bo_mamografia_vigente_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_mamografia_vigente',
+					"value" : 1
+				});
+			}else{
+				parametros.push({
+					"name"  : 'bo_mamografia_vigente',
+					"value" : 0
+				});
+			}
+			$.ajax({
+				dataType:   "json",
+				cache	:   false,
+				async	:   true,
+				data	:   parametros,
+				type	:   "post",
+				url	:   BASE_URI + "index.php/Empa/guardar", 
+				error	:   function(xhr, textStatus, errorThrown){
+							xModal.danger('Error: No se pudo Ingresar un nuevo Registro');
+				},
+				success	:   function(data){
+							if(data.correcto){
+								xModal.success('Éxito: Se Ingresó nuevo Registro!');
+							} else {
+								xModal.info('Error: No se pudo Ingresar un nuevo Registro');
+							}
+				}
+			});
+		buttonEndProcess(button_process);
 });

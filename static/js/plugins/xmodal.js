@@ -86,15 +86,20 @@ var xModal = {
 		
 
 		if(_isIframe !== true){
+			if(_iframeHeight !== undefined && !isNaN(_iframeHeight)){
+				heightIframe = _iframeHeight;
+			}else{
+				heightIframe = 'auto';
+			}
 			if(typeof _item === "object"){
 				var modalFooter = '<div class="modal-footer"><button type="button" class="btn btn-default" onclick="xModal.close();">Cerrar</button></div>';
 				$('#'+id+' .modal-content').last().append(modalFooter);
-				$('#'+id+' #content-modal').last().css({height:"auto"});
+				$('#'+id+' #content-modal').last().css({height:heightIframe});
 				//$('.modal').last().modal({backdrop:'static',keyboard:false});
 			}else{
 				$('#'+id+' #content-modal').last().load(_item,function(){
                     $("#"+id+" #progress").fadeOut(function(){
-                        $('#'+id+' #content-modal').last().css({height:"auto"}).fadeIn();
+                        $('#'+id+' #content-modal').last().css({height:heightIframe}).fadeIn();
                     });
 
 					//$('.modal').last().modal({backdrop:'static',keyboard:false});
@@ -115,7 +120,7 @@ var xModal = {
 			*/
 		}else{
             $("#"+id+" #progress").fadeOut(function(){
-                $('#'+id+' #content-modal').last().css({height:"auto"}).fadeIn();
+                $('#'+id+' #content-modal').last().css({height:heightIframe}).fadeIn();
             });
 			//$('#'+id+' #content-modal').last().css({height:"auto"});
 			//$('.modal').last().modal({backdrop:'static',keyboard:false});
