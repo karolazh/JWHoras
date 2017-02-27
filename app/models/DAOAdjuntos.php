@@ -96,10 +96,12 @@ class DAOAdjuntos extends Model{
                                 adj.id_registro AS id_registro,
                                 adj.id_tipo_adjunto AS id_tipo_adjunto,
                                 tip.gl_nombre_tipo_adjunto AS nombre_tipo_adjunto,
+                                substring_index(substring_index(adj.gl_path,'/',-1),'/',1) AS archivo,
                                 adj.gl_path AS path,
                                 adj.gl_glosa AS glosa,
                                 date_format(adj.fc_crea,'%d-%m-%Y') AS fc_crea,
-                                usr.gl_rut AS rut
+                                usr.gl_rut AS rut,
+                                concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
                             FROM pre_adjuntos adj
                             LEFT JOIN pre_adjuntos_tipo tip ON tip.id_tipo_adjunto = adj.id_tipo_adjunto
                             LEFT JOIN pre_usuarios usr ON usr.id_usuario = adj.id_usuario_crea
@@ -115,6 +117,30 @@ class DAOAdjuntos extends Model{
         }
     }
 
+    public function insertarAdjunto($parametros){
+
+        $query	=   "INSERT INTO pre_adjuntos (
+                        id_registro,
+                        id_tipo_adjunto,
+                        gl_path,
+                        gl_glosa,
+                        fc_crea,
+                        id_usuario_crea
+                    ) VALUES (
+                        '".$parametros['id_reg']."',
+                        '".$parametros['tipo_adjunto']."',
+                        '".$parametros['archivo']."',
+                        '".$parametros['comentario']."',
+                        '".date('Y-m-d H:i:s')."',
+                        ".$_SESSION['id']."
+                    )";
+                  
+        if ($this->db->execQuery($query)) {
+            return $this->db->getLastId();
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>

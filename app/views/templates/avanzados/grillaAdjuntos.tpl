@@ -7,10 +7,10 @@
             <thead>
                 
                 <th align="center" width="10%">Fecha</th>
-                <th align="center" width="20%">Tipo</th>
-                <th align="center" width="30">Documento</th>
-                <th align="center" width="30">Comentario</th>
-                <th align="center" width="10%">Usuario</th>
+                <th align="center" width="10%">Tipo</th>
+                <th align="center" width="20%">Documento</th>
+                <th align="center" width="30%">Comentario</th>
+                <th align="center" width="20%">Funcionario</th>
                 <th align="center" width="10%">Descargar</th>
             </thead>
             <tbody>
@@ -18,11 +18,11 @@
                 <tr>
                     <td>{$adj->fc_crea}</td>
                     <td>{$adj->nombre_tipo_adjunto}</td>
-                    <td>{$adj->path}</td>
+                    <td>{$adj->archivo}</td>
                     <td>{$adj->glosa}</td>
-                    <td>{$adj->rut}</td>
+                    <td>{$adj->funcionario}</td>
                     <td align="center">
-                        <a class="btn btn-sm btn-primary" id="btnDescarga" href = '{$smarty.const.DIR_BASE}archivos/{$adj->path}' target="_blank">
+                        <a class="btn btn-sm btn-primary" id="btnDescarga" href = '{$smarty.const.DIR_BASE}{$adj->path}' target="_blank">
                             <i class="fa fa-download"></i>
                             Descargar</a>
                     </td>

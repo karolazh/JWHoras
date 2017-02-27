@@ -4,6 +4,8 @@
 <div class="box-body">
     <div id="div_tabla" class="table-responsive small col-lg-12">
         <br>
+        <label class="control-label"><h5>Atenciones de Urgencia</h5></label>
+        <br>
         <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
             <thead>
                 <tr role="row">
@@ -11,7 +13,7 @@
                     <th align="center" width="10%">Hora Ing</th>
                     <th align="center" width="">Motivo Consulta</th>
                     <th align="center" width="20%">Instituci&oacute;n</th>
-                    <th align="center" width="15%">Usuario</th>
+                    <th align="center" width="20%">Funcionario</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,7 +23,7 @@
                     <td>{$con->hora_ingreso}</td>
                     <td>{$con->motivo_consulta}</td>
                     <td>{$con->institucion}</td>
-                    <td>{$con->rut}</td>
+                    <td>{$con->funcionario}</td>
                 </tr>
             {/foreach}
             </tbody>
