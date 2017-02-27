@@ -161,10 +161,10 @@
                             <label class="control-label col-sm-2 required">¿Consume bebidas alcoh&oacute;licas?</label>
                             <div class="col-sm-1">
                                 <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol" 
-                                              id="bo_consume_alcohol" value="0">NO</label>
+                                              id="bo_consume_alcohol_0" value="0">NO</label>
                                 &nbsp;&nbsp;
                                 <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol" 
-                                              id="bo_consume_alcohol" value="1">SI</label>
+                                              id="bo_consume_alcohol_1" value="1">SI</label>
                             </div>
                             <div class="col-sm-1">
                                 <button href='javascript:void(0)'
@@ -195,13 +195,13 @@
                         <div class="form-group">
                             <label class="control-label required col-sm-2">¿Usted fuma?</label>
                             <div class="col-sm-1">
-								<label><input class="bo_fuma" type="radio" name="bo_fuma" 
-											  id="bo_fuma" value="0">NO</label>
-								&nbsp;&nbsp;
-								<label><input class="bo_fuma" type="radio" name="bo_fuma" 
-											  id="bo_fuma" value="1">SI</label>
+                                <label><input class="bo_fuma" type="radio" name="bo_fuma" 
+                                              id="bo_fuma_0" value="0">NO</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_fuma" type="radio" name="bo_fuma" 
+                                              id="bo_fuma_1" value="1">SI</label>
                             </div>
-							<label class="control-label required col-sm-1 hidden" id="lbl_fuma">{$botonAyudaFumador}</label>
+                            <label class="control-label required col-sm-1 hidden" id="lbl_fuma">{$botonAyudaFumador}</label>
                         </div>
                     </div>
                 </div>
@@ -286,16 +286,22 @@
                         </div>
                     </div>
                 </div>
+                
                 <!-- e. Diabetes Mellitus (DM) -->
-                <div class="panel panel-success" id="diabetes" style="{$diabetes}">
+                <div class="panel panel-success" id="diabetes">
                     <div class="panel-heading">Diabetes Mellitus (DM)</div>
                     <div class="panel-body">
-                        <div class="form-group">
-                            <div class="col-sm-6">
-                                <label>(Mayor de 40 años, IMC >= 30 o antecedente de DM en padre o hermanos)</label>
+                        <div class="form-group" id="antecedentes" style="{$antecedentes}">
+                            <label class="control-label required col-sm-2">¿Tiene Antecedentes Familiares de Diabetes Mellitus?</label>
+                            <div class="col-sm-2">
+                                <label><input class="bo_antecedente" type="radio" name="bo_antecedente" 
+                                              id="bo_antecedente_0" value="0">No</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_antecedente" type="radio" name="bo_antecedente" 
+                                              id="bo_antecedente_1" value="1">Si</label>
                             </div>
                         </div>   
-                        <div class="form-group">
+                        <div class="form-group" id="glicemia" style="{$diabetes}">
                             <label class="control-label required col-sm-2">Glicemia en Ayunas (mg/dl)</label>
                             <div class="col-sm-3">
                                 <input type="text" name="gl_glicemia" maxlength="5" id="gl_glicemia" value="" 
@@ -329,34 +335,34 @@
                             <label class="control-label required col-sm-2">¿Es trabajadora sexual o persona en centro de reclusión?</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_trabajadora_reclusa" type="radio" name="bo_trabajadora_reclusa" 
-                                              id="bo_trabajadora_reclusa" value="0">No</label>
+                                              id="bo_trabajadora_reclusa_0" value="0">No</label>
                                 &nbsp;&nbsp;
                                 <label><input class="bo_trabajadora_reclusa" type="radio" name="bo_trabajadora_reclusa" 
-                                              id="bo_trabajadora_reclusa" value="1">Si</label>
+                                              id="bo_trabajadora_reclusa_1" value="1">Si</label>
                             </div>
                         </div>  
                         <div class="form-group hidden" id="id_vdrl_rpr">
                             <label class="control-label required col-sm-2">¿Examen VDRL?</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_vdrl" type="radio" name="bo_vdrl" 
-                                              id="bo_vdrl" value="0">Negativo</label>
+                                              id="bo_vdrl_0" value="0">Negativo</label>
                                 &nbsp;&nbsp;
                                 <label><input class="bo_vdrl" type="radio" name="bo_vdrl" 
-                                              id="bo_vdrl" value="1">Positivo</label>
+                                              id="bo_vdrl_1" value="1">Positivo</label>
                             </div>
                             <label class="control-label required col-sm-1">¿Examen RPR?</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_rpr" type="radio" name="bo_rpr" 
-                                              id="bo_rpr" value="0">Negativo</label>
+                                              id="bo_rpr_0" value="0">Negativo</label>
                                 &nbsp;&nbsp;
                                 <label><input class="bo_rpr" type="radio" name="bo_rpr" 
-                                              id="bo_rpr" value="1">Positivo</label>
+                                              id="bo_rpr_1" value="1">Positivo</label>
                             </div>
                             <button type="button" id="verAgendaSifilis" style="display: none" 
                                     class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
-							<div class="col-sm-3" style="display: none" id="div_ITS_agenda">
-								{$botonInformacionAgendaITS}
-							</div>
+                            <div class="col-sm-3" style="display: none" id="div_ITS_agenda">
+                                {$botonInformacionAgendaITS}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -366,27 +372,27 @@
                     <div class="panel-heading">Tuberculosis</div>
                     <div class="panel-body">  
                         <div class="form-group">
-							<label class="control-label required col-sm-2">¿Ha tenido tos productiva por m&aacute;s de 15 d&iacute;as?</label>
+                            <label class="control-label required col-sm-2">¿Ha tenido tos productiva por m&aacute;s de 15 d&iacute;as?</label>
                             <div class="col-sm-2">
-								<label><input class="bo_tos_productiva" type="radio" name="bo_tos_productiva" 
-											  id="bo_tos_productiva" value="0">NO</label>
-								&nbsp;&nbsp;
-								<label><input class="bo_tos_productiva" type="radio" name="bo_tos_productiva" 
-											  id="bo_tos_productiva" value="1">SI</label>	
+                                <label><input class="bo_tos_productiva" type="radio" name="bo_tos_productiva" 
+                                              id="bo_tos_productiva_0" value="0">NO</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_tos_productiva" type="radio" name="bo_tos_productiva" 
+                                              id="bo_tos_productiva_1" value="1">SI</label>	
                             </div>
                         </div>
-                        <div class="form-group hidden" id="id_baciloscopia">
-							<label class="control-label required col-sm-2">Basiloscopia</label>
+                        <div class="form-group" id="id_baciloscopia">
+                            <label class="control-label required col-sm-2">Basiloscopia</label>
                             <div class="col-sm-2">
-								<label><input class="bo_baciloscopia_toma" type="radio" name="bo_baciloscopia_toma" 
-											  id="bo_baciloscopia_toma" value="0">Negativo</label>
-								&nbsp;&nbsp;
-								<label><input class="bo_baciloscopia_toma" type="radio" name="bo_baciloscopia_toma" 
-											  id="bo_baciloscopia_toma" value="1">Positivo</label>
+                                <label><input class="bo_baciloscopia_toma" type="radio" name="bo_baciloscopia_toma" 
+                                              id="bo_baciloscopia_toma_0" value="0">Negativo</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_baciloscopia_toma" type="radio" name="bo_baciloscopia_toma" 
+                                              id="bo_baciloscopia_toma_1" value="1">Positivo</label>
                             </div>
-							<div class="col-sm-1">
-								{$botonAyudaBasiloscopia}
-							</div>
+                        </div>
+                        <div class="col-sm-1">
+                            {$botonAyudaBasiloscopia}
                         </div>
                     </div>
                 </div>
@@ -396,35 +402,35 @@
                     <div class="panel-heading">PAP (Mujeres de 25 a 64 años Cáncer Cervicouterino)</div>
                     <div class="panel-body">  
                         <div class="form-group">
-							<label class="control-label required col-sm-2">¿Se ha realizado PAP?</label>
+                            <label class="control-label required col-sm-2">¿Se ha realizado PAP?</label>
                             <div class="col-sm-2">
-								<label><input class="bo_pap_realizado" type="radio" name="bo_pap_realizado" 
-											  id="bo_pap_realizado" value="0">NO</label>
-								&nbsp;&nbsp;
-								<label><input class="bo_pap_realizado" type="radio" name="bo_pap_realizado" 
-											  id="bo_pap_realizado" value="1">SI</label>
+                                <label><input class="bo_pap_realizado" type="radio" name="bo_pap_realizado" 
+                                              id="bo_pap_realizado_0" value="0">NO</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_pap_realizado" type="radio" name="bo_pap_realizado" 
+                                              id="bo_pap_realizado_1" value="1">SI</label>
                             </div>
                         </div>
                         <div class="form-group hidden" id="ultimo_pap">         
-							<label class="control-label required col-sm-2">Fecha &uacute;ltimo PAP</label>
+                            <label class="control-label required col-sm-2">Fecha &uacute;ltimo PAP</label>
                             <div class="col-sm-2">
                                 <input type="date" name="fc_ultimo_pap" id="fc_ultimo_pap" 
-									   value="" placeholder="" class="form-control"/>
-								<span class="help-block hidden"></span>
+                                       value="" placeholder="" class="form-control"/>
+                                <span class="help-block hidden"></span>
                             </div>
                         </div>
                         <div class="form-group" style="display: none" id="pap_vigente">    
-							<label class="control-label required col-sm-2">PAP Vigente</label>
+                            <label class="control-label required col-sm-2">PAP Vigente</label>
                             <div class="col-sm-2">
-								<label><input class="bo_pap_vigente"  type="radio" name="bo_pap_vigente" 
-											  id="bo_pap_vigente_0" value="0" readonly>NO</label>
-								&nbsp;&nbsp;
-								<label><input class="bo_pap_vigente" type="radio" name="bo_pap_vigente" 
-											  id="bo_pap_vigente_1" value="1" readonly>SI</label>
+                                <label><input class="bo_pap_vigente"  type="radio" name="bo_pap_vigente" 
+                                              id="bo_pap_vigente_0" value="0" readonly>NO</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_pap_vigente" type="radio" name="bo_pap_vigente" 
+                                              id="bo_pap_vigente_1" value="1" readonly>SI</label>
                             </div>
-							<div class="col-sm-1">
-								{$botonAyudaPAPVigente}
-							</div>
+                            <div class="col-sm-1">
+                                {$botonAyudaPAPVigente}
+                            </div>
                         </div>
                         <div class="form-group hidden" id="tomar_fecha">         
                             <label class="control-label required col-sm-2">Tomar Fecha para PAP</label>
@@ -440,11 +446,11 @@
                         <div class="form-group" id="resultado_pap">
                             <label for="bo_pap_toma" class="control-label required col-sm-2">Resultado PAP</label>
                             <div class="col-sm-2">
-								<label><input class="resultado_pap"  type="radio" name="resultado_pap" 
-											  id="resultado_pap" value="0">Alterado</label>
-								&nbsp;&nbsp;
-								<label><input class="resultado_pap" type="radio" name="resultado_pap" 
-											  id="resultado_pap" value="1">Normal</label>
+                                <label><input class="resultado_pap"  type="radio" name="resultado_pap" 
+                                              id="resultado_pap" value="0">Alterado</label>
+                                &nbsp;&nbsp;
+                                <label><input class="resultado_pap" type="radio" name="resultado_pap" 
+                                              id="resultado_pap" value="1">Normal</label>
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" id="verPAP" class="btn btn-sm btn-info">
