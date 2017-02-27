@@ -20,13 +20,16 @@ class DAORegistro extends Model{
 						r.gl_rut,
 
 						r.gl_run_pass,
+                        r.bo_reconoce,
+                        r.bo_acepta_programa,
 						IFNULL(r.gl_rut,r.gl_run_pass) as gl_identificacion,
 						date_format(r.fc_crea,'%d-%m-%Y') as fc_crea,
 						r.gl_nombres,
 						r.gl_apellidos,
 						i.gl_nombre as gl_institucion,
 						c.gl_nombre_comuna,
-						e.gl_nombre_estado_caso
+						e.gl_nombre_estado_caso,
+                        e.id_estado_caso
 					FROM pre_registro r 
 						LEFT JOIN pre_institucion i ON i.id_institucion = r.id_institucion
 						LEFT JOIN pre_comunas c ON c.id_comuna = r.id_comuna
