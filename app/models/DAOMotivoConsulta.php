@@ -98,12 +98,13 @@ class DAOMotivoConsulta extends Model{
                         mot.id_registro AS id_registro,
                         mot.id_institucion AS id_institucion,
                         ins.gl_nombre AS institucion,
-                        mot.fc_ingreso AS fc_ingreso,
+                        date_format(mot.fc_ingreso,'%d-%m-%Y') AS fc_ingreso,
                         mot.gl_hora_ingreso AS hora_ingreso,
                         mot.gl_motivo_consulta AS motivo_consulta,
-                        mot.fc_crea AS fc_crea,
+                        date_format(mot.fc_crea,'%d-%m-%Y') AS fc_crea,
                         mot.id_usuario_crea AS id_usuario_crea,
-                        usr.gl_rut AS rut
+                        usr.gl_rut AS rut,
+                        concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
                     FROM pre_motivo_consulta mot
                     LEFT JOIN pre_institucion ins ON ins.id_institucion = mot.id_institucion
                     LEFT JOIN pre_usuarios usr ON usr.id_usuario = mot.id_usuario_crea

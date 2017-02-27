@@ -8,7 +8,7 @@
                 <th align="center" width="10%">Fecha</th>
                 <th align="center" width="20%">Tipo</th>
                 <th align="center" width="">Comentario</th>
-                <th align="center" width="10%">Usuario</th>
+                <th align="center" width="20%">Funcionario</th>
             </thead>
             <tbody>
             {foreach $arrHistorial as $his}
@@ -16,7 +16,7 @@
                     <td>{$his->fc_crea}</td>
                     <td>{$his->nombre_evento}</td>
                     <td>{$his->glosa}</td>
-                    <td>{$his->rut}</td>                    
+                    <td>{$his->funcionario}</td>
                 </tr>
             {/foreach}
             </tbody>

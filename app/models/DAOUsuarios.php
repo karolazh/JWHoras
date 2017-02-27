@@ -38,6 +38,29 @@ class DAOUsuarios extends Model {
         }
     }
 
+    public function getLoginMidas($rut) {
+        $query = "SELECT 
+                        u.*,
+                        r.gl_nombre_region,
+                        p.gl_nombre_provincia,
+                        c.id_provincia,
+                        c.gl_nombre_comuna
+                FROM pre_usuarios u 
+                        LEFT JOIN pre_regiones r ON u.id_region = r.id_region
+                        LEFT JOIN pre_comunas c ON u.id_comuna = c.id_comuna
+                        LEFT JOIN pre_provincias p ON c.id_provincia = p.id_provincia
+                WHERE u.gl_rut = ? ";
+
+        $param = array($rut);
+        $resultado = $this->db->getQuery($query, $param);
+
+        if ($resultado->numRows > 0) {
+            return $resultado->rows->row_0;
+        } else {
+            return NULL;
+        }
+    }
+
     /**
      * Busca un usuario por email
      * @param string $mail
