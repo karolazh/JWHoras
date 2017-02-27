@@ -32,7 +32,7 @@
 						{/foreach}
 							<tr>
 								<td colspan="6" class="text-right">  TOTAL </td>
-								<td  class="text-center"> <input id="total" value="10"> </td>
+								<td  class="text-center"> <input id="total" value="10" readonly> </td>
 							</tr>
 					</tbody>
 				</table>

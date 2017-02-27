@@ -96,9 +96,12 @@ $(".bo_consume_alcohol").on('change', function (e) {
     if ($('#bo_consume_alcohol').is(':checked')) {
         $('#btnaudit').addClass('hidden');
         $('#gl_puntos_audit').addClass('hidden');
+		$('#btnaudit').addClass('hidden');
+		$('#div_consejeria_alcohol').addClass('hidden');
     } else {
         $('#btnaudit').removeClass('hidden');
         $('#gl_puntos_audit').removeClass('hidden');
+		$('#div_consejeria_alcohol').removeClass('hidden');
     }
 });
 
@@ -145,8 +148,10 @@ $("#gl_glicemia").on('keyup', function (e) {
     }
     if ($("#gl_glicemia").val() > 125) {
         $('#verAgendaDiabetes').show();
+		$('#div_glicemia_agenda').show()
     } else {
         $('#verAgendaDiabetes').hide();
+		$('#div_glicemia_agenda').hide()
     }
 });
 
@@ -163,16 +168,20 @@ $(".bo_trabajadora_reclusa").on('change', function (e) {
 $(".bo_rpr").on('change', function (e) {
     if (($('#bo_rpr').is(':checked')) && ($('#bo_vdrl').is(':checked'))) {
             $('#verAgendaSifilis').hide();
+			$('#div_ITS_agenda').hide();
     } else {
         $('#verAgendaSifilis').show();
+		$('#div_ITS_agenda').show();
     }
 });
 
 $(".bo_vdrl").on('change', function (e) {
     if (($('#bo_rpr').is(':checked')) && ($('#bo_vdrl').is(':checked'))) {
             $('#verAgendaSifilis').hide();
+			$('#div_ITS_agenda').hide();
     } else {
         $('#verAgendaSifilis').show();
+		$('#div_ITS_agenda').show();
     }
 });
 
@@ -217,13 +226,21 @@ $("#gl_colesterol").on('keyup', function (e) {
     if (valor_colesterol > 199 && valor_colesterol < 240) {
         $('#verAgendaDislipidemia').hide();
         $('#div_colesterol').show();
-        $('#gl_colesterol').parent().find('span.help-block').html("Consejería Alimentaria y Actividad Física");
+		$('#div_consejeria_colesterol').show();
         $('#gl_colesterol').parent().find('span.help-block').removeClass("hidden");
     } else if (valor_colesterol >= 240){
         $('#gl_colesterol').parent().find('span.help-block').addClass("hidden");
         $('#div_colesterol').hide();
+		$('#div_consejeria_colesterol').hide();
         $('#verAgendaDislipidemia').show();
-    }
+		$('#div_colesterol_agenda').show();
+    } else {
+		$('#gl_colesterol').parent().find('span.help-block').addClass("hidden");
+        $('#div_colesterol').hide();
+		$('#div_consejeria_colesterol').hide();
+        $('#verAgendaDislipidemia').hide();
+		$('#div_colesterol_agenda').hide()
+	}
 });
 
 //Si realizo Examen Cancer de mama Mostrar -> Ingrese Fecha
@@ -256,9 +273,11 @@ $("#fc_mamografia").livequery(function(){
 $(".bo_mamografia_requiere").on('change', function (e) {
     if ($('#bo_mamografia_requiere').is(':checked')) {
         $('#verAgendaMamografia').hide();
+		$('#div_mamografia_agenda').hide();
         $('#mam_resultado2').hide();
     } else {
         $('#verAgendaMamografia').show();
+		$('#div_mamografia_agenda').show();
         $('#mam_resultado2').show();
     }
 });
@@ -269,4 +288,30 @@ $(document).ready(function () {
         $("#gl_puntos_audit").val($("#total").val());
         xModal.close();
     });
+});
+
+
+//Boton Guardar EMPA
+$("#guardar").on('click', function (e) {
+        var button_process	= buttonStartProcess($(this), e);
+        var parametros		= $("#form").serializeArray();
+			$.ajax({
+				dataType:   "json",
+				cache	:   false,
+				async	:   true,
+				data	:   parametros,
+				type	:   "post",
+				url	:   BASE_URI + "index.php/Empa/guardar", 
+				error	:   function(xhr, textStatus, errorThrown){
+							xModal.danger('Error: No se pudo Ingresar un nuevo Registro');
+				},
+				success	:   function(data){
+							if(data.correcto){
+								xModal.success('Éxito: Se Ingresó nuevo Registro!');
+							} else {
+								xModal.info('Error: No se pudo Ingresar un nuevo Registro');
+							}
+				}
+			});
+		buttonEndProcess(button_process);
 });

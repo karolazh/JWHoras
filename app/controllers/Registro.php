@@ -196,6 +196,8 @@ class Registro extends Controller {
             $arrAdjuntos = $this->_DAOAdjuntos->getListaAdjuntosRegistro($idReg);
             $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
             
+			$this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Datos personales y de exámenes del paciente.','Información'));
+			
             //muestra template
             $this->smarty->display('Registro/bitacora.tpl');
             $this->_addJavascript(STATIC_FILES . 'js/templates/registro/bitacora.js');
@@ -220,8 +222,8 @@ class Registro extends Controller {
         $arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
         $this->smarty->assign("arrCasoEgreso", $arrCasoEgreso);
 		
-        $this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.'));
-
+        $this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese datos personales del paciente.','Ayuda'));
+		$this->smarty->assign("botonAyudaContacto", Boton::botonAyuda('Ingrese datos de contacto del paciente.','Ayuda'));
         //llamado al template
         $this->_display('Registro/nuevo.tpl');
         $this->load->javascript(STATIC_FILES . "js/regiones.js");
@@ -248,6 +250,7 @@ class Registro extends Controller {
 
         $id_registro	= $this->_DAORegistro->insertarRegistro($parametros);
         if($id_registro){
+
 			$correcto						= true;
 			$resultado2						= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
 			$resultado3						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>1));
@@ -317,6 +320,9 @@ class Registro extends Controller {
         $this->smarty->assign('institucion', $obj_registro->gl_nombre_institucion);
         $this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
         $this->smarty->assign('ruta_consentimiento', $obj_registro->gl_path);
+		$this->smarty->assign("botonAyudaSeguimiento", Boton::botonAyuda('Datos sobre el registro al paciente y motivos de consulta.','Información'));
+		$this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Datos personales del paciente.','Información'));
+		$this->smarty->assign("botonAyudaContacto", Boton::botonAyuda('Datos para contactar al paciente.','Información'));
         $this->smarty->display('Registro/ver.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/registro/ver.js");
     }
@@ -361,7 +367,7 @@ class Registro extends Controller {
 
 		if($registro){
 			$json['correcto']			= TRUE;
-                        $json['id_registro']			= $registro->id_registro;
+			$json['id_registro']		= $registro->id_registro;
 			$json['gl_nombres']			= $registro->gl_nombres;
 			$json['gl_apellidos']		= $registro->gl_apellidos;
 			$json['fc_nacimiento']		= $registro->fc_nacimiento;
@@ -376,7 +382,6 @@ class Registro extends Controller {
 			$json['bo_acepta_programa']	= $registro->bo_acepta_programa;
 			$json['gl_latitud']			= $registro->gl_latitud;
 			$json['gl_longitud']		= $registro->gl_longitud;
-			
 			$json['gl_fono']			= $registro->gl_fono;
 			$json['gl_celular']			= $registro->gl_celular;
 			$json['gl_email']			= $registro->gl_email;
