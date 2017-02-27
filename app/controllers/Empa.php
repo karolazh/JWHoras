@@ -165,7 +165,8 @@ class Empa extends Controller{
 
         $registro          = $this->_DAOAlcoholismo->getAll();
         $this->smarty->assign("registro", $registro);
-		$this->smarty->display('Empa/audit.tpl');
+	$this->smarty->display('Empa/audit.tpl');
+        $this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js"); 
 	}
 
 }

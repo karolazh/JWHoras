@@ -262,3 +262,11 @@ $(".bo_mamografia_requiere").on('change', function (e) {
         $('#mam_resultado2').show();
     }
 });
+
+//Boton Guardar AUDIT
+$(document).ready(function () {
+    $("#guardaraudit").on('click', function (e) {
+        $("#gl_puntos_audit").val($("#total").val());
+        xModal.close();
+    });
+});
