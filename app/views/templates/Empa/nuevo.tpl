@@ -383,7 +383,7 @@
                                               id="bo_tos_productiva_1" value="1">SI</label>	
                             </div>
                         </div>
-                        <div class="form-group" id="id_baciloscopia">
+                        <div class="form-group" id="id_baciloscopia" style="display: none">
                             <label class="control-label required col-sm-2">Basiloscopia</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_baciloscopia_toma" type="radio" name="bo_baciloscopia_toma" 
@@ -420,6 +420,9 @@
                                        value="" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>
+                            &nbsp;&nbsp;
+                            <button type="button" id="verAgendaPap1" 
+                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
                         <div class="form-group" style="display: none" id="pap_vigente">    
                             <label class="control-label required col-sm-2">PAP Vigente</label>
@@ -446,13 +449,13 @@
                                     class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
                         <div class="form-group" id="resultado_pap">
-                            <label for="bo_pap_toma" class="control-label required col-sm-2">Resultado PAP</label>
+                            <label class="control-label required col-sm-2">Resultado PAP</label>
                             <div class="col-sm-2">
-                                <label><input class="resultado_pap"  type="radio" name="resultado_pap" 
-                                              id="resultado_pap" value="0">Alterado</label>
+                                <label><input class="bo_pap_toma"  type="radio" name="bo_pap_toma" 
+                                              id="bo_pap_toma_0" value="0">Alterado</label>
                                 &nbsp;&nbsp;
-                                <label><input class="resultado_pap" type="radio" name="resultado_pap" 
-                                              id="resultado_pap" value="1">Normal</label>
+                                <label><input class="bo_pap_toma" type="radio" name="bo_pap_toma" 
+                                              id="bo_pap_toma_1" value="1">Normal</label>
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" id="verPAP" class="btn btn-sm btn-info">
@@ -541,7 +544,7 @@
 								<label><input class="bo_mamografia_requiere" type="radio" name="bo_mamografia_requiere" 
 											  id="bo_mamografia_requiere" value="1">SI</label>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3" id="toma_mamografia" style="display: none">
 								<input type="checkbox" id="bo_mamografia_toma">
 								<label for="bo_mamografia_toma" class="control-label required">Toma Mamograf&iacute;a</label>
                             </div>
@@ -572,14 +575,14 @@
                             <div class="col-sm-1"></div>
                             <div class="col-sm-10">
                                 <label>Observaciones</label>
-                                <textarea type="text" class="form-control col-sm-10" rows="5" id="gl_observaciones_empa" nombre="gl_observaciones_empa"
+                                <textarea type="text" class="form-control col-sm-10" rows="5" id="gl_observaciones_empa" name="gl_observaciones_empa"
                                           placeholder="Ingrese Observaciones" style="resize: none"></textarea>
                             </div>
                             <div class="col-sm-1"></div>
                         </div>
 
 
-                        <div class="form-group">
+                    {*    <div class="form-group">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-3">
                                 <div class="checkbox">
@@ -600,7 +603,8 @@
                             <div class="col-sm-12" hidden="hidden">
                                 <!-- Si Deriva, muestra listado de especialidades a las que puede derivar -->
                             </div>
-                        </div>
+                        </div> *}
+                        
                         <div class="form-group col-sm-11" align="right">
                             <button type="button" id="guardar" class="btn btn-success">
                                 <i class="fa fa-save"></i>  Guardar

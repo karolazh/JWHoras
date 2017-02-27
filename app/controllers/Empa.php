@@ -94,13 +94,14 @@ class Empa extends Controller{
         $this->smarty->assign("gl_comuna", $gl_comuna->gl_nombre_comuna);
         $this->smarty->assign("gl_institucion",  $gl_institucion->gl_nombre);
         $this->smarty->assign("fc_emp", date('Y-m-d'));
-        
         //Cargar Datos Paciente
         $registro          = $this->_DAORegistro->getRegistroById($id_registro);
         $this->smarty->assign("gl_rut", $registro->gl_rut);
         $this->smarty->assign("gl_nombres", $registro->gl_nombres);
         $this->smarty->assign("gl_apellidos", $registro->gl_apellidos);
-        $this->smarty->assign("fc_nacimiento", $registro->fc_nacimiento);
+        $fc_nacimiento = $registro->fc_nacimiento;
+        $fc_nacimiento = date("d/m/Y", strtotime($fc_nacimiento));
+        $this->smarty->assign("fc_nacimiento", $fc_nacimiento);
         $reconoce = $registro->bo_reconoce;
         
         //Cargar Datos DAU Examen
@@ -204,9 +205,8 @@ class Empa extends Controller{
         $parametros		= $this->_request->getParams();
 	$correcto		= false;
         $error			= false;
-        $id_registro            = $this->_DAOEmpa->updateEmpa($parametros);
-        
-        if($id_registro){
+        $id_empa                = $this->_DAOEmpa->updateEmpa($parametros);
+        if($id_empa){
 			$correcto       = true;
         }else{
             $error		= true;

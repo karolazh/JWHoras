@@ -182,7 +182,7 @@ $(".bo_trabajadora_reclusa").on('change', function (e) {
 
 //Si VDRL o RPR es positivo -> Activar Funcionalidad de Agenda para ITS
 $(".bo_rpr").on('change', function (e) {
-    if (($('#bo_rpr_0').is(':checked')) && ($('#bo_vdrl_0').is(':checked'))) {
+    if ((!$('#bo_rpr_1').is(':checked')) && (!$('#bo_vdrl_1').is(':checked'))) {
             $('#verAgendaSifilis').hide();
 			$('#div_ITS_agenda').hide();
     } else {
@@ -192,7 +192,7 @@ $(".bo_rpr").on('change', function (e) {
 });
 
 $(".bo_vdrl").on('change', function (e) {
-    if (($('#bo_rpr_0').is(':checked')) && ($('#bo_vdrl_0').is(':checked'))) {
+    if ((!$('#bo_rpr_1').is(':checked')) && (!$('#bo_vdrl_1').is(':checked'))) {
             $('#verAgendaSifilis').hide();
 			$('#div_ITS_agenda').hide();
     } else {
@@ -204,9 +204,9 @@ $(".bo_vdrl").on('change', function (e) {
 //Si ha tenido Tos por + 15 dias -> mostrar Baciloscopia
 $(".bo_tos_productiva").on('change', function (e) {
     if ($('#bo_tos_productiva_0').is(':checked')) {
-        $('#id_baciloscopia').addClass('hidden');
+        $('#id_baciloscopia').hide();
     } else {
-        $('#id_baciloscopia').removeClass('hidden');
+        $('#id_baciloscopia').show();
     }
 });
 
@@ -233,6 +233,7 @@ $("#fc_ultimo_pap").livequery(function(){
 			$('#bo_pap_vigente_0').prop('checked',true);
 		}
 		$('#pap_vigente').show();
+                $('#verAgendaPap1').show();
 	});
 });
 //Si valor colesterlo >= 200 y < 239 (Consejería Alimentaria y Actividad Fisica
@@ -291,12 +292,14 @@ $("#fc_mamografia").livequery(function(){
 $(".bo_mamografia_requiere").on('change', function (e) {
     if ($('#bo_mamografia_requiere').is(':checked')) {
         $('#verAgendaMamografia').hide();
-		$('#div_mamografia_agenda').hide();
+        $('#div_mamografia_agenda').hide();
         $('#mam_resultado2').hide();
+        $('#toma_mamografia').hide();
     } else {
         $('#verAgendaMamografia').show();
-		$('#div_mamografia_agenda').show();
+        $('#div_mamografia_agenda').show();
         $('#mam_resultado2').show();
+        $('#toma_mamografia').show();
     }
 });
 
@@ -317,16 +320,21 @@ $("#guardar").on('click', function (e) {
 					"name"  : 'bo_consume_alcohol',
 					"value" : 1
 				});
-			}else{
+			}else if($('#bo_consume_alcohol_0').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_consume_alcohol',
 					"value" : 0
 				});
-			}
+			}else{
+                                parametros.push({
+                                            "name"  : 'bo_consume_alcohol',
+                                            "value" : 'NULL'
+                                    });
+                        }
                         if($('#gl_puntos_audit').val() == ""){
 				parametros.push({
 					"name"  : 'gl_puntos_audit',
-					"value" : 0
+					"value" : 'NULL'
 				});
 			}
 			if($('#bo_fuma_1').is(':checked')){
@@ -334,16 +342,27 @@ $("#guardar").on('click', function (e) {
 					"name"  : 'bo_fuma',
 					"value" : 1
 				});
-			}else{
+			}else if ($('#bo_fuma_0').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_fuma',
 					"value" : 0
 				});
-			}
+			}else{
+                                parametros.push({
+					"name"  : 'bo_fuma',
+					"value" : 'NULL'
+				});
+                        }
                         if($('#gl_peso').val() == ""){
 				parametros.push({
 					"name"  : 'gl_peso',
 					"value" : ""
+				});
+			}
+                        if($('#id_clasificacion_imc').val() == ""){
+				parametros.push({
+					"name"  : 'id_clasificacion_imc',
+					"value" : 'NULL'
 				});
 			}
                         if($('#gl_estatura').val() == ""){
@@ -367,13 +386,13 @@ $("#guardar").on('click', function (e) {
                         if($('#nr_ficha').val() == ""){
 				parametros.push({
 					"name"  : 'nr_ficha',
-					"value" : 0
+					"value" : 'NULL'
 				});
 			}
                         if($('#id_sector').val() == ""){
 				parametros.push({
 					"name"  : 'id_sector',
-					"value" : 0
+					"value" : 'NULL'
 				});
 			}
                         if($('#gl_pad').val() == ""){
@@ -394,12 +413,33 @@ $("#guardar").on('click', function (e) {
 					"value" : ""
 				});
 			}
+                        if($('#bo_pap_toma_1').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_pap_toma',
+					"value" : 1
+				});
+			}else if ($('#bo_pap_toma_0').is(':checked')){
+				parametros.push({
+					"name"  : 'bo_pap_toma',
+					"value" : 0
+				});
+			}else{
+                                parametros.push({
+					"name"  : 'bo_pap_toma',
+					"value" : 'NULL'
+				});
+                        }
                         if($('#fc_ultimo_pap').val() == ""){
 				parametros.push({
 					"name"  : 'fc_ultimo_pap',
-					"value" : ""
+					"value" : 'NULL'
 				});
-			}
+			} else {
+                            parametros.push({
+					"name"  : 'fc_ultimo_pap',
+					"value" : "'"+$('#fc_ultimo_pap').val()+"'"
+				});
+                        }
                         if($('#gl_colesterol').val() == ""){
 				parametros.push({
 					"name"  : 'gl_colesterol',
@@ -428,89 +468,124 @@ $("#guardar").on('click', function (e) {
 					"name"  : 'bo_trabajadora_reclusa',
 					"value" : 1
 				});
-			}else{
+			}else if ($('#bo_trabajadora_reclusa_0').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_trabajadora_reclusa',
 					"value" : 0
 				});
-			}
+			}else{
+                                parametros.push({
+					"name"  : 'bo_trabajadora_reclusa',
+					"value" : 'NULL'
+				});
+                        }
                         if($('#bo_vdrl_1').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_vdrl',
 					"value" : 1
 				});
-			}else{
+			}else if ($('#bo_vdrl_0').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_vdrl',
 					"value" : 0
 				});
-			}
+			}else{
+                                parametros.push({
+					"name"  : 'bo_vdrl',
+					"value" : 'NULL'
+				});
+                        }
                         if($('#bo_rpr_1').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_rpr',
 					"value" : 1
 				});
-			}else{
+			}else if ($('#bo_rpr_0').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_rpr',
 					"value" : 0
 				});
-			}
+			}else{
+                                parametros.push({
+					"name"  : 'bo_rpr',
+					"value" : 'NULL'
+				});
+                        }
                         if($('#bo_tos_productiva_1').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_tos_productiva',
 					"value" : 1
 				});
-			}else{
+			}else if ($('#bo_tos_productiva_0').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_tos_productiva',
 					"value" : 0
 				});
-			}
+			}else{
+                                parametros.push({
+					"name"  : 'bo_tos_productiva',
+					"value" : 'NULL'
+				});
+                        }
                         if($('#bo_baciloscopia_toma_1').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_baciloscopia_toma',
 					"value" : 1
 				});
-			}else{
+			}else if ($('#bo_baciloscopia_toma_0').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_baciloscopia_toma',
 					"value" : 0
 				});
-			}
+			}else{
+                                parametros.push({
+					"name"  : 'bo_baciloscopia_toma',
+					"value" : 'NULL'
+				});
+                        }
                         if($('#bo_pap_realizado_1').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_pap_realizado',
 					"value" : 1
 				});
-			}else{
+			}else if ($('#bo_pap_realizado_0').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_pap_realizado',
 					"value" : 0
 				});
-			}
+			}else{
+                                parametros.push({
+					"name"  : 'bo_pap_realizado',
+					"value" : 'NULL'
+				});
+                        }
                         if($('#bo_pap_vigente_1').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_pap_vigente',
 					"value" : 1
 				});
-			}else{
+			}else if ($('#bo_pap_vigente_0').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_pap_vigente',
 					"value" : 0
 				});
-			}
-                        if($('#fc_tomar_pap').val()){
-				parametros.push({
-					"name"  : 'bo_pap_toma',
-					"value" : 1
-				});
 			}else{
-				parametros.push({
-					"name"  : 'bo_pap_toma',
-					"value" : 0
+                                parametros.push({
+					"name"  : 'bo_pap_vigente',
+					"value" : 'NULL'
 				});
-			}
+                        }
+                        if($('#fc_tomar_pap').val() == ""){
+				parametros.push({
+					"name"  : 'fc_tomar_pap',
+					"value" : 'NULL'
+				});
+                        } else {
+                            parametros.push({
+					"name"  : 'fc_tomar_pap',
+					"value" : "'"+$('#fc_tomar_pap').val()+"'"
+				});
+                        }
                         if($('#bo_colesterol_toma').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_colesterol_toma',
@@ -522,29 +597,39 @@ $("#guardar").on('click', function (e) {
 					"value" : 0
 				});
 			}
-                        if($('#bo_mamografia_realizada_1').val()){
+                        if($('#bo_mamografia_realizada_1').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_mamografia_realizada',
 					"value" : 1
 				});
-			}else{
+			}else if ($('#bo_mamografia_realizada_0').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_mamografia_realizada',
 					"value" : 0
 				});
-			}
+			}else{
+                                parametros.push({
+					"name"  : 'bo_mamografia_realizada',
+					"value" : 'NULL'
+				});
+                        }
                         if($('#bo_mamografia_vigente_1').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_mamografia_vigente',
 					"value" : 1
 				});
-			}else{
+			}else if ($('#bo_mamografia_vigente_0').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_mamografia_vigente',
 					"value" : 0
 				});
-			}
-                        if($('#bo_mamografia_toma').val()){
+			}else{
+                                parametros.push({
+					"name"  : 'bo_mamografia_vigente',
+					"value" : 'NULL'
+				});
+                        }
+                        if($('#bo_mamografia_toma').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_mamografia_toma',
 					"value" : 1
@@ -560,12 +645,17 @@ $("#guardar").on('click', function (e) {
 					"name"  : 'bo_mamografia_vigente',
 					"value" : 1
 				});
-			}else{
+			}else if ($('#bo_mamografia_vigente_0').is(':checked')){
 				parametros.push({
 					"name"  : 'bo_mamografia_vigente',
 					"value" : 0
 				});
-			}
+			}else{
+                                parametros.push({
+					"name"  : 'bo_mamografia_vigente',
+					"value" : 'NULL'
+				});
+                        }
 			$.ajax({
 				dataType:   "json",
 				cache	:   false,
