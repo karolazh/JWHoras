@@ -60,24 +60,25 @@ class DAOMotivoConsulta extends Model{
     }
 
     public function insertarMotivoConsulta($parametros, $id_registro) {
-
-
-        $query = "INSERT INTO pre_motivo_consulta
-                                        (   id_registro,
-                                            id_institucion,
-                                            fc_ingreso,
-                                            gl_hora_ingreso,
-                                            gl_motivo_consulta,
-                                            fc_crea,
-                                            id_usuario_crea
-                                        )
-                                VALUES  (   " . $id_registro . ",
-                                            " . $parametros['centrosalud'] . ",
-                                            '" . $parametros['fechaingreso'] . "',
-                                            '" . $parametros['horaingreso'] . "',
-                                            '" . $parametros['motivoconsulta'] . "',
-                                            now(),
-                                            '" . $_SESSION['id'] . "')";
+        $query	= "INSERT INTO pre_motivo_consulta
+							(
+							id_registro,
+							id_institucion,
+							fc_ingreso,
+							gl_hora_ingreso,
+							gl_motivo_consulta,
+							fc_crea,
+							id_usuario_crea
+							)
+					VALUES  (
+							" . $id_registro . ",
+							" .$_SESSION['id_institucion']. ",
+							'" . $parametros['fechaingreso'] . "',
+							'" . $parametros['horaingreso'] . "',
+							'" . $parametros['motivoconsulta'] . "',
+							now(),
+							'" . $_SESSION['id'] . "'
+							)";
 
 		if ($this->db->execQuery($query)) {
             return true;

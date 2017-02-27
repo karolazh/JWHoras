@@ -16,6 +16,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				Datos del Paciente {$botonAyudaPaciente}
+				<input type="text" value="0" id="id_registro" name="id_registro" class="hidden">
 			</div>
 			<div class="panel-body">
 				
@@ -29,7 +30,6 @@
 				
 				<div class="form-group">
 					<div id="nacional">
-						<input type="text" value="0" id="id_registro" name="id_registro" class="hidden">
 						<label for="rut" class="control-label col-sm-2 ">Rut Paciente (*)</label>
 						<div class="col-sm-2">
 							<input type="text" name="rut" id="rut" maxlength="12" onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut')" placeholder="Rut paciente" class="form-control">
@@ -254,6 +254,9 @@
 
 				<div class="form-group clearfix col-md-12 text-right">
 					<button type="button" id="guardar" class="btn btn-success">
+						<i class="fa fa-save"></i>  Guardar
+					</button>
+					<button type="button" id="guardarMotivo" class="btn btn-success" style="display: none">
 						<i class="fa fa-save"></i>  Guardar
 					</button>&nbsp;
 					<button type="button" id="cancelar"  class="btn btn-default" 

@@ -282,6 +282,46 @@ class Registro extends Controller {
         echo $json;
     }
 
+    public function GuardarMotivo() {
+        header('Content-type: application/json');
+        $parametros		= $this->_request->getParams();
+		$correcto		= false;
+        $error			= false;
+		$datos_evento	= array(); 
+
+        $id_registro	= $parametros['id_registro'];
+        if($id_registro){
+			$correcto						= true;
+			$resultado2						= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
+
+			$session							= New Zend_Session_Namespace("usuario_carpeta");
+			$datos_evento['id_registro']		= $id_registro;
+			$datos_evento['bo_estado']			= 1; 
+			$datos_evento['id_usuario_crea']	= $session->id;
+			if ($parametros['chkAcepta']){
+				$resp							= $this->_DAORegistro->update(array('bo_acepta_programa'=>1), $id_registro, 'id_registro');
+				$datos_evento['eventos_tipo']	= 4;
+				$datos_evento['gl_descripcion']	= "Acepta el programa con fecha : ".Fechas::fechaHoy();
+				$resp							= $this->_DAOEventos->insEvento($datos_evento);
+			}
+			if ($parametros['chkReconoce']){
+				$resp							= $this->_DAORegistro->update(array('bo_reconoce'=>1), $id_registro, 'id_registro');
+				$datos_evento['eventos_tipo']	= 5;
+				$datos_evento['gl_descripcion']	= "Reconoce violencia con fecha : ".Fechas::fechaHoy();
+				$resp							= $this->_DAOEventos->insEvento($datos_evento);
+			}
+        }else{
+            $error		= true;
+        }
+
+        $salida	= array("error" => $error,
+            "correcto" => $correcto);
+        $this->smarty->assign("hidden", "");
+        $json	= Zend_Json::encode($salida);
+
+        echo $json;
+    }
+
     public function ver() {
         $parametros		= $this->request->getParametros();
         $id_registro	= $parametros[0];

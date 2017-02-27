@@ -5,7 +5,7 @@
         var parametros		= $("#form").serializeArray();
         var gl_rut			= $("#rut").val();
 
-		if(gl_rut == ''){
+		if(gl_rut == '' && !$('#chkextranjero').is(':checked')){
 			xModal.danger('- El campo RUT es Obligatorio');
 		}else{
 			if($('#chkextranjero').is(':checked')){
@@ -67,13 +67,64 @@
 							if(data.correcto){
 
 								xModal.success('Éxito: Se Ingresó nuevo Registro!');
-								location.href = BASE_URI + "index.php/Registro";
+								setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
 							} else {
 								xModal.info('Error: No se pudo Ingresar un nuevo Registro');
 							}
 				}
 			});
 		}
+		buttonEndProcess(button_process);
+
+    });
+
+    $("#guardarMotivo").on('click', function(e) {
+        var button_process	= buttonStartProcess($(this), e);
+        var parametros		= $("#form").serializeArray();
+
+		if($('#chkAcepta').is(':checked')){
+			parametros.push({
+				"name"  : 'chkAcepta',
+				"value" : 1
+			});
+		}else{
+			parametros.push({
+				"name"  : 'chkAcepta',
+				"value" : 0
+			});
+		}
+		if($('#chkReconoce').is(':checked')){
+			parametros.push({
+				"name"  : 'chkReconoce',
+				"value" : 1
+			});
+		}else{
+			parametros.push({
+				"name"  : 'chkReconoce',
+				"value" : 0
+			});
+		}
+
+		$.ajax({
+			dataType: "json",
+			cache	:false,
+			async	: true,
+			data	: parametros,
+			type	: "post",
+			url		: BASE_URI + "index.php/Registro/GuardarMotivo", 
+			error	: function(xhr, textStatus, errorThrown){
+						xModal.danger('Error: No se pudo agregar Motivo de Consulta');
+			},
+			success	: function(data){
+						if(data.correcto){
+
+							xModal.success('Éxito: Se Ingresó nuevo Motivo de Consulta!');
+							setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
+						} else {
+							xModal.info('Error: No se pudo agregar Motivo de Consulta');
+						}
+			}
+		});
 		buttonEndProcess(button_process);
 
     });
@@ -144,12 +195,6 @@
 									$("#celular").val(data.gl_celular);
 									$("#email").val(data.gl_email);
 
-									if(data.bo_reconoce == '1'){
-										$("#chkReconoce").prop("checked", true);
-									}
-									if(data.bo_acepta_programa == '1'){
-										$("#chkAcepta").prop("checked", true);
-									}
 									if(data.id_comuna != '0'){
 										var comuna = '<option value="'+data.id_comuna+'">'+data.gl_nombre_comuna+'</option>';
 										$("#comuna").html(comuna);
@@ -164,11 +209,27 @@
 										$("#comuna").trigger('change');
 									}
 
-									$('#form').find('input, textarea, checkbox, select').attr('disabled',true);									
-									$( "#motivoconsulta" ).prop( "disabled", false );
-									$( "#fechaingreso" ).prop( "disabled", false );
-									$( "#horaingreso" ).prop( "disabled", false );
+									$('#form').find('input, textarea, checkbox, select').attr('disabled',true);
+									if(data.bo_reconoce == '1'){
+										$("#chkReconoce").prop("checked", true);
+									}else{
+										$("#chkReconoce").prop( "disabled", false );
+									}
+									if(data.bo_acepta_programa == '1'){
+										$("#chkAcepta").prop("checked", true);
+									}else{
+										$("#chkAcepta").prop( "disabled", false );
+									}
+									$("#id_registro").prop("disabled", false );
+									$("#motivoconsulta").prop("disabled", false );
+									$("#fechaingreso").prop("disabled", false );
+									$("#horaingreso").prop("disabled", false );
+									
+									$('#guardar').hide();
+									$('#guardarMotivo').show();
 								} else {
+									$('#guardar').show();
+									$('#guardarMotivo').hide();
 									xModal.info('Nuevo Paciente');
 								}
 					}
