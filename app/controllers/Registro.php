@@ -246,23 +246,28 @@ class Registro extends Controller {
 
         $id_registro	= $this->_DAORegistro->insertarRegistro($parametros);
         if($id_registro){
-			$resultado2	= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
-			$session = New Zend_Session_Namespace("usuario_carpeta");
-			$datos_evento['eventos_tipo'] = 1;
-			$datos_evento['id_registro'] = $id_registro;
-			$datos_evento['gl_descripcion'] = "Registro creado el : ".Fechas::fechaHoy(); 
-			$datos_evento['bo_estado'] = 1; 
-			$datos_evento['id_usuario_crea'] = $session->id;
-			$correcto = $this->_DAOEventos->insEvento($datos_evento);
+			$correcto						= true;
+			$resultado2						= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
+			$resultado3						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>1));
+			$resultado4						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>2));
+
+			$session						= New Zend_Session_Namespace("usuario_carpeta");
+			$datos_evento['eventos_tipo']	= 1;
+			$datos_evento['id_registro']	= $id_registro;
+			$datos_evento['gl_descripcion']	= "Registro creado el : ".Fechas::fechaHoy(); 
+			$datos_evento['bo_estado']		= 1; 
+			$datos_evento['id_usuario_crea']= $session->id;
+			$resp							= $this->_DAOEventos->insEvento($datos_evento);
+
 			if ($parametros['chkAcepta']){
-				$datos_evento['eventos_tipo'] = 4;
-				$datos_evento['gl_descripcion'] = "Acepta el programa con fecha : ".Fechas::fechaHoy();
-				$correcto = $this->_DAOEventos->insEvento($datos_evento);
+				$datos_evento['eventos_tipo']	= 4;
+				$datos_evento['gl_descripcion']	= "Acepta el programa con fecha : ".Fechas::fechaHoy();
+				$resp							= $this->_DAOEventos->insEvento($datos_evento);
 			}
 			if ($parametros['chkReconoce']){
-				$datos_evento['eventos_tipo'] = 5;
-				$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : ".Fechas::fechaHoy();
-				$correcto = $this->_DAOEventos->insEvento($datos_evento);
+				$datos_evento['eventos_tipo']	= 5;
+				$datos_evento['gl_descripcion']	= "Reconoce violencia con fecha : ".Fechas::fechaHoy();
+				$resp							= $this->_DAOEventos->insEvento($datos_evento);
 			}
         }else{
             $error		= true;
