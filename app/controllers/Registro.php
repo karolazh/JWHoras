@@ -227,6 +227,7 @@ class Registro extends Controller {
         $this->load->javascript(STATIC_FILES . "js/regiones.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/nuevo.js");
+        $this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }
 
@@ -239,6 +240,7 @@ class Registro extends Controller {
 		$datos_evento	= array(); 
         $count			= $this->_DAORegistro->countRegistroxRegion($_SESSION['id_region']);
 
+		print_r($parametros);die();
 		if($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50){
 			$gl_grupo_tipo	= 'Seguimiento';
 		}

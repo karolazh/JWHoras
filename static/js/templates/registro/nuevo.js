@@ -41,7 +41,18 @@
 					"value" : 0
 				});
 			}
-
+			/*
+			var inputFileImage = document.getElementById("subirFile");
+			var file = inputFileImage.files[0];
+			var datos = new FormData();
+			
+			datos.append('archivo',file);
+			parametros.push({
+					"name"  : 'archivo',
+					"value" : datos
+				});
+				*/
+				
 			$.ajax({
 				dataType: "json",
 				cache	:false,

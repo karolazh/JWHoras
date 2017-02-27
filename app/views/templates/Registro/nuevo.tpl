@@ -10,7 +10,7 @@
         </ol>
 </section>
 
-<form id="form" class="form-horizontal">
+<form id="form" class="form-horizontal" enctype="multipart/form-data">
 
 	<section class="content">
 		<div class="panel panel-primary">
@@ -204,10 +204,11 @@
 								</a>
 							</div>
 						</div>
-						<div class="form-group">
+						<!-- div class="form-group">
 							<div class="col-sm-4"></div>
 							<div class="col-sm-2">
-								<button type="button" id="btnUpload" class="btn btn-sm btn-success">
+								<button type="button" id="btnUpload" class="btn btn-sm btn-success"
+									 onclick="xModal.open('{$smarty.const.BASE_URI}/adjunto/cargarAdjunto','Cargar Adjunto','',1,false,'150');" >
 									<i class="fa fa-upload" aria-hidden="true"></i> Subir Firmado
 								</button>
 								
@@ -215,7 +216,19 @@
 							<div class="col-sm-1">
 								<span class="help-block hidden" id="spanUpload"></span>
 							</div>
+						</div -->
+						
+						<div class="form-group top-spaced">
+							<label for="files" class="control-label col-sm-4">Subir Consentimiento</label>
+							<div class="col-sm-2">
+								<input type="file" value="Subir" id='subirFile'>
+							</div>
 						</div>
+						
+						<!-- div class="form-group">
+							<div class="col-xs-12" id="listado-adjuntos" name="listado-adjuntos"></div>
+						</div -->
+						
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-12">
