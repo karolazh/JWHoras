@@ -66,6 +66,16 @@
 		
     });
 
+    $("#chkextranjero").on('click', function(e) {		
+		if($('#chkextranjero').is(':checked')){
+			$("#div_rut").hide();
+			$("#extranjero").show();
+		}else{
+			$("#extranjero").hide();
+			$("#div_rut").show();
+		}
+    });
+	
 	//Formatea Fecha
 	function formattedDate(date) {
 		var d		= new Date(date || Date.now()),

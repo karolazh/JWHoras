@@ -16,38 +16,42 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				Datos del Paciente {$botonAyudaPaciente}
+				<input type="text" value="0" id="id_registro" name="id_registro" class="hidden">
 			</div>
 			<div class="panel-body">
 				<div class="form-group">
-                                    <input type="text" value="0" id="id_registro" name="id_registro" class="hidden">
-					<label for="rut" class="control-label col-sm-2 required">Rut Paciente (*)</label>
-					<div class="col-sm-2">
-						<input type="text" name="rut" id="rut" maxlength="12" onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut')" placeholder="Rut paciente" class="form-control">
-						<span class="help-block hidden fa fa-warning"></span>
+					<div id="div_rut">
+						<label for="rut" class="control-label col-sm-2">Rut Paciente (*)</label>
+						<div class="col-sm-2">
+							<input type="text" name="rut" id="rut" maxlength="12" onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut')" placeholder="Rut paciente" class="form-control">
+							<span class="help-block hidden fa fa-warning"></span>
+						</div>
+						<div class="col-sm-1">
+							<button type="button" id="buscar" class="btn btn-info btn-sm form-control" onclick="Registro.cargarRegistro()"><i class="fa fa-search"></i></button>
+						</div>
 					</div>
-					<div class="col-sm-1">
-						<button type="button" id="buscar" class="btn btn-info btn-sm form-control" onclick="Registro.cargarRegistro()"><i class="fa fa-search"></i></button>
+
+					<div style="display: none" id="extranjero">
+						<label for="rut" class="control-label col-sm-2">N°/Pasaporte Extranjero</label>
+						<div class="col-sm-2">
+							<input type="text" name="inputextranjero" id="inputextranjero" maxlength="20" value='' class="form-control" placeholder="Ingrese N°/Pasaporte Extranjero" onblur="validarVacio(this,'Por favor Ingrese N°/Pasaporte Extranjero')">
+							<span class="help-block hidden fa fa-warning"></span>
+						</div>
+						<div class="col-sm-1" id="btnbuscarex">
+							<button type="button" id="buscarex" class="btn btn-info btn-sm form-control">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>
 					</div>
+					
 					<div>
 						<label>
-							<input id="chkextranjero" type="checkbox" value='1' onchange="showChk('extranjero','chkextranjero','rut','buscar')">
+							<input id="chkextranjero" type="checkbox" value='1'>
 							<strong>Extranjero</strong>
 						</label>
 					</div>
 				</div>
 
-				<div class="form-group" style="display: none" id="extranjero">
-									<label for="nombres" class="control-label col-sm-2 required">N°/Pasaporte Extranjero</label>
-					<div class="col-sm-2">
-						<input type="text" name="inputextranjero" id="inputextranjero" maxlength="12" id="inputextranjero" value='' class="form-control" placeholder="Ingrese N°/Pasaporte Extranjero" onblur="validarVacio(this,'Por favor Ingrese N°/Pasaporte Extranjero')">
-						<span class="help-block hidden fa fa-warning"></span>
-					</div>
-					<div class="col-sm-1" id="btnbuscarex">
-						<button type="button" id="buscarex" class="btn btn-info btn-sm form-control">
-							<i class="fa fa-search"></i>
-						</button>
-					</div>
-				</div>
 				<div class="form-group">
 					<label for="nombres" class="control-label col-sm-2 required">Nombres (*)</label>
 					<div class="col-sm-3">
@@ -206,11 +210,11 @@
 				<div class="col-sm-6">
 					<div id="map" data-editable="1" style="width:100%;height:300px;"></div>
 					<div class="form-group">    
-						<label for="email" class="control-label required col-sm-3">Latitud</label>
+						<label for="email" class="control-label required col-sm-2">Latitud</label>
 						<div class="col-sm-3">
 							<input type="text" name="gl_latitud" id="gl_latitud" value="" placeholder="latitud" class="form-control"/>
 						</div>
-						<label for="email" class="control-label required col-sm-1">Longitud</label>
+						<label for="email" class="control-label required col-sm-2">Longitud</label>
 						<div class="col-sm-3">
 							<input type="text" name="gl_longitud"  id="gl_longitud" value="" placeholder="Longitud" class="form-control"/>
 						</div>
