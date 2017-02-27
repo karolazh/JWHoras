@@ -159,14 +159,33 @@ class Empa extends Controller{
         //llamado al template
         $this->_display('Empa/ver.tpl');
     }
-
-	public function audit(){
-		Acceso::redireccionUnlogged($this->smarty);
-
-        $registro          = $this->_DAOAlcoholismo->getAll();
+    
+    public function audit() {
+        Acceso::redireccionUnlogged($this->smarty);
+        $registro = $this->_DAOAlcoholismo->getAll();
         $this->smarty->assign("registro", $registro);
-	$this->smarty->display('Empa/audit.tpl');
-        $this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js"); 
-	}
+        $this->smarty->display('Empa/audit.tpl');
+        $this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
+    }
 
+    public function guardar(){
+        header('Content-type: application/json');
+        $parametros		= $this->_request->getParams();
+	$correcto		= false;
+        $error			= false;
+        //$id_registro            = $this->_DAOEmpa->updateEmpa($parametros);
+        $id_registro            = false;
+        if($id_registro){
+			$correcto       = true;
+        }else{
+            $error		= true;
+        }
+
+        $salida	= array("error" => $error,
+                        "correcto" => $correcto);
+        $this->smarty->assign("hidden", "");
+        $json	= Zend_Json::encode($salida);
+
+        echo $json;
+    }
 }

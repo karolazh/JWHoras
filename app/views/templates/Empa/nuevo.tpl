@@ -17,7 +17,7 @@
 </section>
 
 <form id="form" class="form-horizontal">
-
+    <input type="text" value="0" id="id_empa" name="id_empa" class="hidden">
     <section class="content">
         <div class="panel panel-primary">
             <div class="panel-heading">
