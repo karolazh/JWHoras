@@ -67,6 +67,14 @@
 
     });
 
+	$("#chkAcepta").on('click', function(e) {
+		if($('#chkAcepta').is(':checked')){
+			$('#files').show();
+		}else{
+			$('#files').hide();
+		}
+	});
+
 	//Formatea Fecha
 	function formattedDate(date) {
 		var d		= new Date(date || Date.now()),
