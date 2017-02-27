@@ -1,75 +1,55 @@
 /* global BASE_URI */
 
-    $("#guardarArchivo").on('click', function(e) {
-        xModal.danger('PRUEBA GUARDA COMENTARIO');
-    });
-    
-    $("#guardarEvento").on('click', function(e) {
-        xModal.danger('PRUEBA ADJUNTA ARCHIVO');
-    });
+var Registro = {
 
-    $("#guardar").on('click', function(e) {
-        var button_process	= buttonStartProcess($(this), e);
-        var parametros		= $("#form").serializeArray();
-        var gl_rut			= $("#rut").val();
+    guardarNuevoAdjunto: function (form, btn) {
+        /*
+         realizar validacion formulario
+         */
+        btn.disabled = true;
 
-		if(gl_rut == ''){
-			xModal.danger('- El campo RUT es Obligatorio');
-		}else{
-			if($('#chkextranjero').is(':checked')){
-				parametros.push({
-					"name"  : 'chkextranjero',
-					"value" : 1
-				});
-			}else{
-				parametros.push({
-					"name"  : 'chkextranjero',
-					"value" : 0
-				});
-			}
-			if($('#chkAcepta').is(':checked')){
-				parametros.push({
-					"name"  : 'chkAcepta',
-					"value" : 1
-				});
-			}else{
-				parametros.push({
-					"name"  : 'chkAcepta',
-					"value" : 0
-				});
-			}
-			if($('#chkReconoce').is(':checked')){
-				parametros.push({
-					"name"  : 'chkReconoce',
-					"value" : 1
-				});
-			}else{
-				parametros.push({
-					"name"  : 'chkReconoce',
-					"value" : 0
-				});
-			}
+        var error = false;
+        var msg_error = '';
+        
+        if (form.tipoDoc.value == 0) {
+            msg_error += 'Seleccione Tipo de documento<br/>';
+            error = true;
+        }
+        
+        if (form.archivo.value == "") {
+            msg_error += 'Seleccione Archivo<br/>';
+            error = true;
+        }
+        
+        if (error) {
+            xModal.danger(msg_error,function(){
+                btn.disabled = false;
+            });
 
-			$.ajax({
-				dataType: "json",
-				cache	:false,
-				async	: true,
-				data	: parametros,
-				type	: "post",
-				url		: BASE_URI + "index.php/Registro/GuardarRegistro", 
-				error	: function(xhr, textStatus, errorThrown){
-							xModal.danger('Error: No se pudo Ingresar un nuevo Registro');
-				},
-				success	: function(data){
-							if(data.correcto){
-								xModal.success('Éxito: Se Ingresó nuevo Registro!');
-								location.href = BASE_URI + "index.php/Registro";
-							} else {
-								xModal.info('Error: No se pudo Ingresar un nuevo Registro');
-							}
-				}
-			});
-		}
-		buttonEndProcess(button_process);
-		
-    });
+        } else {
+            var formulario = $(form).serialize();
+            //alert(formulario);
+            //
+            $.post(BASE_URI + 'index.php/Registro/guardarNuevoAdjunto', {data: formulario}, 
+            function (response) {
+                //alert(response);
+                if (response.estado == true) {
+//                    xModal.success(response.mensaje,function(){
+//                        location.href = BASE_URI + 'index.php/Proyecto';
+//                    });
+//
+                } else {
+//                    xModal.danger(response.mensaje,function(){
+//                        btn.disabled = false;
+//                    });
+//
+                }
+            }, 'json').fail(function () {
+                xModal.danger("Error en sistema. Intente nuevamente",function(){
+                    btn.disabled = false;
+                });
+            });
+        }
+
+    }
+}

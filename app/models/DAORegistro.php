@@ -266,7 +266,8 @@ class DAORegistro extends Model{
                         eve.id_registro AS id_registro,
                         eve.gl_descripcion AS glosa,
                         date_format(eve.fc_crea,'%d-%m-%Y') AS fc_crea,
-                        usr.gl_rut AS rut
+                        usr.gl_rut AS rut,
+                        concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
                     FROM pre_eventos eve
                     LEFT JOIN pre_eventos_tipo tip ON tip.id_evento_tipo = eve.id_evento_tipo
                     LEFT JOIN pre_usuarios usr ON usr.id_usuario = eve.id_usuario_crea
