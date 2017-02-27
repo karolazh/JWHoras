@@ -38,13 +38,13 @@ class Empa extends Controller{
     function __construct(){
         parent::__construct();
         //Acceso::set("ADMINISTRADOR");
-		$this->load->lib('Boton', false);
-        $this->_DAOEmpa			= $this->load->model("DAOEmpa");
-        $this->_DAOUsuarios		= $this->load->model("DAOUsuarios");
-        $this->_DAOComuna		= $this->load->model("DAOComuna");
-        $this->_DAOInstitucion	= $this->load->model("DAOInstitucion");
-        $this->_DAORegistro		= $this->load->model("DAORegistro");
-        $this->_DAOAlcoholismo	= $this->load->model("DAOAlcoholismo");
+        $this->load->lib('Boton', false);
+        $this->_DAOEmpa             = $this->load->model("DAOEmpa");
+        $this->_DAOUsuarios         = $this->load->model("DAOUsuarios");
+        $this->_DAOComuna           = $this->load->model("DAOComuna");
+        $this->_DAOInstitucion      = $this->load->model("DAOInstitucion");
+        $this->_DAORegistro         = $this->load->model("DAORegistro");
+        $this->_DAOAlcoholismo      = $this->load->model("DAOAlcoholismo");
     }
     
     /*
@@ -101,6 +101,12 @@ class Empa extends Controller{
         $this->smarty->assign("gl_apellidos", $registro->gl_apellidos);
         $this->smarty->assign("fc_nacimiento", $registro->fc_nacimiento);
         $reconoce = $registro->bo_reconoce;
+        
+        //Cargar Datos DAU Examen
+        //$param = array("id_registro" => $id_registro);
+        //$obj_empa	= $this->_DAOEmpa->verInfoById($param);
+        //$this->smarty->assign("gl_peso", $obj_empa->gl_peso);
+        
         if ($reconoce == 1){
             $check ="checked disabled";
         }else{
@@ -116,9 +122,11 @@ class Empa extends Controller{
         if ($edad > 40) {
             $dislipidemia = "display: block";
             $diabetes = "display: block";
+            $antecedentes = "display: none";
         } else {
             $dislipidemia = "display: none";
             $diabetes = "display: none";
+            $antecedentes = "display: block";
         }
         if ($edad > 24 && $edad < 65){
             $pap = "display: block";
@@ -127,6 +135,7 @@ class Empa extends Controller{
         }
         $this->smarty->assign("pap", $pap);
         $this->smarty->assign("diabetes", $diabetes);
+        $this->smarty->assign("antecedentes", $antecedentes);
         $this->smarty->assign("dislipidemia", $dislipidemia);
         $this->smarty->assign("gl_fono", $registro->gl_fono);
         $this->smarty->assign("gl_celular", $registro->gl_celular);

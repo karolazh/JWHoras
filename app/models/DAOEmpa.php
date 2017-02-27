@@ -163,6 +163,36 @@ class DAOEmpa extends Model{
             return false;
         }
     }
+    
+    	public function verInfoById($parametros) {
+        $query	= "SELECT 
+						
+						IFNULL(e.gl_email,'N/D') as gl_email,
+						IFNULL(e.gl_latitud,'') as gl_latitud,
+						IFNULL(e.gl_longitud,'') as gl_longitud,
+						IFNULL(bo_reconoce,0) as bo_reconoce,
+						IFNULL(bo_acepta_programa,0) as bo_acepta_programa,
+						IFNULL(a.gl_path,'') as gl_path,
+						IFNULL(p.gl_nombre_prevision, 'N/D') as gl_nombre_prevision,
+						IFNULL(c.gl_nombre_comuna, 'N/D') as gl_nombre_comuna,
+						IFNULL(r.gl_nombre_region, 'N/D') as gl_nombre_region
+					FROM pre_empa AS e
+						LEFT JOIN pre_adjuntos AS a USING (id_adjunto)
+						LEFT JOIN pre_prevision AS p USING (id_prevision)
+						LEFT JOIN pre_comunas AS c USING (id_comuna)
+						LEFT JOIN pre_regiones AS r USING (id_region)
+						LEFT JOIN pre_usuarios AS u ON rg.id_usuario_crea = u.id_usuario
+						LEFT JOIN pre_estados_caso AS ec USING (id_estado_caso)
+					WHERE e.id_registro = ".$parametros['id_registro']."
+                                        AND e.nr_orden = ".$parametros['nr_orden']."    ";
+        $consulta = $this->db->getQuery($query, $parametros);
+        if ($consulta->numRows > 0) {
+            return $consulta->rows->row_0;
+        } else {
+            return null;
+        }
+    }
+
 }
     
 ?>

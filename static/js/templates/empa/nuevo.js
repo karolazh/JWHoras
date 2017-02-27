@@ -69,9 +69,8 @@ function calculaIMC()
     
     //Si IMC es mayor a 30 Mostrar Diabetes
     if (imc > 30){
-        $("#diabetes").show();
-    } else {
-        $("#diabetes").hide();
+        $("#glicemia").show();
+        $("#antecedentes").hide();
     }
     
     //enviamos resultados a la caja correspondiente
@@ -93,7 +92,7 @@ $("#gl_circunferencia_abdominal").on('keyup', function (e) {
 
 // Si Consume Alcohol muestra Boton para Hacer Cuestionario AUDIT
 $(".bo_consume_alcohol").on('change', function (e) {
-    if ($('#bo_consume_alcohol').is(':checked')) {
+    if ($('#bo_consume_alcohol_0').is(':checked')) {
         $('#btnaudit').addClass('hidden');
         $('#gl_puntos_audit').addClass('hidden');
 		$('#btnaudit').addClass('hidden');
@@ -116,7 +115,7 @@ $("#gl_puntos_audit").on('change', function (e) {
 
 //Si Fuma muestra Consejería
 $(".bo_fuma").on('change', function (e) {
-    if ($('#bo_fuma').is(':checked')) {
+    if ($('#bo_fuma_0').is(':checked')) {
         $('#lbl_fuma').addClass('hidden');
     } else {
         $('#lbl_fuma').removeClass('hidden');
@@ -139,6 +138,15 @@ $("#gl_pad").on('keyup', function (e) {
     }
 });
 
+// Si tiene Antecedentes de Diabetes Mellitus mostrar/ocultar Examen Glicemia
+$(".bo_antecedente").on('change', function (e) {
+    if ($('#bo_antecedente_0').is(':checked')) {
+        $('#glicemia').hide();
+    } else {
+        $('#glicemia').show();
+    }
+});
+
 //(Si Examen de Glicemia es = 100-125 mh/dl consejería alimentacion) (Si valor >= 126 Referir confirmación diagnóstica)
 $("#gl_glicemia").on('keyup', function (e) {
     if ($("#gl_glicemia").val() >= 100 && $("#gl_glicemia").val() <= 125) {
@@ -157,7 +165,7 @@ $("#gl_glicemia").on('keyup', function (e) {
 
 //Si es trabajadora sexual o persona en centro reclusión -> mostrar VDRL y RPR
 $(".bo_trabajadora_reclusa").on('change', function (e) {
-    if ($('#bo_trabajadora_reclusa').is(':checked')) {
+    if ($('#bo_trabajadora_reclusa_0').is(':checked')) {
         $('#id_vdrl_rpr').addClass('hidden');
     } else {
         $('#id_vdrl_rpr').removeClass('hidden');
@@ -166,7 +174,7 @@ $(".bo_trabajadora_reclusa").on('change', function (e) {
 
 //Si VDRL o RPR es positivo -> Activar Funcionalidad de Agenda para ITS
 $(".bo_rpr").on('change', function (e) {
-    if (($('#bo_rpr').is(':checked')) && ($('#bo_vdrl').is(':checked'))) {
+    if (($('#bo_rpr_0').is(':checked')) && ($('#bo_vdrl_0').is(':checked'))) {
             $('#verAgendaSifilis').hide();
 			$('#div_ITS_agenda').hide();
     } else {
@@ -176,7 +184,7 @@ $(".bo_rpr").on('change', function (e) {
 });
 
 $(".bo_vdrl").on('change', function (e) {
-    if (($('#bo_rpr').is(':checked')) && ($('#bo_vdrl').is(':checked'))) {
+    if (($('#bo_rpr_0').is(':checked')) && ($('#bo_vdrl_0').is(':checked'))) {
             $('#verAgendaSifilis').hide();
 			$('#div_ITS_agenda').hide();
     } else {
@@ -187,7 +195,7 @@ $(".bo_vdrl").on('change', function (e) {
 
 //Si ha tenido Tos por + 15 dias -> mostrar Baciloscopia
 $(".bo_tos_productiva").on('change', function (e) {
-    if ($('#bo_tos_productiva').is(':checked')) {
+    if ($('#bo_tos_productiva_0').is(':checked')) {
         $('#id_baciloscopia').addClass('hidden');
     } else {
         $('#id_baciloscopia').removeClass('hidden');
@@ -196,7 +204,7 @@ $(".bo_tos_productiva").on('change', function (e) {
 
 //Se ha realizado PAP? Si -> Muestra ultima fecha ; No -> Muestra Input para tomar fecha
 $(".bo_pap_realizado").on('change', function (e) {
-    if ($('#bo_pap_realizado').is(':checked')) {
+    if ($('#bo_pap_realizado_0').is(':checked')) {
         $('#tomar_fecha').removeClass('hidden');
         $('#ultimo_pap').addClass('hidden');
     } else {
