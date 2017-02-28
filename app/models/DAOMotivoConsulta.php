@@ -49,8 +49,8 @@ class DAOMotivoConsulta extends Model{
                     FROM ".$this->_tabla." mot
                     LEFT JOIN pre_usuarios usu ON mot.id_usuario_crea = usu.id_usuario
 					LEFT JOIN pre_institucion ins ON mot.id_institucion = ins.id_institucion
-                    WHERE id_registro = ?;";
-                
+                    WHERE id_registro = ?;
+					ORDER BY mot.id_motivo_consulta DESC";
 
         $params = array($id_registro);
         $resultado = $this->db->getQuery($query, $params);

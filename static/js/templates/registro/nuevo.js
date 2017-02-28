@@ -254,7 +254,11 @@
 					},
 					success	: function(data){
 								if(data.correcto){
-									xModal.success('Paciente ya Registro.<br>Se procede a cargar la información.');
+									if(data.count_motivos == 1){
+										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registro en la Plataforma, con fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información.');
+									}else{
+										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registros en la Plataforma, siendo el último de fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información.');
+									}
 
 									$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Registro/bitacora/"+data.id_registro+"', 'Registro número : "+data.id_registro+"', 85);");
 

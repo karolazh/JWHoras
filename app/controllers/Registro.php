@@ -432,8 +432,12 @@ class Registro extends Controller {
         $json			= array();
 
 		if($registro){
+			$arr_motivos				= $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($registro->id_registro);
+			
 			$json['correcto']			= TRUE;
-                        $json['id_registro']			= $registro->id_registro;
+			$json['count_motivos']		= count($arr_motivos);
+			$json['fc_ultimo_motivos']	= $arr_motivos->row_0->fc_ingreso;
+			$json['id_registro']		= $registro->id_registro;
 			$json['gl_nombres']			= $registro->gl_nombres;
 			$json['gl_apellidos']		= $registro->gl_apellidos;
 			$json['fc_nacimiento']		= $registro->fc_nacimiento;
@@ -492,27 +496,3 @@ class Registro extends Controller {
     }
     
 }
-
-//$id_ticket = $_POST["idTicket"];
-//        $fecha_entrega = explode('/', $_POST["fechaEntrega"]);
-//        $comentario =  $_POST["comentario"];
-//        $detalle =  $_POST["detalle"];
-//        $horasEs =  $_POST["horasEstimadas"];
-//        $horasUt =  $_POST["horasUtilizadas"];
-//        $idAsignado =  $_POST["idAsignado"];
-//        $fecha_termino =  explode('/', $_POST["fechaFinalizar"]);
-//
-//        $data = array();
-//        $data["id_ticket"] 			= 	$id_ticket;
-//        $data["fc_plazo"] 			= $fecha_entrega[2] . '-' . $fecha_entrega[1] . '-' . $fecha_entrega[0];
-//        $data["fc_fecha_termino"] 	= $fecha_termino[2] . '-' . $fecha_termino[1] . '-' . $fecha_termino[0];
-//        $data["cd_id_usuario"] 		= $idAsignado;
-//
-//        if($comentario != 1){
-//            $data["gl_comentario"] = $comentario;
-//            $data["gl_detalle_finalizado"] = $detalle;
-//            $data["nr_horas_estimadas"] = $horasEs;
-//            $data["nr_horas_utilizadas"] = $horasUt;
-//            
-//        }
-//        $update = $this->_DAOSolicitudes->update($data, $id_ticket, $this->campo_id);
