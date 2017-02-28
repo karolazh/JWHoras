@@ -392,9 +392,9 @@
                                 <label><input class="bo_baciloscopia_toma" type="radio" name="bo_baciloscopia_toma" 
                                               id="bo_baciloscopia_toma_1" value="1">Positivo</label>
                             </div>
-                        </div>
-                        <div class="col-sm-1">
-                            {$botonAyudaBasiloscopia}
+							<div class="col-sm-1">
+								{$botonAyudaBasiloscopia}
+							</div>
                         </div>
                     </div>
                 </div>
