@@ -1,3 +1,7 @@
+//Cuando Carga FORM -> Controlar mostrar/ocultar elementos según Carga de Datos
+
+
+
 //Calcular IMC segun Peso y Altura
 function calculaIMC()
 {
@@ -101,14 +105,9 @@ $("#gl_circunferencia_abdominal").on('keyup', function (e) {
 // Si Consume Alcohol muestra Boton para Hacer Cuestionario AUDIT
 $(".bo_consume_alcohol").on('change', function (e) {
 	if ($('#bo_consume_alcohol_0').is(':checked')) {
-		$('#btnaudit').addClass('hidden');
-		$('#gl_puntos_audit').addClass('hidden');
-		$('#btnaudit').addClass('hidden');
-		$('#div_consejeria_alcohol').addClass('hidden');
+		$('#div_alcoholismo').hide();
 	} else {
-		$('#btnaudit').removeClass('hidden');
-		$('#gl_puntos_audit').removeClass('hidden');
-		$('#div_consejeria_alcohol').removeClass('hidden');
+		$('#div_alcoholismo').show();
 	}
 });
 
@@ -124,9 +123,9 @@ $("#gl_puntos_audit").on('change', function (e) {
 //Si Fuma muestra Consejería
 $(".bo_fuma").on('change', function (e) {
 	if ($('#bo_fuma_0').is(':checked')) {
-		$('#lbl_fuma').addClass('hidden');
+		$('#lbl_fuma').hide();
 	} else {
-		$('#lbl_fuma').removeClass('hidden');
+		$('#lbl_fuma').show();
 	}
 });
 
@@ -164,19 +163,19 @@ $("#gl_glicemia").on('keyup', function (e) {
 	}
 	if ($("#gl_glicemia").val() > 125) {
 		$('#verAgendaDiabetes').show();
-		$('#div_glicemia_agenda').show()
+                $('#div_glicemia_agenda').show();
 	} else {
 		$('#verAgendaDiabetes').hide();
-		$('#div_glicemia_agenda').hide()
+                $('#div_glicemia_agenda').hide();
 	}
 });
 
 //Si es trabajadora sexual o persona en centro reclusión -> mostrar VDRL y RPR
 $(".bo_trabajadora_reclusa").on('change', function (e) {
 	if ($('#bo_trabajadora_reclusa_0').is(':checked')) {
-		$('#id_vdrl_rpr').addClass('hidden');
+		$('#id_vdrl_rpr').hide();
 	} else {
-		$('#id_vdrl_rpr').removeClass('hidden');
+		$('#id_vdrl_rpr').show();
 	}
 });
 
@@ -216,11 +215,14 @@ $(".bo_tos_productiva").on('change', function (e) {
 //Se ha realizado PAP? Si -> Muestra ultima fecha ; No -> Muestra Input para tomar fecha
 $(".bo_pap_realizado").on('change', function (e) {
 	if ($('#bo_pap_realizado_0').is(':checked')) {
-		$('#tomar_fecha').removeClass('hidden');
-		$('#ultimo_pap').addClass('hidden');
+		$('#tomar_fecha').show();
+		$('#ultimo_pap').hide();
+                $('#pap_vigente').hide();
+                
 	} else {
-		$('#tomar_fecha').addClass('hidden');
-		$('#ultimo_pap').removeClass('hidden');
+		$('#tomar_fecha').hide();
+		$('#ultimo_pap').show();
+                $('#pap_vigente').show();
 	}
 });
 
@@ -245,17 +247,15 @@ $("#gl_colesterol").on('keyup', function (e) {
 	var valor_colesterol = $('#gl_colesterol').val();
 	if (valor_colesterol > 199 && valor_colesterol < 240) {
 		$('#verAgendaDislipidemia').hide();
+                $('#div_colesterol_agenda').hide()
 		$('#div_colesterol').show();
 		$('#div_consejeria_colesterol').show();
-		$('#gl_colesterol').parent().find('span.help-block').removeClass("hidden");
 	} else if (valor_colesterol >= 240) {
-		$('#gl_colesterol').parent().find('span.help-block').addClass("hidden");
 		$('#div_colesterol').hide();
 		$('#div_consejeria_colesterol').hide();
 		$('#verAgendaDislipidemia').show();
 		$('#div_colesterol_agenda').show();
 	} else {
-		$('#gl_colesterol').parent().find('span.help-block').addClass("hidden");
 		$('#div_colesterol').hide();
 		$('#div_consejeria_colesterol').hide();
 		$('#verAgendaDislipidemia').hide();
@@ -296,15 +296,11 @@ $("#fc_mamografia").livequery(function () {
 $(".bo_mamografia_requiere").on('change', function (e) {
 
     if ($('#bo_mamografia_requiere').is(':checked')) {
-        $('#verAgendaMamografia').hide();
-        $('#div_mamografia_agenda').hide();
         $('#mam_resultado2').hide();
-        $('#toma_mamografia').hide();
+        $('#requiere_mamografia').hide();
     } else {
-        $('#verAgendaMamografia').show();
-        $('#div_mamografia_agenda').show();
         $('#mam_resultado2').show();
-        $('#toma_mamografia').show();
+        $('#requiere_mamografia').show();
     }
 });
 
@@ -639,6 +635,17 @@ $("#guardar").on('click', function (e) {
                                 parametros.push({
 					"name"  : 'bo_mamografia_realizada',
 					"value" : 'NULL'
+				});
+                        }
+                        if($('#fc_mamografia').val() == ""){
+				parametros.push({
+					"name"  : 'fc_mamografia',
+					"value" : 'NULL'
+				});
+			} else {
+                            parametros.push({
+					"name"  : 'fc_mamografia',
+					"value" : "'"+$('#fc_mamografia').val()+"'"
 				});
                         }
                         if($('#bo_mamografia_vigente_1').is(':checked')){
