@@ -256,6 +256,8 @@
 								if(data.correcto){
 									xModal.success('Paciente ya Registro.<br>Se procede a cargar la información.');
 
+									$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Registro/bitacora/"+data.id_registro+"', 'Registro número : "+data.id_registro+"', 85);");
+
 									$("#id_registro").val(data.id_registro);
 									$("#nombres").val(data.gl_nombres);
 									$("#apellidos").val(data.gl_apellidos);
@@ -304,9 +306,11 @@
 									
 									$('#guardar').hide();
 									$('#guardarMotivo').show();
+									$("#btnBitacora").show();
 								} else {
 									$('#guardar').show();
 									$('#guardarMotivo').hide();
+									$("#btnBitacora").hide();
 									xModal.info('Nuevo Paciente');
 								}
 					}

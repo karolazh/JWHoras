@@ -32,12 +32,22 @@
 					<div id="nacional">
 						<label for="rut" class="control-label col-sm-2 ">Rut Paciente (*)</label>
 						<div class="col-sm-2">
-							<input type="text" name="rut" id="rut" maxlength="12" onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut')" placeholder="Rut paciente" class="form-control">
+							<input type="text" name="rut" id="rut" maxlength="12" onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut');Registro.cargarRegistro();" placeholder="Rut paciente" class="form-control">
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
 						<div class="col-sm-1">
+							<button type="button" id="btnBitacora" style="display:none;"									
+									data-toggle="tooltip" 
+									title="Revisar bitácora" 
+									class="btn btn-xs btn-primary">
+								<i class="fa fa-info-circle"></i>
+							</button>
+						</div>
+						{*}
+						<div class="col-sm-1">
 							<button type="button" id="buscar" class="btn btn-info btn-sm form-control" onclick="Registro.cargarRegistro()"><i class="fa fa-search"></i></button>
 						</div>
+						{*}
 					</div>
 					
 					<div style="display: none" id="extranjero">
