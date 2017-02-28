@@ -46,7 +46,7 @@
 									{/if}
 								</td>
 								<td class="col-xs-12" for="pregunta_{$i}">
-									<input id="puntos_{$i}" class="text-right col-xs-12" value="" readonly>
+									<input id="puntos_{$i}" class="text-right col-xs-12 subTotal" value="0" >
 								</td>
 							</tr>
 						{/foreach}
