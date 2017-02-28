@@ -25,27 +25,27 @@
 								<td class="text-center"> {$item->gl_pregunta} </td>
 								<td class="text-center" for="pregunta_{$i}">
 									{if $item->gl_respuesta1} 
-										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta1_puntos}" data='{$i}' type="radio" class="radio_audit" title="{$item->gl_respuesta1}"> {$item->gl_respuesta1}
+										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta1_puntos}" {if $item->nr_respuesta1_puntos == $arrAudit->$row_n->nr_valor}checked {/if} data='{$i}' type="radio" class="radio_audit" title="{$item->gl_respuesta1}"> {$item->gl_respuesta1}
 									{/if}
 								</td>
 								<td class="text-center" for="pregunta_{$i}">
 									{if $item->gl_respuesta2} 
-										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta2_puntos}" data='{$i}' type="radio"  class="radio_audit" title="{$item->gl_respuesta2}"> {$item->gl_respuesta2}
+										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta2_puntos}" {if $item->nr_respuesta2_puntos == $arrAudit->$row_n->nr_valor}checked {/if} data='{$i}' type="radio"  class="radio_audit" title="{$item->gl_respuesta2}"> {$item->gl_respuesta2}
 									{/if}
 								</td>
 								<td class="text-center" for="pregunta_{$i}">
 									{if $item->gl_respuesta3} 
-										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta3_puntos}" data='{$i}' type="radio"  class="radio_audit" title="{$item->gl_respuesta3}"> {$item->gl_respuesta3}
+										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta3_puntos}" {if $item->nr_respuesta3_puntos == $arrAudit->$row_n->nr_valor}checked {/if} data='{$i}' type="radio"  class="radio_audit" title="{$item->gl_respuesta3}"> {$item->gl_respuesta3}
 									{/if}
 								</td>
 								<td class="text-center" for="pregunta_{$i}">
 									{if $item->gl_respuesta4} 
-										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta4_puntos}" data='{$i}' type="radio"  class="radio_audit" title="{$item->gl_respuesta4}"> {$item->gl_respuesta4}
+										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta4_puntos}" {if $item->nr_respuesta4_puntos == $arrAudit->$row_n->nr_valor}checked {/if} data='{$i}' type="radio"  class="radio_audit" title="{$item->gl_respuesta4}"> {$item->gl_respuesta4}
 									{/if}
 								</td>
 								<td class="text-center" for="pregunta_{$i}">
 									{if $item->gl_respuesta5} 
-										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta5_puntos}" data='{$i}' type="radio"  class="radio_audit" title="{$item->gl_respuesta5}"> {$item->gl_respuesta5}
+										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta5_puntos}" {if $item->nr_respuesta5_puntos == $arrAudit->$row_n->nr_valor}checked {/if} data='{$i}' type="radio"  class="radio_audit" title="{$item->gl_respuesta5}"> {$item->gl_respuesta5}
 									{/if}
 								</td>
 								<td class="col-xs-12" for="pregunta_{$i}">
