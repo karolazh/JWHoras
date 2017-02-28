@@ -1,7 +1,7 @@
 
-	<div class="panel panel-primary">
-		<div class="panel-body">
-
+<div class="panel panel-primary">
+	<div class="panel-body">
+		<form id="formAudit"class="form-horizontal" role="form">
 			<div class="table-responsive col-lg-12" data-row="10">
 				<table id="tablaPrincipal" class="table table-hover table-striped table-bordered ">
 					<thead>
@@ -53,10 +53,10 @@
 								</td>
 							</tr>
 						{/foreach}
-							<tr>
-								<td colspan="6" class="text-right"><b> TOTAL </b></td>
-								<td class="col-xs-12"> <input id="total" class="text-right col-xs-12" value="{$total}" readonly> </td>
-							</tr>
+						<tr>
+							<td colspan="6" class="text-right"><b> TOTAL </b></td>
+							<td class="col-xs-12"> <input id="total" class="text-right col-xs-12" value="{$total}" readonly> </td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -67,6 +67,6 @@
 					<i class="fa fa-save"></i>  Guardar
 				</button>
 			</div>
-
-		</div>
+		</form>
 	</div>
+</div>

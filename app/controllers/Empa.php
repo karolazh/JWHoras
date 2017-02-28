@@ -347,4 +347,24 @@ class Empa extends Controller{
 
         echo $json;
     }
+	
+	public function guardarAudit(){
+        header('Content-type: application/json');
+        $parametros		= $this->_request->getParams();
+		print_r($parametros);die();
+		$correcto		= false;
+        $error			= false;
+        //$id_empa                = $this->_DAOEmpa->updateEmpa($parametros);
+        if($id_empa){
+            $correcto           = true;
+        }else{
+            $error		= true;
+        }
+
+        $salida	= array("error" => $error,
+                        "correcto" => $correcto);
+        $json	= Zend_Json::encode($salida);
+
+        echo $json;
+    }
 }
