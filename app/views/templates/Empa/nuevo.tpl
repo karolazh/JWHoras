@@ -164,24 +164,24 @@
                                               id="bo_consume_alcohol_0" value="0">NO</label>
                                 &nbsp;&nbsp;
                                 <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol" 
-                                              id="bo_consume_alcohol_1" value="1">SI</label>
+                                              id="bo_consume_alcohol_1" value="1" checked>SI</label>
                             </div>
                             <div class="col-sm-1">
                                 <button href='javascript:void(0)'
                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Empa/audit/{$item->id_registro}', 'AUDIT (Auto-diagnostico sobre Riesgos en el Uso de Alcohol)', 80);"
                                         data-toggle="tooltip"
-                                        title="Ver Registro"
-                                        type="button" id="btnaudit" class="btn btn-sm btn-info hidden btn-flat">
+                                        title="Ver Registro" style="display: none"
+                                        type="button" id="btnaudit" class="btn btn-sm btn-info btn-flat">
                                     <i class="fa fa-file-text-o"></i>&nbsp;AUDIT 
                                 </button>
                             </div>
                             <div class="col-sm-1">
-                                <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value=""
-									   placeholder="AUDIT Puntos" class="form-control hidden" readonly/>
+                                <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value="" style="display: none"
+									   placeholder="AUDIT Puntos" class="form-control" readonly/>
 								<label class="control-label required col-sm-1 hidden" id="lbl_toma">{$botonAyudaAlcoholico}</label>
                             </div>  
 
-							<div id="div_consejeria_alcohol" class="col-sm-1 hidden">
+							<div id="div_consejeria_alcohol" class="col-sm-1" style="display: none">
                                 {$botonAyudaAlcoholico}
                             </div> 
                         </div>

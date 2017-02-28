@@ -101,14 +101,13 @@ $("#gl_circunferencia_abdominal").on('keyup', function (e) {
 // Si Consume Alcohol muestra Boton para Hacer Cuestionario AUDIT
 $(".bo_consume_alcohol").on('change', function (e) {
 	if ($('#bo_consume_alcohol_0').is(':checked')) {
-		$('#btnaudit').addClass('hidden');
-		$('#gl_puntos_audit').addClass('hidden');
-		$('#btnaudit').addClass('hidden');
-		$('#div_consejeria_alcohol').addClass('hidden');
+		$('#btnaudit').hide();
+		$('#gl_puntos_audit').hide();
+		$('#div_consejeria_alcohol').hide();
 	} else {
-		$('#btnaudit').removeClass('hidden');
-		$('#gl_puntos_audit').removeClass('hidden');
-		$('#div_consejeria_alcohol').removeClass('hidden');
+		$('#btnaudit').show();
+		$('#gl_puntos_audit').show();
+		$('#div_consejeria_alcohol').show();
 	}
 });
 
