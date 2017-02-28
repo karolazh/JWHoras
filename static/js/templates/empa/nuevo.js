@@ -316,6 +316,17 @@ $("#guardaraudit").livequery(function () {
 	});
 });
 
+
+
+$(".radio_audit").livequery(function () {
+	$(this).on('change', function (e) {
+		var valor	= $(this).val();
+		var i		= $(this).attr("data");
+		$("#puntos_"+i).val(valor);
+		$("#puntos_"+i).trigger('change');
+	});
+});
+
 $(".subTotal").livequery(function () {
 	$(this).on('change', function (e) {
 		var total = 0;
