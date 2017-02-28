@@ -135,7 +135,7 @@ class DAOEmpa extends Model{
 						gl_estatura                     =       '".$parametros['gl_estatura']."',
 						gl_imc                          =       '".$parametros['gl_imc']."',
 						gl_circunferencia_abdominal     =       '".$parametros['gl_circunferencia_abdominal']."',
-						id_clasificacion_imc            =       '".$parametros['id_clasificacion_imc']."',
+						id_clasificacion_imc            =       ".$parametros['id_clasificacion_imc'].",
 						gl_pas                          =       '".$parametros['gl_pas']."',
 						gl_pad                          =       '".$parametros['gl_pad']."',
                                                 gl_glicemia                     =       '".$parametros['gl_peso']."',
@@ -146,7 +146,8 @@ class DAOEmpa extends Model{
                                                 bo_tos_productiva               =       ".$parametros['bo_tos_productiva'].",
                                                 bo_baciloscopia_toma            =       ".$parametros['bo_baciloscopia_toma'].",
                                                 bo_pap_realizado                =       ".$parametros['bo_pap_realizado'].",
-                                                fc_ultimo_pap                   =       '".$parametros['fc_ultimo_pap']."',
+                                                fc_tomar_pap                    =       ".$parametros['fc_tomar_pap'].",
+                                                fc_ultimo_pap                   =       ".$parametros['fc_ultimo_pap'].",
                                                 bo_pap_vigente                  =       ".$parametros['bo_pap_vigente'].",
                                                 bo_pap_toma                     =       ".$parametros['bo_pap_toma'].",
                                                 gl_colesterol                   =       '".$parametros['gl_colesterol']."',
@@ -161,7 +162,7 @@ class DAOEmpa extends Model{
                     ";
                   
         if ($this->db->execQuery($query)) {
-            return $this->db->getLastId();
+            return true;
         } else {
             return false;
         }

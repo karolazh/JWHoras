@@ -129,6 +129,83 @@
 
     });
 
+    $("#guardarMotivo").on('click', function(e) {
+        var button_process	= buttonStartProcess($(this), e);
+        var parametros		= $("#form").serializeArray();
+
+		if($('#chkAcepta').is(':checked')){
+			parametros.push({
+				"name"  : 'chkAcepta',
+				"value" : 1
+			});
+		}else{
+			parametros.push({
+				"name"  : 'chkAcepta',
+				"value" : 0
+			});
+		}
+		if($('#chkReconoce').is(':checked')){
+			parametros.push({
+				"name"  : 'chkReconoce',
+				"value" : 1
+			});
+		}else{
+			parametros.push({
+				"name"  : 'chkReconoce',
+				"value" : 0
+			});
+		}
+
+		$.ajax({
+			dataType: "json",
+			cache	:false,
+			async	: true,
+			data	: parametros,
+			type	: "post",
+			url		: BASE_URI + "index.php/Registro/GuardarMotivo", 
+			error	: function(xhr, textStatus, errorThrown){
+						xModal.danger('Error: No se pudo agregar Motivo de Consulta');
+			},
+			success	: function(data){
+						if(data.correcto){
+
+							xModal.success('Éxito: Se Ingresó nuevo Motivo de Consulta!');
+							setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
+						} else {
+							xModal.info('Error: No se pudo agregar Motivo de Consulta');
+						}
+			}
+		});
+		buttonEndProcess(button_process);
+
+    });
+
+    $("#guardarReconoce").on('click', function(e) {
+        var button_process	= buttonStartProcess($(this), e);
+		var id_registro			= $(this).attr("data");
+		
+		$.ajax({
+			dataType: "json",
+			cache	:false,
+			async	: true,
+			data	: {id_registro:id_registro},
+			type	: "post",
+			url		: BASE_URI + "index.php/Registro/GuardarReconoce", 
+			error	: function(xhr, textStatus, errorThrown){
+						xModal.danger('Error: No se pudo guardar');
+			},
+			success	: function(data){
+						if(data.correcto){
+							xModal.success('Éxito: información guardada!');
+							setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
+						} else {
+							xModal.info('Error:  No se pudo guardar');
+						}
+			}
+		});
+		buttonEndProcess(button_process);
+    });
+
 	$("#chkextranjero").on('click', function(e) {
 		if($('#chkextranjero').is(':checked')){
 			$('#nacional').hide();
@@ -177,7 +254,13 @@
 					},
 					success	: function(data){
 								if(data.correcto){
-									xModal.success('Paciente ya Registro.<br>Se procede a cargar la información.');
+									if(data.count_motivos == 1){
+										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registro en la Plataforma, con fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información.');
+									}else{
+										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registros en la Plataforma, siendo el último de fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información.');
+									}
+
+									$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Registro/bitacora/"+data.id_registro+"', 'Registro número : "+data.id_registro+"', 85);");
 
 									$("#id_registro").val(data.id_registro);
 									$("#nombres").val(data.gl_nombres);
@@ -227,9 +310,11 @@
 									
 									$('#guardar').hide();
 									$('#guardarMotivo').show();
+									$("#btnBitacora").show();
 								} else {
 									$('#guardar').show();
 									$('#guardarMotivo').hide();
+									$("#btnBitacora").hide();
 									xModal.info('Nuevo Paciente');
 								}
 					}

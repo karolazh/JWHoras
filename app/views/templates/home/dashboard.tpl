@@ -7,14 +7,14 @@
 
 <section class="content">
     <div class="row">
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-4">
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">Estadística Nacional : Total de Registros por Estados</h3>
                 </div>
                 <div class="box-body">
                     <div class="col-xs-12">
-                        <div id="grafico_estados_general" style="height: 700px;"></div>
+                        <div id="grafico_estados_general" style="height: 600px;"></div>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
         </div>
     </div>
     
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-xs-12 col-md-12">
             <div class="box box-primary">
                 <div class="box-header">
@@ -86,7 +86,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </section>
                         
 </body>

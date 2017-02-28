@@ -11,7 +11,19 @@ var Home = {
         });
         var chart = AmCharts.makeChart( "grafico_estados_general", {
           "type": "pie",
+			  labelsEnabled: false,
+			  autoMargins: false,
+			  marginTop: 10,
+			  marginBottom: 10,
+			  marginLeft: 10,
+			  marginRight: 10,
+			  pullOutRadius: 10,		  
           "theme": "light",
+  "legend":{
+   	"position":"bottom",
+    "marginRight":100,
+    "autoMargins":false
+  },		  
           "dataProvider": datos,
           "valueField": "total",
           "titleField": "estado",

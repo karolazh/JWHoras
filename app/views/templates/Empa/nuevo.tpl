@@ -154,9 +154,9 @@
 			<!-- Examen -->
             <div class="panel-body">
                 <!-- a. Alcoholismo -->
-                <div class="panel panel-success">
-                    <div class="panel-heading">Alcoholismo</div>
-                    <div class="panel-body">
+                <div class="box box-success">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Alcoholismo</h3></div>
+                    <div class="box-body">
                         <div class="form-group">
                             <label class="control-label col-sm-2 required">¿Consume bebidas alcoh&oacute;licas?</label>
                             <div class="col-sm-1">
@@ -189,9 +189,9 @@
                 </div>
 
                 <!-- b. Tabaquismo -->
-                <div class="panel panel-success">
-                    <div class="panel-heading">Tabaquismo</div>
-                    <div class="panel-body">   
+                <div class="box box-success">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Tabaquismo</h3></div>
+                    <div class="box-body">   
                         <div class="form-group">
                             <label class="control-label required col-sm-2">¿Usted fuma?</label>
                             <div class="col-sm-1">
@@ -207,9 +207,9 @@
                 </div>
 
                 <!-- c. Obesidad -->
-                <div class="panel panel-success">
-                    <div class="panel-heading">Obesidad</div>
-                    <div class="panel-body">
+                <div class="box box-success">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Obesidad</h3></div>
+                    <div class="box-body">
                         <div class="form-group">
                             <label class="control-label required col-sm-2">Peso (Kg)</label>
                             <div class="col-sm-1">
@@ -261,9 +261,9 @@
                     </div>
                 </div>
                 <!-- d. Hipertensión -->
-                <div class="panel panel-success">
-                    <div class="panel-heading">Hipertensión Arterial</div>
-                    <div class="panel-body"> 
+                <div class="box box-success">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Hipertensión Arterial</h3></div>
+                    <div class="box-body"> 
                         <div class="form-group">
                             <label class="control-label required col-sm-2">PAS (mm/Hg)</label>
                             <div class="col-sm-1">
@@ -290,9 +290,9 @@
                 </div>
                 
                 <!-- e. Diabetes Mellitus (DM) -->
-                <div class="panel panel-success" id="diabetes">
-                    <div class="panel-heading">Diabetes Mellitus (DM)</div>
-                    <div class="panel-body">
+                <div class="box box-success" id="diabetes">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Diabetes Mellitus (DM)</h3></div>
+                    <div class="box-body">
                         <div class="form-group" id="antecedentes" style="{$antecedentes}">
                             <label class="control-label required col-sm-2">¿Tiene Antecedentes Familiares de Diabetes Mellitus?</label>
                             <div class="col-sm-2">
@@ -330,9 +330,9 @@
                 </div>
 
                 <!-- f. Sífilis -->
-                <div class="panel panel-success">
-                    <div class="panel-heading">Sifilis en población de riesgo</div>
-                    <div class="panel-body">    
+                <div class="box box-success">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Sifilis en población de riesgo</h3></div>
+                    <div class="box-body">    
                         <div class="form-group">
                             <label class="control-label required col-sm-2">¿Es trabajadora sexual o persona en centro de reclusión?</label>
                             <div class="col-sm-2">
@@ -370,9 +370,9 @@
                 </div>
 
                 <!-- g. Tuberculósis -->
-                <div class="panel panel-success">
-                    <div class="panel-heading">Tuberculosis</div>
-                    <div class="panel-body">  
+                <div class="box box-success">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Tuberculosis</h3></div>
+                    <div class="box-body">  
                         <div class="form-group">
                             <label class="control-label required col-sm-2">¿Ha tenido tos productiva por m&aacute;s de 15 d&iacute;as?</label>
                             <div class="col-sm-2">
@@ -383,7 +383,7 @@
                                               id="bo_tos_productiva_1" value="1">SI</label>	
                             </div>
                         </div>
-                        <div class="form-group" id="id_baciloscopia">
+                        <div class="form-group" id="id_baciloscopia" style="display: none">
                             <label class="control-label required col-sm-2">Basiloscopia</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_baciloscopia_toma" type="radio" name="bo_baciloscopia_toma" 
@@ -400,9 +400,9 @@
                 </div>
 
                 <!-- h. PAP -->
-                <div class="panel panel-success" style="{$pap}">
-                    <div class="panel-heading">PAP (Mujeres de 25 a 64 años Cáncer Cervicouterino)</div>
-                    <div class="panel-body">  
+                <div class="box box-success" style="{$pap}">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> PAP (Mujeres de 25 a 64 años Cáncer Cervicouterino)</h3></div>
+                    <div class="box-body">  
                         <div class="form-group">
                             <label class="control-label required col-sm-2">¿Se ha realizado PAP?</label>
                             <div class="col-sm-2">
@@ -420,6 +420,9 @@
                                        value="" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>
+                            &nbsp;&nbsp;
+                            <button type="button" id="verAgendaPap1" 
+                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
                         <div class="form-group" style="display: none" id="pap_vigente">    
                             <label class="control-label required col-sm-2">PAP Vigente</label>
@@ -446,13 +449,13 @@
                                     class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
                         <div class="form-group" id="resultado_pap">
-                            <label for="bo_pap_toma" class="control-label required col-sm-2">Resultado PAP</label>
+                            <label class="control-label required col-sm-2">Resultado PAP</label>
                             <div class="col-sm-2">
-                                <label><input class="resultado_pap"  type="radio" name="resultado_pap" 
-                                              id="resultado_pap" value="0">Alterado</label>
+                                <label><input class="bo_pap_toma"  type="radio" name="bo_pap_toma" 
+                                              id="bo_pap_toma_0" value="0">Alterado</label>
                                 &nbsp;&nbsp;
-                                <label><input class="resultado_pap" type="radio" name="resultado_pap" 
-                                              id="resultado_pap" value="1">Normal</label>
+                                <label><input class="bo_pap_toma" type="radio" name="bo_pap_toma" 
+                                              id="bo_pap_toma_1" value="1">Normal</label>
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" id="verPAP" class="btn btn-sm btn-info">
@@ -462,9 +465,9 @@
                     </div>
                 </div>
                 <!-- Dislipidemia -->
-                <div class="panel panel-success" style="{$dislipidemia}">
-                    <div class="panel-heading">Dislipidemia (Mujeres de 40 años o mas)</div>
-                    <div class="panel-body">  
+                <div class="box box-success" style="{$dislipidemia}">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Dislipidemia (Mujeres de 40 años o mas)</h3></div>
+                    <div class="box-body">  
                         <div class="form-group">   
                             <label class="control-label required col-sm-2">Colesterol total (mg/dl)</label>
                             <div class="col-sm-2">
@@ -489,9 +492,9 @@
                     </div>
                 </div>
                 <!-- j. Mujeres de 50 años (cáncer de mama) -->
-                <div class="panel panel-success">
-                    <div class="panel-heading">Cáncer de mama</div>
-                    <div class="panel-body">
+                <div class="box box-success">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Cáncer de mama</h3></div>
+                    <div class="box-body">
                         <div class="form-group">
 							<label class="control-label required col-sm-2">¿Se ha realizado Examen de Mamografía?</label>
                             <div class="col-sm-2">
@@ -541,7 +544,7 @@
 								<label><input class="bo_mamografia_requiere" type="radio" name="bo_mamografia_requiere" 
 											  id="bo_mamografia_requiere" value="1">SI</label>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3" id="toma_mamografia" style="display: none">
 								<input type="checkbox" id="bo_mamografia_toma">
 								<label for="bo_mamografia_toma" class="control-label required">Toma Mamograf&iacute;a</label>
                             </div>
@@ -565,21 +568,21 @@
                 </div>
 
                 <!-- Observaciones -->
-                <div class="panel panel-success">
-                    <div class="panel-heading">Observaciones</div>
-                    <div class="panel-body">
+                <div class="box box-success">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Observaciones</h3></div>
+                    <div class="box-body">
                         <div class="form-group">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-10">
                                 <label>Observaciones</label>
-                                <textarea class="form-control col-sm-10" rows="5" id="gl_observaciones_empa" nombre="gl_observaciones_empa"
+                                <textarea type="text" class="form-control col-sm-10" rows="5" id="gl_observaciones_empa" name="gl_observaciones_empa"
                                           placeholder="Ingrese Observaciones" style="resize: none"></textarea>
                             </div>
                             <div class="col-sm-1"></div>
                         </div>
 
 
-                        <div class="form-group">
+                    {*    <div class="form-group">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-3">
                                 <div class="checkbox">
@@ -600,7 +603,8 @@
                             <div class="col-sm-12" hidden="hidden">
                                 <!-- Si Deriva, muestra listado de especialidades a las que puede derivar -->
                             </div>
-                        </div>
+                        </div> *}
+                        
                         <div class="form-group col-sm-11" align="right">
                             <button type="button" id="guardar" class="btn btn-success">
                                 <i class="fa fa-save"></i>  Guardar
