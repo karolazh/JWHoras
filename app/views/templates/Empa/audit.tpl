@@ -16,8 +16,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						{foreach $registro as $item}
+						{foreach $arrPreguntas as $item}
 							{$i = $item->id_pregunta}
+							{$n = $i - 1}
+							{$row = "row_"}
+							{assign var="row_n" value="`$row``$n`"} 
 							<tr>
 								<td class="text-center"> {$item->gl_pregunta} </td>
 								<td class="text-center" for="pregunta_{$i}">
@@ -46,13 +49,13 @@
 									{/if}
 								</td>
 								<td class="col-xs-12" for="pregunta_{$i}">
-									<input id="puntos_{$i}" class="text-right col-xs-12 subTotal" value="0" >
+									<input id="puntos_{$i}" class="text-right col-xs-12 subTotal" value="{$arrAudit->$row_n->nr_valor}" >
 								</td>
 							</tr>
 						{/foreach}
 							<tr>
 								<td colspan="6" class="text-right"><b> TOTAL </b></td>
-								<td class="col-xs-12"> <input id="total" class="text-right col-xs-12" value="0" readonly> </td>
+								<td class="col-xs-12"> <input id="total" class="text-right col-xs-12" value="{$total}" readonly> </td>
 							</tr>
 					</tbody>
 				</table>

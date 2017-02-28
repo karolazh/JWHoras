@@ -168,7 +168,7 @@
                             </div>
                             <div class="col-sm-1">
                                 <button href='javascript:void(0)'
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Empa/audit/{$item->id_registro}', 'AUDIT (Auto-diagnostico sobre Riesgos en el Uso de Alcohol)', 80);"
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Empa/audit/{$id_empa}', 'AUDIT (Auto-diagnostico sobre Riesgos en el Uso de Alcohol)', 80);"
                                         data-toggle="tooltip"
                                         title="Ver Registro"
                                         type="button" id="btnaudit" class="btn btn-sm btn-info hidden btn-flat">

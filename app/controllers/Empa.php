@@ -40,6 +40,7 @@ class Empa extends Controller{
         //Acceso::set("ADMINISTRADOR");
         $this->load->lib('Boton', false);
         $this->_DAOEmpa             = $this->load->model("DAOEmpa");
+		$this->_DAOEmpaAudit        = $this->load->model("DAOEmpaAudit");
         $this->_DAOUsuarios         = $this->load->model("DAOUsuarios");
         $this->_DAOComuna           = $this->load->model("DAOComuna");
         $this->_DAOInstitucion      = $this->load->model("DAOInstitucion");
@@ -188,8 +189,27 @@ class Empa extends Controller{
     
     public function audit() {
         Acceso::redireccionUnlogged($this->smarty);
-        $registro = $this->_DAOAlcoholismo->getAll();
-        $this->smarty->assign("registro", $registro);
+		$params = $this->request->getParametros();
+        $id_empa = $params[0];
+        $arrPreguntas = $this->_DAOAlcoholismo->getAll();
+		$arrAudit = $this->_DAOEmpaAudit->getAuditByEMPA($id_empa);
+		$total = 0;
+		foreach($arrAudit as $item){
+                if(is_null($item->nr_valor)){
+//                    print_r($item->nr_valor);
+//					print_r('<br>');
+					$item->nr_valor = 0;
+                    $total +=  $item->nr_valor;
+                }else{
+                    $total +=  $item->nr_valor;
+					 //print_r($item->nr_valor);
+					 //print_r('<br>');
+                }
+            }
+//			print_r($total); die();
+		$this->smarty->assign("total", $total);
+		$this->smarty->assign("arrAudit", $arrAudit);
+        $this->smarty->assign("arrPreguntas", $arrPreguntas);
         $this->smarty->display('Empa/audit.tpl');
     }
 
