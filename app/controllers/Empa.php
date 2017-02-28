@@ -191,19 +191,20 @@ class Empa extends Controller{
         $registro = $this->_DAOAlcoholismo->getAll();
         $this->smarty->assign("registro", $registro);
         $this->smarty->display('Empa/audit.tpl');
-        $this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
+        $this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo_audit.js");
     }
 
     public function guardar(){
         header('Content-type: application/json');
-        Acceso::redireccionUnlogged($this->smarty);
+       /*  Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
         $this->smarty->assign("rut", $sesion->rut);
         $this->smarty->assign("usuario", $sesion->usuario);
+		*/
         
         $parametros		= $this->_request->getParams();
-	$correcto		= false;
+		$correcto		= false;
         $error			= false;
         $id_empa                = $this->_DAOEmpa->updateEmpa($parametros);
         if($id_empa){
