@@ -28,7 +28,9 @@ class DAORegistro extends Model{
 						i.gl_nombre as gl_institucion,
 						c.gl_nombre_comuna,
 						e.gl_nombre_estado_caso,
-                        e.id_estado_caso
+                        e.id_estado_caso,
+						(select count(*) from pre_motivo_consulta where pre_motivo_consulta.id_registro = r.id_registro ) as nr_motivo_consulta,
+						datediff(now(),r.fc_crea) as nr_dias_primera_visita
 					FROM pre_registro r 
 						LEFT JOIN pre_institucion i ON i.id_institucion = r.id_institucion
 						LEFT JOIN pre_comunas c ON c.id_comuna = r.id_comuna
