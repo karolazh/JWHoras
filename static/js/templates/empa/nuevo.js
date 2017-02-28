@@ -247,17 +247,15 @@ $("#gl_colesterol").on('keyup', function (e) {
 	var valor_colesterol = $('#gl_colesterol').val();
 	if (valor_colesterol > 199 && valor_colesterol < 240) {
 		$('#verAgendaDislipidemia').hide();
+                $('#div_colesterol_agenda').hide()
 		$('#div_colesterol').show();
 		$('#div_consejeria_colesterol').show();
-		$('#gl_colesterol').parent().find('span.help-block').removeClass("hidden");
 	} else if (valor_colesterol >= 240) {
-		$('#gl_colesterol').parent().find('span.help-block').addClass("hidden");
 		$('#div_colesterol').hide();
 		$('#div_consejeria_colesterol').hide();
 		$('#verAgendaDislipidemia').show();
 		$('#div_colesterol_agenda').show();
 	} else {
-		$('#gl_colesterol').parent().find('span.help-block').addClass("hidden");
 		$('#div_colesterol').hide();
 		$('#div_consejeria_colesterol').hide();
 		$('#verAgendaDislipidemia').hide();

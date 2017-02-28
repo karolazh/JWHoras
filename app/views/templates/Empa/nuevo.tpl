@@ -319,7 +319,7 @@
                             <div class="col-sm-3" style="{if !($gl_glicemia >= 100 and $gl_glicemia <= 125)}display: none{/if}" id="div_glicemia_toma">
                                 <input type="checkbox" id="bo_glicemia_toma" {$bo_glicemia_toma}>
                                 <label for="bo_glicemia_toma" class="control-label required">Toma de Glicemia</label>
-                                <div class="col-sm-1" id="div_consejeria_colesterol">
+                                <div class="col-sm-1">
                                     {$botonConsejeriaGlicemia}
                                 </div>
                             </div>
@@ -474,23 +474,24 @@
                         <div class="form-group">   
                             <label class="control-label required col-sm-2">Colesterol total (mg/dl)</label>
                             <div class="col-sm-2">
-								<input type="text" name="gl_colesterol" id="gl_colesterol" maxlength="4"
-									   onKeyPress="return soloNumeros(event)"
-									   value="{$gl_colesterol}" placeholder="" class="form-control"/>
-								<span class="help-block hidden"></span>
+                                <input type="text" name="gl_colesterol" id="gl_colesterol" maxlength="4"
+                                       onKeyPress="return soloNumeros(event)"
+                                       value="{$gl_colesterol}" placeholder="" class="form-control"/>
+                                <span class="help-block hidden"></span>
                             </div>
-                            <div class="col-sm-3" style="display: none" id="div_colesterol">
-								<input type="checkbox" id="bo_colesterol_toma" {$bo_colesterol_toma}>
-								<label for="bo_colesterol_toma" class="control-label required">Toma de Colesterol</label>
-								<div class="col-sm-1" id="div_consejeria_colesterol">
-									{$botonConsejeriaColesterol}
-								</div>
+                            <div class="col-sm-3" style="{if !($gl_colesterol > 199 and $gl_colesterol < 240)}display: none{/if}" id="div_colesterol">
+                                <input type="checkbox" id="bo_colesterol_toma" {$bo_colesterol_toma}>
+                                <label for="bo_colesterol_toma" class="control-label required">Toma de Colesterol</label>
+                                <div class="col-sm-1" id="div_consejeria_colesterol">
+                                    {$botonConsejeriaColesterol}
+                                </div>
                             </div>
                             <div class="col-sm-3"></div>
-                            <button type="button" id="verAgendaDislipidemia" style="display: none" class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
-							<div class="col-sm-3" style="display: none" id="div_colesterol_agenda">
-								{$botonInformacionAgenda}
-							</div>
+                            <button type="button" id="verAgendaDislipidemia" style="{if !($gl_colesterol >= 240) }display: none{/if}" 
+                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
+                            <div class="col-sm-3" style="{if !($gl_colesterol >= 240) }display: none{/if}" id="div_colesterol_agenda">
+                                {$botonInformacionAgenda}
+                            </div>
                         </div>
                     </div>
                 </div>
