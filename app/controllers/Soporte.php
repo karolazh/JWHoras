@@ -250,7 +250,7 @@ class Soporte extends Controller{
 			$this->view->assign('success',$success);
 			$this->view->assign('mensaje',$mensaje);
 
-			$this->view->assign('template',$this->view->fetch('soportes_midas/cargar_adjunto.tpl'));
+			$this->view->assign('template',$this->view->fetch('soporte/cargar_adjunto.tpl'));
 			$this->view->display('template_iframe.tpl');
 		}
 	}
