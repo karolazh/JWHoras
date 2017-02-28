@@ -139,7 +139,7 @@ class DAOEmpa extends Model{
 						id_clasificacion_imc            =       ".$parametros['id_clasificacion_imc'].",
 						gl_pas                          =       '".$parametros['gl_pas']."',
 						gl_pad                          =       '".$parametros['gl_pad']."',
-                                                gl_glicemia                     =       '".$parametros['gl_peso']."',
+                                                gl_glicemia                     =       '".$parametros['gl_glicemia']."',
 						bo_glicemia_toma                =       ".$parametros['bo_glicemia_toma'].",
 						bo_trabajadora_reclusa          =       ".$parametros['bo_trabajadora_reclusa'].",
 						bo_vdrl                         =       ".$parametros['bo_vdrl'].",
@@ -154,6 +154,7 @@ class DAOEmpa extends Model{
                                                 gl_colesterol                   =       '".$parametros['gl_colesterol']."',
                                                 bo_colesterol_toma              =       ".$parametros['bo_colesterol_toma'].",
                                                 bo_mamografia_realizada         =       ".$parametros['bo_mamografia_realizada'].",
+                                                fc_mamografia                   =       ".$parametros['fc_mamografia'].",
                                                 bo_mamografia_vigente           =       ".$parametros['bo_mamografia_vigente'].",
                                                 bo_mamografia_toma              =       ".$parametros['bo_mamografia_toma'].",
                                                 gl_observaciones_empa           =       '".$parametros['gl_observaciones_empa']."',
@@ -214,12 +215,23 @@ class DAOEmpa extends Model{
                                                 fc_actualiza                    =       '".$parametros['fc_actualiza']."',
                                                 id_usuario_act                  =       ".$_SESSION['id_usuario']." */
     
-    	public function verInfoById($parametros) {
-        $query	= "SELECT 
-						e.*
-					FROM pre_empa e
-					WHERE e.id_empa = ".$parametros['id_empa']."   ";
-        $consulta = $this->db->getQuery($query, $parametros);
+    	public function verInfoById($id_empa) {
+        $query	= "SELECT       *,
+                                IFNULL(bo_consume_alcohol,-1) as bo_consume_alcohol,
+                                IFNULL(bo_fuma,-1) as bo_fuma,
+                                IFNULL(bo_trabajadora_reclusa,-1) as bo_trabajadora_reclusa,
+                                IFNULL(bo_vdrl,-1) as bo_vdrl,
+                                IFNULL(bo_rpr,-1) as bo_rpr,
+                                IFNULL(bo_tos_productiva,-1) as bo_tos_productiva,
+                                IFNULL(bo_baciloscopia_toma,-1) as bo_baciloscopia_toma,
+                                IFNULL(bo_pap_realizado,-1) as bo_pap_realizado,
+                                IFNULL(bo_pap_vigente,-1) as bo_pap_vigente,
+                                IFNULL(bo_pap_toma,-1) as bo_pap_toma,
+                                IFNULL(bo_mamografia_realizada,-1) as bo_mamografia_realizada,
+                                IFNULL(bo_mamografia_vigente,-1) as bo_mamografia_vigente
+                        FROM pre_empa
+			WHERE id_empa = ?";
+        $consulta = $this->db->getQuery($query, $id_empa);
         if ($consulta->numRows > 0) {
             return $consulta->rows->row_0;
         } else {
