@@ -347,6 +347,33 @@
 		}
 	};
 
+	function guardarAdjunto(form,btn){
+		btn.disabled	= true;
+		var btnTexto	= $(btn).html();
+		$(btn).html('Guardando...');
+
+		if(form.adjunto.value == ""){
+			xModal.danger('Error: Debe seleccionar un archivo para adjuntarlo');
+			$(btn).html(btnTexto).attr('disabled',false);			
+		}else{
+			$(form).submit();
+		}
+	}
+	
+	function cargarListadoAdjuntos(){
+		$.post(BASE_URI+'index.php/Registro/cargarListadoAdjuntos',function(response)
+		{			
+			parent.$("#listado-adjuntos").html(response).show();
+		});
+	}
+
+	function borrarAdjunto (adjunto){
+		$.post(BASE_URI+'index.php/Registro/borrarAdjunto/'+adjunto,function(response)
+		{
+			$("#listado-adjuntos").html(response);
+		});
+	}
+
 	$(document).ready(function() {
 
 		var mapa = new MapaFormulario("map");
