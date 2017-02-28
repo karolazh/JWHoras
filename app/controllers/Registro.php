@@ -466,24 +466,25 @@ class Registro extends Controller {
     
     public function guardarNuevoAdjunto() {
         header('Content-type: application/json');
-        //$parametros	      = $this->_request->getParams();
+        $parametros = $this->_request->getParams();
+	
+        $correcto   = false;
+        $error      = false;
         
-        $correcto	      = false;
-        $error		      = true;
-        
-        $parametros = array();
-        $parametros['id_reg']       = $_POST['idreg'];
-        $parametros['tipo_adjunto'] = $_POST['tipoDoc'];
-        $parametros['archivo']      = $_POST['idreg'].'/'.$_POST['archivo'];
-        $parametros['comentario']   = $_POST['adjunto'];
+        $data = array();
+        $data['idreg'] = $parametros['idreg']; //'idreg'
+        $data['tipoDoc'] = $parametros['tipoDoc']; //'tipoDoc'
+        $data['archivo'] = $parametros['archivo']; //'archivo'
+        //$data['comentario_adjunto'] = $parametros['comentario_adjunto']; //'comentario_adjunto'
 
-        $result	= $this->_DAOAdjuntos->insertarAdjunto($parametros);
+        //$result	= $this->_DAOAdjuntos->insertarAdjunto($parametros);
+        $result	= $this->_DAOAdjuntos->insertarAdjunto($data);
         
         if($result){
             //COPIAR ARCHIVO EN RUTA
             $correcto	= true;
         }else{
-            $error      = true;
+            $error		= true;
         }
 
         $salida	= array("error" => $error,
