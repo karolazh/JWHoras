@@ -354,12 +354,12 @@
 
 		if(form.adjunto.value == ""){
 			xModal.danger('Error: Debe seleccionar un archivo para adjuntarlo');
-			$(btn).html(btnTexto).attr('disabled',false);			
+			$(btn).html(btnTexto).attr('disabled',false);
 		}else{
 			$(form).submit();
 		}
 	}
-	
+
 	function cargarListadoAdjuntos(){
 		$.post(BASE_URI+'index.php/Registro/cargarListadoAdjuntos',function(response)
 		{			
