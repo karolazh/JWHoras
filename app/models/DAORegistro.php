@@ -18,7 +18,6 @@ class DAORegistro extends Model{
         $query	= "	SELECT
 						r.id_registro,
 						r.gl_rut,
-
 						r.gl_run_pass,
                         r.bo_reconoce,
                         r.bo_acepta_programa,

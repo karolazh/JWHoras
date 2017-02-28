@@ -53,6 +53,14 @@
                                                 data-toggle="tooltip" title="Formulario EMPA">
                                             <i class="fa fa-book"></i>
                                         </button>
+										{if $item->bo_reconoce == 0}
+											<button type="button" class="btn btn-xs btn-danger guardarReconoce" 
+													data="{$item->id_registro}" 
+													data-toggle="tooltip" title="Reconoce Violencia">
+												<i class="fa fa-bullhorn"></i>
+											</button>
+										{/if}
+										
 										<button type="button" 
 												onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
 												{*onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/detalleRegistro/{$item->gl_rut}', 'Bitácora paciente RUT : {$item->gl_rut}', 85);" *}

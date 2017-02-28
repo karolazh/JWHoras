@@ -93,6 +93,7 @@ class Registro extends Controller {
         //llamado al template
         $this->_display('Registro/index.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
+        $this->load->javascript(STATIC_FILES . "js/templates/registro/index.js");
 
     }
 
@@ -310,6 +311,38 @@ class Registro extends Controller {
 				$datos_evento['gl_descripcion']	= "Reconoce violencia con fecha : ".Fechas::fechaHoy();
 				$resp							= $this->_DAOEventos->insEvento($datos_evento);
 			}
+        }else{
+            $error		= true;
+        }
+
+        $salida	= array("error" => $error,
+            "correcto" => $correcto);
+        $this->smarty->assign("hidden", "");
+        $json	= Zend_Json::encode($salida);
+
+        echo $json;
+    }
+
+    public function GuardarReconoce() {
+        header('Content-type: application/json');
+        $parametros		= $this->_request->getParams();
+		$correcto		= false;
+        $error			= false;
+		$datos_evento	= array();
+
+        $id_registro	= $parametros['id_registro'];
+
+		$resp			= $this->_DAORegistro->update(array('bo_reconoce'=>1), $id_registro, 'id_registro');
+        if($resp){
+			$correcto						= true;
+
+			$session						= New Zend_Session_Namespace("usuario_carpeta");
+			$datos_evento['id_registro']	= $id_registro;
+			$datos_evento['bo_estado']		= 1; 
+			$datos_evento['id_usuario_crea']= $session->id;
+			$datos_evento['eventos_tipo']	= 5;
+			$datos_evento['gl_descripcion']	= "Reconoce violencia con fecha : ".Fechas::fechaHoy();
+			$resp							= $this->_DAOEventos->insEvento($datos_evento);
         }else{
             $error		= true;
         }
