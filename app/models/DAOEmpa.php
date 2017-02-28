@@ -109,6 +109,7 @@ class DAOEmpa extends Model{
                     LEFT JOIN pre_institucion ins ON ins.id_institucion = emp.id_institucion
                     LEFT JOIN pre_usuarios usr ON usr.id_usuario = emp.id_usuario_crea
                     WHERE emp.id_registro =  ?
+					AND nr_orden= 1
                     ORDER BY emp.fc_empa DESC";
 
         $consulta = $this->db->getQuery($query,array($id_registro));
