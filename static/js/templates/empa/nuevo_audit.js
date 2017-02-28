@@ -1,4 +1,11 @@
+	$(".radio_audit").on('change', function (e) {
+		var valor	= $(this).val();
+		var i		= $(this).attr("data");
+		$("#puntos_"+i).val(valor);
+		$("#puntos_"+i).trigger('change');
+	});
 
+/*
 // TODO hacer esto de manera iterativa 1
 	$(".radio_audit_1_1").on('click', function (e) {
 
@@ -386,3 +393,4 @@
 			$("#puntos_10").trigger('change');
 		}
 	});
+*/
