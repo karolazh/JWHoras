@@ -36,7 +36,7 @@
     <link rel="icon" type="image/png" href="{$static}/images/logo_minsal_32.png" />
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
 <div class="wrapper">
 
     <!-- Main Header -->

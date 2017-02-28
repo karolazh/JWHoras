@@ -5,7 +5,7 @@
     <h1><i class="fa fa-book"></i>&nbsp; Registros</h1>
     <div class="col-md-12 text-right">
         <button type="button" id="ingresar" onclick="location.href = '{$base_url}/Registro/nuevo'"
-                class="btn btn-danger">
+                class="btn btn-success">
             <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Registro
         </button>
     </div>
@@ -25,7 +25,11 @@
 							<th class="text-center" width="25%">Nombre</th>
 							<th class="text-center" width="10%">Comuna</th>
 							<th class="text-center" width="25%">Centro Salud</th>
-							<th class="text-center" width="10%">Estado Caso</th>
+							<th class="text-center" width="10%">Estado</th>
+							<th class="text-center" width="5%">Cantidad atenciones</th>
+							<th class="text-center" width="5%">Reconoce violencia</th>
+							<th class="text-center" width="5%">Participa?</th>
+							<th class="text-center" width="1px">Dias primera visita?</th>
 							<th class="text-center">Acciones</th>
 						</tr>
 					</thead>
@@ -39,6 +43,23 @@
 								<td class="text-left"> {$item->gl_nombre_comuna} </td>
 								<td class="text-center"> {$item->gl_nombre} </td>
 								<td class="text-center" nowrap> {$item->gl_nombre_estado_caso} </td>
+								<td class="text-center" nowrap> {$item->nr_motivo_consulta} </td>
+								<td class="text-center" nowrap> 
+										{if $item->bo_reconoce == 1}
+											<span class="label label-danger">Si</span>
+										{else}								
+											<span class="label label-success">No</span>										
+										{/if}								
+								</td>
+								<td class="text-center" nowrap> 
+										{if $item->bo_acepta_programa == 1}
+											<span class="label label-success">Si</span>
+										{else}								
+											<span class="label label-danger">No</span>										
+										{/if}																
+								
+								</td>
+								<td class="text-center" nowrap> {$item->nr_dias_primera_visita} </td>
 								<td class="text-center" nowrap>
 									
 										<button type="button" 
