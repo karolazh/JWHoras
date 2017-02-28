@@ -262,7 +262,7 @@ class Empa extends Controller{
 		$this->smarty->assign("botonConsejeriaGlicemia", Boton::botonAyuda("Reducir ingesta de azúcares y realizar actividad física (controlada)","Consejería","pull-right","btn-danger"));
 		$this->smarty->assign("botonAyudaBasiloscopia", Boton::botonAyuda("1ra muestra de inmediato y entrega de una caja para muestra del día siguiente al despertar","Indicaciones","pull-left","btn-warning"));
 		$this->smarty->assign("botonAyudaPAPVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 3 años","Información","pull-left","btn-info"));
-		$this->smarty->assign("botonAyudaMamografiaVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 3 años","Información","pull-left","btn-info"));
+		$this->smarty->assign("botonAyudaMamografiaVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 1 año","Información","pull-left","btn-info"));
 		$this->smarty->assign("botonConsejeriaColesterol", Boton::botonAyuda("Reducir ingesta calorías y realizar actividad física (controlada)","Consejería","pull-right","btn-danger"));
 		$this->smarty->assign("botonInformacionAgenda", Boton::botonAyuda("Referir confirmación diagnóstica con profesional de la salud.","Consejeria","pull-right","btn-danger"));
 		$this->smarty->assign("botonInformacionAgendaITS", Boton::botonAyuda("Referir a profesional de ITS.","Consejeria","pull-right","btn-danger"));
