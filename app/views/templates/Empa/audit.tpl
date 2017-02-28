@@ -22,27 +22,27 @@
 								<td class="text-center"> {$item->gl_pregunta} </td>
 								<td class="text-center" for="pregunta_{$i}">
 									{if $item->gl_respuesta1} 
-										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta1_puntos}" type="radio" title="{$item->gl_respuesta1}"> {$item->gl_respuesta1}
+										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta1_puntos}" type="radio" class="radio_audit_1_{$i}" title="{$item->gl_respuesta1}"> {$item->gl_respuesta1}
 									{/if}
 								</td>
 								<td class="text-center" for="pregunta_{$i}">
 									{if $item->gl_respuesta2} 
-										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta2_puntos}" type="radio" title="{$item->gl_respuesta2}"> {$item->gl_respuesta2}
+										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta2_puntos}" type="radio"  class="radio_audit_2_{$i}" title="{$item->gl_respuesta2}"> {$item->gl_respuesta2}
 									{/if}
 								</td>
 								<td class="text-center" for="pregunta_{$i}">
 									{if $item->gl_respuesta3} 
-										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta3_puntos}" type="radio" title="{$item->gl_respuesta3}"> {$item->gl_respuesta3}
+										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta3_puntos}" type="radio"  class="radio_audit_3_{$i}" title="{$item->gl_respuesta3}"> {$item->gl_respuesta3}
 									{/if}
 								</td>
 								<td class="text-center" for="pregunta_{$i}">
 									{if $item->gl_respuesta4} 
-										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta4_puntos}" type="radio" title="{$item->gl_respuesta4}"> {$item->gl_respuesta4}
+										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta4_puntos}" type="radio"  class="radio_audit_4_{$i}" title="{$item->gl_respuesta4}"> {$item->gl_respuesta4}
 									{/if}
 								</td>
 								<td class="text-center" for="pregunta_{$i}">
 									{if $item->gl_respuesta5} 
-										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta5_puntos}" type="radio" title="{$item->gl_respuesta5}"> {$item->gl_respuesta5}
+										<input id="pregunta_{$i}" name="pregunta_{$i}" value="{$item->nr_respuesta5_puntos}" type="radio"  class="radio_audit_5_{$i}" title="{$item->gl_respuesta5}"> {$item->gl_respuesta5}
 									{/if}
 								</td>
 								<td class="col-xs-12" for="pregunta_{$i}">
@@ -52,7 +52,7 @@
 						{/foreach}
 							<tr>
 								<td colspan="6" class="text-right"><b> TOTAL </b></td>
-								<td class="col-xs-12"> <input id="total" class="text-right col-xs-12" value="10" readonly> </td>
+								<td class="col-xs-12"> <input id="total" class="text-right col-xs-12" value="0" readonly> </td>
 							</tr>
 					</tbody>
 				</table>
