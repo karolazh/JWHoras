@@ -106,8 +106,8 @@ class Empa extends Controller{
         
         //Cargar Datos DAU Examen
         //$param = array("id_registro" => $id_registro);
-        //$obj_empa	= $this->_DAOEmpa->verInfoById($param);
-        //$this->smarty->assign("gl_peso", $obj_empa->gl_peso);
+        //$empa	= $this->_DAOEmpa->verInfoById($param);
+        //$this->smarty->assign("gl_peso", $empa->gl_peso);
         
         if ($reconoce == 1){
             $check ="checked disabled";
@@ -207,14 +207,13 @@ class Empa extends Controller{
         $error			= false;
         $id_empa                = $this->_DAOEmpa->updateEmpa($parametros);
         if($id_empa){
-			$correcto       = true;
+            $correcto           = true;
         }else{
             $error		= true;
         }
 
         $salida	= array("error" => $error,
                         "correcto" => $correcto);
-        $this->smarty->assign("hidden", "");
         $json	= Zend_Json::encode($salida);
 
         echo $json;
