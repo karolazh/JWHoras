@@ -63,6 +63,9 @@ class Login extends Controller {
 				$session->id		= $usuario->id_usuario;
 				$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
 				$session->mail		= $usuario->gl_email;
+				$session->rut		= $usuario->gl_rut;
+				$session->fono		= $usuario->gl_fono;
+				$session->celular	= $usuario->gl_celular;
 
 				if (!$primer_login) {
 					$ultimo_login	= date('Y-m-d H:i:s');
@@ -169,6 +172,9 @@ class Login extends Controller {
 				$session->id		= $usuario->id_usuario;
 				$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
 				$session->mail		= $usuario->gl_email;
+				$session->rut		= $usuario->gl_rut;
+				$session->fono		= $usuario->gl_fono;
+				$session->celular	= $usuario->gl_celular;
 
 				if (!$primer_login) {
 					$ultimo_login	= date('Y-m-d H:i:s');

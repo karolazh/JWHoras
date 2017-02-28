@@ -53,6 +53,8 @@ class Registro extends Controller {
         parent::__construct();
         $this->load->lib('Fechas', false);
         $this->load->lib('Boton', false);
+        $this->load->lib('Seguridad', false);
+
         $this->_DAORegion			= $this->load->model("DAORegion");
         $this->_DAOComuna			= $this->load->model("DAOComuna");
         $this->_DAORegistro			= $this->load->model("DAORegistro");
@@ -94,6 +96,7 @@ class Registro extends Controller {
         $this->_display('Registro/index.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/index.js");
+        //$this->_addJavascript(STATIC_FILES.'js/templates/soporte/xmodal.js');
 
     }
 
@@ -207,19 +210,23 @@ class Registro extends Controller {
 
     public function nuevo() {
         Acceso::redireccionUnlogged($this->smarty);
+		/*
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
         $this->smarty->assign("rut", $sesion->rut);
         $this->smarty->assign("usuario", $sesion->usuario);
+		*/
 
-        $arrRegiones = $this->_DAORegion->getListaRegiones();
-        $this->smarty->assign("arrRegiones", $arrRegiones);
+		unset($_SESSION['adjuntos']);
 
-        $arrPrevision = $this->_DAOPrevision->getListaPrevision();
-        $this->smarty->assign("arrPrevision", $arrPrevision);
+		$arrRegiones = $this->_DAORegion->getListaRegiones();
+		$this->smarty->assign("arrRegiones", $arrRegiones);
 
-        $arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
-        $this->smarty->assign("arrCasoEgreso", $arrCasoEgreso);
+		$arrPrevision = $this->_DAOPrevision->getListaPrevision();
+		$this->smarty->assign("arrPrevision", $arrPrevision);
+
+		//$arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
+		//$this->smarty->assign("arrCasoEgreso", $arrCasoEgreso);
 		
         $this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.'));
 
@@ -228,7 +235,7 @@ class Registro extends Controller {
         $this->load->javascript(STATIC_FILES . "js/regiones.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/nuevo.js");
-        $this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
+        //$this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }
 
@@ -248,12 +255,49 @@ class Registro extends Controller {
 
         $id_registro	= $this->_DAORegistro->insertarRegistro($parametros);
         if($id_registro){
-			$correcto						= true;
-			$resultado2						= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
-			$resultado3						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>1));
-			$resultado4						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>2));
+			$correcto			= true;
+			$session			= New Zend_Session_Namespace("usuario_carpeta");
 
-			$session						= New Zend_Session_Namespace("usuario_carpeta");
+			$nombre_adjunto		= $_SESSION['adjuntos'][0]['nombre_adjunto'];
+			$arr_extension		= array('jpeg','jpg','png','gif','tiff','bmp','pdf','txt','csv','doc','docx','ppt','pptx','xls','xlsx','eml');
+			$nombre_adjunto 	= strtolower(trim($nombre_adjunto));
+			$nombre_adjunto 	= trim($nombre_adjunto,".");
+			$extension			= substr(strrchr($nombre_adjunto, "."), 1);
+			$gl_nombre_archivo	= 'Consentimiento_'.$parametros['rut'].'.'.$extension;
+			$directorio			= "archivos/$id_registro/";
+			$gl_path			= $directorio.$gl_nombre_archivo;
+
+			$ins_adjunto		= array('id_registro'		=> $id_registro,
+										'id_tipo_adjunto'	=> 1,
+										'gl_nombre'			=> $gl_nombre_archivo,
+										'gl_path'			=> $gl_path,
+										'gl_glosa'			=> 'Consentimiento Firmado',
+										'sha256'			=> Seguridad::generar_sha256($gl_path),
+										'fc_crea'			=> date('Y-m-d h:m:s'),
+										'id_usuario_crea'	=> $session->id,
+										);
+			$id_adjunto			= $this->_DAOAdjuntos->insert($ins_adjunto);
+
+			if($id_adjunto){
+				if(!is_dir($directorio)){
+					mkdir($directorio, 0775, true);
+					
+					$out = fopen($directorio.'/index.html', "w");
+					fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
+					fclose($out);
+				}
+				$out = fopen($gl_path, "w");
+				fwrite($out, base64_decode($_SESSION['adjuntos'][0]['contenido']));
+				fclose($out);
+			}
+
+			$resultado2						= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
+			$id_empa1						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>1));
+			$id_empa2						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>2));
+
+			//$resultado3						= $this->_DAOEmpaAudit->insert($id_empa1);
+			//$resultado4						= $this->_DAOEmpaAudit->insert($id_empa2);
+			
 			$datos_evento['eventos_tipo']	= 1;
 			$datos_evento['id_registro']	= $id_registro;
 			$datos_evento['gl_descripcion']	= "Registro creado el : ".Fechas::fechaHoy(); 
@@ -275,9 +319,7 @@ class Registro extends Controller {
             $error		= true;
         }
 
-        $salida	= array("error" => $error,
-            "correcto" => $correcto);
-        $this->smarty->assign("hidden", "");
+        $salida	= array("error" => $error, "correcto" => $correcto);
         $json	= Zend_Json::encode($salida);
 
         echo $json;
@@ -464,6 +506,169 @@ class Registro extends Controller {
         echo json_encode($json);
     }
     
+	
+	public function cargarAdjunto(){
+		$this->smarty->display('Registro/cargar_adjunto.tpl');
+	}
+	
+	public function guardarAdjunto() {
+		$adjunto	= $_FILES['adjunto'];
+
+		if($adjunto['tmp_name'] != ""){
+			$file		= fopen($adjunto['tmp_name'],'r+b');
+			$contenido	= fread($file,filesize($adjunto['tmp_name']));
+			fclose($file);
+
+			if(!empty($contenido)){
+				$arr_adjunto	= array(
+									'id_adjunto'	=> 1,
+									'id_mensaje'	=> 1,
+									'nombre_adjunto'=> $adjunto['name'],
+									'mime_adjunto'	=> $adjunto['type'],
+									'contenido'		=> base64_encode($contenido)
+								);
+				$_SESSION['adjuntos'][] = $arr_adjunto;	
+				$success	= 1;
+				$mensaje	= "El archivo <strong>".$adjunto['name']."</strong > ha sido Adjuntado";
+			}else{
+				$success	= 0;
+				$mensaje	= "No se ha podido leer el archivo adjunto. Intente nuevamente";		
+			}			
+		}else{
+			$success	= 0;
+			$mensaje	= "Error al cargar el Adjunto. Intente nuevamente";	
+		}
+
+		if($success == 1){
+			echo "<script>parent.cargarListadoAdjuntos('listado-adjuntos'); parent.xModal.close();</script>";
+			echo "<script> parent.$('#btnUploadUno').prop('disabled', true);</script>";
+		}else{
+			$this->view->assign('success',$success);
+			$this->view->assign('mensaje',$mensaje);
+
+			$this->view->assign('template',$this->view->fetch('Registro/cargar_adjunto.tpl'));
+			$this->view->display('template_iframe.tpl');
+		}
+	}
+	
+	public function cargarListadoAdjuntos()	{
+		$adjuntos	= array();
+		$template	= '';
+	
+		if(isset($_SESSION['adjuntos']))
+		{
+			$template.= '<div class="col-xs-6 col-xs-offset-3" id="div_adjuntos" name="div_adjuntos">
+							<table id="adjuntos" class="table table-hover table-condensed table-bordered" align=center>
+								<thead>
+								<tr>
+									<th>Nombre Archivo</th>
+									<th width="50px" nowrap>Descargar</th>
+									<th width="50px" nowrap>Eliminar</th>
+								</tr>
+								</thead>
+								<tbody>';
+			$adjuntos	= $_SESSION['adjuntos'];
+			$i			= 0;
+			foreach($adjuntos as $adjunto)
+			{
+				$template.= '		<tr>
+										<td>										
+											<strong>'.$adjunto['nombre_adjunto'].'</strong>
+										</td>
+										<td align="center"><a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\''.BASE_URI.'/Registro/verAdjunto/'.$i.'\',\'_blank\');">
+												<i class="fa fa-download"></i>
+											</a>
+										</td>										
+										<td align="center">										
+											<button class="btn btn-xs btn-danger" type="button" onclick="borrarAdjunto('.$i.')">
+												<i class="fa fa-trash-o"></i>
+											</button>
+										</td>
+									</tr>';
+				$i++;
+			}
+			
+			$template.= '		</tbody>
+							</table>
+						</div>';
+		}
+
+		echo $template;
+	}
+
+	public function borrarAdjunto()
+	{
+		$parametros		= $this->request->getParametros();
+		$id_adjunto		= $parametros[0];
+		
+		$template	= '';
+		unset($_SESSION['adjuntos'][$id_adjunto]);
+
+		if(count($_SESSION['adjuntos']) > 0){
+			$template.= '<div class="col-xs-6 col-xs-offset-3" id="div_adjuntos" name="div_adjuntos">
+							<table id="adjuntos" class="table table-hover table-condensed table-bordered" align=center>
+								<thead>
+								<tr>
+									<th>Nombre Archivo</th>
+									<th width="50px" nowrap>Descargar</th>
+									<th width="50px" nowrap>Eliminar</th>
+								</tr>
+								</thead>
+								<tbody>';
+			$adjuntos	= $_SESSION['adjuntos'];
+			$i			= 0;
+			unset($_SESSION['adjuntos']);
+
+			foreach($adjuntos as $adjunto)
+			{
+				$_SESSION['adjuntos'][] = $adjunto;
+				$template.= '		<tr>
+										<td>										
+											<strong>'.$adjunto['nombre_adjunto'].'</strong>
+										</td>
+										<td align="center"><a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\''.BASE_URI.'/Registro/verAdjunto/'.$i.'\',\'_blank\');">
+												<i class="fa fa-download"></i>
+											</a>
+										</td>										
+										<td align="center">										
+											<button class="btn btn-xs btn-danger" type="button" onclick="borrarAdjunto('.$i.')">
+												<i class="fa fa-trash-o"></i>
+											</button>
+										</td>
+									</tr>';
+				$i++;
+			}
+			
+			$template.= '		</tbody>
+							</table>
+						</div>';
+		}else{			
+			echo "<script> $('#btnUploadUno').prop('disabled', false);</script>";
+		}
+
+		echo $template;
+	}
+
+    public function verAdjunto()
+	{
+		$parametros		= $this->request->getParametros();
+		$id_adjunto		= $parametros[0];
+
+        if(isset($_SESSION['adjuntos'][$id_adjunto])){
+            $adjunto = $_SESSION['adjuntos'][$id_adjunto];
+            header("Content-Type: ".$adjunto['mime_adjunto']);
+            header("Content-Disposition: inline; filename=".$adjunto['nombre_adjunto']);
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            ob_end_clean();
+            echo base64_decode($adjunto['contenido']);
+            exit();
+        }else{
+            echo "El adjunto no existe";
+        }
+    }
+    
     public function guardarNuevoAdjunto() {
         header('Content-type: application/json');
         $parametros = $this->_request->getParams();
@@ -495,5 +700,5 @@ class Registro extends Controller {
 
         echo $json;
     }
-    
+
 }

@@ -347,6 +347,50 @@
 		}
 	};
 
+	function guardarAdjunto(form,btn){
+		btn.disabled	= true;
+		var btnTexto	= $(btn).html();
+		$(btn).html('Guardando...');
+
+		if(form.adjunto.value == ""){
+			xModal.warning('Error: Debe seleccionar un archivo para adjuntarlo');
+			$(btn).html(btnTexto).attr('disabled',false);
+		}else{
+			extensiones_permitidas	= new Array('.jpeg', '.jpg', '.png', '.gif', '.tiff', '.bmp', '.pdf', '.txt', '.csv', '.doc', '.docx', '.ppt', '.pptx', '.xls', '.xlsx');
+			permitida				= false;
+			string					= form.adjunto.value;
+			extension				= (string.substring(string.lastIndexOf("."))).toLowerCase();
+
+			for(var i = 0; i < extensiones_permitidas.length; i++) {
+				if (extensiones_permitidas[i] == extension){
+					permitida = true;
+					break;
+				}
+			}
+
+			if (!permitida) {
+				xModal.warning('El Tipo de archivo que intenta subir no está permitido.<br><br>Favor elija un archivo con las siguientes extensiones: <br>'+ extensiones_permitidas.join(' '));
+				$(btn).html(btnTexto).attr('disabled',false);
+			}else{
+				$(form).submit();
+			}
+		}
+	}
+
+	function cargarListadoAdjuntos(){
+		$.post(BASE_URI+'index.php/Registro/cargarListadoAdjuntos',function(response)
+		{			
+			parent.$("#listado-adjuntos").html(response).show();
+		});
+	}
+
+	function borrarAdjunto (adjunto){
+		$.post(BASE_URI+'index.php/Registro/borrarAdjunto/'+adjunto,function(response)
+		{
+			$("#listado-adjuntos").html(response);
+		});
+	}
+
 	$(document).ready(function() {
 
 		var mapa = new MapaFormulario("map");

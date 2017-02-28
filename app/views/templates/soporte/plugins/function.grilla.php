@@ -8,7 +8,7 @@
 
 	function smarty_function_grilla($params, &$smarty)
 	{
-		$sesion = New Zend_Session_Namespace("usuario");
+		$sesion = New Zend_Session_Namespace("usuario_carpeta");
 		
 		#SOAP MESA MIDAS		
 		$wsdl					= WSDL_SOPORTE;
@@ -21,7 +21,7 @@
 		}else{
 			$ws_data			= array(
 										'key_public'	=> '17Re8oR4bg6jHg5TOm8Ba3jLoPq4Xw83HuPkUhFa0pvZ',
-										'rut_usuario'	=> $sesion->rut."11111-1",
+										'rut_usuario'	=> $sesion->rut,
 										);
 			$param				= array('data' => $ws_data);
 			$result				= $ws->call('obtenerSoportesUsuario', $param);

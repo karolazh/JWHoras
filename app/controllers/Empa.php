@@ -105,9 +105,118 @@ class Empa extends Controller{
         $reconoce = $registro->bo_reconoce;
         
         //Cargar Datos DAU Examen
-        //$param = array("id_registro" => $id_registro);
-        //$empa	= $this->_DAOEmpa->verInfoById($param);
-        //$this->smarty->assign("gl_peso", $empa->gl_peso);
+        //INICIO
+        $empa	= $this->_DAOEmpa->verInfoById($id_empa -> id_empa);
+        if($empa->gl_peso){
+            $gl_peso = intval($empa->gl_peso);
+            $this->smarty->assign("gl_peso", $gl_peso);
+        }
+        if($empa->gl_estatura){
+            $gl_estatura = str_replace('.','',$empa->gl_estatura);
+            $this->smarty->assign("gl_estatura", $gl_estatura);
+        }
+        if($empa->gl_circunferencia_abdominal){
+            $gl_circunferencia_abdominal = intval($empa->gl_circunferencia_abdominal);
+             $this->smarty->assign("gl_circunferencia_abdominal", $gl_circunferencia_abdominal);
+        }
+        if($empa->bo_consume_alcohol == 1){
+            $this->smarty->assign("bo_consume_alcohol_1", 'checked');
+        }else if($empa->bo_consume_alcohol == 0){
+            $this->smarty->assign("bo_consume_alcohol_0", 'checked');
+        }
+        
+        if($empa->bo_fuma == 1){
+            $this->smarty->assign("bo_fuma_1", 'checked');
+        }else if($empa->bo_fuma == 0){
+            $this->smarty->assign("bo_fuma_0", 'checked');
+        }
+        
+        $this->smarty->assign("gl_puntos_audit", $empa->gl_puntos_audit);
+        $this->smarty->assign("gl_imc", $empa->gl_imc);
+        $this->smarty->assign("id_clasificacion_imc", $empa->id_clasificacion_imc);
+        $this->smarty->assign("gl_pas", $empa->gl_pas);
+        $this->smarty->assign("gl_pad", $empa->gl_pad);
+        $this->smarty->assign("gl_glicemia", $empa->gl_glicemia);
+        if($empa->bo_glicemia_toma == 1){
+            $this->smarty->assign("bo_glicemia_toma", 'checked');
+        }
+        
+        if($empa->bo_trabajadora_reclusa == 1){
+            $this->smarty->assign("bo_trabajadora_reclusa_1", 'checked');
+        }else if($empa->bo_trabajadora_reclusa == 0){
+            $this->smarty->assign("bo_trabajadora_reclusa_0", 'checked');
+        }
+        
+        if($empa->bo_rpr == 1){
+            $this->smarty->assign("bo_rpr_1", 'checked');
+        }else if($empa->bo_rpr == 0){
+            $this->smarty->assign("bo_rpr_0", 'checked');
+        }
+        
+        if($empa->bo_vdrl == 1){
+            $this->smarty->assign("bo_vdrl_1", 'checked');
+        }else if($empa->bo_vdrl == 0){
+            $this->smarty->assign("bo_vdrl_0", 'checked');
+        }
+        
+        if($empa->bo_tos_productiva == 1){
+            $this->smarty->assign("bo_tos_productiva_1", 'checked');
+        }else if($empa->bo_tos_productiva == 0){
+            $this->smarty->assign("bo_tos_productiva_0", 'checked');
+        }
+        
+        if($empa->bo_baciloscopia_toma == 1){
+            $this->smarty->assign("bo_baciloscopia_toma_1", 'checked');
+        }else if($empa->bo_baciloscopia_toma == 0){
+            $this->smarty->assign("bo_baciloscopia_toma_0", 'checked');
+        }
+        
+        if($empa->bo_pap_realizado == 1){
+            $this->smarty->assign("bo_pap_realizado_1", 'checked');
+        }else if($empa->bo_pap_realizado == 0){
+            $this->smarty->assign("bo_pap_realizado_0", 'checked');
+        }
+        
+        $this->smarty->assign("fc_ultimo_pap", $empa->fc_ultimo_pap);
+        $this->smarty->assign("fc_tomar_pap", $empa->fc_tomar_pap);
+        
+        if($empa->bo_pap_vigente == 1){
+            $this->smarty->assign("bo_pap_vigente_1", 'checked');
+        }else if($empa->bo_pap_vigente == 0){
+            $this->smarty->assign("bo_pap_vigente_0", 'checked');
+        }
+        
+        if($empa->bo_pap_toma == 1){
+            $this->smarty->assign("bo_pap_toma_1", 'checked');
+        }else if($empa->bo_pap_toma == 0){
+            $this->smarty->assign("bo_pap_toma_0", 'checked');
+        }
+        
+        $this->smarty->assign("gl_colesterol", $empa->gl_colesterol);
+        
+        if($empa->bo_colesterol_toma == 1){
+            $this->smarty->assign("bo_colesterol_toma", 'checked');
+        }
+        
+        if($empa->bo_mamografia_realizada == 1){
+            $this->smarty->assign("bo_mamografia_realizada_1", 'checked');
+        }else if($empa->bo_mamografia_realizada == 0){
+            $this->smarty->assign("bo_mamografia_realizada_0", 'checked');
+        }
+        
+        if($empa->bo_mamografia_vigente == 1){
+            $this->smarty->assign("bo_mamografia_vigente_1", 'checked');
+        }else if($empa->bo_mamografia_vigente == 0){
+            $this->smarty->assign("bo_mamografia_vigente_0", 'checked');
+        }
+        
+        if($empa->bo_mamografia_toma == 1){
+            $this->smarty->assign("bo_mamografia_toma", 'checked');
+        }
+        
+        $this->smarty->assign("fc_mamografia", $empa->fc_mamografia);
+        $this->smarty->assign("gl_observaciones_empa", $empa->gl_observaciones_empa);
+        //FIN
         
         if ($reconoce == 1){
             $check ="checked disabled";
@@ -153,7 +262,7 @@ class Empa extends Controller{
 		$this->smarty->assign("botonConsejeriaGlicemia", Boton::botonAyuda("Reducir ingesta de azúcares y realizar actividad física (controlada)","Consejería","pull-right","btn-danger"));
 		$this->smarty->assign("botonAyudaBasiloscopia", Boton::botonAyuda("1ra muestra de inmediato y entrega de una caja para muestra del día siguiente al despertar","Indicaciones","pull-left","btn-warning"));
 		$this->smarty->assign("botonAyudaPAPVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 3 años","Información","pull-left","btn-info"));
-		$this->smarty->assign("botonAyudaMamografiaVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 3 años","Información","pull-left","btn-info"));
+		$this->smarty->assign("botonAyudaMamografiaVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 1 año","Información","pull-left","btn-info"));
 		$this->smarty->assign("botonConsejeriaColesterol", Boton::botonAyuda("Reducir ingesta calorías y realizar actividad física (controlada)","Consejería","pull-right","btn-danger"));
 		$this->smarty->assign("botonInformacionAgenda", Boton::botonAyuda("Referir confirmación diagnóstica con profesional de la salud.","Consejeria","pull-right","btn-danger"));
 		$this->smarty->assign("botonInformacionAgendaITS", Boton::botonAyuda("Referir a profesional de ITS.","Consejeria","pull-right","btn-danger"));
@@ -191,19 +300,19 @@ class Empa extends Controller{
         $registro = $this->_DAOAlcoholismo->getAll();
         $this->smarty->assign("registro", $registro);
         $this->smarty->display('Empa/audit.tpl');
-        $this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
     }
 
     public function guardar(){
         header('Content-type: application/json');
-        Acceso::redireccionUnlogged($this->smarty);
+       /*  Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
         $this->smarty->assign("rut", $sesion->rut);
         $this->smarty->assign("usuario", $sesion->usuario);
+		*/
         
         $parametros		= $this->_request->getParams();
-	$correcto		= false;
+		$correcto		= false;
         $error			= false;
         $id_empa                = $this->_DAOEmpa->updateEmpa($parametros);
         if($id_empa){

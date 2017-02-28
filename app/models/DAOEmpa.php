@@ -139,7 +139,7 @@ class DAOEmpa extends Model{
 						id_clasificacion_imc            =       ".$parametros['id_clasificacion_imc'].",
 						gl_pas                          =       '".$parametros['gl_pas']."',
 						gl_pad                          =       '".$parametros['gl_pad']."',
-                                                gl_glicemia                     =       '".$parametros['gl_peso']."',
+                                                gl_glicemia                     =       '".$parametros['gl_glicemia']."',
 						bo_glicemia_toma                =       ".$parametros['bo_glicemia_toma'].",
 						bo_trabajadora_reclusa          =       ".$parametros['bo_trabajadora_reclusa'].",
 						bo_vdrl                         =       ".$parametros['bo_vdrl'].",
@@ -154,6 +154,7 @@ class DAOEmpa extends Model{
                                                 gl_colesterol                   =       '".$parametros['gl_colesterol']."',
                                                 bo_colesterol_toma              =       ".$parametros['bo_colesterol_toma'].",
                                                 bo_mamografia_realizada         =       ".$parametros['bo_mamografia_realizada'].",
+                                                fc_mamografia                   =       ".$parametros['fc_mamografia'].",
                                                 bo_mamografia_vigente           =       ".$parametros['bo_mamografia_vigente'].",
                                                 bo_mamografia_toma              =       ".$parametros['bo_mamografia_toma'].",
                                                 gl_observaciones_empa           =       '".$parametros['gl_observaciones_empa']."',
@@ -171,71 +172,33 @@ class DAOEmpa extends Model{
     
     //Parametros para usar despues mas completo con id's de examenes
     /*
-                                                id_comuna                       =       ".$_SESSION['id_comuna'].",
-						id_sector                       =       ".$parametros['id_sector'].",
-						id_institucion                  =       ".$_SESSION['id_institucion'].",
-						nr_ficha                        =       ".$parametros['nr_ficha'].",
-						fc_empa                         =       '".$parametros['fc_empa']."',
-						bo_consume_alcohol              =       ".$parametros['bo_consume_alcohol'].",
-						gl_puntos_audit                 =       ".$parametros['gl_puntos_audit'].",
-						bo_fuma                         =       ".$parametros['bo_fuma'].",
-						gl_peso                         =       '".$parametros['gl_peso']."',
-						gl_estatura                     =       '".$parametros['gl_estatura']."',
-						gl_imc                          =       '".$parametros['gl_imc']."',
-						gl_circunferencia_abdominal     =       '".$parametros['gl_circunferencia_abdominal']."',
-						id_clasificacion_imc            =       '".$parametros['id_clasificacion_imc']."',
-						gl_pas                          =       '".$parametros['gl_pas']."',
-						gl_pad                          =       '".$parametros['gl_pad']."',
-                                                gl_glicemia                     =       '".$parametros['gl_peso']."',
-						bo_glicemia_toma                =       ".$parametros['bo_glicemia_toma'].",
+					
 						id_examen_glicemia              =       ".$parametros['id_examen_glicemia'].",
-						bo_trabajadora_reclusa          =       ".$parametros['bo_trabajadora_reclusa'].",
-						bo_vdrl                         =       ".$parametros['bo_vdrl'].",
 						id_examen_vdrl                  =       ".$parametros['id_examen_vdrl'].",
-						bo_rpr                          =       ".$parametros['bo_rpr'].",
 						id_examen_rpr                   =       ".$parametros['id_examen_rpr'].",
-                                                bo_tos_productiva               =       ".$parametros['bo_tos_productiva'].",
-                                                bo_baciloscopia_toma            =       ".$parametros['bo_baciloscopia_toma'].",
                                                 id_examen_baciloscopia          =       ".$parametros['id_examen_baciloscopia'].",
-                                                bo_pap_realizado                =       ".$parametros['bo_pap_realizado'].",
-                                                fc_ultimo_pap                   =       '".$parametros['fc_ultimo_pap']."',
-                                                bo_pap_vigente                  =       ".$parametros['bo_pap_vigente'].",
-                                                bo_pap_toma                     =       ".$parametros['bo_pap_toma'].",
                                                 id_examen_pap                   =       ".$parametros['id_examen_pap'].",
-                                                gl_colesterol                   =       '".$parametros['gl_colesterol']."',
-                                                bo_colesterol_toma              =       ".$parametros['bo_colesterol_toma'].",
                                                 id_examen_colesterol            =       ".$parametros['id_examen_colesterol'].",
-                                                bo_mamografia_realizada         =       ".$parametros['bo_mamografia_realizada'].",
-                                                bo_mamografia_vigente           =       ".$parametros['bo_mamografia_vigente'].",
-                                                bo_mamografia_toma              =       ".$parametros['bo_mamografia_toma'].",
                                                 id_examen_mamografia            =       ".$parametros['id_examen_mamografia'].",
-                                                gl_observaciones_empa           =       '".$parametros['gl_observaciones_empa']."',
-                                                fc_crea                         =       '".$parametros['fc_crea']."',
-                                                fc_actualiza                    =       '".$parametros['fc_actualiza']."',
-                                                id_usuario_act                  =       ".$_SESSION['id_usuario']." */
+     */
     
-    	public function verInfoById($parametros) {
-        $query	= "SELECT 
-						
-						IFNULL(e.gl_email,'N/D') as gl_email,
-						IFNULL(e.gl_latitud,'') as gl_latitud,
-						IFNULL(e.gl_longitud,'') as gl_longitud,
-						IFNULL(bo_reconoce,0) as bo_reconoce,
-						IFNULL(bo_acepta_programa,0) as bo_acepta_programa,
-						IFNULL(a.gl_path,'') as gl_path,
-						IFNULL(p.gl_nombre_prevision, 'N/D') as gl_nombre_prevision,
-						IFNULL(c.gl_nombre_comuna, 'N/D') as gl_nombre_comuna,
-						IFNULL(r.gl_nombre_region, 'N/D') as gl_nombre_region
-					FROM pre_empa AS e
-						LEFT JOIN pre_adjuntos AS a USING (id_adjunto)
-						LEFT JOIN pre_prevision AS p USING (id_prevision)
-						LEFT JOIN pre_comunas AS c USING (id_comuna)
-						LEFT JOIN pre_regiones AS r USING (id_region)
-						LEFT JOIN pre_usuarios AS u ON rg.id_usuario_crea = u.id_usuario
-						LEFT JOIN pre_estados_caso AS ec USING (id_estado_caso)
-					WHERE e.id_registro = ".$parametros['id_registro']."
-                                        AND e.nr_orden = ".$parametros['nr_orden']."    ";
-        $consulta = $this->db->getQuery($query, $parametros);
+    	public function verInfoById($id_empa) {
+        $query	= "SELECT       *,
+                                IFNULL(bo_consume_alcohol,-1) as bo_consume_alcohol,
+                                IFNULL(bo_fuma,-1) as bo_fuma,
+                                IFNULL(bo_trabajadora_reclusa,-1) as bo_trabajadora_reclusa,
+                                IFNULL(bo_vdrl,-1) as bo_vdrl,
+                                IFNULL(bo_rpr,-1) as bo_rpr,
+                                IFNULL(bo_tos_productiva,-1) as bo_tos_productiva,
+                                IFNULL(bo_baciloscopia_toma,-1) as bo_baciloscopia_toma,
+                                IFNULL(bo_pap_realizado,-1) as bo_pap_realizado,
+                                IFNULL(bo_pap_vigente,-1) as bo_pap_vigente,
+                                IFNULL(bo_pap_toma,-1) as bo_pap_toma,
+                                IFNULL(bo_mamografia_realizada,-1) as bo_mamografia_realizada,
+                                IFNULL(bo_mamografia_vigente,-1) as bo_mamografia_vigente
+                        FROM pre_empa
+			WHERE id_empa = ?";
+        $consulta = $this->db->getQuery($query, $id_empa);
         if ($consulta->numRows > 0) {
             return $consulta->rows->row_0;
         } else {
