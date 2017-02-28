@@ -25,14 +25,14 @@ class Soporte extends Controller{
 		unset($_SESSION['adjunto_mensaje']);
         $this->_addJavascript(STATIC_FILES.'js/templates/soporte/form.js');
         $this->_addJavascript(STATIC_FILES.'js/templates/soporte/xmodal.js');
-        $sesion = New Zend_Session_Namespace("usuario");
+        $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("email", $sesion->email);
         $this->smarty->assign("rut", $sesion->rut);
         $this->_display('soporte/index.tpl');
     }
 	
 	public function guardar()	{
-		$sesion					= New Zend_Session_Namespace("usuario");
+		$sesion					= New Zend_Session_Namespace("usuario_carpeta");
 		$data					= $this->_request->getParams();
 		$error					= true;
 		$correcto				= false;
@@ -65,7 +65,7 @@ class Soporte extends Controller{
 										'id_region'					=> 0,
 										'gl_codigo_sistema'			=> '1',
 										'gl_tramite'				=> 0,
-										'rut_usuario_creador'		=> $data['rut']."11111-1",
+										'rut_usuario_creador'		=> $sesion->rut,
 										'id_region_creador'			=> 0,
 										'nombre_usuario_creador'	=> '',
 										'email_usuario_creador'		=> $data['email'],
@@ -102,7 +102,7 @@ class Soporte extends Controller{
 	
 	public function verDetalleSoporte()
 	{
-		$sesion			= New Zend_Session_Namespace("usuario");
+		$sesion			= New Zend_Session_Namespace("usuario_carpeta");
 		$parametros		= $this->request->getParametros();
 		
 		$gl_rut_usuario	= $sesion->rut;
@@ -125,7 +125,7 @@ class Soporte extends Controller{
 			$ws_data					= array(
 												'key_public'		=> '17Re8oR4bg6jHg5TOm8Ba3jLoPq4Xw83HuPkUhFa0pvZ',
 												'id_soporte'		=> $id_soporte,
-												'gl_rut_usuario'	=> $gl_rut_usuario."11111-1",
+												'gl_rut_usuario'	=> $gl_rut_usuario,
 												);
 			$param						= array('data' => $ws_data);
 			$result						= $ws->call('obtenerSoportesDetalle', $param);
@@ -169,7 +169,7 @@ class Soporte extends Controller{
   
 	public function imprimir()
 	{
-		$sesion			= New Zend_Session_Namespace("usuario");
+		$sesion			= New Zend_Session_Namespace("usuario_carpeta");
 		$parametros		= $this->request->getParametros();
 		
 		$id_soporte				= $parametros[0];
