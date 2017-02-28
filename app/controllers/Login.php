@@ -10,6 +10,8 @@ class Login extends Controller {
     /*** Constructor ***/
     function __construct() {
         parent::__construct();
+		include_once("app/libs/nusoap/lib/nusoap.php");
+		
         $this->load->lib('Seguridad', false);
         $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
         $this->_DAORegion = $this->load->model("DAORegion");
