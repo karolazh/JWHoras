@@ -224,14 +224,10 @@
 						<div class="form-group">
 							<div class="col-sm-4"></div>
 							<div class="col-sm-2">
-								<button type="button" id="btnUpload" class="btn btn-sm btn-success"
+								<button type="button" id="btnUploadUno" class="btn btn-sm btn-success"
 									 onclick="xModal.open('{$smarty.const.BASE_URI}/Registro/cargarAdjunto','Cargar Adjunto','',1,true,'150');" >
 									<i class="fa fa-upload" aria-hidden="true"></i> Subir Firmado
 								</button>
-								
-							</div>
-							<div class="col-sm-1">
-								<span class="help-block hidden" id="spanUpload"></span>
 							</div>
 						</div>
 						

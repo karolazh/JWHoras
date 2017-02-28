@@ -1,20 +1,17 @@
-//Cuando Carga FORM -> Controlar mostrar/ocultar elementos según Carga de Datos
+//Cuando Carga FORM
+$("#form").ready(function () {
+    var imc = $('#gl_imc').val();
+    
+    //funcion mensaje span IMC
+    mensajeIMC(imc);
+    
+});
 
-
-
-//Calcular IMC segun Peso y Altura
-function calculaIMC()
-{
-//hacemos la llamada a los datos introducidos
-	var peso = $('#gl_peso').val();
-	var altura = $('#gl_estatura').val() / 100;
-	var mensaje = "";
-//calculamos el imc
-	var imc = peso / (altura * altura);
-	imc = imc.toFixed(2);
-//calculamos circunferencia abdominal
+//Poner Mensaje en span segun IMC
+function mensajeIMC(imc){
+    //calculamos circunferencia abdominal
 	//Bajo peso
-	if (imc < 18.50) {
+	if (imc > 0 && imc < 18.50) {
 		$('#gl_imc').css("borderColor", "");
 		$('#gl_imc').parent().find("span.help-block").css("color", "");
 		$('#gl_imc').parent().removeClass("has-error");
@@ -73,6 +70,22 @@ function calculaIMC()
 			mensaje = "Obeso / Obeso Tipo III (riesgo muy severo)";
 		}
 	}
+        
+        $('#gl_imc').parent().find('span.help-block').html(mensaje);
+        $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
+}
+
+//Calcular IMC segun Peso y Altura
+function calculaIMC()
+{
+//hacemos la llamada a los datos introducidos
+	var peso = $('#gl_peso').val();
+	var altura = $('#gl_estatura').val() / 100;
+	var mensaje = "";
+//calculamos el imc
+	var imc = peso / (altura * altura);
+	imc = imc.toFixed(2);
+
 	//mensaje si no tiene valores y dar valor="" a gl_imc
 	if ((peso == "") || (altura == "")) {
 		xModal.danger("Ingrese Peso y Altura");
@@ -84,11 +97,10 @@ function calculaIMC()
 		$("#glicemia").show();
 		$("#antecedentes").hide();
 	}
-
+        //funcion mensaje span IMC
+        mensajeIMC(imc);
 	//enviamos resultados a la caja correspondiente
 	$('#gl_imc').val(imc);
-	$('#gl_imc').parent().find('span.help-block').html(mensaje);
-	$('#gl_imc').parent().find('span.help-block').removeClass("hidden");
 }
 
 

@@ -31,7 +31,7 @@
                     <label class="control-label col-sm-2">Comuna</label>
                     <div class="col-sm-3">
                         <input type="text" name="gl_comuna" id="gl_comuna" value="{$gl_comuna}" 
-                               placeholder="Comuna" class="form-control" disabled/>
+                               placeholder="Comuna" class="form-control" readonly/>
                         <span class="help-block hidden"></span>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                     <label for="gl_institucion" class="control-label col-sm-2">Centro de Salud (*)</label>
                     <div class="col-sm-3">
                         <input type="text" name="gl_institucion" id="gl_institucion" value="{$gl_institucion}"
-                               placeholder="Institución" class="form-control" disabled/>
+                               placeholder="Institución" class="form-control" readonly/>
                         <span class="help-block hidden"></span>
                     </div>
                     <label for="nr_ficha" class="control-label col-sm-2">N° de Ficha (*)</label>
@@ -71,7 +71,7 @@
                     <label class="control-label col-sm-2">Nro. Registro</label>
                     <div class="col-sm-3">
                         <input type="text" name="nro_registro" id="nro_registro" value="" 
-                               placeholder="N° Registro" class="form-control" disabled/>
+                               placeholder="N° Registro" class="form-control" readonly/>
                     </div>
                 </div>
 
@@ -90,57 +90,57 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2 ">Rut Paciente</label>
                     <div class="col-md-4 col-sm-3">
-						<span class="form-control" disabled>{$gl_rut}</span>
+						<span class="form-control" readonly>{$gl_rut}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2">Nombres</label>
                     <div class="col-md-4 col-sm-3">
-						<span class="form-control" disabled>{$gl_nombres}</span>
+						<span class="form-control" readonly>{$gl_nombres}</span>
                     </div>
-                    <label class="control-label col-sm-2">Apellidos</label>
+                    <label class="control-label col-sm-1">Apellidos</label>
                     <div class="col-md-4 col-sm-3">
-						<span class="form-control" disabled>{$gl_apellidos}</span>
+						<span class="form-control" readonly>{$gl_apellidos}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2">Fecha Nacimiento</label>
                     <div class="col-md-4 col-sm-3">
-						<span class="form-control" disabled>{$fc_nacimiento}</span>
+						<span class="form-control" readonly>{$fc_nacimiento}</span>
                     </div>
-                    <label class="control-label col-sm-2">Edad</label>
+                    <label class="control-label col-sm-1">Edad</label>
                     <div class="col-md-4 col-sm-3">
-						<span class="form-control" disabled>{$edad}</span>
+						<span class="form-control" readonly>{$edad}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2">G&eacute;nero</label>
                     <div class="col-md-4 col-sm-3">
-						<span class="form-control" disabled>Femenino</span>
+						<span class="form-control" readonly>Femenino</span>
                     </div>   
-                    <label class="control-label col-sm-2">E-mail</label>
+                    <label class="control-label col-sm-1">E-mail</label>
                     <div class="col-md-4 col-sm-3">
-						<span class="form-control" disabled>{$gl_email}</span>
+						<span class="form-control" readonly>{$gl_email}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2">Fono</label>
                     <div class="col-md-4 col-sm-3">
-						<span class="form-control" disabled>{$gl_fono}</span>
+						<span class="form-control" readonly>{$gl_fono}</span>
                     </div>
-                    <label class="control-label col-sm-2">Celular</label>
+                    <label class="control-label col-sm-1">Celular</label>
                     <div class="col-md-4 col-sm-3">
-						<span class="form-control" disabled>{$gl_celular}</span>
+						<span class="form-control" readonly>{$gl_celular}</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">Direcci&oacute;n</label>
-                    <div class="col-lg-8 col-sm-10">
-						<span class="form-control" disabled>{$gl_direccion}</span>
+                    <div class="col-lg-9 col-sm-10">
+						<span class="form-control" readonly>{$gl_direccion}</span>
                     </div>
                 </div>
             </div>
@@ -204,6 +204,7 @@
                                 <label><input class="bo_fuma" type="radio" name="bo_fuma" 
                                               id="bo_fuma_1" value="1" {$bo_fuma_1}>SI</label>
                             </div>
+                            <div class="col-sm-2"></div>
                             <label class="control-label required col-sm-1" id="lbl_fuma" style="{if $bo_fuma_1 != 'checked'}display: none{/if}">{$botonAyudaFumador}</label>
                         </div>
                     </div>
@@ -216,33 +217,33 @@
                         <div class="form-group">
                             <label class="control-label required col-sm-2">Peso (Kg)</label>
                             <div class="col-sm-1">
-								<input type="text" name="gl_peso" id="gl_peso" maxlength="4"
-									   onKeyPress="return soloNumeros(event)"
-									   value="{$gl_peso}" placeholder="" class="form-control"/>
-								<span class="help-block hidden"></span>
+                                <input type="text" name="gl_peso" id="gl_peso" maxlength="4"
+                                       onKeyPress="return soloNumeros(event)"
+                                       value="{$gl_peso}" placeholder="" class="form-control"/>
+                                <span class="help-block hidden"></span>
                             </div>
                         </div> 
                         <div class="form-group">   
                             <label class="control-label required col-sm-2">Estatura (cm)</label>
                             <div class="col-sm-1">
-								<input type="text" name="gl_estatura" id="gl_estatura" maxlength="4"
-									   onKeyPress="return soloNumeros(event)"
-									   value="{$gl_estatura}" placeholder="" class="form-control"/>
-								<span class="help-block hidden"></span>
+                                <input type="text" name="gl_estatura" id="gl_estatura" maxlength="4"
+                                       onKeyPress="return soloNumeros(event)"
+                                       value="{$gl_estatura}" placeholder="" class="form-control"/>
+                                <span class="help-block hidden"></span>
                             </div>
                         </div>
                         <div class="form-group">   
 
                             <label class="control-label required col-sm-2">Circunferencia Abdominal (cm)</label>
-							<div class="col-sm-1">
+                            <div class="col-sm-1">
                                 <input type="text" name="gl_circunferencia_abdominal" id="gl_circunferencia_abdominal" maxlength="5"
                                        onKeyPress="return soloNumeros(event)" maxlength="4"
                                        value="{$gl_circunferencia_abdominal}" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>
-							<div class="col-sm-1">
-								{$botonAyudaCircunferenciaAbdominal}
-							</div>
+                            <div class="col-sm-1">
+                                {$botonAyudaCircunferenciaAbdominal}
+                            </div>
                         </div>
                         <div class="form-group">     
                             <label class="control-label required col-sm-2">IMC</label>
@@ -250,16 +251,14 @@
                                 <input type="text" name="gl_imc" id="gl_imc" 
                                        value="{$gl_imc}" placeholder="" class="form-control" readonly/>
                                 <span class="help-block hidden"></span>
-                            </div>
+                            </div>  
                             <div class="col-sm-1">
+                                {$botonAyudaIMC} &nbsp;
                                 <button type="button" id="calcular" onclick="calculaIMC()" class="btn btn-sm btn-success">
                                     <i class="fa fa-success"></i> Calcular IMC</button>
                             </div>
                             <input type="text" name="id_clasificacion_imc" id="id_clasificacion_imc" 
-                                       value="{$id_clasificacion_imc}" placeholder="" class="form-control hidden"/>
-							<div class="col-sm-1">
-								{$botonAyudaIMC}
-							</div>
+                                   value="{$id_clasificacion_imc}" placeholder="" class="form-control hidden"/>
                         </div>
                     </div>
                 </div>
@@ -277,7 +276,7 @@
                             <div class="col-sm-1">
                                 {$botonAyudaPAS}
                             </div>
-                            <label class="control-label required col-sm-2">PAD (mm/Hg)</label>
+                            <label class="control-label required col-sm-1">PAD (mm/Hg)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_pad" id="gl_pad" maxlength="4" onKeyPress="return soloNumeros(event)" 
                                        value="{$gl_pad}" placeholder="" class="form-control"/>
@@ -309,7 +308,7 @@
                         </div>   
                         <div class="form-group" id="glicemia" style="{$diabetes}">
                             <label class="control-label required col-sm-2">Glicemia en Ayunas (mg/dl)</label>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <input type="text" name="gl_glicemia" maxlength="5" id="gl_glicemia" value="{$gl_glicemia}" 
                                        placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
@@ -324,10 +323,12 @@
                                     {$botonConsejeriaGlicemia}
                                 </div>
                             </div>
-                            <button type="button" id="verAgendaDiabetes" style="{if !($gl_glicemia > 125)}display: none{/if}"
-                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
-                            <div class="col-sm-3" id="div_glicemia_agenda" style="{if !($gl_glicemia > 125)}display: none{/if}">
-                                {$botonInformacionAgenda}
+                            <div class="col-sm-3">    
+                                <div class="col-sm-1" id="div_glicemia_agenda" style="{if !($gl_glicemia > 125)}display: none{/if}">
+                                    {$botonInformacionAgenda}
+                                </div>
+                                <button type="button" id="verAgendaDiabetes" style="{if !($gl_glicemia > 125)}display: none{/if}"
+                                        class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                             </div>
                         </div>
                     </div>
@@ -339,7 +340,7 @@
                     <div class="box-body">    
                         <div class="form-group">
                             <label class="control-label required col-sm-2">¿Es trabajadora sexual o persona en centro de reclusión?</label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-1">
                                 <label><input class="bo_trabajadora_reclusa" type="radio" name="bo_trabajadora_reclusa" 
                                               id="bo_trabajadora_reclusa_0" value="0" {$bo_trabajadora_reclusa_0}>No</label>
                                 &nbsp;&nbsp;
@@ -364,11 +365,11 @@
                                 <label><input class="bo_rpr" type="radio" name="bo_rpr" 
                                               id="bo_rpr_1" value="1" {$bo_rpr_1}>Positivo</label>
                             </div>
-                            <button type="button" id="verAgendaSifilis" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}"
-                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
-                            <div class="col-sm-3" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}" id="div_ITS_agenda">
+                            <div class="col-sm-1" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}" id="div_ITS_agenda">
                                 {$botonInformacionAgendaITS}
                             </div>
+                            <button type="button" id="verAgendaSifilis" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}"
+                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
                     </div>
                 </div>
@@ -550,15 +551,17 @@
                                               id="bo_mamografia_requiere" value="1">SI</label>
                             </div>
                             <div id="requiere_mamografia" style="display: none">
-                            <div class="col-sm-3" id="toma_mamografia">
-                                <input type="checkbox" id="bo_mamografia_toma" {$bo_mamografia_toma}>
-                                <label for="bo_mamografia_toma" class="control-label required">Toma Mamograf&iacute;a</label>
-                            </div>
-                            <button type="button" id="verAgendaMamografia" class="btn btn-sm btn-success">
-                                <i class="fa fa-file-o"></i> Agenda</button>
-                            <div class="col-sm-3" id="div_mamografia_agenda">
-                                {$botonInformacionAgendaMamografia}
-                            </div>
+                                <div class="col-sm-2" id="toma_mamografia">
+                                    <input type="checkbox" id="bo_mamografia_toma" {$bo_mamografia_toma}>
+                                    <label for="bo_mamografia_toma" class="control-label required">Toma Mamograf&iacute;a</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="col-sm-1" id="div_mamografia_agenda">
+                                        {$botonInformacionAgendaMamografia}
+                                    </div>
+                                    <button type="button" id="verAgendaMamografia" class="btn btn-sm btn-success">
+                                        <i class="fa fa-file-o"></i> Agenda</button>
+                                </div>    
                             </div>
                         </div>
                         <div class="form-group" id="mam_resultado2" style="display: none"> 

@@ -12,16 +12,16 @@
             <section class="content-header" >
                 {*<form id="form" role="form" class="form" enctype="multipart/form-data"
                       action="../Registro/guardarAdjunto" method="post">*}
-                <form id="formEstado" name="form-inline" enctype="application/x-www-form-urlencoded" action="" method="post">
-                    <input type="hidden" name="idreg" id="idreg" value="{$idreg}" >
+                <form id="form" name="form" enctype="multipart/form-data" action="" method="post" >
+                    <input type="hidden" name="idreg" id="idreg" value="{$idreg}" />
                     <div id="seccionAdjunto" style="display:none">
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="tipoDoc">Tipo de documento</label>
-                                        <select class="form-control" id="tipoDoc" name="tipoDoc" 
-                                                onblur="validarVacio(this,'Seleccione Tipo de documento')">
+                                        <select class="form-control" id="tipoDoc" name="tipoDoc">
+                                                {*onblur="validarVacio(this,'Seleccione Tipo de documento')">*}
                                             <option value="0">Seleccione Tipo de Documento</option>
                                             {foreach $arrTipoDocumento as $tipodoc}
                                                     <option value="{$tipodoc->id_tipo_adjunto}" >
@@ -33,8 +33,8 @@
 
                                         <br>
                                         <label class="control-label" for="archivo">Adjuntar documento</label>
-                                        <input type="file" name="archivo" id="archivo" class="form-control" 
-                                               onblur="validarVacio(this,'Seleccione Archivo')"/>
+                                        <input type="file" name="archivo" id="archivo" class="form-control" >
+                                               {*onblur="validarVacio(this,'Seleccione Archivo')"/>*}
 
                                         <br>
                                         <label class="control-label">Comentario (opcional)</label>

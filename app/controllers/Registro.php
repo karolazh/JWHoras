@@ -53,6 +53,8 @@ class Registro extends Controller {
         parent::__construct();
         $this->load->lib('Fechas', false);
         $this->load->lib('Boton', false);
+        $this->load->lib('Seguridad', false);
+
         $this->_DAORegion			= $this->load->model("DAORegion");
         $this->_DAOComuna			= $this->load->model("DAOComuna");
         $this->_DAORegistro			= $this->load->model("DAORegistro");
@@ -208,19 +210,23 @@ class Registro extends Controller {
 
     public function nuevo() {
         Acceso::redireccionUnlogged($this->smarty);
+		/*
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
         $this->smarty->assign("rut", $sesion->rut);
         $this->smarty->assign("usuario", $sesion->usuario);
+		*/
 
-        $arrRegiones = $this->_DAORegion->getListaRegiones();
-        $this->smarty->assign("arrRegiones", $arrRegiones);
+		unset($_SESSION['adjuntos']);
 
-        $arrPrevision = $this->_DAOPrevision->getListaPrevision();
-        $this->smarty->assign("arrPrevision", $arrPrevision);
+		$arrRegiones = $this->_DAORegion->getListaRegiones();
+		$this->smarty->assign("arrRegiones", $arrRegiones);
 
-        $arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
-        $this->smarty->assign("arrCasoEgreso", $arrCasoEgreso);
+		$arrPrevision = $this->_DAOPrevision->getListaPrevision();
+		$this->smarty->assign("arrPrevision", $arrPrevision);
+
+		//$arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
+		//$this->smarty->assign("arrCasoEgreso", $arrCasoEgreso);
 		
         $this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.'));
 
@@ -229,7 +235,7 @@ class Registro extends Controller {
         $this->load->javascript(STATIC_FILES . "js/regiones.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/nuevo.js");
-        $this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
+        //$this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }
 
@@ -249,12 +255,49 @@ class Registro extends Controller {
 
         $id_registro	= $this->_DAORegistro->insertarRegistro($parametros);
         if($id_registro){
-			$correcto						= true;
-			$resultado2						= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
-			$resultado3						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>1));
-			$resultado4						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>2));
+			$correcto			= true;
+			$session			= New Zend_Session_Namespace("usuario_carpeta");
 
-			$session						= New Zend_Session_Namespace("usuario_carpeta");
+			$nombre_adjunto		= $_SESSION['adjuntos'][0]['nombre_adjunto'];
+			$arr_extension		= array('jpeg','jpg','png','gif','tiff','bmp','pdf','txt','csv','doc','docx','ppt','pptx','xls','xlsx','eml');
+			$nombre_adjunto 	= strtolower(trim($nombre_adjunto));
+			$nombre_adjunto 	= trim($nombre_adjunto,".");
+			$extension			= substr(strrchr($nombre_adjunto, "."), 1);
+			$gl_nombre_archivo	= 'Consentimiento_'.$parametros['rut'].'.'.$extension;
+			$directorio			= "archivos/$id_registro/";
+			$gl_path			= $directorio.$gl_nombre_archivo;
+
+			$ins_adjunto		= array('id_registro'		=> $id_registro,
+										'id_tipo_adjunto'	=> 1,
+										'gl_nombre'			=> $gl_nombre_archivo,
+										'gl_path'			=> $gl_path,
+										'gl_glosa'			=> 'Consentimiento Firmado',
+										'sha256'			=> Seguridad::generar_sha256($gl_path),
+										'fc_crea'			=> date('Y-m-d h:m:s'),
+										'id_usuario_crea'	=> $session->id,
+										);
+			$id_adjunto			= $this->_DAOAdjuntos->insert($ins_adjunto);
+
+			if($id_adjunto){
+				if(!is_dir($directorio)){
+					mkdir($directorio, 0775, true);
+					
+					$out = fopen($directorio.'/index.html', "w");
+					fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
+					fclose($out);
+				}
+				$out = fopen($gl_path, "w");
+				fwrite($out, base64_decode($_SESSION['adjuntos'][0]['contenido']));
+				fclose($out);
+			}
+
+			$resultado2						= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
+			$id_empa1						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>1));
+			$id_empa2						= $this->_DAOEmpa->insert(array('id_registro'=>$id_registro,'nr_orden'=>2));
+
+			//$resultado3						= $this->_DAOEmpaAudit->insert($id_empa1);
+			//$resultado4						= $this->_DAOEmpaAudit->insert($id_empa2);
+			
 			$datos_evento['eventos_tipo']	= 1;
 			$datos_evento['id_registro']	= $id_registro;
 			$datos_evento['gl_descripcion']	= "Registro creado el : ".Fechas::fechaHoy(); 
@@ -276,9 +319,7 @@ class Registro extends Controller {
             $error		= true;
         }
 
-        $salida	= array("error" => $error,
-            "correcto" => $correcto);
-        $this->smarty->assign("hidden", "");
+        $salida	= array("error" => $error, "correcto" => $correcto);
         $json	= Zend_Json::encode($salida);
 
         echo $json;
@@ -465,46 +506,12 @@ class Registro extends Controller {
         echo json_encode($json);
     }
     
-	/*
-    public function guardarNuevoAdjunto() {
-        header('Content-type: application/json');
-        //$parametros	      = $this->_request->getParams();
-        
-        $correcto	      = false;
-        $error		      = true;
-        
-        $parametros = array();
-        $parametros['id_reg']       = $_POST['idreg'];
-        $parametros['tipo_adjunto'] = $_POST['tipoDoc'];
-        $parametros['archivo']      = $_POST['idreg'].'/'.$_POST['archivo'];
-        $parametros['comentario']   = $_POST['adjunto'];
-
-        $result	= $this->_DAOAdjuntos->insertarAdjunto($parametros);
-        
-        if($result){
-            //COPIAR ARCHIVO EN RUTA
-            $correcto	= true;
-        }else{
-            $error      = true;
-        }
-
-        $salida	= array("error" => $error,
-                        "correcto" => $correcto);
-        
-        $this->smarty->assign("hidden", "");
-        $json	= Zend_Json::encode($salida);
-
-        echo $json;
-    }
-	*/
-	
 	
 	public function cargarAdjunto(){
 		$this->smarty->display('Registro/cargar_adjunto.tpl');
 	}
 	
-	public function guardarAdjunto()
-	{
+	public function guardarAdjunto() {
 		$adjunto	= $_FILES['adjunto'];
 
 		if($adjunto['tmp_name'] != ""){
@@ -520,7 +527,7 @@ class Registro extends Controller {
 									'mime_adjunto'	=> $adjunto['type'],
 									'contenido'		=> base64_encode($contenido)
 								);
-				$_SESSION['adjunto_mensaje'][] = $arr_adjunto;	
+				$_SESSION['adjuntos'][] = $arr_adjunto;	
 				$success	= 1;
 				$mensaje	= "El archivo <strong>".$adjunto['name']."</strong > ha sido Adjuntado";
 			}else{
@@ -534,6 +541,7 @@ class Registro extends Controller {
 
 		if($success == 1){
 			echo "<script>parent.cargarListadoAdjuntos('listado-adjuntos'); parent.xModal.close();</script>";
+			echo "<script> parent.$('#btnUploadUno').prop('disabled', true);</script>";
 		}else{
 			$this->view->assign('success',$success);
 			$this->view->assign('mensaje',$mensaje);
@@ -543,12 +551,11 @@ class Registro extends Controller {
 		}
 	}
 	
-	public function cargarListadoAdjuntos()
-	{
+	public function cargarListadoAdjuntos()	{
 		$adjuntos	= array();
 		$template	= '';
 	
-		if(isset($_SESSION['adjunto_mensaje']))
+		if(isset($_SESSION['adjuntos']))
 		{
 			$template.= '<div class="col-xs-6 col-xs-offset-3" id="div_adjuntos" name="div_adjuntos">
 							<table id="adjuntos" class="table table-hover table-condensed table-bordered" align=center>
@@ -560,7 +567,7 @@ class Registro extends Controller {
 								</tr>
 								</thead>
 								<tbody>';
-			$adjuntos	= $_SESSION['adjunto_mensaje'];
+			$adjuntos	= $_SESSION['adjuntos'];
 			$i			= 0;
 			foreach($adjuntos as $adjunto)
 			{
@@ -568,7 +575,7 @@ class Registro extends Controller {
 										<td>										
 											<strong>'.$adjunto['nombre_adjunto'].'</strong>
 										</td>
-										<td align="center"><a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\''.BASE_URI.'/Soporte/verAdjunto/'.$i.'\',\'_blank\');">
+										<td align="center"><a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\''.BASE_URI.'/Registro/verAdjunto/'.$i.'\',\'_blank\');">
 												<i class="fa fa-download"></i>
 											</a>
 										</td>										
@@ -595,10 +602,9 @@ class Registro extends Controller {
 		$id_adjunto		= $parametros[0];
 		
 		$template	= '';
-		unset($_SESSION['adjunto_mensaje'][$id_adjunto]);
+		unset($_SESSION['adjuntos'][$id_adjunto]);
 
-		if(count($_SESSION['adjunto_mensaje']) > 0)
-		{
+		if(count($_SESSION['adjuntos']) > 0){
 			$template.= '<div class="col-xs-6 col-xs-offset-3" id="div_adjuntos" name="div_adjuntos">
 							<table id="adjuntos" class="table table-hover table-condensed table-bordered" align=center>
 								<thead>
@@ -609,24 +615,24 @@ class Registro extends Controller {
 								</tr>
 								</thead>
 								<tbody>';
-			$adjuntos	= $_SESSION['adjunto_mensaje'];
+			$adjuntos	= $_SESSION['adjuntos'];
 			$i			= 0;
-			unset($_SESSION['adjunto_mensaje']);
+			unset($_SESSION['adjuntos']);
 
 			foreach($adjuntos as $adjunto)
 			{
-				$_SESSION['adjunto_mensaje'][] = $adjunto;
+				$_SESSION['adjuntos'][] = $adjunto;
 				$template.= '		<tr>
 										<td>										
 											<strong>'.$adjunto['nombre_adjunto'].'</strong>
 										</td>
-										<td><a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\''.BASE_URI.'/Soporte/verAdjunto/'.$i.'\',\'_blank\');">
-												<i class="fa fa-download fa-2x"></i>
+										<td align="center"><a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\''.BASE_URI.'/Registro/verAdjunto/'.$i.'\',\'_blank\');">
+												<i class="fa fa-download"></i>
 											</a>
 										</td>										
-										<td>										
+										<td align="center">										
 											<button class="btn btn-xs btn-danger" type="button" onclick="borrarAdjunto('.$i.')">
-												<i class="fa fa-trash-o fa-2x"></i>
+												<i class="fa fa-trash-o"></i>
 											</button>
 										</td>
 									</tr>';
@@ -636,18 +642,20 @@ class Registro extends Controller {
 			$template.= '		</tbody>
 							</table>
 						</div>';
+		}else{			
+			echo "<script> $('#btnUploadUno').prop('disabled', false);</script>";
 		}
 
 		echo $template;
 	}
-	
+
     public function verAdjunto()
 	{
 		$parametros		= $this->request->getParametros();
 		$id_adjunto		= $parametros[0];
 
-        if(isset($_SESSION['adjunto_mensaje'][$id_adjunto])){
-            $adjunto = $_SESSION['adjunto_mensaje'][$id_adjunto];
+        if(isset($_SESSION['adjuntos'][$id_adjunto])){
+            $adjunto = $_SESSION['adjuntos'][$id_adjunto];
             header("Content-Type: ".$adjunto['mime_adjunto']);
             header("Content-Disposition: inline; filename=".$adjunto['nombre_adjunto']);
             header('Expires: 0');
@@ -661,4 +669,36 @@ class Registro extends Controller {
         }
     }
     
+    public function guardarNuevoAdjunto() {
+        header('Content-type: application/json');
+        $parametros = $this->_request->getParams();
+	
+        $correcto   = false;
+        $error      = false;
+        
+        $data = array();
+        $data['idreg'] = $parametros['idreg']; //'idreg'
+        $data['tipoDoc'] = $parametros['tipoDoc']; //'tipoDoc'
+        $data['archivo'] = $parametros['archivo']; //'archivo'
+        //$data['comentario_adjunto'] = $parametros['comentario_adjunto']; //'comentario_adjunto'
+
+        //$result	= $this->_DAOAdjuntos->insertarAdjunto($parametros);
+        $result	= $this->_DAOAdjuntos->insertarAdjunto($data);
+        
+        if($result){
+            //COPIAR ARCHIVO EN RUTA
+            $correcto	= true;
+        }else{
+            $error		= true;
+        }
+
+        $salida	= array("error" => $error,
+                        "correcto" => $correcto);
+        
+        $this->smarty->assign("hidden", "");
+        $json	= Zend_Json::encode($salida);
+
+        echo $json;
+    }
+
 }

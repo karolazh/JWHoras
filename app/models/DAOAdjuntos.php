@@ -119,20 +119,32 @@ class DAOAdjuntos extends Model{
 
     public function insertarAdjunto($parametros){
 
+//        $query	=   "INSERT INTO pre_adjuntos (
+//                        id_registro
+//                        , id_tipo_adjunto
+//                        , gl_path
+//                        , gl_glosa
+//                        , fc_crea
+//                        , id_usuario_crea
+//                    ) VALUES (
+//                        ".$parametros['idreg']."
+//                        , ".$parametros['tipoDoc']."
+//                        , '".$parametros['archivo']."'
+//                        , '".$parametros['comentario_adjunto']."'
+//                        , '".date('Y-m-d H:i:s')."'
+//                        , ".$_SESSION['id']."
+//                    )";
+        
         $query	=   "INSERT INTO pre_adjuntos (
-                        id_registro,
-                        id_tipo_adjunto,
-                        gl_path,
-                        gl_glosa,
-                        fc_crea,
-                        id_usuario_crea
+                        id_registro
+                        , id_tipo_adjunto
+                        , gl_path
+                        , id_usuario_crea
                     ) VALUES (
-                        '".$parametros['id_reg']."',
-                        '".$parametros['tipo_adjunto']."',
-                        '".$parametros['archivo']."',
-                        '".$parametros['comentario']."',
-                        '".date('Y-m-d H:i:s')."',
-                        ".$_SESSION['id']."
+                        ".$parametros['idreg']."
+                        , ".$parametros['tipoDoc']."
+                        , '".$parametros['archivo']."'
+                        , ".$_SESSION['id']."
                     )";
                   
         if ($this->db->execQuery($query)) {
