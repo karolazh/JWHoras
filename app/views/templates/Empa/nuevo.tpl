@@ -180,7 +180,7 @@
                                 <div class="col-sm-1">
                                     <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value="{$gl_puntos_audit}"
                                            placeholder="AUDIT Puntos" class="form-control" readonly/>
-                                    <label class="control-label required col-sm-1 hidden" id="lbl_toma">{$botonAyudaAlcoholico}</label>
+                                    <span class="help-block hidden"></span>
                                 </div>  
 
                                 <div id="div_consejeria_alcohol" class="col-sm-1">
@@ -241,9 +241,14 @@
                                        value="{$gl_circunferencia_abdominal}" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>
-                            <div class="col-sm-1">
-                                {$botonAyudaCircunferenciaAbdominal}
-                            </div>
+                            <div class="col-sm-1">  
+                                <div>
+                                    {$botonAyudaCircunferenciaAbdominal}
+                                </div>
+                                <div id="botonayudaCAbdominal88" style="{if !($gl_circunferencia_abdominal >= 88)}display: none{/if}">
+                                    {$botonAyudaCAbdominal88}
+                                </div>    
+                            </div>    
                         </div>
                         <div class="form-group">     
                             <label class="control-label required col-sm-2">IMC</label>
@@ -286,6 +291,7 @@
                                 {$botonAyudaPAD}
                             </div>
                             <div class="col-sm-1"></div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <button type="button" id="verAgendaHipertension" style="{if $gl_pad < 90 and $gl_pas < 140}display: none{/if}" 
                                     class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
@@ -308,22 +314,22 @@
                         </div>   
                         <div class="form-group" id="glicemia" style="{$diabetes}">
                             <label class="control-label required col-sm-2">Glicemia en Ayunas (mg/dl)</label>
-                            <div class="col-sm-2">
-                                <input type="text" name="gl_glicemia" maxlength="5" id="gl_glicemia" value="{$gl_glicemia}" 
+                            <div class="col-sm-1">
+                                <input type="text" name="gl_glicemia" maxlength="4" id="gl_glicemia" value="{$gl_glicemia}" 
                                        placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>   
-                            <div class="col-sm-1">
+                            <div class="col-sm-5">
                                 {$botonAyudaGlicemia}
                             </div>
-                            <div class="col-sm-3" style="{if !($gl_glicemia >= 100 and $gl_glicemia <= 125)}display: none{/if}" id="div_glicemia_toma">
+                            <div class="col-sm-2" style="{if !($gl_glicemia >= 100 and $gl_glicemia <= 125)}display: none{/if}" id="div_glicemia_toma">
                                 <input type="checkbox" id="bo_glicemia_toma" {$bo_glicemia_toma}>
                                 <label for="bo_glicemia_toma" class="control-label required">Toma de Glicemia</label>
                                 <div class="col-sm-1">
                                     {$botonConsejeriaGlicemia}
                                 </div>
                             </div>
-                            <div class="col-sm-3">    
+                            <div class="col-sm-2">    
                                 <div class="col-sm-1" id="div_glicemia_agenda" style="{if !($gl_glicemia > 125)}display: none{/if}">
                                     {$botonInformacionAgenda}
                                 </div>
@@ -358,18 +364,20 @@
                                               id="bo_vdrl_1" value="1" {$bo_vdrl_1}>Positivo</label>
                             </div>
                             <label class="control-label required col-sm-1">¿Examen RPR?</label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <label><input class="bo_rpr" type="radio" name="bo_rpr" 
                                               id="bo_rpr_0" value="0" {$bo_rpr_0}>Negativo</label>
                                 &nbsp;&nbsp;
                                 <label><input class="bo_rpr" type="radio" name="bo_rpr" 
                                               id="bo_rpr_1" value="1" {$bo_rpr_1}>Positivo</label>
                             </div>
-                            <div class="col-sm-1" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}" id="div_ITS_agenda">
-                                {$botonInformacionAgendaITS}
+                            <div class="col-sm-2">
+                                <div class="col-sm-1" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}" id="div_ITS_agenda">
+                                    {$botonInformacionAgendaITS}
+                                </div>
+                                <button type="button" id="verAgendaSifilis" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}"
+                                        class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                             </div>
-                            <button type="button" id="verAgendaSifilis" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}"
-                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
                     </div>
                 </div>
@@ -429,7 +437,7 @@
                             <button type="button" id="verAgendaPap1" 
                                     class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                         </div>
-                        <div class="form-group" style="display: none" id="pap_vigente">    
+                        <div class="form-group" style="{if !($bo_pap_vigente_0 or $bo_pap_vigente_1)}display: none{/if}" id="pap_vigente">    
                             <label class="control-label required col-sm-2">PAP Vigente</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_pap_vigente"  type="radio" name="bo_pap_vigente" 
@@ -555,6 +563,7 @@
                                     <input type="checkbox" id="bo_mamografia_toma" {$bo_mamografia_toma}>
                                     <label for="bo_mamografia_toma" class="control-label required">Toma Mamograf&iacute;a</label>
                                 </div>
+                                    <div class="col-sm-2"></div>
                                 <div class="col-sm-3">
                                     <div class="col-sm-1" id="div_mamografia_agenda">
                                         {$botonInformacionAgendaMamografia}
