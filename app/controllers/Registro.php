@@ -33,14 +33,14 @@
 //** clase Admnistracion ***//
 class Registro extends Controller {
 
-    protected $_DAORegistro;
-    protected $_DAOComuna;
-    protected $_DAOCasoEgreso;
     protected $_DAORegion;
+    protected $_DAOComuna;
+    protected $_DAORegistro;
+    protected $_DAOCasoEgreso;
+    protected $_DAOEstadoCaso;
     protected $_DAOPrevision;
     protected $_DAOMotivoConsulta;
     protected $_DAOUsuarios;
-    protected $_DAOEstadoCaso;
     protected $_DAOInstitucion;
 	protected $_DAOEventos;
     protected $_DAOEventosTipo;
@@ -48,6 +48,7 @@ class Registro extends Controller {
     protected $_DAOAdjuntosTipo;
     protected $_DAOEmpa;
     protected $_DAOExamenRegistro;
+    protected $_DAOEstablecimientoSalud;
 
     function __construct() {
         parent::__construct();
@@ -55,21 +56,22 @@ class Registro extends Controller {
         $this->load->lib('Boton', false);
         $this->load->lib('Seguridad', false);
 
-        $this->_DAORegion			= $this->load->model("DAORegion");
-        $this->_DAOComuna			= $this->load->model("DAOComuna");
-        $this->_DAORegistro			= $this->load->model("DAORegistro");
-        $this->_DAOCasoEgreso		= $this->load->model("DAOCasoEgreso");
-        $this->_DAOEstadoCaso		= $this->load->model("DAOEstadoCaso");
-        $this->_DAOPrevision		= $this->load->model("DAOPrevision");
-        $this->_DAOMotivoConsulta	= $this->load->model("DAOMotivoConsulta");
-        $this->_DAOUsuarios			= $this->load->model("DAOUsuarios");
-        $this->_DAOInstitucion		= $this->load->model("DAOInstitucion");
-        $this->_DAOEventosTipo		= $this->load->model("DAOEventosTipo");
-		$this->_DAOEventos			= $this->load->model("DAOEventos");
-        $this->_DAOAdjuntos			= $this->load->model("DAOAdjuntos");
-        $this->_DAOAdjuntosTipo		= $this->load->model("DAOAdjuntosTipo");
-        $this->_DAOEmpa				= $this->load->model("DAOEmpa");
-        $this->_DAOExamenRegistro	= $this->load->model("DAOExamenRegistro");
+        $this->_DAORegion				= $this->load->model("DAORegion");
+        $this->_DAOComuna				= $this->load->model("DAOComuna");
+        $this->_DAORegistro				= $this->load->model("DAORegistro");
+        $this->_DAOCasoEgreso			= $this->load->model("DAOCasoEgreso");
+        $this->_DAOEstadoCaso			= $this->load->model("DAOEstadoCaso");
+        $this->_DAOPrevision			= $this->load->model("DAOPrevision");
+        $this->_DAOMotivoConsulta		= $this->load->model("DAOMotivoConsulta");
+        $this->_DAOUsuarios				= $this->load->model("DAOUsuarios");
+        $this->_DAOInstitucion			= $this->load->model("DAOInstitucion");
+		$this->_DAOEventos				= $this->load->model("DAOEventos");
+        $this->_DAOEventosTipo			= $this->load->model("DAOEventosTipo");
+        $this->_DAOAdjuntos				= $this->load->model("DAOAdjuntos");
+        $this->_DAOAdjuntosTipo			= $this->load->model("DAOAdjuntosTipo");
+        $this->_DAOEmpa					= $this->load->model("DAOEmpa");
+        $this->_DAOExamenRegistro		= $this->load->model("DAOExamenRegistro");
+		$this->_DAOEstablecimientoSalud	= $this->load->model('DAOEstablecimientoSalud');
     }
 
     /*
@@ -458,15 +460,7 @@ class Registro extends Controller {
 		if(!empty($_POST['comuna'])){
 			$comuna			= $_POST['comuna'];
 			$comuna			= $_POST['comuna'];
-			$daoComuna		= $this->load->model('DAOComuna');
-			$centrosalud	= $daoComuna->obtCentroSaludporComuna($comuna)->rows;
-
-			$i				= 0;
-			foreach ($centrosalud as $cSalud) {
-				$json[$i]['id_establecimiento']		= $cSalud->id_establecimiento;
-				$json[$i]['nombre_establecimiento']	= $cSalud->nombre_establecimiento;
-				$i++;
-			}
+			$json			= $this->_DAOEstablecimientoSalud->getEstablecimientoxComuna($comuna);
 		}
         echo json_encode($json);
     }
