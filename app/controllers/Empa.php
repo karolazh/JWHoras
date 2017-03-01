@@ -322,6 +322,7 @@ class Empa extends Controller{
                 }
             }
 //			print_r($total); die();
+		$this->smarty->assign("id_empa", $id_empa);
 		$this->smarty->assign("total", $total);
 		$this->smarty->assign("arrAudit", $arrAudit);
         $this->smarty->assign("arrPreguntas", $arrPreguntas);
@@ -359,8 +360,14 @@ class Empa extends Controller{
         $parametros		= $this->_request->getParams();
 		$correcto		= false;
         $error			= false;
-        //$id_empa                = $this->_DAOEmpa->updateEmpa($parametros);
-        if($id_empa){
+		$cant_preguntas = $parametros['cant_pre'];
+		$id_empa = $parametros['id_empa'];
+		for ($i = 1; $i <= $cant_preguntas; $i++) {
+			$id_pregunta = $i;
+			$valor = $parametros['pregunta_'.$i];
+			$id_empa_audit = $this->_DAOEmpaAudit->updateEmpaAudit($id_empa,$id_pregunta,$valor);
+		}
+        if($id_empa_audit){
             $correcto           = true;
         }else{
             $error		= true;
