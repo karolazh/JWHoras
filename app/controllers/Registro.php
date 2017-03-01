@@ -94,9 +94,7 @@ class Registro extends Controller {
 
         //llamado al template
         $this->_display('Registro/index.tpl');
-        $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/index.js");
-        //$this->_addJavascript(STATIC_FILES.'js/templates/soporte/xmodal.js');
 
     }
 
@@ -233,7 +231,6 @@ class Registro extends Controller {
         //llamado al template
         $this->_display('Registro/nuevo.tpl');
         $this->load->javascript(STATIC_FILES . "js/regiones.js");
-        $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/nuevo.js");
         //$this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
