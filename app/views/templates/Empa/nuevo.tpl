@@ -180,7 +180,7 @@
                                 <div class="col-sm-1">
                                     <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value="{$gl_puntos_audit}"
                                            placeholder="AUDIT Puntos" class="form-control" readonly/>
-                                    <label class="control-label required col-sm-1 hidden" id="lbl_toma">{$botonAyudaAlcoholico}</label>
+                                    <span class="help-block hidden"></span>
                                 </div>  
 
                                 <div id="div_consejeria_alcohol" class="col-sm-1">
@@ -241,9 +241,14 @@
                                        value="{$gl_circunferencia_abdominal}" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>
-                            <div class="col-sm-1">
-                                {$botonAyudaCircunferenciaAbdominal}
-                            </div>
+                            <div class="col-sm-1">  
+                                <div>
+                                    {$botonAyudaCircunferenciaAbdominal}
+                                </div>
+                                <div id="botonayudaCAbdominal88" style="{if !($gl_circunferencia_abdominal >= 88)}display: none{/if}">
+                                    {$botonAyudaCAbdominal88}
+                                </div>    
+                            </div>    
                         </div>
                         <div class="form-group">     
                             <label class="control-label required col-sm-2">IMC</label>
