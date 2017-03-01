@@ -258,37 +258,39 @@ class Registro extends Controller {
 			$correcto			= true;
 			$session			= New Zend_Session_Namespace("usuario_carpeta");
 
-			$nombre_adjunto		= $_SESSION['adjuntos'][0]['nombre_adjunto'];
-			$arr_extension		= array('jpeg','jpg','png','gif','tiff','bmp','pdf','txt','csv','doc','docx','ppt','pptx','xls','xlsx','eml');
-			$nombre_adjunto 	= strtolower(trim($nombre_adjunto));
-			$nombre_adjunto 	= trim($nombre_adjunto,".");
-			$extension			= substr(strrchr($nombre_adjunto, "."), 1);
-			$gl_nombre_archivo	= 'Consentimiento_'.$parametros['rut'].'.'.$extension;
-			$directorio			= "archivos/$id_registro/";
-			$gl_path			= $directorio.$gl_nombre_archivo;
+			if(!empty($_SESSION['adjuntos'])){
+				$nombre_adjunto		= $_SESSION['adjuntos'][0]['nombre_adjunto'];
+				$arr_extension		= array('jpeg','jpg','png','gif','tiff','bmp','pdf','txt','csv','doc','docx','ppt','pptx','xls','xlsx','eml');
+				$nombre_adjunto 	= strtolower(trim($nombre_adjunto));
+				$nombre_adjunto 	= trim($nombre_adjunto,".");
+				$extension			= substr(strrchr($nombre_adjunto, "."), 1);
+				$gl_nombre_archivo	= 'Consentimiento_'.$parametros['rut'].'.'.$extension;
+				$directorio			= "archivos/$id_registro/";
+				$gl_path			= $directorio.$gl_nombre_archivo;
 
-			$ins_adjunto		= array('id_registro'		=> $id_registro,
-										'id_tipo_adjunto'	=> 1,
-										'gl_nombre'			=> $gl_nombre_archivo,
-										'gl_path'			=> $gl_path,
-										'gl_glosa'			=> 'Consentimiento Firmado',
-										'sha256'			=> Seguridad::generar_sha256($gl_path),
-										'fc_crea'			=> date('Y-m-d h:m:s'),
-										'id_usuario_crea'	=> $session->id,
-										);
-			$id_adjunto			= $this->_DAOAdjuntos->insert($ins_adjunto);
+				$ins_adjunto		= array('id_registro'		=> $id_registro,
+											'id_tipo_adjunto'	=> 1,
+											'gl_nombre'			=> $gl_nombre_archivo,
+											'gl_path'			=> $gl_path,
+											'gl_glosa'			=> 'Consentimiento Firmado',
+											'sha256'			=> Seguridad::generar_sha256($gl_path),
+											'fc_crea'			=> date('Y-m-d h:m:s'),
+											'id_usuario_crea'	=> $session->id,
+											);
+				$id_adjunto			= $this->_DAOAdjuntos->insert($ins_adjunto);
 
-			if($id_adjunto){
-				if(!is_dir($directorio)){
-					mkdir($directorio, 0775, true);
-					
-					$out = fopen($directorio.'/index.html', "w");
-					fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
+				if($id_adjunto){
+					if(!is_dir($directorio)){
+						mkdir($directorio, 0775, true);
+						
+						$out = fopen($directorio.'/index.html', "w");
+						fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
+						fclose($out);
+					}
+					$out = fopen($gl_path, "w");
+					fwrite($out, base64_decode($_SESSION['adjuntos'][0]['contenido']));
 					fclose($out);
 				}
-				$out = fopen($gl_path, "w");
-				fwrite($out, base64_decode($_SESSION['adjuntos'][0]['contenido']));
-				fclose($out);
 			}
 
 			$resultado2						= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
