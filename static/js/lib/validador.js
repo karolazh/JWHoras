@@ -74,8 +74,90 @@ function formateaRut(rut0)
         }
         document.getElementById("rut").value = format;
 }
-
+function Valida_Rut( rut )
+{
+    var intlargo = rut.value;
+    var tmpstr = "";
+    if (intlargo.length> 0)
+    {
+        crut = rut.value;
+        
+        for ( i=0; i <crut.length ; i++ )
+        {
+        if ( crut.charAt(i) != ' ' && crut.charAt(i) != '.' && crut.charAt(i) != '-' )
+        	{
+            tmpstr = tmpstr + crut.charAt(i);
+        	}
+        }
+        largo = tmpstr.length;
+        
+        if ( largo <3 )
+        {
+            //alert('Rut inválido (muy corto)')
+			xModal.danger('Rut inválido (muy corto)');
+			$('#rut').parent().addClass('has-error');
+            //Objeto.focus()
+            return false;
+        }else if(largo > 9){
+            //alert('Rut inválido (muy largo)')
+			xModal.danger('Rut inválido (muy largo)');
+			$('#rut').parent().addClass('has-error');
+            //Objeto.focus()
+            return false;
+        }
+        rut = tmpstr;
+        crut= tmpstr;
+        largo = crut.length;
+    
+        if ( largo> 2 )
+            rut = crut.substring(0, largo - 1);
+        else
+            rut = crut.charAt(0);
+    
+        dv = crut.charAt(largo-1);
+    
+        if ( rut == null || dv == null )
+        return 0;
+    
+        var dvr = '0';
+        suma = 0;
+        mul  = 2;
+    
+        for (i= rut.length-1 ; i>= 0; i--)
+        {
+            suma = suma + rut.charAt(i) * mul;
+            if (mul == 7)
+                mul = 2;
+            else
+                mul++;
+        }
+    
+        res = suma % 11;
+        if (res==1)
+            dvr = 'k';
+        else if (res==0)
+            dvr = '0';
+        else
+        {
+            dvi = 11-res;
+            dvr = dvi + "";
+        }
+    
+        if ( dvr != dv.toLowerCase() )
+        {
+			xModal.danger('El rut ingresado es inválido');
+			$('#rut').parent().addClass('has-error');
+            //alert('El rut ingresado es inválido');
+            //Objeto.focus()
+            return false;
+        }
+        //alert('El Rut Ingresado es Correcto!')
+        //Objeto.focus()
+        return true;
+    }
+}
 //Validar rut
+
 function validaRut(objetoRut){
     	var tmpstr = "";
 	var intlargo = objetoRut.value;
