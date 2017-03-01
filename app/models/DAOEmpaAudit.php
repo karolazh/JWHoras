@@ -38,7 +38,6 @@ class DAOEmpaAudit extends Model{
      */
     protected $_tabla           = "pre_empa_audit";
     protected $_primaria		= "id_audit";
-    protected $_transaccional	= false;
 
     /**
      * Constructor
@@ -68,6 +67,18 @@ class DAOEmpaAudit extends Model{
         }
     }
     
+	public function updateEmpaAudit( $id_empa, $id_pregunta, $valor){
+
+        $query	= "	UPDATE pre_empa_audit SET
+						 nr_valor	=	".$valor."
+                        WHERE id_empa   = ".$id_empa." AND id_pregunta = ".$id_pregunta."";
+                  
+        if ($this->db->execQuery($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
 
