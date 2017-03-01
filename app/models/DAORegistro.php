@@ -110,7 +110,7 @@ class DAORegistro extends Model{
         $query	= "	SELECT 
 						pre_registro.*,
 						c.gl_nombre_comuna,
-						e.nombre_establecimiento as gl_centro_salud,
+						e.gl_nombre_establecimiento as gl_centro_salud,
 						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento_vista
 					FROM pre_registro 
                         LEFT JOIN pre_comunas c ON pre_registro.id_comuna = c.id_comuna

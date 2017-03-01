@@ -327,22 +327,19 @@
 		cargarCentroSaludporComuna : function(comuna,combo,centrosalud){
 			if(comuna != 0){
 				$.post(BASE_URI+'index.php/Registro/cargarCentroSaludporComuna',{comuna:comuna},function(response){
-					if(response.length > 0){
-						var total = response.length;
-						var options = '<option value="0">Seleccione un Centro de Salud</option>';
-						for(var i=0; i<total; i++){
-							if(centrosalud == response[i].id_establecimiento){
-								options += '<option value="'+response[i].id_establecimiento+'" selected >'+response[i].nombre_establecimiento+'</option>';	
-							}else{
-								options += '<option value="'+response[i].id_establecimiento+'">'+response[i].nombre_establecimiento+'</option>';
-							}
-							
+					var options = '<option value="0">Seleccione un Centro de Salud</option>';
+					$.each(response, function (i, valor) {
+						if(centrosalud == valor.id_establecimiento){
+							options += '<option value="'+valor.id_establecimiento+'" selected >'+valor.gl_nombre_establecimiento+'</option>';	
+						}else{
+							options += '<option value="'+valor.id_establecimiento+'">'+valor.gl_nombre_establecimiento+'</option>';
 						}
-						$('#'+combo).html(options);
-					}
+					});
+					$('#'+combo).html(options);
+					
 				},'json');
 			}else{
-						$('#'+combo).html('<option value="0">Seleccione un Centro de Salud</option>');
+				$('#'+combo).html('<option value="0">Seleccione un Centro de Salud</option>');
 			}
 		}
 	};

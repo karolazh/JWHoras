@@ -1,13 +1,12 @@
 <?php
 
-
 class DAOEstadoCaso extends Model{
     /**
      * @var string 
      */
-    protected $_tabla = "pre_estados_caso";
-    protected $_primaria = "id_estado_caso";
-    
+    protected $_tabla		= "pre_estados_caso";
+    protected $_primaria	= "id_estado_caso";
+
     /**
      * Constructor
      */
@@ -20,8 +19,8 @@ class DAOEstadoCaso extends Model{
      * Lista Casos de Egreso
      */
     public function getListaEstadoCaso(){
-        $query = "select * from ".$this->_tabla;
-        $resultado = $this->db->getQuery($query);
+        $query		= "SELECT * FROM ".$this->_tabla;
+        $resultado	= $this->db->getQuery($query);
 
         if($resultado->numRows>0){
             return $resultado->rows;
@@ -29,19 +28,20 @@ class DAOEstadoCaso extends Model{
             return NULL;
         }
     }
-    
+
     /*
      * Ver Caso de Egreso
      */
     public function getEstadoCaso($id_estado_caso){
-        $query = "select * from ".$this->_tabla. 
-                  " where ".$this->_primaria." = ?";
+        $query		= "	SELECT * FROM ".$this->_tabla. " 
+						where ".$this->_primaria." = ?";
 
-        $consulta = $this->db->getQuery($query,array($id_estado_caso));
+        $consulta	= $this->db->getQuery($query,array($id_estado_caso));
         if($consulta->numRows > 0){
             return $consulta->rows->row_0;
         }else{
             return null;
         }
     }
+
 }
