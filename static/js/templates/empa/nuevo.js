@@ -585,7 +585,7 @@ $("#guardar").on('click', function (e) {
 	} else {
                 parametros.push({
                         "name": 'gl_colesterol',
-                        "value": "'" + $('#gl_colesterol') + "'"
+                        "value": "'" + $('#gl_colesterol').val() + "'"
                 });
         }
 	if ($('#gl_observaciones_empa').val() == "") {
@@ -596,7 +596,7 @@ $("#guardar").on('click', function (e) {
 	} else {
                 parametros.push({
                         "name": 'gl_observaciones_empa',
-                        "value": "'" + $('#gl_observaciones_empa') + "'"
+                        "value": "'" + $('#gl_observaciones_empa').val() + "'"
                 });
         }
 	if ($('#bo_glicemia_toma').is(':checked')) {
