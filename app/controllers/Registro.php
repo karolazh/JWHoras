@@ -78,10 +78,12 @@ class Registro extends Controller {
 
     public function index() {
         Acceso::redireccionUnlogged($this->smarty);
+		/*
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
         $this->smarty->assign("rut", $sesion->rut);
         $this->smarty->assign("usuario", $sesion->usuario);
+		*/
 
         /*
          * Si tengo perfil 1="ADMIN" / 3="GESTOR NACIONAL" puedo ver todas las DAU
@@ -94,9 +96,7 @@ class Registro extends Controller {
 
         //llamado al template
         $this->_display('Registro/index.tpl');
-        $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/index.js");
-        //$this->_addJavascript(STATIC_FILES.'js/templates/soporte/xmodal.js');
 
     }
 
@@ -233,7 +233,6 @@ class Registro extends Controller {
         //llamado al template
         $this->_display('Registro/nuevo.tpl');
         $this->load->javascript(STATIC_FILES . "js/regiones.js");
-        $this->load->javascript(STATIC_FILES . "js/templates/registro/formulario.js");
         $this->load->javascript(STATIC_FILES . "js/templates/registro/nuevo.js");
         //$this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
@@ -508,6 +507,39 @@ class Registro extends Controller {
         echo json_encode($json);
     }
     
+	/*
+    public function guardarNuevoAdjunto() {
+        header('Content-type: application/json');
+        //$parametros	      = $this->_request->getParams();
+        
+        $correcto	      = false;
+        $error		      = true;
+        
+        $parametros = array();
+        $parametros['id_reg']       = $_POST['idreg'];
+        $parametros['tipo_adjunto'] = $_POST['tipoDoc'];
+        $parametros['archivo']      = $_POST['idreg'].'/'.$_POST['archivo'];
+        $parametros['comentario']   = $_POST['adjunto'];
+
+        $result	= $this->_DAOAdjuntos->insertarAdjunto($parametros);
+        
+        if($result){
+            //COPIAR ARCHIVO EN RUTA
+            $correcto	= true;
+        }else{
+            $error      = true;
+        }
+
+        $salida	= array("error" => $error,
+                        "correcto" => $correcto);
+        
+        $this->smarty->assign("hidden", "");
+        $json	= Zend_Json::encode($salida);
+
+        echo $json;
+    }
+	*/
+	
 	
 	public function cargarAdjunto(){
 		$this->smarty->display('Registro/cargar_adjunto.tpl');
@@ -669,38 +701,6 @@ class Registro extends Controller {
         }else{
             echo "El adjunto no existe";
         }
-    }
-    
-    public function guardarNuevoAdjunto() {
-        header('Content-type: application/json');
-        $parametros = $this->_request->getParams();
-	
-        $correcto   = false;
-        $error      = false;
-        
-        $data = array();
-        $data['idreg'] = $parametros['idreg']; //'idreg'
-        $data['tipoDoc'] = $parametros['tipoDoc']; //'tipoDoc'
-        $data['archivo'] = $parametros['archivo']; //'archivo'
-        //$data['comentario_adjunto'] = $parametros['comentario_adjunto']; //'comentario_adjunto'
-
-        //$result	= $this->_DAOAdjuntos->insertarAdjunto($parametros);
-        $result	= $this->_DAOAdjuntos->insertarAdjunto($data);
-        
-        if($result){
-            //COPIAR ARCHIVO EN RUTA
-            $correcto	= true;
-        }else{
-            $error		= true;
-        }
-
-        $salida	= array("error" => $error,
-                        "correcto" => $correcto);
-        
-        $this->smarty->assign("hidden", "");
-        $json	= Zend_Json::encode($salida);
-
-        echo $json;
     }
 
 }

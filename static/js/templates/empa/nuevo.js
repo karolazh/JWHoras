@@ -240,18 +240,23 @@ $(".bo_pap_realizado").on('change', function (e) {
 
 //PAP Vigente? (automático Calculando si es <=3 años) SI -> Vigente   NO -> No Vigente (Tomar hora para otro)
 $("#fc_ultimo_pap").livequery(function () {
-	$(this).on('change', function (e) {
-		var edad = calcularYear($(this).val());
-		if (edad <= 3) {
-			//check Si
-			$('#bo_pap_vigente_1').prop('checked', true);
-		} else {
-			//check No
-			$('#bo_pap_vigente_0').prop('checked', true);
-		}
-		$('#pap_vigente').show();
-		$('#verAgendaPap1').show();
-	});
+    $(this).on('change', function (e) {
+        if ($(this).val() == "") {
+            $('#bo_pap_vigente_1').prop('checked', false);
+            $('#bo_pap_vigente_0').prop('checked', false);
+        } else {
+            var edad = calcularYear($(this).val());
+            if (edad <= 3) {
+                //check Si
+                $('#bo_pap_vigente_1').prop('checked', true);
+            } else {
+                //check No
+                $('#bo_pap_vigente_0').prop('checked', true);
+            }
+            $('#pap_vigente').show();
+            $('#verAgendaPap1').show();
+        }
+    });
 });
 //Si valor colesterlo >= 200 y < 239 (Consejería Alimentaria y Actividad Fisica
 //Si valor colesterol >= 240 (Referir a confirmación diagnóstica
@@ -290,6 +295,10 @@ $(".bo_mamografia_realizada").on('change', function (e) {
 //Examen Cancer de mama vigente?
 $("#fc_mamografia").livequery(function () {
 	$(this).on('change', function (e) {
+            if ($(this).val() == "") {
+                $('#bo_mamografia_vigente_1').prop('checked', false);
+                $('#bo_mamografia_vigente_0').prop('checked', false);
+            } else {
 		var edad = calcularYear($(this).val());
 		if (edad <= 1) {
 			//check Si
@@ -301,6 +310,7 @@ $("#fc_mamografia").livequery(function () {
 		$('#mam_vigente').show();
 		$('#mam_resultado').show();
 		$('#mam_requiere').show();
+            }
 	});
 });
 

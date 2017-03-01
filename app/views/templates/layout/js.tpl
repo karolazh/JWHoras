@@ -29,6 +29,7 @@
     <script type="text/javascript" src="{$static}js/plugins/qtip/jquery.qtip.min.js"></script>
     <script type="text/javascript" src="{$static}js/base.js"></script>
     <script type="text/javascript" src="{$static}js/lib/validador.js"></script>
+    <script type="text/javascript" src="{$static}js/formulario.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places,drawing&key=AIzaSyBqmaRNgLR0AZU8l7PPITUFJ4EBQD_A_4g"></script>
     {js}
     {$js}
