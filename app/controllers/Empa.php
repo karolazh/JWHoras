@@ -357,7 +357,6 @@ class Empa extends Controller{
 	public function guardarAudit(){
         header('Content-type: application/json');
         $parametros		= $this->_request->getParams();
-		print_r($parametros);die();
 		$correcto		= false;
         $error			= false;
         //$id_empa                = $this->_DAOEmpa->updateEmpa($parametros);

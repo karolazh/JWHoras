@@ -473,13 +473,17 @@ class Registro extends Controller {
 
     public function cargarRegistro() {
         header('Content-type: application/json');
-        $rut			= $_POST['rut'];
+        $rut = $_POST['rut'];
+		$pasaporte = $_POST['inputextranjero'];
+		if (!is_null($rut) && ($rut !== "")){
         $registro		= $this->_DAORegistro->getRegistroByRut($rut);
+		} else if(!is_null($pasaporte)&& ($pasaporte !== "")){
+			$registro   = $this->_DAORegistro->getRegistroByPasaporte($pasaporte);
+		}
         $json			= array();
 
 		if($registro){
 			$arr_motivos				= $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($registro->id_registro);
-			
 			$json['correcto']			= TRUE;
 			$json['count_motivos']		= count($arr_motivos);
 			$json['fc_ultimo_motivos']	= $arr_motivos->row_0->fc_ingreso;
@@ -498,11 +502,9 @@ class Registro extends Controller {
 			$json['bo_acepta_programa']	= $registro->bo_acepta_programa;
 			$json['gl_latitud']			= $registro->gl_latitud;
 			$json['gl_longitud']		= $registro->gl_longitud;
-			
 			$json['gl_fono']			= $registro->gl_fono;
 			$json['gl_celular']			= $registro->gl_celular;
 			$json['gl_email']			= $registro->gl_email;
-
 		}else{
 			$json['correcto']	= FALSE;
 		}
