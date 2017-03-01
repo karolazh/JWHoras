@@ -158,7 +158,7 @@
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Alcoholismo</h3></div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label class="control-label col-sm-2 required">¿Consume bebidas alcoh&oacute;licas?</label>
+                            <label class="control-label col-sm-3 required">¿Consume bebidas alcoh&oacute;licas?</label>
                             <div class="col-sm-1">
                                 <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol" 
                                               id="bo_consume_alcohol_0" value="0" {$bo_consume_alcohol_0}>NO</label>
@@ -196,7 +196,7 @@
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Tabaquismo</h3></div>
                     <div class="box-body">   
                         <div class="form-group">
-                            <label class="control-label required col-sm-2">¿Usted fuma?</label>
+                            <label class="control-label required col-sm-3">¿Usted fuma?</label>
                             <div class="col-sm-1">
                                 <label><input class="bo_fuma" type="radio" name="bo_fuma" 
                                               id="bo_fuma_0" value="0" {$bo_fuma_0}>NO</label>
@@ -215,7 +215,7 @@
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Obesidad</h3></div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label class="control-label required col-sm-2">Peso (Kg)</label>
+                            <label class="control-label required col-sm-3">Peso (Kg)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_peso" id="gl_peso" maxlength="4"
                                        onKeyPress="return soloNumeros(event)"
@@ -224,7 +224,7 @@
                             </div>
                         </div> 
                         <div class="form-group">   
-                            <label class="control-label required col-sm-2">Estatura (cm)</label>
+                            <label class="control-label required col-sm-3">Estatura (cm)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_estatura" id="gl_estatura" maxlength="4"
                                        onKeyPress="return soloNumeros(event)"
@@ -234,7 +234,7 @@
                         </div>
                         <div class="form-group">   
 
-                            <label class="control-label required col-sm-2">Circunferencia Abdominal (cm)</label>
+                            <label class="control-label required col-sm-3">Circunferencia Abdominal (cm)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_circunferencia_abdominal" id="gl_circunferencia_abdominal" maxlength="5"
                                        onKeyPress="return soloNumeros(event)" maxlength="4"
@@ -251,7 +251,7 @@
                             </div>    
                         </div>
                         <div class="form-group">     
-                            <label class="control-label required col-sm-2">IMC</label>
+                            <label class="control-label required col-sm-3">IMC</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_imc" id="gl_imc" 
                                        value="{$gl_imc}" placeholder="" class="form-control" readonly/>
