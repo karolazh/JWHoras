@@ -256,6 +256,7 @@ class Empa extends Controller{
 		$this->smarty->assign("botonAyudaAlcoholico", Boton::botonAyuda("Evitar el uso de bebidas alcohólicas","Consejería","pull-left","btn-danger"));
 		$this->smarty->assign("botonAyudaFumador", Boton::botonAyuda("Evitar el uso de tabaco","Consejería","pull-left","btn-danger"));
 		$this->smarty->assign("botonAyudaCircunferenciaAbdominal", Boton::botonAyuda("Punto medio entre margen inferior de la ultima costilla y la cresta iliaca.","Información","pull-left","btn-info"));
+                $this->smarty->assign("botonAyudaCAbdominal88", Boton::botonAyuda("Alimentación Sana y Actividad Física","Consejería","pull-left","btn-danger"));
 		$this->smarty->assign("botonAyudaIMC", Boton::botonAyuda("Medida de asociación entre la masa y la talla de un individuo","Información","pull-left","btn-info"));        
 		$this->smarty->assign("botonAyudaPAS", Boton::botonAyuda("si >= 140 es hipertensión","Información","pull-left","btn-info"));
 		$this->smarty->assign("botonAyudaPAD", Boton::botonAyuda("si >= 90 es hipertensión","Información","pull-left","btn-info"));
@@ -351,7 +352,6 @@ class Empa extends Controller{
 	public function guardarAudit(){
         header('Content-type: application/json');
         $parametros		= $this->_request->getParams();
-		print_r($parametros);die();
 		$correcto		= false;
         $error			= false;
         //$id_empa                = $this->_DAOEmpa->updateEmpa($parametros);

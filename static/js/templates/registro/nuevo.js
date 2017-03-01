@@ -240,13 +240,14 @@
 	var Registro = {
 		cargarRegistro : function(){
 			var rut = $("#rut").val();
-			if(rut != ""){
+			var inputextranjero = $("#inputextranjero").val();
+			if(rut != "" || inputextranjero != ""){
 
 				$.ajax({
 					dataType: "json",
 					cache	:false,
 					async	: true,
-					data	: {rut:rut},
+					data	: {rut:rut,inputextranjero:inputextranjero},
 					type	: "post",
 					url		: BASE_URI + "index.php/Registro/cargarRegistro", 
 					error	: function(xhr, textStatus, errorThrown){

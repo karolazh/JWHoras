@@ -1,11 +1,50 @@
 //Cuando Carga FORM
 $("#form").ready(function () {
     var imc = $('#gl_imc').val();
-    
+    var pts_audit = $('#gl_puntos_audit').val();
     //funcion mensaje span IMC
     mensajeIMC(imc);
-    
+    //funcion mensaje span Puntos AUDIT
+    mensajeAUDIT(pts_audit);
 });
+
+//Poner Mensaje en span segun Puntos de AUDIT
+function mensajeAUDIT(pts_audit){
+    var mensaje = "";
+    if (pts_audit >= 0 && pts_audit <= 7) {
+        $('#gl_puntos_audit').css("borderColor", "");
+        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+        $('#gl_puntos_audit').parent().removeClass("has-error");
+        $('#gl_puntos_audit').parent().addClass("has-success");
+        mensaje = "Bajo Riesgo";
+    } else if (pts_audit >= 8 && pts_audit <= 15) {
+        $('#gl_puntos_audit').css("borderColor", "");
+        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+        $('#gl_puntos_audit').parent().removeClass("has-error");
+        $('#gl_puntos_audit').parent().removeClass("has-success");
+        $('#gl_puntos_audit').css("borderColor", "#BDB76B");
+        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "#BDB76B");
+        mensaje = "Riesgo";
+    } else if (pts_audit >= 16 && pts_audit <= 19) {
+        $('#gl_puntos_audit').css("borderColor", "");
+        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+        $('#gl_puntos_audit').parent().removeClass("has-error");
+        $('#gl_puntos_audit').parent().removeClass("has-success");
+        $('#gl_puntos_audit').css("borderColor", "#FF8C00");
+        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "#FF8C00");
+        mensaje = "Problema";
+    } else if (pts_audit >= 20 && pts_audit <= 40) {
+        $('#gl_puntos_audit').css("borderColor", "");
+        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+        $('#gl_puntos_audit').parent().removeClass("has-success");
+        $('#gl_puntos_audit').parent().addClass("has-error");
+        mensaje = "Problema o Dependencia";
+    }
+    
+    $('#gl_puntos_audit').parent().find('span.help-block').html(mensaje);
+    $('#gl_puntos_audit').parent().find('span.help-block').removeClass("hidden");
+}
+
 
 //Poner Mensaje en span segun IMC
 function mensajeIMC(imc){
@@ -81,7 +120,6 @@ function calculaIMC()
 //hacemos la llamada a los datos introducidos
 	var peso = $('#gl_peso').val();
 	var altura = $('#gl_estatura').val() / 100;
-	var mensaje = "";
 //calculamos el imc
 	var imc = peso / (altura * altura);
 	imc = imc.toFixed(2);
@@ -107,10 +145,9 @@ function calculaIMC()
 //Si Circunferencia Abdominal es mayor o igual a 88cm -> Consejería
 $("#gl_circunferencia_abdominal").on('keyup', function (e) {
 	if ($("#gl_circunferencia_abdominal").val() >= 88) {
-		$('#gl_circunferencia_abdominal').parent().find('span.help-block').html("Mayor/Igual a 90 (Consejería Alimentación Sana y Actividad Física)");
-		$('#gl_circunferencia_abdominal').parent().find('span.help-block').removeClass("hidden");
+		$('#botonayudaCAbdominal88').show();
 	} else {
-		$('#gl_circunferencia_abdominal').parent().find('span.help-block').addClass("hidden");
+		$('#botonayudaCAbdominal88').hide();
 	}
 });
 
@@ -120,15 +157,6 @@ $(".bo_consume_alcohol").on('change', function (e) {
 		$('#div_alcoholismo').hide();
 	} else {
 		$('#div_alcoholismo').show();
-	}
-});
-
-//Según tipo de consumo mostrar Consejería AUDIT
-$("#gl_puntos_audit").on('change', function (e) {
-	if ($('#gl_puntos_audit').val() > 0) {
-
-	} else {
-
 	}
 });
 
@@ -240,18 +268,23 @@ $(".bo_pap_realizado").on('change', function (e) {
 
 //PAP Vigente? (automático Calculando si es <=3 años) SI -> Vigente   NO -> No Vigente (Tomar hora para otro)
 $("#fc_ultimo_pap").livequery(function () {
-	$(this).on('change', function (e) {
-		var edad = calcularYear($(this).val());
-		if (edad <= 3) {
-			//check Si
-			$('#bo_pap_vigente_1').prop('checked', true);
-		} else {
-			//check No
-			$('#bo_pap_vigente_0').prop('checked', true);
-		}
-		$('#pap_vigente').show();
-		$('#verAgendaPap1').show();
-	});
+    $(this).on('change', function (e) {
+        if ($(this).val() == "") {
+            $('#bo_pap_vigente_1').prop('checked', false);
+            $('#bo_pap_vigente_0').prop('checked', false);
+        } else {
+            var edad = calcularYear($(this).val());
+            if (edad <= 3) {
+                //check Si
+                $('#bo_pap_vigente_1').prop('checked', true);
+            } else {
+                //check No
+                $('#bo_pap_vigente_0').prop('checked', true);
+            }
+            $('#pap_vigente').show();
+            $('#verAgendaPap1').show();
+        }
+    });
 });
 //Si valor colesterlo >= 200 y < 239 (Consejería Alimentaria y Actividad Fisica
 //Si valor colesterol >= 240 (Referir a confirmación diagnóstica
@@ -290,6 +323,10 @@ $(".bo_mamografia_realizada").on('change', function (e) {
 //Examen Cancer de mama vigente?
 $("#fc_mamografia").livequery(function () {
 	$(this).on('change', function (e) {
+            if ($(this).val() == "") {
+                $('#bo_mamografia_vigente_1').prop('checked', false);
+                $('#bo_mamografia_vigente_0').prop('checked', false);
+            } else {
 		var edad = calcularYear($(this).val());
 		if (edad <= 1) {
 			//check Si
@@ -301,6 +338,7 @@ $("#fc_mamografia").livequery(function () {
 		$('#mam_vigente').show();
 		$('#mam_resultado').show();
 		$('#mam_requiere').show();
+            }
 	});
 });
 
@@ -345,6 +383,9 @@ $("#guardaraudit").livequery(function () {
 		});
 		buttonEndProcess(button_process);
 		$("#gl_puntos_audit").val($("#total").val());
+                //Según tipo de consumo mostrar Mensaje (de acuerdo a puntos del AUDIT)
+                var pts_audit = $('#gl_puntos_audit').val();
+                mensajeAUDIT(pts_audit);
 		xModal.close();
 	});
 });

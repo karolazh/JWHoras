@@ -126,7 +126,26 @@ class DAORegistro extends Model{
             return null;
         }
     }
-	
+	public function getRegistroByPasaporte($pasaporte) {
+        $query	= "	SELECT 
+						pre_registro.*,
+						c.gl_nombre_comuna,
+						e.nombre_establecimiento as gl_centro_salud,
+						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento_vista
+					FROM pre_registro 
+                        LEFT JOIN pre_comunas c ON pre_registro.id_comuna = c.id_comuna
+                        LEFT JOIN pre_establecimientos_salud e ON pre_registro.id_centro_salud = e.id_establecimiento
+					WHERE gl_run_pass = ?";
+
+        $param		= array($pasaporte);
+        $consulta	= $this->db->getQuery($query, $param);
+
+        if ($consulta->numRows > 0) {
+            return $consulta->rows->row_0;
+        } else {
+            return null;
+        }
+    }
 
     
 	public function countRegistroxRegion($id_region){

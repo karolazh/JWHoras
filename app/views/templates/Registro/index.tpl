@@ -19,7 +19,7 @@
 				<table id="tablaPrincipal" class="table table-hover table-striped table-bordered dataTable no-footer">
 					<thead>
 						<tr role="row">
-							<th class="text-center hidden" width="5%">ID</th>
+							<!-- th class="text-center" width="1%">ID</th -->
 							<th class="text-center" width="10%">RUT Paciente</th>
 							<th class="text-center" width="5%">Fecha Registro</th>
 							<th class="text-center" width="25%">Nombre</th>
@@ -36,7 +36,7 @@
 					<tbody>
 						{foreach $arrResultado as $item}
 							<tr>
-								<td class="text-center hidden" nowrap> {$item->id_registro} </td>
+								<!-- td class="text-center"> {$item->id_registro} </td -->
 								<td class="text-center" nowrap> {$item->gl_identificacion} </td>
 								<td class="text-center"> {$item->fc_crea} </td>
 								<td class="text-left"> {$item->gl_nombres} {$item->gl_apellidos} </td>

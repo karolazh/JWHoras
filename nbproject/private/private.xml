@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/srv/http/prevencion/app/controllers/Empa.php</file>
-            <file>file:/srv/http/prevencion/app/controllers/Registro.php</file>
-            <file>file:/srv/http/prevencion/app/models/DAOEmpa.php</file>
-            <file>file:/srv/http/prevencion/app/views/templates/Empa/nuevo.tpl</file>
-            <file>file:/srv/http/prevencion/static/js/templates/empa/nuevo.js</file>
-            <file>file:/srv/http/prevencion/app/views/templates/Empa/audit.tpl</file>
+            <file>file:/var/www/html/prevencion/app/controllers/Empa.php</file>
+            <file>file:/var/www/html/prevencion/app/models/DAORegistro.php</file>
+            <file>file:/var/www/html/prevencion/static/js/templates/registro/nuevo.js</file>
+            <file>file:/var/www/html/prevencion/app/views/templates/Registro/nuevo.tpl</file>
+            <file>file:/var/www/html/prevencion/app/controllers/Registro.php</file>
         </group>
     </open-files>
 </project-private>
