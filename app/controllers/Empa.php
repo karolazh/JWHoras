@@ -94,7 +94,7 @@ class Empa extends Controller{
         
         $this->smarty->assign("gl_comuna", $gl_comuna->gl_nombre_comuna);
         $this->smarty->assign("gl_institucion",  $gl_institucion->gl_nombre);
-        $this->smarty->assign("fc_emp", date('Y-m-d'));
+        $this->smarty->assign("fc_empa", date('Y-m-d'));
         //Cargar Datos Paciente
         $registro          = $this->_DAORegistro->getRegistroById($id_registro);
         $this->smarty->assign("gl_rut", $registro->gl_rut);
@@ -233,13 +233,18 @@ class Empa extends Controller{
         //Mostrar/Ocultar Panel Dislipidemia segun Edad
         if ($edad > 40) {
             $dislipidemia = "display: block";
+        } else {
+            $dislipidemia = "display: none";
+        }
+        //Mostrar/Ocultar Diabetes segun Edad y datos Glicemia
+        if ($edad > 40 || $empa->gl_glicemia) {
             $diabetes = "display: block";
             $antecedentes = "display: none";
         } else {
-            $dislipidemia = "display: none";
             $diabetes = "display: none";
             $antecedentes = "display: block";
         }
+        //Mostrar/Ocultar PAP segun edad
         if ($edad > 24 && $edad < 65){
             $pap = "display: block";
         } else {

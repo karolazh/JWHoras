@@ -62,7 +62,7 @@
 
                     <label for="fc_empa" class="control-label col-sm-2">Fecha (*)</label>
                     <div class="col-sm-3">
-                        <input type="date" name="fc_empa" id="fc_empa" value="{$fc_emp}" 
+                        <input type="date" name="fc_empa" id="fc_empa" value="{$fc_empa}" 
                                placeholder="Fecha" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>

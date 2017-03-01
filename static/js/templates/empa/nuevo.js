@@ -48,6 +48,7 @@ function mensajeAUDIT(pts_audit){
 
 //Poner Mensaje en span segun IMC
 function mensajeIMC(imc){
+    var mensaje = "";
     //calculamos circunferencia abdominal
 	//Bajo peso
 	if (imc > 0 && imc < 18.50) {
@@ -109,9 +110,8 @@ function mensajeIMC(imc){
 			mensaje = "Obeso / Obeso Tipo III (riesgo muy severo)";
 		}
 	}
-        
-        $('#gl_imc').parent().find('span.help-block').html(mensaje);
-        $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
+            $('#gl_imc').parent().find('span.help-block').html(mensaje);
+            $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
 }
 
 //Calcular IMC segun Peso y Altura
@@ -458,9 +458,14 @@ $("#guardar").on('click', function (e) {
 	if ($('#gl_peso').val() == "") {
 		parametros.push({
 			"name": 'gl_peso',
-			"value": ""
+			"value": 'NULL'
 		});
-	}
+	} else {
+                parametros.push({
+                    "name": 'gl_peso',
+                    "value": "'" + $('#gl_peso').val() + "'"
+                });
+        }
 	if ($('#id_clasificacion_imc').val() == "") {
 		parametros.push({
 			"name": 'id_clasificacion_imc',
@@ -470,21 +475,36 @@ $("#guardar").on('click', function (e) {
 	if ($('#gl_estatura').val() == "") {
 		parametros.push({
 			"name": 'gl_estatura',
-			"value": ""
+			"value": 'NULL'
 		});
-	}
+	} else {
+                parametros.push({
+                    "name": 'gl_estatura',
+                    "value": "'" + $('#gl_estatura').val() + "'"
+                });
+        }
 	if ($('#gl_circunferencia_abdominal').val() == "") {
 		parametros.push({
 			"name": 'gl_circunferencia_abdominal',
-			"value": ""
+			"value": 'NULL'
 		});
-	}
+	} else {
+                parametros.push({
+                    "name": 'gl_circunferencia_abdominal',
+                    "value": "'" + $('#gl_circunferencia_abdominal').val() + "'"
+                });
+        }
 	if ($('#gl_imc').val() == "") {
 		parametros.push({
 			"name": 'gl_imc',
-			"value": ""
+			"value": 'NULL'
 		});
-	}
+	} else {
+                parametros.push({
+                    "name": 'gl_imc',
+                    "value": "'" + $('#gl_imc').val() + "'"
+                });
+        }
 	if ($('#nr_ficha').val() == "") {
 		parametros.push({
 			"name": 'nr_ficha',
@@ -500,21 +520,36 @@ $("#guardar").on('click', function (e) {
 	if ($('#gl_pad').val() == "") {
 		parametros.push({
 			"name": 'gl_pad',
-			"value": ""
+			"value": 'NULL'
 		});
-	}
+	} else {
+                parametros.push({
+			"name": 'gl_pad',
+			"value": "'" + $('#gl_pad').val() + "'"
+		});
+        }
 	if ($('#gl_pas').val() == "") {
 		parametros.push({
 			"name": 'gl_pas',
-			"value": ""
+			"value": 'NULL'
 		});
-	}
+	} else {
+                parametros.push({
+			"name": 'gl_pas',
+			"value": "'" + $('#gl_pas').val() + "'"
+		});
+        }
 	if ($('#gl_glicemia').val() == "") {
 		parametros.push({
 			"name": 'gl_glicemia',
-			"value": ""
+			"value": 'NULL'
 		});
-	}
+	} else {
+                parametros.push({
+			"name": 'gl_glicemia',
+			"value": "'" + $('#gl_glicemia').val() + "'"
+		});
+        }
 	if ($('#bo_pap_toma_1').is(':checked')) {
 		parametros.push({
 			"name": 'bo_pap_toma',
@@ -545,15 +580,25 @@ $("#guardar").on('click', function (e) {
 	if ($('#gl_colesterol').val() == "") {
 		parametros.push({
 			"name": 'gl_colesterol',
-			"value": ""
+			"value": 'NULL'
 		});
-	}
+	} else {
+                parametros.push({
+                        "name": 'gl_colesterol',
+                        "value": "'" + $('#gl_colesterol') + "'"
+                });
+        }
 	if ($('#gl_observaciones_empa').val() == "") {
 		parametros.push({
 			"name": 'gl_observaciones_empa',
-			"value": ""
+			"value": 'NULL'
 		});
-	}
+	} else {
+                parametros.push({
+                        "name": 'gl_observaciones_empa',
+                        "value": "'" + $('#gl_observaciones_empa') + "'"
+                });
+        }
 	if ($('#bo_glicemia_toma').is(':checked')) {
 		parametros.push({
 			"name": 'bo_glicemia_toma',
@@ -562,7 +607,7 @@ $("#guardar").on('click', function (e) {
 	} else {
 		parametros.push({
 			"name": 'bo_glicemia_toma',
-			"value": 0
+			"value": 'NULL'
 		});
 	}
 	if ($('#bo_trabajadora_reclusa_1').is(':checked')) {
@@ -696,7 +741,7 @@ $("#guardar").on('click', function (e) {
 	} else {
 		parametros.push({
 			"name": 'bo_colesterol_toma',
-			"value": 0
+			"value": 'NULL'
 		});
 	}
 	if ($('#bo_mamografia_realizada_1').is(':checked')) {
@@ -713,6 +758,17 @@ $("#guardar").on('click', function (e) {
 		parametros.push({
 			"name": 'bo_mamografia_realizada',
 			"value": 'NULL'
+		});
+	}
+        if ($('#fc_empa').val() == "") {
+		parametros.push({
+			"name": 'fc_empa',
+			"value": 'NULL'
+		});
+	} else {
+		parametros.push({
+			"name": 'fc_empa',
+			"value": "'" + $('#fc_empa').val() + "'"
 		});
 	}
 	if ($('#fc_mamografia').val() == "") {
@@ -750,7 +806,7 @@ $("#guardar").on('click', function (e) {
 	} else {
 		parametros.push({
 			"name": 'bo_mamografia_toma',
-			"value": 0
+			"value": 'NULL'
 		});
 	}
 	if ($('#bo_mamografia_vigente_1').is(':checked')) {
