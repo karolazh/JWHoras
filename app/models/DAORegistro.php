@@ -91,7 +91,7 @@ class DAORegistro extends Model{
 						LEFT JOIN pre_adjuntos AS a USING (id_adjunto)
 						LEFT JOIN pre_prevision AS p USING (id_prevision)
 						LEFT JOIN pre_comunas AS c USING (id_comuna)
-						LEFT JOIN pre_regiones AS r USING (id_region)
+						LEFT JOIN pre_regiones AS r ON rg.id_region = r.id_region
 						LEFT JOIN pre_usuarios AS u ON rg.id_usuario_crea = u.id_usuario
 						LEFT JOIN pre_estados_caso AS ec USING (id_estado_caso)
                         LEFT JOIN pre_institucion AS i ON rg.id_institucion = i.id_institucion

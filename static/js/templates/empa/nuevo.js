@@ -357,7 +357,6 @@ $(".bo_mamografia_requiere").on('change', function (e) {
 //Boton Guardar AUDIT
 $("#guardaraudit").livequery(function () {
 	$(this).on('click', function (e) {
-		//xModal.success('Guardando nueva Auditoria...');
 		var button_process = buttonStartProcess($(this), e);
 		var id_empa = $('#id_empa').val();
 		var cant_pre = $('#cant_pre').val();
@@ -379,13 +378,13 @@ $("#guardaraudit").livequery(function () {
 			type: "post",
 			url: BASE_URI + "index.php/Empa/guardarAudit",
 			error: function (xhr, textStatus, errorThrown) {
-				xModal.danger('Error: No se pudo Ingresar Auditoria');
+				xModal.danger('Error: No se pudo Ingresar AUDIT');
 			},
 			success: function (data) {
 				if (data.correcto) {
-					xModal.success('Éxito: Se Ingresó nueva Auditoria!');
+					xModal.success('Éxito: Se Ingresó nuevo AUDIT!');
 				} else {
-					xModal.info('Error: No se pudo Ingresar Auditoria');
+					xModal.info('Error: No se pudo Ingresar AUDIT');
 				}
 			}
 		});
@@ -412,6 +411,7 @@ $(".radio_audit").livequery(function () {
 $(".subTotal").livequery(function () {
 	$(this).on('change', function (e) {
 		var total = 0;
+		var i = 0;
 		for (i = 1; i <= 10; i++) {
 			total = total + parseInt($("#puntos_" + i).val());
 		}
