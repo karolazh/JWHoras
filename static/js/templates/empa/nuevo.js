@@ -412,6 +412,7 @@ $(".radio_audit").livequery(function () {
 $(".subTotal").livequery(function () {
 	$(this).on('change', function (e) {
 		var total = 0;
+		var i = 0;
 		for (i = 1; i <= 10; i++) {
 			total = total + parseInt($("#puntos_" + i).val());
 		}
