@@ -357,12 +357,20 @@ $(".bo_mamografia_requiere").on('change', function (e) {
 //Boton Guardar AUDIT
 $("#guardaraudit").livequery(function () {
 	$(this).on('click', function (e) {
+		//xModal.success('Guardando nueva Auditoria...');
 		var button_process = buttonStartProcess($(this), e);
+		var id_empa = $('#id_empa').val();
+		var cant_pre = $('#cant_pre').val();
 		var parametros = $("#formAudit").serializeArray();
 		parametros.push({
-			"name": 'tablaPrincipal',
-			"value": 1
+			"name": 'id_empa',
+			"value": id_empa
 		});
+		parametros.push({
+			"name": 'cant_pre',
+			"value": cant_pre
+		});
+
 		$.ajax({
 			dataType: "json",
 			cache: false,
