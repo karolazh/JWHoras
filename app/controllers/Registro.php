@@ -78,10 +78,12 @@ class Registro extends Controller {
 
     public function index() {
         Acceso::redireccionUnlogged($this->smarty);
+		/*
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
         $this->smarty->assign("id_usuario", $sesion->id);
         $this->smarty->assign("rut", $sesion->rut);
         $this->smarty->assign("usuario", $sesion->usuario);
+		*/
 
         /*
          * Si tengo perfil 1="ADMIN" / 3="GESTOR NACIONAL" puedo ver todas las DAU
