@@ -5,8 +5,15 @@ var Registro = {
     guardarNuevoAdjunto: function (form,btn) {
         var error = false;
         var msg_error = '';        
+        
+        var idreg = form.idreg.value;
         var tipodoc = form.tipoDoc.value;
         var path = form.archivo.value;
+        var comentario = form.comentario_adjunto.value;
+        /* descripción tipo doc */
+        var tipotxt = tipoDoc.options[tipoDoc.selectedIndex].text;
+        /* nombre de tipo de documento a mayusculas*/
+        tipotxt = tipotxt.toUpperCase();
         
         if (tipodoc == 0) {
             msg_error += 'Seleccione Tipo de documento<br/>';
@@ -42,8 +49,46 @@ var Registro = {
                 msg_error += 'Favor elija un archivo con las siguientes extensiones: <br>'
                 msg_error += extensiones_permitidas.join(' ')+'<br/>';
                 xModal.warning(msg_error);
-            }else{
-                $(form).submit();
+            } else {
+                //$(form).submit();
+                
+                var formulario = new FormData();
+                formulario.append('idreg', idreg);
+                formulario.append('tipodoc',tipodoc);
+                formulario.append('tipotxt',tipotxt);
+                formulario.append('comentario',comentario);
+                
+                var inputFileImage = document.getElementById("archivo");
+                var file = inputFileImage.files[0];
+                formulario.append('archivo',file);
+                console.log(formulario);
+                $.ajax({
+                    url : BASE_URI + 'index.php/Registro/guardarNuevoAdjunto', 
+                    data : formulario,
+                    processData : false,
+                    cache : false,
+                    async : true,
+                    type : 'post',
+                    dataType : 'json',
+                    contentType : false,
+                    success : function(response){
+                        if(response.correcto == true){
+                            xModal.success("OK: El archivo fue guardado", function(){
+                                $("#grilla-adjuntos").html(response.grilla);
+                                habilitarAdjunto();
+                            });
+                        }
+                        else{
+                            xModal.danger("ERROR: El archivo NO fue guardado",function(){
+                            });
+                        }
+                    }
+                    , 
+                    error : function(){
+		    		xModal.danger('Error: Intente nuevamente',function(){
+		    		});
+                    }
+                });
             }
         }
     }

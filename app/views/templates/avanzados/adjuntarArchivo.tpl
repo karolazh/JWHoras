@@ -10,8 +10,8 @@
 
         <div class="form-group">
             <section class="content-header" >
-                <form class="form-horizontal" name="form-adjunto" id="form-adjunto" enctype="multipart/form-data"
-                      action="{$base_url}/Registro/guardarNuevoAdjunto" method="post" >
+                <form class="form-horizontal" name="form-adjunto" id="form-adjunto" 
+                      enctype="multipart/form-data" method="post" >
                 {*<form id="form" role="form" class="form" enctype="multipart/form-data"
                       action="../Registro/guardarAdjunto" method="post">*}
                 {*<form id="form" name="form" enctype="multipart/form-data" action="" method="post" >*}
@@ -57,14 +57,6 @@
                                     
                                 </div>
                             </div><!-- <div class="row"> -->
-                                               
-                            {if isset($success)}
-				{if $success == 1}
-					<div class="alert alert-success top-spaced">{$mensaje}</div>
-				{else}
-					<div class="alert alert-danger top-spaced">{$mensaje}</div>
-				{/if}
-                            {/if}
                         </div>
                     </div>
                 </form>

@@ -207,7 +207,11 @@ class Registro extends Controller {
             throw new Exception("El historial que está buscando no existe");
         }
     }
-
+        
+    /**
+     * Registro
+     * 
+     */
     public function nuevo() {
         Acceso::redireccionUnlogged($this->smarty);
 		/*
@@ -516,79 +520,7 @@ class Registro extends Controller {
 		$this->smarty->display('Registro/cargar_adjunto.tpl');
 	}
         
-    public function guardarNuevoAdjunto() {
-        header('Content-type: application/json');
-        
-        //$correcto           = false;
-        //$error              = true;
-        
-        $adjunto            = $_FILES['adjunto'];
-        $id_registro        = $_POST['idreg'];
-        $tipo_doc           = $_POST['tipoDoc'];
-        
-        if ($_POST['comentario_adjunto'] == "") {
-            $glosa          = "Adjunta Documento por Bitácora";
-        } else {
-            $glosa          = $_POST['comentario_adjunto'];
-        }
-        
-        $nombre_adjunto     = $adjunto['name']; //$_SESSION['adjuntos'][0]['nombre_adjunto'];
-        $arr_extension      = array('jpeg','jpg','png','gif','tiff','bmp',
-                                    'pdf','txt','csv','doc','docx','ppt',
-                                    'pptx','xls','xlsx','eml');
-        $nombre_adjunto     = strtolower(trim($nombre_adjunto));
-        $nombre_adjunto     = trim($nombre_adjunto,".");
-        $extension          = substr(strrchr($nombre_adjunto, "."), 1);
-        //$gl_nombre_archivo  = 'ADJUNTO_'.$parametros['rut'].'.'.$extension;
-        $gl_nombre_archivo  = date('Ymd_hms').'_ADJUNTO'.$extension;
-        $directorio         = "archivos/$id_registro/";
-        $gl_path            = $directorio.$gl_nombre_archivo;
-
-        $ins_adjunto        = array('id_registro'	=> $id_registro,
-                                    'id_tipo_adjunto'	=> $tipo_doc, //1,
-                                    'gl_nombre'		=> $gl_nombre_archivo,
-                                    'gl_path'		=> $gl_path,
-                                    'gl_glosa'		=> $glosa, //'Consentimiento Firmado',
-                                    'sha256'		=> Seguridad::generar_sha256($gl_path),
-                                    'fc_crea'		=> date('Y-m-d h:m:s'),
-                                    'id_usuario_crea'	=> $_SESSION['id'],
-                                    );
-        
-        $id_adjunto         = $this->_DAOAdjuntos->insert($ins_adjunto);
-
-        if($id_adjunto){
-            if(!is_dir($directorio)){
-                mkdir($directorio, 0775, true);
-
-                $out = fopen($directorio.'/index.html', "w");
-                fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
-                fclose($out);
-            }
-            
-            $out = fopen($gl_path, "w");
-            //fwrite($out, base64_decode($_SESSION['adjuntos'][0]['contenido']));
-            //fread($file,filesize($adjunto['tmp_name']))
-            fwrite($out, fread($file,filesize($adjunto['tmp_name'])));
-            fclose($out);
-            
-            //$correcto	= true;
-        }
-        else
-        {
-            //$error      = true;
-        }
-
-//        $salida	= array("error" => $error,
-//                        "correcto" => $correcto);
-//        
-//        $this->smarty->assign("hidden", "");
-//        $json	= Zend_Json::encode($salida);
-//
-//        echo $json;        
-    }
-    
-        /*	
-	public function guardarAdjunto() {
+        public function guardarAdjunto() {
 		$adjunto	= $_FILES['adjunto'];
 
 		if($adjunto['tmp_name'] != ""){
@@ -627,7 +559,7 @@ class Registro extends Controller {
 			$this->view->display('template_iframe.tpl');
 		}
 	}
-	*/
+	
 	public function cargarListadoAdjuntos()	{
 		$adjuntos	= array();
 		$template	= '';
@@ -746,4 +678,90 @@ class Registro extends Controller {
         }
     }
 
+    public function guardarNuevoAdjunto() {
+        header('Content-type: application/json');
+        
+        $correcto           = false;
+        $error              = true;
+        
+        $adjunto            = $_FILES['archivo'];
+        $id_registro        = $_POST['idreg'];
+        $tipo_doc           = $_POST['tipodoc'];
+        $tipo_txt           = $_POST['tipotxt'];
+        
+//        if ($_POST['comentario'] == "") {
+//            $glosa          = "Adjunta Documento por Bitácora";
+//        } else {
+//            $glosa          = $_POST['comentario'];
+//        }
+        $glosa          = "Adjunta Documento por Bitácora";
+        
+        $nombre_adjunto     = $adjunto['name']; //$_SESSION['adjuntos'][0]['nombre_adjunto'];
+        
+        $arr_extension      = array('jpeg','jpg','png','gif','tiff','bmp',
+                                    'pdf','txt','csv','doc','docx','ppt',
+                                    'pptx','xls','xlsx','eml');
+        
+        $nombre_adjunto     = strtolower(trim($nombre_adjunto));
+        $nombre_adjunto     = trim($nombre_adjunto,".");
+        
+        $extension          = substr(strrchr($nombre_adjunto, "."), 1);
+        
+        //$gl_nombre_archivo  = 'ADJUNTO_'.$parametros['rut'].'.'.$extension;
+        $gl_nombre_archivo  = date('Ymd_hms').'_'.$tipo_txt.'.'.$extension;
+        
+        $directorio         = "archivos/$id_registro/";
+        $gl_path            = $directorio.$gl_nombre_archivo;
+
+        $ins_adjunto        = array('id_registro'	=> $id_registro,
+                                    'id_tipo_adjunto'	=> $tipo_doc, //1,
+                                    'gl_nombre'		=> $gl_nombre_archivo,
+                                    'gl_path'		=> $gl_path,
+                                    'gl_glosa'		=> $glosa, //'Consentimiento Firmado',
+                                    'sha256'		=> Seguridad::generar_sha256($gl_path),
+                                    'fc_crea'		=> date('Y-m-d h:m:s'),
+                                    'id_usuario_crea'	=> $_SESSION['id'],
+                                    );
+        
+        $id_adjunto         = $this->_DAOAdjuntos->insert($ins_adjunto);
+        $grilla = "";
+        
+        if($id_adjunto){
+            if(!is_dir($directorio)){
+                mkdir($directorio, 0775, true);
+
+                $out = fopen($directorio.'/index.html', "w");
+                fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
+                fclose($out);
+            }
+            
+            $file	= fopen($adjunto['tmp_name'],'r+b');
+	    $contenido	= fread($file,filesize($adjunto['tmp_name']));
+            fclose($file);
+            
+            $out = fopen($gl_path, "w");
+            fwrite($out, $contenido);
+            fclose($out);
+            
+            //Grilla Adjuntos
+            $arrAdjuntos = $this->_DAOAdjuntos->getListaAdjuntosRegistro($id_registro);
+            $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
+            $grilla = $this->smarty->fetch('avanzados/grillaAdjuntos.tpl');
+                        
+            $correcto	= true;
+        }
+        else
+        {
+            $error      = true;
+        }
+
+        $salida	= array("error" => $error,
+                        "correcto" => $correcto,
+                        "grilla" => $grilla);
+        
+        $this->smarty->assign("hidden", "");
+        $json	= Zend_Json::encode($salida);
+
+        echo $json;
+    }
 }
