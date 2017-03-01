@@ -10,7 +10,8 @@
 
         <div class="form-group">
             <section class="content-header" >
-                <form id="form" name="form-inline" enctype="application/x-www-form-urlencoded" action="" method="post">
+                <form id="form" name="form-inline" enctype="application/x-www-form-urlencoded" 
+                      action="" method="post">
                     <input type="hidden" name="idreg" id="idreg" value="{$idreg}" >
                     <div id="seccionComentario" style="display:none">
                         <div class="box-body">
@@ -38,14 +39,14 @@
                                     </div>
 
                                     <div class="btn-group">
-                                        <div id="div_tabla" class="table-responsive small">
+                                        {*<div id="div_tabla" class="table-responsive small">*}
                                             <button id="guardarEvento" type="button" 
                                                     class="btn btn-success btn-sm " 
                                                     {*onclick="Comentario.guardarComentario(this.form, this)"*}
                                                     >
                                                 <i class="fa fa-save"></i>&nbsp;&nbsp;Guardar
                                             </button>
-                                        </div>
+                                        {*</div>*}
                                     </div>
                                 </div>
                             </div>

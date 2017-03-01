@@ -10,17 +10,18 @@
 
         <div class="form-group">
             <section class="content-header" >
-                <form id="form" role="form" name="form-inline" enctype="multipart/form-data" 
-                      action="{$smarty.const.BASE_URI}/Solicitudes/guardarNuevoAdjunto" method="post">
-                    <input type="hidden" name="idreg" id="idreg" value="{$idreg}" >
+                {*<form id="form" role="form" class="form" enctype="multipart/form-data"
+                      action="../Registro/guardarAdjunto" method="post">*}
+                <form id="form" name="form" enctype="multipart/form-data" action="" method="post" >
+                    <input type="hidden" name="idreg" id="idreg" value="{$idreg}" />
                     <div id="seccionAdjunto" style="display:none">
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Tipo de documento</label>
-                                        <select for="tipoDoc" class="form-control" id="tipoDoc" name="tipoDoc" 
-                                                onblur="validarVacio(this,'Seleccione Tipo de documento')">
+                                        <label class="control-label" for="tipoDoc">Tipo de documento</label>
+                                        <select class="form-control" id="tipoDoc" name="tipoDoc">
+                                                {*onblur="validarVacio(this,'Seleccione Tipo de documento')">*}
                                             <option value="0">Seleccione Tipo de Documento</option>
                                             {foreach $arrTipoDocumento as $tipodoc}
                                                     <option value="{$tipodoc->id_tipo_adjunto}" >
@@ -31,31 +32,41 @@
                                         <span class="help-block hidden fa fa-warning"></span>
 
                                         <br>
-                                        <label class="control-label">Adjuntar documento</label>
-                                        <input type="file" name="archivo" id="archivo" class="form-control"/>
+                                        <label class="control-label" for="archivo">Adjuntar documento</label>
+                                        <input type="file" name="archivo" id="archivo" class="form-control" >
+                                               {*onblur="validarVacio(this,'Seleccione Archivo')"/>*}
 
                                         <br>
                                         <label class="control-label">Comentario (opcional)</label>
-                                        <textarea style="resize:none" class="form-control" 
-                                                  id="comentario_adjunto" 
+                                        <textarea style="resize:none" class="form-control" value=""
+                                                  id="comentario_adjunto"
                                                   name="comentario_adjunto">
                                         </textarea>
                                         <br>
                                     </div>
 
                                     <div class="btn-group">
-                                        <div id="div_tabla" class="table-responsive small">
-                                            <button id="guardarArchivo" type="button" 
+                                        {*<div id="div_tabla" class="table-responsive small">*}
+                                            <!--
+                                            <button id="guardarArchivo" type="submit"
+                                                    {*type="button" *}
                                                     class="btn btn-success btn-sm " 
-                                                    onclick="this.form.submit()">
+                                                    onclick="this.form.submit()"
                                                 <i class="fa fa-save"></i>&nbsp;&nbsp;Guardar
                                             </button>
-                                        </div>
+                                            -->
+                                            <button id="" type="button" 
+                                                    class="btn btn-success btn-sm "
+                                                    onclick="Registro.guardarNuevoAdjunto(this.form,this)">
+                                                <i class="fa fa-save"></i>&nbsp;&nbsp;Guardar
+                                            </button>
+                                        {*</div>*}
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
-                                        
+
                     </div>
                 </form>
             </section>

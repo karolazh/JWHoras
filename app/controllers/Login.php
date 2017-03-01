@@ -10,6 +10,8 @@ class Login extends Controller {
     /*** Constructor ***/
     function __construct() {
         parent::__construct();
+		include_once("app/libs/nusoap/lib/nusoap.php");
+		
         $this->load->lib('Seguridad', false);
         $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
         $this->_DAORegion = $this->load->model("DAORegion");
@@ -61,6 +63,9 @@ class Login extends Controller {
 				$session->id		= $usuario->id_usuario;
 				$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
 				$session->mail		= $usuario->gl_email;
+				$session->rut		= $usuario->gl_rut;
+				$session->fono		= $usuario->gl_fono;
+				$session->celular	= $usuario->gl_celular;
 
 				if (!$primer_login) {
 					$ultimo_login	= date('Y-m-d H:i:s');
@@ -105,6 +110,116 @@ class Login extends Controller {
             $this->smarty->display('login/login.tpl');
         }
     }
+
+    public function validaRutMidas() {
+		$parametros		= $this->request->getParametros();
+		$rut_usuario	= $parametros[0];
+		$usuario		= array();
+
+		if( isset($rut_usuario) and trim($rut_usuario) != "" ){
+			$usuario		= $this->_DAOUsuarios->getLoginMidas(strtolower($rut_usuario));
+		}
+
+		if($usuario){			
+			echo json_encode(array('rut'=>$usuario->gl_rut));
+		}else{
+			echo json_encode(array('rut'=>$rut_usuario));
+		}
+
+	}
+
+	public function loginRemotoMidas(){
+        define('MIDAS_WS_AUTH_USER','Midas_Soap_User');
+        define('MIDAS_WS_AUTH_PASS','BQT9U4Ni2yVZHhPQq3T2YpM8RsvwPCSNK0mQX33nBjmfIbvgQK3UeRsLJJxRELetXk8iL9Gj'); 
+
+		$parametros		= $this->request->getParametros();
+		$token			= $parametros[0];
+
+		$usuario		= array();
+		//$ws_info		= $this->_daoWS_Sistema->getWS('MIDAS' ,ENVIROMENT);
+		//$wsdl			= $ws_info->sistema_wsdl;
+		
+		$ws				= new nusoap_client('https://192.168.10.165/midas_prueba/ws/wsMIDAS.php?wsdl');
+		$ws->setCredentials(MIDAS_WS_AUTH_USER, MIDAS_WS_AUTH_PASS, 'basic');
+		$ws->soap_defencoding	= 'UTF-8';
+		$ws->decode_utf8 		= false;
+		$error					= $ws->getError();
+
+		if($error){
+            $this->smarty->assign("hidden", "");
+            $this->smarty->assign("texto_error", "Usuario no está activo o hubo un problema con el WebService.");
+            $this->smarty->display('login/login.tpl');
+		}else{
+			$ws_data    = array(
+								'token'	=> $token,
+								);
+
+			$param		= array('cabecera' => $ws_data);
+			$arr		= $ws->call('validarToken', $param);
+
+			if(isset($arr['rut']) and trim($arr['rut']) != "" ){
+				$usuario	= $this->_DAOUsuarios->getLoginMidas(strtolower($arr['rut']));
+			}else{
+				$this->smarty->assign("hidden", "");
+				$this->smarty->assign("texto_error", $arr['error']['GlosaError']);
+				$this->smarty->display('login/login.tpl');
+			}
+
+			
+        if ($usuario) {
+			if($usuario->bo_activo == 1){
+				$session			= New Zend_Session_Namespace("usuario_carpeta");
+				$session->id		= $usuario->id_usuario;
+				$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+				$session->mail		= $usuario->gl_email;
+				$session->rut		= $usuario->gl_rut;
+				$session->fono		= $usuario->gl_fono;
+				$session->celular	= $usuario->gl_celular;
+
+				if (!$primer_login) {
+					$ultimo_login	= date('Y-m-d H:i:s');
+					$datos			= array($ultimo_login, $session->id);
+					$upd			= $this->_DAOUsuarios->setUltimoLogin($datos);
+				}
+
+				$_SESSION['id']				= $usuario->id_usuario;
+				$_SESSION['perfil']			= $usuario->id_perfil;
+				$_SESSION['gl_grupo_tipo']	= $usuario->gl_grupo_tipo;
+				$_SESSION['id_institucion']	= $usuario->id_institucion;
+				$_SESSION['nombre']			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+				$_SESSION['rut']			= $usuario->gl_rut;
+				$_SESSION['mail']			= $usuario->gl_email;
+				$_SESSION['fono']			= $usuario->gl_fono;
+				$_SESSION['celular']		= $usuario->gl_celular;
+				$_SESSION['comuna']			= $usuario->gl_nombre_comuna;
+				$_SESSION['provincia']		= $usuario->gl_nombre_provincia;
+				$_SESSION['region']			= $usuario->gl_nombre_region;
+				$_SESSION['id_comuna']		= $usuario->id_comuna;
+				$_SESSION['id_provincia']	= $usuario->id_provincia;
+				$_SESSION['id_region']		= $usuario->id_region;
+				$_SESSION['primer_login']	= $primer_login;
+				$_SESSION['autenticado']	= TRUE;
+
+				if ($recordar == 1) {
+					setcookie('datos_usuario_carpeta', $usuario->id_usuario, time() + 365 * 24 * 60 * 60);
+				}
+				if($primer_login) {
+					header('Location: ' . BASE_URI . '/Login/actualizar');
+				}else{
+					header('Location: ' . BASE_URI . '/Home/dashboard');
+				}
+			}else{
+				$this->smarty->assign("hidden", "");
+				$this->smarty->assign("texto_error", "Usuario se encuentra Inhabilitado.");
+				$this->smarty->display('login/login.tpl');				
+			}
+        }else{
+            $this->smarty->assign("hidden", "");
+            $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
+            $this->smarty->display('login/login.tpl');
+        }
+		}
+	}
 
     //*** 20170127 - Formulario para obtener cuenta de usuario **//
     public function obtener_cuenta() {

@@ -7,9 +7,9 @@
             <thead>
                 <tr role="row">
                     <th align="center" width="10%">Fecha</th>
-                    <th align="center" width="40">Institucion</th>
+                    <th align="center" width="30">Institucion</th>
                     <th align="center" width="30">Comuna</th>
-                    <th align="center" width="10%">Usuario</th>
+                    <th align="center" width="20%">Funcionario</th>
                     <th align="center" width="10%">Acciones</th>
                 </tr>
             </thead>
@@ -41,7 +41,7 @@
                     <td>{$emp->fc_empa}</td>
                     <td>{$emp->comuna}</td>
                     <td>{$emp->institucion}</td>
-                    <td>{$emp->rut}</td>
+                    <td>{$emp->funcionario}</td>
                     <td class="text-center" style="width:100px;">
                         <div class="btn-group">
                             <button type="button" class="btn btn-xs btn btn-success" 

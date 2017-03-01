@@ -5,7 +5,7 @@
         var parametros		= $("#form").serializeArray();
         var gl_rut			= $("#rut").val();
 
-		if(gl_rut == ''){
+		if(gl_rut == '' && !$('#chkextranjero').is(':checked')){
 			xModal.danger('- El campo RUT es Obligatorio');
 		}else{
 			if($('#chkextranjero').is(':checked')){
@@ -41,7 +41,18 @@
 					"value" : 0
 				});
 			}
-
+			/*
+			var inputFileImage = document.getElementById("subirFile");
+			var file = inputFileImage.files[0];
+			var datos = new FormData();
+			
+			datos.append('archivo',file);
+			parametros.push({
+					"name"  : 'archivo',
+					"value" : datos
+				});
+				*/
+				
 			$.ajax({
 				dataType: "json",
 				cache	:false,
@@ -54,8 +65,9 @@
 				},
 				success	: function(data){
 							if(data.correcto){
+
 								xModal.success('Éxito: Se Ingresó nuevo Registro!');
-								location.href = BASE_URI + "index.php/Registro";
+								setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
 							} else {
 								xModal.info('Error: No se pudo Ingresar un nuevo Registro');
 							}
@@ -63,68 +75,155 @@
 			});
 		}
 		buttonEndProcess(button_process);
-		
+
     });
 
     $("#guardarMotivo").on('click', function(e) {
         var button_process	= buttonStartProcess($(this), e);
         var parametros		= $("#form").serializeArray();
 
-			if($('#chkAcepta').is(':checked') && !$('#chkAcepta').is(':disabled')){
-				parametros.push({
-					"name"  : 'chkAcepta',
-					"value" : 1
-				});
-			}else{
-				parametros.push({
-					"name"  : 'chkAcepta',
-					"value" : 0
-				});
-			}
-			if($('#chkReconoce').is(':checked') && !$('#chkReconoce').is(':disabled')){
-				parametros.push({
-					"name"  : 'chkReconoce',
-					"value" : 1
-				});
-			}else{
-				parametros.push({
-					"name"  : 'chkReconoce',
-					"value" : 0
-				});
-			}
-
-			$.ajax({
-				dataType: "json",
-				cache	:false,
-				async	: true,
-				data	: parametros,
-				type	: "post",
-				url		: BASE_URI + "index.php/Registro/GuardarMotivo", 
-				error	: function(xhr, textStatus, errorThrown){
-							xModal.danger('Error: No se pudo Ingresar un nuevo Motivo de Consulta');
-				},
-				success	: function(data){
-							if(data.correcto){
-								xModal.success('Éxito: Se Ingresó nuevo Motivo de Consulta!');
-								location.href = BASE_URI + "index.php/Registro";
-							} else {
-								xModal.info('Error: No se pudo Ingresar un nuevo Motivo de Consulta');
-							}
-				}
+		if($('#chkAcepta').is(':checked')){
+			parametros.push({
+				"name"  : 'chkAcepta',
+				"value" : 1
 			});
+		}else{
+			parametros.push({
+				"name"  : 'chkAcepta',
+				"value" : 0
+			});
+		}
+		if($('#chkReconoce').is(':checked')){
+			parametros.push({
+				"name"  : 'chkReconoce',
+				"value" : 1
+			});
+		}else{
+			parametros.push({
+				"name"  : 'chkReconoce',
+				"value" : 0
+			});
+		}
+
+		$.ajax({
+			dataType: "json",
+			cache	:false,
+			async	: true,
+			data	: parametros,
+			type	: "post",
+			url		: BASE_URI + "index.php/Registro/GuardarMotivo", 
+			error	: function(xhr, textStatus, errorThrown){
+						xModal.danger('Error: No se pudo agregar Motivo de Consulta');
+			},
+			success	: function(data){
+						if(data.correcto){
+
+							xModal.success('Éxito: Se Ingresó nuevo Motivo de Consulta!');
+							setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
+						} else {
+							xModal.info('Error: No se pudo agregar Motivo de Consulta');
+						}
+			}
+		});
+		buttonEndProcess(button_process);
+
+    });
+
+    $("#guardarMotivo").on('click', function(e) {
+        var button_process	= buttonStartProcess($(this), e);
+        var parametros		= $("#form").serializeArray();
+
+		if($('#chkAcepta').is(':checked')){
+			parametros.push({
+				"name"  : 'chkAcepta',
+				"value" : 1
+			});
+		}else{
+			parametros.push({
+				"name"  : 'chkAcepta',
+				"value" : 0
+			});
+		}
+		if($('#chkReconoce').is(':checked')){
+			parametros.push({
+				"name"  : 'chkReconoce',
+				"value" : 1
+			});
+		}else{
+			parametros.push({
+				"name"  : 'chkReconoce',
+				"value" : 0
+			});
+		}
+
+		$.ajax({
+			dataType: "json",
+			cache	:false,
+			async	: true,
+			data	: parametros,
+			type	: "post",
+			url		: BASE_URI + "index.php/Registro/GuardarMotivo", 
+			error	: function(xhr, textStatus, errorThrown){
+						xModal.danger('Error: No se pudo agregar Motivo de Consulta');
+			},
+			success	: function(data){
+						if(data.correcto){
+
+							xModal.success('Éxito: Se Ingresó nuevo Motivo de Consulta!');
+							setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
+						} else {
+							xModal.info('Error: No se pudo agregar Motivo de Consulta');
+						}
+			}
+		});
+		buttonEndProcess(button_process);
+
+    });
+
+    $("#guardarReconoce").on('click', function(e) {
+        var button_process	= buttonStartProcess($(this), e);
+		var id_registro			= $(this).attr("data");
+		
+		$.ajax({
+			dataType: "json",
+			cache	:false,
+			async	: true,
+			data	: {id_registro:id_registro},
+			type	: "post",
+			url		: BASE_URI + "index.php/Registro/GuardarReconoce", 
+			error	: function(xhr, textStatus, errorThrown){
+						xModal.danger('Error: No se pudo guardar');
+			},
+			success	: function(data){
+						if(data.correcto){
+							xModal.success('Éxito: información guardada!');
+							setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
+						} else {
+							xModal.info('Error:  No se pudo guardar');
+						}
+			}
+		});
 		buttonEndProcess(button_process);
     });
 
-    $("#chkextranjero").on('click', function(e) {		
+	$("#chkextranjero").on('click', function(e) {
 		if($('#chkextranjero').is(':checked')){
-			$("#div_rut").hide();
-			$("#extranjero").show();
+			$('#nacional').hide();
+			$('#extranjero').show();
 		}else{
-			$("#extranjero").hide();
-			$("#div_rut").show();
+			$('#nacional').show();
+			$('#extranjero').hide();
 		}
-    });
-	
+	});
+
+	$("#chkAcepta").on('click', function(e) {
+		if($('#chkAcepta').is(':checked')){
+			$('#files').show();
+		}else{
+			$('#files').hide();
+		}
+	});
+
 	//Formatea Fecha
 	function formattedDate(date) {
 		var d		= new Date(date || Date.now()),
@@ -142,6 +241,7 @@
 		cargarRegistro : function(){
 			var rut = $("#rut").val();
 			if(rut != ""){
+
 				$.ajax({
 					dataType: "json",
 					cache	:false,
@@ -154,7 +254,14 @@
 					},
 					success	: function(data){
 								if(data.correcto){
-									xModal.success('Paciente ya Registro.<br>Se procede a cargar la información.');
+									if(data.count_motivos == 1){
+										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registro en la Plataforma, con fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información.');
+									}else{
+										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registros en la Plataforma, siendo el último de fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información.');
+									}
+
+									$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Registro/bitacora/"+data.id_registro+"', 'Registro número : "+data.id_registro+"', 85);");
+
 									$("#id_registro").val(data.id_registro);
 									$("#nombres").val(data.gl_nombres);
 									$("#apellidos").val(data.gl_apellidos);
@@ -170,7 +277,7 @@
 									$("#fono").val(data.gl_fono);
 									$("#celular").val(data.gl_celular);
 									$("#email").val(data.gl_email);
-									
+
 									if(data.id_comuna != '0'){
 										var comuna = '<option value="'+data.id_comuna+'">'+data.gl_nombre_comuna+'</option>';
 										$("#comuna").html(comuna);
@@ -185,28 +292,30 @@
 										$("#comuna").trigger('change');
 									}
 
-									$('#form').find('input, textarea, checkbox, select').attr('disabled',true);	
+									$('#form').find('input, textarea, checkbox, select').attr('disabled',true);
 									if(data.bo_reconoce == '1'){
 										$("#chkReconoce").prop("checked", true);
 									}else{
-										$("#chkReconoce").prop("disabled", false);
+										$("#chkReconoce").prop( "disabled", false );
 									}
 									if(data.bo_acepta_programa == '1'){
 										$("#chkAcepta").prop("checked", true);
 									}else{
-										$("#chkAcepta").prop("disabled", false);
+										$("#chkAcepta").prop( "disabled", false );
 									}
-									$( "#id_registro" ).prop( "disabled", false );
-									$( "#motivoconsulta" ).prop( "disabled", false );
-									$( "#fechaingreso" ).prop( "disabled", false );
-									$( "#horaingreso" ).prop( "disabled", false );
-
-									$("#guardar").hide();
-									$("#guardarMotivo").show();
+									$("#id_registro").prop("disabled", false );
+									$("#motivoconsulta").prop("disabled", false );
+									$("#fechaingreso").prop("disabled", false );
+									$("#horaingreso").prop("disabled", false );
+									
+									$('#guardar').hide();
+									$('#guardarMotivo').show();
+									$("#btnBitacora").show();
 								} else {
-									xModal.info('Sin registro en el sistema.');
-									$("#guardarMotivo").hide();
-									$("#guardar").show();
+									$('#guardar').show();
+									$('#guardarMotivo').hide();
+									$("#btnBitacora").hide();
+									xModal.info('Nuevo Paciente');
 								}
 					}
 				});
@@ -237,7 +346,51 @@
 			}
 		}
 	};
-    
+
+	function guardarAdjunto(form,btn){
+		btn.disabled	= true;
+		var btnTexto	= $(btn).html();
+		$(btn).html('Guardando...');
+
+		if(form.adjunto.value == ""){
+			xModal.warning('Error: Debe seleccionar un archivo para adjuntarlo');
+			$(btn).html(btnTexto).attr('disabled',false);
+		}else{
+			extensiones_permitidas	= new Array('.jpeg', '.jpg', '.png', '.gif', '.tiff', '.bmp', '.pdf', '.txt', '.csv', '.doc', '.docx', '.ppt', '.pptx', '.xls', '.xlsx');
+			permitida				= false;
+			string					= form.adjunto.value;
+			extension				= (string.substring(string.lastIndexOf("."))).toLowerCase();
+
+			for(var i = 0; i < extensiones_permitidas.length; i++) {
+				if (extensiones_permitidas[i] == extension){
+					permitida = true;
+					break;
+				}
+			}
+
+			if (!permitida) {
+				xModal.warning('El Tipo de archivo que intenta subir no está permitido.<br><br>Favor elija un archivo con las siguientes extensiones: <br>'+ extensiones_permitidas.join(' '));
+				$(btn).html(btnTexto).attr('disabled',false);
+			}else{
+				$(form).submit();
+			}
+		}
+	}
+
+	function cargarListadoAdjuntos(){
+		$.post(BASE_URI+'index.php/Registro/cargarListadoAdjuntos',function(response)
+		{			
+			parent.$("#listado-adjuntos").html(response).show();
+		});
+	}
+
+	function borrarAdjunto (adjunto){
+		$.post(BASE_URI+'index.php/Registro/borrarAdjunto/'+adjunto,function(response)
+		{
+			$("#listado-adjuntos").html(response);
+		});
+	}
+
 	$(document).ready(function() {
 
 		var mapa = new MapaFormulario("map");

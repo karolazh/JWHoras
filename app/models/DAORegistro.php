@@ -18,15 +18,19 @@ class DAORegistro extends Model{
         $query	= "	SELECT
 						r.id_registro,
 						r.gl_rut,
-
 						r.gl_run_pass,
+                        r.bo_reconoce,
+                        r.bo_acepta_programa,
 						IFNULL(r.gl_rut,r.gl_run_pass) as gl_identificacion,
 						date_format(r.fc_crea,'%d-%m-%Y') as fc_crea,
 						r.gl_nombres,
 						r.gl_apellidos,
 						i.gl_nombre as gl_institucion,
 						c.gl_nombre_comuna,
-						e.gl_nombre_estado_caso
+						e.gl_nombre_estado_caso,
+                        e.id_estado_caso,
+						(select count(*) from pre_motivo_consulta where pre_motivo_consulta.id_registro = r.id_registro ) as nr_motivo_consulta,
+						datediff(now(),r.fc_crea) as nr_dias_primera_visita
 					FROM pre_registro r 
 						LEFT JOIN pre_institucion i ON i.id_institucion = r.id_institucion
 						LEFT JOIN pre_comunas c ON c.id_comuna = r.id_comuna
@@ -263,7 +267,8 @@ class DAORegistro extends Model{
                         eve.id_registro AS id_registro,
                         eve.gl_descripcion AS glosa,
                         date_format(eve.fc_crea,'%d-%m-%Y') AS fc_crea,
-                        usr.gl_rut AS rut
+                        usr.gl_rut AS rut,
+                        concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
                     FROM pre_eventos eve
                     LEFT JOIN pre_eventos_tipo tip ON tip.id_evento_tipo = eve.id_evento_tipo
                     LEFT JOIN pre_usuarios usr ON usr.id_usuario = eve.id_usuario_crea

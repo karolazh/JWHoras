@@ -19,7 +19,7 @@
 						location.href = BASE_URI + "index.php/Soporte/index";
 					} else {
 						alert(data.msg);
-						procesaErrores(data.error);
+						//procesaErrores(data.error);
 						$("#form-error").removeClass("hidden");
 					}
 				}

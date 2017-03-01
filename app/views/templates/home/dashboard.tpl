@@ -7,41 +7,47 @@
 
 <section class="content">
     <div class="row">
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-4">
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">Estadística Nacional</h3>
+                    <h3 class="box-title">Estadística Nacional : Total de Registros por Estados</h3>
                 </div>
                 <div class="box-body">
-                    <div class="col-xs-7">
-                        <canvas id="graficoA"></canvas>
-                    </div>
-                    <div class="col-xs-5">
-                        <div id="graficoA_legend"></div>
+                    <div class="col-xs-12">
+                        <div id="grafico_estados_general" style="height: 600px;"></div>
                     </div>
                 </div>
             </div>
         </div>
                 
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-4">
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">Estadística Regional</h3>
+                    <h3 class="box-title">Estadística Nacional : Reconoce abuso</h3>
                 </div>
                 <div class="box-body">
-                    <div id="map"></div>
-                    <div class="col-xs-7">
-                        <canvas id="graficoA"></canvas>
+                    <div class="col-xs-12">
+                        <div id="grafico_reconoce_abuso" style="height: 300px"></div>
                     </div>
-                    <div class="col-xs-5">
-                        <div id="graficoA_legend"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Estadística Nacional : Acepta Programa</h3>
+                </div>
+                <div class="box-body">
+                    <div class="col-xs-12">
+                        <div id="grafico_acepta_programa" style="height: 300px"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-xs-12 col-md-12">
             <div class="box box-primary">
                 <div class="box-header">
@@ -80,7 +86,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </section>
                         
 </body>

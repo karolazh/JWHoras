@@ -3,8 +3,12 @@
         <i class="fa fa-home"></i> <span>Inicio</span></a>
 </li>
 <li>
+    <a href="{$base_url}/Registro/nuevo">
+        <i class="fa fa-book"></i> <span>Nuevo registro</span></a>
+</li>
+<li>
     <a href="{$base_url}/Registro/index">
-        <i class="fa fa-book"></i> <span>Ficha</span></a>
+        <i class="fa fa-th"></i> <span>Grilla registros</span></a>
 </li>
 <!--li>
     <a href="{$base_url}/Empa/index">
