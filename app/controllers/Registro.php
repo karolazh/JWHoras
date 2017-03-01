@@ -453,18 +453,21 @@ class Registro extends Controller {
     }
 
     public function cargarCentroSaludporComuna() {
-        $comuna			= $_POST['comuna'];
-        $daoComuna		= $this->load->model('DAOComuna');
-        $centrosalud	= $daoComuna->obtCentroSaludporComuna($comuna)->rows;
-
         $json			= array();
-        $i				= 0;
-        foreach ($centrosalud as $cSalud) {
-            $json[$i]['id_establecimiento']		= $cSalud->id_establecimiento;
-            $json[$i]['nombre_establecimiento']	= $cSalud->nombre_establecimiento;
-            $i++;
-        }
+		
+		if(!empty($_POST['comuna'])){
+			$comuna			= $_POST['comuna'];
+			$comuna			= $_POST['comuna'];
+			$daoComuna		= $this->load->model('DAOComuna');
+			$centrosalud	= $daoComuna->obtCentroSaludporComuna($comuna)->rows;
 
+			$i				= 0;
+			foreach ($centrosalud as $cSalud) {
+				$json[$i]['id_establecimiento']		= $cSalud->id_establecimiento;
+				$json[$i]['nombre_establecimiento']	= $cSalud->nombre_establecimiento;
+				$i++;
+			}
+		}
         echo json_encode($json);
     }
 
