@@ -32,7 +32,7 @@
 					<div id="nacional">
 						<label for="rut" class="control-label col-sm-2 ">Rut Paciente (*)</label>
 						<div class="col-sm-2">
-							<input type="text" name="rut" id="rut" maxlength="12" onkeyup="formateaRut(this),validaRut(this),this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this,'Por favor Ingrese Rut');Registro.cargarRegistro();" placeholder="Rut paciente" class="form-control">
+							<input type="text" name="rut" id="rut" maxlength="12" onkeyup="formateaRut(this),this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="if (Valida_Rut(this)){ldelim}validarVacio(this,'Por favor Ingrese Rut');Registro.cargarRegistro();{rdelim}" placeholder="Rut paciente" class="form-control">
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
 						<div class="col-sm-1">
