@@ -54,7 +54,18 @@
                     {/if}
                     <form  id="form" name="form" enctype="application/x-www-form-urlencoded" action="" method="post">
                         <input type="hidden" name="id" id="id" value="{$item->id}"/>
-                        <div class="col-md-6 text-left">
+						<div class="col-md-6 text-left">
+                            <div class="form-group clearfix">
+                                <p class="control-label">Restricciones para el cambio de contraseña</p>
+                            </div>
+                        </div>
+						<div class="col-md-6 text-left">
+                            <div class="form-group clearfix">
+                                <label for="ant_password" class="control-label required">Contraseña Actual (*)</label>
+                                <input type="ant_password" name="ant_password" id="password" value="" class="form-control"/>
+                            </div>
+                        </div>
+						<div class="col-md-6 text-left">
                             <div class="form-group clearfix">
                                 <label for="password" class="control-label required">Nueva contraseña (*)</label>
                                 <input type="password" name="password" id="password" value="" class="form-control"/>

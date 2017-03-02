@@ -17,8 +17,8 @@ function smarty_function_htmlBoxUsuario($params, &$smarty) {
     
     $usuario = $DAOUsuario->getById($id_usuario);
     if(!is_null($usuario)){
-        $smarty->assign("rut", $usuario->usr_rut);
-        $smarty->assign("usuario", $usuario->usr_nombres . " " . $usuario->usr_apellidos);
+        $smarty->assign("rut", $usuario->gl_rut);
+        $smarty->assign("usuario", $usuario->gl_nombres . " " . $usuario->gl_apellidos);
         return $smarty->fetch("plugins/view/box_usuario.tpl");
     }
 }

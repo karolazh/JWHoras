@@ -24,7 +24,7 @@
                 <a href="#" class="btn btn-default btn-flat">Profile</a>
             </div>*}
             <div class="pull-right">
-                <a href="{$smarty.const.BASE_URI}/Login/logoutUsuario" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                <a href="{$smarty.const.BASE_URI}/Login/logoutUsuario" class="btn btn-success btn-flat">Cerrar Sesión</a>
             </div>
         </li>
     </ul>
