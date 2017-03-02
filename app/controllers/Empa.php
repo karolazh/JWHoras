@@ -272,8 +272,8 @@ class Empa extends Controller{
 		$this->smarty->assign("botonAyudaMamografiaVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 1 año","Información","pull-left","btn-info"));
 		$this->smarty->assign("botonConsejeriaColesterol", Boton::botonAyuda("Reducir ingesta calorías y realizar actividad física (controlada)","Consejería","pull-right","btn-danger"));
 		$this->smarty->assign("botonInformacionAgenda", Boton::botonAyuda("Referir confirmación diagnóstica con profesional de la salud.","Consejeria","pull-right","btn-danger"));
-		$this->smarty->assign("botonInformacionAgendaITS", Boton::botonAyuda("Referir a profesional de ITS.","Consejeria","pull-right","btn-danger"));
-		$this->smarty->assign("botonInformacionAgendaMamografia", Boton::botonAyuda("Agendar nueva mamografía.","Información","pull-right","btn-info"));
+		$this->smarty->assign("botonInformacionAgendaITS", Boton::botonAyuda("Referir a profesional de ITS.","Consejeria","","btn-danger"));
+		$this->smarty->assign("botonInformacionAgendaMamografia", Boton::botonAyuda("Agendar nueva mamografía.","Información","","btn-info"));
 		//llamado al template
         $this->_display('Empa/nuevo.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");

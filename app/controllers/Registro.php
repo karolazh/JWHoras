@@ -232,7 +232,7 @@ class Registro extends Controller {
 		//$arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
 		//$this->smarty->assign("arrCasoEgreso", $arrCasoEgreso);
 		
-        $this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.'));
+        $this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.','','pull-right'));
 
         //llamado al template
         $this->_display('Registro/nuevo.tpl');
