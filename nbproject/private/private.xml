@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/srv/http/prevencion/app/controllers/Empa.php</file>
+            <file>file:/srv/http/prevencion/app/models/DAOEmpa.php</file>
+            <file>file:/srv/http/prevencion/app/views/templates/Empa/nuevo.tpl</file>
+            <file>file:/srv/http/prevencion/static/js/templates/empa/nuevo.js</file>
+            <file>file:/srv/http/prevencion/app/libs/Boton.php</file>
+            <file>file:/srv/http/prevencion/app/models/DAORegistro.php</file>
+        </group>
     </open-files>
 </project-private>
