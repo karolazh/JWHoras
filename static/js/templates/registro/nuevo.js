@@ -81,7 +81,9 @@
     $("#guardarMotivo").on('click', function(e) {
         var button_process	= buttonStartProcess($(this), e);
         var parametros		= $("#form").serializeArray();
-
+		var edad = $("#edad").val();
+		var prevision = $("#prevision").val();
+		
 		if($('#chkAcepta').is(':checked')){
 			parametros.push({
 				"name"  : 'chkAcepta',
@@ -103,7 +105,15 @@
 				"name"  : 'chkReconoce',
 				"value" : 0
 			});
-		}
+		} 
+		parametros.push({
+				"name"  : 'edad',
+				"value" : edad
+			});
+		parametros.push({
+				"name"  : 'prevision',
+				"value" : prevision
+			});
 
 		$.ajax({
 			dataType: "json",
@@ -128,7 +138,7 @@
 		buttonEndProcess(button_process);
 
     });
-
+/* estaba repetida
     $("#guardarMotivo").on('click', function(e) {
         var button_process	= buttonStartProcess($(this), e);
         var parametros		= $("#form").serializeArray();
@@ -179,7 +189,7 @@
 		buttonEndProcess(button_process);
 
     });
-
+*/
     $("#guardarReconoce").on('click', function(e) {
         var button_process	= buttonStartProcess($(this), e);
 		var id_registro			= $(this).attr("data");
@@ -256,7 +266,9 @@
 					success	: function(data){
 								if(data.correcto){
 									if(data.count_motivos == 1){
-										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registro en la Plataforma, con fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información.');
+										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registro en la Plataforma, con fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información. <br> Motivos de consulta : <br>'+data.tabla_motivos);
+										$("#div_tabla_motivos").html(data.tabla_motivos);
+										$("#mostrar_motivos_consulta").show();
 									}else{
 										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registros en la Plataforma, siendo el último de fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información.');
 									}

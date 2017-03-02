@@ -252,7 +252,6 @@ class Registro extends Controller {
 		$gl_grupo_tipo	= 'Control';
 		$datos_evento	= array(); 
         $count			= $this->_DAORegistro->countRegistroxRegion($_SESSION['id_region']);
-
 		if($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50){
 			$gl_grupo_tipo	= 'Seguimiento';
 		}
@@ -338,8 +337,16 @@ class Registro extends Controller {
 		$correcto		= false;
         $error			= false;
 		$datos_evento	= array(); 
-
-        $id_registro	= $parametros['id_registro'];
+		$grupo_usuario_registrador = $_SESSION['gl_grupo_tipo'];
+		$count			= $this->_DAORegistro->countRegistroxRegion($_SESSION['id_region']);
+		if($parametros['edad'] > 15 AND  $grupo_usuario_registrador == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50){
+			$gl_grupo_tipo	= 'Seguimiento';
+		} else {
+			$gl_grupo_tipo	= 'Control';
+		}
+		
+		$parametros['gl_grupo_tipo']	= $gl_grupo_tipo;
+		$id_registro	= $parametros['id_registro'];
         if($id_registro){
 			$correcto						= true;
 			$resultado2						= $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros,$id_registro);
@@ -478,11 +485,44 @@ class Registro extends Controller {
 		} else if(!is_null($pasaporte)&& ($pasaporte !== "")){
 			$registro   = $this->_DAORegistro->getRegistroByPasaporte($pasaporte);
 		}
-        $json			= array();
-
+        $json			= array();		
 		if($registro){
 			$arr_motivos				= $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($registro->id_registro);
+			$tabla_motivos = "";
+			if (!is_null($arr_motivos)){
+				$encabezado_tabla	= "<div class='table-responsive col-lg-12' data-row='10'>
+										<table id='tablaPrincipal' class='table table-hover table-striped table-bordered  table-middle dataTable no-footer'>
+											<thead>
+												<tr role='row'>
+													<th align='center' width='10%'>Fecha Ingreso</th>
+													<th align='center' width='10%'>Hora Ingreso</th>
+													<th align='center' width=''>Motivo</th>
+													<th align='center' width='20%'>Institución</th>
+													<th align='center' width='15%'>Funcionario</th>
+
+												</tr>
+											</thead>
+											<tbody>
+											";
+				$tabla_motivos = $encabezado_tabla;
+				foreach($arr_motivos as $item){
+				$cuerpo_tabla		=			"<tr>
+													<td>".$item->fc_ingreso."</td>
+													<td>".$item->gl_hora_ingreso."</td>
+													<td>".$item->gl_motivo_consulta."</td>
+													<td>".$item->gl_nombre_institucion."</td>
+													<td>".$item->gl_nombres." ".$item->gl_apellidos."</td>
+												</tr>
+												";
+				$tabla_motivos = $tabla_motivos . $cuerpo_tabla;
+				}
+				$pie_tabla			=	"</tbody>
+										</table>
+									</div>";
+				$tabla_motivos = $tabla_motivos . $pie_tabla;
+			}
 			$json['correcto']			= TRUE;
+			$json['tabla_motivos']		= $tabla_motivos;
 			$json['count_motivos']		= count($arr_motivos);
 			$json['fc_ultimo_motivos']	= $arr_motivos->row_0->fc_ingreso;
 			$json['id_registro']		= $registro->id_registro;
