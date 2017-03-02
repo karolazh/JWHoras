@@ -53,70 +53,30 @@ function mensajeAUDIT(pts_audit){
 
 //Poner Mensaje en span segun IMC
 function mensajeIMC(imc){
-    var mensaje = "";
-    //calculamos circunferencia abdominal
-	//Bajo peso
-	if (imc > 0 && imc < 18.50) {
-		$('#gl_imc').css("borderColor", "");
-		$('#gl_imc').parent().find("span.help-block").css("color", "");
-		$('#gl_imc').parent().removeClass("has-error");
-		$('#gl_imc').parent().removeClass("has-success");
-		$('#gl_imc').css("borderColor", "#BDB76B");
-		$('#gl_imc').parent().find("span.help-block").css("color", "#BDB76B");
-		if (imc < 16.00) {
-			$("#id_clasificacion_imc").val(1);
-			mensaje = "Bajo Peso / Delgadez Severa";
+    var parametros = {'imc': imc};
+    $.ajax({
+		dataType: "json",
+		cache: false,
+		async: true,
+		data: parametros,
+		type: "post",
+		url: BASE_URI + "index.php/Empa/mensajeIMC",
+		error: function (xhr, textStatus, errorThrown) {
+		},
+		success: function (data) {
+			if (data.correcto) {
+                                $('#gl_imc').css("borderColor", "");
+                                $('#gl_imc').parent().find("span.help-block").css("color", "");
+                                $('#gl_imc').css("borderColor",data.gl_color);
+                                $('#gl_imc').parent().find("span.help-block").css("color", "'"+data.gl_color+"'");
+                                $('#gl_imc').parent().find('span.help-block').html(data.gl_mensaje);
+                                $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
+                                $('#id_clasificacion_imc').val(data.id_tipo_imc);
+			} else {
+				xModal.info('Error!');
+			}
 		}
-		if (imc >= 16.00 && imc < 17.00) {
-			$("#id_clasificacion_imc").val(2);
-			mensaje = "Bajo Peso / Delgadez Moderada";
-		}
-		if (imc >= 17.00 && imc < 18.50) {
-			$("#id_clasificacion_imc").val(3);
-			mensaje = "Bajo Peso / Delgadez Aceptable";
-		}
-	}
-	//Peso Normal
-	if (imc >= 18.50 && imc <= 24.99) {
-		$("#id_clasificacion_imc").val(4);
-		$('#gl_imc').css("borderColor", "");
-		$('#gl_imc').parent().find("span.help-block").css("color", "");
-		$('#gl_imc').parent().removeClass("has-error");
-		$('#gl_imc').parent().addClass("has-success");
-		mensaje = "Peso Normal";
-	}
-	//Sobre Peso
-	if (imc >= 25.00 && imc < 30.00) {
-		$("#id_clasificacion_imc").val(5);
-		$('#gl_imc').css("borderColor", "");
-		$('#gl_imc').parent().find("span.help-block").css("color", "");
-		$('#gl_imc').parent().removeClass("has-error");
-		$('#gl_imc').parent().removeClass("has-success");
-		$('#gl_imc').css("borderColor", "#FF4500");
-		$('#gl_imc').parent().find("span.help-block").css("color", "#FF4500");
-		mensaje = "Sobrepeso / Pre Obeso (riesgo)";
-	}
-	//Obeso
-	if (imc >= 30.00) {
-		$('#gl_imc').css("borderColor", "");
-		$('#gl_imc').parent().find("span.help-block").css("color", "");
-		$('#gl_imc').parent().removeClass("has-success");
-		$('#gl_imc').parent().addClass("has-error");
-		if (imc >= 30.00 && imc < 35.00) {
-			$("#id_clasificacion_imc").val(6);
-			mensaje = "Obeso / Obeso Tipo I (riesgo moderado)";
-		}
-		if (imc >= 35.00 && imc < 40.00) {
-			$("#id_clasificacion_imc").val(7);
-			mensaje = "Obeso / Obeso Tipo II (riesgo severo)";
-		}
-		if (imc >= 40.00) {
-			$("#id_clasificacion_imc").val(8);
-			mensaje = "Obeso / Obeso Tipo III (riesgo muy severo)";
-		}
-	}
-            $('#gl_imc').parent().find('span.help-block').html(mensaje);
-            $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
+	});
 }
 
 //Calcular IMC segun Peso y Altura

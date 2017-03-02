@@ -46,6 +46,7 @@ class Empa extends Controller{
         $this->_DAOInstitucion      = $this->load->model("DAOInstitucion");
         $this->_DAORegistro         = $this->load->model("DAORegistro");
         $this->_DAOAlcoholismo      = $this->load->model("DAOAlcoholismo");
+        $this->_DAOTipoIMC          = $this->load->model("DAOTipoIMC");
     }
     
     /*
@@ -377,6 +378,29 @@ class Empa extends Controller{
                         "correcto" => $correcto);
         $json	= Zend_Json::encode($salida);
 
+        echo $json;
+    }
+    
+    public function mensajeIMC() {
+        header('Content-type: application/json');
+        $parametros		= $this->_request->getParams();
+        $correcto		= false;
+        $error			= false;
+        $datos                  = $this->_DAOTipoIMC->getTipoIMC($parametros['imc']);
+        if($datos){
+            $correcto           = true;
+            $gl_color           = $datos->gl_color;
+            $gl_descripcion     = $datos->gl_descripcion;
+            $id_tipo_imc        = $datos->id_tipo_imc;
+        }else{
+            $error		= true;
+        }
+        $salida	= array("error"         => $error,
+                        "correcto"      => $correcto,
+                        "gl_color"      => $gl_color,
+                        "gl_mensaje"    => $gl_descripcion,
+                        "id_tipo_imc"   => $id_tipo_imc);
+        $json	= Zend_Json::encode($salida);
         echo $json;
     }
 }
