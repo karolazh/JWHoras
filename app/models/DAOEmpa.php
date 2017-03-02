@@ -184,6 +184,7 @@ class DAOEmpa extends Model{
     
     	public function verInfoById($id_empa) {
         $query	= "SELECT       *,
+                                IFNULL(fc_mamografia,0) as fc_mamografia,
                                 IFNULL(bo_consume_alcohol,-1) as bo_consume_alcohol,
                                 IFNULL(bo_fuma,-1) as bo_fuma,
                                 IFNULL(bo_trabajadora_reclusa,-1) as bo_trabajadora_reclusa,

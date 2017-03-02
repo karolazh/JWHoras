@@ -6,41 +6,46 @@ $("#form").ready(function () {
     mensajeIMC(imc);
     //funcion mensaje span Puntos AUDIT
     mensajeAUDIT(pts_audit);
+    
+    if ($("#bo_mamografia_toma").is(':checked')){
+        $("#bo_mamografia_requiere_1").prop('checked', true);
+    }
 });
 
 //Poner Mensaje en span segun Puntos de AUDIT
 function mensajeAUDIT(pts_audit){
     var mensaje = "";
-    if (pts_audit >= 0 && pts_audit <= 7) {
-        $('#gl_puntos_audit').css("borderColor", "");
-        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
-        $('#gl_puntos_audit').parent().removeClass("has-error");
-        $('#gl_puntos_audit').parent().addClass("has-success");
-        mensaje = "Bajo Riesgo";
-    } else if (pts_audit >= 8 && pts_audit <= 15) {
-        $('#gl_puntos_audit').css("borderColor", "");
-        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
-        $('#gl_puntos_audit').parent().removeClass("has-error");
-        $('#gl_puntos_audit').parent().removeClass("has-success");
-        $('#gl_puntos_audit').css("borderColor", "#BDB76B");
-        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "#BDB76B");
-        mensaje = "Riesgo";
-    } else if (pts_audit >= 16 && pts_audit <= 19) {
-        $('#gl_puntos_audit').css("borderColor", "");
-        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
-        $('#gl_puntos_audit').parent().removeClass("has-error");
-        $('#gl_puntos_audit').parent().removeClass("has-success");
-        $('#gl_puntos_audit').css("borderColor", "#FF8C00");
-        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "#FF8C00");
-        mensaje = "Problema";
-    } else if (pts_audit >= 20 && pts_audit <= 40) {
-        $('#gl_puntos_audit').css("borderColor", "");
-        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
-        $('#gl_puntos_audit').parent().removeClass("has-success");
-        $('#gl_puntos_audit').parent().addClass("has-error");
-        mensaje = "Problema o Dependencia";
+    if (pts_audit != "") {
+        if (pts_audit >= 0 && pts_audit <= 7) {
+            $('#gl_puntos_audit').css("borderColor", "");
+            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+            $('#gl_puntos_audit').parent().removeClass("has-error");
+            $('#gl_puntos_audit').parent().addClass("has-success");
+            mensaje = "Bajo Riesgo";
+        } else if (pts_audit >= 8 && pts_audit <= 15) {
+            $('#gl_puntos_audit').css("borderColor", "");
+            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+            $('#gl_puntos_audit').parent().removeClass("has-error");
+            $('#gl_puntos_audit').parent().removeClass("has-success");
+            $('#gl_puntos_audit').css("borderColor", "#BDB76B");
+            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "#BDB76B");
+            mensaje = "Riesgo";
+        } else if (pts_audit >= 16 && pts_audit <= 19) {
+            $('#gl_puntos_audit').css("borderColor", "");
+            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+            $('#gl_puntos_audit').parent().removeClass("has-error");
+            $('#gl_puntos_audit').parent().removeClass("has-success");
+            $('#gl_puntos_audit').css("borderColor", "#FF8C00");
+            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "#FF8C00");
+            mensaje = "Problema";
+        } else if (pts_audit >= 20 && pts_audit <= 40) {
+            $('#gl_puntos_audit').css("borderColor", "");
+            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+            $('#gl_puntos_audit').parent().removeClass("has-success");
+            $('#gl_puntos_audit').parent().addClass("has-error");
+            mensaje = "Problema o Dependencia";
+        }
     }
-    
     $('#gl_puntos_audit').parent().find('span.help-block').html(mensaje);
     $('#gl_puntos_audit').parent().find('span.help-block').removeClass("hidden");
 }
@@ -154,9 +159,10 @@ $("#gl_circunferencia_abdominal").on('keyup', function (e) {
 // Si Consume Alcohol muestra Boton para Hacer Cuestionario AUDIT
 $(".bo_consume_alcohol").on('change', function (e) {
 	if ($('#bo_consume_alcohol_0').is(':checked')) {
-		$('#div_alcoholismo').hide();
+		$('#div_alcoholismo1').hide();
+                $('#div_alcoholismo2').hide();
 	} else {
-		$('#div_alcoholismo').show();
+		$('#div_alcoholismo1').show();
 	}
 });
 
@@ -213,9 +219,11 @@ $("#gl_glicemia").on('keyup', function (e) {
 //Si es trabajadora sexual o persona en centro reclusión -> mostrar VDRL y RPR
 $(".bo_trabajadora_reclusa").on('change', function (e) {
 	if ($('#bo_trabajadora_reclusa_0').is(':checked')) {
-		$('#id_vdrl_rpr').hide();
+		$('#id_vdrl').hide();
+                $('#id_rpr').hide();
 	} else {
-		$('#id_vdrl_rpr').show();
+		$('#id_vdrl').show();
+                $('#id_rpr').show();
 	}
 });
 
@@ -345,12 +353,14 @@ $("#fc_mamografia").livequery(function () {
 //Si requiere otra Mamografía Mostrar Resultado
 $(".bo_mamografia_requiere").on('change', function (e) {
 
-	if ($('#bo_mamografia_requiere').is(':checked')) {
+	if ($('#bo_mamografia_requiere_0').is(':checked')) {
 		$('#mam_resultado2').hide();
 		$('#requiere_mamografia').hide();
+                $('#requiere_mamografia2').hide();
 	} else {
 		$('#mam_resultado2').show();
 		$('#requiere_mamografia').show();
+                $('#requiere_mamografia2').show();
 	}
 });
 
@@ -391,6 +401,7 @@ $("#guardaraudit").livequery(function () {
 		buttonEndProcess(button_process);
 		$("#gl_puntos_audit").val($("#total").val());
                 //Según tipo de consumo mostrar Mensaje (de acuerdo a puntos del AUDIT)
+                $("#div_alcoholismo2").show();
                 var pts_audit = $('#gl_puntos_audit').val();
                 mensajeAUDIT(pts_audit);
 		xModal.close();
