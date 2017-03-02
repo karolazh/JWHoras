@@ -54,7 +54,29 @@
                     {/if}
                     <form  id="form" name="form" enctype="application/x-www-form-urlencoded" action="" method="post">
                         <input type="hidden" name="id" id="id" value="{$item->id}"/>
-                        <div class="col-md-6 text-left">
+						<div class="col-md-6 text-left">
+                            <div class="form-group clearfix">
+                                <label class="control-label">Restricciones para el cambio de contraseña :
+									
+								</label>
+								<ul>
+									<li>No debe ser igual a la contraseña actual</li>
+									<li>Debe tener al menos 8 caracteres</li>
+									<li>No puede tener más de 16 caracteres</li>
+									<li>Debe tener al menos una letra mayúscula</li>
+									<li>Debe tener al menos una letra minúscula</li>
+									<li>Debe tener al menos un caracter numérico</li>
+								</ul>
+                            </div>
+                        </div>
+						<div class="col-md-6 text-left">
+                            <div class="form-group clearfix">
+                                <label for="password_ant" class="control-label required">Contraseña Actual (*)</label>
+                                <input type="password" name="password_ant" id="password_ant" value="" class="form-control"/>
+								<span class="help-block hidden"></span>
+                            </div>
+                        </div>
+						<div class="col-md-6 text-left">
                             <div class="form-group clearfix">
                                 <label for="password" class="control-label required">Nueva contraseña (*)</label>
                                 <input type="password" name="password" id="password" value="" class="form-control"/>

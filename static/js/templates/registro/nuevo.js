@@ -266,7 +266,7 @@
 					success	: function(data){
 								if(data.correcto){
 									if(data.count_motivos == 1){
-										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registro en la Plataforma, con fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información. <br> Motivos de consulta : <br>'+data.tabla_motivos);
+										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registro en la Plataforma, con fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información. <br> Motivos de consulta : <br>'+data.div_superior+data.tabla_motivos+data.div_inferior);
 										$("#div_tabla_motivos").html(data.tabla_motivos);
 										$("#mostrar_motivos_consulta").show();
 									}else{
