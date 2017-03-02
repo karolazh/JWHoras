@@ -7,14 +7,11 @@
  * 
  * Fecha creación: 14/02/2017 
  * 
- * @name Registro.php
- * 
  * @author Carolina Zamora, Orlando Vázquez
  */
 
 class Registro extends Controller {
     
-    protected$_email;
     protected $_DAORegistro;
     protected $_DAOComuna;
     protected $_DAOCasoEgreso;
@@ -33,7 +30,7 @@ class Registro extends Controller {
 
     /**
      * Descripción: Constructor
-     * @name __construct()
+     * @author: 
      */
     function __construct() {
         parent::__construct();
@@ -60,7 +57,7 @@ class Registro extends Controller {
 
     /**
      * Descripción: Index
-     * @name index()
+     * @author: 
      */
     public function index() {
         Acceso::redireccionUnlogged($this->smarty);
@@ -88,7 +85,7 @@ class Registro extends Controller {
     
     /**
      * Descripción: Bitacora de Paciente
-     * @name bitacora()
+     * @author: 
      */
     public function bitacora() {
 
@@ -200,7 +197,7 @@ class Registro extends Controller {
         
     /**
      * Descripción: Nuevo Registro
-     * @name nuevo()
+     * @author: 
      */
     public function nuevo() {
         Acceso::redireccionUnlogged($this->smarty);
@@ -234,7 +231,7 @@ class Registro extends Controller {
 
     /**
      * Descripción: Guardar Registro
-     * @name GuardarRegistro()
+     * @author: 
      */
     public function GuardarRegistro() {
         header('Content-type: application/json');
@@ -325,7 +322,7 @@ class Registro extends Controller {
 
     /**
      * Descripción: Guardar Motivo
-     * @name GuardarMotivo()
+     * @author: 
      */
     public function GuardarMotivo() {
         header('Content-type: application/json');
@@ -377,7 +374,7 @@ class Registro extends Controller {
 
     /**
      * Descripción: Guardar Reconoce
-     * @name GuardarReconoce()
+     * @author: 
      */
     public function GuardarReconoce() {
         header('Content-type: application/json');
@@ -413,7 +410,7 @@ class Registro extends Controller {
 
     /**
      * Descripción: Ver
-     * @name ver()
+     * @author: 
      */
     public function ver() {
         $parametros		= $this->request->getParametros();
@@ -455,7 +452,7 @@ class Registro extends Controller {
 
     /**
      * Descripción: Carga comunas por región
-     * @name cargarComunasPorRegion()
+     * @author: 
      */
     public function cargarComunasPorRegion() {
         $region		= $_POST['region'];
@@ -475,7 +472,7 @@ class Registro extends Controller {
 
     /**
      * Descripción: Carga centros de salud por comuna
-     * @name cargarCentroSaludporComuna()
+     * @author: 
      */
     public function cargarCentroSaludporComuna() {
         $json			= array();
@@ -498,7 +495,7 @@ class Registro extends Controller {
 
     /**
      * Descripción: Carga registro
-     * @name cargarRegistro()
+     * @author: 
      */
     public function cargarRegistro() {
         header('Content-type: application/json');
@@ -576,7 +573,7 @@ class Registro extends Controller {
     
     /**
      * Descripción: Carga adjunto
-     * @name cargarAdjunto()
+     * @author: 
      */
     public function cargarAdjunto(){
             $this->smarty->display('Registro/cargar_adjunto.tpl');
@@ -584,7 +581,7 @@ class Registro extends Controller {
        
     /**
      * Descripción: Guarda adjunto
-     * @name guardarAdjunto()
+     * @author: 
      */
     public function guardarAdjunto() {
             $adjunto	= $_FILES['adjunto'];
@@ -628,7 +625,7 @@ class Registro extends Controller {
 	
     /**
      * Descripción: Carga listado de adjuntos
-     * @name cargarListadoAdjuntos()
+     * @author: 
      */
     public function cargarListadoAdjuntos()	{
             $adjuntos	= array();
@@ -677,7 +674,7 @@ class Registro extends Controller {
 
     /**
      * Descripción: Borrar adjunto
-     * @name borrarAdjunto()
+     * @author: 
      */
     public function borrarAdjunto()
     {
@@ -734,7 +731,7 @@ class Registro extends Controller {
 
     /**
      * Descripción: Ver adjunto
-     * @name verAdjunto()
+     * @author: 
      */
     public function verAdjunto()
 	{
@@ -758,7 +755,6 @@ class Registro extends Controller {
 
     /**
      * Descripción : permite guardar nuevo archivo adjunto desde bitácora
-     * @name guardarNuevoAdjunto
      * @author: Carolina Zamora H.
      * @param
      * @return
