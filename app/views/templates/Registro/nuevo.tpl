@@ -53,14 +53,15 @@
 					<div style="display: none" id="extranjero">
 						<label for="nombres" class="control-label col-sm-2 ">N°/Pasaporte Extranjero</label>
 						<div class="col-sm-2">
-							<input type="text" name="inputextranjero" id="inputextranjero" maxlength="12" id="inputextranjero" value='' class="form-control" placeholder="Ingrese N°/Pasaporte Extranjero" onblur="validarVacio(this,'Por favor Ingrese N°/Pasaporte Extranjero')">
+							<input type="text" name="inputextranjero" id="inputextranjero" maxlength="12" id="inputextranjero" value='' class="form-control" placeholder="Ingrese N°/Pasaporte Extranjero" onblur="validarVacio(this,'Por favor Ingrese N°/Pasaporte Extranjero');Registro.cargarRegistro();">
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
+						{*
 						<div class="col-sm-1" id="btnbuscarex">
 							<button type="button" id="buscarex" class="btn btn-info btn-sm form-control">
 								<i class="fa fa-search"></i>
 							</button>
-						</div>
+						</div>*}
 					</div>
 
 				</div>

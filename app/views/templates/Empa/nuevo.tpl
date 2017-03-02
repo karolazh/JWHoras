@@ -62,7 +62,7 @@
 
                     <label for="fc_empa" class="control-label col-sm-2">Fecha (*)</label>
                     <div class="col-sm-3">
-                        <input type="date" name="fc_empa" id="fc_empa" value="{$fc_emp}" 
+                        <input type="date" name="fc_empa" id="fc_empa" value="{$fc_empa}" 
                                placeholder="Fecha" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
@@ -158,7 +158,7 @@
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Alcoholismo</h3></div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label class="control-label col-sm-2 required">¿Consume bebidas alcoh&oacute;licas?</label>
+                            <label class="control-label col-sm-3 required">¿Consume bebidas alcoh&oacute;licas?</label>
                             <div class="col-sm-1">
                                 <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol" 
                                               id="bo_consume_alcohol_0" value="0" {$bo_consume_alcohol_0}>NO</label>
@@ -196,7 +196,7 @@
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Tabaquismo</h3></div>
                     <div class="box-body">   
                         <div class="form-group">
-                            <label class="control-label required col-sm-2">¿Usted fuma?</label>
+                            <label class="control-label required col-sm-3">¿Usted fuma?</label>
                             <div class="col-sm-1">
                                 <label><input class="bo_fuma" type="radio" name="bo_fuma" 
                                               id="bo_fuma_0" value="0" {$bo_fuma_0}>NO</label>
@@ -215,7 +215,7 @@
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Obesidad</h3></div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label class="control-label required col-sm-2">Peso (Kg)</label>
+                            <label class="control-label required col-sm-3">Peso (Kg)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_peso" id="gl_peso" maxlength="4"
                                        onKeyPress="return soloNumeros(event)"
@@ -224,7 +224,7 @@
                             </div>
                         </div> 
                         <div class="form-group">   
-                            <label class="control-label required col-sm-2">Estatura (cm)</label>
+                            <label class="control-label required col-sm-3">Estatura (cm)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_estatura" id="gl_estatura" maxlength="4"
                                        onKeyPress="return soloNumeros(event)"
@@ -234,7 +234,7 @@
                         </div>
                         <div class="form-group">   
 
-                            <label class="control-label required col-sm-2">Circunferencia Abdominal (cm)</label>
+                            <label class="control-label required col-sm-3">Circunferencia Abdominal (cm)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_circunferencia_abdominal" id="gl_circunferencia_abdominal" maxlength="5"
                                        onKeyPress="return soloNumeros(event)" maxlength="4"
@@ -251,7 +251,7 @@
                             </div>    
                         </div>
                         <div class="form-group">     
-                            <label class="control-label required col-sm-2">IMC</label>
+                            <label class="control-label required col-sm-3">IMC</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_imc" id="gl_imc" 
                                        value="{$gl_imc}" placeholder="" class="form-control" readonly/>
@@ -272,7 +272,7 @@
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Hipertensión Arterial</h3></div>
                     <div class="box-body"> 
                         <div class="form-group">
-                            <label class="control-label required col-sm-2">PAS (mm/Hg)</label>
+                            <label class="control-label required col-sm-3">PAS (mm/Hg)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_pas" id="gl_pas" maxlength="4" onKeyPress="return soloNumeros(event)"
                                        value="{$gl_pas}" placeholder="" class="form-control"/>
@@ -281,19 +281,19 @@
                             <div class="col-sm-1">
                                 {$botonAyudaPAS}
                             </div>
-                            <label class="control-label required col-sm-1">PAD (mm/Hg)</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label required col-sm-3">PAD (mm/Hg)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_pad" id="gl_pad" maxlength="4" onKeyPress="return soloNumeros(event)" 
                                        value="{$gl_pad}" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>
                             <div class="col-sm-1">
-                                {$botonAyudaPAD}
-                            </div>
-                            <div class="col-sm-1"></div>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {$botonAyudaPAD}&nbsp;
                             <button type="button" id="verAgendaHipertension" style="{if $gl_pad < 90 and $gl_pas < 140}display: none{/if}" 
                                     class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -303,7 +303,7 @@
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Diabetes Mellitus (DM)</h3></div>
                     <div class="box-body">
                         <div class="form-group" id="antecedentes" style="{$antecedentes}">
-                            <label class="control-label required col-sm-2">¿Tiene Antecedentes Familiares de Diabetes Mellitus?</label>
+                            <label class="control-label required col-sm-3">¿Tiene Antecedentes Familiares de Diabetes Mellitus?</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_antecedente" type="radio" name="bo_antecedente" 
                                               id="bo_antecedente_0" value="0">No</label>
@@ -313,7 +313,7 @@
                             </div>
                         </div>   
                         <div class="form-group" id="glicemia" style="{$diabetes}">
-                            <label class="control-label required col-sm-2">Glicemia en Ayunas (mg/dl)</label>
+                            <label class="control-label required col-sm-3">Glicemia en Ayunas (mg/dl)</label>
                             <div class="col-sm-1">
                                 <input type="text" name="gl_glicemia" maxlength="4" id="gl_glicemia" value="{$gl_glicemia}" 
                                        placeholder="" class="form-control"/>
@@ -345,7 +345,7 @@
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Sifilis en población de riesgo</h3></div>
                     <div class="box-body">    
                         <div class="form-group">
-                            <label class="control-label required col-sm-2">¿Es trabajadora sexual o persona en centro de reclusión?</label>
+                            <label class="control-label required col-sm-3">¿Es trabajadora sexual o persona en centro de reclusión?</label>
                             <div class="col-sm-1">
                                 <label><input class="bo_trabajadora_reclusa" type="radio" name="bo_trabajadora_reclusa" 
                                               id="bo_trabajadora_reclusa_0" value="0" {$bo_trabajadora_reclusa_0}>No</label>
@@ -355,7 +355,7 @@
                             </div>
                         </div>  
                         <div class="form-group" id="id_vdrl_rpr" style="{if $bo_trabajadora_reclusa_1 != 'checked'}display: none{/if}">
-                            <label class="control-label required col-sm-2">¿Examen VDRL?</label>
+                            <label class="control-label required col-sm-3">¿Examen VDRL?</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_vdrl" type="radio" name="bo_vdrl" 
                                               id="bo_vdrl_0" value="0" {$bo_vdrl_0}>Negativo</label>

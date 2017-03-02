@@ -2,6 +2,7 @@
 <div class="panel panel-primary">
 	<div class="panel-body">
 		<form id="formAudit"class="form-horizontal" role="form">
+			<input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden">
 			<div class="table-responsive col-lg-12" data-row="10">
 				<table id="tablaPrincipal" class="table table-hover table-striped table-bordered ">
 					<thead>
@@ -16,10 +17,12 @@
 						</tr>
 					</thead>
 					<tbody>
+						{$cant_pre = 0}
 						{foreach $arrPreguntas as $item}
 							{$i = $item->id_pregunta}
 							{$n = $i - 1}
 							{$row = "row_"}
+							{$cant_pre = $cant_pre + 1}
 							{assign var="row_n" value="`$row``$n`"} 
 							<tr>
 								<td class="text-center"> {$item->gl_pregunta} </td>
@@ -67,6 +70,7 @@
 					<i class="fa fa-save"></i>  Guardar
 				</button>
 			</div>
+			<input type="text" value="{$cant_pre}" id="cant_pre" name="cant_pre" class="hidden">
 		</form>
 	</div>
 </div>
