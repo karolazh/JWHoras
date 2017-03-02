@@ -10,9 +10,11 @@
 
         <div class="form-group">
             <section class="content-header" >
+                <form class="form-horizontal" name="form-adjunto" id="form-adjunto" 
+                      enctype="multipart/form-data" method="post" >
                 {*<form id="form" role="form" class="form" enctype="multipart/form-data"
                       action="../Registro/guardarAdjunto" method="post">*}
-                <form id="form" name="form" enctype="multipart/form-data" action="" method="post" >
+                {*<form id="form" name="form" enctype="multipart/form-data" action="" method="post" >*}
                     <input type="hidden" name="idreg" id="idreg" value="{$idreg}" />
                     <div id="seccionAdjunto" style="display:none">
                         <div class="box-body">
@@ -46,27 +48,16 @@
                                     </div>
 
                                     <div class="btn-group">
-                                        {*<div id="div_tabla" class="table-responsive small">*}
-                                            <!--
-                                            <button id="guardarArchivo" type="submit"
-                                                    {*type="button" *}
-                                                    class="btn btn-success btn-sm " 
-                                                    onclick="this.form.submit()"
-                                                <i class="fa fa-save"></i>&nbsp;&nbsp;Guardar
-                                            </button>
-                                            -->
-                                            <button id="" type="button" 
-                                                    class="btn btn-success btn-sm "
-                                                    onclick="Registro.guardarNuevoAdjunto(this.form,this)">
-                                                <i class="fa fa-save"></i>&nbsp;&nbsp;Guardar
-                                            </button>
-                                        {*</div>*}
+                                        <button id="" type="button" 
+                                                class="btn btn-success btn-sm "
+                                                onclick="Registro.guardarNuevoAdjunto(this.form,this)">
+                                            <i class="fa fa-save"></i>&nbsp;&nbsp;Guardar
+                                        </button>
                                     </div>
                                     
                                 </div>
-                            </div>
+                            </div><!-- <div class="row"> -->
                         </div>
-
                     </div>
                 </form>
             </section>
