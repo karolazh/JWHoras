@@ -265,12 +265,19 @@
 					},
 					success	: function(data){
 								if(data.correcto){
+									
+									var str_ult_cinco_reg = "";
+									if (data.count_motivos > 5){
+										str_ult_cinco_reg = "Mostrando los 5 últimos Registros.";
+									}
 									if(data.count_motivos == 1){
-										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registro en la Plataforma, con fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información. <br> Motivos de consulta : <br>'+data.div_superior+data.tabla_motivos+data.div_inferior);
+										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registro en la Plataforma, con fecha '+data.fc_ultimo_motivos+'.<br>La información del Paciente ha sido cargada. <br> Motivo de consulta : <br>'+data.div_superior+data.tabla_motivos+data.div_inferior);
 										$("#div_tabla_motivos").html(data.tabla_motivos);
 										$("#mostrar_motivos_consulta").show();
 									}else{
-										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registros en la Plataforma, siendo el último de fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información.');
+										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registros en la Plataforma, siendo el último de fecha '+data.fc_ultimo_motivos+'.<br>La información del Paciente ha sido cargada. '+str_ult_cinco_reg+'<br> Motivos de consulta : <br>'+data.div_superior+data.tabla_motivos+data.div_inferior);
+										$("#div_tabla_motivos").html(data.tabla_motivos);
+										$("#mostrar_motivos_consulta").show();
 									}
 
 									$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Registro/bitacora/"+data.id_registro+"', 'Registro número : "+data.id_registro+"', 85);");

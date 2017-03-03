@@ -507,21 +507,23 @@ class Registro extends Controller {
 			$registro   = $this->_DAORegistro->getRegistroByPasaporte($pasaporte);
 		}
         $json			= array();		
+		
 		if($registro){
-			$arr_motivos				= $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($registro->id_registro);
+			$arr_motivos	= $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($registro->id_registro);
 			$tabla_motivos = "";
 			$div_superior = "<div class='top-spaced'></div>
 								<div class='panel panel-primary'>
 									<div class='panel-heading'>Motivos de consulta</div>";
 			$div_inferior = "</div>";
+			
 			if (!is_null($arr_motivos)){
 				$encabezado_tabla	= "<div class='panel-body'>
-										<div class='table-responsive col-lg-12' data-row='10'>
+										<div class='table-responsive col-lg-12' data-row='5'>
 											<table id='tablaPrincipal' class='table table-hover table-striped table-bordered  table-middle dataTable no-footer'>
 												<thead>
 													<tr role='row'>
-														<th align='center' width='15%'>Fecha Ingreso</th>
-														<th align='center' width='10%'>Hora Ingreso</th>
+														<th align='center' width='16%'>Fecha Ingreso</th>
+														<th align='center' width='9%'>Hora Ingreso</th>
 														<th align='center' width=''>Motivo</th>
 														<th align='center' width='20%'>Institución</th>
 														<th align='center' width='15%'>Funcionario</th>
@@ -531,7 +533,9 @@ class Registro extends Controller {
 												<tbody>
 											";
 				$tabla_motivos = $encabezado_tabla;
-				foreach($arr_motivos as $item){
+				$break_count = 0;
+				foreach(array_reverse((array)$arr_motivos) as $item){
+				if ($break_count < 5) {	
 				$cuerpo_tabla		=			"<tr>
 													<td>".$item->fc_ingreso."</td>
 													<td>".$item->gl_hora_ingreso."</td>
@@ -541,7 +545,11 @@ class Registro extends Controller {
 												</tr>
 												";
 				$tabla_motivos = $tabla_motivos . $cuerpo_tabla;
+				$break_count += 1;
+				}else {
+					break;
 				}
+				} 
 				$pie_tabla			=	"	</tbody>
 											</table>
 										</div>
@@ -553,7 +561,7 @@ class Registro extends Controller {
 			$json['div_superior']		= $div_superior;
 			$json['div_inferior']		= $div_inferior;
 			$json['tabla_motivos']		= $tabla_motivos;
-			$json['count_motivos']		= count($arr_motivos);
+			$json['count_motivos']		= count((array)$arr_motivos);
 			$json['fc_ultimo_motivos']	= $arr_motivos->row_0->fc_ingreso;
 			$json['id_registro']		= $registro->id_registro;
 			$json['gl_nombres']			= $registro->gl_nombres;
