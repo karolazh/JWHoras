@@ -1,5 +1,35 @@
 <?php
 
+/* 
+!IniHeaderDoc
+*****************************************************************************
+!NombreObjeto 		: Login.php
+!Sistema 	  		: PREVENCION DE FEMICIDIOS
+!Modulo 	  		: NA
+!Descripcion  		: 
+!Plataforma   		: !PHP
+!Perfil       		: 
+!Itinerado    		: NA
+!Uso          		: NA
+!Autor        		: Domingo Cortez <domingo.cortez@cosof.cl>
+!Creacion     		: 20/02/2017
+!Retornos/Salidas 	: NA
+!OrigenReq        	: NA
+=============================================================================
+!Parametros 		: NA 
+=============================================================================
+!Testing 			: NA
+=============================================================================
+!ControlCambio
+--------------
+!cVersion !cFecha   !cProgramador   !cDescripcion 
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------
+*****************************************************************************
+!EndHeaderDoc 
+*/
+
 class Soporte extends Controller{
 
     protected $_wsdl;

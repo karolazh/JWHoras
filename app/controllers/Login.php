@@ -1,11 +1,42 @@
 <?php
 
+/* 
+!IniHeaderDoc
+*****************************************************************************
+!NombreObjeto 		: Login.php
+!Sistema 	  		: PREVENCION DE FEMICIDIOS
+!Modulo 	  		: NA
+!Descripcion  		: 
+!Plataforma   		: !PHP
+!Perfil       		: 
+!Itinerado    		: NA
+!Uso          		: NA
+!Autor        		: Victor Retamal <victor.retamal@cosof.cl>
+!Creacion     		: 20/02/2017
+!Retornos/Salidas 	: NA
+!OrigenReq        	: NA
+=============================================================================
+!Parametros 		: NA 
+=============================================================================
+!Testing 			: NA
+=============================================================================
+!ControlCambio
+--------------
+!cVersion !cFecha   !cProgramador   !cDescripcion 
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------
+*****************************************************************************
+!EndHeaderDoc 
+*/
+
 class Login extends Controller {
 
     protected $_DAOUsuarios;
     protected $_DAORegion;
     protected $_DAOComuna;
     protected $_DAOProvincias;
+    protected $DAOAuditoriaLogin;
 
     /*** Constructor ***/
     function __construct() {
@@ -17,6 +48,7 @@ class Login extends Controller {
         $this->_DAORegion = $this->load->model("DAORegion");
         $this->_DAOComuna = $this->load->model("DAOComuna");
         $this->_DAOProvincias = $this->load->model("DAOProvincias");
+        $this->_DAOAuditoriaLogin = $this->load->model("DAOAuditoriaLogin");
     }
 
     public function index() {
@@ -59,6 +91,8 @@ class Login extends Controller {
 
         if ($usuario) {
 			if($usuario->bo_activo == 1){
+				$registro			= $this->_DAOAuditoriaLogin->registro_login($usuario->id_usuario, $rut, 'login');
+				
 				$session			= New Zend_Session_Namespace("usuario_carpeta");
 				$session->id		= $usuario->id_usuario;
 				$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
@@ -105,6 +139,7 @@ class Login extends Controller {
 				$this->smarty->display('login/login.tpl');				
 			}
         }else{
+			$registro	= $this->_DAOAuditoriaLogin->registro_login(0, $rut, 'login');
             $this->smarty->assign("hidden", "");
             $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
             $this->smarty->display('login/login.tpl');
@@ -123,7 +158,7 @@ class Login extends Controller {
 		if($usuario){			
 			echo json_encode(array('rut'=>$usuario->gl_rut));
 		}else{
-			echo json_encode(array('rut'=>$rut_usuario));
+			echo json_encode(array('rut'=>''));
 		}
 
 	}
@@ -166,58 +201,60 @@ class Login extends Controller {
 			}
 
 			
-        if ($usuario) {
-			if($usuario->bo_activo == 1){
-				$session			= New Zend_Session_Namespace("usuario_carpeta");
-				$session->id		= $usuario->id_usuario;
-				$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-				$session->mail		= $usuario->gl_email;
-				$session->rut		= $usuario->gl_rut;
-				$session->fono		= $usuario->gl_fono;
-				$session->celular	= $usuario->gl_celular;
+			if ($usuario) {
+				if($usuario->bo_activo == 1){
+					$registro	= $this->_DAOAuditoriaLogin->registro_login($usuario->id_usuario, $arr['rut'], 'loginMIDAS', $token);
+					$session			= New Zend_Session_Namespace("usuario_carpeta");
+					$session->id		= $usuario->id_usuario;
+					$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+					$session->mail		= $usuario->gl_email;
+					$session->rut		= $usuario->gl_rut;
+					$session->fono		= $usuario->gl_fono;
+					$session->celular	= $usuario->gl_celular;
 
-				if (!$primer_login) {
-					$ultimo_login	= date('Y-m-d H:i:s');
-					$datos			= array($ultimo_login, $session->id);
-					$upd			= $this->_DAOUsuarios->setUltimoLogin($datos);
-				}
+					if (!$primer_login) {
+						$ultimo_login	= date('Y-m-d H:i:s');
+						$datos			= array($ultimo_login, $session->id);
+						$upd			= $this->_DAOUsuarios->setUltimoLogin($datos);
+					}
 
-				$_SESSION['id']				= $usuario->id_usuario;
-				$_SESSION['perfil']			= $usuario->id_perfil;
-				$_SESSION['gl_grupo_tipo']	= $usuario->gl_grupo_tipo;
-				$_SESSION['id_institucion']	= $usuario->id_institucion;
-				$_SESSION['nombre']			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-				$_SESSION['rut']			= $usuario->gl_rut;
-				$_SESSION['mail']			= $usuario->gl_email;
-				$_SESSION['fono']			= $usuario->gl_fono;
-				$_SESSION['celular']		= $usuario->gl_celular;
-				$_SESSION['comuna']			= $usuario->gl_nombre_comuna;
-				$_SESSION['provincia']		= $usuario->gl_nombre_provincia;
-				$_SESSION['region']			= $usuario->gl_nombre_region;
-				$_SESSION['id_comuna']		= $usuario->id_comuna;
-				$_SESSION['id_provincia']	= $usuario->id_provincia;
-				$_SESSION['id_region']		= $usuario->id_region;
-				$_SESSION['primer_login']	= $primer_login;
-				$_SESSION['autenticado']	= TRUE;
+					$_SESSION['id']				= $usuario->id_usuario;
+					$_SESSION['perfil']			= $usuario->id_perfil;
+					$_SESSION['gl_grupo_tipo']	= $usuario->gl_grupo_tipo;
+					$_SESSION['id_institucion']	= $usuario->id_institucion;
+					$_SESSION['nombre']			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+					$_SESSION['rut']			= $usuario->gl_rut;
+					$_SESSION['mail']			= $usuario->gl_email;
+					$_SESSION['fono']			= $usuario->gl_fono;
+					$_SESSION['celular']		= $usuario->gl_celular;
+					$_SESSION['comuna']			= $usuario->gl_nombre_comuna;
+					$_SESSION['provincia']		= $usuario->gl_nombre_provincia;
+					$_SESSION['region']			= $usuario->gl_nombre_region;
+					$_SESSION['id_comuna']		= $usuario->id_comuna;
+					$_SESSION['id_provincia']	= $usuario->id_provincia;
+					$_SESSION['id_region']		= $usuario->id_region;
+					$_SESSION['primer_login']	= $primer_login;
+					$_SESSION['autenticado']	= TRUE;
 
-				if ($recordar == 1) {
-					setcookie('datos_usuario_carpeta', $usuario->id_usuario, time() + 365 * 24 * 60 * 60);
-				}
-				if($primer_login) {
-					header('Location: ' . BASE_URI . '/Login/actualizar');
+					if ($recordar == 1) {
+						setcookie('datos_usuario_carpeta', $usuario->id_usuario, time() + 365 * 24 * 60 * 60);
+					}
+					if($primer_login) {
+						header('Location: ' . BASE_URI . '/Login/actualizar');
+					}else{
+						header('Location: ' . BASE_URI . '/Home/dashboard');
+					}
 				}else{
-					header('Location: ' . BASE_URI . '/Home/dashboard');
+					$registro	= $this->_DAOAuditoriaLogin->registro_login(0, $arr['rut'], 'loginMIDAS', $token);
+					$this->smarty->assign("hidden", "");
+					$this->smarty->assign("texto_error", "Usuario se encuentra Inhabilitado.");
+					$this->smarty->display('login/login.tpl');				
 				}
 			}else{
 				$this->smarty->assign("hidden", "");
-				$this->smarty->assign("texto_error", "Usuario se encuentra Inhabilitado.");
-				$this->smarty->display('login/login.tpl');				
+				$this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
+				$this->smarty->display('login/login.tpl');
 			}
-        }else{
-            $this->smarty->assign("hidden", "");
-            $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
-            $this->smarty->display('login/login.tpl');
-        }
 		}
 	}
 
@@ -271,7 +308,6 @@ class Login extends Controller {
         echo $json;
     }
 
-    
     public function logoutUsuario() {
         if (isset($_COOKIE['datos_usuario_carpeta'])) {
             unset($_COOKIE['datos_usuario_carpeta']);

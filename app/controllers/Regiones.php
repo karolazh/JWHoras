@@ -1,8 +1,36 @@
 <?php
 
+/* 
+!IniHeaderDoc
+*****************************************************************************
+!NombreObjeto 		: Regiones.php
+!Sistema 	  		: PREVENCION DE FEMICIDIOS
+!Modulo 	  		: NA
+!Descripcion  		: 	
+!Plataforma   		: !PHP
+!Perfil       		: 
+!Itinerado    		: NA
+!Uso          		: NA
+!Autor        		: Carolina Zamora <carolina.zamora@cosof.cl>
+!Creacion     		: 14/02/2017
+!Retornos/Salidas 	: NA
+!OrigenReq        	: NA
+=============================================================================
+!Parametros 		: NA 
+=============================================================================
+!Testing 			: NA
+=============================================================================
+!ControlCambio
+--------------
+!cVersion !cFecha   !cProgramador   !cDescripcion 
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------
+*****************************************************************************
+!EndHeaderDoc 
+*/
 
 class Regiones extends Controller{
-
 
 	protected $_DAORegiones;
 	
@@ -12,7 +40,7 @@ class Regiones extends Controller{
 		$this->_DAORegiones = $this->load->model('DAORegion');
                 $this->_DAOComuna = $this->load->model("DAOComuna");
 
-}
+	}
 
     public function cargarComunasPorRegion(){
             $region = $_POST['region'];

@@ -1,5 +1,35 @@
 <?php
 
+/* 
+!IniHeaderDoc
+*****************************************************************************
+!NombreObjeto 		: Home.php
+!Sistema 	  		: PREVENCION DE FEMICIDIOS
+!Modulo 	  		: NA
+!Descripcion  		: 	
+!Plataforma   		: !PHP
+!Perfil       		: 
+!Itinerado    		: NA
+!Uso          		: NA
+!Autor        		: Orlando Vazquez <orlando.vazquez@cosof.cl>
+!Creacion     		: 20/02/2017
+!Retornos/Salidas 	: NA
+!OrigenReq        	: NA
+=============================================================================
+!Parametros 		: NA 
+=============================================================================
+!Testing 			: NA
+=============================================================================
+!ControlCambio
+--------------
+!cVersion !cFecha   !cProgramador   !cDescripcion 
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------
+*****************************************************************************
+!EndHeaderDoc 
+*/
+
 require_once(APP_PATH . "libs/Helpers/View/Grid.php");
 
 class Home extends Controller{

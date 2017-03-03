@@ -1,5 +1,35 @@
 <?php
 
+/* 
+!IniHeaderDoc
+*****************************************************************************
+!NombreObjeto 		: Adjunto.php
+!Sistema 	  		: PREVENCION DE FEMICIDIOS
+!Modulo 	  		: NA
+!Descripcion  		: 	
+!Plataforma   		: !PHP
+!Perfil       		: 
+!Itinerado    		: NA
+!Uso          		: NA
+!Autor        		: Victor Retamal <victor.retamal@cosof.cl>
+!Creacion     		: 14/02/2017
+!Retornos/Salidas 	: NA
+!OrigenReq        	: NA
+=============================================================================
+!Parametros 		: NA 
+=============================================================================
+!Testing 			: NA
+=============================================================================
+!ControlCambio
+--------------
+!cVersion !cFecha   !cProgramador   !cDescripcion 
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------
+*****************************************************************************
+!EndHeaderDoc 
+*/
+
 class Adjunto extends Controller{
 
     protected $_DAOAdjuntos;
