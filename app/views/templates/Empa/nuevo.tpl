@@ -179,6 +179,8 @@
                                             type="button" id="btnaudit" class="btn btn-sm btn-info btn-flat">
                                         <i class="fa fa-file-text-o"></i>&nbsp;AUDIT 
                                     </button>
+									<input type="text" name="id_clasificacion_audit" id="id_clasificacion_audit" 
+										value="{$id_clasificacion_audit}" placeholder="" class="form-control hidden"/>
                                 </div>
                             </div>
                         </div>

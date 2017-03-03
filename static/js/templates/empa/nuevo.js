@@ -14,7 +14,33 @@ $("#form").ready(function () {
 
 //Poner Mensaje en span segun Puntos de AUDIT
 function mensajeAUDIT(pts_audit){
-    var mensaje = "";
+	var parametros = {'pts_audit': pts_audit};
+    if (parametros['pts_audit'] !== '') {
+        $.ajax({
+            dataType: "json",
+            cache: false,
+            async: true,
+            data: parametros,
+            type: "post",
+            url: BASE_URI + "index.php/Empa/mensajeAUDIT",
+            error: function (xhr, textStatus, errorThrown) {
+            },
+            success: function (data) {
+                if (data.correcto) {
+                    $('#gl_puntos_audit').css("borderColor", "");
+                    $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+                    $('#gl_puntos_audit').css("borderColor", data.gl_color);
+                    $('#gl_puntos_audit').parent().find("span.help-block").css("color", "'" + data.gl_color + "'");
+                    $('#gl_puntos_audit').parent().find('span.help-block').html(data.gl_mensaje);
+                    $('#gl_puntos_audit').parent().find('span.help-block').removeClass("hidden");
+                    $('#id_clasificacion_audit').val(data.id_tipo_audit);
+                } else {
+                    xModal.info('Error!');
+                }
+            }
+        });
+    }
+	/*  var mensaje = "";
     if (pts_audit != "") {
         if (pts_audit >= 0 && pts_audit <= 7) {
             $('#gl_puntos_audit').css("borderColor", "");
@@ -47,7 +73,7 @@ function mensajeAUDIT(pts_audit){
         }
     }
     $('#gl_puntos_audit').parent().find('span.help-block').html(mensaje);
-    $('#gl_puntos_audit').parent().find('span.help-block').removeClass("hidden");
+    $('#gl_puntos_audit').parent().find('span.help-block').removeClass("hidden");*/
 }
 
 

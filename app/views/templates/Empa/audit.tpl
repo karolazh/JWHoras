@@ -52,7 +52,7 @@
 									{/if}
 								</td>
 								<td class="col-xs-12" for="pregunta_{$i}">
-									<input id="puntos_{$i}" class="text-right col-xs-12 subTotal" value="{$arrAudit->$row_n->nr_valor}" >
+									<input id="puntos_{$i}" class="text-right col-xs-12 subTotal" disabled value="{$arrAudit->$row_n->nr_valor}" >
 								</td>
 							</tr>
 						{/foreach}
