@@ -3,12 +3,12 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_empa_audit
+* Descripcion	: Modelo para Tabla pre_empa_audit_pregunta
 * Plataforma	: !PHP
-* Creacion		: 27/02/2017
-* @name			DAOEmpaAudit.php
+* Creacion		: 25/02/2017
+* @name			DAOAuditPregunta.php
 * @version		1.0
-* @author		Orlando Vázquez <orlando.vazquez@cosof.cl>
+* @author		Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -19,10 +19,10 @@
 *****************************************************************************
 */
 
-class DAOEmpaAudit extends Model{
+class DAOAuditPregunta extends Model{
 
-    protected $_tabla           = "pre_empa_audit";
-    protected $_primaria		= "id_audit";
+    protected $_tabla           = "pre_empa_audit_pregunta";
+    protected $_primaria		= "id_pregunta";
     protected $_transaccional	= false;
 
     function __construct()
@@ -52,38 +52,6 @@ class DAOEmpaAudit extends Model{
             return $resultado->rows->row_0;
         }else{
             return null;
-        }
-    }
-
-    public function getByIdEmpa($id_empa){
-        $query		= "	SELECT 
-							id_audit,
-							id_empa,
-							id_pregunta,
-							nr_valor
-						FROM pre_empa_audit 
-						WHERE id_empa = ".$id_empa;
-
-		$param		= array($id_empa);
-        $resultado	= $this->db->getQuery($query,$param);
-
-        if($resultado->numRows>0){
-            return $resultado->rows;
-        }else{
-            return NULL;
-        }
-    }
-    
-	public function updateEmpaAudit( $id_empa, $id_pregunta, $valor){
-
-        $query	= "	UPDATE pre_empa_audit SET
-						 nr_valor	=	".$valor."
-                        WHERE id_empa   = ".$id_empa." AND id_pregunta = ".$id_pregunta."";
-                  
-        if ($this->db->execQuery($query)) {
-            return true;
-        } else {
-            return false;
         }
     }
 

@@ -1,39 +1,28 @@
 <?php
 
-/* 
-!IniHeaderDoc
+/**
 *****************************************************************************
-!NombreObjeto 		: DAOEventosTipo.php
-!Sistema 	  	: PREVENCIÓN
-!Modulo 	  	: NA
-!Descripcion  		: 	
-!Plataforma   		: !PHP
-!Perfil       		: 
-!Itinerado    		: NA
-!Uso          		: NA
-!Autor        		: Carolina Zamora
-!Creacion     		: 22/02/2017
-!Retornos/Salidas 	: NA
-!OrigenReq        	: NA
-=============================================================================
-!Parametros 		: NA 
-=============================================================================
-!Testing 		: NA
-=============================================================================
-!ControlCambio
---------------
-!cVersion !cFecha   !cProgramador   !cDescripcion 
------------------------------------------------------------------------------
-
------------------------------------------------------------------------------
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Modelo para Tabla pre_evento_tipo
+* Plataforma	: !PHP
+* Creacion		: 24/02/2017
+* @name			DAOEventoTipo.php
+* @version		1.0
+* @author		Orlando Vázquez <orlando.vazquez@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*
+*-----------------------------------------------------------------------------
 *****************************************************************************
-!EndHeaderDoc 
 */
 
-class DAOEventosTipo extends Model{
+class DAOEventoTipo extends Model{
 
-    protected $_tabla           = "pre_eventos_tipo";
-    protected $_primaria	= "id_evento_tipo";
+    protected $_tabla           = "pre_evento_tipo";
+    protected $_primaria		= "id_evento_tipo";
     protected $_transaccional	= false;
 
     function __construct()
@@ -41,11 +30,8 @@ class DAOEventosTipo extends Model{
         parent::__construct();
     }
 
-    /*
-     * Lista tipos de adjuntos
-     */
-    public function getListaEventosTipo(){
-        $query		= "SELECT * FROM pre_eventos_tipo";
+    public function getLista(){
+        $query		= "	SELECT * FROM ".$this->_tabla;
         $resultado	= $this->db->getQuery($query);
 
         if($resultado->numRows>0){
@@ -54,4 +40,19 @@ class DAOEventosTipo extends Model{
             return NULL;
         }
     }
+
+    public function getById($id){
+        $query		= "	SELECT * FROM ".$this->_tabla."
+						WHERE ".$this->_primaria." = ?";
+
+		$param		= array($id);
+        $resultado	= $this->db->getQuery($query,$param);
+		
+        if($resultado->numRows > 0){
+            return $resultado->rows->row_0;
+        }else{
+            return null;
+        }
+    }
+
 }

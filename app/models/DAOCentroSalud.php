@@ -1,44 +1,30 @@
 <?php
 
-/* 
-!IniHeaderDoc
+/**
 *****************************************************************************
-!NombreObjeto 		: DAOEstablecimientoSalud.php
-!Sistema 	  	: PREVENCIÓN
-!Modulo 	  	: NA
-!Descripcion  		: 	
-!Plataforma   		: !PHP
-!Perfil       		: 
-!Itinerado    		: NA
-!Uso          		: NA
-!Autor        		: Victor Retamal <victor.retamal@cosof.cl>
-!Creacion     		: 01/03/2017
-!Retornos/Salidas 	: NA
-!OrigenReq        	: NA
-=============================================================================
-!Parametros 		: NA 
-=============================================================================
-!Testing 		: NA
-=============================================================================
-!ControlCambio
---------------
-!cVersion !cFecha   !cProgramador   !cDescripcion 
------------------------------------------------------------------------------
-
------------------------------------------------------------------------------
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Modelo para Tabla pre_centro_salud
+* Plataforma	: !PHP
+* Creacion		: 01/03/2017
+* @name			DAOCentroSalud.php
+* @version		1.0
+* @author		Victor Retamal <victor.retamal@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*
+*-----------------------------------------------------------------------------
 *****************************************************************************
-!EndHeaderDoc 
 */
 
-class DAOEstablecimientoSalud extends Model{
+class DAOCentroSalud extends Model{
 
-    protected $_tabla           = "pre_establecimientos_salud";
-    protected $_primaria		= "id_establecimiento";
+    protected $_tabla           = "pre_centro_salud";
+    protected $_primaria		= "id_centro_salud";
     protected $_transaccional	= false;
 
-    /**
-     * Constructor
-     */
     function __construct()
     {
         parent::__construct();
@@ -69,8 +55,9 @@ class DAOEstablecimientoSalud extends Model{
         }
     }
 
-    public function getEstablecimientoxIdServicio($id_servicio_salud){
-        $query		= "	SELECT * FROM ".$this->_tabla."
+    public function getByIdServicio($id_servicio_salud){
+        $query		= "	SELECT * 
+						FROM pre_centro_salud
 						WHERE id_servicio_salud = ?";
 						
 		$params		= array($id_servicio_salud);
@@ -83,12 +70,12 @@ class DAOEstablecimientoSalud extends Model{
         }
     }
 
-    public function getEstablecimientoxRegion($id_region) {
+    public function getByIdRegion($id_region) {
         $query		= "	SELECT 
-							e.gl_nombre_establecimiento, 
-							e.id_establecimiento 
-						FROM pre_establecimientos_salud e
-						WHERE e.id_region = ?";
+							gl_nombre_establecimiento, 
+							id_centro_salud 
+						FROM pre_centro_salud
+						WHERE id_region = ?";
 
 		$params		= array($id_region);
         $resultado	= $this->db->getQuery($query, $params);
@@ -100,12 +87,12 @@ class DAOEstablecimientoSalud extends Model{
         }
     }
 
-    public function getEstablecimientoxComuna($id_comuna) {
+    public function getByIdComuna($id_comuna) {
         $query		= "	SELECT 
-							e.gl_nombre_establecimiento, 
-							e.id_establecimiento 
-						FROM pre_establecimientos_salud e
-						WHERE e.id_comuna = ?";
+							gl_nombre_establecimiento, 
+							id_centro_salud 
+						FROM pre_centro_salud 
+						WHERE id_comuna = ?";
 
 		$params		= array($id_comuna);
         $resultado	= $this->db->getQuery($query, $params);
