@@ -82,6 +82,8 @@
         var button_process	= buttonStartProcess($(this), e);
         var parametros		= $("#form").serializeArray();
 		var edad = $("#edad").val();
+		var rut = $("#rut").val();
+		var gl_grupo_tipo = $("#gl_grupo_tipo").val();
 		var prevision = $("#prevision").val();
 		
 		if($('#chkAcepta').is(':checked')){
@@ -107,8 +109,16 @@
 			});
 		} 
 		parametros.push({
+				"name"  : 'gl_grupo_tipo',
+				"value" : gl_grupo_tipo
+			});
+		parametros.push({
 				"name"  : 'edad',
 				"value" : edad
+			});
+		parametros.push({
+				"name"  : 'rut',
+				"value" : rut
 			});
 		parametros.push({
 				"name"  : 'prevision',
@@ -281,8 +291,8 @@
 									}
 
 									$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Registro/bitacora/"+data.id_registro+"', 'Registro número : "+data.id_registro+"', 85);");
-
 									$("#id_registro").val(data.id_registro);
+									$("#gl_grupo_tipo").val(data.gl_grupo_tipo);
 									$("#nombres").val(data.gl_nombres);
 									$("#apellidos").val(data.gl_apellidos);
 									$("#fc_nacimiento").val(data.fc_nacimiento);

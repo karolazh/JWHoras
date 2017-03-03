@@ -82,7 +82,7 @@ class DAOEventos extends Model{
 	    }
 
 	public function insEvento($data){
-        $query = "insert into pre_eventos values(null,?,?,?,?,CURRENT_TIMESTAMP,?)";
+        $query = "insert into pre_eventos values(null,?,?,NULL,?,?,CURRENT_TIMESTAMP,?)";
         $parametros = array($data['eventos_tipo'], 
 							$data['id_registro'], 
 							$data['gl_descripcion'], 
@@ -96,6 +96,21 @@ class DAOEventos extends Model{
 
     }
 
+	public function insEventoEmpa($data){
+        $query = "insert into pre_eventos values(null,?,NULL,?,?,?,CURRENT_TIMESTAMP,?)";
+        $parametros = array($data['eventos_tipo'], 
+							$data['id_empa'], 
+							$data['gl_descripcion'], 
+							$data['bo_estado'],
+							$data['id_usuario_crea']);
+        if ($this->db->execQuery($query, $parametros)) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+	
 	public function updTipoEvento($datos){
         $query = "UPDATE ".$this->_tabla."
                   SET    id_evento_tipo = ?
