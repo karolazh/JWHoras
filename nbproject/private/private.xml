@@ -7,8 +7,7 @@
             <file>file:/srv/http/prevencion/app/models/DAOEmpa.php</file>
             <file>file:/srv/http/prevencion/app/views/templates/Empa/nuevo.tpl</file>
             <file>file:/srv/http/prevencion/static/js/templates/empa/nuevo.js</file>
-            <file>file:/srv/http/prevencion/app/libs/Boton.php</file>
-            <file>file:/srv/http/prevencion/app/models/DAORegistro.php</file>
+            <file>file:/srv/http/prevencion/app/models/DAOTipoIMC.php</file>
         </group>
     </open-files>
 </project-private>

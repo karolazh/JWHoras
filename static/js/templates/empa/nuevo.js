@@ -52,31 +52,33 @@ function mensajeAUDIT(pts_audit){
 
 
 //Poner Mensaje en span segun IMC
-function mensajeIMC(imc){
+function mensajeIMC(imc) {
     var parametros = {'imc': imc};
-    $.ajax({
-		dataType: "json",
-		cache: false,
-		async: true,
-		data: parametros,
-		type: "post",
-		url: BASE_URI + "index.php/Empa/mensajeIMC",
-		error: function (xhr, textStatus, errorThrown) {
-		},
-		success: function (data) {
-			if (data.correcto) {
-                                $('#gl_imc').css("borderColor", "");
-                                $('#gl_imc').parent().find("span.help-block").css("color", "");
-                                $('#gl_imc').css("borderColor",data.gl_color);
-                                $('#gl_imc').parent().find("span.help-block").css("color", "'"+data.gl_color+"'");
-                                $('#gl_imc').parent().find('span.help-block').html(data.gl_mensaje);
-                                $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
-                                $('#id_clasificacion_imc').val(data.id_tipo_imc);
-			} else {
-				xModal.info('Error!');
-			}
-		}
-	});
+    if (parametros['imc'] != '') {
+        $.ajax({
+            dataType: "json",
+            cache: false,
+            async: true,
+            data: parametros,
+            type: "post",
+            url: BASE_URI + "index.php/Empa/mensajeIMC",
+            error: function (xhr, textStatus, errorThrown) {
+            },
+            success: function (data) {
+                if (data.correcto) {
+                    $('#gl_imc').css("borderColor", "");
+                    $('#gl_imc').parent().find("span.help-block").css("color", "");
+                    $('#gl_imc').css("borderColor", data.gl_color);
+                    $('#gl_imc').parent().find("span.help-block").css("color", "'" + data.gl_color + "'");
+                    $('#gl_imc').parent().find('span.help-block').html(data.gl_mensaje);
+                    $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
+                    $('#id_clasificacion_imc').val(data.id_tipo_imc);
+                } else {
+                    xModal.info('Error!');
+                }
+            }
+        });
+    }
 }
 
 //Calcular IMC segun Peso y Altura
@@ -93,6 +95,10 @@ function calculaIMC()
 	if ((peso == "") || (altura == "")) {
 		xModal.danger("Ingrese Peso y Altura");
 		imc = "";
+                $('#gl_imc').css("borderColor", "");
+                $('#gl_imc').parent().find("span.help-block").css("color", "");
+                $('#gl_imc').parent().find('span.help-block').addClass("hidden");
+                $('#gl_peso').focus();
 	}
 
 	//Si IMC es mayor a 30 Mostrar Diabetes
@@ -155,8 +161,10 @@ $("#gl_pad").on('keyup', function (e) {
 $(".bo_antecedente").on('change', function (e) {
 	if ($('#bo_antecedente_0').is(':checked')) {
 		$('#glicemia').hide();
+                $('#group_glicemia').hide();
 	} else {
 		$('#glicemia').show();
+                $('#group_glicemia').show();
 	}
 });
 

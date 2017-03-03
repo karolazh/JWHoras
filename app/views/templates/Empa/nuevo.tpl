@@ -331,7 +331,7 @@
                                 {$botonAyudaGlicemia}
                             </div>
                         </div>
-                        <div class="form-group" style="{$diabetes}">
+                        <div class="form-group" id="group_glicemia" style="{$diabetes}">
                             <div class="col-sm-5"></div>
                             <div class="col-sm-2" style="{if !($gl_glicemia >= 100 and $gl_glicemia <= 125)}display: none{/if}" id="div_glicemia_toma">
                                     {$botonConsejeriaGlicemia}&nbsp;&nbsp;
@@ -542,8 +542,9 @@
                             <div class="col-sm-1">
                                 {$botonAyudaMamografiaVigente}
                             </div>
-                            <div id="mam_resultado" style="{if $fc_mamografia == 0}display: none{/if}"> 
-                                <label class="control-label required col-sm-2">Resultado Mamografía</label>
+                        </div>
+                        <div class="form-group" id="mam_resultado" style="{if $fc_mamografia == 0}display: none{/if}"> 
+                                <label class="control-label required col-sm-3">Resultado Mamografía</label>
                                 <div class="col-sm-2">
                                     <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
                                                   id="bo_mamografia_resultado" value="0">Alterado</label>
@@ -551,8 +552,7 @@
                                     <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
                                                   id="bo_mamografia_resultado" value="1">Normal</label>
                                 </div>
-                            </div>
-                        </div>
+                        </div>        
                         <div class="form-group" id="mam_requiere"> 
                             <label class="control-label required col-sm-3">¿Requiere Mamografía?</label>
                             <div class="col-sm-2">
@@ -568,8 +568,10 @@
                                     <label for="bo_mamografia_toma" class="control-label required">Toma Mamograf&iacute;a</label>
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group" id="requiere_mamografia2" style="{if $bo_mamografia_toma != 'checked'}display: none{/if}">
                             <div id="mam_resultado2" style="{if $bo_mamografia_toma != 'checked'}display: none{/if}"> 
-                                <label class="control-label required col-sm-1">Resultado Mamografía</label>
+                                <label class="control-label required col-sm-3">Resultado Mamografía</label>
                                 <div class="col-sm-2">
                                     <label><input class="bo_mamografia_resultado2" type="radio" name="bo_mamografia_resultado2" 
                                                   id="bo_mamografia_resultado2" value="0">Alterado</label>
@@ -578,9 +580,6 @@
                                                   id="bo_mamografia_resultado2" value="1">Normal</label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group" id="requiere_mamografia2" style="{if $bo_mamografia_toma != 'checked'}display: none{/if}">
-                            <div class="col-sm-5"></div>
                             <div class="col-sm-3" id="div_mamografia_agenda">
                                 {$botonInformacionAgendaMamografia}&nbsp;&nbsp;
                                 <button type="button" id="verAgendaMamografia" class="btn btn-sm btn-success">
