@@ -82,6 +82,8 @@
         var button_process	= buttonStartProcess($(this), e);
         var parametros		= $("#form").serializeArray();
 		var edad = $("#edad").val();
+		var rut = $("#rut").val();
+		var gl_grupo_tipo = $("#gl_grupo_tipo").val();
 		var prevision = $("#prevision").val();
 		
 		if($('#chkAcepta').is(':checked')){
@@ -107,8 +109,16 @@
 			});
 		} 
 		parametros.push({
+				"name"  : 'gl_grupo_tipo',
+				"value" : gl_grupo_tipo
+			});
+		parametros.push({
 				"name"  : 'edad',
 				"value" : edad
+			});
+		parametros.push({
+				"name"  : 'rut',
+				"value" : rut
 			});
 		parametros.push({
 				"name"  : 'prevision',
@@ -265,17 +275,24 @@
 					},
 					success	: function(data){
 								if(data.correcto){
+									
+									var str_ult_cinco_reg = "";
+									if (data.count_motivos > 5){
+										str_ult_cinco_reg = "Mostrando los 5 últimos Registros.";
+									}
 									if(data.count_motivos == 1){
-										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registro en la Plataforma, con fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información. <br> Motivos de consulta : <br>'+data.div_superior+data.tabla_motivos+data.div_inferior);
+										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registro en la Plataforma, con fecha '+data.fc_ultimo_motivos+'.<br>La información del Paciente ha sido cargada. <br> Motivo de consulta : <br>'+data.div_superior+data.tabla_motivos+data.div_inferior);
 										$("#div_tabla_motivos").html(data.tabla_motivos);
 										$("#mostrar_motivos_consulta").show();
 									}else{
-										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registros en la Plataforma, siendo el último de fecha '+data.fc_ultimo_motivos+'.<br>Se procede a cargar la información.');
+										xModal.success('Paciente se encuentra con '+data.count_motivos+' Registros en la Plataforma, siendo el último de fecha '+data.fc_ultimo_motivos+'.<br>La información del Paciente ha sido cargada. '+str_ult_cinco_reg+'<br> Motivos de consulta : <br>'+data.div_superior+data.tabla_motivos+data.div_inferior);
+										$("#div_tabla_motivos").html(data.tabla_motivos);
+										$("#mostrar_motivos_consulta").show();
 									}
 
 									$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Registro/bitacora/"+data.id_registro+"', 'Registro número : "+data.id_registro+"', 85);");
-
 									$("#id_registro").val(data.id_registro);
+									$("#gl_grupo_tipo").val(data.gl_grupo_tipo);
 									$("#nombres").val(data.gl_nombres);
 									$("#apellidos").val(data.gl_apellidos);
 									$("#fc_nacimiento").val(data.fc_nacimiento);

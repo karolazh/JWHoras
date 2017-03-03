@@ -4201,3 +4201,42 @@ INSERT INTO `pre_usuarios` (`id_usuario`, `id_institucion`, `id_region`, `id_com
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_tipo_audit`
+--
+CREATE TABLE IF NOT EXISTS `pre_tipo_audit` (
+  `id_tipo_audit` int(11) NOT NULL,
+  `gl_descripcion` varchar(250) DEFAULT NULL,
+  `nr_min` int(11) NOT NULL,
+  `nr_max` int(11) NOT NULL,
+  `gl_color` varchar(20) NOT NULL,
+  PRIMARY KEY (`id_tipo_audit`),
+  KEY `IDX_nr_min` (`nr_min`),
+  KEY `IDX_nr_max` (`nr_max`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `pre_tipo_audit`
+--
+
+INSERT INTO `pre_tipo_audit` (`id_tipo_audit`, `gl_descripcion`, `nr_min`, `nr_max`, `gl_color`) VALUES
+(1, 'Bajo Riesgo', 0, 7, '#008000'),
+(2, 'Riesgo', 8, 15, '#BDB76B'),
+(3, 'Problema', 16, 19, '#FF8C00'),
+(4, 'Problema o Dependencia', 20, 40, '#FF0000'),
+(5, 'Overkill de Alcoholismo', 41, 2147483647, '#FF0040');
+
+
+--
+-- Agrega campo booleano bo_finalizado a `pre_tipo_audit`
+--
+ALTER TABLE `pre_empa` ADD `bo_finalizado` BOOLEAN NOT NULL DEFAULT FALSE AFTER `gl_observaciones_empa`;
+
+--
+-- Agrega campo id_empa a `pre_eventos`
+--
+
+ALTER TABLE `pre_eventos`  ADD `id_empa` INT(11) NULL DEFAULT NULL  AFTER `id_registro`;
