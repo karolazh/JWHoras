@@ -17,6 +17,7 @@
 			<div class="panel-heading">
 				Datos del Paciente {$botonAyudaPaciente}
 				<input type="text" value="0" id="id_registro" name="id_registro" class="hidden">
+				<input type="text" value="0" id="gl_grupo_tipo" name="gl_grupo_tipo" class="hidden">
 			</div>
 			<div class="panel-body">
 
@@ -85,7 +86,7 @@
 				<div class="form-group">
 					<label for="fc_nacimiento" class="control-label col-sm-2 ">Fecha Nacimiento(*)</label>
 					<div class="col-sm-3">
-						<input type="date" class="form-control col-sm-2" onblur="validarVacio(this, 'Por favor Ingrese Fecha'), calcularEdad(this.value)" name="fc_nacimiento" id="fc_nacimiento">
+						<input type="date" class="form-control col-sm-2" onblur="validarVacio(this, 'Por favor Ingrese Fecha'), calcularEdad(this.value,'#edad')" name="fc_nacimiento" id="fc_nacimiento">
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 					<label for="edad" class="control-label col-sm-2 ">Edad (*)</label>

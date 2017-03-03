@@ -39,6 +39,7 @@ class Empa extends Controller {
 		parent::__construct();
 		//Acceso::set("ADMINISTRADOR");
 		$this->load->lib('Boton', false);
+		$this->load->lib('Fechas', false);
 		$this->_DAOEmpa = $this->load->model("DAOEmpa");
 		$this->_DAOEmpaAudit = $this->load->model("DAOEmpaAudit");
 		$this->_DAOUsuarios = $this->load->model("DAOUsuarios");
@@ -48,6 +49,8 @@ class Empa extends Controller {
 		$this->_DAOAlcoholismo = $this->load->model("DAOAlcoholismo");
 		$this->_DAOTipoIMC = $this->load->model("DAOTipoIMC");
 		$this->_DAOTipoAUDIT = $this->load->model("DAOTipoAUDIT");
+		$this->_DAOEmpa = $this->load->model("DAOEmpa");
+		$this->_DAOEventos = $this->load->model("DAOEventos");
 	}
 
 	/*
@@ -335,8 +338,9 @@ class Empa extends Controller {
 
 	public function guardar() {
 		header('Content-type: application/json');
+		$session = New Zend_Session_Namespace("usuario_carpeta");
 		/*  Acceso::redireccionUnlogged($this->smarty);
-		  $sesion = New Zend_Session_Namespace("usuario_carpeta");
+
 		  $this->smarty->assign("id_usuario", $sesion->id);
 		  $this->smarty->assign("rut", $sesion->rut);
 		  $this->smarty->assign("usuario", $sesion->usuario);
@@ -345,9 +349,35 @@ class Empa extends Controller {
 		$parametros = $this->_request->getParams();
 		$correcto = false;
 		$error = false;
-		$id_empa = $this->_DAOEmpa->updateEmpa($parametros);
-		if ($id_empa) {
-			$correcto = true;
+		$id_empa = $parametros['id_empa'];
+		$bool_update = $this->_DAOEmpa->updateEmpa($parametros);
+		if ($bool_update) {
+			$datos_evento['eventos_tipo'] = 12;
+			$datos_evento['id_empa'] = $id_empa;
+			$datos_evento['gl_descripcion'] = "Empa modificado el : " . Fechas::fechaHoy();
+			$datos_evento['bo_estado'] = 1;
+			$datos_evento['id_usuario_crea'] = $session->id;
+			$resp = $this->_DAOEventos->insEventoEmpa($datos_evento);
+			if ($resp) {
+				$correcto = TRUE;
+			} else {
+				$error = TRUE;
+			}
+			$finalizado = FALSE;
+			if ($finalizado) {
+
+				$datos_evento['eventos_tipo'] = 2;
+				$datos_evento['id_empa'] = $id_empa;
+				$datos_evento['gl_descripcion'] = "Empa finalizado el : " . Fechas::fechaHoy();
+				$datos_evento['bo_estado'] = 1;
+				$datos_evento['id_usuario_crea'] = $session->id;
+				$resp = $this->_DAOEventos->insEventoEmpa($datos_evento);
+				if ($resp) {
+					$correcto = TRUE;
+				} else {
+					$error = TRUE;
+				}
+			}
 		} else {
 			$error = true;
 		}
@@ -361,6 +391,7 @@ class Empa extends Controller {
 
 	public function guardarAudit() {
 		header('Content-type: application/json');
+		$session = New Zend_Session_Namespace("usuario_carpeta");
 		$parametros = $this->_request->getParams();
 		$correcto = false;
 		$error = false;
@@ -372,7 +403,12 @@ class Empa extends Controller {
 			$id_empa_audit = $this->_DAOEmpaAudit->updateEmpaAudit($id_empa, $id_pregunta, $valor);
 		}
 		if ($id_empa_audit) {
-			$correcto = true;
+			$datos_evento['eventos_tipo'] = 15;
+			$datos_evento['id_empa'] = $id_empa;
+			$datos_evento['gl_descripcion'] = "AUDIT del EMPA ".$id_empa."  modificado el : " . Fechas::fechaHoy();
+			$datos_evento['bo_estado'] = 1;
+			$datos_evento['id_usuario_crea'] = $session->id;
+			$correcto = $this->_DAOEventos->insEventoEmpa($datos_evento);
 		} else {
 			$error = true;
 		}

@@ -69,14 +69,15 @@
 												title="Ver Registro">
 											<i class="fa fa-search"></i>
 										</button>
-                                        <button type="button" class="btn btn-xs btn-success" 
-                                                onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_registro}'" 
-                                                data-toggle="tooltip" title="Formulario EMPA">
-                                            <i class="fa fa-book"></i>
-                                        </button>
+                                                                                <button type="button" 
+                                                                                                class="btn btn-xs btn-success" 
+                                                                                                onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_registro}';" 
+                                                                                                data-toggle="tooltip" title="Formulario EMPA">
+                                                                                        <i class="fa fa-book"></i>
+                                                                                </button>
 										{if $item->bo_reconoce == 0}
-											<button type="button" class="btn btn-xs btn-danger guardarReconoce" 
-													data="{$item->id_registro}" 
+											<button type="button" class="btn btn-xs btn-danger" 
+													onClick="location.href='{$base_url}/Reconoce/identificarAgresor/{$item->id_registro}';"
 													data-toggle="tooltip" title="Reconoce Violencia">
 												<i class="fa fa-bullhorn"></i>
 											</button>
