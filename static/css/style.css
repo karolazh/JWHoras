@@ -2643,7 +2643,7 @@ table.dataTable tbody > tr > td {
   display: inline-block;
   text-align: left;
   vertical-align: middle;
-  width:66%;
+  //width:66%;
 }
 
 .circle-tile-content {
