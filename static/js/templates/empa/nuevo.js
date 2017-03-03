@@ -6,112 +6,105 @@ $("#form").ready(function () {
     mensajeIMC(imc);
     //funcion mensaje span Puntos AUDIT
     mensajeAUDIT(pts_audit);
+    
+    if ($("#bo_mamografia_toma").is(':checked')){
+        $("#bo_mamografia_requiere_1").prop('checked', true);
+    }
 });
 
 //Poner Mensaje en span segun Puntos de AUDIT
 function mensajeAUDIT(pts_audit){
-    var mensaje = "";
-    if (pts_audit >= 0 && pts_audit <= 7) {
-        $('#gl_puntos_audit').css("borderColor", "");
-        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
-        $('#gl_puntos_audit').parent().removeClass("has-error");
-        $('#gl_puntos_audit').parent().addClass("has-success");
-        mensaje = "Bajo Riesgo";
-    } else if (pts_audit >= 8 && pts_audit <= 15) {
-        $('#gl_puntos_audit').css("borderColor", "");
-        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
-        $('#gl_puntos_audit').parent().removeClass("has-error");
-        $('#gl_puntos_audit').parent().removeClass("has-success");
-        $('#gl_puntos_audit').css("borderColor", "#BDB76B");
-        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "#BDB76B");
-        mensaje = "Riesgo";
-    } else if (pts_audit >= 16 && pts_audit <= 19) {
-        $('#gl_puntos_audit').css("borderColor", "");
-        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
-        $('#gl_puntos_audit').parent().removeClass("has-error");
-        $('#gl_puntos_audit').parent().removeClass("has-success");
-        $('#gl_puntos_audit').css("borderColor", "#FF8C00");
-        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "#FF8C00");
-        mensaje = "Problema";
-    } else if (pts_audit >= 20 && pts_audit <= 40) {
-        $('#gl_puntos_audit').css("borderColor", "");
-        $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
-        $('#gl_puntos_audit').parent().removeClass("has-success");
-        $('#gl_puntos_audit').parent().addClass("has-error");
-        mensaje = "Problema o Dependencia";
+	var parametros = {'pts_audit': pts_audit};
+    if (parametros['pts_audit'] !== '') {
+        $.ajax({
+            dataType: "json",
+            cache: false,
+            async: true,
+            data: parametros,
+            type: "post",
+            url: BASE_URI + "index.php/Empa/mensajeAUDIT",
+            error: function (xhr, textStatus, errorThrown) {
+            },
+            success: function (data) {
+                if (data.correcto) {
+                    $('#gl_puntos_audit').css("borderColor", "");
+                    $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+                    $('#gl_puntos_audit').css("borderColor", data.gl_color);
+                    $('#gl_puntos_audit').parent().find("span.help-block").css("color", "'" + data.gl_color + "'");
+                    $('#gl_puntos_audit').parent().find('span.help-block').html(data.gl_mensaje);
+                    $('#gl_puntos_audit').parent().find('span.help-block').removeClass("hidden");
+                    $('#id_clasificacion_audit').val(data.id_tipo_audit);
+                } else {
+                    xModal.info('Error!');
+                }
+            }
+        });
     }
-    
+	/*  var mensaje = "";
+    if (pts_audit != "") {
+        if (pts_audit >= 0 && pts_audit <= 7) {
+            $('#gl_puntos_audit').css("borderColor", "");
+            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+            $('#gl_puntos_audit').parent().removeClass("has-error");
+            $('#gl_puntos_audit').parent().addClass("has-success");
+            mensaje = "Bajo Riesgo";
+        } else if (pts_audit >= 8 && pts_audit <= 15) {
+            $('#gl_puntos_audit').css("borderColor", "");
+            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+            $('#gl_puntos_audit').parent().removeClass("has-error");
+            $('#gl_puntos_audit').parent().removeClass("has-success");
+            $('#gl_puntos_audit').css("borderColor", "#BDB76B");
+            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "#BDB76B");
+            mensaje = "Riesgo";
+        } else if (pts_audit >= 16 && pts_audit <= 19) {
+            $('#gl_puntos_audit').css("borderColor", "");
+            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+            $('#gl_puntos_audit').parent().removeClass("has-error");
+            $('#gl_puntos_audit').parent().removeClass("has-success");
+            $('#gl_puntos_audit').css("borderColor", "#FF8C00");
+            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "#FF8C00");
+            mensaje = "Problema";
+        } else if (pts_audit >= 20 && pts_audit <= 40) {
+            $('#gl_puntos_audit').css("borderColor", "");
+            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
+            $('#gl_puntos_audit').parent().removeClass("has-success");
+            $('#gl_puntos_audit').parent().addClass("has-error");
+            mensaje = "Problema o Dependencia";
+        }
+    }
     $('#gl_puntos_audit').parent().find('span.help-block').html(mensaje);
-    $('#gl_puntos_audit').parent().find('span.help-block').removeClass("hidden");
+    $('#gl_puntos_audit').parent().find('span.help-block').removeClass("hidden");*/
 }
 
 
 //Poner Mensaje en span segun IMC
-function mensajeIMC(imc){
-    var mensaje = "";
-    //calculamos circunferencia abdominal
-	//Bajo peso
-	if (imc > 0 && imc < 18.50) {
-		$('#gl_imc').css("borderColor", "");
-		$('#gl_imc').parent().find("span.help-block").css("color", "");
-		$('#gl_imc').parent().removeClass("has-error");
-		$('#gl_imc').parent().removeClass("has-success");
-		$('#gl_imc').css("borderColor", "#BDB76B");
-		$('#gl_imc').parent().find("span.help-block").css("color", "#BDB76B");
-		if (imc < 16.00) {
-			$("#id_clasificacion_imc").val(1);
-			mensaje = "Bajo Peso / Delgadez Severa";
-		}
-		if (imc >= 16.00 && imc < 17.00) {
-			$("#id_clasificacion_imc").val(2);
-			mensaje = "Bajo Peso / Delgadez Moderada";
-		}
-		if (imc >= 17.00 && imc < 18.50) {
-			$("#id_clasificacion_imc").val(3);
-			mensaje = "Bajo Peso / Delgadez Aceptable";
-		}
-	}
-	//Peso Normal
-	if (imc >= 18.50 && imc <= 24.99) {
-		$("#id_clasificacion_imc").val(4);
-		$('#gl_imc').css("borderColor", "");
-		$('#gl_imc').parent().find("span.help-block").css("color", "");
-		$('#gl_imc').parent().removeClass("has-error");
-		$('#gl_imc').parent().addClass("has-success");
-		mensaje = "Peso Normal";
-	}
-	//Sobre Peso
-	if (imc >= 25.00 && imc < 30.00) {
-		$("#id_clasificacion_imc").val(5);
-		$('#gl_imc').css("borderColor", "");
-		$('#gl_imc').parent().find("span.help-block").css("color", "");
-		$('#gl_imc').parent().removeClass("has-error");
-		$('#gl_imc').parent().removeClass("has-success");
-		$('#gl_imc').css("borderColor", "#FF4500");
-		$('#gl_imc').parent().find("span.help-block").css("color", "#FF4500");
-		mensaje = "Sobrepeso / Pre Obeso (riesgo)";
-	}
-	//Obeso
-	if (imc >= 30.00) {
-		$('#gl_imc').css("borderColor", "");
-		$('#gl_imc').parent().find("span.help-block").css("color", "");
-		$('#gl_imc').parent().removeClass("has-success");
-		$('#gl_imc').parent().addClass("has-error");
-		if (imc >= 30.00 && imc < 35.00) {
-			$("#id_clasificacion_imc").val(6);
-			mensaje = "Obeso / Obeso Tipo I (riesgo moderado)";
-		}
-		if (imc >= 35.00 && imc < 40.00) {
-			$("#id_clasificacion_imc").val(7);
-			mensaje = "Obeso / Obeso Tipo II (riesgo severo)";
-		}
-		if (imc >= 40.00) {
-			$("#id_clasificacion_imc").val(8);
-			mensaje = "Obeso / Obeso Tipo III (riesgo muy severo)";
-		}
-	}
-            $('#gl_imc').parent().find('span.help-block').html(mensaje);
-            $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
+function mensajeIMC(imc) {
+    var parametros = {'imc': imc};
+    if (parametros['imc'] != '') {
+        $.ajax({
+            dataType: "json",
+            cache: false,
+            async: true,
+            data: parametros,
+            type: "post",
+            url: BASE_URI + "index.php/Empa/mensajeIMC",
+            error: function (xhr, textStatus, errorThrown) {
+            },
+            success: function (data) {
+                if (data.correcto) {
+                    $('#gl_imc').css("borderColor", "");
+                    $('#gl_imc').parent().find("span.help-block").css("color", "");
+                    $('#gl_imc').css("borderColor", data.gl_color);
+                    $('#gl_imc').parent().find("span.help-block").css("color", "'" + data.gl_color + "'");
+                    $('#gl_imc').parent().find('span.help-block').html(data.gl_mensaje);
+                    $('#gl_imc').parent().find('span.help-block').removeClass("hidden");
+                    $('#id_clasificacion_imc').val(data.id_tipo_imc);
+                } else {
+                    xModal.info('Error!');
+                }
+            }
+        });
+    }
 }
 
 //Calcular IMC segun Peso y Altura
@@ -128,6 +121,10 @@ function calculaIMC()
 	if ((peso == "") || (altura == "")) {
 		xModal.danger("Ingrese Peso y Altura");
 		imc = "";
+                $('#gl_imc').css("borderColor", "");
+                $('#gl_imc').parent().find("span.help-block").css("color", "");
+                $('#gl_imc').parent().find('span.help-block').addClass("hidden");
+                $('#gl_peso').focus();
 	}
 
 	//Si IMC es mayor a 30 Mostrar Diabetes
@@ -154,9 +151,10 @@ $("#gl_circunferencia_abdominal").on('keyup', function (e) {
 // Si Consume Alcohol muestra Boton para Hacer Cuestionario AUDIT
 $(".bo_consume_alcohol").on('change', function (e) {
 	if ($('#bo_consume_alcohol_0').is(':checked')) {
-		$('#div_alcoholismo').hide();
+		$('#div_alcoholismo1').hide();
+                $('#div_alcoholismo2').hide();
 	} else {
-		$('#div_alcoholismo').show();
+		$('#div_alcoholismo1').show();
 	}
 });
 
@@ -189,8 +187,10 @@ $("#gl_pad").on('keyup', function (e) {
 $(".bo_antecedente").on('change', function (e) {
 	if ($('#bo_antecedente_0').is(':checked')) {
 		$('#glicemia').hide();
+                $('#group_glicemia').hide();
 	} else {
 		$('#glicemia').show();
+                $('#group_glicemia').show();
 	}
 });
 
@@ -213,9 +213,11 @@ $("#gl_glicemia").on('keyup', function (e) {
 //Si es trabajadora sexual o persona en centro reclusión -> mostrar VDRL y RPR
 $(".bo_trabajadora_reclusa").on('change', function (e) {
 	if ($('#bo_trabajadora_reclusa_0').is(':checked')) {
-		$('#id_vdrl_rpr').hide();
+		$('#id_vdrl').hide();
+                $('#id_rpr').hide();
 	} else {
-		$('#id_vdrl_rpr').show();
+		$('#id_vdrl').show();
+                $('#id_rpr').show();
 	}
 });
 
@@ -345,12 +347,14 @@ $("#fc_mamografia").livequery(function () {
 //Si requiere otra Mamografía Mostrar Resultado
 $(".bo_mamografia_requiere").on('change', function (e) {
 
-	if ($('#bo_mamografia_requiere').is(':checked')) {
+	if ($('#bo_mamografia_requiere_0').is(':checked')) {
 		$('#mam_resultado2').hide();
 		$('#requiere_mamografia').hide();
+                $('#requiere_mamografia2').hide();
 	} else {
 		$('#mam_resultado2').show();
 		$('#requiere_mamografia').show();
+                $('#requiere_mamografia2').show();
 	}
 });
 
@@ -391,6 +395,7 @@ $("#guardaraudit").livequery(function () {
 		buttonEndProcess(button_process);
 		$("#gl_puntos_audit").val($("#total").val());
                 //Según tipo de consumo mostrar Mensaje (de acuerdo a puntos del AUDIT)
+                $("#div_alcoholismo2").show();
                 var pts_audit = $('#gl_puntos_audit').val();
                 mensajeAUDIT(pts_audit);
 		xModal.close();

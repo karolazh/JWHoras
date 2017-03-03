@@ -19,6 +19,7 @@ $(document).ready(function() {
 							if(data.correcto){
 								$("#password").val("");
 								$("#password_repetido").val("");
+								$("#password_ant").val("");
 								limpiaErrores(data.error);
 								$("#form-error").addClass("hidden");
 								xModal.info('Contraseña Actualizada');
