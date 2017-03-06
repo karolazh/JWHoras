@@ -32,10 +32,10 @@ class DAOPaciente extends Model{
 
     public function getLista(){
         $query		= "	SELECT * FROM ".$this->_tabla;
-        $resultado	= $this->db->getQuery($query);
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
@@ -46,12 +46,12 @@ class DAOPaciente extends Model{
 						WHERE ".$this->_primaria." = ?";
 
 		$param		= array($id);
-        $resultado	= $this->db->getQuery($query,$param);
+        $result	= $this->db->getQuery($query,$param);
 		
-        if($resultado->numRows > 0){
-            return $resultado->rows->row_0;
+        if($result->numRows > 0){
+            return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 
@@ -68,10 +68,10 @@ class DAOPaciente extends Model{
 					WHERE gl_rut = ?";
 
         $param		= array($gl_rut);
-        $consulta	= $this->db->getQuery($query, $param);
+        $result	= $this->db->getQuery($query, $param);
 
-        if ($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
+        if ($result->numRows > 0) {
+            return $result->rows->row_0;
         } else {
             return null;
         }
@@ -99,10 +99,10 @@ class DAOPaciente extends Model{
 							LEFT JOIN pre_comuna c ON c.id_comuna = paciente.id_comuna
 							LEFT JOIN pre_paciente_estado e ON e.id_paciente_estado = paciente.id_paciente_estado";
 
-        $resultado	= $this->db->getQuery($query);
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-			return $resultado->rows;
+        if($result->numRows>0){
+			return $result->rows;
         }else{
             return NULL;
         }
@@ -139,7 +139,7 @@ class DAOPaciente extends Model{
 							com.gl_nombre_comuna AS comuna,
 							ins.gl_nombre AS institucion
 						FROM pre_paciente AS paciente
-							LEFT JOIN pre_comunas com ON com.id_comuna = paciente.id_comuna
+							LEFT JOIN pre_comuna com ON com.id_comuna = paciente.id_comuna
 							LEFT JOIN pre_provincia pro ON pro.id_provincia = com.id_provincia
 							LEFT JOIN pre_region rg ON rg.id_region = pro.id_region
 							LEFT JOIN pre_centro_salud ins ON ins.id_centro_salud = paciente.id_institucion
@@ -148,10 +148,10 @@ class DAOPaciente extends Model{
 						WHERE paciente.id_paciente = ?";
 
         $param		= array($id_paciente);
-        $consulta	= $this->db->getQuery($query, $param);
+        $result	= $this->db->getQuery($query, $param);
 
-        if($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
+        if($result->numRows > 0) {
+            return $result->rows->row_0;
         }else{
             return NULL;
         }
@@ -194,10 +194,10 @@ class DAOPaciente extends Model{
 						WHERE paciente.id_paciente = ?";
 
         $param		= array($id_paciente);
-		$consulta	= $this->db->getQuery($query, $param);
+		$result	= $this->db->getQuery($query, $param);
 
-		if ($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
+		if ($result->numRows > 0) {
+            return $result->rows->row_0;
         } else {
             return null;
         }
@@ -215,10 +215,10 @@ class DAOPaciente extends Model{
 					WHERE gl_run_pass = ?";
 
         $param		= array($pasaporte);
-        $consulta	= $this->db->getQuery($query, $param);
+        $result	= $this->db->getQuery($query, $param);
 
-        if ($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
+        if ($result->numRows > 0) {
+            return $result->rows->row_0;
         } else {
             return null;
         }
@@ -231,10 +231,10 @@ class DAOPaciente extends Model{
 						WHERE paciente.id_region = ?";
 
 		$param		= array($id_region);
-        $consulta	= $this->db->getQuery($query,$param);
+        $result	= $this->db->getQuery($query,$param);
 
-        if($consulta->numRows > 0){
-            return $consulta->numRows;
+        if($result->numRows > 0){
+            return $result->numRows;
         } else {
             return 0;
         }
@@ -288,7 +288,7 @@ class DAOPaciente extends Model{
 						'".$parametros['gl_longitud']."',
 						'".$parametros['chkReconoce']."',
 						".$parametros['chkAcepta'].",
-						'".date('Y-m-d H:i:s')."',
+						now(),
 						".$_SESSION['id']."
 						)
                     ";
@@ -296,7 +296,7 @@ class DAOPaciente extends Model{
         if ($this->db->execQuery($query)) {
             return $this->db->getLastId();
         } else {
-            return false;
+            return NULL;
         }
     }
     
@@ -325,7 +325,6 @@ class DAOPaciente extends Model{
                         date_format(reg.fc_crea,'%d-%m-%Y') AS fc_crea,
                         ins.gl_nombre AS institucion,
                         reg.id_centro_salud AS centro_salud, 
-                        
                         reg.id_adjunto AS id_adjunto,
                         reg.gl_latitud AS latitud, 
                         reg.gl_longitud AS longitud,
@@ -333,19 +332,19 @@ class DAOPaciente extends Model{
                         reg.id_usuario_crea AS usuario_crea, 
                         reg.id_usuario_actualiza AS usuario_actualiza
                     FROM pre_paciente reg
-                    left join pre_comunas com on com.id_comuna = reg.id_comuna
-                    left join pre_provincias pro on pro.id_provincia = com.id_provincia
+                    left join pre_comuna com on com.id_comuna = reg.id_comuna
+                    left join pre_provincia pro on pro.id_provincia = com.id_provincia
                     left join pre_region rg on rg.id_region = pro.id_region
                     left join pre_centro_salud ins on ins.id_centro_salud = reg.id_institucion
                     left join pre_prevision pre on pre.id_prevision = reg.id_prevision
                     left join pre_paciente_estado est on est.id_paciente_estado = reg.id_paciente_estado
                     WHERE reg.id_registro = ?";
 
-        $param = array($id_registro);
-        $consulta = $this->db->getQuery($query, $param);
+        $param	= array($id_registro);
+        $result = $this->db->getQuery($query, $param);
 
-        if ($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
+        if ($result->numRows > 0) {
+            return $result->rows->row_0;
         } else {
             return NULL;
         }

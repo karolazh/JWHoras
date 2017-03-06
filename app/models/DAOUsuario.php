@@ -51,7 +51,7 @@ class DAOUsuario extends Model {
         if($result->numRows > 0){
             return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 
@@ -139,40 +139,15 @@ class DAOUsuario extends Model {
         }
     }
 
-	public function registro_login($id_usuario, $rut_usuario, $gl_origen, $token = ''){
-		$ip_privada	= '0.0.0';
-		$ip_publica	= '0.0.0';
-
-		if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-			$ip_privada	= $_SERVER['HTTP_X_FORWARDED_FOR'];
-		}
-		if(!empty($_SERVER['REMOTE_ADDR'])) {
-			$ip_publica	= $_SERVER['REMOTE_ADDR'];
-		}
-		
-		$query	= " INSERT INTO pre_auditoria_login 
-						(
-							id_usuario,
-							gl_rut,
-							gl_origen,
-							gl_token,
-							ip_privada,
-							ip_publica
-						)
-						VALUES (?,?,?,?,?,?)";
-		$param	= array($id_usuario,$rut_usuario,$gl_origen,$token,$ip_privada,$ip_publica);
-		return $this->db->execQuery($query,$param);
-	}
-
     public function setUltimoLogin($datos){
         $query	= "	UPDATE pre_usuario
 					SET fc_ultimo_login = now()
 					WHERE id_usuario = ? ";
 
         if ($this->db->execQuery($query, $datos)) {
-            return true;
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -182,9 +157,9 @@ class DAOUsuario extends Model {
 					WHERE id_usuario = ? ";
 
         if ($this->db->execQuery($query, $datos)) {
-            return true;
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 

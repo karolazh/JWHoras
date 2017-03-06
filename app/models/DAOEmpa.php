@@ -24,7 +24,7 @@ class DAOEmpa extends Model{
 
     protected $_tabla			= "pre_empa";
     protected $_primaria		= "id_empa";
-    protected $_transaccional           = false;
+    protected $_transaccional	= false;
     
     function __construct()
     {
@@ -32,66 +32,66 @@ class DAOEmpa extends Model{
     }
 
     public function getLista(){
-        $query		= "	SELECT * FROM ".$this->_tabla;
-        $resultado	= $this->db->getQuery($query);
+        $query	= "	SELECT * FROM ".$this->_tabla;
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
 
     public function getById($id){
-        $query		= "	SELECT * FROM ".$this->_tabla."
-						WHERE ".$this->_primaria." = ?";
+        $query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE ".$this->_primaria." = ?";
 
-		$param		= array($id);
+		$param	= array($id);
         $result	= $this->db->getQuery($query,$param);
 		
         if($result->numRows > 0){
             return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 
     public function getByIdPaciente($id_paciente, $nr_orden=1){
-        $query		= "	SELECT * FROM pre_empa 
-						WHERE id_paciente = ?
-							AND nr_orden = ?";
+        $query	= "	SELECT * FROM pre_empa 
+					WHERE id_paciente = ?
+						AND nr_orden = ?";
 
-		$param		= array($id_paciente,$nr_orden);
+		$param	= array($id_paciente,$nr_orden);
         $result	= $this->db->getQuery($query,$param);
 
         if($result->numRows > 0){
             return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }    
 
     public function getEmpaGrilla($id_paciente, $nr_orden=1){
-        $query		= "	SELECT 
-							emp.id_empa,
-							emp.id_paciente,
-							date_format(emp.fc_empa,'%d-%m-%Y') AS fc_empa,
-							reg.gl_rut AS rut,
-							com.gl_nombre_comuna AS comuna,
-							ins.gl_nombre AS institucion,
-							usr.gl_rut AS rut,
-							concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
-						FROM pre_empa emp
-							LEFT JOIN pre_paciente reg ON reg.id_paciente = emp.id_paciente
-							LEFT JOIN pre_comuna com ON com.id_comuna = emp.id_comuna
-							LEFT JOIN pre_centro_salud ins ON ins.id_centro_salud = emp.id_institucion
-							LEFT JOIN pre_usuario usr ON usr.id_usuario = emp.id_usuario_crea
-						WHERE emp.id_paciente =  ?
-							AND nr_orden= ?
-						ORDER BY emp.fc_empa DESC";
+        $query	= "	SELECT 
+						emp.id_empa,
+						emp.id_paciente,
+						date_format(emp.fc_empa,'%d-%m-%Y') AS fc_empa,
+						reg.gl_rut AS rut,
+						com.gl_nombre_comuna AS comuna,
+						ins.gl_nombre AS institucion,
+						usr.gl_rut AS rut,
+						concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
+					FROM pre_empa emp
+						LEFT JOIN pre_paciente reg ON reg.id_paciente = emp.id_paciente
+						LEFT JOIN pre_comuna com ON com.id_comuna = emp.id_comuna
+						LEFT JOIN pre_centro_salud ins ON ins.id_centro_salud = emp.id_institucion
+						LEFT JOIN pre_usuario usr ON usr.id_usuario = emp.id_usuario_crea
+					WHERE emp.id_paciente =  ?
+						AND nr_orden= ?
+					ORDER BY emp.fc_empa DESC";
 
-		$param		= array($id_paciente,$nr_orden);
-        $result	= $this->db->getQuery($query,array($id_paciente));
+		$param	= array($id_paciente,$nr_orden);
+        $result	= $this->db->getQuery($query,$param);
 
         if($result->numRows > 0){
             return $result->rows;
@@ -142,9 +142,9 @@ class DAOEmpa extends Model{
                     ";
 
         if($this->db->execQuery($query)) {
-            return true;
+            return TRUE;
         }else{
-            return false;
+            return FALSE;
         }
     }
 
@@ -160,31 +160,31 @@ class DAOEmpa extends Model{
 	*/
     
 	public function verInfoById($id_empa) {
-        $query		= "	SELECT 
-							pre_empa.*,
-                                			IFNULL(fc_mamografia,0) as fc_mamografia,
-							IFNULL(bo_consume_alcohol,-1) as bo_consume_alcohol,
-							IFNULL(bo_fuma,-1) as bo_fuma,
-							IFNULL(bo_trabajadora_reclusa,-1) as bo_trabajadora_reclusa,
-							IFNULL(bo_vdrl,-1) as bo_vdrl,
-							IFNULL(bo_rpr,-1) as bo_rpr,
-							IFNULL(bo_tos_productiva,-1) as bo_tos_productiva,
-							IFNULL(bo_baciloscopia_toma,-1) as bo_baciloscopia_toma,
-							IFNULL(bo_pap_realizado,-1) as bo_pap_realizado,
-							IFNULL(bo_pap_vigente,-1) as bo_pap_vigente,
-							IFNULL(bo_pap_toma,-1) as bo_pap_toma,
-							IFNULL(bo_mamografia_realizada,-1) as bo_mamografia_realizada,
-							IFNULL(bo_mamografia_vigente,-1) as bo_mamografia_vigente
-						FROM pre_empa
-						WHERE id_empa = ?";
+        $query	= "	SELECT 
+						pre_empa.*,
+						IFNULL(fc_mamografia,0) as fc_mamografia,
+						IFNULL(bo_consume_alcohol,-1) as bo_consume_alcohol,
+						IFNULL(bo_fuma,-1) as bo_fuma,
+						IFNULL(bo_trabajadora_reclusa,-1) as bo_trabajadora_reclusa,
+						IFNULL(bo_vdrl,-1) as bo_vdrl,
+						IFNULL(bo_rpr,-1) as bo_rpr,
+						IFNULL(bo_tos_productiva,-1) as bo_tos_productiva,
+						IFNULL(bo_baciloscopia_toma,-1) as bo_baciloscopia_toma,
+						IFNULL(bo_pap_realizado,-1) as bo_pap_realizado,
+						IFNULL(bo_pap_vigente,-1) as bo_pap_vigente,
+						IFNULL(bo_pap_toma,-1) as bo_pap_toma,
+						IFNULL(bo_mamografia_realizada,-1) as bo_mamografia_realizada,
+						IFNULL(bo_mamografia_vigente,-1) as bo_mamografia_vigente
+					FROM pre_empa
+					WHERE id_empa = ?";
 
-		$param		= array($id_empa);
+		$param	= array($id_empa);
         $result	= $this->db->getQuery($query, $param);
 
         if($result->numRows > 0) {
 			return $result->rows->row_0;
         }else{
-			return null;
+			return NULL;
         }
     }
 
