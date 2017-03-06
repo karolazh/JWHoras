@@ -70,6 +70,17 @@ class DAOUsuario extends Model {
         }
     }
 
+	/**
+	* getLogin($gl_rut, $gl_password)
+	* Obtener la información para Validar al usuario e Iniciar la Session
+	* 
+	* @author	<victor.retamal@cosof.cl>	27-02-2017
+	* 
+	* @param string	$gl_rut del usuario.
+	* @param string	$gl_password  del usuario.
+	*
+	* @return object Información del usuario
+	*/
     public function getLogin($gl_rut, $gl_password) {
         $query	= "	SELECT 
 						u.*,
@@ -94,7 +105,18 @@ class DAOUsuario extends Model {
         }
     }
 
-    public function getLoginMidas($rut) {
+	/**
+	* getLoginMidas($gl_rut)
+	* Obtener la información para Validar al usuario que ingresa desde MIDAS e Iniciar la Session
+	* 
+	* @author	<victor.retamal@cosof.cl>	27-02-2017
+	* 
+	* @param string	$gl_rut del usuario.
+	*
+	* @return object Información del usuario
+	*/
+
+    public function getLoginMidas($gl_rut) {
         $query	= "	SELECT 
                         u.*,
                         r.gl_nombre_region,
@@ -107,7 +129,7 @@ class DAOUsuario extends Model {
                         LEFT JOIN pre_provincia p ON c.id_provincia = p.id_provincia
 					WHERE u.gl_rut = ? ";
 
-        $param	= array($rut);
+        $param	= array($gl_rut);
         $result	= $this->db->getQuery($query, $param);
 
         if ($result->numRows > 0) {
