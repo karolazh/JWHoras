@@ -1,15 +1,15 @@
 <?php
 
 //require_once (APP_PATH . 'models/DAOPerfil.php');
-require_once (APP_PATH . 'models/DAOUsuarios.php');
+require_once (APP_PATH . 'models/DAOUsuario.php');
 
 Class Acceso{
     
     /**
      *
-     * @var DAOUsuarios 
+     * @var DAOUsuario 
      */
-    protected $_DAOUsuarios;
+    protected $_DAOUsuario;
     
     /**
      * Establece el control para acceder a un recurso
@@ -33,7 +33,7 @@ Class Acceso{
      * Constructor
      */
     public function __construct() {
-        $this->_DAOUsuarios = New DAOUsuarios();
+        $this->_DAOUsuario = New DAOUsuario();
     }
     
     /**
@@ -78,7 +78,7 @@ Class Acceso{
         $session = New Zend_Session_Namespace("usuario_carpeta");
         $id_user = $session->id;
         //echo $id_user;
-        return $this->_DAOUsuarios->getById($id_user);
+        return $this->_DAOUsuario->getById($id_user);
     }
     
     public static function redireccionUnlogged($smarty) {

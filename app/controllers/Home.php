@@ -40,7 +40,7 @@ class Home extends Controller{
     function __construct(){
         parent::__construct();
         $this->smarty->addPluginsDir(APP_PATH . "views/templates/home/plugins/");        
-        $this->_DAOUsuarios = $this->load->model("DAOUsuarios");       
+        $this->_DAOUsuario = $this->load->model("DAOUsuario");       
     }
 
     public function index(){
@@ -54,14 +54,14 @@ class Home extends Controller{
         Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
 
-        $daoRegistro = $this->load->model('DAORegistro');
-        $daoEstadoCaso = $this->load->model('DAOEstadoCaso');
+        $daoPaciente = $this->load->model('DAOPaciente');
+        $daoPacienteEstado = $this->load->model('DAOPacienteEstado');
 
         $arr_estados = array();
         $arr_abuso = array(0,0);
         $arr_programa = array(0,0);
 
-        $estados = $daoEstadoCaso->getListaEstadoCaso();
+        $estados = $daoPacienteEstado->getLista();
         $arr_estados[0]['total'] = 0;
         $arr_estados[0]['nombre'] = 'Sin Estado';
         foreach($estados as $estado){
@@ -69,7 +69,7 @@ class Home extends Controller{
             $arr_estados[$estado->id_estado_caso]['nombre'] = $estado->gl_nombre_estado_caso;
         }
 
-        $registros = $daoRegistro->getListaRegistro();
+        $registros = $daoPaciente->getLista();
         if(!is_null($registros)){
             foreach($registros as $registro){
 

@@ -28,7 +28,7 @@ class DAOTipoActividadEconomica extends Model{
     /*
      * 20170203 - Lista Regiones
      */
-    public function getListaTipoActividadEconomica(){
+    public function getLista(){
         $query		= $this->db->select("*")->from($this->_tabla);
         $resultado	= $query->getResult();
 

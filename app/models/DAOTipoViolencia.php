@@ -28,7 +28,7 @@ class DAOTipoViolencia extends Model{
     /*
      * 20170203 - Lista Regiones
      */
-    public function getListaTipoViolencia(){
+    public function getLista(){
         $query		= $this->db->select("*")->from($this->_tabla);
         $resultado	= $query->getResult();
 

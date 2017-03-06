@@ -28,7 +28,7 @@ class DAOTipoEscolaridad extends Model{
     /*
      * 20170203 - Lista Regiones
      */
-    public function getListaTipoEscolaridad(){
+    public function getLista(){
         $query		= $this->db->select("*")->from($this->_tabla);
         $resultado	= $query->getResult();
 

@@ -9,10 +9,8 @@ class Reconoce extends Controller {
     protected $_DAORegion;
     protected $_DAOPrevision;
     protected $_DAOMotivoConsulta;
-    protected $_DAOUsuarios;
+    protected $_DAOUsuario;
     protected $_DAOEstadoCaso;
-    protected $_DAOInstitucion;
-    protected $_DAOEventos;
     protected $_DAOEventosTipo;
     protected $_DAOAdjuntos;
     protected $_DAOAdjuntosTipo;
@@ -33,7 +31,7 @@ class Reconoce extends Controller {
         $this->_DAOComuna                   = $this->load->model("DAOComuna");
         $this->_DAORegistro                 = $this->load->model("DAORegistro");
         $this->_DAOTipoOcupacion            = $this->load->model("DAOTipoOcupacion");
-        $this->_DAOUsuarios                 = $this->load->model("DAOUsuarios");
+        $this->_DAOUsuario                  = $this->load->model("DAOUsuario");
         $this->_DAOTipoEscolaridad          = $this->load->model("DAOTipoEscolaridad");
         $this->_DAOEstadoCivil              = $this->load->model("DAOEstadoCivil");
         $this->_DAOTipoActividadEconomica   = $this->load->model("DAOTipoActividadEconomica");
@@ -44,22 +42,22 @@ class Reconoce extends Controller {
     public function identificarAgresor(){
     
     //Cargar Arrays
-        $arrTipoOcupacion = $this->_DAOTipoOcupacion->getListaTipoOcupaciones();
+        $arrTipoOcupacion = $this->_DAOTipoOcupacion->getLista();
 	$this->smarty->assign("arrTipoOcupacion", $arrTipoOcupacion);
         
-        $arrTipoEstadoCivil = $this->_DAOEstadoCivil->getListaTipoEstadoCivil();
+        $arrTipoEstadoCivil = $this->_DAOEstadoCivil->getLista();
 	$this->smarty->assign("arrTipoEstadoCivil", $arrTipoEstadoCivil);
         
-        $arrEscolaridad = $this->_DAOTipoEscolaridad->getListaTipoEscolaridad();
+        $arrEscolaridad = $this->_DAOTipoEscolaridad->getLista();
 	$this->smarty->assign("arrEscolaridad", $arrEscolaridad);
                 
-        $arrActividadEconomica = $this->_DAOTipoActividadEconomica->getListaTipoActividadEconomica();
+        $arrActividadEconomica = $this->_DAOTipoActividadEconomica->getLista();
 	$this->smarty->assign("arrActividadEconomica", $arrActividadEconomica);
         
-        $arrTipoViolencia = $this->_DAOTipoViolencia->getListaTipoViolencia();
+        $arrTipoViolencia = $this->_DAOTipoViolencia->getLista();
 	$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
         
-        $arrNivelRiesgo = $this->_DAOTipoRiesgo->getListaTipoRiesgo();
+        $arrNivelRiesgo = $this->_DAOTipoRiesgo->getLista();
 	$this->smarty->assign("arrNivelRiesgo", $arrNivelRiesgo);
         
     //Obtener Datos de la BD    

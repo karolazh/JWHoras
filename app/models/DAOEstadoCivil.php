@@ -28,7 +28,7 @@ class DAOEstadoCivil extends Model{
     /*
      * 20170203 - Lista Regiones
      */
-    public function getListaTipoEstadoCivil(){
+    public function getLista(){
         $query		= $this->db->select("*")->from($this->_tabla);
         $resultado	= $query->getResult();
 
