@@ -34,7 +34,7 @@ class Empa extends Controller{
 		$this->_DAOEmpaAudit = $this->load->model("DAOEmpaAudit");
 		$this->_DAOUsuario = $this->load->model("DAOUsuario");
 		$this->_DAOComuna = $this->load->model("DAOComuna");
-		$this->_DAOInstitucion = $this->load->model("DAOInstitucion");
+		$this->_DAOCentroSalud = $this->load->model("DAOCentroSalud");
 		$this->_DAOPaciente = $this->load->model("DAOPaciente");
 		$this->_DAOAuditPregunta = $this->load->model("DAOAuditPregunta");
 		$this->_DAOTipoIMC = $this->load->model("DAOTipoIMC");
@@ -84,10 +84,10 @@ class Empa extends Controller{
 		$id_pac = 1;
 		//Cargar Datos Enfermera
 		$gl_comuna = $this->_DAOComuna->getById($_SESSION['id_comuna']);
-		$gl_institucion = $this->_DAOInstitucion->getInstitucion($_SESSION['id_institucion']);
+		$gl_institucion = $this->_DAOCentroSalud->getById($_SESSION['id_institucion']);
 
 		$this->smarty->assign("gl_comuna", $gl_comuna->gl_nombre_comuna);
-		$this->smarty->assign("gl_institucion", $gl_institucion->gl_nombre);
+		$this->smarty->assign("gl_institucion", $gl_institucion->gl_nombre_establecimiento);
 		$this->smarty->assign("fc_empa", date('Y-m-d'));
 		//Cargar Datos Paciente
 		$registro = $this->_DAOPaciente->getById($id_registro);
@@ -339,9 +339,12 @@ class Empa extends Controller{
 		$correcto = false;
 		$error = false;
 		$id_empa = $parametros['id_empa'];
+		$id_paciente = $parametros['id_paciente'];
+		
 		$bool_update = $this->_DAOEmpa->updateEmpa($parametros);
 		if ($bool_update) {
 			$datos_evento['eventos_tipo'] = 12;
+			$datos_evento['id_paciente'] = $id_paciente;
 			$datos_evento['id_empa'] = $id_empa;
 			$datos_evento['gl_descripcion'] = "Empa modificado el : " . Fechas::fechaHoy();
 			$datos_evento['bo_estado'] = 1;

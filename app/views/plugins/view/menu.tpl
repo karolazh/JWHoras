@@ -4,11 +4,11 @@
 </li>
 <li>
     <a href="{$base_url}/Paciente/nuevo">
-        <i class="fa fa-book"></i> <span>Nuevo registro</span></a>
+        <i class="fa fa-book"></i> <span>Nuevo Registro</span></a>
 </li>
 <li>
     <a href="{$base_url}/Paciente/index">
-        <i class="fa fa-th"></i> <span>Grilla registros</span></a>
+        <i class="fa fa-th"></i> <span>Grilla Pacientes</span></a>
 </li>
 <li>
     <a href="{$base_url}/Empa/index">

@@ -31,27 +31,27 @@ class DAOTipoEgreso extends Model{
     }
 
     public function getLista(){
-        $query		= "	SELECT * FROM ".$this->_tabla;
-        $resultado	= $this->db->getQuery($query);
+        $query	= "	SELECT * FROM ".$this->_tabla;
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
 
     public function getById($id){
-        $query		= "	SELECT * FROM ".$this->_tabla."
-						WHERE ".$this->_primaria." = ?";
+        $query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE ".$this->_primaria." = ?";
 
-		$param		= array($id);
+		$param	= array($id);
         $result	= $this->db->getQuery($query,$param);
 
         if($result->numRows > 0){
             return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 

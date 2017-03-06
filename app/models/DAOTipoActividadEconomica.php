@@ -5,8 +5,8 @@
 * Sistema		: PREVENCION DE FEMICIDIOS
 * Descripcion	: Modelo para Tabla pre_tipo_actividad_economica
 * Plataforma	: !PHP
-* Creacion		: 20/02/2017
-* @name			DAOUsuario.php
+* Creacion		: 06/03/2017
+* @name			DAOTipoActividadEconomica.php
 * @version		1.0
 * @author		David Gusmán <david.guzman@cosof.cl>
 *=============================================================================
@@ -53,7 +53,7 @@ class DAOTipoActividadEconomica extends Model{
         if($result->numRows > 0){
             return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 	

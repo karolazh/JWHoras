@@ -32,7 +32,7 @@ class Paciente extends Controller {
     protected $_DAOUsuario;
     protected $_DAOCentroSalud;
     protected $_DAOEvento;
-    protected $_DAOEventosTipo;
+    protected $_DAOEventoTipo;
     protected $_DAOAdjunto;
     protected $_DAOAdjuntoTipo;
     protected $_DAOEmpa;
@@ -47,20 +47,20 @@ class Paciente extends Controller {
         $this->load->lib('Boton', false);
         $this->load->lib('Seguridad', false);
 
-        $this->_DAORegion			= $this->load->model("DAORegion");
-        $this->_DAOComuna               	= $this->load->model("DAOComuna");
-        $this->_DAOPaciente			= $this->load->model("DAOPaciente");
+        $this->_DAORegion				= $this->load->model("DAORegion");
+        $this->_DAOComuna               = $this->load->model("DAOComuna");
+        $this->_DAOPaciente				= $this->load->model("DAOPaciente");
         $this->_DAOTipoEgreso			= $this->load->model("DAOTipoEgreso");
         $this->_DAOPacienteEstado		= $this->load->model("DAOPacienteEstado");
         $this->_DAOPrevision			= $this->load->model("DAOPrevision");
         $this->_DAOPacienteRegistro		= $this->load->model("DAOPacienteRegistro");
-        $this->_DAOUsuario			= $this->load->model("DAOUsuario");
+        $this->_DAOUsuario				= $this->load->model("DAOUsuario");
         $this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
-	$this->_DAOEvento			= $this->load->model("DAOEvento");
-        $this->_DAOEventosTipo			= $this->load->model("DAOEventosTipo");
-        $this->_DAOAdjunto			= $this->load->model("DAOAdjunto");
+		$this->_DAOEvento				= $this->load->model("DAOEvento");
+        $this->_DAOEventoTipo			= $this->load->model("DAOEventoTipo");
+        $this->_DAOAdjunto				= $this->load->model("DAOAdjunto");
         $this->_DAOAdjuntoTipo			= $this->load->model("DAOAdjuntoTipo");
-        $this->_DAOEmpa				= $this->load->model("DAOEmpa");
+        $this->_DAOEmpa					= $this->load->model("DAOEmpa");
         $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
     }
 
@@ -83,12 +83,12 @@ class Paciente extends Controller {
 		 * Si tengo perfil 4="GESTOR REGIONAL" puedo ver solo las DAU correspondientes a la región
 		 * REALIZAR FUNCIÓN PARA LISTAR SEGÚN PERFIL
 		 */
-		$arr = $this->_DAOPaciente->getLista();
+		$arr = $this->_DAOPaciente->getListaDetalle();
 		$this->smarty->assign('arrResultado', $arr);
 
 		//llamado al template
 		$this->_display('Paciente/index.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/Paciente/index.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/paciente/index.js");
 	}
 
 	/**
@@ -296,7 +296,7 @@ class Paciente extends Controller {
 				$datos_evento['gl_descripcion'] = "Empa ".$id_empa1." creado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado'] = 1;
 				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEventos->insEvento($datos_evento);
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
 			}
 			$id_empa2 = $this->_DAOEmpa->insert(array('id_registro' => $id_registro, 'nr_orden' => 2));
 			if ($id_empa2 != "" && !is_null($id_empa2)) {
@@ -305,7 +305,7 @@ class Paciente extends Controller {
 				$datos_evento['gl_descripcion'] = "Empa ".$id_empa2." creado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado'] = 1;
 				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEventos->insEvento($datos_evento);
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
 			}
 			//$resultado3						= $this->_DAOEmpaAudit->insert($id_empa1);
 			//$resultado4						= $this->_DAOEmpaAudit->insert($id_empa2);
@@ -526,13 +526,13 @@ class Paciente extends Controller {
 		if (!empty($_POST['comuna'])) {
 			$comuna = $_POST['comuna'];
 			$comuna = $_POST['comuna'];
-			$daoComuna = $this->load->model('DAOComuna');
-			$centrosalud = $daoComuna->obtCentroSaludporComuna($comuna)->rows;
+			$daoCentroSalud = $this->load->model('DAOCentroSalud');
+			$centrosalud = $daoCentroSalud->getByIdComuna($comuna);
 
 			$i = 0;
 			foreach ($centrosalud as $cSalud) {
-				$json[$i]['id_establecimiento'] = $cSalud->id_establecimiento;
-				$json[$i]['nombre_establecimiento'] = $cSalud->nombre_establecimiento;
+				$json[$i]['id_establecimiento'] = $cSalud->id_centro_salud;
+				$json[$i]['gl_nombre_establecimiento'] = $cSalud->gl_nombre_establecimiento;
 				$i++;
 			}
 		}
@@ -908,6 +908,34 @@ class Paciente extends Controller {
 		$json = Zend_Json::encode($salida);
 
 		echo $json;
+	}
+
+	/**
+	* Descripción : Generar PDF de Consentimiento con los Datos del Paciente
+	* @author: Victor Retamal <victor.retamal@cosof.cl>
+	* @param 
+	* @return PDF
+	*/
+	public function generarConsentimiento() {
+        $this->load->lib('MPdf', false);
+		#$parametros			= $this->_request->getParams();
+		$nombre_paciente	= 'nombre_paciente'; #$parametros['nombre_paciente'];
+		$rut_paciente		= '11111111-1'; #$parametros['rut_paciente'];
+		$filename			= 'Consentimiento_'.$rut_paciente.'.pdf';
+		$fecha_actual		= date('d-m-Y');
+		$nombre_usuario		= $_SESSION['nombre'];
+		$rut_usuario		= $_SESSION['rut'];
+			
+		$this->smarty->assign('nombre_paciente',$nombre_paciente);				
+		$this->smarty->assign('rut_paciente',$rut_paciente);
+		$this->smarty->assign('fecha_actual',$fecha_actual);
+		$this->smarty->assign('nombre_usuario',$nombre_usuario);
+		$this->smarty->assign('rut_usuario',$rut_usuario);
+		$html = $this->smarty->fetch('pdf/consentimiento.tpl');	
+		
+		header('Content-type: application/pdf');
+		header("Content-Disposition: inline; filename='$filename'");
+		echo crear_mpdf($html, $filename, false, 'I');
 	}
 
 }

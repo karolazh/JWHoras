@@ -31,59 +31,58 @@ class DAOEmpaAudit extends Model{
     }
 
     public function getLista(){
-        $query		= "	SELECT * FROM ".$this->_tabla;
-        $resultado	= $this->db->getQuery($query);
+        $query	= "	SELECT * FROM ".$this->_tabla;
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
 
     public function getById($id){
-        $query		= "	SELECT * FROM ".$this->_tabla."
+        $query	= "	SELECT * FROM ".$this->_tabla."
 						WHERE ".$this->_primaria." = ?";
 
-		$param		= array($id);
-        $resultado	= $this->db->getQuery($query,$param);
+		$param	= array($id);
+        $result	= $this->db->getQuery($query,$param);
 		
-        if($resultado->numRows > 0){
-            return $resultado->rows->row_0;
+        if($result->numRows > 0){
+            return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 
     public function getByIdEmpa($id_empa){
-        $query		= "	SELECT 
-							id_audit,
-							id_empa,
-							id_pregunta,
-							nr_valor
-						FROM pre_empa_audit 
-						WHERE id_empa = ".$id_empa;
+        $query	= "	SELECT 
+						id_audit,
+						id_empa,
+						id_pregunta,
+						nr_valor
+					FROM pre_empa_audit 
+					WHERE id_empa = ".$id_empa;
 
-		$param		= array($id_empa);
-        $resultado	= $this->db->getQuery($query,$param);
+		$param	= array($id_empa);
+        $result	= $this->db->getQuery($query,$param);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
     
 	public function updateEmpaAudit( $id_empa, $id_pregunta, $valor){
+        $query	= "	UPDATE pre_empa_audit 
+					SET	nr_valor =	".$valor."
+					WHERE id_empa = ".$id_empa." AND id_pregunta = ".$id_pregunta."";
 
-        $query	= "	UPDATE pre_empa_audit SET
-						 nr_valor	=	".$valor."
-                        WHERE id_empa   = ".$id_empa." AND id_pregunta = ".$id_pregunta."";
-                  
         if ($this->db->execQuery($query)) {
-            return true;
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
