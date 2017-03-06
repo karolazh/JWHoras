@@ -5,10 +5,10 @@
 * Sistema		: PREVENCION DE FEMICIDIOS
 * Descripcion	: Modelo para Tabla pre_paciente
 * Plataforma	: !PHP
-* Creacion		: 20/02/2017
+* Creacion		: 22/02/2017
 * @name			DAOPaciente.php
 * @version		1.0
-* @author		David Guzman <david.guzman@cosof.cl>
+* @author		Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------

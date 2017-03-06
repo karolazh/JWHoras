@@ -56,22 +56,6 @@ class DAOTipoActividadEconomica extends Model{
             return null;
         }
     }
-    
-    /*** 20170131 - Funcion obtiene datos de una región ***/
-	/* USAR getById */
-    public function getTipoActividadEconomica($id_actividad_economica){
-		$query	= "	SELECT * 
-					FROM ".$this->_tabla."
-					WHERE id_actividad_economica = ?";
-
-		$param	= array($id_actividad_economica);
-        $result	= $this->db->getQuery($query,$param);
-        if($result->numRows > 0){
-            return $result->rows->row_0;
-        }else{
-            return null;
-        }
-    }
 	
 }
 

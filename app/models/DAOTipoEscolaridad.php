@@ -28,7 +28,6 @@ class DAOTipoEscolaridad extends Model{
     function __construct(){
         parent::__construct();
     }
-    
 
     public function getLista(){
         $query	= "	SELECT * FROM ".$this->_tabla;
