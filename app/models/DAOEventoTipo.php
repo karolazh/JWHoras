@@ -19,7 +19,7 @@
 *****************************************************************************
 */
 
-class DAOEventosTipo extends Model{
+class DAOEventoTipo extends Model{
 
     protected $_tabla           = "pre_evento_tipo";
     protected $_primaria		= "id_evento_tipo";
@@ -56,3 +56,5 @@ class DAOEventosTipo extends Model{
     }
 
 }
+
+?>
