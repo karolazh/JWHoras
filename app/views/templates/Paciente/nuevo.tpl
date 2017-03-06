@@ -96,7 +96,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="genero" class="control-label col-sm-2 ">Género(*)</label>
+					<label for="genero" class="control-label col-sm-2 ">Sexo(*)</label>
 					<div class="col-sm-3">
 						<select for="genero" class="form-control" disabled id="genero" name="genero">
 							<option value="F">Femenino</option>

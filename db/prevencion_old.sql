@@ -3431,7 +3431,7 @@ INSERT INTO `pre_estados_caso` (`id_estado_caso`, `gl_nombre_estado_caso`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pre_eventos`
+-- Estructura de tabla para la tabla `pre_evento`
 --
 
 CREATE TABLE IF NOT EXISTS `pre_eventos` (

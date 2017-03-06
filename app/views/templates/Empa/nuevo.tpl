@@ -155,7 +155,7 @@
             <div class="panel-body">
                 <!-- a. Alcoholismo -->
                 <div class="box box-success">
-                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Alcoholismo</h3></div>
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Consumo de alcohol</h3></div>
                     <div class="box-body">
                         <div class="form-group">
                             <label class="control-label col-sm-3 required">¿Consume bebidas alcoh&oacute;licas?</label>
