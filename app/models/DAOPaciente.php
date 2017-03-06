@@ -341,7 +341,7 @@ class DAOPaciente extends Model{
                     WHERE reg.id_paciente = ?";
 
         $param = array($id_paciente);
-        $consulta = $this->db->getQuery($query, $param);
+        $result = $this->db->getQuery($query, $param);
 
 
         if ($result->numRows > 0) {
@@ -371,10 +371,10 @@ class DAOPaciente extends Model{
                     WHERE eve.id_paciente = ?";
 
 	$param		= array($id_registro);
-        $consulta	= $this->db->getQuery($query,$param);
+        $result	= $this->db->getQuery($query,$param);
         
-        if($consulta->numRows>0){
-            return $consulta->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
