@@ -5,7 +5,7 @@
 * Sistema		: PREVENCION DE FEMICIDIOS
 * Descripcion	: Modelo para Tabla pre_paciente_registro
 * Plataforma	: !PHP
-* Creacion		: 03/03/2017
+* Creacion		: 27/02/2017
 * @name			DAOPacienteRegistro.php
 * @version		1.0
 * @author		Victor Retamal <victor.retamal@cosof.cl>
@@ -116,3 +116,5 @@ class DAOPacienteRegistro extends Model{
     }
 
 }
+
+?>
