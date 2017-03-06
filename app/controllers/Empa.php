@@ -35,8 +35,8 @@ class Empa extends Controller{
 		$this->_DAOUsuario = $this->load->model("DAOUsuario");
 		$this->_DAOComuna = $this->load->model("DAOComuna");
 		$this->_DAOInstitucion = $this->load->model("DAOInstitucion");
-		$this->_DAORegistro = $this->load->model("DAORegistro");
-		$this->_DAOAlcoholismo = $this->load->model("DAOAlcoholismo");
+		$this->_DAOPaciente = $this->load->model("DAOPaciente");
+		$this->_DAOAuditPregunta = $this->load->model("DAOAuditPregunta");
 		$this->_DAOTipoIMC = $this->load->model("DAOTipoIMC");
 		$this->_DAOTipoAUDIT = $this->load->model("DAOTipoAUDIT");
 		$this->_DAOEvento = $this->load->model("DAOEvento");
@@ -62,7 +62,7 @@ class Empa extends Controller{
 		//$this->smarty->assign('arrResultado', $arr);
 		//llamado al template
 
-		$arrResultado = $this->_DAORegistro->getListaRegistro();
+		$arrResultado = $this->_DAOPaciente->getLista();
 		$this->smarty->assign("arrResultado", $arrResultado);
 
 		$this->_display('Empa/index.tpl');
@@ -90,7 +90,7 @@ class Empa extends Controller{
 		$this->smarty->assign("gl_institucion", $gl_institucion->gl_nombre);
 		$this->smarty->assign("fc_empa", date('Y-m-d'));
 		//Cargar Datos Paciente
-		$registro = $this->_DAORegistro->getRegistroById($id_registro);
+		$registro = $this->_DAOPaciente->getById($id_registro);
 		$this->smarty->assign("gl_rut", $registro->gl_rut);
 		$this->smarty->assign("gl_nombres", $registro->gl_nombres);
 		$this->smarty->assign("gl_apellidos", $registro->gl_apellidos);
@@ -300,7 +300,7 @@ class Empa extends Controller{
 		Acceso::redireccionUnlogged($this->smarty);
 		$params = $this->request->getParametros();
 		$id_empa = $params[0];
-		$arrPreguntas = $this->_DAOAlcoholismo->getAll();
+		$arrPreguntas = $this->_DAOAuditPregunta->getAll();
 		$arrAudit = $this->_DAOEmpaAudit->getAuditByEMPA($id_empa);
 		$total = 0;
 		if (!is_null($arrAudit)) {

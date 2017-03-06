@@ -10,7 +10,7 @@ require_once(APP_PATH . "libs/Helpers/View/Grid.php");
  */
 function smarty_function_grilla($params, &$smarty) {
     $grid = New View_Grid("lista_usuarios");
-    $grid->setModel("DAOUsuarios");
+    $grid->setModel("DAOUsuario");
     $grid->addHelperPath(__DIR__, "");
     $grid->setQuery("queryBusqueda", array("rut" => "rut",
                                            "nombre" => "nombre",

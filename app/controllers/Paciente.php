@@ -15,7 +15,7 @@
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
 *<david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
-*<orlando.vazquez@cosof.co> 06-03-2017  ln 391 _DAOMotivoConsulta->insertarMotivoConsulta -> _DAOMotivoConsulta->insertarMotivoConsulta
+*<orlando.vazquez@cosof.co> 06-03-2017  Adaptacion a nueva BD de DAO's y funciones
 *-----------------------------------------------------------------------------
 *****************************************************************************
 */
@@ -34,7 +34,7 @@ class Paciente extends Controller {
     protected $_DAOEvento;
     protected $_DAOEventosTipo;
     protected $_DAOAdjunto;
-    protected $_DAOAdjuntosTipo;
+    protected $_DAOAdjuntoTipo;
     protected $_DAOEmpa;
     protected $_DAOPacienteExamen;
     protected $_DAOEstablecimientoSalud;
@@ -60,7 +60,7 @@ class Paciente extends Controller {
 	$this->_DAOEvento			= $this->load->model("DAOEvento");
         $this->_DAOEventosTipo			= $this->load->model("DAOEventosTipo");
         $this->_DAOAdjunto			= $this->load->model("DAOAdjunto");
-        $this->_DAOAdjuntosTipo			= $this->load->model("DAOAdjuntosTipo");
+        $this->_DAOAdjuntoTipo			= $this->load->model("DAOAdjuntoTipo");
         $this->_DAOEmpa				= $this->load->model("DAOEmpa");
         $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
 	$this->_DAOEstablecimientoSalud         = $this->load->model('DAOEstablecimientoSalud');
@@ -388,8 +388,7 @@ class Paciente extends Controller {
 		
 		if ($id_registro) {
 			$correcto = true;
-			$resultado2 = $this->_DAOMotivoConsulta->insertar($parametros, $id_registro);
-
+			$resultado2 = $this->_DAOPacienteRegistro->insertar($parametros, $id_registro);
 			$session = New Zend_Session_Namespace("usuario_carpeta");
 			$datos_evento['id_registro'] = $id_registro;
 			$datos_evento['bo_estado'] = 1;
@@ -468,7 +467,7 @@ class Paciente extends Controller {
 
 		if (!is_null($obj_registro)) {
 			$edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
-			$arrMotivosConsulta = $this->_DAOMotivoConsulta->getByIdPaciente($obj_registro->id_registro);
+			$arrMotivosConsulta = $this->_DAOPacienteRegistro->getByIdPaciente($obj_registro->id_registro);
 		}
 		$this->smarty->assign('id_registro', $obj_registro->id_registro);
 		$this->smarty->assign('rut', $obj_registro->gl_rut);
@@ -558,7 +557,7 @@ class Paciente extends Controller {
 		$json = array();
 
 		if ($registro) {
-			$arr_motivos = $this->_DAOMotivoConsulta->getByIdPaciente($registro->id_registro);
+			$arr_motivos = $this->_DAOPacienteRegistro->getByIdPaciente($registro->id_registro);
 			$tabla_motivos = "";
 			$div_superior = "<div class='top-spaced'></div>
 								<div class='panel panel-primary'>

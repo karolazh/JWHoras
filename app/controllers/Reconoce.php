@@ -22,19 +22,19 @@
 
 class Reconoce extends Controller {
     
-    protected $_DAORegistro;
+    protected $_DAOPaciente;
     protected $_DAOComuna;
     protected $_DAOCasoEgreso;
     protected $_DAORegion;
     protected $_DAOPrevision;
-    protected $_DAOMotivoConsulta;
+    protected $_DAOPacienteRegistro;
     protected $_DAOUsuario;
     protected $_DAOEstadoCaso;
     protected $_DAOEventoTipo;
-    protected $_DAOAdjuntos;
-    protected $_DAOAdjuntosTipo;
+    protected $_DAOAdjunto;
+    protected $_DAOAdjuntoTipo;
     protected $_DAOEmpa;
-    protected $_DAOExamenRegistro;
+    protected $_DAOPacienteExamen;
 
     /**
      * Descripción: Constructor
@@ -48,7 +48,7 @@ class Reconoce extends Controller {
 
         $this->_DAORegion                   = $this->load->model("DAORegion");
         $this->_DAOComuna                   = $this->load->model("DAOComuna");
-        $this->_DAORegistro                 = $this->load->model("DAORegistro");
+        $this->_DAOPaciente                 = $this->load->model("DAOPaciente");
         $this->_DAOTipoOcupacion            = $this->load->model("DAOTipoOcupacion");
         $this->_DAOUsuario                  = $this->load->model("DAOUsuario");
         $this->_DAOTipoEscolaridad          = $this->load->model("DAOTipoEscolaridad");
@@ -83,7 +83,7 @@ class Reconoce extends Controller {
         $parametros = $this->request->getParametros();
         $id_registro = $parametros[0];
         $this->smarty->assign("id_registro", $id_registro);
-        $obj_registro	= $this->_DAORegistro->verInfoById($id_registro);
+        $obj_registro	= $this->_DAOPaciente->verInfoById($id_registro);
         $fc_nacimiento = $obj_registro->fc_nacimiento;
         list($Y, $m, $d ) = explode("-", $fc_nacimiento);
         $edad = ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );

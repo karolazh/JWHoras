@@ -73,7 +73,7 @@ abstract class Controller
         $request = new Zend_Controller_Request_Http();
         $myCookie = $request->getCookie('datos_usuario_carpeta');
         if(!is_null($myCookie)){
-            $DAOUsuario = $this->load->model("DAOUsuarios");
+            $DAOUsuario = $this->load->model("DAOUsuario");
             $usuario = $DAOUsuario->getById($myCookie);
             
             $session 			= New Zend_Session_Namespace("usuario_carpeta");
