@@ -1,38 +1,38 @@
 <?php
 
-/*
-  !IniHeaderDoc
- * ****************************************************************************
-  !NombreObjeto 		: Empa.php
-  !Sistema 	  	: PREVENCIÓN
-  !Modulo 	  	: NA
-  !Descripcion  		:
-  !Plataforma   		: !PHP
-  !Perfil       		:
-  !Itinerado    		: NA
-  !Uso          		: NA
-  !Autor        		:
-  !Creacion     		: 16/02/2017
-  !Retornos/Salidas 	: NA
-  !OrigenReq        	: NA
-  =============================================================================
-  !Parametros 		: NA
-  =============================================================================
-  !Testing 		: NA
-  =============================================================================
-  !ControlCambio
-  --------------
-  !cVersion !cFecha   !cProgramador   !cDescripcion
-  -----------------------------------------------------------------------------
+/* 
+!IniHeaderDoc
+*****************************************************************************
+!NombreObjeto 		: Empa.php
+!Sistema 	  		: PREVENCIÓN DE FEMICIDIOS
+!Modulo 	  		: NA
+!Descripcion  		: 	
+!Plataforma   		: !PHP
+!Perfil       		: 
+!Itinerado    		: NA
+!Uso          		: NA
+!Autor        		: David Gusman <david.guzman@cosof.cl>
+!Creacion     		: 20/02/2017
+!Retornos/Salidas 	: NA
+!OrigenReq        	: NA
+=============================================================================
+!Parametros 		: NA 
+=============================================================================
+!Testing 			: NA
+=============================================================================
+!ControlCambio
+--------------
+!cVersion !cFecha   !cProgramador   !cDescripcion 
+-----------------------------------------------------------------------------
 
-  -----------------------------------------------------------------------------
- * ****************************************************************************
-  !EndHeaderDoc
- */
+-----------------------------------------------------------------------------
+*****************************************************************************
+!EndHeaderDoc 
+*/
 
-class Empa extends Controller {
-
-	protected $_DAOEmpa;
+class Empa extends Controller{
+	
+    protected $_DAOEmpa;
 
 	//funcion construct
 	function __construct() {

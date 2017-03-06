@@ -3,10 +3,10 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_region
+* Descripcion	: Modelo para Tabla pre_provincia
 * Plataforma	: !PHP
-* Creacion		: 25/02/2017
-* @name			DAORegion.php
+* Creacion		: 01/03/2017
+* @name			DAOProvincia.php
 * @version		1.0
 * @author		Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
@@ -19,10 +19,10 @@
 *****************************************************************************
 */
 
-class DAORegion extends Model{
+class DAOProvincia extends Model{
 
-    protected $_tabla			= "pre_region";
-    protected $_primaria		= "id_region";
+    protected $_tabla			= "pre_provincia";
+    protected $_primaria		= "id_provincia";
     protected $_transaccional	= false;
 
     function __construct(){
@@ -42,38 +42,30 @@ class DAORegion extends Model{
 
     public function getById($id){
         $query	= "	SELECT * FROM ".$this->_tabla."
-					WHERE ".$this->_primaria." = ?";
+						WHERE ".$this->_primaria." = ?";
 
 		$param	= array($id);
         $resul	= $this->db->getQuery($query,$param);
-
-        if($resul->numRows > 0){
-            return $resul->rows->row_0;
-        }else{
-            return NULL;
-        }
-    }
-
-    public function getDetalleByIdRegion($id_region){
-		$query	= "	SELECT 
-						c.*,
-						p.gl_nombre_provincia,
-						r.gl_codigo_region,
-						r.gl_nombre_region,
-						r.gl_latitud,
-						r.gl_longitud
-					FROM pre_region r
-						LEFT JOIN pre_provincia p  ON r.id_region = p.id_region
-						LEFT JOIN pre_comuna c ON p.id_provincia = c.id_provincia
-					WHERE c.id_region = ?";
-
-		$param	= array($id_region);
-        $resul	= $this->db->getQuery($query,$param);
-
+		
         if($resul->numRows > 0){
             return $resul->rows->row_0;
         }else{
             return null;
+        }
+    }
+
+    public function getByIdRegion($id_region){
+        $query	= "	SELECT * 
+					FROM pre_provincia
+					WHERE id_region = ?";
+
+		$param	= array($id_region);
+        $resul	= $this->db->getQuery($query,$params);
+
+        if($resul->numRows>0){
+            return $resul->rows;
+        }else{
+            return NULL;
         }
     }
 

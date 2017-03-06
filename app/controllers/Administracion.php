@@ -4,21 +4,21 @@
 !IniHeaderDoc
 *****************************************************************************
 !NombreObjeto 		: Administracion.php
-!Sistema 	  	: PREVENCION
-!Modulo 	  	: NA
+!Sistema 	  		: PREVENCION DE FEMICIDIOS
+!Modulo 	  		: NA
 !Descripcion  		: 	
 !Plataforma   		: !PHP
 !Perfil       		: 
 !Itinerado    		: NA
 !Uso          		: NA
-!Autor        		: Carolina Zamora Hormazábal
+!Autor        		: Carolina Zamora <carolina.zamora@cosof.cl>
 !Creacion     		: 14/02/2017
 !Retornos/Salidas 	: NA
 !OrigenReq        	: NA
 =============================================================================
 !Parametros 		: NA 
 =============================================================================
-!Testing 		: NA
+!Testing 			: NA
 =============================================================================
 !ControlCambio
 --------------
