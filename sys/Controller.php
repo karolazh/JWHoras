@@ -77,12 +77,13 @@ abstract class Controller
             $usuario = $DAOUsuario->getById($myCookie);
             
             $session 			= New Zend_Session_Namespace("usuario_carpeta");
-            //$session->id 		= $usuario->id;
-            //$session->rut 		= $usuario->rut;
-            //$session->usuario 	= $usuario->nombres." ".$usuario->apellidos;
-            $session->id 		= $usuario->usr_id;
-            $session->rut 		= $usuario->usr_rut;
-            $session->usuario 	= $usuario->usr_nombres." ".$usuario->usr_apellidos;
+            $session->id 		= $usuario->id_usuario;
+			$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+            $session->usuario 	= $usuario->gl_nombres." ".$usuario->gl_apellidos;
+			$session->mail		= $usuario->gl_email;
+            $session->rut 		= $usuario->gl_rut;
+			$session->fono		= $usuario->gl_fono;
+			$session->celular	= $usuario->gl_celular;
         }
     }
         
