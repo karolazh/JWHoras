@@ -30,9 +30,15 @@ class DAOPaciente extends Model{
         parent::__construct();
     }
 
-    public function getLista(){
+    public function getLista($parametros = null){
         $query		= "	SELECT * FROM ".$this->_tabla;
-        $resultado	= $this->db->getQuery($query);
+        $params = array();
+        if(isset($parametros['region'])){
+        	$query .= ' WHERE id_region = ?';
+        	$params[] = $parametros['region'];
+        }
+
+        $resultado	= $this->db->getQuery($query, $params);
 
         if($resultado->numRows>0){
             return $resultado->rows;

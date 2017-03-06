@@ -48,7 +48,7 @@ class Home extends Controller{
 
         $daoPaciente = $this->load->model('DAOPaciente');
         $daoPacienteEstado = $this->load->model('DAOPacienteEstado');
-
+        
         $jscode = '';
         if($_SESSION['perfil'] == 4 or $_SESSION['perfil'] == 5){
 
@@ -116,7 +116,15 @@ class Home extends Controller{
         $daoPacientes = $this->load->model('DAOPaciente');
 
         $response = array();
-        $pacientes =  $daoPacientes->getLista();
+
+        if($_SESSION['perfil'] == 5){
+            $pacientes =  $daoPacientes->getLista();
+        }else{
+            $id_region = $_SESSION['id_region'];
+            $pacientes =  $daoPacientes->getLista(array('region' => $id_region));
+        }
+
+        //$pacientes =  $daoPacientes->getLista();
 
         if($pacientes){
             foreach($pacientes as $paciente){
