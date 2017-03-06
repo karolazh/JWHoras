@@ -9,23 +9,23 @@
  * 
  * @author Carolina Zamora, Orlando Vázquez
  */
-class Registro extends Controller {
+class Paciente extends Controller {
 
     protected $_DAORegion;
     protected $_DAOComuna;
-    protected $_DAORegistro;
+    protected $_DAOPaciente;
     protected $_DAOCasoEgreso;
     protected $_DAOEstadoCaso;
     protected $_DAOPrevision;
     protected $_DAOMotivoConsulta;
     protected $_DAOUsuarios;
     protected $_DAOInstitucion;
-	protected $_DAOEventos;
+    protected $_DAOEvento;
     protected $_DAOEventosTipo;
     protected $_DAOAdjuntos;
     protected $_DAOAdjuntosTipo;
     protected $_DAOEmpa;
-    protected $_DAOExamenRegistro;
+    protected $_DAOPacienteExamen;
     protected $_DAOEstablecimientoSalud;
 	/**
 	 * Descripción: Constructor
@@ -37,22 +37,22 @@ class Registro extends Controller {
         $this->load->lib('Boton', false);
         $this->load->lib('Seguridad', false);
 
-        $this->_DAORegion				= $this->load->model("DAORegion");
-        $this->_DAOComuna				= $this->load->model("DAOComuna");
-        $this->_DAORegistro				= $this->load->model("DAORegistro");
+        $this->_DAORegion			= $this->load->model("DAORegion");
+        $this->_DAOComuna			= $this->load->model("DAOComuna");
+        $this->_DAOPaciente			= $this->load->model("DAOPaciente");
         $this->_DAOCasoEgreso			= $this->load->model("DAOCasoEgreso");
         $this->_DAOEstadoCaso			= $this->load->model("DAOEstadoCaso");
         $this->_DAOPrevision			= $this->load->model("DAOPrevision");
         $this->_DAOMotivoConsulta		= $this->load->model("DAOMotivoConsulta");
-        $this->_DAOUsuarios				= $this->load->model("DAOUsuarios");
+        $this->_DAOUsuario			= $this->load->model("DAOUsuario");
         $this->_DAOInstitucion			= $this->load->model("DAOInstitucion");
-		$this->_DAOEventos				= $this->load->model("DAOEventos");
+	$this->_DAOEvento			= $this->load->model("DAOEvento");
         $this->_DAOEventosTipo			= $this->load->model("DAOEventosTipo");
-        $this->_DAOAdjuntos				= $this->load->model("DAOAdjuntos");
+        $this->_DAOAdjuntos			= $this->load->model("DAOAdjuntos");
         $this->_DAOAdjuntosTipo			= $this->load->model("DAOAdjuntosTipo");
-        $this->_DAOEmpa					= $this->load->model("DAOEmpa");
-        $this->_DAOExamenRegistro		= $this->load->model("DAOExamenRegistro");
-		$this->_DAOEstablecimientoSalud	= $this->load->model('DAOEstablecimientoSalud');
+        $this->_DAOEmpa				= $this->load->model("DAOEmpa");
+        $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
+	$this->_DAOEstablecimientoSalud         = $this->load->model('DAOEstablecimientoSalud');
     }
 
 	/**
@@ -74,12 +74,12 @@ class Registro extends Controller {
 		 * Si tengo perfil 4="GESTOR REGIONAL" puedo ver solo las DAU correspondientes a la región
 		 * REALIZAR FUNCIÓN PARA LISTAR SEGÚN PERFIL
 		 */
-		$arr = $this->_DAORegistro->getListaRegistro();
+		$arr = $this->_DAOPaciente->getLista();
 		$this->smarty->assign('arrResultado', $arr);
 
 		//llamado al template
-		$this->_display('Registro/index.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/registro/index.js");
+		$this->_display('Paciente/index.tpl');
+		$this->load->javascript(STATIC_FILES . "js/templates/Paciente/index.js");
 	}
 
 	/**
@@ -90,14 +90,14 @@ class Registro extends Controller {
 
 		$parametros = $this->request->getParametros();
 		$idReg = $parametros[0];
-		$detReg = $this->_DAORegistro->getRegistroxId($idReg);
+		$detReg = $this->_DAOPaciente->getById($idReg);
 
 		if (!is_null($detReg)) {
 			//$this->smarty->assign("detReg", $detReg);
 
 			$this->smarty->assign("idreg", $idReg);
 
-			//Datos de Registro
+			//Datos de Paciente
 			$run = "";
 			$ext = "NO";
 			if (!is_null($detReg->rut)) {
@@ -160,8 +160,8 @@ class Registro extends Controller {
 			$arrEmpa = $this->_DAOEmpa->getEmpaGrilla($idReg);
 			$this->smarty->assign('arrEmpa', $arrEmpa);
 
-			//Grilla Exámenes x Registro
-			$arrExamenes = $this->_DAOExamenRegistro->getListaExamenRegistroxId($idReg);
+			//Grilla Exámenes x Paciente
+			$arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($idReg);
 			$this->smarty->assign('arrExamenes', $arrExamenes);
 
 			//Tipos de Eventos
@@ -169,20 +169,20 @@ class Registro extends Controller {
 			$this->smarty->assign('arrTipoEvento', $arrTipoEvento);
 
 			//Grilla Bitácora
-			$arrHistorial = $this->_DAORegistro->getEventosRegistro($idReg);
+			$arrHistorial = $this->_DAOEvento->getEventosRegistro($idReg);
 			$this->smarty->assign('arrHistorial', $arrHistorial);
 
 			//Tipos de Adjuntos
-			$arrTipoDocumento = $this->_DAOAdjuntosTipo->getListaAdjuntosTipo();
+			$arrTipoDocumento = $this->_DAOAdjuntoTipo->getLista();
 			$this->smarty->assign('arrTipoDocumento', $arrTipoDocumento);
 
 			//Grilla Adjuntos
-			$arrAdjuntos = $this->_DAOAdjuntos->getListaAdjuntosRegistro($idReg);
+			$arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($idReg);
 			$this->smarty->assign('arrAdjuntos', $arrAdjuntos);
 
 			//muestra template
-			$this->smarty->display('Registro/bitacora.tpl');
-			$this->load->javascript(STATIC_FILES . 'js/templates/registro/bitacora.js');
+			$this->smarty->display('Paciente/bitacora.tpl');
+			$this->load->javascript(STATIC_FILES . 'js/templates/paciente/bitacora.js');
 		} else {
 			throw new Exception("El historial que está buscando no existe");
 		}
@@ -203,10 +203,10 @@ class Registro extends Controller {
 
 		unset($_SESSION['adjuntos']);
 
-		$arrRegiones = $this->_DAORegion->getListaRegiones();
+		$arrRegiones = $this->_DAORegion->getLista();
 		$this->smarty->assign("arrRegiones", $arrRegiones);
 
-		$arrPrevision = $this->_DAOPrevision->getListaPrevision();
+		$arrPrevision = $this->_DAOPrevision->getLista();
 		$this->smarty->assign("arrPrevision", $arrPrevision);
 
 		//$arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
@@ -215,9 +215,9 @@ class Registro extends Controller {
 		$this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.', '', 'pull-right'));
 
 		//llamado al template
-		$this->_display('Registro/nuevo.tpl');
+		$this->_display('Paciente/nuevo.tpl');
 		$this->load->javascript(STATIC_FILES . "js/regiones.js");
-		$this->load->javascript(STATIC_FILES . "js/templates/registro/nuevo.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/paciente/nuevo.js");
 		//$this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
 		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
 	}
@@ -233,13 +233,13 @@ class Registro extends Controller {
 		$error = false;
 		$gl_grupo_tipo = 'Control';
 		$datos_evento = array();
-		$count = $this->_DAORegistro->countRegistroxRegion($_SESSION['id_region']);
+		$count = $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
 		if ($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
 			$gl_grupo_tipo = 'Seguimiento';
 		}
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
 
-		$id_registro = $this->_DAORegistro->insertarRegistro($parametros);
+		$id_registro = $this->_DAOPaciente->insertarPaciente($parametros);
 		if ($id_registro) {
 			$correcto = true;
 			$session = New Zend_Session_Namespace("usuario_carpeta");
@@ -263,7 +263,7 @@ class Registro extends Controller {
 					'fc_crea' => date('Y-m-d h:m:s'),
 					'id_usuario_crea' => $session->id,
 				);
-				$id_adjunto = $this->_DAOAdjuntos->insert($ins_adjunto);
+				$id_adjunto = $this->_DAOAdjunto->insert($ins_adjunto);
 
 				if ($id_adjunto) {
 					if (!is_dir($directorio)) {
@@ -318,20 +318,20 @@ class Registro extends Controller {
 			}*/
 			$datos_evento['eventos_tipo'] = 1;
 			$datos_evento['id_registro'] = $id_registro;
-			$datos_evento['gl_descripcion'] = "Registro creado el : " . Fechas::fechaHoy();
+			$datos_evento['gl_descripcion'] = "Paciente creado el : " . Fechas::fechaHoy();
 			$datos_evento['bo_estado'] = 1;
 			$datos_evento['id_usuario_crea'] = $session->id;
-			$resp = $this->_DAOEventos->insEvento($datos_evento);
+			$resp = $this->_DAOEvento->insEvento($datos_evento);
 
 			if ($parametros['chkAcepta']) {
 				$datos_evento['eventos_tipo'] = 4;
 				$datos_evento['gl_descripcion'] = "Acepta el programa con fecha : " . Fechas::fechaHoy();
-				$resp = $this->_DAOEventos->insEvento($datos_evento);
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
 			}
 			if ($parametros['chkReconoce']) {
 				$datos_evento['eventos_tipo'] = 5;
 				$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : " . Fechas::fechaHoy();
-				$resp = $this->_DAOEventos->insEvento($datos_evento);
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
 			}
 		} else {
 			$error = true;
@@ -358,7 +358,7 @@ class Registro extends Controller {
 		$id_registro = $parametros['id_registro'];
 		$gl_grupo_tipo_ant = $parametros['gl_grupo_tipo'];
 		$grupo_usuario_registrador = $_SESSION['gl_grupo_tipo'];
-		$count = $this->_DAORegistro->countRegistroxRegion($_SESSION['id_region']);
+		$count = $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
 		if ($parametros['edad'] > 15 AND $grupo_usuario_registrador == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
 			$gl_grupo_tipo = 'Seguimiento';
 			if ($gl_grupo_tipo_ant != $gl_grupo_tipo){
@@ -385,18 +385,18 @@ class Registro extends Controller {
 			$datos_evento['id_usuario_crea'] = $session->id;
 			$datos_evento['eventos_tipo'] = 16;
 			$datos_evento['gl_descripcion'] = "Consulta agregada el : " . Fechas::fechaHoy();
-			$resp = $this->_DAOEventos->insEvento($datos_evento);
+			$resp = $this->_DAOEvento->insEvento($datos_evento);
 			if ($parametros['chkAcepta']) {
-				$resp = $this->_DAORegistro->update(array('bo_acepta_programa' => 1), $id_registro, 'id_registro');
+				$resp = $this->_DAOPaciente->update(array('bo_acepta_programa' => 1), $id_registro, 'id_registro');
 				$datos_evento['eventos_tipo'] = 4;
 				$datos_evento['gl_descripcion'] = "Acepta el programa con fecha : " . Fechas::fechaHoy();
-				$resp = $this->_DAOEventos->insEvento($datos_evento);
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
 			}
 			if ($parametros['chkReconoce']) {
-				$resp = $this->_DAORegistro->update(array('bo_reconoce' => 1), $id_registro, 'id_registro');
+				$resp = $this->_DAOPaciente->update(array('bo_reconoce' => 1), $id_registro, 'id_registro');
 				$datos_evento['eventos_tipo'] = 5;
 				$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : " . Fechas::fechaHoy();
-				$resp = $this->_DAOEventos->insEvento($datos_evento);
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
 			}
 		} else {
 			$error = true;
@@ -423,7 +423,7 @@ class Registro extends Controller {
 
 		$id_registro = $parametros['id_registro'];
 
-		$resp = $this->_DAORegistro->update(array('bo_reconoce' => 1), $id_registro, 'id_registro');
+		$resp = $this->_DAOPaciente->update(array('bo_reconoce' => 1), $id_registro, 'id_registro');
 		if ($resp) {
 			$correcto = true;
 
@@ -433,7 +433,7 @@ class Registro extends Controller {
 			$datos_evento['id_usuario_crea'] = $session->id;
 			$datos_evento['eventos_tipo'] = 5;
 			$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : " . Fechas::fechaHoy();
-			$resp = $this->_DAOEventos->insEvento($datos_evento);
+			$resp = $this->_DAOEvento->insEvento($datos_evento);
 		} else {
 			$error = true;
 		}
@@ -453,7 +453,7 @@ class Registro extends Controller {
 	public function ver() {
 		$parametros = $this->request->getParametros();
 		$id_registro = $parametros[0];
-		$obj_registro = $this->_DAORegistro->verInfoById($id_registro);
+		$obj_registro = $this->_DAOPaciente->verInfoById($id_registro);
 
 		if (!is_null($obj_registro)) {
 			$edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
@@ -484,8 +484,8 @@ class Registro extends Controller {
 		$this->smarty->assign('institucion', $obj_registro->gl_nombre_institucion);
 		$this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
 		$this->smarty->assign('ruta_consentimiento', $obj_registro->gl_path);
-		$this->smarty->display('Registro/ver.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/registro/ver.js");
+		$this->smarty->display('Paciente/ver.tpl');
+		$this->load->javascript(STATIC_FILES . "js/templates/paciente/ver.js");
 	}
 
 	/**
@@ -540,9 +540,9 @@ class Registro extends Controller {
 		$rut = $_POST['rut'];
 		$pasaporte = $_POST['inputextranjero'];
 		if (!is_null($rut) && ($rut !== "")) {
-			$registro = $this->_DAORegistro->getRegistroByRut($rut);
+			$registro = $this->_DAOPaciente->getByRut($rut);
 		} else if (!is_null($pasaporte) && ($pasaporte !== "")) {
-			$registro = $this->_DAORegistro->getRegistroByPasaporte($pasaporte);
+			$registro = $this->_DAOPaciente->getByPasaporte($pasaporte);
 		}
 		$json = array();
 
@@ -632,7 +632,7 @@ class Registro extends Controller {
 	 * @author: 
 	 */
 	public function cargarAdjunto() {
-		$this->smarty->display('Registro/cargar_adjunto.tpl');
+		$this->smarty->display('Paciente/cargar_adjunto.tpl');
 	}
 
 	/**
@@ -674,7 +674,7 @@ class Registro extends Controller {
 			$this->view->assign('success', $success);
 			$this->view->assign('mensaje', $mensaje);
 
-			$this->view->assign('template', $this->view->fetch('Registro/cargar_adjunto.tpl'));
+			$this->view->assign('template', $this->view->fetch('Paciente/cargar_adjunto.tpl'));
 			$this->view->display('template_iframe.tpl');
 		}
 	}
@@ -862,7 +862,7 @@ class Registro extends Controller {
 			'id_usuario_crea' => $_SESSION['id'],
 		);
 
-		$id_adjunto = $this->_DAOAdjuntos->insert($ins_adjunto);
+		$id_adjunto = $this->_DAOAdjunto->insert($ins_adjunto);
 		$grilla = "";
 
 		if ($id_adjunto) {
@@ -883,7 +883,7 @@ class Registro extends Controller {
 			fclose($out);
 
 			//Grilla Adjuntos
-			$arrAdjuntos = $this->_DAOAdjuntos->getListaAdjuntosRegistro($id_registro);
+			$arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($id_registro);
 			$this->smarty->assign('arrAdjuntos', $arrAdjuntos);
 			$grilla = $this->smarty->fetch('avanzados/grillaAdjuntos.tpl');
 
