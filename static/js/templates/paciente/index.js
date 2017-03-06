@@ -9,14 +9,14 @@
 			async	: true,
 			data	: {id_registro:id_registro},
 			type	: "post",
-			url		: BASE_URI + "index.php/Registro/GuardarReconoce", 
+			url		: BASE_URI + "index.php/Paciente/GuardarReconoce", 
 			error	: function(xhr, textStatus, errorThrown){
 						xModal.danger('Error: No se pudo guardar');
 			},
 			success	: function(data){
 						if(data.correcto){
 							xModal.success('Éxito: información guardada!');
-							setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
+							setTimeout(function() { location.href = BASE_URI + "index.php/Paciente"; }, 2000);
 						} else {
 							xModal.info('Error:  No se pudo guardar');
 						}
