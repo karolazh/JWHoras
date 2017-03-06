@@ -910,4 +910,32 @@ class Paciente extends Controller {
 		echo $json;
 	}
 
+	/**
+	* Descripción : Generar PDF de Consentimiento con los Datos del Paciente
+	* @author: Victor Retamal <victor.retamal@cosof.cl>
+	* @param 
+	* @return PDF
+	*/
+	public function generarConsentimiento() {
+        $this->load->lib('MPdf', false);
+		#$parametros			= $this->_request->getParams();
+		$nombre_paciente	= 'nombre_paciente'; #$parametros['nombre_paciente'];
+		$rut_paciente		= '11111111-1'; #$parametros['rut_paciente'];
+		$filename			= 'Consentimiento_'.$rut_paciente.'.pdf';
+		$fecha_actual		= date('d-m-Y');
+		$nombre_usuario		= $_SESSION['nombre'];
+		$rut_usuario		= $_SESSION['rut'];
+			
+		$this->smarty->assign('nombre_paciente',$nombre_paciente);				
+		$this->smarty->assign('rut_paciente',$rut_paciente);
+		$this->smarty->assign('fecha_actual',$fecha_actual);
+		$this->smarty->assign('nombre_usuario',$nombre_usuario);
+		$this->smarty->assign('rut_usuario',$rut_usuario);
+		$html = $this->smarty->fetch('pdf/consentimiento.tpl');	
+		
+		header('Content-type: application/pdf');
+		header("Content-Disposition: inline; filename='$filename'");
+		echo crear_mpdf($html, $filename, false, 'I');
+	}
+
 }
