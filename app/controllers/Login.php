@@ -20,9 +20,11 @@
 =============================================================================
 !Testing 			: NA
 =============================================================================
-!ControlCambio
---------------
-!cVersion !cFecha   !cProgramador   !cDescripcion 
+*!ControlCambio
+*--------------
+*!cProgramador					!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*<orlando.vazquezl@cosof.cl>	06-05-2017	Modificación referencias a DAO's de acuerdo a nueva estructura de BD.
 -----------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
@@ -32,10 +34,10 @@
 
 class Login extends Controller {
 
-    protected $_DAOUsuarios;
+    protected $_DAOUsuario;
     protected $_DAORegion;
     protected $_DAOComuna;
-    protected $_DAOProvincias;
+    protected $_DAOProvincia;
     protected $DAOAuditoriaLogin;
 
     /*** Constructor ***/
@@ -44,10 +46,10 @@ class Login extends Controller {
 		include_once("app/libs/nusoap/lib/nusoap.php");
 		
         $this->load->lib('Seguridad', false);
-        $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
+        $this->_DAOUsuario = $this->load->model("DAOUsuario");
         $this->_DAORegion = $this->load->model("DAORegion");
         $this->_DAOComuna = $this->load->model("DAOComuna");
-        $this->_DAOProvincias = $this->load->model("DAOProvincias");
+        $this->_DAOProvincia = $this->load->model("DAOProvincia");
         $this->_DAOAuditoriaLogin = $this->load->model("DAOAuditoriaLogin");
     }
 
@@ -55,7 +57,7 @@ class Login extends Controller {
         $session = New Zend_Session_Namespace("usuario_carpeta");
 
         if (isset($session->id)) {
-            $usuario = $this->_DAOUsuarios->getById($session->id);
+            $usuario = $this->_DAOUsuario->getById($session->id);
             if (!is_null($usuario)) {
                 header("location: index.php/Home/dashboard");
                 die();
@@ -83,7 +85,7 @@ class Login extends Controller {
 		$region			= "";
 		$provincia		= "";
 
-        $usuario		= $this->_DAOUsuarios->getLogin($rut, $password);
+        $usuario		= $this->_DAOUsuario->getLogin($rut, $password);
 
         if (empty($usuario->fc_ultimo_login)) {
 			$primer_login = TRUE;
@@ -152,7 +154,7 @@ class Login extends Controller {
 		$usuario		= array();
 
 		if( isset($rut_usuario) and trim($rut_usuario) != "" ){
-			$usuario		= $this->_DAOUsuarios->getLoginMidas(strtolower($rut_usuario));
+			$usuario		= $this->_DAOUsuario->getLoginMidas(strtolower($rut_usuario));
 		}
 
 		if($usuario){			
@@ -193,7 +195,7 @@ class Login extends Controller {
 			$arr		= $ws->call('validarToken', $param);
 
 			if(isset($arr['rut']) and trim($arr['rut']) != "" ){
-				$usuario	= $this->_DAOUsuarios->getLoginMidas(strtolower($arr['rut']));
+				$usuario	= $this->_DAOUsuario->getLoginMidas(strtolower($arr['rut']));
 			}else{
 				$this->smarty->assign("hidden", "");
 				$this->smarty->assign("texto_error", $arr['error']['GlosaError']);
@@ -215,7 +217,7 @@ class Login extends Controller {
 					if (!$primer_login) {
 						$ultimo_login	= date('Y-m-d H:i:s');
 						$datos			= array($ultimo_login, $session->id);
-						$upd			= $this->_DAOUsuarios->setUltimoLogin($datos);
+						$upd			= $this->_DAOUsuario->setUltimoLogin($datos);
 					}
 
 					$_SESSION['id']				= $usuario->id_usuario;
@@ -294,7 +296,7 @@ class Login extends Controller {
             $ultimo_login	= date('Y-m-d H:i:s');
             $datos			= array($password, $ultimo_login, $session->id);
 
-            $upd = $this->_DAOUsuarios->setPassword($datos);
+            $upd = $this->_DAOUsuario->setPassword($datos);
             if ($upd) {
                 $primer_login = FALSE;
                 $_SESSION['primer_login'] = $primer_login;
@@ -327,7 +329,7 @@ class Login extends Controller {
         $destinatario	= "";
 
         if (trim($this->_request->getParam("rut")) != "") {
-            $usuario	= $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
+            $usuario	= $this->_DAOUsuario->getByRut($this->_request->getParam("rut"));
 
             if (!is_null($usuario)) {
                 $correcto	= true;
@@ -338,7 +340,7 @@ class Login extends Controller {
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);
                 $ultimo_login = NULL;
-                $this->_DAOUsuarios->update(
+                $this->_DAOUsuario->update(
                         array("gl_password" => $cadenahash, "fc_ultimo_login" => $ultimo_login), $usuario->id_usuario, "id_usuario"
                 );
 
