@@ -5,16 +5,17 @@
 * Sistema		: PREVENCION DE FEMICIDIOS
 * Descripcion	: Modelo para Tabla pre_empa
 * Plataforma	: !PHP
-* Creacion		: 22/02/2017
+* Creacion		: 16/02/2017
 * @name			DAOEmpa.php
 * @version		1.0
-* @author		David Gusman <david.guzman@cosof.cl>
+* @author		Carolina Zamora <carolina.zamora@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
-*
+*<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a campos de la BD antigua
+* 
 *-----------------------------------------------------------------------------
 *****************************************************************************
 */
@@ -83,7 +84,7 @@ class DAOEmpa extends Model{
 						FROM pre_empa emp
 							LEFT JOIN pre_paciente reg ON reg.id_paciente = emp.id_paciente
 							LEFT JOIN pre_comuna com ON com.id_comuna = emp.id_comuna
-							LEFT JOIN pre_institucion ins ON ins.id_institucion = emp.id_institucion
+							LEFT JOIN pre_centro_salud ins ON ins.id_centro_salud = emp.id_institucion
 							LEFT JOIN pre_usuario usr ON usr.id_usuario = emp.id_usuario_crea
 						WHERE emp.id_paciente =  ?
 							AND nr_orden= ?

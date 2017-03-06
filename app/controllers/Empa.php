@@ -1,33 +1,23 @@
 <?php
 
-/* 
-!IniHeaderDoc
+/**
 *****************************************************************************
-!NombreObjeto 		: Empa.php
-!Sistema 	  		: PREVENCIÓN DE FEMICIDIOS
-!Modulo 	  		: NA
-!Descripcion  		: 	
-!Plataforma   		: !PHP
-!Perfil       		: 
-!Itinerado    		: NA
-!Uso          		: NA
-!Autor        		: David Gusman <david.guzman@cosof.cl>
-!Creacion     		: 20/02/2017
-!Retornos/Salidas 	: NA
-!OrigenReq        	: NA
-=============================================================================
-!Parametros 		: NA 
-=============================================================================
-!Testing 			: NA
-=============================================================================
-!ControlCambio
---------------
-!cVersion !cFecha   !cProgramador   !cDescripcion 
------------------------------------------------------------------------------
-
------------------------------------------------------------------------------
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Controlador para el formulario EMPA
+* Plataforma	: !PHP
+* Creacion		: 16/02/2017
+* @name			Empa.php
+* @version		1.0
+* @author		Carolina Zamora <carolina.zamora@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a DAO's
+*
+*-----------------------------------------------------------------------------
 *****************************************************************************
-!EndHeaderDoc 
 */
 
 class Empa extends Controller{
@@ -356,7 +346,7 @@ class Empa extends Controller{
 			$datos_evento['gl_descripcion'] = "Empa modificado el : " . Fechas::fechaHoy();
 			$datos_evento['bo_estado'] = 1;
 			$datos_evento['id_usuario_crea'] = $session->id;
-			$resp = $this->_DAOEventos->insEventoEmpa($datos_evento);
+			$resp = $this->_DAOEvento->insEventoEmpa($datos_evento);
 			if ($resp) {
 				$correcto = TRUE;
 			} else {
@@ -370,7 +360,7 @@ class Empa extends Controller{
 				$datos_evento['gl_descripcion'] = "Empa finalizado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado'] = 1;
 				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEventos->insEventoEmpa($datos_evento);
+				$resp = $this->_DAOEvento->insEventoEmpa($datos_evento);
 				if ($resp) {
 					$correcto = TRUE;
 				} else {
@@ -407,7 +397,7 @@ class Empa extends Controller{
 			$datos_evento['gl_descripcion'] = "AUDIT del EMPA ".$id_empa."  modificado el : " . Fechas::fechaHoy();
 			$datos_evento['bo_estado'] = 1;
 			$datos_evento['id_usuario_crea'] = $session->id;
-			$correcto = $this->_DAOEventos->insEventoEmpa($datos_evento);
+			$correcto = $this->_DAOEvento->insEventoEmpa($datos_evento);
 		} else {
 			$error = true;
 		}

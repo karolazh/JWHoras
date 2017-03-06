@@ -5,16 +5,16 @@
 * Sistema		: PREVENCION DE FEMICIDIOS
 * Descripcion	: Modelo para Tabla pre_paciente
 * Plataforma	: !PHP
-* Creacion		: 22/02/2017
+* Creacion		: 20/02/2017
 * @name			DAOPaciente.php
 * @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* @author		David Guzman <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
-*
+*<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a BD antigua
 *-----------------------------------------------------------------------------
 *****************************************************************************
 */
@@ -63,8 +63,8 @@ class DAOPaciente extends Model{
 						e.gl_nombre_establecimiento as gl_centro_salud,
 						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento_vista
 					FROM pre_paciente AS paciente
-                        LEFT JOIN pre_comunas c ON paciente.id_comuna = c.id_comuna
-                        LEFT JOIN pre_establecimientos_salud e ON paciente.id_centro_salud = e.id_establecimiento
+                        LEFT JOIN pre_comuna c ON paciente.id_comuna = c.id_comuna
+                        LEFT JOIN pre_centro_salud e ON paciente.id_centro_salud = e.id_establecimiento
 					WHERE gl_rut = ?";
 
         $param		= array($gl_rut);
@@ -92,12 +92,12 @@ class DAOPaciente extends Model{
 							c.gl_nombre_comuna,
 							e.gl_nombre_estado_caso,
 							e.id_estado_caso,
-							(select count(*) from pre_motivo_consulta where pre_motivo_consulta.id_paciente = paciente.id_paciente ) as nr_motivo_consulta,
+							(select count(*) from pre_paciente_registro where pre_paciente_registro.id_paciente = paciente.id_paciente ) as nr_motivo_consulta,
 							datediff(now(),paciente.fc_crea) as nr_dias_primera_visita
 						FROM pre_paciente paciente 
-							LEFT JOIN pre_institucion i ON i.id_institucion = paciente.id_institucion
-							LEFT JOIN pre_comunas c ON c.id_comuna = paciente.id_comuna
-							LEFT JOIN pre_estados_caso e ON e.id_estado_caso = paciente.id_estado_caso";
+							LEFT JOIN pre_centro_salud i ON i.id_centro_salud = paciente.id_institucion
+							LEFT JOIN pre_comuna c ON c.id_comuna = paciente.id_comuna
+							LEFT JOIN pre_paciente_estado e ON e.id_estado_caso = paciente.id_estado_caso";
 
         $resultado	= $this->db->getQuery($query);
 
@@ -141,10 +141,10 @@ class DAOPaciente extends Model{
 						FROM pre_paciente AS paciente
 							LEFT JOIN pre_comunas com ON com.id_comuna = paciente.id_comuna
 							LEFT JOIN pre_provincia pro ON pro.id_provincia = com.id_provincia
-							LEFT JOIN pre_regiones rg ON rg.id_region = pro.id_region
-							LEFT JOIN pre_institucion ins ON ins.id_institucion = paciente.id_institucion
+							LEFT JOIN pre_region rg ON rg.id_region = pro.id_region
+							LEFT JOIN pre_centro_salud ins ON ins.id_centro_salud = paciente.id_institucion
 							LEFT JOIN pre_prevision pre ON pre.id_prevision = paciente.id_prevision
-							LEFT JOIN pre_estados_caso est ON est.id_estado_caso = paciente.id_estado_caso
+							LEFT JOIN pre_paciente_estado est ON est.id_estado_caso = paciente.id_estado_caso
 						WHERE paciente.id_paciente = ?";
 
         $param		= array($id_paciente);
@@ -184,13 +184,13 @@ class DAOPaciente extends Model{
 							IFNULL(ec.gl_nombre_estado_caso, 'N/D') as gl_nombre_estado_caso,
 							IFNULL(i.gl_nombre, 'N/D') as gl_nombre_institucion
 						FROM pre_paciente AS paciente
-							LEFT JOIN pre_adjuntos AS a on (paciente.id_paciente = a.id_paciente AND a.id_tipo_adjunto = 1)
+							LEFT JOIN pre_adjunto AS a on (paciente.id_paciente = a.id_paciente AND a.id_tipo_adjunto = 1)
 							LEFT JOIN pre_prevision AS p USING (id_prevision)
-							LEFT JOIN pre_comunas AS c USING (id_comuna)
-							LEFT JOIN pre_regiones AS r on paciente.id_region = r.id_region
-							LEFT JOIN pre_usuarios AS u ON paciente.id_usuario_crea = u.id_usuario
-							LEFT JOIN pre_estados_caso AS ec USING (id_estado_caso)
-							LEFT JOIN pre_institucion AS i ON paciente.id_institucion = i.id_institucion
+							LEFT JOIN pre_comuna AS c USING (id_comuna)
+							LEFT JOIN pre_region AS r on paciente.id_region = r.id_region
+							LEFT JOIN pre_usuario AS u ON paciente.id_usuario_crea = u.id_usuario
+							LEFT JOIN pre_paciente_estado AS ec USING (id_estado_caso)
+							LEFT JOIN pre_centro_salud AS i ON paciente.id_centro_salud = i.id_institucion
 						WHERE paciente.id_paciente = ?";
 
         $param		= array($id_paciente);
@@ -332,13 +332,13 @@ class DAOPaciente extends Model{
                         date_format(reg.fc_actualiza,'%d-%m-%Y') AS fc_actualiza,
                         reg.id_usuario_crea AS usuario_crea, 
                         reg.id_usuario_actualiza AS usuario_actualiza
-                    FROM pre_registro reg
+                    FROM pre_paciente reg
                     left join pre_comunas com on com.id_comuna = reg.id_comuna
                     left join pre_provincias pro on pro.id_provincia = com.id_provincia
-                    left join pre_regiones rg on rg.id_region = pro.id_region
-                    left join pre_institucion ins on ins.id_institucion = reg.id_institucion
+                    left join pre_region rg on rg.id_region = pro.id_region
+                    left join pre_centro_salud ins on ins.id_centro_salud = reg.id_institucion
                     left join pre_prevision pre on pre.id_prevision = reg.id_prevision
-                    left join pre_estados_caso est on est.id_estado_caso = reg.id_estado_caso
+                    left join pre_paciente_estado est on est.id_estado_caso = reg.id_estado_caso
                     WHERE reg.id_registro = ?";
 
         $param = array($id_registro);

@@ -5,7 +5,7 @@
 * Sistema		: PREVENCION DE FEMICIDIOS
 * Descripcion	: Modelo para Tabla pre_paciente_registro
 * Plataforma	: !PHP
-* Creacion		: 27/02/2017
+* Creacion		: 03/03/2017
 * @name			DAOPacienteRegistro.php
 * @version		1.0
 * @author		Victor Retamal <victor.retamal@cosof.cl>
@@ -14,7 +14,7 @@
 *--------------
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
-*
+*<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a campos de la BD antigua
 *-----------------------------------------------------------------------------
 *****************************************************************************
 */
@@ -72,7 +72,7 @@ class DAOPacienteRegistro extends Model{
 							ins.gl_nombre as gl_nombre_institucion
 						FROM pre_paciente_registro registro
 							LEFT JOIN pre_usuario usu ON registro.id_usuario_crea = usu.id_usuario
-							LEFT JOIN pre_institucion ins ON registro.id_institucion = ins.id_institucion
+							LEFT JOIN pre_centro_salud ins ON registro.id_centro_salud = ins.id_institucion
 						WHERE id_paciente = ?;
 						ORDER BY registro.id_registro DESC";
 

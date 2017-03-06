@@ -30,7 +30,7 @@ class Reconoce extends Controller {
     protected $_DAOMotivoConsulta;
     protected $_DAOUsuario;
     protected $_DAOEstadoCaso;
-    protected $_DAOEventosTipo;
+    protected $_DAOEventoTipo;
     protected $_DAOAdjuntos;
     protected $_DAOAdjuntosTipo;
     protected $_DAOEmpa;
