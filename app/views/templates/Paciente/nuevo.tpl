@@ -5,8 +5,8 @@
     <h1><i class="fa fa-plus"></i>Nuevo</h1>
 	<ol class="breadcrumb">
 		<li><a href="{$base_url}/Administracion/noticias">
-				<i class="fa fa-folder-open"></i>&nbsp;Registros</a></li>
-		<li class="active"> &nbsp;Nuevo Registro</li>
+				<i class="fa fa-folder-open"></i>&nbsp;Pacientes</a></li>
+		<li class="active"> &nbsp;Nuevo Paciente</li>
 	</ol>
 </section>
 
@@ -35,7 +35,7 @@
 						<div class="col-sm-2">
 							<input type="text" name="rut" id="rut" maxlength="12" onkeyup="formateaRut(this), this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="if (Valida_Rut(this)){ldelim}
 										validarVacio(this, 'Por favor Ingrese Rut');
-										Registro.cargarRegistro();{rdelim}" placeholder="Rut paciente" class="form-control">
+										Paciente.cargar();{rdelim}" placeholder="Rut paciente" class="form-control">
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
 						<div class="col-sm-1">
@@ -57,7 +57,7 @@
 						<label for="nombres" class="control-label col-sm-2 ">N°/Pasaporte Extranjero</label>
 						<div class="col-sm-2">
 							<input type="text" name="inputextranjero" id="inputextranjero" maxlength="12" id="inputextranjero" value='' class="form-control" placeholder="Ingrese N°/Pasaporte Extranjero" onblur="validarVacio(this, 'Por favor Ingrese N°/Pasaporte Extranjero');
-									Registro.cargarRegistro();">
+									Paciente.cargar();">
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
 						{*
@@ -157,7 +157,7 @@
 						<label class="control-label  col-sm-4">Comuna (*)</label>
 						<div class="col-sm-6">
 							<select for="comuna" class="form-control" id="comuna" name="comuna" 
-									onchange="Registro.cargarCentroSaludporComuna(this.value, 'centrosalud')"
+									onchange="Paciente.cargarCentroSaludporComuna(this.value, 'centrosalud')"
 									onblur="validarVacio(this, 'Por favor Seleccione una Comuna')">
 								<option value="0">Seleccione una Comuna</option>
 							</select>
@@ -240,7 +240,7 @@
 							<div class="col-sm-4"></div>
 							<div class="col-sm-2">
 								<button type="button" id="btnUploadUno" class="btn btn-sm btn-success"
-										onclick="xModal.open('{$smarty.const.BASE_URI}/Registro/cargarAdjunto', 'Cargar Adjunto', '', 1, true, '150');" >
+										onclick="xModal.open('{$smarty.const.BASE_URI}/Paciente/cargarAdjunto', 'Cargar Adjunto', '', 1, true, '150');" >
 									<i class="fa fa-upload" aria-hidden="true"></i> Subir Firmado
 								</button>
 							</div>
@@ -281,7 +281,7 @@
 						<i class="fa fa-save"></i>  Guardar
 					</button>&nbsp;
 					<button type="button" id="cancelar"  class="btn btn-default" 
-							onclick="location.href = '{$base_url}/Registro/index'">
+							onclick="location.href = '{$base_url}/Paciente/index'">
 						<i class="fa fa-remove"></i>  Cancelar
 					</button>
 					<br/><br/>

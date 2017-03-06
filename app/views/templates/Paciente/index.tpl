@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1><i class="fa fa-book"></i>&nbsp; Registros</h1>
     <div class="col-md-12 text-right">
-        <button type="button" id="ingresar" onclick="location.href = '{$base_url}/Registro/nuevo'"
+        <button type="button" id="ingresar" onclick="location.href = '{$base_url}/Paciente/nuevo'"
                 class="btn btn-success">
             <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Registro
         </button>
@@ -36,12 +36,12 @@
 					<tbody>
 						{foreach $arrResultado as $item}
 							<tr>
-								<!-- td class="text-center"> {$item->id_registro} </td -->
+								<!-- td class="text-center"> {$item->id_paciente} </td -->
 								<td class="text-center" nowrap> {$item->gl_identificacion} </td>
 								<td class="text-center"> {$item->fc_crea} </td>
 								<td class="text-left"> {$item->gl_nombres} {$item->gl_apellidos} </td>
 								<td class="text-left"> {$item->gl_nombre_comuna} </td>
-								<td class="text-center"> {$item->gl_nombre} </td>
+								<td class="text-center"> {$item->gl_institucion} </td>
 								<td class="text-center" nowrap> {$item->gl_nombre_estado_caso} </td>
 								<td class="text-center" nowrap> {$item->nr_motivo_consulta} </td>
 								<td class="text-center" nowrap> 
@@ -63,7 +63,7 @@
 								<td class="text-center" nowrap>
 									
 										<button type="button" 
-												onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/ver/{$item->id_registro}', 'Detalle Registro', 85);" 
+												onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/ver/{$item->id_registro}', 'Detalle Registro', 85);" 
 												data-toggle="tooltip" 
 												class="btn btn-xs btn-info"
 												title="Ver Registro">
@@ -84,7 +84,7 @@
 										{/if}
 										
 										<button type="button"
-												onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
+												onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/bitacora/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
 												data-toggle="tooltip" 
 												title="Revisar bitácora" 
 												class="btn btn-xs btn-primary">

@@ -64,7 +64,7 @@ class DAOPaciente extends Model{
 						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento_vista
 					FROM pre_paciente AS paciente
                         LEFT JOIN pre_comuna c ON paciente.id_comuna = c.id_comuna
-                        LEFT JOIN pre_centro_salud e ON paciente.id_centro_salud = e.id_establecimiento
+                        LEFT JOIN pre_centro_salud e ON paciente.id_centro_salud = e.id_centro_salud
 					WHERE gl_rut = ?";
 
         $param		= array($gl_rut);
@@ -95,7 +95,7 @@ class DAOPaciente extends Model{
 							(select count(*) from pre_paciente_registro where pre_paciente_registro.id_paciente = paciente.id_paciente ) as nr_motivo_consulta,
 							datediff(now(),paciente.fc_crea) as nr_dias_primera_visita
 						FROM pre_paciente paciente 
-							LEFT JOIN pre_centro_salud i ON i.id_centro_salud = paciente.id_centro_salud
+							LEFT JOIN pre_centro_salud i ON i.id_centro_salud = paciente.id_institucion
 							LEFT JOIN pre_comuna c ON c.id_comuna = paciente.id_comuna
 							LEFT JOIN pre_paciente_estado e ON e.id_paciente_estado = paciente.id_paciente_estado";
 
