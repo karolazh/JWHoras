@@ -6,7 +6,7 @@
 * Descripcion	: Modelo para Tabla pre_evento
 * Plataforma	: !PHP
 * Creacion		: 24/02/2017
-* @name			DAOEventos.php
+* @name			DAOEvento.php
 * @version		1.0
 * @author		Orlando Vázquez <orlando.vazquez@cosof.cl>
 *=============================================================================
@@ -31,32 +31,32 @@ class DAOEvento extends Model{
     }
 
     public function getLista(){
-        $query		= "	SELECT * FROM ".$this->_tabla;
-        $resultado	= $this->db->getQuery($query);
+        $query	= "	SELECT * FROM ".$this->_tabla;
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
 
     public function getById($id){
-        $query		= "	SELECT * FROM ".$this->_tabla."
+        $query	= "	SELECT * FROM ".$this->_tabla."
 						WHERE ".$this->_primaria." = ?";
 
-		$param		= array($id);
-        $resultado	= $this->db->getQuery($query,$param);
+		$param	= array($id);
+        $result	= $this->db->getQuery($query,$param);
 		
-        if($resultado->numRows > 0){
-            return $resultado->rows->row_0;
+        if($result->numRows > 0){
+            return $result->rows->row_0;
         }else{
             return NULL;
         }
     }
 
 	public function selBusquedaEventos($parametros){
-        $query		= "	SELECT
+        $query	= "	SELECT
 							e.id_evento, 
 							e.gl_descripcion,
 							e.id_evento_tipo,
@@ -75,10 +75,10 @@ class DAOEvento extends Model{
 			$query	.= " AND e.id_paciente = " . $parametros["id_paciente"];
 		}
 
-        $resultado	= $this->db->getQuery($query);
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
@@ -99,7 +99,7 @@ class DAOEvento extends Model{
         if($this->db->execQuery($query, $param)) {
             return $this->db->getLastId();
         }else{
-            return false;
+            return FALSE;
         }
     }
 
@@ -109,11 +109,11 @@ class DAOEvento extends Model{
 					WHERE  " . $this->_primaria . " = ? ";
 
 		$param	= array($datos['id_evento_tipo'], $datos['id_evento']);
-
+		
         if($this->db->execQuery($query, $param)) {
-			return true;
+			return TRUE;
         }else{
-			return false;
+			return FALSE;
         }
     }
 
@@ -125,32 +125,32 @@ class DAOEvento extends Model{
 		$param	= array($datos['gl_descripcion'], $datos['id_evento']);
 
         if($this->db->execQuery($query, $param)) {
-            return true;
+            return TRUE;
         }else{
-            return false;
+            return FALSE;
         }
     }
 
     public function getEventosRegistro($id_paciente){
-        $query		= "	SELECT
-							eve.id_evento AS id_evento, 
-							eve.id_evento_tipo AS id_evento_tipo, 
-							tip.gl_nombre_evento_tipo AS nombre_evento,
-							eve.id_paciente AS id_paciente,
-							eve.gl_descripcion AS glosa,
-							date_format(eve.fc_crea,'%d-%m-%Y') AS fc_crea,
-							usr.gl_rut AS rut,
-							concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
-						FROM pre_evento eve
-						LEFT JOIN pre_evento_tipo tip ON tip.id_evento_tipo = eve.id_evento_tipo
-						LEFT JOIN pre_usuario usr ON usr.id_usuario = eve.id_usuario_crea
-						WHERE eve.id_paciente = ?";
+        $query	= "	SELECT
+						eve.id_evento AS id_evento, 
+						eve.id_evento_tipo AS id_evento_tipo, 
+						tip.gl_nombre_evento_tipo AS nombre_evento,
+						eve.id_paciente AS id_paciente,
+						eve.gl_descripcion AS glosa,
+						date_format(eve.fc_crea,'%d-%m-%Y') AS fc_crea,
+						usr.gl_rut AS rut,
+						concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
+					FROM pre_evento eve
+					LEFT JOIN pre_evento_tipo tip ON tip.id_evento_tipo = eve.id_evento_tipo
+					LEFT JOIN pre_usuario usr ON usr.id_usuario = eve.id_usuario_crea
+					WHERE eve.id_paciente = ?";
 
-		$param		= array($id_paciente);
-        $resultado	= $this->db->getQuery($query,$param);
+		$param	= array($id_paciente);
+        $result	= $this->db->getQuery($query,$param);
         
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }

@@ -6,7 +6,7 @@
 * Descripcion	: Modelo para Tabla pre_auditoria_login
 * Plataforma	: !PHP
 * Creacion		: 03/03/2017
-* @name			DAOUsuario.php
+* @name			DAOAuditoriaLogin.php
 * @version		1.0
 * @author		Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
@@ -50,7 +50,7 @@ class DAOAuditoriaLogin extends Model {
         if($result->numRows > 0){
             return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 

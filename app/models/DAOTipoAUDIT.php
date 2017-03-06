@@ -1,5 +1,24 @@
 <?php
 
+/**
+*****************************************************************************
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Modelo para Tabla pre_tipo_audit
+* Plataforma	: !PHP
+* Creacion		: 03/03/2017
+* @name			DAOTipoAUDIT.php
+* @version		1.0
+* @author		Orlando Vazquez <orlando.vazquez@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*
+*-----------------------------------------------------------------------------
+*****************************************************************************
+*/
+
 class DAOTipoAUDIT extends Model{
 
     protected $_tabla			= "pre_tipo_audit";
@@ -11,29 +30,46 @@ class DAOTipoAUDIT extends Model{
         parent::__construct();
     }
 
-    public function getListaTipoAUDIT(){
-        $query		= "	SELECT * FROM ".$this->_tabla;
-        $resultado	= $this->db->getQuery($query);
+    public function getLista(){
+        $query	= "	SELECT * FROM ".$this->_tabla;
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
+        }else{
+            return NULL;
+        }
+    }
+
+    public function getById($id){
+        $query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE ".$this->_primaria." = ?";
+
+		$param	= array($id);
+        $result	= $this->db->getQuery($query,$param);
+		
+        if($result->numRows > 0){
+            return $result->rows->row_0;
         }else{
             return NULL;
         }
     }
 
     public function getTipoAUDIT($audit){
-        $query	= "	SELECT  * 
-                                FROM ".$this->_tabla
-					
-                              ." WHERE ? BETWEEN nr_min AND nr_max";
+        $query	= "	SELECT * 
+					FROM ".$this->_tabla."
+					WHERE ? BETWEEN nr_min AND nr_max";
 
-	$consulta = $this->db->getQuery($query,array($audit));
-        if($consulta->numRows > 0){
-            return $consulta->rows->row_0;
+		$param	= array($audit);
+		$result = $this->db->getQuery($query,$param);
+
+        if($result->numRows > 0){
+            return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 
 }
+
+?>

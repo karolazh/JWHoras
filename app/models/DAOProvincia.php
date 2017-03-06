@@ -42,7 +42,7 @@ class DAOProvincia extends Model{
 
     public function getById($id){
         $query	= "	SELECT * FROM ".$this->_tabla."
-						WHERE ".$this->_primaria." = ?";
+					WHERE ".$this->_primaria." = ?";
 
 		$param	= array($id);
         $resul	= $this->db->getQuery($query,$param);
@@ -50,7 +50,7 @@ class DAOProvincia extends Model{
         if($resul->numRows > 0){
             return $resul->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 

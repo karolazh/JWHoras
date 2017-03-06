@@ -17,7 +17,7 @@
 </section>
 
 <form id="form" class="form-horizontal">
-	<input type="text" value="{$id_registro}" id="id_paciente" name="id_paciente" >
+	<input type="text" value="{$id_registro}" id="id_paciente" name="id_paciente" class="hidden">
     <input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden">
     <section class="content">
         <div class="panel panel-primary">
