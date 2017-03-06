@@ -47,20 +47,20 @@ class Paciente extends Controller {
         $this->load->lib('Boton', false);
         $this->load->lib('Seguridad', false);
 
-        $this->_DAORegion			= $this->load->model("DAORegion");
-        $this->_DAOComuna               	= $this->load->model("DAOComuna");
-        $this->_DAOPaciente			= $this->load->model("DAOPaciente");
+        $this->_DAORegion				= $this->load->model("DAORegion");
+        $this->_DAOComuna               = $this->load->model("DAOComuna");
+        $this->_DAOPaciente				= $this->load->model("DAOPaciente");
         $this->_DAOTipoEgreso			= $this->load->model("DAOTipoEgreso");
         $this->_DAOPacienteEstado		= $this->load->model("DAOPacienteEstado");
         $this->_DAOPrevision			= $this->load->model("DAOPrevision");
         $this->_DAOPacienteRegistro		= $this->load->model("DAOPacienteRegistro");
-        $this->_DAOUsuario			= $this->load->model("DAOUsuario");
+        $this->_DAOUsuario				= $this->load->model("DAOUsuario");
         $this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
-	$this->_DAOEvento			= $this->load->model("DAOEvento");
+		$this->_DAOEvento				= $this->load->model("DAOEvento");
         $this->_DAOEventosTipo			= $this->load->model("DAOEventosTipo");
-        $this->_DAOAdjunto			= $this->load->model("DAOAdjunto");
+        $this->_DAOAdjunto				= $this->load->model("DAOAdjunto");
         $this->_DAOAdjuntoTipo			= $this->load->model("DAOAdjuntoTipo");
-        $this->_DAOEmpa				= $this->load->model("DAOEmpa");
+        $this->_DAOEmpa					= $this->load->model("DAOEmpa");
         $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
     }
 
@@ -526,13 +526,13 @@ class Paciente extends Controller {
 		if (!empty($_POST['comuna'])) {
 			$comuna = $_POST['comuna'];
 			$comuna = $_POST['comuna'];
-			$daoComuna = $this->load->model('DAOComuna');
-			$centrosalud = $daoComuna->obtCentroSaludporComuna($comuna)->rows;
+			$daoCentroSalud = $this->load->model('DAOCentroSalud');
+			$centrosalud = $daoCentroSalud->getByIdComuna($comuna);
 
 			$i = 0;
 			foreach ($centrosalud as $cSalud) {
-				$json[$i]['id_establecimiento'] = $cSalud->id_establecimiento;
-				$json[$i]['nombre_establecimiento'] = $cSalud->nombre_establecimiento;
+				$json[$i]['id_establecimiento'] = $cSalud->id_centro_salud;
+				$json[$i]['gl_nombre_establecimiento'] = $cSalud->gl_nombre_establecimiento;
 				$i++;
 			}
 		}

@@ -59,7 +59,7 @@
 				async	: true,
 				data	: parametros,
 				type	: "post",
-				url		: BASE_URI + "index.php/Registro/GuardarRegistro", 
+				url		: BASE_URI + "index.php/Paciente/GuardarRegistro", 
 				error	: function(xhr, textStatus, errorThrown){
 							xModal.danger('Error: No se pudo Ingresar un nuevo Registro');
 				},
@@ -67,7 +67,7 @@
 							if(data.correcto){
 
 								xModal.success('Éxito: Se Ingresó nuevo Registro!');
-								setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
+								setTimeout(function() { location.href = BASE_URI + "index.php/Paciente"; }, 2000);
 							} else {
 								xModal.info('Error: No se pudo Ingresar un nuevo Registro');
 							}
@@ -131,7 +131,7 @@
 			async	: true,
 			data	: parametros,
 			type	: "post",
-			url		: BASE_URI + "index.php/Registro/GuardarMotivo", 
+			url		: BASE_URI + "index.php/Paciente/GuardarMotivo", 
 			error	: function(xhr, textStatus, errorThrown){
 						xModal.danger('Error: No se pudo agregar Motivo de Consulta');
 			},
@@ -139,7 +139,7 @@
 						if(data.correcto){
 
 							xModal.success('Éxito: Se Ingresó nuevo Motivo de Consulta!');
-							setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
+							setTimeout(function() { location.href = BASE_URI + "index.php/Paciente"; }, 2000);
 						} else {
 							xModal.info('Error: No se pudo agregar Motivo de Consulta');
 						}
@@ -182,7 +182,7 @@
 			async	: true,
 			data	: parametros,
 			type	: "post",
-			url		: BASE_URI + "index.php/Registro/GuardarMotivo", 
+			url		: BASE_URI + "index.php/Paciente/GuardarMotivo", 
 			error	: function(xhr, textStatus, errorThrown){
 						xModal.danger('Error: No se pudo agregar Motivo de Consulta');
 			},
@@ -190,7 +190,7 @@
 						if(data.correcto){
 
 							xModal.success('Éxito: Se Ingresó nuevo Motivo de Consulta!');
-							setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
+							setTimeout(function() { location.href = BASE_URI + "index.php/Paciente"; }, 2000);
 						} else {
 							xModal.info('Error: No se pudo agregar Motivo de Consulta');
 						}
@@ -210,14 +210,14 @@
 			async	: true,
 			data	: {id_registro:id_registro},
 			type	: "post",
-			url		: BASE_URI + "index.php/Registro/GuardarReconoce", 
+			url		: BASE_URI + "index.php/Paciente/GuardarReconoce", 
 			error	: function(xhr, textStatus, errorThrown){
 						xModal.danger('Error: No se pudo guardar');
 			},
 			success	: function(data){
 						if(data.correcto){
 							xModal.success('Éxito: información guardada!');
-							setTimeout(function() { location.href = BASE_URI + "index.php/Registro"; }, 2000);
+							setTimeout(function() { location.href = BASE_URI + "index.php/Paciente"; }, 2000);
 						} else {
 							xModal.info('Error:  No se pudo guardar');
 						}
@@ -257,8 +257,8 @@
 		return [day, month, year].join('/');
 	}
 
-	var Registro = {
-		cargarRegistro : function(){
+	var Paciente = {
+		cargar : function(){
 			var rut = $("#rut").val();
 			var inputextranjero = $("#inputextranjero").val();
 			if(rut != "" || inputextranjero != ""){
@@ -269,7 +269,7 @@
 					async	: true,
 					data	: {rut:rut,inputextranjero:inputextranjero},
 					type	: "post",
-					url		: BASE_URI + "index.php/Registro/cargarRegistro", 
+					url		: BASE_URI + "index.php/Paciente/cargarRegistro", 
 					error	: function(xhr, textStatus, errorThrown){
 								xModal.danger('Error al Buscar');
 					},
@@ -290,7 +290,7 @@
 										$("#mostrar_motivos_consulta").show();
 									}
 
-									$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Registro/bitacora/"+data.id_registro+"', 'Registro número : "+data.id_registro+"', 85);");
+									$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Paciente/bitacora/"+data.id_registro+"', 'Registro número : "+data.id_registro+"', 85);");
 									$("#id_registro").val(data.id_registro);
 									$("#gl_grupo_tipo").val(data.gl_grupo_tipo);
 									$("#nombres").val(data.gl_nombres);
@@ -356,7 +356,7 @@
 				
 		cargarCentroSaludporComuna : function(comuna,combo,centrosalud){
 			if(comuna != 0){
-				$.post(BASE_URI+'index.php/Registro/cargarCentroSaludporComuna',{comuna:comuna},function(response){
+				$.post(BASE_URI+'index.php/Paciente/cargarCentroSaludporComuna',{comuna:comuna},function(response){
 					var options = '<option value="0">Seleccione un Centro de Salud</option>';
 					$.each(response, function (i, valor) {
 						if(centrosalud == valor.id_establecimiento){
@@ -405,14 +405,14 @@
 	}
 
 	function cargarListadoAdjuntos(){
-		$.post(BASE_URI+'index.php/Registro/cargarListadoAdjuntos',function(response)
+		$.post(BASE_URI+'index.php/Paciente/cargarListadoAdjuntos',function(response)
 		{			
 			parent.$("#listado-adjuntos").html(response).show();
 		});
 	}
 
 	function borrarAdjunto (adjunto){
-		$.post(BASE_URI+'index.php/Registro/borrarAdjunto/'+adjunto,function(response)
+		$.post(BASE_URI+'index.php/Paciente/borrarAdjunto/'+adjunto,function(response)
 		{
 			$("#listado-adjuntos").html(response);
 		});
