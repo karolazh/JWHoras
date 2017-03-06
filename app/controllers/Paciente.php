@@ -3,19 +3,19 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion           : Controller para Registro de Paciente
-* Plataforma            : !PHP
+* Descripcion   : Controller para Registro de Paciente
+* Plataforma    : !PHP
 * Creacion		: 14/02/2017
 * @name			Paciente.php
 * @version		1.0
-* @author		Carolina, Orlando <orlando.vazquez@cosof.cl>
+* @author		Carolina Zamora <carolina.zamora@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
 *<david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
-*
+*<orlando.vazquez@cosof.co> 06-03-2017  ln 391 _DAOMotivoConsulta->insertarMotivoConsulta -> _DAOMotivoConsulta->insertarMotivoConsulta
 *-----------------------------------------------------------------------------
 *****************************************************************************
 */
@@ -388,7 +388,7 @@ class Paciente extends Controller {
 		
 		if ($id_registro) {
 			$correcto = true;
-			$resultado2 = $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros, $id_registro);
+			$resultado2 = $this->_DAOMotivoConsulta->insertar($parametros, $id_registro);
 
 			$session = New Zend_Session_Namespace("usuario_carpeta");
 			$datos_evento['id_registro'] = $id_registro;
@@ -468,7 +468,7 @@ class Paciente extends Controller {
 
 		if (!is_null($obj_registro)) {
 			$edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
-			$arrMotivosConsulta = $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($obj_registro->id_registro);
+			$arrMotivosConsulta = $this->_DAOMotivoConsulta->getByIdPaciente($obj_registro->id_registro);
 		}
 		$this->smarty->assign('id_registro', $obj_registro->id_registro);
 		$this->smarty->assign('rut', $obj_registro->gl_rut);
@@ -558,7 +558,7 @@ class Paciente extends Controller {
 		$json = array();
 
 		if ($registro) {
-			$arr_motivos = $this->_DAOMotivoConsulta->getListaMotivoConsultaByRegistro($registro->id_registro);
+			$arr_motivos = $this->_DAOMotivoConsulta->getByIdPaciente($registro->id_registro);
 			$tabla_motivos = "";
 			$div_superior = "<div class='top-spaced'></div>
 								<div class='panel panel-primary'>
