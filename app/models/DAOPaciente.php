@@ -203,7 +203,7 @@ class DAOPaciente extends Model{
         }
     }
 
-	public function getRegistroByPasaporte($pasaporte) {
+	public function getByPasaporte($pasaporte) {
         $query	= "	SELECT 
 						p.*,
 						c.gl_nombre_comuna,
