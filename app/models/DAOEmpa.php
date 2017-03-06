@@ -78,7 +78,7 @@ class DAOEmpa extends Model{
 							date_format(emp.fc_empa,'%d-%m-%Y') AS fc_empa,
 							reg.gl_rut AS rut,
 							com.gl_nombre_comuna AS comuna,
-							ins.gl_nombre AS institucion,
+							ins.gl_nombre_establecimiento AS institucion,
 							usr.gl_rut AS rut,
 							concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
 						FROM pre_empa emp
@@ -91,7 +91,8 @@ class DAOEmpa extends Model{
 						ORDER BY emp.fc_empa DESC";
 
 		$param		= array($id_paciente,$nr_orden);
-        $result	= $this->db->getQuery($query,array($id_paciente));
+        //$result	= $this->db->getQuery($query,array($id_paciente));
+        $result	= $this->db->getQuery($query,$param);
 
         if($result->numRows > 0){
             return $result->rows;

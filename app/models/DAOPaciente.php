@@ -137,9 +137,9 @@ class DAOPaciente extends Model{
 							rg.gl_nombre_region AS region,
 							pro.gl_nombre_provincia AS provincia,
 							com.gl_nombre_comuna AS comuna,
-							ins.gl_nombre AS institucion
+							ins.gl_nombre_establecimiento AS institucion
 						FROM pre_paciente AS paciente
-							LEFT JOIN pre_comunas com ON com.id_comuna = paciente.id_comuna
+							LEFT JOIN pre_comuna com ON com.id_comuna = paciente.id_comuna
 							LEFT JOIN pre_provincia pro ON pro.id_provincia = com.id_provincia
 							LEFT JOIN pre_region rg ON rg.id_region = pro.id_region
 							LEFT JOIN pre_centro_salud ins ON ins.id_centro_salud = paciente.id_institucion
@@ -323,7 +323,7 @@ class DAOPaciente extends Model{
                         reg.bo_reconoce AS reconoce, 
                         reg.bo_acepta_programa AS acepta,
                         date_format(reg.fc_crea,'%d-%m-%Y') AS fc_crea,
-                        ins.gl_nombre AS institucion,
+                        ins.gl_nombre_establecimiento AS institucion,
                         reg.id_centro_salud AS centro_salud, 
                         
                         reg.id_adjunto AS id_adjunto,
@@ -333,7 +333,7 @@ class DAOPaciente extends Model{
                         reg.id_usuario_crea AS usuario_crea, 
                         reg.id_usuario_actualiza AS usuario_actualiza
                     FROM pre_paciente reg
-                    left join pre_comunas com on com.id_comuna = reg.id_comuna
+                    left join pre_comuna com on com.id_comuna = reg.id_comuna
                     left join pre_provincias pro on pro.id_provincia = com.id_provincia
                     left join pre_region rg on rg.id_region = pro.id_region
                     left join pre_centro_salud ins on ins.id_centro_salud = reg.id_institucion

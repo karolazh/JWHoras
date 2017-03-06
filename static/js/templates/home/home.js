@@ -1,3 +1,4 @@
+var cargar_mapa = true;
 
 var Home = {
 
@@ -127,6 +128,51 @@ var Home = {
         }
 
       } );
+    },
+
+    initMapaGestor : function(){
+        
+        if(cargar_mapa){
+          var mapa = new MapaFormulario('mapa_gestor');
+
+          mapa.seteaLatitud($("#latitud").val());
+          mapa.seteaLongitud($("#longitud").val());
+          mapa.seteaZoom(4);
+          mapa.inicio();
+          mapa.cargaMapa();  
+          cargar_mapa = false;
+
+          $.ajax({
+            url : BASE_URI + 'index.php/Home/pacientesMapaDashboard',
+            type : 'post',
+            dataType : 'json',
+            success : function(response){
+              var total = response.pacientes.length;
+              var icono = ''
+              for(var i = 0; i < total; i++){
+                var posicion = new google.maps.LatLng( parseFloat(response.pacientes[i].latitud), parseFloat(response.pacientes[i].longitud)) ;
+
+                var paciente = new google.maps.Marker({
+                    id : 'paciente_' + response.pacientes[i].id,
+                    position: posicion,
+                    map: mapa.getMapa(),
+                    icon: BASE_URI + 'static/images/markers/femenino.png'
+                });
+                var id_paciente = response.pacientes[i].id;
+                google.maps.event.addListener(paciente, 'click', function (){
+                    xModal.open(BASE_URI + 'index.php/Paciente/bitacora/' + id_paciente, 'Registro número : ' + id_paciente, 85);
+                });
+
+
+              }
+            }
+          });
+          
+        }
+        
+        
+        
+
     }
 
 }
