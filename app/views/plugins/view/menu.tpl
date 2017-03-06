@@ -3,11 +3,11 @@
         <i class="fa fa-home"></i> <span>Inicio</span></a>
 </li>
 <li>
-    <a href="{$base_url}/Registro/nuevo">
+    <a href="{$base_url}/Paciente/nuevo">
         <i class="fa fa-book"></i> <span>Nuevo registro</span></a>
 </li>
 <li>
-    <a href="{$base_url}/Registro/index">
+    <a href="{$base_url}/Paciente/index">
         <i class="fa fa-th"></i> <span>Grilla registros</span></a>
 </li>
 <!--li>

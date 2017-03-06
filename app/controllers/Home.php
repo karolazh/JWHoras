@@ -1,33 +1,23 @@
 <?php
 
-/* 
-!IniHeaderDoc
+/**
 *****************************************************************************
-!NombreObjeto 		: Home.php
-!Sistema 	  		: PREVENCION DE FEMICIDIOS
-!Modulo 	  		: NA
-!Descripcion  		: 	
-!Plataforma   		: !PHP
-!Perfil       		: 
-!Itinerado    		: NA
-!Uso          		: NA
-!Autor        		: Orlando Vazquez <orlando.vazquez@cosof.cl>
-!Creacion     		: 20/02/2017
-!Retornos/Salidas 	: NA
-!OrigenReq        	: NA
-=============================================================================
-!Parametros 		: NA 
-=============================================================================
-!Testing 			: NA
-=============================================================================
-!ControlCambio
---------------
-!cVersion !cFecha   !cProgramador   !cDescripcion 
------------------------------------------------------------------------------
-
------------------------------------------------------------------------------
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion           : Controller para Registro de Paciente
+* Plataforma            : !PHP
+* Creacion		: 14/02/2017
+* @name			Home.php
+* @version		1.0
+* @author		Orlando Vazquez <orlando.vazquez@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*<david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
+*
+*-----------------------------------------------------------------------------
 *****************************************************************************
-!EndHeaderDoc 
 */
 
 require_once(APP_PATH . "libs/Helpers/View/Grid.php");
@@ -40,7 +30,9 @@ class Home extends Controller{
     function __construct(){
         parent::__construct();
         $this->smarty->addPluginsDir(APP_PATH . "views/templates/home/plugins/");        
-        $this->_DAOUsuario = $this->load->model("DAOUsuario");       
+        $this->_DAOUsuario = $this->load->model("DAOUsuario");
+        $this->_DAOPaciente = $this->load->model("DAOPaciente"); 
+        $this->_DAOPacienteEstado = $this->load->model("DAOPacienteEstado"); 
     }
 
     public function index(){

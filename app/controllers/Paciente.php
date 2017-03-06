@@ -1,14 +1,25 @@
 <?php
 
 /**
- * Sistema       : Prevención de Femicidios
- * 
- * Descripción   : Controller para Registro de Paciente
- * 
- * Fecha creación: 14/02/2017 
- * 
- * @author Carolina Zamora, Orlando Vázquez
- */
+*****************************************************************************
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion           : Controller para Registro de Paciente
+* Plataforma            : !PHP
+* Creacion		: 14/02/2017
+* @name			Paciente.php
+* @version		1.0
+* @author		Carolina, Orlando <orlando.vazquez@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*<david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
+*
+*-----------------------------------------------------------------------------
+*****************************************************************************
+*/
+
 class Paciente extends Controller {
 
     protected $_DAORegion;
@@ -17,12 +28,12 @@ class Paciente extends Controller {
     protected $_DAOCasoEgreso;
     protected $_DAOEstadoCaso;
     protected $_DAOPrevision;
-    protected $_DAOMotivoConsulta;
-    protected $_DAOUsuarios;
+    protected $_DAOPacienteRegistro;
+    protected $_DAOUsuario;
     protected $_DAOInstitucion;
     protected $_DAOEvento;
     protected $_DAOEventosTipo;
-    protected $_DAOAdjuntos;
+    protected $_DAOAdjunto;
     protected $_DAOAdjuntosTipo;
     protected $_DAOEmpa;
     protected $_DAOPacienteExamen;
@@ -43,12 +54,12 @@ class Paciente extends Controller {
         $this->_DAOCasoEgreso			= $this->load->model("DAOCasoEgreso");
         $this->_DAOEstadoCaso			= $this->load->model("DAOEstadoCaso");
         $this->_DAOPrevision			= $this->load->model("DAOPrevision");
-        $this->_DAOMotivoConsulta		= $this->load->model("DAOMotivoConsulta");
+        $this->_DAOPacienteRegistro		= $this->load->model("DAOPacienteRegistro");
         $this->_DAOUsuario			= $this->load->model("DAOUsuario");
         $this->_DAOInstitucion			= $this->load->model("DAOInstitucion");
 	$this->_DAOEvento			= $this->load->model("DAOEvento");
         $this->_DAOEventosTipo			= $this->load->model("DAOEventosTipo");
-        $this->_DAOAdjuntos			= $this->load->model("DAOAdjuntos");
+        $this->_DAOAdjunto			= $this->load->model("DAOAdjunto");
         $this->_DAOAdjuntosTipo			= $this->load->model("DAOAdjuntosTipo");
         $this->_DAOEmpa				= $this->load->model("DAOEmpa");
         $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
@@ -153,7 +164,7 @@ class Paciente extends Controller {
 			$this->smarty->assign("acepta", $acepta);
 
 			//Grilla Motivos de Consulta
-			$arrConsultas = $this->_DAOMotivoConsulta->getMotivosConsultaGrilla($idReg);
+			$arrConsultas = $this->_DAOPacienteRegistro->getByIdPaciente($idReg);
 			$this->smarty->assign('arrConsultas', $arrConsultas);
 
 			//Grilla Empa
@@ -279,7 +290,7 @@ class Paciente extends Controller {
 				}
 			}
 
-			$resultado2 = $this->_DAOMotivoConsulta->insertarMotivoConsulta($parametros, $id_registro);
+			$resultado2 = $this->_DAOPacienteRegistro->insertarRegistro($parametros, $id_registro);
 			$id_empa1 = $this->_DAOEmpa->insert(array('id_registro' => $id_registro, 'nr_orden' => 1));
 			if ($id_empa1 != "" && !is_null($id_empa1)) {
 				$datos_evento['eventos_tipo'] = 13;
