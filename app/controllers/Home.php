@@ -65,8 +65,8 @@ class Home extends Controller{
         $arr_estados[0]['total'] = 0;
         $arr_estados[0]['nombre'] = 'Sin Estado';
         foreach($estados as $estado){
-            $arr_estados[$estado->id_estado_caso]['total'] = 0;
-            $arr_estados[$estado->id_estado_caso]['nombre'] = $estado->gl_nombre_estado_caso;
+            $arr_estados[$estado->id_paciente_estado]['total'] = 0;
+            $arr_estados[$estado->id_paciente_estado]['nombre'] = $estado->gl_nombre_estado_caso;
         }
 
         $registros = $daoPaciente->getLista();
@@ -85,8 +85,8 @@ class Home extends Controller{
                     $arr_programa[0] = $arr_programa[0] + 1; 
                 }
 
-                if(!empty($registro->id_estado_caso))
-                    $arr_estados[$registro->id_estado_caso]['total'] = $arr_estados[$registro->id_estado_caso]['total'] + 1; 
+                if(!empty($registro->id_paciente_estado))
+                    $arr_estados[$registro->id_paciente_estado]['total'] = $arr_estados[$registro->id_paciente_estado]['total'] + 1; 
                 else
                     $arr_estados[0]['total'] = $arr_estados[0]['total'] + 1; 
             }
