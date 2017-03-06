@@ -78,12 +78,12 @@ class Empa extends Controller{
 		$parametros = $this->request->getParametros();
 		$id_registro = $parametros[0];
 		$this->smarty->assign("id_registro", $id_registro);
-		$id_empa = $this->_DAOEmpa->getEmpaByIdRegistro($id_registro);
+		$id_empa = $this->_DAOEmpa->getByIdPaciente($id_registro);
 		$this->smarty->assign("id_empa", $id_empa->id_empa);
 		/* Obtener id de paciente a través de id de dau */
 		$id_pac = 1;
 		//Cargar Datos Enfermera
-		$gl_comuna = $this->_DAOComuna->getComuna($_SESSION['id_comuna']);
+		$gl_comuna = $this->_DAOComuna->getById($_SESSION['id_comuna']);
 		$gl_institucion = $this->_DAOInstitucion->getInstitucion($_SESSION['id_institucion']);
 
 		$this->smarty->assign("gl_comuna", $gl_comuna->gl_nombre_comuna);
@@ -301,7 +301,7 @@ class Empa extends Controller{
 		$params = $this->request->getParametros();
 		$id_empa = $params[0];
 		$arrPreguntas = $this->_DAOAuditPregunta->getAll();
-		$arrAudit = $this->_DAOEmpaAudit->getAuditByEMPA($id_empa);
+		$arrAudit = $this->_DAOEmpaAudit->getByIdEmpa($id_empa);
 		$total = 0;
 		if (!is_null($arrAudit)) {
 			foreach ($arrAudit as $item) {
@@ -346,7 +346,7 @@ class Empa extends Controller{
 			$datos_evento['gl_descripcion'] = "Empa modificado el : " . Fechas::fechaHoy();
 			$datos_evento['bo_estado'] = 1;
 			$datos_evento['id_usuario_crea'] = $session->id;
-			$resp = $this->_DAOEvento->insEventoEmpa($datos_evento);
+			$resp = $this->_DAOEvento->insEvento($datos_evento);
 			if ($resp) {
 				$correcto = TRUE;
 			} else {
@@ -360,7 +360,7 @@ class Empa extends Controller{
 				$datos_evento['gl_descripcion'] = "Empa finalizado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado'] = 1;
 				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEvento->insEventoEmpa($datos_evento);
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
 				if ($resp) {
 					$correcto = TRUE;
 				} else {
@@ -397,7 +397,7 @@ class Empa extends Controller{
 			$datos_evento['gl_descripcion'] = "AUDIT del EMPA ".$id_empa."  modificado el : " . Fechas::fechaHoy();
 			$datos_evento['bo_estado'] = 1;
 			$datos_evento['id_usuario_crea'] = $session->id;
-			$correcto = $this->_DAOEvento->insEventoEmpa($datos_evento);
+			$correcto = $this->_DAOEvento->insEvento($datos_evento);
 		} else {
 			$error = true;
 		}

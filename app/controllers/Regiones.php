@@ -46,7 +46,7 @@ class Regiones extends Controller{
             $region = $_POST['region'];
 
             $daoRegion = $this->load->model('DAORegion');
-            $comunas = $daoRegion->obtComunasPorRegion($region)->rows;
+            $comunas = $daoRegion->getDetalleByIdRegion($region)->rows;
 
             $json = array();
             $i = 0;

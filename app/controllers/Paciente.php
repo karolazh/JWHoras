@@ -176,7 +176,7 @@ class Paciente extends Controller {
 			$this->smarty->assign('arrExamenes', $arrExamenes);
 
 			//Tipos de Eventos
-			$arrTipoEvento = $this->_DAOEventosTipo->getListaEventosTipo();
+			$arrTipoEvento = $this->_DAOEventosTipo->getLista();
 			$this->smarty->assign('arrTipoEvento', $arrTipoEvento);
 
 			//Grilla Bitácora
@@ -220,7 +220,7 @@ class Paciente extends Controller {
 		$arrPrevision = $this->_DAOPrevision->getLista();
 		$this->smarty->assign("arrPrevision", $arrPrevision);
 
-		//$arrCasoEgreso = $this->_DAOCasoEgreso->getListaCasoEgreso();
+		//$arrCasoEgreso = $this->_DAOCasoEgreso->getLista();
 		//$this->smarty->assign("arrCasoEgreso", $arrCasoEgreso);
 
 		$this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.', '', 'pull-right'));
@@ -298,7 +298,7 @@ class Paciente extends Controller {
 				$datos_evento['gl_descripcion'] = "Empa ".$id_empa1." creado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado'] = 1;
 				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEventos->insEventoEmpa($datos_evento);
+				$resp = $this->_DAOEventos->insEvento($datos_evento);
 			}
 			$id_empa2 = $this->_DAOEmpa->insert(array('id_registro' => $id_registro, 'nr_orden' => 2));
 			if ($id_empa2 != "" && !is_null($id_empa2)) {
@@ -307,7 +307,7 @@ class Paciente extends Controller {
 				$datos_evento['gl_descripcion'] = "Empa ".$id_empa2." creado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado'] = 1;
 				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEventos->insEventoEmpa($datos_evento);
+				$resp = $this->_DAOEventos->insEvento($datos_evento);
 			}
 			//$resultado3						= $this->_DAOEmpaAudit->insert($id_empa1);
 			//$resultado4						= $this->_DAOEmpaAudit->insert($id_empa2);
@@ -317,7 +317,7 @@ class Paciente extends Controller {
 				$datos_evento['gl_descripcion'] = "AUDIT del EMPA".$id_empa1." creado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado'] = 1;
 				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEventos->insEventoEmpa($datos_evento);
+				$resp = $this->_DAOEventos->insEvento($datos_evento);
 			}
 			if ($resultado4) {
 				$datos_evento['eventos_tipo'] = 14;
@@ -325,7 +325,7 @@ class Paciente extends Controller {
 				$datos_evento['gl_descripcion'] = "AUDIT del EMPA".$id_empa2." creado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado'] = 1;
 				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEventos->insEventoEmpa($datos_evento);
+				$resp = $this->_DAOEventos->insEvento($datos_evento);
 			}*/
 			$datos_evento['eventos_tipo'] = 1;
 			$datos_evento['id_registro'] = $id_registro;
@@ -505,7 +505,7 @@ class Paciente extends Controller {
 	public function cargarComunasPorRegion() {
 		$region = $_POST['region'];
 		$daoRegion = $this->load->model('DAORegion');
-		$comunas = $daoRegion->obtComunasPorRegion($region)->rows;
+		$comunas = $daoRegion->getDetalleByIdRegion($region)->rows;
 
 		$json = array();
 		$i = 0;
