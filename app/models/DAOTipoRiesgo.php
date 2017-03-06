@@ -28,7 +28,7 @@ class DAOTipoRiesgo extends Model{
     /*
      * 20170203 - Lista Regiones
      */
-    public function getListaTipoRiesgo(){
+    public function getLista(){
         $query		= $this->db->select("*")->from($this->_tabla);
         $resultado	= $query->getResult();
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once(APP_PATH . "models/DAOUsuarios.php");
+require_once(APP_PATH . "models/DAOUsuario.php");
 
 /**
  * 
@@ -10,7 +10,7 @@ require_once(APP_PATH . "models/DAOUsuarios.php");
  */
 function smarty_function_htmlMenu($params, &$smarty) {
     
-    $DAOUsuario = New DAOUsuarios();
+    $DAOUsuario = New DAOUsuario();
     
     $sesion = New Zend_Session_Namespace("usuario_carpeta");
     $id_usuario = $sesion->id;

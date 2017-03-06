@@ -156,7 +156,7 @@
                                 <div class="panel-body">
                                     <div class="col-lg-2"></div>
                                     <div class="table-responsive col-lg-8" data-row="10">
-                                        <table id="tablaPrincipal" class="table table-hover table-striped table-bordered dataTable no-footer">
+                                        <table id="tablaPrincipal" class="table table-hover table-striped table-bordered">
                                             <thead>
                                                 <tr role="row">
                                                     <th class="text-center" width="35%">Tipo de Violencia</th>
@@ -291,16 +291,16 @@
                                                        placeholder="Número de Hijos" class="form-control"/>
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
-					<label for="gl_estado_civil_agresor" class="control-label col-sm-1">N° Hijos en Común</label>
+					<label for="nr_hijos_comun" class="control-label col-sm-1">N° Hijos en Común</label>
 					<div class="col-sm-3">
-						<input type="text" name="gl_estado_civil_agresor" id="gl_estado_civil_agresor" value=""
+						<input type="text" name="nr_hijos_comun" id="nr_hijos_comun" value=""
                                                        placeholder="Número de Hijos en Común" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 				</div>
                                         
                                 <div class="form-group">
-                                        <label for="gl_ocupacion_agresor" class="control-label col-sm-3">Ocupación</label>
+                                        <label for="id_ocupacion_agresor" class="control-label col-sm-3">Ocupación</label>
 					<div class="col-sm-3">					
 						<select class="form-control" id="id_ocupacion_agresor" name="id_ocupacion_agresor">
                                                     <option value="0">Seleccione Tipo de Ocupación</option>

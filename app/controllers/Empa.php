@@ -42,15 +42,14 @@ class Empa extends Controller{
 		$this->load->lib('Fechas', false);
 		$this->_DAOEmpa = $this->load->model("DAOEmpa");
 		$this->_DAOEmpaAudit = $this->load->model("DAOEmpaAudit");
-		$this->_DAOUsuarios = $this->load->model("DAOUsuarios");
+		$this->_DAOUsuario = $this->load->model("DAOUsuario");
 		$this->_DAOComuna = $this->load->model("DAOComuna");
 		$this->_DAOInstitucion = $this->load->model("DAOInstitucion");
 		$this->_DAORegistro = $this->load->model("DAORegistro");
 		$this->_DAOAlcoholismo = $this->load->model("DAOAlcoholismo");
 		$this->_DAOTipoIMC = $this->load->model("DAOTipoIMC");
 		$this->_DAOTipoAUDIT = $this->load->model("DAOTipoAUDIT");
-		$this->_DAOEmpa = $this->load->model("DAOEmpa");
-		$this->_DAOEventos = $this->load->model("DAOEventos");
+		$this->_DAOEvento = $this->load->model("DAOEvento");
 	}
 
 	/*

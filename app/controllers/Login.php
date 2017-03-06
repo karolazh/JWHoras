@@ -104,9 +104,8 @@ class Login extends Controller {
 				$session->celular	= $usuario->gl_celular;
 
 				if (!$primer_login) {
-					$ultimo_login	= date('Y-m-d H:i:s');
-					$datos			= array($ultimo_login, $session->id);
-					$upd			= $this->_DAOUsuarios->setUltimoLogin($datos);
+					$datos			= array($session->id);
+					$upd			= $this->_DAOUsuario->setUltimoLogin($datos);
 				}
 
 				$_SESSION['id']				= $usuario->id_usuario;
@@ -215,8 +214,7 @@ class Login extends Controller {
 					$session->celular	= $usuario->gl_celular;
 
 					if (!$primer_login) {
-						$ultimo_login	= date('Y-m-d H:i:s');
-						$datos			= array($ultimo_login, $session->id);
+						$datos			= array($session->id);
 						$upd			= $this->_DAOUsuario->setUltimoLogin($datos);
 					}
 

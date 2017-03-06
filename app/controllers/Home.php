@@ -40,7 +40,7 @@ class Home extends Controller{
     function __construct(){
         parent::__construct();
         $this->smarty->addPluginsDir(APP_PATH . "views/templates/home/plugins/");        
-        $this->_DAOUsuarios = $this->load->model("DAOUsuarios");       
+        $this->_DAOUsuario = $this->load->model("DAOUsuario");       
     }
 
     public function index(){
@@ -54,22 +54,22 @@ class Home extends Controller{
         Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
 
-        $daoRegistro = $this->load->model('DAORegistro');
-        $daoEstadoCaso = $this->load->model('DAOEstadoCaso');
+        $daoPaciente = $this->load->model('DAOPaciente');
+        $daoPacienteEstado = $this->load->model('DAOPacienteEstado');
 
         $arr_estados = array();
         $arr_abuso = array(0,0);
         $arr_programa = array(0,0);
 
-        $estados = $daoEstadoCaso->getListaEstadoCaso();
+        $estados = $daoPacienteEstado->getLista();
         $arr_estados[0]['total'] = 0;
         $arr_estados[0]['nombre'] = 'Sin Estado';
         foreach($estados as $estado){
-            $arr_estados[$estado->id_estado_caso]['total'] = 0;
-            $arr_estados[$estado->id_estado_caso]['nombre'] = $estado->gl_nombre_estado_caso;
+            $arr_estados[$estado->id_paciente_estado]['total'] = 0;
+            $arr_estados[$estado->id_paciente_estado]['nombre'] = $estado->gl_nombre_estado_caso;
         }
 
-        $registros = $daoRegistro->getListaRegistro();
+        $registros = $daoPaciente->getLista();
         if(!is_null($registros)){
             foreach($registros as $registro){
 
@@ -85,8 +85,8 @@ class Home extends Controller{
                     $arr_programa[0] = $arr_programa[0] + 1; 
                 }
 
-                if(!empty($registro->id_estado_caso))
-                    $arr_estados[$registro->id_estado_caso]['total'] = $arr_estados[$registro->id_estado_caso]['total'] + 1; 
+                if(!empty($registro->id_paciente_estado))
+                    $arr_estados[$registro->id_paciente_estado]['total'] = $arr_estados[$registro->id_paciente_estado]['total'] + 1; 
                 else
                     $arr_estados[0]['total'] = $arr_estados[0]['total'] + 1; 
             }
