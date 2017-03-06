@@ -32,7 +32,7 @@ class Paciente extends Controller {
     protected $_DAOUsuario;
     protected $_DAOCentroSalud;
     protected $_DAOEvento;
-    protected $_DAOEventosTipo;
+    protected $_DAOEventoTipo;
     protected $_DAOAdjunto;
     protected $_DAOAdjuntoTipo;
     protected $_DAOEmpa;
@@ -57,7 +57,7 @@ class Paciente extends Controller {
         $this->_DAOUsuario				= $this->load->model("DAOUsuario");
         $this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
 		$this->_DAOEvento				= $this->load->model("DAOEvento");
-        $this->_DAOEventosTipo			= $this->load->model("DAOEventosTipo");
+        $this->_DAOEventoTipo			= $this->load->model("DAOEventoTipo");
         $this->_DAOAdjunto				= $this->load->model("DAOAdjunto");
         $this->_DAOAdjuntoTipo			= $this->load->model("DAOAdjuntoTipo");
         $this->_DAOEmpa					= $this->load->model("DAOEmpa");
@@ -83,7 +83,7 @@ class Paciente extends Controller {
 		 * Si tengo perfil 4="GESTOR REGIONAL" puedo ver solo las DAU correspondientes a la región
 		 * REALIZAR FUNCIÓN PARA LISTAR SEGÚN PERFIL
 		 */
-		$arr = $this->_DAOPaciente->getLista();
+		$arr = $this->_DAOPaciente->getListaDetalle();
 		$this->smarty->assign('arrResultado', $arr);
 
 		//llamado al template
@@ -296,7 +296,7 @@ class Paciente extends Controller {
 				$datos_evento['gl_descripcion'] = "Empa ".$id_empa1." creado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado'] = 1;
 				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEventos->insEvento($datos_evento);
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
 			}
 			$id_empa2 = $this->_DAOEmpa->insert(array('id_registro' => $id_registro, 'nr_orden' => 2));
 			if ($id_empa2 != "" && !is_null($id_empa2)) {
@@ -305,7 +305,7 @@ class Paciente extends Controller {
 				$datos_evento['gl_descripcion'] = "Empa ".$id_empa2." creado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado'] = 1;
 				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEventos->insEvento($datos_evento);
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
 			}
 			//$resultado3						= $this->_DAOEmpaAudit->insert($id_empa1);
 			//$resultado4						= $this->_DAOEmpaAudit->insert($id_empa2);

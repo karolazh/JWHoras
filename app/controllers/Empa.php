@@ -34,7 +34,7 @@ class Empa extends Controller{
 		$this->_DAOEmpaAudit = $this->load->model("DAOEmpaAudit");
 		$this->_DAOUsuario = $this->load->model("DAOUsuario");
 		$this->_DAOComuna = $this->load->model("DAOComuna");
-		$this->_DAOInstitucion = $this->load->model("DAOInstitucion");
+		$this->_DAOCentroSalud = $this->load->model("DAOCentroSalud");
 		$this->_DAOPaciente = $this->load->model("DAOPaciente");
 		$this->_DAOAuditPregunta = $this->load->model("DAOAuditPregunta");
 		$this->_DAOTipoIMC = $this->load->model("DAOTipoIMC");
@@ -84,10 +84,10 @@ class Empa extends Controller{
 		$id_pac = 1;
 		//Cargar Datos Enfermera
 		$gl_comuna = $this->_DAOComuna->getById($_SESSION['id_comuna']);
-		$gl_institucion = $this->_DAOInstitucion->getInstitucion($_SESSION['id_institucion']);
+		$gl_institucion = $this->_DAOCentroSalud->getById($_SESSION['id_institucion']);
 
 		$this->smarty->assign("gl_comuna", $gl_comuna->gl_nombre_comuna);
-		$this->smarty->assign("gl_institucion", $gl_institucion->gl_nombre);
+		$this->smarty->assign("gl_institucion", $gl_institucion->gl_nombre_establecimiento);
 		$this->smarty->assign("fc_empa", date('Y-m-d'));
 		//Cargar Datos Paciente
 		$registro = $this->_DAOPaciente->getById($id_registro);

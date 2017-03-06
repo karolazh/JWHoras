@@ -36,12 +36,12 @@
 					<tbody>
 						{foreach $arrResultado as $item}
 							<tr>
-								<!-- td class="text-center"> {$item->id_registro} </td -->
+								<!-- td class="text-center"> {$item->id_paciente} </td -->
 								<td class="text-center" nowrap> {$item->gl_identificacion} </td>
 								<td class="text-center"> {$item->fc_crea} </td>
 								<td class="text-left"> {$item->gl_nombres} {$item->gl_apellidos} </td>
 								<td class="text-left"> {$item->gl_nombre_comuna} </td>
-								<td class="text-center"> {$item->gl_nombre} </td>
+								<td class="text-center"> {$item->gl_institucion} </td>
 								<td class="text-center" nowrap> {$item->gl_nombre_estado_caso} </td>
 								<td class="text-center" nowrap> {$item->nr_motivo_consulta} </td>
 								<td class="text-center" nowrap> 
