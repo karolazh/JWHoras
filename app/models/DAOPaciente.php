@@ -300,9 +300,9 @@ class DAOPaciente extends Model{
         }
     }
     
-    public function getRegistroxId($id_registro) {
+    public function getRegistroxId($id_paciente) {
         $query = "SELECT
-                        reg.id_registro AS id_registro,	
+                        reg.id_paciente AS id_paciente,	
                         reg.gl_rut AS rut,
                         reg.bo_extranjero AS extranjero, 
                         reg.gl_run_pass AS run_pass,
@@ -339,9 +339,9 @@ class DAOPaciente extends Model{
                     left join pre_centro_salud ins on ins.id_centro_salud = reg.id_institucion
                     left join pre_prevision pre on pre.id_prevision = reg.id_prevision
                     left join pre_paciente_estado est on est.id_paciente_estado = reg.id_paciente_estado
-                    WHERE reg.id_registro = ?";
+                    WHERE reg.id_paciente = ?";
 
-        $param = array($id_registro);
+        $param = array($id_paciente);
         $consulta = $this->db->getQuery($query, $param);
 
         if ($consulta->numRows > 0) {
@@ -360,7 +360,7 @@ class DAOPaciente extends Model{
                         eve.id_evento AS id_evento, 
                         eve.id_evento_tipo AS id_evento_tipo, 
                         tip.gl_nombre_evento_tipo AS nombre_evento,
-                        eve.id_registro AS id_registro,
+                        eve.id_paciente AS id_paciente,
                         eve.gl_descripcion AS glosa,
                         date_format(eve.fc_crea,'%d-%m-%Y') AS fc_crea,
                         usr.gl_rut AS rut,
@@ -368,7 +368,7 @@ class DAOPaciente extends Model{
                     FROM pre_eventos eve
                     LEFT JOIN pre_eventos_tipo tip ON tip.id_evento_tipo = eve.id_evento_tipo
                     LEFT JOIN pre_usuarios usr ON usr.id_usuario = eve.id_usuario_crea
-                    WHERE eve.id_registro = ?";
+                    WHERE eve.id_paciente = ?";
 
 	$param		= array($id_registro);
         $consulta	= $this->db->getQuery($query,$param);

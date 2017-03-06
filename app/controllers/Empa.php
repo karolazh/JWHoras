@@ -339,9 +339,12 @@ class Empa extends Controller{
 		$correcto = false;
 		$error = false;
 		$id_empa = $parametros['id_empa'];
+		$id_paciente = $parametros['id_paciente'];
+		
 		$bool_update = $this->_DAOEmpa->updateEmpa($parametros);
 		if ($bool_update) {
 			$datos_evento['eventos_tipo'] = 12;
+			$datos_evento['id_paciente'] = $id_paciente;
 			$datos_evento['id_empa'] = $id_empa;
 			$datos_evento['gl_descripcion'] = "Empa modificado el : " . Fechas::fechaHoy();
 			$datos_evento['bo_estado'] = 1;

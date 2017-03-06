@@ -6,7 +6,7 @@
     <div class="col-md-12 text-right">
         <button type="button"
                 href='javascript:void(0)' 
-                onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$id_registro}', 'Registro número : {$id_registro}', 85);" 
+                onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/bitacora/{$id_paciente}', 'Registro número : {$id_paciente}', 85);" 
                 data-toggle="tooltip" 
                 title="Bitácora"
                 class="btn btn-sm btn-flat btn-primary">
@@ -17,6 +17,7 @@
 </section>
 
 <form id="form" class="form-horizontal">
+	<input type="text" value="{$id_registro}" id="id_paciente" name="id_paciente" >
     <input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden">
     <section class="content">
         <div class="panel panel-primary">
@@ -55,7 +56,7 @@
                 <div class="form-group">
                     <label for="id_sector" class="control-label col-sm-3">Sector (*)</label>
                     <div class="col-sm-3">
-                        <input type="text" name="id_sector" id="id_sector" value="" 
+                        <input type="text" name="gl_sector" id="gl_sector" value="" 
                                placeholder="Sector" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
@@ -351,7 +352,7 @@
 
                 <!-- f. Sífilis -->
                 <div class="box box-success">
-                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Sifilis en población de riesgo</h3></div>
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Enfermedades de Transmisión Sexual</h3></div>
                     <div class="box-body">    
                         <div class="form-group">
                             <label class="control-label required col-sm-3">¿Es trabajadora sexual o persona en centro de reclusión?</label>

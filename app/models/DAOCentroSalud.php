@@ -49,7 +49,7 @@ class DAOCentroSalud extends Model{
         $resultado	= $this->db->getQuery($query, $params);
 
         if($resultado->numRows>0){
-            return $resultado->rows;
+            return $resultado->rows->row_0;
         }else{
             return NULL;
         }

@@ -85,7 +85,7 @@ class DAOEvento extends Model{
 	}
 
 	public function insEvento($data){
-        $query	= "INSERT into pre_evento values(null,?,?,?,?,?,CURRENT_TIMESTAMP)";
+        $query	= "INSERT into pre_evento values(null,?,?,?,?,?,?,CURRENT_TIMESTAMP)";
 
         $param	= array(
 						$data['eventos_tipo'],
