@@ -73,7 +73,7 @@ class DAORegion extends Model{
         if($resul->numRows > 0){
             return $resul->rows;
         }else{
-            return null;
+            return NULL;
         }
     }
 
