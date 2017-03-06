@@ -1,1 +1,0 @@
-<iframe width="100%" height="1200px" frameBorder="0" src="http://200.55.194.54/programacion/sipresa_login_remoto_dcortez.php?amb=2&rut={$rutUsuario}"></iframe>
