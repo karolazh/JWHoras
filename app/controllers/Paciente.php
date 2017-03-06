@@ -25,19 +25,18 @@ class Paciente extends Controller {
     protected $_DAORegion;
     protected $_DAOComuna;
     protected $_DAOPaciente;
-    protected $_DAOCasoEgreso;
-    protected $_DAOEstadoCaso;
+    protected $_DAOTipoEgreso;
+    protected $_DAOPacienteEstado;
     protected $_DAOPrevision;
     protected $_DAOPacienteRegistro;
     protected $_DAOUsuario;
-    protected $_DAOInstitucion;
+    protected $_DAOCentroSalud;
     protected $_DAOEvento;
     protected $_DAOEventosTipo;
     protected $_DAOAdjunto;
     protected $_DAOAdjuntoTipo;
     protected $_DAOEmpa;
     protected $_DAOPacienteExamen;
-    protected $_DAOEstablecimientoSalud;
 	/**
 	 * Descripción: Constructor
 	 * @author: 
@@ -49,21 +48,20 @@ class Paciente extends Controller {
         $this->load->lib('Seguridad', false);
 
         $this->_DAORegion			= $this->load->model("DAORegion");
-        $this->_DAOComuna			= $this->load->model("DAOComuna");
+        $this->_DAOComuna               	= $this->load->model("DAOComuna");
         $this->_DAOPaciente			= $this->load->model("DAOPaciente");
-        $this->_DAOCasoEgreso			= $this->load->model("DAOCasoEgreso");
-        $this->_DAOEstadoCaso			= $this->load->model("DAOEstadoCaso");
+        $this->_DAOTipoEgreso			= $this->load->model("DAOTipoEgreso");
+        $this->_DAOPacienteEstado		= $this->load->model("DAOPacienteEstado");
         $this->_DAOPrevision			= $this->load->model("DAOPrevision");
         $this->_DAOPacienteRegistro		= $this->load->model("DAOPacienteRegistro");
         $this->_DAOUsuario			= $this->load->model("DAOUsuario");
-        $this->_DAOInstitucion			= $this->load->model("DAOInstitucion");
+        $this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
 	$this->_DAOEvento			= $this->load->model("DAOEvento");
         $this->_DAOEventosTipo			= $this->load->model("DAOEventosTipo");
         $this->_DAOAdjunto			= $this->load->model("DAOAdjunto");
         $this->_DAOAdjuntoTipo			= $this->load->model("DAOAdjuntoTipo");
         $this->_DAOEmpa				= $this->load->model("DAOEmpa");
         $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
-	$this->_DAOEstablecimientoSalud         = $this->load->model('DAOEstablecimientoSalud');
     }
 
 	/**
@@ -220,7 +218,7 @@ class Paciente extends Controller {
 		$arrPrevision = $this->_DAOPrevision->getLista();
 		$this->smarty->assign("arrPrevision", $arrPrevision);
 
-		//$arrCasoEgreso = $this->_DAOCasoEgreso->getLista();
+		//$arrCasoEgreso = $this->_DAOTipoEgreso->getLista();
 		//$this->smarty->assign("arrCasoEgreso", $arrCasoEgreso);
 
 		$this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.', '', 'pull-right'));

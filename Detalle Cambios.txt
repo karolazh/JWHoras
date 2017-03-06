@@ -79,7 +79,7 @@ DAOPaciente
 DAOEventos
 	- selListaEventos		(Usar getLista)
 	- selEventoById			(Usar getById)
-	- selBusquedaEventos	(Modificados Datos de entrada)
+	- selBusquedaselListaEventosEventos	(Modificados Datos de entrada)
 	- insEvento				(Modificados Datos de entrada)
 	- getEventosRegistro	(Modificados Datos de entrada)
 	
