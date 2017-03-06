@@ -22,7 +22,7 @@
 class DAOPacienteEstado extends Model{
 
     protected $_tabla			= "pre_paciente_estado";
-    protected $_primaria		= "id_estado_caso";
+    protected $_primaria		= "id_paciente_estado";
     protected $_transaccional	= false;
 
     function __construct()
