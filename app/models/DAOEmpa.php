@@ -5,10 +5,10 @@
 * Sistema		: PREVENCION DE FEMICIDIOS
 * Descripcion	: Modelo para Tabla pre_empa
 * Plataforma	: !PHP
-* Creacion		: 16/02/2017
+* Creacion		: 22/02/2017
 * @name			DAOEmpa.php
 * @version		1.0
-* @author		Carolina Zamora <carolina.zamora@cosof.cl>
+* @author		David Gusman <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
