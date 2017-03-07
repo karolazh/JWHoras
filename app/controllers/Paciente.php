@@ -99,7 +99,8 @@ class Paciente extends Controller {
 
 		$parametros = $this->request->getParametros();
 		$idReg = $parametros[0];
-		$detReg = $this->_DAOPaciente->getById($idReg);
+		//$detReg = $this->_DAOPaciente->getById($idReg);
+		$detReg = $this->_DAOPaciente->getPacienteById($idReg);
 
 		if (!is_null($detReg)) {
 			//$this->smarty->assign("detReg", $detReg);

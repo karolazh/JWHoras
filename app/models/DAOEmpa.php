@@ -72,7 +72,27 @@ class DAOEmpa extends Model{
     }    
 
     public function getEmpaGrilla($id_paciente, $nr_orden=1){
-        $query	= "	SELECT 
+        $query		= "	SELECT 
+							emp.id_empa,
+							emp.id_paciente,
+							date_format(emp.fc_empa,'%d-%m-%Y') AS fc_empa,
+							reg.gl_rut AS rut,
+							com.gl_nombre_comuna AS comuna,
+							ins.gl_nombre_establecimiento AS institucion,
+							usr.gl_rut AS rut,
+							concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
+						FROM pre_empa emp
+							LEFT JOIN pre_paciente reg ON reg.id_paciente = emp.id_paciente
+							LEFT JOIN pre_comuna com ON com.id_comuna = emp.id_comuna
+							LEFT JOIN pre_centro_salud ins ON ins.id_centro_salud = emp.id_institucion
+							LEFT JOIN pre_usuario usr ON usr.id_usuario = emp.id_usuario_crea
+						WHERE emp.id_paciente =  ?
+							AND nr_orden= ?
+						ORDER BY emp.fc_empa DESC";
+
+		$param		= array($id_paciente,$nr_orden);
+        //$result	= $this->db->getQuery($query,array($id_paciente));
+        /*$query	= "	SELECT 
 						emp.id_empa,
 						emp.id_paciente,
 						date_format(emp.fc_empa,'%d-%m-%Y') AS fc_empa,
@@ -90,7 +110,7 @@ class DAOEmpa extends Model{
 						AND nr_orden= ?
 					ORDER BY emp.fc_empa DESC";
 
-		$param	= array($id_paciente,$nr_orden);
+		$param	= array($id_paciente,$nr_orden);*/
         $result	= $this->db->getQuery($query,$param);
 
         if($result->numRows > 0){

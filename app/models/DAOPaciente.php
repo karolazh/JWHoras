@@ -30,9 +30,16 @@ class DAOPaciente extends Model{
         parent::__construct();
     }
 
-    public function getLista(){
+    public function getLista($parametros = null){
         $query		= "	SELECT * FROM ".$this->_tabla;
-        $result	= $this->db->getQuery($query);
+        $params = array();
+        if(isset($parametros['region'])){
+        	$query .= ' WHERE id_region = ?';
+        	$params[] = $parametros['region'];
+        }
+
+        $result	= $this->db->getQuery($query, $params);
+        //$result	= $this->db->getQuery($query);
 
         if($result->numRows>0){
             return $result->rows;
@@ -137,7 +144,7 @@ class DAOPaciente extends Model{
 							rg.gl_nombre_region AS region,
 							pro.gl_nombre_provincia AS provincia,
 							com.gl_nombre_comuna AS comuna,
-							ins.gl_nombre AS institucion
+							ins.gl_nombre_establecimiento AS institucion
 						FROM pre_paciente AS paciente
 							LEFT JOIN pre_comuna com ON com.id_comuna = paciente.id_comuna
 							LEFT JOIN pre_provincia pro ON pro.id_provincia = com.id_provincia
@@ -323,7 +330,7 @@ class DAOPaciente extends Model{
                         reg.bo_reconoce AS reconoce, 
                         reg.bo_acepta_programa AS acepta,
                         date_format(reg.fc_crea,'%d-%m-%Y') AS fc_crea,
-                        ins.gl_nombre AS institucion,
+                        ins.gl_nombre_establecimiento AS institucion,
                         reg.id_centro_salud AS centro_salud, 
                         reg.id_adjunto AS id_adjunto,
                         reg.gl_latitud AS latitud, 

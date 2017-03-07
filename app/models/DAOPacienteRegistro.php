@@ -56,7 +56,27 @@ class DAOPacienteRegistro extends Model{
     }
 
     public function getByIdPaciente($id_paciente) {
-        $query	= "	SELECT 
+        $query		= "	SELECT 
+							registro.id_registro,
+							registro.id_paciente,
+							registro.id_institucion,
+							date_format(registro.fc_ingreso, '%d-%m-%Y') as fc_ingreso,
+							registro.gl_hora_ingreso, 
+							registro.gl_motivo_consulta,
+							date_format(registro.fc_crea,'%d-%m-%Y') AS fc_crea,
+							registro.id_usuario_crea AS id_usuario_crea,
+							usu.gl_nombres,
+							usu.gl_apellidos,
+							usu.gl_rut AS rut,
+							concat_ws(' ' , usu.gl_nombres, usu.gl_apellidos) AS funcionario,
+							ins.gl_nombre_establecimiento as gl_nombre_institucion,
+							registro.fc_ingreso as fecha_ingreso 
+						FROM pre_paciente_registro registro
+							LEFT JOIN pre_usuario usu ON registro.id_usuario_crea = usu.id_usuario
+							LEFT JOIN pre_centro_salud ins ON registro.id_institucion = ins.id_centro_salud
+						WHERE id_paciente = ?;
+						ORDER BY registro.id_registro DESC";
+        /*$query	= "	SELECT 
 						registro.id_registro,
 						registro.id_paciente,
 						registro.id_institucion,
@@ -74,7 +94,7 @@ class DAOPacienteRegistro extends Model{
 						LEFT JOIN pre_usuario usu ON registro.id_usuario_crea = usu.id_usuario
 						LEFT JOIN pre_centro_salud ins ON registro.id_centro_salud = ins.id_institucion
 					WHERE id_paciente = ?;
-					ORDER BY registro.id_registro DESC";
+					ORDER BY registro.id_registro DESC";*/
 
         $params	= array($id_paciente);
         $result	= $this->db->getQuery($query, $params);
