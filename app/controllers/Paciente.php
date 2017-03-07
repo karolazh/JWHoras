@@ -16,6 +16,7 @@
  * -----------------------------------------------------------------------------
  * <david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
  * <orlando.vazquez@cosof.co> 06-03-2017  Adaptacion a nueva BD de DAO's y funciones
+ * <victor.retamal@cosof.co> 07-03-2017  fix GuardarRegistro() para nueva BD
  * -----------------------------------------------------------------------------
  * ****************************************************************************
  */
