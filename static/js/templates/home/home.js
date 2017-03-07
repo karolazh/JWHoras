@@ -156,7 +156,6 @@ var Home = {
 
       var chart = AmCharts.makeChart("grafico_fechas_registros", {
           "type": "serial",
-          "path" : BASE_URI + 'static/js/plugins/amcharts',
           "theme": "light",
           "language" : "es",
           "marginRight": 40,
