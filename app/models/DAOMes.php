@@ -3,30 +3,30 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_estado_civil
+* Descripcion	: Modelo para Tabla pre_mes
 * Plataforma	: !PHP
-* Creacion		: 06/03/2017
-* @name			DAOEstadoCivil.php
+* Creacion		: 07/03/2017
+* @name			DAOMes.php
 * @version		1.0
-* @author		David Gusman <david.guzman@cosof.cl>
+* @author		David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
-*<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a campos de la BD antigua
-*<david.guzman@cosof.cl>	07-03-2017	Modificada clave primaria por nombre original
+*
 *-----------------------------------------------------------------------------
 *****************************************************************************
 */
 
-class DAOEstadoCivil extends Model{
+class DAOMes extends Model{
 
-    protected $_tabla			= "pre_tipo_estado_civil";
-    protected $_primaria		= "id_estado_civil";
+    protected $_tabla           = "pre_mes";
+    protected $_primaria		= "id_mes";
     protected $_transaccional	= false;
 
-    function __construct(){
+    function __construct()
+    {
         parent::__construct();
     }
 

@@ -40,6 +40,7 @@ class Empa extends Controller{
 		$this->_DAOTipoIMC = $this->load->model("DAOTipoIMC");
 		$this->_DAOTipoAUDIT = $this->load->model("DAOTipoAUDIT");
 		$this->_DAOEvento = $this->load->model("DAOEvento");
+		$this->_DAOMes = $this->load->model("DAOMes");
 	}
 
 	/*
@@ -76,9 +77,9 @@ class Empa extends Controller{
 		$this->smarty->assign("usuario", $sesion->usuario);
 
 		$parametros = $this->request->getParametros();
-		$id_registro = $parametros[0];
-		$this->smarty->assign("id_registro", $id_registro);
-		$id_empa = $this->_DAOEmpa->getByIdPaciente($id_registro);
+		$id_paciente = $parametros[0];
+		$this->smarty->assign("id_paciente", $id_paciente);
+		$id_empa = $this->_DAOEmpa->getByIdPaciente($id_paciente);
 		$this->smarty->assign("id_empa", $id_empa->id_empa);
 		/* Obtener id de paciente a través de id de dau */
 		$id_pac = 1;
@@ -90,7 +91,7 @@ class Empa extends Controller{
 		$this->smarty->assign("gl_institucion", $gl_institucion->gl_nombre_establecimiento);
 		$this->smarty->assign("fc_empa", date('Y-m-d'));
 		//Cargar Datos Paciente
-		$registro = $this->_DAOPaciente->getById($id_registro);
+		$registro = $this->_DAOPaciente->getById($id_paciente);
 		$this->smarty->assign("gl_rut", $registro->gl_rut);
 		$this->smarty->assign("gl_nombres", $registro->gl_nombres);
 		$this->smarty->assign("gl_apellidos", $registro->gl_apellidos);
@@ -153,6 +154,12 @@ class Empa extends Controller{
 		} else if ($empa->bo_vdrl == 0) {
 			$this->smarty->assign("bo_vdrl_0", 'checked');
 		}
+		
+		if ($empa->bo_vih == 1) {
+			$this->smarty->assign("bo_vih_1", 'checked');
+		} else if ($empa->bo_vdrl == 0) {
+			$this->smarty->assign("bo_vih_0", 'checked');
+		}
 
 		if ($empa->bo_tos_productiva == 1) {
 			$this->smarty->assign("bo_tos_productiva_1", 'checked');
@@ -171,7 +178,16 @@ class Empa extends Controller{
 		} else if ($empa->bo_pap_realizado == 0) {
 			$this->smarty->assign("bo_pap_realizado_0", 'checked');
 		}
-
+		
+        $arrMes = $this->_DAOMes->getLista();
+		$this->smarty->assign("arrMes", $arrMes);
+		
+		$this->smarty->assign("fc_ultimo_pap_ano", $empa->fc_ultimo_pap_ano);
+		$this->smarty->assign("fc_ultimo_pap_mes", $empa->fc_ultimo_pap_mes);
+		
+		$this->smarty->assign("fc_mamografia_ano", $empa->fc_mamografia_ano);
+		$this->smarty->assign("fc_mamografia_mes", $empa->fc_mamografia_mes);
+		
 		$this->smarty->assign("fc_ultimo_pap", $empa->fc_ultimo_pap);
 		$this->smarty->assign("fc_tomar_pap", $empa->fc_tomar_pap);
 
@@ -268,6 +284,7 @@ class Empa extends Controller{
 		$this->smarty->assign("botonInformacionAgenda", Boton::botonAyuda("Referir confirmación diagnóstica con profesional de la salud.", "Consejeria", "", "btn-danger"));
 		$this->smarty->assign("botonInformacionAgendaITS", Boton::botonAyuda("Referir a profesional de ITS.", "Consejeria", "", "btn-danger"));
 		$this->smarty->assign("botonInformacionAgendaMamografia", Boton::botonAyuda("Agendar nueva mamografía.", "Información", "", "btn-info"));
+		$this->smarty->assign("botonInformacionAgendaVIH", Boton::botonAyuda("Referir a Profesional de ITS.", "Información", "", "btn-danger"));
 		//llamado al template
 		$this->_display('Empa/nuevo.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
@@ -300,7 +317,7 @@ class Empa extends Controller{
 		Acceso::redireccionUnlogged($this->smarty);
 		$params = $this->request->getParametros();
 		$id_empa = $params[0];
-		$arrPreguntas = $this->_DAOAuditPregunta->getAll();
+		$arrPreguntas = $this->_DAOAuditPregunta->getLista();
 		$arrAudit = $this->_DAOEmpaAudit->getByIdEmpa($id_empa);
 		$total = 0;
 		if (!is_null($arrAudit)) {

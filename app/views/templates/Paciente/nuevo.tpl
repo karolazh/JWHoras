@@ -107,13 +107,26 @@
 				<div class="form-group">
 					<label for="prevision" class="control-label col-sm-2">Previsión (*)</label>
 					<div class="col-sm-3">
-						<select for="prevision" class="form-control" id="prevision" name="prevision" onblur="validarVacio(this, 'Por favor Seleccione una Previsión')">
-							<option value="0">Seleccione una Previsión</option>
+						<select id="opcionPrevision" for="prevision" class="form-control" id="prevision" name="prevision" onchange="mostrarFonasaExtranjero(this.value, 'id_prevision')" onblur="validarVacio(this, 'Por favor Seleccione una Previsión')">
+							<option  value="0">Seleccione una Previsión</option>
 							{foreach $arrPrevision as $item}
-								<option value="{$item->id_prevision}" >{$item->gl_nombre_prevision}</option>
+								<option  value="{$item->id_prevision}" >{$item->gl_nombre_prevision}</option>
 							{/foreach}
 						</select>
 						<span class="help-block hidden fa fa-warning"></span>
+					</div>
+				</div>
+				<div id="groupFonasaExtranjero" class="form-group hidden">
+					<label for="gl_codigo_fonasa" class="control-label col-sm-2 ">Código Fonasa</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control col-sm-2" name="gl_codigo_fonasa" id="gl_codigo_fonasa">
+						<span class="help-block hidden fa fa-warning"></span>
+					</div>
+					<div class="col-sm-1">					
+						<button type="button" id="btnUploadFonasa" class="btn btn-sm btn-success"
+										onclick="xModal.open('{$smarty.const.BASE_URI}/Paciente/cargarAdjuntoFonasa', 'Cargar Adjunto', '', 1, true, '150');" >
+							<i class="fa fa-upload" aria-hidden="true"></i> Subir Archivo Fonasa
+						</button>
 					</div>
 				</div>
 			</div>
