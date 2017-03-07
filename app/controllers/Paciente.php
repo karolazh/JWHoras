@@ -543,10 +543,10 @@ class Paciente extends Controller {
 	}
 
 	/**
-	 * Descripción: Carga registro
-	 * @author: 
+	 * Descripción: Carga data del Paciente
+	 * @author: Victor Retamal
 	 */
-	public function cargarRegistro() {
+	public function cargarPaciente() {
 		header('Content-type: application/json');
 		$rut = $_POST['rut'];
 		$pasaporte = $_POST['inputextranjero'];
@@ -558,7 +558,7 @@ class Paciente extends Controller {
 		$json = array();
 
 		if ($registro) {
-			$arr_motivos = $this->_DAOPacienteRegistro->getByIdPaciente($registro->id_registro);
+			$arr_motivos = $this->_DAOPacienteRegistro->getByIdPaciente($registro->id_paciente);
 			$tabla_motivos = "";
 			$div_superior = "<div class='top-spaced'></div>
 								<div class='panel panel-primary'>
@@ -589,7 +589,7 @@ class Paciente extends Controller {
 													<td>" . $item->fc_ingreso . "</td>
 													<td>" . $item->gl_hora_ingreso . "</td>
 													<td>" . $item->gl_motivo_consulta . "</td>
-													<td>" . $item->gl_nombre_institucion . "</td>
+													<td>" . $item->gl_nombre_establecimiento . "</td>
 													<td>" . $item->gl_nombres . " " . $item->gl_apellidos . "</td>
 												</tr>
 												";
@@ -613,7 +613,7 @@ class Paciente extends Controller {
 			$json['count_motivos']			= count((array) $arr_motivos);
 			$json['fc_ultimo_motivos']		= $arr_motivos->row_0->fc_ingreso;
 			$json['gl_grupo_tipo']			= $registro->gl_grupo_tipo;
-			$json['id_registro']			= $registro->id_registro;
+			$json['id_paciente']			= $registro->id_paciente;
 			$json['gl_nombres']				= $registro->gl_nombres;
 			$json['gl_apellidos']			= $registro->gl_apellidos;
 			$json['fc_nacimiento']			= $registro->fc_nacimiento;
