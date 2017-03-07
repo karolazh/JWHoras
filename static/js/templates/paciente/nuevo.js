@@ -383,7 +383,7 @@ var Paciente = {
 				async: true,
 				data: {rut: rut, inputextranjero: inputextranjero},
 				type: "post",
-				url: BASE_URI + "index.php/Paciente/cargarRegistro",
+				url: BASE_URI + "index.php/Paciente/cargarPaciente",
 				error: function (xhr, textStatus, errorThrown) {
 					xModal.danger('Error al Buscar');
 				},
