@@ -85,6 +85,7 @@ class DAOPacienteDireccion extends Model {
     public function insertarDireccion($parametros){
         $query	= "	INSERT INTO ".$this->_tabla."
 						(
+						id_paciente
 						gl_direccion,
 						gl_latitud,
 						gl_longitud,
@@ -96,6 +97,7 @@ class DAOPacienteDireccion extends Model {
 						)
 					VALUES
 						(
+						".$parametros['id_paciente'].",
 						'".$parametros['direccion']."',
 						'".$parametros['gl_latitud']."',
 						'".$parametros['gl_longitud']."',
