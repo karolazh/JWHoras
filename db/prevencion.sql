@@ -5043,7 +5043,6 @@ CREATE TABLE IF NOT EXISTS `pre_usuario_especialidad` (
 
 CREATE TABLE IF NOT EXISTS `pre_paciente_direccion` (
   `id_direccion` int(11) NOT NULL AUTO_INCREMENT,
-  `id_paciente` int(11) NOT NULL,
   `gl_direccion` varchar(255) NOT NULL,
   `gl_latitud` varchar(30) NOT NULL,
   `gl_longitud` varchar(30) NOT NULL,
