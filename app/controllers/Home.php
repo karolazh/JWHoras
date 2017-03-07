@@ -52,11 +52,14 @@ class Home extends Controller{
         $jscode = '';
         if($_SESSION['perfil'] == 4 or $_SESSION['perfil'] == 5){
 
+            $daoPacienteRegistro = $this->load->model('DAOPacienteRegistro');
+
             $template = 'home/dashboard_gestor_casos.tpl';
 
             $arr_estados = array();
             $arr_abuso = array(0,0);
             $arr_programa = array(0,0);
+            $arr_registros_fechas = array();
 
             $estados = $daoPacienteEstado->getLista();
 
@@ -69,14 +72,16 @@ class Home extends Controller{
 
             if($_SESSION['perfil'] == 5){
                 $registros = $daoPaciente->getLista();                
-                $tituloEstadoNacional = 'Estadística Nacional : Total de Registros por Estados';
+                $tituloEstadoNacional = 'Estadística Nacional : Total de Pacientes por Estados';
                 $tituloReconoceAbuso = 'Estadística Nacional : Reconoce abuso';
                 $tituloAceptaPrograma = 'Estadística Nacional : Acepta Programa';
+                $tituloFechasRegistros = 'Estadística Nacional : Registros por fecha';
             }else{
                 $registros = $daoPaciente->getLista(array('region' => $_SESSION['id_region']));
-                $tituloEstadoNacional = 'Estadística Regional : Total de Registros por Estados';
+                $tituloEstadoNacional = 'Estadística Regional : Total de Pacientes por Estados';
                 $tituloReconoceAbuso = 'Estadística Regional : Reconoce abuso';
                 $tituloAceptaPrograma = 'Estadística Regional : Acepta Programa';
+                $tituloFechasRegistros = 'Estadística Regional : Registros por fecha';
             }
 
             
@@ -99,12 +104,27 @@ class Home extends Controller{
                         $arr_estados[$registro->id_paciente_estado]['total'] = $arr_estados[$registro->id_paciente_estado]['total'] + 1; 
                     else
                         $arr_estados[0]['total'] = $arr_estados[0]['total'] + 1; 
+
+                    $registros_paciente = $daoPacienteRegistro->getByIdPaciente($registro->id_paciente);
+                    if($registros_paciente){
+                        foreach($registros_paciente as $reg_pac){
+                            $indice = str_replace('-','',$reg_pac->fecha_ingreso);
+                            if(isset($arr_registros_fechas[$indice])){
+                                $arr_registros_fechas[$indice]['total'] = $arr_registros_fechas[$indice]['total'] + 1;
+                            }else{
+                                $arr_registros_fechas[$indice]['fecha'] = $reg_pac->fecha_ingreso;
+                                $arr_registros_fechas[$indice]['total'] =  1;
+                            }        
+                        }
+                    }
+                    
                 }
             }   
             
             $jscode = 'Home.graficoEstadosNacional('.json_encode($arr_estados).',"'.$tituloEstadoNacional.'");';
             $jscode .= 'Home.graficoReconoceAbuso('.json_encode($arr_abuso).',"'.$tituloReconoceAbuso.'");';
             $jscode .= 'Home.graficoAceptaPrograma('.json_encode($arr_programa).',"'.$tituloAceptaPrograma.'");';
+            $jscode .= 'Home.graficoFechasRegistros('.json_encode($arr_registros_fechas).',"'.$tituloFechasRegistros.'");';
 
 
         }else{

@@ -49,7 +49,20 @@
                                     </div>
                                     <div class="box-body">
                                         <div class="col-xs-12">
-                                            <div id="grafico_estados_general" style="height: 600px;"></div>
+                                            <div id="grafico_estados_general" style="height: 700px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-8">
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h3 class="box-title" id="titulo_fechas_registros"></h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="col-xs-12">
+                                            <div id="grafico_fechas_registros" style="height: 350px"></div>
                                         </div>
                                     </div>
                                 </div>

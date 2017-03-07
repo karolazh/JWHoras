@@ -69,7 +69,8 @@ class DAOPacienteRegistro extends Model{
 							usu.gl_apellidos,
 							usu.gl_rut AS rut,
 							concat_ws(' ' , usu.gl_nombres, usu.gl_apellidos) AS funcionario,
-							ins.gl_nombre_establecimiento as gl_nombre_institucion
+							ins.gl_nombre_establecimiento as gl_nombre_institucion,
+							registro.fc_ingreso as fecha_ingreso 
 						FROM pre_paciente_registro registro
 							LEFT JOIN pre_usuario usu ON registro.id_usuario_crea = usu.id_usuario
 							LEFT JOIN pre_centro_salud ins ON registro.id_institucion = ins.id_centro_salud
