@@ -165,7 +165,7 @@ class Paciente extends Controller {
                 $this->smarty->assign("acepta", $acepta);
 
                 //Grilla Motivos de Consulta (Paciente-Registro)
-                $arrConsultas = $this->_DAOPacienteRegistro->getListaPacienteRegistro($idPac);
+                $arrConsultas = $this->_DAOPacienteRegistro->getByIdPaciente($idPac);
                 $this->smarty->assign('arrConsultas', $arrConsultas);
 
                 //Grilla Empa
