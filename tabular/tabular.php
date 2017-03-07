@@ -105,7 +105,7 @@
         }
     }
 	
-	/*	Orlando */
+	/*	Orlando OK*/
 	$session					= New Zend_Session_Namespace("usuario_carpeta");
 	$parametros					= $this->_request->getParams();
 	$correcto					= false;
