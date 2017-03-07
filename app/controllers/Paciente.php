@@ -478,37 +478,36 @@ class Paciente extends Controller {
 	public function ver() {
 		$parametros = $this->request->getParametros();
 		$id_registro = $parametros[0];
-		$obj_registro = $this->_DAOPaciente->verInfoById($id_registro);
-
-		if (!is_null($obj_registro)) {
-			$edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
-			$arrMotivosConsulta = $this->_DAOPacienteRegistro->getById($obj_registro->id_paciente);
+		$info_paciente = $this->_DAOPaciente->verInfoById($id_registro);
+		if (!is_null($info_paciente)) {
+			$edad = Fechas::calcularEdadInv($info_paciente->fc_nacimiento);
+			$arrMotivosConsulta = $this->_DAOPacienteRegistro->getByIdPaciente($info_paciente->id_paciente);
 		}
-		$this->smarty->assign('id_paciente', $obj_registro->id_paciente);
-		$this->smarty->assign('rut', $obj_registro->gl_rut);
-		$this->smarty->assign('extranjero', $obj_registro->bo_extranjero);
-		$this->smarty->assign('run_pass', $obj_registro->gl_run_pass);
-		$this->smarty->assign('nombres', $obj_registro->gl_nombres);
-		$this->smarty->assign('apellidos', $obj_registro->gl_apellidos);
-		$this->smarty->assign('fecha_nacimiento', $obj_registro->fc_nacimiento);
-		$this->smarty->assign('sexo', $obj_registro->gl_sexo);
-		$this->smarty->assign('direccion', $obj_registro->gl_direccion);
-		$this->smarty->assign('fono', $obj_registro->gl_fono);
-		$this->smarty->assign('celular', $obj_registro->gl_celular);
-		$this->smarty->assign('email', $obj_registro->gl_email);
-		$this->smarty->assign('latitud', $obj_registro->gl_latitud);
-		$this->smarty->assign('longitud', $obj_registro->gl_longitud);
-		$this->smarty->assign('reconoce', $obj_registro->bo_reconoce);
-		$this->smarty->assign('acepta', $obj_registro->bo_acepta_programa);
-		$this->smarty->assign('prevision', $obj_registro->gl_nombre_prevision);
-		$this->smarty->assign('comuna', $obj_registro->gl_nombre_comuna);
-		$this->smarty->assign('region', $obj_registro->gl_nombre_region);
+		$this->smarty->assign('id_paciente', $info_paciente->id_paciente);
+		$this->smarty->assign('rut', $info_paciente->gl_rut);
+		$this->smarty->assign('extranjero', $info_paciente->bo_extranjero);
+		$this->smarty->assign('run_pass', $info_paciente->gl_run_pass);
+		$this->smarty->assign('nombres', $info_paciente->gl_nombres);
+		$this->smarty->assign('apellidos', $info_paciente->gl_apellidos);
+		$this->smarty->assign('fecha_nacimiento', $info_paciente->fc_nacimiento);
+		$this->smarty->assign('sexo', $info_paciente->gl_sexo);
+		$this->smarty->assign('direccion', $info_paciente->gl_direccion);
+		$this->smarty->assign('fono', $info_paciente->gl_fono);
+		$this->smarty->assign('celular', $info_paciente->gl_celular);
+		$this->smarty->assign('email', $info_paciente->gl_email);
+		$this->smarty->assign('latitud', $info_paciente->gl_latitud);
+		$this->smarty->assign('longitud', $info_paciente->gl_longitud);
+		$this->smarty->assign('reconoce', $info_paciente->bo_reconoce);
+		$this->smarty->assign('acepta', $info_paciente->bo_acepta_programa);
+		$this->smarty->assign('prevision', $info_paciente->gl_nombre_prevision);
+		$this->smarty->assign('comuna', $info_paciente->gl_nombre_comuna);
+		$this->smarty->assign('region', $info_paciente->gl_nombre_region);
 		$this->smarty->assign('edad', $edad);
-		$this->smarty->assign('nombre_registrador', $obj_registro->gl_nombre_usuario_crea);
-		$this->smarty->assign('estado_caso', $obj_registro->gl_nombre_estado_caso);
-		$this->smarty->assign('institucion', $obj_registro->gl_nombre_institucion);
+		$this->smarty->assign('nombre_registrador', $info_paciente->gl_nombre_usuario_crea);
+		$this->smarty->assign('estado_caso', $info_paciente->gl_nombre_estado_caso);
+		$this->smarty->assign('institucion', $info_paciente->gl_nombre_institucion);
 		$this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
-		$this->smarty->assign('ruta_consentimiento', $obj_registro->gl_path);
+		$this->smarty->assign('ruta_consentimiento', $info_paciente->gl_path);
 		$this->smarty->display('Paciente/ver.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/paciente/ver.js");
 	}
