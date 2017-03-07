@@ -61,8 +61,8 @@
             {foreach $arrExamenes as $exa}
                 <tr>
                     <td>{$exa->fc_crea}</td>
-                    <td>{$exa->nombre_examen}</td>
-                    <td>{$exa->nombre_laboratorio}</td>
+                    <td>{$exa->gl_nombre_examen}</td>
+                    <td>{$exa->gl_nombre_laboratorio}</td>
                     <td align="center">
                         {if $exa->resultado == "N"}
                             <h6><b><span class="label label-success small">NORMAL</span></b></h6>

@@ -358,6 +358,55 @@ class DAOPaciente extends Model{
         }
     }
     
+    public function getByIdPaciente($id_paciente) {
+        $query = "SELECT
+                        pac.id_paciente,	
+                        pac.gl_rut,
+                        pac.bo_extranjero, 
+                        pac.gl_run_pass,
+                        pac.gl_nombres, 
+                        pac.gl_apellidos,
+                        date_format(pac.fc_nacimiento,'%d-%m-%Y') as fc_nacimiento,
+                        pac.gl_sexo, 
+                        pre.gl_nombre_prevision,
+                        pac.gl_direccion, 
+                        pac.gl_fono, 
+                        pac.gl_celular, 
+                        rg.gl_nombre_region,
+                        pro.gl_nombre_provincia,
+                        com.gl_nombre_comuna,
+                        pac.gl_email, 
+                        est.gl_nombre_estado_caso,
+                        pac.gl_grupo_tipo,
+                        pac.bo_reconoce, 
+                        pac.bo_acepta_programa,
+                        date_format(pac.fc_crea,'%d-%m-%Y') AS fc_crea,
+                        cs.gl_nombre_establecimiento,
+                        pac.id_centro_salud, 
+                        pac.gl_latitud, 
+                        pac.gl_longitud,
+                        date_format(pac.fc_actualiza,'%d-%m-%Y'),
+                        pac.id_usuario_crea, 
+                        pac.id_usuario_actualiza
+                    FROM pre_paciente pac
+                    left join pre_comuna com on com.id_comuna = pac.id_comuna
+                    left join pre_provincia pro on pro.id_provincia = com.id_provincia
+                    left join pre_region rg on rg.id_region = pro.id_region
+                    left join pre_centro_salud cs on cs.id_centro_salud = pac.id_centro_salud
+                    left join pre_prevision pre on pre.id_prevision = pac.id_prevision
+                    left join pre_paciente_estado est on est.id_paciente_estado = pac.id_paciente_estado
+                    WHERE pac.id_paciente = ?";
+
+        $param = array($id_paciente);
+        $result = $this->db->getQuery($query, $param);
+
+        if ($result->numRows > 0) {
+            return $result->rows->row_0;
+        } else {
+            return NULL;
+        }
+    }
+    
     /*
     Funcion debe estar en Evento
     */

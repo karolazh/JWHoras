@@ -5035,3 +5035,22 @@ CREATE TABLE IF NOT EXISTS `pre_usuario_especialidad` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_paciente_direccion`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_paciente_direccion` (
+  `id_direccion` int(11) NOT NULL AUTO_INCREMENT,
+  `id_paciente` int(11) NOT NULL,
+  `gl_direccion` varchar(255) NOT NULL,
+  `gl_latitud` varchar(30) NOT NULL,
+  `gl_longitud` varchar(30) NOT NULL,
+  `bo_estado` tinyint(1) NOT NULL,
+  `id_usuario_crea` int(11) NOT NULL,
+  `fc_crea` datetime NOT NULL,
+  `id_usuario_actualiza` int(11) NOT NULL,
+  `fc_actualiza` datetime NOT NULL,
+  PRIMARY KEY (`id_direccion`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

@@ -11,8 +11,8 @@
                 <tr role="row">
                     <th align="center" width="10%">Fecha Ing</th>
                     <th align="center" width="10%">Hora Ing</th>
-                    <th align="center" width="">Motivo Consulta</th>
-                    <th align="center" width="20%">Instituci&oacute;n</th>
+                    <th align="center" width="30%">Motivo Consulta</th>
+                    <th align="center" width="30%">Instituci&oacute;n</th>
                     <th align="center" width="20%">Funcionario</th>
                 </tr>
             </thead>
@@ -20,9 +20,9 @@
             {foreach $arrConsultas as $con}
                 <tr>
                     <td>{$con->fc_ingreso}</td>
-                    <td>{$con->hora_ingreso}</td>
-                    <td>{$con->motivo_consulta}</td>
-                    <td>{$con->institucion}</td>
+                    <td>{$con->gl_hora_ingreso}</td>
+                    <td>{$con->gl_motivo_consulta}</td>
+                    <td>{$con->gl_nombre_establecimiento}</td>
                     <td>{$con->funcionario}</td>
                 </tr>
             {/foreach}
