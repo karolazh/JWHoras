@@ -7,9 +7,23 @@ $("#form").ready(function () {
     //funcion mensaje span Puntos AUDIT
     mensajeAUDIT(pts_audit);
     
+	if($("#ultimo_pap_ano").val()){
+		$("#fc_ultimo_pap_ano option[value="+ $("#ultimo_pap_ano").val() +"]").attr("selected",true);
+	}
+	if($("#ultimo_pap_mes").val()){
+		$("#fc_ultimo_pap_mes option[value="+ $("#ultimo_pap_mes").val() +"]").attr("selected",true);
+	}
+	if($("#mamografia_ano").val()){
+		$("#fc_mamografia_ano option[value="+ $("#mamografia_ano").val() +"]").attr("selected",true);
+	}
+	if($("#mamografia_mes").val()){
+		$("#fc_mamografia_mes option[value="+ $("#mamografia_mes").val() +"]").attr("selected",true);
+	}
+	
     if ($("#bo_mamografia_toma").is(':checked')){
         $("#bo_mamografia_requiere_1").prop('checked', true);
     }
+	
 });
 
 //Poner Mensaje en span segun Puntos de AUDIT
@@ -280,13 +294,13 @@ $(".bo_pap_realizado").on('change', function (e) {
 });
 
 //PAP Vigente? (automático Calculando si es <=3 años) SI -> Vigente   NO -> No Vigente (Tomar hora para otro)
-$("#fc_ultimo_pap").livequery(function () {
-    $(this).on('change', function (e) {
-        if ($(this).val() == "") {
+$("#fc_ultimo_pap_ano").on('change', function (e) {
+        if ($("#fc_ultimo_pap_ano").val() == 0 || $("#fc_ultimo_pap_mes").val() == 0) {
             $('#bo_pap_vigente_1').prop('checked', false);
             $('#bo_pap_vigente_0').prop('checked', false);
         } else {
-            var edad = calcularYear($(this).val());
+			var fecha = $("#fc_ultimo_pap_ano").val()+"-"+$("#fc_ultimo_pap_mes").val()+"-"+01;
+            var edad = calcularYear(fecha);
             if (edad <= 3) {
                 //check Si
                 $('#bo_pap_vigente_1').prop('checked', true);
@@ -297,7 +311,24 @@ $("#fc_ultimo_pap").livequery(function () {
             $('#pap_vigente').show();
             $('#verAgendaPap1').show();
         }
-    });
+});
+$("#fc_ultimo_pap_mes").on('change', function (e) {
+        if ($("#fc_ultimo_pap_ano").val() == 0 || $("#fc_ultimo_pap_mes").val() == 0) {
+            $('#bo_pap_vigente_1').prop('checked', false);
+            $('#bo_pap_vigente_0').prop('checked', false);
+        } else {
+			var fecha = $("#fc_ultimo_pap_ano").val()+"-"+$("#fc_ultimo_pap_mes").val()+"-"+01;
+            var edad = calcularYear(fecha);
+            if (edad <= 3) {
+                //check Si
+                $('#bo_pap_vigente_1').prop('checked', true);
+            } else {
+                //check No
+                $('#bo_pap_vigente_0').prop('checked', true);
+            }
+            $('#pap_vigente').show();
+            $('#verAgendaPap1').show();
+        }
 });
 //Si valor colesterlo >= 200 y < 239 (Consejería Alimentaria y Actividad Fisica
 //Si valor colesterol >= 240 (Referir a confirmación diagnóstica
@@ -334,13 +365,13 @@ $(".bo_mamografia_realizada").on('change', function (e) {
 });
 
 //Examen Cancer de mama vigente?
-$("#fc_mamografia").livequery(function () {
-	$(this).on('change', function (e) {
-            if ($(this).val() == "") {
-                $('#bo_mamografia_vigente_1').prop('checked', false);
-                $('#bo_mamografia_vigente_0').prop('checked', false);
-            } else {
-		var edad = calcularYear($(this).val());
+$("#fc_mamografia_ano").on('change', function (e) {
+	if ($("#fc_mamografia_ano").val() == 0 || $("#fc_mamografia_mes").val() == 0) {
+		$('#bo_mamografia_vigente_1').prop('checked', false);
+		$('#bo_mamografia_vigente_0').prop('checked', false);
+	} else {
+		var fecha = $("#fc_mamografia_ano").val()+"-"+$("#fc_mamografia_mes").val()+"-"+01;
+        var edad = calcularYear(fecha);
 		if (edad <= 1) {
 			//check Si
 			$('#bo_mamografia_vigente_1').prop('checked', true);
@@ -351,8 +382,26 @@ $("#fc_mamografia").livequery(function () {
 		$('#mam_vigente').show();
 		$('#mam_resultado').show();
 		$('#mam_requiere').show();
-            }
-	});
+	}
+});
+$("#fc_mamografia_mes").on('change', function (e) {
+	if ($("#fc_mamografia_ano").val() == 0 || $("#fc_mamografia_mes").val() == 0) {
+		$('#bo_mamografia_vigente_1').prop('checked', false);
+		$('#bo_mamografia_vigente_0').prop('checked', false);
+	} else {
+		var fecha = $("#fc_mamografia_ano").val()+"-"+$("#fc_mamografia_mes").val()+"-"+01;
+        var edad = calcularYear(fecha);
+		if (edad <= 1) {
+			//check Si
+			$('#bo_mamografia_vigente_1').prop('checked', true);
+		} else {
+			//check No
+			$('#bo_mamografia_vigente_0').prop('checked', true);
+		}
+		$('#mam_vigente').show();
+		$('#mam_resultado').show();
+		$('#mam_requiere').show();
+	}
 });
 
 //Si requiere otra Mamografía Mostrar Resultado
@@ -601,6 +650,28 @@ $("#guardar").on('click', function (e) {
 			"value": "'" + $('#fc_ultimo_pap').val() + "'"
 		});
 	}
+	if ($('#fc_ultimo_pap_ano').val() == "") {
+		parametros.push({
+			"name": 'fc_ultimo_pap_ano',
+			"value": 'NULL'
+		});
+	} else {
+		parametros.push({
+			"name": 'fc_ultimo_pap_ano',
+			"value": $('#fc_ultimo_pap_ano').val()
+		});
+	}
+	if ($('#fc_ultimo_pap_mes').val() == "") {
+		parametros.push({
+			"name": 'fc_ultimo_pap_mes',
+			"value": 'NULL'
+		});
+	} else {
+		parametros.push({
+			"name": 'fc_ultimo_pap_mes',
+			"value": "'" + $('#fc_ultimo_pap_mes').val() + "'"
+		});
+	}
 	if ($('#gl_colesterol').val() == "") {
 		parametros.push({
 			"name": 'gl_colesterol',
@@ -822,6 +893,28 @@ $("#guardar").on('click', function (e) {
 			"value": "'" + $('#fc_mamografia').val() + "'"
 		});
 	}
+	if ($('#fc_mamografia_ano').val() == "") {
+		parametros.push({
+			"name": 'fc_mamografia_ano',
+			"value": 'NULL'
+		});
+	} else {
+		parametros.push({
+			"name": 'fc_mamografia_ano',
+			"value": $('#fc_mamografia_ano').val()
+		});
+	}
+	if ($('#fc_mamografia_mes').val() == "") {
+		parametros.push({
+			"name": 'fc_mamografia_mes',
+			"value": 'NULL'
+		});
+	} else {
+		parametros.push({
+			"name": 'fc_mamografia_mes',
+			"value": "'" + $('#fc_mamografia_mes').val() + "'"
+		});
+	}	
 	if ($('#bo_mamografia_vigente_1').is(':checked')) {
 		parametros.push({
 			"name": 'bo_mamografia_vigente',

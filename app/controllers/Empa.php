@@ -40,6 +40,7 @@ class Empa extends Controller{
 		$this->_DAOTipoIMC = $this->load->model("DAOTipoIMC");
 		$this->_DAOTipoAUDIT = $this->load->model("DAOTipoAUDIT");
 		$this->_DAOEvento = $this->load->model("DAOEvento");
+		$this->_DAOMes = $this->load->model("DAOMes");
 	}
 
 	/*
@@ -177,7 +178,16 @@ class Empa extends Controller{
 		} else if ($empa->bo_pap_realizado == 0) {
 			$this->smarty->assign("bo_pap_realizado_0", 'checked');
 		}
-
+		
+        $arrMes = $this->_DAOMes->getLista();
+		$this->smarty->assign("arrMes", $arrMes);
+		
+		$this->smarty->assign("fc_ultimo_pap_ano", $empa->fc_ultimo_pap_ano);
+		$this->smarty->assign("fc_ultimo_pap_mes", $empa->fc_ultimo_pap_mes);
+		
+		$this->smarty->assign("fc_mamografia_ano", $empa->fc_mamografia_ano);
+		$this->smarty->assign("fc_mamografia_mes", $empa->fc_mamografia_mes);
+		
 		$this->smarty->assign("fc_ultimo_pap", $empa->fc_ultimo_pap);
 		$this->smarty->assign("fc_tomar_pap", $empa->fc_tomar_pap);
 
