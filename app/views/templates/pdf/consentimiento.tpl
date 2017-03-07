@@ -36,11 +36,24 @@
         <td width="1%"><strong>:</strong></td>
         <td><ins>{$nombre_paciente}</ins></td>
     </tr>
+    {if $rut_paciente == ""}
+    <tr>
+        <td><strong>RUN/Pasaporte de la Participante</strong></td>
+        <td><strong>:</strong></td>
+        <td><ins>{$run_pasaporte}</ins></td>
+    </tr>
+    <tr>
+        <td><strong>C&oacute;digo de Fonasa</strong></td>
+        <td><strong>:</strong></td>
+        <td><ins>{$codigo_fonasa}</ins></td>
+    </tr>
+    {else}
     <tr>
         <td><strong>RUT de la Participante</strong></td>
         <td><strong>:</strong></td>
         <td><ins>{$rut_paciente}</ins></td>
     </tr>
+    {/if}
     <tr>
         <td><strong>Fecha</strong></td>
         <td><strong>:</strong></td>

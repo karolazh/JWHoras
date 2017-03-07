@@ -173,7 +173,7 @@ class Paciente extends Controller {
                 $this->smarty->assign('arrEmpa', $arrEmpa);
 
                 //Grilla Exámenes x Paciente
-                $arrExamenes = $this->_DAOPacienteExamen->getListaExamenes($idPac);
+                $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($idPac);
                 $this->smarty->assign('arrExamenes', $arrExamenes);
 
                 //Tipos de Eventos
@@ -181,7 +181,7 @@ class Paciente extends Controller {
                 $this->smarty->assign('arrTipoEvento', $arrTipoEvento);
 
                 //Grilla Eventos
-                $arrEventos = $this->_DAOEvento->getListaEventosPaciente($idPac);
+                $arrEventos = $this->_DAOEvento->getEventosPaciente($idPac);
                 $this->smarty->assign('arrEventos', $arrEventos);
 
                 //Tipos de Adjuntos
@@ -189,7 +189,7 @@ class Paciente extends Controller {
                 $this->smarty->assign('arrTipoDocumento', $arrTipoDocumento);
 
                 //Grilla Adjuntos
-                $arrAdjuntos = $this->_DAOAdjunto->getListaAdjuntosPaciente($idPac);
+                $arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($idPac);
                 $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
 
                 //muestra template
