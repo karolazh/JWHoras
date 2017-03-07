@@ -16,7 +16,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				Datos del Paciente {$botonAyudaPaciente}
-				<input type="text" value="0" id="id_registro" name="id_registro" class="hidden">
+				<input type="text" value="0" id="id_paciente" name="id_paciente" class="hidden">
 				<input type="text" value="0" id="gl_grupo_tipo" name="gl_grupo_tipo" class="hidden">
 			</div>
 			<div class="panel-body">
@@ -48,7 +48,7 @@
 						</div>
 						{*}
 						<div class="col-sm-1">
-						<button type="button" id="buscar" class="btn btn-info btn-sm form-control" onclick="Registro.cargarRegistro()"><i class="fa fa-search"></i></button>
+						<button type="button" id="buscar" class="btn btn-info btn-sm form-control" onclick="Paciente.cargarRegistro()"><i class="fa fa-search"></i></button>
 						</div>
 						{*}
 					</div>
@@ -86,7 +86,7 @@
 				<div class="form-group">
 					<label for="fc_nacimiento" class="control-label col-sm-2 ">Fecha Nacimiento(*)</label>
 					<div class="col-sm-3">
-						<input type="date" class="form-control col-sm-2" onblur="validarVacio(this, 'Por favor Ingrese Fecha'), calcularEdad(this.value,'#edad')" name="fc_nacimiento" id="fc_nacimiento">
+						<input type="date" class="form-control col-sm-2" onblur="validarVacio(this, 'Por favor Ingrese Fecha'), calcularEdad(this.value, '#edad')" name="fc_nacimiento" id="fc_nacimiento">
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 					<label for="edad" class="control-label col-sm-2 ">Edad (*)</label>
@@ -124,7 +124,7 @@
 					</div>
 					<div class="col-sm-1">					
 						<button type="button" id="btnUploadFonasa" class="btn btn-sm btn-success"
-										onclick="xModal.open('{$smarty.const.BASE_URI}/Paciente/cargarAdjuntoFonasa', 'Cargar Adjunto', '', 1, true, '150');" >
+								onclick="xModal.open('{$smarty.const.BASE_URI}/Paciente/cargarAdjuntoFonasa', 'Cargar Adjunto', '', 1, true, '150');" >
 							<i class="fa fa-upload" aria-hidden="true"></i> Subir Archivo Fonasa
 						</button>
 					</div>
@@ -179,12 +179,18 @@
 					</div>
 
 					<div class="form-group">
-						<label for="fono" class="control-label col-sm-4">Fono</label>
+						<label for="fono" class="control-label col-sm-4">Teléfono</label>
 						<div class="col-sm-5">
 							<input type="text" name="fono" id="fono" value="" maxlength="11" onKeyPress="return soloNumeros(event)" placeholder="Fono" class="form-control"/>
 							<span class="help-block hidden"></span>
 						</div>
+						<label for="fono_seguro" class="control-label col-sm-2 ">¿Teléfono Seguro?</label>
+						<div class="col-sm-1">
+							<input id="fono_seguro" name="fono_seguro" type="checkbox" value='1'>
+							<span class="help-block hidden fa fa-warning"></span>
+						</div>
 					</div>
+
 					<div class="form-group">    
 						<label for="celular" class="control-label col-sm-4">Celular</label>
 						<div class="col-sm-5">
@@ -228,12 +234,16 @@
 							<span class="help-block hidden"></span>
 						</div>
 					</div>
+
+					{* 
 					<div class="form-group">
-						<label for="chkReconoce" class="control-label col-sm-4">¿Reconoce Maltrato?</label>
-						<div class="col-sm-1">
-							<input id="chkReconoce" value="1" type="checkbox">
-						</div>
+					<label for="chkReconoce" class="control-label col-sm-4">¿Reconoce Maltrato?</label>
+					<div class="col-sm-1">
+					<input id="chkReconoce" value="1" type="checkbox">
 					</div>
+					</div>
+					*}
+
 					<div class="form-group">
 						<label for="chkAcepta" class="control-label col-sm-4">¿Consiente Participar?</label>
 						<div class="col-sm-1">
@@ -243,8 +253,17 @@
 					<div id="files" style="display: none">
 						<div class="form-group">
 							<label for="files" class="control-label col-sm-4">Consentimiento</label>
+
+							{*
 							<div class="col-sm-3">
-								<a class="btn btn-sm btn-info" id="btnDescarga" href = '{$smarty.const.DIR_BASE}archivos/sistema/consentimiento.pdf' download target="_blank">
+							<a class="btn btn-sm btn-info" id="btnDescarga" onclick="xModal.open('{$smarty.const.BASE_URI}/Paciente/generarConsentimiento', 'Cargar Adjunto', '70', 1, true,'700');" download target="_blank">
+							<i class="fa fa-download"></i>Descargar
+							</a>
+							</div>
+							*}
+
+							<div class="col-sm-3">
+								<a class="btn btn-sm btn-info" id="btnDescarga" download target="_blank">
 									<i class="fa fa-download"></i>Descargar
 								</a>
 							</div>

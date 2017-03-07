@@ -11,11 +11,11 @@
                 <th align="center" width="20%">Funcionario</th>
             </thead>
             <tbody>
-            {foreach $arrHistorial as $his}
+            {foreach $arrEventos as $his}
                 <tr>
                     <td>{$his->fc_crea}</td>
-                    <td>{$his->nombre_evento}</td>
-                    <td>{$his->glosa}</td>
+                    <td>{$his->gl_nombre_evento_tipo}</td>
+                    <td>{$his->gl_descripcion}</td>
                     <td>{$his->funcionario}</td>
                 </tr>
             {/foreach}

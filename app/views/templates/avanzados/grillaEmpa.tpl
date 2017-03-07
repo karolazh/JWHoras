@@ -39,8 +39,8 @@
             {foreach $arrEmpa as $emp}
                 <tr>
                     <td>{$emp->fc_empa}</td>
-                    <td>{$emp->comuna}</td>
-                    <td>{$emp->institucion}</td>
+                    <td>{$emp->gl_nombre_comuna}</td>
+                    <td>{$emp->gl_nombre_establecimiento}</td>
                     <td>{$emp->funcionario}</td>
                     <td class="text-center" style="width:100px;">
                         <div class="btn-group">

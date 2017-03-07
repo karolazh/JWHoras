@@ -37,6 +37,7 @@ class Paciente extends Controller {
     protected $_DAOAdjuntoTipo;
     protected $_DAOEmpa;
     protected $_DAOPacienteExamen;
+    
 	/**
 	 * Descripción: Constructor
 	 * @author: 
@@ -88,114 +89,115 @@ class Paciente extends Controller {
 
 		//llamado al template
 		$this->_display('Paciente/index.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/paciente/index.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/Paciente/index.js");
 	}
 
 	/**
 	 * Descripción: Bitacora de Paciente
-	 * @author: 
+	 * @author Carolina Zamora Hormazábal
 	 */
 	public function bitacora() {
 
-		$parametros = $this->request->getParametros();
-		$idReg = $parametros[0];
-		//$detReg = $this->_DAOPaciente->getById($idReg);
-		$detReg = $this->_DAOPaciente->getPacienteById($idReg);
+            $parametros = $this->request->getParametros();
+            $idPac = $parametros[0];
+            //$detReg = $this->_DAOPaciente->getById($idReg);
+            $detPac = $this->_DAOPaciente->getByIdPaciente($idPac);
 
-		if (!is_null($detReg)) {
-			//$this->smarty->assign("detReg", $detReg);
+            if (!is_null($detPac)) {
+                //$this->smarty->assign("detReg", $detReg);
 
-			$this->smarty->assign("idreg", $idReg);
+                $this->smarty->assign("idpac", $detPac);
 
-			//Datos de Paciente
-			$run = "";
-			$ext = "NO";
-			if (!is_null($detReg->rut)) {
-				$run = $detReg->rut;
-			} else {
-				$run = $detReg->run_pass;
-				$ext = "SI";
-			}
-			$this->smarty->assign("run", $run);
-			$this->smarty->assign("ext", $ext);
-			//$this->smarty->assign("nombres", $detReg->nombres);
-			//$this->smarty->assign("apellidos", $detReg->apellidos);
-			$nombres = $detReg->nombres . ' ' . $detReg->apellidos;
-			$this->smarty->assign("nombres", $nombres);
+                //Datos de Paciente
+                $run = "";
+                $ext = "NO";
+                if (!is_null($detPac->gl_rut)) {
+                        $run = $detPac->gl_rut;
+                } else {
+                        $run = $detPac->gl_run_pass;
+                        $ext = "SI";
+                }
+                $this->smarty->assign("run", $run);
+                $this->smarty->assign("ext", $ext);
+                //$this->smarty->assign("nombres", $detReg->nombres);
+                //$this->smarty->assign("apellidos", $detReg->apellidos);
+                $nombres = $detPac->gl_nombres.' '.$detPac->gl_apellidos;
+                $this->smarty->assign("nombres", $nombres);
 
-			//$edad = "";
-			$edad = Fechas::calcularEdadInv($detReg->fc_nacimiento);
-			$this->smarty->assign("fecha_nac", $detReg->fc_nacimiento);
-			$this->smarty->assign("edad", $edad);
+                //$edad = "";
+                $edad = Fechas::calcularEdadInv($detPac->fc_nacimiento);
+                $this->smarty->assign("fecha_nac", $detPac->fc_nacimiento);
+                $this->smarty->assign("edad", $edad);
 
-			$genero = "FEMENINO"; //obtener de BD y validad a futuro
-			$this->smarty->assign("genero", $genero);
-			$this->smarty->assign("estado", $detReg->estado);
+                //$genero = $detPac->gl_sexo;
+                $genero = "FEMENINO"; //obtener de BD y validad a futuro
+                $this->smarty->assign("genero", $genero);
+                $this->smarty->assign("estado", $detPac->gl_nombre_estado_caso);
 
-			$this->smarty->assign("prevision", $detReg->prevision);
-			$this->smarty->assign("grupo", $detReg->grupo);
+                $this->smarty->assign("prevision", $detPac->gl_nombre_prevision);
+                $this->smarty->assign("grupo", $detPac->gl_grupo_tipo);
 
-			$this->smarty->assign("direccion", $detReg->direccion);
-			$this->smarty->assign("fono", $detReg->fono);
+                $this->smarty->assign("direccion", $detPac->gl_direccion);
+                $this->smarty->assign("fono", $detPac->gl_fono);
 
-			$this->smarty->assign("celular", $detReg->celular);
-			$this->smarty->assign("email", $detReg->email);
+                $this->smarty->assign("celular", $detPac->gl_celular);
+                $this->smarty->assign("email", $detPac->gl_email);
 
-			$this->smarty->assign("comuna", $detReg->comuna);
-			$this->smarty->assign("provincia", $detReg->provincia);
+                $this->smarty->assign("comuna", $detPac->gl_nombre_comuna);
+                $this->smarty->assign("provincia", $detPac->gl_nombre_provincia);
 
-			$this->smarty->assign("region", $detReg->region);
-			$this->smarty->assign("fecha_reg", $detReg->fc_crea);
+                $this->smarty->assign("region", $detPac->gl_nombre_region);
+                $this->smarty->assign("fecha_reg", $detPac->fc_crea);
 
-			$reconoce = "NO";
-			if (!is_null($detReg->reconoce)) {
-				if ($detReg->reconoce) {
-					$reconoce = "SI";
-				}
-			}
-			$acepta = "NO";
-			if (!is_null($detReg->acepta)) {
-				if ($detReg->acepta) {
-					$acepta = "SI";
-				}
-			}
-			$this->smarty->assign("reconoce", $reconoce);
-			$this->smarty->assign("acepta", $acepta);
+                $reconoce = "NO";
+                if (!is_null($detPac->bo_reconoce)) {
+                    if ($detPac->bo_reconoce) {
+                        $reconoce = "SI";
+                    }
+                }
+                $acepta = "NO";
+                if (!is_null($detPac->bo_acepta_programa)) {
+                    if ($detPac->bo_acepta_programa) {
+                        $acepta = "SI";
+                    }
+                }
+                $this->smarty->assign("reconoce", $reconoce);
+                $this->smarty->assign("acepta", $acepta);
 
-			//Grilla Motivos de Consulta
-			$arrConsultas = $this->_DAOPacienteRegistro->getByIdPaciente($idReg);
-			$this->smarty->assign('arrConsultas', $arrConsultas);
+                //Grilla Motivos de Consulta (Paciente-Registro)
+                $arrConsultas = $this->_DAOPacienteRegistro->getListaPacienteRegistro($idPac);
+                $this->smarty->assign('arrConsultas', $arrConsultas);
 
-			//Grilla Empa
-			$arrEmpa = $this->_DAOEmpa->getEmpaGrilla($idReg);
-			$this->smarty->assign('arrEmpa', $arrEmpa);
+                //Grilla Empa
+                $arrEmpa = $this->_DAOEmpa->getListaEmpa($idPac);
+                $this->smarty->assign('arrEmpa', $arrEmpa);
 
-			//Grilla Exámenes x Paciente
-			$arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($idReg);
-			$this->smarty->assign('arrExamenes', $arrExamenes);
+                //Grilla Exámenes x Paciente
+                $arrExamenes = $this->_DAOPacienteExamen->getListaExamenes($idPac);
+                $this->smarty->assign('arrExamenes', $arrExamenes);
 
-			//Tipos de Eventos
-			$arrTipoEvento = $this->_DAOEventosTipo->getLista();
-			$this->smarty->assign('arrTipoEvento', $arrTipoEvento);
+                //Tipos de Eventos
+                $arrTipoEvento = $this->_DAOEventoTipo->getLista();
+                $this->smarty->assign('arrTipoEvento', $arrTipoEvento);
 
-			//Grilla Bitácora
-			$arrHistorial = $this->_DAOEvento->getEventosRegistro($idReg);
-			$this->smarty->assign('arrHistorial', $arrHistorial);
+                //Grilla Eventos
+                $arrEventos = $this->_DAOEvento->getListaEventosPaciente($idPac);
+                $this->smarty->assign('arrEventos', $arrEventos);
 
-			//Tipos de Adjuntos
-			$arrTipoDocumento = $this->_DAOAdjuntoTipo->getLista();
-			$this->smarty->assign('arrTipoDocumento', $arrTipoDocumento);
+                //Tipos de Adjuntos
+                $arrTipoDocumento = $this->_DAOAdjuntoTipo->getLista();
+                $this->smarty->assign('arrTipoDocumento', $arrTipoDocumento);
 
-			//Grilla Adjuntos
-			$arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($idReg);
-			$this->smarty->assign('arrAdjuntos', $arrAdjuntos);
+                //Grilla Adjuntos
+                $arrAdjuntos = $this->_DAOAdjunto->getListaAdjuntosPaciente($idPac);
+                $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
 
-			//muestra template
-			$this->smarty->display('Paciente/bitacora.tpl');
-			$this->load->javascript(STATIC_FILES . 'js/templates/paciente/bitacora.js');
-		} else {
-			throw new Exception("El historial que está buscando no existe");
-		}
+                //muestra template
+                $this->smarty->display('Paciente/bitacora.tpl');
+                $this->load->javascript(STATIC_FILES . 'js/templates/paciente/bitacora.js');
+            } else {
+                throw new Exception("El historial que está buscando no existe");
+            }
 	}
 
 	/**
@@ -919,24 +921,39 @@ class Paciente extends Controller {
 	*/
 	public function generarConsentimiento() {
         $this->load->lib('MPdf', false);
-		#$parametros			= $this->_request->getParams();
-		$nombre_paciente	= 'nombre_paciente'; #$parametros['nombre_paciente'];
-		$rut_paciente		= '11111111-1'; #$parametros['rut_paciente'];
-		$filename			= 'Consentimiento_'.$rut_paciente.'.pdf';
-		$fecha_actual		= date('d-m-Y');
-		$nombre_usuario		= $_SESSION['nombre'];
-		$rut_usuario		= $_SESSION['rut'];
-			
-		$this->smarty->assign('nombre_paciente',$nombre_paciente);				
-		$this->smarty->assign('rut_paciente',$rut_paciente);
-		$this->smarty->assign('fecha_actual',$fecha_actual);
-		$this->smarty->assign('nombre_usuario',$nombre_usuario);
-		$this->smarty->assign('rut_usuario',$rut_usuario);
-		$html = $this->smarty->fetch('pdf/consentimiento.tpl');	
+		//header('Content-type: application/pdf');
+		//header("Content-Disposition: inline; filename='$filename'");
+		//echo crear_mpdf($html, $filename, false, 'D');
+		$param			= $this->_request->getParams();
+		$correcto		= false;
+		$base64			= '';
+		$nombre			= $param['nombres'].' '.$param['apellidos'];
+		$rut			= $param['rut'];
+		$gl_pasaporte	= $param['inputextranjero'];
+		$cod_fonasa		= $param['cod_fonasa'];
+		$filename		= 'Consentimiento_'.$rut.'.pdf';
+
+		$this->smarty->assign('nombre_paciente',$nombre);
+		$this->smarty->assign('rut_paciente',$rut);
+		$this->smarty->assign('gl_pasaporte',$rut);
+		$this->smarty->assign('cod_fonasa',$cod_fonasa);
+		$this->smarty->assign('fecha_actual',date('d-m-Y'));
+		$this->smarty->assign('nombre_usuario',$_SESSION['nombre']);
+		$this->smarty->assign('rut_usuario',$_SESSION['rut']);
+		$html = $this->smarty->fetch('pdf/consentimiento.tpl');
 		
-		header('Content-type: application/pdf');
-		header("Content-Disposition: inline; filename='$filename'");
-		echo crear_mpdf($html, $filename, false, 'I');
+		$base64			= base64_encode(crear_mpdf($html, $filename, false, 'S'));
+		if($base64){
+			$correcto	= true;
+		}
+		$salida			= array(
+							"correcto"	=> $correcto,
+							"filename"	=> $filename,
+							"base64"	=> $base64
+							);
+		$json			= Zend_Json::encode($salida);
+
+		echo $json;
 	}
 
 }
