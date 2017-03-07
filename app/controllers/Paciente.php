@@ -347,6 +347,7 @@ class Paciente extends Controller {
 				$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : " . Fechas::fechaHoy();
 				$resp = $this->_DAOEvento->insEvento($datos_evento);
 			}
+			$parametros['id_paciente'] = $id_paciente;
 			$parametros['bo_estado'] = 1;
 			$parametros['id_usuario_crea'] = $session->id;
 			$parametros['fc_crea'] = "now()";
