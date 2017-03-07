@@ -55,7 +55,7 @@ class DAOPacienteExamen extends Model{
         }
     }
 
-    public function getListaExamenes($id_paciente){
+    public function getByIdPaciente($id_paciente){
         $query	=   "SELECT
                         examen.id_paciente_examen ,
                         examen.id_tipo_examen,

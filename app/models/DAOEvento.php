@@ -131,7 +131,7 @@ class DAOEvento extends Model{
     }
 }
 
-    public function getListaEventosPaciente($id_paciente){
+    public function getEventosPaciente($id_paciente){
         $query	=   "SELECT
                         eve.id_evento, 
                         eve.id_evento_tipo, 
