@@ -1,69 +1,70 @@
 <?php
 
 /**
-*****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion   : Controller para Registro de Paciente
-* Plataforma    : !PHP
-* Creacion		: 14/02/2017
-* @name			Paciente.php
-* @version		1.0
-* @author		Carolina Zamora <carolina.zamora@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
-*<orlando.vazquez@cosof.co> 06-03-2017  Adaptacion a nueva BD de DAO's y funciones
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ * ****************************************************************************
+ * Sistema		: PREVENCION DE FEMICIDIOS
+ * Descripcion   : Controller para Registro de Paciente
+ * Plataforma    : !PHP
+ * Creacion		: 14/02/2017
+ * @name			Paciente.php
+ * @version		1.0
+ * @author		Carolina Zamora <carolina.zamora@cosof.cl>
+ * =============================================================================
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * -----------------------------------------------------------------------------
+ * <david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
+ * <orlando.vazquez@cosof.co> 06-03-2017  Adaptacion a nueva BD de DAO's y funciones
+ * -----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Paciente extends Controller {
 
-    protected $_DAORegion;
-    protected $_DAOComuna;
-    protected $_DAOPaciente;
-    protected $_DAOTipoEgreso;
-    protected $_DAOPacienteEstado;
-    protected $_DAOPrevision;
-    protected $_DAOPacienteRegistro;
-    protected $_DAOUsuario;
-    protected $_DAOCentroSalud;
-    protected $_DAOEvento;
-    protected $_DAOEventoTipo;
-    protected $_DAOAdjunto;
-    protected $_DAOAdjuntoTipo;
-    protected $_DAOEmpa;
-    protected $_DAOPacienteExamen;
-    
+	protected $_DAORegion;
+	protected $_DAOComuna;
+	protected $_DAOPaciente;
+	protected $_DAOTipoEgreso;
+	protected $_DAOPacienteEstado;
+	protected $_DAOPrevision;
+	protected $_DAOPacienteRegistro;
+	protected $_DAOUsuario;
+	protected $_DAOCentroSalud;
+	protected $_DAOEvento;
+	protected $_DAOEventoTipo;
+	protected $_DAOAdjunto;
+	protected $_DAOAdjuntoTipo;
+	protected $_DAOEmpa;
+	protected $_DAOPacienteExamen;
+	protected $_DAOPacienteDireccion;
+
 	/**
 	 * Descripción: Constructor
 	 * @author: 
 	 */
-    function __construct() {
-        parent::__construct();
-        $this->load->lib('Fechas', false);
-        $this->load->lib('Boton', false);
-        $this->load->lib('Seguridad', false);
+	function __construct() {
+		parent::__construct();
+		$this->load->lib('Fechas', false);
+		$this->load->lib('Boton', false);
+		$this->load->lib('Seguridad', false);
 
-        $this->_DAORegion				= $this->load->model("DAORegion");
-        $this->_DAOComuna               = $this->load->model("DAOComuna");
-        $this->_DAOPaciente				= $this->load->model("DAOPaciente");
-        $this->_DAOTipoEgreso			= $this->load->model("DAOTipoEgreso");
-        $this->_DAOPacienteEstado		= $this->load->model("DAOPacienteEstado");
-        $this->_DAOPrevision			= $this->load->model("DAOPrevision");
-        $this->_DAOPacienteRegistro		= $this->load->model("DAOPacienteRegistro");
-        $this->_DAOUsuario				= $this->load->model("DAOUsuario");
-        $this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
-		$this->_DAOEvento				= $this->load->model("DAOEvento");
-        $this->_DAOEventoTipo			= $this->load->model("DAOEventoTipo");
-        $this->_DAOAdjunto				= $this->load->model("DAOAdjunto");
-        $this->_DAOAdjuntoTipo			= $this->load->model("DAOAdjuntoTipo");
-        $this->_DAOEmpa					= $this->load->model("DAOEmpa");
-        $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
-    }
+		$this->_DAORegion = $this->load->model("DAORegion");
+		$this->_DAOComuna = $this->load->model("DAOComuna");
+		$this->_DAOPaciente = $this->load->model("DAOPaciente");
+		$this->_DAOTipoEgreso = $this->load->model("DAOTipoEgreso");
+		$this->_DAOPacienteEstado = $this->load->model("DAOPacienteEstado");
+		$this->_DAOPrevision = $this->load->model("DAOPrevision");
+		$this->_DAOPacienteRegistro = $this->load->model("DAOPacienteRegistro");
+		$this->_DAOUsuario = $this->load->model("DAOUsuario");
+		$this->_DAOCentroSalud = $this->load->model("DAOCentroSalud");
+		$this->_DAOEvento = $this->load->model("DAOEvento");
+		$this->_DAOEventoTipo = $this->load->model("DAOEventoTipo");
+		$this->_DAOAdjunto = $this->load->model("DAOAdjunto");
+		$this->_DAOAdjuntoTipo = $this->load->model("DAOAdjuntoTipo");
+		$this->_DAOEmpa = $this->load->model("DAOEmpa");
+		$this->_DAOPacienteExamen = $this->load->model("DAOPacienteExamen");
+		$this->_DAOPacienteDireccion = $this->load->model("DAOPacienteDireccion");
+	}
 
 	/**
 	 * Descripción: Index
@@ -97,6 +98,7 @@ class Paciente extends Controller {
 	 * @author Carolina Zamora Hormazábal
 	 */
 	public function bitacora() {
+
 
             $parametros = $this->request->getParametros();
             $idPac = $parametros[0];
@@ -165,7 +167,7 @@ class Paciente extends Controller {
                 $this->smarty->assign("acepta", $acepta);
 
                 //Grilla Motivos de Consulta (Paciente-Registro)
-                $arrConsultas = $this->_DAOPacienteRegistro->getListaPacienteRegistro($idPac);
+                $arrConsultas = $this->_DAOPacienteRegistro->getByIdPaciente($idPac);
                 $this->smarty->assign('arrConsultas', $arrConsultas);
 
                 //Grilla Empa
@@ -173,7 +175,7 @@ class Paciente extends Controller {
                 $this->smarty->assign('arrEmpa', $arrEmpa);
 
                 //Grilla Exámenes x Paciente
-                $arrExamenes = $this->_DAOPacienteExamen->getListaExamenes($idPac);
+                $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($idPac);
                 $this->smarty->assign('arrExamenes', $arrExamenes);
 
                 //Tipos de Eventos
@@ -181,7 +183,7 @@ class Paciente extends Controller {
                 $this->smarty->assign('arrTipoEvento', $arrTipoEvento);
 
                 //Grilla Eventos
-                $arrEventos = $this->_DAOEvento->getListaEventosPaciente($idPac);
+                $arrEventos = $this->_DAOEvento->getEventosPaciente($idPac);
                 $this->smarty->assign('arrEventos', $arrEventos);
 
                 //Tipos de Adjuntos
@@ -189,7 +191,7 @@ class Paciente extends Controller {
                 $this->smarty->assign('arrTipoDocumento', $arrTipoDocumento);
 
                 //Grilla Adjuntos
-                $arrAdjuntos = $this->_DAOAdjunto->getListaAdjuntosPaciente($idPac);
+                $arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($idPac);
                 $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
 
                 //muestra template
@@ -240,6 +242,7 @@ class Paciente extends Controller {
 	 */
 	public function GuardarRegistro() {
 		header('Content-type: application/json');
+		$session = New Zend_Session_Namespace("usuario_carpeta");
 		$parametros = $this->_request->getParams();
 		$correcto = false;
 		$error = false;
@@ -250,100 +253,111 @@ class Paciente extends Controller {
 			$gl_grupo_tipo = 'Seguimiento';
 		}
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
+		$parametros['bo_estado'] = 1;
+		$parametros['id_usuario_crea'] = $session->id;
+		$parametros['fc_crea'] = "now()";
+		$id_direccion = $this->_DAOPacienteDireccion->insertarDireccion($parametros);
+		if ($id_direccion) {
+			$parametros['id_direccion'] = $id_direccion;
+			$id_paciente = $this->_DAOPaciente->insertarPaciente($parametros);
+			if ($id_paciente) {
+				
+				$session = New Zend_Session_Namespace("usuario_carpeta");
 
-		$id_registro = $this->_DAOPaciente->insertarPaciente($parametros);
-		if ($id_registro) {
-			$correcto = true;
-			$session = New Zend_Session_Namespace("usuario_carpeta");
+				if (!empty($_SESSION['adjuntos'])) {
+					$nombre_adjunto = $_SESSION['adjuntos'][0]['nombre_adjunto'];
+					$arr_extension = array('jpeg', 'jpg', 'png', 'gif', 'tiff', 'bmp', 'pdf', 'txt', 'csv', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'eml');
+					$nombre_adjunto = strtolower(trim($nombre_adjunto));
+					$nombre_adjunto = trim($nombre_adjunto, ".");
+					$extension = substr(strrchr($nombre_adjunto, "."), 1);
+					$gl_nombre_archivo = 'Consentimiento_' . $parametros['rut'] . '.' . $extension;
+					$directorio = "archivos/$id_paciente/";
+					$gl_path = $directorio . $gl_nombre_archivo;
 
-			if (!empty($_SESSION['adjuntos'])) {
-				$nombre_adjunto = $_SESSION['adjuntos'][0]['nombre_adjunto'];
-				$arr_extension = array('jpeg', 'jpg', 'png', 'gif', 'tiff', 'bmp', 'pdf', 'txt', 'csv', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'eml');
-				$nombre_adjunto = strtolower(trim($nombre_adjunto));
-				$nombre_adjunto = trim($nombre_adjunto, ".");
-				$extension = substr(strrchr($nombre_adjunto, "."), 1);
-				$gl_nombre_archivo = 'Consentimiento_' . $parametros['rut'] . '.' . $extension;
-				$directorio = "archivos/$id_registro/";
-				$gl_path = $directorio . $gl_nombre_archivo;
+					$ins_adjunto = array('id_registro' => $id_paciente,
+						'id_tipo_adjunto' => 1,
+						'gl_nombre' => $gl_nombre_archivo,
+						'gl_path' => $gl_path,
+						'gl_glosa' => 'Consentimiento Firmado',
+						'sha256' => Seguridad::generar_sha256($gl_path),
+						'fc_crea' => date('Y-m-d h:m:s'),
+						'id_usuario_crea' => $session->id,
+					);
+					$id_adjunto = $this->_DAOAdjunto->insert($ins_adjunto);
 
-				$ins_adjunto = array('id_registro' => $id_registro,
-					'id_tipo_adjunto' => 1,
-					'gl_nombre' => $gl_nombre_archivo,
-					'gl_path' => $gl_path,
-					'gl_glosa' => 'Consentimiento Firmado',
-					'sha256' => Seguridad::generar_sha256($gl_path),
-					'fc_crea' => date('Y-m-d h:m:s'),
-					'id_usuario_crea' => $session->id,
-				);
-				$id_adjunto = $this->_DAOAdjunto->insert($ins_adjunto);
+					if ($id_adjunto) {
+						if (!is_dir($directorio)) {
+							mkdir($directorio, 0775, true);
 
-				if ($id_adjunto) {
-					if (!is_dir($directorio)) {
-						mkdir($directorio, 0775, true);
-
-						$out = fopen($directorio . '/index.html', "w");
-						fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
+							$out = fopen($directorio . '/index.html', "w");
+							fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
+							fclose($out);
+						}
+						$out = fopen($gl_path, "w");
+						fwrite($out, base64_decode($_SESSION['adjuntos'][0]['contenido']));
 						fclose($out);
 					}
-					$out = fopen($gl_path, "w");
-					fwrite($out, base64_decode($_SESSION['adjuntos'][0]['contenido']));
-					fclose($out);
 				}
-			}
 
-			$resultado2 = $this->_DAOPacienteRegistro->insertarRegistro($parametros, $id_registro);
-			$id_empa1 = $this->_DAOEmpa->insert(array('id_registro' => $id_registro, 'nr_orden' => 1));
-			if ($id_empa1 != "" && !is_null($id_empa1)) {
-				$datos_evento['eventos_tipo'] = 13;
-				$datos_evento['id_empa'] = $id_empa1;
-				$datos_evento['gl_descripcion'] = "Empa ".$id_empa1." creado el : " . Fechas::fechaHoy();
+				$resultado2 = $this->_DAOPacienteRegistro->insertarRegistro($parametros, $id_paciente);
+				$id_empa1 = $this->_DAOEmpa->insert(array('id_paciente' => $id_paciente, 'nr_orden' => 1));
+				if ($id_empa1 != "" && !is_null($id_empa1)) {
+					$datos_evento['eventos_tipo'] = 13;
+					$datos_evento['id_paciente'] = $id_paciente;
+					$datos_evento['id_empa'] = $id_empa1;
+					$datos_evento['gl_descripcion'] = "Empa " . $id_empa1 . " creado el : " . Fechas::fechaHoy();
+					$datos_evento['bo_estado'] = 1;
+					$datos_evento['id_usuario_crea'] = $session->id;
+					$resp = $this->_DAOEvento->insEvento($datos_evento);
+				}
+				$id_empa2 = $this->_DAOEmpa->insert(array('id_paciente' => $id_paciente, 'nr_orden' => 2));
+				if ($id_empa2 != "" && !is_null($id_empa2)) {
+					$datos_evento['eventos_tipo'] = 13;
+					$datos_evento['id_paciente'] = $id_paciente;
+					$datos_evento['id_empa'] = $id_empa2;
+					$datos_evento['gl_descripcion'] = "Empa " . $id_empa2 . " creado el : " . Fechas::fechaHoy();
+					$datos_evento['bo_estado'] = 1;
+					$datos_evento['id_usuario_crea'] = $session->id;
+					$resp = $this->_DAOEvento->insEvento($datos_evento);
+				}
+				//$resultado3						= $this->_DAOEmpaAudit->insert($id_empa1);
+				//$resultado4						= $this->_DAOEmpaAudit->insert($id_empa2);
+				/* 	if ($resultado3) {
+				  $datos_evento['eventos_tipo'] = 14;
+				  $datos_evento['id_empa'] = $id_empa1;
+				  $datos_evento['gl_descripcion'] = "AUDIT del EMPA".$id_empa1." creado el : " . Fechas::fechaHoy();
+				  $datos_evento['bo_estado'] = 1;
+				  $datos_evento['id_usuario_crea'] = $session->id;
+				  $resp = $this->_DAOEventos->insEvento($datos_evento);
+				  }
+				  if ($resultado4) {
+				  $datos_evento['eventos_tipo'] = 14;
+				  $datos_evento['id_empa'] = $id_empa1;
+				  $datos_evento['gl_descripcion'] = "AUDIT del EMPA".$id_empa2." creado el : " . Fechas::fechaHoy();
+				  $datos_evento['bo_estado'] = 1;
+				  $datos_evento['id_usuario_crea'] = $session->id;
+				  $resp = $this->_DAOEventos->insEvento($datos_evento);
+				  } */
+				$datos_evento['eventos_tipo'] = 1;
+				$datos_evento['id_registro'] = $id_paciente;
+				$datos_evento['gl_descripcion'] = "Paciente creado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado'] = 1;
 				$datos_evento['id_usuario_crea'] = $session->id;
 				$resp = $this->_DAOEvento->insEvento($datos_evento);
-			}
-			$id_empa2 = $this->_DAOEmpa->insert(array('id_registro' => $id_registro, 'nr_orden' => 2));
-			if ($id_empa2 != "" && !is_null($id_empa2)) {
-				$datos_evento['eventos_tipo'] = 13;
-				$datos_evento['id_empa'] = $id_empa2;
-				$datos_evento['gl_descripcion'] = "Empa ".$id_empa2." creado el : " . Fechas::fechaHoy();
-				$datos_evento['bo_estado'] = 1;
-				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEvento->insEvento($datos_evento);
-			}
-			//$resultado3						= $this->_DAOEmpaAudit->insert($id_empa1);
-			//$resultado4						= $this->_DAOEmpaAudit->insert($id_empa2);
-		/*	if ($resultado3) {
-				$datos_evento['eventos_tipo'] = 14;
-				$datos_evento['id_empa'] = $id_empa1;
-				$datos_evento['gl_descripcion'] = "AUDIT del EMPA".$id_empa1." creado el : " . Fechas::fechaHoy();
-				$datos_evento['bo_estado'] = 1;
-				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEventos->insEvento($datos_evento);
-			}
-			if ($resultado4) {
-				$datos_evento['eventos_tipo'] = 14;
-				$datos_evento['id_empa'] = $id_empa1;
-				$datos_evento['gl_descripcion'] = "AUDIT del EMPA".$id_empa2." creado el : " . Fechas::fechaHoy();
-				$datos_evento['bo_estado'] = 1;
-				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEventos->insEvento($datos_evento);
-			}*/
-			$datos_evento['eventos_tipo'] = 1;
-			$datos_evento['id_registro'] = $id_registro;
-			$datos_evento['gl_descripcion'] = "Paciente creado el : " . Fechas::fechaHoy();
-			$datos_evento['bo_estado'] = 1;
-			$datos_evento['id_usuario_crea'] = $session->id;
-			$resp = $this->_DAOEvento->insEvento($datos_evento);
 
-			if ($parametros['chkAcepta']) {
-				$datos_evento['eventos_tipo'] = 4;
-				$datos_evento['gl_descripcion'] = "Acepta el programa con fecha : " . Fechas::fechaHoy();
-				$resp = $this->_DAOEvento->insEvento($datos_evento);
-			}
-			if ($parametros['chkReconoce']) {
-				$datos_evento['eventos_tipo'] = 5;
-				$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : " . Fechas::fechaHoy();
-				$resp = $this->_DAOEvento->insEvento($datos_evento);
+				if ($parametros['chkAcepta']) {
+					$datos_evento['eventos_tipo'] = 4;
+					$datos_evento['gl_descripcion'] = "Acepta el programa con fecha : " . Fechas::fechaHoy();
+					$resp = $this->_DAOEvento->insEvento($datos_evento);
+				}
+				if ($parametros['chkReconoce']) {
+					$datos_evento['eventos_tipo'] = 5;
+					$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : " . Fechas::fechaHoy();
+					$resp = $this->_DAOEvento->insEvento($datos_evento);
+				}
+				$correcto = true;
+			} else {
+				$error = true;
 			}
 		} else {
 			$error = true;
@@ -373,20 +387,20 @@ class Paciente extends Controller {
 		$count = $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
 		if ($parametros['edad'] > 15 AND $grupo_usuario_registrador == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
 			$gl_grupo_tipo = 'Seguimiento';
-			if ($gl_grupo_tipo_ant != $gl_grupo_tipo){
-			$datos_evento['id_registro'] = $id_registro;
-			$datos_evento['bo_estado'] = 1;
-			$datos_evento['id_usuario_crea'] = $session->id;
-			$datos_evento['eventos_tipo'] = 10;
-			$datos_evento['gl_descripcion'] = "Paciente RUT : ". $rut ." en seguimiento desde : " . Fechas::fechaHoy();
-			$resp = $this->_DAOEventos->insEvento($datos_evento);
+			if ($gl_grupo_tipo_ant != $gl_grupo_tipo) {
+				$datos_evento['id_registro'] = $id_registro;
+				$datos_evento['bo_estado'] = 1;
+				$datos_evento['id_usuario_crea'] = $session->id;
+				$datos_evento['eventos_tipo'] = 10;
+				$datos_evento['gl_descripcion'] = "Paciente RUT : " . $rut . " en seguimiento desde : " . Fechas::fechaHoy();
+				$resp = $this->_DAOEventos->insEvento($datos_evento);
 			}
 		} else {
 			$gl_grupo_tipo = 'Control';
 		}
 
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
-		
+
 		if ($id_registro) {
 			$correcto = true;
 			$resultado2 = $this->_DAOPacienteRegistro->insertar($parametros, $id_registro);
@@ -468,9 +482,9 @@ class Paciente extends Controller {
 
 		if (!is_null($obj_registro)) {
 			$edad = Fechas::calcularEdadInv($obj_registro->fc_nacimiento);
-			$arrMotivosConsulta = $this->_DAOPacienteRegistro->getByIdPaciente($obj_registro->id_registro);
+			$arrMotivosConsulta = $this->_DAOPacienteRegistro->getById($obj_registro->id_paciente);
 		}
-		$this->smarty->assign('id_registro', $obj_registro->id_registro);
+		$this->smarty->assign('id_paciente', $obj_registro->id_paciente);
 		$this->smarty->assign('rut', $obj_registro->gl_rut);
 		$this->smarty->assign('extranjero', $obj_registro->bo_extranjero);
 		$this->smarty->assign('run_pass', $obj_registro->gl_run_pass);
@@ -543,10 +557,10 @@ class Paciente extends Controller {
 	}
 
 	/**
-	 * Descripción: Carga registro
-	 * @author: 
+	 * Descripción: Carga data del Paciente
+	 * @author: Victor Retamal
 	 */
-	public function cargarRegistro() {
+	public function cargarPaciente() {
 		header('Content-type: application/json');
 		$rut = $_POST['rut'];
 		$pasaporte = $_POST['inputextranjero'];
@@ -558,7 +572,7 @@ class Paciente extends Controller {
 		$json = array();
 
 		if ($registro) {
-			$arr_motivos = $this->_DAOPacienteRegistro->getByIdPaciente($registro->id_registro);
+			$arr_motivos = $this->_DAOPacienteRegistro->getByIdPaciente($registro->id_paciente);
 			$tabla_motivos = "";
 			$div_superior = "<div class='top-spaced'></div>
 								<div class='panel panel-primary'>
@@ -589,7 +603,7 @@ class Paciente extends Controller {
 													<td>" . $item->fc_ingreso . "</td>
 													<td>" . $item->gl_hora_ingreso . "</td>
 													<td>" . $item->gl_motivo_consulta . "</td>
-													<td>" . $item->gl_nombre_institucion . "</td>
+													<td>" . $item->gl_nombre_establecimiento . "</td>
 													<td>" . $item->gl_nombres . " " . $item->gl_apellidos . "</td>
 												</tr>
 												";
@@ -606,6 +620,7 @@ class Paciente extends Controller {
 				$tabla_motivos = $tabla_motivos . $pie_tabla;
 			}
 
+
 			$json['correcto']				= TRUE;
 			$json['div_superior']			= $div_superior;
 			$json['div_inferior']			= $div_inferior;
@@ -613,7 +628,7 @@ class Paciente extends Controller {
 			$json['count_motivos']			= count((array) $arr_motivos);
 			$json['fc_ultimo_motivos']		= $arr_motivos->row_0->fc_ingreso;
 			$json['gl_grupo_tipo']			= $registro->gl_grupo_tipo;
-			$json['id_registro']			= $registro->id_registro;
+			$json['id_paciente']			= $registro->id_paciente;
 			$json['gl_nombres']				= $registro->gl_nombres;
 			$json['gl_apellidos']			= $registro->gl_apellidos;
 			$json['fc_nacimiento']			= $registro->fc_nacimiento;
@@ -632,7 +647,7 @@ class Paciente extends Controller {
 			$json['gl_celular']				= $registro->gl_celular;
 			$json['gl_email']				= $registro->gl_email;
 		} else {
-			$json['correcto']				= FALSE;
+			$json['correcto'] = FALSE;
 		}
 
 		echo json_encode($json);
@@ -914,44 +929,44 @@ class Paciente extends Controller {
 	}
 
 	/**
-	* Descripción : Generar PDF de Consentimiento con los Datos del Paciente
-	* @author: Victor Retamal <victor.retamal@cosof.cl>
-	* @param 
-	* @return PDF
-	*/
+	 * Descripción : Generar PDF de Consentimiento con los Datos del Paciente
+	 * @author: Victor Retamal <victor.retamal@cosof.cl>
+	 * @param 
+	 * @return PDF
+	 */
 	public function generarConsentimiento() {
-        $this->load->lib('MPdf', false);
+		$this->load->lib('MPdf', false);
 		//header('Content-type: application/pdf');
 		//header("Content-Disposition: inline; filename='$filename'");
 		//echo crear_mpdf($html, $filename, false, 'D');
-		$param			= $this->_request->getParams();
-		$correcto		= false;
-		$base64			= '';
-		$nombre			= $param['nombres'].' '.$param['apellidos'];
-		$rut			= $param['rut'];
-		$gl_pasaporte	= $param['inputextranjero'];
-		$cod_fonasa		= $param['cod_fonasa'];
-		$filename		= 'Consentimiento_'.$rut.'.pdf';
+		$param = $this->_request->getParams();
+		$correcto = false;
+		$base64 = '';
+		$nombre = $param['nombres'] . ' ' . $param['apellidos'];
+		$rut = $param['rut'];
+		$gl_pasaporte = $param['inputextranjero'];
+		$cod_fonasa = $param['cod_fonasa'];
+		$filename = 'Consentimiento_' . $rut . '.pdf';
 
-		$this->smarty->assign('nombre_paciente',$nombre);
-		$this->smarty->assign('rut_paciente',$rut);
-		$this->smarty->assign('gl_pasaporte',$rut);
-		$this->smarty->assign('cod_fonasa',$cod_fonasa);
-		$this->smarty->assign('fecha_actual',date('d-m-Y'));
-		$this->smarty->assign('nombre_usuario',$_SESSION['nombre']);
-		$this->smarty->assign('rut_usuario',$_SESSION['rut']);
+		$this->smarty->assign('nombre_paciente', $nombre);
+		$this->smarty->assign('rut_paciente', $rut);
+		$this->smarty->assign('gl_pasaporte', $rut);
+		$this->smarty->assign('cod_fonasa', $cod_fonasa);
+		$this->smarty->assign('fecha_actual', date('d-m-Y'));
+		$this->smarty->assign('nombre_usuario', $_SESSION['nombre']);
+		$this->smarty->assign('rut_usuario', $_SESSION['rut']);
 		$html = $this->smarty->fetch('pdf/consentimiento.tpl');
-		
-		$base64			= base64_encode(crear_mpdf($html, $filename, false, 'S'));
-		if($base64){
-			$correcto	= true;
+
+		$base64 = base64_encode(crear_mpdf($html, $filename, false, 'S'));
+		if ($base64) {
+			$correcto = true;
 		}
-		$salida			= array(
-							"correcto"	=> $correcto,
-							"filename"	=> $filename,
-							"base64"	=> $base64
-							);
-		$json			= Zend_Json::encode($salida);
+		$salida = array(
+			"correcto" => $correcto,
+			"filename" => $filename,
+			"base64" => $base64
+		);
+		$json = Zend_Json::encode($salida);
 
 		echo $json;
 	}

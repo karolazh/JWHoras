@@ -70,7 +70,7 @@ class DAOAdjunto extends Model{
         }
     }
     
-    public function getListaAdjuntosPaciente($id_paciente){
+    public function getDetalleByIdPaciente($id_paciente){
         $query	=   "SELECT 
                         adj.id_adjunto,
                         adj.id_paciente,

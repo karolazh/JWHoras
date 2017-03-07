@@ -55,7 +55,7 @@ class DAOPacienteRegistro extends Model{
         }
     }
 
-    public function getListaPacienteRegistro($id_paciente) {
+    public function getByIdPaciente($id_paciente) {
         $query	=   "SELECT 
                         registro.id_registro,
                         registro.id_paciente,

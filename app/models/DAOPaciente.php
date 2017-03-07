@@ -253,6 +253,7 @@ class DAOPaciente extends Model{
 						id_institucion,
 						id_region,
 						id_comuna,
+						id_direccion,
 						id_prevision,
 						gl_grupo_tipo,
 						gl_rut,
@@ -278,6 +279,7 @@ class DAOPaciente extends Model{
 						".$_SESSION['id_institucion'].",
 						".$parametros['region'].",
 						".$parametros['comuna'].",
+						".$parametros['id_direccion'].",
 						".$parametros['prevision'].",
 						'".$parametros['gl_grupo_tipo']."',
 						'".$parametros['rut']."',
@@ -406,36 +408,6 @@ class DAOPaciente extends Model{
             return NULL;
         }
     }
-    
-    /*
-    Funcion debe estar en Evento
-    */
-    /*
-    public function getEventosRegistro($id_registro){
-        $query	=   "SELECT
-                        eve.id_evento AS id_evento, 
-                        eve.id_evento_tipo AS id_evento_tipo, 
-                        tip.gl_nombre_evento_tipo AS nombre_evento,
-                        eve.id_paciente AS id_paciente,
-                        eve.gl_descripcion AS glosa,
-                        date_format(eve.fc_crea,'%d-%m-%Y') AS fc_crea,
-                        usr.gl_rut AS rut,
-                        concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
-                    FROM pre_eventos eve
-                    LEFT JOIN pre_eventos_tipo tip ON tip.id_evento_tipo = eve.id_evento_tipo
-                    LEFT JOIN pre_usuarios usr ON usr.id_usuario = eve.id_usuario_crea
-                    WHERE eve.id_paciente = ?";
-
-	$param		= array($id_registro);
-        $result	= $this->db->getQuery($query,$param);
-        
-        if($result->numRows>0){
-            return $result->rows;
-        }else{
-            return NULL;
-        }
-    }
-    */
 
 }
 
