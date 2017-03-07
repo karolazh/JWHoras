@@ -1,15 +1,19 @@
 /* global BASE_URI */
 
-var Registro = {
+var Paciente = {
     
     guardarNuevoAdjunto: function (form,btn) {
         var error = false;
         var msg_error = '';        
         
-        var idreg = form.idreg.value;
+        var idpac = form.idpac.value;
+        //alert(idpac);
         var tipodoc = form.tipoDoc.value;
+        //alert(tipodoc);
         var path = form.archivo.value;
+        //alert(path);
         var comentario = form.comentario_adjunto.value;
+        //alert(comentario);
         /* descripción tipo doc */
         var tipotxt = tipoDoc.options[tipoDoc.selectedIndex].text;
         /* nombre de tipo de documento a mayusculas*/
@@ -39,8 +43,8 @@ var Registro = {
 
             for(var i = 0; i < extensiones_permitidas.length; i++) {
                 if (extensiones_permitidas[i] == extension){
-                        permitida = true;
-                        break;
+                    permitida = true;
+                    break;
                 }
             }
 
@@ -53,7 +57,7 @@ var Registro = {
                 //$(form).submit();
                 
                 var formulario = new FormData();
-                formulario.append('idreg', idreg);
+                formulario.append('idpac', idpac);
                 formulario.append('tipodoc',tipodoc);
                 formulario.append('tipotxt',tipotxt);
                 formulario.append('comentario',comentario);
@@ -63,7 +67,7 @@ var Registro = {
                 formulario.append('archivo',file);
                 console.log(formulario);
                 $.ajax({
-                    url : BASE_URI + 'index.php/Registro/guardarNuevoAdjunto', 
+                    url : BASE_URI + 'index.php/Paciente/guardarNuevoAdjunto', 
                     data : formulario,
                     processData : false,
                     cache : false,

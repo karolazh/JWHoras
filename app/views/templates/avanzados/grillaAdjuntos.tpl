@@ -22,7 +22,7 @@
                     <td>{$adj->gl_glosa}</td>
                     <td>{$adj->funcionario}</td>
                     <td align="center">
-                        <a class="btn btn-sm btn-primary" id="btnDescarga" href = '{$smarty.const.DIR_BASE}{$adj->path}' target="_blank">
+                        <a class="btn btn-sm btn-primary" id="btnDescarga" href = '{$smarty.const.DIR_BASE}{$adj->gl_path}' target="_blank">
                             <i class="fa fa-download"></i>
                             Descargar</a>
                     </td>
