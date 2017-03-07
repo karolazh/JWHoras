@@ -108,7 +108,7 @@ class Paciente extends Controller {
             if (!is_null($detPac)) {
                 //$this->smarty->assign("detReg", $detReg);
 
-                $this->smarty->assign("idpac", $detPac);
+                $this->smarty->assign("idpac", $idPac);
 
                 //Datos de Paciente
                 $run = "";
@@ -832,100 +832,99 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción : permite guardar nuevo archivo adjunto desde bitácora
-	 * @author: Carolina Zamora H.
+	 * @author Carolina Zamora H.
 	 * @param
-	 * @return
+	 * @return JSON
 	 */
 	public function guardarNuevoAdjunto() {
-		header('Content-type: application/json');
+            header('Content-type: application/json');
 
-		$correcto = false;
-		$error = true;
+            $correcto = false;
+            $error = true;
 
-		$adjunto = $_FILES['archivo'];
-		$id_registro = $_POST['idreg'];
-		$tipo_doc = $_POST['tipodoc'];
-		$tipo_txt = $_POST['tipotxt'];
+            $adjunto = $_FILES['archivo'];
 
-		if ($_POST['comentario'] == "") {
-			$glosa = "Adjunta Documento por Bitácora";
-		} else {
-			$glosa = $_POST['comentario'];
-		}
-		//$glosa          = "Adjunta Documento por Bitácora";
+            $id_paciente = $_POST['idpac'];
+            $tipo_doc = $_POST['tipodoc'];
+            $tipo_txt = $_POST['tipotxt'];
 
-		$nombre_adjunto = $adjunto['name']; //$_SESSION['adjuntos'][0]['nombre_adjunto'];
+            if ($_POST['comentario'] == "") {
+                $glosa = "Adjunta Documento por Bitácora";
+            } else {
+                $glosa = $_POST['comentario'];
+            }
+            //$glosa           = "Adjunta Documento por Bitácora";
 
-		$arr_extension = array('jpeg', 'jpg', 'png', 'gif', 'tiff', 'bmp',
-			'pdf', 'txt', 'csv', 'doc', 'docx', 'ppt',
-			'pptx', 'xls', 'xlsx', 'eml');
+            $nombre_adjunto = $adjunto['name'];
 
-		$nombre_adjunto = strtolower(trim($nombre_adjunto));
-		$nombre_adjunto = trim($nombre_adjunto, ".");
+            $arr_extension = array('jpeg', 'jpg', 'png', 'gif', 'tiff', 'bmp',
+                                   'pdf', 'txt', 'csv', 'doc', 'docx', 'ppt',
+                                   'pptx', 'xls', 'xlsx', 'eml');
 
-		$extension = substr(strrchr($nombre_adjunto, "."), 1);
+            $nombre_adjunto = strtolower(trim($nombre_adjunto));
+            $nombre_adjunto = trim($nombre_adjunto, ".");
 
-		//obtiene fecha y hora
-		$date = new DateTime();
-		$result = $date->format('Y-m-d_H-i-s');
-		$krr = explode('-', $result);
-		$result = implode("", $krr);
+            $extension = substr(strrchr($nombre_adjunto, "."), 1);
 
-		//$gl_nombre_archivo  = 'ADJUNTO_'.$parametros['rut'].'.'.$extension;
-		//$gl_nombre_archivo  = date('Y-m-d h:m:s').'_'.$tipo_txt.'.'.$extension;
-		$gl_nombre_archivo = $result . '_' . $tipo_txt . '.' . $extension;
+            //obtiene fecha y hora
+            $date = new DateTime();
+            $result = $date->format('Y-m-d_H-i-s');
+            $krr = explode('-', $result);
+            $result = implode("", $krr);
 
-		$directorio = "archivos/$id_registro/";
-		$gl_path = $directorio . $gl_nombre_archivo;
+            $gl_nombre_archivo = $result . '_' . $tipo_txt . '.' . $extension;
 
-		$ins_adjunto = array('id_registro' => $id_registro,
-			'id_tipo_adjunto' => $tipo_doc, //1,
-			'gl_nombre' => $gl_nombre_archivo,
-			'gl_path' => $gl_path,
-			'gl_glosa' => $glosa, //'Consentimiento Firmado',
-			'sha256' => Seguridad::generar_sha256($gl_path),
-			'fc_crea' => date('Y-m-d h:m:s'),
-			'id_usuario_crea' => $_SESSION['id'],
-		);
+            $directorio = "archivos/$id_paciente/";
+            $gl_path = $directorio . $gl_nombre_archivo;
 
-		$id_adjunto = $this->_DAOAdjunto->insert($ins_adjunto);
-		$grilla = "";
+            $ins_adjunto = array('id_paciente'     => $id_paciente,
+                                 'id_adjunto_tipo' => $tipo_doc,
+                                 'gl_nombre'       => $gl_nombre_archivo,
+                                 'gl_path'         => $gl_path,
+                                 'gl_glosa'        => $glosa,
+                                 'sha256'          => Seguridad::generar_sha256($gl_path),
+                                 'fc_crea'         => date('Y-m-d h:m:s'),
+                                 'id_usuario_crea' => $_SESSION['id'],
+                                );
 
-		if ($id_adjunto) {
-			if (!is_dir($directorio)) {
-				mkdir($directorio, 0775, true);
+            $id_adjunto = $this->_DAOAdjunto->insert($ins_adjunto);
+            $grilla = "";
 
-				$out = fopen($directorio . '/index.html', "w");
-				fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
-				fclose($out);
-			}
+            if ($id_adjunto) {
+                if (!is_dir($directorio)) {
+                    mkdir($directorio, 0775, true);
 
-			$file = fopen($adjunto['tmp_name'], 'r+b');
-			$contenido = fread($file, filesize($adjunto['tmp_name']));
-			fclose($file);
+                    $out = fopen($directorio . '/index.html', "w");
+                    fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
+                    fclose($out);
+                }
 
-			$out = fopen($gl_path, "w");
-			fwrite($out, $contenido);
-			fclose($out);
+                $file = fopen($adjunto['tmp_name'], 'r+b');
+                $contenido = fread($file, filesize($adjunto['tmp_name']));
+                fclose($file);
 
-			//Grilla Adjuntos
-			$arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($id_registro);
-			$this->smarty->assign('arrAdjuntos', $arrAdjuntos);
-			$grilla = $this->smarty->fetch('avanzados/grillaAdjuntos.tpl');
+                $out = fopen($gl_path, "w");
+                fwrite($out, $contenido);
+                fclose($out);
 
-			$correcto = true;
-		} else {
-			$error = true;
-		}
+                //Grilla Adjuntos
+                $arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($id_paciente);
+                $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
+                $grilla = $this->smarty->fetch('avanzados/grillaAdjuntos.tpl');
 
-		$salida = array("error" => $error,
-			"correcto" => $correcto,
-			"grilla" => $grilla);
+                $correcto = true;
+            } else {
+                $error = true;
+            }
 
-		$this->smarty->assign("hidden", "");
-		$json = Zend_Json::encode($salida);
+            $salida = array("error"    => $error,
+                            "correcto" => $correcto,
+                            "grilla"   => $grilla);
 
-		echo $json;
+            $this->smarty->assign("hidden", "");
+            $json = Zend_Json::encode($salida);
+
+            echo $json;
 	}
 
 	/**
