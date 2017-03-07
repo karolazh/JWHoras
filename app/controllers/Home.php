@@ -54,6 +54,58 @@ class Home extends Controller{
 
             $template = 'home/dashboard_gestor_casos.tpl';
 
+            $arr_estados = array();
+            $arr_abuso = array(0,0);
+            $arr_programa = array(0,0);
+
+            $estados = $daoPacienteEstado->getLista();
+
+            $arr_estados[0]['total'] = 0;
+            $arr_estados[0]['nombre'] = 'Sin Estado';
+            foreach($estados as $estado){
+                $arr_estados[$estado->id_paciente_estado]['total'] = 0;
+                $arr_estados[$estado->id_paciente_estado]['nombre'] = $estado->gl_nombre_estado_caso;
+            }
+
+            if($_SESSION['perfil'] == 5){
+                $registros = $daoPaciente->getLista();                
+                $tituloEstadoNacional = 'Estadística Nacional : Total de Registros por Estados';
+                $tituloReconoceAbuso = 'Estadística Nacional : Reconoce abuso';
+                $tituloAceptaPrograma = 'Estadística Nacional : Acepta Programa';
+            }else{
+                $registros = $daoPaciente->getLista(array('region' => $_SESSION['id_region']));
+                $tituloEstadoNacional = 'Estadística Regional : Total de Registros por Estados';
+                $tituloReconoceAbuso = 'Estadística Regional : Reconoce abuso';
+                $tituloAceptaPrograma = 'Estadística Regional : Acepta Programa';
+            }
+
+            
+            if(!is_null($registros)){
+                foreach($registros as $registro){
+
+                    if($registro->bo_reconoce){
+                        $arr_abuso[1] = $arr_abuso[1] + 1; 
+                    }else{
+                        $arr_abuso[0] = $arr_abuso[0] + 1; 
+                    }
+
+                    if($registro->bo_acepta_programa){
+                        $arr_programa[1] = $arr_programa[1] + 1; 
+                    }else{
+                        $arr_programa[0] = $arr_programa[0] + 1; 
+                    }
+
+                    if(!empty($registro->id_paciente_estado))
+                        $arr_estados[$registro->id_paciente_estado]['total'] = $arr_estados[$registro->id_paciente_estado]['total'] + 1; 
+                    else
+                        $arr_estados[0]['total'] = $arr_estados[0]['total'] + 1; 
+                }
+            }   
+            
+            $jscode = 'Home.graficoEstadosNacional('.json_encode($arr_estados).',"'.$tituloEstadoNacional.'");';
+            $jscode .= 'Home.graficoReconoceAbuso('.json_encode($arr_abuso).',"'.$tituloReconoceAbuso.'");';
+            $jscode .= 'Home.graficoAceptaPrograma('.json_encode($arr_programa).',"'.$tituloAceptaPrograma.'");';
+
 
         }else{
             $arr_estados = array();
@@ -93,8 +145,8 @@ class Home extends Controller{
             
             $template = 'home/dashboard.tpl';
             $jscode = 'Home.graficoEstadosNacional('.json_encode($arr_estados).');';
-            $jscode += 'Home.graficoReconoceAbuso('.json_encode($arr_abuso).');';
-            $jscode += 'Home.graficoAceptaPrograma('.json_encode($arr_programa).');';
+            $jscode .= 'Home.graficoReconoceAbuso('.json_encode($arr_abuso).');';
+            $jscode .= 'Home.graficoAceptaPrograma('.json_encode($arr_programa).');';
         }
 
         

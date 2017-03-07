@@ -3,7 +3,11 @@ var cargar_mapa = true;
 var Home = {
 
 
-    graficoEstadosNacional : function(data){
+    graficoEstadosNacional : function(data,titulo){
+
+        if(titulo !== undefined){
+          $("#titulo_registros_estados").html(titulo);
+        }
         
         var datos = [];
         $.each(data, function(i, value){
@@ -38,7 +42,11 @@ var Home = {
     },
 
 
-    graficoReconoceAbuso : function(data){
+    graficoReconoceAbuso : function(data,titulo){
+
+      if(titulo !== undefined){
+        $("#titulo_reconoce_abuso").html(titulo);
+      }
 
       var chart = AmCharts.makeChart( "grafico_reconoce_abuso", {
         "type": "serial",
@@ -84,8 +92,12 @@ var Home = {
       } );
     },
 
-    graficoAceptaPrograma : function(data){
+    graficoAceptaPrograma : function(data,titulo){
       
+      if(titulo !== undefined){
+        $("#titulo_acepta_programa").html(titulo);
+      }
+
       var chart = AmCharts.makeChart( "grafico_acepta_programa", {
         "type": "serial",
         "theme": "light",
@@ -147,24 +159,27 @@ var Home = {
             type : 'post',
             dataType : 'json',
             success : function(response){
-              var total = response.pacientes.length;
-              var icono = ''
-              for(var i = 0; i < total; i++){
-                var posicion = new google.maps.LatLng( parseFloat(response.pacientes[i].latitud), parseFloat(response.pacientes[i].longitud)) ;
+              if(response.pacientes){
+                var total = response.pacientes.length;
+                var icono = ''
+                for(var i = 0; i < total; i++){
+                  var posicion = new google.maps.LatLng( parseFloat(response.pacientes[i].latitud), parseFloat(response.pacientes[i].longitud)) ;
 
-                var paciente = new google.maps.Marker({
-                    id : 'paciente_' + response.pacientes[i].id,
-                    position: posicion,
-                    map: mapa.getMapa(),
-                    icon: BASE_URI + 'static/images/markers/femenino.png'
-                });
-                var id_paciente = response.pacientes[i].id;
-                google.maps.event.addListener(paciente, 'click', function (){
-                    xModal.open(BASE_URI + 'index.php/Paciente/bitacora/' + id_paciente, 'Registro número : ' + id_paciente, 85);
-                });
+                  var paciente = new google.maps.Marker({
+                      id : 'paciente_' + response.pacientes[i].id,
+                      position: posicion,
+                      map: mapa.getMapa(),
+                      icon: BASE_URI + 'static/images/markers/femenino.png'
+                  });
+                  var id_paciente = response.pacientes[i].id;
+                  google.maps.event.addListener(paciente, 'click', function (){
+                      xModal.open(BASE_URI + 'index.php/Paciente/bitacora/' + id_paciente, 'Registro número : ' + id_paciente, 85);
+                  });
 
 
+                }  
               }
+              
             }
           });
           

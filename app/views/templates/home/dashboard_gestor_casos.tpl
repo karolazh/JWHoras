@@ -40,7 +40,47 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="estadisticas">
                     <div class="col-xs-12">
-                    <legend>Estadísticas</legend>
+                        <legend>Estadísticas</legend>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h3 class="box-title" id="titulo_registros_estados"></h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="col-xs-12">
+                                            <div id="grafico_estados_general" style="height: 600px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                    
+                            <div class="col-xs-12 col-md-4">
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h3 class="box-title" id="titulo_reconoce_abuso"></h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="col-xs-12">
+                                            <div id="grafico_reconoce_abuso" style="height: 300px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-4">
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h3 class="box-title" id="titulo_acepta_programa"></h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="col-xs-12">
+                                            <div id="grafico_acepta_programa" style="height: 300px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
