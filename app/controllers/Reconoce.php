@@ -77,26 +77,33 @@ class Reconoce extends Controller {
     public function identificarAgresor(){
     
     //Cargar Arrays
+		$parametros = $this->request->getParametros();
+		$id_paciente = $parametros[0];
+		$this->smarty->assign("id_paciente", $id_paciente);
+		
         $arrTipoOcupacion = $this->_DAOTipoOcupacion->getLista();
-	$this->smarty->assign("arrTipoOcupacion", $arrTipoOcupacion);
+		$this->smarty->assign("arrTipoOcupacion", $arrTipoOcupacion);
         
         $arrTipoEstadoCivil = $this->_DAOEstadoCivil->getLista();
-	$this->smarty->assign("arrTipoEstadoCivil", $arrTipoEstadoCivil);
+		$this->smarty->assign("arrTipoEstadoCivil", $arrTipoEstadoCivil);
         
         $arrEscolaridad = $this->_DAOTipoEscolaridad->getLista();
-	$this->smarty->assign("arrEscolaridad", $arrEscolaridad);
+		$this->smarty->assign("arrEscolaridad", $arrEscolaridad);
+		
+		$arrComuna = $this->_DAOComuna->getLista();
+		$this->smarty->assign("arrComuna", $arrComuna);
                 
         $arrActividadEconomica = $this->_DAOTipoActividadEconomica->getLista();
-	$this->smarty->assign("arrActividadEconomica", $arrActividadEconomica);
+		$this->smarty->assign("arrActividadEconomica", $arrActividadEconomica);
         
         $arrTipoViolencia = $this->_DAOTipoViolencia->getLista();
-	$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
+		$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
         
         $arrTipoRiesgo = $this->_DAOTipoRiesgo->getLista();
-	$this->smarty->assign("arrTipoRiesgo", $arrTipoRiesgo);
+		$this->smarty->assign("arrTipoRiesgo", $arrTipoRiesgo);
 	
 		$arrTipoVinculo = $this->_DAOTipoVinculo->getLista();
-	$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);
+		$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);
         
     //Obtener Datos de la BD    
         $parametros = $this->request->getParametros();
@@ -128,5 +135,55 @@ class Reconoce extends Controller {
         $this->load->javascript(STATIC_FILES . "js/templates/reconoce/identificar_agresor.js");
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }
+	
+	public function guardar(){
+		header('Content-type: application/json');
+		$parametros = $this->_request->getParams();
+		$correcto = false;
+		$error = false;
+		
+		$id_paciente = $parametros['id_paciente'];
+		
+		//$bool_update = $this->_DAOPacienteAgresor->insertarAgresor($parametros);
+		if ($bool_update) {
+			$datos_evento['eventos_tipo'] = 12;
+			$datos_evento['id_paciente'] = $id_paciente;
+			$datos_evento['id_empa'] = $id_empa;
+			$datos_evento['gl_descripcion'] = "Empa modificado el : " . Fechas::fechaHoy();
+			$datos_evento['bo_estado'] = 1;
+			$datos_evento['id_usuario_crea'] = $session->id;
+			$resp = $this->_DAOEvento->insEvento($datos_evento);
+			if ($resp) {
+				$correcto = TRUE;
+			} else {
+				$error = TRUE;
+			}
+			$finalizado = FALSE;
+			if ($finalizado) {
+
+				$datos_evento['eventos_tipo'] = 2;
+				$datos_evento['id_empa'] = $id_empa;
+				$datos_evento['gl_descripcion'] = "Empa finalizado el : " . Fechas::fechaHoy();
+				$datos_evento['bo_estado'] = 1;
+				$datos_evento['id_usuario_crea'] = $session->id;
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
+				if ($resp) {
+					$correcto = TRUE;
+				} else {
+					$error = TRUE;
+				}
+			}
+		} else {
+			$error = true;
+		}
+
+		$salida = array("error" => $error,
+			"correcto" => $correcto);
+		$json = Zend_Json::encode($salida);
+
+		echo $json;
+		
+		
+	}
     
 }
