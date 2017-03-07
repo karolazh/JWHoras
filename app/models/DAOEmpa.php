@@ -3,8 +3,8 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_empa
-* Plataforma	: !PHP
+* Descripcion           : Modelo para Tabla pre_empa
+* Plataforma            : !PHP
 * Creacion		: 22/02/2017
 * @name			DAOEmpa.php
 * @version		1.0
@@ -22,8 +22,8 @@
 
 class DAOEmpa extends Model{
 
-    protected $_tabla			= "pre_empa";
-    protected $_primaria		= "id_empa";
+    protected $_tabla		= "pre_empa";
+    protected $_primaria	= "id_empa";
     protected $_transaccional	= false;
     
     function __construct()
@@ -57,11 +57,11 @@ class DAOEmpa extends Model{
     }
 
     public function getByIdPaciente($id_paciente, $nr_orden=1){
-        $query	= "	SELECT * FROM pre_empa 
-					WHERE id_paciente = ?
-						AND nr_orden = ?";
+        $query	=   "SELECT * FROM pre_empa 
+                    WHERE id_paciente = ?
+                    AND nr_orden = ?";
 
-		$param	= array($id_paciente,$nr_orden);
+	$param	= array($id_paciente,$nr_orden);
         $result	= $this->db->getQuery($query,$param);
 
         if($result->numRows > 0){
@@ -69,28 +69,28 @@ class DAOEmpa extends Model{
         }else{
             return NULL;
         }
-    }    
+    }
 
-    public function getEmpaGrilla($id_paciente, $nr_orden=1){
-        $query	= "	SELECT 
-						emp.id_empa,
-						emp.id_paciente,
-						date_format(emp.fc_empa,'%d-%m-%Y') AS fc_empa,
-						reg.gl_rut AS rut,
-						com.gl_nombre_comuna AS comuna,
-						ins.gl_nombre AS institucion,
-						usr.gl_rut AS rut,
-						concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
-					FROM pre_empa emp
-						LEFT JOIN pre_paciente reg ON reg.id_paciente = emp.id_paciente
-						LEFT JOIN pre_comuna com ON com.id_comuna = emp.id_comuna
-						LEFT JOIN pre_centro_salud ins ON ins.id_centro_salud = emp.id_institucion
-						LEFT JOIN pre_usuario usr ON usr.id_usuario = emp.id_usuario_crea
-					WHERE emp.id_paciente =  ?
-						AND nr_orden= ?
-					ORDER BY emp.fc_empa DESC";
+    public function getListaEmpa($id_paciente, $nr_orden=1){
+        $query	=   "SELECT 
+                        emp.id_empa,
+                        emp.id_paciente,
+                        date_format(emp.fc_empa,'%d-%m-%Y') AS fc_empa,
+                        pac.gl_rut,
+                        com.gl_nombre_comuna,
+                        cs.gl_nombre_establecimiento,
+                        usr.gl_rut,
+                        concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
+                    FROM pre_empa emp
+                    LEFT JOIN pre_paciente pac ON pac.id_paciente = emp.id_paciente
+                    LEFT JOIN pre_comuna com ON com.id_comuna = emp.id_comuna
+                    LEFT JOIN pre_centro_salud cs ON cs.id_centro_salud = emp.id_institucion
+                    LEFT JOIN pre_usuario usr ON usr.id_usuario = emp.id_usuario_crea
+                    WHERE emp.id_paciente = ?
+                    AND nr_orden = ?
+                    ORDER BY emp.fc_empa DESC";
 
-		$param	= array($id_paciente,$nr_orden);
+        $param	= array($id_paciente,$nr_orden);
         $result	= $this->db->getQuery($query,$param);
 
         if($result->numRows > 0){

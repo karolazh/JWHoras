@@ -3,8 +3,8 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_paciente_registro
-* Plataforma	: !PHP
+* Descripcion           : Modelo para Tabla pre_paciente_registro
+* Plataforma            : !PHP
 * Creacion		: 27/02/2017
 * @name			DAOPacienteRegistro.php
 * @version		1.0
@@ -21,8 +21,8 @@
 
 class DAOPacienteRegistro extends Model{
 
-    protected $_tabla			= "pre_paciente_registro";
-    protected $_primaria		= "id_registro";
+    protected $_tabla		= "pre_paciente_registro";
+    protected $_primaria	= "id_registro";
     protected $_transaccional	= false;
 
     function __construct()
@@ -55,26 +55,26 @@ class DAOPacienteRegistro extends Model{
         }
     }
 
-    public function getByIdPaciente($id_paciente) {
-        $query	= "	SELECT 
-						registro.id_registro,
-						registro.id_paciente,
-						registro.id_institucion,
-						date_format(registro.fc_ingreso, '%d-%m-%Y') as fc_ingreso,
-						registro.gl_hora_ingreso, 
-						registro.gl_motivo_consulta,
-						date_format(registro.fc_crea,'%d-%m-%Y') AS fc_crea,
-						registro.id_usuario_crea AS id_usuario_crea,
-						usu.gl_nombres,
-						usu.gl_apellidos,
-						usu.gl_rut AS rut,
-						concat_ws(' ' , usu.gl_nombres, usu.gl_apellidos) AS funcionario,
-						ins.gl_nombre as gl_nombre_institucion
-					FROM pre_paciente_registro registro
-						LEFT JOIN pre_usuario usu ON registro.id_usuario_crea = usu.id_usuario
-						LEFT JOIN pre_centro_salud ins ON registro.id_centro_salud = ins.id_institucion
-					WHERE id_paciente = ?;
-					ORDER BY registro.id_registro DESC";
+    public function getListaPacienteRegistro($id_paciente) {
+        $query	=   "SELECT 
+                        registro.id_registro,
+                        registro.id_paciente,
+                        registro.id_institucion,
+                        date_format(registro.fc_ingreso, '%d-%m-%Y') AS fc_ingreso,
+                        registro.gl_hora_ingreso, 
+                        registro.gl_motivo_consulta,
+                        date_format(registro.fc_crea,'%d-%m-%Y') AS fc_crea,
+                        registro.id_usuario_crea AS id_usuario_crea,
+                        usu.gl_nombres,
+                        usu.gl_apellidos,
+                        usu.gl_rut AS rut,
+                        concat_ws(' ' , usu.gl_nombres, usu.gl_apellidos) AS funcionario,
+                        cs.gl_nombre_establecimiento
+                    FROM pre_paciente_registro registro
+                    LEFT JOIN pre_usuario usu ON usu.id_usuario = registro.id_usuario_crea
+                    LEFT JOIN pre_centro_salud cs ON cs.id_centro_salud = registro.id_institucion
+                    WHERE id_paciente = ?;
+                    ORDER BY registro.id_registro DESC";
 
         $params	= array($id_paciente);
         $result	= $this->db->getQuery($query, $params);
