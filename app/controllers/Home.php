@@ -177,6 +177,7 @@ class Home extends Controller{
         $this->load->javascript(STATIC_FILES.'js/plugins/amcharts/amcharts.js');
         $this->load->javascript(STATIC_FILES.'js/plugins/amcharts/pie.js');
         $this->load->javascript(STATIC_FILES.'js/plugins/amcharts/serial.js');
+        $this->load->javascript(STATIC_FILES.'js/plugins/amcharts/lang/es.js');
         $this->load->javascript(STATIC_FILES.'js/templates/home/home.js');
         $this->load->javascript(STATIC_FILES.'js/formulario.js');
         $this->load->javascript($jscode);
