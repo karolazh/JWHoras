@@ -107,16 +107,16 @@
 				<div class="form-group">
 					<label for="prevision" class="control-label col-sm-2">Previsión (*)</label>
 					<div class="col-sm-3">
-						<select for="prevision" class="form-control" id="prevision" name="prevision" onblur="validarVacio(this, 'Por favor Seleccione una Previsión')">
-							<option value="0">Seleccione una Previsión</option>
+						<select id="opcionPrevision" for="prevision" class="form-control" id="prevision" name="prevision" onchange="mostrarFonasaExtranjero(this.value, 'id_prevision')" onblur="validarVacio(this, 'Por favor Seleccione una Previsión')">
+							<option  value="0">Seleccione una Previsión</option>
 							{foreach $arrPrevision as $item}
-								<option value="{$item->id_prevision}" >{$item->gl_nombre_prevision}</option>
+								<option  value="{$item->id_prevision}" >{$item->gl_nombre_prevision}</option>
 							{/foreach}
 						</select>
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 				</div>
-				<div class="form-group hidden">
+				<div id="groupFonasaExtranjero" class="form-group hidden">
 					<label for="gl_codigo_fonasa" class="control-label col-sm-2 ">Código Fonasa</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control col-sm-2" name="gl_codigo_fonasa" id="gl_codigo_fonasa">
