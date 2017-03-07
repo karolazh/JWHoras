@@ -76,9 +76,9 @@
 				</div>
                             
                                 <div class="form-group">
-					<label for="gl_estado_civil" class="control-label col-sm-3">Estado Civil</label>
+					<label for="id_estado_civil" class="control-label col-sm-3">Estado Civil</label>
 					<div class="col-sm-3">
-                                                <select class="form-control" id="gl_estado_civil" name="gl_estado_civil">
+                                                <select class="form-control" id="id_estado_civil" name="id_estado_civil">
                                                     <option value="0">Seleccione Estado Civil</option>
                                                     {foreach $arrTipoEstadoCivil as $item}
                                                         <option value="{$item->id_estado_civil}" >{$item->gl_estado_civil}</option>
@@ -86,18 +86,18 @@
                                                 </select>
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
-                                        <label for="nr_hijos" class="control-label col-sm-1">Numero de Hijos</label>
+                    <label for="nr_hijos" class="control-label col-sm-1">Numero de Hijos</label>
 					<div class="col-sm-3">					
-						<input type="number" name="nr_hijos" id="nr_hijos" value=""
+						<input type="number" name="nr_hijos" id="nr_hijos" value="" min="0" max="15"
                                                        placeholder="Numero Hijos" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 				</div>
                             
-                                <div class="form-group">
-					<label for="gl_ocupacion" class="control-label col-sm-3">Ocupación</label>
+                <div class="form-group">
+					<label for="id_tipo_ocupacion" class="control-label col-sm-3">Ocupación</label>
 					<div class="col-sm-3">
-						<select class="form-control" id="gl_ocupacion" name="gl_ocupacion">
+						<select class="form-control" id="id_tipo_ocupacion" name="id_tipo_ocupacion">
                                                     <option value="0">Seleccione Tipo de Ocupación</option>
                                                     {foreach $arrTipoOcupacion as $item}
                                                         <option value="{$item->id_tipo_ocupacion}" >{$item->gl_tipo_ocupacion}</option>
@@ -105,16 +105,17 @@
                                                 </select>
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
-                                        <label for="gl_situacion_laboral" class="control-label col-sm-1">Situación Laboral</label>
+                    <label for="gl_situacion_laboral" class="control-label col-sm-1">Situación Laboral</label>
 					<div class="col-sm-3">
+						<!-- input de situacion laboral En Veremos... -->
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 				</div>
                             
-                                <div class="form-group">
-					<label for="gl_escolaridad" class="control-label col-sm-3">Escolaridad</label>
+                <div class="form-group">
+					<label for="id_tipo_escolaridad" class="control-label col-sm-3">Escolaridad</label>
 					<div class="col-sm-3">					
-						<select class="form-control" id="gl_escolaridad" name="gl_escolaridad">
+						<select class="form-control" id="id_tipo_escolaridad" name="id_tipo_escolaridad">
                                                     <option value="0">Seleccione Escolaridad</option>
                                                     {foreach $arrEscolaridad as $item}
                                                         <option value="{$item->id_tipo_escolaridad}" >{$item->gl_tipo_escolaridad}</option>
@@ -124,7 +125,7 @@
 					</div>
 				</div>
                             
-                                <div class="form-group">
+                <div class="form-group">
 					<label for="fc_reconoce" class="control-label col-sm-3">Fecha</label>
 					<div class="col-sm-3">
 						<input type="date" name="fc_reconoce" id="fc_reconoce" value="{$fc_reconoce}"
@@ -150,53 +151,57 @@
 			</div>
 		</div>
 		
-		<div class="top-spaced"></div>
-		<div class="panel panel-primary">
-                                <div class="panel-heading">Caracterización de la violencia {$botonAyudaViolencia}</div>
-                                <div class="panel-body">
-                                    <div class="col-lg-2"></div>
-                                    <div class="table-responsive col-lg-8" data-row="10">
-                                        <table id="tablaPrincipal" class="table table-hover table-striped table-bordered">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th class="text-center" width="35%">Tipo de Violencia</th>
-                                                    <th class="text-center" width="15%">Ausente</th>
-                                                    <th class="text-center" width="15%">Leve</th>
-                                                    <th class="text-center" width="15%">Moderada</th>
-                                                    <th class="text-center" width="15%">Severa</th>
-                                                    <th class="text-center" width="5%">Resultado</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                    {foreach $arrTipoViolencia as $item}
-                                                    {$i = $item->id_tipo_violencia}
-                                                    <tr>
-                                                        <td class="text-center" nowrap>{$item->gl_tipo_violencia}</td>
-                                                        <td class="text-center"><input type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
-                                                        <td class="text-center"><input type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
-                                                        <td class="text-center"><input type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
-                                                        <td class="text-center"><input type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
-                                                        <td class="text-center"><input type='input' id='id_resultado_{$i}' name='id_resultado_{$i}' readonly></td>
-                                                    </tr>
-                                                    {/foreach}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                            
-                                    <div class="form-group">
-					<label for="gl_tipo_riesgo" class="control-label col-sm-3">Nivel de Riesgo</label>
-					<div class="col-sm-3">					
-						<select class="form-control" id="gl_tipo_riesgo" name="gl_tipo_riesgo">
-                                                    <option value="0">Seleccione Nivel de Riesgo</option>
-                                                    {foreach $arrTipoRiesgo as $item}
-                                                        <option value="{$item->id_tipo_riesgo}" >{$item->gl_tipo_riesgo}</option>
-                                                    {/foreach}
-                                                </select>
+				<div class="top-spaced"></div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">Caracterización de la violencia {$botonAyudaViolencia}</div>
+					<div class="panel-body">
+						<div class="col-lg-3"></div>
+						<div class="form-group">
+							<div class="table-responsive col-lg-6" data-row="10">
+								<table id="tablaPrincipal" class="table table-hover table-striped table-bordered">
+									<thead>
+										<tr role="row">
+											<th class="text-center" width="35%">Tipo de Violencia</th>
+											<th class="text-center" width="10%">Ausente</th>
+											<th class="text-center" width="10%">Leve</th>
+											<th class="text-center" width="10%">Moderada</th>
+											<th class="text-center" width="10%">Severa</th>
+										</tr>
+									</thead>
+									<tbody>
+										{foreach $arrTipoViolencia as $item}
+											{$i = $item->id_tipo_violencia}
+											<tr>
+												<td class="text-center" nowrap>{$item->gl_tipo_violencia}</td>
+												<td class="text-center"><input type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
+												<td class="text-center"><input type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
+												<td class="text-center"><input type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
+												<td class="text-center"><input type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
+											</tr>
+										{/foreach}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-lg-3"></div>
+						<div class="form-group">
+							<label for="gl_tipo_riesgo" class="control-label">Nivel de Riesgo</label>
+						</div>
+						<div class="col-lg-3"></div>
+						<div class="form-group col-lg-6">&nbsp;&nbsp;
+							<label><input type="radio" class="gl_tipo_riesgo" id="gl_tipo_riesgo_0" name="gl_tipo_riesgo"
+										  value="0">Leve</label>&nbsp;&nbsp;
+							<label><input type="radio" class="gl_tipo_riesgo" id="gl_tipo_riesgo_1" name="gl_tipo_riesgo"
+									   value="0">Moderado</label>&nbsp;&nbsp;
+							<label><input type="radio" class="gl_tipo_riesgo" id="gl_tipo_riesgo_2" name="gl_tipo_riesgo"
+									   value="0">Grave</label>&nbsp;&nbsp;
+							<label><input type="radio" class="gl_tipo_riesgo" id="gl_tipo_riesgo_3" name="gl_tipo_riesgo"
+									   value="0">Extremo</label>
+						</div>
+						
+
 					</div>
-                                    </div>
-                                                
-                                </div>
-                </div>
+				</div>
                         
                 <div class="top-spaced"></div>
 		<div class="panel panel-primary">
@@ -204,9 +209,9 @@
 			<div class="panel-body">
 				
                                 <div class="form-group">
-                                    <label for="gl_tipo_agresor" class="control-label col-sm-3">Vínculo con el Agresor</label>
+                                    <label for="id_tipo_vinculo" class="control-label col-sm-3">Vínculo con el Agresor</label>
                                     <div class="col-sm-3">
-                                        <select for="gl_tipo_agresor" class="form-control" id="gl_tipo_agresor" name="gl_tipo_agresor">
+                                        <select for="id_tipo_vinculo" class="form-control" id="id_tipo_vinculo" name="id_tipo_vinculo">
                                             <option value="0">Seleccione Vinculo con Agresor</option>
                                             {foreach $arrTipoVinculo as $item}
                                                 <option value="{$item->id_tipo_vinculo}" >{$item->gl_tipo_vinculo}</option>
@@ -223,7 +228,7 @@
                                                        placeholder="Nombres Agresor" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
-                                        <label for="gl_apellidos_agresor" class="control-label col-sm-1">Apellidos</label>
+                    <label for="gl_apellidos_agresor" class="control-label col-sm-1">Apellidos</label>
 					<div class="col-sm-3">					
 						<input type="text" name="gl_apellidos_agresor" id="gl_apellidos_agresor" value=""
                                                        placeholder="Apellidos Agresor" class="form-control" />
@@ -231,7 +236,7 @@
 					</div>
 				</div>
                                         
-                                <div class="form-group">
+                <div class="form-group">
 						<label for="gl_rut_agresor" class="control-label col-sm-3">RUT/RUN/Pasaporte</label>
 						<div class="col-sm-3">
 							<input type="text" name="gl_rut_agresor" id="gl_rut_agresor" value=""
@@ -240,7 +245,7 @@
 						</div>
 				</div>
                                 
-                                <div class="form-group">
+                <div class="form-group">
 					<label for="fc_nacimiento_agresor" class="control-label col-sm-3">Fecha Nacimiento</label>
 					<div class="col-sm-3">
 						<input type="date" name="fc_nacimiento_agresor" id="fc_nacimiento_agresor" value=""
@@ -248,7 +253,7 @@
                                                        placeholder="Fecha Nacimiento Agresor" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
-                                        <label for="edad_agresor" class="control-label col-sm-1">Edad</label>
+                    <label for="edad_agresor" class="control-label col-sm-1">Edad</label>
 					<div class="col-sm-3">					
 						<input type="text" name="edad_agresor" id="edad_agresor" value=""
                                                        placeholder="Edad Agresor" class="form-control" readonly/>
@@ -256,25 +261,33 @@
 					</div>
 				</div>
                                 
-                                <div class="form-group">
-					<label for="gl_comuna_residencia_agresor" class="control-label col-sm-3">Comuna de Residencia</label>
+                <div class="form-group">
+					<label for="id_comuna_vive" class="control-label col-sm-3">Comuna de Residencia</label>
 					<div class="col-sm-3">
-						<input type="date" name="gl_comuna_residencia_agresor" id="gl_comuna_residencia_agresor" value=""
-                                                       placeholder="Comuna de Residencia" class="form-control" />
+								<select class="form-control" id="id_comuna_vive" name="id_comuna_vive">
+									<option value="0">Seleccione Comuna donde Vive Agresor</option>
+									{foreach $arrComuna as $item}
+										<option value="{$item->id_comuna}" >{$item->gl_nombre_comuna}</option>
+									{/foreach}
+								</select>
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
-                                        <label for="gl_comuna_trabaja_agresor" class="control-label col-sm-1">Comuna del Trabajo</label>
-					<div class="col-sm-3">					
-						<input type="text" name="gl_comuna_trabaja_agresor" id="gl_comuna_trabaja_agresor" value=""
-                                                       placeholder="Comuna donde Trabaja" class="form-control"/>
+                    <label for="id_comuna_trabaja" class="control-label col-sm-1">Comuna del Trabajo</label>
+					<div class="col-sm-3">
+								<select class="form-control" id="id_comuna_trabaja" name="id_comuna_trabaja">
+									<option value="0">Seleccione Comuna donde Trabaja Agresor</option>
+									{foreach $arrComuna as $item}
+										<option value="{$item->id_comuna}" >{$item->gl_nombre_comuna}</option>
+									{/foreach}
+								</select>
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 				</div>
                                 
-                                <div class="form-group">
-					<label for="gl_estado_civil_agresor" class="control-label col-sm-3">Estado Civil</label>
+                <div class="form-group">
+					<label for="id_estado_civil_agresor" class="control-label col-sm-3">Estado Civil</label>
 					<div class="col-sm-3">
-                                                <select class="form-control" id="gl_estado_civil_agresor" name="gl_estado_civil_agresor">
+                                                <select class="form-control" id="id_estado_civil_agresor" name="id_estado_civil_agresor">
                                                     <option value="0">Seleccione Estado Civil Agresor</option>
                                                     {foreach $arrTipoEstadoCivil as $item}
                                                         <option value="{$item->id_estado_civil}" >{$item->gl_estado_civil}</option>
@@ -284,25 +297,25 @@
 					</div>
 				</div>
                                         
-                                <div class="form-group">
-                                        <label for="nr_hijos_agresor" class="control-label col-sm-3">N° de Hijos</label>
+				<div class="form-group">
+					<label for="nr_hijos_agresor" class="control-label col-sm-3">N° de Hijos</label>
 					<div class="col-sm-3">					
-						<input type="text" name="nr_hijos_agresor" id="nr_hijos_agresor" value=""
+						<input type="number" name="nr_hijos_agresor" id="nr_hijos_agresor" value="" min="0" max="15"
                                                        placeholder="Número de Hijos" class="form-control"/>
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
-					<label for="nr_hijos_comun" class="control-label col-sm-1">N° Hijos en Común</label>
+					<label for="nr_hijos_en_comun" class="control-label col-sm-1">N° Hijos en Común</label>
 					<div class="col-sm-3">
-						<input type="text" name="nr_hijos_comun" id="nr_hijos_comun" value=""
+						<input type="number" name="nr_hijos_en_comun" id="nr_hijos_en_comun" value="" min="0" max="15"
                                                        placeholder="Número de Hijos en Común" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 				</div>
                                         
-                                <div class="form-group">
-                                        <label for="id_ocupacion_agresor" class="control-label col-sm-3">Ocupación</label>
+				<div class="form-group">
+					<label for="id_tipo_ocupacion_agresor" class="control-label col-sm-3">Ocupación</label>
 					<div class="col-sm-3">					
-						<select class="form-control" id="id_ocupacion_agresor" name="id_ocupacion_agresor">
+						<select class="form-control" id="id_tipo_ocupacion_agresor" name="id_tipo_ocupacion_agresor">
                                                     <option value="0">Seleccione Tipo de Ocupación</option>
                                                     {foreach $arrTipoOcupacion as $item}
                                                         <option value="{$item->id_tipo_ocupacion}" >{$item->gl_tipo_ocupacion}</option>
@@ -322,19 +335,19 @@
 					</div>
 				</div>
                                                 
-                                <div class="form-group">
-					<label for="nr_ingresos_agresor" class="control-label col-sm-3">Ingresos Mensuales Estimados</label>
+				<div class="form-group">
+					<label for="nr_ingreso_mensual" class="control-label col-sm-3">Ingresos Mensuales Estimados</label>
 					<div class="col-sm-3">
-						<input type="text" name="nr_ingresos_agresor" id="nr_ingresos_agresor" value=""
+						<input type="text" name="nr_ingreso_mensual" id="nr_ingreso_mensual" value=""
                                                        placeholder="Ingresos Mensuales Estimados" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 				</div>
                                         
-                                <div class="form-group">
-                                        <label for="gl_sexo_agresor" class="control-label col-sm-3">Sexo</label>
+				<div class="form-group">
+						<label for="id_tipo_sexo" class="control-label col-sm-3">Sexo</label>
 					<div class="col-sm-3">					
-						<select class="form-control" id="gl_sexo_agresor" name="gl_sexo_agresor">
+						<select class="form-control" id="id_tipo_sexo" name="id_tipo_sexo">
                                                     <option value="0">Seleccione Sexo</option>
                                                     {foreach $arrSexo as $item}
                                                         <option value="{$item->id_sexo}" >{$item->gl_sexo}</option>
@@ -342,9 +355,9 @@
                                                 </select>
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
-					<label for="gl_genero_agresor" class="control-label col-sm-1">Género</label>
+					<label for="id_tipo_genero" class="control-label col-sm-1">Género</label>
 					<div class="col-sm-3">
-						<select class="form-control" id="gl_genero_agresor" name="gl_genero_agresor">
+						<select class="form-control" id="id_tipo_genero" name="id_tipo_genero">
                                                     <option value="0">Seleccione Género</option>
                                                     {foreach $arrGenero as $item}
                                                         <option value="{$item->id_genero}" >{$item->gl_genero}</option>
@@ -354,10 +367,10 @@
 					</div>
 				</div>
                                                 
-                                <div class="form-group">
-					<label for="gl_orientacion_sexual" class="control-label col-sm-3">Orientación Sexual</label>
+				<div class="form-group">
+					<label for="id_orientacion_sexual" class="control-label col-sm-3">Orientación Sexual</label>
 					<div class="col-sm-3">
-						<select class="form-control" id="gl_orientacion_sexual" name="gl_orientacion_sexual">
+						<select class="form-control" id="id_orientacion_sexual" name="id_orientacion_sexual">
                                                     <option value="0">Seleccione Orientación Sexual</option>
                                                     {foreach $arrOrientacion as $item}
                                                         <option value="{$item->id_orientacion_sexual}" >{$item->gl_orientacion_sexual}</option>
@@ -367,21 +380,21 @@
 					</div>
 				</div>
                                                 
-                                <div class="form-group">
-					<label for="nr_denuncias_violencia" class="control-label col-sm-3">N° de Denuncias por Violencia</label>
+				<div class="form-group">
+					<label for="nr_denuncias_por_violencia" class="control-label col-sm-3">N° de Denuncias por Violencia</label>
 					<div class="col-sm-3">
-						<input type="text" name="nr_denuncias_violencia" id="nr_denuncias_violencia" value=""
+						<input type="text" name="nr_denuncias_por_violencia" id="nr_denuncias_por_violencia" value=""
                                                        placeholder="Número de Denuncias por Violencia" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 				</div>
                                                 
-                                <div class="form-group clearfix col-md-10 text-right">
+				<div class="form-group clearfix col-md-10 text-right">
 					<button type="button" id="guardar" class="btn btn-success">
 						<i class="fa fa-save"></i>  Guardar
 					</button>&nbsp;
 					<button type="button" id="cancelar"  class="btn btn-default" 
-							onclick="location.href = '{$base_url}/Registro/index'">
+							onclick="location.href = '{$base_url}/Paciente/index'">
 						<i class="fa fa-remove"></i>  Cancelar
 					</button>
 					<br/><br/>

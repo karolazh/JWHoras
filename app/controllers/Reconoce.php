@@ -78,25 +78,28 @@ class Reconoce extends Controller {
     
     //Cargar Arrays
         $arrTipoOcupacion = $this->_DAOTipoOcupacion->getLista();
-	$this->smarty->assign("arrTipoOcupacion", $arrTipoOcupacion);
+		$this->smarty->assign("arrTipoOcupacion", $arrTipoOcupacion);
         
         $arrTipoEstadoCivil = $this->_DAOEstadoCivil->getLista();
-	$this->smarty->assign("arrTipoEstadoCivil", $arrTipoEstadoCivil);
+		$this->smarty->assign("arrTipoEstadoCivil", $arrTipoEstadoCivil);
         
         $arrEscolaridad = $this->_DAOTipoEscolaridad->getLista();
-	$this->smarty->assign("arrEscolaridad", $arrEscolaridad);
+		$this->smarty->assign("arrEscolaridad", $arrEscolaridad);
+		
+		$arrComuna = $this->_DAOComuna->getLista();
+		$this->smarty->assign("arrComuna", $arrComuna);
                 
         $arrActividadEconomica = $this->_DAOTipoActividadEconomica->getLista();
-	$this->smarty->assign("arrActividadEconomica", $arrActividadEconomica);
+		$this->smarty->assign("arrActividadEconomica", $arrActividadEconomica);
         
         $arrTipoViolencia = $this->_DAOTipoViolencia->getLista();
-	$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
+		$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
         
         $arrTipoRiesgo = $this->_DAOTipoRiesgo->getLista();
-	$this->smarty->assign("arrTipoRiesgo", $arrTipoRiesgo);
+		$this->smarty->assign("arrTipoRiesgo", $arrTipoRiesgo);
 	
 		$arrTipoVinculo = $this->_DAOTipoVinculo->getLista();
-	$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);
+		$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);
         
     //Obtener Datos de la BD    
         $parametros = $this->request->getParametros();
@@ -128,5 +131,15 @@ class Reconoce extends Controller {
         $this->load->javascript(STATIC_FILES . "js/templates/reconoce/identificar_agresor.js");
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }
+	
+	public function guardar(){
+		header('Content-type: application/json');
+		$parametros = $this->_request->getParams();
+		$correcto = false;
+		$error = false;
+		
+		
+		
+	}
     
 }
