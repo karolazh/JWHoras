@@ -31,74 +31,74 @@ class DAOCentroSalud extends Model{
     }
 
     public function getLista(){
-        $query		= "SELECT * FROM ".$this->_tabla;
-        $resultado	= $this->db->getQuery($query);
+        $query	= "SELECT * FROM ".$this->_tabla;
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
 
     public function getById($id){
-        $query		= "	SELECT * FROM ".$this->_tabla."
-						WHERE ".$this->_primaria." = ?";
-						
-		$params		= array($id);
-        $resultado	= $this->db->getQuery($query, $params);
+        $query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE ".$this->_primaria." = ?";
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+		$param	= array($id);
+        $result	= $this->db->getQuery($query, $param);
+
+        if($result->numRows>0){
+            return $result->rows->row_0;
         }else{
             return NULL;
         }
     }
 
     public function getByIdServicio($id_servicio_salud){
-        $query		= "	SELECT * 
-						FROM pre_centro_salud
-						WHERE id_servicio_salud = ?";
+        $query	= "	SELECT * 
+					FROM pre_centro_salud
+					WHERE id_servicio_salud = ?";
 						
-		$params		= array($id_servicio_salud);
-        $resultado	= $this->db->getQuery($query, $params);
+		$param	= array($id_servicio_salud);
+        $result	= $this->db->getQuery($query, $param);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
 
     public function getByIdRegion($id_region) {
-        $query		= "	SELECT 
-							gl_nombre_establecimiento, 
-							id_centro_salud 
-						FROM pre_centro_salud
-						WHERE id_region = ?";
+        $query	= "	SELECT 
+						gl_nombre_establecimiento, 
+						id_centro_salud 
+					FROM pre_centro_salud
+					WHERE id_region = ?";
 
-		$params		= array($id_region);
-        $resultado	= $this->db->getQuery($query, $params);
+		$param	= array($id_region);
+        $result	= $this->db->getQuery($query, $param);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
 
     public function getByIdComuna($id_comuna) {
-        $query		= "	SELECT 
+        $query	= "	SELECT 
 							gl_nombre_establecimiento, 
 							id_centro_salud 
 						FROM pre_centro_salud 
 						WHERE id_comuna = ?";
 
-		$params		= array($id_comuna);
-        $resultado	= $this->db->getQuery($query, $params);
+		$param	= array($id_comuna);
+        $result	= $this->db->getQuery($query, $param);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }

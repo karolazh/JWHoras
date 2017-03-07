@@ -1,41 +1,60 @@
 <?php
 
+/**
+*****************************************************************************
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Modelo para Tabla pre_tipo_estado_civil
+* Plataforma	: !PHP
+* Creacion		: 06/03/2017
+* @name			DAOEstadoCivil.php
+* @version		1.0
+* @author		David Gusman <david.guzman@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a campos de la BD antigua
+*<david.guzman@cosof.cl>	07-03-2017	Modificada clave primaria por nombre original
+*-----------------------------------------------------------------------------
+*****************************************************************************
+*/
+
 class DAOEstadoCivil extends Model{
 
     protected $_tabla			= "pre_tipo_estado_civil";
-    protected $_primaria		= "id_tipo_estado_civil";
+    protected $_primaria		= "id_estado_civil";
     protected $_transaccional	= false;
 
     function __construct(){
         parent::__construct();
     }
-    
-    /*** 20170131 - Funcion obtiene datos de una región ***/
-    public function getTipoOcupacion($id_tipo_estado_civil){
-		$query	= "	SELECT * 
-					FROM ".$this->_tabla."
-					WHERE id_tipo_estado_civil = ?";
 
-	$params		= array($id_tipo_estado_civil);
-        $consulta	= $this->db->getQuery($query,$params);
-        if($consulta->numRows > 0){
-            return $consulta->rows->row_0;
-        }else{
-            return null;
-        }
-    }
-    
-    /*
-     * 20170203 - Lista Regiones
-     */
     public function getLista(){
-        $query		= $this->db->select("*")->from($this->_tabla);
-        $resultado	= $query->getResult();
+        $query	= "	SELECT * FROM ".$this->_tabla;
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
+
+    public function getById($id){
+        $query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE ".$this->_primaria." = ?";
+
+		$param	= array($id);
+        $result	= $this->db->getQuery($query,$param);
+		
+        if($result->numRows > 0){
+            return $result->rows->row_0;
+        }else{
+            return NULL;
+        }
+    }
+
 }
+
+?>

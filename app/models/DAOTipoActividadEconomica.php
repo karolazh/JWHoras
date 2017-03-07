@@ -1,5 +1,25 @@
 <?php
 
+/**
+*****************************************************************************
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Modelo para Tabla pre_tipo_actividad_economica
+* Plataforma	: !PHP
+* Creacion		: 06/03/2017
+* @name			DAOTipoActividadEconomica.php
+* @version		1.0
+* @author		David Gusmán <david.guzman@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*<david.guzman@cosof.cl>	07-03-2017	Cambio de clave primaria para que funcione correctamente
+* 
+*-----------------------------------------------------------------------------
+*****************************************************************************
+*/
+
 class DAOTipoActividadEconomica extends Model{
 
     protected $_tabla			= "pre_tipo_actividad_economica";
@@ -8,21 +28,6 @@ class DAOTipoActividadEconomica extends Model{
 
     function __construct(){
         parent::__construct();
-    }
-    
-    /*** 20170131 - Funcion obtiene datos de una región ***/
-    public function getTipoActividadEconomica($id_actividad_economica){
-		$query	= "	SELECT * 
-					FROM ".$this->_tabla."
-					WHERE id_actividad_economica = ?";
-
-	$params		= array($id_actividad_economica);
-        $consulta	= $this->db->getQuery($query,$params);
-        if($consulta->numRows > 0){
-            return $consulta->rows->row_0;
-        }else{
-            return null;
-        }
     }
     
     /*
@@ -38,4 +43,21 @@ class DAOTipoActividadEconomica extends Model{
             return NULL;
         }
     }
+
+    public function getById($id){
+        $query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE ".$this->_primaria." = ?";
+
+		$param	= array($id);
+        $result	= $this->db->getQuery($query,$param);
+		
+        if($result->numRows > 0){
+            return $result->rows->row_0;
+        }else{
+            return NULL;
+        }
+    }
+	
 }
+
+?>

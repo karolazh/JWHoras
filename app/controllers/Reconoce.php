@@ -15,6 +15,7 @@
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
 *<orlando.vazquez@cosof.cl>	06-03-2017	Incluida la información del autor en la cabecera, 
+*<david.guzman@cosof.cl>	07-03-2017	Function identificarAgresor mejoras,
 *
 *-----------------------------------------------------------------------------
 *****************************************************************************
@@ -35,6 +36,8 @@ class Reconoce extends Controller {
     protected $_DAOAdjuntoTipo;
     protected $_DAOEmpa;
     protected $_DAOPacienteExamen;
+	protected $_DAOTipoVinculo;
+	protected $_DAOTipoRiesgo;
 
     /**
      * Descripción: Constructor
@@ -56,8 +59,21 @@ class Reconoce extends Controller {
         $this->_DAOTipoActividadEconomica   = $this->load->model("DAOTipoActividadEconomica");
         $this->_DAOTipoViolencia            = $this->load->model("DAOTipoViolencia");
         $this->_DAOTipoRiesgo               = $this->load->model("DAOTipoRiesgo");
+		$this->_DAOTipoVinculo              = $this->load->model("DAOTipoVinculo");
     }
-    
+	
+	/**
+	* identificarAgresor()
+	* Genera los Array y Datos respectivos de la BD para luego llenar con Smarty 
+	* el "identificar_agresor.tpl" y cargar finalmente la vista junto con 
+	* los .js  "validador.js" y "identificar_agresor.js". 
+	* 
+	* @author	<david.guzman@cosof.cl>	07-03-2017
+	* 
+	* @param -
+	*
+	* @return valores con Smarty a identificar_agresor.tpl
+	*/    
     public function identificarAgresor(){
     
     //Cargar Arrays
@@ -76,8 +92,11 @@ class Reconoce extends Controller {
         $arrTipoViolencia = $this->_DAOTipoViolencia->getLista();
 	$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
         
-        $arrNivelRiesgo = $this->_DAOTipoRiesgo->getLista();
-	$this->smarty->assign("arrNivelRiesgo", $arrNivelRiesgo);
+        $arrTipoRiesgo = $this->_DAOTipoRiesgo->getLista();
+	$this->smarty->assign("arrTipoRiesgo", $arrTipoRiesgo);
+	
+		$arrTipoVinculo = $this->_DAOTipoVinculo->getLista();
+	$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);
         
     //Obtener Datos de la BD    
         $parametros = $this->request->getParametros();

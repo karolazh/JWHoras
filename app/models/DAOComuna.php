@@ -31,26 +31,26 @@ class DAOComuna extends Model {
 
     public function getLista(){
         $query		= "	SELECT * FROM ".$this->_tabla;
-        $resultado	= $this->db->getQuery($query);
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
 
     public function getById($id){
-        $query		= "	SELECT * FROM ".$this->_tabla."
-						WHERE ".$this->_primaria." = ?";
+        $query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE ".$this->_primaria." = ?";
 
-		$param		= array($id);
-        $resultado	= $this->db->getQuery($query,$param);
+		$param	= array($id);
+        $result	= $this->db->getQuery($query,$param);
 		
-        if($resultado->numRows > 0){
-            return $resultado->rows->row_0;
+        if($result->numRows > 0){
+            return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 
@@ -59,36 +59,36 @@ class DAOComuna extends Model {
 						FROM pre_comuna
 						WHERE id_provincia = ?";
 
-		$params		= array($id_provincia);
-        $resultado	= $this->db->getQuery($query, $params);
+		$param		= array($id_provincia);
+        $result	= $this->db->getQuery($query, $param);
 
-        if($resultado->numRows > 0) {
-            return $resultado->rows;
+        if($result->numRows > 0) {
+            return $result->rows;
         }else{
             return NULL;
         }
     }
 
     public function getInfoComunaxID($id_comuna) {
-        $query		= "	SELECT 
-							c.id_comuna,
-							c.gl_nombre_comuna,
-							c.id_provincia,
-							p.gl_nombre_provincia,
-							r.id_region,
-							r.gl_nombre_region
-						FROM pre_comuna c
-							LEFT JOIN pre_provincia p ON c.id_provincia = p.id_provincia
-							LEFT JOIN pre_region r ON p.id_region = r.id_region
-						WHERE c.id_comuna = ?";
+        $query	= "	SELECT 
+						c.id_comuna,
+						c.gl_nombre_comuna,
+						c.id_provincia,
+						p.gl_nombre_provincia,
+						r.id_region,
+						r.gl_nombre_region
+					FROM pre_comuna c
+						LEFT JOIN pre_provincia p ON c.id_provincia = p.id_provincia
+						LEFT JOIN pre_region r ON p.id_region = r.id_region
+					WHERE c.id_comuna = ?";
 
-		$params		= array($id_comuna);
-        $consulta	= $this->db->getQuery($query, $params);
+		$param	= array($id_comuna);
+        $result	= $this->db->getQuery($query, $param);
 
-        if($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
+        if($result->numRows > 0) {
+            return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 

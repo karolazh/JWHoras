@@ -1,5 +1,24 @@
 <?php
 
+/**
+*****************************************************************************
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Modelo para Tabla pre_tipo_violencia
+* Plataforma	: !PHP
+* Creacion		: 06/03/2017
+* @name			DAOTipoViolencia.php
+* @version		1.0
+* @author		David Gusmán <david.guzman@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*
+*-----------------------------------------------------------------------------
+*****************************************************************************
+*/
+
 class DAOTipoViolencia extends Model{
 
     protected $_tabla			= "pre_tipo_violencia";
@@ -9,33 +28,32 @@ class DAOTipoViolencia extends Model{
     function __construct(){
         parent::__construct();
     }
-    
-    /*** 20170131 - Funcion obtiene datos de una región ***/
-    public function getTipoViolencia($id_tipo_violencia){
-		$query	= "	SELECT * 
-					FROM ".$this->_tabla."
-					WHERE id_tipo_violencia = ?";
 
-	$params		= array($id_tipo_violencia);
-        $consulta	= $this->db->getQuery($query,$params);
-        if($consulta->numRows > 0){
-            return $consulta->rows->row_0;
-        }else{
-            return null;
-        }
-    }
-    
-    /*
-     * 20170203 - Lista Regiones
-     */
     public function getLista(){
-        $query		= $this->db->select("*")->from($this->_tabla);
-        $resultado	= $query->getResult();
+        $query	= "	SELECT * FROM ".$this->_tabla;
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
+
+    public function getById($id){
+        $query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE ".$this->_primaria." = ?";
+
+		$param	= array($id);
+        $result	= $this->db->getQuery($query,$param);
+		
+        if($result->numRows > 0){
+            return $result->rows->row_0;
+        }else{
+            return NULL;
+        }
+    }
+
 }
+
+?>

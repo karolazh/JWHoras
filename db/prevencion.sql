@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 192.168.0.200
--- Tiempo de generación: 06-03-2017 a las 13:15:02
+-- Tiempo de generación: 06-03-2017 a las 17:50:25
 -- Versión del servidor: 5.6.10
 -- Versión de PHP: 5.6.26
 
@@ -4699,11 +4699,11 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_genero` (
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_grupo` (
-  `id_institucion_tipo` int(11) NOT NULL AUTO_INCREMENT,
-  `gl_nombre_institucion_tipo` varchar(150) DEFAULT NULL,
+  `id_tipo_grupo` int(11) NOT NULL AUTO_INCREMENT,
+  `gl_nombre_tipo_grupo` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_institucion_tipo`),
+  PRIMARY KEY (`id_tipo_grupo`),
   KEY `id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
@@ -4711,7 +4711,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_grupo` (
 -- Volcado de datos para la tabla `pre_tipo_grupo`
 --
 
-INSERT INTO `pre_tipo_grupo` (`id_institucion_tipo`, `gl_nombre_institucion_tipo`, `id_usuario_crea`, `fc_crea`) VALUES
+INSERT INTO `pre_tipo_grupo` (`id_tipo_grupo`, `gl_nombre_tipo_grupo`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 'Control', NULL, NULL),
 (2, 'Tratamiento', NULL, NULL);
 
@@ -5009,8 +5009,8 @@ CREATE TABLE IF NOT EXISTS `pre_usuario` (
 
 INSERT INTO `pre_usuario` (`id_usuario`, `id_perfil`, `gl_rut`, `gl_password`, `id_institucion`, `id_tipo_grupo`, `gl_nombres`, `gl_apellidos`, `id_region`, `id_comuna`, `gl_direccion`, `gl_email`, `gl_fono`, `gl_celular`, `bo_activo`, `fc_ultimo_login`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 1, '13225524-5', '7c63b8135f73d87fbd3ac01623823633c54f0cf2c320bbaf463d4d275d498060fcc6e5c40f2b49aaab881e4064c0d2803c5361a9eabe157ab1cf4d1da19120d3', 1, '2', 'Administrador', 'Prevención', 6, 79, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, 1, '2017-03-03 20:44:41', NULL, NULL, 1, '2017-02-09 10:30:00'),
-(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2, '2', 'Orlando', 'Vazquez', 1, 3, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-06 09:43:59', NULL, NULL, 1, '2017-02-09 10:30:00'),
-(3, 1, '0-0', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 3, '2', 'David', 'Guzmán', 7, NULL, NULL, 'david.guzman@cosof.cl', NULL, NULL, 1, '2017-02-23 09:48:37', NULL, NULL, 1, '2017-02-09 10:30:00'),
+(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2, '2', 'Orlando', 'Vazquez', 1, 3, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-06 17:47:53', NULL, NULL, 1, '2017-02-09 10:30:00'),
+(3, 1, '0-0', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 3, '2', 'David', 'Guzmán', 7, NULL, NULL, 'david.guzman@cosof.cl', NULL, NULL, 1, '2017-03-06 13:57:04', NULL, NULL, 1, '2017-02-09 10:30:00'),
 (6, 1, '11111111-1', '0235aa034af9c8684f147ff288b790cb89e8ebd2e2770b655fa3754722a82ed4b8239c3c34ad5e8c87b77b8f489d303f2f0baef5324ab1ca24e9ad7975b3941d', 1, '2', 'Uni', 'Cornio', 1, 1, NULL, 'ovazquez.gonzalez@gmail.com', NULL, NULL, 1, '2017-03-03 20:45:34', NULL, NULL, 1, NULL);
 
 -- --------------------------------------------------------

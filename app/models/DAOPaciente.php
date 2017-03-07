@@ -5,10 +5,10 @@
 * Sistema		: PREVENCION DE FEMICIDIOS
 * Descripcion	: Modelo para Tabla pre_paciente
 * Plataforma	: !PHP
-* Creacion		: 20/02/2017
+* Creacion		: 22/02/2017
 * @name			DAOPaciente.php
 * @version		1.0
-* @author		David Guzman <david.guzman@cosof.cl>
+* @author		Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -38,10 +38,11 @@ class DAOPaciente extends Model{
         	$params[] = $parametros['region'];
         }
 
-        $resultado	= $this->db->getQuery($query, $params);
+        $result	= $this->db->getQuery($query, $params);
+        //$result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
@@ -52,12 +53,12 @@ class DAOPaciente extends Model{
 						WHERE ".$this->_primaria." = ?";
 
 		$param		= array($id);
-        $resultado	= $this->db->getQuery($query,$param);
+        $result	= $this->db->getQuery($query,$param);
 		
-        if($resultado->numRows > 0){
-            return $resultado->rows->row_0;
+        if($result->numRows > 0){
+            return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 
@@ -70,14 +71,14 @@ class DAOPaciente extends Model{
 						date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento_vista
 					FROM pre_paciente AS paciente
                         LEFT JOIN pre_comuna c ON paciente.id_comuna = c.id_comuna
-                        LEFT JOIN pre_centro_salud e ON paciente.id_centro_salud = e.id_establecimiento
+                        LEFT JOIN pre_centro_salud e ON paciente.id_centro_salud = e.id_centro_salud
 					WHERE gl_rut = ?";
 
         $param		= array($gl_rut);
-        $consulta	= $this->db->getQuery($query, $param);
+        $result	= $this->db->getQuery($query, $param);
 
-        if ($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
+        if ($result->numRows > 0) {
+            return $result->rows->row_0;
         } else {
             return null;
         }
@@ -101,14 +102,14 @@ class DAOPaciente extends Model{
 							(select count(*) from pre_paciente_registro where pre_paciente_registro.id_paciente = paciente.id_paciente ) as nr_motivo_consulta,
 							datediff(now(),paciente.fc_crea) as nr_dias_primera_visita
 						FROM pre_paciente paciente 
-							LEFT JOIN pre_centro_salud i ON i.id_centro_salud = paciente.id_centro_salud
+							LEFT JOIN pre_centro_salud i ON i.id_centro_salud = paciente.id_institucion
 							LEFT JOIN pre_comuna c ON c.id_comuna = paciente.id_comuna
 							LEFT JOIN pre_paciente_estado e ON e.id_paciente_estado = paciente.id_paciente_estado";
 
-        $resultado	= $this->db->getQuery($query);
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-			return $resultado->rows;
+        if($result->numRows>0){
+			return $result->rows;
         }else{
             return NULL;
         }
@@ -154,10 +155,10 @@ class DAOPaciente extends Model{
 						WHERE paciente.id_paciente = ?";
 
         $param		= array($id_paciente);
-        $consulta	= $this->db->getQuery($query, $param);
+        $result	= $this->db->getQuery($query, $param);
 
-        if($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
+        if($result->numRows > 0) {
+            return $result->rows->row_0;
         }else{
             return NULL;
         }
@@ -200,10 +201,10 @@ class DAOPaciente extends Model{
 						WHERE paciente.id_paciente = ?";
 
         $param		= array($id_paciente);
-		$consulta	= $this->db->getQuery($query, $param);
+		$result	= $this->db->getQuery($query, $param);
 
-		if ($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
+		if ($result->numRows > 0) {
+            return $result->rows->row_0;
         } else {
             return null;
         }
@@ -221,10 +222,10 @@ class DAOPaciente extends Model{
 					WHERE gl_run_pass = ?";
 
         $param		= array($pasaporte);
-        $consulta	= $this->db->getQuery($query, $param);
+        $result	= $this->db->getQuery($query, $param);
 
-        if ($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
+        if ($result->numRows > 0) {
+            return $result->rows->row_0;
         } else {
             return null;
         }
@@ -237,10 +238,10 @@ class DAOPaciente extends Model{
 						WHERE paciente.id_region = ?";
 
 		$param		= array($id_region);
-        $consulta	= $this->db->getQuery($query,$param);
+        $result	= $this->db->getQuery($query,$param);
 
-        if($consulta->numRows > 0){
-            return $consulta->numRows;
+        if($result->numRows > 0){
+            return $result->numRows;
         } else {
             return 0;
         }
@@ -294,7 +295,7 @@ class DAOPaciente extends Model{
 						'".$parametros['gl_longitud']."',
 						'".$parametros['chkReconoce']."',
 						".$parametros['chkAcepta'].",
-						'".date('Y-m-d H:i:s')."',
+						now(),
 						".$_SESSION['id']."
 						)
                     ";
@@ -302,13 +303,13 @@ class DAOPaciente extends Model{
         if ($this->db->execQuery($query)) {
             return $this->db->getLastId();
         } else {
-            return false;
+            return NULL;
         }
     }
     
-    public function getRegistroxId($id_registro) {
+    public function getRegistroxId($id_paciente) {
         $query = "SELECT
-                        reg.id_registro AS id_registro,	
+                        reg.id_paciente AS id_paciente,	
                         reg.gl_rut AS rut,
                         reg.bo_extranjero AS extranjero, 
                         reg.gl_run_pass AS run_pass,
@@ -331,7 +332,6 @@ class DAOPaciente extends Model{
                         date_format(reg.fc_crea,'%d-%m-%Y') AS fc_crea,
                         ins.gl_nombre_establecimiento AS institucion,
                         reg.id_centro_salud AS centro_salud, 
-                        
                         reg.id_adjunto AS id_adjunto,
                         reg.gl_latitud AS latitud, 
                         reg.gl_longitud AS longitud,
@@ -340,18 +340,19 @@ class DAOPaciente extends Model{
                         reg.id_usuario_actualiza AS usuario_actualiza
                     FROM pre_paciente reg
                     left join pre_comuna com on com.id_comuna = reg.id_comuna
-                    left join pre_provincias pro on pro.id_provincia = com.id_provincia
+                    left join pre_provincia pro on pro.id_provincia = com.id_provincia
                     left join pre_region rg on rg.id_region = pro.id_region
                     left join pre_centro_salud ins on ins.id_centro_salud = reg.id_institucion
                     left join pre_prevision pre on pre.id_prevision = reg.id_prevision
                     left join pre_paciente_estado est on est.id_paciente_estado = reg.id_paciente_estado
-                    WHERE reg.id_registro = ?";
+                    WHERE reg.id_paciente = ?";
 
-        $param = array($id_registro);
-        $consulta = $this->db->getQuery($query, $param);
+        $param = array($id_paciente);
+        $result = $this->db->getQuery($query, $param);
 
-        if ($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
+
+        if ($result->numRows > 0) {
+            return $result->rows->row_0;
         } else {
             return NULL;
         }
@@ -366,7 +367,7 @@ class DAOPaciente extends Model{
                         eve.id_evento AS id_evento, 
                         eve.id_evento_tipo AS id_evento_tipo, 
                         tip.gl_nombre_evento_tipo AS nombre_evento,
-                        eve.id_registro AS id_registro,
+                        eve.id_paciente AS id_paciente,
                         eve.gl_descripcion AS glosa,
                         date_format(eve.fc_crea,'%d-%m-%Y') AS fc_crea,
                         usr.gl_rut AS rut,
@@ -374,13 +375,13 @@ class DAOPaciente extends Model{
                     FROM pre_eventos eve
                     LEFT JOIN pre_eventos_tipo tip ON tip.id_evento_tipo = eve.id_evento_tipo
                     LEFT JOIN pre_usuarios usr ON usr.id_usuario = eve.id_usuario_crea
-                    WHERE eve.id_registro = ?";
+                    WHERE eve.id_paciente = ?";
 
 	$param		= array($id_registro);
-        $consulta	= $this->db->getQuery($query,$param);
+        $result	= $this->db->getQuery($query,$param);
         
-        if($consulta->numRows>0){
-            return $consulta->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }

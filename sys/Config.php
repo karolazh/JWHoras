@@ -16,7 +16,7 @@
 /**
  * APP_NAME: Nombre de la aplicación
  */
-define('APP_NAME','');
+define('APP_NAME','Prevención de Femicidios');
 
 /**
  * ENVIROMENT:

@@ -71,9 +71,9 @@ class DAORegion extends Model{
         $resul	= $this->db->getQuery($query,$param);
 
         if($resul->numRows > 0){
-            return $resul->rows->row_0;
+            return $resul->rows;
         }else{
-            return null;
+            return NULL;
         }
     }
 
