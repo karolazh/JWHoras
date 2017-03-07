@@ -281,7 +281,7 @@ $(".bo_tos_productiva").on('change', function (e) {
 
 //Se ha realizado PAP? Si -> Muestra ultima fecha ; No -> Muestra Input para tomar fecha
 $(".bo_pap_realizado").on('change', function (e) {
-	if ($('#bo_pap_realizado_0').is(':checked')) {
+	if ($('#bo_pap_realizado_0').is(':checked') || $('#bo_pap_realizado_2').is(':checked')) {
 		$('#tomar_fecha').show();
 		$('#ultimo_pap').hide();
 		$('#pap_vigente').hide();
@@ -355,7 +355,7 @@ $("#gl_colesterol").on('keyup', function (e) {
 //Si realizo Examen Cancer de mama Mostrar -> Ingrese Fecha
 $(".bo_mamografia_realizada").on('change', function (e) {
 
-	if ($('#bo_mamografia_realizada_0').is(':checked')) {
+	if ($('#bo_mamografia_realizada_0').is(':checked') || $('#bo_mamografia_realizada_2').is(':checked')) {
 		$('#fecha_mamografia').hide();
 		$('#mam_vigente').hide();
 		$('#mam_resultado').hide();
@@ -811,9 +811,30 @@ $("#guardar").on('click', function (e) {
 			"name": 'bo_pap_realizado',
 			"value": 0
 		});
+	} else if ($('#bo_pap_realizado_2').is(':checked')) {
+		parametros.push({
+			"name": 'bo_pap_realizado',
+			"value": 2
+		});
 	} else {
 		parametros.push({
 			"name": 'bo_pap_realizado',
+			"value": 'NULL'
+		});
+	}
+	if ($('#bo_pap_resultado_1').is(':checked')) {
+		parametros.push({
+			"name": 'bo_pap_resultado',
+			"value": 1
+		});
+	} else if ($('#bo_pap_resultado_0').is(':checked')) {
+		parametros.push({
+			"name": 'bo_pap_resultado',
+			"value": 0
+		});
+	} else {
+		parametros.push({
+			"name": 'bo_pap_resultado',
 			"value": 'NULL'
 		});
 	}
@@ -865,9 +886,46 @@ $("#guardar").on('click', function (e) {
 			"name": 'bo_mamografia_realizada',
 			"value": 0
 		});
+	} else if ($('#bo_mamografia_realizada_2').is(':checked')) {
+		parametros.push({
+			"name": 'bo_mamografia_realizada',
+			"value": 2
+		});
 	} else {
 		parametros.push({
 			"name": 'bo_mamografia_realizada',
+			"value": 'NULL'
+		});
+	}
+	if ($('#bo_mamografia_resultado_1').is(':checked')) {
+		parametros.push({
+			"name": 'bo_mamografia_resultado',
+			"value": 1
+		});
+	} else if ($('#bo_mamografia_resultado_0').is(':checked')) {
+		parametros.push({
+			"name": 'bo_mamografia_resultado',
+			"value": 0
+		});
+	} else {
+		parametros.push({
+			"name": 'bo_mamografia_resultado',
+			"value": 'NULL'
+		});
+	}
+	if ($('#bo_mamografia_resultado_pasado_1').is(':checked')) {
+		parametros.push({
+			"name": 'bo_mamografia_resultado_pasado',
+			"value": 1
+		});
+	} else if ($('#bo_mamografia_resultado_pasado_0').is(':checked')) {
+		parametros.push({
+			"name": 'bo_mamografia_resultado_pasado',
+			"value": 0
+		});
+	} else {
+		parametros.push({
+			"name": 'bo_mamografia_resultado_pasado',
 			"value": 'NULL'
 		});
 	}

@@ -177,6 +177,14 @@ class Empa extends Controller{
 			$this->smarty->assign("bo_pap_realizado_1", 'checked');
 		} else if ($empa->bo_pap_realizado == 0) {
 			$this->smarty->assign("bo_pap_realizado_0", 'checked');
+		} else if ($empa->bo_pap_realizado == 2) {
+			$this->smarty->assign("bo_pap_realizado_2", 'checked');
+		}
+		
+		if ($empa->bo_pap_resultado == 1) {
+			$this->smarty->assign("bo_pap_resultado_1", 'checked');
+		} else if ($empa->bo_pap_resultado == 0) {
+			$this->smarty->assign("bo_pap_resultado_0", 'checked');
 		}
 		
         $arrMes = $this->_DAOMes->getLista();
@@ -208,11 +216,25 @@ class Empa extends Controller{
 		if ($empa->bo_colesterol_toma == 1) {
 			$this->smarty->assign("bo_colesterol_toma", 'checked');
 		}
-
+		
+		if ($empa->bo_mamografia_resultado_pasado == 1) {
+			$this->smarty->assign("bo_mamografia_resultado_pasado_1", 'checked');
+		} else if ($empa->bo_mamografia_resultado_pasado == 0) {
+			$this->smarty->assign("bo_mamografia_resultado_pasado_0", 'checked');
+		}
+		
+		if ($empa->bo_mamografia_resultado == 1) {
+			$this->smarty->assign("bo_mamografia_resultado_1", 'checked');
+		} else if ($empa->bo_mamografia_resultado == 0) {
+			$this->smarty->assign("bo_mamografia_resultado_0", 'checked');
+		}
+		
 		if ($empa->bo_mamografia_realizada == 1) {
 			$this->smarty->assign("bo_mamografia_realizada_1", 'checked');
 		} else if ($empa->bo_mamografia_realizada == 0) {
 			$this->smarty->assign("bo_mamografia_realizada_0", 'checked');
+		} else if ($empa->bo_mamografia_realizada == 2) {
+			$this->smarty->assign("bo_mamografia_realizada_2", 'checked');
 		}
 
 		if ($empa->bo_mamografia_vigente == 1) {
@@ -282,9 +304,9 @@ class Empa extends Controller{
 		$this->smarty->assign("botonAyudaMamografiaVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 1 año", "Información", "", "btn-info"));
 		$this->smarty->assign("botonConsejeriaColesterol", Boton::botonAyuda("Reducir ingesta calorías y realizar actividad física (controlada)", "Consejería", "", "btn-danger"));
 		$this->smarty->assign("botonInformacionAgenda", Boton::botonAyuda("Referir confirmación diagnóstica con profesional de la salud.", "Consejeria", "", "btn-danger"));
-		$this->smarty->assign("botonInformacionAgendaITS", Boton::botonAyuda("Referir a profesional de ITS.", "Consejeria", "", "btn-danger"));
+		$this->smarty->assign("botonInformacionAgendaITS", Boton::botonAyuda("Referir a profesional de ITS por Sifilis.", "Consejeria", "", "btn-danger"));
 		$this->smarty->assign("botonInformacionAgendaMamografia", Boton::botonAyuda("Agendar nueva mamografía.", "Información", "", "btn-info"));
-		$this->smarty->assign("botonInformacionAgendaVIH", Boton::botonAyuda("Referir a Profesional de ITS.", "Información", "", "btn-danger"));
+		$this->smarty->assign("botonInformacionAgendaVIH", Boton::botonAyuda("Referir a Profesional de ITS por VIH.", "Información", "", "btn-danger"));
 		//llamado al template
 		$this->_display('Empa/nuevo.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");

@@ -449,6 +449,9 @@
                                 &nbsp;&nbsp;
                                 <label><input class="bo_pap_realizado" type="radio" name="bo_pap_realizado" 
                                               id="bo_pap_realizado_1" value="1" {$bo_pap_realizado_1}>SI</label>
+								&nbsp;&nbsp;
+                                <label><input class="bo_pap_realizado" type="radio" name="bo_pap_realizado" 
+                                              id="bo_pap_realizado_2" value="2" {$bo_pap_realizado_2}>NO SABE</label>
                             </div>
                         </div>
                         <div class="form-group" id="ultimo_pap" style="{if $bo_pap_realizado_1 != 'checked'}display: none{/if}">         
@@ -503,11 +506,11 @@
                         <div class="form-group" id="resultado_pap">
                             <label class="control-label required col-sm-3">Resultado PAP</label>
                             <div class="col-sm-2">
-                                <label><input class="bo_pap_toma"  type="radio" name="bo_pap_toma" 
-                                              id="bo_pap_toma_0" value="0" {$bo_pap_toma_0}>Alterado</label>
+                                <label><input class="bo_pap_resultado"  type="radio" name="bo_pap_resultado" 
+                                              id="bo_pap_resultado_0" value="0" {$bo_pap_resultado_0}>Alterado</label>
                                 &nbsp;&nbsp;
-                                <label><input class="bo_pap_toma" type="radio" name="bo_pap_toma" 
-                                              id="bo_pap_toma_1" value="1" {$bo_pap_toma_1}>Normal</label>
+                                <label><input class="bo_pap_resultado" type="radio" name="bo_pap_toma" 
+                                              id="bo_pap_resultado_1" value="1" {$bo_pap_resultado_1}>Normal</label>
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" id="verPAP" class="btn btn-sm btn-info">
@@ -553,6 +556,9 @@
                                 &nbsp;&nbsp;
                                 <label><input class="bo_mamografia_realizada" type="radio" name="bo_mamografia_realizada" 
                                               id="bo_mamografia_realizada_1" value="1" {$bo_mamografia_realizada_1}>SI</label>
+								&nbsp;&nbsp;
+                                <label><input class="bo_mamografia_realizada" type="radio" name="bo_mamografia_realizada" 
+                                              id="bo_mamografia_realizada_2" value="1" {$bo_mamografia_realizada_2}>NO SABE</label>
                             </div>
                         </div>
                         <div class="form-group" id="fecha_mamografia" style="{if $bo_mamografia_realizada_1 != 'checked'}display: none{/if}">
@@ -592,11 +598,11 @@
                         <div class="form-group" id="mam_resultado" style="{if $fc_mamografia == 0}display: none{/if}"> 
                                 <label class="control-label required col-sm-3">Resultado Mamografía</label>
                                 <div class="col-sm-2">
-                                    <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
-                                                  id="bo_mamografia_resultado" value="0">Alterado</label>
+                                    <label><input class="bo_mamografia_resultado_pasado" type="radio" name="bo_mamografia_resultado_pasado" 
+                                                  id="bo_mamografia_resultado_pasado_0" value="0" {$bo_mamografia_resultado_pasado_0}>Alterado</label>
                                     &nbsp;&nbsp;
-                                    <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
-                                                  id="bo_mamografia_resultado" value="1">Normal</label>
+                                    <label><input class="bo_mamografia_resultado_pasado" type="radio" name="bo_mamografia_resultado_pasado" 
+                                                  id="bo_mamografia_resultado_pasado_1" value="1" {$bo_mamografia_resultado_pasado_1}>Normal</label>
                                 </div>
                         </div>        
                         <div class="form-group" id="mam_requiere"> 
@@ -619,11 +625,11 @@
                             <div id="mam_resultado2" style="{if $bo_mamografia_toma != 'checked'}display: none{/if}"> 
                                 <label class="control-label required col-sm-3">Resultado Mamografía</label>
                                 <div class="col-sm-2">
-                                    <label><input class="bo_mamografia_resultado2" type="radio" name="bo_mamografia_resultado2" 
-                                                  id="bo_mamografia_resultado2" value="0">Alterado</label>
+                                    <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
+                                                  id="bo_mamografia_resultado_0" value="0" {$bo_mamografia_resultado_0}>Alterado</label>
                                     &nbsp;&nbsp;
-                                    <label><input class="bo_mamografia_resultado2" type="radio" name="bo_mamografia_resultado2" 
-                                                  id="bo_mamografia_resultado2" value="1">Normal</label>
+                                    <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
+                                                  id="bo_mamografia_resultado_1" value="1" {$bo_mamografia_resultado_1}>Normal</label>
                                 </div>
                             </div>
                             <div class="col-sm-3" id="div_mamografia_agenda">
