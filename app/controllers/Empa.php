@@ -41,6 +41,7 @@ class Empa extends Controller{
 		$this->_DAOTipoAUDIT = $this->load->model("DAOTipoAUDIT");
 		$this->_DAOEvento = $this->load->model("DAOEvento");
 		$this->_DAOMes = $this->load->model("DAOMes");
+		$this->_DAOPacienteDireccion = $this->load->model("DAOPacienteDireccion");
 	}
 
 	/*
@@ -92,6 +93,7 @@ class Empa extends Controller{
 		$this->smarty->assign("fc_empa", date('Y-m-d'));
 		//Cargar Datos Paciente
 		$registro = $this->_DAOPaciente->getById($id_paciente);
+		$direccion = $this->_DAOPacienteDireccion->getById($id_paciente);
 		$this->smarty->assign("gl_rut", $registro->gl_rut);
 		$this->smarty->assign("gl_nombres", $registro->gl_nombres);
 		$this->smarty->assign("gl_apellidos", $registro->gl_apellidos);
@@ -289,7 +291,7 @@ class Empa extends Controller{
 		$this->smarty->assign("gl_fono", $registro->gl_fono);
 		$this->smarty->assign("gl_celular", $registro->gl_celular);
 		$this->smarty->assign("gl_email", $registro->gl_email);
-		$this->smarty->assign("gl_direccion", $registro->gl_direccion);
+		$this->smarty->assign("gl_direccion", $direccion->gl_direccion);
 		$this->smarty->assign("botonAyudaAlcoholico", Boton::botonAyuda("Evitar el uso de bebidas alcohólicas", "Consejería", "", "btn-danger"));
 		$this->smarty->assign("botonAyudaFumador", Boton::botonAyuda("Evitar el uso de tabaco", "Consejería", "", "btn-danger"));
 		$this->smarty->assign("botonAyudaCircunferenciaAbdominal", Boton::botonAyuda("Punto medio entre margen inferior de la ultima costilla y la cresta iliaca.", "Información", "", "btn-info"));
