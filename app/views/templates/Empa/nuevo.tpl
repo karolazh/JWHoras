@@ -154,7 +154,24 @@
 
 			<!-- Examen -->
             <div class="panel-body">
-                <!-- a. Alcoholismo -->
+				
+				<!-- Embarazo -->
+                <div class="box box-success">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Embarazada</h3></div>
+                    <div class="box-body">  
+                        <div class="form-group">   
+                            <label class="control-label required col-sm-3">¿Está Embarazada?</label>
+                            <div class="col-sm-1">
+                                <label><input class="bo_embarazo" type="radio" name="bo_embarazo" 
+                                              id="bo_embarazo_0" value="0" {$bo_embarazo_0}>NO</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_embarazo" type="radio" name="bo_embarazo"
+                                              id="bo_embarazo_1" value="1" {$bo_embarazo_1}>SI</label>
+                            </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- Alcoholismo -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Consumo de alcohol</h3></div>
                     <div class="box-body">
@@ -201,7 +218,7 @@
                     </div>
                 </div>
 
-                <!-- b. Tabaquismo -->
+                <!-- Tabaquismo -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Tabaquismo</h3></div>
                     <div class="box-body">   
@@ -220,8 +237,8 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- c. Obesidad -->
+				
+                <!-- Obesidad -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Obesidad</h3></div>
                     <div class="box-body">
@@ -278,7 +295,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- d. Hipertensión -->
+                <!-- Hipertensión -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Hipertensión Arterial</h3></div>
                     <div class="box-body"> 
@@ -309,7 +326,7 @@
                     </div>
                 </div>
                 
-                <!-- e. Diabetes Mellitus (DM) -->
+                <!-- Diabetes Mellitus (DM) -->
                 <div class="box box-success" id="diabetes">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Diabetes Mellitus (DM)</h3></div>
                     <div class="box-body">
@@ -350,7 +367,7 @@
                     </div>
                 </div>
 
-                <!-- f. Sífilis -->
+                <!-- Sífilis -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Enfermedades de Transmisión Sexual</h3></div>
                     <div class="box-body">    
@@ -390,7 +407,7 @@
                             </div>
                         </div>
 						<div class="form-group" id="id_vih">
-                            <label class="control-label required col-sm-3">¿Examen VIH? (VIH)</label>
+                            <label class="control-label required col-sm-3">¿Examen Test Elisa? (VIH)</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_vih" type="radio" name="bo_vih" 
                                               id="bo_vih_0" value="0" {$bo_vih_0}>Negativo</label>
@@ -407,7 +424,7 @@
                     </div>
                 </div>
 
-                <!-- g. Tuberculósis -->
+                <!-- Tuberculósis -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Tuberculosis</h3></div>
                     <div class="box-body">  
@@ -437,7 +454,7 @@
                     </div>
                 </div>
 
-                <!-- h. PAP -->
+                <!-- PAP -->
                 <div class="box box-success" style="{$pap}">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> PAP (Mujeres de 25 a 64 años Cáncer Cervicouterino)</h3></div>
                     <div class="box-body">  
@@ -544,7 +561,7 @@
                     </div>
                     </div>
                 </div>
-                <!-- j. Mujeres de 50 años (cáncer de mama) -->
+                <!-- Cáncer de mama -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Cáncer de mama</h3></div>
                     <div class="box-body">
