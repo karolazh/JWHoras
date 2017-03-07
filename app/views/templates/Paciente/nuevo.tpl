@@ -116,6 +116,19 @@
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 				</div>
+				<div class="form-group hidden">
+					<label for="gl_codigo_fonasa" class="control-label col-sm-2 ">Código Fonasa</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control col-sm-2" name="gl_codigo_fonasa" id="gl_codigo_fonasa">
+						<span class="help-block hidden fa fa-warning"></span>
+					</div>
+					<div class="col-sm-1">					
+						<button type="button" id="btnUploadFonasa" class="btn btn-sm btn-success"
+										onclick="xModal.open('{$smarty.const.BASE_URI}/Paciente/cargarAdjuntoFonasa', 'Cargar Adjunto', '', 1, true, '150');" >
+							<i class="fa fa-upload" aria-hidden="true"></i> Subir Archivo Fonasa
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="mostrar_motivos_consulta" style="display:none">		

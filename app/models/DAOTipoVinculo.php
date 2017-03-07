@@ -3,39 +3,42 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_estado_civil
+* Descripcion	: Modelo para Tabla pre_tipo_vinculo
 * Plataforma	: !PHP
-* Creacion		: 06/03/2017
-* @name			DAOEstadoCivil.php
+* Creacion		: 07/03/2017
+* @name			DAOTipoVinculo.php
 * @version		1.0
-* @author		David Gusman <david.guzman@cosof.cl>
+* @author		David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
-*<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a campos de la BD antigua
-*<david.guzman@cosof.cl>	07-03-2017	Modificada clave primaria por nombre original
+*<david.guzman@cosof.cl>	07-03-2017	Creacion DAOTipoVinculo y respectivas funciones
+* 
 *-----------------------------------------------------------------------------
 *****************************************************************************
 */
 
-class DAOEstadoCivil extends Model{
+class DAOTipoVinculo extends Model{
 
-    protected $_tabla			= "pre_tipo_estado_civil";
-    protected $_primaria		= "id_estado_civil";
+    protected $_tabla			= "pre_tipo_vinculo";
+    protected $_primaria		= "id_tipo_vinculo";
     protected $_transaccional	= false;
 
     function __construct(){
         parent::__construct();
     }
-
+    
+    /*
+     * 20170203 - Lista Regiones
+     */
     public function getLista(){
-        $query	= "	SELECT * FROM ".$this->_tabla;
-        $result	= $this->db->getQuery($query);
+        $query		= $this->db->select("*")->from($this->_tabla);
+        $resultado	= $query->getResult();
 
-        if($result->numRows>0){
-            return $result->rows;
+        if($resultado->numRows>0){
+            return $resultado->rows;
         }else{
             return NULL;
         }
@@ -54,7 +57,7 @@ class DAOEstadoCivil extends Model{
             return NULL;
         }
     }
-
+	
 }
 
 ?>

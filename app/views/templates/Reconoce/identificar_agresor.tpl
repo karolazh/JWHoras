@@ -81,14 +81,14 @@
                                                 <select class="form-control" id="gl_estado_civil" name="gl_estado_civil">
                                                     <option value="0">Seleccione Estado Civil</option>
                                                     {foreach $arrTipoEstadoCivil as $item}
-                                                        <option value="{$item->id_tipo_estado_civil}" >{$item->gl_tipo_estado_civil}</option>
+                                                        <option value="{$item->id_estado_civil}" >{$item->gl_estado_civil}</option>
                                                     {/foreach}
                                                 </select>
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
                                         <label for="nr_hijos" class="control-label col-sm-1">Numero de Hijos</label>
 					<div class="col-sm-3">					
-						<input type="text" name="nr_hijos" id="nr_hijos" value=""
+						<input type="number" name="nr_hijos" id="nr_hijos" value=""
                                                        placeholder="Numero Hijos" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
@@ -208,8 +208,8 @@
                                     <div class="col-sm-3">
                                         <select for="gl_tipo_agresor" class="form-control" id="gl_tipo_agresor" name="gl_tipo_agresor">
                                             <option value="0">Seleccione Vinculo con Agresor</option>
-                                            {foreach $arrTipoAgresor as $item}
-                                                <option value="{$item->id_tipo_agresor}" >{$item->gl_tipo_agresor}</option>
+                                            {foreach $arrTipoVinculo as $item}
+                                                <option value="{$item->id_tipo_vinculo}" >{$item->gl_tipo_vinculo}</option>
                                             {/foreach}
                                         </select>
                                         <span class="help-block hidden fa fa-warning"></span>
@@ -277,7 +277,7 @@
                                                 <select class="form-control" id="gl_estado_civil_agresor" name="gl_estado_civil_agresor">
                                                     <option value="0">Seleccione Estado Civil Agresor</option>
                                                     {foreach $arrTipoEstadoCivil as $item}
-                                                        <option value="{$item->id_tipo_estado_civil}" >{$item->gl_tipo_estado_civil}</option>
+                                                        <option value="{$item->id_estado_civil}" >{$item->gl_estado_civil}</option>
                                                     {/foreach}
                                                 </select>
 						<span class="help-block hidden fa fa-warning"></span>
@@ -315,7 +315,7 @@
 						<select class="form-control" id="id_actividad_economica" name="id_actividad_economica">
                                                     <option value="0">Seleccione Grupo de Actividad Económica</option>
                                                     {foreach $arrActividadEconomica as $item}
-                                                        <option value="{$item->id_actividad_economica}" >{$item->gl_actividad_economica}</option>
+                                                        <option value="{$item->id_actividad_economica}" >{$item->gl_nombre_actividad}</option>
                                                     {/foreach}
                                                 </select>
 						<span class="help-block hidden fa fa-warning"></span>
