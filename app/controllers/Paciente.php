@@ -99,106 +99,107 @@ class Paciente extends Controller {
 	 */
 	public function bitacora() {
 
-		$parametros = $this->request->getParametros();
-		$idPac = $parametros[0];
-		//$detReg = $this->_DAOPaciente->getById($idReg);
-		$detPac = $this->_DAOPaciente->getByIdPaciente($idPac);
 
-		if (!is_null($detPac)) {
-			//$this->smarty->assign("detReg", $detReg);
+            $parametros = $this->request->getParametros();
+            $idPac = $parametros[0];
+            //$detReg = $this->_DAOPaciente->getById($idReg);
+            $detPac = $this->_DAOPaciente->getByIdPaciente($idPac);
 
-			$this->smarty->assign("idpac", $detPac);
+            if (!is_null($detPac)) {
+                //$this->smarty->assign("detReg", $detReg);
 
-			//Datos de Paciente
-			$run = "";
-			$ext = "NO";
-			if (!is_null($detPac->gl_rut)) {
-				$run = $detPac->gl_rut;
-			} else {
-				$run = $detPac->gl_run_pass;
-				$ext = "SI";
-			}
-			$this->smarty->assign("run", $run);
-			$this->smarty->assign("ext", $ext);
-			//$this->smarty->assign("nombres", $detReg->nombres);
-			//$this->smarty->assign("apellidos", $detReg->apellidos);
-			$nombres = $detPac->gl_nombres . ' ' . $detPac->gl_apellidos;
-			$this->smarty->assign("nombres", $nombres);
+                $this->smarty->assign("idpac", $detPac);
 
-			//$edad = "";
-			$edad = Fechas::calcularEdadInv($detPac->fc_nacimiento);
-			$this->smarty->assign("fecha_nac", $detPac->fc_nacimiento);
-			$this->smarty->assign("edad", $edad);
+                //Datos de Paciente
+                $run = "";
+                $ext = "NO";
+                if (!is_null($detPac->gl_rut)) {
+                        $run = $detPac->gl_rut;
+                } else {
+                        $run = $detPac->gl_run_pass;
+                        $ext = "SI";
+                }
+                $this->smarty->assign("run", $run);
+                $this->smarty->assign("ext", $ext);
+                //$this->smarty->assign("nombres", $detReg->nombres);
+                //$this->smarty->assign("apellidos", $detReg->apellidos);
+                $nombres = $detPac->gl_nombres.' '.$detPac->gl_apellidos;
+                $this->smarty->assign("nombres", $nombres);
 
-			//$genero = $detPac->gl_sexo;
-			$genero = "FEMENINO"; //obtener de BD y validad a futuro
-			$this->smarty->assign("genero", $genero);
-			$this->smarty->assign("estado", $detPac->gl_nombre_estado_caso);
+                //$edad = "";
+                $edad = Fechas::calcularEdadInv($detPac->fc_nacimiento);
+                $this->smarty->assign("fecha_nac", $detPac->fc_nacimiento);
+                $this->smarty->assign("edad", $edad);
 
-			$this->smarty->assign("prevision", $detPac->gl_nombre_prevision);
-			$this->smarty->assign("grupo", $detPac->gl_grupo_tipo);
+                //$genero = $detPac->gl_sexo;
+                $genero = "FEMENINO"; //obtener de BD y validad a futuro
+                $this->smarty->assign("genero", $genero);
+                $this->smarty->assign("estado", $detPac->gl_nombre_estado_caso);
 
-			$this->smarty->assign("direccion", $detPac->gl_direccion);
-			$this->smarty->assign("fono", $detPac->gl_fono);
+                $this->smarty->assign("prevision", $detPac->gl_nombre_prevision);
+                $this->smarty->assign("grupo", $detPac->gl_grupo_tipo);
 
-			$this->smarty->assign("celular", $detPac->gl_celular);
-			$this->smarty->assign("email", $detPac->gl_email);
+                $this->smarty->assign("direccion", $detPac->gl_direccion);
+                $this->smarty->assign("fono", $detPac->gl_fono);
 
-			$this->smarty->assign("comuna", $detPac->gl_nombre_comuna);
-			$this->smarty->assign("provincia", $detPac->gl_nombre_provincia);
+                $this->smarty->assign("celular", $detPac->gl_celular);
+                $this->smarty->assign("email", $detPac->gl_email);
 
-			$this->smarty->assign("region", $detPac->gl_nombre_region);
-			$this->smarty->assign("fecha_reg", $detPac->fc_crea);
+                $this->smarty->assign("comuna", $detPac->gl_nombre_comuna);
+                $this->smarty->assign("provincia", $detPac->gl_nombre_provincia);
 
-			$reconoce = "NO";
-			if (!is_null($detPac->bo_reconoce)) {
-				if ($detPac->bo_reconoce) {
-					$reconoce = "SI";
-				}
-			}
-			$acepta = "NO";
-			if (!is_null($detPac->bo_acepta_programa)) {
-				if ($detPac->bo_acepta_programa) {
-					$acepta = "SI";
-				}
-			}
-			$this->smarty->assign("reconoce", $reconoce);
-			$this->smarty->assign("acepta", $acepta);
+                $this->smarty->assign("region", $detPac->gl_nombre_region);
+                $this->smarty->assign("fecha_reg", $detPac->fc_crea);
 
-			//Grilla Motivos de Consulta (Paciente-Registro)
-			$arrConsultas = $this->_DAOPacienteRegistro->getListaPacienteRegistro($idPac);
-			$this->smarty->assign('arrConsultas', $arrConsultas);
+                $reconoce = "NO";
+                if (!is_null($detPac->bo_reconoce)) {
+                    if ($detPac->bo_reconoce) {
+                        $reconoce = "SI";
+                    }
+                }
+                $acepta = "NO";
+                if (!is_null($detPac->bo_acepta_programa)) {
+                    if ($detPac->bo_acepta_programa) {
+                        $acepta = "SI";
+                    }
+                }
+                $this->smarty->assign("reconoce", $reconoce);
+                $this->smarty->assign("acepta", $acepta);
 
-			//Grilla Empa
-			$arrEmpa = $this->_DAOEmpa->getListaEmpa($idPac);
-			$this->smarty->assign('arrEmpa', $arrEmpa);
+                //Grilla Motivos de Consulta (Paciente-Registro)
+                $arrConsultas = $this->_DAOPacienteRegistro->getByIdPaciente($idPac);
+                $this->smarty->assign('arrConsultas', $arrConsultas);
 
-			//Grilla Exámenes x Paciente
-			$arrExamenes = $this->_DAOPacienteExamen->getListaExamenes($idPac);
-			$this->smarty->assign('arrExamenes', $arrExamenes);
+                //Grilla Empa
+                $arrEmpa = $this->_DAOEmpa->getListaEmpa($idPac);
+                $this->smarty->assign('arrEmpa', $arrEmpa);
 
-			//Tipos de Eventos
-			$arrTipoEvento = $this->_DAOEventoTipo->getLista();
-			$this->smarty->assign('arrTipoEvento', $arrTipoEvento);
+                //Grilla Exámenes x Paciente
+                $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($idPac);
+                $this->smarty->assign('arrExamenes', $arrExamenes);
 
-			//Grilla Eventos
-			$arrEventos = $this->_DAOEvento->getListaEventosPaciente($idPac);
-			$this->smarty->assign('arrEventos', $arrEventos);
+                //Tipos de Eventos
+                $arrTipoEvento = $this->_DAOEventoTipo->getLista();
+                $this->smarty->assign('arrTipoEvento', $arrTipoEvento);
 
-			//Tipos de Adjuntos
-			$arrTipoDocumento = $this->_DAOAdjuntoTipo->getLista();
-			$this->smarty->assign('arrTipoDocumento', $arrTipoDocumento);
+                //Grilla Eventos
+                $arrEventos = $this->_DAOEvento->getEventosPaciente($idPac);
+                $this->smarty->assign('arrEventos', $arrEventos);
 
-			//Grilla Adjuntos
-			$arrAdjuntos = $this->_DAOAdjunto->getListaAdjuntosPaciente($idPac);
-			$this->smarty->assign('arrAdjuntos', $arrAdjuntos);
+                //Tipos de Adjuntos
+                $arrTipoDocumento = $this->_DAOAdjuntoTipo->getLista();
+                $this->smarty->assign('arrTipoDocumento', $arrTipoDocumento);
 
-			//muestra template
-			$this->smarty->display('Paciente/bitacora.tpl');
-			$this->load->javascript(STATIC_FILES . 'js/templates/paciente/bitacora.js');
-		} else {
-			throw new Exception("El historial que está buscando no existe");
-		}
+                //Grilla Adjuntos
+                $arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($idPac);
+                $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
+
+                //muestra template
+                $this->smarty->display('Paciente/bitacora.tpl');
+                $this->load->javascript(STATIC_FILES . 'js/templates/paciente/bitacora.js');
+            } else {
+                throw new Exception("El historial que está buscando no existe");
+            }
 	}
 
 	/**
@@ -556,10 +557,10 @@ class Paciente extends Controller {
 	}
 
 	/**
-	 * Descripción: Carga registro
-	 * @author: 
+	 * Descripción: Carga data del Paciente
+	 * @author: Victor Retamal
 	 */
-	public function cargarRegistro() {
+	public function cargarPaciente() {
 		header('Content-type: application/json');
 		$rut = $_POST['rut'];
 		$pasaporte = $_POST['inputextranjero'];
@@ -571,7 +572,7 @@ class Paciente extends Controller {
 		$json = array();
 
 		if ($registro) {
-			$arr_motivos = $this->_DAOPacienteRegistro->getByIdPaciente($registro->id_registro);
+			$arr_motivos = $this->_DAOPacienteRegistro->getByIdPaciente($registro->id_paciente);
 			$tabla_motivos = "";
 			$div_superior = "<div class='top-spaced'></div>
 								<div class='panel panel-primary'>
@@ -602,7 +603,7 @@ class Paciente extends Controller {
 													<td>" . $item->fc_ingreso . "</td>
 													<td>" . $item->gl_hora_ingreso . "</td>
 													<td>" . $item->gl_motivo_consulta . "</td>
-													<td>" . $item->gl_nombre_institucion . "</td>
+													<td>" . $item->gl_nombre_establecimiento . "</td>
 													<td>" . $item->gl_nombres . " " . $item->gl_apellidos . "</td>
 												</tr>
 												";
@@ -619,31 +620,32 @@ class Paciente extends Controller {
 				$tabla_motivos = $tabla_motivos . $pie_tabla;
 			}
 
-			$json['correcto'] = TRUE;
-			$json['div_superior'] = $div_superior;
-			$json['div_inferior'] = $div_inferior;
-			$json['tabla_motivos'] = $tabla_motivos;
-			$json['count_motivos'] = count((array) $arr_motivos);
-			$json['fc_ultimo_motivos'] = $arr_motivos->row_0->fc_ingreso;
-			$json['gl_grupo_tipo'] = $registro->gl_grupo_tipo;
-			$json['id_registro'] = $registro->id_registro;
-			$json['gl_nombres'] = $registro->gl_nombres;
-			$json['gl_apellidos'] = $registro->gl_apellidos;
-			$json['fc_nacimiento'] = $registro->fc_nacimiento;
-			$json['id_prevision'] = $registro->id_prevision;
-			$json['gl_direccion'] = $registro->gl_direccion;
-			$json['id_region'] = $registro->id_region;
-			$json['gl_nombre_comuna'] = $registro->gl_nombre_comuna;
-			$json['id_comuna'] = $registro->id_comuna;
-			$json['gl_centro_salud'] = $registro->gl_centro_salud;
-			$json['id_centro_salud'] = $registro->id_centro_salud;
-			$json['bo_reconoce'] = $registro->bo_reconoce;
-			$json['bo_acepta_programa'] = $registro->bo_acepta_programa;
-			$json['gl_latitud'] = $registro->gl_latitud;
-			$json['gl_longitud'] = $registro->gl_longitud;
-			$json['gl_fono'] = $registro->gl_fono;
-			$json['gl_celular'] = $registro->gl_celular;
-			$json['gl_email'] = $registro->gl_email;
+
+			$json['correcto']				= TRUE;
+			$json['div_superior']			= $div_superior;
+			$json['div_inferior']			= $div_inferior;
+			$json['tabla_motivos']			= $tabla_motivos;
+			$json['count_motivos']			= count((array) $arr_motivos);
+			$json['fc_ultimo_motivos']		= $arr_motivos->row_0->fc_ingreso;
+			$json['gl_grupo_tipo']			= $registro->gl_grupo_tipo;
+			$json['id_paciente']			= $registro->id_paciente;
+			$json['gl_nombres']				= $registro->gl_nombres;
+			$json['gl_apellidos']			= $registro->gl_apellidos;
+			$json['fc_nacimiento']			= $registro->fc_nacimiento;
+			$json['id_prevision']			= $registro->id_prevision;
+			$json['gl_direccion']			= $registro->gl_direccion;
+			$json['id_region']				= $registro->id_region;
+			$json['gl_nombre_comuna']		= $registro->gl_nombre_comuna;
+			$json['id_comuna']				= $registro->id_comuna;
+			$json['gl_centro_salud']		= $registro->gl_centro_salud;
+			$json['id_centro_salud']		= $registro->id_centro_salud;
+			$json['bo_reconoce']			= $registro->bo_reconoce;
+			$json['bo_acepta_programa']		= $registro->bo_acepta_programa;
+			$json['gl_latitud']				= $registro->gl_latitud;
+			$json['gl_longitud']			= $registro->gl_longitud;
+			$json['gl_fono']				= $registro->gl_fono;
+			$json['gl_celular']				= $registro->gl_celular;
+			$json['gl_email']				= $registro->gl_email;
 		} else {
 			$json['correcto'] = FALSE;
 		}
