@@ -175,7 +175,7 @@ class Paciente extends Controller {
 			$this->smarty->assign('arrExamenes', $arrExamenes);
 
 			//Tipos de Eventos
-			$arrTipoEvento = $this->_DAOEventosTipo->getLista();
+			$arrTipoEvento = $this->_DAOEventoTipo->getLista();
 			$this->smarty->assign('arrTipoEvento', $arrTipoEvento);
 
 			//Grilla Bitácora
