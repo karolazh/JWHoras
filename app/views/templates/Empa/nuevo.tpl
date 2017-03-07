@@ -17,7 +17,7 @@
 </section>
 
 <form id="form" class="form-horizontal">
-	<input type="text" value="{$id_registro}" id="id_paciente" name="id_paciente" class="hidden">
+	<input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
     <input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden">
     <section class="content">
         <div class="panel panel-primary">
@@ -365,7 +365,7 @@
                             </div>
                         </div>  
                         <div class="form-group" id="id_vdrl" style="{if $bo_trabajadora_reclusa_1 != 'checked'}display: none{/if}">
-                            <label class="control-label required col-sm-3">¿Examen VDRL?</label>
+                            <label class="control-label required col-sm-3">¿Examen VDRL? (Sifilis)</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_vdrl" type="radio" name="bo_vdrl" 
                                               id="bo_vdrl_0" value="0" {$bo_vdrl_0}>Negativo</label>
@@ -375,7 +375,7 @@
                             </div>
                         </div>  
                         <div class="form-group" id="id_rpr" style="{if $bo_trabajadora_reclusa_1 != 'checked'}display: none{/if}">
-                            <label class="control-label required col-sm-3">¿Examen RPR?</label>
+                            <label class="control-label required col-sm-3">¿Examen RPR? (Sifilis)</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_rpr" type="radio" name="bo_rpr" 
                                               id="bo_rpr_0" value="0" {$bo_rpr_0}>Negativo</label>
@@ -386,6 +386,21 @@
                             <div class="col-sm-2" id="div_ITS_agenda" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}">
                                 {$botonInformacionAgendaITS}&nbsp;&nbsp;
                                 <button type="button" id="verAgendaSifilis" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}"
+                                        class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
+                            </div>
+                        </div>
+						<div class="form-group" id="id_vih">
+                            <label class="control-label required col-sm-3">¿Examen VIH? (VIH)</label>
+                            <div class="col-sm-2">
+                                <label><input class="bo_vih" type="radio" name="bo_vih" 
+                                              id="bo_vih_0" value="0" {$bo_vih_0}>Negativo</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_vih" type="radio" name="bo_vih" 
+                                              id="bo_vih_1" value="1" {$bo_vih_1}>Positivo</label>
+                            </div>
+                            <div class="col-sm-2" id="div_vih_agenda" style="{if $bo_vih_1 != 'checked'}display: none{/if}">
+                                {$botonInformacionAgendaVIH}&nbsp;&nbsp;
+                                <button type="button" id="verAgendaVIH" style="{if $bo_vih_1 != 'checked'}display: none{/if}"
                                         class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                             </div>
                         </div>

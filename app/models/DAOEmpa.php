@@ -122,6 +122,7 @@ class DAOEmpa extends Model{
 						bo_trabajadora_reclusa		= ".$parametros['bo_trabajadora_reclusa'].",
 						bo_vdrl						= ".$parametros['bo_vdrl'].",
 						bo_rpr						= ".$parametros['bo_rpr'].",
+						bo_vih						= ".$parametros['bo_vih'].",	
 						bo_tos_productiva			= ".$parametros['bo_tos_productiva'].",
 						bo_baciloscopia_toma		= ".$parametros['bo_baciloscopia_toma'].",
 						bo_pap_realizado			= ".$parametros['bo_pap_realizado'].",

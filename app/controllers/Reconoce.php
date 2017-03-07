@@ -37,6 +37,7 @@ class Reconoce extends Controller {
     protected $_DAOEmpa;
     protected $_DAOPacienteExamen;
 	protected $_DAOTipoVinculo;
+	protected $_DAOTipoRiesgo;
 
     /**
      * Descripción: Constructor
@@ -91,8 +92,8 @@ class Reconoce extends Controller {
         $arrTipoViolencia = $this->_DAOTipoViolencia->getLista();
 	$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
         
-        $arrNivelRiesgo = $this->_DAOTipoRiesgo->getLista();
-	$this->smarty->assign("arrNivelRiesgo", $arrNivelRiesgo);
+        $arrTipoRiesgo = $this->_DAOTipoRiesgo->getLista();
+	$this->smarty->assign("arrTipoRiesgo", $arrTipoRiesgo);
 	
 		$arrTipoVinculo = $this->_DAOTipoVinculo->getLista();
 	$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);

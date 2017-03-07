@@ -244,6 +244,17 @@ $(".bo_vdrl").on('change', function (e) {
 	}
 });
 
+$(".bo_vih").on('change', function (e) {
+
+	if ((!$('#bo_vih_1').is(':checked'))) {
+		$('#verAgendaVIH').hide();
+		$('#div_vih_agenda').hide();
+	} else {
+		$('#verAgendaVIH').show();
+		$('#div_vih_agenda').show();
+	}
+});
+
 //Si ha tenido Tos por + 15 dias -> mostrar Baciloscopia
 $(".bo_tos_productiva").on('change', function (e) {
 
@@ -668,6 +679,22 @@ $("#guardar").on('click', function (e) {
 	} else {
 		parametros.push({
 			"name": 'bo_rpr',
+			"value": 'NULL'
+		});
+	}
+	if ($('#bo_vih_1').is(':checked')) {
+		parametros.push({
+			"name": 'bo_vih',
+			"value": 1
+		});
+	} else if ($('#bo_vih_0').is(':checked')) {
+		parametros.push({
+			"name": 'bo_vih',
+			"value": 0
+		});
+	} else {
+		parametros.push({
+			"name": 'bo_vih',
 			"value": 'NULL'
 		});
 	}

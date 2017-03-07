@@ -188,7 +188,7 @@
 					<div class="col-sm-3">					
 						<select class="form-control" id="gl_tipo_riesgo" name="gl_tipo_riesgo">
                                                     <option value="0">Seleccione Nivel de Riesgo</option>
-                                                    {foreach $arrNivelRiesgo as $item}
+                                                    {foreach $arrTipoRiesgo as $item}
                                                         <option value="{$item->id_tipo_riesgo}" >{$item->gl_tipo_riesgo}</option>
                                                     {/foreach}
                                                 </select>
