@@ -108,7 +108,7 @@ class Paciente extends Controller {
             if (!is_null($detPac)) {
                 //$this->smarty->assign("detReg", $detReg);
 
-                $this->smarty->assign("idpac", $detPac);
+                $this->smarty->assign("idpac", $idPac);
 
                 //Datos de Paciente
                 $run = "";
@@ -253,115 +253,109 @@ class Paciente extends Controller {
 			$gl_grupo_tipo = 'Seguimiento';
 		}
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
-		$parametros['bo_estado'] = 1;
-		$parametros['id_usuario_crea'] = $session->id;
-		$parametros['fc_crea'] = "now()";
-		$id_direccion = $this->_DAOPacienteDireccion->insertarDireccion($parametros);
-		if ($id_direccion) {
-			$parametros['id_direccion'] = $id_direccion;
-			$id_paciente = $this->_DAOPaciente->insertarPaciente($parametros);
-			if ($id_paciente) {
-				
-				$session = New Zend_Session_Namespace("usuario_carpeta");
+		$id_paciente = $this->_DAOPaciente->insertarPaciente($parametros);
+		if ($id_paciente) {
 
-				if (!empty($_SESSION['adjuntos'])) {
-					$nombre_adjunto = $_SESSION['adjuntos'][0]['nombre_adjunto'];
-					$arr_extension = array('jpeg', 'jpg', 'png', 'gif', 'tiff', 'bmp', 'pdf', 'txt', 'csv', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'eml');
-					$nombre_adjunto = strtolower(trim($nombre_adjunto));
-					$nombre_adjunto = trim($nombre_adjunto, ".");
-					$extension = substr(strrchr($nombre_adjunto, "."), 1);
-					$gl_nombre_archivo = 'Consentimiento_' . $parametros['rut'] . '.' . $extension;
-					$directorio = "archivos/$id_paciente/";
-					$gl_path = $directorio . $gl_nombre_archivo;
+			$session = New Zend_Session_Namespace("usuario_carpeta");
 
-					$ins_adjunto = array('id_registro' => $id_paciente,
-						'id_tipo_adjunto' => 1,
-						'gl_nombre' => $gl_nombre_archivo,
-						'gl_path' => $gl_path,
-						'gl_glosa' => 'Consentimiento Firmado',
-						'sha256' => Seguridad::generar_sha256($gl_path),
-						'fc_crea' => date('Y-m-d h:m:s'),
-						'id_usuario_crea' => $session->id,
-					);
-					$id_adjunto = $this->_DAOAdjunto->insert($ins_adjunto);
+			if (!empty($_SESSION['adjuntos'])) {
+				$nombre_adjunto = $_SESSION['adjuntos'][0]['nombre_adjunto'];
+				$arr_extension = array('jpeg', 'jpg', 'png', 'gif', 'tiff', 'bmp', 'pdf', 'txt', 'csv', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'eml');
+				$nombre_adjunto = strtolower(trim($nombre_adjunto));
+				$nombre_adjunto = trim($nombre_adjunto, ".");
+				$extension = substr(strrchr($nombre_adjunto, "."), 1);
+				$gl_nombre_archivo = 'Consentimiento_' . $parametros['rut'] . '.' . $extension;
+				$directorio = "archivos/$id_paciente/";
+				$gl_path = $directorio . $gl_nombre_archivo;
 
-					if ($id_adjunto) {
-						if (!is_dir($directorio)) {
-							mkdir($directorio, 0775, true);
+				$ins_adjunto = array('id_registro' => $id_paciente,
+					'id_tipo_adjunto' => 1,
+					'gl_nombre' => $gl_nombre_archivo,
+					'gl_path' => $gl_path,
+					'gl_glosa' => 'Consentimiento Firmado',
+					'sha256' => Seguridad::generar_sha256($gl_path),
+					'fc_crea' => date('Y-m-d h:m:s'),
+					'id_usuario_crea' => $session->id,
+				);
+				$id_adjunto = $this->_DAOAdjunto->insert($ins_adjunto);
 
-							$out = fopen($directorio . '/index.html', "w");
-							fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
-							fclose($out);
-						}
-						$out = fopen($gl_path, "w");
-						fwrite($out, base64_decode($_SESSION['adjuntos'][0]['contenido']));
+				if ($id_adjunto) {
+					if (!is_dir($directorio)) {
+						mkdir($directorio, 0775, true);
+
+						$out = fopen($directorio . '/index.html', "w");
+						fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
 						fclose($out);
 					}
+					$out = fopen($gl_path, "w");
+					fwrite($out, base64_decode($_SESSION['adjuntos'][0]['contenido']));
+					fclose($out);
 				}
-
-				$resultado2 = $this->_DAOPacienteRegistro->insertarRegistro($parametros, $id_paciente);
-				$id_empa1 = $this->_DAOEmpa->insert(array('id_paciente' => $id_paciente, 'nr_orden' => 1));
-				if ($id_empa1 != "" && !is_null($id_empa1)) {
-					$datos_evento['eventos_tipo'] = 13;
-					$datos_evento['id_paciente'] = $id_paciente;
-					$datos_evento['id_empa'] = $id_empa1;
-					$datos_evento['gl_descripcion'] = "Empa " . $id_empa1 . " creado el : " . Fechas::fechaHoy();
-					$datos_evento['bo_estado'] = 1;
-					$datos_evento['id_usuario_crea'] = $session->id;
-					$resp = $this->_DAOEvento->insEvento($datos_evento);
-				}
-				$id_empa2 = $this->_DAOEmpa->insert(array('id_paciente' => $id_paciente, 'nr_orden' => 2));
-				if ($id_empa2 != "" && !is_null($id_empa2)) {
-					$datos_evento['eventos_tipo'] = 13;
-					$datos_evento['id_paciente'] = $id_paciente;
-					$datos_evento['id_empa'] = $id_empa2;
-					$datos_evento['gl_descripcion'] = "Empa " . $id_empa2 . " creado el : " . Fechas::fechaHoy();
-					$datos_evento['bo_estado'] = 1;
-					$datos_evento['id_usuario_crea'] = $session->id;
-					$resp = $this->_DAOEvento->insEvento($datos_evento);
-				}
-				//$resultado3						= $this->_DAOEmpaAudit->insert($id_empa1);
-				//$resultado4						= $this->_DAOEmpaAudit->insert($id_empa2);
-				/* 	if ($resultado3) {
-				  $datos_evento['eventos_tipo'] = 14;
-				  $datos_evento['id_empa'] = $id_empa1;
-				  $datos_evento['gl_descripcion'] = "AUDIT del EMPA".$id_empa1." creado el : " . Fechas::fechaHoy();
-				  $datos_evento['bo_estado'] = 1;
-				  $datos_evento['id_usuario_crea'] = $session->id;
-				  $resp = $this->_DAOEventos->insEvento($datos_evento);
-				  }
-				  if ($resultado4) {
-				  $datos_evento['eventos_tipo'] = 14;
-				  $datos_evento['id_empa'] = $id_empa1;
-				  $datos_evento['gl_descripcion'] = "AUDIT del EMPA".$id_empa2." creado el : " . Fechas::fechaHoy();
-				  $datos_evento['bo_estado'] = 1;
-				  $datos_evento['id_usuario_crea'] = $session->id;
-				  $resp = $this->_DAOEventos->insEvento($datos_evento);
-				  } */
-				$datos_evento['eventos_tipo'] = 1;
-				$datos_evento['id_registro'] = $id_paciente;
-				$datos_evento['gl_descripcion'] = "Paciente creado el : " . Fechas::fechaHoy();
+			}
+			$datos_evento['id_paciente'] = $id_paciente;
+			$resultado2 = $this->_DAOPacienteRegistro->insertarRegistro($parametros, $id_paciente);
+			$id_empa1 = $this->_DAOEmpa->insert(array('id_paciente' => $id_paciente, 'nr_orden' => 1));
+			if ($id_empa1 != "" && !is_null($id_empa1)) {
+				$datos_evento['eventos_tipo'] = 13;
+				$datos_evento['id_empa'] = $id_empa1;
+				$datos_evento['gl_descripcion'] = "Empa " . $id_empa1 . " creado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado'] = 1;
 				$datos_evento['id_usuario_crea'] = $session->id;
 				$resp = $this->_DAOEvento->insEvento($datos_evento);
-
-				if ($parametros['chkAcepta']) {
-					$datos_evento['eventos_tipo'] = 4;
-					$datos_evento['gl_descripcion'] = "Acepta el programa con fecha : " . Fechas::fechaHoy();
-					$resp = $this->_DAOEvento->insEvento($datos_evento);
-				}
-				if ($parametros['chkReconoce']) {
-					$datos_evento['eventos_tipo'] = 5;
-					$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : " . Fechas::fechaHoy();
-					$resp = $this->_DAOEvento->insEvento($datos_evento);
-				}
-				$correcto = true;
-			} else {
-				$error = true;
 			}
+			$id_empa2 = $this->_DAOEmpa->insert(array('id_paciente' => $id_paciente, 'nr_orden' => 2));
+			if ($id_empa2 != "" && !is_null($id_empa2)) {
+				$datos_evento['eventos_tipo'] = 13;
+				$datos_evento['id_empa'] = $id_empa2;
+				$datos_evento['gl_descripcion'] = "Empa " . $id_empa2 . " creado el : " . Fechas::fechaHoy();
+				$datos_evento['bo_estado'] = 1;
+				$datos_evento['id_usuario_crea'] = $session->id;
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
+			}
+			//$resultado3						= $this->_DAOEmpaAudit->insert($id_empa1);
+			//$resultado4						= $this->_DAOEmpaAudit->insert($id_empa2);
+			/* 	if ($resultado3) {
+			  $datos_evento['eventos_tipo'] = 14;
+			  $datos_evento['id_empa'] = $id_empa1;
+			  $datos_evento['gl_descripcion'] = "AUDIT del EMPA".$id_empa1." creado el : " . Fechas::fechaHoy();
+			  $datos_evento['bo_estado'] = 1;
+			  $datos_evento['id_usuario_crea'] = $session->id;
+			  $resp = $this->_DAOEventos->insEvento($datos_evento);
+			  }
+			  if ($resultado4) {
+			  $datos_evento['eventos_tipo'] = 14;
+			  $datos_evento['id_empa'] = $id_empa1;
+			  $datos_evento['gl_descripcion'] = "AUDIT del EMPA".$id_empa2." creado el : " . Fechas::fechaHoy();
+			  $datos_evento['bo_estado'] = 1;
+			  $datos_evento['id_usuario_crea'] = $session->id;
+			  $resp = $this->_DAOEventos->insEvento($datos_evento);
+			  } */
+			$datos_evento['eventos_tipo'] = 1;
+			$datos_evento['id_paciente'] = $id_paciente;
+			$datos_evento['gl_descripcion'] = "Paciente creado el : " . Fechas::fechaHoy();
+			$datos_evento['bo_estado'] = 1;
+			$datos_evento['id_usuario_crea'] = $session->id;
+			$resp = $this->_DAOEvento->insEvento($datos_evento);
+
+			if ($parametros['chkAcepta']) {
+				$datos_evento['eventos_tipo'] = 4;
+				$datos_evento['gl_descripcion'] = "Acepta el programa con fecha : " . Fechas::fechaHoy();
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
+			}
+			if ($parametros['chkReconoce']) {
+				$datos_evento['eventos_tipo'] = 5;
+				$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : " . Fechas::fechaHoy();
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
+			}
+			$parametros['bo_estado'] = 1;
+			$parametros['id_usuario_crea'] = $session->id;
+			$parametros['fc_crea'] = "now()";
+			$id_direccion = $this->_DAOPacienteDireccion->insertarDireccion($parametros);
+			$correcto = true;
 		} else {
 			$error = true;
 		}
+
 
 		$salida = array("error" => $error, "correcto" => $correcto);
 		$json = Zend_Json::encode($salida);
@@ -620,31 +614,31 @@ class Paciente extends Controller {
 			}
 
 
-			$json['correcto']				= TRUE;
-			$json['div_superior']			= $div_superior;
-			$json['div_inferior']			= $div_inferior;
-			$json['tabla_motivos']			= $tabla_motivos;
-			$json['count_motivos']			= count((array) $arr_motivos);
-			$json['fc_ultimo_motivos']		= $arr_motivos->row_0->fc_ingreso;
-			$json['gl_grupo_tipo']			= $registro->gl_grupo_tipo;
-			$json['id_paciente']			= $registro->id_paciente;
-			$json['gl_nombres']				= $registro->gl_nombres;
-			$json['gl_apellidos']			= $registro->gl_apellidos;
-			$json['fc_nacimiento']			= $registro->fc_nacimiento;
-			$json['id_prevision']			= $registro->id_prevision;
-			$json['gl_direccion']			= $registro->gl_direccion;
-			$json['id_region']				= $registro->id_region;
-			$json['gl_nombre_comuna']		= $registro->gl_nombre_comuna;
-			$json['id_comuna']				= $registro->id_comuna;
-			$json['gl_centro_salud']		= $registro->gl_centro_salud;
-			$json['id_centro_salud']		= $registro->id_centro_salud;
-			$json['bo_reconoce']			= $registro->bo_reconoce;
-			$json['bo_acepta_programa']		= $registro->bo_acepta_programa;
-			$json['gl_latitud']				= $registro->gl_latitud;
-			$json['gl_longitud']			= $registro->gl_longitud;
-			$json['gl_fono']				= $registro->gl_fono;
-			$json['gl_celular']				= $registro->gl_celular;
-			$json['gl_email']				= $registro->gl_email;
+			$json['correcto'] = TRUE;
+			$json['div_superior'] = $div_superior;
+			$json['div_inferior'] = $div_inferior;
+			$json['tabla_motivos'] = $tabla_motivos;
+			$json['count_motivos'] = count((array) $arr_motivos);
+			$json['fc_ultimo_motivos'] = $arr_motivos->row_0->fc_ingreso;
+			$json['gl_grupo_tipo'] = $registro->gl_grupo_tipo;
+			$json['id_paciente'] = $registro->id_paciente;
+			$json['gl_nombres'] = $registro->gl_nombres;
+			$json['gl_apellidos'] = $registro->gl_apellidos;
+			$json['fc_nacimiento'] = $registro->fc_nacimiento;
+			$json['id_prevision'] = $registro->id_prevision;
+			$json['gl_direccion'] = $registro->gl_direccion;
+			$json['id_region'] = $registro->id_region;
+			$json['gl_nombre_comuna'] = $registro->gl_nombre_comuna;
+			$json['id_comuna'] = $registro->id_comuna;
+			$json['gl_centro_salud'] = $registro->gl_centro_salud;
+			$json['id_centro_salud'] = $registro->id_centro_salud;
+			$json['bo_reconoce'] = $registro->bo_reconoce;
+			$json['bo_acepta_programa'] = $registro->bo_acepta_programa;
+			$json['gl_latitud'] = $registro->gl_latitud;
+			$json['gl_longitud'] = $registro->gl_longitud;
+			$json['gl_fono'] = $registro->gl_fono;
+			$json['gl_celular'] = $registro->gl_celular;
+			$json['gl_email'] = $registro->gl_email;
 		} else {
 			$json['correcto'] = FALSE;
 		}
@@ -831,100 +825,99 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción : permite guardar nuevo archivo adjunto desde bitácora
-	 * @author: Carolina Zamora H.
+	 * @author Carolina Zamora H.
 	 * @param
-	 * @return
+	 * @return JSON
 	 */
 	public function guardarNuevoAdjunto() {
-		header('Content-type: application/json');
+            header('Content-type: application/json');
 
-		$correcto = false;
-		$error = true;
+            $correcto = false;
+            $error = true;
 
-		$adjunto = $_FILES['archivo'];
-		$id_registro = $_POST['idreg'];
-		$tipo_doc = $_POST['tipodoc'];
-		$tipo_txt = $_POST['tipotxt'];
+            $adjunto = $_FILES['archivo'];
 
-		if ($_POST['comentario'] == "") {
-			$glosa = "Adjunta Documento por Bitácora";
-		} else {
-			$glosa = $_POST['comentario'];
-		}
-		//$glosa          = "Adjunta Documento por Bitácora";
+            $id_paciente = $_POST['idpac'];
+            $tipo_doc = $_POST['tipodoc'];
+            $tipo_txt = $_POST['tipotxt'];
 
-		$nombre_adjunto = $adjunto['name']; //$_SESSION['adjuntos'][0]['nombre_adjunto'];
+            if ($_POST['comentario'] == "") {
+                $glosa = "Adjunta Documento por Bitácora";
+            } else {
+                $glosa = $_POST['comentario'];
+            }
+            //$glosa           = "Adjunta Documento por Bitácora";
 
-		$arr_extension = array('jpeg', 'jpg', 'png', 'gif', 'tiff', 'bmp',
-			'pdf', 'txt', 'csv', 'doc', 'docx', 'ppt',
-			'pptx', 'xls', 'xlsx', 'eml');
+            $nombre_adjunto = $adjunto['name'];
 
-		$nombre_adjunto = strtolower(trim($nombre_adjunto));
-		$nombre_adjunto = trim($nombre_adjunto, ".");
+            $arr_extension = array('jpeg', 'jpg', 'png', 'gif', 'tiff', 'bmp',
+                                   'pdf', 'txt', 'csv', 'doc', 'docx', 'ppt',
+                                   'pptx', 'xls', 'xlsx', 'eml');
 
-		$extension = substr(strrchr($nombre_adjunto, "."), 1);
+            $nombre_adjunto = strtolower(trim($nombre_adjunto));
+            $nombre_adjunto = trim($nombre_adjunto, ".");
 
-		//obtiene fecha y hora
-		$date = new DateTime();
-		$result = $date->format('Y-m-d_H-i-s');
-		$krr = explode('-', $result);
-		$result = implode("", $krr);
+            $extension = substr(strrchr($nombre_adjunto, "."), 1);
 
-		//$gl_nombre_archivo  = 'ADJUNTO_'.$parametros['rut'].'.'.$extension;
-		//$gl_nombre_archivo  = date('Y-m-d h:m:s').'_'.$tipo_txt.'.'.$extension;
-		$gl_nombre_archivo = $result . '_' . $tipo_txt . '.' . $extension;
+            //obtiene fecha y hora
+            $date = new DateTime();
+            $result = $date->format('Y-m-d_H-i-s');
+            $krr = explode('-', $result);
+            $result = implode("", $krr);
 
-		$directorio = "archivos/$id_registro/";
-		$gl_path = $directorio . $gl_nombre_archivo;
+            $gl_nombre_archivo = $result . '_' . $tipo_txt . '.' . $extension;
 
-		$ins_adjunto = array('id_registro' => $id_registro,
-			'id_tipo_adjunto' => $tipo_doc, //1,
-			'gl_nombre' => $gl_nombre_archivo,
-			'gl_path' => $gl_path,
-			'gl_glosa' => $glosa, //'Consentimiento Firmado',
-			'sha256' => Seguridad::generar_sha256($gl_path),
-			'fc_crea' => date('Y-m-d h:m:s'),
-			'id_usuario_crea' => $_SESSION['id'],
-		);
+            $directorio = "archivos/$id_paciente/";
+            $gl_path = $directorio . $gl_nombre_archivo;
 
-		$id_adjunto = $this->_DAOAdjunto->insert($ins_adjunto);
-		$grilla = "";
+            $ins_adjunto = array('id_paciente'     => $id_paciente,
+                                 'id_adjunto_tipo' => $tipo_doc,
+                                 'gl_nombre'       => $gl_nombre_archivo,
+                                 'gl_path'         => $gl_path,
+                                 'gl_glosa'        => $glosa,
+                                 'sha256'          => Seguridad::generar_sha256($gl_path),
+                                 'fc_crea'         => date('Y-m-d h:m:s'),
+                                 'id_usuario_crea' => $_SESSION['id'],
+                                );
 
-		if ($id_adjunto) {
-			if (!is_dir($directorio)) {
-				mkdir($directorio, 0775, true);
+            $id_adjunto = $this->_DAOAdjunto->insert($ins_adjunto);
+            $grilla = "";
 
-				$out = fopen($directorio . '/index.html', "w");
-				fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
-				fclose($out);
-			}
+            if ($id_adjunto) {
+                if (!is_dir($directorio)) {
+                    mkdir($directorio, 0775, true);
 
-			$file = fopen($adjunto['tmp_name'], 'r+b');
-			$contenido = fread($file, filesize($adjunto['tmp_name']));
-			fclose($file);
+                    $out = fopen($directorio . '/index.html', "w");
+                    fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
+                    fclose($out);
+                }
 
-			$out = fopen($gl_path, "w");
-			fwrite($out, $contenido);
-			fclose($out);
+                $file = fopen($adjunto['tmp_name'], 'r+b');
+                $contenido = fread($file, filesize($adjunto['tmp_name']));
+                fclose($file);
 
-			//Grilla Adjuntos
-			$arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($id_registro);
-			$this->smarty->assign('arrAdjuntos', $arrAdjuntos);
-			$grilla = $this->smarty->fetch('avanzados/grillaAdjuntos.tpl');
+                $out = fopen($gl_path, "w");
+                fwrite($out, $contenido);
+                fclose($out);
 
-			$correcto = true;
-		} else {
-			$error = true;
-		}
+                //Grilla Adjuntos
+                $arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($id_paciente);
+                $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
+                $grilla = $this->smarty->fetch('avanzados/grillaAdjuntos.tpl');
 
-		$salida = array("error" => $error,
-			"correcto" => $correcto,
-			"grilla" => $grilla);
+                $correcto = true;
+            } else {
+                $error = true;
+            }
 
-		$this->smarty->assign("hidden", "");
-		$json = Zend_Json::encode($salida);
+            $salida = array("error"    => $error,
+                            "correcto" => $correcto,
+                            "grilla"   => $grilla);
 
-		echo $json;
+            $this->smarty->assign("hidden", "");
+            $json = Zend_Json::encode($salida);
+
+            echo $json;
 	}
 
 	/**
