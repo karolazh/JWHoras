@@ -88,7 +88,7 @@ class Paciente extends Controller {
 
 		//llamado al template
 		$this->_display('Paciente/index.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/paciente/index.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/Paciente/index.js");
 	}
 
 	/**
@@ -918,24 +918,39 @@ class Paciente extends Controller {
 	*/
 	public function generarConsentimiento() {
         $this->load->lib('MPdf', false);
-		#$parametros			= $this->_request->getParams();
-		$nombre_paciente	= 'nombre_paciente'; #$parametros['nombre_paciente'];
-		$rut_paciente		= '11111111-1'; #$parametros['rut_paciente'];
-		$filename			= 'Consentimiento_'.$rut_paciente.'.pdf';
-		$fecha_actual		= date('d-m-Y');
-		$nombre_usuario		= $_SESSION['nombre'];
-		$rut_usuario		= $_SESSION['rut'];
-			
-		$this->smarty->assign('nombre_paciente',$nombre_paciente);				
-		$this->smarty->assign('rut_paciente',$rut_paciente);
-		$this->smarty->assign('fecha_actual',$fecha_actual);
-		$this->smarty->assign('nombre_usuario',$nombre_usuario);
-		$this->smarty->assign('rut_usuario',$rut_usuario);
-		$html = $this->smarty->fetch('pdf/consentimiento.tpl');	
+		//header('Content-type: application/pdf');
+		//header("Content-Disposition: inline; filename='$filename'");
+		//echo crear_mpdf($html, $filename, false, 'D');
+		$param			= $this->_request->getParams();
+		$correcto		= false;
+		$base64			= '';
+		$nombre			= $param['nombres'].' '.$param['apellidos'];
+		$rut			= $param['rut'];
+		$gl_pasaporte	= $param['inputextranjero'];
+		$cod_fonasa		= $param['cod_fonasa'];
+		$filename		= 'Consentimiento_'.$rut.'.pdf';
+
+		$this->smarty->assign('nombre_paciente',$nombre);
+		$this->smarty->assign('rut_paciente',$rut);
+		$this->smarty->assign('gl_pasaporte',$rut);
+		$this->smarty->assign('cod_fonasa',$cod_fonasa);
+		$this->smarty->assign('fecha_actual',date('d-m-Y'));
+		$this->smarty->assign('nombre_usuario',$_SESSION['nombre']);
+		$this->smarty->assign('rut_usuario',$_SESSION['rut']);
+		$html = $this->smarty->fetch('pdf/consentimiento.tpl');
 		
-		header('Content-type: application/pdf');
-		header("Content-Disposition: inline; filename='$filename'");
-		echo crear_mpdf($html, $filename, false, 'I');
+		$base64			= base64_encode(crear_mpdf($html, $filename, false, 'S'));
+		if($base64){
+			$correcto	= true;
+		}
+		$salida			= array(
+							"correcto"	=> $correcto,
+							"filename"	=> $filename,
+							"base64"	=> $base64
+							);
+		$json			= Zend_Json::encode($salida);
+
+		echo $json;
 	}
 
 }

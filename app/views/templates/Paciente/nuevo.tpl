@@ -16,7 +16,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				Datos del Paciente {$botonAyudaPaciente}
-				<input type="text" value="0" id="id_registro" name="id_registro" class="hidden">
+				<input type="text" value="0" id="id_paciente" name="id_paciente" class="hidden">
 				<input type="text" value="0" id="gl_grupo_tipo" name="gl_grupo_tipo" class="hidden">
 			</div>
 			<div class="panel-body">
@@ -48,7 +48,7 @@
 						</div>
 						{*}
 						<div class="col-sm-1">
-						<button type="button" id="buscar" class="btn btn-info btn-sm form-control" onclick="Registro.cargarRegistro()"><i class="fa fa-search"></i></button>
+						<button type="button" id="buscar" class="btn btn-info btn-sm form-control" onclick="Paciente.cargarRegistro()"><i class="fa fa-search"></i></button>
 						</div>
 						{*}
 					</div>
@@ -215,12 +215,16 @@
 							<span class="help-block hidden"></span>
 						</div>
 					</div>
+
+					{* 
 					<div class="form-group">
 						<label for="chkReconoce" class="control-label col-sm-4">¿Reconoce Maltrato?</label>
 						<div class="col-sm-1">
 							<input id="chkReconoce" value="1" type="checkbox">
 						</div>
 					</div>
+					*}
+
 					<div class="form-group">
 						<label for="chkAcepta" class="control-label col-sm-4">¿Consiente Participar?</label>
 						<div class="col-sm-1">
@@ -230,8 +234,17 @@
 					<div id="files" style="display: none">
 						<div class="form-group">
 							<label for="files" class="control-label col-sm-4">Consentimiento</label>
+
+							{*
 							<div class="col-sm-3">
-								<a class="btn btn-sm btn-info" id="btnDescarga" href = '{$smarty.const.DIR_BASE}archivos/sistema/consentimiento.pdf' download target="_blank">
+								<a class="btn btn-sm btn-info" id="btnDescarga" onclick="xModal.open('{$smarty.const.BASE_URI}/Paciente/generarConsentimiento', 'Cargar Adjunto', '70', 1, true,'700');" download target="_blank">
+									<i class="fa fa-download"></i>Descargar
+								</a>
+							</div>
+							*}
+
+							<div class="col-sm-3">
+								<a class="btn btn-sm btn-info" id="btnDescarga" download target="_blank">
 									<i class="fa fa-download"></i>Descargar
 								</a>
 							</div>

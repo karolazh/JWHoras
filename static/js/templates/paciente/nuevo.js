@@ -202,13 +202,13 @@
 */
     $("#guardarReconoce").on('click', function(e) {
         var button_process	= buttonStartProcess($(this), e);
-		var id_registro			= $(this).attr("data");
+		var id_paciente			= $(this).attr("data");
 		
 		$.ajax({
 			dataType: "json",
 			cache	:false,
 			async	: true,
-			data	: {id_registro:id_registro},
+			data	: {id_paciente:id_paciente},
 			type	: "post",
 			url		: BASE_URI + "index.php/Paciente/GuardarReconoce", 
 			error	: function(xhr, textStatus, errorThrown){
@@ -244,6 +244,107 @@
 		}
 	});
 
+	var Base64Binary = {
+		/* Ejemplo de uso
+			var uintArray	= Base64Binary.decode(data);  
+			var byteArray	= Base64Binary.decodeArrayBuffer(data);
+		*/
+		_keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+		
+		/* will return a  Uint8Array type */
+		decodeArrayBuffer: function(input) {
+			var bytes = (input.length/4) * 3;
+			var ab = new ArrayBuffer(bytes);
+			this.decode(input, ab);
+			
+			return ab;
+		},
+
+		removePaddingChars: function(input){
+			var lkey = this._keyStr.indexOf(input.charAt(input.length - 1));
+			if(lkey == 64){
+				return input.substring(0,input.length - 1);
+			}
+			return input;
+		},
+
+		decode: function (input, arrayBuffer) {
+			//get last chars to see if are valid
+			input = this.removePaddingChars(input);
+			input = this.removePaddingChars(input);
+
+			var bytes = parseInt((input.length / 4) * 3, 10);
+			
+			var uarray;
+			var chr1, chr2, chr3;
+			var enc1, enc2, enc3, enc4;
+			var i = 0;
+			var j = 0;
+			
+			if (arrayBuffer)
+				uarray = new Uint8Array(arrayBuffer);
+			else
+				uarray = new Uint8Array(bytes);
+			
+			input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+			
+			for (i=0; i<bytes; i+=3) {	
+				//get the 3 octects in 4 ascii chars
+				enc1 = this._keyStr.indexOf(input.charAt(j++));
+				enc2 = this._keyStr.indexOf(input.charAt(j++));
+				enc3 = this._keyStr.indexOf(input.charAt(j++));
+				enc4 = this._keyStr.indexOf(input.charAt(j++));
+		
+				chr1 = (enc1 << 2) | (enc2 >> 4);
+				chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+				chr3 = ((enc3 & 3) << 6) | enc4;
+		
+				uarray[i] = chr1;			
+				if (enc3 != 64) uarray[i+1] = chr2;
+				if (enc4 != 64) uarray[i+2] = chr3;
+			}
+		
+			return uarray;	
+		}
+	}
+
+    $("#btnDescarga").on('click', function(e) {
+		var button_process	= buttonStartProcess($(this), e);
+        var parametros		= $("#form").serializeArray();
+        var gl_rut			= $("#rut").val();
+		var inputextranjero	= $("#inputextranjero").val();
+
+		if(rut == '' || inputextranjero == ''){
+			xModal.info('Debe ingresar un RUT o un Pasaporte.');
+		}else{
+
+			$.ajax({
+				dataType: "json",
+				cache	:false,
+				async	: true,
+				data	: parametros,
+				type	: "post",
+				url		: BASE_URI + "index.php/Paciente/generarConsentimiento", 
+				error	: function(xhr, textStatus, errorThrown){
+							xModal.danger('Error: No se ha podido generar el PDF.<br> Favor informar a Mesa de Ayuda.');
+				},
+				success	: function(data){
+							if(data.correcto){
+								var byteArray	= Base64Binary.decodeArrayBuffer(data.base64);
+								var blob		= new Blob([byteArray], {type: 'application/pdf'});
+								var link		= document.createElement('a');
+								link.href		= window.URL.createObjectURL(blob);
+								link.download	= data.filename;
+								link.click();
+							}else{
+								xModal.danger('No se ha podido generar el PDF.<br> Favor informar a Mesa de Ayuda.');
+							}
+				}
+			});
+		}
+		buttonEndProcess(button_process);
+    });
+
 	//Formatea Fecha
 	function formattedDate(date) {
 		var d		= new Date(date || Date.now()),
@@ -259,8 +360,8 @@
 
 	var Paciente = {
 		cargar : function(){
-			var rut = $("#rut").val();
-			var inputextranjero = $("#inputextranjero").val();
+			var rut				= $("#rut").val();
+			var inputextranjero	= $("#inputextranjero").val();
 			if(rut != "" || inputextranjero != ""){
 
 				$.ajax({
@@ -290,8 +391,8 @@
 										$("#mostrar_motivos_consulta").show();
 									}
 
-									$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Paciente/bitacora/"+data.id_registro+"', 'Registro número : "+data.id_registro+"', 85);");
-									$("#id_registro").val(data.id_registro);
+									$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Paciente/bitacora/"+data.id_paciente+"', 'Registro número : "+data.id_paciente+"', 85);");
+									$("#id_paciente").val(data.id_paciente);
 									$("#gl_grupo_tipo").val(data.gl_grupo_tipo);
 									$("#nombres").val(data.gl_nombres);
 									$("#apellidos").val(data.gl_apellidos);
@@ -333,7 +434,7 @@
 									}else{
 										$("#chkAcepta").prop( "disabled", false );
 									}
-									$("#id_registro").prop("disabled", false );
+									$("#id_paciente").prop("disabled", false );
 									$("#motivoconsulta").prop("disabled", false );
 									$("#fechaingreso").prop("disabled", false );
 									$("#horaingreso").prop("disabled", false );
