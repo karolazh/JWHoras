@@ -77,6 +77,10 @@ class Reconoce extends Controller {
     public function identificarAgresor(){
     
     //Cargar Arrays
+		$parametros = $this->request->getParametros();
+		$id_paciente = $parametros[0];
+		$this->smarty->assign("id_paciente", $id_paciente);
+		
         $arrTipoOcupacion = $this->_DAOTipoOcupacion->getLista();
 		$this->smarty->assign("arrTipoOcupacion", $arrTipoOcupacion);
         
@@ -138,6 +142,46 @@ class Reconoce extends Controller {
 		$correcto = false;
 		$error = false;
 		
+		$id_paciente = $parametros['id_paciente'];
+		
+		//$bool_update = $this->_DAOPacienteAgresor->insertarAgresor($parametros);
+		if ($bool_update) {
+			$datos_evento['eventos_tipo'] = 12;
+			$datos_evento['id_paciente'] = $id_paciente;
+			$datos_evento['id_empa'] = $id_empa;
+			$datos_evento['gl_descripcion'] = "Empa modificado el : " . Fechas::fechaHoy();
+			$datos_evento['bo_estado'] = 1;
+			$datos_evento['id_usuario_crea'] = $session->id;
+			$resp = $this->_DAOEvento->insEvento($datos_evento);
+			if ($resp) {
+				$correcto = TRUE;
+			} else {
+				$error = TRUE;
+			}
+			$finalizado = FALSE;
+			if ($finalizado) {
+
+				$datos_evento['eventos_tipo'] = 2;
+				$datos_evento['id_empa'] = $id_empa;
+				$datos_evento['gl_descripcion'] = "Empa finalizado el : " . Fechas::fechaHoy();
+				$datos_evento['bo_estado'] = 1;
+				$datos_evento['id_usuario_crea'] = $session->id;
+				$resp = $this->_DAOEvento->insEvento($datos_evento);
+				if ($resp) {
+					$correcto = TRUE;
+				} else {
+					$error = TRUE;
+				}
+			}
+		} else {
+			$error = true;
+		}
+
+		$salida = array("error" => $error,
+			"correcto" => $correcto);
+		$json = Zend_Json::encode($salida);
+
+		echo $json;
 		
 		
 	}

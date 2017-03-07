@@ -16,8 +16,8 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				Datos de la Víctima {$botonAyudaPaciente}
-				<input type="text" value="0" id="id_registro" name="id_registro" class="hidden">
 			</div>
+				<input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
 			<div class="panel-body">
                                 
                                 <div class="form-group">
