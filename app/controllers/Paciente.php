@@ -38,39 +38,33 @@ class Paciente extends Controller {
 	protected $_DAOEmpa;
 	protected $_DAOPacienteExamen;
 	protected $_DAOPacienteDireccion;
+	protected $_DAOEmpaAudit;
 
-	/**
-	 * Descripción: Constructor
-	 * @author: 
-	 */
 	function __construct() {
 		parent::__construct();
 		$this->load->lib('Fechas', false);
 		$this->load->lib('Boton', false);
 		$this->load->lib('Seguridad', false);
 
-		$this->_DAORegion = $this->load->model("DAORegion");
-		$this->_DAOComuna = $this->load->model("DAOComuna");
-		$this->_DAOPaciente = $this->load->model("DAOPaciente");
-		$this->_DAOTipoEgreso = $this->load->model("DAOTipoEgreso");
-		$this->_DAOPacienteEstado = $this->load->model("DAOPacienteEstado");
-		$this->_DAOPrevision = $this->load->model("DAOPrevision");
-		$this->_DAOPacienteRegistro = $this->load->model("DAOPacienteRegistro");
-		$this->_DAOUsuario = $this->load->model("DAOUsuario");
-		$this->_DAOCentroSalud = $this->load->model("DAOCentroSalud");
-		$this->_DAOEvento = $this->load->model("DAOEvento");
-		$this->_DAOEventoTipo = $this->load->model("DAOEventoTipo");
-		$this->_DAOAdjunto = $this->load->model("DAOAdjunto");
-		$this->_DAOAdjuntoTipo = $this->load->model("DAOAdjuntoTipo");
-		$this->_DAOEmpa = $this->load->model("DAOEmpa");
-		$this->_DAOPacienteExamen = $this->load->model("DAOPacienteExamen");
-		$this->_DAOPacienteDireccion = $this->load->model("DAOPacienteDireccion");
+		$this->_DAORegion				= $this->load->model("DAORegion");
+		$this->_DAOComuna				= $this->load->model("DAOComuna");
+		$this->_DAOPaciente				= $this->load->model("DAOPaciente");
+		$this->_DAOTipoEgreso			= $this->load->model("DAOTipoEgreso");
+		$this->_DAOPacienteEstado		= $this->load->model("DAOPacienteEstado");
+		$this->_DAOPrevision			= $this->load->model("DAOPrevision");
+		$this->_DAOPacienteRegistro		= $this->load->model("DAOPacienteRegistro");
+		$this->_DAOUsuario				= $this->load->model("DAOUsuario");
+		$this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
+		$this->_DAOEvento				= $this->load->model("DAOEvento");
+		$this->_DAOEventoTipo			= $this->load->model("DAOEventoTipo");
+		$this->_DAOAdjunto				= $this->load->model("DAOAdjunto");
+		$this->_DAOAdjuntoTipo			= $this->load->model("DAOAdjuntoTipo");
+		$this->_DAOEmpa					= $this->load->model("DAOEmpa");
+		$this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
+		$this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
+		$this->_DAOEmpaAudit			= $this->load->model("DAOEmpaAudit");
 	}
 
-	/**
-	 * Descripción: Index
-	 * @author: 
-	 */
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
 		/*
@@ -278,7 +272,7 @@ class Paciente extends Controller {
 											'gl_glosa'			=> 'Consentimiento Firmado',
 											'sha256'			=> Seguridad::generar_sha256($gl_path),
 											'fc_crea'			=> date('Y-m-d h:m:s'),
-											'id_usuario_crea'	=> $session->id,
+											'id_usuario_crea'	=> $_SESSION['id'],
 										);
 				$id_adjunto			= $this->_DAOAdjunto->insert($ins_adjunto);
 
@@ -300,38 +294,25 @@ class Paciente extends Controller {
 			$id_empa1		= $this->_DAOEmpa->insert(array('id_paciente' => $id_paciente, 'nr_orden' => 1));
 			$id_empa2		= $this->_DAOEmpa->insert(array('id_paciente' => $id_paciente, 'nr_orden' => 2));
 
-			//$resultado3						= $this->_DAOEmpaAudit->insert($id_empa1);
-			//$resultado4						= $this->_DAOEmpaAudit->insert($id_empa2);
-		/*	if ($resultado3) {
-				$datos_evento['eventos_tipo'] = 14;
-				$datos_evento['id_empa'] = $id_empa1;
-				$datos_evento['gl_descripcion'] = "AUDIT del EMPA".$id_empa1." creado el : " . Fechas::fechaHoy();
-				$datos_evento['bo_estado'] = 1;
-				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEvento->insEvento($datos_evento);
+			for($i=1; $i<=10; $i++ ){
+				$id_audit1	= $this->_DAOEmpaAudit->insert(array('id_empa' => $id_empa1,'id_pregunta' => $i,'id_usuario_crea' => $_SESSION['id']));
+				$id_audit2	= $this->_DAOEmpaAudit->insert(array('id_empa' => $id_empa2,'id_pregunta' => $i,'id_usuario_crea' => $_SESSION['id']));
 			}
-			if ($resultado4) {
-				$datos_evento['eventos_tipo'] = 14;
-				$datos_evento['id_empa'] = $id_empa1;
-				$datos_evento['gl_descripcion'] = "AUDIT del EMPA".$id_empa2." creado el : " . Fechas::fechaHoy();
-				$datos_evento['bo_estado'] = 1;
-				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEvento->insEvento($datos_evento);
-			}*/
-			$datos_evento['eventos_tipo']		= 1;
-			$datos_evento['id_empa']			= 0;
-			$datos_evento['id_paciente']		= $id_paciente;
-			$datos_evento['gl_descripcion']		= "Paciente creado el : " . Fechas::fechaHoy();
-			$datos_evento['bo_estado']			= 1;
-			$datos_evento['id_usuario_crea']	= $session->id;
-			$resp								= $this->_DAOEvento->insEvento($datos_evento);
+
+			$datos_evento['eventos_tipo']			= 1;
+			$datos_evento['id_empa']				= 0;
+			$datos_evento['id_paciente']			= $id_paciente;
+			$datos_evento['gl_descripcion']			= "Paciente creado el : " . Fechas::fechaHoy();
+			$datos_evento['bo_estado']				= 1;
+			$datos_evento['id_usuario_crea']		= $_SESSION['id'];
+			$resp									= $this->_DAOEvento->insEvento($datos_evento);
 			
 			if ($id_empa1) {
 				$datos_evento['eventos_tipo']		= 13;
 				$datos_evento['id_empa']			= $id_empa1;
 				$datos_evento['gl_descripcion']		= "Empa ".$id_empa1." creado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado']			= 1;
-				$datos_evento['id_usuario_crea']	= $session->id;
+				$datos_evento['id_usuario_crea']	= $_SESSION['id'];
 				$resp								= $this->_DAOEvento->insEvento($datos_evento);
 			}
 			if ($id_empa2) {
@@ -339,7 +320,25 @@ class Paciente extends Controller {
 				$datos_evento['id_empa']			= $id_empa2;
 				$datos_evento['gl_descripcion']		= "Empa ".$id_empa2." creado el : " . Fechas::fechaHoy();
 				$datos_evento['bo_estado']			= 1;
-				$datos_evento['id_usuario_crea']	= $session->id;
+				$datos_evento['id_usuario_crea']	= $_SESSION['id'];
+				$resp								= $this->_DAOEvento->insEvento($datos_evento);
+			}
+			if ($id_audit1) {
+				$datos_evento['eventos_tipo']		= 14;
+				$datos_evento['id_empa']			= $id_empa1;
+				$datos_evento['id_paciente']		= $id_paciente;
+				$datos_evento['gl_descripcion']		= "AUDIT del EMPA".$id_empa1." creado el : " . Fechas::fechaHoy();
+				$datos_evento['bo_estado']			= 1;
+				$datos_evento['id_usuario_crea']	= $_SESSION['id'];
+				$resp								= $this->_DAOEvento->insEvento($datos_evento);
+			}
+			if ($id_audit2) {
+				$datos_evento['eventos_tipo']		= 14;
+				$datos_evento['id_empa']			= $id_empa2;
+				$datos_evento['id_paciente']		= $id_paciente;
+				$datos_evento['gl_descripcion']		= "AUDIT del EMPA".$id_empa2." creado el : " . Fechas::fechaHoy();
+				$datos_evento['bo_estado']			= 1;
+				$datos_evento['id_usuario_crea']	= $_SESSION['id'];
 				$resp								= $this->_DAOEvento->insEvento($datos_evento);
 			}
 			if ($parametros['chkAcepta']) {
@@ -347,16 +346,18 @@ class Paciente extends Controller {
 				$datos_evento['gl_descripcion']	= "Acepta el programa con fecha : " . Fechas::fechaHoy();
 				$resp							= $this->_DAOEvento->insEvento($datos_evento);
 			}
+			/*
 			if ($parametros['chkReconoce']) {
 				$datos_evento['eventos_tipo']	= 5;
 				$datos_evento['gl_descripcion']	= "Reconoce violencia con fecha : " . Fechas::fechaHoy();
 				$resp							= $this->_DAOEvento->insEvento($datos_evento);
 			}
-			$parametros['id_paciente'] = $id_paciente;
-			$parametros['bo_estado'] = 1;
-			$parametros['id_usuario_crea'] = $session->id;
-			$parametros['fc_crea'] = "now()";
-			$id_direccion = $this->_DAOPacienteDireccion->insertarDireccion($parametros);
+			*/
+
+			$parametros['bo_estado']		= 1;
+			$parametros['id_usuario_crea']	= $_SESSION['id'];
+			$parametros['fc_crea']			= "now()";
+			$id_direccion					= $this->_DAOPacienteDireccion->insertarDireccion($parametros);
 
 		} else {
 			$error = true;
