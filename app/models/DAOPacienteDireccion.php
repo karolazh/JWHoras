@@ -170,7 +170,7 @@ class DAOPacienteDireccion extends Model {
     * 
     * @param    int $id_paciente
     *
-    * @return   $result
+    * @return   object
     */
     public function getByIdDirecciones($id_paciente){
         $query = "  SELECT 
@@ -213,7 +213,7 @@ class DAOPacienteDireccion extends Model {
     * 
     * @param    int $id_paciente
     *
-    * @return   $result
+    * @return  object
     */
     public function getByIdDireccionVigente($id_paciente){
         $query = "  SELECT 
