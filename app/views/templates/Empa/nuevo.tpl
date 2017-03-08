@@ -406,7 +406,7 @@
                                         class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                             </div>
                         </div>
-						<div class="form-group" id="id_vih">
+						<div class="form-group" id="id_vih" style="{if $bo_trabajadora_reclusa_1 != 'checked'}display: none{/if}">
                             <label class="control-label required col-sm-3">¿Examen Test Elisa? (VIH)</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_vih" type="radio" name="bo_vih" 

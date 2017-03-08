@@ -41,6 +41,7 @@ class Reconoce extends Controller {
 	protected $_DAOTipoGenero;
 	protected $_DAOTipoOrientacionSexual;
 	protected $_DAOTipoSexo;
+	protected $_DAOPacienteAgresor;
 
     /**
      * Descripción: Constructor
@@ -55,6 +56,7 @@ class Reconoce extends Controller {
         $this->_DAORegion                   = $this->load->model("DAORegion");
         $this->_DAOComuna                   = $this->load->model("DAOComuna");
         $this->_DAOPaciente                 = $this->load->model("DAOPaciente");
+        $this->_DAOPacienteAgresor          = $this->load->model("DAOPacienteAgresor");
         $this->_DAOTipoOcupacion            = $this->load->model("DAOTipoOcupacion");
         $this->_DAOUsuario                  = $this->load->model("DAOUsuario");
         $this->_DAOTipoEscolaridad          = $this->load->model("DAOTipoEscolaridad");
@@ -154,18 +156,20 @@ class Reconoce extends Controller {
 	public function guardar(){
 		header('Content-type: application/json');
 		$parametros = $this->_request->getParams();
-		$correcto = false;
-		$error = false;
+		$correcto = FALSE;
+		$error = FALSE;
 		
-		$id_paciente = $parametros['id_paciente'];
+	//	$id_paciente = $parametros['id_paciente'];
 		
-		//$bool_update1 = $this->_DAOPacienteAgresor->insertarAgresor($parametros);
-		//$bool_update2 = $this->_DAOPaciente->updatePaciente($parametros);
-		if ($bool_update) {
+		$bool_insert = $this->_DAOPacienteAgresor->insertarAgresor($parametros);
+		$bool_update = $this->_DAOPaciente->updatePaciente($parametros);
+		
+		if ($bool_update && $bool_insert) {
+			/*
 			$datos_evento['eventos_tipo'] = 12;
 			$datos_evento['id_paciente'] = $id_paciente;
-			$datos_evento['id_empa'] = $id_empa;
-			$datos_evento['gl_descripcion'] = "Empa modificado el : " . Fechas::fechaHoy();
+			$datos_evento['id_empa'] = 0;
+			$datos_evento['gl_descripcion'] = "Reconoce Agresor : " . Fechas::fechaHoy();
 			$datos_evento['bo_estado'] = 1;
 			$datos_evento['id_usuario_crea'] = $session->id;
 			$resp = $this->_DAOEvento->insEvento($datos_evento);
@@ -174,23 +178,11 @@ class Reconoce extends Controller {
 			} else {
 				$error = TRUE;
 			}
-			$finalizado = FALSE;
-			if ($finalizado) {
+			 */
+			$correcto = TRUE;
 
-				$datos_evento['eventos_tipo'] = 2;
-				$datos_evento['id_empa'] = $id_empa;
-				$datos_evento['gl_descripcion'] = "Empa finalizado el : " . Fechas::fechaHoy();
-				$datos_evento['bo_estado'] = 1;
-				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEvento->insEvento($datos_evento);
-				if ($resp) {
-					$correcto = TRUE;
-				} else {
-					$error = TRUE;
-				}
-			}
 		} else {
-			$error = true;
+			$error = TRUE;
 		}
 
 		$salida = array("error" => $error,

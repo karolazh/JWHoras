@@ -228,10 +228,12 @@ $("#gl_glicemia").on('keyup', function (e) {
 $(".bo_trabajadora_reclusa").on('change', function (e) {
 	if ($('#bo_trabajadora_reclusa_0').is(':checked')) {
 		$('#id_vdrl').hide();
-                $('#id_rpr').hide();
+        $('#id_rpr').hide();
+		$('#id_vih').hide();
 	} else {
 		$('#id_vdrl').show();
-                $('#id_rpr').show();
+        $('#id_rpr').show();
+        $('#id_vih').show();
 	}
 });
 

@@ -3,7 +3,7 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_paciente
+* Descripcion	: Modelo para Tabla pre_paciente_direccion
 * Plataforma	: !PHP
 * Creacion		: 07/03/2017
 * @name			DAOPacienteDireccion.php
@@ -22,7 +22,7 @@
 class DAOPacienteDireccion extends Model {
 
     protected $_tabla			= "pre_paciente_direccion";
-    protected $_primaria		= "id_direccion";
+    protected $_primaria		= "id_paciente_direccion";
 
     function __construct(){
         parent::__construct();       

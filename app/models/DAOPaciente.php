@@ -410,10 +410,14 @@ class DAOPaciente extends Model{
 	
 	public function updatePaciente($parametros){
 		$query	= "	UPDATE pre_paciente SET
-						id_estado_civil					= ".$_SESSION['id_estado_civil'].",
+						gl_nacionalidad					= ".$parametros['gl_nacionalidad'].",
+						gl_direccion_alternativa		= ".$parametros['gl_direccion_alternativa'].",
+						id_estado_civil					= ".$parametros['id_estado_civil'].",
 						nr_hijos						= ".$parametros['nr_hijos'].",
 						id_tipo_ocupacion				= ".$parametros['id_tipo_ocupacion'].",
 						id_tipo_escolaridad				= ".$parametros['id_tipo_escolaridad'].",
+						fc_reconoce						= ".$parametros['fc_reconoce'].",
+						fc_hora_reconoce				= ".$parametros['fc_hora_reconoce'].",
 						gl_acompañante					= ".$parametros['gl_acompañante'].",
 						fc_actualiza					= now()
 					WHERE id_paciente = ".$parametros['id_paciente']."
