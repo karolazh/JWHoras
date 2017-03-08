@@ -558,8 +558,17 @@ class Paciente extends Controller {
                 }
                 $this->smarty->assign("muestra_direcciones", $muestra_direcciones);
                 
+                //Grilla Exámenes Alterados x Paciente
+                $muestra_examenes = "NO";
+                $arrExamenes = $this->_DAOPacienteExamen->getByIdPacienteAlterado($id_paciente);
+                if (!is_null($arrExamenes)) {
+                    $this->smarty->assign('arrExamenes', $arrExamenes);
+                    $muestra_examenes = "SI";
+                }
+                $this->smarty->assign("muestra_examenes", $muestra_examenes);
+                
                 $this->smarty->display('Paciente/ver.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/paciente/ver.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/paciente/ver.js");                
 	}
 
 	/**

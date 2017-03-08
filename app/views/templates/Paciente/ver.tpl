@@ -93,7 +93,44 @@
                         </tbody>
                     </table>
                     <div class="top-spaced"></div>
-                </div>                
+                </div>
+                <!-- FIN MOTIVOS DE CONSULTA -->
+                
+                <!-- EXÁMENES ALTERADOS -->
+                {if $muestra_examenes == "SI"}
+                    <div class="form-group">
+                        {*{include file='avanzados/grillaDirecciones.tpl'}*}
+                        <div id="div_tabla" class="table-responsive small col-lg-12">
+                            <label class="control-label"><h5>Ex&aacute;menes Alterados</h5></label>
+                            <br>
+                            <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
+                                <thead>
+                                    <tr role="row">
+                                        <th align="center" width="5%">Fecha</th>
+                                        <th align="center" width="">Examen</th>
+                                        <th align="center" width="">Laboratorio</th>
+                                        <th align="center" width="10%">Resultado</th>                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {foreach $arrExamenes as $exa}
+                                    <tr>
+                                        <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->fc_crea}</td>
+                                        <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->gl_nombre_examen}</td>
+                                        <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->gl_nombre_laboratorio}</td>
+                                        <td style="background: #F7D3D2;"align="center">
+                                            <h6><b><span class="label label-danger" style="color:#ffffff">ALTERADO</span></b></h6>
+                                        </td>
+                                    </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                            <div class="top-spaced"></div>
+                        </div>
+                    </div>
+                {/if}
+                <!-- FIN EXÁMENES ALTERADOS -->
+                
             </div>
         </div>
         
