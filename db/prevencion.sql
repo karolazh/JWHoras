@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 192.168.0.200
--- Tiempo de generación: 06-03-2017 a las 17:50:25
+-- Tiempo de generación: 07-03-2017 a las 21:41:03
 -- Versión del servidor: 5.6.10
 -- Versión de PHP: 5.6.26
 
@@ -47,7 +47,14 @@ CREATE TABLE IF NOT EXISTS `pre_adjunto` (
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_sha256` (`sha256`),
   KEY `IDX_id_tipo_adjunto` (`id_adjunto_tipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `pre_adjunto`
+--
+
+INSERT INTO `pre_adjunto` (`id_adjunto`, `id_paciente`, `id_adjunto_tipo`, `id_empa`, `gl_nombre`, `gl_path`, `gl_glosa`, `sha256`, `bo_estado`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 1, 2, 0, '20170307_172400_EXAMEN.pdf', 'archivos/1/20170307_172400_EXAMEN.pdf', 'UP 1 20170307', '9767d6420acc7240acf6091bc4dbd805b78e7c9d197545a157ba3f14c25ac07f', 1, 1, '2017-03-07 05:03:00');
 
 -- --------------------------------------------------------
 
@@ -83,14 +90,33 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria` (
   `id_usuario` int(11) DEFAULT '0',
   `gl_tipo` varchar(255) DEFAULT NULL,
   `gl_query` longtext,
-  `ip_publica` varchar(50) DEFAULT '0.0.0.0',
-  `ip_privada` varchar(50) DEFAULT '0.0.0.0',
-  `fc_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `gl_ip` varchar(500) DEFAULT '0.0.0.0',
   `gl_tiempo` varchar(100) DEFAULT NULL COMMENT 'Tiempo de Ejecucion de Script',
+  `fc_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_auditoria`),
   KEY `IDX_gl_tipo` (`gl_tipo`),
   KEY `IDX_id_usuario` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+
+--
+-- Volcado de datos para la tabla `pre_auditoria`
+--
+
+INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`, `gl_ip`, `gl_tiempo`, `fc_creacion`) VALUES
+(1, 2, 'INSERT', 'INSERT INTO pre_paciente\r\n						(\r\n						id_institucion,\r\n						id_region,\r\n						id_comuna,\r\n						id_prevision,\r\n						gl_grupo_tipo,\r\n						gl_rut,\r\n						bo_extranjero,\r\n						gl_run_pass,\r\n						gl_nombres,\r\n						gl_apellidos,\r\n						fc_nacimiento,\r\n						gl_direccion,\r\n						gl_fono,\r\n						gl_celular,\r\n						gl_email,\r\n						id_centro_salud,\r\n						gl_latitud,\r\n						gl_longitud,\r\n						bo_reconoce,\r\n						bo_acepta_programa,\r\n						fc_crea,\r\n						id_usuario_crea\r\n						)\r\n					VALUES\r\n						(\r\n						2,\r\n						5,\r\n						35,\r\n						1,\r\n						''Control'',\r\n						''11111111-1'',\r\n						''0'',\r\n						'''',\r\n						''Usuario'',\r\n						''Prueba'',\r\n						''1980-03-07'',\r\n						''Pedro Montt 2344-2392, Valparaíso, Región de Valparaíso, Chile'',\r\n						''563241'',\r\n						''99985025'',\r\n						''victor.retamal@cosof.cl'',\r\n						''2066'',\r\n						''-33.04736960000001'',\r\n						''-71.61133965463102'',\r\n						''0'',\r\n						0,\r\n						now(),\r\n						2\r\n						)', '::1', '0.0019998550415039', '2017-03-07 21:24:57'),
+(2, 2, 'INSERT', 'INSERT INTO pre_paciente_registro\r\n						(\r\n						id_paciente,\r\n						id_institucion,\r\n						fc_ingreso,\r\n						gl_hora_ingreso,\r\n						gl_motivo_consulta,\r\n						fc_crea,\r\n						id_usuario_crea\r\n						)\r\n					VALUES  \r\n						(\r\n						1,\r\n						2,\r\n						''2017-03-07'',\r\n						''17:37'',\r\n						''Prueba'',\r\n						now(),\r\n						''2''\r\n						)', '::1', '0.00099992752075195', '2017-03-07 21:24:57'),
+(3, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''1'',1)', '::1', '0.002000093460083', '2017-03-07 21:24:57'),
+(4, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''1'',2)', '::1', '0.00099992752075195', '2017-03-07 21:24:57'),
+(5, 2, 'INSERT', 'INSERT into pre_evento values(null,1,''1'',,''Paciente creado el : 2017-03-07'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00099992752075195', '2017-03-07 21:24:57'),
+(6, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''1'',''3'',''Empa 3 creado el : 2017-03-07'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00099992752075195', '2017-03-07 21:24:57'),
+(7, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''1'',''4'',''Empa 4 creado el : 2017-03-07'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010001659393311', '2017-03-07 21:24:57'),
+(8, 2, 'INSERT', 'INSERT INTO pre_paciente\r\n						(\r\n						id_institucion,\r\n						id_region,\r\n						id_comuna,\r\n						id_prevision,\r\n						gl_grupo_tipo,\r\n						gl_rut,\r\n						bo_extranjero,\r\n						gl_run_pass,\r\n						gl_nombres,\r\n						gl_apellidos,\r\n						fc_nacimiento,\r\n						gl_direccion,\r\n						gl_fono,\r\n						gl_celular,\r\n						gl_email,\r\n						id_centro_salud,\r\n						gl_latitud,\r\n						gl_longitud,\r\n						bo_reconoce,\r\n						bo_acepta_programa,\r\n						fc_crea,\r\n						id_usuario_crea\r\n						)\r\n					VALUES\r\n						(\r\n						2,\r\n						5,\r\n						35,\r\n						1,\r\n						''Control'',\r\n						''11111111-1'',\r\n						''0'',\r\n						'''',\r\n						''Usuario'',\r\n						''Prueba'',\r\n						''1980-03-07'',\r\n						''Pedro Montt 2344-2392, Valparaíso, Región de Valparaíso, Chile'',\r\n						''563241'',\r\n						''99985025'',\r\n						''victor.retamal@cosof.cl'',\r\n						''2066'',\r\n						''-33.04736960000001'',\r\n						''-71.61133965463102'',\r\n						''0'',\r\n						0,\r\n						now(),\r\n						2\r\n						)', '::1', '0.0019998550415039', '2017-03-07 21:26:16'),
+(9, 2, 'INSERT', 'INSERT INTO pre_paciente_registro\r\n						(\r\n						id_paciente,\r\n						id_institucion,\r\n						fc_ingreso,\r\n						gl_hora_ingreso,\r\n						gl_motivo_consulta,\r\n						fc_crea,\r\n						id_usuario_crea\r\n						)\r\n					VALUES  \r\n						(\r\n						8,\r\n						2,\r\n						''2017-03-07'',\r\n						''17:37'',\r\n						''Prueba'',\r\n						now(),\r\n						''2''\r\n						)', '::1', '0.0019998550415039', '2017-03-07 21:26:16'),
+(10, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''8'',1)', '::1', '0.00099992752075195', '2017-03-07 21:26:16'),
+(11, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''8'',2)', '::1', '0.00099992752075195', '2017-03-07 21:26:16'),
+(12, 2, 'INSERT', 'INSERT into pre_evento values(null,1,''8'',0,''Paciente creado el : 2017-03-07'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0', '2017-03-07 21:26:16'),
+(13, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''8'',''10'',''Empa 10 creado el : 2017-03-07'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00099992752075195', '2017-03-07 21:26:16'),
+(14, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''8'',''11'',''Empa 11 creado el : 2017-03-07'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010001659393311', '2017-03-07 21:26:16');
 
 -- --------------------------------------------------------
 
@@ -112,7 +138,58 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria_login` (
   KEY `IDX_gl_rut` (`gl_rut`),
   KEY `IDX_ip_privada` (`ip_privada`),
   KEY `IDX_ip_publica` (`ip_publica`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=46 ;
+
+--
+-- Volcado de datos para la tabla `pre_auditoria_login`
+--
+
+INSERT INTO `pre_auditoria_login` (`id_auditoria_login`, `id_usuario`, `gl_rut`, `gl_origen`, `gl_token`, `ip_privada`, `ip_publica`, `fc_creacion`) VALUES
+(1, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-06 13:41:07'),
+(2, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-06 13:41:46'),
+(3, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-06 13:41:47'),
+(4, 3, '0-0', 'login', '', '0.0.0', '::1', '2017-03-06 13:42:57'),
+(5, 3, '0-0', 'login', '', '0.0.0', '::1', '2017-03-06 13:46:01'),
+(6, 3, '0-0', 'login', '', '0.0.0', '::1', '2017-03-06 13:46:02'),
+(7, 3, '0-0', 'login', '', '0.0.0', '::1', '2017-03-06 13:46:21'),
+(8, 3, '0-0', 'login', '', '0.0.0', '::1', '2017-03-06 13:46:21'),
+(9, 3, '0-0', 'login', '', '0.0.0', '::1', '2017-03-06 13:47:00'),
+(10, 3, '0-0', 'login', '', '0.0.0', '::1', '2017-03-06 13:57:04'),
+(11, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 13:58:13'),
+(12, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 13:58:27'),
+(13, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 15:18:01'),
+(14, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 16:02:04'),
+(15, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 16:56:56'),
+(16, 0, '', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 17:47:41'),
+(17, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 17:47:53'),
+(18, 3, '0-0', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 18:03:06'),
+(19, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 18:17:01'),
+(20, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 18:19:03'),
+(21, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-06 19:36:15'),
+(22, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-06 19:39:17'),
+(23, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-06 19:55:07'),
+(24, 3, '0-0', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 20:58:42'),
+(25, 3, '0-0', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 21:25:03'),
+(26, 3, '0-0', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 21:25:28'),
+(27, 3, '0-0', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 21:25:53'),
+(28, 3, '0-0', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 21:26:26'),
+(29, 6, '11111111-1', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 21:33:18'),
+(30, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 21:36:18'),
+(31, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-06 21:42:22'),
+(32, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-07 12:02:42'),
+(33, 3, '0-0', 'login', '', '0.0.0', '127.0.0.1', '2017-03-07 12:19:02'),
+(34, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-07 12:32:24'),
+(35, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-07 12:50:51'),
+(36, 3, '0-0', 'login', '', '0.0.0', '127.0.0.1', '2017-03-07 13:25:56'),
+(37, 3, '0-0', 'login', '', '0.0.0', '127.0.0.1', '2017-03-07 13:26:54'),
+(38, 3, '0-0', 'login', '', '0.0.0', '127.0.0.1', '2017-03-07 13:30:59'),
+(39, 3, '0-0', 'login', '', '0.0.0', '127.0.0.1', '2017-03-07 14:28:11'),
+(40, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-07 14:47:34'),
+(41, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-07 16:28:30'),
+(42, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-07 18:09:03'),
+(43, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-07 18:29:34'),
+(44, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-07 18:49:43'),
+(45, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-07 20:55:45');
 
 -- --------------------------------------------------------
 
@@ -3094,11 +3171,16 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   `id_examen_vdrl` int(11) DEFAULT NULL,
   `bo_rpr` int(1) DEFAULT NULL,
   `id_examen_rpr` int(11) DEFAULT NULL,
+  `bo_vih` int(1) DEFAULT NULL,
+  `id_examen_vih` int(11) DEFAULT NULL,
   `bo_tos_productiva` int(1) DEFAULT NULL,
   `bo_baciloscopia_toma` int(1) DEFAULT NULL,
   `id_examen_baciloscopia` int(11) DEFAULT NULL,
   `bo_pap_realizado` int(1) DEFAULT NULL,
+  `bo_pap_resultado` int(1) DEFAULT NULL,
   `fc_ultimo_pap` date DEFAULT NULL,
+  `fc_ultimo_pap_ano` int(4) DEFAULT NULL,
+  `fc_ultimo_pap_mes` int(3) DEFAULT NULL,
   `fc_tomar_pap` date DEFAULT NULL,
   `bo_pap_vigente` int(1) DEFAULT NULL,
   `bo_pap_toma` int(1) DEFAULT NULL,
@@ -3107,10 +3189,14 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   `bo_colesterol_toma` int(1) DEFAULT NULL,
   `id_examen_colesterol` int(11) DEFAULT NULL,
   `bo_mamografia_realizada` int(1) DEFAULT NULL,
+  `bo_mamografia_resultado_pasado` int(1) DEFAULT NULL,
   `bo_mamografia_vigente` int(1) DEFAULT NULL,
   `bo_mamografia_toma` int(1) DEFAULT NULL,
+  `bo_mamografia_resultado` int(1) DEFAULT NULL,
   `id_examen_mamografia` int(11) DEFAULT NULL,
   `fc_mamografia` date DEFAULT NULL,
+  `fc_mamografia_ano` int(4) DEFAULT NULL,
+  `fc_mamografia_mes` int(3) DEFAULT NULL,
   `gl_observaciones_empa` varchar(2000) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT '0',
   `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -3131,7 +3217,38 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   KEY `IDX_id_usuario_act` (`id_usuario_act`),
   KEY `IDX_nr_orden` (`nr_orden`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+
+--
+-- Volcado de datos para la tabla `pre_empa`
+--
+
+INSERT INTO `pre_empa` (`id_empa`, `id_paciente`, `nr_orden`, `id_comuna`, `gl_sector`, `id_institucion`, `nr_ficha`, `fc_empa`, `bo_consume_alcohol`, `gl_puntos_audit`, `bo_fuma`, `gl_peso`, `gl_estatura`, `gl_imc`, `gl_circunferencia_abdominal`, `id_clasificacion_imc`, `gl_pas`, `gl_pad`, `gl_glicemia`, `bo_glicemia_toma`, `id_examen_glicemia`, `bo_trabajadora_reclusa`, `bo_vdrl`, `id_examen_vdrl`, `bo_rpr`, `id_examen_rpr`, `bo_vih`, `id_examen_vih`, `bo_tos_productiva`, `bo_baciloscopia_toma`, `id_examen_baciloscopia`, `bo_pap_realizado`, `bo_pap_resultado`, `fc_ultimo_pap`, `fc_ultimo_pap_ano`, `fc_ultimo_pap_mes`, `fc_tomar_pap`, `bo_pap_vigente`, `bo_pap_toma`, `id_examen_pap`, `gl_colesterol`, `bo_colesterol_toma`, `id_examen_colesterol`, `bo_mamografia_realizada`, `bo_mamografia_resultado_pasado`, `bo_mamografia_vigente`, `bo_mamografia_toma`, `bo_mamografia_resultado`, `id_examen_mamografia`, `fc_mamografia`, `fc_mamografia_ano`, `fc_mamografia_mes`, `gl_observaciones_empa`, `id_usuario_crea`, `fc_crea`, `id_usuario_act`, `fc_actualiza`) VALUES
+(1, 1, 1, 3, '', 2, NULL, '2017-03-07 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, 1, NULL, 1, NULL, 1, 1, NULL, 2, 1, NULL, 2014, 1, NULL, 1, NULL, NULL, NULL, NULL, NULL, 2, NULL, 1, 1, NULL, NULL, '2017-03-02', 2015, 5, 'asdasd', 3, '2017-03-06 19:48:01', 2, '2017-03-07 17:15:09'),
+(2, 4, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 18:52:10', 0, NULL),
+(3, 5, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 19:02:34', 0, NULL),
+(4, 6, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 19:04:46', 0, NULL),
+(5, 6, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 19:04:46', 0, NULL),
+(6, 7, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 19:26:42', 0, NULL),
+(7, 7, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 19:26:42', 0, NULL),
+(8, 9, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:02:12', 0, NULL),
+(9, 9, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:02:12', 0, NULL),
+(10, 10, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:05:55', 0, NULL),
+(11, 10, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:05:55', 0, NULL),
+(12, 12, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:09:39', 0, NULL),
+(13, 12, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:09:39', 0, NULL),
+(14, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:10:49', 0, NULL),
+(15, 1, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:10:50', 0, NULL),
+(16, 8, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:13:57', 0, NULL),
+(17, 8, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:13:57', 0, NULL),
+(18, 15, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:22:20', 0, NULL),
+(19, 15, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:22:20', 0, NULL),
+(20, 22, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:22:41', 0, NULL),
+(21, 22, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:22:41', 0, NULL),
+(22, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:24:57', 0, NULL),
+(23, 1, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:24:57', 0, NULL),
+(24, 8, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:26:16', 0, NULL),
+(25, 8, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-07 21:26:16', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -3211,7 +3328,18 @@ CREATE TABLE IF NOT EXISTS `pre_evento` (
   KEY `IDX_id_evento_tipo` (`id_evento_tipo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `pre_evento`
+--
+
+INSERT INTO `pre_evento` (`id_evento`, `id_evento_tipo`, `id_paciente`, `id_empa`, `gl_descripcion`, `bo_estado`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 13, 1, 3, 'Empa 3 creado el : 2017-03-07', 1, 2, '2017-03-07 21:24:57'),
+(2, 13, 1, 4, 'Empa 4 creado el : 2017-03-07', 1, 2, '2017-03-07 21:24:57'),
+(3, 1, 8, 0, 'Paciente creado el : 2017-03-07', 1, 2, '2017-03-07 21:26:16'),
+(4, 13, 8, 10, 'Empa 10 creado el : 2017-03-07', 1, 2, '2017-03-07 21:26:16'),
+(5, 13, 8, 11, 'Empa 11 creado el : 2017-03-07', 1, 2, '2017-03-07 21:26:16');
 
 -- --------------------------------------------------------
 
@@ -3311,16 +3439,46 @@ INSERT INTO `pre_laboratorio` (`id_laboratorio`, `gl_nombre_laboratorio`, `id_us
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pre_mes`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_mes` (
+  `id_mes` int(11) NOT NULL AUTO_INCREMENT,
+  `gl_mes` varchar(11) DEFAULT NULL,
+  PRIMARY KEY (`id_mes`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+
+--
+-- Volcado de datos para la tabla `pre_mes`
+--
+
+INSERT INTO `pre_mes` (`id_mes`, `gl_mes`) VALUES
+(1, 'Enero'),
+(2, 'Febrero'),
+(3, 'Marzo'),
+(4, 'Abril'),
+(5, 'Mayo'),
+(6, 'Junio'),
+(7, 'Julio'),
+(8, 'Agosto'),
+(9, 'Septiembre'),
+(10, 'Octubre'),
+(11, 'Noviembre'),
+(12, 'Diciembre');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pre_opcion`
 --
 
 CREATE TABLE IF NOT EXISTS `pre_opcion` (
   `id_opcion` int(11) NOT NULL AUTO_INCREMENT,
   `id_opcion_padre` int(11) DEFAULT '0',
+  `bo_tiene_hijo` tinyint(1) DEFAULT '0',
   `gl_nombre_opcion` varchar(255) DEFAULT NULL,
   `gl_icono` varchar(50) DEFAULT NULL,
   `gl_url` varchar(255) DEFAULT NULL,
-  `bo_tiene_hijo` int(1) DEFAULT '0',
   `bo_activo` int(1) DEFAULT '1',
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -3336,14 +3494,14 @@ CREATE TABLE IF NOT EXISTS `pre_opcion` (
 -- Volcado de datos para la tabla `pre_opcion`
 --
 
-INSERT INTO `pre_opcion` (`id_opcion`, `id_opcion_padre`, `gl_nombre_opcion`, `gl_icono`, `gl_url`, `bo_tiene_hijo`, `bo_activo`, `id_usuario_crea`, `fc_crea`, `id_usuario_actualiza`, `fc_actualiza`) VALUES
-(1, 0, 'Inicio', 'fa fa-home', '/Home/dashboard', 0, 1, 2, '2017-02-23 15:40:27', NULL, NULL),
-(2, 0, 'Registro', 'fa fa-book', '/Registro/index', 0, 1, 2, '2017-02-23 15:40:27', NULL, NULL),
-(3, 0, 'Atención', 'fa fa-medkit', '/Empa/index', 0, 1, 2, '2017-02-23 15:44:32', NULL, NULL),
-(4, 0, 'Administración', 'fa fa-cog', NULL, 1, 1, 2, '2017-02-23 15:44:32', NULL, NULL),
-(5, 4, 'Mantenedores', 'fa fa-plus-circle', NULL, 1, 1, 2, '2017-02-23 15:51:17', NULL, NULL),
-(6, 5, 'Perfiles', 'fa fa-plus-circle', '/Administracion/perfiles', 0, 1, 2, '2017-02-23 15:55:19', NULL, NULL),
-(7, 0, 'Soporte', 'fa fa-life-ring', '/Soporte/', 0, 1, 2, '2017-02-23 16:01:37', NULL, NULL);
+INSERT INTO `pre_opcion` (`id_opcion`, `id_opcion_padre`, `bo_tiene_hijo`, `gl_nombre_opcion`, `gl_icono`, `gl_url`, `bo_activo`, `id_usuario_crea`, `fc_crea`, `id_usuario_actualiza`, `fc_actualiza`) VALUES
+(1, 0, 0, 'Inicio', 'fa fa-home', '/Home/dashboard', 1, 2, '2017-02-23 15:40:27', NULL, NULL),
+(2, 0, 0, 'Nuevo Registro', 'fa fa-book', '/Paciente/nuevo', 1, 2, '2017-02-23 15:40:27', NULL, '2017-03-06 20:21:10'),
+(3, 0, 0, 'Atención', 'fa fa-medkit', '/Empa/index', 0, 2, '2017-02-23 15:44:32', NULL, '2017-03-07 12:31:43'),
+(4, 0, 0, 'Grilla Pacientes', 'fa fa-th', '/Paciente/index', 1, 2, '2017-02-23 15:44:32', NULL, '2017-03-07 12:32:50'),
+(5, 0, 1, 'Mantenedores', 'fa fa-plus-circle', NULL, 1, 2, '2017-02-23 15:51:17', NULL, '2017-03-06 20:27:36'),
+(6, 5, 0, 'Usuarios', 'fa fa-plus-circle', NULL, 1, 2, '2017-02-23 15:55:19', NULL, '2017-03-06 20:27:44'),
+(7, 0, 0, 'Mesa de Ayuda', 'fa fa-life-ring', '/Soporte/', 1, 2, '2017-02-23 16:01:37', NULL, '2017-03-06 20:24:18');
 
 -- --------------------------------------------------------
 
@@ -3357,6 +3515,12 @@ CREATE TABLE IF NOT EXISTS `pre_paciente` (
   `id_region` int(11) DEFAULT NULL,
   `id_comuna` int(11) DEFAULT NULL,
   `id_prevision` int(11) DEFAULT NULL,
+  `id_estado_civil` int(11) DEFAULT NULL,
+  `id_tipo_ocupacion` int(11) DEFAULT NULL,
+  `id_tipo_escolaridad` int(11) DEFAULT NULL,
+  `nr_hijos` int(2) DEFAULT NULL,
+  `gl_acompañante` varchar(100) DEFAULT NULL,
+  `gl_codigo_fonasa` varchar(3) DEFAULT 'A',
   `bo_acepta_programa` int(1) DEFAULT NULL,
   `bo_reconoce` int(1) DEFAULT NULL,
   `id_paciente_estado` int(11) DEFAULT '1',
@@ -3390,7 +3554,15 @@ CREATE TABLE IF NOT EXISTS `pre_paciente` (
   KEY `IDX_gl_rut` (`gl_rut`),
   KEY `IDX_id_centro_salud` (`id_centro_salud`),
   KEY `IDX_gl_run_pass` (`gl_run_pass`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente`
+--
+
+INSERT INTO `pre_paciente` (`id_paciente`, `id_institucion`, `id_region`, `id_comuna`, `id_prevision`, `id_estado_civil`, `id_tipo_ocupacion`, `id_tipo_escolaridad`, `nr_hijos`, `gl_acompañante`, `gl_codigo_fonasa`, `bo_acepta_programa`, `bo_reconoce`, `id_paciente_estado`, `gl_grupo_tipo`, `gl_rut`, `bo_extranjero`, `gl_run_pass`, `gl_nombres`, `gl_apellidos`, `fc_nacimiento`, `gl_sexo`, `gl_direccion`, `gl_fono`, `gl_celular`, `gl_email`, `id_centro_salud`, `gl_latitud`, `gl_longitud`, `id_usuario_crea`, `fc_crea`, `id_usuario_actualiza`, `fc_actualiza`) VALUES
+(1, 2, 5, 35, 1, NULL, NULL, NULL, NULL, NULL, 'A', 0, 0, 1, 'Control', '11111111-1', 0, '', 'Usuario', 'Prueba', '1980-03-07', 'F', 'Pedro Montt 2344-2392, Valparaíso, Región de Valparaíso, Chile', '563241', '99985025', 'victor.retamal@cosof.cl', 2066, '-33.04736960000001', '-71.61133965463102', 2, '2017-03-07 21:24:57', NULL, NULL),
+(2, 2, 5, 35, 1, NULL, NULL, NULL, NULL, NULL, 'A', 0, 0, 1, 'Control', '11111111-1', 0, '', 'Usuario', 'Prueba', '1980-03-07', 'F', 'Pedro Montt 2344-2392, Valparaíso, Región de Valparaíso, Chile', '563241', '99985025', 'victor.retamal@cosof.cl', 2066, '-33.04736960000001', '-71.61133965463102', 2, '2017-03-07 21:26:16', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3401,6 +3573,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente` (
 CREATE TABLE IF NOT EXISTS `pre_paciente_agresor` (
   `id_agresor` int(11) NOT NULL AUTO_INCREMENT,
   `id_paciente` int(11) NOT NULL,
+  `id_tipo_vinculo` int(11) DEFAULT NULL,
   `gl_rut_agresor` varchar(11) NOT NULL,
   `id_region` int(11) DEFAULT NULL,
   `id_comuna_vive` int(11) DEFAULT NULL,
@@ -3443,6 +3616,40 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_derivar` (
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_paciente` (`id_paciente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_paciente_direccion`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_paciente_direccion` (
+  `id_direccion` int(11) NOT NULL AUTO_INCREMENT,
+  `id_paciente` int(11) NOT NULL,
+  `gl_direccion` varchar(255) NOT NULL,
+  `gl_latitud` varchar(30) NOT NULL,
+  `gl_longitud` varchar(30) NOT NULL,
+  `bo_estado` tinyint(1) NOT NULL,
+  `id_usuario_crea` int(11) NOT NULL,
+  `fc_crea` datetime NOT NULL,
+  `id_usuario_actualiza` int(11) NOT NULL,
+  `fc_actualiza` datetime NOT NULL,
+  PRIMARY KEY (`id_direccion`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_direccion`
+--
+
+INSERT INTO `pre_paciente_direccion` (`id_direccion`, `id_paciente`, `gl_direccion`, `gl_latitud`, `gl_longitud`, `bo_estado`, `id_usuario_crea`, `fc_crea`, `id_usuario_actualiza`, `fc_actualiza`) VALUES
+(1, 1, 'Circunvalación Álvarez Zorrilla 3087, La Serena, Región de Coquimbo, Chile', '-29.871149319955837', '-71.22842809206543', 1, 1, '2017-03-07 17:30:38', 1, '2017-03-07 17:30:38'),
+(2, 2, 'Av. Radomiro Tomic 7700-7748, Antofagasta, Región de Antofagasta, Chile', '-23.598598961675197', '-70.38528442382812', 1, 1, '2017-03-07 17:30:38', 1, '2017-03-07 17:30:38'),
+(4, 3, 'Alejandro Fierro 4031, Quinta Normal, Región Metropolitana, Chile', '-33.43573900686818', '-70.69015502929688', 1, 2, '2017-03-07 18:44:29', 2, '2017-03-07 18:44:29'),
+(5, 4, 'Salvador Gutiérrez 4901-4941, Quinta Normal, Región Metropolitana, Chile', '-33.42456461884057', '-70.70182800292969', 1, 2, '2017-03-07 18:52:10', 2, '2017-03-07 18:52:10'),
+(6, 5, 'Dieciséis Nte 1182, Santiago, Independencia, Región Metropolitana, Chile', '-33.415108243832975', '-70.67298889160156', 1, 2, '2017-03-07 19:02:34', 2, '2017-03-07 19:02:34'),
+(7, 6, 'Los Membrillos 6583, Santiago, Cerro Navia, Región Metropolitana, Chile', '-33.43258740206331', '-70.72998046875', 1, 2, '2017-03-07 19:04:46', 2, '2017-03-07 19:04:46'),
+(8, 7, 'Bismarck 1282, Quinta Normal, Región Metropolitana, Chile', '-33.436025510720334', '-70.69530487060547', 1, 2, '2017-03-07 19:26:42', 2, '2017-03-07 19:26:42'),
+(9, 10, 'Prof Fuentes Maturana 215, Quinta Normal, Región Metropolitana, Chile', '-33.42112605618061', '-70.70457458496094', 1, 2, '2017-03-07 21:05:55', 2, '2017-03-07 21:05:55');
 
 -- --------------------------------------------------------
 
@@ -3526,7 +3733,29 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_registro` (
   KEY `IDX_id_institucion` (`id_institucion`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_registro`
+--
+
+INSERT INTO `pre_paciente_registro` (`id_registro`, `id_paciente`, `id_institucion`, `fc_ingreso`, `gl_hora_ingreso`, `gl_motivo_consulta`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 1, 3, '2017-03-06', '15:47:00', 'dos dos dos', 3, '2017-03-06 18:50:35'),
+(2, 3, 2, '2017-03-07', '15:42:00', 'motivo_1', 2, '2017-03-07 18:44:29'),
+(3, 4, 2, '2017-03-07', '15:49:00', 'motivo_01', 2, '2017-03-07 18:52:10'),
+(4, 5, 2, '2017-03-07', '16:00:00', 'motivo', 2, '2017-03-07 19:02:34'),
+(5, 6, 2, '2017-03-07', '16:02:00', 'motivo', 2, '2017-03-07 19:04:46'),
+(6, 7, 2, '2017-03-07', '16:23:00', 'motivo01', 2, '2017-03-07 19:26:42'),
+(7, 5, 2, '2017-03-07', '17:37:00', 'Prueba', 2, '2017-03-07 20:41:03'),
+(8, 9, 2, '2017-03-07', '17:59:00', '', 2, '2017-03-07 21:02:12'),
+(9, 10, 2, '2017-03-07', '18:03:00', '1', 2, '2017-03-07 21:05:55'),
+(10, 12, 2, '2017-03-07', '17:37:00', 'Prueba', 2, '2017-03-07 21:09:39'),
+(11, 1, 2, '2017-03-07', '17:37:00', 'Prueba', 2, '2017-03-07 21:10:49'),
+(12, 8, 2, '2017-03-07', '17:37:00', 'Prueba', 2, '2017-03-07 21:13:57'),
+(13, 15, 2, '2017-03-07', '17:37:00', 'Prueba', 2, '2017-03-07 21:22:20'),
+(14, 22, 2, '2017-03-07', '17:37:00', 'Prueba', 2, '2017-03-07 21:22:41'),
+(15, 1, 2, '2017-03-07', '17:37:00', 'Prueba', 2, '2017-03-07 21:24:57'),
+(16, 8, 2, '2017-03-07', '17:37:00', 'Prueba', 2, '2017-03-07 21:26:16');
 
 -- --------------------------------------------------------
 
@@ -3581,6 +3810,8 @@ INSERT INTO `pre_perfil_opcion` (`id_perfil`, `id_opcion`, `id_usuario_crea`, `f
 (1, 1, NULL, NULL),
 (1, 2, NULL, NULL),
 (1, 3, NULL, NULL),
+(1, 4, 2, '2017-03-06 20:31:28'),
+(1, 5, 2, '2017-03-06 20:31:28'),
 (1, 6, NULL, NULL),
 (1, 7, NULL, NULL),
 (2, 2, NULL, NULL),
@@ -4692,6 +4923,15 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_genero` (
   PRIMARY KEY (`id_tipo_genero`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `pre_tipo_genero`
+--
+
+INSERT INTO `pre_tipo_genero` (`id_tipo_genero`, `gl_tipo_genero`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'HOMBRE', 1, '2017-03-07 00:00:00'),
+(2, 'MUJER', 2, '2017-03-07 00:00:00'),
+(3, 'INDEFINIDO', 1, '2017-03-07 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -4869,6 +5109,16 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_orientacion_sexual` (
   PRIMARY KEY (`id_orientacion_sexual`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `pre_tipo_orientacion_sexual`
+--
+
+INSERT INTO `pre_tipo_orientacion_sexual` (`id_orientacion_sexual`, `gl_orientacion_sexual`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'HETEROSEXUAL', 1, '2017-03-07 00:00:00'),
+(2, 'HOMOSEXUAL', 1, '2017-03-07 00:00:00'),
+(3, 'BISEXUAL', 1, '2017-03-07 00:00:00'),
+(4, 'PANSEXUAL', 1, '2017-03-07 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -4896,6 +5146,14 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_sexo` (
   `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_sexo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `pre_tipo_sexo`
+--
+
+INSERT INTO `pre_tipo_sexo` (`id_tipo_sexo`, `gl_tipo_sexo`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'MASCULINO', 1, '2017-03-07 00:00:00'),
+(2, 'FEMENINO', 1, '2017-03-07 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -5008,10 +5266,10 @@ CREATE TABLE IF NOT EXISTS `pre_usuario` (
 --
 
 INSERT INTO `pre_usuario` (`id_usuario`, `id_perfil`, `gl_rut`, `gl_password`, `id_institucion`, `id_tipo_grupo`, `gl_nombres`, `gl_apellidos`, `id_region`, `id_comuna`, `gl_direccion`, `gl_email`, `gl_fono`, `gl_celular`, `bo_activo`, `fc_ultimo_login`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 1, '13225524-5', '7c63b8135f73d87fbd3ac01623823633c54f0cf2c320bbaf463d4d275d498060fcc6e5c40f2b49aaab881e4064c0d2803c5361a9eabe157ab1cf4d1da19120d3', 1, '2', 'Administrador', 'Prevención', 6, 79, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, 1, '2017-03-03 20:44:41', NULL, NULL, 1, '2017-02-09 10:30:00'),
-(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2, '2', 'Orlando', 'Vazquez', 1, 3, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-06 17:47:53', NULL, NULL, 1, '2017-02-09 10:30:00'),
-(3, 1, '0-0', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 3, '2', 'David', 'Guzmán', 7, NULL, NULL, 'david.guzman@cosof.cl', NULL, NULL, 1, '2017-03-06 13:57:04', NULL, NULL, 1, '2017-02-09 10:30:00'),
-(6, 1, '11111111-1', '0235aa034af9c8684f147ff288b790cb89e8ebd2e2770b655fa3754722a82ed4b8239c3c34ad5e8c87b77b8f489d303f2f0baef5324ab1ca24e9ad7975b3941d', 1, '2', 'Uni', 'Cornio', 1, 1, NULL, 'ovazquez.gonzalez@gmail.com', NULL, NULL, 1, '2017-03-03 20:45:34', NULL, NULL, 1, NULL);
+(1, 1, '13225524-5', '7c63b8135f73d87fbd3ac01623823633c54f0cf2c320bbaf463d4d275d498060fcc6e5c40f2b49aaab881e4064c0d2803c5361a9eabe157ab1cf4d1da19120d3', 1, '2', 'Administrador', 'Prevención', 6, 79, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, 1, '2017-03-07 18:29:34', NULL, NULL, 1, '2017-02-09 10:30:00'),
+(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2, '2', 'Orlando', 'Vazquez', 1, 3, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-07 20:55:45', NULL, NULL, 1, '2017-02-09 10:30:00'),
+(3, 5, '0-0', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 3, '2', 'David', 'Guzmán', 7, 375, NULL, 'david.guzman@cosof.cl', NULL, NULL, 1, '2017-03-07 14:28:11', NULL, NULL, 1, '2017-02-09 10:30:00'),
+(6, 2, '11111111-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1, '2', 'Uni', 'Cornio', 1, 1, NULL, 'ovazquez.gonzalez@gmail.com', NULL, NULL, 1, '2017-03-06 21:33:18', NULL, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -5035,21 +5293,3 @@ CREATE TABLE IF NOT EXISTS `pre_usuario_especialidad` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pre_paciente_direccion`
---
-
-CREATE TABLE IF NOT EXISTS `pre_paciente_direccion` (
-  `id_direccion` int(11) NOT NULL AUTO_INCREMENT,
-  `gl_direccion` varchar(255) NOT NULL,
-  `gl_latitud` varchar(30) NOT NULL,
-  `gl_longitud` varchar(30) NOT NULL,
-  `bo_estado` tinyint(1) NOT NULL,
-  `id_usuario_crea` int(11) NOT NULL,
-  `fc_crea` datetime NOT NULL,
-  `id_usuario_actualiza` int(11) NOT NULL,
-  `fc_actualiza` datetime NOT NULL,
-  PRIMARY KEY (`id_direccion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

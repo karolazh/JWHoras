@@ -144,7 +144,8 @@ class Reconoce extends Controller {
 		
 		$id_paciente = $parametros['id_paciente'];
 		
-		//$bool_update = $this->_DAOPacienteAgresor->insertarAgresor($parametros);
+		//$bool_update1 = $this->_DAOPacienteAgresor->insertarAgresor($parametros);
+		//$bool_update2 = $this->_DAOPaciente->updatePaciente($parametros);
 		if ($bool_update) {
 			$datos_evento['eventos_tipo'] = 12;
 			$datos_evento['id_paciente'] = $id_paciente;

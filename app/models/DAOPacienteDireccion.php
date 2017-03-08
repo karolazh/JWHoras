@@ -14,7 +14,7 @@
 *--------------
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
-*
+*<david.guzman@cosof.cl>	07-03-2017	getByIdPaciente()
 *-----------------------------------------------------------------------------
 *****************************************************************************
 */
@@ -115,6 +115,33 @@ class DAOPacienteDireccion extends Model {
             return NULL;
         }
     }
+	
+	
+	/**
+	* insertar()
+	* Lleva la informacion de la direccion a la base de datos.
+	* 
+	* @author	<david.guzman@cosof.cl>	07-03-2017
+	* 
+	* @param	array		$id_paciente
+	*
+	* @return	object	Obtener Informacion segun Id Paciente y bo_estado = 1 (vigente)
+	*/
+	public function getByIdPaciente($id_paciente){
+		$query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE id_paciente = ?
+					AND bo_estado = 1";
+
+		$param	= array($id_paciente);
+        $result	= $this->db->getQuery($query,$param);
+		
+        if($result->numRows > 0){
+            return $result->rows->row_0;
+        }else{
+            return NULL;
+        }
+	}
+	
 }
 
 ?>

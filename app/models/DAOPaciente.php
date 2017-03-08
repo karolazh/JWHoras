@@ -15,6 +15,7 @@
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
 *<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a BD antigua
+*<david.guzman@cosof.cl>	07-03-2017	updatePaciente()
 *-----------------------------------------------------------------------------
 *****************************************************************************
 */
@@ -406,7 +407,25 @@ class DAOPaciente extends Model{
             return NULL;
         }
     }
+	
+	public function updatePaciente($parametros){
+		$query	= "	UPDATE pre_paciente SET
+						id_estado_civil					= ".$_SESSION['id_estado_civil'].",
+						nr_hijos						= ".$parametros['nr_hijos'].",
+						id_tipo_ocupacion				= ".$parametros['id_tipo_ocupacion'].",
+						id_tipo_escolaridad				= ".$parametros['id_tipo_escolaridad'].",
+						gl_acompañante					= ".$parametros['gl_acompañante'].",
+						fc_actualiza					= now()
+					WHERE id_paciente = ".$parametros['id_paciente']."
+                    ";
 
+        if($this->db->execQuery($query)) {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+	}
+	
 }
 
 ?>

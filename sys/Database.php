@@ -1,18 +1,16 @@
 <?php if(!defined('BASE_PATH')) exit('No se permite acceder a este script');
 
-class Database extends PDO
-{
+class Database extends PDO{
 
-    private $select = "";
-    private $from = "";
-    private $where = "";
-    private $orderBy = "";
-    private $groupBy = "";
-    private $join = "";
-    private $limit = "";
-    private $valores = array();
+    private $select		= "";
+    private $from		= "";
+    private $where		= "";
+    private $orderBy	= "";
+    private $groupBy	= "";
+    private $join		= "";
+    private $limit		= "";
+    private $valores	= array();
     private static $instance;
-
 
     public function __construct()
     {
@@ -70,7 +68,6 @@ class Database extends PDO
         return self::$instance;
     }
 
-
     /**
      * Prepara la query para ejecutarla
      * @param [type] $sql [description]
@@ -78,7 +75,6 @@ class Database extends PDO
     private function setQuery($sql){
         return self::prepare($sql);
     }
-
 
     /**
      * Obtener todos los registros de la query entregada
@@ -107,7 +103,6 @@ class Database extends PDO
         return $resultado;
     }
 
-
     /**
      * Retorna datos de error en caso de generarse uno
      * @return array Arreglo que contiene informacion del error
@@ -115,7 +110,6 @@ class Database extends PDO
     public function getError(){
         return self::errorInfo();
     }
-
 
     /**
      * Retorna el ID del ultimo registro ingresado
@@ -129,7 +123,6 @@ class Database extends PDO
         }
         return self::lastInsertId();
     }
-
 
     /**
      * [select description]
@@ -157,7 +150,6 @@ class Database extends PDO
         return $this;
     }
 
-
     /**
      * [from description]
      * @param  [type] $tabla [description]
@@ -168,7 +160,6 @@ class Database extends PDO
         $this->from .= $sql;
         return $this;
     }
-
 
     public function whereCondOr($array){
         
@@ -189,7 +180,7 @@ class Database extends PDO
         $this->where .= $sql;
         return $this;
     }
-    
+
     /**
      * [whereAnd description]
      * @param  string $campo     
@@ -257,7 +248,7 @@ class Database extends PDO
         }
         return $sql;
     }
-    
+
     /**
      * 
      * @param string $campo
@@ -289,7 +280,6 @@ class Database extends PDO
         $this->where .= $sql;
         return $this;
     }
-
 
     /**
      * [whereAnd description]
@@ -362,7 +352,6 @@ class Database extends PDO
         return $this;
     }
 
-
     /**
      * [join description]
      * @param  [type] $tabla     [description]
@@ -399,7 +388,6 @@ class Database extends PDO
         $this->limit = $sql;
         return $this;
     }
-
 
     /**
      * Obtener resultado de query general formada
@@ -464,9 +452,7 @@ class Database extends PDO
         $selectAll->execute();
 
         return $this->getAllResult($selectAll);
-
     }
-
 
     /**
      * [selectBy description]
@@ -526,7 +512,6 @@ class Database extends PDO
         return $this->getAllResult($selectBy);
     }
 
-
     /**
      * Ejecutar sql de consulta
      * @param  [type] $query      [description]
@@ -534,6 +519,8 @@ class Database extends PDO
      * @return [type]             [description]
      */
     public function getQuery($query,$parametros=null){
+
+        $tiempo_inicial = microtime(true);
         try{
             $result = self::prepare($query);
 
@@ -549,10 +536,21 @@ class Database extends PDO
                 $result->execute();
             }
 
-            $retorno = $this->getAllResult($result);
-            $retorno->printQuery = $this->getQueryString($query,$parametros);
+           // if(defined('ENVIROMENT') and ENVIROMENT != "PROD"){
+            if(defined('ENVIROMENT')){
+                $tiempo_total = ((microtime(true) - $tiempo_inicial));
+                $this->queryLog($tiempo_total,$this->getQueryString($query,$parametros));
+            }
+			
+            $retorno				= $this->getAllResult($result);
+            $retorno->printQuery	= $this->getQueryString($query,$parametros);
+
             return $retorno;
         }catch (PDOException $e){
+            if(defined('ENVIROMENT')){
+                $tiempo_total = ((microtime(true) - $tiempo_inicial));
+                $this->queryLog($tiempo_total,$this->getQueryString($query,$parametros));
+            }
             if(defined("ERROR_LOG_FILE")){
                 Error::errorLog($e->getMessage(),Error::DATABASE_ERROR);
                 Error::errorLog("Query: ".$this->getQueryString($query,$parametros),Error::DATABASE_ERROR);
@@ -653,7 +651,7 @@ class Database extends PDO
      * @return [type]             [description]
      */
     public function execQuery($query,$parametros=null){
-
+        $tiempo_inicial = microtime(true);
         try{
             
             $result = self::prepare($query);
@@ -669,28 +667,33 @@ class Database extends PDO
                 $result->execute();
             }
 
+            if(defined('ENVIROMENT')){
+                $tiempo_total = ((microtime(true) - $tiempo_inicial));
+                $this->queryLog($tiempo_total,$this->getQueryString($query,$parametros));    
+            }
+
             if($result->rowCount() >= 0){
                 return true;
             }else{
                 return false;
             }
         }catch (PDOException $e){
-            if(ENVIROMENT == "PROD"){
-                if(defined("ERROR_LOG_FILE")){
-                    Error::errorLog($e->getMessage(),Error::DATABASE_ERROR);
-                    Error::errorLog("Query: ".$this->getQueryString($query,$parametros),Error::DATABASE_ERROR);
-                    Error::errorLog("Datos: ".print_r($parametros,true),Error::DATABASE_ERROR);
-                }else{
-                    error_log($e->getMessage());
-                }
-            } else{
-                throw new Exception($e->getMessage() . " <br> " . $this->getQueryString($query,$parametros));
+            if(defined('ENVIROMENT')){
+                $tiempo_total = ((microtime(true) - $tiempo_inicial));
+                $this->queryLog($tiempo_total,$this->getQueryString($query,$parametros));    
             }
+
+			if(defined("ERROR_LOG_FILE")){
+				Error::errorLog($e->getMessage(),Error::DATABASE_ERROR);
+				Error::errorLog("Query: ".$this->getQueryString($query,$parametros),Error::DATABASE_ERROR);
+				Error::errorLog("Datos: ".print_r($parametros,true),Error::DATABASE_ERROR);
+			}else{
+				error_log($e->getMessage());
+			}
         }
 
 
     }
-
 
     /**
      * obtener query con parametros incluidos
@@ -719,6 +722,42 @@ class Database extends PDO
            
     }
 
+	/**
+	* queryLog($tiempo,$gl_query) Registrar en Tabla pre_auditoria las querys de Insert y Update realizadas en el sistema
+	* @param  string $tiempo Tiempo de Ejecución
+	* @param  string $gl_query Query utilizada
+	*/
+    private function queryLog($gl_tiempo, $gl_query){
+		$gl_query	= trim ($gl_query);
+        $fecha		= date('Y-m-d H:i:s');
+        $gl_tipo	= strtoupper(substr(trim($gl_query),0,6));
+		$ip			= '';
 
+        if($gl_tipo != "SELECT" ){
+            if (isset($_SERVER["HTTP_CLIENT_IP"])) {
+                $ip .= ' - '.$_SERVER["HTTP_CLIENT_IP"];
+            }elseif (isset($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                $ip .= ' - '.$_SERVER["HTTP_X_FORWARDED_FOR"];
+            }elseif (isset($_SERVER["HTTP_X_FORWARDED"])){
+                $ip .= ' - '.$_SERVER["HTTP_X_FORWARDED"];
+            }elseif (isset($_SERVER["HTTP_FORWARDED_FOR"])){
+                $ip .= ' - '.$_SERVER["HTTP_FORWARDED_FOR"];
+            }elseif (isset($_SERVER["HTTP_FORWARDED"])){
+                $ip .= ' - '.$_SERVER["HTTP_FORWARDED"];
+            }
+            $ip		= $_SERVER['REMOTE_ADDR'] . $ip;
+
+            if(!isset($_SESSION['id'])){
+                $id_usuario	= 0;
+            }else{
+                $id_usuario	= $_SESSION['id'];
+            }
+
+            $query_log	= "INSERT INTO pre_auditoria values(DEFAULT,?,?,?,?,?,now())";
+            $parametros = array($id_usuario,$gl_tipo,$gl_query,$ip,$gl_tiempo);
+            $log		= self::prepare($query_log);
+            $log->execute($parametros);
+        }
+    }
 
 }

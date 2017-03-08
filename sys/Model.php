@@ -222,7 +222,7 @@ class Model{
      * @param int $id
      */
     public function delete($id){
-        return $this->db->delete($this->_tabla, $this->_primaria, $id);
+        //return $this->db->delete($this->_tabla, $this->_primaria, $id);
     }
 
     public function insertar($tabla,$campos){

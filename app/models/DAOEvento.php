@@ -56,80 +56,80 @@ class DAOEvento extends Model{
     }
 
     public function selBusquedaEventos($parametros){
-    $query	= "	SELECT
-                                                    e.id_evento, 
-                                                    e.gl_descripcion,
-                                                    e.id_evento_tipo,
-                                                    date_format(e.fc_crea,'%d-%m-%Y') as fc_crea,
-                                                    e.id_paciente
-                                            FROM pre_evento e
-                                            WHERE 1 ";
+		$query	= "	SELECT
+						e.id_evento, 
+						e.gl_descripcion,
+						e.id_evento_tipo,
+						date_format(e.fc_crea,'%d-%m-%Y') as fc_crea,
+						e.id_paciente
+					FROM pre_evento e
+					WHERE 1 ";
 
-            if(!empty($parametros["gl_descripcion"])){
-                    $query	.= " AND e.gl_descripcion LIKE %" . $parametros["gl_descripcion"] . "%";
-            }
-            if(!empty($parametros["id_evento_tipo"])){
-                    $query	.= " AND e.id_evento_tipo = " . $parametros["id_evento_tipo"];
-            }
-            if(!empty($parametros["id_paciente"])){
-                    $query	.= " AND e.id_paciente = " . $parametros["id_paciente"];
-            }
+		if(!empty($parametros["gl_descripcion"])){
+				$query	.= " AND e.gl_descripcion LIKE %" . $parametros["gl_descripcion"] . "%";
+		}
+		if(!empty($parametros["id_evento_tipo"])){
+				$query	.= " AND e.id_evento_tipo = " . $parametros["id_evento_tipo"];
+		}
+		if(!empty($parametros["id_paciente"])){
+				$query	.= " AND e.id_paciente = " . $parametros["id_paciente"];
+		}
 
-    $result	= $this->db->getQuery($query);
+		$result	= $this->db->getQuery($query);
 
-    if($result->numRows>0){
-        return $result->rows;
-    }else{
-        return NULL;
-    }
+		if($result->numRows>0){
+			return $result->rows;
+		}else{
+			return NULL;
+		}
     }
 
     public function insEvento($data){
-    $query	= "INSERT into pre_evento values(null,?,?,?,?,?,?,CURRENT_TIMESTAMP)";
+		$query	= "INSERT into pre_evento values(null,?,?,?,?,?,?,CURRENT_TIMESTAMP)";
 
-    $param	= array(
-                                            $data['eventos_tipo'],
-                                            $data['id_paciente'],
-                                            $data['id_empa'],
-                                            $data['gl_descripcion'],
-                                            $data['bo_estado'],
-                                            $data['id_usuario_crea']
-                                            );
+		$param	= array(
+						$data['eventos_tipo'],
+						$data['id_paciente'],
+						$data['id_empa'],
+						$data['gl_descripcion'],
+						$data['bo_estado'],
+						$data['id_usuario_crea']
+					);
 
-    if($this->db->execQuery($query, $param)) {
-        return $this->db->getLastId();
-    }else{
-        return FALSE;
-    }
-}
+		if($this->db->execQuery($query, $param)) {
+			return $this->db->getLastId();
+		}else{
+			return FALSE;
+		}
+	}
 
     public function updTipoEvento($datos){
-    $query	= "	UPDATE ".$this->_tabla."
-                                    SET    id_evento_tipo = ?
-                                    WHERE  " . $this->_primaria . " = ? ";
+		$query	= "	UPDATE ".$this->_tabla."
+										SET    id_evento_tipo = ?
+										WHERE  " . $this->_primaria . " = ? ";
 
-            $param	= array($datos['id_evento_tipo'], $datos['id_evento']);
+				$param	= array($datos['id_evento_tipo'], $datos['id_evento']);
 
-    if($this->db->execQuery($query, $param)) {
-                    return TRUE;
-    }else{
-                    return FALSE;
-    }
-}
+		if($this->db->execQuery($query, $param)) {
+						return TRUE;
+		}else{
+						return FALSE;
+		}
+	}
 
     public function updDescripcion($datos){
-    $query	= "	UPDATE ".$this->_tabla."
-                                    SET    gl_descripcion = ?
-                                    WHERE  " . $this->_primaria . " = ? ";
+		$query	= "	UPDATE ".$this->_tabla."
+										SET    gl_descripcion = ?
+										WHERE  " . $this->_primaria . " = ? ";
 
-            $param	= array($datos['gl_descripcion'], $datos['id_evento']);
+				$param	= array($datos['gl_descripcion'], $datos['id_evento']);
 
-    if($this->db->execQuery($query, $param)) {
-        return TRUE;
-    }else{
-        return FALSE;
-    }
-}
+		if($this->db->execQuery($query, $param)) {
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
 
     public function getEventosPaciente($id_paciente){
         $query	=   "SELECT
