@@ -81,7 +81,7 @@ class Paciente extends Controller {
 		 * REALIZAR FUNCIÓN PARA LISTAR SEGÚN PERFIL
 		 */
 		 
-		 print_r($_SESSION);die();
+		 //print_r($_SESSION);die();
 		$arr = $this->_DAOPaciente->getListaDetalle();
 		$this->smarty->assign('arrResultado', $arr);
 
