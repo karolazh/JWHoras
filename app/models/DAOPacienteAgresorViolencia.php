@@ -70,6 +70,23 @@ class DAOPacienteAgresorViolencia extends Model{
             return NULL;
         }
     }
+	
+	public function getByIdPacientePregunta($id_paciente,$id_pregunta){
+        $query	= "	SELECT 
+						*
+					FROM pre_paciente_agresor_violencia 
+					WHERE	id_paciente = ".$id_paciente."
+				    AND	id_pregunta = ".$id_pregunta;
+
+		$param	= array($id_paciente);
+        $result	= $this->db->getQuery($query,$param);
+
+        if($result->numRows>0){
+            return $result->rows;
+        }else{
+            return NULL;
+        }
+    }
     
 	public function insertViolencia($id_paciente, $id_pregunta, $valor){
         $query	= "	INSERT INTO pre_paciente_agresor_violencia 
