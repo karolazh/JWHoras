@@ -3,7 +3,7 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_paciente
+* Descripcion	: Modelo para Tabla pre_paciente_direccion
 * Plataforma	: !PHP
 * Creacion		: 07/03/2017
 * @name			DAOPacienteDireccion.php
@@ -22,7 +22,7 @@
 class DAOPacienteDireccion extends Model {
 
     protected $_tabla			= "pre_paciente_direccion";
-    protected $_primaria		= "id_direccion";
+    protected $_primaria		= "id_paciente_direccion";
 
     function __construct(){
         parent::__construct();       
@@ -113,9 +113,9 @@ class DAOPacienteDireccion extends Model {
 						now()
 						)
                     ";
-
+		
         if ($this->db->execQuery($query)) {
-            return $this->db->getLastId();
+			return $this->db->getLastId();
         } else {
             return NULL;
         }
@@ -170,7 +170,7 @@ class DAOPacienteDireccion extends Model {
     * 
     * @param    int $id_paciente
     *
-    * @return   $result
+    * @return   object
     */
     public function getByIdDirecciones($id_paciente){
         $query = "  SELECT 
@@ -215,7 +215,7 @@ class DAOPacienteDireccion extends Model {
     * 
     * @param    int $id_paciente
     *
-    * @return   $result
+    * @return  object
     */
     public function getByIdDireccionVigente($id_paciente){
         $query = "  SELECT 

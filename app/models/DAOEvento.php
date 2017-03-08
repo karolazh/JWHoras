@@ -144,7 +144,8 @@ class DAOEvento extends Model{
                     FROM pre_evento eve
                     LEFT JOIN pre_evento_tipo tip ON tip.id_evento_tipo = eve.id_evento_tipo
                     LEFT JOIN pre_usuario usr ON usr.id_usuario = eve.id_usuario_crea
-                    WHERE eve.id_paciente = ?";
+                    WHERE eve.id_paciente = ?
+						AND bo_mostrar = 1";
 
         $param	= array($id_paciente);
         $result	= $this->db->getQuery($query,$param);

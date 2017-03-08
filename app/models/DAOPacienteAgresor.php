@@ -3,7 +3,7 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_egreso
+* Descripcion	: Modelo para Tabla pre_paciente_agresor
 * Plataforma	: !PHP
 * Creacion		: 01/03/2017
 * @name			DAOPacienteAgresor.php
@@ -60,7 +60,10 @@ class DAOPacienteAgresor extends Model{
 						(
 						id_paciente,
 						id_tipo_vinculo,
+						gl_nombres_agresor,
+						gl_apellidos_agresor,
 						gl_rut_agresor,
+						id_tipo_riesgo,
 						id_comuna_vive,
 						id_comuna_trabaja,
 						id_estado_civil,
@@ -70,8 +73,6 @@ class DAOPacienteAgresor extends Model{
 						id_tipo_genero,
 						id_orientacion_sexual,
 						nr_ingreso_mensual,
-						gl_nombres_agresor,
-						gl_apellidos_agresor,
 						fc_nacimiento_agresor,
 						nr_hijos,
 						nr_hijos_en_comun,
@@ -81,33 +82,34 @@ class DAOPacienteAgresor extends Model{
 						)
 					VALUES
 						(
-						".$_SESSION['id_paciente'].",
+						".$parametros['id_paciente'].",
 						".$parametros['id_tipo_vinculo'].",
+						".$parametros['gl_nombres_agresor'].",
+						".$parametros['gl_apellidos_agresor'].",
 						".$parametros['gl_rut_agresor'].",
+						".$parametros['id_tipo_riesgo'].",
 						".$parametros['id_comuna_vive'].",
-						'".$parametros['id_comuna_trabaja']."',
-						'".$parametros['id_estado_civil']."',
-						'".$parametros['id_tipo_ocupacion']."',
-						'".$parametros['id_actividad_economica']."',
-						'".$parametros['id_tipo_sexo']."',
-						'".$parametros['id_tipo_genero']."',
-						'".$parametros['id_orientacion_sexual']."',
-						'".$parametros['nr_ingreso_mensual']."',
-						'".$parametros['gl_nombres_agresor']."',
-						'".$parametros['gl_apellidos_agresor']."',
-						'".$parametros['fc_nacimiento_agresor']."',
-						'".$parametros['nr_hijos']."',
-						'".$parametros['nr_hijos_en_comun']."',
-						'".$parametros['nr_denuncias_por_violencia']."',
+						".$parametros['id_comuna_trabaja'].",
+						".$parametros['id_estado_civil'].",
+						".$parametros['id_tipo_ocupacion_agresor'].",
+						".$parametros['id_actividad_economica'].",
+						".$parametros['id_tipo_sexo'].",
+						".$parametros['id_tipo_genero'].",
+						".$parametros['id_orientacion_sexual'].",
+						".$parametros['nr_ingreso_mensual'].",
+						".$parametros['fc_nacimiento_agresor'].",
+						".$parametros['nr_hijos_agresor'].",
+						".$parametros['nr_hijos_en_comun'].",
+						".$parametros['nr_denuncias_por_violencia'].",
 						".$_SESSION['id'].",
 						now()
 						)
                     ";
 
         if ($this->db->execQuery($query)) {
-            return $this->db->getLastId();
+            return TRUE;
         } else {
-            return NULL;
+            return FALSE;
         }
 	}
 	

@@ -21,7 +21,6 @@
 			<div class="text-center top-spaced">
 				<button class="btn btn-sm btn-danger" type="button" onclick="parent.xModal.close();">Cerrar ventana</button>
 				<button class="btn btn-sm btn-success" type="button" onclick="parent.guardarAdjunto(this.form,this);">Guardar adjunto</button>
-				<!-- button class="btn btn-sm btn-success" type="submit">Guardar adjunto</button -->
 			</div>
 		</form>
 	</div>

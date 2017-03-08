@@ -85,7 +85,7 @@ class DAOPaciente extends Model{
         }
     }
 
-    public function getListaDetalle(){
+    public function getListaDetalle($where=array()){
         $query		= "	SELECT
 							paciente.id_paciente,
 							paciente.gl_rut,
@@ -95,7 +95,7 @@ class DAOPaciente extends Model{
 							paciente.gl_nombres,
 							paciente.gl_apellidos,
 							date_format(paciente.fc_crea,'%d-%m-%Y') as fc_crea,
-							IFNULL(paciente.gl_rut,paciente.gl_run_pass) as gl_identificacion,
+							IF(paciente.bo_extranjero=1,paciente.gl_run_pass,paciente.gl_rut) as gl_identificacion,
 							i.gl_nombre_establecimiento as gl_institucion,
 							c.gl_nombre_comuna,
 							e.gl_nombre_estado_caso,
@@ -107,6 +107,11 @@ class DAOPaciente extends Model{
 							LEFT JOIN pre_comuna c ON c.id_comuna = paciente.id_comuna
 							LEFT JOIN pre_paciente_estado e ON e.id_paciente_estado = paciente.id_paciente_estado";
 
+		if(!empty($where)){
+			foreach($where as $w){
+				$query .= ' WHERE '.$w['campo'].' = '.$w['valor'];
+			}
+		}
         $result	= $this->db->getQuery($query);
 
         if($result->numRows>0){
@@ -410,10 +415,14 @@ class DAOPaciente extends Model{
 	
 	public function updatePaciente($parametros){
 		$query	= "	UPDATE pre_paciente SET
-						id_estado_civil					= ".$_SESSION['id_estado_civil'].",
+						gl_nacionalidad					= ".$parametros['gl_nacionalidad'].",
+						gl_direccion_alternativa		= ".$parametros['gl_direccion_alternativa'].",
+						id_estado_civil					= ".$parametros['id_estado_civil'].",
 						nr_hijos						= ".$parametros['nr_hijos'].",
 						id_tipo_ocupacion				= ".$parametros['id_tipo_ocupacion'].",
 						id_tipo_escolaridad				= ".$parametros['id_tipo_escolaridad'].",
+						fc_reconoce						= ".$parametros['fc_reconoce'].",
+						fc_hora_reconoce				= ".$parametros['fc_hora_reconoce'].",
 						gl_acompañante					= ".$parametros['gl_acompañante'].",
 						fc_actualiza					= now()
 					WHERE id_paciente = ".$parametros['id_paciente']."

@@ -38,6 +38,11 @@ class Reconoce extends Controller {
     protected $_DAOPacienteExamen;
 	protected $_DAOTipoVinculo;
 	protected $_DAOTipoRiesgo;
+	protected $_DAOTipoGenero;
+	protected $_DAOTipoOrientacionSexual;
+	protected $_DAOTipoSexo;
+	protected $_DAOPacienteAgresor;
+	protected $_DAOPacienteDireccion;
 
     /**
      * Descripción: Constructor
@@ -52,6 +57,7 @@ class Reconoce extends Controller {
         $this->_DAORegion                   = $this->load->model("DAORegion");
         $this->_DAOComuna                   = $this->load->model("DAOComuna");
         $this->_DAOPaciente                 = $this->load->model("DAOPaciente");
+        $this->_DAOPacienteAgresor          = $this->load->model("DAOPacienteAgresor");
         $this->_DAOTipoOcupacion            = $this->load->model("DAOTipoOcupacion");
         $this->_DAOUsuario                  = $this->load->model("DAOUsuario");
         $this->_DAOTipoEscolaridad          = $this->load->model("DAOTipoEscolaridad");
@@ -60,6 +66,10 @@ class Reconoce extends Controller {
         $this->_DAOTipoViolencia            = $this->load->model("DAOTipoViolencia");
         $this->_DAOTipoRiesgo               = $this->load->model("DAOTipoRiesgo");
 		$this->_DAOTipoVinculo              = $this->load->model("DAOTipoVinculo");
+		$this->_DAOTipoGenero               = $this->load->model("DAOTipoGenero");
+		$this->_DAOTipoOrientacionSexual    = $this->load->model("DAOTipoOrientacionSexual");
+		$this->_DAOTipoSexo					= $this->load->model("DAOTipoSexo");
+		$this->_DAOPacienteDireccion		= $this->load->model("DAOPacienteDireccion");
     }
 	
 	/**
@@ -101,10 +111,20 @@ class Reconoce extends Controller {
         
         $arrTipoRiesgo = $this->_DAOTipoRiesgo->getLista();
 		$this->smarty->assign("arrTipoRiesgo", $arrTipoRiesgo);
+		
+		$arrSexo = $this->_DAOTipoSexo->getLista();
+		$this->smarty->assign("arrSexo", $arrSexo);
+		
+		$arrGenero = $this->_DAOTipoGenero->getLista();
+		$this->smarty->assign("arrGenero", $arrGenero);
+		
+		$arrOrientacion = $this->_DAOTipoOrientacionSexual->getLista();
+		$this->smarty->assign("arrOrientacion", $arrOrientacion);
 	
 		$arrTipoVinculo = $this->_DAOTipoVinculo->getLista();
 		$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);
         
+		$direccion = $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
     //Obtener Datos de la BD    
         $parametros = $this->request->getParametros();
         $id_registro = $parametros[0];
@@ -119,7 +139,7 @@ class Reconoce extends Controller {
         $this->smarty->assign('gl_nombres', $obj_registro->gl_nombres);
         $this->smarty->assign('gl_apellidos', $obj_registro->gl_apellidos);
         $this->smarty->assign('fc_nacimiento', $obj_registro->fc_nacimiento);
-        $this->smarty->assign('gl_direccion', $obj_registro->gl_direccion);
+        $this->smarty->assign('gl_direccion', $direccion->gl_direccion);
         $this->smarty->assign('edad', $edad);
         $this->smarty->assign('fc_reconoce', Fechas::fechaHoy());
         $this->smarty->assign('fc_hora', date('h:i'));
@@ -136,21 +156,34 @@ class Reconoce extends Controller {
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }
 	
+	/**
+	* guardar()
+	* Inserta datos del Agresor de la Paciente
+	* Y hace un Update con nuevos Datos de Paciente
+	* 
+	* @author	<david.guzman@cosof.cl>	08-03-2017
+	* 
+	* @param -
+	*
+	* @return booleanos -> correcto o error
+	*/   
 	public function guardar(){
 		header('Content-type: application/json');
 		$parametros = $this->_request->getParams();
-		$correcto = false;
-		$error = false;
+		$correcto = FALSE;
+		$error = FALSE;
 		
-		$id_paciente = $parametros['id_paciente'];
+	//	$id_paciente = $parametros['id_paciente'];
 		
-		//$bool_update1 = $this->_DAOPacienteAgresor->insertarAgresor($parametros);
-		//$bool_update2 = $this->_DAOPaciente->updatePaciente($parametros);
-		if ($bool_update) {
+		$bool_insert = $this->_DAOPacienteAgresor->insertarAgresor($parametros);
+		$bool_update = $this->_DAOPaciente->updatePaciente($parametros);
+		
+		if ($bool_update && $bool_insert) {
+			/*
 			$datos_evento['eventos_tipo'] = 12;
 			$datos_evento['id_paciente'] = $id_paciente;
-			$datos_evento['id_empa'] = $id_empa;
-			$datos_evento['gl_descripcion'] = "Empa modificado el : " . Fechas::fechaHoy();
+			$datos_evento['id_empa'] = 0;
+			$datos_evento['gl_descripcion'] = "Reconoce Agresor : " . Fechas::fechaHoy();
 			$datos_evento['bo_estado'] = 1;
 			$datos_evento['id_usuario_crea'] = $session->id;
 			$resp = $this->_DAOEvento->insEvento($datos_evento);
@@ -159,23 +192,11 @@ class Reconoce extends Controller {
 			} else {
 				$error = TRUE;
 			}
-			$finalizado = FALSE;
-			if ($finalizado) {
+			 */
+			$correcto = TRUE;
 
-				$datos_evento['eventos_tipo'] = 2;
-				$datos_evento['id_empa'] = $id_empa;
-				$datos_evento['gl_descripcion'] = "Empa finalizado el : " . Fechas::fechaHoy();
-				$datos_evento['bo_estado'] = 1;
-				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEvento->insEvento($datos_evento);
-				if ($resp) {
-					$correcto = TRUE;
-				} else {
-					$error = TRUE;
-				}
-			}
 		} else {
-			$error = true;
+			$error = TRUE;
 		}
 
 		$salida = array("error" => $error,

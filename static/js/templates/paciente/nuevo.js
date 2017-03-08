@@ -326,6 +326,7 @@ $("#chkAcepta").on('click', function (e) {
 		var inputextranjero	= $("#inputextranjero").val();
 
 		if(rut == '' || inputextranjero == ''){
+			
 			xModal.info('Debe ingresar un RUT o un Pasaporte.');
 		}else{
 
@@ -404,8 +405,8 @@ var Paciente = {
 							$("#mostrar_motivos_consulta").show();
 						}
 
-									$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Paciente/bitacora/"+data.id_paciente+"', 'Registro número : "+data.id_paciente+"', 85);");
-									$("#id_paciente").val(data.id_paciente);
+						$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Paciente/bitacora/"+data.id_paciente+"', 'Registro número : "+data.id_paciente+"', 85);");
+						$("#id_paciente").val(data.id_paciente);
 						$("#gl_grupo_tipo").val(data.gl_grupo_tipo);
 						$("#nombres").val(data.gl_nombres);
 						$("#apellidos").val(data.gl_apellidos);
@@ -447,7 +448,7 @@ var Paciente = {
 						} else {
 							$("#chkAcepta").prop("disabled", false);
 						}
-									$("#id_paciente").prop("disabled", false );
+						$("#id_paciente").prop("disabled", false );
 						$("#motivoconsulta").prop("disabled", false);
 						$("#fechaingreso").prop("disabled", false);
 						$("#horaingreso").prop("disabled", false);
@@ -464,7 +465,9 @@ var Paciente = {
 				}
 			});
 		} else {
-			xModal.info("Debe ingresar un RUT");
+			if ($('#chkextranjero').is(':checked') && inputextranjero === ""){
+				xModal.info("Debe ingresar por lo menos un número de pasaporte");
+			}
 		}
 	},
 	cargarCentroSaludporComuna: function (comuna, combo, centrosalud) {

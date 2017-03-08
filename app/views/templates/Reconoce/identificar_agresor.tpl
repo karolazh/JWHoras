@@ -17,7 +17,7 @@
 			<div class="panel-heading">
 				Datos de la Víctima {$botonAyudaPaciente}
 			</div>
-				<input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
+			<input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
 			<div class="panel-body">
                                 
                                 <div class="form-group">
@@ -30,18 +30,18 @@
 				</div>
                             
 				<div class="form-group">
-						<label for="gl_rut" class="control-label col-sm-3">RUT/RUN/Pasaporte</label>
-						<div class="col-sm-3">
-							<input type="text" name="gl_rut" id="gl_rut" value="{$gl_rut}"
-                                                               placeholder="Rut paciente" class="form-control" readonly>
-							<span class="help-block hidden fa fa-warning"></span>
-						</div>  
-                                                <label for="gl_nacionalidad" class="control-label col-sm-1">Nacionalidad:</label>
-						<div class="col-sm-3">
-							<input type="text" name="gl_nacionalidad" id="gl_nacionalidad"
-                                                                placeholder="Nacionalidad" class="form-control">
-							<span class="help-block hidden fa fa-warning"></span>
-						</div>
+					<label for="gl_rut" class="control-label col-sm-3">RUT/RUN/Pasaporte</label>
+					<div class="col-sm-3">
+						<input type="text" name="gl_rut" id="gl_rut" value="{$gl_rut}"
+							   placeholder="Rut paciente" class="form-control" readonly>
+						<span class="help-block hidden fa fa-warning"></span>
+					</div>  
+					<label for="gl_nacionalidad" class="control-label col-sm-1">Nacionalidad:</label>
+					<div class="col-sm-3">
+						<input type="text" name="gl_nacionalidad" id="gl_nacionalidad"
+							   placeholder="Nacionalidad" class="form-control">
+						<span class="help-block hidden fa fa-warning"></span>
+					</div>
 				</div>
 
 				<div class="form-group">
@@ -132,9 +132,9 @@
                                                        placeholder="Fecha" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
-                                        <label for="fc_hora" class="control-label col-sm-1">Hora</label>
+                                        <label for="fc_hora_reconoce" class="control-label col-sm-1">Hora</label>
 					<div class="col-sm-3">					
-						<input type="time" name="fc_hora" id="fc_hora" value="{$fc_hora}"
+						<input type="time" name="fc_hora_reconoce" id="fc_hora_reconoce" value="{$fc_hora}"
                                                        placeholder="Hora" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
@@ -185,17 +185,17 @@
 						</div>
 						<div class="col-lg-3"></div>
 						<div class="form-group">
-							<label for="gl_tipo_riesgo" class="control-label">Nivel de Riesgo</label>
+							<label for="id_tipo_riesgo" class="control-label">Nivel de Riesgo</label>
 						</div>
 						<div class="col-lg-3"></div>
 						<div class="form-group col-lg-6">&nbsp;&nbsp;
-							<label><input type="radio" class="gl_tipo_riesgo" id="gl_tipo_riesgo_0" name="gl_tipo_riesgo"
+							<label><input type="radio" class="id_tipo_riesgo" id="id_tipo_riesgo_1" name="id_tipo_riesgo"
 										  value="0">Leve</label>&nbsp;&nbsp;
-							<label><input type="radio" class="gl_tipo_riesgo" id="gl_tipo_riesgo_1" name="gl_tipo_riesgo"
+							<label><input type="radio" class="id_tipo_riesgo" id="id_tipo_riesgo_2" name="id_tipo_riesgo"
 									   value="0">Moderado</label>&nbsp;&nbsp;
-							<label><input type="radio" class="gl_tipo_riesgo" id="gl_tipo_riesgo_2" name="gl_tipo_riesgo"
+							<label><input type="radio" class="id_tipo_riesgo" id="id_tipo_riesgo_3" name="id_tipo_riesgo"
 									   value="0">Grave</label>&nbsp;&nbsp;
-							<label><input type="radio" class="gl_tipo_riesgo" id="gl_tipo_riesgo_3" name="gl_tipo_riesgo"
+							<label><input type="radio" class="id_tipo_riesgo" id="id_tipo_riesgo_4" name="id_tipo_riesgo"
 									   value="0">Extremo</label>
 						</div>
 						
@@ -338,8 +338,8 @@
 				<div class="form-group">
 					<label for="nr_ingreso_mensual" class="control-label col-sm-3">Ingresos Mensuales Estimados</label>
 					<div class="col-sm-3">
-						<input type="text" name="nr_ingreso_mensual" id="nr_ingreso_mensual" value=""
-                                                       placeholder="Ingresos Mensuales Estimados" class="form-control" />
+						<input type="number" name="nr_ingreso_mensual" id="nr_ingreso_mensual" min="0" value=""
+                               placeholder="Ingresos Mensuales Estimados" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 				</div>
@@ -350,7 +350,7 @@
 						<select class="form-control" id="id_tipo_sexo" name="id_tipo_sexo">
                                                     <option value="0">Seleccione Sexo</option>
                                                     {foreach $arrSexo as $item}
-                                                        <option value="{$item->id_sexo}" >{$item->gl_sexo}</option>
+                                                        <option value="{$item->id_tipo_sexo}" >{$item->gl_tipo_sexo}</option>
                                                     {/foreach}
                                                 </select>
 						<span class="help-block hidden fa fa-warning"></span>
@@ -360,7 +360,7 @@
 						<select class="form-control" id="id_tipo_genero" name="id_tipo_genero">
                                                     <option value="0">Seleccione Género</option>
                                                     {foreach $arrGenero as $item}
-                                                        <option value="{$item->id_genero}" >{$item->gl_genero}</option>
+                                                        <option value="{$item->id_tipo_genero}" >{$item->gl_tipo_genero}</option>
                                                     {/foreach}
                                                 </select>
 						<span class="help-block hidden fa fa-warning"></span>

@@ -2,7 +2,7 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
 <section class="content-header">
-    <h1><i class="fa fa-book"></i>&nbsp; {$titulo} </h1>
+    <h1><i class="fa fa-book"></i>&nbsp; Pacientes</h1>
     <div class="col-md-12 text-right">
         <button type="button" id="ingresar" onclick="location.href = '{$base_url}/Paciente/nuevo'"
                 class="btn btn-success">
@@ -79,15 +79,6 @@
 											data-toggle="tooltip" title="Reconoce Violencia">
 											<i class="fa fa-bullhorn"></i>
 										</button>
-									{/if}
-									{if $mostrar_plan == 1}
-									<button type="button"
-										onClick="xModal.open('{$smarty.const.BASE_URI}/Medico/plan_tratamiento/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
-										data-toggle="tooltip" 
-										title="Plan Tratamiento" 
-										class="btn btn-xs btn-default">
-										<i class="fa fa-medkit"></i>
-									</button>
 									{/if}
 									<button type="button"
 										onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/bitacora/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
