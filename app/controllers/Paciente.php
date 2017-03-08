@@ -931,42 +931,45 @@ class Paciente extends Controller {
 	/**
 	 * Descripción : Generar PDF de Consentimiento con los Datos del Paciente
 	 * @author: Victor Retamal <victor.retamal@cosof.cl>
-	 * @param 
+	 * @param array Con los datos necesarios para generar el Consentimiento.
 	 * @return PDF
 	 */
 	public function generarConsentimiento() {
 		$this->load->lib('Mpdf', false);
-		//header('Content-type: application/pdf');
-		//header("Content-Disposition: inline; filename='$filename'");
-		//echo crear_mpdf($html, $filename, false, 'D');
-		$param = $this->_request->getParams();
-		$correcto = false;
-		$base64 = '';
-		$nombre = $param['nombres'] . ' ' . $param['apellidos'];
-		$rut = $param['rut'];
-		$gl_pasaporte = $param['inputextranjero'];
-		$cod_fonasa = $param['cod_fonasa'];
-		$filename = 'Consentimiento_' . $rut . '.pdf';
+		$param			= $this->_request->getParams();
+		$correcto		= false;
+		$base64			= '';
+		$nombre			= $param['nombres'] . ' ' . $param['apellidos'];
+		$rut			= $param['rut'];
+		$gl_pasaporte	= $param['inputextranjero'];
+		$codigo_fonasa	= $param['gl_codigo_fonasa'];
+
+		if(!empty($rut)){
+			$filename	= 'Consentimiento_' . $rut . '.pdf';
+		}else{
+			$filename	= 'Consentimiento_' . $codigo_fonasa . '.pdf';
+		}
 
 		$this->smarty->assign('nombre_paciente', $nombre);
 		$this->smarty->assign('rut_paciente', $rut);
-		$this->smarty->assign('gl_pasaporte', $rut);
-		$this->smarty->assign('cod_fonasa', $cod_fonasa);
+		$this->smarty->assign('run_pasaporte', $gl_pasaporte);
+		$this->smarty->assign('codigo_fonasa', $codigo_fonasa);
 		$this->smarty->assign('fecha_actual', date('d-m-Y'));
 		$this->smarty->assign('nombre_usuario', $_SESSION['nombre']);
 		$this->smarty->assign('rut_usuario', $_SESSION['rut']);
-		$html = $this->smarty->fetch('pdf/consentimiento.tpl');
 
-		$base64 = base64_encode(crear_mpdf($html, $filename, false, 'S'));
+		$html			= $this->smarty->fetch('pdf/consentimiento.tpl');
+
+		$base64			= base64_encode(crear_mpdf($html, $filename, false, 'S'));
 		if ($base64) {
-			$correcto = true;
+			$correcto	= true;
 		}
-		$salida = array(
-			"correcto" => $correcto,
-			"filename" => $filename,
-			"base64" => $base64
-		);
-		$json = Zend_Json::encode($salida);
+		$salida			= array(
+								"correcto"	=> $correcto,
+								"filename"	=> $filename,
+								"base64"	=> $base64
+							);
+		$json			= Zend_Json::encode($salida);
 
 		echo $json;
 	}
