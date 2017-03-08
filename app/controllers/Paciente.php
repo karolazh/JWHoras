@@ -67,25 +67,10 @@ class Paciente extends Controller {
 
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
-		/*
-		  $sesion = New Zend_Session_Namespace("usuario_carpeta");
-		  $this->smarty->assign("id_usuario", $sesion->id);
-		  $this->smarty->assign("rut", $sesion->rut);
-		  $this->smarty->assign("usuario", $sesion->usuario);
-		 */
 
-		/*
-		 * Si tengo perfil 1="ADMIN" / 3="GESTOR NACIONAL" puedo ver todas las DAU
-		 * Si tengo perfil 2="ENFERMERA" puedo ver solo las DAU ingresadas en mi institución
-		 * Si tengo perfil 4="GESTOR REGIONAL" puedo ver solo las DAU correspondientes a la región
-		 * REALIZAR FUNCIÓN PARA LISTAR SEGÚN PERFIL
-		 */
-		 
-		 //print_r($_SESSION);die();
 		$arr = $this->_DAOPaciente->getListaDetalle();
 		$this->smarty->assign('arrResultado', $arr);
 
-		//llamado al template
 		$this->_display('Paciente/index.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/Paciente/index.js");
 	}
@@ -205,12 +190,6 @@ class Paciente extends Controller {
 	 */
 	public function nuevo() {
 		Acceso::redireccionUnlogged($this->smarty);
-		/*
-		  $sesion = New Zend_Session_Namespace("usuario_carpeta");
-		  $this->smarty->assign("id_usuario", $sesion->id);
-		  $this->smarty->assign("rut", $sesion->rut);
-		  $this->smarty->assign("usuario", $sesion->usuario);
-		 */
 
 		unset($_SESSION['adjuntos']);
 
