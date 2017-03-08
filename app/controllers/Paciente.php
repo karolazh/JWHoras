@@ -356,7 +356,7 @@ class Paciente extends Controller {
 
 			$parametros['bo_estado']		= 1;
 			$parametros['id_usuario_crea']	= $_SESSION['id'];
-			$parametros['fc_crea']			= "now()";
+			$parametros['fc_crea']			= "now()";			
 			$id_direccion					= $this->_DAOPacienteDireccion->insertarDireccion($parametros);
 
 		} else {
