@@ -93,7 +93,7 @@ class Empa extends Controller{
 		$this->smarty->assign("fc_empa", date('Y-m-d'));
 		//Cargar Datos Paciente
 		$registro = $this->_DAOPaciente->getById($id_paciente);
-		$direccion = $this->_DAOPacienteDireccion->getById($id_paciente);
+		$direccion = $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
 		$this->smarty->assign("gl_rut", $registro->gl_rut);
 		$this->smarty->assign("gl_nombres", $registro->gl_nombres);
 		$this->smarty->assign("gl_apellidos", $registro->gl_apellidos);
