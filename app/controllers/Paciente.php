@@ -80,6 +80,8 @@ class Paciente extends Controller {
 		 * Si tengo perfil 4="GESTOR REGIONAL" puedo ver solo las DAU correspondientes a la región
 		 * REALIZAR FUNCIÓN PARA LISTAR SEGÚN PERFIL
 		 */
+		 
+		 print_r($_SESSION);die();
 		$arr = $this->_DAOPaciente->getListaDetalle();
 		$this->smarty->assign('arrResultado', $arr);
 
@@ -242,13 +244,16 @@ class Paciente extends Controller {
 		$correcto		= false;
 		$error			= false;
 		$gl_grupo_tipo	= 'Control';
+		$id_tipo_grupo	= 1;
 		$datos_evento	= array();
 		$count			= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
 
-		if ($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Tratamiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
+		if ($parametros['edad'] > 15 AND $_SESSION['id_tipo_grupo'] == 2 AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
 			$gl_grupo_tipo = 'Tratamiento';
+			$id_tipo_grupo = 2;
 		}
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
+		$parametros['id_tipo_grupo'] = $id_tipo_grupo;
 
 		$id_paciente	= $this->_DAOPaciente->insertarPaciente($parametros);
 		if ($id_paciente) {

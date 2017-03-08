@@ -110,7 +110,7 @@ class Login extends Controller {
 
 				$_SESSION['id']				= $usuario->id_usuario;
 				$_SESSION['perfil']			= $usuario->id_perfil;
-				$_SESSION['gl_grupo_tipo']	= $usuario->gl_grupo_tipo;
+				$_SESSION['id_tipo_grupo']	= $usuario->id_tipo_grupo;
 				$_SESSION['id_institucion']	= $usuario->id_institucion;
 				$_SESSION['nombre']			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
 				$_SESSION['rut']			= $usuario->gl_rut;
@@ -220,7 +220,7 @@ class Login extends Controller {
 
 					$_SESSION['id']				= $usuario->id_usuario;
 					$_SESSION['perfil']			= $usuario->id_perfil;
-					$_SESSION['gl_grupo_tipo']	= $usuario->gl_grupo_tipo;
+					$_SESSION['id_tipo_grupo']	= $usuario->id_tipo_grupo;
 					$_SESSION['id_institucion']	= $usuario->id_institucion;
 					$_SESSION['nombre']			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
 					$_SESSION['rut']			= $usuario->gl_rut;
@@ -279,8 +279,8 @@ class Login extends Controller {
         $this->_addJavascript(STATIC_FILES . 'js/templates/login/actualizar_password.js');
         $this->_display('login/actualizar.tpl');
     }
-            /* obtiene nombre de comuna */
-    //*** 20170201 - Funcion guarda nueva password ***//
+
+    /** 20170201 - Funcion guarda nueva password */
     public function ajax_guardar_nuevo_password() {
         header('Content-type: application/json');
 
