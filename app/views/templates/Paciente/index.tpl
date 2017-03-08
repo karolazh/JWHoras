@@ -2,7 +2,7 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
 <section class="content-header">
-    <h1><i class="fa fa-book"></i>&nbsp; Registros</h1>
+    <h1><i class="fa fa-book"></i>&nbsp; Pacientes</h1>
     <div class="col-md-12 text-right">
         <button type="button" id="ingresar" onclick="location.href = '{$base_url}/Paciente/nuevo'"
                 class="btn btn-success">
@@ -20,7 +20,7 @@
 					<thead>
 						<tr role="row">
 							<!-- th class="text-center" width="1%">ID</th -->
-							<th class="text-center" width="10%">RUT Paciente</th>
+							<th class="text-center" width="10%">RUT / Pasaporte</th>
 							<th class="text-center" width="5%">Fecha Registro</th>
 							<th class="text-center" width="25%">Nombre</th>
 							<th class="text-center" width="10%">Comuna</th>
@@ -45,53 +45,49 @@
 								<td class="text-center" nowrap> {$item->gl_nombre_estado_caso} </td>
 								<td class="text-center" nowrap> {$item->nr_motivo_consulta} </td>
 								<td class="text-center" nowrap> 
-										{if $item->bo_reconoce == 1}
-											<span class="label label-danger">Si</span>
-										{else}								
-											<span class="label label-success">No</span>										
-										{/if}								
+									{if $item->bo_reconoce == 1}
+										<span class="label label-danger">Si</span>
+									{else}
+										<span class="label label-success">No</span>
+									{/if}
 								</td>
-								<td class="text-center" nowrap> 
-										{if $item->bo_acepta_programa == 1}
-											<span class="label label-success">Si</span>
-										{else}								
-											<span class="label label-danger">No</span>										
-										{/if}																
-								
+								<td class="text-center" nowrap>
+									{if $item->bo_acepta_programa == 1}
+										<span class="label label-success">Si</span>
+									{else}
+										<span class="label label-danger">No</span>
+									{/if}								
 								</td>
 								<td class="text-center" nowrap> {$item->nr_dias_primera_visita} </td>
 								<td class="text-center" nowrap>
-									
-										<button type="button" 
-												onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/ver/{$item->id_paciente}', 'Detalle Registro', 85);" 
-												data-toggle="tooltip" 
-												class="btn btn-xs btn-info"
-												title="Ver Registro">
-											<i class="fa fa-search"></i>
+									<button type="button" 
+										onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/ver/{$item->id_paciente}', 'Detalle Registro', 85);" 
+										data-toggle="tooltip" 
+										class="btn btn-xs btn-info"
+										title="Ver Registro">
+										<i class="fa fa-search"></i>
+									</button>
+									<button type="button" 
+										class="btn btn-xs btn-success" 
+										onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_paciente}';" 
+										data-toggle="tooltip" title="Formulario EMPA">
+										<i class="fa fa-book"></i>
+									</button>
+									{if $item->bo_reconoce == 0}
+										<button type="button" class="btn btn-xs btn-danger" 
+											onClick="location.href='{$base_url}/Reconoce/identificarAgresor/{$item->id_paciente}';"
+											data-toggle="tooltip" title="Reconoce Violencia">
+											<i class="fa fa-bullhorn"></i>
 										</button>
-                                                                                <button type="button" 
-                                                                                                class="btn btn-xs btn-success" 
-                                                                                                onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_paciente}';" 
-                                                                                                data-toggle="tooltip" title="Formulario EMPA">
-                                                                                        <i class="fa fa-book"></i>
-                                                                                </button>
-										{if $item->bo_reconoce == 0}
-											<button type="button" class="btn btn-xs btn-danger" 
-													onClick="location.href='{$base_url}/Reconoce/identificarAgresor/{$item->id_paciente}';"
-													data-toggle="tooltip" title="Reconoce Violencia">
-												<i class="fa fa-bullhorn"></i>
-											</button>
-										{/if}
-										
-										<button type="button"
-												onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/bitacora/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
-												data-toggle="tooltip" 
-												title="Revisar bitácora" 
-												class="btn btn-xs btn-primary">
-											<i class="fa fa-info-circle"></i>
-										</button>
-												
-								</td>          
+									{/if}
+									<button type="button"
+										onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/bitacora/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
+										data-toggle="tooltip" 
+										title="Revisar bitácora" 
+										class="btn btn-xs btn-primary">
+										<i class="fa fa-info-circle"></i>
+									</button>
+								</td>
 							</tr>
 						{/foreach}
 					</tbody>

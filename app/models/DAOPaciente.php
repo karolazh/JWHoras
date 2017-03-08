@@ -95,7 +95,7 @@ class DAOPaciente extends Model{
 							paciente.gl_nombres,
 							paciente.gl_apellidos,
 							date_format(paciente.fc_crea,'%d-%m-%Y') as fc_crea,
-							IFNULL(paciente.gl_rut,paciente.gl_run_pass) as gl_identificacion,
+							IF(paciente.bo_extranjero=1,paciente.gl_run_pass,paciente.gl_rut) as gl_identificacion,
 							i.gl_nombre_establecimiento as gl_institucion,
 							c.gl_nombre_comuna,
 							e.gl_nombre_estado_caso,

@@ -25,7 +25,7 @@
 		$gl_grupo_tipo	= 'Control';
 	}
 		
-    public function getByIdPaciente($id_paciente){
+     function getByIdPaciente0($id_paciente){
         $query	= "	SELECT
                         examen.id_paciente_examen ,
                         examen.id_tipo_examen,
@@ -78,7 +78,7 @@
             $gl_grupo_tipo  = 'Control';
 	}
 		
-    public function getByIdPaciente($id_paciente){
+     function getByIdPaciente($id_paciente){
         $query	=   "SELECT
                         examen.id_paciente_examen ,
                         examen.id_tipo_examen,
@@ -131,7 +131,7 @@
 		$gl_grupo_tipo = 'Control';
 	}
 
-	public function getByIdPaciente($id_paciente){
+	 function getByIdPaciente2($id_paciente){
 		$query = "	SELECT
 							examen.id_paciente_examen ,
 							examen.id_tipo_examen,
@@ -183,7 +183,7 @@
 			$gl_grupo_tipo			= 'Control';
 	}
 		
-    public function getByIdPaciente($id_paciente){
+     function getByIdPaciente3($id_paciente){
         $query	= "	SELECT
 								examen.id_paciente_examen ,
 								examen.id_tipo_examen,
