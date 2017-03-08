@@ -117,6 +117,12 @@ class Empa extends Controller{
 			$gl_circunferencia_abdominal = intval($empa->gl_circunferencia_abdominal);
 			$this->smarty->assign("gl_circunferencia_abdominal", $gl_circunferencia_abdominal);
 		}
+		if ($empa->bo_embarazo == 1) {
+			$this->smarty->assign("bo_embarazo_1", 'checked');
+		} else if ($empa->bo_consume_alcohol == 0) {
+			$this->smarty->assign("bo_embarazo_0", 'checked');
+		}
+		
 		if ($empa->bo_consume_alcohol == 1) {
 			$this->smarty->assign("bo_consume_alcohol_1", 'checked');
 		} else if ($empa->bo_consume_alcohol == 0) {

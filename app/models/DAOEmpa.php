@@ -107,6 +107,7 @@ class DAOEmpa extends Model{
 						id_institucion					= ".$_SESSION['id_institucion'].",
 						nr_ficha						= ".$parametros['nr_ficha'].",
 						fc_empa							= ".$parametros['fc_empa'].",
+						bo_embarazo						= ".$parametros['bo_embarazo'].",
 						bo_consume_alcohol				= ".$parametros['bo_consume_alcohol'].",
 						gl_puntos_audit					= ".$parametros['gl_puntos_audit'].",
 						bo_fuma							= ".$parametros['bo_fuma'].",
@@ -170,6 +171,7 @@ class DAOEmpa extends Model{
         $query	= "	SELECT 
 						pre_empa.*,
 						IFNULL(fc_mamografia,0) as fc_mamografia,
+						IFNULL(bo_embarazo,-1) as bo_embarazo,
 						IFNULL(bo_consume_alcohol,-1) as bo_consume_alcohol,
 						IFNULL(bo_fuma,-1) as bo_fuma,
 						IFNULL(bo_trabajadora_reclusa,-1) as bo_trabajadora_reclusa,
