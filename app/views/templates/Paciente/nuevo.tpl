@@ -147,13 +147,7 @@
 			<div class="panel-heading">Datos de Contacto {$botonAyudaContacto}</div>
 			<div class="panel-body">
 				<div class="col-md-6 col-sm-12">
-					<div class="form-group">
-						<label for="direccion" class="control-label col-sm-4">Dirección (*)</label>
-						<div class="col-sm-8">
-							<input type="text" name="direccion" id="direccion" value="" onblur="validarVacio(this, 'Por favor Ingrese Dirección')" onkeyup="validarVacio(this, 'Por favor Ingrese Dirección')" placeholder="Dirección" class="form-control"/>
-							<span class="help-block hidden fa fa-warning"></span>
-						</div>
-					</div>	
+
 					<div class="form-group">
 						<label class="control-label col-sm-4">Región (*)</label>
 						<div class="col-sm-6">
@@ -175,6 +169,23 @@
 								<option value="0">Seleccione una Comuna</option>
 							</select>
 							<span class="help-block hidden fa fa-warning"></span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="direccion" class="control-label col-sm-4">Dirección (*)</label>
+						<div class="col-sm-8">
+							<input type="text" name="direccion" id="direccion" value="" onblur="validarVacio(this, 'Por favor Ingrese Dirección')" onkeyup="validarVacio(this, 'Por favor Ingrese Dirección')" placeholder="Dirección" class="form-control"/>
+							<span class="help-block hidden fa fa-warning"></span>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="centrosalud" class="control-label col-sm-4">Centro de Salud</label>
+						<div class="col-sm-6">
+							<select for="centrosalud" class="form-control" id="centrosalud" name="centrosalud" onblur="validarVacio(this, 'Por favor Seleccione una Comuna')">
+								<option value="0">Seleccione un Centro de Salud</option>
+							</select>
 						</div>
 					</div>
 
@@ -203,14 +214,6 @@
 						<div class="col-sm-6">
 							<input type="text" name="email" id="email" value="" onblur="validaEmail(this, 'Correo Inválido!')" placeholder="E-mail" class="form-control"/>
 							<span class="help-block hidden"></span>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="centrosalud" class="control-label col-sm-4">Centro de Salud</label>
-						<div class="col-sm-6">
-							<select for="centrosalud" class="form-control" id="centrosalud" name="centrosalud" onblur="validarVacio(this, 'Por favor Seleccione una Comuna')">
-								<option value="0">Seleccione un Centro de Salud</option>
-							</select>
 						</div>
 					</div>
 					<div class="form-group">
