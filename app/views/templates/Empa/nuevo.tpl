@@ -468,27 +468,28 @@
                                               id="bo_pap_realizado_1" value="1" {$bo_pap_realizado_1}>SI</label>
                             </div>
                         </div>
-                        <div class="form-group" id="ultimo_pap" style="{if $bo_pap_realizado_1 != 'checked'}display: none{/if}">         
-                            <label class="control-label required col-sm-3">Fecha &uacute;ltimo PAP</label>
-                            <div class="col-sm-2">
-                                <input type="date" name="fc_ultimo_pap" id="fc_ultimo_pap" 
-                                       value="{$fc_ultimo_pap}" placeholder="" class="form-control hidden"/>
+                                <input type="date" name="fc_ultimo_pap" id="fc_ultimo_pap" value="{$fc_ultimo_pap}" placeholder="" class="form-control hidden"/>
 								<input type="text" id="ultimo_pap_ano" value="{$fc_ultimo_pap_ano}" class="form-control hidden"/>
 								<input type="text" id="ultimo_pap_mes" value="{$fc_ultimo_pap_mes}" class="form-control hidden"/>
-								<select class="form-control" id="fc_ultimo_pap_ano" name="fc_ultimo_pap_ano">
-									<option value="0">Seleccione Año</option>
-									{for $i = 2017 to 1900 step=-1}
-										<option value="{$i}" >{$i}</option>
-									{/for}
-								</select>
-								<select class="form-control" id="fc_ultimo_pap_mes" name="fc_ultimo_pap_mes">
+								
+                        <div class="form-group" id="ultimo_pap" style="{if $bo_pap_realizado_1 != 'checked'}display: none{/if}">         
+                            <label class="control-label required col-sm-3">Fecha &uacute;ltimo PAP</label>
+							<div class="col-sm-1">	
+								<select class="form-control col-sm-1" id="fc_ultimo_pap_mes" name="fc_ultimo_pap_mes">
 									<option value="0">Seleccione Mes</option>
 									{foreach $arrMes as $item}
 										<option value="{$item->id_mes}" >{$item->gl_mes}</option>
 									{/foreach}
 								</select>
-                                <span class="help-block hidden"></span>
                             </div>
+                            <div class="col-sm-1">
+								<select class="form-control col-sm-1" id="fc_ultimo_pap_ano" name="fc_ultimo_pap_ano">
+									<option value="0">Seleccione Año</option>
+									{for $i = 2017 to 1900 step=-1}
+										<option value="{$i}" >{$i}</option>
+									{/for}
+								</select>
+							</div>	
                             &nbsp;&nbsp;
                             <button type="button" id="verAgendaPap1" 
                                     class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
@@ -577,7 +578,15 @@
                         </div>
                         <div class="form-group" id="fecha_mamografia" style="{if $bo_mamografia_realizada_1 != 'checked'}display: none{/if}">
                             <label class="control-label required col-sm-3">Fecha Mamografía</label>
-                            <div class="col-sm-2">
+							<div class="col-sm-1">
+								<select class="form-control" id="fc_mamografia_mes" name="fc_mamografia_mes">
+									<option value="0">Seleccione Mes</option>
+									{foreach $arrMes as $item}
+										<option value="{$item->id_mes}" >{$item->gl_mes}</option>
+									{/foreach}
+								</select>
+                            </div>
+                            <div class="col-sm-1">
                                 <input type="date" name="fc_mamografia" id="fc_mamografia" value="" 
                                        placeholder="" class="form-control hidden"/>
 								<input type="text" id="mamografia_ano" value="{$fc_mamografia_ano}" class="form-control hidden"/>
@@ -588,13 +597,7 @@
 										<option value="{$i}" >{$i}</option>
 									{/for}
 								</select>
-								<select class="form-control" id="fc_mamografia_mes" name="fc_mamografia_mes">
-									<option value="0">Seleccione Mes</option>
-									{foreach $arrMes as $item}
-										<option value="{$item->id_mes}" >{$item->gl_mes}</option>
-									{/foreach}
-								</select>
-                            </div>
+							</div>
                         </div>
                         <div class="form-group" id="mam_vigente" style="{if $fc_mamografia_ano == 0 and $fc_mamografia_mes == 0}display: none{/if}">    
                             <label class="control-label required col-sm-3">¿Mamografía Vigente?</label>

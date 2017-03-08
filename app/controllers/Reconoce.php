@@ -156,6 +156,17 @@ class Reconoce extends Controller {
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }
 	
+	/**
+	* guardar()
+	* Inserta datos del Agresor de la Paciente
+	* Y hace un Update con nuevos Datos de Paciente
+	* 
+	* @author	<david.guzman@cosof.cl>	08-03-2017
+	* 
+	* @param -
+	*
+	* @return booleanos -> correcto o error
+	*/   
 	public function guardar(){
 		header('Content-type: application/json');
 		$parametros = $this->_request->getParams();
