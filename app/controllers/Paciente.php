@@ -23,14 +23,10 @@
 class Paciente extends Controller {
 
 	protected $_DAORegion;
-	protected $_DAOComuna;
 	protected $_DAOPaciente;
 	protected $_DAOTipoEgreso;
-	protected $_DAOPacienteEstado;
 	protected $_DAOPrevision;
 	protected $_DAOPacienteRegistro;
-	protected $_DAOUsuario;
-	protected $_DAOCentroSalud;
 	protected $_DAOEvento;
 	protected $_DAOEventoTipo;
 	protected $_DAOAdjunto;
@@ -47,14 +43,10 @@ class Paciente extends Controller {
 		$this->load->lib('Seguridad', false);
 
 		$this->_DAORegion				= $this->load->model("DAORegion");
-		$this->_DAOComuna				= $this->load->model("DAOComuna");
 		$this->_DAOPaciente				= $this->load->model("DAOPaciente");
 		$this->_DAOTipoEgreso			= $this->load->model("DAOTipoEgreso");
-		$this->_DAOPacienteEstado		= $this->load->model("DAOPacienteEstado");
 		$this->_DAOPrevision			= $this->load->model("DAOPrevision");
 		$this->_DAOPacienteRegistro		= $this->load->model("DAOPacienteRegistro");
-		$this->_DAOUsuario				= $this->load->model("DAOUsuario");
-		$this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
 		$this->_DAOEvento				= $this->load->model("DAOEvento");
 		$this->_DAOEventoTipo			= $this->load->model("DAOEventoTipo");
 		$this->_DAOAdjunto				= $this->load->model("DAOAdjunto");
