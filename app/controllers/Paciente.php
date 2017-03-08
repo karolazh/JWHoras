@@ -62,6 +62,7 @@ class Paciente extends Controller {
 
 		$arr = $this->_DAOPaciente->getListaDetalle();
 		$this->smarty->assign('arrResultado', $arr);
+		$this->smarty->assign('titulo', 'Pacientes');
 
 		$this->_display('Paciente/index.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/Paciente/index.js");

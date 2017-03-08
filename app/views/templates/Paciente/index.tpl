@@ -2,7 +2,7 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
 <section class="content-header">
-    <h1><i class="fa fa-book"></i>&nbsp; Pacientes</h1>
+    <h1><i class="fa fa-book"></i>&nbsp; {$titulo} </h1>
     <div class="col-md-12 text-right">
         <button type="button" id="ingresar" onclick="location.href = '{$base_url}/Paciente/nuevo'"
                 class="btn btn-success">
