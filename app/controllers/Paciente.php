@@ -352,6 +352,7 @@ class Paciente extends Controller {
 				$datos_evento['gl_descripcion']	= "Reconoce violencia con fecha : " . Fechas::fechaHoy();
 				$resp							= $this->_DAOEvento->insEvento($datos_evento);
 			}
+			$parametros['id_paciente'] = $id_paciente;
 			$parametros['bo_estado'] = 1;
 			$parametros['id_usuario_crea'] = $session->id;
 			$parametros['fc_crea'] = "now()";
@@ -933,7 +934,7 @@ class Paciente extends Controller {
 	 * @return PDF
 	 */
 	public function generarConsentimiento() {
-		$this->load->lib('MPdf', false);
+		$this->load->lib('Mpdf', false);
 		//header('Content-type: application/pdf');
 		//header("Content-Disposition: inline; filename='$filename'");
 		//echo crear_mpdf($html, $filename, false, 'D');
