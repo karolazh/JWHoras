@@ -87,6 +87,8 @@ class DAOPacienteDireccion extends Model {
 		$query	= "	INSERT INTO ".$this->_tabla."
 						(
 						id_paciente,
+						id_comuna,
+						id_region,
 						gl_direccion,
 						gl_latitud,
 						gl_longitud,
@@ -99,6 +101,8 @@ class DAOPacienteDireccion extends Model {
 					VALUES
 						(
 						".$parametros['id_paciente'].",
+						".$parametros['comuna'].",
+						".$parametros['region'].",
 						'".$parametros['direccion']."',
 						'".$parametros['gl_latitud']."',
 						'".$parametros['gl_longitud']."',
