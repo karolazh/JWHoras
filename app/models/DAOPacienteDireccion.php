@@ -113,9 +113,9 @@ class DAOPacienteDireccion extends Model {
 						now()
 						)
                     ";
-
+		
         if ($this->db->execQuery($query)) {
-            return $this->db->getLastId();
+			return $this->db->getLastId();
         } else {
             return NULL;
         }
