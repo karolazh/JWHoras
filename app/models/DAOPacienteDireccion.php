@@ -177,6 +177,8 @@ class DAOPacienteDireccion extends Model {
                         pac.id_paciente,
                         com.id_comuna,
                         com.gl_nombre_comuna,
+                        pro.id_provincia,
+                        pro.gl_nombre_provincia,
                         reg.id_region,
                         reg.gl_nombre_region,
                         pac.gl_direccion, 
@@ -186,20 +188,20 @@ class DAOPacienteDireccion extends Model {
                         pac.id_usuario_crea,
                         usr.gl_rut,
                         concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario,
-                        date_format(pac.fc_crea,'%d-%m-%Y') AS fc_crea,
-                        pac.fc_crea
+                        date_format(pac.fc_crea,'%d-%m-%Y') AS fc_crea
                     FROM pre_paciente_direccion pac
                     LEFT JOIN pre_region reg ON reg.id_region = pac.id_region
                     LEFT JOIN pre_comuna com ON com.id_comuna = pac.id_comuna
+                    LEFT JOIN pre_provincia pro ON pro.id_provincia = com.id_provincia
                     LEFT JOIN pre_usuario usr ON usr.id_usuario = pac.id_usuario_crea
-                    WHERE pac.id_paciente = 0
+                    WHERE pac.id_paciente = ?
                     ORDER BY fc_crea DESC";
 
         $param	= array($id_paciente);
         $result	= $this->db->getQuery($query, $param);
 
         if($result->numRows>0){
-            return $result->rows;
+            return $result;
         }else{
             return NULL;
         }
@@ -220,6 +222,8 @@ class DAOPacienteDireccion extends Model {
                         pac.id_paciente,
                         com.id_comuna,
                         com.gl_nombre_comuna,
+                        pro.id_provincia,
+                        pro.gl_nombre_provincia,
                         reg.id_region,
                         reg.gl_nombre_region,
                         pac.gl_direccion, 
@@ -231,6 +235,7 @@ class DAOPacienteDireccion extends Model {
                     FROM pre_paciente_direccion pac
                     LEFT JOIN pre_region reg ON reg.id_region = pac.id_region
                     LEFT JOIN pre_comuna com ON com.id_comuna = pac.id_comuna
+                    LEFT JOIN pre_provincia pro ON pro.id_provincia = com.id_provincia
                     WHERE pac.id_paciente = ?
                     AND pac.bo_estado = 1
                     ORDER BY fc_crea DESC
@@ -239,8 +244,8 @@ class DAOPacienteDireccion extends Model {
         $param	= array($id_paciente);
         $result	= $this->db->getQuery($query, $param);
 
-        if($result->numRows>0){
-            return $result->rows;
+        if($result->numRows > 0){
+            return $result->rows->row_0;
         }else{
             return NULL;
         }

@@ -42,6 +42,8 @@ class Reconoce extends Controller {
 	protected $_DAOTipoOrientacionSexual;
 	protected $_DAOTipoSexo;
 	protected $_DAOPacienteAgresor;
+	protected $_DAOPacienteDireccion;
+	protected $_DAOPacienteAgresorViolencia;
 
     /**
      * Descripción: Constructor
@@ -68,6 +70,8 @@ class Reconoce extends Controller {
 		$this->_DAOTipoGenero               = $this->load->model("DAOTipoGenero");
 		$this->_DAOTipoOrientacionSexual    = $this->load->model("DAOTipoOrientacionSexual");
 		$this->_DAOTipoSexo					= $this->load->model("DAOTipoSexo");
+		$this->_DAOPacienteDireccion		= $this->load->model("DAOPacienteDireccion");
+		$this->_DAOPacienteAgresorViolencia	= $this->load->model("DAOPacienteAgresorViolencia");
     }
 	
 	/**
@@ -83,7 +87,7 @@ class Reconoce extends Controller {
 	* @return valores con Smarty a identificar_agresor.tpl
 	*/    
     public function identificarAgresor(){
-    
+	
     //Cargar Arrays
 		$parametros = $this->request->getParametros();
 		$id_paciente = $parametros[0];
@@ -104,9 +108,6 @@ class Reconoce extends Controller {
         $arrActividadEconomica = $this->_DAOTipoActividadEconomica->getLista();
 		$this->smarty->assign("arrActividadEconomica", $arrActividadEconomica);
         
-        $arrTipoViolencia = $this->_DAOTipoViolencia->getLista();
-		$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
-        
         $arrTipoRiesgo = $this->_DAOTipoRiesgo->getLista();
 		$this->smarty->assign("arrTipoRiesgo", $arrTipoRiesgo);
 		
@@ -122,6 +123,21 @@ class Reconoce extends Controller {
 		$arrTipoVinculo = $this->_DAOTipoVinculo->getLista();
 		$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);
         
+		$direccion = $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
+		
+        $arrTipoViolencia = $this->_DAOTipoViolencia->getLista();
+		$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
+		
+		$arrPuntos = $this->_DAOPacienteAgresorViolencia->getByIdPaciente($id_paciente);
+		if (!is_null($arrPuntos)) {
+			foreach ($arrPuntos as $item) {
+				if (is_null($item->nr_valor)) {
+					$item->nr_valor = 0;
+				}
+			}
+		}
+		$this->smarty->assign("arrPuntos", $arrPuntos);
+		
     //Obtener Datos de la BD    
         $parametros = $this->request->getParametros();
         $id_registro = $parametros[0];
@@ -136,7 +152,7 @@ class Reconoce extends Controller {
         $this->smarty->assign('gl_nombres', $obj_registro->gl_nombres);
         $this->smarty->assign('gl_apellidos', $obj_registro->gl_apellidos);
         $this->smarty->assign('fc_nacimiento', $obj_registro->fc_nacimiento);
-        $this->smarty->assign('gl_direccion', $obj_registro->gl_direccion);
+        $this->smarty->assign('gl_direccion', $direccion->gl_direccion);
         $this->smarty->assign('edad', $edad);
         $this->smarty->assign('fc_reconoce', Fechas::fechaHoy());
         $this->smarty->assign('fc_hora', date('h:i'));
@@ -153,13 +169,34 @@ class Reconoce extends Controller {
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }
 	
+	/**
+	* guardar()
+	* Inserta datos del Agresor de la Paciente
+	* Y hace un Update con nuevos Datos de Paciente
+	* 
+	* @author	<david.guzman@cosof.cl>	08-03-2017
+	* 
+	* @param -
+	*
+	* @return booleanos -> correcto o error
+	*/   
 	public function guardar(){
 		header('Content-type: application/json');
 		$parametros = $this->_request->getParams();
 		$correcto = FALSE;
 		$error = FALSE;
-		
-	//	$id_paciente = $parametros['id_paciente'];
+		$cant_preguntas = $parametros['cant_pre'];
+		$id_paciente = $parametros['id_paciente'];
+		for ($i = 1; $i <= $cant_preguntas; $i++) {
+			$id_pregunta = $i;
+			$valor = $parametros['id_tipo_violencia_' . $i];
+			$bool_existe = $this->_DAOPacienteAgresorViolencia->getByIdPaciente($id_paciente);
+			if (!$bool_existe){
+					$bool_violencia = $this->_DAOPacienteAgresorViolencia->insertViolencia($id_paciente, $id_pregunta, $valor);
+			} else {
+					$bool_violencia = $this->_DAOPacienteAgresorViolencia->updateViolencia($id_paciente, $id_pregunta, $valor);
+			}
+		}
 		
 		$bool_insert = $this->_DAOPacienteAgresor->insertarAgresor($parametros);
 		$bool_update = $this->_DAOPaciente->updatePaciente($parametros);

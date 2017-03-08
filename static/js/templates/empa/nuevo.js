@@ -162,6 +162,17 @@ $("#gl_circunferencia_abdominal").on('keyup', function (e) {
 	}
 });
 
+// Si Está Embarazada -> mostrar/ocultar según corresponda
+$(".bo_embarazo").on('change', function (e) {
+	if ($('#bo_embarazo_1').is(':checked')) {
+		$('#cancer_de_mama').hide();
+		$('#pap').hide();
+	} else {
+		$('#cancer_de_mama').show();
+		$('#pap').show();
+	}
+});
+
 // Si Consume Alcohol muestra Boton para Hacer Cuestionario AUDIT
 $(".bo_consume_alcohol").on('change', function (e) {
 	if ($('#bo_consume_alcohol_0').is(':checked')) {
@@ -283,13 +294,15 @@ $(".bo_tos_productiva").on('change', function (e) {
 
 //Se ha realizado PAP? Si -> Muestra ultima fecha ; No -> Muestra Input para tomar fecha
 $(".bo_pap_realizado").on('change', function (e) {
-	if ($('#bo_pap_realizado_0').is(':checked') || $('#bo_pap_realizado_2').is(':checked')) {
+	if ($('#bo_pap_realizado_0').is(':checked')) {
 		$('#tomar_fecha').show();
 		$('#ultimo_pap').hide();
+		$('#resultado_pap').hide();
 		$('#pap_vigente').hide();
 
 	} else {
 		$('#tomar_fecha').hide();
+		$('#resultado_pap').show();
 		$('#ultimo_pap').show();
 		$('#pap_vigente').show();
 	}
@@ -306,9 +319,11 @@ $("#fc_ultimo_pap_ano").on('change', function (e) {
             if (edad <= 3) {
                 //check Si
                 $('#bo_pap_vigente_1').prop('checked', true);
+				$('#tomar_fecha').hide();
             } else {
                 //check No
                 $('#bo_pap_vigente_0').prop('checked', true);
+				$('#tomar_fecha').show();
             }
             $('#pap_vigente').show();
             $('#verAgendaPap1').show();
@@ -324,13 +339,23 @@ $("#fc_ultimo_pap_mes").on('change', function (e) {
             if (edad <= 3) {
                 //check Si
                 $('#bo_pap_vigente_1').prop('checked', true);
+				$('#tomar_fecha').hide();
             } else {
                 //check No
                 $('#bo_pap_vigente_0').prop('checked', true);
+				$('#tomar_fecha').show();
             }
             $('#pap_vigente').show();
             $('#verAgendaPap1').show();
         }
+});
+$(".bo_pap_vigente").on('change', function (e) {
+
+	if ($('#bo_pap_vigente_1').is(':checked')) {
+		$('#tomar_fecha').hide();
+	} else {
+		$('#tomar_fecha').show();
+	}
 });
 //Si valor colesterlo >= 200 y < 239 (Consejería Alimentaria y Actividad Fisica
 //Si valor colesterol >= 240 (Referir a confirmación diagnóstica
@@ -357,7 +382,7 @@ $("#gl_colesterol").on('keyup', function (e) {
 //Si realizo Examen Cancer de mama Mostrar -> Ingrese Fecha
 $(".bo_mamografia_realizada").on('change', function (e) {
 
-	if ($('#bo_mamografia_realizada_0').is(':checked') || $('#bo_mamografia_realizada_2').is(':checked')) {
+	if ($('#bo_mamografia_realizada_0').is(':checked')) {
 		$('#fecha_mamografia').hide();
 		$('#mam_vigente').hide();
 		$('#mam_resultado').hide();
@@ -491,6 +516,24 @@ $(".subTotal").livequery(function () {
 $("#guardar").on('click', function (e) {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
+
+	if ($('#bo_embarazo_1').is(':checked')) {
+		parametros.push({
+			"name": 'bo_embarazo',
+			"value": 1
+		});
+	} else if ($('#bo_embarazo_0').is(':checked')) {
+		parametros.push({
+			"name": 'bo_embarazo',
+			"value": 0
+		});
+	} else {
+		parametros.push({
+			"name": 'bo_embarazo',
+			"value": 'NULL'
+		});
+	}
+
 
 	if ($('#bo_consume_alcohol_1').is(':checked')) {
 		parametros.push({
@@ -813,11 +856,6 @@ $("#guardar").on('click', function (e) {
 			"name": 'bo_pap_realizado',
 			"value": 0
 		});
-	} else if ($('#bo_pap_realizado_2').is(':checked')) {
-		parametros.push({
-			"name": 'bo_pap_realizado',
-			"value": 2
-		});
 	} else {
 		parametros.push({
 			"name": 'bo_pap_realizado',
@@ -833,6 +871,11 @@ $("#guardar").on('click', function (e) {
 		parametros.push({
 			"name": 'bo_pap_resultado',
 			"value": 0
+		});
+	} else if ($('#bo_pap_resultado_2').is(':checked')) {
+		parametros.push({
+			"name": 'bo_pap_resultado',
+			"value": 2
 		});
 	} else {
 		parametros.push({
@@ -888,11 +931,6 @@ $("#guardar").on('click', function (e) {
 			"name": 'bo_mamografia_realizada',
 			"value": 0
 		});
-	} else if ($('#bo_mamografia_realizada_2').is(':checked')) {
-		parametros.push({
-			"name": 'bo_mamografia_realizada',
-			"value": 2
-		});
 	} else {
 		parametros.push({
 			"name": 'bo_mamografia_realizada',
@@ -924,6 +962,11 @@ $("#guardar").on('click', function (e) {
 		parametros.push({
 			"name": 'bo_mamografia_resultado_pasado',
 			"value": 0
+		});
+	} else if ($('#bo_mamografia_resultado_pasado_2').is(':checked')) {
+		parametros.push({
+			"name": 'bo_mamografia_resultado_pasado',
+			"value": 2
 		});
 	} else {
 		parametros.push({
@@ -1018,6 +1061,12 @@ $("#guardar").on('click', function (e) {
 			"value": 'NULL'
 		});
 	}
+//Dar parametro bo_finalizado en 1
+	parametros.push({
+			"name": 'bo_finalizado',
+			"value": 1
+		});
+		
 	$.ajax({
 		dataType: "json",
 		cache: false,

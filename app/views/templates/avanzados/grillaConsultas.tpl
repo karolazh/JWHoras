@@ -3,7 +3,6 @@
 
 <div class="box-body">
     <div id="div_tabla" class="table-responsive small col-lg-12">
-        <br>
         <label class="control-label"><h5>Atenciones de Urgencia</h5></label>
         <br>
         <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
