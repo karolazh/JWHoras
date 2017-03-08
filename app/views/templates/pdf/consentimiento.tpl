@@ -3,7 +3,7 @@
 <head>
 </head>
 
-<body style="font-size: 16px;font-family: Arial">
+<body style="font-size: 14px;font-family: Arial">
 
 <br>
 <table border="0" width="100%">
@@ -122,7 +122,7 @@
 <br><br><br>
 <table border="0" width="100%">
     <tr>
-        <td align="center">
+        <td align="center" style="font-size: 12px;font-family: Arial">
             <strong>Ha sido proporcionada al participante una copia de este documento de Consentimiento Informado.</strong>
         </td>
     </tr>

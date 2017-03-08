@@ -753,9 +753,20 @@ class Database extends PDO{
                 $id_usuario	= $_SESSION['id'];
             }
 
+			$conn = new PDO(
+							'mysql:host=' . DB_HOST .
+							';dbname=' . DB_NAME,
+							DB_USER,
+							DB_PASS,
+							array(
+								PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES '. DB_CHAR,
+								PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+								)
+						);
+			 
             $query_log	= "INSERT INTO pre_auditoria values(DEFAULT,?,?,?,?,?,now())";
             $parametros = array($id_usuario,$gl_tipo,$gl_query,$ip,$gl_tiempo);
-            $log		= self::prepare($query_log);
+            $log		= $conn->prepare($query_log);
             $log->execute($parametros);
         }
     }
