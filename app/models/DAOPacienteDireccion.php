@@ -83,7 +83,8 @@ class DAOPacienteDireccion extends Model {
 	* @return	object	Informacion de la direccion por id_direccion
 	*/
     public function insertarDireccion($parametros){
-        $query	= "	INSERT INTO ".$this->_tabla."
+        $this->inhabilitarDireccionesPaciente($parametros['id_paciente']);
+		$query	= "	INSERT INTO ".$this->_tabla."
 						(
 						id_paciente,
 						gl_direccion,
@@ -142,6 +143,21 @@ class DAOPacienteDireccion extends Model {
         }
 	}
 	
+	private function inhabilitarDireccionesPaciente($id_paciente){
+		 $query	= "	UPDATE pre_paciente_direccion SET
+						bo_estado					= 0,
+						id_usuario_actualiza		= ".$_SESSION['id'].",
+						fc_actualiza				= now()
+					WHERE id_paciente = ".$id_paciente."
+                    ";
+
+        if($this->db->execQuery($query)) {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+		 
+	 }
 }
 
 ?>
