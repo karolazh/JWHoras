@@ -1,33 +1,22 @@
 <?php
 
-/* 
-!IniHeaderDoc
+/**
 *****************************************************************************
-!NombreObjeto 		: DAOPrevision.php
-!Sistema 	  	: PREVENCIÓN
-!Modulo 	  	: NA
-!Descripcion  		: 	
-!Plataforma   		: !PHP
-!Perfil       		: 
-!Itinerado    		: NA
-!Uso          		: NA
-!Autor        		: 
-!Creacion     		: 16/02/2017
-!Retornos/Salidas 	: NA
-!OrigenReq        	: NA
-=============================================================================
-!Parametros 		: NA 
-=============================================================================
-!Testing 		: NA
-=============================================================================
-!ControlCambio
---------------
-!cVersion !cFecha   !cProgramador   !cDescripcion 
------------------------------------------------------------------------------
-
------------------------------------------------------------------------------
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Modelo para Tabla pre_prevision
+* Plataforma	: !PHP
+* Creacion		: 01/03/2017
+* @name			DAOPrevision.php
+* @version		1.0
+* @author		Victor Retamal <victor.retamal@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*
+*-----------------------------------------------------------------------------
 *****************************************************************************
-!EndHeaderDoc 
 */
 
 class DAOPrevision extends Model{
@@ -41,30 +30,31 @@ class DAOPrevision extends Model{
         parent::__construct();
     }
 
-    public function getPrevision($cod_prevision){
-        $query	= "	SELECT
-						gl_nombre_prevision 
-					FROM pre_prevision
-					WHERE id_prevision = ? ";
+    public function getLista(){
+        $query	= "	SELECT * FROM ".$this->_tabla;
+        $result	= $this->db->getQuery($query);
 
-		$params		= array($cod_prevision);
-        $consulta	= $this->db->getQuery($query,$params);
-
-		if($consulta->numRows > 0){
-            return $consulta->rows->row_0;
-        }else{
-            return null;
-        }
-    }
-    
-    public function getListaPrevision(){
-		$query		= "SELECT * FROM pre_prevision";
-        $resultado	= $this->db->getQuery($query);
-
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
+
+    public function getById($id){
+        $query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE ".$this->_primaria." = ?";
+
+		$param	= array($id);
+        $result	= $this->db->getQuery($query,$param);
+		
+        if($result->numRows > 0){
+            return $result->rows->row_0;
+        }else{
+            return NULL;
+        }
+    }
+
 }
+
+?>

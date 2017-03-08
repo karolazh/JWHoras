@@ -1,7 +1,7 @@
 <?php
 
 require_once(APP_PATH . "models/DAOSistemas.php");
-require_once(APP_PATH . "models/DAOUsuarios.php");
+require_once(APP_PATH . "models/DAOUsuario.php");
 require_once(APP_PATH . "models/DAOPerfil.php");
 
 /**
@@ -15,8 +15,8 @@ function smarty_function_sistemas($params, &$smarty) {
     
     
     $DAOSistemas = New DAOSistemas();
-    $DAOUsuarios = New DAOUsuarios();
-    $usuario = $DAOUsuarios->getById($sesion->id);
+    $DAOUsuario = New DAOUsuario();
+    $usuario = $DAOUsuario->getById($sesion->id);
 	
     //Obtener lista de sistemas
     $lista_sistemas = $DAOSistemas->listar("nombre");

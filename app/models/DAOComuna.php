@@ -1,8 +1,27 @@
 <?php
 
+/**
+*****************************************************************************
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Modelo para Tabla pre_comuna
+* Plataforma	: !PHP
+* Creacion		: 24/02/2017
+* @name			DAOComuna.php
+* @version		1.0
+* @author		Victor Retamal <victor.retamal@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*
+*-----------------------------------------------------------------------------
+*****************************************************************************
+*/
+
 class DAOComuna extends Model {
 
-    protected $_tabla			= "pre_comunas";
+    protected $_tabla			= "pre_comuna";
     protected $_primaria		= "id_comuna";
     protected $_transaccional	= false;
 
@@ -10,43 +29,47 @@ class DAOComuna extends Model {
         parent::__construct();
     }
 
-    /*     * * 20170131 - Funcion obtiene datos de una comuna ** */
-    public function getComuna($id_comuna) {
-        $query	= "	SELECT * 
-					FROM " . $this->_tabla . "
-					WHERE id_comuna = ?";
+    public function getLista(){
+        $query		= "	SELECT * FROM ".$this->_tabla;
+        $result	= $this->db->getQuery($query);
 
-		$params		= array($id_comuna);
-        $consulta 	= $this->db->getQuery($query, $params);
-
-        if ($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
-        } else {
-            return null;
-        }
-    }
-
-    /*
-     * 20170203 - Lista Comunas
-     */
-    public function getListaComunas($id_provincia) {
-        $query	= "	SELECT * 
-					FROM " . $this->_tabla . " 
-					WHERE id_provincia = ?";
-
-		$params		= array($id_provincia);
-        $resultado	= $this->db->getQuery($query, $params);
-
-        if ($resultado->numRows > 0) {
-            return $resultado->rows;
-        } else {
+        if($result->numRows>0){
+            return $result->rows;
+        }else{
             return NULL;
         }
     }
 
-	// Funcion debería llamarse getInfoComunaxID($id_comuna)
-    public function getComunaRegion($id_comuna) {
+    public function getById($id){
+        $query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE ".$this->_primaria." = ?";
 
+		$param	= array($id);
+        $result	= $this->db->getQuery($query,$param);
+		
+        if($result->numRows > 0){
+            return $result->rows->row_0;
+        }else{
+            return NULL;
+        }
+    }
+
+    public function getByIdProvincia($id_provincia) {
+        $query		= "	SELECT * 
+						FROM pre_comuna
+						WHERE id_provincia = ?";
+
+		$param		= array($id_provincia);
+        $result	= $this->db->getQuery($query, $param);
+
+        if($result->numRows > 0) {
+            return $result->rows;
+        }else{
+            return NULL;
+        }
+    }
+
+    public function getInfoComunaxID($id_comuna) {
         $query	= "	SELECT 
 						c.id_comuna,
 						c.gl_nombre_comuna,
@@ -54,31 +77,21 @@ class DAOComuna extends Model {
 						p.gl_nombre_provincia,
 						r.id_region,
 						r.gl_nombre_region
-					FROM pre_comunas c
-						LEFT JOIN pre_provincias p ON c.id_provincia = p.id_provincia
-						LEFT JOIN pre_regiones r ON p.id_region = r.id_region
+					FROM pre_comuna c
+						LEFT JOIN pre_provincia p ON c.id_provincia = p.id_provincia
+						LEFT JOIN pre_region r ON p.id_region = r.id_region
 					WHERE c.id_comuna = ?";
 
-		$params		= array($id_comuna);
-        $consulta	= $this->db->getQuery($query, $params);
+		$param	= array($id_comuna);
+        $result	= $this->db->getQuery($query, $param);
 
-        if ($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
-        } else {
-            return null;
+        if($result->numRows > 0) {
+            return $result->rows->row_0;
+        }else{
+            return NULL;
         }
     }
 
-    public function obtCentroSaludporComuna($id_comuna) {
-        $query	= "	SELECT 
-						e.nombre_establecimiento, 
-						e.id_establecimiento 
-					FROM pre_establecimientos_salud e
-						LEFT JOIN pre_comunas c ON c.id_comuna = e.id_comuna_establecimiento
-					WHERE c.id_comuna = ?";
-
-		$params		= array($id_comuna);
-        return $this->db->getQuery($query, $params);
-    }
-
 }
+
+?>

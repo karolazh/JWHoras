@@ -1,6 +1,6 @@
 <?php
 
-require_once (APP_PATH . 'models/DAOUsuarios.php');
+require_once (APP_PATH . 'models/DAOUsuario.php');
 require_once (__DIR__ . '/../Validar.php');
 
 /**
@@ -55,7 +55,7 @@ Class Validar_Usuario extends Validar{
      * Valida el password
      */
     protected function _validarPassword(){
-        $DAOUsuario = New DAOUsuarios();
+        $DAOUsuario = New DAOUsuario();
         $id = $this->_parametros["id"];
         $usuario = $DAOUsuario->getById($id);
         if(is_null($usuario)){
@@ -89,7 +89,7 @@ Class Validar_Usuario extends Validar{
      * Ve que no se repita el rut
      */
     protected function _verSiYaExiste(){
-        $DAOUsuario = New DAOUsuarios();
+        $DAOUsuario = New DAOUsuario();
         
         $id = $this->_parametros["id"];
         $usuario = $DAOUsuario->getById($id);

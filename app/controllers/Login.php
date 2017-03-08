@@ -1,11 +1,44 @@
 <?php
 
+/* 
+!IniHeaderDoc
+*****************************************************************************
+!NombreObjeto 		: Login.php
+!Sistema 	  		: PREVENCION DE FEMICIDIOS
+!Modulo 	  		: NA
+!Descripcion  		: 
+!Plataforma   		: !PHP
+!Perfil       		: 
+!Itinerado    		: NA
+!Uso          		: NA
+!Autor        		: Victor Retamal <victor.retamal@cosof.cl>
+!Creacion     		: 20/02/2017
+!Retornos/Salidas 	: NA
+!OrigenReq        	: NA
+=============================================================================
+!Parametros 		: NA 
+=============================================================================
+!Testing 			: NA
+=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador					!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*<orlando.vazquezl@cosof.cl>	06-05-2017	Modificación referencias a DAO's de acuerdo a nueva estructura de BD.
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------
+*****************************************************************************
+!EndHeaderDoc 
+*/
+
 class Login extends Controller {
 
-    protected $_DAOUsuarios;
+    protected $_DAOUsuario;
     protected $_DAORegion;
     protected $_DAOComuna;
-    protected $_DAOProvincias;
+    protected $_DAOProvincia;
+    protected $DAOAuditoriaLogin;
 
     /*** Constructor ***/
     function __construct() {
@@ -13,17 +46,18 @@ class Login extends Controller {
 		include_once("app/libs/nusoap/lib/nusoap.php");
 		
         $this->load->lib('Seguridad', false);
-        $this->_DAOUsuarios = $this->load->model("DAOUsuarios");
+        $this->_DAOUsuario = $this->load->model("DAOUsuario");
         $this->_DAORegion = $this->load->model("DAORegion");
         $this->_DAOComuna = $this->load->model("DAOComuna");
-        $this->_DAOProvincias = $this->load->model("DAOProvincias");
+        $this->_DAOProvincia = $this->load->model("DAOProvincia");
+        $this->_DAOAuditoriaLogin = $this->load->model("DAOAuditoriaLogin");
     }
 
     public function index() {
         $session = New Zend_Session_Namespace("usuario_carpeta");
 
         if (isset($session->id)) {
-            $usuario = $this->_DAOUsuarios->getById($session->id);
+            $usuario = $this->_DAOUsuario->getById($session->id);
             if (!is_null($usuario)) {
                 header("location: index.php/Home/dashboard");
                 die();
@@ -51,7 +85,7 @@ class Login extends Controller {
 		$region			= "";
 		$provincia		= "";
 
-        $usuario		= $this->_DAOUsuarios->getLogin($rut, $password);
+        $usuario		= $this->_DAOUsuario->getLogin($rut, $password);
 
         if (empty($usuario->fc_ultimo_login)) {
 			$primer_login = TRUE;
@@ -59,6 +93,8 @@ class Login extends Controller {
 
         if ($usuario) {
 			if($usuario->bo_activo == 1){
+				$registro			= $this->_DAOAuditoriaLogin->registro_login($usuario->id_usuario, $rut, 'login');
+				
 				$session			= New Zend_Session_Namespace("usuario_carpeta");
 				$session->id		= $usuario->id_usuario;
 				$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
@@ -68,9 +104,8 @@ class Login extends Controller {
 				$session->celular	= $usuario->gl_celular;
 
 				if (!$primer_login) {
-					$ultimo_login	= date('Y-m-d H:i:s');
-					$datos			= array($ultimo_login, $session->id);
-					$upd			= $this->_DAOUsuarios->setUltimoLogin($datos);
+					$datos			= array($session->id);
+					$upd			= $this->_DAOUsuario->setUltimoLogin($datos);
 				}
 
 				$_SESSION['id']				= $usuario->id_usuario;
@@ -105,6 +140,7 @@ class Login extends Controller {
 				$this->smarty->display('login/login.tpl');				
 			}
         }else{
+			$registro	= $this->_DAOAuditoriaLogin->registro_login(0, $rut, 'login');
             $this->smarty->assign("hidden", "");
             $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
             $this->smarty->display('login/login.tpl');
@@ -117,13 +153,13 @@ class Login extends Controller {
 		$usuario		= array();
 
 		if( isset($rut_usuario) and trim($rut_usuario) != "" ){
-			$usuario		= $this->_DAOUsuarios->getLoginMidas(strtolower($rut_usuario));
+			$usuario		= $this->_DAOUsuario->getLoginMidas(strtolower($rut_usuario));
 		}
 
 		if($usuario){			
 			echo json_encode(array('rut'=>$usuario->gl_rut));
 		}else{
-			echo json_encode(array('rut'=>$rut_usuario));
+			echo json_encode(array('rut'=>''));
 		}
 
 	}
@@ -158,7 +194,7 @@ class Login extends Controller {
 			$arr		= $ws->call('validarToken', $param);
 
 			if(isset($arr['rut']) and trim($arr['rut']) != "" ){
-				$usuario	= $this->_DAOUsuarios->getLoginMidas(strtolower($arr['rut']));
+				$usuario	= $this->_DAOUsuario->getLoginMidas(strtolower($arr['rut']));
 			}else{
 				$this->smarty->assign("hidden", "");
 				$this->smarty->assign("texto_error", $arr['error']['GlosaError']);
@@ -166,58 +202,59 @@ class Login extends Controller {
 			}
 
 			
-        if ($usuario) {
-			if($usuario->bo_activo == 1){
-				$session			= New Zend_Session_Namespace("usuario_carpeta");
-				$session->id		= $usuario->id_usuario;
-				$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-				$session->mail		= $usuario->gl_email;
-				$session->rut		= $usuario->gl_rut;
-				$session->fono		= $usuario->gl_fono;
-				$session->celular	= $usuario->gl_celular;
+			if ($usuario) {
+				if($usuario->bo_activo == 1){
+					$registro	= $this->_DAOAuditoriaLogin->registro_login($usuario->id_usuario, $arr['rut'], 'loginMIDAS', $token);
+					$session			= New Zend_Session_Namespace("usuario_carpeta");
+					$session->id		= $usuario->id_usuario;
+					$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+					$session->mail		= $usuario->gl_email;
+					$session->rut		= $usuario->gl_rut;
+					$session->fono		= $usuario->gl_fono;
+					$session->celular	= $usuario->gl_celular;
 
-				if (!$primer_login) {
-					$ultimo_login	= date('Y-m-d H:i:s');
-					$datos			= array($ultimo_login, $session->id);
-					$upd			= $this->_DAOUsuarios->setUltimoLogin($datos);
-				}
+					if (!$primer_login) {
+						$datos			= array($session->id);
+						$upd			= $this->_DAOUsuario->setUltimoLogin($datos);
+					}
 
-				$_SESSION['id']				= $usuario->id_usuario;
-				$_SESSION['perfil']			= $usuario->id_perfil;
-				$_SESSION['gl_grupo_tipo']	= $usuario->gl_grupo_tipo;
-				$_SESSION['id_institucion']	= $usuario->id_institucion;
-				$_SESSION['nombre']			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-				$_SESSION['rut']			= $usuario->gl_rut;
-				$_SESSION['mail']			= $usuario->gl_email;
-				$_SESSION['fono']			= $usuario->gl_fono;
-				$_SESSION['celular']		= $usuario->gl_celular;
-				$_SESSION['comuna']			= $usuario->gl_nombre_comuna;
-				$_SESSION['provincia']		= $usuario->gl_nombre_provincia;
-				$_SESSION['region']			= $usuario->gl_nombre_region;
-				$_SESSION['id_comuna']		= $usuario->id_comuna;
-				$_SESSION['id_provincia']	= $usuario->id_provincia;
-				$_SESSION['id_region']		= $usuario->id_region;
-				$_SESSION['primer_login']	= $primer_login;
-				$_SESSION['autenticado']	= TRUE;
+					$_SESSION['id']				= $usuario->id_usuario;
+					$_SESSION['perfil']			= $usuario->id_perfil;
+					$_SESSION['gl_grupo_tipo']	= $usuario->gl_grupo_tipo;
+					$_SESSION['id_institucion']	= $usuario->id_institucion;
+					$_SESSION['nombre']			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+					$_SESSION['rut']			= $usuario->gl_rut;
+					$_SESSION['mail']			= $usuario->gl_email;
+					$_SESSION['fono']			= $usuario->gl_fono;
+					$_SESSION['celular']		= $usuario->gl_celular;
+					$_SESSION['comuna']			= $usuario->gl_nombre_comuna;
+					$_SESSION['provincia']		= $usuario->gl_nombre_provincia;
+					$_SESSION['region']			= $usuario->gl_nombre_region;
+					$_SESSION['id_comuna']		= $usuario->id_comuna;
+					$_SESSION['id_provincia']	= $usuario->id_provincia;
+					$_SESSION['id_region']		= $usuario->id_region;
+					$_SESSION['primer_login']	= $primer_login;
+					$_SESSION['autenticado']	= TRUE;
 
-				if ($recordar == 1) {
-					setcookie('datos_usuario_carpeta', $usuario->id_usuario, time() + 365 * 24 * 60 * 60);
-				}
-				if($primer_login) {
-					header('Location: ' . BASE_URI . '/Login/actualizar');
+					if ($recordar == 1) {
+						setcookie('datos_usuario_carpeta', $usuario->id_usuario, time() + 365 * 24 * 60 * 60);
+					}
+					if($primer_login) {
+						header('Location: ' . BASE_URI . '/Login/actualizar');
+					}else{
+						header('Location: ' . BASE_URI . '/Home/dashboard');
+					}
 				}else{
-					header('Location: ' . BASE_URI . '/Home/dashboard');
+					$registro	= $this->_DAOAuditoriaLogin->registro_login(0, $arr['rut'], 'loginMIDAS', $token);
+					$this->smarty->assign("hidden", "");
+					$this->smarty->assign("texto_error", "Usuario se encuentra Inhabilitado.");
+					$this->smarty->display('login/login.tpl');				
 				}
 			}else{
 				$this->smarty->assign("hidden", "");
-				$this->smarty->assign("texto_error", "Usuario se encuentra Inhabilitado.");
-				$this->smarty->display('login/login.tpl');				
+				$this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
+				$this->smarty->display('login/login.tpl');
 			}
-        }else{
-            $this->smarty->assign("hidden", "");
-            $this->smarty->assign("texto_error", "Los datos ingresados no son válidos.");
-            $this->smarty->display('login/login.tpl');
-        }
 		}
 	}
 
@@ -257,7 +294,7 @@ class Login extends Controller {
             $ultimo_login	= date('Y-m-d H:i:s');
             $datos			= array($password, $ultimo_login, $session->id);
 
-            $upd = $this->_DAOUsuarios->setPassword($datos);
+            $upd = $this->_DAOUsuario->setPassword($datos);
             if ($upd) {
                 $primer_login = FALSE;
                 $_SESSION['primer_login'] = $primer_login;
@@ -271,7 +308,6 @@ class Login extends Controller {
         echo $json;
     }
 
-    
     public function logoutUsuario() {
         if (isset($_COOKIE['datos_usuario_carpeta'])) {
             unset($_COOKIE['datos_usuario_carpeta']);
@@ -291,7 +327,7 @@ class Login extends Controller {
         $destinatario	= "";
 
         if (trim($this->_request->getParam("rut")) != "") {
-            $usuario	= $this->_DAOUsuarios->getByRut($this->_request->getParam("rut"));
+            $usuario	= $this->_DAOUsuario->getByRut($this->_request->getParam("rut"));
 
             if (!is_null($usuario)) {
                 $correcto	= true;
@@ -302,7 +338,7 @@ class Login extends Controller {
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);
                 $ultimo_login = NULL;
-                $this->_DAOUsuarios->update(
+                $this->_DAOUsuario->update(
                         array("gl_password" => $cadenahash, "fc_ultimo_login" => $ultimo_login), $usuario->id_usuario, "id_usuario"
                 );
 

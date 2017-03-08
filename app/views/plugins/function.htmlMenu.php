@@ -1,7 +1,9 @@
 <?php
 
-require_once(APP_PATH . "models/DAOUsuarios.php");
-
+require_once(APP_PATH . "models/DAOUsuario.php");
+require_once(APP_PATH . "models/DAOPerfil.php");
+require_once(APP_PATH . "models/DAOPerfilOpcion.php");
+require_once(APP_PATH . "models/DAOOpcion.php");
 /**
  * 
  * @param array $params
@@ -10,13 +12,20 @@ require_once(APP_PATH . "models/DAOUsuarios.php");
  */
 function smarty_function_htmlMenu($params, &$smarty) {
     
-    $DAOUsuario = New DAOUsuarios();
-    
+    $DAOUsuario = New DAOUsuario();
+    $DAOPerfil = New DAOPerfil();
+	$DAOPerfilOpcion = New DAOPerfilOpcion();
+	$DAOOpcion = New DAOOpcion();
     $sesion = New Zend_Session_Namespace("usuario_carpeta");
     $id_usuario = $sesion->id;
-    
     $usuario = $DAOUsuario->getById($id_usuario);
-    if(!is_null($usuario)){
+    $id_perfil = $usuario->id_perfil;
+	$opciones = $DAOPerfilOpcion->getOpcionesRaiz($id_perfil);
+	foreach($opciones AS $opcion){
+		
+	}
+	$smarty->assign("opciones", $opciones);
+	if(!is_null($usuario)){
         return $smarty->fetch("plugins/view/menu.tpl");
     }
 }

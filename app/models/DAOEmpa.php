@@ -1,209 +1,200 @@
 <?php
 
-/* 
-!IniHeaderDoc
+/**
 *****************************************************************************
-!NombreObjeto 		: DAOEmpa.php
-!Sistema 	  	: PREVENCIÓN
-!Modulo 	  	: NA
-!Descripcion  		: 	
-!Plataforma   		: !PHP
-!Perfil       		: 
-!Itinerado    		: NA
-!Uso          		: NA
-!Autor        		: 
-!Creacion     		: 16/02/2017
-!Retornos/Salidas 	: NA
-!OrigenReq        	: NA
-=============================================================================
-!Parametros 		: NA 
-=============================================================================
-!Testing 		: NA
-=============================================================================
-!ControlCambio
---------------
-!cVersion !cFecha   !cProgramador   !cDescripcion 
------------------------------------------------------------------------------
-
------------------------------------------------------------------------------
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion           : Modelo para Tabla pre_empa
+* Plataforma            : !PHP
+* Creacion		: 22/02/2017
+* @name			DAOEmpa.php
+* @version		1.0
+* @author		David Gusman <david.guzman@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a campos de la BD antigua
+* 
+*-----------------------------------------------------------------------------
 *****************************************************************************
-!EndHeaderDoc 
 */
 
 class DAOEmpa extends Model{
-    /**
-     * @var string 
-     */
-    protected $_tabla			= "pre_empa";
-    protected $_primaria		= "id_empa";
-    protected $_transaccional           = false;
+
+    protected $_tabla		= "pre_empa";
+    protected $_primaria	= "id_empa";
+    protected $_transaccional	= false;
     
-    /**
-     * Constructor
-     */
     function __construct()
     {
         parent::__construct();
     }
 
-    /*
-     * Lista Empa (todos)
-     */
-    public function getListaEmpa(){
-//        $query = $this->db->select("*")->from("tab_empa");
-//        $resultado = $query->getResult();
-        
-        $query = "select * from tab_empa";
-        $resultado = $this->db->getQuery($query);
+    public function getLista(){
+        $query	= "	SELECT * FROM ".$this->_tabla;
+        $result	= $this->db->getQuery($query);
 
-        if($resultado->numRows>0){
-            return $resultado->rows;
+        if($result->numRows>0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
-    
-    /*
-     * Ver Empa
-     */
-    public function getEmpa($id_empa){
-        $query = "select * from tab_empa 
-                  where id_empa = ?";
 
-        $consulta = $this->db->getQuery($query,array($id_empa));
-        if($consulta->numRows > 0){
-            return $consulta->rows->row_0;
+    public function getById($id){
+        $query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE ".$this->_primaria." = ?";
+
+		$param	= array($id);
+        $result	= $this->db->getQuery($query,$param);
+		
+        if($result->numRows > 0){
+            return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
     }
 
-    public function getEmpaByIdRegistro($id_registro){
-        $query = "select * from pre_empa 
-                  where id_registro = ?
-                  and nr_orden = 1";
+    public function getByIdPaciente($id_paciente, $nr_orden=1){
+        $query	=   "SELECT * FROM pre_empa 
+                    WHERE id_paciente = ?
+                    AND nr_orden = ?";
 
-        $consulta = $this->db->getQuery($query,array($id_registro));
-        if($consulta->numRows > 0){
-            return $consulta->rows->row_0;
+	$param	= array($id_paciente,$nr_orden);
+        $result	= $this->db->getQuery($query,$param);
+
+        if($result->numRows > 0){
+            return $result->rows->row_0;
         }else{
-            return null;
+            return NULL;
         }
-    }    
-    /*
-     * Ver Empa para Grilla
-     */
-    public function getEmpaGrilla($id_registro){
-        $query =    "SELECT 
-                        emp.id_empa AS id_empa,
-                        emp.id_registro AS id_registro,
+    }
+
+    public function getListaEmpa($id_paciente, $nr_orden=1){
+        $query	=   "SELECT 
+                        emp.id_empa,
+                        emp.id_paciente,
                         date_format(emp.fc_empa,'%d-%m-%Y') AS fc_empa,
-                        reg.gl_rut AS rut,
-                        com.gl_nombre_comuna AS comuna,
-                        ins.gl_nombre AS institucion,
-                        usr.gl_rut AS rut,
+                        pac.gl_rut,
+                        com.gl_nombre_comuna,
+                        cs.gl_nombre_establecimiento,
+                        usr.gl_rut,
                         concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
                     FROM pre_empa emp
-                    LEFT JOIN pre_registro reg ON reg.id_registro = emp.id_registro
-                    LEFT JOIN pre_comunas com ON com.id_comuna = emp.id_comuna
-                    LEFT JOIN pre_institucion ins ON ins.id_institucion = emp.id_institucion
-                    LEFT JOIN pre_usuarios usr ON usr.id_usuario = emp.id_usuario_crea
-                    WHERE emp.id_registro =  ?
-					AND nr_orden= 1
+                    LEFT JOIN pre_paciente pac ON pac.id_paciente = emp.id_paciente
+                    LEFT JOIN pre_comuna com ON com.id_comuna = emp.id_comuna
+                    LEFT JOIN pre_centro_salud cs ON cs.id_centro_salud = emp.id_institucion
+                    LEFT JOIN pre_usuario usr ON usr.id_usuario = emp.id_usuario_crea
+                    WHERE emp.id_paciente = ?
+                    AND nr_orden = ?
                     ORDER BY emp.fc_empa DESC";
 
-        $consulta = $this->db->getQuery($query,array($id_registro));
-        if($consulta->numRows > 0){
-            return $consulta->rows;
+        $param	= array($id_paciente,$nr_orden);
+        $result	= $this->db->getQuery($query,$param);
+
+        if($result->numRows > 0){
+            return $result->rows;
         }else{
             return NULL;
         }
     }
 
-
     public function updateEmpa($parametros){
-
         $query	= "	UPDATE pre_empa SET
-						id_comuna                       =       ".$_SESSION['id_comuna'].",
-						id_sector                       =       ".$parametros['id_sector'].",
-						id_institucion                  =       ".$_SESSION['id_institucion'].",
-						nr_ficha                        =       ".$parametros['nr_ficha'].",
-						fc_empa                         =       ".$parametros['fc_empa'].",
-						bo_consume_alcohol              =       ".$parametros['bo_consume_alcohol'].",
-						gl_puntos_audit                 =       ".$parametros['gl_puntos_audit'].",
-						bo_fuma                         =       ".$parametros['bo_fuma'].",
-						gl_peso                         =       ".$parametros['gl_peso'].",
-						gl_estatura                     =       ".$parametros['gl_estatura'].",
-						gl_imc                          =       ".$parametros['gl_imc'].",
-						gl_circunferencia_abdominal     =       ".$parametros['gl_circunferencia_abdominal'].",
-						id_clasificacion_imc            =       ".$parametros['id_clasificacion_imc'].",
-						gl_pas                          =       ".$parametros['gl_pas'].",
-						gl_pad                          =       ".$parametros['gl_pad'].",
-                                                gl_glicemia                     =       ".$parametros['gl_glicemia'].",
-						bo_glicemia_toma                =       ".$parametros['bo_glicemia_toma'].",
-						bo_trabajadora_reclusa          =       ".$parametros['bo_trabajadora_reclusa'].",
-						bo_vdrl                         =       ".$parametros['bo_vdrl'].",
-						bo_rpr                          =       ".$parametros['bo_rpr'].",
-                                                bo_tos_productiva               =       ".$parametros['bo_tos_productiva'].",
-                                                bo_baciloscopia_toma            =       ".$parametros['bo_baciloscopia_toma'].",
-                                                bo_pap_realizado                =       ".$parametros['bo_pap_realizado'].",
-                                                fc_tomar_pap                    =       ".$parametros['fc_tomar_pap'].",
-                                                fc_ultimo_pap                   =       ".$parametros['fc_ultimo_pap'].",
-                                                bo_pap_vigente                  =       ".$parametros['bo_pap_vigente'].",
-                                                bo_pap_toma                     =       ".$parametros['bo_pap_toma'].",
-                                                gl_colesterol                   =       ".$parametros['gl_colesterol'].",
-                                                bo_colesterol_toma              =       ".$parametros['bo_colesterol_toma'].",
-                                                bo_mamografia_realizada         =       ".$parametros['bo_mamografia_realizada'].",
-                                                fc_mamografia                   =       ".$parametros['fc_mamografia'].",
-                                                bo_mamografia_vigente           =       ".$parametros['bo_mamografia_vigente'].",
-                                                bo_mamografia_toma              =       ".$parametros['bo_mamografia_toma'].",
-                                                gl_observaciones_empa           =       ".$parametros['gl_observaciones_empa'].",
-                                                fc_actualiza                    =       '".date('Y-m-d H:i:s')."',
-                                                id_usuario_act                  =       ".$_SESSION['id']."
-                        WHERE id_empa   = ".$parametros['id_empa']."
+						id_comuna						= ".$_SESSION['id_comuna'].",
+						gl_sector						= '".$parametros['gl_sector']."',
+						id_institucion					= ".$_SESSION['id_institucion'].",
+						nr_ficha						= ".$parametros['nr_ficha'].",
+						fc_empa							= ".$parametros['fc_empa'].",
+						bo_consume_alcohol				= ".$parametros['bo_consume_alcohol'].",
+						gl_puntos_audit					= ".$parametros['gl_puntos_audit'].",
+						bo_fuma							= ".$parametros['bo_fuma'].",
+						gl_peso							= ".$parametros['gl_peso'].",
+						gl_estatura						= ".$parametros['gl_estatura'].",
+						gl_imc							= ".$parametros['gl_imc'].",
+						gl_circunferencia_abdominal		= ".$parametros['gl_circunferencia_abdominal'].",
+						id_clasificacion_imc			= ".$parametros['id_clasificacion_imc'].",
+						gl_pas							= ".$parametros['gl_pas'].",
+						gl_pad							= ".$parametros['gl_pad'].",
+						gl_glicemia						= ".$parametros['gl_glicemia'].",
+						bo_glicemia_toma				= ".$parametros['bo_glicemia_toma'].",
+						bo_trabajadora_reclusa			= ".$parametros['bo_trabajadora_reclusa'].",
+						bo_vdrl							= ".$parametros['bo_vdrl'].",
+						bo_rpr							= ".$parametros['bo_rpr'].",
+						bo_vih							= ".$parametros['bo_vih'].",	
+						bo_tos_productiva				= ".$parametros['bo_tos_productiva'].",
+						bo_baciloscopia_toma			= ".$parametros['bo_baciloscopia_toma'].",
+						bo_pap_realizado				= ".$parametros['bo_pap_realizado'].",
+						bo_pap_resultado				= ".$parametros['bo_pap_resultado'].",
+						fc_tomar_pap					= ".$parametros['fc_tomar_pap'].",
+						fc_ultimo_pap_ano				= ".$parametros['fc_ultimo_pap_ano'].",	
+						fc_ultimo_pap_mes				= ".$parametros['fc_ultimo_pap_mes'].",	
+						bo_pap_vigente					= ".$parametros['bo_pap_vigente'].",
+						bo_pap_toma						= ".$parametros['bo_pap_toma'].",
+						gl_colesterol					= ".$parametros['gl_colesterol'].",
+						bo_colesterol_toma				= ".$parametros['bo_colesterol_toma'].",
+						bo_mamografia_realizada			= ".$parametros['bo_mamografia_realizada'].",
+						bo_mamografia_resultado_pasado	= ".$parametros['bo_mamografia_resultado_pasado'].",
+						bo_mamografia_resultado			= ".$parametros['bo_mamografia_resultado'].",
+						fc_mamografia					= ".$parametros['fc_mamografia'].",
+						fc_mamografia_ano				= ".$parametros['fc_mamografia_ano'].",	
+						fc_mamografia_mes				= ".$parametros['fc_mamografia_mes'].",	
+						bo_mamografia_vigente			= ".$parametros['bo_mamografia_vigente'].",
+						bo_mamografia_toma				= ".$parametros['bo_mamografia_toma'].",
+						gl_observaciones_empa			= ".$parametros['gl_observaciones_empa'].",
+						fc_actualiza					= now(),
+						id_usuario_act					= ".$_SESSION['id']."
+					WHERE id_empa = ".$parametros['id_empa']."
                     ";
-                  
-        if ($this->db->execQuery($query)) {
-            return true;
-        } else {
-            return false;
+
+        if($this->db->execQuery($query)) {
+            return TRUE;
+        }else{
+            return FALSE;
         }
     }
-    
+
     //Parametros para usar despues mas completo con id's de examenes
     /*
-					
-						id_examen_glicemia              =       ".$parametros['id_examen_glicemia'].",
-						id_examen_vdrl                  =       ".$parametros['id_examen_vdrl'].",
-						id_examen_rpr                   =       ".$parametros['id_examen_rpr'].",
-                                                id_examen_baciloscopia          =       ".$parametros['id_examen_baciloscopia'].",
-                                                id_examen_pap                   =       ".$parametros['id_examen_pap'].",
-                                                id_examen_colesterol            =       ".$parametros['id_examen_colesterol'].",
-                                                id_examen_mamografia            =       ".$parametros['id_examen_mamografia'].",
-     */
+		id_examen_glicemia              =       ".$parametros['id_examen_glicemia'].",
+		id_examen_vdrl                  =       ".$parametros['id_examen_vdrl'].",
+		id_examen_rpr                   =       ".$parametros['id_examen_rpr'].",
+		id_examen_baciloscopia          =       ".$parametros['id_examen_baciloscopia'].",
+		id_examen_pap                   =       ".$parametros['id_examen_pap'].",
+		id_examen_colesterol            =       ".$parametros['id_examen_colesterol'].",
+		id_examen_mamografia            =       ".$parametros['id_examen_mamografia'].",
+	*/
     
-    	public function verInfoById($id_empa) {
-        $query	= "SELECT       *,
-                                IFNULL(fc_mamografia,0) as fc_mamografia,
-                                IFNULL(bo_consume_alcohol,-1) as bo_consume_alcohol,
-                                IFNULL(bo_fuma,-1) as bo_fuma,
-                                IFNULL(bo_trabajadora_reclusa,-1) as bo_trabajadora_reclusa,
-                                IFNULL(bo_vdrl,-1) as bo_vdrl,
-                                IFNULL(bo_rpr,-1) as bo_rpr,
-                                IFNULL(bo_tos_productiva,-1) as bo_tos_productiva,
-                                IFNULL(bo_baciloscopia_toma,-1) as bo_baciloscopia_toma,
-                                IFNULL(bo_pap_realizado,-1) as bo_pap_realizado,
-                                IFNULL(bo_pap_vigente,-1) as bo_pap_vigente,
-                                IFNULL(bo_pap_toma,-1) as bo_pap_toma,
-                                IFNULL(bo_mamografia_realizada,-1) as bo_mamografia_realizada,
-                                IFNULL(bo_mamografia_vigente,-1) as bo_mamografia_vigente
-                        FROM pre_empa
-			WHERE id_empa = ?";
-        $consulta = $this->db->getQuery($query, $id_empa);
-        if ($consulta->numRows > 0) {
-            return $consulta->rows->row_0;
-        } else {
-            return null;
+	public function verInfoById($id_empa) {
+        $query	= "	SELECT 
+						pre_empa.*,
+						IFNULL(fc_mamografia,0) as fc_mamografia,
+						IFNULL(bo_consume_alcohol,-1) as bo_consume_alcohol,
+						IFNULL(bo_fuma,-1) as bo_fuma,
+						IFNULL(bo_trabajadora_reclusa,-1) as bo_trabajadora_reclusa,
+						IFNULL(bo_vdrl,-1) as bo_vdrl,
+						IFNULL(bo_rpr,-1) as bo_rpr,
+						IFNULL(bo_tos_productiva,-1) as bo_tos_productiva,
+						IFNULL(bo_baciloscopia_toma,-1) as bo_baciloscopia_toma,
+						IFNULL(bo_pap_realizado,-1) as bo_pap_realizado,
+						IFNULL(bo_pap_resultado,-1) as bo_pap_resultado,
+						IFNULL(bo_pap_vigente,-1) as bo_pap_vigente,
+						IFNULL(bo_pap_toma,-1) as bo_pap_toma,
+						IFNULL(bo_mamografia_realizada,-1) as bo_mamografia_realizada,
+						IFNULL(bo_mamografia_resultado_pasado,-1) as bo_mamografia_resultado_pasado,
+						IFNULL(bo_mamografia_resultado,-1) as bo_mamografia_resultado,
+						IFNULL(bo_mamografia_vigente,-1) as bo_mamografia_vigente
+					FROM pre_empa
+					WHERE id_empa = ?";
+
+		$param	= array($id_empa);
+        $result	= $this->db->getQuery($query, $param);
+
+        if($result->numRows > 0) {
+			return $result->rows->row_0;
+        }else{
+			return NULL;
         }
     }
 

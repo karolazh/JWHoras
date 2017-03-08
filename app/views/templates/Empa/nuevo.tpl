@@ -6,7 +6,7 @@
     <div class="col-md-12 text-right">
         <button type="button"
                 href='javascript:void(0)' 
-                onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$id_registro}', 'Registro número : {$id_registro}', 85);" 
+                onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/bitacora/{$id_paciente}', 'Registro número : {$id_paciente}', 85);" 
                 data-toggle="tooltip" 
                 title="Bitácora"
                 class="btn btn-sm btn-flat btn-primary">
@@ -17,6 +17,7 @@
 </section>
 
 <form id="form" class="form-horizontal">
+	<input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
     <input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden">
     <section class="content">
         <div class="panel panel-primary">
@@ -55,7 +56,7 @@
                 <div class="form-group">
                     <label for="id_sector" class="control-label col-sm-3">Sector (*)</label>
                     <div class="col-sm-3">
-                        <input type="text" name="id_sector" id="id_sector" value="" 
+                        <input type="text" name="gl_sector" id="gl_sector" value="" 
                                placeholder="Sector" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
@@ -153,9 +154,26 @@
 
 			<!-- Examen -->
             <div class="panel-body">
-                <!-- a. Alcoholismo -->
+				
+				<!-- Embarazo -->
                 <div class="box box-success">
-                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Alcoholismo</h3></div>
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Embarazada</h3></div>
+                    <div class="box-body">  
+                        <div class="form-group">   
+                            <label class="control-label required col-sm-3">¿Está Embarazada?</label>
+                            <div class="col-sm-1">
+                                <label><input class="bo_embarazo" type="radio" name="bo_embarazo" 
+                                              id="bo_embarazo_0" value="0" {$bo_embarazo_0}>NO</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_embarazo" type="radio" name="bo_embarazo"
+                                              id="bo_embarazo_1" value="1" {$bo_embarazo_1}>SI</label>
+                            </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- Alcoholismo -->
+                <div class="box box-success">
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Consumo de alcohol</h3></div>
                     <div class="box-body">
                         <div class="form-group">
                             <label class="control-label col-sm-3 required">¿Consume bebidas alcoh&oacute;licas?</label>
@@ -179,6 +197,8 @@
                                             type="button" id="btnaudit" class="btn btn-sm btn-info btn-flat">
                                         <i class="fa fa-file-text-o"></i>&nbsp;AUDIT 
                                     </button>
+									<input type="text" name="id_clasificacion_audit" id="id_clasificacion_audit" 
+										value="{$id_clasificacion_audit}" placeholder="" class="form-control hidden"/>
                                 </div>
                             </div>
                         </div>
@@ -198,7 +218,7 @@
                     </div>
                 </div>
 
-                <!-- b. Tabaquismo -->
+                <!-- Tabaquismo -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Tabaquismo</h3></div>
                     <div class="box-body">   
@@ -217,8 +237,8 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- c. Obesidad -->
+				
+                <!-- Obesidad -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Obesidad</h3></div>
                     <div class="box-body">
@@ -275,7 +295,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- d. Hipertensión -->
+                <!-- Hipertensión -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Hipertensión Arterial</h3></div>
                     <div class="box-body"> 
@@ -306,7 +326,7 @@
                     </div>
                 </div>
                 
-                <!-- e. Diabetes Mellitus (DM) -->
+                <!-- Diabetes Mellitus (DM) -->
                 <div class="box box-success" id="diabetes">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Diabetes Mellitus (DM)</h3></div>
                     <div class="box-body">
@@ -347,9 +367,9 @@
                     </div>
                 </div>
 
-                <!-- f. Sífilis -->
+                <!-- Sífilis -->
                 <div class="box box-success">
-                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Sifilis en población de riesgo</h3></div>
+                    <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Enfermedades de Transmisión Sexual</h3></div>
                     <div class="box-body">    
                         <div class="form-group">
                             <label class="control-label required col-sm-3">¿Es trabajadora sexual o persona en centro de reclusión?</label>
@@ -362,7 +382,7 @@
                             </div>
                         </div>  
                         <div class="form-group" id="id_vdrl" style="{if $bo_trabajadora_reclusa_1 != 'checked'}display: none{/if}">
-                            <label class="control-label required col-sm-3">¿Examen VDRL?</label>
+                            <label class="control-label required col-sm-3">¿Examen VDRL? (Sifilis)</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_vdrl" type="radio" name="bo_vdrl" 
                                               id="bo_vdrl_0" value="0" {$bo_vdrl_0}>Negativo</label>
@@ -372,7 +392,7 @@
                             </div>
                         </div>  
                         <div class="form-group" id="id_rpr" style="{if $bo_trabajadora_reclusa_1 != 'checked'}display: none{/if}">
-                            <label class="control-label required col-sm-3">¿Examen RPR?</label>
+                            <label class="control-label required col-sm-3">¿Examen RPR? (Sifilis)</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_rpr" type="radio" name="bo_rpr" 
                                               id="bo_rpr_0" value="0" {$bo_rpr_0}>Negativo</label>
@@ -386,10 +406,25 @@
                                         class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
                             </div>
                         </div>
+						<div class="form-group" id="id_vih">
+                            <label class="control-label required col-sm-3">¿Examen Test Elisa? (VIH)</label>
+                            <div class="col-sm-2">
+                                <label><input class="bo_vih" type="radio" name="bo_vih" 
+                                              id="bo_vih_0" value="0" {$bo_vih_0}>Negativo</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_vih" type="radio" name="bo_vih" 
+                                              id="bo_vih_1" value="1" {$bo_vih_1}>Positivo</label>
+                            </div>
+                            <div class="col-sm-2" id="div_vih_agenda" style="{if $bo_vih_1 != 'checked'}display: none{/if}">
+                                {$botonInformacionAgendaVIH}&nbsp;&nbsp;
+                                <button type="button" id="verAgendaVIH" style="{if $bo_vih_1 != 'checked'}display: none{/if}"
+                                        class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- g. Tuberculósis -->
+                <!-- Tuberculósis -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Tuberculosis</h3></div>
                     <div class="box-body">  
@@ -419,7 +454,7 @@
                     </div>
                 </div>
 
-                <!-- h. PAP -->
+                <!-- PAP -->
                 <div class="box box-success" style="{$pap}">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> PAP (Mujeres de 25 a 64 años Cáncer Cervicouterino)</h3></div>
                     <div class="box-body">  
@@ -431,13 +466,30 @@
                                 &nbsp;&nbsp;
                                 <label><input class="bo_pap_realizado" type="radio" name="bo_pap_realizado" 
                                               id="bo_pap_realizado_1" value="1" {$bo_pap_realizado_1}>SI</label>
+								&nbsp;&nbsp;
+                                <label><input class="bo_pap_realizado" type="radio" name="bo_pap_realizado" 
+                                              id="bo_pap_realizado_2" value="2" {$bo_pap_realizado_2}>NO SABE</label>
                             </div>
                         </div>
                         <div class="form-group" id="ultimo_pap" style="{if $bo_pap_realizado_1 != 'checked'}display: none{/if}">         
                             <label class="control-label required col-sm-3">Fecha &uacute;ltimo PAP</label>
                             <div class="col-sm-2">
                                 <input type="date" name="fc_ultimo_pap" id="fc_ultimo_pap" 
-                                       value="{$fc_ultimo_pap}" placeholder="" class="form-control"/>
+                                       value="{$fc_ultimo_pap}" placeholder="" class="form-control hidden"/>
+								<input type="text" id="ultimo_pap_ano" value="{$fc_ultimo_pap_ano}" class="form-control hidden"/>
+								<input type="text" id="ultimo_pap_mes" value="{$fc_ultimo_pap_mes}" class="form-control hidden"/>
+								<select class="form-control" id="fc_ultimo_pap_ano" name="fc_ultimo_pap_ano">
+									<option value="0">Seleccione Año</option>
+									{for $i = 2017 to 1900 step=-1}
+										<option value="{$i}" >{$i}</option>
+									{/for}
+								</select>
+								<select class="form-control" id="fc_ultimo_pap_mes" name="fc_ultimo_pap_mes">
+									<option value="0">Seleccione Mes</option>
+									{foreach $arrMes as $item}
+										<option value="{$item->id_mes}" >{$item->gl_mes}</option>
+									{/foreach}
+								</select>
                                 <span class="help-block hidden"></span>
                             </div>
                             &nbsp;&nbsp;
@@ -471,11 +523,11 @@
                         <div class="form-group" id="resultado_pap">
                             <label class="control-label required col-sm-3">Resultado PAP</label>
                             <div class="col-sm-2">
-                                <label><input class="bo_pap_toma"  type="radio" name="bo_pap_toma" 
-                                              id="bo_pap_toma_0" value="0" {$bo_pap_toma_0}>Alterado</label>
+                                <label><input class="bo_pap_resultado"  type="radio" name="bo_pap_resultado" 
+                                              id="bo_pap_resultado_0" value="0" {$bo_pap_resultado_0}>Alterado</label>
                                 &nbsp;&nbsp;
-                                <label><input class="bo_pap_toma" type="radio" name="bo_pap_toma" 
-                                              id="bo_pap_toma_1" value="1" {$bo_pap_toma_1}>Normal</label>
+                                <label><input class="bo_pap_resultado" type="radio" name="bo_pap_toma" 
+                                              id="bo_pap_resultado_1" value="1" {$bo_pap_resultado_1}>Normal</label>
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" id="verPAP" class="btn btn-sm btn-info">
@@ -509,7 +561,7 @@
                     </div>
                     </div>
                 </div>
-                <!-- j. Mujeres de 50 años (cáncer de mama) -->
+                <!-- Cáncer de mama -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Cáncer de mama</h3></div>
                     <div class="box-body">
@@ -521,13 +573,30 @@
                                 &nbsp;&nbsp;
                                 <label><input class="bo_mamografia_realizada" type="radio" name="bo_mamografia_realizada" 
                                               id="bo_mamografia_realizada_1" value="1" {$bo_mamografia_realizada_1}>SI</label>
+								&nbsp;&nbsp;
+                                <label><input class="bo_mamografia_realizada" type="radio" name="bo_mamografia_realizada" 
+                                              id="bo_mamografia_realizada_2" value="1" {$bo_mamografia_realizada_2}>NO SABE</label>
                             </div>
                         </div>
                         <div class="form-group" id="fecha_mamografia" style="{if $bo_mamografia_realizada_1 != 'checked'}display: none{/if}">
                             <label class="control-label required col-sm-3">Fecha Mamografía</label>
                             <div class="col-sm-2">
                                 <input type="date" name="fc_mamografia" id="fc_mamografia" value="{$fc_mamografia}" 
-                                       placeholder="" class="form-control"/>
+                                       placeholder="" class="form-control hidden"/>
+								<input type="text" id="mamografia_ano" value="{$fc_mamografia_ano}" class="form-control hidden"/>
+								<input type="text" id="mamografia_mes" value="{$fc_mamografia_mes}" class="form-control hidden"/>
+								<select class="form-control" id="fc_mamografia_ano" name="fc_mamografia_ano">
+									<option value="0">Seleccione Año</option>
+									{for $i = 2017 to 1900 step=-1}
+										<option value="{$i}" >{$i}</option>
+									{/for}
+								</select>
+								<select class="form-control" id="fc_mamografia_mes" name="fc_mamografia_mes">
+									<option value="0">Seleccione Mes</option>
+									{foreach $arrMes as $item}
+										<option value="{$item->id_mes}" >{$item->gl_mes}</option>
+									{/foreach}
+								</select>
                             </div>
                         </div>
                         <div class="form-group" id="mam_vigente" style="{if $fc_mamografia == 0}display: none{/if}">    
@@ -546,11 +615,11 @@
                         <div class="form-group" id="mam_resultado" style="{if $fc_mamografia == 0}display: none{/if}"> 
                                 <label class="control-label required col-sm-3">Resultado Mamografía</label>
                                 <div class="col-sm-2">
-                                    <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
-                                                  id="bo_mamografia_resultado" value="0">Alterado</label>
+                                    <label><input class="bo_mamografia_resultado_pasado" type="radio" name="bo_mamografia_resultado_pasado" 
+                                                  id="bo_mamografia_resultado_pasado_0" value="0" {$bo_mamografia_resultado_pasado_0}>Alterado</label>
                                     &nbsp;&nbsp;
-                                    <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
-                                                  id="bo_mamografia_resultado" value="1">Normal</label>
+                                    <label><input class="bo_mamografia_resultado_pasado" type="radio" name="bo_mamografia_resultado_pasado" 
+                                                  id="bo_mamografia_resultado_pasado_1" value="1" {$bo_mamografia_resultado_pasado_1}>Normal</label>
                                 </div>
                         </div>        
                         <div class="form-group" id="mam_requiere"> 
@@ -573,11 +642,11 @@
                             <div id="mam_resultado2" style="{if $bo_mamografia_toma != 'checked'}display: none{/if}"> 
                                 <label class="control-label required col-sm-3">Resultado Mamografía</label>
                                 <div class="col-sm-2">
-                                    <label><input class="bo_mamografia_resultado2" type="radio" name="bo_mamografia_resultado2" 
-                                                  id="bo_mamografia_resultado2" value="0">Alterado</label>
+                                    <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
+                                                  id="bo_mamografia_resultado_0" value="0" {$bo_mamografia_resultado_0}>Alterado</label>
                                     &nbsp;&nbsp;
-                                    <label><input class="bo_mamografia_resultado2" type="radio" name="bo_mamografia_resultado2" 
-                                                  id="bo_mamografia_resultado2" value="1">Normal</label>
+                                    <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
+                                                  id="bo_mamografia_resultado_1" value="1" {$bo_mamografia_resultado_1}>Normal</label>
                                 </div>
                             </div>
                             <div class="col-sm-3" id="div_mamografia_agenda">

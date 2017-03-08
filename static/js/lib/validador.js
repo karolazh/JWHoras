@@ -284,12 +284,12 @@ function calcularYear(Fecha){
 }
 
 //Calcular Edad
-function calcularEdad(Fecha){
+function calcularEdad(Fecha,input){
     fecha = new Date(Fecha);
     hoy = new Date();
     ed = parseInt((hoy -fecha)/365/24/60/60/1000);
     if (ed >= 0)
-     {document.getElementById('edad').value = ed;}
+     {$(input).val(ed);}
 }
 
 //Mostrar DIV con checkbox

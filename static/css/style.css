@@ -1979,7 +1979,7 @@ input[type="checkbox"]:hover,
 input[type="checkbox"]:checked::after,
 .checkbox input[type="checkbox"]:checked::after,
 .checkbox-inline input[type="checkbox"]:checked::after {
-    content: url(../img/checkmark.png);
+//    content: url(../img/checkmark.png);
     display: block;
     position: absolute;
     top: -6px;
@@ -2643,6 +2643,7 @@ table.dataTable tbody > tr > td {
   display: inline-block;
   text-align: left;
   vertical-align: middle;
+  //width:66%;
 }
 
 .circle-tile-content {

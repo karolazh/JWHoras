@@ -1,14 +1,33 @@
 <?php
 
+/**
+*****************************************************************************
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Controlador de archivos adjuntos
+* Plataforma	: !PHP
+* Creacion		: 13/02/2017
+* @name			Adjunto.php
+* @version		1.0
+* @author		Victor Retamal <victor.retamal@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*<orlando.vazquez@cosof.cl>	06-03-2017	Modificadas referencias de DAO's y agregada información de autor.
+*
+*-----------------------------------------------------------------------------
+*****************************************************************************
+*/
 class Adjunto extends Controller{
 
-    protected $_DAOAdjuntos;
+    protected $_DAOAdjunto;
 
 	function __construct() {
 		parent::__construct();
         $this->load->lib('Boton', false);
 
-        $this->_DAOAdjuntos			= $this->load->model("DAOAdjuntos");
+        $this->_DAOAdjunto			= $this->load->model("DAOAdjunto");
 	}
 
 	public function cargarAdjunto(){
@@ -55,7 +74,7 @@ class Adjunto extends Controller{
 		}
 	}
 
-	public function cargarListadoAdjuntos(){
+	public function cargarListado(){
 		$adjuntos	= array();
 		$template	= '';
 
@@ -100,7 +119,7 @@ class Adjunto extends Controller{
 		echo $template;
 	}
 
-	public function borrarAdjunto(){
+	public function borrar(){
 		$id_adjunto	= $_POST['adjunto'];
 		$template	= '';
 		unset($_SESSION['adjunto'][$id_adjunto]);
@@ -149,7 +168,7 @@ class Adjunto extends Controller{
 		echo $template;
 	}
 
-    public function verAdjunto(){
+    public function ver(){
         $id_adjunto = Request::getParametros(0);
 
         if(isset($_SESSION['adjuntos'][$id_adjunto])){

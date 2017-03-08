@@ -16,7 +16,7 @@
 /**
  * APP_NAME: Nombre de la aplicación
  */
-define('APP_NAME','');
+define('APP_NAME','Prevención de Femicidios');
 
 /**
  * ENVIROMENT:
@@ -152,7 +152,7 @@ $config['email_admin'] = "";
 # zona horaria
 date_default_timezone_set('America/Santiago');
 
-if(ENVIROMENT != "PROD"){
-    //ini_set('error_reporting', E_ALL);
-    //ini_set('display_errors', 0);
+if(ENVIROMENT == "DEV"){
+    ini_set('error_reporting', E_ALL);
+    ini_set('display_errors', 0);
 }
