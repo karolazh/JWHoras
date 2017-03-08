@@ -169,19 +169,25 @@
 										</tr>
 									</thead>
 									<tbody>
+										{$cant_pre = 0}
 										{foreach $arrTipoViolencia as $item}
 											{$i = $item->id_tipo_violencia}
+											{$n = $i - 1}
+											{$row = "row_"}
+											{$cant_pre = $cant_pre + 1}
+											{assign var="row_n" value="`$row``$n`"}
 											<tr>
 												<td class="text-center" nowrap>{$item->gl_tipo_violencia}</td>
-												<td class="text-center"><input type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
-												<td class="text-center"><input type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
-												<td class="text-center"><input type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
-												<td class="text-center"><input type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
+												<td class="text-center"><input class="id_tipo_violencia" value="{$item->gl_respuesta_1}" {if $item->gl_respuesta_1 == $arrPuntos->$row_n->nr_valor}checked {/if} type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
+												<td class="text-center"><input class="id_tipo_violencia" value="{$item->gl_respuesta_2}" {if $item->gl_respuesta_2 == $arrPuntos->$row_n->nr_valor}checked {/if} type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
+												<td class="text-center"><input class="id_tipo_violencia" value="{$item->gl_respuesta_3}" {if $item->gl_respuesta_3 == $arrPuntos->$row_n->nr_valor}checked {/if} type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
+												<td class="text-center"><input class="id_tipo_violencia" value="{$item->gl_respuesta_4}" {if $item->gl_respuesta_4 == $arrPuntos->$row_n->nr_valor}checked {/if} type='radio' id='id_tipo_violencia_{$i}' name='id_tipo_violencia_{$i}'></td>
 											</tr>
 										{/foreach}
 									</tbody>
 								</table>
 							</div>
+									<input type="text" value="{$cant_pre}" id="cant_pre" name="cant_pre" class="hidden">
 						</div>
 						<div class="col-lg-3"></div>
 						<div class="form-group">

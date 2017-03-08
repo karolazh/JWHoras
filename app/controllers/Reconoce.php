@@ -43,6 +43,7 @@ class Reconoce extends Controller {
 	protected $_DAOTipoSexo;
 	protected $_DAOPacienteAgresor;
 	protected $_DAOPacienteDireccion;
+	protected $_DAOPacienteAgresorViolencia;
 
     /**
      * Descripción: Constructor
@@ -70,6 +71,7 @@ class Reconoce extends Controller {
 		$this->_DAOTipoOrientacionSexual    = $this->load->model("DAOTipoOrientacionSexual");
 		$this->_DAOTipoSexo					= $this->load->model("DAOTipoSexo");
 		$this->_DAOPacienteDireccion		= $this->load->model("DAOPacienteDireccion");
+		$this->_DAOPacienteAgresorViolencia	= $this->load->model("DAOPacienteAgresorViolencia");
     }
 	
 	/**
@@ -85,7 +87,7 @@ class Reconoce extends Controller {
 	* @return valores con Smarty a identificar_agresor.tpl
 	*/    
     public function identificarAgresor(){
-    
+	
     //Cargar Arrays
 		$parametros = $this->request->getParametros();
 		$id_paciente = $parametros[0];
@@ -106,9 +108,6 @@ class Reconoce extends Controller {
         $arrActividadEconomica = $this->_DAOTipoActividadEconomica->getLista();
 		$this->smarty->assign("arrActividadEconomica", $arrActividadEconomica);
         
-        $arrTipoViolencia = $this->_DAOTipoViolencia->getLista();
-		$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
-        
         $arrTipoRiesgo = $this->_DAOTipoRiesgo->getLista();
 		$this->smarty->assign("arrTipoRiesgo", $arrTipoRiesgo);
 		
@@ -125,6 +124,20 @@ class Reconoce extends Controller {
 		$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);
         
 		$direccion = $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
+		
+        $arrTipoViolencia = $this->_DAOTipoViolencia->getLista();
+		$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
+		
+		$arrPuntos = $this->_DAOPacienteAgresorViolencia->getByIdPaciente($id_paciente);
+		if (!is_null($arrPuntos)) {
+			foreach ($arrPuntos as $item) {
+				if (is_null($item->nr_valor)) {
+					$item->nr_valor = 0;
+				}
+			}
+		}
+		$this->smarty->assign("arrPuntos", $arrPuntos);
+		
     //Obtener Datos de la BD    
         $parametros = $this->request->getParametros();
         $id_registro = $parametros[0];
@@ -172,8 +185,18 @@ class Reconoce extends Controller {
 		$parametros = $this->_request->getParams();
 		$correcto = FALSE;
 		$error = FALSE;
-		
-	//	$id_paciente = $parametros['id_paciente'];
+		$cant_preguntas = $parametros['cant_pre'];
+		$id_paciente = $parametros['id_paciente'];
+		for ($i = 1; $i <= $cant_preguntas; $i++) {
+			$id_pregunta = $i;
+			$valor = $parametros['id_tipo_violencia_' . $i];
+			$bool_existe = $this->_DAOPacienteAgresorViolencia->getByIdPaciente($id_paciente);
+			if (!$bool_existe){
+					$bool_violencia = $this->_DAOPacienteAgresorViolencia->insertViolencia($id_paciente, $id_pregunta, $valor);
+			} else {
+					$bool_violencia = $this->_DAOPacienteAgresorViolencia->updateViolencia($id_paciente, $id_pregunta, $valor);
+			}
+		}
 		
 		$bool_insert = $this->_DAOPacienteAgresor->insertarAgresor($parametros);
 		$bool_update = $this->_DAOPaciente->updatePaciente($parametros);
