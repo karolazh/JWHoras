@@ -928,7 +928,7 @@ class Paciente extends Controller {
 	 * @return PDF
 	 */
 	public function generarConsentimiento() {
-		$this->load->lib('MPdf', false);
+		$this->load->lib('Mpdf', false);
 		//header('Content-type: application/pdf');
 		//header("Content-Disposition: inline; filename='$filename'");
 		//echo crear_mpdf($html, $filename, false, 'D');

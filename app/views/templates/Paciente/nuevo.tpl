@@ -305,7 +305,7 @@
 					</div>
 				</div>
 
-				<div class="form-group clearfix col-md-12 text-right">
+				<div class="form-group clearfix  text-right">
 					<button type="button" id="guardar" class="btn btn-success">
 						<i class="fa fa-save"></i>  Guardar
 					</button>
