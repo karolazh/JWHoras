@@ -350,7 +350,7 @@
 						<select class="form-control" id="id_tipo_sexo" name="id_tipo_sexo">
                                                     <option value="0">Seleccione Sexo</option>
                                                     {foreach $arrSexo as $item}
-                                                        <option value="{$item->id_sexo}" >{$item->gl_sexo}</option>
+                                                        <option value="{$item->id_tipo_sexo}" >{$item->gl_tipo_sexo}</option>
                                                     {/foreach}
                                                 </select>
 						<span class="help-block hidden fa fa-warning"></span>
@@ -360,7 +360,7 @@
 						<select class="form-control" id="id_tipo_genero" name="id_tipo_genero">
                                                     <option value="0">Seleccione Género</option>
                                                     {foreach $arrGenero as $item}
-                                                        <option value="{$item->id_genero}" >{$item->gl_genero}</option>
+                                                        <option value="{$item->id_tipo_genero}" >{$item->gl_tipo_genero}</option>
                                                     {/foreach}
                                                 </select>
 						<span class="help-block hidden fa fa-warning"></span>

@@ -38,6 +38,9 @@ class Reconoce extends Controller {
     protected $_DAOPacienteExamen;
 	protected $_DAOTipoVinculo;
 	protected $_DAOTipoRiesgo;
+	protected $_DAOTipoGenero;
+	protected $_DAOTipoOrientacionSexual;
+	protected $_DAOTipoSexo;
 
     /**
      * Descripción: Constructor
@@ -60,6 +63,9 @@ class Reconoce extends Controller {
         $this->_DAOTipoViolencia            = $this->load->model("DAOTipoViolencia");
         $this->_DAOTipoRiesgo               = $this->load->model("DAOTipoRiesgo");
 		$this->_DAOTipoVinculo              = $this->load->model("DAOTipoVinculo");
+		$this->_DAOTipoGenero               = $this->load->model("DAOTipoGenero");
+		$this->_DAOTipoOrientacionSexual    = $this->load->model("DAOTipoOrientacionSexual");
+		$this->_DAOTipoSexo					= $this->load->model("DAOTipoSexo");
     }
 	
 	/**
@@ -101,6 +107,15 @@ class Reconoce extends Controller {
         
         $arrTipoRiesgo = $this->_DAOTipoRiesgo->getLista();
 		$this->smarty->assign("arrTipoRiesgo", $arrTipoRiesgo);
+		
+		$arrSexo = $this->_DAOTipoSexo->getLista();
+		$this->smarty->assign("arrSexo", $arrSexo);
+		
+		$arrGenero = $this->_DAOTipoGenero->getLista();
+		$this->smarty->assign("arrGenero", $arrGenero);
+		
+		$arrOrientacion = $this->_DAOTipoOrientacionSexual->getLista();
+		$this->smarty->assign("arrOrientacion", $arrOrientacion);
 	
 		$arrTipoVinculo = $this->_DAOTipoVinculo->getLista();
 		$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);
