@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 192.168.0.200
--- Tiempo de generación: 08-03-2017 a las 18:10:12
+-- Tiempo de generación: 08-03-2017 a las 21:18:00
 -- Versión del servidor: 5.6.10
 -- Versión de PHP: 5.6.26
 
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria` (
   PRIMARY KEY (`id_auditoria`),
   KEY `IDX_gl_tipo` (`gl_tipo`),
   KEY `IDX_id_usuario` (`id_usuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=130 ;
 
 --
 -- Volcado de datos para la tabla `pre_auditoria`
@@ -98,7 +98,135 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria` (
 
 INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`, `gl_ip`, `gl_tiempo`, `fc_creacion`) VALUES
 (1, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2\n					WHERE id_empa = 1', '::1', '0.0043160915374756', '2017-03-08 18:10:09'),
-(2, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0021851062774658', '2017-03-08 18:10:09');
+(2, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0021851062774658', '2017-03-08 18:10:09'),
+(3, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2\n					WHERE id_empa = 1', '::1', '0.002094030380249', '2017-03-08 18:14:52'),
+(4, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0013868808746338', '2017-03-08 18:14:52'),
+(5, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= ''5'',	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2\n					WHERE id_empa = 1', '::1', '0.0022101402282715', '2017-03-08 18:16:45'),
+(6, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.001248836517334', '2017-03-08 18:16:45'),
+(7, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= ''4'',	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2\n					WHERE id_empa = 1', '::1', '0.0021209716796875', '2017-03-08 18:22:46'),
+(8, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0019569396972656', '2017-03-08 18:22:46'),
+(9, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 0,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= ''4'',	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2\n					WHERE id_empa = 1', '::1', '0.002126932144165', '2017-03-08 18:25:47'),
+(10, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0008699893951416', '2017-03-08 18:25:47'),
+(11, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= ''4'',	\n						bo_pap_vigente					= 0,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2\n					WHERE id_empa = 1', '::1', '0.0024118423461914', '2017-03-08 18:26:06'),
+(12, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0022599697113037', '2017-03-08 18:26:06'),
+(13, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= ''4'',	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2\n					WHERE id_empa = 1', '::1', '0.0020999908447266', '2017-03-08 18:34:10'),
+(14, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011570453643799', '2017-03-08 18:34:10'),
+(15, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00086402893066406', '2017-03-08 19:27:52'),
+(16, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.00080013275146484', '2017-03-08 19:27:52'),
+(17, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.0007171630859375', '2017-03-08 19:29:26'),
+(18, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.0010879039764404', '2017-03-08 19:29:26'),
+(19, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00087404251098633', '2017-03-08 19:33:15'),
+(20, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.00099492073059082', '2017-03-08 19:33:15'),
+(21, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.001533031463623', '2017-03-08 19:34:03'),
+(22, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.0018770694732666', '2017-03-08 19:34:03'),
+(23, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00061893463134766', '2017-03-08 19:35:22'),
+(24, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.00092101097106934', '2017-03-08 19:35:22'),
+(25, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00091886520385742', '2017-03-08 19:42:19'),
+(26, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.00081586837768555', '2017-03-08 19:42:19'),
+(27, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.0010249614715576', '2017-03-08 19:47:38'),
+(28, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.00099587440490723', '2017-03-08 19:47:38'),
+(29, 2, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.00099086761474609', '2017-03-08 19:50:33'),
+(30, 2, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''2''', '127.0.0.1', '0.0011541843414307', '2017-03-08 19:50:33'),
+(31, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00082802772521973', '2017-03-08 19:51:07'),
+(32, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.0011041164398193', '2017-03-08 19:51:07'),
+(33, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00072503089904785', '2017-03-08 19:55:14'),
+(34, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.0010049343109131', '2017-03-08 19:55:14'),
+(35, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00067806243896484', '2017-03-08 19:58:03'),
+(36, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.00091791152954102', '2017-03-08 19:58:03'),
+(37, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00059390068054199', '2017-03-08 20:00:08'),
+(38, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.0010888576507568', '2017-03-08 20:00:08'),
+(39, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	1\n					WHERE id_empa = 1 AND id_pregunta = 1', '::1', '0.0031158924102783', '2017-03-08 20:16:20'),
+(40, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	1\n					WHERE id_empa = 1 AND id_pregunta = 2', '::1', '0.0028250217437744', '2017-03-08 20:16:20'),
+(41, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	2\n					WHERE id_empa = 1 AND id_pregunta = 3', '::1', '0.001121997833252', '2017-03-08 20:16:20'),
+(42, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	1\n					WHERE id_empa = 1 AND id_pregunta = 4', '::1', '0.001129150390625', '2017-03-08 20:16:20'),
+(43, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	3\n					WHERE id_empa = 1 AND id_pregunta = 5', '::1', '0.00091886520385742', '2017-03-08 20:16:20'),
+(44, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	2\n					WHERE id_empa = 1 AND id_pregunta = 6', '::1', '0.000946044921875', '2017-03-08 20:16:20'),
+(45, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	1\n					WHERE id_empa = 1 AND id_pregunta = 7', '::1', '0.00096487998962402', '2017-03-08 20:16:20'),
+(46, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	1\n					WHERE id_empa = 1 AND id_pregunta = 8', '::1', '0.0010321140289307', '2017-03-08 20:16:20'),
+(47, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	2\n					WHERE id_empa = 1 AND id_pregunta = 9', '::1', '0.0010209083557129', '2017-03-08 20:16:20'),
+(48, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 10', '::1', '0.0010840892791748', '2017-03-08 20:16:20'),
+(49, 2, 'INSERT', 'INSERT into pre_evento values(null,15,,''1'',''AUDIT del EMPA 1  modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00091385841369629', '2017-03-08 20:16:20'),
+(50, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00076508522033691', '2017-03-08 20:19:55'),
+(51, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.0010089874267578', '2017-03-08 20:19:55'),
+(52, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00081801414489746', '2017-03-08 20:22:13'),
+(53, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''13'',0,''Consulta agregada el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.00099802017211914', '2017-03-08 20:22:13'),
+(54, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= ''4'',	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0021119117736816', '2017-03-08 20:28:43'),
+(55, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011138916015625', '2017-03-08 20:28:43'),
+(56, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= ''4'',	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.001835823059082', '2017-03-08 20:28:52'),
+(57, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010731220245361', '2017-03-08 20:28:52'),
+(58, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= ''4'',	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0020148754119873', '2017-03-08 20:30:46'),
+(59, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00081801414489746', '2017-03-08 20:30:46'),
+(60, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00053191184997559', '2017-03-08 20:30:48'),
+(61, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0021119117736816', '2017-03-08 20:33:36'),
+(62, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00093412399291992', '2017-03-08 20:33:36'),
+(63, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0023460388183594', '2017-03-08 20:38:20'),
+(64, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010180473327637', '2017-03-08 20:38:20'),
+(65, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0022451877593994', '2017-03-08 20:39:33'),
+(66, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00081896781921387', '2017-03-08 20:39:33'),
+(67, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.0010521411895752', '2017-03-08 20:40:00'),
+(68, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0018711090087891', '2017-03-08 20:41:15'),
+(69, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0021841526031494', '2017-03-08 20:41:15'),
+(70, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0027961730957031', '2017-03-08 20:41:57'),
+(71, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.001121997833252', '2017-03-08 20:41:57'),
+(72, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0021920204162598', '2017-03-08 20:42:41'),
+(73, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010881423950195', '2017-03-08 20:42:41'),
+(74, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.001561164855957', '2017-03-08 20:44:33'),
+(75, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= 2017-03-08,\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= 4,	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0021641254425049', '2017-03-08 20:46:46'),
+(76, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= 2017-03-08,\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= 4,	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0023090839385986', '2017-03-08 20:47:21'),
+(77, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= 2017-03-08,\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= 4,	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0020039081573486', '2017-03-08 20:47:44'),
+(78, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= 2017-03-08,\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= 4,	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.00223708152771', '2017-03-08 20:50:27'),
+(79, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= 2017-03-08,\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= 4,	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2\n					WHERE id_empa = 1', '::1', '0.0016958713531494', '2017-03-08 20:51:32'),
+(80, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= 2017-03-08,\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= 4,	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2\n					WHERE id_empa = 1', '::1', '0.001600980758667', '2017-03-08 20:51:40'),
+(81, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= 2017-03-08,\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= 4,	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= 4,	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2\n					WHERE id_empa = 1', '::1', '0.0017530918121338', '2017-03-08 20:51:44'),
+(82, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= ''4'',	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2\n					WHERE id_empa = 1', '::1', '0.0018999576568604', '2017-03-08 20:52:24');
+INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`, `gl_ip`, `gl_tiempo`, `fc_creacion`) VALUES
+(83, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0022430419921875', '2017-03-08 20:52:24'),
+(84, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= ''4'',	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2\n					WHERE id_empa = 1', '::1', '0.0024240016937256', '2017-03-08 20:52:35'),
+(85, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00083708763122559', '2017-03-08 20:52:35'),
+(86, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00077605247497559', '2017-03-08 20:53:55'),
+(87, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.0010299682617188', '2017-03-08 20:55:00'),
+(88, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= ''4'',	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0022869110107422', '2017-03-08 20:55:13'),
+(89, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 3,\n						gl_sector						= '''',\n						id_institucion					= 2,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-08'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 1,\n						bo_pap_resultado				= 2,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 2014,	\n						fc_ultimo_pap_mes				= ''4'',	\n						bo_pap_vigente					= 1,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 1,\n						bo_mamografia_resultado_pasado	= 2,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 2014,	\n						fc_mamografia_mes				= ''4'',	\n						bo_mamografia_vigente			= 0,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0021059513092041', '2017-03-08 20:56:52'),
+(90, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''13'',''1'',''Empa modificado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00086593627929688', '2017-03-08 20:56:52'),
+(91, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00047898292541504', '2017-03-08 20:57:06'),
+(92, 2, 'INSERT', 'INSERT INTO pre_paciente\r\n						(\r\n						id_institucion,\r\n						id_region,\r\n						id_comuna,\r\n						id_prevision,\r\n						gl_grupo_tipo,\r\n						gl_rut,\r\n						bo_extranjero,\r\n						gl_run_pass,\r\n						gl_nombres,\r\n						gl_apellidos,\r\n						fc_nacimiento,\r\n						gl_direccion,\r\n						gl_fono,\r\n						gl_celular,\r\n						gl_email,\r\n						id_centro_salud,\r\n						gl_latitud,\r\n						gl_longitud,\r\n						bo_reconoce,\r\n						bo_acepta_programa,\r\n						fc_crea,\r\n						id_usuario_crea\r\n						)\r\n					VALUES\r\n						(\r\n						2,\r\n						5,\r\n						35,\r\n						1,\r\n						''Tratamiento'',\r\n						''11111111-1'',\r\n						''0'',\r\n						'''',\r\n						''Paciente'',\r\n						''Prueba'',\r\n						''1980-03-08'',\r\n						''Pedro Montt 1200, Valparaíso, Chile'',\r\n						''98521487'',\r\n						''9985412'',\r\n						''prueba@prueba.com'',\r\n						''2032'',\r\n						''-33.0465371'',\r\n						''-71.6194787'',\r\n						''0'',\r\n						1,\r\n						now(),\r\n						2\r\n						)', '::1', '0.003000020980835', '2017-03-08 20:59:31'),
+(93, 2, 'INSERT', 'INSERT INTO pre_adjunto(id_paciente,id_tipo_adjunto,gl_nombre,gl_path,gl_glosa,sha256,fc_crea,id_usuario_crea) VALUES(''14'',1,''Consentimiento_11111111-1.pdf'',''archivos/14/Consentimiento_11111111-1.pdf'',''Consentimiento Firmado'',''7df87da98ba96dbf1651f4f14d9b36e3fe86c6569cd4e22fe484d256488841c1'',''2017-03-08 05:03:37'',''2'')', '::1', '0.00099992752075195', '2017-03-08 20:59:31'),
+(94, 2, 'INSERT', 'INSERT INTO pre_paciente_registro\r\n						(\r\n						id_paciente,\r\n						id_institucion,\r\n						fc_ingreso,\r\n						gl_hora_ingreso,\r\n						gl_motivo_consulta,\r\n						fc_crea,\r\n						id_usuario_crea\r\n						)\r\n					VALUES  \r\n						(\r\n						14,\r\n						2,\r\n						''2017-03-08'',\r\n						''17:52'',\r\n						''Consulta de Prueba'',\r\n						now(),\r\n						''2''\r\n						)', '::1', '0.00099992752075195', '2017-03-08 20:59:31'),
+(95, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''14'',1)', '::1', '0.0010001659393311', '2017-03-08 20:59:31'),
+(96, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''14'',2)', '::1', '0.0019998550415039', '2017-03-08 20:59:31'),
+(97, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''3'',1,''2'')', '::1', '0.00099992752075195', '2017-03-08 20:59:31'),
+(98, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''4'',1,''2'')', '::1', '0.0019998550415039', '2017-03-08 20:59:31'),
+(99, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''3'',2,''2'')', '::1', '0.00099992752075195', '2017-03-08 20:59:31'),
+(100, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''4'',2,''2'')', '::1', '0.0010001659393311', '2017-03-08 20:59:31'),
+(101, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''3'',3,''2'')', '::1', '0.00099992752075195', '2017-03-08 20:59:31'),
+(102, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''4'',3,''2'')', '::1', '0.00099992752075195', '2017-03-08 20:59:31'),
+(103, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''3'',4,''2'')', '::1', '0.00099992752075195', '2017-03-08 20:59:31'),
+(104, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''4'',4,''2'')', '::1', '0.0010001659393311', '2017-03-08 20:59:31'),
+(105, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''3'',5,''2'')', '::1', '0.002000093460083', '2017-03-08 20:59:31'),
+(106, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''4'',5,''2'')', '::1', '0.0010001659393311', '2017-03-08 20:59:31'),
+(107, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''3'',6,''2'')', '::1', '0.0010001659393311', '2017-03-08 20:59:31'),
+(108, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''4'',6,''2'')', '::1', '0.00099992752075195', '2017-03-08 20:59:31'),
+(109, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''3'',7,''2'')', '::1', '0.00099992752075195', '2017-03-08 20:59:32'),
+(110, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''4'',7,''2'')', '::1', '0.00099992752075195', '2017-03-08 20:59:32'),
+(111, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''3'',8,''2'')', '::1', '0.00099992752075195', '2017-03-08 20:59:32'),
+(112, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''4'',8,''2'')', '::1', '0.0010001659393311', '2017-03-08 20:59:32'),
+(113, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''3'',9,''2'')', '::1', '0.0010008811950684', '2017-03-08 20:59:32'),
+(114, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''4'',9,''2'')', '::1', '0.0010001659393311', '2017-03-08 20:59:32'),
+(115, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''3'',10,''2'')', '::1', '0.00099992752075195', '2017-03-08 20:59:32'),
+(116, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''4'',10,''2'')', '::1', '0.00099992752075195', '2017-03-08 20:59:32'),
+(117, 2, 'INSERT', 'INSERT into pre_evento values(null,1,''14'',0,''Paciente creado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.14500784873962', '2017-03-08 20:59:32'),
+(118, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''14'',''3'',''Empa 3 creado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00099992752075195', '2017-03-08 20:59:32'),
+(119, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''14'',''4'',''Empa 4 creado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0', '2017-03-08 20:59:32'),
+(120, 2, 'INSERT', 'INSERT into pre_evento values(null,14,''14'',''3'',''AUDIT del EMPA3 creado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0', '2017-03-08 20:59:32'),
+(121, 2, 'INSERT', 'INSERT into pre_evento values(null,14,''14'',''4'',''AUDIT del EMPA4 creado el : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00099992752075195', '2017-03-08 20:59:32'),
+(122, 2, 'INSERT', 'INSERT into pre_evento values(null,4,''14'',''4'',''Acepta el programa con fecha : 2017-03-08'',1,''2'',CURRENT_TIMESTAMP)', '::1', '0.002000093460083', '2017-03-08 20:59:32'),
+(123, 2, 'UPDATE', 'UPDATE pre_paciente_direccion SET\r\n						bo_estado					= 0,\r\n						id_usuario_actualiza		= 2,\r\n						fc_actualiza				= now()\r\n					WHERE id_paciente = 14', '::1', '0.00099992752075195', '2017-03-08 20:59:32'),
+(124, 2, 'INSERT', 'INSERT INTO pre_paciente_direccion\r\n						(\r\n						id_paciente,\r\n						id_comuna,\r\n						id_region,\r\n						gl_direccion,\r\n						gl_latitud,\r\n						gl_longitud,\r\n						bo_estado,\r\n						id_usuario_crea,\r\n						fc_crea,\r\n						id_usuario_actualiza,\r\n						fc_actualiza\r\n						)\r\n					VALUES\r\n						(\r\n						14,\r\n						35,\r\n						5,\r\n						''Pedro Montt 1200, Valparaíso, Chile'',\r\n						''-33.0465371'',\r\n						''-71.6194787'',\r\n						1,\r\n						2,\r\n						now(),\r\n						2,\r\n						now()\r\n						)', '::1', '0.0010001659393311', '2017-03-08 20:59:32'),
+(125, 2, 'INSERT', 'INSERT INTO Array() VALUES()', '127.0.0.1', '0.00094294548034668', '2017-03-08 21:00:53'),
+(126, 2, 'INSERT', 'INSERT INTO pre_paciente_registro(id_paciente,id_institucion,gl_hora_ingreso,fc_ingreso,gl_motivo_consulta,fc_crea,id_usuario_crea) VALUES(''13'',''1849'',''18:01'',''2017-03-08'','''',''2017-03-08 06:03:42'',''2'')', '127.0.0.1', '0.0013580322265625', '2017-03-08 21:02:40'),
+(127, 2, 'INSERT', 'INSERT INTO pre_paciente_registro(id_paciente,id_institucion,gl_hora_ingreso,fc_ingreso,gl_motivo_consulta,fc_crea,id_usuario_crea) VALUES(''13'',''1849'',''18:02'',''2017-03-08'',''1'',''2017-03-08 06:03:58'',''2'')', '127.0.0.1', '0.001129150390625', '2017-03-08 21:03:56'),
+(128, 2, 'INSERT', 'INSERT INTO pre_paciente_registro(id_paciente,id_institucion,gl_hora_ingreso,fc_ingreso,gl_motivo_consulta,fc_crea,id_usuario_crea) VALUES(''13'',''1849'',''18:04'',''2017-03-08'',''test'',''2017-03-08 06:03:21'',''2'')', '127.0.0.1', '0.0011279582977295', '2017-03-08 21:05:19'),
+(129, 2, 'INSERT', 'INSERT INTO pre_paciente_registro(id_paciente,id_institucion,gl_hora_ingreso,fc_ingreso,gl_motivo_consulta,fc_crea,id_usuario_crea) VALUES(''13'',''1849'',''18:04'',''2017-03-08'','''',''2017-03-08 06:03:53'',''2'')', '127.0.0.1', '0.00099492073059082', '2017-03-08 21:06:50');
 
 -- --------------------------------------------------------
 
@@ -120,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria_login` (
   KEY `IDX_gl_rut` (`gl_rut`),
   KEY `IDX_ip_privada` (`ip_privada`),
   KEY `IDX_ip_publica` (`ip_publica`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Volcado de datos para la tabla `pre_auditoria_login`
@@ -142,7 +270,8 @@ INSERT INTO `pre_auditoria_login` (`id_auditoria_login`, `id_usuario`, `gl_rut`,
 (13, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-08 15:18:31'),
 (14, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-08 15:31:57'),
 (15, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-08 17:08:20'),
-(16, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-08 18:00:26');
+(16, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-08 18:00:26'),
+(17, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-08 19:50:33');
 
 -- --------------------------------------------------------
 
@@ -3102,6 +3231,7 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   `id_empa` int(11) NOT NULL AUTO_INCREMENT,
   `id_paciente` int(11) NOT NULL,
   `nr_orden` int(11) DEFAULT '0',
+  `bo_finalizado` int(1) DEFAULT '0' COMMENT '1=SI',
   `id_comuna` int(11) DEFAULT '0',
   `gl_sector` varchar(250) DEFAULT NULL,
   `id_institucion` int(11) DEFAULT NULL,
@@ -3172,15 +3302,17 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   KEY `IDX_id_usuario_act` (`id_usuario_act`),
   KEY `IDX_nr_orden` (`nr_orden`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `pre_empa`
 --
 
-INSERT INTO `pre_empa` (`id_empa`, `id_paciente`, `nr_orden`, `id_comuna`, `gl_sector`, `id_institucion`, `nr_ficha`, `fc_empa`, `bo_embarazo`, `bo_consume_alcohol`, `gl_puntos_audit`, `bo_fuma`, `gl_peso`, `gl_estatura`, `gl_imc`, `gl_circunferencia_abdominal`, `id_clasificacion_imc`, `gl_pas`, `gl_pad`, `gl_glicemia`, `bo_glicemia_toma`, `id_examen_glicemia`, `bo_trabajadora_reclusa`, `bo_vdrl`, `id_examen_vdrl`, `bo_rpr`, `id_examen_rpr`, `bo_vih`, `id_examen_vih`, `bo_tos_productiva`, `bo_baciloscopia_toma`, `id_examen_baciloscopia`, `bo_pap_realizado`, `bo_pap_resultado`, `fc_ultimo_pap`, `fc_ultimo_pap_ano`, `fc_ultimo_pap_mes`, `fc_tomar_pap`, `bo_pap_vigente`, `bo_pap_toma`, `id_examen_pap`, `gl_colesterol`, `bo_colesterol_toma`, `id_examen_colesterol`, `bo_mamografia_realizada`, `bo_mamografia_resultado_pasado`, `bo_mamografia_vigente`, `bo_mamografia_toma`, `bo_mamografia_resultado`, `id_examen_mamografia`, `fc_mamografia`, `fc_mamografia_ano`, `fc_mamografia_mes`, `gl_observaciones_empa`, `id_usuario_crea`, `fc_crea`, `id_usuario_act`, `fc_actualiza`) VALUES
-(1, 13, 1, 3, '', 2, NULL, '2017-03-08 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, 0, NULL, NULL, NULL, NULL, 2014, 4, NULL, 0, '2017-03-08 17:29:47', 2, '2017-03-08 18:10:09'),
-(2, 13, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-08 17:29:47', 0, NULL);
+INSERT INTO `pre_empa` (`id_empa`, `id_paciente`, `nr_orden`, `bo_finalizado`, `id_comuna`, `gl_sector`, `id_institucion`, `nr_ficha`, `fc_empa`, `bo_embarazo`, `bo_consume_alcohol`, `gl_puntos_audit`, `bo_fuma`, `gl_peso`, `gl_estatura`, `gl_imc`, `gl_circunferencia_abdominal`, `id_clasificacion_imc`, `gl_pas`, `gl_pad`, `gl_glicemia`, `bo_glicemia_toma`, `id_examen_glicemia`, `bo_trabajadora_reclusa`, `bo_vdrl`, `id_examen_vdrl`, `bo_rpr`, `id_examen_rpr`, `bo_vih`, `id_examen_vih`, `bo_tos_productiva`, `bo_baciloscopia_toma`, `id_examen_baciloscopia`, `bo_pap_realizado`, `bo_pap_resultado`, `fc_ultimo_pap`, `fc_ultimo_pap_ano`, `fc_ultimo_pap_mes`, `fc_tomar_pap`, `bo_pap_vigente`, `bo_pap_toma`, `id_examen_pap`, `gl_colesterol`, `bo_colesterol_toma`, `id_examen_colesterol`, `bo_mamografia_realizada`, `bo_mamografia_resultado_pasado`, `bo_mamografia_vigente`, `bo_mamografia_toma`, `bo_mamografia_resultado`, `id_examen_mamografia`, `fc_mamografia`, `fc_mamografia_ano`, `fc_mamografia_mes`, `gl_observaciones_empa`, `id_usuario_crea`, `fc_crea`, `id_usuario_act`, `fc_actualiza`) VALUES
+(1, 13, 1, 1, 3, '', 2, NULL, '2017-03-08 00:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, 2014, 4, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, 2, 0, NULL, NULL, NULL, NULL, 2014, 4, NULL, 0, '2017-03-08 17:29:47', 2, '2017-03-08 20:56:52'),
+(2, 13, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-08 17:29:47', 0, NULL),
+(3, 14, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-08 20:59:31', 0, NULL),
+(4, 14, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-08 20:59:31', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -3198,33 +3330,53 @@ CREATE TABLE IF NOT EXISTS `pre_empa_audit` (
   PRIMARY KEY (`id_audit`),
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
 
 --
 -- Volcado de datos para la tabla `pre_empa_audit`
 --
 
 INSERT INTO `pre_empa_audit` (`id_audit`, `id_empa`, `id_pregunta`, `nr_valor`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 1, 1, NULL, 2, '2017-03-08 17:29:47'),
+(1, 1, 1, 1, 2, '2017-03-08 17:29:47'),
 (2, 2, 1, NULL, 2, '2017-03-08 17:29:47'),
-(3, 1, 2, NULL, 2, '2017-03-08 17:29:47'),
+(3, 1, 2, 1, 2, '2017-03-08 17:29:47'),
 (4, 2, 2, NULL, 2, '2017-03-08 17:29:47'),
-(5, 1, 3, NULL, 2, '2017-03-08 17:29:47'),
+(5, 1, 3, 2, 2, '2017-03-08 17:29:47'),
 (6, 2, 3, NULL, 2, '2017-03-08 17:29:47'),
-(7, 1, 4, NULL, 2, '2017-03-08 17:29:47'),
+(7, 1, 4, 1, 2, '2017-03-08 17:29:47'),
 (8, 2, 4, NULL, 2, '2017-03-08 17:29:47'),
-(9, 1, 5, NULL, 2, '2017-03-08 17:29:47'),
+(9, 1, 5, 3, 2, '2017-03-08 17:29:47'),
 (10, 2, 5, NULL, 2, '2017-03-08 17:29:47'),
-(11, 1, 6, NULL, 2, '2017-03-08 17:29:47'),
+(11, 1, 6, 2, 2, '2017-03-08 17:29:47'),
 (12, 2, 6, NULL, 2, '2017-03-08 17:29:47'),
-(13, 1, 7, NULL, 2, '2017-03-08 17:29:47'),
+(13, 1, 7, 1, 2, '2017-03-08 17:29:47'),
 (14, 2, 7, NULL, 2, '2017-03-08 17:29:47'),
-(15, 1, 8, NULL, 2, '2017-03-08 17:29:47'),
+(15, 1, 8, 1, 2, '2017-03-08 17:29:47'),
 (16, 2, 8, NULL, 2, '2017-03-08 17:29:47'),
-(17, 1, 9, NULL, 2, '2017-03-08 17:29:47'),
+(17, 1, 9, 2, 2, '2017-03-08 17:29:47'),
 (18, 2, 9, NULL, 2, '2017-03-08 17:29:47'),
-(19, 1, 10, NULL, 2, '2017-03-08 17:29:47'),
-(20, 2, 10, NULL, 2, '2017-03-08 17:29:47');
+(19, 1, 10, 4, 2, '2017-03-08 17:29:47'),
+(20, 2, 10, NULL, 2, '2017-03-08 17:29:47'),
+(21, 3, 1, NULL, 2, '2017-03-08 20:59:31'),
+(22, 4, 1, NULL, 2, '2017-03-08 20:59:31'),
+(23, 3, 2, NULL, 2, '2017-03-08 20:59:31'),
+(24, 4, 2, NULL, 2, '2017-03-08 20:59:31'),
+(25, 3, 3, NULL, 2, '2017-03-08 20:59:31'),
+(26, 4, 3, NULL, 2, '2017-03-08 20:59:31'),
+(27, 3, 4, NULL, 2, '2017-03-08 20:59:31'),
+(28, 4, 4, NULL, 2, '2017-03-08 20:59:31'),
+(29, 3, 5, NULL, 2, '2017-03-08 20:59:31'),
+(30, 4, 5, NULL, 2, '2017-03-08 20:59:31'),
+(31, 3, 6, NULL, 2, '2017-03-08 20:59:31'),
+(32, 4, 6, NULL, 2, '2017-03-08 20:59:31'),
+(33, 3, 7, NULL, 2, '2017-03-08 20:59:31'),
+(34, 4, 7, NULL, 2, '2017-03-08 20:59:32'),
+(35, 3, 8, NULL, 2, '2017-03-08 20:59:32'),
+(36, 4, 8, NULL, 2, '2017-03-08 20:59:32'),
+(37, 3, 9, NULL, 2, '2017-03-08 20:59:32'),
+(38, 4, 9, NULL, 2, '2017-03-08 20:59:32'),
+(39, 3, 10, NULL, 2, '2017-03-08 20:59:32'),
+(40, 4, 10, NULL, 2, '2017-03-08 20:59:32');
 
 -- --------------------------------------------------------
 
@@ -3280,25 +3432,32 @@ CREATE TABLE IF NOT EXISTS `pre_evento` (
   `id_empa` int(11) NOT NULL,
   `gl_descripcion` text COLLATE utf8_spanish_ci,
   `bo_estado` int(1) DEFAULT '1',
+  `bo_mostrar` int(1) DEFAULT '1' COMMENT '1=SI',
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_evento`),
   KEY `IDX_id_evento_tipo` (`id_evento_tipo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=13 ;
 
 --
 -- Volcado de datos para la tabla `pre_evento`
 --
 
-INSERT INTO `pre_evento` (`id_evento`, `id_evento_tipo`, `id_paciente`, `id_empa`, `gl_descripcion`, `bo_estado`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 1, 13, 0, 'Paciente creado el : 2017-03-08', 1, 2, '2017-03-08 17:29:47'),
-(2, 13, 13, 1, 'Empa 1 creado el : 2017-03-08', 1, 2, '2017-03-08 17:29:47'),
-(3, 13, 13, 2, 'Empa 2 creado el : 2017-03-08', 1, 2, '2017-03-08 17:29:47'),
-(4, 14, 13, 1, 'AUDIT del EMPA1 creado el : 2017-03-08', 1, 2, '2017-03-08 17:29:47'),
-(5, 14, 13, 2, 'AUDIT del EMPA2 creado el : 2017-03-08', 1, 2, '2017-03-08 17:29:47'),
-(6, 12, 13, 1, 'Empa modificado el : 2017-03-08', 1, 2, '2017-03-08 18:10:09');
+INSERT INTO `pre_evento` (`id_evento`, `id_evento_tipo`, `id_paciente`, `id_empa`, `gl_descripcion`, `bo_estado`, `bo_mostrar`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 1, 13, 0, 'Paciente creado el : 2017-03-08', 1, 1, 2, '2017-03-08 17:29:47'),
+(2, 13, 13, 1, 'Empa 1 creado el : 2017-03-08', 1, 0, 2, '2017-03-08 17:29:47'),
+(3, 13, 13, 2, 'Empa 2 creado el : 2017-03-08', 1, 0, 2, '2017-03-08 17:29:47'),
+(4, 14, 13, 1, 'AUDIT del EMPA1 creado el : 2017-03-08', 1, 0, 2, '2017-03-08 17:29:47'),
+(5, 14, 13, 2, 'AUDIT del EMPA2 creado el : 2017-03-08', 1, 0, 2, '2017-03-08 17:29:47'),
+(6, 12, 13, 1, 'Empa modificado el : 2017-03-08', 1, 0, 2, '2017-03-08 18:10:09'),
+(7, 12, 13, 1, 'Empa modificado el : 2017-03-08', 1, 0, 2, '2017-03-08 18:14:52'),
+(8, 12, 13, 1, 'Empa modificado el : 2017-03-08', 1, 0, 2, '2017-03-08 18:16:45'),
+(9, 12, 13, 1, 'Empa modificado el : 2017-03-08', 1, 0, 2, '2017-03-08 18:22:46'),
+(10, 12, 13, 1, 'Empa modificado el : 2017-03-08', 1, 0, 2, '2017-03-08 18:25:47'),
+(11, 12, 13, 1, 'Empa modificado el : 2017-03-08', 1, 0, 2, '2017-03-08 18:26:06'),
+(12, 12, 13, 1, 'Empa modificado el : 2017-03-08', 1, 1, 2, '2017-03-08 18:34:10');
 
 -- --------------------------------------------------------
 
@@ -3313,7 +3472,7 @@ CREATE TABLE IF NOT EXISTS `pre_evento_tipo` (
   `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_evento_tipo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- Volcado de datos para la tabla `pre_evento_tipo`
@@ -3330,7 +3489,12 @@ INSERT INTO `pre_evento_tipo` (`id_evento_tipo`, `gl_nombre_evento_tipo`, `id_us
 (8, 'Paciente Abandona Consejería', NULL, NULL),
 (9, 'Paciente Abandona Seguimiento', NULL, NULL),
 (10, 'Paciente vuelve a Seguimiento', NULL, NULL),
-(11, 'Ingreso de Nuevo Examen', NULL, NULL);
+(11, 'Ingreso de Nuevo Examen', NULL, NULL),
+(12, 'EMPA Modificado', NULL, '2017-03-08 20:26:43'),
+(13, 'EMPA Creado', NULL, '2017-03-08 20:26:53'),
+(14, 'AUDIT Creado', NULL, '2017-03-08 20:27:19'),
+(15, 'AUDIT Modificado', NULL, '2017-03-08 20:27:43'),
+(16, 'Consulta Agregada', NULL, '2017-03-08 20:28:34');
 
 -- --------------------------------------------------------
 
@@ -3407,7 +3571,7 @@ CREATE TABLE IF NOT EXISTS `pre_opcion` (
   KEY `IDX_id_opcion_padre` (`id_opcion_padre`),
   KEY `IDX_bo_activo` (`bo_activo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
 
 --
 -- Volcado de datos para la tabla `pre_opcion`
@@ -3420,7 +3584,8 @@ INSERT INTO `pre_opcion` (`id_opcion`, `id_opcion_padre`, `bo_tiene_hijo`, `gl_n
 (4, 0, 0, 'Grilla Pacientes', 'fa fa-th', '/Paciente/index', 1, 2, '2017-02-23 15:44:32', NULL, '2017-03-07 12:32:50'),
 (5, 0, 1, 'Mantenedores', 'fa fa-plus-circle', NULL, 1, 2, '2017-02-23 15:51:17', NULL, '2017-03-06 20:27:36'),
 (6, 5, 0, 'Usuarios', 'fa fa-plus-circle', NULL, 1, 2, '2017-02-23 15:55:19', NULL, '2017-03-06 20:27:44'),
-(7, 0, 0, 'Mesa de Ayuda', 'fa fa-life-ring', '/Soporte/', 1, 2, '2017-02-23 16:01:37', NULL, '2017-03-06 20:24:18');
+(8, 0, 0, 'Evaluación', 'fa fa-plus-square', '/Medico/', 1, NULL, '2017-03-08 21:10:45', NULL, '2017-03-08 21:16:00'),
+(9999, 0, 0, 'Mesa de Ayuda', 'fa fa-life-ring', '/Soporte/', 1, 2, '2017-02-23 16:01:37', NULL, '2017-03-08 21:16:25');
 
 -- --------------------------------------------------------
 
@@ -3478,14 +3643,15 @@ CREATE TABLE IF NOT EXISTS `pre_paciente` (
   KEY `IDX_gl_rut` (`gl_rut`),
   KEY `IDX_id_centro_salud` (`id_centro_salud`),
   KEY `IDX_gl_run_pass` (`gl_run_pass`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Volcado de datos para la tabla `pre_paciente`
 --
 
 INSERT INTO `pre_paciente` (`id_paciente`, `id_institucion`, `id_region`, `id_comuna`, `id_prevision`, `id_estado_civil`, `id_tipo_ocupacion`, `id_tipo_escolaridad`, `id_tipo_grupo`, `gl_grupo_tipo`, `nr_hijos`, `gl_nacionalidad`, `gl_direccion_alternativa`, `fc_reconoce`, `fc_hora_reconoce`, `gl_acompañante`, `gl_codigo_fonasa`, `bo_acepta_programa`, `bo_reconoce`, `id_paciente_estado`, `gl_rut`, `bo_extranjero`, `gl_run_pass`, `gl_nombres`, `gl_apellidos`, `fc_nacimiento`, `gl_sexo`, `gl_direccion`, `gl_fono`, `gl_celular`, `gl_email`, `id_centro_salud`, `gl_latitud`, `gl_longitud`, `id_usuario_crea`, `fc_crea`, `id_usuario_actualiza`, `fc_actualiza`) VALUES
-(13, 2, 13, 589, 1, NULL, NULL, NULL, 1, 'Control', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 0, 0, 1, '01-9', 0, '', 'test_dir', 'a', '1990-01-01', 'F', 'Aviador Acevedo 1708, Conchalí, Región Metropolitana, Chile', '1', '1', 'e@a.cl', 1849, '-33.39450839111185', '-70.67131042596884', 2, '2017-03-08 17:29:47', NULL, NULL);
+(13, 2, 13, 589, 1, NULL, NULL, NULL, 1, 'Control', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 0, 0, 1, '01-9', 0, '', 'test_dir', 'a', '1990-01-01', 'F', 'Aviador Acevedo 1708, Conchalí, Región Metropolitana, Chile', '1', '1', 'e@a.cl', 1849, '-33.39450839111185', '-70.67131042596884', 2, '2017-03-08 17:29:47', NULL, NULL),
+(14, 2, 5, 35, 1, NULL, NULL, NULL, 1, 'Tratamiento', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 1, 0, 1, '11111111-1', 0, '', 'Paciente', 'Prueba', '1980-03-08', 'F', 'Pedro Montt 1200, Valparaíso, Chile', '98521487', '9985412', 'prueba@prueba.com', 2032, '-33.0465371', '-71.6194787', 2, '2017-03-08 20:59:31', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3518,6 +3684,23 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor` (
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_agresor`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_paciente_agresor_violencia`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_paciente_agresor_violencia` (
+  `id_violencia` int(11) NOT NULL AUTO_INCREMENT,
+  `id_agresor` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
+  `id_pregunta` int(11) NOT NULL,
+  `nr_valor` int(11) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` date DEFAULT NULL,
+  PRIMARY KEY (`id_violencia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -3558,17 +3741,19 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_direccion` (
   `bo_estado` tinyint(1) NOT NULL,
   `id_usuario_crea` int(11) NOT NULL,
   `fc_crea` datetime NOT NULL,
-  `id_usuario_actualiza` int(11) NOT NULL,
-  `fc_actualiza` datetime NOT NULL,
+  `id_usuario_actualiza` int(11) DEFAULT NULL,
+  `fc_actualiza` datetime DEFAULT NULL,
   PRIMARY KEY (`id_paciente_direccion`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `pre_paciente_direccion`
 --
 
 INSERT INTO `pre_paciente_direccion` (`id_paciente_direccion`, `id_paciente`, `id_comuna`, `id_region`, `gl_direccion`, `gl_latitud`, `gl_longitud`, `bo_estado`, `id_usuario_crea`, `fc_crea`, `id_usuario_actualiza`, `fc_actualiza`) VALUES
-(1, 13, 589, 13, 'Aviador Acevedo 1708, Conchalí, Región Metropolitana, Chile', '-33.39450839111185', '-70.67131042596884', 1, 2, '2017-03-08 17:29:47', 2, '2017-03-08 17:29:47');
+(1, 13, 589, 13, 'Aviador Acevedo 1708, Conchalí, Región Metropolitana, Chile', '-33.39450839111185', '-70.67131042596884', 1, 2, '2017-03-08 17:29:47', NULL, NULL),
+(2, 13, 589, 13, 'Aviador Acevedo 1710, Conchalí', '-33.39450839111185', '-70.67131042596884', 0, 1, '2017-03-08 00:00:00', NULL, NULL),
+(3, 14, 35, 5, 'Pedro Montt 1200, Valparaíso, Chile', '-33.0465371', '-71.6194787', 1, 2, '2017-03-08 20:59:32', 2, '2017-03-08 20:59:32');
 
 -- --------------------------------------------------------
 
@@ -3652,14 +3837,19 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_registro` (
   KEY `IDX_id_institucion` (`id_institucion`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `pre_paciente_registro`
 --
 
 INSERT INTO `pre_paciente_registro` (`id_registro`, `id_paciente`, `id_institucion`, `fc_ingreso`, `gl_hora_ingreso`, `gl_motivo_consulta`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 13, 2, '2017-03-08', '14:27:00', 'motivo 1', 2, '2017-03-08 17:29:47');
+(1, 13, 2, '2017-03-08', '14:27:00', 'motivo 1', 2, '2017-03-08 17:29:47'),
+(2, 14, 2, '2017-03-08', '17:52:00', 'Consulta de Prueba', 2, '2017-03-08 20:59:31'),
+(3, 13, 1849, '2017-03-08', '18:01:00', '', 2, '2017-03-08 06:03:42'),
+(4, 13, 1849, '2017-03-08', '18:02:00', '1', 2, '2017-03-08 06:03:58'),
+(5, 13, 1849, '2017-03-08', '18:04:00', 'test', 2, '2017-03-08 06:03:21'),
+(6, 13, 1849, '2017-03-08', '18:04:00', '', 2, '2017-03-08 06:03:53');
 
 -- --------------------------------------------------------
 
@@ -3717,9 +3907,13 @@ INSERT INTO `pre_perfil_opcion` (`id_perfil`, `id_opcion`, `id_usuario_crea`, `f
 (1, 4, 2, '2017-03-06 20:31:28'),
 (1, 5, 2, '2017-03-06 20:31:28'),
 (1, 6, NULL, NULL),
-(1, 7, NULL, NULL),
+(1, 8, NULL, '2017-03-08 21:11:22'),
+(1, 9999, NULL, NULL),
+(2, 1, NULL, NULL),
 (2, 2, NULL, NULL),
-(2, 3, NULL, NULL);
+(2, 4, NULL, '2017-03-08 21:12:49'),
+(2, 8, NULL, '2017-03-08 21:13:14'),
+(2, 9999, NULL, '2017-03-08 21:13:06');
 
 -- --------------------------------------------------------
 
@@ -5187,9 +5381,9 @@ CREATE TABLE IF NOT EXISTS `pre_usuario` (
 
 INSERT INTO `pre_usuario` (`id_usuario`, `id_perfil`, `gl_rut`, `gl_password`, `id_institucion`, `id_tipo_grupo`, `gl_nombres`, `gl_apellidos`, `id_region`, `id_comuna`, `gl_direccion`, `gl_email`, `gl_fono`, `gl_celular`, `bo_activo`, `fc_ultimo_login`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 1, '13225524-5', '7c63b8135f73d87fbd3ac01623823633c54f0cf2c320bbaf463d4d275d498060fcc6e5c40f2b49aaab881e4064c0d2803c5361a9eabe157ab1cf4d1da19120d3', 2462, '2', 'Administrador', 'Prevención', 1, 349, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, 1, '2017-03-08 18:00:26', NULL, NULL, 1, '2017-02-09 10:30:00'),
-(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2, '2', 'Orlando', 'Vazquez', 1, 3, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-08 17:08:20', NULL, NULL, 1, '2017-02-09 10:30:00'),
-(3, 5, '0-0', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 3, '2', 'David', 'Guzmán', 7, 375, NULL, 'david.guzman@cosof.cl', NULL, NULL, 1, '2017-03-08 12:50:21', NULL, NULL, 1, '2017-02-09 10:30:00'),
-(6, 2, '11111111-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1, '2', 'Uni', 'Cornio', 1, 1, NULL, 'ovazquez.gonzalez@gmail.com', NULL, NULL, 1, '2017-03-06 21:33:18', NULL, NULL, 1, NULL);
+(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, '2', 'Orlando', 'Vazquez', 1, 349, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-08 19:50:33', NULL, NULL, 1, '2017-02-09 10:30:00'),
+(3, 5, '0-0', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, '2', 'David', 'Guzmán', 1, 349, NULL, 'david.guzman@cosof.cl', NULL, NULL, 1, '2017-03-08 12:50:21', NULL, NULL, 1, '2017-02-09 10:30:00'),
+(6, 2, '11111111-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, '2', 'Uni', 'Cornio', 1, 349, NULL, 'ovazquez.gonzalez@gmail.com', NULL, NULL, 1, '2017-03-06 21:33:18', NULL, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
