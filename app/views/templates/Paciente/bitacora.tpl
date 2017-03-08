@@ -96,7 +96,7 @@
                         <label class="control-label">Direcci&oacute;n : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$direccion}" class="form-control" readonly>
+                        <input type="text" value="{$gl_direccion}" class="form-control" readonly>
                     </div>
                 </div>
 
@@ -136,7 +136,7 @@
                         <label class="control-label">Comuna : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$comuna}" class="form-control" readonly>
+                        <input type="text" value="{$gl_nombre_comuna}" class="form-control" readonly>
                     </div>
                 </div>
 
@@ -145,7 +145,7 @@
                         <label class="control-label">Provincia : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$provincia}" class="form-control" readonly>
+                        <input type="text" value="{$gl_nombre_provincia}" class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -156,7 +156,7 @@
                         <label class="control-label">Regi&oacute;n : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$region}" class="form-control" readonly>
+                        <input type="text" value="{$gl_nombre_region}" class="form-control" readonly>
                     </div>
                 </div>
 
@@ -190,6 +190,13 @@
                 </div>
             </div>
 
+            <!-- DIRECCIONES -->
+            {if $muestra_direcciones == "SI"}
+                <div class="form-group">
+                    {include file='avanzados/grillaDirecciones.tpl'}
+                </div>
+            {/if}
+                    
             <!-- MOTIVOS DE CONSULTA -->
             <div class="form-group">
                 {include file='avanzados/grillaConsultas.tpl'}
@@ -210,9 +217,15 @@
                 <li><a data-toggle="tab" href="#examenes">EX&Aacute;MENES</a></li>
                 <li><a data-toggle="tab" href="#eventos">EVENTOS</a></li>
                 <li><a data-toggle="tab" href="#documentos">DOCUMENTOS</a></li>
+                {*{if $muestra_direcciones == "SI"}
+                    <li><a data-toggle="tab" href="#direcciones">DIRECCIONES</a></li>
+                {/if}*}
             </ul>
 
             <div class="tab-content">
+                {*<div class="form-group">
+                    {$muestra_direcciones}<br>
+                </div>*}
 
                 <!-- EMPA  -->
                 <div id="empa" class="tab-pane fade in active">
@@ -260,6 +273,19 @@
                         </div>
                     </div>
                 </div>
+                
+                {*<!-- DIRECCIONES -->
+                {if $muestra_direcciones == "SI"}
+                    <div id="direcciones" class="tab-pane fade">
+                        <div class="box-body">
+                            <div class="col-md-12">
+                                <div class="form-group" id="grilla-direcciones">
+                                    {include file='avanzados/grillaDirecciones.tpl'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {/if}*}
 
             </div>
 
