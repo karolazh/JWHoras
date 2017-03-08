@@ -185,14 +185,14 @@ class Empa extends Controller{
 			$this->smarty->assign("bo_pap_realizado_1", 'checked');
 		} else if ($empa->bo_pap_realizado == 0) {
 			$this->smarty->assign("bo_pap_realizado_0", 'checked');
-		} else if ($empa->bo_pap_realizado == 2) {
-			$this->smarty->assign("bo_pap_realizado_2", 'checked');
 		}
 		
 		if ($empa->bo_pap_resultado == 1) {
 			$this->smarty->assign("bo_pap_resultado_1", 'checked');
 		} else if ($empa->bo_pap_resultado == 0) {
 			$this->smarty->assign("bo_pap_resultado_0", 'checked');
+		} else if ($empa->bo_pap_resultado == 2) {
+			$this->smarty->assign("bo_pap_resultado_2", 'checked');
 		}
 		
         $arrMes = $this->_DAOMes->getLista();
@@ -229,6 +229,8 @@ class Empa extends Controller{
 			$this->smarty->assign("bo_mamografia_resultado_pasado_1", 'checked');
 		} else if ($empa->bo_mamografia_resultado_pasado == 0) {
 			$this->smarty->assign("bo_mamografia_resultado_pasado_0", 'checked');
+		} else if ($empa->bo_mamografia_resultado_pasado == 2) {
+			$this->smarty->assign("bo_mamografia_resultado_pasado_2", 'checked');
 		}
 		
 		if ($empa->bo_mamografia_resultado == 1) {
@@ -241,8 +243,6 @@ class Empa extends Controller{
 			$this->smarty->assign("bo_mamografia_realizada_1", 'checked');
 		} else if ($empa->bo_mamografia_realizada == 0) {
 			$this->smarty->assign("bo_mamografia_realizada_0", 'checked');
-		} else if ($empa->bo_mamografia_realizada == 2) {
-			$this->smarty->assign("bo_mamografia_realizada_2", 'checked');
 		}
 
 		if ($empa->bo_mamografia_vigente == 1) {
@@ -255,7 +255,6 @@ class Empa extends Controller{
 			$this->smarty->assign("bo_mamografia_toma", 'checked');
 		}
 
-		$this->smarty->assign("fc_mamografia", $empa->fc_mamografia);
 		$this->smarty->assign("gl_observaciones_empa", $empa->gl_observaciones_empa);
 		//FIN
 

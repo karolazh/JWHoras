@@ -466,9 +466,6 @@
                                 &nbsp;&nbsp;
                                 <label><input class="bo_pap_realizado" type="radio" name="bo_pap_realizado" 
                                               id="bo_pap_realizado_1" value="1" {$bo_pap_realizado_1}>SI</label>
-								&nbsp;&nbsp;
-                                <label><input class="bo_pap_realizado" type="radio" name="bo_pap_realizado" 
-                                              id="bo_pap_realizado_2" value="2" {$bo_pap_realizado_2}>NO SABE</label>
                             </div>
                         </div>
                         <div class="form-group" id="ultimo_pap" style="{if $bo_pap_realizado_1 != 'checked'}display: none{/if}">         
@@ -509,7 +506,24 @@
                                 {$botonAyudaPAPVigente}
                             </div>
                         </div>
-                        <div class="form-group" id="tomar_fecha" style="{if $bo_pap_realizado_0 != 'checked'}display: none{/if}">         
+                        <div class="form-group" id="resultado_pap" style="{if $bo_pap_realizado_1 != 'checked'}display: none{/if}">
+                            <label class="control-label required col-sm-3">Resultado PAP</label>
+                            <div class="col-sm-2">
+                                <label><input class="bo_pap_resultado"  type="radio" name="bo_pap_resultado" 
+                                              id="bo_pap_resultado_0" value="0" {$bo_pap_resultado_0}>Alterado</label>
+                                &nbsp;&nbsp;
+                                <label><input class="bo_pap_resultado" type="radio" name="bo_pap_resultado" 
+                                              id="bo_pap_resultado_1" value="1" {$bo_pap_resultado_1}>Normal</label>
+								&nbsp;&nbsp;
+                                <label><input class="bo_pap_resultado" type="radio" name="bo_pap_resultado" 
+                                              id="bo_pap_resultado_2" value="2" {$bo_pap_resultado_2}>NO SABE</label>
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="button" id="verPAP" class="btn btn-sm btn-info">
+                                    <i class="fa fa-info"></i> Ver Resultado</button>
+                            </div>
+                        </div>
+                        <div class="form-group" id="tomar_fecha" style="{if $bo_pap_realizado_0 != 'checked' and $bo_pap_vigente_0 != 'checked'}display: none{/if}">         
                             <label class="control-label required col-sm-3">Tomar Fecha para PAP</label>
                             <div class="col-sm-2">
                                 <input type="date" name="fc_tomar_pap" id="fc_tomar_pap" 
@@ -519,20 +533,6 @@
                             &nbsp;&nbsp;
                             <button type="button" id="verAgendaPap" 
                                     class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
-                        </div>
-                        <div class="form-group" id="resultado_pap">
-                            <label class="control-label required col-sm-3">Resultado PAP</label>
-                            <div class="col-sm-2">
-                                <label><input class="bo_pap_resultado"  type="radio" name="bo_pap_resultado" 
-                                              id="bo_pap_resultado_0" value="0" {$bo_pap_resultado_0}>Alterado</label>
-                                &nbsp;&nbsp;
-                                <label><input class="bo_pap_resultado" type="radio" name="bo_pap_toma" 
-                                              id="bo_pap_resultado_1" value="1" {$bo_pap_resultado_1}>Normal</label>
-                            </div>
-                            <div class="col-sm-1">
-                                <button type="button" id="verPAP" class="btn btn-sm btn-info">
-                                    <i class="fa fa-info"></i> Ver Resultado</button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -573,15 +573,12 @@
                                 &nbsp;&nbsp;
                                 <label><input class="bo_mamografia_realizada" type="radio" name="bo_mamografia_realizada" 
                                               id="bo_mamografia_realizada_1" value="1" {$bo_mamografia_realizada_1}>SI</label>
-								&nbsp;&nbsp;
-                                <label><input class="bo_mamografia_realizada" type="radio" name="bo_mamografia_realizada" 
-                                              id="bo_mamografia_realizada_2" value="1" {$bo_mamografia_realizada_2}>NO SABE</label>
                             </div>
                         </div>
                         <div class="form-group" id="fecha_mamografia" style="{if $bo_mamografia_realizada_1 != 'checked'}display: none{/if}">
                             <label class="control-label required col-sm-3">Fecha Mamografía</label>
                             <div class="col-sm-2">
-                                <input type="date" name="fc_mamografia" id="fc_mamografia" value="{$fc_mamografia}" 
+                                <input type="date" name="fc_mamografia" id="fc_mamografia" value="" 
                                        placeholder="" class="form-control hidden"/>
 								<input type="text" id="mamografia_ano" value="{$fc_mamografia_ano}" class="form-control hidden"/>
 								<input type="text" id="mamografia_mes" value="{$fc_mamografia_mes}" class="form-control hidden"/>
@@ -599,7 +596,7 @@
 								</select>
                             </div>
                         </div>
-                        <div class="form-group" id="mam_vigente" style="{if $fc_mamografia == 0}display: none{/if}">    
+                        <div class="form-group" id="mam_vigente" style="{if $fc_mamografia_ano == 0 and $fc_mamografia_mes == 0}display: none{/if}">    
                             <label class="control-label required col-sm-3">¿Mamografía Vigente?</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_mamografia_vigente" type="radio" name="bo_mamografia_vigente" 
@@ -612,7 +609,7 @@
                                 {$botonAyudaMamografiaVigente}
                             </div>
                         </div>
-                        <div class="form-group" id="mam_resultado" style="{if $fc_mamografia == 0}display: none{/if}"> 
+                        <div class="form-group" id="mam_resultado" style="{if $fc_mamografia_ano == 0 and $fc_mamografia_mes == 0}display: none{/if}"> 
                                 <label class="control-label required col-sm-3">Resultado Mamografía</label>
                                 <div class="col-sm-2">
                                     <label><input class="bo_mamografia_resultado_pasado" type="radio" name="bo_mamografia_resultado_pasado" 
@@ -620,6 +617,9 @@
                                     &nbsp;&nbsp;
                                     <label><input class="bo_mamografia_resultado_pasado" type="radio" name="bo_mamografia_resultado_pasado" 
                                                   id="bo_mamografia_resultado_pasado_1" value="1" {$bo_mamografia_resultado_pasado_1}>Normal</label>
+									&nbsp;&nbsp;
+									<label><input class="bo_mamografia_resultado_pasado" type="radio" name="bo_mamografia_resultado_pasado" 
+												  id="bo_mamografia_resultado_pasado_2" value="1" {$bo_mamografia_resultado_pasado_2}>NO SABE</label>
                                 </div>
                         </div>        
                         <div class="form-group" id="mam_requiere"> 
