@@ -82,8 +82,7 @@ class DAOPacienteDireccion extends Model {
 	*
 	* @return	object	Informacion de la direccion por id_direccion
 	*/
-    public function insertarDireccion($parametros){
-        $this->inhabilitarDireccionesPaciente($parametros['id_paciente']);
+    public function insertarDireccion($datos){
 		$query	= "	INSERT INTO ".$this->_tabla."
 						(
 						id_paciente,
@@ -100,15 +99,15 @@ class DAOPacienteDireccion extends Model {
 						)
 					VALUES
 						(
-						".$parametros['id_paciente'].",
-						".$parametros['comuna'].",
-						".$parametros['region'].",
-						'".$parametros['direccion']."',
-						'".$parametros['gl_latitud']."',
-						'".$parametros['gl_longitud']."',
-						".$parametros['bo_estado'].",
-						".$parametros['id_usuario_crea'].",
-						".$parametros['fc_crea'].",
+						".$datos['id_paciente'].",
+						".$datos['id_comuna'].",
+						".$datos['id_region'].",
+						'".$datos['gl_direccion']."',
+						'".$datos['gl_latitud']."',
+						'".$datos['gl_longitud']."',
+						".$datos['bo_estado'].",
+						".$datos['id_usuario_crea'].",
+						now(),
 						".$_SESSION['id'].",
 						now()
 						)
@@ -117,7 +116,7 @@ class DAOPacienteDireccion extends Model {
         if ($this->db->execQuery($query)) {
 			return $this->db->getLastId();
         } else {
-            return NULL;
+			print_r($query);DIE('EL DAO SE CAYO D:!!!! ALARMA ALARMA!!!!');
         }
     }
 	
@@ -147,7 +146,7 @@ class DAOPacienteDireccion extends Model {
         }
 	}
 	
-	private function inhabilitarDireccionesPaciente($id_paciente){
+	public function disabDirecciones($id_paciente){
 		 $query	= "	UPDATE pre_paciente_direccion SET
 						bo_estado					= 0,
 						id_usuario_actualiza		= ".$_SESSION['id'].",

@@ -1,5 +1,5 @@
 /* global BASE_URI */
-
+cambio_direccion = false; //variable global JS
 $("#guardar").on('click', function (e) {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
@@ -81,12 +81,16 @@ $("#guardar").on('click', function (e) {
 });
 
 $("#guardarMotivo").on('click', function (e) {
+	
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
 	var edad = $("#edad").val();
 	var rut = $("#rut").val();
 	var gl_grupo_tipo = $("#gl_grupo_tipo").val();
 	var prevision = $("#prevision").val();
+	var centrosalud = $("#centrosalud").val()
+	var gl_latitud = $("#gl_latitud").val();
+	var gl_longitud = $("#gl_longitud").val();
 
 	if ($('#chkAcepta').is(':checked')) {
 		parametros.push({
@@ -111,6 +115,10 @@ $("#guardarMotivo").on('click', function (e) {
 		});
 	}
 	parametros.push({
+		"name": 'cambio_direccion',
+		"value": cambio_direccion //variable global JS
+	});
+	parametros.push({
 		"name": 'gl_grupo_tipo',
 		"value": gl_grupo_tipo
 	});
@@ -123,10 +131,22 @@ $("#guardarMotivo").on('click', function (e) {
 		"value": rut
 	});
 	parametros.push({
+		"name": 'centrosalud',
+		"value": centrosalud
+	});
+	parametros.push({
 		"name": 'prevision',
 		"value": prevision
 	});
-
+	parametros.push({
+		"name": 'gl_latitud',
+		"value": gl_latitud
+	});
+	parametros.push({
+		"name": 'gl_longitud',
+		"value": gl_longitud
+	});
+	
 	$.ajax({
 		dataType: "json",
 		cache: false,
@@ -136,6 +156,7 @@ $("#guardarMotivo").on('click', function (e) {
 		url: BASE_URI + "index.php/Paciente/GuardarMotivo",
 		error: function (xhr, textStatus, errorThrown) {
 			xModal.danger('Error: No se pudo agregar Motivo de Consulta');
+			alert('HTTP Error: '+errorThrown);
 		},
 		success: function (data) {
 			if (data.correcto) {
@@ -254,6 +275,33 @@ $("#chkAcepta").on('click', function (e) {
 		$('#files').hide();
 	}
 });
+
+$("#direccion").on("change paste keyup ", function() {
+	
+	if($('#centrosalud').is('[disabled=disabled]')){
+		$('#form').find('#centrosalud').attr('disabled', false);
+		cambio_direccion = true; //variable global JS
+	}
+	
+});
+
+$("#region").on('change', function (e) {
+	
+	if($('#centrosalud').is('[disabled=disabled]')){
+		$('#form').find('#centrosalud').attr('disabled', false);
+		cambio_direccion = true; //variable global JS
+	}
+	
+});
+$("#comuna").on('change', function (e) {
+	
+	if($('#centrosalud').is('[disabled=disabled]')){
+		$('#form').find('#centrosalud').attr('disabled', false);
+		cambio_direccion = true; //variable global JS
+	}
+	
+});
+
 
 	var Base64Binary = {
 		/* Ejemplo de uso
@@ -438,6 +486,9 @@ var Paciente = {
 						}
 
 						$('#form').find('input, textarea, checkbox, select').attr('disabled', true);
+						$('#form').find('#direccion').attr('disabled', false);
+						$('#form').find('#region').attr('disabled', false);
+						$('#form').find('#comuna').attr('disabled', false);
 						if (data.bo_reconoce == '1') {
 							$("#chkReconoce").prop("checked", true);
 						} else {
@@ -561,3 +612,5 @@ function mostrarFonasaExtranjero(id_prevision) {
 		$('#groupFonasaExtranjero').addClass("hidden");
 	}
 }
+
+

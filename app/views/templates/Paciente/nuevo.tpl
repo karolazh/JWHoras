@@ -124,7 +124,7 @@
 					</div>
 					<div class="col-sm-1">					
 						<button type="button" id="btnUploadFonasa" class="btn btn-sm btn-success"
-								onclick="xModal.open('{$smarty.const.BASE_URI}/Paciente/cargarAdjuntoFonasa', 'Cargar Adjunto', '', 1, true, '150');" >
+								onclick="xModal.open('{$smarty.const.BASE_URI}/Paciente/cargarAdjunto', 'Cargar Adjunto', '', 1, true, '150');" >
 							<i class="fa fa-upload" aria-hidden="true"></i> Subir Archivo Fonasa
 						</button>
 					</div>
@@ -285,26 +285,26 @@
 							</div>
 						</div -->
 
-						<div class="form-group">
-							<div class="col-xs-12" id="listado-adjuntos" name="listado-adjuntos"></div>
-						</div>
+						
 
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-12">
 					<div id="map" data-editable="1" style="width:100%;height:300px;"></div>
 					<div class="form-group">
-						<label for="email" class="control-label col-sm-3">Latitud</label>
+						<label for="gl_latitud" class="control-label col-sm-3">Latitud</label>
 						<div class="col-sm-3">
 							<input type="text" name="gl_latitud" id="gl_latitud" value="" placeholder="latitud" class="form-control"/>
 						</div>
-						<label for="email" class="control-label col-sm-1">Longitud</label>
+						<label for="gl_longitud" class="control-label col-sm-1">Longitud</label>
 						<div class="col-sm-3">
-							<input type="text" name="gl_longitud"  id="gl_longitud" value="" placeholder="Longitud" class="form-control"/>
+							<input type="text" name="gl_longitud"  id="gl_longitud" value="" placeholder="longitud" class="form-control"/>
 						</div>
 					</div>
 				</div>
-
+				<div class="form-group">
+					<div class="col-xs-12" id="listado-adjuntos" name="listado-adjuntos"></div>
+				</div>
 				<div class="form-group clearfix  text-right">
 					<button type="button" id="guardar" class="btn btn-success">
 						<i class="fa fa-save"></i>  Guardar

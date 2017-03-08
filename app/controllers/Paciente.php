@@ -342,6 +342,7 @@ class Paciente extends Controller {
 			$parametros['id_usuario_crea']	= $_SESSION['id'];
 			$parametros['fc_crea']			= "now()";
 			$parametros['id_paciente']		= $id_paciente;			
+			$blah							= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
 			$id_direccion					= $this->_DAOPacienteDireccion->insertarDireccion($parametros);
 
 		} else {
@@ -370,39 +371,67 @@ class Paciente extends Controller {
 		$gl_grupo_tipo_ant	= $parametros['gl_grupo_tipo'];
 		$count				= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
 
-		if($parametros['edad'] > 15 AND $_SESSION['gl_grupo_tipo'] == 'Tratamiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
+		if($parametros['edad'] > 15 AND  $_SESSION['id_tipo_grupo'] == 2 AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
 			$gl_grupo_tipo = 'Tratamiento';
+			$id_tipo_grupo = 2;
 			if ($gl_grupo_tipo_ant != $gl_grupo_tipo){
-				$datos_evento['id_paciente']		= $id_paciente;
-				$datos_evento['bo_estado']			= 1;
-				$datos_evento['id_usuario_crea']	= $session->id;
-				$datos_evento['eventos_tipo']		= 10;
-				$datos_evento['gl_descripcion']		= "Paciente RUT : ". $rut ." en Grupo Tratamiento desde : " . Fechas::fechaHoy();
-				$resp								= $this->_DAOEvento->insEvento($datos_evento);
+//				$datos_evento['id_paciente']		= $id_paciente;
+//				$datos_evento['id_empa']			= 0;
+//				$datos_evento['bo_estado']			= 1;
+//				$datos_evento['id_usuario_crea']	= $session->id;
+//				$datos_evento['eventos_tipo']		= 10;
+//				$datos_evento['gl_descripcion']		= "Paciente RUT : ". $rut ." en Grupo Tratamiento desde : " . Fechas::fechaHoy();
+//				$resp								= $this->_DAOEvento->insEvento($datos_evento);
+				
 			}
 		}else{
 			$gl_grupo_tipo = 'Control';
+			$id_tipo_grupo = 1;
 		}
 
 		$parametros['gl_grupo_tipo']	= $gl_grupo_tipo;
+		$parametros['id_tipo_grupo']	= $id_tipo_grupo;
 		
 		if ($id_paciente) {
-				$correcto							= true;
-				$resultado2							= $this->_DAOPacienteRegistro->insertar($parametros, $id_paciente);
+				
+				 $ins_paciente_registro = array('id_paciente'			=> $parametros['id_paciente'],
+												'id_institucion'		=> $parametros['centrosalud'],
+												'gl_hora_ingreso'       => $parametros['horaingreso'],
+												'fc_ingreso'			=> $parametros['fechaingreso'],
+												'gl_motivo_consulta'	=> $parametros['motivoconsulta'], 
+												'fc_crea'				=> date('Y-m-d h:m:s'),
+												'id_usuario_crea'		=> $_SESSION['id'],
+                                );
+				$resultado2							= $this->_DAOPacienteRegistro->insertar("pre_paciente_registro", $ins_paciente_registro);			
+				$ins_direccion = array(	'id_paciente'			=> $parametros['id_paciente'],
+													'id_comuna'				=> $parametros['comuna'],
+													'id_region'				=> $parametros['region'],
+													'gl_direccion'			=> $parametros['direccion'],
+													'gl_latitud'			=> $parametros['gl_latitud'],
+													'gl_longitud'			=> $parametros['gl_longitud'],
+													'bo_estado'				=> 1,
+													'fc_ingreso'			=> $parametros['fechaingreso'],
+													'gl_motivo_consulta'	=> $parametros['motivoconsulta'], 
+													'fc_crea'				=> date('Y-m-d h:m:s'),
+													'id_usuario_crea'		=> $_SESSION['id'],
+								);
+				$blah							= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
+				$id_direccion					= $this->_DAOPacienteDireccion->insertarDireccion($ins_direccion);
 				$session							= New Zend_Session_Namespace("usuario_carpeta");
-				$datos_evento['id_paciente']		= $id_paciente;
-				$datos_evento['bo_estado']			= 1;
-				$datos_evento['id_usuario_crea']	= $session->id;
-				$datos_evento['eventos_tipo']		= 16;
-				$datos_evento['gl_descripcion']		= "Consulta agregada el : " . Fechas::fechaHoy();
-				$resp								= $this->_DAOEvento->insEvento($datos_evento);
-
-			if ($parametros['chkAcepta']) {
-				$resp = $this->_DAOPaciente->update(array('bo_acepta_programa' => 1), $id_paciente, 'id_paciente');
-				$datos_evento['eventos_tipo'] = 4;
-				$datos_evento['gl_descripcion'] = "Acepta el programa con fecha : " . Fechas::fechaHoy();
-				$resp = $this->_DAOEvento->insEvento($datos_evento);
-			}
+//				$datos_evento['id_paciente']		= $id_paciente;
+//				$datos_evento['id_empa']			= 0;
+//				$datos_evento['bo_estado']			= 1;
+//				$datos_evento['id_usuario_crea']	= $session->id;
+//				$datos_evento['eventos_tipo']		= 16;
+//				$datos_evento['gl_descripcion']		= "Consulta agregada el : " . Fechas::fechaHoy();
+//				$resp								= $this->_DAOEvento->insEvento($datos_evento);
+				$correcto							= true;
+			//if ($parametros['chkAcepta']) {
+				//$resp = $this->_DAOPaciente->update(array('bo_acepta_programa' => 1), $id_paciente, 'id_paciente');
+//				$datos_evento['eventos_tipo'] = 4;
+//				$datos_evento['gl_descripcion'] = "Acepta el programa con fecha : " . Fechas::fechaHoy();
+//				$resp = $this->_DAOEvento->insEvento($datos_evento);
+		//	}
 
 			/*
 			if ($parametros['chkReconoce']) {
@@ -681,7 +710,7 @@ class Paciente extends Controller {
 
 		if ($success == 1) {
 			echo "<script>parent.cargarListadoAdjuntos('listado-adjuntos'); parent.xModal.close();</script>";
-			echo "<script> parent.$('#btnUploadUno').prop('disabled', true);</script>";
+			//echo "<script> parent.$('#btnUploadUno').prop('disabled', true);</script>";
 		} else {
 			$this->view->assign('success', $success);
 			$this->view->assign('mensaje', $mensaje);
@@ -717,7 +746,7 @@ class Paciente extends Controller {
                                                                             <td>										
                                                                                     <strong>' . $adjunto['nombre_adjunto'] . '</strong>
                                                                             </td>
-                                                                            <td align="center"><a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\'' . BASE_URI . '/Registro/verAdjunto/' . $i . '\',\'_blank\');">
+                                                                            <td align="center"><a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\'' . BASE_URI . '/Paciente/verAdjunto/' . $i . '\',\'_blank\');">
                                                                                             <i class="fa fa-download"></i>
                                                                                     </a>
                                                                             </td>										
@@ -770,7 +799,7 @@ class Paciente extends Controller {
                                                                             <td>										
                                                                                     <strong>' . $adjunto['nombre_adjunto'] . '</strong>
                                                                             </td>
-                                                                            <td align="center"><a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\'' . BASE_URI . '/Registro/verAdjunto/' . $i . '\',\'_blank\');">
+                                                                            <td align="center"><a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\'' . BASE_URI . '/Paciente/verAdjunto/' . $i . '\',\'_blank\');">
                                                                                             <i class="fa fa-download"></i>
                                                                                     </a>
                                                                             </td>										
