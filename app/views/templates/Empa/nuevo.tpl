@@ -455,7 +455,7 @@
                 </div>
 
                 <!-- PAP -->
-                <div class="box box-success" style="{$pap}">
+                <div class="box box-success" id="pap" style="{$pap}">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> PAP (Mujeres de 25 a 64 años Cáncer Cervicouterino)</h3></div>
                     <div class="box-body">  
                         <div class="form-group">
@@ -562,7 +562,7 @@
                     </div>
                 </div>
                 <!-- Cáncer de mama -->
-                <div class="box box-success">
+                <div class="box box-success" id="cancer_de_mama">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Cáncer de mama</h3></div>
                     <div class="box-body">
                         <div class="form-group">

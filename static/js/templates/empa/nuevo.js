@@ -162,6 +162,17 @@ $("#gl_circunferencia_abdominal").on('keyup', function (e) {
 	}
 });
 
+// Si Está Embarazada -> mostrar/ocultar según corresponda
+$(".bo_embarazo").on('change', function (e) {
+	if ($('#bo_embarazo_1').is(':checked')) {
+		$('#cancer_de_mama').hide();
+		$('#pap').hide();
+	} else {
+		$('#cancer_de_mama').show();
+		$('#pap').show();
+	}
+});
+
 // Si Consume Alcohol muestra Boton para Hacer Cuestionario AUDIT
 $(".bo_consume_alcohol").on('change', function (e) {
 	if ($('#bo_consume_alcohol_0').is(':checked')) {

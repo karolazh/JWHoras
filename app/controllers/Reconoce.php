@@ -42,6 +42,7 @@ class Reconoce extends Controller {
 	protected $_DAOTipoOrientacionSexual;
 	protected $_DAOTipoSexo;
 	protected $_DAOPacienteAgresor;
+	protected $_DAOPacienteDireccion;
 
     /**
      * Descripción: Constructor
@@ -68,6 +69,7 @@ class Reconoce extends Controller {
 		$this->_DAOTipoGenero               = $this->load->model("DAOTipoGenero");
 		$this->_DAOTipoOrientacionSexual    = $this->load->model("DAOTipoOrientacionSexual");
 		$this->_DAOTipoSexo					= $this->load->model("DAOTipoSexo");
+		$this->_DAOPacienteDireccion		= $this->load->model("DAOPacienteDireccion");
     }
 	
 	/**
@@ -122,6 +124,7 @@ class Reconoce extends Controller {
 		$arrTipoVinculo = $this->_DAOTipoVinculo->getLista();
 		$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);
         
+		$direccion = $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
     //Obtener Datos de la BD    
         $parametros = $this->request->getParametros();
         $id_registro = $parametros[0];
@@ -136,7 +139,7 @@ class Reconoce extends Controller {
         $this->smarty->assign('gl_nombres', $obj_registro->gl_nombres);
         $this->smarty->assign('gl_apellidos', $obj_registro->gl_apellidos);
         $this->smarty->assign('fc_nacimiento', $obj_registro->fc_nacimiento);
-        $this->smarty->assign('gl_direccion', $obj_registro->gl_direccion);
+        $this->smarty->assign('gl_direccion', $direccion->gl_direccion);
         $this->smarty->assign('edad', $edad);
         $this->smarty->assign('fc_reconoce', Fechas::fechaHoy());
         $this->smarty->assign('fc_hora', date('h:i'));
