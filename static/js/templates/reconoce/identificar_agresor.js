@@ -363,6 +363,20 @@ $("#guardar").on('click', function (e) {
 			"value": cant_pre
 		});
 		
+		for(i=1; i<=cant_pre; i++){
+				valor = $('input:radio[name=id_tipo_violencia_'+i+']:checked').val();
+				if (valor != 1 && valor != 2 && valor != 3 && valor != 4) {
+					parametros.push({
+						"name": 'id_tipo_violencia_'+i,
+						"value": 'NULL'
+					});
+				} else {
+					parametros.push({
+						"name": 'id_tipo_violencia_'+i,
+						"value": $('#id_tipo_violencia_'+i).val()
+					});
+				}
+		}
 		$.ajax({
 			dataType: "json",
 			cache: false,
