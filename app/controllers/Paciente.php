@@ -92,44 +92,42 @@ class Paciente extends Controller {
 
                 //Datos de Paciente
                 $run = "";
-                $ext = "NO";
-                if (!is_null($detPaciente->gl_rut)) {
+                if ($detPaciente->bo_extranjero == 0) {
                         $run = $detPaciente->gl_rut;
                 } else {
                         $run = $detPaciente->gl_run_pass;
-                        $ext = "SI";
                 }
                 $this->smarty->assign("run", $run);
-                $this->smarty->assign("ext", $ext);
-                //$this->smarty->assign("nombres", $detReg->nombres);
-                //$this->smarty->assign("apellidos", $detReg->apellidos);
+                
                 $nombres = $detPaciente->gl_nombres.' '.$detPaciente->gl_apellidos;
                 $this->smarty->assign("nombres", $nombres);
 
-                //$edad = "";
                 $edad = Fechas::calcularEdadInv($detPaciente->fc_nacimiento);
-                $this->smarty->assign("fecha_nac", $detPaciente->fc_nacimiento);
+                $this->smarty->assign("fc_nacimiento", $detPaciente->fc_nacimiento);
                 $this->smarty->assign("edad", $edad);
 
-                //$genero = $detPac->gl_sexo;
-                $genero = "FEMENINO"; //obtener de BD y validad a futuro
-                $this->smarty->assign("genero", $genero);
-                $this->smarty->assign("estado", $detPaciente->gl_nombre_estado_caso);
+                if ($detPac->gl_sexo == "F") {
+                    $sexo = "FEMENINO";
+                } else {
+                    $sexo = $detPac->gl_sexo;
+                }
+                $this->smarty->assign("gl_sexo", $sexo);
+                $this->smarty->assign("gl_nombre_estado_caso", $detPaciente->gl_nombre_estado_caso);
 
-                $this->smarty->assign("prevision", $detPaciente->gl_nombre_prevision);
-                $this->smarty->assign("grupo", $detPaciente->gl_grupo_tipo);
+                $this->smarty->assign("gl_nombre_prevision", $detPaciente->gl_nombre_prevision);
+                $this->smarty->assign("gl_grupo_tipo", $detPaciente->gl_grupo_tipo);
 
                 //$this->smarty->assign("direccion", $detPaciente->gl_direccion);
-                $this->smarty->assign("fono", $detPaciente->gl_fono);
+                $this->smarty->assign("gl_fono", $detPaciente->gl_fono);
 
-                $this->smarty->assign("celular", $detPaciente->gl_celular);
-                $this->smarty->assign("email", $detPaciente->gl_email);
+                $this->smarty->assign("gl_celular", $detPaciente->gl_celular);
+                $this->smarty->assign("gl_email", $detPaciente->gl_email);
 
                 //$this->smarty->assign("comuna", $detPaciente->gl_nombre_comuna);
                 //$this->smarty->assign("provincia", $detPaciente->gl_nombre_provincia);
 
                 //$this->smarty->assign("region", $detPaciente->gl_nombre_region);
-                $this->smarty->assign("fecha_reg", $detPaciente->fc_crea);
+                $this->smarty->assign("fc_crea", $detPaciente->fc_crea);
 
                 $reconoce = "NO";
                 if (!is_null($detPaciente->bo_reconoce)) {
@@ -143,8 +141,21 @@ class Paciente extends Controller {
                         $acepta = "SI";
                     }
                 }
-                $this->smarty->assign("reconoce", $reconoce);
-                $this->smarty->assign("acepta", $acepta);
+                $this->smarty->assign("bo_reconoce", $reconoce);
+                $this->smarty->assign("bo_acepta_programa", $acepta);
+                
+                //Grilla Direcciones
+                $muestra_direcciones = "NO";
+                $arrDirecciones = $this->_DAOPacienteDireccion->getByIdDirecciones($id_paciente);
+                //print_r($arrDirecciones);
+                //die();
+                if (!is_null($arrDirecciones)) {
+                    if($arrDirecciones->numRows>1){
+                        $this->smarty->assign('arrDirecciones', $arrDirecciones->rows);
+                        $muestra_direcciones = "SI";
+                    }
+                }
+                $this->smarty->assign("muestra_direcciones", $muestra_direcciones);
 
                 //Grilla Motivos de Consulta (Paciente-Registro)
                 $arrConsultas = $this->_DAOPacienteRegistro->getByIdPaciente($id_paciente);
@@ -184,8 +195,8 @@ class Paciente extends Controller {
                 $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
                 
 				
-				$arr_plan	= $this->_DAOPacientePlanTratamiento->getByIdPaciente($id_paciente);
-				$this->smarty->assign("arr_plan", $arr_plan);
+                $arr_plan	= $this->_DAOPacientePlanTratamiento->getByIdPaciente($id_paciente);
+                $this->smarty->assign("arr_plan", $arr_plan);
 				
                 //Dirección Vigente de Paciente
                 $direccion = "";
@@ -206,19 +217,6 @@ class Paciente extends Controller {
                 $this->smarty->assign("gl_nombre_provincia", $provincia);
                 $this->smarty->assign("gl_nombre_region", $region);
                 $this->smarty->assign("gl_direccion", $direccion);
-                
-                //Grilla Direcciones
-                $muestra_direcciones = "NO";
-                $arrDirecciones = $this->_DAOPacienteDireccion->getByIdDirecciones($id_paciente);
-                //print_r($arrDirecciones);
-                //die();
-                if (!is_null($arrDirecciones)) {
-                    if($arrDirecciones->numRows>1){
-                        $this->smarty->assign('arrDirecciones', $arrDirecciones->rows);
-                        $muestra_direcciones = "SI";
-                    }
-                }
-                $this->smarty->assign("muestra_direcciones", $muestra_direcciones);
                 
                 //muestra template
                 $this->smarty->display('Paciente/bitacora.tpl');

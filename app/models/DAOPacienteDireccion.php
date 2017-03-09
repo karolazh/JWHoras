@@ -208,7 +208,7 @@ class DAOPacienteDireccion extends Model {
                     LEFT JOIN pre_provincia pro ON pro.id_provincia = com.id_provincia
                     LEFT JOIN pre_usuario usr ON usr.id_usuario = pac.id_usuario_crea
                     WHERE pac.id_paciente = ?
-                    ORDER BY fc_crea DESC";
+                    ORDER BY pac.bo_estado DESC";
 
         $param	= array($id_paciente);
         $result	= $this->db->getQuery($query, $param);
