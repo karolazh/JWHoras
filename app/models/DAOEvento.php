@@ -85,7 +85,7 @@ class DAOEvento extends Model{
     }
 
     public function insEvento($data){
-		$query	= "INSERT into pre_evento values(null,?,?,?,?,?,?,CURRENT_TIMESTAMP)";
+		$query	= "INSERT into pre_evento values(null,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)";
 
 		$param	= array(
 						$data['eventos_tipo'],
@@ -93,6 +93,7 @@ class DAOEvento extends Model{
 						$data['id_empa'],
 						$data['gl_descripcion'],
 						$data['bo_estado'],
+						$data['bo_mostrar'],
 						$data['id_usuario_crea']
 					);
 
@@ -156,5 +157,20 @@ class DAOEvento extends Model{
             return NULL;
         }
     }
+	public function ocultarEventos($id_evento_tipo){
+		 $query	= "	UPDATE pre_evento SET
+						bo_mostrar			= 0,
+						id_usuario_crea		= ".$_SESSION['id'].",
+						fc_crea				= now()
+					WHERE id_evento_tipo = ".$id_evento_tipo."
+                    ";
+
+        if($this->db->execQuery($query)) {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+		 
+	 }
 
 }

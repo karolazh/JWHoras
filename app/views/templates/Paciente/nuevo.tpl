@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1><i class="fa fa-plus"></i>Nuevo</h1>
 	<ol class="breadcrumb">
-		<li><a href="{$base_url}/Administracion/noticias">
+		<li><a href="{$base_url}/Paciente/">
 				<i class="fa fa-folder-open"></i>&nbsp;Pacientes</a></li>
 		<li class="active"> &nbsp;Nuevo Paciente</li>
 	</ol>
@@ -174,12 +174,21 @@
 
 					<div class="form-group">
 						<label for="direccion" class="control-label col-sm-4">Dirección (*)</label>
-						<div class="col-sm-8">
+						<div class="col-sm-5">
 							<input type="text" name="direccion" id="direccion" value="" onblur="validarVacio(this, 'Por favor Ingrese Dirección')" onkeyup="validarVacio(this, 'Por favor Ingrese Dirección')" placeholder="Dirección" class="form-control"/>
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
+						<div id="groupConfirmaDir" class="form-group hidden">
+							<label for="chk_confirma_dir" class="control-label col-sm-2 ">Confirma Direccion</label>
+							<div class="col-sm-1">
+								<input id="chk_confirma_dir" type="checkbox" value='1'>
+								<span class="help-block hidden fa fa-warning"></span>
+							</div>
+						</div>
 					</div>
-					
+					<div class="form-group" id="groupTablaDirecciones" style="display:none">
+						
+					</div>
 					<div class="form-group">
 						<label for="centrosalud" class="control-label col-sm-4">Centro de Salud</label>
 						<div class="col-sm-6">
@@ -191,20 +200,27 @@
 
 					<div class="form-group">
 						<label for="fono" class="control-label col-sm-4">Teléfono</label>
-						<div class="col-sm-5">
+						<div class="col-sm-3">
 							<input type="text" name="fono" id="fono" value="" maxlength="11" onKeyPress="return soloNumeros(event)" placeholder="Fono" class="form-control"/>
 							<span class="help-block hidden"></span>
 						</div>
-						<label for="fono_seguro" class="control-label col-sm-2 ">¿Teléfono Seguro?</label>
+						<label for="fono_seguro" class="control-label col-sm-1 ">¿Teléfono Seguro?</label>
 						<div class="col-sm-1">
 							<input id="fono_seguro" name="fono_seguro" type="checkbox" value='1'>
 							<span class="help-block hidden fa fa-warning"></span>
+						</div>
+						<div id="groupConfirmaFono" class="form-group hidden">
+							<label for="chk_confirma_fono" class="control-label col-sm-1">Confirma Fono</label>
+							<div class="col-sm-1">
+								<input id="chk_confirma_fono" type="checkbox" value='1'>
+								<span class="help-block hidden fa fa-warning"></span>
+							</div>
 						</div>
 					</div>
 
 					<div class="form-group">    
 						<label for="celular" class="control-label col-sm-4">Celular</label>
-						<div class="col-sm-5">
+						<div class="col-sm-3">
 							<input type="text" name="celular" id="celular" value="" maxlength="11" onKeyPress="return soloNumeros(event)" placeholder="Celular" class="form-control"/>
 							<span class="help-block hidden"></span>
 						</div>
@@ -288,26 +304,26 @@
 							</div>
 						</div -->
 
-						<div class="form-group">
-							<div class="col-xs-12" id="listado-adjuntos" name="listado-adjuntos"></div>
-						</div>
+						
 
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-12">
 					<div id="map" data-editable="1" style="width:100%;height:300px;"></div>
 					<div class="form-group">
-						<label for="email" class="control-label col-sm-3">Latitud</label>
+						<label for="gl_latitud" class="control-label col-sm-3">Latitud</label>
 						<div class="col-sm-3">
 							<input type="text" name="gl_latitud" id="gl_latitud" value="" placeholder="latitud" class="form-control"/>
 						</div>
-						<label for="email" class="control-label col-sm-1">Longitud</label>
+						<label for="gl_longitud" class="control-label col-sm-1">Longitud</label>
 						<div class="col-sm-3">
-							<input type="text" name="gl_longitud"  id="gl_longitud" value="" placeholder="Longitud" class="form-control"/>
+							<input type="text" name="gl_longitud"  id="gl_longitud" value="" placeholder="longitud" class="form-control"/>
 						</div>
 					</div>
 				</div>
-
+				<div class="form-group">
+					<div class="col-xs-12" id="listado-adjuntos" name="listado-adjuntos"></div>
+				</div>
 				<div class="form-group clearfix  text-right">
 					<button type="button" id="guardar" class="btn btn-success">
 						<i class="fa fa-save"></i>  Guardar
