@@ -92,7 +92,7 @@ class Empa extends Controller{
 
 		$this->smarty->assign("gl_comuna", $gl_comuna->gl_nombre_comuna);
 		$this->smarty->assign("gl_institucion", $gl_institucion->gl_nombre_establecimiento);
-		$this->smarty->assign("fc_empa", date('Y-m-d'));
+		
 		//Cargar Datos Paciente
 		$registro = $this->_DAOPaciente->getById($id_paciente);
 		$direccion = $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
@@ -112,6 +112,20 @@ class Empa extends Controller{
 		//Cargar Datos DAU Examen
 		//INICIO
 		$empa = $this->_DAOEmpa->verInfoById($id_empa->id_empa);
+		
+		if ($empa->nr_ficha) {
+			$this->smarty->assign("nr_ficha", $empa->nr_ficha);
+		}
+		
+		if ($empa->gl_sector) {
+			$this->smarty->assign("gl_sector", $empa->gl_sector);
+		}
+		
+		if ($id_empa -> fc_empa != ""){
+			$this->smarty->assign("fc_empa", $id_empa -> fc_empa);
+		} else {
+			$this->smarty->assign("fc_empa", date('Y-m-d'));
+		}
 		if ($empa->gl_peso) {
 			$gl_peso = intval($empa->gl_peso);
 			$this->smarty->assign("gl_peso", $gl_peso);
@@ -126,7 +140,7 @@ class Empa extends Controller{
 		}
 		if ($empa->bo_embarazo == 1) {
 			$this->smarty->assign("bo_embarazo_1", 'checked');
-		} else if ($empa->bo_consume_alcohol == 0) {
+		} else if ($empa->bo_embarazo == 0) {
 			$this->smarty->assign("bo_embarazo_0", 'checked');
 		}
 		
@@ -257,6 +271,18 @@ class Empa extends Controller{
 		} else if ($empa->bo_mamografia_vigente == 0) {
 			$this->smarty->assign("bo_mamografia_vigente_0", 'checked');
 		}
+		
+		if ($empa->bo_antecedente_diabetes == 1) {
+			$this->smarty->assign("bo_antecedente_diabetes_1", 'checked');
+		} else if ($empa->bo_antecedente_diabetes == 0) {
+			$this->smarty->assign("bo_antecedente_diabetes_0", 'checked');
+		}
+		
+		if ($empa->bo_mamografia_requiere == 1) {
+			$this->smarty->assign("bo_mamografia_requiere_1", 'checked');
+		} else if ($empa->bo_mamografia_requiere == 0) {
+			$this->smarty->assign("bo_mamografia_requiere_0", 'checked');
+		}
 
 		if ($empa->bo_mamografia_toma == 1) {
 			$this->smarty->assign("bo_mamografia_toma", 'checked');
@@ -291,11 +317,19 @@ class Empa extends Controller{
 			$antecedentes = "display: block";
 		}
 		//Mostrar/Ocultar PAP segun edad
-		if ($edad > 24 && $edad < 65) {
-			$pap = "display: block";
-		} else {
+		if (!($edad > 24 && $edad < 65) || ($empa->bo_embarazo == 1)) {
 			$pap = "display: none";
+		} else {
+			$pap = "display: block";
 		}
+		
+		if ($empa->bo_embarazo == 1) {
+			$mamografia = "display: none";
+		} else {
+			$mamografia = "display: block";
+		}
+		
+		$this->smarty->assign("mamografia", $mamografia);
 		$this->smarty->assign("pap", $pap);
 		$this->smarty->assign("diabetes", $diabetes);
 		$this->smarty->assign("antecedentes", $antecedentes);
@@ -359,18 +393,15 @@ class Empa extends Controller{
 		if (!is_null($arrAudit)) {
 			foreach ($arrAudit as $item) {
 				if (is_null($item->nr_valor)) {
-//                    print_r($item->nr_valor);
-//					print_r('<br>');
-					$item->nr_valor = 0;
+
+					//$item->nr_valor = 0;
 					$total += $item->nr_valor;
 				} else {
 					$total += $item->nr_valor;
-					//print_r($item->nr_valor);
-					//print_r('<br>');
+
 				}
 			}
 		}
-//			print_r($total); die();
 		$this->smarty->assign("id_empa", $id_empa);
 		$this->smarty->assign("total", $total);
 		$this->smarty->assign("arrAudit", $arrAudit);

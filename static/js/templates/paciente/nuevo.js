@@ -44,6 +44,17 @@ $("#guardar").on('click', function (e) {
 				"value": 0
 			});
 		}
+		if ($('#fono_seguro').is(':checked')) {
+			parametros.push({
+				"name": 'fono_seguro',
+				"value": 1
+			});
+		} else {
+			parametros.push({
+				"name": 'fono_seguro',
+				"value": 0
+			});
+		}
 		/*
 		 var inputFileImage = document.getElementById("subirFile");
 		 var file = inputFileImage.files[0];
@@ -89,105 +100,115 @@ $("#guardarMotivo").on('click', function (e) {
 	} else if (!$('#chk_confirma_fono').is(':checked')) {
 		xModal.danger('Debe confirmar el Teléfono del Paciente antes de poder Guardar.');
 	} else {
-		var button_process		= buttonStartProcess($(this), e);
-		var parametros			= $("#form").serializeArray();
-		var edad				= $("#edad").val();
-		var rut					= $("#rut").val();
-		var gl_grupo_tipo		= $("#gl_grupo_tipo").val();
-		var prevision			= $("#prevision").val();
-		var centrosalud			= $("#centrosalud").val()
-		var gl_latitud			= $("#gl_latitud").val();
-		var gl_longitud			= $("#gl_longitud").val();
-		var chk_confirma_fono	= $("#chk_confirma_fono").val();
-		var chk_confirma_dir	= $("#chk_confirma_dir").val();
-
-		if ($('#chkAcepta').is(':checked')) {
+	var button_process = buttonStartProcess($(this), e);
+	var parametros = $("#form").serializeArray();
+	var edad = $("#edad").val();
+	var rut = $("#rut").val();
+	var gl_grupo_tipo = $("#gl_grupo_tipo").val();
+	var prevision = $("#prevision").val();
+	var centrosalud = $("#centrosalud").val()
+	var gl_latitud = $("#gl_latitud").val();
+	var gl_longitud = $("#gl_longitud").val();
+	var chk_confirma_fono = $("#chk_confirma_fono").val();
+	var chk_confirma_dir = $("#chk_confirma_dir").val();
+	if ($('#chkAcepta').is(':checked')) {
+		parametros.push({
+			"name": 'chkAcepta',
+			"value": 1
+		});
+	} else {
+		parametros.push({
+			"name": 'chkAcepta',
+			"value": 0
+		});
+	}
+	if ($('#chkReconoce').is(':checked')) {
+		parametros.push({
+			"name": 'chkReconoce',
+			"value": 1
+		});
+	} else {
+		parametros.push({
+			"name": 'chkReconoce',
+			"value": 0
+		});
+	}
+	if ($('#fono_seguro').is(':checked')) {
 			parametros.push({
-				"name": 'chkAcepta',
+				"name": 'fono_seguro',
 				"value": 1
 			});
 		} else {
 			parametros.push({
-				"name": 'chkAcepta',
+				"name": 'fono_seguro',
 				"value": 0
 			});
 		}
-		if ($('#chkReconoce').is(':checked')) {
-			parametros.push({
-				"name": 'chkReconoce',
-				"value": 1
-			});
-		} else {
-			parametros.push({
-				"name": 'chkReconoce',
-				"value": 0
-			});
-		}
-		parametros.push({
-				"name": 'chk_confirma_fono',
-				"value": chk_confirma_fono
-		});
-		parametros.push({
-				"name": 'chk_confirma_dir',
-				"value": chk_confirma_dir
-		});
-		parametros.push({
-			"name": 'cambio_direccion',
-			"value": cambio_direccion //variable global JS
-		});
-		parametros.push({
-			"name": 'gl_grupo_tipo',
-			"value": gl_grupo_tipo
-		});
-		parametros.push({
-			"name": 'edad',
-			"value": edad
-		});
-		parametros.push({
-			"name": 'rut',
-			"value": rut
-		});
-		parametros.push({
-			"name": 'centrosalud',
-			"value": centrosalud
-		});
-		parametros.push({
-			"name": 'prevision',
-			"value": prevision
-		});
-		parametros.push({
-			"name": 'gl_latitud',
-			"value": gl_latitud
-		});
-		parametros.push({
-			"name": 'gl_longitud',
-			"value": gl_longitud
-		});
+	parametros.push({
+			"name": 'chk_confirma_fono',
+			"value": chk_confirma_fono
+	});
+	parametros.push({
+			"name": 'chk_confirma_dir',
+			"value": chk_confirma_dir
+	});
+	parametros.push({
+		"name": 'cambio_direccion',
+		"value": cambio_direccion //variable global JS
+	});
+	parametros.push({
+		"name": 'gl_grupo_tipo',
+		"value": gl_grupo_tipo
+	});
+	parametros.push({
+		"name": 'edad',
+		"value": edad
+	});
+	parametros.push({
+		"name": 'rut',
+		"value": rut
+	});
+	parametros.push({
+		"name": 'centrosalud',
+		"value": centrosalud
+	});
+	parametros.push({
+		"name": 'prevision',
+		"value": prevision
+	});
+	parametros.push({
+		"name": 'gl_latitud',
+		"value": gl_latitud
+	});
+	parametros.push({
+		"name": 'gl_longitud',
+		"value": gl_longitud
+	});
 	
-		$.ajax({
-			dataType: "json",
-			cache	: false,
-			async	: true,
-			data	: parametros,
-			type	: "post",
-			url		: BASE_URI + "index.php/Paciente/GuardarMotivo",
-			error	: function (xhr, textStatus, errorThrown) {
+	$.ajax({
+		dataType: "json",
+		cache: false,
+		async: true,
+		data: parametros,
+		type: "post",
+		url: BASE_URI + "index.php/Paciente/GuardarMotivo",
+		error: function (xhr, textStatus, errorThrown) {
 						xModal.danger('Error: No se pudo agregar el Registro');
-						alert('HTTP Error: '+errorThrown);
-					},
-			success	: function (data) {
-						if (data.correcto) {
+			alert('HTTP Error: '+errorThrown);
+		},
+		success: function (data) {
+			if (data.correcto) {
 
 							xModal.success('Éxito: Se Ingresó nuevo Registro!');
-							setTimeout(function () {
-								location.href = BASE_URI + "index.php/Paciente";
-							}, 2000);
-						} else {
+				setTimeout(function () {
+					location.href = BASE_URI + "index.php/Paciente";
+				}, 2000);
+			} else {
 							xModal.info('Error: No se pudo agregar el Registro.<br>Favor contacte con Mesa de Ayuda');
-						}
-					}
-		});
-		buttonEndProcess(button_process);
+			}
+		}
+	});
+	buttonEndProcess(button_process);
 	}
 });
 
@@ -454,12 +475,13 @@ var Paciente = {
 						}
 
 						$('#form').find('input, textarea, checkbox, select').attr('disabled', true);
-						$('#form').find('#direccion').attr('disabled', false);
-						$('#form').find('#region').attr('disabled', false);
-						$('#form').find('#comuna').attr('disabled', false);
-						$('#form').find('#fono').attr('disabled', false);
-						$('#form').find('#chk_confirma_fono').attr('disabled', false);
-						$('#form').find('#chk_confirma_dir').attr('disabled', false);
+						$('#form').find('#direccion')						.attr('disabled', false);
+						$('#form').find('#region')							.attr('disabled', false);
+						$('#form').find('#comuna')							.attr('disabled', false);
+						$('#form').find('#fono')							.attr('disabled', false);
+						$('#form').find('#chk_confirma_fono')				.attr('disabled', false);
+						$('#form').find('#chk_confirma_dir')				.attr('disabled', false);
+						$('#form').find('#fono_seguro')						.attr('disabled', false);
 						if (data.bo_reconoce == '1') {
 							$("#chkReconoce").prop("checked", true);
 						} else {
@@ -469,6 +491,11 @@ var Paciente = {
 							$("#chkAcepta").prop("checked", true);
 						} else {
 							$("#chkAcepta").prop("disabled", false);
+						}
+						if (data.bo_fono_seguro == '1') {
+							$("#fono_seguro").prop("checked", true);
+						} else {
+							$("#fono_seguro").prop("disabled", false);
 						}
 						$("#id_paciente").prop("disabled", false );
 						$("#motivoconsulta").prop("disabled", false);

@@ -46,7 +46,7 @@
                     </div>
                     <label for="nr_ficha" class="control-label col-sm-1">N° de Ficha (*)</label>
                     <div class="col-sm-3">
-                        <input type="text" name="nr_ficha" id="nr_ficha" value="" 
+                        <input type="text" name="nr_ficha" id="nr_ficha" value="{$nr_ficha}" 
                                placeholder="N° de Ficha" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
@@ -56,7 +56,7 @@
                 <div class="form-group">
                     <label for="id_sector" class="control-label col-sm-3">Sector (*)</label>
                     <div class="col-sm-3">
-                        <input type="text" name="gl_sector" id="gl_sector" value="" 
+                        <input type="text" name="gl_sector" id="gl_sector" value="{$gl_sector}" 
                                placeholder="Sector" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
@@ -334,10 +334,10 @@
                             <label class="control-label required col-sm-3">¿Tiene Antecedentes Familiares de Diabetes Mellitus?</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_antecedente" type="radio" name="bo_antecedente" 
-                                              id="bo_antecedente_0" value="0">No</label>
+                                              id="bo_antecedente_0" value="0" {$bo_antecedente_diabetes_0}>No</label>
                                 &nbsp;&nbsp;
                                 <label><input class="bo_antecedente" type="radio" name="bo_antecedente" 
-                                              id="bo_antecedente_1" value="1">Si</label>
+                                              id="bo_antecedente_1" value="1" {$bo_antecedente_diabetes_1}>Si</label>
                             </div>
                         </div>   
                         <div class="form-group" id="glicemia" style="{$diabetes}">
@@ -563,7 +563,7 @@
                     </div>
                 </div>
                 <!-- Cáncer de mama -->
-                <div class="box box-success" id="cancer_de_mama">
+                <div class="box box-success" id="cancer_de_mama" style="{$mamografia}">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Cáncer de mama</h3></div>
                     <div class="box-body">
                         <div class="form-group">
@@ -629,20 +629,20 @@
                             <label class="control-label required col-sm-3">¿Requiere Mamografía?</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_mamografia_requiere" type="radio" name="bo_mamografia_requiere" 
-                                              id="bo_mamografia_requiere_0" value="0">NO</label>
+                                              id="bo_mamografia_requiere_0" value="0"{$bo_mamografia_requiere_0}>NO</label>
                                 &nbsp;&nbsp;
                                 <label><input class="bo_mamografia_requiere" type="radio" name="bo_mamografia_requiere" 
-                                              id="bo_mamografia_requiere_1" value="1">SI</label>
+                                              id="bo_mamografia_requiere_1" value="1" {$bo_mamografia_requiere_1}>SI</label>
                             </div>
-                            <div id="requiere_mamografia" style="{if $bo_mamografia_toma != 'checked'}display: none{/if}">
+                            <div id="requiere_mamografia" style="{if $bo_mamografia_requiere_1 != 'checked'}display: none{/if}">
                                 <div class="col-sm-2" id="toma_mamografia">
                                     <input type="checkbox" id="bo_mamografia_toma" {$bo_mamografia_toma}>
                                     <label for="bo_mamografia_toma" class="control-label required">Toma Mamograf&iacute;a</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" id="requiere_mamografia2" style="{if $bo_mamografia_toma != 'checked'}display: none{/if}">
-                            <div id="mam_resultado2" style="{if $bo_mamografia_toma != 'checked'}display: none{/if}"> 
+                        <div class="form-group" id="requiere_mamografia2" style="{if $bo_mamografia_requiere_1 != 'checked'}display: none{/if}">
+                            <div id="mam_resultado2" style="{if $bo_mamografia_requiere_1 != 'checked'}display: none{/if}"> 
                                 <label class="control-label required col-sm-3">Resultado Mamografía</label>
                                 <div class="col-sm-2">
                                     <label><input class="bo_mamografia_resultado" type="radio" name="bo_mamografia_resultado" 
@@ -704,7 +704,7 @@
                                 <i class="fa fa-save"></i>  Guardar
                             </button>&nbsp;
                             <button type="button" id="cancelar"  class="btn btn-default" 
-                                    onclick="location.href = '{$base_url}/Empa/index'">
+                                    onclick="location.href = '{$base_url}/Paciente/index'">
                                 <i class="fa fa-remove"></i>  Cancelar
                             </button>
                         </div>
