@@ -415,7 +415,10 @@ var Paciente = {
 							$("#div_tabla_motivos").html(data.tabla_motivos);
 							$("#mostrar_motivos_consulta").show();
 						}
-
+						if (data.count_direcciones > 1) {
+							$("#groupTablaDirecciones").html(data.tabla_direcciones);
+							$("#groupTablaDirecciones").show();
+						}
 						$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Paciente/bitacora/"+data.id_paciente+"', 'Registro número : "+data.id_paciente+"', 85);");
 						$("#id_paciente").val(data.id_paciente);
 						$("#gl_grupo_tipo").val(data.gl_grupo_tipo);

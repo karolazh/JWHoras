@@ -708,10 +708,11 @@ class Paciente extends Controller {
 		$json = array();
 
 		if ($registro) {
-			$direccion = $this->_DAOPacienteDireccion->getByIdPaciente($registro->id_paciente);
-			$info_comuna = $this->_DAOComuna->getInfoComunaxID($direccion->id_comuna);
+			$direcciones = $this->_DAOPacienteDireccion->getMultByIdPaciente($registro->id_paciente);
+			$info_comuna = $this->_DAOComuna->getInfoComunaxID($direcciones->row_0->id_comuna);
 			$arr_motivos = $this->_DAOPacienteRegistro->getByIdPaciente($registro->id_paciente);
 			$tabla_motivos = "";
+			$tabla_direcciones = "";
 			$div_superior = "<div class='top-spaced'></div>
 								<div class='panel panel-primary'>
 									<div class='panel-heading'>Motivos de consulta</div>";
@@ -757,12 +758,41 @@ class Paciente extends Controller {
 									</div>";
 				$tabla_motivos = $tabla_motivos . $pie_tabla;
 			}
-
+			if (!is_null($direcciones)) {
+				$encabezado_tabla_direcciones = "<div class='table-responsive col-sm-12 center' data-row='5'>
+							<table id='tablaDireccion' class='table table-hover table-striped table-bordered dataTable no-footer'>
+								<thead>
+									<tr role='row'>
+										<th class='text-center' width='10%'>Direcciones</th>
+									</tr>
+								</thead>
+								<tbody>";
+				$tabla_direcciones = $encabezado_tabla_direcciones;
+				$break_count = 0;
+				foreach (array_reverse((array) $direcciones) as $item) {
+					if ($break_count < 5) {
+						$cuerpo_tabla_direcciones = "<tr>
+														<td class='text-center' nowrap> $item->gl_direccion </td>
+													</tr>
+												";
+						$tabla_direcciones = $tabla_direcciones . $cuerpo_tabla_direcciones;
+						$break_count += 1;
+					} else {
+						break;
+					}
+				}
+				$pie_tabla_direcciones = "	 </tbody>
+								 </table>
+								</div>";
+				$tabla_direcciones = $tabla_direcciones . $pie_tabla_direcciones;
+			}
 			$json['correcto']				= TRUE;
 			$json['div_superior']			= $div_superior;
 			$json['div_inferior']			= $div_inferior;
 			$json['tabla_motivos']			= $tabla_motivos;
 			$json['count_motivos']			= count((array) $arr_motivos);
+			$json['tabla_direcciones']		= $tabla_direcciones;
+			$json['count_direcciones']		= count((array) $direcciones);
 			$json['fc_ultimo_motivos']		= $arr_motivos->row_0->fc_ingreso;
 			$json['gl_grupo_tipo']			= $registro->gl_grupo_tipo;
 			$json['id_paciente']			= $registro->id_paciente;
@@ -770,16 +800,17 @@ class Paciente extends Controller {
 			$json['gl_apellidos']			= $registro->gl_apellidos;
 			$json['fc_nacimiento']			= $registro->fc_nacimiento;
 			$json['id_prevision']			= $registro->id_prevision;
-			$json['gl_direccion']			= $direccion->gl_direccion;
-			$json['id_region']				= $direccion->id_region;
+			$json['gl_direccion']			= $direcciones->row_0->gl_direccion;
+			$json['id_region']				= $direcciones->row_0->id_region;
 			$json['gl_nombre_comuna']		= $info_comuna->gl_nombre_comuna;
-			$json['id_comuna']				= $direccion->id_comuna;
+			$json['id_comuna']				= $direcciones->row_0->id_comuna;
 			$json['gl_centro_salud']		= $registro->gl_centro_salud;
 			$json['id_centro_salud']		= $registro->id_centro_salud;
 			$json['bo_reconoce']			= $registro->bo_reconoce;
 			$json['bo_acepta_programa']		= $registro->bo_acepta_programa;
-			$json['gl_latitud']				= $direccion->gl_latitud;
-			$json['gl_longitud']			= $direccion->gl_longitud;
+			$json['gl_latitud']				= $direcciones->row_0->gl_latitud;
+			$json['gl_longitud']			= $direcciones->row_0->gl_longitud;
+			
 			$json['gl_fono']				= $registro->gl_fono;
 			$json['gl_celular']				= $registro->gl_celular;
 			$json['gl_email']				= $registro->gl_email;
