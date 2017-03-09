@@ -66,6 +66,7 @@
                         <div class="top-spaced"></div>
                     </div>
                 </div>
+                
                 <!-- MOTIVOS DE CONSULTA -->
                 <div id="div_tabla" class="table-responsive small col-lg-12">
                     <label class="control-label"><h5>Atenciones de Urgencia</h5></label>
@@ -100,7 +101,6 @@
                 <!-- EXÁMENES ALTERADOS -->
                 {if $muestra_examenes == "SI"}
                     <div class="form-group">
-                        {*{include file='avanzados/grillaDirecciones.tpl'}*}
                         <div id="div_tabla" class="table-responsive small col-lg-12">
                             <label class="control-label"><h5>Ex&aacute;menes Alterados</h5></label>
                             <br>
