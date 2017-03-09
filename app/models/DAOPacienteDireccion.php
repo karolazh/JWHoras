@@ -145,7 +145,20 @@ class DAOPacienteDireccion extends Model {
             return NULL;
         }
 	}
-	
+	public function getMultByIdPaciente($id_paciente){
+		$query	= "	SELECT * FROM ".$this->_tabla."
+					WHERE id_paciente = ?
+					AND bo_estado = 1";
+
+		$param	= array($id_paciente);
+        $result	= $this->db->getQuery($query,$param);
+		
+        if($result->numRows > 0){
+            return $result->rows;
+        }else{
+            return NULL;
+        }
+	}
 	public function disabDirecciones($id_paciente){
 		 $query	= "	UPDATE pre_paciente_direccion SET
 						bo_estado					= 0,

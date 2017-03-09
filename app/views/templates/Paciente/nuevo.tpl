@@ -186,7 +186,9 @@
 							</div>
 						</div>
 					</div>
-					
+					<div class="form-group" id="groupTablaDirecciones" style="display:none">
+						
+					</div>
 					<div class="form-group">
 						<label for="centrosalud" class="control-label col-sm-4">Centro de Salud</label>
 						<div class="col-sm-6">
