@@ -200,27 +200,31 @@
 
 					<div class="form-group">
 						<label for="fono" class="control-label col-sm-4">Teléfono</label>
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<input type="text" name="fono" id="fono" value="" maxlength="11" onKeyPress="return soloNumeros(event)" placeholder="Fono" class="form-control"/>
 							<span class="help-block hidden"></span>
 						</div>
-						<label for="fono_seguro" class="control-label col-sm-2 ">¿Teléfono Seguro?</label>
-						<div class="col-sm-1">
-							<input id="fono_seguro" name="fono_seguro" type="checkbox" value='1'>
-							<span class="help-block hidden fa fa-warning"></span>
-						</div>
+						<div class="col-sm-2"></div>
 						<div id="groupConfirmaFono" class="form-group hidden">
-							<label for="chk_confirma_fono" class="control-label col-sm-2">Confirma Fono</label>
+							<label for="chk_confirma_fono" class="control-label col-sm-2">Confirma Teléfono</label>
 							<div class="col-sm-1">
 								<input id="chk_confirma_fono" type="checkbox" value='1'>
 								<span class="help-block hidden fa fa-warning"></span>
 							</div>
 						</div>
 					</div>
+					
+					<div class="form-group">
+						<label for="celular" class="control-label col-sm-4">¿Teléfono Seguro?</label>
+						<div class="col-sm-3">
+							<input id="fono_seguro" name="fono_seguro" type="checkbox" value='1'>
+							<span class="help-block hidden fa fa-warning"></span>
+						</div>
+					</div>
 
-					<div class="form-group">    
+					<div class="form-group">
 						<label for="celular" class="control-label col-sm-4">Celular</label>
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<input type="text" name="celular" id="celular" value="" maxlength="11" onKeyPress="return soloNumeros(event)" placeholder="Celular" class="form-control"/>
 							<span class="help-block hidden"></span>
 						</div>
