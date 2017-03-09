@@ -132,7 +132,7 @@ class Empa extends Controller{
 		}
 		if ($empa->bo_embarazo == 1) {
 			$this->smarty->assign("bo_embarazo_1", 'checked');
-		} else if ($empa->bo_consume_alcohol == 0) {
+		} else if ($empa->bo_embarazo == 0) {
 			$this->smarty->assign("bo_embarazo_0", 'checked');
 		}
 		
@@ -309,11 +309,19 @@ class Empa extends Controller{
 			$antecedentes = "display: block";
 		}
 		//Mostrar/Ocultar PAP segun edad
-		if ($edad > 24 && $edad < 65) {
-			$pap = "display: block";
-		} else {
+		if (!($edad > 24 && $edad < 65) || ($empa->bo_embarazo == 1)) {
 			$pap = "display: none";
+		} else {
+			$pap = "display: block";
 		}
+		
+		if ($empa->bo_embarazo == 1) {
+			$mamografia = "display: none";
+		} else {
+			$mamografia = "display: block";
+		}
+		
+		$this->smarty->assign("mamografia", $mamografia);
 		$this->smarty->assign("pap", $pap);
 		$this->smarty->assign("diabetes", $diabetes);
 		$this->smarty->assign("antecedentes", $antecedentes);

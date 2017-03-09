@@ -563,7 +563,7 @@
                     </div>
                 </div>
                 <!-- Cáncer de mama -->
-                <div class="box box-success" id="cancer_de_mama">
+                <div class="box box-success" id="cancer_de_mama" style="{$mamografia}">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Cáncer de mama</h3></div>
                     <div class="box-body">
                         <div class="form-group">
