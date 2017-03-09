@@ -72,3 +72,36 @@
 		</div>
 	</section>
 </form>
+
+
+
+{if count($arr_plan) > 0}
+<section class="content">
+	<div class="panel panel-primary">
+		<div class="panel-heading"> Lista </div>
+		<div class="panel-body">
+			<div class="table-responsive col-lg-12" data-row="10">
+				<table id="tablaPrincipal" class="table table-hover table-striped table-bordered  no-footer">
+					<thead>
+						<tr role="row">
+							<th class="text-center" width="10%">Especialista</th>
+							<th class="text-center" width="5%">Observación</th>
+							<th class="text-center" width="25%">Fecha</th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach $arr_plan as $item}
+							<tr>
+								<td class="text-center" nowrap> {$item->gl_nombre_especialidad} </td>
+								<td class="text-center" nowrap> {$item->gl_observacion} </td>
+								<td class="text-center" nowrap> {$item->fc_crea} </td>
+							</tr>
+						{/foreach}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>  
+</section>
+{/if}
