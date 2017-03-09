@@ -134,7 +134,7 @@
 		<div id="mostrar_motivos_consulta" style="display:none">		
 			<div class="top-spaced"></div>
 			<div class="panel panel-primary">
-				<div class="panel-heading">Motivos de consulta</div>
+				<div class="panel-heading">Atenciones de Urgencia</div>
 				<div class="panel-body">
 					<div id="div_tabla_motivos" class="form-group">
 
@@ -200,17 +200,17 @@
 
 					<div class="form-group">
 						<label for="fono" class="control-label col-sm-4">Teléfono</label>
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<input type="text" name="fono" id="fono" value="" maxlength="11" onKeyPress="return soloNumeros(event)" placeholder="Fono" class="form-control"/>
 							<span class="help-block hidden"></span>
 						</div>
-						<label for="fono_seguro" class="control-label col-sm-1 ">¿Teléfono Seguro?</label>
+						<label for="fono_seguro" class="control-label col-sm-2 ">¿Teléfono Seguro?</label>
 						<div class="col-sm-1">
 							<input id="fono_seguro" name="fono_seguro" type="checkbox" value='1'>
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
 						<div id="groupConfirmaFono" class="form-group hidden">
-							<label for="chk_confirma_fono" class="control-label col-sm-1">Confirma Fono</label>
+							<label for="chk_confirma_fono" class="control-label col-sm-2">Confirma Fono</label>
 							<div class="col-sm-1">
 								<input id="chk_confirma_fono" type="checkbox" value='1'>
 								<span class="help-block hidden fa fa-warning"></span>
@@ -220,7 +220,7 @@
 
 					<div class="form-group">    
 						<label for="celular" class="control-label col-sm-4">Celular</label>
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<input type="text" name="celular" id="celular" value="" maxlength="11" onKeyPress="return soloNumeros(event)" placeholder="Celular" class="form-control"/>
 							<span class="help-block hidden"></span>
 						</div>
