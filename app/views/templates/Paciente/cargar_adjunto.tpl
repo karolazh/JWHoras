@@ -2,7 +2,7 @@
 
 <div class="row" style="width: 100%; min-height: calc(100vh); margin-left:auto;margin-right:auto; max-width: 100%;">
 	<div class="col-xs-10">	
-		<form class="form-horizontal" name="form-adjunto" id="form-adjunto" action="{$base_url}/Paciente/guardarAdjunto" method="post" enctype="multipart/form-data"> 
+		<form class="form-horizontal" name="form-adjunto" id="form-adjunto" action="{$base_url}/Paciente/guardarAdjunto/{$smarty.session.adj.tipo_adjunto}" method="post" enctype="multipart/form-data"> 
 			<div class="form-group top-spaced">
 				<label for="" class="control-label col-xs-2">Adjunto</label>
 				<div class="col-xs-10">

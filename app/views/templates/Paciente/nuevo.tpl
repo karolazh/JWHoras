@@ -124,7 +124,7 @@
 					</div>
 					<div class="col-sm-1">					
 						<button type="button" id="btnUploadFonasa" class="btn btn-sm btn-success"
-								onclick="xModal.open('{$smarty.const.BASE_URI}/Paciente/cargarAdjunto', 'Cargar Adjunto', '', 1, true, '150');" >
+								onclick="xModal.open('{$smarty.const.BASE_URI}/Paciente/cargarAdjuntoFonasa', 'Cargar Adjunto', '', 1, true, '150');" >
 							<i class="fa fa-upload" aria-hidden="true"></i> Subir Archivo Fonasa
 						</button>
 					</div>
