@@ -23,6 +23,7 @@
 class Paciente extends Controller {
 
 	protected $_DAORegion;
+	protected $_DAOComuna;
 	protected $_DAOPaciente;
 	protected $_DAOTipoEgreso;
 	protected $_DAOPrevision;
@@ -44,6 +45,7 @@ class Paciente extends Controller {
 		$this->load->lib('Evento', false);
 		$this->_Evento = new Evento();
 		$this->_DAORegion				= $this->load->model("DAORegion");
+		$this->_DAOComuna				= $this->load->model("DAOComuna");
 		$this->_DAOPaciente				= $this->load->model("DAOPaciente");
 		$this->_DAOTipoEgreso			= $this->load->model("DAOTipoEgreso");
 		$this->_DAOPrevision			= $this->load->model("DAOPrevision");
@@ -451,6 +453,8 @@ class Paciente extends Controller {
 		$gl_grupo_tipo_ant	= $parametros['gl_grupo_tipo'];
 		$confirma_fono		= $parametros['chk_confirma_fono'];
 		$confirma_direccion	= $parametros['chk_confirma_dir'];
+		$id_centro_salud	= $parametros['centrosalud'];
+		$gl_fono			= $parametros['fono'];
 		$count				= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
 
 		if($parametros['edad'] > 15 AND  $_SESSION['id_tipo_grupo'] == 2 AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
@@ -490,11 +494,17 @@ class Paciente extends Controller {
 										'fc_crea'				=> date('Y-m-d h:m:s'),
 										'id_usuario_crea'		=> $_SESSION['id'],
 								);
-				$blah							= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
+				$res_disab_direcciones			= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
 				$id_direccion					= $this->_DAOPacienteDireccion->insertarDireccion($ins_direccion);
+				$res_update_centro_salud		= $this->_DAOPaciente->update(array('id_centro_salud' => $id_centro_salud), $id_paciente, 'id_paciente');
+				$res_update_centro_fono			= $this->_DAOPaciente->update(array('gl_fono' => $gl_fono), $id_paciente, 'id_paciente');
 				$session							= New Zend_Session_Namespace("usuario_carpeta");
-				$correcto = $this->_Evento->guardar(16,0,$id_paciente,"Motivo consulta agregada el : " . Fechas::fechaHoyVista(),1,0,$_SESSION['id']);
-
+				$res_evento = $this->_Evento->guardar(16,0,$id_paciente,"Motivo consulta agregada el : " . Fechas::fechaHoyVista(),1,0,$_SESSION['id']);
+				if($res_update_centro_salud && $res_evento && $res_disab_direcciones && $res_update_centro_fono){
+					$correcto = TRUE;
+				} else {
+					$error = TRUE;
+				}
 			if ($parametros['chkAcepta']) {
 				$resp = $this->_DAOPaciente->update(array('bo_acepta_programa' => 1), $id_paciente, 'id_paciente');
 				if ($resp){
@@ -698,6 +708,8 @@ class Paciente extends Controller {
 		$json = array();
 
 		if ($registro) {
+			$direccion = $this->_DAOPacienteDireccion->getByIdPaciente($registro->id_paciente);
+			$info_comuna = $this->_DAOComuna->getInfoComunaxID($direccion->id_comuna);
 			$arr_motivos = $this->_DAOPacienteRegistro->getByIdPaciente($registro->id_paciente);
 			$tabla_motivos = "";
 			$div_superior = "<div class='top-spaced'></div>
@@ -758,16 +770,16 @@ class Paciente extends Controller {
 			$json['gl_apellidos']			= $registro->gl_apellidos;
 			$json['fc_nacimiento']			= $registro->fc_nacimiento;
 			$json['id_prevision']			= $registro->id_prevision;
-			$json['gl_direccion']			= $registro->gl_direccion;
-			$json['id_region']				= $registro->id_region;
-			$json['gl_nombre_comuna']		= $registro->gl_nombre_comuna;
-			$json['id_comuna']				= $registro->id_comuna;
+			$json['gl_direccion']			= $direccion->gl_direccion;
+			$json['id_region']				= $direccion->id_region;
+			$json['gl_nombre_comuna']		= $info_comuna->gl_nombre_comuna;
+			$json['id_comuna']				= $direccion->id_comuna;
 			$json['gl_centro_salud']		= $registro->gl_centro_salud;
 			$json['id_centro_salud']		= $registro->id_centro_salud;
 			$json['bo_reconoce']			= $registro->bo_reconoce;
 			$json['bo_acepta_programa']		= $registro->bo_acepta_programa;
-			$json['gl_latitud']				= $registro->gl_latitud;
-			$json['gl_longitud']			= $registro->gl_longitud;
+			$json['gl_latitud']				= $direccion->gl_latitud;
+			$json['gl_longitud']			= $direccion->gl_longitud;
 			$json['gl_fono']				= $registro->gl_fono;
 			$json['gl_celular']				= $registro->gl_celular;
 			$json['gl_email']				= $registro->gl_email;
