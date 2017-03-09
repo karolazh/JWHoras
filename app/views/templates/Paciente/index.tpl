@@ -4,10 +4,12 @@
 <section class="content-header">
     <h1><i class="fa fa-book"></i>&nbsp; {$titulo} </h1>
     <div class="col-md-12 text-right">
+		{if $mostrar_plan != 1}
         <button type="button" id="ingresar" onclick="location.href = '{$base_url}/Paciente/nuevo'"
                 class="btn btn-success">
             <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Registro
         </button>
+		{/if}
     </div>
     <br/><br/>
 </section>
@@ -82,7 +84,7 @@
 									{/if}
 									{if $mostrar_plan == 1}
 									<button type="button"
-										onClick="xModal.open('{$smarty.const.BASE_URI}/Medico/plan_tratamiento/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
+										onclick="location.href = '{$base_url}/Medico/plan_tratamiento/{$item->id_paciente}'"
 										data-toggle="tooltip" 
 										title="Plan Tratamiento" 
 										class="btn btn-xs btn-default">

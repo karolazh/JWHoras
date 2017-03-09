@@ -358,8 +358,10 @@ var MapaFormulario = Class({
     setInputs : function(posicion){
         $("#" + this.input_longitud).val(parseFloat(posicion.lng()));
         $("#" + this.input_latitud).val(parseFloat(posicion.lat()));
-
         $("#" + this.input_longitud).trigger('blur');
+		if($('#centrosalud').is('[disabled=disabled]')){
+			$('#centrosalud').attr('disabled', false);
+		}
         $("#" + this.input_latitud).trigger('blur');
         
         // Actualizar input de dirección (places_input) al mover el pin 

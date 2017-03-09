@@ -21,10 +21,12 @@ function smarty_function_htmlMenu($params, &$smarty) {
     $usuario = $DAOUsuario->getById($id_usuario);
     $id_perfil = $usuario->id_perfil;
 	$opciones = $DAOPerfilOpcion->getOpcionesRaiz($id_perfil);
+	$subOpciones = $DAOPerfilOpcion->getSubOpciones($id_perfil);
 	foreach($opciones AS $opcion){
 		
 	}
 	$smarty->assign("opciones", $opciones);
+	$smarty->assign("subOpciones", $subOpciones);
 	if(!is_null($usuario)){
         return $smarty->fetch("plugins/view/menu.tpl");
     }

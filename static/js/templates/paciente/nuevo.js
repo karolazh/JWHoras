@@ -1,5 +1,5 @@
 /* global BASE_URI */
-
+cambio_direccion = false; //variable global JS
 $("#guardar").on('click', function (e) {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
@@ -7,7 +7,10 @@ $("#guardar").on('click', function (e) {
 
 	if (gl_rut == '' && !$('#chkextranjero').is(':checked')) {
 		xModal.danger('- El campo RUT es Obligatorio');
-	} else {
+	} else if ($('#chkextranjero').is(':checked') && $('#opcionPrevision').val() === "1" && $('#gl_codigo_fonasa').val() === "") {
+		xModal.danger('Si eres extranjero afiliado en FONASA, deber ingresar tu código fonasa y subir tu certifiado de afiliación');
+	}
+		else {
 		if ($('#chkextranjero').is(':checked')) {
 			parametros.push({
 				"name": 'chkextranjero',
@@ -81,13 +84,20 @@ $("#guardar").on('click', function (e) {
 });
 
 $("#guardarMotivo").on('click', function (e) {
+	if (!$('#chk_confirma_fono').is(':checked') || !$('#chk_confirma_dir').is(':checked')) {
+			xModal.danger('Debe confirmar su telefono y su direccion para guardar');
+	} else {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
 	var edad = $("#edad").val();
 	var rut = $("#rut").val();
 	var gl_grupo_tipo = $("#gl_grupo_tipo").val();
 	var prevision = $("#prevision").val();
-
+	var centrosalud = $("#centrosalud").val()
+	var gl_latitud = $("#gl_latitud").val();
+	var gl_longitud = $("#gl_longitud").val();
+	var chk_confirma_fono = $("#chk_confirma_fono").val();
+	var chk_confirma_dir = $("#chk_confirma_dir").val();
 	if ($('#chkAcepta').is(':checked')) {
 		parametros.push({
 			"name": 'chkAcepta',
@@ -111,6 +121,18 @@ $("#guardarMotivo").on('click', function (e) {
 		});
 	}
 	parametros.push({
+			"name": 'chk_confirma_fono',
+			"value": chk_confirma_fono
+	});
+	parametros.push({
+			"name": 'chk_confirma_dir',
+			"value": chk_confirma_dir
+	});
+	parametros.push({
+		"name": 'cambio_direccion',
+		"value": cambio_direccion //variable global JS
+	});
+	parametros.push({
 		"name": 'gl_grupo_tipo',
 		"value": gl_grupo_tipo
 	});
@@ -123,10 +145,22 @@ $("#guardarMotivo").on('click', function (e) {
 		"value": rut
 	});
 	parametros.push({
+		"name": 'centrosalud',
+		"value": centrosalud
+	});
+	parametros.push({
 		"name": 'prevision',
 		"value": prevision
 	});
-
+	parametros.push({
+		"name": 'gl_latitud',
+		"value": gl_latitud
+	});
+	parametros.push({
+		"name": 'gl_longitud',
+		"value": gl_longitud
+	});
+	
 	$.ajax({
 		dataType: "json",
 		cache: false,
@@ -136,6 +170,7 @@ $("#guardarMotivo").on('click', function (e) {
 		url: BASE_URI + "index.php/Paciente/GuardarMotivo",
 		error: function (xhr, textStatus, errorThrown) {
 			xModal.danger('Error: No se pudo agregar Motivo de Consulta');
+			alert('HTTP Error: '+errorThrown);
 		},
 		success: function (data) {
 			if (data.correcto) {
@@ -150,60 +185,9 @@ $("#guardarMotivo").on('click', function (e) {
 		}
 	});
 	buttonEndProcess(button_process);
-
+	}
 });
-/* estaba repetida
- $("#guardarMotivo").on('click', function(e) {
- var button_process	= buttonStartProcess($(this), e);
- var parametros		= $("#form").serializeArray();
- 
- if($('#chkAcepta').is(':checked')){
- parametros.push({
- "name"  : 'chkAcepta',
- "value" : 1
- });
- }else{
- parametros.push({
- "name"  : 'chkAcepta',
- "value" : 0
- });
- }
- if($('#chkReconoce').is(':checked')){
- parametros.push({
- "name"  : 'chkReconoce',
- "value" : 1
- });
- }else{
- parametros.push({
- "name"  : 'chkReconoce',
- "value" : 0
- });
- }
- 
- $.ajax({
- dataType: "json",
- cache	:false,
- async	: true,
- data	: parametros,
- type	: "post",
- url		: BASE_URI + "index.php/Paciente/GuardarMotivo", 
- error	: function(xhr, textStatus, errorThrown){
- xModal.danger('Error: No se pudo agregar Motivo de Consulta');
- },
- success	: function(data){
- if(data.correcto){
- 
- xModal.success('Éxito: Se Ingresó nuevo Motivo de Consulta!');
- setTimeout(function() { location.href = BASE_URI + "index.php/Paciente"; }, 2000);
- } else {
- xModal.info('Error: No se pudo agregar Motivo de Consulta');
- }
- }
- });
- buttonEndProcess(button_process);
- 
- });
- */
+
 $("#guardarReconoce").on('click', function (e) {
 	var button_process = buttonStartProcess($(this), e);
 		var id_paciente			= $(this).attr("data");
@@ -254,6 +238,33 @@ $("#chkAcepta").on('click', function (e) {
 		$('#files').hide();
 	}
 });
+
+$("#direccion").on("change paste keyup ", function() {
+	
+	if($('#centrosalud').is('[disabled=disabled]')){
+		$('#form').find('#centrosalud').attr('disabled', false);
+		cambio_direccion = true; //variable global JS
+	}
+	
+});
+
+$("#region").on('change', function (e) {
+	
+	if($('#centrosalud').is('[disabled=disabled]')){
+		$('#form').find('#centrosalud').attr('disabled', false);
+		cambio_direccion = true; //variable global JS
+	}
+	
+});
+$("#comuna").on('change', function (e) {
+	
+	if($('#centrosalud').is('[disabled=disabled]')){
+		$('#form').find('#centrosalud').attr('disabled', false);
+		cambio_direccion = true; //variable global JS
+	}
+	
+});
+
 
 	var Base64Binary = {
 		/* Ejemplo de uso
@@ -404,7 +415,10 @@ var Paciente = {
 							$("#div_tabla_motivos").html(data.tabla_motivos);
 							$("#mostrar_motivos_consulta").show();
 						}
-
+						if (data.count_direcciones > 1) {
+							$("#groupTablaDirecciones").html(data.tabla_direcciones);
+							$("#groupTablaDirecciones").show();
+						}
 						$("#btnBitacora").attr("onclick","xModal.open('"+BASE_URI + "index.php/Paciente/bitacora/"+data.id_paciente+"', 'Registro número : "+data.id_paciente+"', 85);");
 						$("#id_paciente").val(data.id_paciente);
 						$("#gl_grupo_tipo").val(data.gl_grupo_tipo);
@@ -438,6 +452,12 @@ var Paciente = {
 						}
 
 						$('#form').find('input, textarea, checkbox, select').attr('disabled', true);
+						$('#form').find('#direccion').attr('disabled', false);
+						$('#form').find('#region').attr('disabled', false);
+						$('#form').find('#comuna').attr('disabled', false);
+						$('#form').find('#fono').attr('disabled', false);
+						$('#form').find('#chk_confirma_fono').attr('disabled', false);
+						$('#form').find('#chk_confirma_dir').attr('disabled', false);
 						if (data.bo_reconoce == '1') {
 							$("#chkReconoce").prop("checked", true);
 						} else {
@@ -456,6 +476,8 @@ var Paciente = {
 						$('#guardar').hide();
 						$('#guardarMotivo').show();
 						$("#btnBitacora").show();
+						$('#groupConfirmaFono').removeClass("hidden");
+						$('#groupConfirmaDir').removeClass("hidden");
 					} else {
 						$('#guardar').show();
 						$('#guardarMotivo').hide();
@@ -561,3 +583,5 @@ function mostrarFonasaExtranjero(id_prevision) {
 		$('#groupFonasaExtranjero').addClass("hidden");
 	}
 }
+
+
