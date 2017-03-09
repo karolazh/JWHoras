@@ -106,10 +106,10 @@ class Paciente extends Controller {
                 $this->smarty->assign("fc_nacimiento", $detPaciente->fc_nacimiento);
                 $this->smarty->assign("edad", $edad);
 
-                if ($detPac->gl_sexo == "F") {
+                if ($detPaciente->gl_sexo == "F") {
                     $sexo = "FEMENINO";
                 } else {
-                    $sexo = $detPac->gl_sexo;
+                    $sexo = $detPaciente->gl_sexo;
                 }
                 $this->smarty->assign("gl_sexo", $sexo);
                 $this->smarty->assign("gl_nombre_estado_caso", $detPaciente->gl_nombre_estado_caso);
