@@ -55,6 +55,24 @@ class DAOPacientePlanTratamiento extends Model{
         }
     }
 
+    public function getByIdPaciente($id_paciente){
+        $query	= "	SELECT 
+						plan.*,
+						e.gl_nombre_especialidad
+					FROM pre_paciente_plan_tratamiento plan
+						LEFT JOIN pre_tipo_especialidad e ON e.id_tipo_especialidad = plan.id_tipo_especialidad
+					WHERE id_paciente = ?";
+
+		$param	= array($id_paciente);
+        $result	= $this->db->getQuery($query,$param);
+		
+        if($result->numRows > 0){
+            return $result->rows;
+        }else{
+            return NULL;
+        }
+    }
+
 }
 
 ?>

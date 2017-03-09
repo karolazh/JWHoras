@@ -68,14 +68,15 @@ class Medico extends Controller {
 		$parametros			= $this->request->getParametros();
 		$id_paciente		= $parametros[0];
 		$arrEspecialidad	= $this->_DAOTipoEspecialidad->getLista();
+		$arr_plan			= $this->_DAOPacientePlanTratamiento->getByIdPaciente($id_paciente);
 		
-		$resp = $this->_Evento->guardarMostrarUltimo(20,0,$id_paciente,"Plan tratamiento Iniciado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		//$resp = $this->_Evento->guardarMostrarUltimo(21,0,$id_paciente,"Plan tratamiento Modificado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		
 		$this->smarty->assign("id_paciente", $id_paciente);
+		$this->smarty->assign("arr_plan", $arr_plan);
 		$this->smarty->assign("arrEspecialidad", $arrEspecialidad);
 		$this->smarty->assign("botonAyudaTratamiento", Boton::botonAyuda('Ingrese Datos del Tratamiento.', '', 'pull-right'));
-		
+
 		$this->_display('medico/tratamiento.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/medico/nuevo.js");
 		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
@@ -89,10 +90,13 @@ class Medico extends Controller {
 		$parametros						= $this->_request->getParams();
 		$parametros['id_usuario_crea']	= $_SESSION['id'];
 		$correcto						= false;
+		$id_paciente					= $parametros['id_paciente'];
 		
-		$id_plan		=	$this->_DAOPacientePlanTratamiento->insert($parametros);
+		$id_plan						= $this->_DAOPacientePlanTratamiento->insert($parametros);
 		if($id_plan) {
-			$correcto	= true;
+			$correcto			= true;
+			$arrEspecialidad	= $this->_DAOTipoEspecialidad->getById($parametros['id_tipo_especialidad']);
+			$resp				= $this->_Evento->guardarMostrarUltimo(20,0,$id_paciente,"Plan de Tratamiento con ".$arrEspecialidad->gl_nombre_especialidad." Iniciado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		}
 			
 		$salida			= array("correcto" => $correcto);
