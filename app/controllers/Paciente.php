@@ -731,7 +731,7 @@ class Paciente extends Controller {
 			$tabla_direcciones = "";
 			$div_superior = "<div class='top-spaced'></div>
 								<div class='panel panel-primary'>
-									<div class='panel-heading'>Motivos de consulta</div>";
+									<div class='panel-heading'>Atenciones de Urgencia</div>";
 			$div_inferior = "</div>";
 
 			if (!is_null($arr_motivos)) {
