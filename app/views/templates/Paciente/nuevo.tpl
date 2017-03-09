@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1><i class="fa fa-plus"></i>Nuevo</h1>
 	<ol class="breadcrumb">
-		<li><a href="{$base_url}/Administracion/noticias">
+		<li><a href="{$base_url}/Paciente/">
 				<i class="fa fa-folder-open"></i>&nbsp;Pacientes</a></li>
 		<li class="active"> &nbsp;Nuevo Paciente</li>
 	</ol>
