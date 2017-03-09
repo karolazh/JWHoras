@@ -36,7 +36,7 @@
                         <label class="control-label">Fecha Nacimiento : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$fecha_nac}" class="form-control" readonly>
+                        <input type="text" value="{$fc_nacimiento}" class="form-control" readonly>
                     </div>
                 </div>
 
@@ -53,10 +53,10 @@
             <div class="form-group">
                 <div class="clearfix col-md-6">
                     <div class="col-md-4">
-                        <label class="control-label">G&eacute;nero : </label>
+                        <label class="control-label">Sexo : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$genero}" class="form-control" readonly>
+                        <input type="text" value="{$gl_sexo}" class="form-control" readonly>
                     </div>
                 </div>
 
@@ -65,7 +65,7 @@
                         <label class="control-label">Estado Caso : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$estado}" class="form-control" readonly>
+                        <input type="text" value="{$gl_nombre_estado_caso}" class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                         <label class="control-label">Previsi&oacute;n : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$prevision}" class="form-control" readonly>
+                        <input type="text" value="{$gl_nombre_prevision}" class="form-control" readonly>
                     </div>
                 </div>
 
@@ -85,7 +85,7 @@
                         <label class="control-label">Grupo : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$grupo}" class="form-control" readonly>
+                        <input type="text" value="{$gl_grupo_tipo}" class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
                         <label class="control-label">Fono : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$fono}" class="form-control" readonly>
+                        <input type="text" value="{$gl_fono}" class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                         <label class="control-label">Celular : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$celular}" class="form-control" readonly>
+                        <input type="text" value="{$gl_celular}" class="form-control" readonly>
                     </div>
                 </div>
 
@@ -125,7 +125,7 @@
                         <label class="control-label">E-mail : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$email}" class="form-control" readonly>
+                        <input type="text" value="{$gl_email}" class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -165,7 +165,7 @@
                         <label class="control-label">Fecha Registro : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$fecha_reg}" class="form-control" readonly>
+                        <input type="text" value="{$fc_crea}" class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -176,7 +176,7 @@
                         <label class="control-label">Reconoce: </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$reconoce}" class="form-control" readonly>
+                        <input type="text" value="{$bo_reconoce}" class="form-control" readonly>
                     </div>
                 </div>
 
@@ -185,7 +185,7 @@
                         <label class="control-label">Acepta Programa : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$acepta}" class="form-control" readonly>
+                        <input type="text" value="{$bo_acepta_programa}" class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -253,9 +253,6 @@
                    <li><a data-toggle="tab" href="#plan">PLAN TRATAMIENTO</a></li>
                 <li><a data-toggle="tab" href="#eventos">EVENTOS</a></li>
                 <li><a data-toggle="tab" href="#documentos">DOCUMENTOS</a></li>
-                {*{if $muestra_direcciones == "SI"}
-                    <li><a data-toggle="tab" href="#direcciones">DIRECCIONES</a></li>
-                {/if}*}
             </ul>
 
             <div class="tab-content">
