@@ -149,6 +149,15 @@ class Paciente extends Controller {
                 //Grilla Motivos de Consulta (Paciente-Registro)
                 $arrConsultas = $this->_DAOPacienteRegistro->getByIdPaciente($id_paciente);
                 $this->smarty->assign('arrConsultas', $arrConsultas);
+                
+                //Grilla Exámenes Alterados x Paciente
+                $muestra_examenes = "NO";
+                $arrExamenesAlt = $this->_DAOPacienteExamen->getByIdPacienteAlterado($id_paciente);
+                if (!is_null($arrExamenesAlt)) {
+                    $this->smarty->assign('arrExamenesAlt', $arrExamenesAlt);
+                    $muestra_examenes = "SI";
+                }
+                $this->smarty->assign("muestra_examenes", $muestra_examenes);
 
                 //Grilla Empa
                 $arrEmpa = $this->_DAOEmpa->getListaEmpa($id_paciente);
