@@ -414,10 +414,12 @@ $(".bo_mamografia_requiere").on('change', function (e) {
 //Boton Guardar AUDIT
 $("#guardaraudit").livequery(function () {
 	$(this).on('click', function (e) {
-		var button_process = buttonStartProcess($(this), e);
-		var id_empa = $('#id_empa').val();
-		var cant_pre = $('#cant_pre').val();
-		var parametros = $("#formAudit").serializeArray();
+		var button_process	= buttonStartProcess($(this), e);
+		var id_empa			= $('#id_empa').val();
+		var cant_pre		= $('#cant_pre').val();
+		var total			= $('#total').val();
+		var parametros		= $("#formAudit").serializeArray();
+		
 		parametros.push({
 			"name": 'id_empa',
 			"value": id_empa
@@ -427,24 +429,26 @@ $("#guardaraudit").livequery(function () {
 			"value": cant_pre
 		});
 
-		$.ajax({
-			dataType: "json",
-			cache: false,
-			async: true,
-			data: parametros,
-			type: "post",
-			url: BASE_URI + "index.php/Empa/guardarAudit",
-			error: function (xhr, textStatus, errorThrown) {
-				xModal.danger('Error: No se pudo Ingresar AUDIT');
-			},
-			success: function (data) {
-				if (data.correcto) {
-					//xModal.success('Éxito: Se Ingresó nuevo AUDIT!');
-				} else {
-					xModal.info('Error: No se pudo Ingresar AUDIT');
+		if(total > 0){
+			$.ajax({
+				dataType: "json",
+				cache: false,
+				async: true,
+				data: parametros,
+				type: "post",
+				url: BASE_URI + "index.php/Empa/guardarAudit",
+				error: function (xhr, textStatus, errorThrown) {
+					xModal.danger('Error: No se pudo Ingresar AUDIT');
+				},
+				success: function (data) {
+					if (data.correcto) {
+						//xModal.success('Éxito: Se Ingresó nuevo AUDIT!');
+					} else {
+						xModal.info('Error: No se pudo Ingresar AUDIT');
+					}
 				}
-			}
-		});
+			});
+		}
 		buttonEndProcess(button_process);
 		$("#gl_puntos_audit").val($("#total").val());
                 //Según tipo de consumo mostrar Mensaje (de acuerdo a puntos del AUDIT)
