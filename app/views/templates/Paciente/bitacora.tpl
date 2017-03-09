@@ -215,6 +215,7 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#empa">EMPA</a></li>
                 <li><a data-toggle="tab" href="#examenes">EX&Aacute;MENES</a></li>
+                   <li><a data-toggle="tab" href="#plan">PLAN TRATAMIENTO</a></li>
                 <li><a data-toggle="tab" href="#eventos">EVENTOS</a></li>
                 <li><a data-toggle="tab" href="#documentos">DOCUMENTOS</a></li>
                 {*{if $muestra_direcciones == "SI"}
@@ -245,6 +246,17 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 {include file='avanzados/grillaExamenes.tpl'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				
+                <!-- Plan Tratamiento -->
+                <div id="plan" class="tab-pane fade">
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {include file='avanzados/agregarPlan.tpl'}
                             </div>
                         </div>
                     </div>
