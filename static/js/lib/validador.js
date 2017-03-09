@@ -74,13 +74,21 @@ function formateaRut(rut0)
         }
         document.getElementById("rut").value = format;
 }
-function Valida_Rut( rut )
-{
+
+function Valida_Rut( rut ){
     var intlargo = rut.value;
     var tmpstr = "";
     if (intlargo.length> 0)
     {
+		var re = /^[1-9]{1}[0-9]{0,7}\-([0-9]|[kK]){1}$/;
         crut = rut.value;
+		
+		if(!re.test(crut)){
+			xModal.danger('El RUT ingresado no es válido');
+			$('#rut').parent().addClass('has-error');
+			$('#rut').val('');
+			return false;
+		}
         
         for ( i=0; i <crut.length ; i++ )
         {
@@ -93,16 +101,14 @@ function Valida_Rut( rut )
         
         if ( largo <3 )
         {
-            //alert('Rut inválido (muy corto)')
-			xModal.danger('Rut inválido (muy corto)');
+			xModal.danger('El RUT ingresado no es válido (muy corto)');
 			$('#rut').parent().addClass('has-error');
-            //Objeto.focus()
+			$('#rut').val('');
             return false;
         }else if(largo > 9){
-            //alert('Rut inválido (muy largo)')
-			xModal.danger('Rut inválido (muy largo)');
+			xModal.danger('El RUT ingresado no es válido (muy largo)');
 			$('#rut').parent().addClass('has-error');
-            //Objeto.focus()
+			$('#rut').val('');
             return false;
         }
         rut = tmpstr;
@@ -145,14 +151,11 @@ function Valida_Rut( rut )
     
         if ( dvr != dv.toLowerCase() )
         {
-			xModal.danger('El rut ingresado es inválido');
+			xModal.danger('El RUT ingresado no es válido');
 			$('#rut').parent().addClass('has-error');
-            //alert('El rut ingresado es inválido');
-            //Objeto.focus()
+			$('#rut').val('');
             return false;
         }
-        //alert('El Rut Ingresado es Correcto!')
-        //Objeto.focus()
         return true;
     }
 }
