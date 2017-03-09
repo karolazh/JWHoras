@@ -70,7 +70,8 @@
                 <div id="div_tabla" class="table-responsive small col-lg-12">
                     <label class="control-label"><h5>Atenciones de Urgencia</h5></label>
                     <br>
-                    <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
+                    {*<table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">*}
+                    <table id="tablaPrincipal" class="table table-hover table-striped table-bordered dataTable no-footer">
                         <thead>
                             <tr role="row">
                                 <th align="center" width="10%">Fecha Ing</th>
@@ -103,7 +104,8 @@
                         <div id="div_tabla" class="table-responsive small col-lg-12">
                             <label class="control-label"><h5>Ex&aacute;menes Alterados</h5></label>
                             <br>
-                            <table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">
+                            {*<table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">*}
+                            <table id="tablaPrincipal" class="table table-hover table-striped table-bordered dataTable no-footer">
                                 <thead>
                                     <tr role="row">
                                         <th align="center" width="5%">Fecha</th>
