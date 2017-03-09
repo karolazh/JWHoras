@@ -373,7 +373,7 @@ $("#guardar").on('click', function (e) {
 				} else {
 					parametros.push({
 						"name": 'id_tipo_violencia_'+i,
-						"value": $('#id_tipo_violencia_'+i).val()
+						"value": valor
 					});
 				}
 		}
