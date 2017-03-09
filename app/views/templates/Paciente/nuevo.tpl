@@ -174,9 +174,16 @@
 
 					<div class="form-group">
 						<label for="direccion" class="control-label col-sm-4">Dirección (*)</label>
-						<div class="col-sm-8">
+						<div class="col-sm-5">
 							<input type="text" name="direccion" id="direccion" value="" onblur="validarVacio(this, 'Por favor Ingrese Dirección')" onkeyup="validarVacio(this, 'Por favor Ingrese Dirección')" placeholder="Dirección" class="form-control"/>
 							<span class="help-block hidden fa fa-warning"></span>
+						</div>
+						<div id="groupConfirmaDir" class="form-group hidden">
+							<label for="chk_confirma_dir" class="control-label col-sm-2 ">Confirma Direccion</label>
+							<div class="col-sm-1">
+								<input id="chk_confirma_dir" type="checkbox" value='1'>
+								<span class="help-block hidden fa fa-warning"></span>
+							</div>
 						</div>
 					</div>
 					
@@ -191,20 +198,27 @@
 
 					<div class="form-group">
 						<label for="fono" class="control-label col-sm-4">Teléfono</label>
-						<div class="col-sm-5">
+						<div class="col-sm-3">
 							<input type="text" name="fono" id="fono" value="" maxlength="11" onKeyPress="return soloNumeros(event)" placeholder="Fono" class="form-control"/>
 							<span class="help-block hidden"></span>
 						</div>
-						<label for="fono_seguro" class="control-label col-sm-2 ">¿Teléfono Seguro?</label>
+						<label for="fono_seguro" class="control-label col-sm-1 ">¿Teléfono Seguro?</label>
 						<div class="col-sm-1">
 							<input id="fono_seguro" name="fono_seguro" type="checkbox" value='1'>
 							<span class="help-block hidden fa fa-warning"></span>
+						</div>
+						<div id="groupConfirmaFono" class="form-group hidden">
+							<label for="chk_confirma_fono" class="control-label col-sm-1">Confirma Fono</label>
+							<div class="col-sm-1">
+								<input id="chk_confirma_fono" type="checkbox" value='1'>
+								<span class="help-block hidden fa fa-warning"></span>
+							</div>
 						</div>
 					</div>
 
 					<div class="form-group">    
 						<label for="celular" class="control-label col-sm-4">Celular</label>
-						<div class="col-sm-5">
+						<div class="col-sm-3">
 							<input type="text" name="celular" id="celular" value="" maxlength="11" onKeyPress="return soloNumeros(event)" placeholder="Celular" class="form-control"/>
 							<span class="help-block hidden"></span>
 						</div>

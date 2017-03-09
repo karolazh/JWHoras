@@ -449,6 +449,8 @@ class Paciente extends Controller {
 		$rut				= $parametros['rut'];
 		$id_paciente		= $parametros['id_paciente'];
 		$gl_grupo_tipo_ant	= $parametros['gl_grupo_tipo'];
+		$confirma_fono		= $parametros['chk_confirma_fono'];
+		$confirma_direccion	= $parametros['chk_confirma_dir'];
 		$count				= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
 
 		if($parametros['edad'] > 15 AND  $_SESSION['id_tipo_grupo'] == 2 AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
@@ -465,7 +467,7 @@ class Paciente extends Controller {
 		$parametros['gl_grupo_tipo']	= $gl_grupo_tipo;
 		$parametros['id_tipo_grupo']	= $id_tipo_grupo;
 		
-		if ($id_paciente) {
+		if ($id_paciente &&  $confirma_fono == "1" &&   $confirma_direccion == "1") {
 				
 				 $ins_paciente_registro = array('id_paciente'			=> $parametros['id_paciente'],
 												'id_institucion'		=> $parametros['centrosalud'],
