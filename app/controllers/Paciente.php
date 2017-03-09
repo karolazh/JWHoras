@@ -35,14 +35,14 @@ class Paciente extends Controller {
 	protected $_DAOPacienteExamen;
 	protected $_DAOPacienteDireccion;
 	protected $_DAOEmpaAudit;
-
-	function __construct() {
+	protected $_Evento;
+				function __construct() {
 		parent::__construct();
 		$this->load->lib('Fechas', false);
 		$this->load->lib('Boton', false);
 		$this->load->lib('Seguridad', false);
 		$this->load->lib('Evento', false);
-
+		$this->_Evento = new Evento();
 		$this->_DAORegion				= $this->load->model("DAORegion");
 		$this->_DAOPaciente				= $this->load->model("DAOPaciente");
 		$this->_DAOTipoEgreso			= $this->load->model("DAOTipoEgreso");
@@ -250,7 +250,6 @@ class Paciente extends Controller {
 		$error			= false;
 		$gl_grupo_tipo	= 'Control';
 		$id_tipo_grupo	= 1;
-		$datos_evento	= array();
 		$count			= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
 
 		if ($parametros['edad'] > 15 AND $_SESSION['id_tipo_grupo'] == 2 AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
@@ -308,46 +307,23 @@ class Paciente extends Controller {
 				$id_audit1	= $this->_DAOEmpaAudit->insert(array('id_empa' => $id_empa1,'id_pregunta' => $i,'id_usuario_crea' => $_SESSION['id']));
 				$id_audit2	= $this->_DAOEmpaAudit->insert(array('id_empa' => $id_empa2,'id_pregunta' => $i,'id_usuario_crea' => $_SESSION['id']));
 			}
-			Evento::guardarEvento(1,0,$id_paciente,"Paciente creado el : " . Fechas::fechaHoy(),1,1,$_SESSION['id']);
+			
+			$this->_Evento->guardar(1,0,$id_paciente,"Paciente creado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 			
 			if ($id_empa1) {
-				$datos_evento['eventos_tipo']		= 13;
-				$datos_evento['id_empa']			= $id_empa1;
-				$datos_evento['gl_descripcion']		= "Empa ".$id_empa1." creado el : " . Fechas::fechaHoy();
-				$datos_evento['bo_estado']			= 1;
-				$datos_evento['id_usuario_crea']	= $_SESSION['id'];
-				$resp								= $this->_DAOEvento->insEvento($datos_evento);
+				$resp = $this->_Evento->guardar(13,$id_empa1,$id_paciente,"Empa ".$id_empa1." creado el : " . Fechas::fechaHoyVista(),1,0,$_SESSION['id']);
 			}
 			if ($id_empa2) {
-				$datos_evento['eventos_tipo']		= 13;
-				$datos_evento['id_empa']			= $id_empa2;
-				$datos_evento['gl_descripcion']		= "Empa ".$id_empa2." creado el : " . Fechas::fechaHoy();
-				$datos_evento['bo_estado']			= 1;
-				$datos_evento['id_usuario_crea']	= $_SESSION['id'];
-				$resp								= $this->_DAOEvento->insEvento($datos_evento);
+				$resp = $this->_Evento->guardar(13,$id_empa2,$id_paciente,"Empa ".$id_empa2." creado el : " . Fechas::fechaHoyVista(),1,0,$_SESSION['id']);
 			}
 			if ($id_audit1) {
-				$datos_evento['eventos_tipo']		= 14;
-				$datos_evento['id_empa']			= $id_empa1;
-				$datos_evento['id_paciente']		= $id_paciente;
-				$datos_evento['gl_descripcion']		= "AUDIT del EMPA".$id_empa1." creado el : " . Fechas::fechaHoy();
-				$datos_evento['bo_estado']			= 1;
-				$datos_evento['id_usuario_crea']	= $_SESSION['id'];
-				$resp								= $this->_DAOEvento->insEvento($datos_evento);
+				$resp = $this->_Evento->guardar(14,$id_empa1,$id_paciente,"AUDIT del EMPA".$id_empa1." creado el : " . Fechas::fechaHoyVista(),1,0,$_SESSION['id']);
 			}
 			if ($id_audit2) {
-				$datos_evento['eventos_tipo']		= 14;
-				$datos_evento['id_empa']			= $id_empa2;
-				$datos_evento['id_paciente']		= $id_paciente;
-				$datos_evento['gl_descripcion']		= "AUDIT del EMPA".$id_empa2." creado el : " . Fechas::fechaHoy();
-				$datos_evento['bo_estado']			= 1;
-				$datos_evento['id_usuario_crea']	= $_SESSION['id'];
-				$resp								= $this->_DAOEvento->insEvento($datos_evento);
+				$resp = $this->_Evento->guardar(14,$id_empa2,$id_paciente,"AUDIT del EMPA".$id_empa2." creado el : " . Fechas::fechaHoyVista(),1,0,$_SESSION['id']);
 			}
 			if ($parametros['chkAcepta']) {
-				$datos_evento['eventos_tipo']	= 4;
-				$datos_evento['gl_descripcion']	= "Acepta el programa con fecha : " . Fechas::fechaHoy();
-				$resp							= $this->_DAOEvento->insEvento($datos_evento);
+				$resp = $this->_Evento->guardar(4,0,$id_paciente,"AUDIT del EMPA".$id_empa2." creado el : " . "Acepta el programa con fecha : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 			}
 			/*
 			if ($parametros['chkReconoce']) {
@@ -361,8 +337,10 @@ class Paciente extends Controller {
 			$parametros['id_usuario_crea']	= $_SESSION['id'];
 			$parametros['fc_crea']			= "now()";
 			$parametros['id_paciente']		= $id_paciente;			
-			$blah							= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
-			$id_direccion					= $this->_DAOPacienteDireccion->insertarDireccion($parametros);
+			$desabilitadas					= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
+			if($desabilitadas){
+				$id_direccion				= $this->_DAOPacienteDireccion->insertarDireccion($parametros);
+			}
 
 		} else {
 			$error = true;
@@ -384,7 +362,6 @@ class Paciente extends Controller {
 		$parametros			= $this->_request->getParams();
 		$correcto			= false;
 		$error				= false;
-		$datos_evento		= array();
 		$rut				= $parametros['rut'];
 		$id_paciente		= $parametros['id_paciente'];
 		$gl_grupo_tipo_ant	= $parametros['gl_grupo_tipo'];
@@ -393,22 +370,8 @@ class Paciente extends Controller {
 		if($parametros['edad'] > 15 AND  $_SESSION['id_tipo_grupo'] == 2 AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
 			$gl_grupo_tipo = 'Tratamiento';
 			$id_tipo_grupo = 2;
-			$evento = new Evento();
 			if ($gl_grupo_tipo_ant != $gl_grupo_tipo){
-				if($evento->guardarEvento(10,0,$id_paciente,"Paciente RUT : ". $rut ." en Grupo Tratamiento desde : " . Fechas::fechaHoy(),1,1,$_SESSION['id'])){
-					print_r("todo bien"); DIE();
-				} else {
-					print_r("se fue todo al carajo mierda!"); DIE();
-				}
-						
-//				$datos_evento['id_paciente']		= $id_paciente;
-//				$datos_evento['id_empa']			= 0;
-//				$datos_evento['bo_estado']			= 1;
-//				$datos_evento['id_usuario_crea']	= $session->id;
-//				$datos_evento['eventos_tipo']		= 10;
-//				$datos_evento['gl_descripcion']		= "Paciente RUT : ". $rut ." en Grupo Tratamiento desde : " . Fechas::fechaHoy();
-//				$resp								= $this->_DAOEvento->insEvento($datos_evento);
-				
+				$resp = $this->_Evento->guardar(10,0,$id_paciente,"Paciente RUT : ". $rut ." en Grupo Tratamiento desde : " . Fechas::fechaHoyVista(),1,1,$session->id);				
 			}
 		}else{
 			$gl_grupo_tipo = 'Control';
@@ -444,13 +407,12 @@ class Paciente extends Controller {
 				$blah							= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
 				$id_direccion					= $this->_DAOPacienteDireccion->insertarDireccion($ins_direccion);
 				$session							= New Zend_Session_Namespace("usuario_carpeta");
-				$evento = new Evento();
-				$correcto = $evento->guardarEvento(16,0,$id_paciente,"Consulta agregada el : " . Fechas::fechaHoy(),1,1,$_SESSION['id']);
+				$correcto = $this->_Evento->guardar(16,0,$id_paciente,"Motivo consulta agregada el : " . Fechas::fechaHoyVista(),1,0,$_SESSION['id']);
 
 			if ($parametros['chkAcepta']) {
 				$resp = $this->_DAOPaciente->update(array('bo_acepta_programa' => 1), $id_paciente, 'id_paciente');
 				if ($resp){
-					$correcto = $evento->guardarEvento(4,0,$id_paciente,"Acepta el programa con fecha : " . Fechas::fechaHoy(),1,1,$_SESSION['id']);
+					$correcto = $this->_Evento->guardar(4,0,$id_paciente,"Acepta el programa con fecha : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 				}
 			}
 
@@ -482,21 +444,16 @@ class Paciente extends Controller {
 		$parametros = $this->_request->getParams();
 		$correcto = false;
 		$error = false;
-		$datos_evento = array();
 
 		$id_registro = $parametros['id_registro'];
 
-		$resp = $this->_DAOPaciente->update(array('bo_reconoce' => 1), $id_registro, 'id_registro');
+		$resp = $this->_DAOPaciente->update(array('bo_reconoce' => 1), $id_paciente, 'id_paciente');
 		if ($resp) {
 			$correcto = true;
 
 			$session = New Zend_Session_Namespace("usuario_carpeta");
-			$datos_evento['id_registro'] = $id_registro;
-			$datos_evento['bo_estado'] = 1;
-			$datos_evento['id_usuario_crea'] = $session->id;
-			$datos_evento['eventos_tipo'] = 5;
-			$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : " . Fechas::fechaHoy();
-			$resp = $this->_DAOEvento->insEvento($datos_evento);
+			$resp = $this->_Evento->guardar(5,0,$id_paciente,"Reconoce violencia con fecha : " . Fechas::fechaHoyVista(),1,1,$session->id);
+
 		} else {
 			$error = true;
 		}

@@ -99,12 +99,7 @@ class DAOEvento extends Model{
 
 		if($this->db->execQuery($query, $param)) {
 			return $this->db->getLastId();
-			print_r("todo ok");die();
 		}else{
-			print_r("se cayo esta wea : ");
-			print_r($query);
-			print_r("con estos parametros : ");
-			print_r($param);
 			return FALSE;
 		}
 	}
@@ -162,5 +157,20 @@ class DAOEvento extends Model{
             return NULL;
         }
     }
+	public function ocultarEventos($id_evento_tipo){
+		 $query	= "	UPDATE pre_evento SET
+						bo_mostrar			= 0,
+						id_usuario_crea		= ".$_SESSION['id'].",
+						fc_crea				= now()
+					WHERE id_evento_tipo = ".$id_evento_tipo."
+                    ";
+
+        if($this->db->execQuery($query)) {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+		 
+	 }
 
 }

@@ -27,21 +27,33 @@ Class Evento{
 	 * @param string $bo_estado
 	 * @param int $id_usuario_crea
      */
-    public function guardarEvento($tipo_evento,$id_empa, $id_paciente, $gl_descripcion, $bo_estado,$bo_mostrar, $id_usuario_crea){
+    public function guardar($tipo_evento,$id_empa, $id_paciente, $gl_descripcion, $bo_estado,$bo_mostrar, $id_usuario_crea){
         
         $datos_evento['eventos_tipo']			= $tipo_evento;
 		$datos_evento['id_empa']				= $id_empa;
 		$datos_evento['id_paciente']			= $id_paciente;
 		$datos_evento['gl_descripcion']			= $gl_descripcion;
 		$datos_evento['bo_estado']				= $bo_estado;
-		$datos_evento['bo_mostrar']				= $bo_estado;
+		$datos_evento['bo_mostrar']				= $bo_mostrar;
 		$datos_evento['id_usuario_crea']		= $id_usuario_crea;
 		$resp									= $this->_DAOEvento->insEvento($datos_evento);
-		if ($resp != FALSE){
-			return TRUE;
-		} else {
-			return FALSE;
+		return $resp;
+    }
+	public function guardarMostrarUltimo($tipo_evento,$id_empa, $id_paciente, $gl_descripcion, $bo_estado,$bo_mostrar, $id_usuario_crea){
+        
+        $datos_evento['eventos_tipo']			= $tipo_evento;
+		$datos_evento['id_empa']				= $id_empa;
+		$datos_evento['id_paciente']			= $id_paciente;
+		$datos_evento['gl_descripcion']			= $gl_descripcion;
+		$datos_evento['bo_estado']				= $bo_estado;
+		$datos_evento['bo_mostrar']				= $bo_mostrar;
+		$datos_evento['id_usuario_crea']		= $id_usuario_crea;
+		$ocultar									= $this->_DAOEvento->ocultarEventos($tipo_evento);
+		$resp = FALSE;
+		if ($ocultar){
+			$resp									= $this->_DAOEvento->insEvento($datos_evento);
 		}
+		return $resp;
     }
    
 }

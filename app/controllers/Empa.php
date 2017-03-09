@@ -23,13 +23,15 @@
 class Empa extends Controller{
 	
     protected $_DAOEmpa;
-
+	protected $_Evento;
 	//funcion construct
 	function __construct() {
 		parent::__construct();
 		//Acceso::set("ADMINISTRADOR");
 		$this->load->lib('Boton', false);
 		$this->load->lib('Fechas', false);
+		$this->load->lib('Evento', false);
+		$this->_Evento = new Evento();
 		$this->_DAOEmpa = $this->load->model("DAOEmpa");
 		$this->_DAOEmpaAudit = $this->load->model("DAOEmpaAudit");
 		$this->_DAOUsuario = $this->load->model("DAOUsuario");
@@ -389,13 +391,7 @@ class Empa extends Controller{
 		
 		$bool_update = $this->_DAOEmpa->updateEmpa($parametros);
 		if ($bool_update) {
-			$datos_evento['eventos_tipo'] = 12;
-			$datos_evento['id_paciente'] = $id_paciente;
-			$datos_evento['id_empa'] = $id_empa;
-			$datos_evento['gl_descripcion'] = "Empa modificado el : " . Fechas::fechaHoy();
-			$datos_evento['bo_estado'] = 1;
-			$datos_evento['id_usuario_crea'] = $session->id;
-			$resp = $this->_DAOEvento->insEvento($datos_evento);
+			$resp = $this->_Evento->guardarMostrarUltimo(12,$id_empa,$id_paciente,"Empa modificado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
 			if ($resp) {
 				$correcto = TRUE;
 			} else {
@@ -403,16 +399,11 @@ class Empa extends Controller{
 			}
 			$finalizado = FALSE;
 			if ($finalizado) {
-
-				$datos_evento['eventos_tipo'] = 2;
-				$datos_evento['id_empa'] = $id_empa;
-				$datos_evento['gl_descripcion'] = "Empa finalizado el : " . Fechas::fechaHoy();
-				$datos_evento['bo_estado'] = 1;
-				$datos_evento['id_usuario_crea'] = $session->id;
-				$resp = $this->_DAOEvento->insEvento($datos_evento);
+				$resp = $this->_Evento->guardar(2,$id_empa,$id_paciente,"Empa finalizado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
 				if ($resp) {
 					$correcto = TRUE;
 				} else {
+					$correcto = FALSE;
 					$error = TRUE;
 				}
 			}
@@ -441,12 +432,7 @@ class Empa extends Controller{
 			$id_empa_audit = $this->_DAOEmpaAudit->updateEmpaAudit($id_empa, $id_pregunta, $valor);
 		}
 		if ($id_empa_audit) {
-			$datos_evento['eventos_tipo'] = 15;
-			$datos_evento['id_empa'] = $id_empa;
-			$datos_evento['gl_descripcion'] = "AUDIT del EMPA ".$id_empa."  modificado el : " . Fechas::fechaHoy();
-			$datos_evento['bo_estado'] = 1;
-			$datos_evento['id_usuario_crea'] = $session->id;
-			$correcto = $this->_DAOEvento->insEvento($datos_evento);
+			$correcto = $this->_Evento->guardarMostrarUltimo(15,$id_empa,0,"AUDIT del EMPA ".$id_empa."  modificado el : " . Fechas::fechaHoy(),1,1,$session->id);
 		} else {
 			$error = true;
 		}
