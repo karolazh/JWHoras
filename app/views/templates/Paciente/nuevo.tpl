@@ -179,8 +179,8 @@
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
 						<div id="groupConfirmaDir" class="form-group hidden">
-							<label for="chk_confirma_dir" class="control-label col-sm-2 ">Confirma Direccion</label>
-							<div class="col-sm-1">
+							<label for="chk_confirma_dir" class="control-label col-sm-2 col-xs-6">Confirma Direccion</label>
+							<div class="col-sm-1 col-xs-6">
 								<input id="chk_confirma_dir" type="checkbox" value='1'>
 								<span class="help-block hidden fa fa-warning"></span>
 							</div>
@@ -206,8 +206,8 @@
 						</div>
 						<div class="col-sm-2"></div>
 						<div id="groupConfirmaFono" class="form-group hidden">
-							<label for="chk_confirma_fono" class="control-label col-sm-2">Confirma Teléfono</label>
-							<div class="col-sm-1">
+							<label for="chk_confirma_fono" class="control-label col-sm-2 col-xs-6">Confirma Teléfono</label>
+							<div class="col-sm-1 col-xs-6">
 								<input id="chk_confirma_fono" type="checkbox" value='1'>
 								<span class="help-block hidden fa fa-warning"></span>
 							</div>
@@ -215,8 +215,8 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="celular" class="control-label col-sm-4">¿Teléfono Seguro?</label>
-						<div class="col-sm-3">
+						<label for="celular" class="control-label col-sm-4 col-xs-6">¿Teléfono Seguro?</label>
+						<div class="col-sm-3 col-xs-6">
 							<input id="fono_seguro" name="fono_seguro" type="checkbox" value='1'>
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
@@ -268,8 +268,8 @@
 					*}
 
 					<div class="form-group">
-						<label for="chkAcepta" class="control-label col-sm-4">¿Consiente Participar?</label>
-						<div class="col-sm-1">
+						<label for="chkAcepta" class="control-label col-sm-4 col-xs-6">¿Consiente Participar?</label>
+						<div class="col-sm-1 col-xs-6">
 							<input id="chkAcepta" type="checkbox">
 						</div>
 					</div>
