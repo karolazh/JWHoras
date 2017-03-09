@@ -96,7 +96,12 @@ class Empa extends Controller{
 		//Cargar Datos Paciente
 		$registro = $this->_DAOPaciente->getById($id_paciente);
 		$direccion = $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
-		$this->smarty->assign("gl_rut", $registro->gl_rut);
+		if ($registro->gl_rut != ""){
+			$this->smarty->assign("gl_rut", $registro->gl_rut);
+		} else {
+		$this->smarty->assign("gl_rut", $registro->gl_run_pass);
+		}
+		
 		$this->smarty->assign("gl_nombres", $registro->gl_nombres);
 		$this->smarty->assign("gl_apellidos", $registro->gl_apellidos);
 		$fc_nacimiento = $registro->fc_nacimiento;
