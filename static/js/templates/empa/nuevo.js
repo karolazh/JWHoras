@@ -709,6 +709,24 @@ $("#guardar").on('click', function (e) {
                         "value": "'" + $('#gl_observaciones_empa').val() + "'"
                 });
         }
+	
+	if ($('#bo_antecedente_1').is(':checked')) {
+		parametros.push({
+			"name": 'bo_antecedente_diabetes',
+			"value": 1
+		});
+	} else if ($('#bo_antecedente_0').is(':checked')) {
+		parametros.push({
+			"name": 'bo_antecedente_diabetes',
+			"value": 0
+		});
+	} else {
+		parametros.push({
+			"name": 'bo_antecedente_diabetes',
+			"value": 'NULL'
+		});
+	}
+		
 	if ($('#bo_glicemia_toma').is(':checked')) {
 		parametros.push({
 			"name": 'bo_glicemia_toma',
@@ -923,6 +941,24 @@ $("#guardar").on('click', function (e) {
 			"value": 'NULL'
 		});
 	}
+	
+	if ($('#bo_mamografia_requiere_1').is(':checked')) {
+		parametros.push({
+			"name": 'bo_mamografia_requiere',
+			"value": 1
+		});
+	} else if ($('#bo_mamografia_requiere_0').is(':checked')) {
+		parametros.push({
+			"name": 'bo_mamografia_requiere',
+			"value": 0
+		});
+	} else {
+		parametros.push({
+			"name": 'bo_mamografia_requiere',
+			"value": 'NULL'
+		});
+	}
+	
 	if ($('#bo_mamografia_resultado_pasado_1').is(':checked')) {
 		parametros.push({
 			"name": 'bo_mamografia_resultado_pasado',
