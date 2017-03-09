@@ -1,22 +1,3 @@
-<!--li>
-<li>
-	<a href="">
-		<i class="fa fa-plus-circle"></i> <span>Mantenedores</span></a>
-		<ul class="treeview-menu">
-			<li>
-				<a href="">
-					<i class="fa fa-plus-circle"></i> <span>Usuarios</span></a>
-			</li>
-		</ul>
-</li>
-stdClass Object ( 
-	[row_0] => stdClass Object ( 
-							[id_opcion] => 6 
-							[id_opcion_padre] => 5 
-							[bo_tiene_hijo] => 0 
-							[gl_nombre_opcion] => 
-							Usuarios [gl_icono] => fa fa-plus-circle [gl_url] => ) )
--->
 {foreach $opciones as $opcion}    
 	{if $opcion->id_opcion_padre == 0 AND !$opcion->bo_tiene_hijo}
 	<li>
