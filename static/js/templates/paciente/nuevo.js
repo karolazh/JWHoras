@@ -44,6 +44,17 @@ $("#guardar").on('click', function (e) {
 				"value": 0
 			});
 		}
+		if ($('#fono_seguro').is(':checked')) {
+			parametros.push({
+				"name": 'fono_seguro',
+				"value": 1
+			});
+		} else {
+			parametros.push({
+				"name": 'fono_seguro',
+				"value": 0
+			});
+		}
 		/*
 		 var inputFileImage = document.getElementById("subirFile");
 		 var file = inputFileImage.files[0];
@@ -120,6 +131,17 @@ $("#guardarMotivo").on('click', function (e) {
 			"value": 0
 		});
 	}
+	if ($('#fono_seguro').is(':checked')) {
+			parametros.push({
+				"name": 'fono_seguro',
+				"value": 1
+			});
+		} else {
+			parametros.push({
+				"name": 'fono_seguro',
+				"value": 0
+			});
+		}
 	parametros.push({
 			"name": 'chk_confirma_fono',
 			"value": chk_confirma_fono
@@ -452,12 +474,13 @@ var Paciente = {
 						}
 
 						$('#form').find('input, textarea, checkbox, select').attr('disabled', true);
-						$('#form').find('#direccion').attr('disabled', false);
-						$('#form').find('#region').attr('disabled', false);
-						$('#form').find('#comuna').attr('disabled', false);
-						$('#form').find('#fono').attr('disabled', false);
-						$('#form').find('#chk_confirma_fono').attr('disabled', false);
-						$('#form').find('#chk_confirma_dir').attr('disabled', false);
+						$('#form').find('#direccion')						.attr('disabled', false);
+						$('#form').find('#region')							.attr('disabled', false);
+						$('#form').find('#comuna')							.attr('disabled', false);
+						$('#form').find('#fono')							.attr('disabled', false);
+						$('#form').find('#chk_confirma_fono')				.attr('disabled', false);
+						$('#form').find('#chk_confirma_dir')				.attr('disabled', false);
+						$('#form').find('#fono_seguro')						.attr('disabled', false);
 						if (data.bo_reconoce == '1') {
 							$("#chkReconoce").prop("checked", true);
 						} else {
@@ -467,6 +490,11 @@ var Paciente = {
 							$("#chkAcepta").prop("checked", true);
 						} else {
 							$("#chkAcepta").prop("disabled", false);
+						}
+						if (data.bo_fono_seguro == '1') {
+							$("#fono_seguro").prop("checked", true);
+						} else {
+							$("#fono_seguro").prop("disabled", false);
 						}
 						$("#id_paciente").prop("disabled", false );
 						$("#motivoconsulta").prop("disabled", false);

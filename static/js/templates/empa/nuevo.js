@@ -473,7 +473,7 @@ $("#guardaraudit").livequery(function () {
 			},
 			success: function (data) {
 				if (data.correcto) {
-					xModal.success('Éxito: Se Ingresó nuevo AUDIT!');
+					//xModal.success('Éxito: Se Ingresó nuevo AUDIT!');
 				} else {
 					xModal.info('Error: No se pudo Ingresar AUDIT');
 				}
@@ -505,7 +505,11 @@ $(".subTotal").livequery(function () {
 		var total = 0;
 		var i = 0;
 		for (i = 1; i <= 10; i++) {
-			total = total + parseInt($("#puntos_" + i).val());
+			if ($("#puntos_" + i).val() !== null){
+				alert($("#puntos_" + i).val());
+			} else {
+				total = total + parseInt($("#puntos_" + i).val());
+			}
 		}
 		$("#total").val(total);
 	});

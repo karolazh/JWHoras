@@ -354,18 +354,15 @@ class Empa extends Controller{
 		if (!is_null($arrAudit)) {
 			foreach ($arrAudit as $item) {
 				if (is_null($item->nr_valor)) {
-//                    print_r($item->nr_valor);
-//					print_r('<br>');
-					$item->nr_valor = 0;
+
+					//$item->nr_valor = 0;
 					$total += $item->nr_valor;
 				} else {
 					$total += $item->nr_valor;
-					//print_r($item->nr_valor);
-					//print_r('<br>');
+
 				}
 			}
 		}
-//			print_r($total); die();
 		$this->smarty->assign("id_empa", $id_empa);
 		$this->smarty->assign("total", $total);
 		$this->smarty->assign("arrAudit", $arrAudit);
