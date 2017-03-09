@@ -1046,6 +1046,9 @@ $("#guardar").on('click', function (e) {
 		success: function (data) {
 			if (data.correcto) {
 				xModal.success('Éxito: Se Ingresó nuevo Registro!');
+				setTimeout(function () {
+					location.href = BASE_URI + "index.php/Paciente";
+				}, 2000);
 			} else {
 				xModal.info('Error: No se pudo Ingresar un nuevo Registro');
 			}

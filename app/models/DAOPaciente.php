@@ -86,32 +86,36 @@ class DAOPaciente extends Model{
     }
 
     public function getListaDetalle($where=array()){
-        $query		= "	SELECT
-							paciente.id_paciente,
-							paciente.gl_rut,
-							paciente.gl_run_pass,
-							paciente.bo_reconoce,
-							paciente.bo_acepta_programa,
-							paciente.gl_nombres,
-							paciente.gl_apellidos,
-							date_format(paciente.fc_crea,'%d-%m-%Y') as fc_crea,
-							IF(paciente.bo_extranjero=1,paciente.gl_run_pass,paciente.gl_rut) as gl_identificacion,
-							i.gl_nombre_establecimiento as gl_institucion,
-							c.gl_nombre_comuna,
-							e.gl_nombre_estado_caso,
-							e.id_paciente_estado,
-							(select count(*) from pre_paciente_registro where pre_paciente_registro.id_paciente = paciente.id_paciente ) as nr_motivo_consulta,
-							datediff(now(),paciente.fc_crea) as nr_dias_primera_visita
-						FROM pre_paciente paciente 
-							LEFT JOIN pre_centro_salud i ON i.id_centro_salud = paciente.id_institucion
-							LEFT JOIN pre_comuna c ON c.id_comuna = paciente.id_comuna
-							LEFT JOIN pre_paciente_estado e ON e.id_paciente_estado = paciente.id_paciente_estado";
+        $query = "  SELECT
+                        paciente.id_paciente,
+                        paciente.gl_rut,
+                        paciente.gl_run_pass,
+                        paciente.bo_reconoce,
+                        paciente.bo_acepta_programa,
+                        paciente.gl_nombres,
+                        paciente.gl_apellidos,
+                        date_format(paciente.fc_crea,'%d-%m-%Y') as fc_crea,
+                        IF(paciente.bo_extranjero=1,paciente.gl_run_pass,paciente.gl_rut) as gl_identificacion,
+                        i.gl_nombre_establecimiento as gl_institucion,
+                        c.gl_nombre_comuna,
+                        e.gl_nombre_estado_caso,
+                        e.id_paciente_estado,
+                        (select count(*) from pre_paciente_registro where pre_paciente_registro.id_paciente = paciente.id_paciente ) as nr_motivo_consulta,
+                        (SELECT COUNT(*) FROM pre_paciente_examen paciente_examen 
+                         WHERE paciente_examen.id_paciente = paciente.id_paciente
+                         AND paciente_examen.gl_resultado = 'A') AS nr_examen_alterado,
+                        datediff(now(),paciente.fc_crea) as nr_dias_primera_visita
+                    FROM pre_paciente paciente 
+                    LEFT JOIN pre_centro_salud i ON i.id_centro_salud = paciente.id_institucion
+                    LEFT JOIN pre_comuna c ON c.id_comuna = paciente.id_comuna
+                    LEFT JOIN pre_paciente_estado e ON e.id_paciente_estado = paciente.id_paciente_estado";
 
 		if(!empty($where)){
 			foreach($where as $w){
 				$query .= ' WHERE '.$w['campo'].' = '.$w['valor'];
 			}
 		}
+                
         $result	= $this->db->getQuery($query);
 
         if($result->numRows>0){
