@@ -89,7 +89,7 @@
 
             <div class="panel-body">
                 <div class="form-group">
-                    <label class="control-label col-sm-3 ">Rut Paciente</label>
+                    <label class="control-label col-sm-3 ">RUT/RUN/Pasaporte</label>
                     <div class="col-md-3 col-sm-3">
 			<span class="form-control" readonly>{$gl_rut}</span>
                     </div>

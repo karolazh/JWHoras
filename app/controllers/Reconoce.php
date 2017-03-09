@@ -148,9 +148,13 @@ class Reconoce extends Controller {
         $fc_nacimiento = $obj_registro->fc_nacimiento;
         list($Y, $m, $d ) = explode("-", $fc_nacimiento);
         $edad = ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );
-            
-        $this->smarty->assign('gl_rut', $obj_registro->gl_rut);
-        $this->smarty->assign('gl_run_pass', $obj_registro->gl_run_pass);
+        
+		if ($obj_registro->gl_rut != ""){
+			$this->smarty->assign("gl_rut", $obj_registro->gl_rut);
+		} else {
+		$this->smarty->assign("gl_rut", $obj_registro->gl_run_pass);
+		}
+		
         $this->smarty->assign('gl_nombres', $obj_registro->gl_nombres);
         $this->smarty->assign('gl_apellidos', $obj_registro->gl_apellidos);
         $this->smarty->assign('fc_nacimiento', $obj_registro->fc_nacimiento);
