@@ -46,7 +46,7 @@
                     </div>
                     <label for="nr_ficha" class="control-label col-sm-1">N° de Ficha (*)</label>
                     <div class="col-sm-3">
-                        <input type="text" name="nr_ficha" id="nr_ficha" value="" 
+                        <input type="text" name="nr_ficha" id="nr_ficha" value="{$nr_ficha}" 
                                placeholder="N° de Ficha" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
@@ -56,7 +56,7 @@
                 <div class="form-group">
                     <label for="id_sector" class="control-label col-sm-3">Sector (*)</label>
                     <div class="col-sm-3">
-                        <input type="text" name="gl_sector" id="gl_sector" value="" 
+                        <input type="text" name="gl_sector" id="gl_sector" value="{$gl_sector}" 
                                placeholder="Sector" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>

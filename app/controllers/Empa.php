@@ -113,6 +113,14 @@ class Empa extends Controller{
 		//INICIO
 		$empa = $this->_DAOEmpa->verInfoById($id_empa->id_empa);
 		
+		if ($empa->nr_ficha) {
+			$this->smarty->assign("nr_ficha", $empa->nr_ficha);
+		}
+		
+		if ($empa->gl_sector) {
+			$this->smarty->assign("gl_sector", $empa->gl_sector);
+		}
+		
 		if ($id_empa -> fc_empa != ""){
 			$this->smarty->assign("fc_empa", $id_empa -> fc_empa);
 		} else {
