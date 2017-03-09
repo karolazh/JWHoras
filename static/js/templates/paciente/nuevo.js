@@ -336,8 +336,7 @@ $("#comuna").on('change', function (e) {
         var gl_rut			= $("#rut").val();
 		var inputextranjero	= $("#inputextranjero").val();
 
-		if(rut == '' || inputextranjero == ''){
-			
+		if(rut == '' && inputextranjero == ''){			
 			xModal.info('Debe ingresar un RUT o un Pasaporte.');
 		}else{
 
@@ -488,7 +487,7 @@ var Paciente = {
 			});
 		} else {
 			if ($('#chkextranjero').is(':checked') && inputextranjero === ""){
-				xModal.info("Debe ingresar por lo menos un número de pasaporte");
+				xModal.info("Debe ingresar un RUT o un Pasaporte");
 			}
 		}
 	},

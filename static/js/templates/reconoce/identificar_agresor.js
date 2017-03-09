@@ -372,6 +372,9 @@ $("#guardar").on('click', function (e) {
 			url: BASE_URI + "index.php/Reconoce/guardar",
 			error: function (xhr, textStatus, errorThrown) {
 				xModal.danger('Error: No se pudo Ingresar un nuevo Registro');
+				setTimeout(function () {
+					location.href = BASE_URI + "index.php/Paciente";
+				}, 2000);
 			},
 			success: function (data) {
 				if (data.correcto) {
