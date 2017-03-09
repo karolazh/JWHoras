@@ -16,7 +16,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				 {$botonAyudaTratamiento}
-				<input type="text" value="0" id="id_paciente" name="id_paciente" class="hidden">
+				<input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
 			</div>
 			<div class="panel-body">
 				<div class="top-spaced"></div>
