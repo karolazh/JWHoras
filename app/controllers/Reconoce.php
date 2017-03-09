@@ -190,7 +190,7 @@ class Reconoce extends Controller {
 		for ($i = 1; $i <= $cant_preguntas; $i++) {
 			$id_pregunta = $i;
 			$valor = $parametros['id_tipo_violencia_' . $i];
-			$bool_existe = $this->_DAOPacienteAgresorViolencia->getByIdPaciente($id_paciente);
+			$bool_existe = $this->_DAOPacienteAgresorViolencia->getByIdPacientePregunta($id_paciente,$id_pregunta);
 			if (!$bool_existe){
 					$bool_violencia = $this->_DAOPacienteAgresorViolencia->insertViolencia($id_paciente, $id_pregunta, $valor);
 			} else {

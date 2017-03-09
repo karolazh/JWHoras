@@ -383,10 +383,3 @@ $("#guardar").on('click', function (e) {
 		});
 		buttonEndProcess(button_process);
 });
-
-$(".id_tipo_violencia").livequery(function () {
-	$(this).on('change', function (e) {
-		var valor = $(this).val();
-		var i = $(this).attr("data");
-	});
-});
