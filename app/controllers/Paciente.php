@@ -246,8 +246,38 @@ class Paciente extends Controller {
 		header('Content-type: application/json');
 		$session = New Zend_Session_Namespace("usuario_carpeta");
 		$parametros		= $this->_request->getParams();
+/*	$parametros	
+(
+    [id_paciente] => 0
+    [gl_grupo_tipo] => 0
+    [rut] => 
+    [inputextranjero] => 2
+    [nombres] => g
+    [apellidos] => g
+    [fc_nacimiento] => 1988-01-01
+    [edad] => 29
+    [prevision] => 2
+    [gl_codigo_fonasa] => 
+    [region] => 2
+    [comuna] => 359
+    [direccion] => Inglaterra 1131, Santiago, Independencia, Región Metropolitana, Chile
+    [centrosalud] => 0
+    [fono] => 
+    [celular] => 
+    [email] => 
+    [motivoconsulta] => 
+    [fechaingreso] => 2017-03-09
+    [horaingreso] => 01:28
+    [gl_latitud] => -33.412295209394344
+    [gl_longitud] => -70.65502167446539
+    [chkextranjero] => 1
+    [chkAcepta] => 0
+    [chkReconoce] => 0
+)
+		 */
 		$correcto		= false;
 		$error			= false;
+		$id_paciente    = false;
 		$gl_grupo_tipo	= 'Control';
 		$id_tipo_grupo	= 1;
 		$count			= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
@@ -258,8 +288,13 @@ class Paciente extends Controller {
 		}
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
 		$parametros['id_tipo_grupo'] = $id_tipo_grupo;
-
-		$id_paciente	= $this->_DAOPaciente->insertarPaciente($parametros);
+		if ($parametros['chkextranjero'] != 1){
+			$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
+		} else if ($parametros['prevision'] == "1"){
+			if ($parametros['gl_codigo_fonasa'] != ""){
+				$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
+			}
+		}
 		if ($id_paciente) {
 			$correcto	= true;
 			$session	= New Zend_Session_Namespace("usuario_carpeta");
@@ -337,9 +372,21 @@ class Paciente extends Controller {
 			$parametros['id_usuario_crea']	= $_SESSION['id'];
 			$parametros['fc_crea']			= "now()";
 			$parametros['id_paciente']		= $id_paciente;			
+			$ins_direccion = array(	'id_paciente'			=> $parametros['id_paciente'],
+									'id_comuna'				=> $parametros['comuna'],
+									'id_region'				=> $parametros['region'],
+									'gl_direccion'			=> $parametros['direccion'],
+									'gl_latitud'			=> $parametros['gl_latitud'],
+									'gl_longitud'			=> $parametros['gl_longitud'],
+									'bo_estado'				=> 1,
+									'fc_ingreso'			=> $parametros['fechaingreso'],
+									'gl_motivo_consulta'	=> $parametros['motivoconsulta'], 
+									'fc_crea'				=> date('Y-m-d h:m:s'),
+									'id_usuario_crea'		=> $_SESSION['id'],
+								);
 			$desabilitadas					= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
 			if($desabilitadas){
-				$id_direccion				= $this->_DAOPacienteDireccion->insertarDireccion($parametros);
+				$id_direccion				= $this->_DAOPacienteDireccion->insertarDireccion($ins_direccion);
 			}
 
 		} else {
@@ -393,16 +440,16 @@ class Paciente extends Controller {
                                 );
 				$resultado2							= $this->_DAOPacienteRegistro->insertar("pre_paciente_registro", $ins_paciente_registro);			
 				$ins_direccion = array(	'id_paciente'			=> $parametros['id_paciente'],
-													'id_comuna'				=> $parametros['comuna'],
-													'id_region'				=> $parametros['region'],
-													'gl_direccion'			=> $parametros['direccion'],
-													'gl_latitud'			=> $parametros['gl_latitud'],
-													'gl_longitud'			=> $parametros['gl_longitud'],
-													'bo_estado'				=> 1,
-													'fc_ingreso'			=> $parametros['fechaingreso'],
-													'gl_motivo_consulta'	=> $parametros['motivoconsulta'], 
-													'fc_crea'				=> date('Y-m-d h:m:s'),
-													'id_usuario_crea'		=> $_SESSION['id'],
+										'id_comuna'				=> $parametros['comuna'],
+										'id_region'				=> $parametros['region'],
+										'gl_direccion'			=> $parametros['direccion'],
+										'gl_latitud'			=> $parametros['gl_latitud'],
+										'gl_longitud'			=> $parametros['gl_longitud'],
+										'bo_estado'				=> 1,
+										'fc_ingreso'			=> $parametros['fechaingreso'],
+										'gl_motivo_consulta'	=> $parametros['motivoconsulta'], 
+										'fc_crea'				=> date('Y-m-d h:m:s'),
+										'id_usuario_crea'		=> $_SESSION['id'],
 								);
 				$blah							= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
 				$id_direccion					= $this->_DAOPacienteDireccion->insertarDireccion($ins_direccion);

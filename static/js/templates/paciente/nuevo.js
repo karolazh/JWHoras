@@ -7,7 +7,10 @@ $("#guardar").on('click', function (e) {
 
 	if (gl_rut == '' && !$('#chkextranjero').is(':checked')) {
 		xModal.danger('- El campo RUT es Obligatorio');
-	} else {
+	} else if ($('#chkextranjero').is(':checked') && $('#opcionPrevision').val() === "1" && $('#gl_codigo_fonasa').val() === "") {
+		xModal.danger('Si eres extranjero afiliado en FONASA, deber ingresar tu código fonasa y subir tu certifiado de afiliación');
+	}
+		else {
 		if ($('#chkextranjero').is(':checked')) {
 			parametros.push({
 				"name": 'chkextranjero',

@@ -116,7 +116,7 @@ class DAOPacienteDireccion extends Model {
         if ($this->db->execQuery($query)) {
 			return $this->db->getLastId();
         } else {
-			print_r($query);DIE('EL DAO SE CAYO D:!!!! ALARMA ALARMA!!!!');
+			return false;
         }
     }
 	
