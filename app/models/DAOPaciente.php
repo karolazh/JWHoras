@@ -430,7 +430,8 @@ class DAOPaciente extends Model{
 						fc_reconoce						= ".$parametros['fc_reconoce'].",
 						fc_hora_reconoce				= ".$parametros['fc_hora_reconoce'].",
 						gl_acompañante					= ".$parametros['gl_acompañante'].",
-						fc_actualiza					= now()
+						fc_actualiza					= now(),
+						bo_reconoce						= 1
 					WHERE id_paciente = ".$parametros['id_paciente']."
                     ";
 
