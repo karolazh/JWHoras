@@ -69,7 +69,6 @@ class Medico extends Controller {
 		$id_paciente		= $parametros[0];
 		$arrEspecialidad	= $this->_DAOTipoEspecialidad->getLista();
 		
-		$resp = $this->_Evento->guardarMostrarUltimo(20,0,$id_paciente,"Plan tratamiento Iniciado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		//$resp = $this->_Evento->guardarMostrarUltimo(21,0,$id_paciente,"Plan tratamiento Modificado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		
 		$this->smarty->assign("id_paciente", $id_paciente);
@@ -89,10 +88,13 @@ class Medico extends Controller {
 		$parametros						= $this->_request->getParams();
 		$parametros['id_usuario_crea']	= $_SESSION['id'];
 		$correcto						= false;
+		$id_paciente					= $parametros['id_paciente'];
 		
 		$id_plan		=	$this->_DAOPacientePlanTratamiento->insert($parametros);
 		if($id_plan) {
-			$correcto	= true;
+			$correcto			= true;
+			$arrEspecialidad	= $this->_DAOTipoEspecialidad->getById($parametros['id_tipo_especialidad']);
+			$resp				= $this->_Evento->guardarMostrarUltimo(20,0,$id_paciente,"Plan de Tratamiento con ".$arrEspecialidad->gl_nombre_especialidad." Iniciado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		}
 			
 		$salida			= array("correcto" => $correcto);
