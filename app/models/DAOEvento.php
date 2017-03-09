@@ -85,7 +85,7 @@ class DAOEvento extends Model{
     }
 
     public function insEvento($data){
-		$query	= "INSERT into pre_evento values(null,?,?,?,?,?,?,CURRENT_TIMESTAMP)";
+		$query	= "INSERT into pre_evento values(null,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)";
 
 		$param	= array(
 						$data['eventos_tipo'],
@@ -93,12 +93,18 @@ class DAOEvento extends Model{
 						$data['id_empa'],
 						$data['gl_descripcion'],
 						$data['bo_estado'],
+						$data['bo_mostrar'],
 						$data['id_usuario_crea']
 					);
 
 		if($this->db->execQuery($query, $param)) {
 			return $this->db->getLastId();
+			print_r("todo ok");die();
 		}else{
+			print_r("se cayo esta wea : ");
+			print_r($query);
+			print_r("con estos parametros : ");
+			print_r($param);
 			return FALSE;
 		}
 	}
