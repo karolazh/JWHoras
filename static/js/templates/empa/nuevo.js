@@ -448,13 +448,16 @@ $("#guardaraudit").livequery(function () {
 					}
 				}
 			});
+			
+			$("#gl_puntos_audit").val($("#total").val());
+			//Según tipo de consumo mostrar Mensaje (de acuerdo a puntos del AUDIT)
+			$("#div_alcoholismo2").show();
+			var pts_audit = $('#gl_puntos_audit').val();
+			mensajeAUDIT(pts_audit);
+		}else{
+			$("#gl_puntos_audit").val('');
 		}
 		buttonEndProcess(button_process);
-		$("#gl_puntos_audit").val($("#total").val());
-                //Según tipo de consumo mostrar Mensaje (de acuerdo a puntos del AUDIT)
-                $("#div_alcoholismo2").show();
-                var pts_audit = $('#gl_puntos_audit').val();
-                mensajeAUDIT(pts_audit);
 		xModal.close();
 	});
 });
@@ -476,7 +479,7 @@ $(".subTotal").livequery(function () {
 		var i = 0;
 		for (i = 1; i <= 10; i++) {
 			if ($("#puntos_" + i).val() !== null){
-				alert($("#puntos_" + i).val());
+				//alert($("#puntos_" + i).val());
 			} else {
 				total = total + parseInt($("#puntos_" + i).val());
 			}
