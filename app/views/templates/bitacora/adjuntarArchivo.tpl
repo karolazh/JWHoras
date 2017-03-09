@@ -12,7 +12,7 @@
             <section class="content-header" >
                 <form class="form-horizontal" name="form-adjunto" id="form-adjunto" 
                       enctype="multipart/form-data" method="post" >
-                    <input type="hidden" name="idpac" id="idpac" value="{$idpac}" />
+                    <input type="hidden" name="id_paciente" id="id_paciente" value="{$id_paciente}" />
                     <div id="seccionAdjunto" style="display:none">
                         <div class="box-body">
                             <div class="row">
@@ -44,7 +44,7 @@
                                     <div class="btn-group">
                                         <button id="" type="button" 
                                                 class="btn btn-success btn-sm "
-                                                onclick="Paciente.guardarNuevoAdjunto(this.form,this)">
+                                                onclick="Bitacora.guardarNuevoAdjunto(this.form,this)">
                                             <i class="fa fa-save"></i>&nbsp;&nbsp;Guardar
                                         </button>
                                     </div>

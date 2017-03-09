@@ -97,7 +97,7 @@
                                                                 </button>
                                                                 {/if}
                                                                 <button type="button"
-                                                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/bitacora/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
+                                                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
                                                                         title="Revisar bitácora" 
                                                                         class="btn btn-xs btn-primary">
@@ -164,7 +164,7 @@
                                                                 </button>
                                                                 {/if}
                                                                 <button type="button"
-                                                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/bitacora/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
+                                                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
                                                                         title="Revisar bitácora" 
                                                                         class="btn btn-xs btn-primary">

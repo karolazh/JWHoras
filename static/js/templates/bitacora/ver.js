@@ -1,12 +1,12 @@
 /* global BASE_URI */
 
-var Paciente = {
+var Bitacora = {
     
     guardarNuevoAdjunto: function (form,btn) {
         var error = false;
         var msg_error = '';        
         
-        var idpac = form.idpac.value;
+        var idpac = form.id_paciente.value;
         //alert(idpac);
         var tipodoc = form.tipoDoc.value;
         //alert(tipodoc);
@@ -37,9 +37,9 @@ var Paciente = {
                                                '.tiff', '.bmp', '.pdf', '.txt', 
                                                '.csv', '.doc', '.docx', '.ppt', 
                                                '.pptx', '.xls', '.xlsx');
-            permitida		   = false;
-            string		   = path;
-            extension		   = (string.substring(string.lastIndexOf("."))).toLowerCase();
+            permitida   = false;
+            string      = path;
+            extension   = (string.substring(string.lastIndexOf("."))).toLowerCase();
 
             for(var i = 0; i < extensiones_permitidas.length; i++) {
                 if (extensiones_permitidas[i] == extension){
@@ -65,9 +65,10 @@ var Paciente = {
                 var inputFileImage = document.getElementById("archivo");
                 var file = inputFileImage.files[0];
                 formulario.append('archivo',file);
-                console.log(formulario);
+                //alert(BASE_URI + 'index.php/Bitacora/guardarNuevoAdjunto');
+                console.log(formulario);                
                 $.ajax({
-                    url : BASE_URI + 'index.php/Paciente/guardarNuevoAdjunto', 
+                    url : BASE_URI + 'index.php/Bitacora/guardarNuevoAdjunto', 
                     data : formulario,
                     processData : false,
                     cache : false,
@@ -89,8 +90,8 @@ var Paciente = {
                     }
                     , 
                     error : function(){
-		    		xModal.danger('Error: Intente nuevamente',function(){
-		    		});
+                            xModal.danger('Error: Intente nuevamente',function(){
+                            });
                     }
                 });
             }
