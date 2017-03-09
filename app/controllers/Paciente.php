@@ -37,7 +37,9 @@ class Paciente extends Controller {
 	protected $_DAOPacienteDireccion;
 	protected $_DAOEmpaAudit;
 	protected $_Evento;
-				function __construct() {
+	protected $_DAOPacientePlanTratamiento;
+
+	function __construct() {
 		parent::__construct();
 		$this->load->lib('Fechas', false);
 		$this->load->lib('Boton', false);
@@ -58,6 +60,7 @@ class Paciente extends Controller {
 		$this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
 		$this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
 		$this->_DAOEmpaAudit			= $this->load->model("DAOEmpaAudit");
+		$this->_DAOPacientePlanTratamiento	= $this->load->model("DAOPacientePlanTratamiento");
 	}
 
 	public function index() {
@@ -146,6 +149,15 @@ class Paciente extends Controller {
                 //Grilla Motivos de Consulta (Paciente-Registro)
                 $arrConsultas = $this->_DAOPacienteRegistro->getByIdPaciente($id_paciente);
                 $this->smarty->assign('arrConsultas', $arrConsultas);
+                
+                //Grilla Exámenes Alterados x Paciente
+                $muestra_examenes = "NO";
+                $arrExamenesAlt = $this->_DAOPacienteExamen->getByIdPacienteAlterado($id_paciente);
+                if (!is_null($arrExamenesAlt)) {
+                    $this->smarty->assign('arrExamenesAlt', $arrExamenesAlt);
+                    $muestra_examenes = "SI";
+                }
+                $this->smarty->assign("muestra_examenes", $muestra_examenes);
 
                 //Grilla Empa
                 $arrEmpa = $this->_DAOEmpa->getListaEmpa($id_paciente);
@@ -171,6 +183,10 @@ class Paciente extends Controller {
                 $arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($id_paciente);
                 $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
                 
+				
+				$arr_plan	= $this->_DAOPacientePlanTratamiento->getByIdPaciente($id_paciente);
+				$this->smarty->assign("arr_plan", $arr_plan);
+				
                 //Dirección Vigente de Paciente
                 $direccion = "";
                 $comuna = "";

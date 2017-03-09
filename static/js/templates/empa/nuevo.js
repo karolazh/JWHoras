@@ -54,40 +54,6 @@ function mensajeAUDIT(pts_audit){
             }
         });
     }
-	/*  var mensaje = "";
-    if (pts_audit != "") {
-        if (pts_audit >= 0 && pts_audit <= 7) {
-            $('#gl_puntos_audit').css("borderColor", "");
-            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
-            $('#gl_puntos_audit').parent().removeClass("has-error");
-            $('#gl_puntos_audit').parent().addClass("has-success");
-            mensaje = "Bajo Riesgo";
-        } else if (pts_audit >= 8 && pts_audit <= 15) {
-            $('#gl_puntos_audit').css("borderColor", "");
-            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
-            $('#gl_puntos_audit').parent().removeClass("has-error");
-            $('#gl_puntos_audit').parent().removeClass("has-success");
-            $('#gl_puntos_audit').css("borderColor", "#BDB76B");
-            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "#BDB76B");
-            mensaje = "Riesgo";
-        } else if (pts_audit >= 16 && pts_audit <= 19) {
-            $('#gl_puntos_audit').css("borderColor", "");
-            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
-            $('#gl_puntos_audit').parent().removeClass("has-error");
-            $('#gl_puntos_audit').parent().removeClass("has-success");
-            $('#gl_puntos_audit').css("borderColor", "#FF8C00");
-            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "#FF8C00");
-            mensaje = "Problema";
-        } else if (pts_audit >= 20 && pts_audit <= 40) {
-            $('#gl_puntos_audit').css("borderColor", "");
-            $('#gl_puntos_audit').parent().find("span.help-block").css("color", "");
-            $('#gl_puntos_audit').parent().removeClass("has-success");
-            $('#gl_puntos_audit').parent().addClass("has-error");
-            mensaje = "Problema o Dependencia";
-        }
-    }
-    $('#gl_puntos_audit').parent().find('span.help-block').html(mensaje);
-    $('#gl_puntos_audit').parent().find('span.help-block').removeClass("hidden");*/
 }
 
 
@@ -1084,6 +1050,9 @@ $("#guardar").on('click', function (e) {
 		success: function (data) {
 			if (data.correcto) {
 				xModal.success('Éxito: Se Ingresó nuevo Registro!');
+				setTimeout(function () {
+					location.href = BASE_URI + "index.php/Paciente";
+				}, 2000);
 			} else {
 				xModal.info('Error: No se pudo Ingresar un nuevo Registro');
 			}

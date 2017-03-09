@@ -89,7 +89,7 @@
 
             <div class="panel-body">
                 <div class="form-group">
-                    <label class="control-label col-sm-3 ">Rut Paciente</label>
+                    <label class="control-label col-sm-3 ">RUT/RUN/Pasaporte</label>
                     <div class="col-md-3 col-sm-3">
 			<span class="form-control" readonly>{$gl_rut}</span>
                     </div>
@@ -203,7 +203,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div id="div_alcoholismo2" style="{if ($gl_puntos_audit == "")}display: none{/if}">
+                            <div id="div_alcoholismo2" style="{if ($bo_consume_alcohol_1 != 'checked')}display: none{/if}">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-2">
                                     <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value="{$gl_puntos_audit}"

@@ -277,7 +277,8 @@ function validarVacio(metodo, mensaje_error){
 function calcularYear(Fecha){
     fecha = new Date(Fecha);
     hoy = new Date();
-    ed = parseInt((hoy -fecha)/365/24/60/60/1000);
+    ed = (hoy -fecha)/365/24/60/60/1000;
+	ed = ed.toFixed(2);	
     if (ed >= 0)
      {return ed;}
      else{return null;}
