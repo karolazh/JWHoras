@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 192.168.0.200
--- Tiempo de generación: 09-03-2017 a las 18:20:06
+-- Tiempo de generación: 09-03-2017 a las 14:15:59
 -- Versión del servidor: 5.6.10
 -- Versión de PHP: 5.6.26
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `pre_adjunto` (
   `sha256` varchar(255) DEFAULT NULL,
   `bo_estado` int(1) DEFAULT '1' COMMENT '1=activo',
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_adjunto`),
   UNIQUE KEY `UNIQ_gl_path` (`gl_path`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `pre_adjunto` (
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_sha256` (`sha256`),
   KEY `IDX_id_tipo_adjunto` (`id_adjunto_tipo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `pre_adjunto`
@@ -56,8 +56,7 @@ CREATE TABLE IF NOT EXISTS `pre_adjunto` (
 INSERT INTO `pre_adjunto` (`id_adjunto`, `id_paciente`, `id_adjunto_tipo`, `id_empa`, `gl_nombre`, `gl_path`, `gl_glosa`, `sha256`, `bo_estado`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 1, 3, 0, 'Archivo_Fonasa_.pdf', 'archivos/1/Archivo_Fonasa_.pdf', 'Archivo Fonasa', 'b84df4989903f2fe202a6273e5e2c32ec74656484f7d4f609de52a62ad8ff733', 1, 2, '2017-03-09 09:03:13'),
 (2, 2, 1, 0, 'Consentimiento_.pdf', 'archivos/2/Consentimiento_.pdf', 'Consentimiento Firmado', 'b1737f5a91f915a02496ec1bd1b43a7b543d1cfba4155f4a12e140c09abf7bb9', 1, 2, '2017-03-09 09:03:13'),
-(3, 3, 1, 0, 'Consentimiento_11-6.pdf', 'archivos/3/Consentimiento_11-6.pdf', 'Consentimiento Firmado', '5989da9dbe4081b68fe94c7db8464e0c71b2451131ec6e5fd74758f00130aad4', 1, 2, '2017-03-09 10:03:02'),
-(4, 4, 1, 0, 'Consentimiento_22222222-2.pdf', 'archivos/4/Consentimiento_22222222-2.pdf', 'Consentimiento Firmado', 'a1c24a12b467de402e343ea46f7be002805fae0b5c90243b4c5e3979882d5d44', 1, 2, '2017-03-09 03:03:40');
+(3, 3, 1, 0, 'Consentimiento_11-6.pdf', 'archivos/3/Consentimiento_11-6.pdf', 'Consentimiento Firmado', '5989da9dbe4081b68fe94c7db8464e0c71b2451131ec6e5fd74758f00130aad4', 1, 2, '2017-03-09 10:03:02');
 
 -- --------------------------------------------------------
 
@@ -69,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `pre_adjunto_tipo` (
   `id_adjunto_tipo` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_tipo_adjunto` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_adjunto_tipo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
@@ -96,11 +95,11 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria` (
   `gl_query` longtext,
   `gl_ip` varchar(500) DEFAULT '0.0.0.0',
   `gl_tiempo` varchar(100) DEFAULT NULL COMMENT 'Tiempo de Ejecucion de Script',
-  `fc_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `fc_creacion` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_auditoria`),
   KEY `IDX_gl_tipo` (`gl_tipo`),
   KEY `IDX_id_usuario` (`id_usuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=472 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=164 ;
 
 --
 -- Volcado de datos para la tabla `pre_auditoria`
@@ -269,317 +268,7 @@ INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`
 (160, 2, 'UPDATE', 'UPDATE pre_paciente SET bo_fono_seguro =  WHERE id_paciente = ''3''', '127.0.0.1', '0.0010168552398682', '2017-03-09 14:11:03'),
 (161, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''3'',0,''Motivo consulta agregada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.00077700614929199', '2017-03-09 14:11:03'),
 (162, 2, 'UPDATE', 'UPDATE pre_paciente SET bo_acepta_programa = 1 WHERE id_paciente = ''3''', '127.0.0.1', '0.00087308883666992', '2017-03-09 14:11:03'),
-(163, 2, 'INSERT', 'INSERT into pre_evento values(null,4,''3'',0,''Acepta el programa con fecha : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.00091314315795898', '2017-03-09 14:11:03'),
-(164, 2, 'INSERT', 'INSERT INTO pre_paciente_registro(id_paciente,id_institucion,gl_hora_ingreso,fc_ingreso,gl_motivo_consulta,fc_crea,id_usuario_crea) VALUES(''3'',''10'',''11:16'',''2017-03-09'','''',''2017-03-09 11:03:04'',''2'')', '127.0.0.1', '0.0010030269622803', '2017-03-09 14:18:02'),
-(165, 2, 'UPDATE', 'UPDATE pre_paciente_direccion SET\n						bo_estado					= 0,\n						id_usuario_actualiza		= 2,\n						fc_actualiza				= now()\n					WHERE id_paciente = 3', '127.0.0.1', '0.0012609958648682', '2017-03-09 14:18:02'),
-(166, 2, 'INSERT', 'INSERT INTO pre_paciente_direccion\n						(\n						id_paciente,\n						id_comuna,\n						id_region,\n						gl_direccion,\n						gl_latitud,\n						gl_longitud,\n						bo_estado,\n						id_usuario_crea,\n						fc_crea,\n						id_usuario_actualiza,\n						fc_actualiza\n						)\n					VALUES\n						(\n						3,\n						356,\n						2,\n						''Antonio José de Sucre 602-706, Antofagasta, Región de Antofagasta, Chile'',\n						''-23.64828386865711'',\n						''-70.39564262784552'',\n						1,\n						2,\n						now(),\n						2,\n						now()\n						)', '127.0.0.1', '0.00092196464538574', '2017-03-09 14:18:02'),
-(167, 2, 'UPDATE', 'UPDATE pre_paciente SET id_centro_salud = ''10'' WHERE id_paciente = ''3''', '127.0.0.1', '0.0011301040649414', '2017-03-09 14:18:02'),
-(168, 2, 'UPDATE', 'UPDATE pre_paciente SET gl_fono = ''2586523'' WHERE id_paciente = ''3''', '127.0.0.1', '0.00089693069458008', '2017-03-09 14:18:02'),
-(169, 2, 'UPDATE', 'UPDATE pre_paciente SET bo_fono_seguro = ''0'' WHERE id_paciente = ''3''', '127.0.0.1', '0.00085806846618652', '2017-03-09 14:18:02'),
-(170, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''3'',0,''Motivo consulta agregada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.0017168521881104', '2017-03-09 14:18:02'),
-(171, 2, 'UPDATE', 'UPDATE pre_paciente SET bo_acepta_programa = 1 WHERE id_paciente = ''3''', '127.0.0.1', '0.00097799301147461', '2017-03-09 14:18:02'),
-(172, 2, 'INSERT', 'INSERT into pre_evento values(null,4,''3'',0,''Acepta el programa con fecha : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.0010800361633301', '2017-03-09 14:18:02'),
-(173, 2, 'INSERT', 'INSERT INTO pre_paciente_registro(id_paciente,id_institucion,gl_hora_ingreso,fc_ingreso,gl_motivo_consulta,fc_crea,id_usuario_crea) VALUES(''3'',''10'',''11:17'',''2017-03-09'','''',''2017-03-09 11:03:21'',''2'')', '127.0.0.1', '0.0011730194091797', '2017-03-09 14:18:19'),
-(174, 2, 'UPDATE', 'UPDATE pre_paciente_direccion SET\n						bo_estado					= 0,\n						id_usuario_actualiza		= 2,\n						fc_actualiza				= now()\n					WHERE id_paciente = 3', '127.0.0.1', '0.0011281967163086', '2017-03-09 14:18:19'),
-(175, 2, 'INSERT', 'INSERT INTO pre_paciente_direccion\n						(\n						id_paciente,\n						id_comuna,\n						id_region,\n						gl_direccion,\n						gl_latitud,\n						gl_longitud,\n						bo_estado,\n						id_usuario_crea,\n						fc_crea,\n						id_usuario_actualiza,\n						fc_actualiza\n						)\n					VALUES\n						(\n						3,\n						356,\n						2,\n						''Antonio José de Sucre 602-706, Antofagasta, Región de Antofagasta, Chile'',\n						''-23.64828386865711'',\n						''-70.39564262784552'',\n						1,\n						2,\n						now(),\n						2,\n						now()\n						)', '127.0.0.1', '0.0010640621185303', '2017-03-09 14:18:19'),
-(176, 2, 'UPDATE', 'UPDATE pre_paciente SET id_centro_salud = ''10'' WHERE id_paciente = ''3''', '127.0.0.1', '0.0030899047851562', '2017-03-09 14:18:19'),
-(177, 2, 'UPDATE', 'UPDATE pre_paciente SET gl_fono = ''2586523'' WHERE id_paciente = ''3''', '127.0.0.1', '0.0010511875152588', '2017-03-09 14:18:19'),
-(178, 2, 'UPDATE', 'UPDATE pre_paciente SET bo_fono_seguro = ''1'' WHERE id_paciente = ''3''', '127.0.0.1', '0.0012650489807129', '2017-03-09 14:18:19'),
-(179, 2, 'INSERT', 'INSERT into pre_evento values(null,16,''3'',0,''Motivo consulta agregada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.0010111331939697', '2017-03-09 14:18:19'),
-(180, 2, 'UPDATE', 'UPDATE pre_paciente SET bo_acepta_programa = 1 WHERE id_paciente = ''3''', '127.0.0.1', '0.0010249614715576', '2017-03-09 14:18:19'),
-(181, 2, 'INSERT', 'INSERT into pre_evento values(null,4,''3'',0,''Acepta el programa con fecha : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.00118088722229', '2017-03-09 14:18:19'),
-(182, 1, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (0,''1325524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0020179748535156', '2017-03-09 14:35:00'),
-(183, 1, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.001129150390625', '2017-03-09 14:35:15'),
-(184, 1, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.012840032577515', '2017-03-09 14:35:15'),
-(185, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									1,\n										\n								)', '::1', '0.0010209083557129', '2017-03-09 14:54:09'),
-(186, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0010828971862793', '2017-03-09 14:54:09'),
-(187, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.001121997833252', '2017-03-09 14:54:09'),
-(188, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									2,\n										\n								)', '::1', '0.0009770393371582', '2017-03-09 14:54:09'),
-(189, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0010778903961182', '2017-03-09 14:54:09'),
-(190, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010089874267578', '2017-03-09 14:54:09'),
-(191, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									3,\n										\n								)', '::1', '0.00089406967163086', '2017-03-09 14:54:09'),
-(192, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0011200904846191', '2017-03-09 14:54:09'),
-(193, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0025238990783691', '2017-03-09 14:54:09'),
-(194, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									4,\n										\n								)', '::1', '0.00073504447937012', '2017-03-09 14:54:09'),
-(195, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0011658668518066', '2017-03-09 14:54:09'),
-(196, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00084996223449707', '2017-03-09 14:54:09'),
-(197, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						gl_rut_agresor,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						nr_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						3,\n						NULL,\n						''12323'',\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						2,\n						now()\n						)', '::1', '0.0022940635681152', '2017-03-09 14:54:09'),
-(198, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 19', '::1', '0.00074100494384766', '2017-03-09 14:54:09');
-INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`, `gl_ip`, `gl_tiempo`, `fc_creacion`) VALUES
-(199, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''3'',0,'' Agresor creado el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011880397796631', '2017-03-09 14:54:09'),
-(200, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= NULL,\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= NULL,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= NULL,\n						id_tipo_escolaridad				= NULL,\n						fc_reconoce						= ''2017-03-09'',\n						fc_hora_reconoce				= ''11:53'',\n						gl_acompañante					= NULL,\n						fc_actualiza					= now(),\n						bo_reconoce						= 1\n					WHERE id_paciente = 3', '::1', '0.0019810199737549', '2017-03-09 14:54:09'),
-(201, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 5', '::1', '0.0009160041809082', '2017-03-09 14:54:09'),
-(202, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''3'',0,''Paciente Reconoce Violencia el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00089883804321289', '2017-03-09 14:54:09'),
-(203, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									1,\n										\n								)', '::1', '0.0011789798736572', '2017-03-09 14:54:19'),
-(204, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0014059543609619', '2017-03-09 14:54:20'),
-(205, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00088000297546387', '2017-03-09 14:54:20'),
-(206, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									2,\n										\n								)', '::1', '0.0010719299316406', '2017-03-09 14:54:20'),
-(207, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0012791156768799', '2017-03-09 14:54:20'),
-(208, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.000885009765625', '2017-03-09 14:54:20'),
-(209, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									3,\n										\n								)', '::1', '0.0012359619140625', '2017-03-09 14:54:20'),
-(210, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0012598037719727', '2017-03-09 14:54:20'),
-(211, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011329650878906', '2017-03-09 14:54:20'),
-(212, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									4,\n										\n								)', '::1', '0.00091695785522461', '2017-03-09 14:54:20'),
-(213, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0011649131774902', '2017-03-09 14:54:20'),
-(214, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00090408325195312', '2017-03-09 14:54:20'),
-(215, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						gl_rut_agresor,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						nr_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						3,\n						NULL,\n						NULL,\n						NULL,\n						''12323'',\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						2,\n						now()\n						)', '::1', '0.0011382102966309', '2017-03-09 14:54:20'),
-(216, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 19', '::1', '0.0013630390167236', '2017-03-09 14:54:20'),
-(217, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''3'',0,'' Agresor creado el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012099742889404', '2017-03-09 14:54:20'),
-(218, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= NULL,\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= NULL,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= NULL,\n						id_tipo_escolaridad				= NULL,\n						fc_reconoce						= ''2017-03-09'',\n						fc_hora_reconoce				= ''11:53'',\n						gl_acompañante					= NULL,\n						fc_actualiza					= now(),\n						bo_reconoce						= 1\n					WHERE id_paciente = 3', '::1', '0.0024559497833252', '2017-03-09 14:54:20'),
-(219, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 5', '::1', '0.0014438629150391', '2017-03-09 14:54:20'),
-(220, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''3'',0,''Paciente Reconoce Violencia el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.001086950302124', '2017-03-09 14:54:20'),
-(221, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0014309883117676', '2017-03-09 14:54:20'),
-(222, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',0,''Reconoce Agresor : 2017-03-09'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010888576507568', '2017-03-09 14:54:20'),
-(223, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									1,\n										\n								)', '::1', '0.0012009143829346', '2017-03-09 14:54:55'),
-(224, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0015032291412354', '2017-03-09 14:54:55'),
-(225, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0014669895172119', '2017-03-09 14:54:55'),
-(226, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									2,\n										\n								)', '::1', '0.0010819435119629', '2017-03-09 14:54:55'),
-(227, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0023319721221924', '2017-03-09 14:54:55'),
-(228, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0009918212890625', '2017-03-09 14:54:55'),
-(229, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									3,\n										\n								)', '::1', '0.0012130737304688', '2017-03-09 14:54:55'),
-(230, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0013930797576904', '2017-03-09 14:54:55'),
-(231, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00098586082458496', '2017-03-09 14:54:55'),
-(232, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									4,\n										\n								)', '::1', '0.0011200904846191', '2017-03-09 14:54:55'),
-(233, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0013930797576904', '2017-03-09 14:54:55'),
-(234, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00089406967163086', '2017-03-09 14:54:55'),
-(235, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						gl_rut_agresor,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						nr_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						3,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						2,\n						now()\n						)', '::1', '0.0013511180877686', '2017-03-09 14:54:55'),
-(236, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 19', '::1', '0.0013601779937744', '2017-03-09 14:54:55'),
-(237, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''3'',0,'' Agresor creado el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012040138244629', '2017-03-09 14:54:55'),
-(238, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= NULL,\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= NULL,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= NULL,\n						id_tipo_escolaridad				= NULL,\n						fc_reconoce						= ''2017-03-09'',\n						fc_hora_reconoce				= ''11:53'',\n						gl_acompañante					= NULL,\n						fc_actualiza					= now(),\n						bo_reconoce						= 1\n					WHERE id_paciente = 3', '::1', '0.0026280879974365', '2017-03-09 14:54:55'),
-(239, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 5', '::1', '0.00081706047058105', '2017-03-09 14:54:55'),
-(240, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''3'',0,''Paciente Reconoce Violencia el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00064992904663086', '2017-03-09 14:54:55'),
-(241, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									1,\n									NULL	\n								)', '::1', '0.0014488697052002', '2017-03-09 15:03:33'),
-(242, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0011758804321289', '2017-03-09 15:03:33'),
-(243, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010941028594971', '2017-03-09 15:03:33'),
-(244, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									2,\n									NULL	\n								)', '::1', '0.0010571479797363', '2017-03-09 15:03:33'),
-(245, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.001384973526001', '2017-03-09 15:03:33'),
-(246, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00086402893066406', '2017-03-09 15:03:33'),
-(247, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									3,\n									NULL	\n								)', '::1', '0.00081205368041992', '2017-03-09 15:03:33'),
-(248, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.0015969276428223', '2017-03-09 15:03:33'),
-(249, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00083279609680176', '2017-03-09 15:03:33'),
-(250, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									3,\n									4,\n									NULL	\n								)', '::1', '0.00096797943115234', '2017-03-09 15:03:33'),
-(251, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 17', '::1', '0.001471996307373', '2017-03-09 15:03:33'),
-(252, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''3'',0,''Paciente Agresor Violencia creada el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00086283683776855', '2017-03-09 15:03:33'),
-(253, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						gl_rut_agresor,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						nr_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						3,\n						NULL,\n						NULL,\n						NULL,\n						''12323'',\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						2,\n						now()\n						)', '::1', '0.00098800659179688', '2017-03-09 15:03:33'),
-(254, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 19', '::1', '0.0018420219421387', '2017-03-09 15:03:33'),
-(255, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''3'',0,'' Agresor creado el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.000946044921875', '2017-03-09 15:03:33'),
-(256, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= NULL,\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= NULL,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= NULL,\n						id_tipo_escolaridad				= NULL,\n						fc_reconoce						= ''2017-03-09'',\n						fc_hora_reconoce				= ''12:02'',\n						gl_acompañante					= NULL,\n						fc_actualiza					= now(),\n						bo_reconoce						= 1\n					WHERE id_paciente = 3', '::1', '0.0012800693511963', '2017-03-09 15:03:33'),
-(257, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 5', '::1', '0.0013248920440674', '2017-03-09 15:03:33'),
-(258, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''3'',0,''Paciente Reconoce Violencia el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00095200538635254', '2017-03-09 15:03:33'),
-(259, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0012068748474121', '2017-03-09 15:03:33'),
-(260, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',0,''Reconoce Agresor : 2017-03-09'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.001007080078125', '2017-03-09 15:03:33'),
-(261, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	1\n					WHERE id_paciente = 3 AND id_pregunta = 1', '::1', '0.0011520385742188', '2017-03-09 15:18:17'),
-(262, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.00099015235900879', '2017-03-09 15:18:17'),
-(263, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0009157657623291', '2017-03-09 15:18:17'),
-(264, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	1\n					WHERE id_paciente = 3 AND id_pregunta = 2', '::1', '0.0012021064758301', '2017-03-09 15:18:17'),
-(265, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0011558532714844', '2017-03-09 15:18:17'),
-(266, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00094318389892578', '2017-03-09 15:18:17'),
-(267, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	1\n					WHERE id_paciente = 3 AND id_pregunta = 3', '::1', '0.0011651515960693', '2017-03-09 15:18:17'),
-(268, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0013151168823242', '2017-03-09 15:18:17'),
-(269, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0008699893951416', '2017-03-09 15:18:17'),
-(270, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	1\n					WHERE id_paciente = 3 AND id_pregunta = 4', '::1', '0.0011739730834961', '2017-03-09 15:18:17'),
-(271, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0010931491851807', '2017-03-09 15:18:17'),
-(272, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011711120605469', '2017-03-09 15:18:17'),
-(273, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						gl_rut_agresor,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						nr_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						3,\n						NULL,\n						NULL,\n						NULL,\n						''1233'',\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						2,\n						now()\n						)', '::1', '0.00094294548034668', '2017-03-09 15:18:17'),
-(274, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 19', '::1', '0.0011088848114014', '2017-03-09 15:18:17'),
-(275, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''3'',0,'' Agresor creado el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00118088722229', '2017-03-09 15:18:17'),
-(276, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= NULL,\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= NULL,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= NULL,\n						id_tipo_escolaridad				= NULL,\n						fc_reconoce						= ''2017-03-09'',\n						fc_hora_reconoce				= ''12:17'',\n						gl_acompañante					= NULL,\n						fc_actualiza					= now(),\n						bo_reconoce						= 1\n					WHERE id_paciente = 3', '::1', '0.0014758110046387', '2017-03-09 15:18:17'),
-(277, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 5', '::1', '0.001276969909668', '2017-03-09 15:18:17'),
-(278, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''3'',0,''Paciente Reconoce Violencia el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00090122222900391', '2017-03-09 15:18:17'),
-(279, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0012021064758301', '2017-03-09 15:18:17'),
-(280, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',0,''Reconoce Agresor : 2017-03-09'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00090384483337402', '2017-03-09 15:18:17'),
-(281, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.00097393989562988', '2017-03-09 15:20:55'),
-(282, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.00097393989562988', '2017-03-09 15:20:55'),
-(283, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	1\n					WHERE id_paciente = 3 AND id_pregunta = 1', '::1', '0.00097203254699707', '2017-03-09 15:21:25'),
-(284, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0012199878692627', '2017-03-09 15:21:25'),
-(285, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00092411041259766', '2017-03-09 15:21:25'),
-(286, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	1\n					WHERE id_paciente = 3 AND id_pregunta = 2', '::1', '0.00088691711425781', '2017-03-09 15:21:25'),
-(287, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0011920928955078', '2017-03-09 15:21:25'),
-(288, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00079202651977539', '2017-03-09 15:21:25'),
-(289, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	1\n					WHERE id_paciente = 3 AND id_pregunta = 3', '::1', '0.00099706649780273', '2017-03-09 15:21:25'),
-(290, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0011639595031738', '2017-03-09 15:21:25'),
-(291, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00088977813720703', '2017-03-09 15:21:25'),
-(292, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	1\n					WHERE id_paciente = 3 AND id_pregunta = 4', '::1', '0.0012040138244629', '2017-03-09 15:21:25'),
-(293, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0011980533599854', '2017-03-09 15:21:25'),
-(294, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010039806365967', '2017-03-09 15:21:25'),
-(295, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						gl_rut_agresor,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						nr_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						3,\n						NULL,\n						NULL,\n						NULL,\n						''12323'',\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						2,\n						now()\n						)', '::1', '0.00097513198852539', '2017-03-09 15:21:25'),
-(296, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 19', '::1', '0.0013260841369629', '2017-03-09 15:21:25'),
-(297, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''3'',0,'' Agresor creado el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00076389312744141', '2017-03-09 15:21:25'),
-(298, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= NULL,\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= NULL,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= NULL,\n						id_tipo_escolaridad				= NULL,\n						fc_reconoce						= ''2017-03-09'',\n						fc_hora_reconoce				= ''12:17'',\n						gl_acompañante					= NULL,\n						fc_actualiza					= now(),\n						bo_reconoce						= 1\n					WHERE id_paciente = 3', '::1', '0.001439094543457', '2017-03-09 15:21:25'),
-(299, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 5', '::1', '0.0010919570922852', '2017-03-09 15:21:25'),
-(300, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''3'',0,''Paciente Reconoce Violencia el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00083804130554199', '2017-03-09 15:21:25'),
-(301, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.00095796585083008', '2017-03-09 15:21:25'),
-(302, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',0,''Reconoce Agresor : 2017-03-09'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00088405609130859', '2017-03-09 15:21:25'),
-(303, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	NULL\n					WHERE id_paciente = 3 AND id_pregunta = 1', '::1', '0.00088787078857422', '2017-03-09 15:26:16'),
-(304, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0011758804321289', '2017-03-09 15:26:16'),
-(305, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00081110000610352', '2017-03-09 15:26:16'),
-(306, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	NULL\n					WHERE id_paciente = 3 AND id_pregunta = 2', '::1', '0.0010089874267578', '2017-03-09 15:26:16'),
-(307, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0011880397796631', '2017-03-09 15:26:16'),
-(308, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00071310997009277', '2017-03-09 15:26:16'),
-(309, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	NULL\n					WHERE id_paciente = 3 AND id_pregunta = 3', '::1', '0.00092720985412598', '2017-03-09 15:26:16'),
-(310, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0011990070343018', '2017-03-09 15:26:16'),
-(311, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.001068115234375', '2017-03-09 15:26:16'),
-(312, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	NULL\n					WHERE id_paciente = 3 AND id_pregunta = 4', '::1', '0.0012149810791016', '2017-03-09 15:26:16'),
-(313, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.001270055770874', '2017-03-09 15:26:16'),
-(314, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00074291229248047', '2017-03-09 15:26:16'),
-(315, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						gl_rut_agresor,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						nr_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						3,\n						NULL,\n						NULL,\n						NULL,\n						''1233'',\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						2,\n						now()\n						)', '::1', '0.00090503692626953', '2017-03-09 15:26:16'),
-(316, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 19', '::1', '0.0011320114135742', '2017-03-09 15:26:16'),
-(317, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''3'',0,'' Agresor creado el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00072908401489258', '2017-03-09 15:26:16'),
-(318, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= NULL,\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= NULL,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= NULL,\n						id_tipo_escolaridad				= NULL,\n						fc_reconoce						= ''2017-03-09'',\n						fc_hora_reconoce				= ''12:25'',\n						gl_acompañante					= NULL,\n						fc_actualiza					= now(),\n						bo_reconoce						= 1\n					WHERE id_paciente = 3', '::1', '0.0011448860168457', '2017-03-09 15:26:16'),
-(319, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 5', '::1', '0.0011670589447021', '2017-03-09 15:26:16'),
-(320, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''3'',0,''Paciente Reconoce Violencia el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00078105926513672', '2017-03-09 15:26:16'),
-(321, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0010309219360352', '2017-03-09 15:26:16'),
-(322, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',0,''Reconoce Agresor : 2017-03-09'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00067019462585449', '2017-03-09 15:26:16'),
-(323, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	NULL\n					WHERE id_paciente = 3 AND id_pregunta = 1', '::1', '0.0012271404266357', '2017-03-09 15:29:42'),
-(324, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0014140605926514', '2017-03-09 15:29:42'),
-(325, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011060237884521', '2017-03-09 15:29:42'),
-(326, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	NULL\n					WHERE id_paciente = 3 AND id_pregunta = 2', '::1', '0.0012798309326172', '2017-03-09 15:29:42'),
-(327, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0015139579772949', '2017-03-09 15:29:42'),
-(328, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00095701217651367', '2017-03-09 15:29:42'),
-(329, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	NULL\n					WHERE id_paciente = 3 AND id_pregunta = 3', '::1', '0.0011940002441406', '2017-03-09 15:29:42'),
-(330, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0015511512756348', '2017-03-09 15:29:42'),
-(331, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010089874267578', '2017-03-09 15:29:42'),
-(332, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	NULL\n					WHERE id_paciente = 3 AND id_pregunta = 4', '::1', '0.0012021064758301', '2017-03-09 15:29:42'),
-(333, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0014121532440186', '2017-03-09 15:29:42'),
-(334, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00089812278747559', '2017-03-09 15:29:42'),
-(335, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						gl_rut_agresor,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						nr_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						3,\n						NULL,\n						NULL,\n						NULL,\n						''12323'',\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						2,\n						now()\n						)', '::1', '0.0011119842529297', '2017-03-09 15:29:42'),
-(336, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 19', '::1', '0.0014059543609619', '2017-03-09 15:29:42'),
-(337, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''3'',0,'' Agresor creado el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00093293190002441', '2017-03-09 15:29:42'),
-(338, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= NULL,\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= NULL,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= NULL,\n						id_tipo_escolaridad				= NULL,\n						fc_reconoce						= ''2017-03-09'',\n						fc_hora_reconoce				= ''12:28'',\n						gl_acompañante					= NULL,\n						fc_actualiza					= now(),\n						bo_reconoce						= 1\n					WHERE id_paciente = 3', '::1', '0.0013680458068848', '2017-03-09 15:29:42'),
-(339, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 5', '::1', '0.001305103302002', '2017-03-09 15:29:42'),
-(340, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''3'',0,''Paciente Reconoce Violencia el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0013289451599121', '2017-03-09 15:29:42'),
-(341, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.00092816352844238', '2017-03-09 15:29:42'),
-(342, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',0,''Reconoce Agresor : 2017-03-09'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00048708915710449', '2017-03-09 15:29:42'),
-(343, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	NULL\n					WHERE id_paciente = 3 AND id_pregunta = 1', '::1', '0.0013968944549561', '2017-03-09 15:30:03'),
-(344, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0015161037445068', '2017-03-09 15:30:03'),
-(345, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010240077972412', '2017-03-09 15:30:03'),
-(346, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	NULL\n					WHERE id_paciente = 3 AND id_pregunta = 2', '::1', '0.0013871192932129', '2017-03-09 15:30:03'),
-(347, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0014998912811279', '2017-03-09 15:30:03'),
-(348, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010840892791748', '2017-03-09 15:30:03'),
-(349, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	NULL\n					WHERE id_paciente = 3 AND id_pregunta = 3', '::1', '0.0014619827270508', '2017-03-09 15:30:03'),
-(350, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0017821788787842', '2017-03-09 15:30:03'),
-(351, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011050701141357', '2017-03-09 15:30:03'),
-(352, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	NULL\n					WHERE id_paciente = 3 AND id_pregunta = 4', '::1', '0.0011639595031738', '2017-03-09 15:30:03'),
-(353, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0018041133880615', '2017-03-09 15:30:03'),
-(354, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012872219085693', '2017-03-09 15:30:03'),
-(355, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						gl_rut_agresor,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						nr_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						3,\n						NULL,\n						NULL,\n						NULL,\n						''12323'',\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						2,\n						now()\n						)', '::1', '0.0012218952178955', '2017-03-09 15:30:03'),
-(356, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 19', '::1', '0.0017039775848389', '2017-03-09 15:30:03'),
-(357, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''3'',0,'' Agresor creado el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011498928070068', '2017-03-09 15:30:03'),
-(358, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= NULL,\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= NULL,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= NULL,\n						id_tipo_escolaridad				= NULL,\n						fc_reconoce						= ''2017-03-09'',\n						fc_hora_reconoce				= ''12:28'',\n						gl_acompañante					= NULL,\n						fc_actualiza					= now(),\n						bo_reconoce						= 1\n					WHERE id_paciente = 3', '::1', '0.0017421245574951', '2017-03-09 15:30:03'),
-(359, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 5', '::1', '0.0016059875488281', '2017-03-09 15:30:03'),
-(360, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''3'',0,''Paciente Reconoce Violencia el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011332035064697', '2017-03-09 15:30:03'),
-(361, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0017530918121338', '2017-03-09 15:30:03'),
-(362, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',0,''Reconoce Agresor : 2017-03-09'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010721683502197', '2017-03-09 15:30:03'),
-(363, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	1\n					WHERE id_paciente = 3 AND id_pregunta = 1', '::1', '0.0013761520385742', '2017-03-09 15:32:30'),
-(364, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.00193190574646', '2017-03-09 15:32:30'),
-(365, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012538433074951', '2017-03-09 15:32:30'),
-(366, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 3 AND id_pregunta = 2', '::1', '0.0013949871063232', '2017-03-09 15:32:30'),
-(367, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0018069744110107', '2017-03-09 15:32:30'),
-(368, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010168552398682', '2017-03-09 15:32:30'),
-(369, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	1\n					WHERE id_paciente = 3 AND id_pregunta = 3', '::1', '0.0015799999237061', '2017-03-09 15:32:30'),
-(370, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0015740394592285', '2017-03-09 15:32:30'),
-(371, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00081014633178711', '2017-03-09 15:32:30'),
-(372, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	4\n					WHERE id_paciente = 3 AND id_pregunta = 4', '::1', '0.001492977142334', '2017-03-09 15:32:30'),
-(373, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 18', '::1', '0.0014948844909668', '2017-03-09 15:32:30'),
-(374, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''3'',0,''Paciente Agresor Violencia modificada el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00096487998962402', '2017-03-09 15:32:30'),
-(375, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						gl_rut_agresor,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						nr_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						3,\n						NULL,\n						NULL,\n						NULL,\n						''12323'',\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						NULL,\n						2,\n						now()\n						)', '::1', '0.0020201206207275', '2017-03-09 15:32:30'),
-(376, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 19', '::1', '0.0013589859008789', '2017-03-09 15:32:30'),
-(377, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''3'',0,'' Agresor creado el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00088119506835938', '2017-03-09 15:32:30'),
-(378, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= NULL,\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= NULL,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= NULL,\n						id_tipo_escolaridad				= NULL,\n						fc_reconoce						= ''2017-03-09'',\n						fc_hora_reconoce				= ''12:31'',\n						gl_acompañante					= NULL,\n						fc_actualiza					= now(),\n						bo_reconoce						= 1\n					WHERE id_paciente = 3', '::1', '0.0010008811950684', '2017-03-09 15:32:30'),
-(379, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 5', '::1', '0.0013461112976074', '2017-03-09 15:32:30'),
-(380, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''3'',0,''Paciente Reconoce Violencia el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00085902214050293', '2017-03-09 15:32:30'),
-(381, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0013298988342285', '2017-03-09 15:32:30'),
-(382, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',0,''Reconoce Agresor : 2017-03-09'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00093388557434082', '2017-03-09 15:32:30'),
-(383, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	\n					WHERE id_empa = 5 AND id_pregunta = 1', '::1', '0.0012731552124023', '2017-03-09 16:00:57'),
-(384, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	\n					WHERE id_empa = 5 AND id_pregunta = 2', '::1', '0.00094699859619141', '2017-03-09 16:00:57'),
-(385, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	\n					WHERE id_empa = 5 AND id_pregunta = 3', '::1', '0.00081515312194824', '2017-03-09 16:00:57'),
-(386, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	\n					WHERE id_empa = 5 AND id_pregunta = 4', '::1', '0.00093293190002441', '2017-03-09 16:00:57'),
-(387, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	\n					WHERE id_empa = 5 AND id_pregunta = 5', '::1', '0.00094413757324219', '2017-03-09 16:00:57'),
-(388, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	\n					WHERE id_empa = 5 AND id_pregunta = 6', '::1', '0.0010309219360352', '2017-03-09 16:00:57'),
-(389, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	\n					WHERE id_empa = 5 AND id_pregunta = 7', '::1', '0.0009758472442627', '2017-03-09 16:00:57'),
-(390, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	\n					WHERE id_empa = 5 AND id_pregunta = 8', '::1', '0.00088310241699219', '2017-03-09 16:00:57'),
-(391, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	\n					WHERE id_empa = 5 AND id_pregunta = 9', '::1', '0.00077700614929199', '2017-03-09 16:00:57'),
-(392, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	\n					WHERE id_empa = 5 AND id_pregunta = 10', '::1', '0.00085997581481934', '2017-03-09 16:00:57');
-INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`, `gl_ip`, `gl_tiempo`, `fc_creacion`) VALUES
-(393, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= '''',\n						id_institucion					= 2462,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-09'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= NULL,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 0,	\n						fc_mamografia_mes				= ''0'',	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.002223014831543', '2017-03-09 16:05:14'),
-(394, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0015730857849121', '2017-03-09 16:05:14'),
-(395, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''1'',''1'',''Empa modificado el : 09-03-2017 por usuario 2'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00105881690979', '2017-03-09 16:05:14'),
-(396, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= '''',\n						id_institucion					= 2462,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-09'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= NULL,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 0,	\n						fc_mamografia_mes				= ''0'',	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 5', '::1', '0.0023179054260254', '2017-03-09 16:06:33'),
-(397, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0011470317840576', '2017-03-09 16:06:33'),
-(398, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',''5'',''Empa modificado el : 09-03-2017 por usuario 2'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00096797943115234', '2017-03-09 16:06:33'),
-(399, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= '''',\n						id_institucion					= 2462,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-09'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= NULL,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 0,	\n						fc_mamografia_mes				= ''0'',	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 5', '::1', '0.0019469261169434', '2017-03-09 16:06:46'),
-(400, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0014297962188721', '2017-03-09 16:06:46'),
-(401, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',''5'',''Empa modificado el : 09-03-2017 por usuario 2'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0013549327850342', '2017-03-09 16:06:46'),
-(402, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= '''',\n						id_institucion					= 2462,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-09'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= NULL,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 0,	\n						fc_mamografia_mes				= ''0'',	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 1', '::1', '0.0022821426391602', '2017-03-09 16:06:54'),
-(403, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0012400150299072', '2017-03-09 16:06:54'),
-(404, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''1'',''1'',''Empa modificado el : 09-03-2017 por usuario 2'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010180473327637', '2017-03-09 16:06:54'),
-(405, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= '''',\n						id_institucion					= 2462,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-09'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= NULL,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 0,	\n						fc_mamografia_mes				= ''0'',	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 5', '::1', '0.0020489692687988', '2017-03-09 16:07:24'),
-(406, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0013840198516846', '2017-03-09 16:07:24'),
-(407, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',''5'',''Empa modificado el : 09-03-2017 por usuario 2'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011961460113525', '2017-03-09 16:07:24'),
-(408, 2, 'UPDATE', 'UPDATE pre_empa SET\r\n						id_comuna						= 349,\r\n						gl_sector						= '''',\r\n						id_institucion					= 2462,\r\n						nr_ficha						= NULL,\r\n						fc_empa							= ''2017-03-09'',\r\n						bo_embarazo						= NULL,\r\n						bo_consume_alcohol				= NULL,\r\n						gl_puntos_audit					= NULL,\r\n						bo_fuma							= NULL,\r\n						gl_peso							= NULL,\r\n						gl_estatura						= NULL,\r\n						gl_imc							= NULL,\r\n						gl_circunferencia_abdominal		= NULL,\r\n						id_clasificacion_imc			= NULL,\r\n						gl_pas							= NULL,\r\n						gl_pad							= NULL,\r\n						gl_glicemia						= NULL,\r\n						bo_glicemia_toma				= NULL,\r\n						bo_trabajadora_reclusa			= 1,\r\n						bo_vdrl							= 1,\r\n						bo_rpr							= 1,\r\n						bo_vih							= 1,	\r\n						bo_tos_productiva				= NULL,\r\n						bo_baciloscopia_toma			= NULL,\r\n						bo_pap_realizado				= NULL,\r\n						bo_pap_resultado				= NULL,\r\n						fc_tomar_pap					= NULL,\r\n						fc_ultimo_pap_ano				= 0,	\r\n						fc_ultimo_pap_mes				= ''0'',	\r\n						bo_pap_vigente					= NULL,\r\n						bo_pap_toma						= NULL,\r\n						gl_colesterol					= NULL,\r\n						bo_colesterol_toma				= NULL,\r\n						bo_mamografia_realizada			= NULL,\r\n						bo_mamografia_resultado_pasado	= NULL,\r\n						bo_mamografia_resultado			= NULL,\r\n						fc_mamografia					= NULL,\r\n						fc_mamografia_ano				= 0,	\r\n						fc_mamografia_mes				= ''0'',	\r\n						bo_mamografia_vigente			= NULL,\r\n						bo_mamografia_toma				= NULL,\r\n						gl_observaciones_empa			= NULL,\r\n						fc_actualiza					= now(),\r\n						id_usuario_act					= 2,\r\n						bo_finalizado					= 1\r\n					WHERE id_empa = 5', '::1', '0.003000020980835', '2017-03-09 17:32:43'),
-(409, 2, 'UPDATE', 'UPDATE pre_evento SET\r\n						bo_mostrar			= 0,\r\n						id_usuario_crea		= 2,\r\n						fc_crea				= now()\r\n					WHERE id_evento_tipo = 12', '::1', '0.0039999485015869', '2017-03-09 17:32:43'),
-(410, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',''5'',''Empa modificado el : 09-03-2017 por usuario 2'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.002000093460083', '2017-03-09 17:32:43'),
-(411, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= '''',\n						id_institucion					= 2462,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-09'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= NULL,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 0,	\n						fc_mamografia_mes				= ''0'',	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 5', '::1', '0.002331018447876', '2017-03-09 17:41:50'),
-(412, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0018699169158936', '2017-03-09 17:41:50'),
-(413, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',''5'',''Empa modificado el : 09-03-2017 por usuario 2'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0013689994812012', '2017-03-09 17:41:50'),
-(414, 2, 'INSERT', 'INSERT INTO pre_auditoria_login \r\n						(\r\n							id_usuario,\r\n							gl_rut,\r\n							gl_origen,\r\n							gl_token,\r\n							ip_privada,\r\n							ip_publica\r\n						)\r\n						VALUES (''6'',''11111111-1'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0039999485015869', '2017-03-09 17:56:39'),
-(415, 2, 'UPDATE', 'UPDATE pre_usuario\r\n					SET fc_ultimo_login = now()\r\n					WHERE id_usuario = ''6''', '::1', '0.00099992752075195', '2017-03-09 17:56:39'),
-(416, 6, 'INSERT', 'INSERT INTO pre_auditoria_login \r\n						(\r\n							id_usuario,\r\n							gl_rut,\r\n							gl_origen,\r\n							gl_token,\r\n							ip_privada,\r\n							ip_publica\r\n						)\r\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.002000093460083', '2017-03-09 17:57:14'),
-(417, 6, 'UPDATE', 'UPDATE pre_usuario\r\n					SET fc_ultimo_login = now()\r\n					WHERE id_usuario = ''2''', '::1', '0.00099992752075195', '2017-03-09 17:57:14'),
-(418, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= '''',\n						id_institucion					= 2462,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-09'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= NULL,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 0,	\n						fc_mamografia_mes				= ''0'',	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 5', '::1', '0.0019159317016602', '2017-03-09 18:06:13'),
-(419, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0025298595428467', '2017-03-09 18:06:13'),
-(420, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',''5'',''Empa modificado el : 09-03-2017 por usuario 2'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.016577959060669', '2017-03-09 18:06:13'),
-(421, 2, 'INSERT', 'INSERT INTO pre_paciente\r\n						(\r\n						id_institucion,\r\n						id_region,\r\n						id_comuna,\r\n						id_prevision,\r\n						gl_grupo_tipo,\r\n						gl_rut,\r\n						bo_extranjero,\r\n						gl_run_pass,\r\n						gl_nombres,\r\n						gl_apellidos,\r\n						fc_nacimiento,\r\n						gl_direccion,\r\n						gl_fono,\r\n						gl_celular,\r\n						gl_email,\r\n						id_centro_salud,\r\n						gl_latitud,\r\n						gl_longitud,\r\n						bo_reconoce,\r\n						bo_acepta_programa,\r\n						fc_crea,\r\n						id_usuario_crea\r\n						)\r\n					VALUES\r\n						(\r\n						2462,\r\n						5,\r\n						35,\r\n						1,\r\n						''Tratamiento'',\r\n						''22222222-2'',\r\n						''0'',\r\n						'''',\r\n						''Paciente'',\r\n						''Prueba'',\r\n						''1981-03-09'',\r\n						''Pedro Montt 2120, Valparaíso, Chile'',\r\n						''52121459'',\r\n						''995874212'',\r\n						''prueba@prueba.cl'',\r\n						''2057'',\r\n						''-33.047121'',\r\n						''-71.61455030000002'',\r\n						''0'',\r\n						1,\r\n						now(),\r\n						2\r\n						)', '::1', '0.12479996681213', '2017-03-09 18:07:01'),
-(422, 2, 'INSERT', 'INSERT INTO pre_paciente\r\n						(\r\n						id_institucion,\r\n						id_region,\r\n						id_comuna,\r\n						id_prevision,\r\n						gl_grupo_tipo,\r\n						gl_rut,\r\n						bo_extranjero,\r\n						gl_run_pass,\r\n						gl_nombres,\r\n						gl_apellidos,\r\n						fc_nacimiento,\r\n						gl_direccion,\r\n						gl_fono,\r\n						gl_celular,\r\n						gl_email,\r\n						id_centro_salud,\r\n						gl_latitud,\r\n						gl_longitud,\r\n						bo_reconoce,\r\n						bo_acepta_programa,\r\n						fc_crea,\r\n						id_usuario_crea\r\n						)\r\n					VALUES\r\n						(\r\n						2462,\r\n						5,\r\n						35,\r\n						1,\r\n						''Tratamiento'',\r\n						''22222222-2'',\r\n						''0'',\r\n						'''',\r\n						''Paciente'',\r\n						''Prueba'',\r\n						''1981-03-09'',\r\n						''Pedro Montt 2120, Valparaíso, Chile'',\r\n						''52121459'',\r\n						''995874212'',\r\n						''prueba@prueba.cl'',\r\n						''2057'',\r\n						''-33.047121'',\r\n						''-71.61455030000002'',\r\n						''0'',\r\n						1,\r\n						now(),\r\n						2\r\n						)', '::1', '0', '2017-03-09 18:07:12'),
-(423, 2, 'INSERT', 'INSERT INTO pre_paciente\r\n						(\r\n						id_institucion,\r\n						id_region,\r\n						id_comuna,\r\n						id_prevision,\r\n						gl_grupo_tipo,\r\n						gl_rut,\r\n						bo_extranjero,\r\n						gl_run_pass,\r\n						gl_nombres,\r\n						gl_apellidos,\r\n						fc_nacimiento,\r\n						gl_direccion,\r\n						gl_fono,\r\n						gl_celular,\r\n						gl_email,\r\n						id_centro_salud,\r\n						gl_latitud,\r\n						gl_longitud,\r\n						bo_reconoce,\r\n						bo_acepta_programa,\r\n						fc_crea,\r\n						id_usuario_crea\r\n						)\r\n					VALUES\r\n						(\r\n						2462,\r\n						5,\r\n						35,\r\n						1,\r\n						''Tratamiento'',\r\n						''22222222-2'',\r\n						''0'',\r\n						'''',\r\n						''Paciente'',\r\n						''Prueba'',\r\n						''1981-03-09'',\r\n						''Pedro Montt 2120, Valparaíso, Chile'',\r\n						''52121459'',\r\n						''995874212'',\r\n						''prueba@prueba.cl'',\r\n						''2057'',\r\n						''-33.047121'',\r\n						''-71.61455030000002'',\r\n						''0'',\r\n						1,\r\n						now(),\r\n						2\r\n						)', '::1', '0', '2017-03-09 18:07:35'),
-(424, 2, 'INSERT', 'INSERT INTO pre_paciente\r\n						(\r\n						id_institucion,\r\n						id_region,\r\n						id_comuna,\r\n						id_prevision,\r\n						gl_grupo_tipo,\r\n						gl_rut,\r\n						bo_extranjero,\r\n						gl_run_pass,\r\n						gl_nombres,\r\n						gl_apellidos,\r\n						fc_nacimiento,\r\n						gl_direccion,\r\n						gl_fono,\r\n						gl_celular,\r\n						gl_email,\r\n						id_centro_salud,\r\n						gl_latitud,\r\n						gl_longitud,\r\n						bo_reconoce,\r\n						bo_acepta_programa,\r\n						fc_crea,\r\n						id_usuario_crea\r\n						)\r\n					VALUES\r\n						(\r\n						2462,\r\n						5,\r\n						35,\r\n						1,\r\n						''Tratamiento'',\r\n						''22222222-2'',\r\n						''0'',\r\n						'''',\r\n						''Paciente'',\r\n						''Prueba'',\r\n						''1981-03-09'',\r\n						''Pedro Montt 2120, Valparaíso, Chile'',\r\n						''52121459'',\r\n						''995874212'',\r\n						''prueba@prueba.cl'',\r\n						''2057'',\r\n						''-33.047121'',\r\n						''-71.61455030000002'',\r\n						''0'',\r\n						1,\r\n						now(),\r\n						2\r\n						)', '::1', '0', '2017-03-09 18:08:10'),
-(425, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0012931823730469', '2017-03-09 18:09:14'),
-(426, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0016579627990723', '2017-03-09 18:09:14'),
-(427, 2, 'INSERT', 'INSERT INTO pre_paciente\r\n						(\r\n						id_institucion,\r\n						id_region,\r\n						id_comuna,\r\n						id_prevision,\r\n						gl_grupo_tipo,\r\n						gl_rut,\r\n						bo_extranjero,\r\n						gl_run_pass,\r\n						gl_nombres,\r\n						gl_apellidos,\r\n						fc_nacimiento,\r\n						gl_direccion,\r\n						gl_fono,\r\n						gl_celular,\r\n						gl_email,\r\n						id_centro_salud,\r\n						gl_latitud,\r\n						gl_longitud,\r\n						bo_reconoce,\r\n						bo_acepta_programa,\r\n						fc_crea,\r\n						id_usuario_crea\r\n						)\r\n					VALUES\r\n						(\r\n						2462,\r\n						5,\r\n						35,\r\n						1,\r\n						''Tratamiento'',\r\n						''22222222-2'',\r\n						''0'',\r\n						'''',\r\n						''Paciente'',\r\n						''Prueba'',\r\n						''1981-03-09'',\r\n						''Pedro Montt 2120, Valparaíso, Chile'',\r\n						''52121459'',\r\n						''995874212'',\r\n						''prueba@prueba.cl'',\r\n						''2057'',\r\n						''-33.047121'',\r\n						''-71.61455030000002'',\r\n						''0'',\r\n						1,\r\n						now(),\r\n						2\r\n						)', '::1', '0.00099992752075195', '2017-03-09 18:11:33'),
-(428, 2, 'INSERT', 'INSERT INTO pre_adjunto(id_paciente,id_adjunto_tipo,gl_nombre,gl_path,gl_glosa,sha256,fc_crea,id_usuario_crea) VALUES(''4'',1,''Consentimiento_22222222-2.pdf'',''archivos/4/Consentimiento_22222222-2.pdf'',''Consentimiento Firmado'',''a1c24a12b467de402e343ea46f7be002805fae0b5c90243b4c5e3979882d5d44'',''2017-03-09 03:03:40'',''2'')', '::1', '0.0019998550415039', '2017-03-09 18:11:33'),
-(429, 2, 'INSERT', 'INSERT INTO pre_paciente_registro\r\n						(\r\n						id_paciente,\r\n						id_institucion,\r\n						fc_ingreso,\r\n						gl_hora_ingreso,\r\n						gl_motivo_consulta,\r\n						fc_crea,\r\n						id_usuario_crea\r\n						)\r\n					VALUES  \r\n						(\r\n						4,\r\n						2462,\r\n						''2017-03-09'',\r\n						''15:02'',\r\n						''Consulta de Prueba'',\r\n						now(),\r\n						''2''\r\n						)', '::1', '0.00099992752075195', '2017-03-09 18:11:33'),
-(430, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''4'',1)', '::1', '0.0010001659393311', '2017-03-09 18:11:33'),
-(431, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''4'',2)', '::1', '0.00099992752075195', '2017-03-09 18:11:33'),
-(432, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''7'',1,''2'')', '::1', '0.014001131057739', '2017-03-09 18:11:33'),
-(433, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''8'',1,''2'')', '::1', '0.0010001659393311', '2017-03-09 18:11:33'),
-(434, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''7'',2,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:33'),
-(435, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''8'',2,''2'')', '::1', '0', '2017-03-09 18:11:33'),
-(436, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''7'',3,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:33'),
-(437, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''8'',3,''2'')', '::1', '0.0010001659393311', '2017-03-09 18:11:33'),
-(438, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''7'',4,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:33'),
-(439, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''8'',4,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:33'),
-(440, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''7'',5,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:33'),
-(441, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''8'',5,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(442, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''7'',6,''2'')', '::1', '0.0010001659393311', '2017-03-09 18:11:34'),
-(443, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''8'',6,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(444, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''7'',7,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(445, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''8'',7,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(446, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''7'',8,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(447, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''8'',8,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(448, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''7'',9,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(449, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''8'',9,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(450, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''7'',10,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(451, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''8'',10,''2'')', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(452, 2, 'INSERT', 'INSERT into pre_evento values(null,1,''4'',0,''Paciente creado el : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010001659393311', '2017-03-09 18:11:34'),
-(453, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''4'',''7'',''Empa 7 creado el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(454, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''4'',''8'',''Empa 8 creado el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(455, 2, 'INSERT', 'INSERT into pre_evento values(null,14,''4'',''7'',''AUDIT del EMPA7 creado el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010001659393311', '2017-03-09 18:11:34'),
-(456, 2, 'INSERT', 'INSERT into pre_evento values(null,14,''4'',''8'',''AUDIT del EMPA8 creado el : 09-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(457, 2, 'INSERT', 'INSERT into pre_evento values(null,4,''4'',0,''AUDIT del EMPA8 creado el : Acepta el programa con fecha : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010011196136475', '2017-03-09 18:11:34'),
-(458, 2, 'UPDATE', 'UPDATE pre_paciente_direccion SET\r\n						bo_estado					= 0,\r\n						id_usuario_actualiza		= 2,\r\n						fc_actualiza				= now()\r\n					WHERE id_paciente = 4', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(459, 2, 'INSERT', 'INSERT INTO pre_paciente_direccion\r\n						(\r\n						id_paciente,\r\n						id_comuna,\r\n						id_region,\r\n						gl_direccion,\r\n						gl_latitud,\r\n						gl_longitud,\r\n						bo_estado,\r\n						id_usuario_crea,\r\n						fc_crea,\r\n						id_usuario_actualiza,\r\n						fc_actualiza\r\n						)\r\n					VALUES\r\n						(\r\n						4,\r\n						35,\r\n						5,\r\n						''Pedro Montt 2120, Valparaíso, Chile'',\r\n						''-33.047121'',\r\n						''-71.61455030000002'',\r\n						1,\r\n						2,\r\n						now(),\r\n						2,\r\n						now()\r\n						)', '::1', '0.00099992752075195', '2017-03-09 18:11:34'),
-(460, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= '''',\n						id_institucion					= 2462,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-09'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						bo_antecedente_diabetes			= NULL,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= NULL,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 0,	\n						fc_mamografia_mes				= ''0'',	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 5', '::1', '0.002000093460083', '2017-03-09 18:13:11'),
-(461, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0015101432800293', '2017-03-09 18:13:11'),
-(462, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',''5'',''Empa modificado el : 09-03-2017 por usuario 2'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012390613555908', '2017-03-09 18:13:11'),
-(463, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= '''',\n						id_institucion					= 2462,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-09'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						bo_antecedente_diabetes			= 1,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= NULL,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 0,	\n						fc_mamografia_mes				= ''0'',	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 5', '::1', '0.0023050308227539', '2017-03-09 18:15:34'),
-(464, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0019659996032715', '2017-03-09 18:15:34'),
-(465, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',''5'',''Empa modificado el : 09-03-2017 por usuario 2'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00097990036010742', '2017-03-09 18:15:34'),
-(466, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= '''',\n						id_institucion					= 2462,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-09'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						bo_antecedente_diabetes			= 0,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= NULL,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 0,	\n						fc_mamografia_mes				= ''0'',	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 5', '::1', '0.0021600723266602', '2017-03-09 18:15:52'),
-(467, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.001514196395874', '2017-03-09 18:15:52'),
-(468, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',''5'',''Empa modificado el : 09-03-2017 por usuario 2'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010781288146973', '2017-03-09 18:15:52'),
-(469, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= '''',\n						id_institucion					= 2462,\n						nr_ficha						= NULL,\n						fc_empa							= ''2017-03-09'',\n						bo_embarazo						= NULL,\n						bo_consume_alcohol				= NULL,\n						gl_puntos_audit					= NULL,\n						bo_fuma							= NULL,\n						gl_peso							= NULL,\n						gl_estatura						= NULL,\n						gl_imc							= NULL,\n						gl_circunferencia_abdominal		= NULL,\n						id_clasificacion_imc			= NULL,\n						gl_pas							= NULL,\n						gl_pad							= NULL,\n						bo_antecedente_diabetes			= 0,\n						gl_glicemia						= NULL,\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= NULL,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= NULL,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= NULL,\n						bo_pap_resultado				= NULL,\n						fc_tomar_pap					= NULL,\n						fc_ultimo_pap_ano				= 0,	\n						fc_ultimo_pap_mes				= ''0'',	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= NULL,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia					= NULL,\n						fc_mamografia_ano				= 0,	\n						fc_mamografia_mes				= ''0'',	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						gl_observaciones_empa			= NULL,\n						fc_actualiza					= now(),\n						id_usuario_act					= 2,\n						bo_finalizado					= 1\n					WHERE id_empa = 5', '::1', '0.0021779537200928', '2017-03-09 18:16:15'),
-(470, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 12', '::1', '0.0015289783477783', '2017-03-09 18:16:15'),
-(471, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''3'',''5'',''Empa modificado el : 09-03-2017 por usuario 2'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012381076812744', '2017-03-09 18:16:15');
+(163, 2, 'INSERT', 'INSERT into pre_evento values(null,4,''3'',0,''Acepta el programa con fecha : 09-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '127.0.0.1', '0.00091314315795898', '2017-03-09 14:11:03');
 
 -- --------------------------------------------------------
 
@@ -595,26 +284,20 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria_login` (
   `gl_token` varchar(255) DEFAULT NULL,
   `ip_privada` varchar(50) DEFAULT '0.0.0.0',
   `ip_publica` varchar(50) DEFAULT '0.0.0.0',
-  `fc_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `fc_creacion` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_auditoria_login`),
   KEY `IDX_id_usuario` (`id_usuario`),
   KEY `IDX_gl_rut` (`gl_rut`),
   KEY `IDX_ip_privada` (`ip_privada`),
   KEY `IDX_ip_publica` (`ip_publica`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `pre_auditoria_login`
 --
 
 INSERT INTO `pre_auditoria_login` (`id_auditoria_login`, `id_usuario`, `gl_rut`, `gl_origen`, `gl_token`, `ip_privada`, `ip_publica`, `fc_creacion`) VALUES
-(1, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-09 12:52:19'),
-(2, 0, '1325524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-09 14:35:00'),
-(3, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-09 14:35:15'),
-(4, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-09 15:20:55'),
-(5, 6, '11111111-1', 'login', '', '0.0.0', '::1', '2017-03-09 17:56:39'),
-(6, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-09 17:57:14'),
-(7, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-09 18:09:14');
+(1, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-09 12:52:19');
 
 -- --------------------------------------------------------
 
@@ -638,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `pre_centro_salud` (
   `gl_longitud` varchar(30) DEFAULT NULL,
   `bo_estado` int(1) DEFAULT '1',
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_centro_salud`),
   UNIQUE KEY `cd_establecimiento` (`cd_establecimiento`),
   KEY `IDX_id_region` (`id_region`),
@@ -3183,7 +2866,7 @@ CREATE TABLE IF NOT EXISTS `pre_comuna` (
   `id_provincia` int(11) DEFAULT '0',
   `gl_nombre_comuna` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_comuna`),
   KEY `IDX_id_provincia` (`id_provincia`),
   KEY `IDX_id_region` (`id_region`)
@@ -3555,9 +3238,9 @@ CREATE TABLE IF NOT EXISTS `pre_diagnostico` (
   `id_paciente` int(11) NOT NULL,
   `gl_diagnostico` longtext,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   `id_usuario_act` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `fc_actualiza` datetime DEFAULT NULL,
   PRIMARY KEY (`id_diagnostico`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_usuario_act` (`id_usuario_act`),
@@ -3591,7 +3274,6 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   `id_clasificacion_imc` int(11) DEFAULT NULL,
   `gl_pas` varchar(100) DEFAULT NULL,
   `gl_pad` varchar(100) DEFAULT NULL,
-  `bo_antecedente_diabetes` int(1) DEFAULT NULL,
   `gl_glicemia` varchar(100) DEFAULT NULL,
   `bo_glicemia_toma` int(1) DEFAULT NULL,
   `id_examen_glicemia` int(11) DEFAULT NULL,
@@ -3628,9 +3310,9 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   `fc_mamografia_mes` int(3) DEFAULT NULL,
   `gl_observaciones_empa` varchar(2000) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT '0',
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   `id_usuario_act` int(11) DEFAULT '0',
-  `fc_actualiza` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `fc_actualiza` datetime DEFAULT NULL ,
   PRIMARY KEY (`id_empa`),
   KEY `IDX_id_comuna` (`id_comuna`),
   KEY `IDX_id_institucion` (`id_institucion`),
@@ -3646,21 +3328,19 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   KEY `IDX_id_usuario_act` (`id_usuario_act`),
   KEY `IDX_nr_orden` (`nr_orden`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `pre_empa`
 --
 
-INSERT INTO `pre_empa` (`id_empa`, `id_paciente`, `nr_orden`, `bo_finalizado`, `id_comuna`, `gl_sector`, `id_institucion`, `nr_ficha`, `fc_empa`, `bo_embarazo`, `bo_consume_alcohol`, `gl_puntos_audit`, `bo_fuma`, `gl_peso`, `gl_estatura`, `gl_imc`, `gl_circunferencia_abdominal`, `id_clasificacion_imc`, `gl_pas`, `gl_pad`, `bo_antecedente_diabetes`, `gl_glicemia`, `bo_glicemia_toma`, `id_examen_glicemia`, `bo_trabajadora_reclusa`, `bo_vdrl`, `id_examen_vdrl`, `bo_rpr`, `id_examen_rpr`, `bo_vih`, `id_examen_vih`, `bo_tos_productiva`, `bo_baciloscopia_toma`, `id_examen_baciloscopia`, `bo_pap_realizado`, `bo_pap_resultado`, `fc_ultimo_pap`, `fc_ultimo_pap_ano`, `fc_ultimo_pap_mes`, `fc_tomar_pap`, `bo_pap_vigente`, `bo_pap_toma`, `id_examen_pap`, `gl_colesterol`, `bo_colesterol_toma`, `id_examen_colesterol`, `bo_mamografia_realizada`, `bo_mamografia_resultado_pasado`, `bo_mamografia_vigente`, `bo_mamografia_toma`, `bo_mamografia_resultado`, `id_examen_mamografia`, `fc_mamografia`, `fc_mamografia_ano`, `fc_mamografia_mes`, `gl_observaciones_empa`, `id_usuario_crea`, `fc_crea`, `id_usuario_act`, `fc_actualiza`) VALUES
-(1, 1, 1, 1, 349, '', 2462, NULL, '2017-03-09 00:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, '2017-03-09 12:52:11', 2, '2017-03-09 16:06:54'),
-(2, 1, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-09 12:52:11', 0, NULL),
-(3, 2, 1, 1, 349, '123', 2462, 354, '2017-03-09 00:00:00', 0, 1, '23', 0, '75', '175', '24.49', '65', 4, '120', '80', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 1, 0, NULL, 2017, 1, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, NULL, NULL, NULL, NULL, 2017, 1, 'EMPA Full', 0, '2017-03-09 12:59:06', 2, '2017-03-09 13:26:16'),
-(4, 2, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-09 12:59:06', 0, NULL),
-(5, 3, 1, 1, 349, '', 2462, NULL, '2017-03-09 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, '2017-03-09 13:52:00', 2, '2017-03-09 18:16:15'),
-(6, 3, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-09 13:52:00', 0, NULL),
-(7, 4, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-09 18:11:33', 0, NULL),
-(8, 4, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-09 18:11:33', 0, NULL);
+INSERT INTO `pre_empa` (`id_empa`, `id_paciente`, `nr_orden`, `bo_finalizado`, `id_comuna`, `gl_sector`, `id_institucion`, `nr_ficha`, `fc_empa`, `bo_embarazo`, `bo_consume_alcohol`, `gl_puntos_audit`, `bo_fuma`, `gl_peso`, `gl_estatura`, `gl_imc`, `gl_circunferencia_abdominal`, `id_clasificacion_imc`, `gl_pas`, `gl_pad`, `gl_glicemia`, `bo_glicemia_toma`, `id_examen_glicemia`, `bo_trabajadora_reclusa`, `bo_vdrl`, `id_examen_vdrl`, `bo_rpr`, `id_examen_rpr`, `bo_vih`, `id_examen_vih`, `bo_tos_productiva`, `bo_baciloscopia_toma`, `id_examen_baciloscopia`, `bo_pap_realizado`, `bo_pap_resultado`, `fc_ultimo_pap`, `fc_ultimo_pap_ano`, `fc_ultimo_pap_mes`, `fc_tomar_pap`, `bo_pap_vigente`, `bo_pap_toma`, `id_examen_pap`, `gl_colesterol`, `bo_colesterol_toma`, `id_examen_colesterol`, `bo_mamografia_realizada`, `bo_mamografia_resultado_pasado`, `bo_mamografia_vigente`, `bo_mamografia_toma`, `bo_mamografia_resultado`, `id_examen_mamografia`, `fc_mamografia`, `fc_mamografia_ano`, `fc_mamografia_mes`, `gl_observaciones_empa`, `id_usuario_crea`, `fc_crea`, `id_usuario_act`, `fc_actualiza`) VALUES
+(1, 1, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-09 12:52:11', 0, NULL),
+(2, 1, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-09 12:52:11', 0, NULL),
+(3, 2, 1, 1, 349, '123', 2462, 354, '2017-03-09 00:00:00', 0, 1, '23', 0, '75', '175', '24.49', '65', 4, '120', '80', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 1, 0, NULL, 2017, 1, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, NULL, NULL, NULL, NULL, 2017, 1, 'EMPA Full', 0, '2017-03-09 12:59:06', 2, '2017-03-09 13:26:16'),
+(4, 2, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-09 12:59:06', 0, NULL),
+(5, 3, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-09 13:52:00', 0, NULL),
+(6, 3, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-09 13:52:00', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -3674,11 +3354,11 @@ CREATE TABLE IF NOT EXISTS `pre_empa_audit` (
   `id_pregunta` int(11) NOT NULL,
   `nr_valor` int(11) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_audit`),
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=81 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=61 ;
 
 --
 -- Volcado de datos para la tabla `pre_empa_audit`
@@ -3744,27 +3424,7 @@ INSERT INTO `pre_empa_audit` (`id_audit`, `id_empa`, `id_pregunta`, `nr_valor`, 
 (57, 5, 9, NULL, 2, '2017-03-09 13:52:00'),
 (58, 6, 9, NULL, 2, '2017-03-09 13:52:00'),
 (59, 5, 10, NULL, 2, '2017-03-09 13:52:00'),
-(60, 6, 10, NULL, 2, '2017-03-09 13:52:00'),
-(61, 7, 1, NULL, 2, '2017-03-09 18:11:33'),
-(62, 8, 1, NULL, 2, '2017-03-09 18:11:33'),
-(63, 7, 2, NULL, 2, '2017-03-09 18:11:33'),
-(64, 8, 2, NULL, 2, '2017-03-09 18:11:33'),
-(65, 7, 3, NULL, 2, '2017-03-09 18:11:33'),
-(66, 8, 3, NULL, 2, '2017-03-09 18:11:33'),
-(67, 7, 4, NULL, 2, '2017-03-09 18:11:33'),
-(68, 8, 4, NULL, 2, '2017-03-09 18:11:33'),
-(69, 7, 5, NULL, 2, '2017-03-09 18:11:33'),
-(70, 8, 5, NULL, 2, '2017-03-09 18:11:33'),
-(71, 7, 6, NULL, 2, '2017-03-09 18:11:34'),
-(72, 8, 6, NULL, 2, '2017-03-09 18:11:34'),
-(73, 7, 7, NULL, 2, '2017-03-09 18:11:34'),
-(74, 8, 7, NULL, 2, '2017-03-09 18:11:34'),
-(75, 7, 8, NULL, 2, '2017-03-09 18:11:34'),
-(76, 8, 8, NULL, 2, '2017-03-09 18:11:34'),
-(77, 7, 9, NULL, 2, '2017-03-09 18:11:34'),
-(78, 8, 9, NULL, 2, '2017-03-09 18:11:34'),
-(79, 7, 10, NULL, 2, '2017-03-09 18:11:34'),
-(80, 8, 10, NULL, 2, '2017-03-09 18:11:34');
+(60, 6, 10, NULL, 2, '2017-03-09 13:52:00');
 
 -- --------------------------------------------------------
 
@@ -3786,7 +3446,7 @@ CREATE TABLE IF NOT EXISTS `pre_empa_audit_pregunta` (
   `gl_respuesta5` varchar(50) DEFAULT NULL,
   `nr_respuesta5_puntos` int(11) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_pregunta`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -3822,12 +3482,12 @@ CREATE TABLE IF NOT EXISTS `pre_evento` (
   `bo_estado` int(1) DEFAULT '1',
   `bo_mostrar` int(1) DEFAULT '1' COMMENT '1=SI',
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_evento`),
   KEY `IDX_id_evento_tipo` (`id_evento_tipo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=121 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=31 ;
 
 --
 -- Volcado de datos para la tabla `pre_evento`
@@ -3847,9 +3507,9 @@ INSERT INTO `pre_evento` (`id_evento`, `id_evento_tipo`, `id_paciente`, `id_empa
 (11, 4, 2, 0, 'AUDIT del EMPA4 creado el : Acepta el programa con fecha : 09-03-2017', 1, 1, 2, '2017-03-09 12:59:06'),
 (12, 15, 0, 3, 'AUDIT del EMPA 3  modificado el : 2017-03-09', 1, 0, 2, '2017-03-09 13:11:01'),
 (13, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-09', 1, 1, 2, '2017-03-09 13:11:01'),
-(14, 12, 2, 3, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(15, 12, 2, 3, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(16, 12, 2, 3, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
+(14, 12, 2, 3, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 13:26:16'),
+(15, 12, 2, 3, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 13:26:16'),
+(16, 12, 2, 3, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 1, 2, '2017-03-09 13:26:16'),
 (17, 20, 2, 0, 'Plan tratamiento Iniciado el : 09-03-2017', 1, 0, 2, '2017-03-09 13:37:46'),
 (18, 20, 2, 0, 'Plan tratamiento Iniciado el : 09-03-2017', 1, 0, 2, '2017-03-09 13:37:46'),
 (19, 20, 2, 0, 'Plan tratamiento Iniciado el : 09-03-2017', 1, 0, 2, '2017-03-09 13:37:46'),
@@ -3863,97 +3523,7 @@ INSERT INTO `pre_evento` (`id_evento`, `id_evento_tipo`, `id_paciente`, `id_empa
 (27, 16, 2, 0, 'Motivo consulta agregada el : 09-03-2017', 1, 0, 2, '2017-03-09 13:59:37'),
 (28, 4, 2, 0, 'Acepta el programa con fecha : 09-03-2017', 1, 1, 2, '2017-03-09 13:59:37'),
 (29, 16, 3, 0, 'Motivo consulta agregada el : 09-03-2017', 1, 0, 2, '2017-03-09 14:11:03'),
-(30, 4, 3, 0, 'Acepta el programa con fecha : 09-03-2017', 1, 1, 2, '2017-03-09 14:11:03'),
-(31, 16, 3, 0, 'Motivo consulta agregada el : 09-03-2017', 1, 0, 2, '2017-03-09 14:18:02'),
-(32, 4, 3, 0, 'Acepta el programa con fecha : 09-03-2017', 1, 1, 2, '2017-03-09 14:18:02'),
-(33, 16, 3, 0, 'Motivo consulta agregada el : 09-03-2017', 1, 0, 2, '2017-03-09 14:18:19'),
-(34, 4, 3, 0, 'Acepta el programa con fecha : 09-03-2017', 1, 1, 2, '2017-03-09 14:18:19'),
-(35, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(36, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(37, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(38, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(39, 19, 3, 0, ' Agresor creado el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(40, 5, 3, 0, 'Paciente Reconoce Violencia el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(41, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(42, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(43, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(44, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(45, 19, 3, 0, ' Agresor creado el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(46, 5, 3, 0, 'Paciente Reconoce Violencia el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(47, 12, 3, 0, 'Reconoce Agresor : 2017-03-09', 1, 0, 2, '2017-03-09 18:16:15'),
-(48, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(49, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(50, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(51, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(52, 19, 3, 0, ' Agresor creado el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(53, 5, 3, 0, 'Paciente Reconoce Violencia el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(54, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(55, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(56, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(57, 17, 3, 0, 'Paciente Agresor Violencia creada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:03:33'),
-(58, 19, 3, 0, ' Agresor creado el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(59, 5, 3, 0, 'Paciente Reconoce Violencia el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(60, 12, 3, 0, 'Reconoce Agresor : 2017-03-09', 1, 0, 2, '2017-03-09 18:16:15'),
-(61, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(62, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(63, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(64, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(65, 19, 3, 0, ' Agresor creado el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(66, 5, 3, 0, 'Paciente Reconoce Violencia el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(67, 12, 3, 0, 'Reconoce Agresor : 2017-03-09', 1, 0, 2, '2017-03-09 18:16:15'),
-(68, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(69, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(70, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(71, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(72, 19, 3, 0, ' Agresor creado el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(73, 5, 3, 0, 'Paciente Reconoce Violencia el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(74, 12, 3, 0, 'Reconoce Agresor : 2017-03-09', 1, 0, 2, '2017-03-09 18:16:15'),
-(75, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(76, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(77, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(78, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(79, 19, 3, 0, ' Agresor creado el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(80, 5, 3, 0, 'Paciente Reconoce Violencia el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(81, 12, 3, 0, 'Reconoce Agresor : 2017-03-09', 1, 0, 2, '2017-03-09 18:16:15'),
-(82, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(83, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(84, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(85, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(86, 19, 3, 0, ' Agresor creado el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(87, 5, 3, 0, 'Paciente Reconoce Violencia el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(88, 12, 3, 0, 'Reconoce Agresor : 2017-03-09', 1, 0, 2, '2017-03-09 18:16:15'),
-(89, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(90, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(91, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(92, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(93, 19, 3, 0, ' Agresor creado el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(94, 5, 3, 0, 'Paciente Reconoce Violencia el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(95, 12, 3, 0, 'Reconoce Agresor : 2017-03-09', 1, 0, 2, '2017-03-09 18:16:15'),
-(96, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(97, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(98, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 0, 2, '2017-03-09 15:32:30'),
-(99, 18, 3, 0, 'Paciente Agresor Violencia modificada el : 09-03-2017', 1, 1, 2, '2017-03-09 15:32:30'),
-(100, 19, 3, 0, ' Agresor creado el : 09-03-2017', 1, 1, 2, '2017-03-09 15:32:30'),
-(101, 5, 3, 0, 'Paciente Reconoce Violencia el : 09-03-2017', 1, 1, 2, '2017-03-09 15:32:30'),
-(102, 12, 3, 0, 'Reconoce Agresor : 2017-03-09', 1, 0, 2, '2017-03-09 18:16:15'),
-(103, 12, 1, 1, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(104, 12, 3, 5, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(105, 12, 3, 5, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(106, 12, 1, 1, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(107, 12, 3, 5, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(108, 12, 3, 5, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(109, 12, 3, 5, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(110, 12, 3, 5, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(111, 1, 4, 0, 'Paciente creado el : 09-03-2017', 1, 1, 2, '2017-03-09 18:11:34'),
-(112, 13, 4, 7, 'Empa 7 creado el : 09-03-2017', 1, 0, 2, '2017-03-09 18:11:34'),
-(113, 13, 4, 8, 'Empa 8 creado el : 09-03-2017', 1, 0, 2, '2017-03-09 18:11:34'),
-(114, 14, 4, 7, 'AUDIT del EMPA7 creado el : 09-03-2017', 1, 0, 2, '2017-03-09 18:11:34'),
-(115, 14, 4, 8, 'AUDIT del EMPA8 creado el : 09-03-2017', 1, 0, 2, '2017-03-09 18:11:34'),
-(116, 4, 4, 0, 'AUDIT del EMPA8 creado el : Acepta el programa con fecha : 09-03-2017', 1, 1, 2, '2017-03-09 18:11:34'),
-(117, 12, 3, 5, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(118, 12, 3, 5, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(119, 12, 3, 5, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 0, 2, '2017-03-09 18:16:15'),
-(120, 12, 3, 5, 'Empa modificado el : 09-03-2017 por usuario 2', 1, 1, 2, '2017-03-09 18:16:15');
+(30, 4, 3, 0, 'Acepta el programa con fecha : 09-03-2017', 1, 1, 2, '2017-03-09 14:11:03');
 
 -- --------------------------------------------------------
 
@@ -3965,7 +3535,7 @@ CREATE TABLE IF NOT EXISTS `pre_evento_tipo` (
   `id_evento_tipo` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_evento_tipo` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_evento_tipo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
@@ -4007,7 +3577,7 @@ CREATE TABLE IF NOT EXISTS `pre_laboratorio` (
   `id_laboratorio` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_laboratorio` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_laboratorio`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
@@ -4065,9 +3635,9 @@ CREATE TABLE IF NOT EXISTS `pre_opcion` (
   `gl_url` varchar(255) DEFAULT NULL,
   `bo_activo` int(1) DEFAULT '1',
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `fc_actualiza` datetime DEFAULT NULL,
   PRIMARY KEY (`id_opcion`),
   KEY `IDX_id_opcion_padre` (`id_opcion_padre`),
   KEY `IDX_bo_activo` (`bo_activo`),
@@ -4124,16 +3694,16 @@ CREATE TABLE IF NOT EXISTS `pre_paciente` (
   `gl_sexo` char(1) DEFAULT 'F',
   `gl_direccion` varchar(255) DEFAULT NULL,
   `gl_fono` varchar(20) DEFAULT NULL,
-  `bo_fono_seguro` int(1) DEFAULT '0',
+  `bo_fono_seguro` tinyint(4) NOT NULL,
   `gl_celular` varchar(20) DEFAULT NULL,
   `gl_email` varchar(150) DEFAULT NULL,
   `id_centro_salud` int(11) DEFAULT NULL COMMENT 'Consultorio/otro donde se atiende regularmente',
   `gl_latitud` varchar(30) DEFAULT NULL,
   `gl_longitud` varchar(30) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `fc_actualiza` datetime DEFAULT NULL,
   PRIMARY KEY (`id_paciente`),
   KEY `IDX_id_institucion` (`id_institucion`),
   KEY `IDX_id_comuna` (`id_comuna`),
@@ -4145,17 +3715,16 @@ CREATE TABLE IF NOT EXISTS `pre_paciente` (
   KEY `IDX_gl_rut` (`gl_rut`),
   KEY `IDX_id_centro_salud` (`id_centro_salud`),
   KEY `IDX_gl_run_pass` (`gl_run_pass`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `pre_paciente`
 --
 
 INSERT INTO `pre_paciente` (`id_paciente`, `id_institucion`, `id_region`, `id_comuna`, `id_prevision`, `id_estado_civil`, `id_tipo_ocupacion`, `id_tipo_escolaridad`, `id_tipo_grupo`, `gl_grupo_tipo`, `nr_hijos`, `gl_nacionalidad`, `gl_direccion_alternativa`, `fc_reconoce`, `fc_hora_reconoce`, `gl_acompañante`, `gl_codigo_fonasa`, `bo_acepta_programa`, `bo_reconoce`, `id_paciente_estado`, `gl_rut`, `bo_extranjero`, `gl_run_pass`, `gl_nombres`, `gl_apellidos`, `fc_nacimiento`, `gl_sexo`, `gl_direccion`, `gl_fono`, `bo_fono_seguro`, `gl_celular`, `gl_email`, `id_centro_salud`, `gl_latitud`, `gl_longitud`, `id_usuario_crea`, `fc_crea`, `id_usuario_actualiza`, `fc_actualiza`) VALUES
-(1, 2462, 0, 0, 1, NULL, NULL, NULL, 1, 'Control', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 0, 0, 1, '', 1, '1', 'Test_extranjera_1', 'ape_test_1', '1971-11-01', 'F', '', '', 0, '', '', 0, '', '', 2, '2017-03-09 12:52:11', NULL, '2017-03-09 14:42:28'),
+(1, 2462, 0, 0, 1, NULL, NULL, NULL, 1, 'Control', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 0, 0, 1, '18181', 1, '1', 'Test_extranjera_1', 'ape_test_1', '1971-11-01', 'F', '', '', 0, '', '', 0, '', '', 2, '2017-03-09 12:52:11', NULL, '2017-03-09 14:03:59'),
 (2, 2462, 5, 35, 1, NULL, NULL, NULL, 1, 'Tratamiento', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 1, 0, 1, '', 1, '22', 'Extranjero', '22', '1980-03-09', 'F', 'Pedro Montt 1200, Valparaíso, Chile', '852145', 1, '99', 'prueba@prueba.cl', 2033, '-33.0465371', '-71.6194787', 2, '2017-03-09 12:59:06', NULL, '2017-03-09 13:59:37'),
-(3, 2462, 2, 356, 1, NULL, NULL, NULL, 1, 'Tratamiento', NULL, NULL, NULL, '2017-03-09', '12:31:00', NULL, 'A', 1, 1, 1, '11-6', 0, '', 'Josefa', 'Fuentes', '1989-03-01', 'F', 'Antonio José de Sucre 602-706, Antofagasta, Región de Antofagasta, Chile', '2586523', 1, '985626587', 'Josefa@mail.cl', 10, '-23.64828386865711', '-70.39564262784552', 2, '2017-03-09 13:52:00', NULL, '2017-03-09 15:32:30'),
-(4, 2462, 5, 35, 1, NULL, NULL, NULL, 1, 'Tratamiento', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 1, 0, 1, '22222222-2', 0, '', 'Paciente', 'Prueba', '1981-03-09', 'F', 'Pedro Montt 2120, Valparaíso, Chile', '52121459', 0, '995874212', 'prueba@prueba.cl', 2057, '-33.047121', '-71.61455030000002', 2, '2017-03-09 18:11:33', NULL, NULL);
+(3, 2462, 2, 356, 1, NULL, NULL, NULL, 1, 'Tratamiento', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 1, 0, 1, '11-6', 0, '', 'Josefa', 'Fuentes', '1989-03-01', 'F', 'Antonio José de Sucre 602-706, Antofagasta, Región de Antofagasta, Chile', '2586523', 1, '985626587', 'Josefa@mail.cl', 10, '-23.64828386865711', '-70.39564262784552', 2, '2017-03-09 13:52:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4186,23 +3755,9 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor` (
   `nr_hijos_en_comun` int(11) DEFAULT NULL,
   `nr_denuncias_por_violencia` int(11) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_agresor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
-
---
--- Volcado de datos para la tabla `pre_paciente_agresor`
---
-
-INSERT INTO `pre_paciente_agresor` (`id_agresor`, `id_paciente`, `id_tipo_vinculo`, `gl_rut_agresor`, `id_region`, `id_tipo_riesgo`, `id_comuna_vive`, `id_comuna_trabaja`, `id_estado_civil`, `id_tipo_ocupacion`, `id_actividad_economica`, `id_tipo_sexo`, `id_tipo_genero`, `id_orientacion_sexual`, `nr_ingreso_mensual`, `gl_nombres_agresor`, `gl_apellidos_agresor`, `fc_nacimiento_agresor`, `nr_hijos`, `nr_hijos_en_comun`, `nr_denuncias_por_violencia`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 3, NULL, '12323', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-09 14:54:20'),
-(2, 3, NULL, '12323', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-09 15:03:33'),
-(3, 3, NULL, '1233', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-09 15:18:17'),
-(4, 3, NULL, '12323', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-09 15:21:25'),
-(5, 3, NULL, '1233', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-09 15:26:16'),
-(6, 3, NULL, '12323', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-09 15:29:42'),
-(7, 3, NULL, '12323', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-09 15:30:03'),
-(8, 3, NULL, '12323', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-09 15:32:30');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4218,17 +3773,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor_violencia` (
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` date DEFAULT NULL,
   PRIMARY KEY (`id_violencia`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
---
--- Volcado de datos para la tabla `pre_paciente_agresor_violencia`
---
-
-INSERT INTO `pre_paciente_agresor_violencia` (`id_violencia`, `id_paciente`, `id_pregunta`, `nr_valor`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 3, 1, 1, NULL, NULL),
-(2, 3, 2, 2, NULL, NULL),
-(3, 3, 3, 1, NULL, NULL),
-(4, 3, 4, 4, NULL, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4242,9 +3787,9 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_derivar` (
   `id_empa` int(11) DEFAULT NULL,
   `id_profesional` int(11) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   `id_usuario_act` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `fc_actualiza` datetime DEFAULT NULL,
   PRIMARY KEY (`id_derivar`),
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
@@ -4271,7 +3816,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_direccion` (
   `id_usuario_actualiza` int(11) DEFAULT NULL,
   `fc_actualiza` datetime DEFAULT NULL,
   PRIMARY KEY (`id_paciente_direccion`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `pre_paciente_direccion`
@@ -4280,12 +3825,9 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_direccion` (
 INSERT INTO `pre_paciente_direccion` (`id_paciente_direccion`, `id_paciente`, `id_comuna`, `id_region`, `gl_direccion`, `gl_latitud`, `gl_longitud`, `bo_estado`, `id_usuario_crea`, `fc_crea`, `id_usuario_actualiza`, `fc_actualiza`) VALUES
 (1, 1, 0, 0, '', '', '', 1, 2, '2017-03-09 12:52:11', 2, '2017-03-09 12:52:11'),
 (2, 2, 35, 5, 'Pedro Montt 1200, Valparaíso, Chile', '-33.0465371', '-71.6194787', 0, 2, '2017-03-09 12:59:06', 2, '2017-03-09 13:59:37'),
-(3, 3, 356, 2, 'Antonio José de Sucre 602-706, Antofagasta, Región de Antofagasta, Chile', '-23.64828386865711', '-70.39564262784552', 0, 2, '2017-03-09 13:52:00', 2, '2017-03-09 14:18:19'),
+(3, 3, 356, 2, 'Antonio José de Sucre 602-706, Antofagasta, Región de Antofagasta, Chile', '-23.64828386865711', '-70.39564262784552', 0, 2, '2017-03-09 13:52:00', 2, '2017-03-09 14:11:03'),
 (4, 2, 35, 5, 'Pedro Montt 1200, Valparaíso, Chile', '-33.0465371', '-71.6194787', 1, 2, '2017-03-09 13:59:37', 2, '2017-03-09 13:59:37'),
-(5, 3, 356, 2, 'Antonio José de Sucre 602-706, Antofagasta, Región de Antofagasta, Chile', '-23.64828386865711', '-70.39564262784552', 0, 2, '2017-03-09 14:11:03', 2, '2017-03-09 14:18:19'),
-(6, 3, 356, 2, 'Antonio José de Sucre 602-706, Antofagasta, Región de Antofagasta, Chile', '-23.64828386865711', '-70.39564262784552', 0, 2, '2017-03-09 14:18:02', 2, '2017-03-09 14:18:19'),
-(7, 3, 356, 2, 'Antonio José de Sucre 602-706, Antofagasta, Región de Antofagasta, Chile', '-23.64828386865711', '-70.39564262784552', 1, 2, '2017-03-09 14:18:19', 2, '2017-03-09 14:18:19'),
-(8, 4, 35, 5, 'Pedro Montt 2120, Valparaíso, Chile', '-33.047121', '-71.61455030000002', 1, 2, '2017-03-09 18:11:34', 2, '2017-03-09 18:11:34');
+(5, 3, 356, 2, 'Antonio José de Sucre 602-706, Antofagasta, Región de Antofagasta, Chile', '-23.64828386865711', '-70.39564262784552', 1, 2, '2017-03-09 14:11:03', 2, '2017-03-09 14:11:03');
 
 -- --------------------------------------------------------
 
@@ -4297,7 +3839,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_estado` (
   `id_paciente_estado` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_estado_caso` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_paciente_estado`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
@@ -4336,9 +3878,9 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_examen` (
   `gl_resultado_descripcion` longtext,
   `gl_indicacion` longtext,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   `id_usuario_act` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `fc_actualiza` datetime DEFAULT NULL,
   PRIMARY KEY (`id_paciente_examen`),
   KEY `IDX_id_laboratorio` (`id_laboratorio`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
@@ -4373,9 +3915,9 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_plan_tratamiento` (
   `id_tipo_especialidad` int(11) DEFAULT NULL,
   `id_profesional` int(11) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   `id_usuario_act` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `fc_actualiza` datetime DEFAULT NULL,
   PRIMARY KEY (`id_plan_tratamiento`),
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
@@ -4406,12 +3948,12 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_registro` (
   `gl_hora_ingreso` time DEFAULT NULL,
   `gl_motivo_consulta` longtext,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_registro`),
   KEY `IDX_id_institucion` (`id_institucion`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `pre_paciente_registro`
@@ -4422,10 +3964,7 @@ INSERT INTO `pre_paciente_registro` (`id_registro`, `id_paciente`, `id_instituci
 (2, 2, 2462, '2017-03-09', '09:56:00', 'Prueba', 2, '2017-03-09 12:59:06'),
 (3, 3, 2462, '2017-03-09', '10:30:00', 'Quemadura', 2, '2017-03-09 13:52:00'),
 (4, 2, 2033, '2017-03-09', '10:58:00', '', 2, '2017-03-09 10:03:39'),
-(5, 3, 10, '2017-03-09', '11:09:00', '', 2, '2017-03-09 11:03:05'),
-(6, 3, 10, '2017-03-09', '11:16:00', '', 2, '2017-03-09 11:03:04'),
-(7, 3, 10, '2017-03-09', '11:17:00', '', 2, '2017-03-09 11:03:21'),
-(8, 4, 2462, '2017-03-09', '15:02:00', 'Consulta de Prueba', 2, '2017-03-09 18:11:33');
+(5, 3, 10, '2017-03-09', '11:09:00', '', 2, '2017-03-09 11:03:05');
 
 -- --------------------------------------------------------
 
@@ -4437,7 +3976,7 @@ CREATE TABLE IF NOT EXISTS `pre_perfil` (
   `id_perfil` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_perfil` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_perfil`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
@@ -4465,7 +4004,7 @@ CREATE TABLE IF NOT EXISTS `pre_perfil_opcion` (
   `id_perfil` int(11) NOT NULL,
   `id_opcion` int(11) NOT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_perfil`,`id_opcion`),
   KEY `id_perfil` (`id_perfil`),
   KEY `id_opcion` (`id_opcion`),
@@ -4501,7 +4040,7 @@ CREATE TABLE IF NOT EXISTS `pre_prevision` (
   `id_prevision` int(11) NOT NULL,
   `gl_nombre_prevision` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_prevision`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -4526,7 +4065,7 @@ CREATE TABLE IF NOT EXISTS `pre_provincia` (
   `id_region` int(11) NOT NULL,
   `gl_nombre_provincia` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_provincia`),
   KEY `IDX_id_region` (`id_region`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
@@ -4607,7 +4146,7 @@ CREATE TABLE IF NOT EXISTS `pre_region` (
   `gl_longitud` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `gl_path_logo` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_region`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
@@ -4644,7 +4183,7 @@ CREATE TABLE IF NOT EXISTS `pre_servicio_salud` (
   `id_region` int(11) NOT NULL,
   `gl_nombre_servicio` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_servicio`),
   KEY `IDX_id_region` (`id_region`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
@@ -4696,7 +4235,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_actividad_economica` (
   `gl_codigo_actividad` varchar(100) DEFAULT NULL,
   `gl_nombre_actividad` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_actividad_economica`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=701 ;
 
@@ -5417,7 +4956,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_agresor` (
   `id_tipo_agresor` int(11) NOT NULL AUTO_INCREMENT,
   `gl_tipo_agresor` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_agresor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -5434,7 +4973,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_audit` (
   `nr_max` int(11) NOT NULL,
   `gl_color` varchar(20) NOT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_audit`),
   KEY `IDX_nr_min` (`nr_min`),
   KEY `IDX_nr_max` (`nr_max`)
@@ -5461,7 +5000,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_egreso` (
   `id_tipo_egreso` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_caso_egreso` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_egreso`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
@@ -5486,7 +5025,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_escolaridad` (
   `id_tipo_escolaridad` int(11) NOT NULL,
   `gl_tipo_escolaridad` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_escolaridad`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -5512,7 +5051,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_especialidad` (
   `id_tipo_especialidad` int(11) NOT NULL,
   `gl_nombre_especialidad` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_especialidad`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -5538,7 +5077,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_estado_civil` (
   `id_estado_civil` int(11) NOT NULL,
   `gl_estado_civil` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_estado_civil`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -5567,7 +5106,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_examen` (
   `gl_nombre_examen` varchar(255) DEFAULT NULL,
   `gl_descripción_examen` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_examen`),
   KEY `id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
@@ -5595,7 +5134,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_genero` (
   `id_tipo_genero` int(11) NOT NULL,
   `gl_tipo_genero` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_genero`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -5618,7 +5157,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_grupo` (
   `id_tipo_grupo` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_tipo_grupo` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_grupo`),
   KEY `id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
@@ -5644,7 +5183,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_imc` (
   `nr_max` decimal(10,2) DEFAULT NULL,
   `gl_color` varchar(20) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_imc`),
   KEY `IDX_nr_min` (`nr_min`),
   KEY `IDX_nr_max` (`nr_max`),
@@ -5677,7 +5216,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_ingreso_mensual` (
   `nr_ingreso_minimo` int(11) DEFAULT NULL,
   `nr_ingreso_maximo` int(11) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_ingreso_mensual`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -5691,7 +5230,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_ocupacion` (
   `id_tipo_ocupacion` int(11) NOT NULL,
   `gl_tipo_ocupacion` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_ocupacion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -5781,7 +5320,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_orientacion_sexual` (
   `id_orientacion_sexual` int(11) NOT NULL,
   `gl_orientacion_sexual` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_orientacion_sexual`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -5811,7 +5350,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_riesgo` (
   `id_tipo_riesgo` int(11) NOT NULL,
   `gl_tipo_riesgo` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_riesgo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -5835,7 +5374,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_sexo` (
   `id_tipo_sexo` int(11) NOT NULL,
   `gl_tipo_sexo` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_sexo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -5857,7 +5396,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_vinculo` (
   `id_tipo_vinculo` int(11) NOT NULL,
   `gl_tipo_vinculo` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_vinculo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -5890,7 +5429,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_violencia` (
   `gl_respuesta_3` int(11) DEFAULT NULL,
   `gl_respuesta_4` int(11) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_tipo_violencia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -5914,7 +5453,7 @@ CREATE TABLE IF NOT EXISTS `pre_transaccion_tipo` (
   `id_transaccion_tipo` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_transaccion_tipo` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_transaccion_tipo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -5962,10 +5501,10 @@ CREATE TABLE IF NOT EXISTS `pre_usuario` (
 --
 
 INSERT INTO `pre_usuario` (`id_usuario`, `id_perfil`, `gl_rut`, `gl_password`, `id_institucion`, `id_tipo_grupo`, `gl_nombres`, `gl_apellidos`, `id_region`, `id_comuna`, `gl_direccion`, `gl_email`, `gl_fono`, `gl_celular`, `bo_activo`, `fc_ultimo_login`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 1, '13225524-5', '7c63b8135f73d87fbd3ac01623823633c54f0cf2c320bbaf463d4d275d498060fcc6e5c40f2b49aaab881e4064c0d2803c5361a9eabe157ab1cf4d1da19120d3', 2462, '2', 'Administrador', 'Prevención', 1, 349, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, 1, '2017-03-09 18:09:14', NULL, NULL, 1, '2017-02-09 10:30:00'),
-(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, '2', 'Orlando', 'Vazquez', 1, 349, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-09 17:57:14', NULL, NULL, 1, '2017-02-09 10:30:00'),
+(1, 1, '13225524-5', '7c63b8135f73d87fbd3ac01623823633c54f0cf2c320bbaf463d4d275d498060fcc6e5c40f2b49aaab881e4064c0d2803c5361a9eabe157ab1cf4d1da19120d3', 2462, '2', 'Administrador', 'Prevención', 1, 349, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, 1, '2017-03-09 12:20:24', NULL, NULL, 1, '2017-02-09 10:30:00'),
+(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, '2', 'Orlando', 'Vazquez', 1, 349, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-09 12:52:19', NULL, NULL, 1, '2017-02-09 10:30:00'),
 (3, 5, '0-0', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, '2', 'David', 'Guzmán', 1, 349, NULL, 'david.guzman@cosof.cl', NULL, NULL, 1, '2017-03-09 11:40:18', NULL, NULL, 1, '2017-02-09 10:30:00'),
-(6, 2, '11111111-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, '2', 'Uni', 'Cornio', 1, 349, NULL, 'ovazquez.gonzalez@gmail.com', NULL, NULL, 1, '2017-03-09 17:56:39', NULL, NULL, 1, NULL);
+(6, 2, '11111111-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, '2', 'Uni', 'Cornio', 1, 349, NULL, 'ovazquez.gonzalez@gmail.com', NULL, NULL, 1, '2017-03-09 11:42:56', NULL, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -5979,7 +5518,7 @@ CREATE TABLE IF NOT EXISTS `pre_usuario_especialidad` (
   `id_tipo_especialidad` int(11) NOT NULL,
   `gl_descripcion` varchar(250) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` datetime DEFAULT NULL,
   PRIMARY KEY (`id_usuario_especialidad`),
   KEY `IDX_id_usuario` (`id_usuario`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
