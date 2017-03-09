@@ -57,7 +57,9 @@ class DAOEmpa extends Model{
     }
 
     public function getByIdPaciente($id_paciente, $nr_orden=1){
-        $query	=   "SELECT * FROM pre_empa 
+        $query	=   "SELECT *,
+							date_format(fc_empa,'%Y-%m-%d') AS fc_empa
+					FROM pre_empa 
                     WHERE id_paciente = ?
                     AND nr_orden = ?";
 
@@ -118,6 +120,7 @@ class DAOEmpa extends Model{
 						id_clasificacion_imc			= ".$parametros['id_clasificacion_imc'].",
 						gl_pas							= ".$parametros['gl_pas'].",
 						gl_pad							= ".$parametros['gl_pad'].",
+						bo_antecedente_diabetes			= ".$parametros['bo_antecedente_diabetes'].",
 						gl_glicemia						= ".$parametros['gl_glicemia'].",
 						bo_glicemia_toma				= ".$parametros['bo_glicemia_toma'].",
 						bo_trabajadora_reclusa			= ".$parametros['bo_trabajadora_reclusa'].",
@@ -143,6 +146,7 @@ class DAOEmpa extends Model{
 						fc_mamografia_mes				= ".$parametros['fc_mamografia_mes'].",	
 						bo_mamografia_vigente			= ".$parametros['bo_mamografia_vigente'].",
 						bo_mamografia_toma				= ".$parametros['bo_mamografia_toma'].",
+						bo_mamografia_requiere			= ".$parametros['bo_mamografia_requiere'].",
 						gl_observaciones_empa			= ".$parametros['gl_observaciones_empa'].",
 						fc_actualiza					= now(),
 						id_usuario_act					= ".$_SESSION['id'].",
@@ -180,6 +184,7 @@ class DAOEmpa extends Model{
 						IFNULL(bo_rpr,-1) as bo_rpr,
 						IFNULL(bo_tos_productiva,-1) as bo_tos_productiva,
 						IFNULL(bo_baciloscopia_toma,-1) as bo_baciloscopia_toma,
+						IFNULL(bo_antecedente_diabetes,-1) as bo_antecedente_diabetes,
 						IFNULL(bo_pap_realizado,-1) as bo_pap_realizado,
 						IFNULL(bo_pap_resultado,-1) as bo_pap_resultado,
 						IFNULL(bo_pap_vigente,-1) as bo_pap_vigente,
@@ -187,7 +192,8 @@ class DAOEmpa extends Model{
 						IFNULL(bo_mamografia_realizada,-1) as bo_mamografia_realizada,
 						IFNULL(bo_mamografia_resultado_pasado,-1) as bo_mamografia_resultado_pasado,
 						IFNULL(bo_mamografia_resultado,-1) as bo_mamografia_resultado,
-						IFNULL(bo_mamografia_vigente,-1) as bo_mamografia_vigente
+						IFNULL(bo_mamografia_vigente,-1) as bo_mamografia_vigente,
+						IFNULL(bo_mamografia_requiere,-1) as bo_mamografia_requiere
 					FROM pre_empa
 					WHERE id_empa = ?";
 

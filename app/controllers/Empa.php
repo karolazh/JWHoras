@@ -92,7 +92,7 @@ class Empa extends Controller{
 
 		$this->smarty->assign("gl_comuna", $gl_comuna->gl_nombre_comuna);
 		$this->smarty->assign("gl_institucion", $gl_institucion->gl_nombre_establecimiento);
-		$this->smarty->assign("fc_empa", date('Y-m-d'));
+		
 		//Cargar Datos Paciente
 		$registro = $this->_DAOPaciente->getById($id_paciente);
 		$direccion = $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
@@ -112,6 +112,12 @@ class Empa extends Controller{
 		//Cargar Datos DAU Examen
 		//INICIO
 		$empa = $this->_DAOEmpa->verInfoById($id_empa->id_empa);
+		
+		if ($id_empa -> fc_empa != ""){
+			$this->smarty->assign("fc_empa", $id_empa -> fc_empa);
+		} else {
+			$this->smarty->assign("fc_empa", date('Y-m-d'));
+		}
 		if ($empa->gl_peso) {
 			$gl_peso = intval($empa->gl_peso);
 			$this->smarty->assign("gl_peso", $gl_peso);
@@ -256,6 +262,18 @@ class Empa extends Controller{
 			$this->smarty->assign("bo_mamografia_vigente_1", 'checked');
 		} else if ($empa->bo_mamografia_vigente == 0) {
 			$this->smarty->assign("bo_mamografia_vigente_0", 'checked');
+		}
+		
+		if ($empa->bo_antecedente_diabetes == 1) {
+			$this->smarty->assign("bo_antecedente_diabetes_1", 'checked');
+		} else if ($empa->bo_antecedente_diabetes == 0) {
+			$this->smarty->assign("bo_antecedente_diabetes_0", 'checked');
+		}
+		
+		if ($empa->bo_mamografia_requiere == 1) {
+			$this->smarty->assign("bo_mamografia_requiere_1", 'checked');
+		} else if ($empa->bo_mamografia_requiere == 0) {
+			$this->smarty->assign("bo_mamografia_requiere_0", 'checked');
 		}
 
 		if ($empa->bo_mamografia_toma == 1) {
