@@ -110,13 +110,14 @@ class Paciente extends Controller {
 		header('Content-type: application/json');
 		$session = New Zend_Session_Namespace("usuario_carpeta");
 		$parametros		= $this->_request->getParams();
-		$correcto		= false;
-		$error			= false;
-		$id_paciente    = false;
-		$gl_grupo_tipo	= 'Control';
-		$id_tipo_grupo	= 1;
-		$count			= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
-
+		print_r($parametros);DIE();
+		$correcto			= false;
+		$error				= false;
+		$id_paciente		= false;
+		$gl_grupo_tipo		= 'Control';
+		$id_tipo_grupo		= 1;
+		$count				= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
+		$paciente_valida	= $this->_validarPacienteExtranjeraFonasa($parametros);
 		if ($parametros['edad'] > 15 AND $_SESSION['id_tipo_grupo'] == 2 AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
 			$gl_grupo_tipo = 'Tratamiento';
 			$id_tipo_grupo = 2;
@@ -260,6 +261,7 @@ class Paciente extends Controller {
 		$parametros			= $this->_request->getParams();
 		$correcto			= false;
 		$error				= false;
+		$paciente_valida	= false;
 		$rut				= $parametros['rut'];
 		$id_paciente		= $parametros['id_paciente'];
 		$gl_grupo_tipo_ant	= $parametros['gl_grupo_tipo'];
@@ -870,5 +872,23 @@ class Paciente extends Controller {
 
 		echo $json;
 	}
-
+	
+	/**
+	* _validarRegistroExtranjeroFonasa($parametros)
+	* Valida si se subio el certificado de afiliacion y el código de la paciente extranjera Afiliada a Fonasa
+	* 
+	* @author	<orlando.vazquez@cosof.cl>	10-03-2017
+	* 
+	* @param Array $parametros datos del request del formulario Paciente/nuevo.tpl
+	*
+	* @return Boolean	validacion 
+	*/
+	
+	private function _validarPacienteExtranjeraFonasa($parametros){
+		if ($parametros){
+			
+		} else { 
+			return FALSE;
+		}
+	}
 }
