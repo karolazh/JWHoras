@@ -18,6 +18,7 @@
 				Datos del Paciente {$botonAyudaPaciente}
 				<input type="text" value="0" id="id_paciente" name="id_paciente" class="hidden">
 				<input type="text" value="0" id="gl_grupo_tipo" name="gl_grupo_tipo" class="hidden">
+				<input type="text" value="0" id="cambio_direccion" name="cambio_direccion" class="hidden">
 			</div>
 			<div class="panel-body">
 
