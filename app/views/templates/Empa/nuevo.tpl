@@ -113,7 +113,7 @@
                     </div>
                     <label class="control-label col-sm-1">Edad</label>
                     <div class="col-md-3 col-sm-3">
-						<span class="form-control" readonly>{$edad}</span>
+						<input type="text" class="form-control" name="nr_edad" id="nr_edad" value="{$edad}" readonly/>
                     </div>
                 </div>
 

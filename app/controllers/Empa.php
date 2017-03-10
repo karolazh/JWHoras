@@ -419,36 +419,26 @@ class Empa extends Controller{
 		  $this->smarty->assign("usuario", $sesion->usuario);
 		 */
 
-		$parametros = $this->_request->getParams();
-		$correcto = false;
-		$error = false;
+		$parametros		= $this->_request->getParams();
+		$correcto		= FALSE;
+		$error			= FALSE;
+		$finalizado		= FALSE;
 		$id_empa = $parametros['id_empa'];
 		$id_paciente = $parametros['id_paciente'];
 		
 		$bool_update = $this->_DAOEmpa->updateEmpa($parametros);
 		if ($bool_update) {
-			$resp = $this->_Evento->guardarMostrarUltimo(12,$id_empa,$id_paciente,"Empa modificado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
-			if ($resp) {
-				$correcto = TRUE;
-			} else {
-				$error = TRUE;
-			}
-			$finalizado = FALSE;
-			if ($finalizado) {
-				$resp = $this->_Evento->guardar(2,$id_empa,$id_paciente,"Empa finalizado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
-				if ($resp) {
-					$correcto = TRUE;
-				} else {
-					$correcto = FALSE;
-					$error = TRUE;
-				}
-			}
+			//$resp = $this->_Evento->guardarMostrarUltimo(12,$id_empa,$id_paciente,"Empa modificado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
+			$correcto = TRUE;
+			$finalizado = $this->guardarFinalizado($parametros);
+			//$resp = $this->_Evento->guardar(2,$id_empa,$id_paciente,"Empa finalizado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
 		} else {
-			$error = true;
+			$error = TRUE;
 		}
 
 		$salida = array("error" => $error,
-			"correcto" => $correcto);
+						"correcto" => $correcto,
+						"finalizado" => $finalizado);
 		$json = Zend_Json::encode($salida);
 
 		echo $json;
@@ -524,6 +514,117 @@ class Empa extends Controller{
 			"id_tipo_audit" => $id_tipo_audit);
 		$json = Zend_Json::encode($salida);
 		echo $json;
+	}
+	//No está completo aún
+	//En proceso
+	public function guardarFinalizado($parametros){
+		//print_r($parametros); die;
+		if ($parametros['gl_sector'] == 'NULL') {
+			return FALSE;
+		}
+		if ($parametros['nr_ficha'] == 'NULL') {
+			return FALSE;
+		}
+
+		if ($parametros['fc_empa'] == 'NULL') {
+			return FALSE;
+		}
+
+		if ($parametros['bo_embarazo'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_consume_alcohol'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['gl_puntos_audit'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_fuma'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['gl_peso'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['gl_estatura'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['gl_imc'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['gl_circunferencia_abdominal'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['gl_pas'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['gl_pad'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_antecedente_diabetes'] == 'NULL' && ($parametros['nr_edad'] > 40 || $parametros['gl_imc'] >= 30)) {
+			return FALSE;
+		}
+		
+		if ($parametros['gl_glicemia'] == 'NULL' && ($parametros['nr_edad'] > 40 || $parametros['gl_imc'] >= 30 || $parametros['bo_antecedente_diabetes'] == 1)) {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_trabajadora_reclusa'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_tos_productiva'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_pap_realizado'] == 'NULL' && $parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64) {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_pap_realizado'] == 0 && $parametros['fc_tomar_pap'] == 'NULL'){
+			return FALSE;
+		}
+		
+		if ($parametros['bo_pap_realizado'] == 1 && ($parametros['bo_pap_resultado'] == 'NULL' || $parametros['fc_ultimo_pap_ano'] == 'NULL' || 
+													$parametros['fc_ultimo_pap_mes'] == 'NULL' || $parametros['bo_pap_vigente'] == 'NULL')){
+			return FALSE;
+		}
+		
+		if ($parametros['gl_colesterol'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_mamografia_realizada'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_mamografia_requiere'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_mamografia_requiere'] == 1 && $parametros['bo_mamografia_resultado'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_mamografia_realizada'] == 1 && ($parametros['fc_mamografia_mes'] == 'NULL' || $parametros['fc_mamografia_mes'] == 'NULL' ||
+															$parametros['bo_mamografia_vigente'] == 'NULL' || $parametros['bo_mamografia_resultado_pasado'] == 'NULL')) {
+			return FALSE;
+		}
+		
+		if ($parametros['gl_observaciones'] == 'NULL') {
+			return FALSE;
+		}
+		
+		return TRUE;
 	}
 
 }
