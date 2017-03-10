@@ -460,15 +460,15 @@ var Paciente = {
 						$("#email").val(data.gl_email);
 
 						if (data.id_comuna != '0') {
-							var comuna = '<option value="' + data.id_comuna + '">' + data.gl_nombre_comuna + '</option>';
-							$("#comuna").html(comuna);
+							//var comuna = '<option value="' + data.id_comuna + '">' + data.gl_nombre_comuna + '</option>';
+							$("#comuna").html(data.jsonComuna);
 						} else {
 							$("#region").trigger('change');
 						}
 
 						if (data.id_centro_salud != '0') {
-							var centro_salud = '<option value="' + data.id_centro_salud + '">' + data.gl_centro_salud + '</option>';
-							$("#centrosalud").html(centro_salud);
+							//var centro_salud = '<option value="' + data.id_centro_salud + '">' + data.gl_centro_salud + '</option>';
+							$("#centrosalud").html(data.jsonCentroSalud);
 						} else {
 							$("#comuna").trigger('change');
 						}
@@ -525,10 +525,10 @@ var Paciente = {
 			$.post(BASE_URI + 'index.php/Paciente/cargarCentroSaludporComuna', {comuna: comuna}, function (response) {
 				var options = '<option value="0">Seleccione un Centro de Salud</option>';
 				$.each(response, function (i, valor) {
-					if (centrosalud == valor.id_establecimiento) {
-						options += '<option value="' + valor.id_establecimiento + '" selected >' + valor.gl_nombre_establecimiento + '</option>';
+					if (centrosalud == valor.id_centro_salud) {
+						options += '<option value="' + valor.id_centro_salud + '" selected >' + valor.gl_nombre_establecimiento + '</option>';
 					} else {
-						options += '<option value="' + valor.id_establecimiento + '">' + valor.gl_nombre_establecimiento + '</option>';
+						options += '<option value="' + valor.id_centro_salud + '">' + valor.gl_nombre_establecimiento + '</option>';
 					}
 				});
 				$('#' + combo).html(options);
