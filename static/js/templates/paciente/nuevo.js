@@ -3,12 +3,16 @@ $("#guardar").on('click', function (e) {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
 	var gl_rut = $("#rut").val();
-
 	if (gl_rut == '' && !$('#chkextranjero').is(':checked')) {
 		xModal.danger('- El campo RUT es Obligatorio');
 	} else if ($('#chkextranjero').is(':checked') && $('#opcionPrevision').val() === "1" && $('#gl_codigo_fonasa').val() === "") {
 		xModal.danger('Si eres extranjero afiliado en FONASA, deber ingresar tu código fonasa y subir tu certifiado de afiliación');
-	}
+	} else if ($( "#region option:selected" ).val() === "0"){
+		xModal.danger('Debe seleccionar la region del paciente.');
+	} else if ($( "#comuna option:selected" ).val() === "0"){
+		xModal.danger('Debe seleccionar la comuna del paciente.');
+	} 
+	
 		else {
 		if ($('#chkextranjero').is(':checked')) {
 			parametros.push({
@@ -97,6 +101,10 @@ $("#guardarMotivo").on('click', function (e) {
 		xModal.danger('Debe confirmar la Dirección del Paciente antes de poder Guardar.');
 	} else if (!$('#chk_confirma_fono').is(':checked')) {
 		xModal.danger('Debe confirmar el Teléfono del Paciente antes de poder Guardar.');
+	} else if ($( "#region option:selected" ).val() === "0"){
+		xModal.danger('Debe seleccionar la region del paciente.');
+	} else if ($( "#comuna option:selected" ).val() === "0"){
+		xModal.danger('Debe seleccionar la comuna del paciente.');
 	} else {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
