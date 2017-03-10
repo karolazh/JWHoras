@@ -191,6 +191,7 @@ class DAOPaciente extends Model{
 							IFNULL(paciente.gl_email,'N/D') as gl_email,
 							IFNULL(paciente.gl_latitud,'') as gl_latitud,
 							IFNULL(paciente.gl_longitud,'') as gl_longitud,
+							IFNULL(paciente.bo_fono_seguro,0) as bo_fono_seguro,
 							IFNULL(bo_reconoce,0) as bo_reconoce,
 							IFNULL(bo_acepta_programa,0) as bo_acepta_programa,
 							IFNULL(a.gl_path,'') as gl_path,
@@ -392,6 +393,7 @@ class DAOPaciente extends Model{
                         pac.gl_grupo_tipo,
                         pac.bo_reconoce, 
                         pac.bo_acepta_programa,
+                        pac.bo_fono_seguro,
                         date_format(pac.fc_crea,'%d-%m-%Y') AS fc_crea,
                         cs.gl_nombre_establecimiento,
                         pac.id_centro_salud, 
@@ -401,12 +403,12 @@ class DAOPaciente extends Model{
                         pac.id_usuario_crea, 
                         pac.id_usuario_actualiza
                     FROM pre_paciente pac
-                    left join pre_comuna com on com.id_comuna = pac.id_comuna
-                    left join pre_provincia pro on pro.id_provincia = com.id_provincia
-                    left join pre_region rg on rg.id_region = pro.id_region
-                    left join pre_centro_salud cs on cs.id_centro_salud = pac.id_centro_salud
-                    left join pre_prevision pre on pre.id_prevision = pac.id_prevision
-                    left join pre_paciente_estado est on est.id_paciente_estado = pac.id_paciente_estado
+						LEFT JOIN pre_comuna com on com.id_comuna = pac.id_comuna
+						LEFT JOIN pre_provincia pro on pro.id_provincia = com.id_provincia
+						LEFT JOIN pre_region rg on rg.id_region = pro.id_region
+						LEFT JOIN pre_centro_salud cs on cs.id_centro_salud = pac.id_centro_salud
+						LEFT JOIN pre_prevision pre on pre.id_prevision = pac.id_prevision
+						LEFT JOIN pre_paciente_estado est on est.id_paciente_estado = pac.id_paciente_estado
                     WHERE pac.id_paciente = ?";
 
         $param = array($id_paciente);
