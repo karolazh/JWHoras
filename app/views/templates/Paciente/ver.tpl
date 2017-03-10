@@ -306,10 +306,18 @@
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-4">
-                            <label class="control-label required">Fono : </label>
+                            <label class="control-label required">Teléfono : </label>
                         </div>
                         <div class="col-md-8">
                             <input type="text"  value="{$fono}" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <label class="control-label required">¿Teléfono Seguro? </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text"  value="{if $bo_fono_seguro==1}SI{else}NO{/if}" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="col-md-12">

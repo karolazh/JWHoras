@@ -401,12 +401,12 @@ class DAOPaciente extends Model{
                         pac.id_usuario_crea, 
                         pac.id_usuario_actualiza
                     FROM pre_paciente pac
-                    left join pre_comuna com on com.id_comuna = pac.id_comuna
-                    left join pre_provincia pro on pro.id_provincia = com.id_provincia
-                    left join pre_region rg on rg.id_region = pro.id_region
-                    left join pre_centro_salud cs on cs.id_centro_salud = pac.id_centro_salud
-                    left join pre_prevision pre on pre.id_prevision = pac.id_prevision
-                    left join pre_paciente_estado est on est.id_paciente_estado = pac.id_paciente_estado
+						LEFT JOIN pre_comuna com on com.id_comuna = pac.id_comuna
+						LEFT JOIN pre_provincia pro on pro.id_provincia = com.id_provincia
+						LEFT JOIN pre_region rg on rg.id_region = pro.id_region
+						LEFT JOIN pre_centro_salud cs on cs.id_centro_salud = pac.id_centro_salud
+						LEFT JOIN pre_prevision pre on pre.id_prevision = pac.id_prevision
+						LEFT JOIN pre_paciente_estado est on est.id_paciente_estado = pac.id_paciente_estado
                     WHERE pac.id_paciente = ?";
 
         $param = array($id_paciente);
