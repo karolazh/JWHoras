@@ -113,7 +113,7 @@
                     </div>
                     <label class="control-label col-sm-1">Edad</label>
                     <div class="col-md-3 col-sm-3">
-						<span class="form-control" readonly>{$edad}</span>
+						<input type="text" class="form-control" name="nr_edad" id="nr_edad" value="{$edad}" readonly/>
                     </div>
                 </div>
 
@@ -330,7 +330,7 @@
                 <div class="box box-success" id="diabetes">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Diabetes Mellitus (DM)</h3></div>
                     <div class="box-body">
-                        <div class="form-group" id="antecedentes" style="{$antecedentes}">
+                        <div class="form-group" id="antecedentes" >
                             <label class="control-label required col-sm-3">¿Tiene Antecedentes Familiares de Diabetes Mellitus?</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_antecedente" type="radio" name="bo_antecedente" 

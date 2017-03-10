@@ -2,6 +2,7 @@
 $("#form").ready(function () {
     var imc = $('#gl_imc').val();
     var pts_audit = $('#gl_puntos_audit').val();
+    var edad = $('#nr_edad').val();
     //funcion mensaje span IMC
     mensajeIMC(imc);
     //funcion mensaje span Puntos AUDIT
@@ -24,6 +25,10 @@ $("#form").ready(function () {
         $("#bo_mamografia_requiere_1").prop('checked', true);
     }
 	
+	if (imc>=30 || edad>=40){
+		$("#bo_antecedente_0").attr("checked",false);
+		$('#bo_antecedente_1').attr("checked",false);
+	}
 });
 
 //Poner Mensaje en span segun Puntos de AUDIT
@@ -505,6 +510,13 @@ $("#guardar").on('click', function (e) {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
 
+	if ($('#gl_sector').val() == "") {
+		parametros.push({
+			"name": 'gl_sector',
+			"value": 'NULL'
+		});
+	}
+
 	if ($('#bo_embarazo_1').is(':checked')) {
 		parametros.push({
 			"name": 'bo_embarazo',
@@ -683,7 +695,7 @@ $("#guardar").on('click', function (e) {
 			"value": "'" + $('#fc_ultimo_pap').val() + "'"
 		});
 	}
-	if ($('#fc_ultimo_pap_ano').val() == "") {
+	if ($('#fc_ultimo_pap_ano').val() == 0) {
 		parametros.push({
 			"name": 'fc_ultimo_pap_ano',
 			"value": 'NULL'
@@ -694,7 +706,7 @@ $("#guardar").on('click', function (e) {
 			"value": $('#fc_ultimo_pap_ano').val()
 		});
 	}
-	if ($('#fc_ultimo_pap_mes').val() == "") {
+	if ($('#fc_ultimo_pap_mes').val() == 0) {
 		parametros.push({
 			"name": 'fc_ultimo_pap_mes',
 			"value": 'NULL'
@@ -702,7 +714,7 @@ $("#guardar").on('click', function (e) {
 	} else {
 		parametros.push({
 			"name": 'fc_ultimo_pap_mes',
-			"value": "'" + $('#fc_ultimo_pap_mes').val() + "'"
+			"value": $('#fc_ultimo_pap_mes').val()
 		});
 	}
 	if ($('#gl_colesterol').val() == "") {
@@ -1020,7 +1032,7 @@ $("#guardar").on('click', function (e) {
 			"value": "'" + $('#fc_mamografia').val() + "'"
 		});
 	}
-	if ($('#fc_mamografia_ano').val() == "") {
+	if ($('#fc_mamografia_ano').val() == 0) {
 		parametros.push({
 			"name": 'fc_mamografia_ano',
 			"value": 'NULL'
@@ -1031,7 +1043,7 @@ $("#guardar").on('click', function (e) {
 			"value": $('#fc_mamografia_ano').val()
 		});
 	}
-	if ($('#fc_mamografia_mes').val() == "") {
+	if ($('#fc_mamografia_mes').val() == 0) {
 		parametros.push({
 			"name": 'fc_mamografia_mes',
 			"value": 'NULL'
@@ -1039,7 +1051,7 @@ $("#guardar").on('click', function (e) {
 	} else {
 		parametros.push({
 			"name": 'fc_mamografia_mes',
-			"value": "'" + $('#fc_mamografia_mes').val() + "'"
+			"value": $('#fc_mamografia_mes').val()
 		});
 	}	
 	if ($('#bo_mamografia_vigente_1').is(':checked')) {
@@ -1104,11 +1116,14 @@ $("#guardar").on('click', function (e) {
 		success: function (data) {
 			if (data.correcto) {
 				xModal.success('Éxito: Se Ingresó nuevo Registro!');
-				setTimeout(function () {
+				/*setTimeout(function () {
 					location.href = BASE_URI + "index.php/Paciente";
-				}, 2000);
+				}, 2000);*/
 			} else {
 				xModal.info('Error: No se pudo Ingresar un nuevo Registro');
+			}
+			if (data.finalizado){
+				xModal.info('Finalizado');
 			}
 		}
 	});

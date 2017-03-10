@@ -196,13 +196,13 @@
 						<div class="col-lg-3"></div>
 						<div class="form-group col-lg-6">&nbsp;&nbsp;
 							<label><input type="radio" class="id_tipo_riesgo" id="id_tipo_riesgo_1" name="id_tipo_riesgo"
-										  value="0">Leve</label>&nbsp;&nbsp;
+										  value="0"><span class="label label-success">Leve</span></label>&nbsp;&nbsp;
 							<label><input type="radio" class="id_tipo_riesgo" id="id_tipo_riesgo_2" name="id_tipo_riesgo"
-									   value="0">Moderado</label>&nbsp;&nbsp;
+									   value="0"><span class="label label-warning">Moderado</span></label>&nbsp;&nbsp;
 							<label><input type="radio" class="id_tipo_riesgo" id="id_tipo_riesgo_3" name="id_tipo_riesgo"
-									   value="0">Grave</label>&nbsp;&nbsp;
+									   value="0"><span class="label label-danger">Grave</span></label>&nbsp;&nbsp;
 							<label><input type="radio" class="id_tipo_riesgo" id="id_tipo_riesgo_4" name="id_tipo_riesgo"
-									   value="0">Extremo</label>
+									   value="0"><span class="label label-danger">Extremo</span></label>
 						</div>
 						
 
@@ -348,17 +348,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="id_tipo_sexo" class="control-label col-sm-3">Sexo</label>
-						<div class="col-sm-3">					
-							<select class="form-control" id="id_tipo_sexo" name="id_tipo_sexo">
-								<option value="0">Seleccione Sexo</option>
-								{foreach $arrSexo as $item}
-									<option value="{$item->id_tipo_sexo}" >{$item->gl_tipo_sexo}</option>
-								{/foreach}
-							</select>
-							<span class="help-block hidden fa fa-warning"></span>
-						</div>
-						<label for="id_tipo_genero" class="control-label col-sm-1">Género</label>
+						<label for="id_tipo_genero" class="control-label col-sm-3">Género</label>
 						<div class="col-sm-3">
 							<select class="form-control" id="id_tipo_genero" name="id_tipo_genero">
 								<option value="0">Seleccione Género</option>
@@ -368,16 +358,20 @@
 							</select>
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
+						<label for="id_tipo_sexo" class="control-label col-sm-1">Sexo</label>
+						<div class="col-sm-3">					
+							<select class="form-control" id="id_tipo_sexo" name="id_tipo_sexo">
+								<option value="0">Seleccione Sexo</option>
+								{foreach $arrSexo as $item}
+									<option value="{$item->id_tipo_sexo}" >{$item->gl_tipo_sexo}</option>
+								{/foreach}
+							</select>
+							<span class="help-block hidden fa fa-warning"></span>
+						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="nr_denuncias_por_violencia" class="control-label col-sm-3">N° de Denuncias por Violencia</label>
-						<div class="col-sm-3">
-							<input type="text" name="nr_denuncias_por_violencia" id="nr_denuncias_por_violencia" value=""
-								   placeholder="Número de Denuncias por Violencia" class="form-control" />
-							<span class="help-block hidden fa fa-warning"></span>
-						</div>
-						<label for="id_orientacion_sexual" class="control-label col-sm-1">Orientación Sexual</label>
+						<label for="id_orientacion_sexual" class="control-label col-sm-3">Orientación Sexual</label>
 						<div class="col-sm-3">
 							<select class="form-control" id="id_orientacion_sexual" name="id_orientacion_sexual">
 								<option value="0">Seleccione Orientación Sexual</option>
@@ -385,6 +379,12 @@
 									<option value="{$item->id_orientacion_sexual}" >{$item->gl_orientacion_sexual}</option>
 								{/foreach}
 							</select>
+							<span class="help-block hidden fa fa-warning"></span>
+						</div>
+						<label for="nr_denuncias_por_violencia" class="control-label col-sm-1">N° de Denuncias por Violencia</label>
+						<div class="col-sm-3">
+							<input type="text" name="nr_denuncias_por_violencia" id="nr_denuncias_por_violencia" value=""
+								   placeholder="Número de Denuncias por Violencia" class="form-control" />
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
 					</div>
