@@ -1,5 +1,4 @@
 /* global BASE_URI */
-cambio_direccion = false; //variable global JS
 $("#guardar").on('click', function (e) {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
@@ -79,13 +78,12 @@ $("#guardar").on('click', function (e) {
 			},
 			success: function (data) {
 				if (data.correcto) {
-
 					xModal.success('Éxito: Se Ingresó nuevo Registro!');
 					setTimeout(function () {
 						location.href = BASE_URI + "index.php/Paciente";
 					}, 2000);
 				} else {
-					xModal.info('Error: No se pudo Ingresar un nuevo Registro');
+					xModal.danger('Error: '+ data.mensaje_error);
 				}
 			}
 		});
@@ -111,6 +109,7 @@ $("#guardarMotivo").on('click', function (e) {
 	var gl_longitud = $("#gl_longitud").val();
 	var chk_confirma_fono = $("#chk_confirma_fono").val();
 	var chk_confirma_dir = $("#chk_confirma_dir").val();
+	var cambio_direccion = $("#cambio_direccion").val();
 	if ($('#chkAcepta').is(':checked')) {
 		parametros.push({
 			"name": 'chkAcepta',
@@ -267,7 +266,7 @@ $("#direccion").on("change paste keyup ", function() {
 	
 	if($('#centrosalud').is('[disabled=disabled]')){
 		$('#form').find('#centrosalud').attr('disabled', false);
-		cambio_direccion = true; //variable global JS
+		$("#cambio_direccion").val("1"); //variable global JS
 	}
 	
 });
@@ -276,7 +275,7 @@ $("#region").on('change', function (e) {
 	
 	if($('#centrosalud').is('[disabled=disabled]')){
 		$('#form').find('#centrosalud').attr('disabled', false);
-		cambio_direccion = true; //variable global JS
+		$("#cambio_direccion").val("1"); //variable global JS
 	}
 	
 });
@@ -284,7 +283,7 @@ $("#comuna").on('change', function (e) {
 	
 	if($('#centrosalud').is('[disabled=disabled]')){
 		$('#form').find('#centrosalud').attr('disabled', false);
-		cambio_direccion = true; //variable global JS
+		$("#cambio_direccion").val("1");//variable global JS
 	}
 	
 });

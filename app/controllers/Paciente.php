@@ -110,13 +110,12 @@ class Paciente extends Controller {
 		header('Content-type: application/json');
 		$session = New Zend_Session_Namespace("usuario_carpeta");
 		$parametros		= $this->_request->getParams();
-		$correcto		= false;
-		$error			= false;
-		$id_paciente    = false;
-		$gl_grupo_tipo	= 'Control';
-		$id_tipo_grupo	= 1;
-		$count			= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
-
+		$correcto			= false;
+		$error				= false;
+		$id_paciente		= false;
+		$gl_grupo_tipo		= 'Control';
+		$id_tipo_grupo		= 1;
+		$count				= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
 		if ($parametros['edad'] > 15 AND $_SESSION['id_tipo_grupo'] == 2 AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
 			$gl_grupo_tipo = 'Tratamiento';
 			$id_tipo_grupo = 2;
@@ -127,11 +126,28 @@ class Paciente extends Controller {
 			$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
 		} else if ($parametros['prevision'] == "1"){
 			if ($parametros['gl_codigo_fonasa'] != ""){
-				$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
+				if (!empty($_SESSION['adjuntos'])) {
+					foreach ($_SESSION['adjuntos'] as $adjunto){
+							if (($adjunt->tipo_adjunto == 3)){
+								$viene_adjunto_fonasa = TRUE;
+							}
+					}
+					if ($viene_adjunto_fonasa){
+						$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
+					} else {
+						$error = true;
+						$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
+					}
+				} else {
+						$error = true;
+						$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
+				}
+			} else {
+				$error = true;
+				$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe indicar su código.";
 			}
 		}
 		if ($id_paciente) {
-			$correcto	= true;
 			$session	= New Zend_Session_Namespace("usuario_carpeta");
 
 			if (!empty($_SESSION['adjuntos'])) {
@@ -222,7 +238,7 @@ class Paciente extends Controller {
 			$parametros['bo_estado']		= 1;
 			$parametros['id_usuario_crea']	= $_SESSION['id'];
 			$parametros['fc_crea']			= "now()";
-			$parametros['id_paciente']		= $id_paciente;			
+			$parametros['id_paciente']		= $id_paciente;
 			$ins_direccion = array(	'id_paciente'			=> $parametros['id_paciente'],
 									'id_comuna'				=> $parametros['comuna'],
 									'id_region'				=> $parametros['region'],
@@ -239,14 +255,12 @@ class Paciente extends Controller {
 			if($desabilitadas){
 				$id_direccion				= $this->_DAOPacienteDireccion->insertarDireccion($ins_direccion);
 			}
-
+			$correcto	= true;
 		} else {
 			$error = true;
 		}
-
-		$salida = array("error" => $error, "correcto" => $correcto);
+		$salida = array("error" => $error, "correcto" => $correcto, "mensaje_error" => $mensaje_error);
 		$json = Zend_Json::encode($salida);
-
 		echo $json;
 	}
 
@@ -260,6 +274,7 @@ class Paciente extends Controller {
 		$parametros			= $this->_request->getParams();
 		$correcto			= false;
 		$error				= false;
+		$paciente_valida	= false;
 		$rut				= $parametros['rut'];
 		$id_paciente		= $parametros['id_paciente'];
 		$gl_grupo_tipo_ant	= $parametros['gl_grupo_tipo'];
@@ -307,8 +322,10 @@ class Paciente extends Controller {
 										'fc_crea'				=> date('Y-m-d h:m:s'),
 										'id_usuario_crea'		=> $_SESSION['id'],
 								);
-				$res_disab_direcciones			= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
-				$id_direccion					= $this->_DAOPacienteDireccion->insertarDireccion($ins_direccion);
+				if ($parametro['cambio_direccion'] == "1"){
+					$res_disab_direcciones			= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
+					$id_direccion					= $this->_DAOPacienteDireccion->insertarDireccion($ins_direccion);
+				}
 				$res_update_centro_salud		= $this->_DAOPaciente->update(array('id_centro_salud' => $id_centro_salud), $id_paciente, 'id_paciente');
 				$res_update_centro_fono			= $this->_DAOPaciente->update(array('gl_fono' => $gl_fono), $id_paciente, 'id_paciente');
 				$res_update_fono_seguro			= $this->_DAOPaciente->update(array('bo_fono_seguro' => $bo_fono_seguro), $id_paciente, 'id_paciente');
@@ -324,6 +341,9 @@ class Paciente extends Controller {
 				$resp = $this->_DAOPaciente->update(array('bo_acepta_programa' => 1), $id_paciente, 'id_paciente');
 				if ($resp){
 					$correcto = $this->_Evento->guardar(4,0,$id_paciente,"Acepta el programa con fecha : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
+				} else {
+					$error = true;
+					$mensaje_error = "Error al guardar algo en la BASE DE DATOS";
 				}
 			}
 
@@ -339,8 +359,9 @@ class Paciente extends Controller {
 			$error	= true;
 		}
 
-		$salida	= array("error"		=> $error,
-						"correcto"	=> $correcto);
+		$salida	= array("error"			=> $error,
+						"correcto"		=> $correcto,
+						"mensaje_error" => $mensaje_error );
 		$json	= Zend_Json::encode($salida);
 
 		echo $json;
@@ -382,14 +403,16 @@ class Paciente extends Controller {
 	 * @author: 
 	 */
 	public function ver() {
-		$parametros = $this->request->getParametros();
-		$id_registro = $parametros[0];
-		$info_paciente = $this->_DAOPaciente->verInfoById($id_registro);
+		$parametros		= $this->request->getParametros();
+		$id_registro	= $parametros[0];
+		$info_paciente	= $this->_DAOPaciente->verInfoById($id_registro);
+
 		if (!is_null($info_paciente)) {
 			$edad = Fechas::calcularEdadInv($info_paciente->fc_nacimiento);
 			$arrMotivosConsulta = $this->_DAOPacienteRegistro->getByIdPaciente($info_paciente->id_paciente);                        
 		}
-                $this->smarty->assign('id_paciente', $info_paciente->id_paciente);
+		
+		$this->smarty->assign('id_paciente', $info_paciente->id_paciente);
 		$this->smarty->assign('rut', $info_paciente->gl_rut);
 		$this->smarty->assign('extranjero', $info_paciente->bo_extranjero);
 		$this->smarty->assign('run_pass', $info_paciente->gl_run_pass);
@@ -414,6 +437,7 @@ class Paciente extends Controller {
 		$this->smarty->assign('institucion', $info_paciente->gl_nombre_institucion);
 		$this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
 		$this->smarty->assign('ruta_consentimiento', $info_paciente->gl_path);
+		$this->smarty->assign('bo_fono_seguro', $info_paciente->bo_fono_seguro);
 		
                 /* Caro 08-03-2017 */
                 $id_paciente = $info_paciente->id_paciente;

@@ -419,6 +419,7 @@ $("#guardaraudit").livequery(function () {
 		var cant_pre		= $('#cant_pre').val();
 		var total			= $('#total').val();
 		var parametros		= $("#formAudit").serializeArray();
+		var mostrar			= true;
 		
 		parametros.push({
 			"name": 'id_empa',
@@ -429,28 +430,38 @@ $("#guardaraudit").livequery(function () {
 			"value": cant_pre
 		});
 
-		if(total > 0){
-			$.ajax({
-				dataType: "json",
-				cache: false,
-				async: true,
-				data: parametros,
-				type: "post",
-				url: BASE_URI + "index.php/Empa/guardarAudit",
-				error: function (xhr, textStatus, errorThrown) {
-					xModal.danger('Error: No se pudo Ingresar AUDIT');
-				},
-				success: function (data) {
-					if (data.correcto) {
-						//xModal.success('Éxito: Se Ingresó nuevo AUDIT!');
-					} else {
-						xModal.info('Error: No se pudo Ingresar AUDIT');
+		for(var i=1; i<=cant_pre; i++){
+			valor	= $('input:radio[name=pregunta_'+i+']:checked').val();			
+			if (typeof valor === "undefined" || valor === null || valor === '') {
+				parametros.push({
+					"name": 'pregunta_'+i,
+					"value": 'NULL'
+				});
+				mostrar	= false;
+			}
+		}
+
+		$.ajax({
+			dataType: "json",
+			cache	: false,
+			async	: true,
+			data	: parametros,
+			type	: "post",
+			url		: BASE_URI + "index.php/Empa/guardarAudit",
+			error	: function (xhr, textStatus, errorThrown) {
+						xModal.danger('Error: No se pudo Ingresar AUDIT');
+					},
+			success	: function (data) {
+						if (data.correcto) {
+							//xModal.success('Éxito: Se Ingresó nuevo AUDIT!');
+						} else {
+							xModal.info('Error: No se pudo Ingresar AUDIT');
+						}
 					}
-				}
-			});
-			
-			$("#gl_puntos_audit").val($("#total").val());
-			//Según tipo de consumo mostrar Mensaje (de acuerdo a puntos del AUDIT)
+		});
+
+		if(mostrar){
+			$("#gl_puntos_audit").val(total);
 			$("#div_alcoholismo2").show();
 			var pts_audit = $('#gl_puntos_audit').val();
 			mensajeAUDIT(pts_audit);
@@ -475,13 +486,13 @@ $(".radio_audit").livequery(function () {
 
 $(".subTotal").livequery(function () {
 	$(this).on('change', function (e) {
-		var total = 0;
-		var i = 0;
-		for (i = 1; i <= 10; i++) {
-			if ($("#puntos_" + i).val() !== null){
-				//alert($("#puntos_" + i).val());
-			} else {
-				total = total + parseInt($("#puntos_" + i).val());
+		var total		= 0;
+		var cant_pre	= $('#cant_pre').val();
+		
+		for (var i = 1; i <= cant_pre; i++) {
+			var valor = $("#puntos_" + i).val();
+			if (typeof valor !== "undefined" && valor !== null && valor !== ''){
+				total = parseInt(total) + parseInt(valor);
 			}
 		}
 		$("#total").val(total);
@@ -493,6 +504,13 @@ $(".subTotal").livequery(function () {
 $("#guardar").on('click', function (e) {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
+
+	if ($('#gl_sector').val() == "") {
+		parametros.push({
+			"name": 'gl_sector',
+			"value": 'NULL'
+		});
+	}
 
 	if ($('#bo_embarazo_1').is(':checked')) {
 		parametros.push({
@@ -672,7 +690,7 @@ $("#guardar").on('click', function (e) {
 			"value": "'" + $('#fc_ultimo_pap').val() + "'"
 		});
 	}
-	if ($('#fc_ultimo_pap_ano').val() == "") {
+	if ($('#fc_ultimo_pap_ano').val() == 0) {
 		parametros.push({
 			"name": 'fc_ultimo_pap_ano',
 			"value": 'NULL'
@@ -683,7 +701,7 @@ $("#guardar").on('click', function (e) {
 			"value": $('#fc_ultimo_pap_ano').val()
 		});
 	}
-	if ($('#fc_ultimo_pap_mes').val() == "") {
+	if ($('#fc_ultimo_pap_mes').val() == 0) {
 		parametros.push({
 			"name": 'fc_ultimo_pap_mes',
 			"value": 'NULL'
@@ -691,7 +709,7 @@ $("#guardar").on('click', function (e) {
 	} else {
 		parametros.push({
 			"name": 'fc_ultimo_pap_mes',
-			"value": "'" + $('#fc_ultimo_pap_mes').val() + "'"
+			"value": $('#fc_ultimo_pap_mes').val()
 		});
 	}
 	if ($('#gl_colesterol').val() == "") {
@@ -1009,7 +1027,7 @@ $("#guardar").on('click', function (e) {
 			"value": "'" + $('#fc_mamografia').val() + "'"
 		});
 	}
-	if ($('#fc_mamografia_ano').val() == "") {
+	if ($('#fc_mamografia_ano').val() == 0) {
 		parametros.push({
 			"name": 'fc_mamografia_ano',
 			"value": 'NULL'
@@ -1020,7 +1038,7 @@ $("#guardar").on('click', function (e) {
 			"value": $('#fc_mamografia_ano').val()
 		});
 	}
-	if ($('#fc_mamografia_mes').val() == "") {
+	if ($('#fc_mamografia_mes').val() == 0) {
 		parametros.push({
 			"name": 'fc_mamografia_mes',
 			"value": 'NULL'
@@ -1028,7 +1046,7 @@ $("#guardar").on('click', function (e) {
 	} else {
 		parametros.push({
 			"name": 'fc_mamografia_mes',
-			"value": "'" + $('#fc_mamografia_mes').val() + "'"
+			"value": $('#fc_mamografia_mes').val()
 		});
 	}	
 	if ($('#bo_mamografia_vigente_1').is(':checked')) {
@@ -1093,11 +1111,14 @@ $("#guardar").on('click', function (e) {
 		success: function (data) {
 			if (data.correcto) {
 				xModal.success('Éxito: Se Ingresó nuevo Registro!');
-				setTimeout(function () {
+				/*setTimeout(function () {
 					location.href = BASE_URI + "index.php/Paciente";
-				}, 2000);
+				}, 2000);*/
 			} else {
 				xModal.info('Error: No se pudo Ingresar un nuevo Registro');
+			}
+			if (data.finalizado){
+				xModal.info('Finalizado');
 			}
 		}
 	});

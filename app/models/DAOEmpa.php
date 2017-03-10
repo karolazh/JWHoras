@@ -141,7 +141,6 @@ class DAOEmpa extends Model{
 						bo_mamografia_realizada			= ".$parametros['bo_mamografia_realizada'].",
 						bo_mamografia_resultado_pasado	= ".$parametros['bo_mamografia_resultado_pasado'].",
 						bo_mamografia_resultado			= ".$parametros['bo_mamografia_resultado'].",
-						fc_mamografia					= ".$parametros['fc_mamografia'].",
 						fc_mamografia_ano				= ".$parametros['fc_mamografia_ano'].",	
 						fc_mamografia_mes				= ".$parametros['fc_mamografia_mes'].",	
 						bo_mamografia_vigente			= ".$parametros['bo_mamografia_vigente'].",
@@ -204,6 +203,19 @@ class DAOEmpa extends Model{
 			return $result->rows->row_0;
         }else{
 			return NULL;
+        }
+    }
+	
+	public function updateFinalizado($parametros){
+        $query	= "	UPDATE pre_empa SET
+						bo_finalizado					= ".$parametros['bo_finalizado']."
+					WHERE id_empa = ".$parametros['id_empa']."
+                    ";
+
+        if($this->db->execQuery($query)) {
+            return TRUE;
+        }else{
+            return FALSE;
         }
     }
 

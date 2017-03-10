@@ -93,19 +93,19 @@
             <div class="form-group">
                 <div class="clearfix col-md-6">
                     <div class="col-md-4">
-                        <label class="control-label">Direcci&oacute;n : </label>
+                        <label class="control-label">Regi&oacute;n : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$gl_direccion}" class="form-control" readonly>
+                        <input type="text" value="{$gl_nombre_region}" class="form-control" readonly>
                     </div>
                 </div>
 
                 <div class="clearfix col-md-6">
                     <div class="col-md-4">
-                        <label class="control-label">Fono : </label>
+                        <label class="control-label">Comuna : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$gl_fono}" class="form-control" readonly>
+                        <input type="text" value="{$gl_nombre_comuna}" class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -113,10 +113,10 @@
             <div class="form-group">
                 <div class="clearfix col-md-6">
                     <div class="col-md-4">
-                        <label class="control-label">Celular : </label>
+                        <label class="control-label">Direcci&oacute;n : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$gl_celular}" class="form-control" readonly>
+                        <input type="text" value="{$gl_direccion}" class="form-control" readonly>
                     </div>
                 </div>
 
@@ -128,24 +128,23 @@
                         <input type="text" value="{$gl_email}" class="form-control" readonly>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
+			</div>
+			<div class="form-group">
                 <div class="clearfix col-md-6">
                     <div class="col-md-4">
-                        <label class="control-label">Comuna : </label>
+                        <label class="control-label">Teléfono : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$gl_nombre_comuna}" class="form-control" readonly>
+                        <input type="text" value="{$gl_fono}" class="form-control" readonly>
                     </div>
                 </div>
 
                 <div class="clearfix col-md-6">
                     <div class="col-md-4">
-                        <label class="control-label">Provincia : </label>
+                        <label class="control-label">¿Teléfono Seguro? </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$gl_nombre_provincia}" class="form-control" readonly>
+                        <input type="text" value="{if $bo_fono_seguro==1}SI{else}NO{/if}" class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -153,10 +152,10 @@
             <div class="form-group">
                 <div class="clearfix col-md-6">
                     <div class="col-md-4">
-                        <label class="control-label">Regi&oacute;n : </label>
+                        <label class="control-label">Celular : </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="{$gl_nombre_region}" class="form-control" readonly>
+                        <input type="text" value="{$gl_celular}" class="form-control" readonly>
                     </div>
                 </div>
 
@@ -189,18 +188,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- DIRECCIONES -->
-            {if $muestra_direcciones == "SI"}
-                <div class="form-group">
-                    {include file='bitacora/grillaDirecciones.tpl'}
-                </div>
-            {/if}
-                    
-            <!-- MOTIVOS DE CONSULTA -->
-            <div class="form-group">
-                {include file='bitacora/grillaConsultas.tpl'}
-            </div>
             
             <!-- EXÁMENES ALTERADOS -->
             {if $muestra_examenes == "SI"}
@@ -209,6 +196,18 @@
                 </div>
             {/if}
             <!-- FIN EXÁMENES ALTERADOS -->
+
+            <!-- MOTIVOS DE CONSULTA -->
+            <div class="form-group">
+                {include file='bitacora/grillaConsultas.tpl'}
+            </div>
+			
+            <!-- DIRECCIONES -->
+            {if $muestra_direcciones == "SI"}
+                <div class="form-group">
+                    {include file='bitacora/grillaDirecciones.tpl'}
+                </div>
+            {/if}
 
         </div>
 
