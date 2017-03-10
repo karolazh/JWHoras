@@ -173,12 +173,12 @@
 
 		$gl_grupo_tipo = 'Seguimiento';
 		if ($gl_grupo_tipo_ant != $gl_grupo_tipo){
-			$datos_evento['id_paciente'] = $id_paciente;
-			$datos_evento['bo_estado'] = 1;
-			$datos_evento['id_usuario_crea'] = $session->id;
-			$datos_evento['eventos_tipo'] = 10;
-			$datos_evento['gl_descripcion'] = "Paciente RUT : ". $rut ." en seguimiento desde : " . Fechas::fechaHoy();
-			$resp = $this->_DAOEventos->insEvento($datos_evento);
+			$datos_evento['id_paciente']		= $id_paciente;
+			$datos_evento['bo_estado']			= 1;
+			$datos_evento['id_usuario_crea']	= $session->id;
+			$datos_evento['eventos_tipo']		= 10;
+			$datos_evento['gl_descripcion']		= "Paciente RUT : ". $rut ." en seguimiento desde : " . Fechas::fechaHoy();
+			$resp								= $this->_DAOEventos->insEvento($datos_evento);
 		}
 	}else{
 		$gl_grupo_tipo = 'Control';
