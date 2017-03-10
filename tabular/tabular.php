@@ -67,19 +67,19 @@
 	if($parametros['edad'] > 15 AND $grupo_usuario_registrador == 'Seguimiento' AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
 		$gl_grupo_tipo  = 'Seguimiento';
 		if ($gl_grupo_tipo_ant != $gl_grupo_tipo){
-			$datos_evento['id_paciente']	= $id_paciente;
-			$datos_evento['bo_estado']		= 1;
-			$datos_evento['id_usuario_crea']= $session->id;
-			$datos_evento['eventos_tipo']	= 10;
-			$datos_evento['gl_descripcion']	= "Paciente RUT : ". $rut ." en seguimiento desde : " . Fechas::fechaHoy();
-			$resp							= $this->_DAOEventos->insEvento($datos_evento);
+			$datos_evento['id_paciente']        = $id_paciente;
+			$datos_evento['bo_estado']          = 1;
+			$datos_evento['id_usuario_crea']    = $session->id;
+			$datos_evento['eventos_tipo']       = 10;
+			$datos_evento['gl_descripcion']     = "Paciente RUT : ". $rut ." en seguimiento desde : " . Fechas::fechaHoy();
+			$resp                               = $this->_DAOEventos->insEvento($datos_evento);
 		}
 	}else{
 		$gl_grupo_tipo  = 'Control';
 	}
 		
      function getByIdPaciente($id_paciente){
-        $query	=   "SELECT
+        $query = "  SELECT
                         examen.id_paciente_examen ,
                         examen.id_tipo_examen,
                         examen.id_empa,
