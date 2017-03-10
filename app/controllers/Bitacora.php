@@ -106,7 +106,7 @@ class Bitacora extends Controller {
 
             //$this->smarty->assign("direccion", $detPaciente->gl_direccion);
             $this->smarty->assign("gl_fono", $detPaciente->gl_fono);
-            $this->smarty->assign("gl_fono", $detPaciente->bo_fono_seguro);
+            $this->smarty->assign("bo_fono_seguro", $detPaciente->bo_fono_seguro);
 
             $this->smarty->assign("gl_celular", $detPaciente->gl_celular);
             $this->smarty->assign("gl_email", $detPaciente->gl_email);
