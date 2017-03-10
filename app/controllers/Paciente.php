@@ -630,16 +630,24 @@ class Paciente extends Controller {
 							<table id='tablaDireccion' class='table table-hover table-striped table-bordered dataTable no-footer'>
 								<thead>
 									<tr role='row'>
-										<th class='text-center' width='10%'>Direcciones</th>
+										<th align='center' width='10%'>Fecha</th>
+										<th align='center' width='23%'>Direcci&oacute;nes vigentes</th>
+										<th align='center' width='22%'>Comuna</th>
+										<th align='center' width='22%'>Regi&oacute;n</th>
+										<th align='center' width='23%'>Funcionario</th>
 									</tr>
 								</thead>
 								<tbody>";
 				$tabla_direcciones = $encabezado_tabla_direcciones;
 				$break_count = 0;
-				foreach (array_reverse((array) $direcciones) as $item) {
+				foreach (array_reverse((array) $direcciones) as $dir) {
 					if ($break_count < 5) {
 						$cuerpo_tabla_direcciones = "<tr>
-														<td class='text-center' nowrap> $item->gl_direccion </td>
+														<td>$dir->fc_crea</td>
+														<td>$dir->gl_direccion</td>
+														<td>$dir->gl_nombre_comuna</td>
+														<td>$dir->gl_nombre_region</td>
+														<td>$dir->funcionario</td>	
 													</tr>
 												";
 						$tabla_direcciones = $tabla_direcciones . $cuerpo_tabla_direcciones;
