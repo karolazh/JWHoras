@@ -2,6 +2,7 @@
 $("#form").ready(function () {
     var imc = $('#gl_imc').val();
     var pts_audit = $('#gl_puntos_audit').val();
+    var edad = $('#nr_edad').val();
     //funcion mensaje span IMC
     mensajeIMC(imc);
     //funcion mensaje span Puntos AUDIT
@@ -24,6 +25,10 @@ $("#form").ready(function () {
         $("#bo_mamografia_requiere_1").prop('checked', true);
     }
 	
+	if (imc>=30 || edad>=40){
+		$("#bo_antecedente_0").attr("checked",false);
+		$('#bo_antecedente_1').attr("checked",false);
+	}
 });
 
 //Poner Mensaje en span segun Puntos de AUDIT

@@ -428,10 +428,13 @@ class Empa extends Controller{
 		
 		$bool_update = $this->_DAOEmpa->updateEmpa($parametros);
 		if ($bool_update) {
-			//$resp = $this->_Evento->guardarMostrarUltimo(12,$id_empa,$id_paciente,"Empa modificado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
+			$resp = $this->_Evento->guardarMostrarUltimo(12,$id_empa,$id_paciente,"Empa modificado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
 			$correcto = TRUE;
 			$finalizado = $this->guardarFinalizado($parametros);
-			//$resp = $this->_Evento->guardar(2,$id_empa,$id_paciente,"Empa finalizado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
+			if ($finalizado){
+				$this->_DAOEmpa->updateFinalizado($parametros);
+				//$resp = $this->_Evento->guardar(2,$id_empa,$id_paciente,"Empa finalizado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
+			}
 		} else {
 			$error = TRUE;
 		}
@@ -569,12 +572,9 @@ class Empa extends Controller{
 		if ($parametros['gl_pad'] == 'NULL') {
 			return FALSE;
 		}
-		
-		if ($parametros['bo_antecedente_diabetes'] == 'NULL' && ($parametros['nr_edad'] > 40 || $parametros['gl_imc'] >= 30)) {
-			return FALSE;
-		}
-		
-		if ($parametros['gl_glicemia'] == 'NULL' && ($parametros['nr_edad'] > 40 || $parametros['gl_imc'] >= 30 || $parametros['bo_antecedente_diabetes'] == 1)) {
+		//Error con glicemia .. Ver!
+
+		if (($parametros['nr_edad'] >= 40 || $parametros['gl_imc'] >= 30 || $parametros['bo_antecedente_diabetes'] == 1) && $parametros['gl_glicemia'] == 'NULL') {
 			return FALSE;
 		}
 		
@@ -621,12 +621,12 @@ class Empa extends Controller{
 			return FALSE;
 		}
 		
-		if ($parametros['bo_mamografia_realizada'] == 1 && ($parametros['fc_mamografia_mes'] == 'NULL' || $parametros['fc_mamografia_mes'] == 'NULL' ||
-			$parametros['bo_mamografia_vigente'] == 'NULL' || $parametros['bo_mamografia_resultado_pasado'] == 'NULL') && $parametros['bo_embarazo'] == 0) {
+		if ($parametros['bo_mamografia_realizada'] == 1 && $parametros['bo_embarazo'] == 0 && ($parametros['fc_mamografia_mes'] == 'NULL' || $parametros['fc_mamografia_mes'] == 'NULL' ||
+			$parametros['bo_mamografia_vigente'] == 'NULL' || $parametros['bo_mamografia_resultado_pasado'] == 'NULL')) {
 			return FALSE;
 		}
 		
-		if ($parametros['gl_observaciones'] == 'NULL') {
+		if ($parametros['gl_observaciones_empa'] == 'NULL') {
 			return FALSE;
 		}
 		
