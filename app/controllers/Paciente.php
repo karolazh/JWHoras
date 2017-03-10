@@ -403,14 +403,16 @@ class Paciente extends Controller {
 	 * @author: 
 	 */
 	public function ver() {
-		$parametros = $this->request->getParametros();
-		$id_registro = $parametros[0];
-		$info_paciente = $this->_DAOPaciente->verInfoById($id_registro);
+		$parametros		= $this->request->getParametros();
+		$id_registro	= $parametros[0];
+		$info_paciente	= $this->_DAOPaciente->verInfoById($id_registro);
+
 		if (!is_null($info_paciente)) {
 			$edad = Fechas::calcularEdadInv($info_paciente->fc_nacimiento);
 			$arrMotivosConsulta = $this->_DAOPacienteRegistro->getByIdPaciente($info_paciente->id_paciente);                        
 		}
-                $this->smarty->assign('id_paciente', $info_paciente->id_paciente);
+		
+		$this->smarty->assign('id_paciente', $info_paciente->id_paciente);
 		$this->smarty->assign('rut', $info_paciente->gl_rut);
 		$this->smarty->assign('extranjero', $info_paciente->bo_extranjero);
 		$this->smarty->assign('run_pass', $info_paciente->gl_run_pass);
@@ -435,6 +437,7 @@ class Paciente extends Controller {
 		$this->smarty->assign('institucion', $info_paciente->gl_nombre_institucion);
 		$this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
 		$this->smarty->assign('ruta_consentimiento', $info_paciente->gl_path);
+		$this->smarty->assign('bo_fono_seguro', $info_paciente->bo_fono_seguro);
 		
                 /* Caro 08-03-2017 */
                 $id_paciente = $info_paciente->id_paciente;
