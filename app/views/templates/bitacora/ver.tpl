@@ -189,18 +189,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- DIRECCIONES -->
-            {if $muestra_direcciones == "SI"}
-                <div class="form-group">
-                    {include file='bitacora/grillaDirecciones.tpl'}
-                </div>
-            {/if}
-                    
-            <!-- MOTIVOS DE CONSULTA -->
-            <div class="form-group">
-                {include file='bitacora/grillaConsultas.tpl'}
-            </div>
             
             <!-- EXÁMENES ALTERADOS -->
             {if $muestra_examenes == "SI"}
@@ -209,6 +197,18 @@
                 </div>
             {/if}
             <!-- FIN EXÁMENES ALTERADOS -->
+
+            <!-- MOTIVOS DE CONSULTA -->
+            <div class="form-group">
+                {include file='bitacora/grillaConsultas.tpl'}
+            </div>
+			
+            <!-- DIRECCIONES -->
+            {if $muestra_direcciones == "SI"}
+                <div class="form-group">
+                    {include file='bitacora/grillaDirecciones.tpl'}
+                </div>
+            {/if}
 
         </div>
 
