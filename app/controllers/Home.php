@@ -108,11 +108,11 @@ class Home extends Controller{
                     $registros_paciente = $daoPacienteRegistro->getByIdPaciente($registro->id_paciente);
                     if($registros_paciente){
                         foreach($registros_paciente as $reg_pac){
-                            $indice = str_replace('-','',$reg_pac->fecha_ingreso);
+                            $indice = str_replace('-','',$reg_pac->fc_ingreso);
                             if(isset($arr_registros_fechas[$indice])){
                                 $arr_registros_fechas[$indice]['total'] = $arr_registros_fechas[$indice]['total'] + 1;
                             }else{
-                                $arr_registros_fechas[$indice]['fecha'] = $reg_pac->fecha_ingreso;
+                                $arr_registros_fechas[$indice]['fecha'] = $reg_pac->fc_ingreso;
                                 $arr_registros_fechas[$indice]['total'] =  1;
                             }        
                         }

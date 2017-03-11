@@ -2,6 +2,7 @@
 $("#guardar").on('click', function (e) {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
+	var region = $("#region").val();
 	var gl_rut = $("#rut").val();
 	if (gl_rut == '' && !$('#chkextranjero').is(':checked')) {
 		xModal.danger('- El campo RUT es Obligatorio');
@@ -58,6 +59,10 @@ $("#guardar").on('click', function (e) {
 				"value": 0
 			});
 		}
+		parametros.push({
+				"name": 'region',
+				"value": region
+			});
 		/*
 		 var inputFileImage = document.getElementById("subirFile");
 		 var file = inputFileImage.files[0];

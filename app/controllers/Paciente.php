@@ -83,12 +83,21 @@ class Paciente extends Controller {
 	 */
 	public function nuevo() {
 		Acceso::redireccionUnlogged($this->smarty);
-
 		unset($_SESSION['adjuntos']);
-
-		$arrRegiones = $this->_DAORegion->getLista();
-		$this->smarty->assign("arrRegiones", $arrRegiones);
-
+		$es_admin = FALSE;
+		if ($_SESSION['perfil'] =="1" || $_SESSION['perfil'] == "5"){
+			$arrRegiones = $this->_DAORegion->getLista();
+			$this->smarty->assign("arrRegiones", $arrRegiones);
+			$es_admin = TRUE;
+			
+		} else	{
+			$region_usuario = $this->_DAORegion->getById($_SESSION['id_region']);
+			$this->smarty->assign("region_usuario",$region_usuario);
+			$arrComunas = $this->_DAOComuna->getComunasByIdRegion($_SESSION['id_region']);
+			$this->smarty->assign("arrComunas", $arrComunas);
+		}
+		$this->smarty->assign("region_usuario",$region_usuario);
+		$this->smarty->assign("es_admin", $es_admin);
 		$arrPrevision = $this->_DAOPrevision->getLista();
 		$this->smarty->assign("arrPrevision", $arrPrevision);
 
@@ -115,6 +124,7 @@ class Paciente extends Controller {
 		$parametros		= $this->_request->getParams();
 		$correcto			= false;
 		$error				= false;
+		$mensaje_error		= "Error no identificado";
 		$id_paciente		= false;
 		$gl_grupo_tipo		= 'Control';
 		$id_tipo_grupo		= 1;
@@ -123,6 +133,7 @@ class Paciente extends Controller {
 			$gl_grupo_tipo = 'Tratamiento';
 			$id_tipo_grupo = 2;
 		}
+		
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
 		$parametros['id_tipo_grupo'] = $id_tipo_grupo;
 		if ($parametros['chkextranjero'] != 1){
