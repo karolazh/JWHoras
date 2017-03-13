@@ -162,6 +162,7 @@ class Paciente extends Controller {
 			}
 		}
 		if ($id_paciente) {
+			$correcto	= true;
 			$session	= New Zend_Session_Namespace("usuario_carpeta");
 
 			if (!empty($_SESSION['adjuntos'])) {
@@ -269,7 +270,7 @@ class Paciente extends Controller {
 			if($desabilitadas){
 				$id_direccion				= $this->_DAOPacienteDireccion->insertarDireccion($ins_direccion);
 			}
-			$correcto	= true;
+
 		} else {
 			$error = true;
 		}

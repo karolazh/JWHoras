@@ -30,8 +30,8 @@
                                                 <th class="text-center" width="10%">Estado</th>
                                                 <th class="text-center" width="5%">Cantidad atenciones</th>
                                                 <th class="text-center" width="5%">Reconoce violencia</th>
-                                                <th class="text-center" width="5%">Participa?</th>
-                                                <th class="text-center" width="5%">Exámenes PAP o Mamografía Alterados?</th>
+                                                <th class="text-center" width="5%">Participa</th>
+                                                <th class="text-center" width="5%">Exámen PAP o Mamografía Alterado</th>
                                                 <th class="text-center" width="1px">Dias primera visita?</th>
                                                 <th class="text-center">Acciones</th>
                                         </tr>
