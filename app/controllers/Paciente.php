@@ -83,6 +83,7 @@ class Paciente extends Controller {
 	 */
 	public function nuevo() {
 		Acceso::redireccionUnlogged($this->smarty);
+		$region_usuario = "";
 		unset($_SESSION['adjuntos']);
 		$es_admin = FALSE;
 		if ($_SESSION['perfil'] =="1" || $_SESSION['perfil'] == "5"){
