@@ -2,13 +2,18 @@
 $("#guardar").on('click', function (e) {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
+	var region = $("#region").val();
 	var gl_rut = $("#rut").val();
-
 	if (gl_rut == '' && !$('#chkextranjero').is(':checked')) {
 		xModal.danger('- El campo RUT es Obligatorio');
 	} else if ($('#chkextranjero').is(':checked') && $('#opcionPrevision').val() === "1" && $('#gl_codigo_fonasa').val() === "") {
 		xModal.danger('Si eres extranjero afiliado en FONASA, deber ingresar tu código fonasa y subir tu certifiado de afiliación');
-	}
+	} else if ($( "#region option:selected" ).val() === "0"){
+		xModal.danger('Debe seleccionar la region del paciente.');
+	} else if ($( "#comuna option:selected" ).val() === "0"){
+		xModal.danger('Debe seleccionar la comuna del paciente.');
+	} 
+	
 		else {
 		if ($('#chkextranjero').is(':checked')) {
 			parametros.push({
@@ -54,6 +59,10 @@ $("#guardar").on('click', function (e) {
 				"value": 0
 			});
 		}
+		parametros.push({
+				"name": 'region',
+				"value": region
+			});
 		/*
 		 var inputFileImage = document.getElementById("subirFile");
 		 var file = inputFileImage.files[0];
@@ -97,6 +106,10 @@ $("#guardarMotivo").on('click', function (e) {
 		xModal.danger('Debe confirmar la Dirección del Paciente antes de poder Guardar.');
 	} else if (!$('#chk_confirma_fono').is(':checked')) {
 		xModal.danger('Debe confirmar el Teléfono del Paciente antes de poder Guardar.');
+	} else if ($( "#region option:selected" ).val() === "0"){
+		xModal.danger('Debe seleccionar la region del paciente.');
+	} else if ($( "#comuna option:selected" ).val() === "0"){
+		xModal.danger('Debe seleccionar la comuna del paciente.');
 	} else {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
@@ -460,15 +473,15 @@ var Paciente = {
 						$("#email").val(data.gl_email);
 
 						if (data.id_comuna != '0') {
-							var comuna = '<option value="' + data.id_comuna + '">' + data.gl_nombre_comuna + '</option>';
-							$("#comuna").html(comuna);
+							//var comuna = '<option value="' + data.id_comuna + '">' + data.gl_nombre_comuna + '</option>';
+							$("#comuna").html(data.jsonComuna);
 						} else {
 							$("#region").trigger('change');
 						}
 
 						if (data.id_centro_salud != '0') {
-							var centro_salud = '<option value="' + data.id_centro_salud + '">' + data.gl_centro_salud + '</option>';
-							$("#centrosalud").html(centro_salud);
+							//var centro_salud = '<option value="' + data.id_centro_salud + '">' + data.gl_centro_salud + '</option>';
+							$("#centrosalud").html(data.jsonCentroSalud);
 						} else {
 							$("#comuna").trigger('change');
 						}
@@ -525,10 +538,10 @@ var Paciente = {
 			$.post(BASE_URI + 'index.php/Paciente/cargarCentroSaludporComuna', {comuna: comuna}, function (response) {
 				var options = '<option value="0">Seleccione un Centro de Salud</option>';
 				$.each(response, function (i, valor) {
-					if (centrosalud == valor.id_establecimiento) {
-						options += '<option value="' + valor.id_establecimiento + '" selected >' + valor.gl_nombre_establecimiento + '</option>';
+					if (centrosalud == valor.id_centro_salud) {
+						options += '<option value="' + valor.id_centro_salud + '" selected >' + valor.gl_nombre_establecimiento + '</option>';
 					} else {
-						options += '<option value="' + valor.id_establecimiento + '">' + valor.gl_nombre_establecimiento + '</option>';
+						options += '<option value="' + valor.id_centro_salud + '">' + valor.gl_nombre_establecimiento + '</option>';
 					}
 				});
 				$('#' + combo).html(options);

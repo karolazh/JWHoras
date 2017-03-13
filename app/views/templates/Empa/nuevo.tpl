@@ -330,7 +330,7 @@
                 <div class="box box-success" id="diabetes">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Diabetes Mellitus (DM)</h3></div>
                     <div class="box-body">
-                        <div class="form-group" id="antecedentes" style="{$antecedentes}">
+                        <div class="form-group" id="antecedentes" >
                             <label class="control-label required col-sm-3">¿Tiene Antecedentes Familiares de Diabetes Mellitus?</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_antecedente" type="radio" name="bo_antecedente" 

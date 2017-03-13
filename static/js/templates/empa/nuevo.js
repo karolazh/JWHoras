@@ -2,6 +2,7 @@
 $("#form").ready(function () {
     var imc = $('#gl_imc').val();
     var pts_audit = $('#gl_puntos_audit').val();
+    var edad = $('#nr_edad').val();
     //funcion mensaje span IMC
     mensajeIMC(imc);
     //funcion mensaje span Puntos AUDIT
@@ -24,6 +25,10 @@ $("#form").ready(function () {
         $("#bo_mamografia_requiere_1").prop('checked', true);
     }
 	
+	if (imc>=30 || edad>=40){
+		$("#bo_antecedente_0").attr("checked",false);
+		$('#bo_antecedente_1').attr("checked",false);
+	}
 });
 
 //Poner Mensaje en span segun Puntos de AUDIT
@@ -1111,15 +1116,15 @@ $("#guardar").on('click', function (e) {
 		success: function (data) {
 			if (data.correcto) {
 				xModal.success('Éxito: Se Ingresó nuevo Registro!');
-				/*setTimeout(function () {
+				setTimeout(function () {
 					location.href = BASE_URI + "index.php/Paciente";
-				}, 2000);*/
+				}, 2000);
 			} else {
 				xModal.info('Error: No se pudo Ingresar un nuevo Registro');
 			}
-			if (data.finalizado){
+			/*if (data.finalizado){
 				xModal.info('Finalizado');
-			}
+			}*/
 		}
 	});
 	buttonEndProcess(button_process);

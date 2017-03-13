@@ -92,6 +92,23 @@ class DAOComuna extends Model {
         }
     }
 
+	public function getComunasByIdRegion($id_region){
+		$query	= "	SELECT 
+						c.*
+					FROM pre_comuna c
+						LEFT JOIN pre_region r ON c.id_region = r.id_region
+					WHERE c.id_region = ?";
+
+		$param	= array($id_region);
+        $resul	= $this->db->getQuery($query,$param);
+
+        if($resul->numRows > 0){
+            return $resul->rows;
+        }else{
+            return NULL;
+        }
+    }
+	
 }
 
 ?>

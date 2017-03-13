@@ -152,22 +152,38 @@
 					<div class="form-group">
 						<label class="control-label col-sm-4">Región (*)</label>
 						<div class="col-sm-6">
+							{if $es_admin}
 							<select for="region" class="form-control" id="region" name="region" onchange="Region.cargarComunasPorRegion(this.value, 'comuna')" onblur="validarVacio(this, 'Por favor Seleccione una Región')">
-								<option value="0">Seleccione una Región</option>
-								{foreach $arrRegiones as $item}
-									<option value="{$item->id_region}" >{$item->gl_nombre_region}</option>
-								{/foreach}
+								
+									<option value="0">Seleccione una Región</option>
+									{foreach $arrRegiones as $item}
+										<option value="{$item->id_region}" >{$item->gl_nombre_region}</option>
+									{/foreach}
+							</select>	
+								
+							{else}
+							<select  for="region" class="form-control" id="region" name="region" onblur="validarVacio(this, 'Por favor Seleccione una Región')" disabled>
+										<option value="{$region_usuario->id_region}">{$region_usuario->gl_nombre_region}</option>
 							</select>
+							
+							{/if}
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
 					</div>
 					<div class="form-group"> 
 						<label class="control-label  col-sm-4">Comuna (*)</label>
 						<div class="col-sm-6">
+							
+
 							<select for="comuna" class="form-control" id="comuna" name="comuna" 
 									onchange="Paciente.cargarCentroSaludporComuna(this.value, 'centrosalud')"
 									onblur="validarVacio(this, 'Por favor Seleccione una Comuna')">
 								<option value="0">Seleccione una Comuna</option>
+								{if !$es_admin}
+									{foreach $arrComunas as $item}
+										<option value="{$item->id_comuna}" >{$item->gl_nombre_comuna}</option>
+									{/foreach}
+								{/if}
 							</select>
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
