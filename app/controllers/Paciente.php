@@ -159,7 +159,7 @@ class Paciente extends Controller {
 			}
 		}
 		
-		if($mensaje_error == ''){
+		if($mensaje_error != ''){
 			$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
 		}
 		if ($id_paciente) {
@@ -274,7 +274,7 @@ class Paciente extends Controller {
 
 		} else {
 			$error = true;
-			$mensaje_error = 'Error al Guardar los datos. Favor comuniquese con Mesa de Ayuda.';
+			$mensaje_error = 'Error al Guardar los datos. Favor comuníquese con Mesa de Ayuda.';
 		}
 		$salida = array("error" => $error, "correcto" => $correcto, "mensaje_error" => $mensaje_error);
 		$json = Zend_Json::encode($salida);
