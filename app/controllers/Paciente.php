@@ -125,7 +125,7 @@ class Paciente extends Controller {
 		$parametros		= $this->_request->getParams();
 		$correcto			= false;
 		$error				= false;
-		$mensaje_error		= "Error no identificado";
+		$mensaje_error		= '';
 		$id_paciente		= false;
 		$gl_grupo_tipo		= 'Control';
 		$id_tipo_grupo		= 1;
@@ -147,11 +147,9 @@ class Paciente extends Controller {
 								$viene_adjunto_fonasa = TRUE;
 							}
 					}
-					if ($viene_adjunto_fonasa){
-						$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
-					} else {
-						$error = true;
-						$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
+					if (!$viene_adjunto_fonasa){
+						$error			= true;
+						$mensaje_error	= "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
 					}
 				} else {
 						$error = true;
@@ -161,6 +159,10 @@ class Paciente extends Controller {
 				$error = true;
 				$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe indicar su código.";
 			}
+		}
+		
+		if($mensaje_error == ''){
+			$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
 		}
 		if ($id_paciente) {
 			$correcto	= true;
@@ -274,6 +276,7 @@ class Paciente extends Controller {
 
 		} else {
 			$error = true;
+			$mensaje_error = 'Error al Guardar los datos. Favor comuniquese con Mesa de Ayuda.';
 		}
 		$salida = array("error" => $error, "correcto" => $correcto, "mensaje_error" => $mensaje_error);
 		$json = Zend_Json::encode($salida);
