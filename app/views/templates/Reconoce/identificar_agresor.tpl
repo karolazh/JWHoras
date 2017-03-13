@@ -227,8 +227,8 @@
 						<div id="nacional">
 							<label for="gl_rut_agresor" class="control-label col-sm-3">Rut Agresor (*)</label>
 							<div class="col-sm-2">
-								<input type="text" name="gl_rut_agresor" id="gl_rut_agresor" maxlength="12" onkeyup="formateaRut(this), this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this, 'Por favor Ingrese RUT');if (Valida_Rut(this)){ldelim}
-											validarVacio(this, 'Por favor Ingrese Rut');{rdelim}" placeholder="Rut Agresor" class="form-control">
+								<input type="text" name="gl_rut_agresor" id="gl_rut_agresor" maxlength="12" onkeyup="formateaRut(this), this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" 
+									   onblur="if (Valida_Rut(this)){ldelim} validarVacio(this, 'Por favor Ingrese Rut');{rdelim}" placeholder="Rut Agresor" class="form-control">
 								<span class="help-block hidden fa fa-warning"></span>
 							</div>
 						</div>
