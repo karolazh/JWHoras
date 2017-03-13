@@ -109,6 +109,9 @@ class Paciente extends Controller {
 
 		//llamado al template
 		$this->_display('Paciente/nuevo.tpl');
+		$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/bootstrap-datepicker.js');
+        $this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/locales/bootstrap-datepicker.es.js');
+		$this->load->javascript('$(".datepicker").datepicker({ todayBtn: true,language: "es",   todayHighlight: true,autoclose: true});');
 		$this->load->javascript(STATIC_FILES . "js/regiones.js");
 		$this->load->javascript(STATIC_FILES . "js/templates/paciente/nuevo.js");
 		//$this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
