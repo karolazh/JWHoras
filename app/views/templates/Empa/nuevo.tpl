@@ -1,5 +1,6 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="{$static}/template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
 
 <section class="content-header">
     <h1><i class="fa fa-medkit"></i> Ingresar EMPA</h1>
@@ -62,11 +63,23 @@
                     </div>
 
                     <label for="fc_empa" class="control-label col-sm-1">Fecha (*)</label>
-                    <div class="col-sm-3">
+					<div class="col-lg-3">
+							<div class="input-group">
+								<input type="text" class="form-control datepicker " readonly
+									   style="border-radius: 0" 
+									   id="fc_empa"
+									   name="fc_empa"
+									   value="{$fc_empa}"
+									   placeholder="Fecha">
+								<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_empa').focus();"></i></span>
+								<span class="help-block hidden"></span>
+							</div>
+					</div>
+					<!--<div class="col-sm-3">
                         <input type="date" name="fc_empa" id="fc_empa" value="{$fc_empa}" 
                                placeholder="Fecha" class="form-control"/>
                         <span class="help-block hidden"></span>
-                    </div>
+                    </div>-->
                 </div>    
                 <div class="form-group">
                     <label class="control-label col-sm-3">Nro. Registro</label>
