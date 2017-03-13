@@ -137,9 +137,7 @@ class Paciente extends Controller {
 		
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
 		$parametros['id_tipo_grupo'] = $id_tipo_grupo;
-		if ($parametros['chkextranjero'] != 1){
-			$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
-		} else if ($parametros['prevision'] == "1"){
+		if ($parametros['prevision'] == "1"){
 			if ($parametros['gl_codigo_fonasa'] != ""){
 				if (!empty($_SESSION['adjuntos'])) {
 					foreach ($_SESSION['adjuntos'] as $adjunto){
