@@ -3,10 +3,13 @@ $("#guardar").on('click', function (e) {
 	var button_process = buttonStartProcess($(this), e);
 	var parametros = $("#form").serializeArray();
 	var gl_rut_agresor = $("#gl_rut_agresor").val();
+	var gl_run_pass_agresor = $("#gl_run_pass_agresor").val();
 	
 	//Validar Rut Agresor
-	if (gl_rut_agresor == '') {
+	if ((!$('#chkextranjero').is(':checked')) && gl_rut_agresor == '') {
 		xModal.danger('- El campo RUT de Agresor es Obligatorio');
+	} else if ($('#chkextranjero').is(':checked') && gl_run_pass_agresor == ''){
+		xModal.danger('- El campo RUN/Pasaporte de Agresor es Obligatorio');
 	} else {
 		//Validar Vacios y otros
 		//Datos Pacientes para UPDATE
@@ -193,6 +196,18 @@ $("#guardar").on('click', function (e) {
 					"value": "'" + $('#gl_apellidos_agresor').val() + "'"
 				});
 			}
+			
+			if ($('#chkextranjero').is(':checked')) {
+			parametros.push({
+				"name": 'bo_extranjero',
+				"value": 1
+			});
+			} else {
+				parametros.push({
+					"name": 'bo_extranjero',
+					"value": 0
+				});
+			}
 
 			if ($('#gl_rut_agresor').val() == "") {
 				parametros.push({
@@ -203,6 +218,18 @@ $("#guardar").on('click', function (e) {
 				parametros.push({
 					"name": 'gl_rut_agresor',
 					"value": "'" + $('#gl_rut_agresor').val() + "'"
+				});
+			}
+			
+			if ($('#gl_run_pass_agresor').val() == "") {
+				parametros.push({
+					"name": 'gl_run_pass_agresor',
+					"value": 'NULL'
+				});
+			} else {
+				parametros.push({
+					"name": 'gl_run_pass_agresor',
+					"value": "'" + $('#gl_run_pass_agresor').val() + "'"
 				});
 			}
 
@@ -406,4 +433,19 @@ $("#guardar").on('click', function (e) {
 
 	}
 		buttonEndProcess(button_process);
+});
+
+$("#chkextranjero").on('click', function (e) {
+	if ($('#chkextranjero').is(':checked')) {
+		$('#nacional').hide();
+		$('#extranjero').show();
+		var id_prevision = $('#opcionPrevision').val();
+		if (id_prevision === "1") {
+			$('#groupFonasaExtranjero').removeClass("hidden");
+		}
+	} else {
+		$('#nacional').show();
+		$('#extranjero').hide();
+		$('#groupFonasaExtranjero').addClass("hidden");
+	}
 });
