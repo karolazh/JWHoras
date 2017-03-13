@@ -273,10 +273,23 @@
 					</div>
 					<div class="form-group">
 						<label for="fechaingreso" class="control-label col-sm-4">Fecha Ingreso</label>
-						<div class="col-sm-6">
-							<input type="date" name="fechaingreso" id="fechaingreso" value="{$smarty.now|date_format:"%Y-%m-%d"}" onblur="validarVacio(this, 'Por favor Ingrese Fecha y Hora de Ingreso')" placeholder="Fecha y Hora de Ingreso" class="form-control"/>
-							<span class="help-block hidden"></span>
+						<div class="col-lg-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker " readonly
+                                           style="border-radius: 0" 
+										   id="fechaingreso"
+                                           name="fechaingreso"
+										   onchange="validarVacio(this, 'Por favor Ingrese Fecha y Hora de Ingreso')"
+										   value="{$smarty.now|date_format:"%d/%m/%Y"}"
+                                           placeholder="Fecha y Hora de Ingreso">
+                                    <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fechaingreso').focus();"></i></span>
+									<span class="help-block hidden"></span>
+                                </div>
 						</div>
+					<!--<div class="col-sm-6">
+							<input type="date" name="fechaingreso" id="fechaingreso" value="{$smarty.now|date_format:"%d/%m/%Y"}" onblur="validarVacio(this, 'Por favor Ingrese Fecha y Hora de Ingreso')" placeholder="Fecha y Hora de Ingreso" class="form-control"/>
+							<span class="help-block hidden"></span>
+						</div>-->
 					</div>   
 					<div class="form-group">
 						<label for="horaingreso" class="control-label col-sm-4">Hora Ingreso</label>
