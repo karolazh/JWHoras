@@ -3388,3 +3388,12 @@ table.dataTable tbody > tr > td {
 	/*top:44px*/
 	margin-left:0
 }
+
+@media (max-width:991px)
+{
+	a.btn.btn-success.btn-flat {
+		color: #fff;
+		background-color: #529d54;
+		border-color: #a3aba3;
+	}
+}
