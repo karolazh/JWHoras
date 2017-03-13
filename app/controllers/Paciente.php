@@ -947,4 +947,28 @@ class Paciente extends Controller {
 		echo $json;
 	}
 
+	public function buscar() {
+		Acceso::redireccionUnlogged($this->smarty);
+		
+		$arrRegiones = $this->_DAORegion->getLista();
+		$this->smarty->assign("arrRegiones", $arrRegiones);
+		
+		$arrCentroSalud	= $this->_DAOCentroSalud->getLista();
+		$this->smarty->assign("arrCentroSalud", $arrCentroSalud);
+		
+		$this->_display('Paciente/buscar.tpl');
+		$this->load->javascript(STATIC_FILES . "js/templates/paciente/buscar.js");
+		$this->load->javascript(STATIC_FILES . "js/regiones.js");
+	}
+	
+	public function realizarBusqueda(){
+		header('Content-type: application/json');
+		$parametros = $this->_request->getParams();
+		
+		$arr = $this->_DAOPaciente->buscarPaciente($parametros);
+		print_r($arr); die;
+		$this->smarty->assign('arrResultado', $arr);
+		
+	}
+	
 }

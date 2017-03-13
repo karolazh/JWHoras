@@ -1097,12 +1097,7 @@ $("#guardar").on('click', function (e) {
 			"value": 'NULL'
 		});
 	}
-//Dar parametro bo_finalizado en 1
-	parametros.push({
-			"name": 'bo_finalizado',
-			"value": 1
-		});
-		
+
 	$.ajax({
 		dataType: "json",
 		cache: false,
