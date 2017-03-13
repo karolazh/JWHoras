@@ -53,7 +53,7 @@
                     </div>
                     {/if}
                     <form  id="form" name="form" enctype="application/x-www-form-urlencoded" action="" method="post">
-                        <input type="hidden" name="id" id="id" value="{$item->id}"/>
+                        <input type="hidden" name="id" id="id" value="{$id_usuario}"/>
 						<div class="col-md-6 text-left">
                             <div class="form-group clearfix">
                                 <label class="control-label">Restricciones para el cambio de contraseña :

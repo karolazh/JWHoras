@@ -266,6 +266,7 @@ class Login extends Controller {
 
     //*** 20170127 - Formulario Actualiza Password ***//
     public function actualizar() {
+		$this->smarty->assign("id_usuario", $_SESSION['id']);
         $this->smarty->assign("nombre", $_SESSION['nombre']);
         $this->smarty->assign("rut", $_SESSION['rut']);
         $this->smarty->assign("mail", $_SESSION['mail']);
@@ -283,10 +284,9 @@ class Login extends Controller {
     /** 20170201 - Funcion guarda nueva password */
     public function ajax_guardar_nuevo_password() {
         header('Content-type: application/json');
-
+		$correcto = false;
         $session = New Zend_Session_Namespace("usuario_carpeta");
-
-        $validar = $this->load->lib("Helpers/Validar/ActualizarPassword", true, "Validar_ActualizarPassword", $this->_request->getParams());
+		$validar = $this->load->lib("Helpers/Validar/ActualizarPassword", true, "Validar_ActualizarPassword", $this->_request->getParams());
 
         if ($validar->isValid()) {
             //$date = date('Y-m-d H:i:s');
@@ -298,11 +298,13 @@ class Login extends Controller {
             if ($upd) {
                 $primer_login = FALSE;
                 $_SESSION['primer_login'] = $primer_login;
+				$correcto = true;
             }
+			
         }
 
         $salida = array("error" => $validar->getErrores(),
-            "correcto" => $validar->getCorrecto());
+            "correcto" => $correcto);
         $this->smarty->assign("hidden", "");
         $json = Zend_Json::encode($salida);
         echo $json;
@@ -338,10 +340,7 @@ class Login extends Controller {
                 $this->smarty->assign('pass', $cadena);
                 $this->smarty->assign("url", HOST . "/index.php/Usuario/modificar_password/" . $cadena);
                 $ultimo_login = NULL;
-                $this->_DAOUsuario->update(
-                        array("gl_password" => $cadenahash, "fc_ultimo_login" => $ultimo_login), $usuario->id_usuario, "id_usuario"
-                );
-
+                $this->_DAOUsuario->update(array("gl_password" => $cadenahash, "fc_ultimo_login" => $ultimo_login, "id_usuario" => $id_usuario));
                 $this->load->lib('Email', false);
                 $remitente			= "midas@minsal.cl";
                 $nombre_remitente	= "Prevención de Femicidios";

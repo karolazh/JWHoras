@@ -524,6 +524,10 @@ var Paciente = {
 						$('#guardarMotivo').hide();
 						$("#btnBitacora").hide();
 						xModal.info('Nuevo Paciente');
+
+						setTimeout(function () {
+							xModal.close();
+						}, 1500);
 					}
 				}
 			});
