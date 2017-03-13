@@ -581,10 +581,6 @@ class Empa extends Controller{
 			return FALSE;
 		}
 		
-		if ($parametros['bo_antecedente_diabetes'] == 'NULL') {
-			return FALSE;
-		}
-		
 		if ($parametros['bo_antecedente_diabetes'] == 1 && $parametros['gl_glicemia'] == 'NULL') {
 			return FALSE;
 		}
