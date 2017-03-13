@@ -572,13 +572,36 @@ class Empa extends Controller{
 		if ($parametros['gl_pad'] == 'NULL') {
 			return FALSE;
 		}
-		//Error con glicemia .. Ver!
-
-		if (($parametros['nr_edad'] >= 40 || $parametros['gl_imc'] >= 30 || $parametros['bo_antecedente_diabetes'] == 1) && $parametros['gl_glicemia'] == 'NULL') {
+		
+		if ($parametros['nr_edad'] > 40 && $parametros['gl_glicemia'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['gl_imc'] >= 30 && $parametros['gl_glicemia'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_antecedente_diabetes'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_antecedente_diabetes'] == 1 && $parametros['gl_glicemia'] == 'NULL') {
 			return FALSE;
 		}
 		
 		if ($parametros['bo_trabajadora_reclusa'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_trabajadora_reclusa'] == 1 && $parametros['bo_vdrl'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_trabajadora_reclusa'] == 1 && $parametros['bo_rpr'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_trabajadora_reclusa'] == 1 && $parametros['bo_vih'] == 'NULL') {
 			return FALSE;
 		}
 		
