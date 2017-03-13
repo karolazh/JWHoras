@@ -38,6 +38,8 @@ class Paciente extends Controller {
 	protected $_DAOEmpaAudit;
 	protected $_Evento;
 	protected $_DAOPacientePlanTratamiento;
+	protected $_DAOCentroSalud;
+
 
 	function __construct() {
 		parent::__construct();
@@ -60,6 +62,7 @@ class Paciente extends Controller {
 		$this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
 		$this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
 		$this->_DAOEmpaAudit			= $this->load->model("DAOEmpaAudit");
+		$this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
 		$this->_DAOPacientePlanTratamiento	= $this->load->model("DAOPacientePlanTratamiento");
 	}
 
@@ -80,12 +83,21 @@ class Paciente extends Controller {
 	 */
 	public function nuevo() {
 		Acceso::redireccionUnlogged($this->smarty);
-
 		unset($_SESSION['adjuntos']);
-
-		$arrRegiones = $this->_DAORegion->getLista();
-		$this->smarty->assign("arrRegiones", $arrRegiones);
-
+		$es_admin = FALSE;
+		if ($_SESSION['perfil'] =="1" || $_SESSION['perfil'] == "5"){
+			$arrRegiones = $this->_DAORegion->getLista();
+			$this->smarty->assign("arrRegiones", $arrRegiones);
+			$es_admin = TRUE;
+			
+		} else	{
+			$region_usuario = $this->_DAORegion->getById($_SESSION['id_region']);
+			$this->smarty->assign("region_usuario",$region_usuario);
+			$arrComunas = $this->_DAOComuna->getComunasByIdRegion($_SESSION['id_region']);
+			$this->smarty->assign("arrComunas", $arrComunas);
+		}
+		$this->smarty->assign("region_usuario",$region_usuario);
+		$this->smarty->assign("es_admin", $es_admin);
 		$arrPrevision = $this->_DAOPrevision->getLista();
 		$this->smarty->assign("arrPrevision", $arrPrevision);
 
@@ -112,6 +124,7 @@ class Paciente extends Controller {
 		$parametros		= $this->_request->getParams();
 		$correcto			= false;
 		$error				= false;
+		$mensaje_error		= "Error no identificado";
 		$id_paciente		= false;
 		$gl_grupo_tipo		= 'Control';
 		$id_tipo_grupo		= 1;
@@ -120,6 +133,7 @@ class Paciente extends Controller {
 			$gl_grupo_tipo = 'Tratamiento';
 			$id_tipo_grupo = 2;
 		}
+		
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
 		$parametros['id_tipo_grupo'] = $id_tipo_grupo;
 		if ($parametros['chkextranjero'] != 1){
@@ -284,6 +298,7 @@ class Paciente extends Controller {
 		$gl_fono			= $parametros['fono'];
 		$bo_fono_seguro		= $parametros['fono_seguro'];
 		$count				= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
+		$mensaje_error		= "";
 
 		if($parametros['edad'] > 15 AND  $_SESSION['id_tipo_grupo'] == 2 AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
 			$gl_grupo_tipo = 'Tratamiento';
@@ -322,9 +337,15 @@ class Paciente extends Controller {
 										'fc_crea'				=> date('Y-m-d h:m:s'),
 										'id_usuario_crea'		=> $_SESSION['id'],
 								);
-				if ($parametro['cambio_direccion'] == "1"){
-					$res_disab_direcciones			= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
-					$id_direccion					= $this->_DAOPacienteDireccion->insertarDireccion($ins_direccion);
+				if ($parametros['cambio_direccion'] == "1"){
+					if($this->_DAOPacienteDireccion->disabDirecciones($id_paciente)){
+						if($this->_DAOPacienteDireccion->insertarDireccion($ins_direccion)){
+						$correcto = true;
+						}
+					} else {
+						$correcto = false;
+						$mensaje_error = "No se pudieron desabilitar las direcciones anteriores";
+					}
 				}
 				$res_update_centro_salud		= $this->_DAOPaciente->update(array('id_centro_salud' => $id_centro_salud), $id_paciente, 'id_paciente');
 				$res_update_centro_fono			= $this->_DAOPaciente->update(array('gl_fono' => $gl_fono), $id_paciente, 'id_paciente');
@@ -332,7 +353,7 @@ class Paciente extends Controller {
 
 				$session							= New Zend_Session_Namespace("usuario_carpeta");
 				$res_evento = $this->_Evento->guardar(16,0,$id_paciente,"Motivo consulta agregada el : " . Fechas::fechaHoyVista(),1,0,$_SESSION['id']);
-				if($res_update_centro_salud && $res_evento && $res_disab_direcciones && $res_update_centro_fono && $res_update_fono_seguro){
+				if($res_update_centro_salud && $res_evento && $res_update_centro_fono && $res_update_fono_seguro){
 					$correcto = TRUE;
 				} else {
 					$error = TRUE;
@@ -517,13 +538,12 @@ class Paciente extends Controller {
 
 		if (!empty($_POST['comuna'])) {
 			$comuna = $_POST['comuna'];
-			$comuna = $_POST['comuna'];
 			$daoCentroSalud = $this->load->model('DAOCentroSalud');
 			$centrosalud = $daoCentroSalud->getByIdComuna($comuna);
 
 			$i = 0;
 			foreach ($centrosalud as $cSalud) {
-				$json[$i]['id_establecimiento'] = $cSalud->id_centro_salud;
+				$json[$i]['id_centro_salud'] = $cSalud->id_centro_salud;
 				$json[$i]['gl_nombre_establecimiento'] = $cSalud->gl_nombre_establecimiento;
 				$i++;
 			}
@@ -547,8 +567,27 @@ class Paciente extends Controller {
 		$json = array();
 
 		if ($registro) {
-			$direcciones = $this->_DAOPacienteDireccion->getMultByIdPaciente($registro->id_paciente);
-			$info_comuna = $this->_DAOComuna->getInfoComunaxID($direcciones->row_0->id_comuna);
+			$direcciones	= $this->_DAOPacienteDireccion->getMultByIdPaciente($registro->id_paciente);
+			$info_comuna	= $this->_DAOComuna->getInfoComunaxID($direcciones->row_0->id_comuna);
+			$arrComunas		= $this->_DAORegion->getDetalleByIdRegion($direcciones->row_0->id_region);
+			$arrCentroSalud	= $this->_DAOCentroSalud->getByIdComuna($direcciones->row_0->id_comuna);
+			$jsonComuna = '';
+			$jsonCentroSalud = '';
+            $i = 0;
+            foreach($arrComunas as $comuna){
+				if ($direcciones->row_0->id_comuna == $comuna->id_comuna){
+                    $jsonComuna .= '<option value="' . $comuna->id_comuna . '"selected>' . $comuna->gl_nombre_comuna . '</option>';
+				} else {
+					$jsonComuna .= '<option value="' . $comuna->id_comuna . '">' . $comuna->gl_nombre_comuna . '</option>';
+				}
+            }
+			 foreach($arrCentroSalud as $centro){
+				if ($registro->id_centro_salud == $centro->id_centro_salud){
+                    $jsonCentroSalud .= '<option value="' . $centro->id_centro_salud . '"selected>' . $centro->gl_nombre_establecimiento . '</option>';
+				} else {
+					$jsonCentroSalud .= '<option value="' . $centro->id_centro_salud . '">' . $centro->gl_nombre_establecimiento . '</option>';
+				}
+            }
 			$arr_motivos = $this->_DAOPacienteRegistro->getByIdPaciente($registro->id_paciente);
 			$tabla_motivos = "";
 			$tabla_direcciones = "";
@@ -602,16 +641,24 @@ class Paciente extends Controller {
 							<table id='tablaDireccion' class='table table-hover table-striped table-bordered dataTable no-footer'>
 								<thead>
 									<tr role='row'>
-										<th class='text-center' width='10%'>Direcciones</th>
+										<th align='center' width='10%'>Fecha</th>
+										<th align='center' width='23%'>Direcci&oacute;nes vigentes</th>
+										<th align='center' width='22%'>Comuna</th>
+										<th align='center' width='22%'>Regi&oacute;n</th>
+										<th align='center' width='23%'>Funcionario</th>
 									</tr>
 								</thead>
 								<tbody>";
 				$tabla_direcciones = $encabezado_tabla_direcciones;
 				$break_count = 0;
-				foreach (array_reverse((array) $direcciones) as $item) {
+				foreach (array_reverse((array) $direcciones) as $dir) {
 					if ($break_count < 5) {
 						$cuerpo_tabla_direcciones = "<tr>
-														<td class='text-center' nowrap> $item->gl_direccion </td>
+														<td>$dir->fc_crea</td>
+														<td>$dir->gl_direccion</td>
+														<td>$dir->gl_nombre_comuna</td>
+														<td>$dir->gl_nombre_region</td>
+														<td>$dir->funcionario</td>	
 													</tr>
 												";
 						$tabla_direcciones = $tabla_direcciones . $cuerpo_tabla_direcciones;
@@ -632,6 +679,8 @@ class Paciente extends Controller {
 			$json['count_motivos']			= count((array) $arr_motivos);
 			$json['tabla_direcciones']		= $tabla_direcciones;
 			$json['count_direcciones']		= count((array) $direcciones);
+			$json['jsonComuna']				= $jsonComuna;
+			$json['jsonCentroSalud']		= $jsonCentroSalud;
 			$json['fc_ultimo_motivos']		= $arr_motivos->row_0->fc_ingreso;
 			$json['gl_grupo_tipo']			= $registro->gl_grupo_tipo;
 			$json['id_paciente']			= $registro->id_paciente;
