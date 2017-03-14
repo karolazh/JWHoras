@@ -17,7 +17,9 @@
 				<div class="form-group">
 					<label for="rut" class="control-label col-sm-2">Rut</label>
 					<div class="col-sm-3">
-						<input type="text" name="rut" id="rut" value="{$rut}"
+						<input type="text" name="rut" id="rut" value="{$rut}" maxlength="12"
+							   onkeyup="formateaRut(this), this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)"
+							   onblur="Valida_Rut(this)"
 							   placeholder="Rut" class="form-control"/>
 						<span class="help-block hidden"></span>
 					</div>
