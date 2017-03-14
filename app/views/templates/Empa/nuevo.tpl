@@ -539,11 +539,23 @@
                         </div>
                         <div class="form-group" id="tomar_fecha" style="{if $bo_pap_realizado_0 != 'checked' and $bo_pap_vigente_0 != 'checked'}display: none{/if}">         
                             <label class="control-label required col-sm-3">Tomar Fecha para PAP</label>
-                            <div class="col-sm-2">
+							<div class="col-sm-2">
+								<div class="input-group">
+									<input type="text" class="form-control datepicker " readonly
+										   style="border-radius: 0" 
+										   id="fc_tomar_pap"
+										   name="fc_tomar_pap"
+										   value="{$fc_tomar_pap}"
+										   placeholder="Fecha">
+									<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_tomar_pap').focus();"></i></span>
+									<span class="help-block hidden"></span>
+								</div>
+							</div>
+							<!-- <div class="col-sm-2">
                                 <input type="date" name="fc_tomar_pap" id="fc_tomar_pap" 
                                        value="{$fc_tomar_pap}" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
-                            </div>
+                            </div>-->
                             &nbsp;&nbsp;
                             <button type="button" id="verAgendaPap" 
                                     class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
