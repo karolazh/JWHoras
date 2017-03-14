@@ -217,12 +217,14 @@
                                 </div>
                             </div>
                         </div>
+								<input id="redirige_empa" class="redirige_empa" value="0">
                         <div class="form-group">
                             <div id="div_alcoholismo2" style="{if ($bo_consume_alcohol_1 != 'checked')}display: none{/if}">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-2">
                                     <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value="{$gl_puntos_audit}"
                                            placeholder="AUDIT Puntos" class="form-control" readonly/>
+									
                                     <span class="help-block hidden"></span>
                                 </div>
                                 <div id="div_consejeria_alcohol" class="col-sm-1">

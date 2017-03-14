@@ -454,11 +454,11 @@ $("#guardaraudit").livequery(function () {
 			type	: "post",
 			url		: BASE_URI + "index.php/Empa/guardarAudit",
 			error	: function (xhr, textStatus, errorThrown) {
-						xModal.danger('Error: No se pudo Ingresar AUDIT');
+						//xModal.danger('Error: No se pudo Ingresar AUDIT');
 					},
 			success	: function (data) {
 						if (data.correcto) {
-							//xModal.success('Éxito: Se Ingresó nuevo AUDIT!');
+							xModal.success('Éxito: Se Ingresó nuevo AUDIT!');
 						} else {
 							xModal.info('Error: No se pudo Ingresar AUDIT');
 						}
@@ -470,6 +470,8 @@ $("#guardaraudit").livequery(function () {
 			$("#div_alcoholismo2").show();
 			var pts_audit = $('#gl_puntos_audit').val();
 			mensajeAUDIT(pts_audit);
+			$("#redirige_empa").val(1);
+			$('#guardar').trigger('click');
 		}else{
 			$("#gl_puntos_audit").val('');
 		}
@@ -1102,7 +1104,7 @@ $("#guardar").on('click', function (e) {
 			"value": 'NULL'
 		});
 	}
-
+	
 	$.ajax({
 		dataType: "json",
 		cache: false,
@@ -1116,16 +1118,20 @@ $("#guardar").on('click', function (e) {
 		success: function (data) {
 			if (data.correcto) {
 				xModal.success('Éxito: Se Ingresó nuevo Registro!');
-				setTimeout(function () {
-					location.href = BASE_URI + "index.php/Paciente";
-				}, 2000);
+				if ($("#redirige_empa").val() == 0) {
+					setTimeout(function () {
+						location.href = BASE_URI + "index.php/Paciente";
+					}, 2000);
+				} else {
+					//alert("valor 1");
+				}
 			} else {
 				xModal.info('Error: No se pudo Ingresar un nuevo Registro');
 			}
-			/*if (data.finalizado){
-				xModal.info('Finalizado');
-			}*/
+			//if (data.finalizado){
+			//	xModal.info('Finalizado');
+		//	}
 		}
-	});
+	}); 
 	buttonEndProcess(button_process);
 });
