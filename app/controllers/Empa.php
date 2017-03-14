@@ -148,6 +148,8 @@ class Empa extends Controller{
 			$this->smarty->assign("bo_consume_alcohol_1", 'checked');
 		} else if ($empa->bo_consume_alcohol == 0) {
 			$this->smarty->assign("bo_consume_alcohol_0", 'checked');
+		} else if ($empa->bo_consume_alcohol == 2) {
+			$this->smarty->assign("bo_consume_alcohol_2", 'checked');
 		}
 
 		if ($empa->bo_fuma == 1) {

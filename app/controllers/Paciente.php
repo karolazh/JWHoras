@@ -975,7 +975,10 @@ class Paciente extends Controller {
 			$region			= $parametros['region'];
 			$comuna			= $parametros['comuna'];
 			
-			if($rut != '' || $pasaporte != '' || $nombres != '' || $apellidos != '' || $cod_fonasa != '' || $centro_salud != 0 || $region != 0 || $comuna != 0){
+			if ($rut != '' && $pasaporte != ''){
+				$jscode = "xModal.danger('Error: No se puede buscar por Rut y Pasaporte a la vez');";
+				$this->_addJavascript($jscode);
+			} else if($rut != '' || $pasaporte != '' || $nombres != '' || $apellidos != '' || $cod_fonasa != '' || $centro_salud != 0 || $region != 0 || $comuna != 0){
 				$mostrar = 1;
 				$arr = $this->_DAOPaciente->buscarPaciente($parametros);
 
@@ -988,7 +991,7 @@ class Paciente extends Controller {
 
 				//$this->_addJavascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
 				//$this->load->javascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
-				
+
 				$jscode = "$(\"#centro_salud option[value='".$centro_salud."']\").attr('selected',true);";
 				$this->_addJavascript($jscode);
 				$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
