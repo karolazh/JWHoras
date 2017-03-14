@@ -504,7 +504,7 @@ class Paciente extends Controller {
                 
                 //Grilla Exámenes Alterados x Paciente
                 $muestra_examenes = "NO";
-                $arrExamenes = $this->_DAOPacienteExamen->getByIdPacienteAlterado($id_paciente);
+                $arrExamenes = $this->_DAOPacienteExamen->getExamenAleradoByIdPaciente($id_paciente);
                 if (!is_null($arrExamenes)) {
                     $this->smarty->assign('arrExamenes', $arrExamenes);
                     $muestra_examenes = "SI";
