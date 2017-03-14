@@ -991,7 +991,7 @@ class Paciente extends Controller {
 			$jscode = "$('#region').trigger('change')";
 			$this->_addJavascript($jscode);
 			//Se necesita que campo comuna sea seleccionado
-			$jscode = "$(document).ready(function () { $(\"#comuna option[value='".$comuna."']\").attr('selected',true); });";
+			$jscode = "setTimeout(function(){ $(\"#comuna option[value='".$comuna."']\").attr('selected',true); },200);";
 			$this->_addJavascript($jscode);
 			
 			//$this->_addJavascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
