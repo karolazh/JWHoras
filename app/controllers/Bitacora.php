@@ -151,7 +151,7 @@ class Bitacora extends Controller {
 
             //Grilla Exámenes Alterados x Paciente
             $muestra_examenes = "NO";
-            $arrExamenesAlt = $this->_DAOPacienteExamen->getByIdPacienteAlterado($id_paciente);
+            $arrExamenesAlt = $this->_DAOPacienteExamen->getExamenAleradoByIdPaciente($id_paciente);
             if (!is_null($arrExamenesAlt)) {
                 $this->smarty->assign('arrExamenesAlt', $arrExamenesAlt);
                 $muestra_examenes = "SI";
