@@ -145,10 +145,10 @@ class Laboratorio extends Controller {
         $this->smarty->assign('arrLaboratorios', $arrLaboratorios);
         $this->smarty->assign('arrTipoExamen', $arrTipoExamen);
         $this->smarty->assign('arrExamenes', $arrExamenes);
-        $this->smarty->assign("botonNuevoExamen", Boton::botonAyuda("Ingreso de Nuevo Examen", "Ayuda", "", "btn-warning"));        
+        //$this->smarty->assign("botonNuevoExamen", Boton::botonAyuda("Ingreso de Nuevo Examen", "Ayuda", "", "btn-warning"));        
         //$this->smarty->display('laboratorio/ver.tpl');
         $this->_display('laboratorio/ver.tpl');
-        $this->load->javascript(STATIC_FILES . 'js/templates/laboratorio/ver.js');        
+        $this->load->javascript(STATIC_FILES . 'js/templates/laboratorio/ver.js');
 		//$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/bootstrap-datepicker.js');
         //$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/locales/bootstrap-datepicker.es.js');
 		//$this->load->javascript('$(".datepicker").datepicker({ todayBtn: true,language: "es",   todayHighlight: true,autoclose: true});');

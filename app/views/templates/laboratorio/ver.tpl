@@ -8,6 +8,14 @@
     <div class="col-md-12 text-right">
         <button type="button"
                 href='javascript:void(0)' 
+                onClick="habilitarNuevoExamen();" 
+                data-toggle="tooltip" 
+                title="Nuevo Examen"
+                class="btn btn-sm btn-flat btn-success">
+			<i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Examen
+        </button>&nbsp;
+        <button type="button"
+                href='javascript:void(0)' 
                 onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$id_paciente}', 'Registro número : {$id_paciente}', 85);" 
                 data-toggle="tooltip" 
                 title="Bitácora"
@@ -160,14 +168,35 @@
         </div>
         <!-- FIN DATOS DEL EXAMEN -->
     </div>
+            
+    <div id="seccionNuevoExamen" style="display:none">
+        <!-- DATOS DEL EXAMEN -->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Nuevo Examen
+            </div>
+            {include file='laboratorio/nuevoExamen.tpl'}
+            
+            <div class="top-spaced"></div>
+        </div>
+        <!-- FIN DATOS DEL EXAMEN -->
+    </div>
 </section>
                     
 <script type="text/javascript">
-    function habilitarExamen(id_paciente_examen) {
+    function habilitarExamen() {
         $('#seccionExamen').toggle();
     }
     
     function deshabilitarExamen() {
         $('#seccionExamen').toggle();
+    }
+    
+    function habilitarNuevoExamen() {
+        $('#seccionNuevoExamen').toggle();
+    }
+    
+    function deshabilitarNuevoExamen() {
+        $('#seccionNuevoExamen').toggle();
     }
 </script>
