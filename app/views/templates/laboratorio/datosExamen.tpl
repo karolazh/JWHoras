@@ -150,8 +150,7 @@
                     {*<label>Resultado Descripci&oacute;n</label>*}
                     <textarea type="text" class="form-control col-sm-10" rows="5" 
                               id="gl_resultado_descripcion" name="gl_resultado_descripcion"
-                              placeholder="Ingrese resultado descripci&oacute;n" style="resize: none">
-                        {$gl_resultado_descripcion}</textarea>
+                              placeholder="Ingrese resultado descripci&oacute;n" style="resize: none">{$gl_resultado_descripcion}</textarea>
                 </div>
                 <div class="col-sm-1"></div>
             </div>
@@ -169,8 +168,7 @@
                     {*<label>Indicaciones</label>*}
                     <textarea type="text" class="form-control col-sm-10" rows="5" 
                               id="gl_indicacion" name="gl_indicacion"
-                              placeholder="Ingrese indicaciones" style="resize: none">
-                        {$gl_indicacion}</textarea>
+                              placeholder="Ingrese indicaciones" style="resize: none">{$gl_indicacion}</textarea>
                 </div>
                 <div class="col-sm-1"></div>
             </div>
