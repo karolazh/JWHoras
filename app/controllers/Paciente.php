@@ -988,6 +988,7 @@ class Paciente extends Controller {
 				$this->smarty->assign('nombres',$nombres);
 				$this->smarty->assign('apellidos',$apellidos);
 				$this->smarty->assign('cod_fonasa',$cod_fonasa);
+				$this->_addJavascript(STATIC_FILES . "js/regiones.js");
 
 				//$this->_addJavascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
 				//$this->load->javascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
@@ -1010,6 +1011,7 @@ class Paciente extends Controller {
 		
 		
 		$this->_display('Paciente/buscar.tpl');
+		$this->load->javascript(STATIC_FILES . "js/regiones.js");
 		//$this->smarty->display('Paciente/buscar.tpl');
 		
 	}
