@@ -956,17 +956,67 @@ class Paciente extends Controller {
 		$arrCentroSalud	= $this->_DAOCentroSalud->getLista();
 		$this->smarty->assign("arrCentroSalud", $arrCentroSalud);
 		
-		$this->_display('Paciente/buscar.tpl');
+		$mostrar = 0;
+		$parametros = $this->_request->getParams();
+		//$parametros		= $this->request->getParametros();
+		//$parametros		= $_REQUEST;
+		//print_r($parametros);
 		$this->load->javascript(STATIC_FILES . "js/templates/paciente/buscar.js");
 		$this->load->javascript(STATIC_FILES . "js/regiones.js");
+
+		
+		if($parametros){
+			$rut			= $parametros['rut'];
+			$pasaporte		= $parametros['pasaporte'];
+			$nombres		= $parametros['nombres'];
+			$apellidos		= $parametros['apellidos'];
+			$cod_fonasa		= $parametros['cod_fonasa'];
+			$centro_salud	= $parametros['centro_salud'];
+			$region			= $parametros['region'];
+			$comuna			= $parametros['comuna'];
+			$mostrar = 1;
+			$arr = $this->_DAOPaciente->buscarPaciente($parametros);
+			
+			$this->smarty->assign('arrResultado', $arr);
+			$this->smarty->assign('rut',$rut);
+			$this->smarty->assign('pasaporte',$pasaporte);
+			$this->smarty->assign('nombres',$nombres);
+			$this->smarty->assign('apellidos',$apellidos);
+			$this->smarty->assign('cod_fonasa',$cod_fonasa);
+			
+			$jscode = "$(\"#centro_salud option[value='".$centro_salud."']\").attr('selected',true);";
+			$this->_addJavascript($jscode);
+			$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
+			$this->_addJavascript($jscode);
+			$jscode = "$('#region').trigger('change')";
+			$this->_addJavascript($jscode);
+			//Se necesita que campo comuna sea seleccionado
+			$jscode = "$(document).ready(function () { $(\"#comuna option[value='".$comuna."']\").attr('selected',true); });";
+			$this->_addJavascript($jscode);
+			
+			//$this->_addJavascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
+			//$this->load->javascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
+		}
+		
+		
+		$this->smarty->assign('mostrar',$mostrar);
+		//print_r($arr); die;
+		
+		
+		$this->_display('Paciente/buscar.tpl');
+		//$this->smarty->display('Paciente/buscar.tpl');
+		
 	}
 	
 	public function realizarBusqueda(){
 		Acceso::redireccionUnlogged($this->smarty);
 		header('Content-type: application/json');
-		$mostrar = 0;
-		$parametros = $this->_request->getParams();
 		
+		$mostrar = 0;
+		//$parametros = $this->_request->getParams();
+		//$parametros		= $this->request->getParametros();
+		$parametros		= $_REQUEST;
+		print_r($parametros);
 		if($parametros){
 			$mostrar = 1;
 		}
@@ -974,23 +1024,23 @@ class Paciente extends Controller {
 		$arr = $this->_DAOPaciente->buscarPaciente($parametros);
 		//print_r($arr); die;
 		
-		$this->view->assign('arrResultado', $arr);
-		$this->view->assign('mostrar',$mostrar);
+		$this->smarty->assign('arrResultado', $arr);
+		$this->smarty->assign('mostrar',$mostrar);
 		
 
-		$this->view->assign('rut',$parametros['rut']);
-		$this->view->assign('pasaporte',$parametros['pasaporte']);
-		$this->view->assign('nombres',$parametros['nombres']);
-		$this->view->assign('apellidos',$parametros['apellidos']);
-		$this->view->assign('cod_fonasa',$parametros['cod_fonasa']);
-		$this->view->assign('mostrar',$mostrar);
-		$this->view->assign('template',$this->view->fetch('Paciente/buscar.tpl'));
-		$this->load->javascript(STATIC_FILES.'js/templates/paciente/buscar.js');
-		$this->load->javascript(STATIC_FILES . "js/regiones.js");
+		$this->smarty->assign('rut',$parametros['rut']);
+		$this->smarty->assign('pasaporte',$parametros['pasaporte']);
+		$this->smarty->assign('nombres',$parametros['nombres']);
+		$this->smarty->assign('apellidos',$parametros['apellidos']);
+		$this->smarty->assign('cod_fonasa',$parametros['cod_fonasa']);
+		$this->smarty->assign('mostrar',$mostrar);
+		//$this->smarty->assign('template',$this->smarty->fetch('Paciente/buscar.tpl'));
+		//$this->load->javascript(STATIC_FILES.'js/templates/paciente/buscar.js');
+		//$this->load->javascript(STATIC_FILES . "js/regiones.js");
 
-		$this->view->display('template.tpl');
-		$this->load->javascript('jqueryDatatable.init();');
-		
+		//$this->smarty->display('template.tpl');
+		//$this->_display('Paciente/buscar.tpl');
+		$this->smarty->display('Paciente/buscar.tpl');
 	}
 	
 }

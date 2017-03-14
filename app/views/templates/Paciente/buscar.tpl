@@ -6,7 +6,7 @@
     <br/><br/>
 </section>
 
-<form id="form" class="form-horizontal">
+<form id="form" action="#" method="post" class="form-horizontal">
 	<section class="content">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -41,7 +41,7 @@
                     </div>
 				</div>
 				<div class="form-group">
-                    <label for="cod_fonasa" class="control-label col-sm-2">Cod. Fonasa</label>
+                    <label for="cod_fonasa" class="control-label col-sm-2">Código Fonasa</label>
                     <div class="col-sm-3">
                         <input type="text" name="cod_fonasa" id="cod_fonasa" value="{$cod_fonasa}"
                                placeholder="Código Fonasa" class="form-control"/>
@@ -79,7 +79,7 @@
 					</div>
 
 					<div class="col-sm-1">
-						<button type="button" id="buscar" class="btn btn-info">
+						<button type="submit" id="buscar" class="btn btn-info">
 							<i class="fa fa-search"></i>  Buscar
 						</button>
 					</div>

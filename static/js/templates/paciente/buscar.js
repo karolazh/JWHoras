@@ -1,5 +1,5 @@
 //Boton Buscar 
-$("#buscar").livequery(function () {
+/*$("#buscar").livequery(function () {
 	$(this).on('click', function (e) {
 		var button_process	= buttonStartProcess($(this), e);
 		var parametros		= $("#form").serializeArray();
@@ -29,4 +29,4 @@ $("#buscar").livequery(function () {
 		}
 		buttonEndProcess(button_process);
 	});
-});
+});*/
