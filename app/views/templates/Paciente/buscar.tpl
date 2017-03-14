@@ -15,13 +15,13 @@
 				<div class="form-group">
                     <label for="rut" class="control-label col-sm-2">Rut</label>
                     <div class="col-sm-3">
-                        <input type="text" name="rut" id="rut" value=""
+                        <input type="text" name="rut" id="rut" value="{$rut}"
                                placeholder="Rut" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
                     <label for="pasaporte" class="control-label col-sm-1">Pasaporte</label>
                     <div class="col-sm-3">
-                        <input type="text" name="pasaporte" id="pasaporte" value="" 
+                        <input type="text" name="pasaporte" id="pasaporte" value="{$pasaporte}" 
                                placeholder="Pasaporte (Extranjero)" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
@@ -29,13 +29,13 @@
 				<div class="form-group">
                     <label for="nombres" class="control-label col-sm-2">Nombres</label>
                     <div class="col-sm-3">
-                        <input type="text" name="nombres" id="nombres" value=""
+                        <input type="text" name="nombres" id="nombres" value="{$nombres}"
                                placeholder="Nombres" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
                     <label for="apellidos" class="control-label col-sm-1">Apellidos</label>
                     <div class="col-sm-3">
-                        <input type="text" name="apellidos" id="apellidos" value="" 
+                        <input type="text" name="apellidos" id="apellidos" value="{$apellidos}" 
                                placeholder="Apellidos" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
@@ -43,7 +43,7 @@
 				<div class="form-group">
                     <label for="cod_fonasa" class="control-label col-sm-2">Cod. Fonasa</label>
                     <div class="col-sm-3">
-                        <input type="text" name="cod_fonasa" id="cod_fonasa" value=""
+                        <input type="text" name="cod_fonasa" id="cod_fonasa" value="{$cod_fonasa}"
                                placeholder="Código Fonasa" class="form-control"/>
                         <span class="help-block hidden"></span>
                     </div>
@@ -87,11 +87,16 @@
 		</div>
 							   
 	<div class="top-spaced"></div> 
+		{if $mostrar==1}	
+	
 
         <div class="panel panel-primary">
 				<div class="panel-heading">
-
+					Resultado de la Búsqueda
 				</div>
+				{if isset($errorWS)}
+					<div class="alert alert-danger">Hubo un problema al obtener los Soportes.<br> Favor intentar nuevamente o contactarse con Administrador.</div>
+				{else}
                 <div class="table-responsive col-lg-12" data-row="10">
 					<table id="tablaPrincipal" class="table table-hover table-striped table-bordered dataTable no-footer">
 						<thead>
@@ -253,7 +258,9 @@
 							{/foreach}
 						</tbody>
 					</table>
-			</div>
-		</div>    
+				</div>
+				{/if}
+		</div> 
+		{/if}
 	</section>
 </form>
