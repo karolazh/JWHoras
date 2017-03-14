@@ -962,12 +962,34 @@ class Paciente extends Controller {
 	}
 	
 	public function realizarBusqueda(){
+		Acceso::redireccionUnlogged($this->smarty);
 		header('Content-type: application/json');
+		$mostrar = 0;
 		$parametros = $this->_request->getParams();
 		
+		if($parametros){
+			$mostrar = 1;
+		}
+		
 		$arr = $this->_DAOPaciente->buscarPaciente($parametros);
-		print_r($arr); die;
-		$this->smarty->assign('arrResultado', $arr);
+		//print_r($arr); die;
+		
+		$this->view->assign('arrResultado', $arr);
+		$this->view->assign('mostrar',$mostrar);
+		
+
+		$this->view->assign('rut',$parametros['rut']);
+		$this->view->assign('pasaporte',$parametros['pasaporte']);
+		$this->view->assign('nombres',$parametros['nombres']);
+		$this->view->assign('apellidos',$parametros['apellidos']);
+		$this->view->assign('cod_fonasa',$parametros['cod_fonasa']);
+		$this->view->assign('mostrar',$mostrar);
+		$this->view->assign('template',$this->view->fetch('Paciente/buscar.tpl'));
+		$this->load->javascript(STATIC_FILES.'js/templates/paciente/buscar.js');
+		$this->load->javascript(STATIC_FILES . "js/regiones.js");
+
+		$this->view->display('template.tpl');
+		$this->load->javascript('jqueryDatatable.init();');
 		
 	}
 	

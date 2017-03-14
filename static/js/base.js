@@ -232,8 +232,8 @@
         var at		= "top center";
 		var texto	= '';
 
-		if($(this).attr("title") != "" && $(this).attr("title") != "undefined"){
-            texto = $(this).attr("title");
+		if($(this).attr("data-title") != "" && $(this).attr("data-title") != "undefined"){
+            texto = $(this).attr("data-title");
         }
         $(this).qtip({ 
             position: {
