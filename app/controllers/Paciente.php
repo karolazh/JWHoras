@@ -986,6 +986,9 @@ class Paciente extends Controller {
 				$this->smarty->assign('apellidos',$apellidos);
 				$this->smarty->assign('cod_fonasa',$cod_fonasa);
 
+				//$this->_addJavascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
+				//$this->load->javascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
+				
 				$jscode = "$(\"#centro_salud option[value='".$centro_salud."']\").attr('selected',true);";
 				$this->_addJavascript($jscode);
 				$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
@@ -993,14 +996,9 @@ class Paciente extends Controller {
 				$jscode = "$('#region').trigger('change')";
 				$this->_addJavascript($jscode);
 				//Se necesita que campo comuna sea seleccionado
-				$jscode = "$(document).ready(function () { $(\"#comuna option[value='".$comuna."']\").attr('selected',true); });";
+				$jscode = "setTimeout(function(){ $(\"#comuna option[value='".$comuna."']\").attr('selected',true); },200);";
 				$this->_addJavascript($jscode);
-
-				//$this->_addJavascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
-				//$this->load->javascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
 			}
-			
-			
 		}
 		
 		
