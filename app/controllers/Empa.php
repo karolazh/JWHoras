@@ -148,6 +148,8 @@ class Empa extends Controller{
 			$this->smarty->assign("bo_consume_alcohol_1", 'checked');
 		} else if ($empa->bo_consume_alcohol == 0) {
 			$this->smarty->assign("bo_consume_alcohol_0", 'checked');
+		} else if ($empa->bo_consume_alcohol == 2) {
+			$this->smarty->assign("bo_consume_alcohol_2", 'checked');
 		}
 
 		if ($empa->bo_fuma == 1) {
@@ -356,7 +358,10 @@ class Empa extends Controller{
 		$this->smarty->assign("botonInformacionAgendaMamografia", Boton::botonAyuda("Agendar nueva mamografía.", "Información", "", "btn-info"));
 		$this->smarty->assign("botonInformacionAgendaVIH", Boton::botonAyuda("Referir a Profesional de ITS por VIH.", "Información", "", "btn-danger"));
 		//llamado al template
-		$this->_display('Empa/nuevo.tpl');
+		$this->_display('Empa/nuevo.tpl');		
+		$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/bootstrap-datepicker.js');
+        $this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/locales/bootstrap-datepicker.es.js');
+		$this->load->javascript('$(".datepicker").datepicker({ todayBtn: true,language: "es",   todayHighlight: true,autoclose: true});');
 		$this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
 		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
 	}
@@ -578,10 +583,6 @@ class Empa extends Controller{
 		}
 		
 		if ($parametros['gl_imc'] >= 30 && $parametros['gl_glicemia'] == 'NULL') {
-			return FALSE;
-		}
-		
-		if ($parametros['bo_antecedente_diabetes'] == 'NULL') {
 			return FALSE;
 		}
 		

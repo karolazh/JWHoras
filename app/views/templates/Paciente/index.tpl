@@ -30,8 +30,8 @@
                                                 <th class="text-center" width="10%">Estado</th>
                                                 <th class="text-center" width="5%">Cantidad atenciones</th>
                                                 <th class="text-center" width="5%">Reconoce violencia</th>
-                                                <th class="text-center" width="5%">Participa?</th>
-                                                <th class="text-center" width="5%">Exámenes PAP o Mamografía Alterados?</th>
+                                                <th class="text-center" width="5%">Participa</th>
+                                                <th class="text-center" width="5%">Exámen PAP o Mamografía Alterado</th>
                                                 <th class="text-center" width="1px">Dias primera visita?</th>
                                                 <th class="text-center">Acciones</th>
                                         </tr>
@@ -71,19 +71,19 @@
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/ver/{$item->id_paciente}', 'Detalle Registro', 85);" 
                                                                         data-toggle="tooltip" 
                                                                         class="btn btn-xs btn-info"
-                                                                        title="Ver Registro">
+                                                                        data-title="Ver Registro">
                                                                         <i class="fa fa-search"></i>
                                                                 </button>
                                                                 <button type="button" 
                                                                         class="btn btn-xs btn-success" 
                                                                         onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_paciente}';" 
-                                                                        data-toggle="tooltip" title="Formulario EMPA">
+                                                                        data-toggle="tooltip" data-title="Formulario EMPA">
                                                                         <i class="fa fa-book"></i>
                                                                 </button>
                                                                 {if $item->bo_reconoce == 0}
                                                                         <button type="button" class="btn btn-xs btn-danger" 
                                                                                 onClick="location.href='{$base_url}/Reconoce/identificarAgresor/{$item->id_paciente}';"
-                                                                                data-toggle="tooltip" title="Reconoce Violencia">
+                                                                                data-toggle="tooltip" data-title="Reconoce Violencia">
                                                                                 <i class="fa fa-bullhorn"></i>
                                                                         </button>
                                                                 {/if}
@@ -91,7 +91,7 @@
                                                                 <button type="button"
                                                                         onclick="location.href = '{$base_url}/Medico/plan_tratamiento/{$item->id_paciente}'"
                                                                         data-toggle="tooltip" 
-                                                                        title="Plan Tratamiento" 
+                                                                        data-title="Plan Tratamiento" 
                                                                         class="btn btn-xs btn-default">
                                                                         <i class="fa fa-medkit"></i>
                                                                 </button>
@@ -99,7 +99,7 @@
                                                                 <button type="button"
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
-                                                                        title="Revisar bitácora" 
+                                                                        data-title="Revisar bitácora" 
                                                                         class="btn btn-xs btn-primary">
                                                                         <i class="fa fa-info-circle"></i>
                                                                 </button>
@@ -138,19 +138,19 @@
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/ver/{$item->id_paciente}', 'Detalle Registro', 85);" 
                                                                         data-toggle="tooltip" 
                                                                         class="btn btn-xs btn-info"
-                                                                        title="Ver Registro">
+                                                                        data-title="Ver Registro">
                                                                         <i class="fa fa-search"></i>
                                                                 </button>
                                                                 <button type="button" 
                                                                         class="btn btn-xs btn-success" 
                                                                         onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_paciente}';" 
-                                                                        data-toggle="tooltip" title="Formulario EMPA">
+                                                                        data-toggle="tooltip" data-title="Formulario EMPA">
                                                                         <i class="fa fa-book"></i>
                                                                 </button>
                                                                 {if $item->bo_reconoce == 0}
                                                                         <button type="button" class="btn btn-xs btn-danger" 
                                                                                 onClick="location.href='{$base_url}/Reconoce/identificarAgresor/{$item->id_paciente}';"
-                                                                                data-toggle="tooltip" title="Reconoce Violencia">
+                                                                                data-toggle="tooltip" data-title="Reconoce Violencia">
                                                                                 <i class="fa fa-bullhorn"></i>
                                                                         </button>
                                                                 {/if}
@@ -158,7 +158,7 @@
                                                                 <button type="button"
                                                                         onclick="location.href = '{$base_url}/Medico/plan_tratamiento/{$item->id_paciente}'"
                                                                         data-toggle="tooltip" 
-                                                                        title="Plan Tratamiento" 
+                                                                        data-title="Plan Tratamiento" 
                                                                         class="btn btn-xs btn-default">
                                                                         <i class="fa fa-medkit"></i>
                                                                 </button>
@@ -166,7 +166,7 @@
                                                                 <button type="button"
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
-                                                                        title="Revisar bitácora" 
+                                                                        data-title="Revisar bitácora" 
                                                                         class="btn btn-xs btn-primary">
                                                                         <i class="fa fa-info-circle"></i>
                                                                 </button>

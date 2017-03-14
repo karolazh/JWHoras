@@ -2,7 +2,8 @@ $(document).ready(function() {
 
     $("#guardar").on('click', function(e) {
         var button_process	= buttonStartProcess($(this), e);
-        var parametros		= $("#form").serialize();
+        var parametros = $("#form").serialize();
+		var id = $("#id").val();
         $.ajax({         
             dataType	: "json",
             cache		: false,
@@ -22,8 +23,12 @@ $(document).ready(function() {
 								$("#password_ant").val("");
 								limpiaErrores(data.error);
 								$("#form-error").addClass("hidden");
-								xModal.info('Contraseña Actualizada');
-								location.href = BASE_URI + "index.php/Home/dashboard";
+								xModal.success('Éxito: Se actualizo su contraseña.');
+									setTimeout(function () {
+										location.href = BASE_URI + "index.php/Home/dashboard";
+									}, 2000);
+								//xModal.info('Contraseña Actualizada');
+								//location.href = BASE_URI + "index.php/Home/dashboard";
 							} else {
 								procesaErrores(data.error);
 								xModal.info('Error al Actualizar la Contraseña.');

@@ -148,7 +148,10 @@ class Laboratorio extends Controller {
         $this->smarty->assign("botonNuevoExamen", Boton::botonAyuda("Ingreso de Nuevo Examen", "Ayuda", "", "btn-warning"));        
         //$this->smarty->display('laboratorio/ver.tpl');
         $this->_display('laboratorio/ver.tpl');
-        $this->load->javascript(STATIC_FILES . 'js/templates/laboratorio/ver.js');		
+        $this->load->javascript(STATIC_FILES . 'js/templates/laboratorio/ver.js');        
+		//$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/bootstrap-datepicker.js');
+        //$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/locales/bootstrap-datepicker.es.js');
+		//$this->load->javascript('$(".datepicker").datepicker({ todayBtn: true,language: "es",   todayHighlight: true,autoclose: true});');
 	}
     
     public function buscarExamen() {
@@ -156,79 +159,8 @@ class Laboratorio extends Controller {
 
         $correcto = true;
         $error = false;
-
-//        $adjunto = $_FILES['archivo'];
-//        $id_paciente = $_POST['idpac'];
-//        $tipo_doc = $_POST['tipodoc'];
-//        $tipo_txt = $_POST['tipotxt'];
-//        $glosa = $_POST['comentario'];
-//        $glosa = trim($glosa);
-//        
-//        if ($glosa == "") {
-//            $glosa = "Adjunta Documento por Bitácora";
-//        }
-//
-//        $nombre_adjunto = $adjunto['name'];
-//
-//        $arr_extension = array('jpeg', 'jpg', 'png', 'gif', 'tiff', 'bmp',
-//                               'pdf', 'txt', 'csv', 'doc', 'docx', 'ppt',
-//                               'pptx', 'xls', 'xlsx', 'eml');
-//
-//        $nombre_adjunto = strtolower(trim($nombre_adjunto));
-//        $nombre_adjunto = trim($nombre_adjunto, ".");
-//
-//        $extension = substr(strrchr($nombre_adjunto, "."), 1);
-//
-//        //obtiene fecha y hora
-//        $date = new DateTime();
-//        $result = $date->format('Y-m-d_H-i-s');
-//        $krr = explode('-', $result);
-//        $result = implode("", $krr);
-//
-//        $gl_nombre_archivo = $result . '_' . $tipo_txt . '.' . $extension;
-//
-//        $directorio = "archivos/$id_paciente/";
-//        $gl_path = $directorio . $gl_nombre_archivo;
-//
-//        $ins_adjunto = array('id_paciente'     => $id_paciente,
-//                             'id_adjunto_tipo' => $tipo_doc,
-//                             'gl_nombre'       => $gl_nombre_archivo,
-//                             'gl_path'         => $gl_path,
-//                             'gl_glosa'        => $glosa,
-//                             'sha256'          => Seguridad::generar_sha256($gl_path),
-//                             'fc_crea'         => date('Y-m-d h:m:s'),
-//                             'id_usuario_crea' => $_SESSION['id'],
-//                            );
-//
-//        $id_adjunto = $this->_DAOAdjunto->insert($ins_adjunto);
-//        $grilla = "";
-//
-//        if ($id_adjunto) {
-//            if (!is_dir($directorio)) {
-//                mkdir($directorio, 0775, true);
-//
-//                $out = fopen($directorio . '/index.html', "w");
-//                fwrite($out, "<html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>");
-//                fclose($out);
-//            }
-//
-//            $file = fopen($adjunto['tmp_name'], 'r+b');
-//            $contenido = fread($file, filesize($adjunto['tmp_name']));
-//            fclose($file);
-//
-//            $out = fopen($gl_path, "w");
-//            fwrite($out, $contenido);
-//            fclose($out);
-//
-//            //Grilla Adjuntos
-//            $arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($id_paciente);
-//            $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
-//            $grilla = $this->smarty->fetch('bitacora/grillaAdjuntos.tpl');
-//
-//            $correcto = true;
-//        } else {
-//            $error = true;
-//        }
+        
+        //...
 
         $salida = array("error"    => $error,
                         "correcto" => $correcto);
@@ -237,5 +169,5 @@ class Laboratorio extends Controller {
         $json = Zend_Json::encode($salida);
 
         echo $json;
-	}
+    }
 }

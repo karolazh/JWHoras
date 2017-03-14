@@ -72,7 +72,7 @@ function formateaRut(rut0)
             format = rut1.substring(i, i + 1) + format;
             cont++;
         }
-        document.getElementById("rut").value = format;
+        document.getElementById($(rut0).prop("id")).value = format;
 }
 
 function Valida_Rut( rut ){

@@ -153,7 +153,7 @@ class DAOUsuario extends Model {
 
     public function setPassword($datos){
         $query	= "	UPDATE pre_usuario
-					SET gl_password = ? , fc_ultimo_login = now()
+					SET gl_password = ? , fc_ultimo_login = ?
 					WHERE id_usuario = ? ";
 
         if ($this->db->execQuery($query, $datos)) {

@@ -1,5 +1,6 @@
 <link href="{$base_url}/template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$base_url}/template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="{$static}/template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
 
 <section class="content-header">
     <h1><i class="fa fa-bullhorn"></i>&nbsp;Identificación del Agresor</h1>
@@ -128,11 +129,23 @@
                 <div class="form-group">
 					<label for="fc_reconoce" class="control-label col-sm-3">Fecha</label>
 					<div class="col-sm-3">
+							<div class="input-group">
+								<input type="text" class="form-control datepicker " readonly
+									   style="border-radius: 0" 
+									   id="fc_reconoce"
+									   name="fc_reconoce"
+									   value="{$fc_reconoce|date_format:"%d/%m/%Y"}"
+									   placeholder="Fecha">
+								<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_reconoce').focus();"></i></span>
+								<span class="help-block hidden"></span>
+							</div>
+					</div>
+<!--				<div class="col-sm-3">
 						<input type="date" name="fc_reconoce" id="fc_reconoce" value="{$fc_reconoce}"
                                                        placeholder="Fecha" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
-					</div>
-                                        <label for="fc_hora_reconoce" class="control-label col-sm-1">Hora</label>
+					</div> -->
+                    <label for="fc_hora_reconoce" class="control-label col-sm-1">Hora</label>
 					<div class="col-sm-3">					
 						<input type="time" name="fc_hora_reconoce" id="fc_hora_reconoce" value="{$fc_hora}"
                                                        placeholder="Hora" class="form-control" />
@@ -213,14 +226,35 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">Caracterización del Agresor {$botonAyudaAgresor}</div>
 			<div class="panel-body">
-                                        
+                
 					<div class="form-group">
-						<label for="gl_rut_agresor" class="control-label col-sm-3">RUT/RUN/Pasaporte</label>
+						<label for="chkextranjero" class="control-label col-sm-3">¿Extranjero?</label>
 						<div class="col-sm-3">
-							<input type="text" name="gl_rut_agresor" id="gl_rut_agresor" value=""
-								   placeholder="Rut/Run/Pasaporte Agresor" class="form-control" />
+							<input id="chkextranjero" type="checkbox" value='1'>
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
+					</div>
+				
+					<div class="form-group">
+
+						<div id="nacional">
+							<label for="gl_rut_agresor" class="control-label col-sm-3">Rut Agresor (*)</label>
+							<div class="col-sm-2">
+								<input type="text" name="gl_rut_agresor" id="gl_rut_agresor" maxlength="12" onkeyup="formateaRut(this), this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" 
+									   onblur="if (Valida_Rut(this)){ldelim} validarVacio(this, 'Por favor Ingrese Rut');{rdelim}" placeholder="Rut Agresor" class="form-control">
+								<span class="help-block hidden fa fa-warning"></span>
+							</div>
+						</div>
+
+						<div style="display: none" id="extranjero">
+							<label for="gl_run_pass_agresor" class="control-label col-sm-3">N°/Pasaporte Extranjero</label>
+							<div class="col-sm-2">
+								<input type="text" name="gl_run_pass_agresor" id="gl_run_pass_agresor" maxlength="12" value='' class="form-control" 
+									   placeholder="Ingrese N°/Pasaporte Extranjero" onblur="validarVacio(this, 'Por favor Ingrese N°/Pasaporte Extranjero');">
+								<span class="help-block hidden fa fa-warning"></span>
+							</div>
+						</div>
+
 					</div>
 
 					<div class="form-group">

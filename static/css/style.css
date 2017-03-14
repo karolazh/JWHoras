@@ -3381,3 +3381,19 @@ table.dataTable tbody > tr > td {
     padding: 4px;
     position: relative;
 }
+
+/*Agregado el 13-03-2017 para fixear menu con sub-menu*/
+.sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>.treeview-menu
+{
+	/*top:44px*/
+	margin-left:0
+}
+
+@media (max-width:991px)
+{
+	a.btn.btn-success.btn-flat {
+		color: #fff;
+		background-color: #529d54;
+		border-color: #a3aba3;
+	}
+}

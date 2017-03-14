@@ -83,6 +83,7 @@ class Paciente extends Controller {
 	 */
 	public function nuevo() {
 		Acceso::redireccionUnlogged($this->smarty);
+		$region_usuario = "";
 		unset($_SESSION['adjuntos']);
 		$es_admin = FALSE;
 		if ($_SESSION['perfil'] =="1" || $_SESSION['perfil'] == "5"){
@@ -108,6 +109,9 @@ class Paciente extends Controller {
 
 		//llamado al template
 		$this->_display('Paciente/nuevo.tpl');
+		$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/bootstrap-datepicker.js');
+        $this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/locales/bootstrap-datepicker.es.js');
+		$this->load->javascript('$(".datepicker").datepicker({ todayBtn: true,language: "es",   todayHighlight: true,autoclose: true});');
 		$this->load->javascript(STATIC_FILES . "js/regiones.js");
 		$this->load->javascript(STATIC_FILES . "js/templates/paciente/nuevo.js");
 		//$this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
@@ -124,7 +128,7 @@ class Paciente extends Controller {
 		$parametros		= $this->_request->getParams();
 		$correcto			= false;
 		$error				= false;
-		$mensaje_error		= "Error no identificado";
+		$mensaje_error		= '';
 		$id_paciente		= false;
 		$gl_grupo_tipo		= 'Control';
 		$id_tipo_grupo		= 1;
@@ -136,9 +140,7 @@ class Paciente extends Controller {
 		
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
 		$parametros['id_tipo_grupo'] = $id_tipo_grupo;
-		if ($parametros['chkextranjero'] != 1){
-			$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
-		} else if ($parametros['prevision'] == "1"){
+		if ($parametros['prevision'] == "1"){
 			if ($parametros['gl_codigo_fonasa'] != ""){
 				if (!empty($_SESSION['adjuntos'])) {
 					foreach ($_SESSION['adjuntos'] as $adjunto){
@@ -146,11 +148,9 @@ class Paciente extends Controller {
 								$viene_adjunto_fonasa = TRUE;
 							}
 					}
-					if ($viene_adjunto_fonasa){
-						$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
-					} else {
-						$error = true;
-						$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
+					if (!$viene_adjunto_fonasa){
+						$error			= true;
+						$mensaje_error	= "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
 					}
 				} else {
 						$error = true;
@@ -161,7 +161,12 @@ class Paciente extends Controller {
 				$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe indicar su código.";
 			}
 		}
+		
+		if($mensaje_error != ''){
+			$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
+		}
 		if ($id_paciente) {
+			$correcto	= true;
 			$session	= New Zend_Session_Namespace("usuario_carpeta");
 
 			if (!empty($_SESSION['adjuntos'])) {
@@ -269,9 +274,10 @@ class Paciente extends Controller {
 			if($desabilitadas){
 				$id_direccion				= $this->_DAOPacienteDireccion->insertarDireccion($ins_direccion);
 			}
-			$correcto	= true;
+
 		} else {
 			$error = true;
+			$mensaje_error = 'Error al Guardar los datos. Favor comuníquese con Mesa de Ayuda.';
 		}
 		$salida = array("error" => $error, "correcto" => $correcto, "mensaje_error" => $mensaje_error);
 		$json = Zend_Json::encode($salida);
@@ -941,4 +947,108 @@ class Paciente extends Controller {
 		echo $json;
 	}
 
+	public function buscar() {
+		Acceso::redireccionUnlogged($this->smarty);
+		
+		$arrRegiones = $this->_DAORegion->getLista();
+		$this->smarty->assign("arrRegiones", $arrRegiones);
+		
+		$arrCentroSalud	= $this->_DAOCentroSalud->getLista();
+		$this->smarty->assign("arrCentroSalud", $arrCentroSalud);
+		
+		$mostrar = 0;
+		$parametros = $this->_request->getParams();
+		//$parametros		= $this->request->getParametros();
+		//$parametros		= $_REQUEST;
+		//print_r($parametros);
+		//$this->load->javascript(STATIC_FILES . "js/templates/paciente/buscar.js");
+		//$this->load->javascript(STATIC_FILES . "js/regiones.js");
+
+		
+		if($parametros){
+			$rut			= $parametros['rut'];
+			$pasaporte		= $parametros['pasaporte'];
+			$nombres		= $parametros['nombres'];
+			$apellidos		= $parametros['apellidos'];
+			$cod_fonasa		= $parametros['cod_fonasa'];
+			$centro_salud	= $parametros['centro_salud'];
+			$region			= $parametros['region'];
+			$comuna			= $parametros['comuna'];
+			
+			if ($rut != '' && $pasaporte != ''){
+				$jscode = "xModal.danger('Error: No se puede buscar por Rut y Pasaporte a la vez');";
+				$this->_addJavascript($jscode);
+			} else if($rut != '' || $pasaporte != '' || $nombres != '' || $apellidos != '' || $cod_fonasa != '' || $centro_salud != 0 || $region != 0 || $comuna != 0){
+				$mostrar = 1;
+				$arr = $this->_DAOPaciente->buscarPaciente($parametros);
+
+				$this->smarty->assign('arrResultado', $arr);
+				$this->smarty->assign('rut',$rut);
+				$this->smarty->assign('pasaporte',$pasaporte);
+				$this->smarty->assign('nombres',$nombres);
+				$this->smarty->assign('apellidos',$apellidos);
+				$this->smarty->assign('cod_fonasa',$cod_fonasa);
+				$this->_addJavascript(STATIC_FILES . "js/regiones.js");
+
+				//$this->_addJavascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
+				//$this->load->javascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
+
+				$jscode = "$(\"#centro_salud option[value='".$centro_salud."']\").attr('selected',true);";
+				$this->_addJavascript($jscode);
+				$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
+				$this->_addJavascript($jscode);
+				$jscode = "$('#region').trigger('change')";
+				$this->_addJavascript($jscode);
+				//Se necesita que campo comuna sea seleccionado
+				$jscode = "setTimeout(function(){ $(\"#comuna option[value='".$comuna."']\").attr('selected',true); },200);";
+				$this->_addJavascript($jscode);
+			}
+		}
+		
+		
+		$this->smarty->assign('mostrar',$mostrar);
+		//print_r($arr); die;
+		
+		
+		$this->_display('Paciente/buscar.tpl');
+		$this->load->javascript(STATIC_FILES . "js/regiones.js");
+		//$this->smarty->display('Paciente/buscar.tpl');
+		
+	}
+	
+	public function realizarBusqueda(){
+		Acceso::redireccionUnlogged($this->smarty);
+		header('Content-type: application/json');
+		
+		$mostrar = 0;
+		//$parametros = $this->_request->getParams();
+		//$parametros		= $this->request->getParametros();
+		$parametros		= $_REQUEST;
+		print_r($parametros);
+		if($parametros){
+			$mostrar = 1;
+		}
+		
+		$arr = $this->_DAOPaciente->buscarPaciente($parametros);
+		//print_r($arr); die;
+		
+		$this->smarty->assign('arrResultado', $arr);
+		$this->smarty->assign('mostrar',$mostrar);
+		
+
+		$this->smarty->assign('rut',$parametros['rut']);
+		$this->smarty->assign('pasaporte',$parametros['pasaporte']);
+		$this->smarty->assign('nombres',$parametros['nombres']);
+		$this->smarty->assign('apellidos',$parametros['apellidos']);
+		$this->smarty->assign('cod_fonasa',$parametros['cod_fonasa']);
+		$this->smarty->assign('mostrar',$mostrar);
+		//$this->smarty->assign('template',$this->smarty->fetch('Paciente/buscar.tpl'));
+		//$this->load->javascript(STATIC_FILES.'js/templates/paciente/buscar.js');
+		//$this->load->javascript(STATIC_FILES . "js/regiones.js");
+
+		//$this->smarty->display('template.tpl');
+		//$this->_display('Paciente/buscar.tpl');
+		$this->smarty->display('Paciente/buscar.tpl');
+	}
+	
 }

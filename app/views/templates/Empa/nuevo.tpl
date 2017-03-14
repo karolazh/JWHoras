@@ -1,5 +1,6 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="{$static}/template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
 
 <section class="content-header">
     <h1><i class="fa fa-medkit"></i> Ingresar EMPA</h1>
@@ -62,11 +63,23 @@
                     </div>
 
                     <label for="fc_empa" class="control-label col-sm-1">Fecha (*)</label>
-                    <div class="col-sm-3">
+					<div class="col-lg-3">
+							<div class="input-group">
+								<input type="text" class="form-control datepicker " readonly
+									   style="border-radius: 0" 
+									   id="fc_empa"
+									   name="fc_empa"
+									   value="{$fc_empa}"
+									   placeholder="Fecha">
+								<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_empa').focus();"></i></span>
+								<span class="help-block hidden"></span>
+							</div>
+					</div>
+					<!--<div class="col-sm-3">
                         <input type="date" name="fc_empa" id="fc_empa" value="{$fc_empa}" 
                                placeholder="Fecha" class="form-control"/>
                         <span class="help-block hidden"></span>
-                    </div>
+                    </div>-->
                 </div>    
                 <div class="form-group">
                     <label class="control-label col-sm-3">Nro. Registro</label>
@@ -177,13 +190,15 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label class="control-label col-sm-3 required">¿Consume bebidas alcoh&oacute;licas?</label>
-                            <div class="col-sm-1">
+                            <div class="col-sm-2">
                                 <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol" 
                                               id="bo_consume_alcohol_0" value="0" {$bo_consume_alcohol_0}>NO</label>
                                 &nbsp;&nbsp;
-                                <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol" 
-
+                                <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol"
                                               id="bo_consume_alcohol_1" value="1" {$bo_consume_alcohol_1}>SI</label>
+								&nbsp;&nbsp;
+                                <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol"
+                                              id="bo_consume_alcohol_2" value="2" {$bo_consume_alcohol_2}>NO RESPONDE</label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -330,7 +345,7 @@
                 <div class="box box-success" id="diabetes">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Diabetes Mellitus (DM)</h3></div>
                     <div class="box-body">
-                        <div class="form-group" id="antecedentes" >
+                        <div class="form-group" id="antecedentes" style="{$antecedentes}">
                             <label class="control-label required col-sm-3">¿Tiene Antecedentes Familiares de Diabetes Mellitus?</label>
                             <div class="col-sm-2">
                                 <label><input class="bo_antecedente" type="radio" name="bo_antecedente" 
@@ -526,11 +541,23 @@
                         </div>
                         <div class="form-group" id="tomar_fecha" style="{if $bo_pap_realizado_0 != 'checked' and $bo_pap_vigente_0 != 'checked'}display: none{/if}">         
                             <label class="control-label required col-sm-3">Tomar Fecha para PAP</label>
-                            <div class="col-sm-2">
+							<div class="col-sm-2">
+								<div class="input-group">
+									<input type="text" class="form-control datepicker " readonly
+										   style="border-radius: 0" 
+										   id="fc_tomar_pap"
+										   name="fc_tomar_pap"
+										   value="{$fc_tomar_pap}"
+										   placeholder="Fecha">
+									<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_tomar_pap').focus();"></i></span>
+									<span class="help-block hidden"></span>
+								</div>
+							</div>
+							<!-- <div class="col-sm-2">
                                 <input type="date" name="fc_tomar_pap" id="fc_tomar_pap" 
                                        value="{$fc_tomar_pap}" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
-                            </div>
+                            </div>-->
                             &nbsp;&nbsp;
                             <button type="button" id="verAgendaPap" 
                                     class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>

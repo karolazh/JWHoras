@@ -146,7 +146,7 @@ $(".bo_embarazo").on('change', function (e) {
 
 // Si Consume Alcohol muestra Boton para Hacer Cuestionario AUDIT
 $(".bo_consume_alcohol").on('change', function (e) {
-	if ($('#bo_consume_alcohol_0').is(':checked')) {
+	if ($('#bo_consume_alcohol_0').is(':checked') || ($('#bo_consume_alcohol_2').is(':checked'))) {
 		$('#div_alcoholismo1').hide();
                 $('#div_alcoholismo2').hide();
 	} else {
@@ -544,6 +544,11 @@ $("#guardar").on('click', function (e) {
 		parametros.push({
 			"name": 'bo_consume_alcohol',
 			"value": 0
+		});
+	} else if ($('#bo_consume_alcohol_2').is(':checked')) {
+		parametros.push({
+			"name": 'bo_consume_alcohol',
+			"value": 2
 		});
 	} else {
 		parametros.push({
@@ -1097,12 +1102,7 @@ $("#guardar").on('click', function (e) {
 			"value": 'NULL'
 		});
 	}
-//Dar parametro bo_finalizado en 1
-	parametros.push({
-			"name": 'bo_finalizado',
-			"value": 1
-		});
-		
+
 	$.ajax({
 		dataType: "json",
 		cache: false,
