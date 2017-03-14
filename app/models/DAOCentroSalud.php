@@ -104,6 +104,19 @@ class DAOCentroSalud extends Model{
         }
     }
 
+	public function getListaOrdenada(){
+        $query	= "SELECT *
+					FROM pre_centro_salud
+					ORDER BY gl_nombre_establecimiento ASC";
+        $result	= $this->db->getQuery($query);
+
+        if($result->numRows>0){
+            return $result->rows;
+        }else{
+            return NULL;
+        }
+    }
+	
 }
 
 ?>

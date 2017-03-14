@@ -24,9 +24,12 @@ class Laboratorio extends Controller {
     protected $_DAOPaciente;
     protected $_DAOPacienteExamen;
     protected $_DAOPacienteDireccion;
+    protected $_DAOLaboratorio;
+    protected $_DAOTipoExamen;
 
 	function __construct() {
 		parent::__construct();
+        $this->load->lib('Boton', false);
 		$this->load->lib('Fechas', false);
         $this->load->lib('Seguridad', false);
 		$this->load->lib('Evento', false);
@@ -35,6 +38,8 @@ class Laboratorio extends Controller {
         $this->_DAOPaciente				= $this->load->model("DAOPaciente");
         $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
         $this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
+        $this->_DAOLaboratorio			= $this->load->model("DAOLaboratorio");
+        $this->_DAOTipoExamen			= $this->load->model("DAOTipoExamen");
 	}
 
     /**
@@ -49,17 +54,35 @@ class Laboratorio extends Controller {
 		$this->smarty->assign('titulo', 'Examenes');
 
 		$this->_display('laboratorio/index.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/laboratorio/index.js");
 	}
     
     public function ver() {
-        $parametros = $this->request->getParametros();
-        $id_paciente_examen = $parametros[0];
-        $id_paciente = $parametros[1];
+        Acceso::redireccionUnlogged($this->smarty);
+		$sesion = New Zend_Session_Namespace("usuario_carpeta");
         
+        $parametros = $this->request->getParametros();
+        $id_paciente = $parametros[0];
+        
+        //Combo Laboratorios
+        $arrLaboratorios = $this->_DAOLaboratorio->getLista();
+        //Combos Tipo Examen
+        $arrTipoExamen = $this->_DAOTipoExamen->getLista();
+        //Grilla Exámenes x Paciente
+        $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
+        //*Pendiente Filtrar por exámenes de paciente*
+        $arrExamenesEmpa = $this->_DAOTipoExamen->getLista();
+        
+        //Datos toma examen
+        //Si perfil es "LABORATORIO"
+        if ($_SESSION['perfil'] == "7")
+        {
+            $rut_lab = $_SESSION['rut'];
+            $nombre_lab = $_SESSION['nombre'];
+        }
+        
+        //Datos de Paciente
         $detPaciente = $this->_DAOPaciente->getByIdPaciente($id_paciente);        
-        if (!is_null($detPaciente)) {
-            //Datos de Paciente
+        if (!is_null($detPaciente)) {            
             $run = "";
             if ($detPaciente->bo_extranjero == 0) {
                 $run = $detPaciente->gl_rut;
@@ -119,10 +142,32 @@ class Laboratorio extends Controller {
             $this->smarty->assign("gl_direccion", $direccion);            
         }
         
-        $this->smarty->display('laboratorio/ver.tpl');
-		$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/bootstrap-datepicker.js');
-        $this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/locales/bootstrap-datepicker.es.js');
-		$this->load->javascript('$(".datepicker").datepicker({ todayBtn: true,language: "es",   todayHighlight: true,autoclose: true});');
-		$this->load->javascript(STATIC_FILES . "js/templates/laboratorio/ver.js");
+        $this->smarty->assign('arrLaboratorios', $arrLaboratorios);
+        $this->smarty->assign('arrTipoExamen', $arrTipoExamen);
+        $this->smarty->assign('arrExamenes', $arrExamenes);
+        //$this->smarty->assign("botonNuevoExamen", Boton::botonAyuda("Ingreso de Nuevo Examen", "Ayuda", "", "btn-warning"));        
+        //$this->smarty->display('laboratorio/ver.tpl');
+        $this->_display('laboratorio/ver.tpl');
+        $this->load->javascript(STATIC_FILES . 'js/templates/laboratorio/ver.js');
+		//$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/bootstrap-datepicker.js');
+        //$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/locales/bootstrap-datepicker.es.js');
+		//$this->load->javascript('$(".datepicker").datepicker({ todayBtn: true,language: "es",   todayHighlight: true,autoclose: true});');
 	}
+    
+    public function buscarExamen() {
+        header('Content-type: application/json');
+
+        $correcto = true;
+        $error = false;
+        
+        //...
+
+        $salida = array("error"    => $error,
+                        "correcto" => $correcto);
+
+        $this->smarty->assign("hidden", "");
+        $json = Zend_Json::encode($salida);
+
+        echo $json;
+    }
 }

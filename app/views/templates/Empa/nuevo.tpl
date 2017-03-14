@@ -190,13 +190,15 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label class="control-label col-sm-3 required">¿Consume bebidas alcoh&oacute;licas?</label>
-                            <div class="col-sm-1">
+                            <div class="col-sm-2">
                                 <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol" 
                                               id="bo_consume_alcohol_0" value="0" {$bo_consume_alcohol_0}>NO</label>
                                 &nbsp;&nbsp;
-                                <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol" 
-
+                                <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol"
                                               id="bo_consume_alcohol_1" value="1" {$bo_consume_alcohol_1}>SI</label>
+								&nbsp;&nbsp;
+                                <label><input class="bo_consume_alcohol" type="radio" name="bo_consume_alcohol"
+                                              id="bo_consume_alcohol_2" value="2" {$bo_consume_alcohol_2}>NO RESPONDE</label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -215,12 +217,14 @@
                                 </div>
                             </div>
                         </div>
+								<input id="redirige_empa" class="redirige_empa" value="0">
                         <div class="form-group">
                             <div id="div_alcoholismo2" style="{if ($bo_consume_alcohol_1 != 'checked')}display: none{/if}">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-2">
                                     <input type="text" name="gl_puntos_audit" id="gl_puntos_audit" value="{$gl_puntos_audit}"
                                            placeholder="AUDIT Puntos" class="form-control" readonly/>
+									
                                     <span class="help-block hidden"></span>
                                 </div>
                                 <div id="div_consejeria_alcohol" class="col-sm-1">

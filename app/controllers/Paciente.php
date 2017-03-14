@@ -514,7 +514,7 @@ class Paciente extends Controller {
                 
                 //Grilla Exámenes Alterados x Paciente
                 $muestra_examenes = "NO";
-                $arrExamenes = $this->_DAOPacienteExamen->getByIdPacienteAlterado($id_paciente);
+                $arrExamenes = $this->_DAOPacienteExamen->getExamenAleradoByIdPaciente($id_paciente);
                 if (!is_null($arrExamenes)) {
                     $this->smarty->assign('arrExamenes', $arrExamenes);
                     $muestra_examenes = "SI";
@@ -960,20 +960,17 @@ class Paciente extends Controller {
 	public function buscar() {
 		Acceso::redireccionUnlogged($this->smarty);
 		
+		/*$arrCentroSalud = $this->_DAOCentroSalud->getByIdRegion($_SESSION['id_region']);
+		$this->smarty->assign("arrCentroSalud", $arrCentroSalud);*/
+		
 		$arrRegiones = $this->_DAORegion->getLista();
 		$this->smarty->assign("arrRegiones", $arrRegiones);
 		
-		$arrCentroSalud	= $this->_DAOCentroSalud->getLista();
+		$arrCentroSalud	= $this->_DAOCentroSalud->getListaOrdenada();
 		$this->smarty->assign("arrCentroSalud", $arrCentroSalud);
 		
 		$mostrar = 0;
 		$parametros = $this->_request->getParams();
-		//$parametros		= $this->request->getParametros();
-		//$parametros		= $_REQUEST;
-		//print_r($parametros);
-		$this->load->javascript(STATIC_FILES . "js/templates/paciente/buscar.js");
-		$this->load->javascript(STATIC_FILES . "js/regiones.js");
-
 		
 		if($parametros){
 			$rut			= $parametros['rut'];
@@ -984,36 +981,38 @@ class Paciente extends Controller {
 			$centro_salud	= $parametros['centro_salud'];
 			$region			= $parametros['region'];
 			$comuna			= $parametros['comuna'];
-			$mostrar = 1;
-			$arr = $this->_DAOPaciente->buscarPaciente($parametros);
 			
-			$this->smarty->assign('arrResultado', $arr);
-			$this->smarty->assign('rut',$rut);
-			$this->smarty->assign('pasaporte',$pasaporte);
-			$this->smarty->assign('nombres',$nombres);
-			$this->smarty->assign('apellidos',$apellidos);
-			$this->smarty->assign('cod_fonasa',$cod_fonasa);
-			
-			$jscode = "$(\"#centro_salud option[value='".$centro_salud."']\").attr('selected',true);";
-			$this->_addJavascript($jscode);
-			$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
-			$this->_addJavascript($jscode);
-			$jscode = "$('#region').trigger('change')";
-			$this->_addJavascript($jscode);
-			//Se necesita que campo comuna sea seleccionado
-			$jscode = "setTimeout(function(){ $(\"#comuna option[value='".$comuna."']\").attr('selected',true); },200);";
-			$this->_addJavascript($jscode);
-			
-			//$this->_addJavascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
-			//$this->load->javascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
+			if ($rut != '' && $pasaporte != ''){
+				$jscode = "xModal.danger('Error: No se puede buscar por Rut y Pasaporte a la vez');";
+				$this->_addJavascript($jscode);
+			} else if($rut != '' || $pasaporte != '' || $nombres != '' || $apellidos != '' || $cod_fonasa != '' || $centro_salud != 0 || $region != 0 || $comuna != 0){
+				$mostrar = 1;
+				$arr = $this->_DAOPaciente->buscarPaciente($parametros);
+
+				$this->smarty->assign('arrResultado', $arr);
+				$this->smarty->assign('rut',$rut);
+				$this->smarty->assign('pasaporte',$pasaporte);
+				$this->smarty->assign('nombres',$nombres);
+				$this->smarty->assign('apellidos',$apellidos);
+				$this->smarty->assign('cod_fonasa',$cod_fonasa);
+				$this->_addJavascript(STATIC_FILES . "js/regiones.js");
+
+				$jscode = "$(\"#centro_salud option[value='".$centro_salud."']\").attr('selected',true);";
+				$this->_addJavascript($jscode);
+				$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
+				$this->_addJavascript($jscode);
+				$jscode = "$('#region').trigger('change')";
+				$this->_addJavascript($jscode);
+				$jscode = "setTimeout(function(){ $(\"#comuna option[value='".$comuna."']\").attr('selected',true); },100);";
+				$this->_addJavascript($jscode);
+			}
 		}
 		
 		
 		$this->smarty->assign('mostrar',$mostrar);
 		//print_r($arr); die;
-		
-		
 		$this->_display('Paciente/buscar.tpl');
+		$this->load->javascript(STATIC_FILES . "js/regiones.js");
 		//$this->smarty->display('Paciente/buscar.tpl');
 		
 	}

@@ -148,6 +148,8 @@ class Empa extends Controller{
 			$this->smarty->assign("bo_consume_alcohol_1", 'checked');
 		} else if ($empa->bo_consume_alcohol == 0) {
 			$this->smarty->assign("bo_consume_alcohol_0", 'checked');
+		} else if ($empa->bo_consume_alcohol == 2) {
+			$this->smarty->assign("bo_consume_alcohol_2", 'checked');
 		}
 
 		if ($empa->bo_fuma == 1) {
@@ -454,6 +456,7 @@ class Empa extends Controller{
 		header('Content-type: application/json');
 		$session = New Zend_Session_Namespace("usuario_carpeta");
 		$parametros = $this->_request->getParams();
+		print_r($parametros); die;
 		$correcto = false;
 		$error = false;
 		$cant_preguntas = $parametros['cant_pre'];
@@ -462,6 +465,7 @@ class Empa extends Controller{
 			$id_pregunta = $i;
 			$valor = $parametros['pregunta_' . $i];
 			$id_empa_audit = $this->_DAOEmpaAudit->updateEmpaAudit($id_empa, $id_pregunta, $valor);
+			//$bool_update = $this->_DAOEmpa->updateEmpa($parametros);
 		}
 		if ($id_empa_audit) {
 			$correcto = $this->_Evento->guardarMostrarUltimo(15,$id_empa,0,"AUDIT del EMPA ".$id_empa."  modificado el : " . Fechas::fechaHoy(),1,1,$session->id);
