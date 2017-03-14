@@ -1,6 +1,7 @@
 <link href="{$base_url}/template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$base_url}/template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-<link href="{$static}/template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
+<!--<link href="{$static}/template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>-->
+<link href="{$static}/template/plugins/datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css"/>
 <section class="content-header">
     <h1><i class="fa fa-plus"></i>Nuevo</h1>
 	<ol class="breadcrumb">
@@ -86,21 +87,18 @@
 
 				<div class="form-group">
 					<label for="fc_nacimiento" class="control-label col-sm-2 ">Fecha Nacimiento(*)</label>
-					<div class="col-lg-3">
-                                <div class="input-group">
-                                    <input type="text" class="form-control datepicker " readonly
-                                           style="border-radius: 0" 
-										   id="fc_nacimiento"
-                                           name="fc_nacimiento"
-										   onchange="validarVacio(this, 'Por favor Ingrese Fecha'), calcularEdad(this.value, '#edad')"
-                                           placeholder="">
-                                    <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_nacimiento').focus();"></i></span>
-                                </div>
-                    </div>
-					<!--<div class="col-sm-3">
-						<input type="date" class="form-control col-sm-2" onblur="validarVacio(this, 'Por favor Ingrese Fecha'), calcularEdad(this.value, '#edad')" name="fc_nacimiento" id="fc_nacimiento">
-						<span class="help-block hidden fa fa-warning"></span>
-					</div>-->
+					<div class='col-sm-3'>
+						    <div class="input-group">
+								<input type='text' class="form-control datepicker"
+									   id='fc_nacimiento' 
+									   name='fc_nacimiento'
+									   onblur="validarVacio(this, 'Por favor Ingrese Fecha'), calcularEdad(this.value, '#edad')"
+									   />
+								<span class="help-block hidden fa fa-warning"></span>
+								<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_nacimiento').focus();"></i></span>
+								
+							</div>
+					</div>
 					<label for="edad" class="control-label col-sm-2 ">Edad (*)</label>
 					<div class="col-sm-1">					
 						<input type="text" name="edad" id="edad" placeholder="Edad" class="form-control" readonly />
@@ -273,23 +271,20 @@
 					</div>
 					<div class="form-group">
 						<label for="fechaingreso" class="control-label col-sm-4">Fecha Ingreso</label>
-						<div class="col-sm-6">
-                                <div class="input-group">
-                                    <input type="text" class="form-control datepicker " readonly
-                                           style="border-radius: 0" 
-										   id="fechaingreso"
-                                           name="fechaingreso"
-										   onchange="validarVacio(this, 'Por favor Ingrese Fecha y Hora de Ingreso')"
-										   value="{$smarty.now|date_format:"%d/%m/%Y"}"
-                                           placeholder="Fecha y Hora de Ingreso">
-                                    <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fechaingreso').focus();"></i></span>
-									<span class="help-block hidden"></span>
-                                </div>
-						</div>
-					<!--<div class="col-sm-6">
-							<input type="date" name="fechaingreso" id="fechaingreso" value="{$smarty.now|date_format:"%d/%m/%Y"}" onblur="validarVacio(this, 'Por favor Ingrese Fecha y Hora de Ingreso')" placeholder="Fecha y Hora de Ingreso" class="form-control"/>
-							<span class="help-block hidden"></span>
-						</div>-->
+						<div class='col-sm-3'>
+						    <div class="input-group">
+								<input type='text' class="form-control datepicker"
+									   id='fechaingreso' 
+									   name='fechaingreso'
+									   onblur="validarVacio(this, 'Por favor Ingrese Fecha y Hora de Ingreso')"
+									   value="{$smarty.now|date_format:"%d/%m/%Y"}"
+									   />
+								<span class="help-block hidden fa fa-warning"></span>
+								<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fechaingreso').focus();"></i></span>
+								
+							</div>
+					</div>
+		
 					</div>   
 					<div class="form-group">
 						<label for="horaingreso" class="control-label col-sm-4">Hora Ingreso</label>
