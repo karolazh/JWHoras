@@ -974,28 +974,33 @@ class Paciente extends Controller {
 			$centro_salud	= $parametros['centro_salud'];
 			$region			= $parametros['region'];
 			$comuna			= $parametros['comuna'];
-			$mostrar = 1;
-			$arr = $this->_DAOPaciente->buscarPaciente($parametros);
 			
-			$this->smarty->assign('arrResultado', $arr);
-			$this->smarty->assign('rut',$rut);
-			$this->smarty->assign('pasaporte',$pasaporte);
-			$this->smarty->assign('nombres',$nombres);
-			$this->smarty->assign('apellidos',$apellidos);
-			$this->smarty->assign('cod_fonasa',$cod_fonasa);
+			if($rut != '' || $pasaporte != '' || $nombres != '' || $apellidos != '' || $cod_fonasa != '' || $centro_salud != 0 || $region != 0 || $comuna != 0){
+				$mostrar = 1;
+				$arr = $this->_DAOPaciente->buscarPaciente($parametros);
+
+				$this->smarty->assign('arrResultado', $arr);
+				$this->smarty->assign('rut',$rut);
+				$this->smarty->assign('pasaporte',$pasaporte);
+				$this->smarty->assign('nombres',$nombres);
+				$this->smarty->assign('apellidos',$apellidos);
+				$this->smarty->assign('cod_fonasa',$cod_fonasa);
+
+				$jscode = "$(\"#centro_salud option[value='".$centro_salud."']\").attr('selected',true);";
+				$this->_addJavascript($jscode);
+				$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
+				$this->_addJavascript($jscode);
+				$jscode = "$('#region').trigger('change')";
+				$this->_addJavascript($jscode);
+				//Se necesita que campo comuna sea seleccionado
+				$jscode = "$(document).ready(function () { $(\"#comuna option[value='".$comuna."']\").attr('selected',true); });";
+				$this->_addJavascript($jscode);
+
+				//$this->_addJavascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
+				//$this->load->javascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
+			}
 			
-			$jscode = "$(\"#centro_salud option[value='".$centro_salud."']\").attr('selected',true);";
-			$this->_addJavascript($jscode);
-			$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
-			$this->_addJavascript($jscode);
-			$jscode = "$('#region').trigger('change')";
-			$this->_addJavascript($jscode);
-			//Se necesita que campo comuna sea seleccionado
-			$jscode = "$(document).ready(function () { $(\"#comuna option[value='".$comuna."']\").attr('selected',true); });";
-			$this->_addJavascript($jscode);
 			
-			//$this->_addJavascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
-			//$this->load->javascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
 		}
 		
 		
