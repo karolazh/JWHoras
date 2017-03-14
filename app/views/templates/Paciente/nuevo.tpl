@@ -273,7 +273,7 @@
 					</div>
 					<div class="form-group">
 						<label for="fechaingreso" class="control-label col-sm-4">Fecha Ingreso</label>
-						<div class="col-lg-3">
+						<div class="col-sm-6">
                                 <div class="input-group">
                                     <input type="text" class="form-control datepicker " readonly
                                            style="border-radius: 0" 
