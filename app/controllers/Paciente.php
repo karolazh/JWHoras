@@ -961,8 +961,8 @@ class Paciente extends Controller {
 		//$parametros		= $this->request->getParametros();
 		//$parametros		= $_REQUEST;
 		//print_r($parametros);
-		$this->load->javascript(STATIC_FILES . "js/templates/paciente/buscar.js");
-		$this->load->javascript(STATIC_FILES . "js/regiones.js");
+		//$this->load->javascript(STATIC_FILES . "js/templates/paciente/buscar.js");
+		//$this->load->javascript(STATIC_FILES . "js/regiones.js");
 
 		
 		if($parametros){
@@ -993,6 +993,7 @@ class Paciente extends Controller {
 			//Se necesita que campo comuna sea seleccionado
 			$jscode = "setTimeout(function(){ $(\"#comuna option[value='".$comuna."']\").attr('selected',true); },200);";
 			$this->_addJavascript($jscode);
+			
 			
 			//$this->_addJavascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
 			//$this->load->javascript(STATIC_FILES . 'template/plugins/jQuery/jQuery-2.1.4.min.js');
