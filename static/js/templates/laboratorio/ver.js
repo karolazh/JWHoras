@@ -2,7 +2,8 @@
 
 var Laboratorio = {
     
-    buscarExamen: function (id, form, btn) {
+    buscarExamen: function (id) {
+		console.log(id);
         var error = false;
         var msg_error = '';
         

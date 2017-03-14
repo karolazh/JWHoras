@@ -34,7 +34,7 @@
                             <button type="button" 
                                 {*onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/ver/{$item->id_paciente}', 'Detalle Registro', 85);" *}
                                 {*onclick="habilitarExamen({$exa->id_paciente_examen})"*}
-                                onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen},this.form,this);"
+                                onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"
                                 class="btn btn-xs btn-info"
                                 data-toggle="tooltip" 
                                 title="Ver Examen">
@@ -43,7 +43,7 @@
                             <button type="button" 
                                 {*onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/ver/{$item->id_paciente}', 'Detalle Registro', 85);" *}
                                 {*onclick="habilitarExamen({$exa->id_paciente_examen})"*}
-                                onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen},this.form,this);"
+                                onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"
                                 class="btn btn-xs btn-success"
                                 data-toggle="tooltip" 
                                 title="Ver Examen">
@@ -71,7 +71,7 @@
                             <button type="button" 
                                 {*onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/ver/{$item->id_paciente}', 'Detalle Registro', 85);" *}
                                 {*onclick="habilitarExamen({$exa->id_paciente_examen})"*}
-                                onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen},this.form,this);"
+                                onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"
                                 class="btn btn-xs btn-info"
                                 data-toggle="tooltip" 
                                 title="Ver Examen">
@@ -80,7 +80,7 @@
                             <button type="button" 
                                 {*onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/ver/{$item->id_paciente}', 'Detalle Registro', 85);" *}
                                 {*onclick="habilitarExamen({$exa->id_paciente_examen})"*}
-                                onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen},this.form,this);"
+                                onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"
                                 class="btn btn-xs btn-success"
                                 data-toggle="tooltip" 
                                 title="Ver Examen">

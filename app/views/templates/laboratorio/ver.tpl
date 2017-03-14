@@ -165,7 +165,6 @@
 <script type="text/javascript">
     function habilitarExamen(id_paciente_examen) {
         $('#seccionExamen').toggle();
-        alert(id_paciente_examen);
     }
     
     function deshabilitarExamen() {
