@@ -1,5 +1,6 @@
 <link href="{$base_url}/template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$base_url}/template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="{$static}/template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
 
 <section class="content-header">
     <h1><i class="fa fa-bullhorn"></i>&nbsp;Identificación del Agresor</h1>
@@ -128,11 +129,23 @@
                 <div class="form-group">
 					<label for="fc_reconoce" class="control-label col-sm-3">Fecha</label>
 					<div class="col-sm-3">
+							<div class="input-group">
+								<input type="text" class="form-control datepicker " readonly
+									   style="border-radius: 0" 
+									   id="fc_reconoce"
+									   name="fc_reconoce"
+									   value="{$fc_reconoce|date_format:"%d/%m/%Y"}"
+									   placeholder="Fecha">
+								<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_reconoce').focus();"></i></span>
+								<span class="help-block hidden"></span>
+							</div>
+					</div>
+<!--				<div class="col-sm-3">
 						<input type="date" name="fc_reconoce" id="fc_reconoce" value="{$fc_reconoce}"
                                                        placeholder="Fecha" class="form-control" />
 						<span class="help-block hidden fa fa-warning"></span>
-					</div>
-                                        <label for="fc_hora_reconoce" class="control-label col-sm-1">Hora</label>
+					</div> -->
+                    <label for="fc_hora_reconoce" class="control-label col-sm-1">Hora</label>
 					<div class="col-sm-3">					
 						<input type="time" name="fc_hora_reconoce" id="fc_hora_reconoce" value="{$fc_hora}"
                                                        placeholder="Hora" class="form-control" />
