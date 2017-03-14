@@ -156,6 +156,11 @@ function Valida_Rut( rut ){
 			$('#rut').val('');
             return false;
         }
+
+		if ($('#rut').parent().hasClass('has-error')) {
+			$('#rut').parent().removeClass('has-error');
+		}
+		$('#rut').parent().addClass('has-success');
         return true;
     }
 }
