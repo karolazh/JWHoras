@@ -453,7 +453,7 @@ class Empa extends Controller{
 		header('Content-type: application/json');
 		$session = New Zend_Session_Namespace("usuario_carpeta");
 		$parametros = $this->_request->getParams();
-		print_r($parametros); die;
+		//print_r($parametros); die;
 		$correcto = false;
 		$error = false;
 		$cant_preguntas = $parametros['cant_pre'];
