@@ -330,6 +330,19 @@ class Empa extends Controller{
 		} else {
 			$mamografia = "display: block";
 		}
+        
+        /* Caro 15-03-2017*/
+        //Exámenes fijos en formulario EMPA
+        $this->smarty->assign("id_glicemia", "1");
+        $this->smarty->assign("id_vdrl", "2");
+        $this->smarty->assign("id_rpr", "3");
+        $this->smarty->assign("id_vih", "4");
+        $this->smarty->assign("id_baciloscopia", "5");
+        $this->smarty->assign("id_pap", "6");
+        $this->smarty->assign("id_colesterol", "7");
+        $this->smarty->assign("id_mamografia", "8");
+        $this->smarty->assign("id_hipertension", "9");
+        /* Fin Caro */
 		
 		$this->smarty->assign("mamografia", $mamografia);
 		$this->smarty->assign("pap", $pap);

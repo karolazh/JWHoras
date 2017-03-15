@@ -7,7 +7,7 @@
     <div class="col-md-12 text-right">
         <button type="button"
                 href='javascript:void(0)' 
-                onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/bitacora/{$id_paciente}', 'Registro número : {$id_paciente}', 85);" 
+                onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$id_paciente}', 'Registro número : {$id_paciente}', 85);" 
                 data-toggle="tooltip" 
                 title="Bitácora"
                 class="btn btn-sm btn-flat btn-primary">
@@ -179,6 +179,7 @@
                     </div>
                     </div>
                 </div>
+
                 <!-- Alcoholismo -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Consumo de alcohol</h3></div>
@@ -307,6 +308,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <!-- Hipertensión -->
                 <div class="box box-success">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Hipertensión Arterial</h3></div>
@@ -331,8 +333,12 @@
                             </div>
                             <div class="col-sm-1">
                                 {$botonAyudaPAD}&nbsp;
-                            <button type="button" id="verAgendaHipertension" style="{if $gl_pad < 90 and $gl_pas < 140}display: none{/if}" 
-                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
+                                {*<button type="button" id="verAgendaHipertension" style="{if $gl_pad < 90 and $gl_pas < 140}display: none{/if}" 
+                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>*}
+                                <button type="button" id="verAgendaHipertension" style="{if $gl_pad < 90 and $gl_pas < 140}display: none{/if}" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_hipertension}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        class="btn btn-sm btn-success">                                        
+                                    <i class="fa fa-file-o"></i> Agenda</button>
                             </div>
                         </div>
                     </div>
@@ -371,9 +377,13 @@
                                 <label for="bo_glicemia_toma" class="control-label required">Toma de Glicemia</label>
                             </div>
                             <div class="col-sm-2" id="div_glicemia_agenda" style="{if !($gl_glicemia > 125)}display: none{/if}"> 
-                                    {$botonInformacionAgenda}&nbsp;&nbsp;
-                                <button type="button" id="verAgendaDiabetes"
-                                        class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
+                                {$botonInformacionAgenda}&nbsp;&nbsp;
+                                {*<button type="button" id="verAgendaDiabetes"
+                                        class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>*}
+                                <button type="button" id="verAgendaDiabetes" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_glicemia}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        class="btn btn-sm btn-success">                                        
+                                    <i class="fa fa-file-o"></i> Agenda</button>
                             </div>
                         </div>
                     </div>
@@ -392,7 +402,8 @@
                                 <label><input class="bo_trabajadora_reclusa" type="radio" name="bo_trabajadora_reclusa" 
                                               id="bo_trabajadora_reclusa_1" value="1" {$bo_trabajadora_reclusa_1}>Si</label>
                             </div>
-                        </div>  
+                        </div> 
+                        <!-- VDRL -->
                         <div class="form-group" id="id_vdrl" style="{if $bo_trabajadora_reclusa_1 != 'checked'}display: none{/if}">
                             <label class="control-label required col-sm-3">¿Examen VDRL? (Sifilis)</label>
                             <div class="col-sm-2">
@@ -402,7 +413,15 @@
                                 <label><input class="bo_vdrl" type="radio" name="bo_vdrl" 
                                               id="bo_vdrl_1" value="1" {$bo_vdrl_1}>Positivo</label>
                             </div>
-                        </div>  
+                            <div class="col-sm-2" id="div_vdrl_agenda" style="{if $bo_vdrl_1 != 'checked'}display: none{/if}">
+                                {$botonInformacionAgendaITS}&nbsp;&nbsp;
+                                <button type="button" id="verAgendaVDRL" style="{if $bo_vdrl_1 != 'checked'}display: none{/if}"
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_vdrl}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        class="btn btn-sm btn-success">                                        
+                                    <i class="fa fa-file-o"></i> Agenda</button>
+                            </div>
+                        </div>
+                        <!-- RPR -->
                         <div class="form-group" id="id_rpr" style="{if $bo_trabajadora_reclusa_1 != 'checked'}display: none{/if}">
                             <label class="control-label required col-sm-3">¿Examen RPR? (Sifilis)</label>
                             <div class="col-sm-2">
@@ -412,12 +431,17 @@
                                 <label><input class="bo_rpr" type="radio" name="bo_rpr" 
                                               id="bo_rpr_1" value="1" {$bo_rpr_1}>Positivo</label>
                             </div>
-                            <div class="col-sm-2" id="div_ITS_agenda" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}">
+                            <div class="col-sm-2" id="div_rpr_agenda" style="{if $bo_rpr_1 != 'checked'}display: none{/if}">
                                 {$botonInformacionAgendaITS}&nbsp;&nbsp;
-                                <button type="button" id="verAgendaSifilis" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}"
-                                        class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
+                                {*<button type="button" id="verAgendaSifilis" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}"
+                                        class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>*}
+                                <button type="button" id="verAgendaRPR" style="{if $bo_rpr_1 != 'checked'}display: none{/if}"
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_rpr}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        class="btn btn-sm btn-success">
+                                    <i class="fa fa-file-o"></i> Agenda</button>
                             </div>
                         </div>
+                        <!-- VIH -->
 						<div class="form-group" id="id_vih" style="{if $bo_trabajadora_reclusa_1 != 'checked'}display: none{/if}">
                             <label class="control-label required col-sm-3">¿Examen Test Elisa? (VIH)</label>
                             <div class="col-sm-2">
@@ -429,8 +453,12 @@
                             </div>
                             <div class="col-sm-2" id="div_vih_agenda" style="{if $bo_vih_1 != 'checked'}display: none{/if}">
                                 {$botonInformacionAgendaVIH}&nbsp;&nbsp;
+                                {*<button type="button" id="verAgendaVIH" style="{if $bo_vih_1 != 'checked'}display: none{/if}"
+                                        class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>*}
                                 <button type="button" id="verAgendaVIH" style="{if $bo_vih_1 != 'checked'}display: none{/if}"
-                                        class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_vih}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        class="btn btn-sm btn-success">                                        
+                                    <i class="fa fa-file-o"></i> Agenda</button>
                             </div>
                         </div>
                     </div>
@@ -480,9 +508,10 @@
                                               id="bo_pap_realizado_1" value="1" {$bo_pap_realizado_1}>SI</label>
                             </div>
                         </div>
-                                <input type="date" name="fc_ultimo_pap" id="fc_ultimo_pap" value="{$fc_ultimo_pap}" placeholder="" class="form-control hidden"/>
-								<input type="text" id="ultimo_pap_ano" value="{$fc_ultimo_pap_ano}" class="form-control hidden"/>
-								<input type="text" id="ultimo_pap_mes" value="{$fc_ultimo_pap_mes}" class="form-control hidden"/>
+                            
+                        <input type="date" name="fc_ultimo_pap" id="fc_ultimo_pap" value="{$fc_ultimo_pap}" placeholder="" class="form-control hidden"/>
+                        <input type="text" id="ultimo_pap_ano" value="{$fc_ultimo_pap_ano}" class="form-control hidden"/>
+                        <input type="text" id="ultimo_pap_mes" value="{$fc_ultimo_pap_mes}" class="form-control hidden"/>
 								
                         <div class="form-group" id="ultimo_pap" style="{if $bo_pap_realizado_1 != 'checked'}display: none{/if}">         
                             <label class="control-label required col-sm-3">Fecha &uacute;ltimo PAP</label>
@@ -503,8 +532,12 @@
 								</select>
 							</div>	
                             &nbsp;&nbsp;
+                            {*<button type="button" id="verAgendaPap1" 
+                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>*}
                             <button type="button" id="verAgendaPap1" 
-                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_pap}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        class="btn btn-sm btn-success">                                        
+                                    <i class="fa fa-file-o"></i> Agenda</button>
                         </div>
                         <div class="form-group" style="{if !($bo_pap_vigente_0 or $bo_pap_vigente_1)}display: none{/if}" id="pap_vigente">    
                             <label class="control-label required col-sm-3">PAP Vigente</label>
@@ -531,7 +564,7 @@
                                 <label><input class="bo_pap_resultado" type="radio" name="bo_pap_resultado" 
                                               id="bo_pap_resultado_2" value="2" {$bo_pap_resultado_2}>NO SABE</label>
                             </div>
-                            <div class="col-sm-1">
+                            <div class="col-sm-2">
                                 <button type="button" id="verPAP" class="btn btn-sm btn-info">
                                     <i class="fa fa-info"></i> Ver Resultado</button>
                             </div>
@@ -556,13 +589,16 @@
                                 <input type="date" name="fc_tomar_pap" id="fc_tomar_pap" 
                                        value="{$fc_tomar_pap}" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
-                            </div>-->
+                            </div> -->
                             &nbsp;&nbsp;
                             <button type="button" id="verAgendaPap" 
-                                    class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_pap}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        class="btn btn-sm btn-success">                                        
+                                    <i class="fa fa-file-o"></i> Agenda</button>
                         </div>
                     </div>
                 </div>
+                                        
                 <!-- Dislipidemia -->
                 <div class="box box-success" style="{$dislipidemia}">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Dislipidemia (Mujeres de 40 años o mas)</h3></div>
@@ -582,12 +618,17 @@
                             </div>
                             <div class="col-sm-3" style="{if !($gl_colesterol >= 240) }display: none{/if}" id="div_colesterol_agenda">
                                     {$botonInformacionAgenda}&nbsp;&nbsp;
+                                {*<button type="button" id="verAgendaDislipidemia" style="{if !($gl_colesterol >= 240) }display: none{/if}" 
+                                        class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>*}
                                 <button type="button" id="verAgendaDislipidemia" style="{if !($gl_colesterol >= 240) }display: none{/if}" 
-                                        class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_colesterol}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        class="btn btn-sm btn-success">                                        
+                                    <i class="fa fa-file-o"></i> Agenda</button>
                             </div>
                     </div>
                     </div>
                 </div>
+
                 <!-- Cáncer de mama -->
                 <div class="box box-success" id="cancer_de_mama" style="{$mamografia}">
                     <div class="box-header with-border"><h3 class="box-title"><i class="fa fa-sticky-note"></i> Cáncer de mama</h3></div>
@@ -680,7 +721,9 @@
                             </div>
                             <div class="col-sm-3" id="div_mamografia_agenda">
                                 {$botonInformacionAgendaMamografia}&nbsp;&nbsp;
-                                <button type="button" id="verAgendaMamografia" class="btn btn-sm btn-success">
+                                <button type="button" id="verAgendaMamografia" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_mamografia}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-file-o"></i> Agenda</button>
                             </div> 
                         </div>

@@ -23,6 +23,8 @@ class Agenda extends Controller {
     protected $_DAOPaciente;
     protected $_DAOPacienteExamen;
     protected $_DAOPacienteDireccion;
+    protected $_DAOLaboratorio;
+    protected $_DAOTipoExamen;
 
 	function __construct() {
 		parent::__construct();
@@ -31,6 +33,8 @@ class Agenda extends Controller {
 		$this->_DAOPaciente				= $this->load->model("DAOPaciente");
         $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
         $this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
+        $this->_DAOLaboratorio			= $this->load->model("DAOLaboratorio");
+        $this->_DAOTipoExamen			= $this->load->model("DAOTipoExamen");
 	}
 
     /**
@@ -121,4 +125,55 @@ class Agenda extends Controller {
         $this->smarty->assign('arrExamenes', $arrExamenes);
         $this->smarty->display('agenda/ver.tpl');
 	}
+    
+    /**
+	 * Descripción: Ver Agenda de Examenes
+	 * @author Carolina Zamora Hormazábal
+	 */
+    public function agendar() {
+        Acceso::redireccionUnlogged($this->smarty);
+		$sesion = New Zend_Session_Namespace("usuario_carpeta");
+        
+        $parametros = $this->request->getParametros();
+        $id_paciente = $parametros[0];
+        $id_examen = $parametros[1];
+                
+        //Combo Laboratorios
+        $arrLaboratorios = $this->_DAOLaboratorio->getLista();
+        //Combos Tipo Examen
+        $arrTipoExamen = $this->_DAOTipoExamen->getLista();
+        
+        $this->smarty->assign("id_paciente", $id_paciente);
+        $this->smarty->assign("id_examen", $id_examen);
+        
+        $this->smarty->assign('arrLaboratorios', $arrLaboratorios);
+        $this->smarty->assign('arrTipoExamen', $arrTipoExamen);
+        $this->smarty->display('agenda/agendar.tpl');
+        $this->load->javascript(STATIC_FILES . 'js/templates/agenda/agendar.js');
+        
+    }
+    
+    /**
+	 * Descripción: Guardar Fecha/Hora Paciente en Agenda
+	 * @author Carolina Zamora Hormazábal
+	 */
+    public function guardarAgenda() {
+        header('Content-type: application/json');
+
+        $correcto = true;
+        $error = false;
+        
+        $id_paciente = $_POST['id_paciente'];
+        $id_examen = $_POST['id_examen'];
+        
+        //...
+
+        $salida = array("error"    => $error,
+                        "correcto" => $correcto);
+
+        $this->smarty->assign("hidden", "");
+        $json = Zend_Json::encode($salida);
+
+        echo $json;
+    }
 }
