@@ -23,7 +23,6 @@ class DAOPacienteRegistro extends Model{
 
     protected $_tabla		= "pre_paciente_registro";
     protected $_primaria	= "id_registro";
-    protected $_transaccional	= false;
 
     function __construct()
     {
@@ -101,7 +100,7 @@ class DAOPacienteRegistro extends Model{
 						(
 						" .$id_paciente . ",
 						" .$_SESSION['id_institucion']. ",
-						'".$parametros['fechaingreso']. "',
+						".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fechaingreso'])). ",
 						'".$parametros['horaingreso']. "',
 						'".$parametros['motivoconsulta']. "',
 						now(),

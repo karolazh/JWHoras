@@ -152,6 +152,17 @@
 				</div>
 			</div>
 		</div>
+		<div id="mostrar_direcciones" style="display:none"> 
+			<div class="top-spaced"></div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">Direcciones</div>
+				<div class="panel-body">
+					<div class="form-group" id="groupTablaDirecciones" style="display:none">
+
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="top-spaced"></div>
 		<div class="panel panel-primary">
 			<div class="panel-heading">Datos de Contacto {$botonAyudaContacto}</div>
@@ -211,9 +222,6 @@
 								<span class="help-block hidden fa fa-warning"></span>
 							</div>
 						</div>
-					</div>
-					<div class="form-group" id="groupTablaDirecciones" style="display:none">
-						
 					</div>
 					<div class="form-group">
 						<label for="centrosalud" class="control-label col-sm-4">Centro de Salud</label>

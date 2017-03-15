@@ -29,6 +29,7 @@ class Home extends Controller{
      */
     function __construct(){
         parent::__construct();
+		$this->load->lib('Fechas', false);		
         $this->smarty->addPluginsDir(APP_PATH . "views/templates/home/plugins/");        
         $this->_DAOUsuario = $this->load->model("DAOUsuario");
         $this->_DAOPaciente = $this->load->model("DAOPaciente"); 

@@ -145,7 +145,7 @@ class DAOPacienteDireccion extends Model {
             return NULL;
         }
 	}
-	public function getMultByIdPaciente($id_paciente){
+	public function getMultByIdPaciente($id_paciente, $bo_estado=1){
 		$query	= "	SELECT 
                         pac.id_paciente_direccion,
                         pac.id_paciente,
@@ -168,9 +168,11 @@ class DAOPacienteDireccion extends Model {
                     LEFT JOIN pre_comuna com ON com.id_comuna = pac.id_comuna
                     LEFT JOIN pre_provincia pro ON pro.id_provincia = com.id_provincia
                     LEFT JOIN pre_usuario usr ON usr.id_usuario = pac.id_usuario_crea
-                    WHERE pac.id_paciente = ?
-					AND bo_estado = 1";
+                    WHERE pac.id_paciente = ?";
 
+if($bo_estado==1){
+	$query .= ' AND bo_estado = 1';
+}
 		$param	= array($id_paciente);
         $result	= $this->db->getQuery($query,$param);
 		

@@ -1124,6 +1124,7 @@ $("#guardar").on('click', function (e) {
 					}, 2000);
 				} else {
 					//alert("valor 1");
+					$("#redirige_empa").val(0);
 				}
 			} else {
 				xModal.info('Error: No se pudo Ingresar un nuevo Registro');

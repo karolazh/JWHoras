@@ -24,7 +24,6 @@ class DAOPaciente extends Model{
 
     protected $_tabla			= "pre_paciente";
     protected $_primaria		= "id_paciente";
-    protected $_transaccional	= false;
 
     function __construct()
     {
@@ -302,7 +301,7 @@ class DAOPaciente extends Model{
 						'".$parametros['inputextranjero']."',
 						'".$parametros['nombres']."',
 						'".$parametros['apellidos']."',
-						'".$parametros['fc_nacimiento']."',
+						".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_nacimiento'])).",
 						'".$parametros['direccion']."',
 						'".$parametros['fono']."',
 						".$parametros['fono_seguro'].",
@@ -317,7 +316,6 @@ class DAOPaciente extends Model{
 						".$_SESSION['id']."
 						)
                     ";
-
         if ($this->db->execQuery($query)) {
             return $this->db->getLastId();
         } else {
@@ -434,7 +432,7 @@ class DAOPaciente extends Model{
 						nr_hijos						= ".$parametros['nr_hijos'].",
 						id_tipo_ocupacion				= ".$parametros['id_tipo_ocupacion'].",
 						id_tipo_escolaridad				= ".$parametros['id_tipo_escolaridad'].",
-						fc_reconoce						= ".$parametros['fc_reconoce'].",
+						fc_reconoce						= ".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_reconoce'])).",
 						fc_hora_reconoce				= ".$parametros['fc_hora_reconoce'].",
 						gl_acompañante					= ".$parametros['gl_acompañante'].",
 						bo_reconoce						= 1,

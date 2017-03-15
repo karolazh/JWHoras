@@ -23,7 +23,6 @@ class DAOAuditoriaLogin extends Model {
 
     protected $_tabla			= "pre_auditoria_login";
     protected $_primaria		= "id_auditoria_login";
-    protected $_transaccional	= false;
 
     function __construct(){
         parent::__construct();       

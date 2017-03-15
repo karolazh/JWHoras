@@ -3,12 +3,12 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_empa_audit
+* Descripcion	: Modelo para Tabla pre_adjunto
 * Plataforma	: !PHP
-* Creacion		: 27/02/2017
-* @name			DAOEmpaAudit.php
+* Creacion		: 15/03/2017
+* @name			DAOAdjunto.php
 * @version		1.0
-* @author		Orlando Vázquez <orlando.vazquez@cosof.cl>
+* @author		Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -19,10 +19,11 @@
 *****************************************************************************
 */
 
-class DAOEmpaAudit extends Model{
+class DAOWebService extends Model{
 
-    protected $_tabla           = "pre_empa_audit";
-    protected $_primaria		= "id_audit";
+    protected $_tabla           = "pre_web_service";
+    protected $_primaria		= "id_web_service";
+    protected $_transaccional	= false;
 
     function __construct()
     {
@@ -42,11 +43,11 @@ class DAOEmpaAudit extends Model{
 
     public function getById($id){
         $query	= "	SELECT * FROM ".$this->_tabla."
-						WHERE ".$this->_primaria." = ?";
+			WHERE ".$this->_primaria." = ?";
 
 		$param	= array($id);
         $result	= $this->db->getQuery($query,$param);
-		
+
         if($result->numRows > 0){
             return $result->rows->row_0;
         }else{
@@ -54,37 +55,4 @@ class DAOEmpaAudit extends Model{
         }
     }
 
-    public function getByIdEmpa($id_empa){
-        $query	= "	SELECT 
-						id_audit,
-						id_empa,
-						id_pregunta,
-						nr_valor
-					FROM pre_empa_audit 
-					WHERE id_empa = ".$id_empa;
-
-		$param	= array($id_empa);
-        $result	= $this->db->getQuery($query,$param);
-
-        if($result->numRows>0){
-            return $result->rows;
-        }else{
-            return NULL;
-        }
-    }
-    
-	public function updateEmpaAudit( $id_empa, $id_pregunta, $valor){
-        $query	= "	UPDATE pre_empa_audit 
-					SET	nr_valor =	".$valor."
-					WHERE id_empa = ".$id_empa." AND id_pregunta = ".$id_pregunta."";
-
-        if ($this->db->execQuery($query)) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
-    }
-
 }
-
-?>
