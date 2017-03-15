@@ -222,8 +222,12 @@
         <div class="panel-body">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#empa">EMPA</a></li>
+			{if $bo_reconoce == 1}	
+                <li><a data-toggle="tab" href="#agresor">DATOS DEL AGRESOR</a></li>
+                <li><a data-toggle="tab" href="#violencia">CARACTERIZACIÓN DE VIOLENCIA</a></li>
+			{/if}	
                 <li><a data-toggle="tab" href="#examenes">EX&Aacute;MENES</a></li>
-                   <li><a data-toggle="tab" href="#plan">PLAN TRATAMIENTO</a></li>
+                <li><a data-toggle="tab" href="#plan">PLAN TRATAMIENTO</a></li>
                 <li><a data-toggle="tab" href="#eventos">EVENTOS</a></li>
                 <li><a data-toggle="tab" href="#documentos">DOCUMENTOS</a></li>
             </ul>
@@ -239,6 +243,30 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 {include file='bitacora/grillaEmpa.tpl'}
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+							
+				 <!-- DATOS DEL AGRESOR  -->
+                <div id="agresor" class="tab-pane fade">
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {include file='bitacora/datosAgresor.tpl'}
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+							
+				 <!-- DATOS DEL AGRESOR  -->
+                <div id="violencia" class="tab-pane fade">
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {include file='bitacora/caracterizacionViolencia.tpl'}
                             </div>
                         </div>
                         <br>

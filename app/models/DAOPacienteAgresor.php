@@ -117,6 +117,42 @@ class DAOPacienteAgresor extends Model{
         }
 	}
 	
+	public function getByIdPaciente($id){
+        $query	= "	SELECT
+						a.*,
+						v.gl_tipo_vinculo,
+						e.gl_estado_civil,
+						o.gl_tipo_ocupacion,
+						act.gl_nombre_actividad,
+						s.gl_tipo_sexo,
+						g.gl_tipo_genero,
+						os.gl_orientacion_sexual,
+						date_format(fc_nacimiento_agresor,'%d-%m-%Y') as fc_nacimiento_agresor
+
+					FROM pre_paciente_agresor a
+					LEFT JOIN pre_tipo_vinculo v ON a.id_tipo_vinculo = v.id_tipo_vinculo
+					LEFT JOIN pre_tipo_estado_civil e ON a.id_estado_civil = e.id_estado_civil
+					LEFT JOIN pre_tipo_ocupacion o ON a.id_tipo_ocupacion = o.id_tipo_ocupacion
+					LEFT JOIN pre_tipo_actividad_economica act ON a.id_actividad_economica = act.id_actividad_economica
+					LEFT JOIN pre_tipo_sexo s ON a.id_tipo_sexo = s.id_tipo_sexo
+					LEFT JOIN pre_tipo_genero g ON a.id_tipo_genero = g.id_tipo_genero
+					LEFT JOIN pre_tipo_orientacion_sexual os ON a.id_orientacion_sexual = os.id_orientacion_sexual
+					
+                    
+					WHERE id_paciente = ?
+					ORDER BY id_agresor ASC
+					LIMIT 1";
+
+		$param	= array($id);
+        $result	= $this->db->getQuery($query,$param);
+
+        if($result->numRows > 0){
+            return $result->rows->row_0;
+        }else{
+            return NULL;
+        }
+    }
+	
 }
 
 ?>
