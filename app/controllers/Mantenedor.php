@@ -183,7 +183,7 @@ class Mantenedor extends Controller{
 	/********************************************** MENU **********************************************/
 	public function menu(){
 
-		$this->smarty->assign('arr_data',$this->_DAOPerfilOpcion->getAllMenuOpcion());
+		$this->smarty->assign('arr_data',$this->_DAOPerfilOpcion->getLista());
 
 		$this->_display('mantenedor_menu/bandeja.tpl');
 	}

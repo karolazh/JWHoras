@@ -26,7 +26,7 @@ class Adjunto extends Controller{
 	function __construct() {
 		parent::__construct();
         $this->load->lib('Boton', false);
-
+		$this->load->lib('Fechas', false);
         $this->_DAOAdjunto			= $this->load->model("DAOAdjunto");
 	}
 

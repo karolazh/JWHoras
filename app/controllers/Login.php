@@ -46,6 +46,7 @@ class Login extends Controller {
 		include_once("app/libs/nusoap/lib/nusoap.php");
 		
         $this->load->lib('Seguridad', false);
+		$this->load->lib('Fechas', false);
         $this->_DAOUsuario			= $this->load->model("DAOUsuario");
         $this->_DAORegion			= $this->load->model("DAORegion");
         $this->_DAOComuna			= $this->load->model("DAOComuna");

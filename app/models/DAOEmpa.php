@@ -24,7 +24,6 @@ class DAOEmpa extends Model{
 
     protected $_tabla		= "pre_empa";
     protected $_primaria	= "id_empa";
-    protected $_transaccional	= false;
     
     function __construct()
     {
@@ -108,7 +107,7 @@ class DAOEmpa extends Model{
 						gl_sector						= '".$parametros['gl_sector']."',
 						id_institucion					= ".$_SESSION['id_institucion'].",
 						nr_ficha						= ".$parametros['nr_ficha'].",
-						fc_empa							= ".$parametros['fc_empa'].",
+						fc_empa							= ".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_empa'])).",
 						bo_embarazo						= ".$parametros['bo_embarazo'].",
 						bo_consume_alcohol				= ".$parametros['bo_consume_alcohol'].",
 						gl_puntos_audit					= ".$parametros['gl_puntos_audit'].",
@@ -131,7 +130,7 @@ class DAOEmpa extends Model{
 						bo_baciloscopia_toma			= ".$parametros['bo_baciloscopia_toma'].",
 						bo_pap_realizado				= ".$parametros['bo_pap_realizado'].",
 						bo_pap_resultado				= ".$parametros['bo_pap_resultado'].",
-						fc_tomar_pap					= ".$parametros['fc_tomar_pap'].",
+						fc_tomar_pap					= ".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_tomar_pap'])).",
 						fc_ultimo_pap_ano				= ".$parametros['fc_ultimo_pap_ano'].",	
 						fc_ultimo_pap_mes				= ".$parametros['fc_ultimo_pap_mes'].",	
 						bo_pap_vigente					= ".$parametros['bo_pap_vigente'].",
