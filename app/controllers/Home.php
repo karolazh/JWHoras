@@ -121,7 +121,12 @@ class Home extends Controller{
                 }
             }   
 
-            $pacientes = $this->_DAOPaciente->getListaDetalle();
+            if($_SESSION['perfil'] == 5){
+                $pacientes = $this->_DAOPaciente->getListaDetalle();    
+            }else{
+                $pacientes = $this->_DAOPaciente->getListaDetalle(array('paciente.id_region' => $_SESSION['id_region']));
+            }
+            
             $arr_violencia = array();
             $arr_pap = array();
             if($pacientes){
