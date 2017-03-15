@@ -1,3 +1,4 @@
+
 	$(document).ajaxStart(function () {
 		$("#div_cargando").fadeIn();
 	});
@@ -361,4 +362,20 @@
        $(this).removeClass("dt-button");
        $(this).addClass("btn btn-default btn-xs");
     });
+	
+	// funcion para que funcione el calendario estilo ASD, 
+	// autor : orlando.vazquez@cosof.cl
+	$(function () {
+                $(".datepicker").datetimepicker({
+                    locale: "es",
+					format: "DD/MM/YYYY",
+                });
+    });
+	//funcion para que funcione la seleccion de hora estilo ASD {ahora mismo se ve gigante y no se porque :( }
+	//autor : orlando.vazquez@cosof.cl
+	 $(function () {
+                $(".timepicker").datetimepicker({
+                    format: "LT"
+                });
+            });
 

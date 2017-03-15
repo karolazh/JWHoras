@@ -109,9 +109,6 @@ class Paciente extends Controller {
 
 		//llamado al template
 		$this->_display('Paciente/nuevo.tpl');
-		$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/bootstrap-datepicker.js');
-        $this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/locales/bootstrap-datepicker.es.js');
-		$this->load->javascript('$(".datepicker").datepicker({ todayBtn: true,language: "es",   todayHighlight: true,autoclose: true});');
 		$this->load->javascript(STATIC_FILES . "js/regiones.js");
 		$this->load->javascript(STATIC_FILES . "js/templates/paciente/nuevo.js");
 		//$this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
@@ -623,8 +620,8 @@ class Paciente extends Controller {
 				foreach (array_reverse((array) $arr_motivos) as $item) {
 					if ($break_count < 5) {
 						$cuerpo_tabla = "<tr>
-													<td>" . $item->fc_ingreso . "</td>
-													<td>" . $item->gl_hora_ingreso . "</td>
+													<td align='center'>" . $item->fc_ingreso . "</td>
+													<td align='center'>" . $item->gl_hora_ingreso . "</td>
 													<td>" . $item->gl_motivo_consulta . "</td>
 													<td>" . $item->gl_nombre_establecimiento . "</td>
 													<td>" . $item->gl_nombres . " " . $item->gl_apellidos . "</td>
@@ -648,10 +645,11 @@ class Paciente extends Controller {
 								<thead>
 									<tr role='row'>
 										<th align='center' width='10%'>Fecha</th>
-										<th align='center' width='23%'>Direcci&oacute;nes vigentes</th>
-										<th align='center' width='22%'>Comuna</th>
-										<th align='center' width='22%'>Regi&oacute;n</th>
-										<th align='center' width='23%'>Funcionario</th>
+										<th align='center' width='20%'>Direcci&oacute;nes</th>
+										<th align='center' width='20%'>Comuna</th>
+										<th align='center' width='20%'>Regi&oacute;n</th>
+										<th align='center' width='10%'>Estado</th>
+										<th align='center' width='20%'>Funcionario</th>
 									</tr>
 								</thead>
 								<tbody>";
@@ -660,11 +658,19 @@ class Paciente extends Controller {
 				foreach (array_reverse((array) $direcciones) as $dir) {
 					if ($break_count < 5) {
 						$cuerpo_tabla_direcciones = "<tr>
-														<td>$dir->fc_crea</td>
-														<td>$dir->gl_direccion</td>
-														<td>$dir->gl_nombre_comuna</td>
-														<td>$dir->gl_nombre_region</td>
-														<td>$dir->funcionario</td>	
+															<td align='center'>$dir->fc_crea</td>
+															<td>$dir->gl_direccion</td>
+															<td>$dir->gl_nombre_comuna</td>
+															<td>$dir->gl_nombre_region</td>
+															<td align='center'>";
+						if($dir->bo_estado == 1){
+							$cuerpo_tabla_direcciones .="		<h6><b><span class='label label-success small'>VIGENTE</span></b></h6>";
+						}else {
+							$cuerpo_tabla_direcciones .="		<h6><b><span class='label label-danger small'>NO VIGENTE</span></b></h6>";
+						}
+						
+						$cuerpo_tabla_direcciones .= "		</td>
+															<td>$dir->funcionario</td>	
 													</tr>
 												";
 						$tabla_direcciones = $tabla_direcciones . $cuerpo_tabla_direcciones;

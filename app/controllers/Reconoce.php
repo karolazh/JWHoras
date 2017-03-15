@@ -171,9 +171,6 @@ class Reconoce extends Controller {
     //Llamado al template
         $this->_display('Reconoce/identificar_agresor.tpl');
     //Llamado al Javascript
-		$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/bootstrap-datepicker.js');
-        $this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/locales/bootstrap-datepicker.es.js');
-		$this->load->javascript('$(".datepicker").datepicker({ todayBtn: true,language: "es",   todayHighlight: true,autoclose: true});');
         $this->load->javascript(STATIC_FILES . "js/templates/reconoce/identificar_agresor.js");
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }

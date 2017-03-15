@@ -1,6 +1,6 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-<link href="{$static}/template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
+<link href="{$static}/template/plugins/datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css"/>
 
 <section class="content-header">
     <h1><i class="fa fa-medkit"></i> Ingresar EMPA</h1>
@@ -63,23 +63,18 @@
                     </div>
 
                     <label for="fc_empa" class="control-label col-sm-1">Fecha (*)</label>
-					<div class="col-lg-3">
-							<div class="input-group">
-								<input type="text" class="form-control datepicker " readonly
-									   style="border-radius: 0" 
-									   id="fc_empa"
-									   name="fc_empa"
-									   value="{$fc_empa}"
-									   placeholder="Fecha">
+					<div class='col-lg-3'>
+						    <div class="input-group">
+								<input type='text' class="form-control datepicker"
+									   id='fc_empa' 
+									   name='fc_empa'
+									   value="{$fc_empa|date_format:"%d/%m/%Y"}"
+									   />
+								<span class="help-block hidden fa fa-warning"></span>
 								<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_empa').focus();"></i></span>
-								<span class="help-block hidden"></span>
+								
 							</div>
 					</div>
-					<!--<div class="col-sm-3">
-                        <input type="date" name="fc_empa" id="fc_empa" value="{$fc_empa}" 
-                               placeholder="Fecha" class="form-control"/>
-                        <span class="help-block hidden"></span>
-                    </div>-->
                 </div>    
                 <div class="form-group">
                     <label class="control-label col-sm-3">Nro. Registro</label>
@@ -217,7 +212,7 @@
                                 </div>
                             </div>
                         </div>
-								<input id="redirige_empa" class="redirige_empa" value="0">
+								<input id="redirige_empa" class="redirige_empa hidden" value="0">
                         <div class="form-group">
                             <div id="div_alcoholismo2" style="{if ($bo_consume_alcohol_1 != 'checked')}display: none{/if}">
                                 <div class="col-sm-3"></div>
@@ -543,16 +538,18 @@
                         </div>
                         <div class="form-group" id="tomar_fecha" style="{if $bo_pap_realizado_0 != 'checked' and $bo_pap_vigente_0 != 'checked'}display: none{/if}">         
                             <label class="control-label required col-sm-3">Tomar Fecha para PAP</label>
-							<div class="col-sm-2">
+							<div class='col-sm-2'>
 								<div class="input-group">
-									<input type="text" class="form-control datepicker " readonly
+									<input type='text' class="form-control datepicker"
 										   style="border-radius: 0" 
-										   id="fc_tomar_pap"
-										   name="fc_tomar_pap"
-										   value="{$fc_tomar_pap}"
-										   placeholder="Fecha">
+										   id='fc_tomar_pap' 
+										   name='fc_tomar_pap'
+										   value="{$fc_tomar_pap|date_format:"%d/%m/%Y"}"
+										   placeholder="Fecha"
+										   />
+									<span class="help-block hidden fa fa-warning"></span>
 									<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_tomar_pap').focus();"></i></span>
-									<span class="help-block hidden"></span>
+
 								</div>
 							</div>
 							<!-- <div class="col-sm-2">
