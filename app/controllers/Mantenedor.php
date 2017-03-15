@@ -55,7 +55,6 @@ class Mantenedor extends Controller{
 		$id_usuario	= $parametros[0];
 		$data		= $this->_DAOUsuario->getById($id_usuario);
 		$perfiles	= $this->_DAOPerfil->getLista();
-
 		$this->smarty->assign('itm',$data);
 		$this->smarty->assign('perfiles',$perfiles);
 		$this->smarty->display('mantenedor_usuario/editar.tpl');
