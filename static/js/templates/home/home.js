@@ -150,19 +150,19 @@ var Home = {
 
       var datos = [];
       $.each(data, function(i, item){
-        var fecha = {date: item.fecha, value: parseInt(item.total)};
+        var fecha = {'date': item.fecha, 'value': parseInt(item.total)};
         datos.push(fecha);
       });
-
+      
       var chart = AmCharts.makeChart("grafico_fechas_registros", {
           "type": "serial",
           "theme": "light",
-          "language" : "es",
+          /*"language" : "es",*/
           "marginRight": 40,
           "marginLeft": 40,
           "autoMarginOffset": 20,
           "mouseWheelZoomEnabled":true,
-          "dataDateFormat": "YYYY-MM-DD",
+          "dataDateFormat": "DD-MM-YYYY",
           "valueAxes": [{
               "id": "v1",
               "axisAlpha": 0,
