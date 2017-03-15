@@ -1,7 +1,7 @@
 <link href="{$base_url}/template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$base_url}/template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-<!--<link href="{$static}/template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>-->
 <link href="{$static}/template/plugins/datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css"/>
+
 <section class="content-header">
     <h1><i class="fa fa-plus"></i>Nuevo</h1>
 	<ol class="breadcrumb">
@@ -271,7 +271,7 @@
 					</div>
 					<div class="form-group">
 						<label for="fechaingreso" class="control-label col-sm-4">Fecha Ingreso</label>
-						<div class='col-sm-3'>
+						<div class='col-sm-6'>
 						    <div class="input-group">
 								<input type='text' class="form-control datepicker"
 									   id='fechaingreso' 
@@ -283,7 +283,7 @@
 								<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fechaingreso').focus();"></i></span>
 								
 							</div>
-					</div>
+						</div>
 		
 					</div>   
 					<div class="form-group">
