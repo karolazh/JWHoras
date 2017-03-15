@@ -101,7 +101,7 @@ class DAOPacienteRegistro extends Model{
 						(
 						" .$id_paciente . ",
 						" .$_SESSION['id_institucion']. ",
-						'".$parametros['fechaingreso']. "',
+						".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fechaingreso'])). ",
 						'".$parametros['horaingreso']. "',
 						'".$parametros['motivoconsulta']. "',
 						now(),

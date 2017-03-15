@@ -85,7 +85,7 @@ class DAOPaciente extends Model{
         }
     }
 
-    public function getListaDetalle($where=array()){
+    public function getListaDetalle($parametros=array()){
         $query = "  SELECT
                         paciente.id_paciente,
                         paciente.gl_rut,
@@ -109,14 +109,19 @@ class DAOPaciente extends Model{
                     LEFT JOIN pre_centro_salud i ON i.id_centro_salud = paciente.id_institucion
                     LEFT JOIN pre_comuna c ON c.id_comuna = paciente.id_comuna
                     LEFT JOIN pre_paciente_estado e ON e.id_paciente_estado = paciente.id_paciente_estado";
-
-		if(!empty($where)){
-			foreach($where as $w){
-				$query .= ' WHERE '.$w['campo'].' = '.$w['valor'];
+        $params = array();
+		if(!empty($parametros)){
+            $where = ' WHERE ';
+            
+			foreach($parametros as $campo=>$valor){
+				$where .= ' '.$campo.' = ? AND';
+                $params[] = $valor;
 			}
+            $where = trim($where,'AND');
+            $query .= $where;
 		}
-                
-        $result	= $this->db->getQuery($query);
+
+        $result	= $this->db->getQuery($query,$params);
 
         if($result->numRows>0){
 			return $result->rows;
@@ -297,7 +302,7 @@ class DAOPaciente extends Model{
 						'".$parametros['inputextranjero']."',
 						'".$parametros['nombres']."',
 						'".$parametros['apellidos']."',
-						'".$parametros['fc_nacimiento']."',
+						".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_nacimiento'])).",
 						'".$parametros['direccion']."',
 						'".$parametros['fono']."',
 						".$parametros['fono_seguro'].",
@@ -312,7 +317,6 @@ class DAOPaciente extends Model{
 						".$_SESSION['id']."
 						)
                     ";
-
         if ($this->db->execQuery($query)) {
             return $this->db->getLastId();
         } else {
@@ -429,7 +433,7 @@ class DAOPaciente extends Model{
 						nr_hijos						= ".$parametros['nr_hijos'].",
 						id_tipo_ocupacion				= ".$parametros['id_tipo_ocupacion'].",
 						id_tipo_escolaridad				= ".$parametros['id_tipo_escolaridad'].",
-						fc_reconoce						= ".$parametros['fc_reconoce'].",
+						fc_reconoce						= ".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_reconoce'])).",
 						fc_hora_reconoce				= ".$parametros['fc_hora_reconoce'].",
 						gl_acompañante					= ".$parametros['gl_acompañante'].",
 						bo_reconoce						= 1,

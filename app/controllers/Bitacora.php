@@ -1,6 +1,6 @@
 <?php
 
-	/**
+/**
 	 * *****************************************************************************
 	 * Sistema          : PREVENCION DE FEMICIDIOS
 	 * Descripcion      : Controller para Bitácora de Paciente
@@ -44,23 +44,27 @@
 			$this->load->lib('Seguridad', false);
 			$this->load->lib('Evento', false);
 			$this->_Evento = new Evento();
-			$this->_DAOPaciente = $this->load->model("DAOPaciente");
-			$this->_DAOPacienteRegistro = $this->load->model("DAOPacienteRegistro");
-			$this->_DAOPacienteAgresor = $this->load->model("DAOPacienteAgresor");
-			$this->_DAOEvento = $this->load->model("DAOEvento");
-			$this->_DAOEventoTipo = $this->load->model("DAOEventoTipo");
-			$this->_DAOAdjunto = $this->load->model("DAOAdjunto");
-			$this->_DAOAdjuntoTipo = $this->load->model("DAOAdjuntoTipo");
-			$this->_DAOEmpa = $this->load->model("DAOEmpa");
-			$this->_DAOPacienteExamen = $this->load->model("DAOPacienteExamen");
-			$this->_DAOPacienteDireccion = $this->load->model("DAOPacienteDireccion");
-			$this->_DAOPacientePlanTratamiento = $this->load->model("DAOPacientePlanTratamiento");
-			$this->_DAOComuna = $this->load->model("DAOComuna");
-			$this->_DAOPacienteAgresorViolencia = $this->load->model("DAOPacienteAgresorViolencia");
-			$this->_DAOTipoViolencia = $this->load->model("DAOTipoViolencia");
+			$this->_DAOPaciente						= $this->load->model("DAOPaciente");
+			$this->_DAOPacienteRegistro				= $this->load->model("DAOPacienteRegistro");
+			$this->_DAOPacienteAgresor				= $this->load->model("DAOPacienteAgresor");
+			$this->_DAOEvento						= $this->load->model("DAOEvento");
+			$this->_DAOEventoTipo					= $this->load->model("DAOEventoTipo");
+			$this->_DAOAdjunto						= $this->load->model("DAOAdjunto");
+			$this->_DAOAdjuntoTipo					= $this->load->model("DAOAdjuntoTipo");
+			$this->_DAOEmpa							= $this->load->model("DAOEmpa");
+			$this->_DAOPacienteExamen				= $this->load->model("DAOPacienteExamen");
+			$this->_DAOPacienteDireccion			= $this->load->model("DAOPacienteDireccion");
+			$this->_DAOPacientePlanTratamiento		= $this->load->model("DAOPacientePlanTratamiento");
+			$this->_DAOComuna						= $this->load->model("DAOComuna");
+			$this->_DAOPacienteAgresorViolencia		= $this->load->model("DAOPacienteAgresorViolencia");
+			$this->_DAOTipoViolencia				= $this->load->model("DAOTipoViolencia");
 			$this->_DAOTipoRiesgo = $this->load->model("DAOTipoRiesgo");
 		}
 
+	/**
+	 * Descripción: Index Bitacora
+	 * @author Carolina Zamora Hormazábal
+	 */
 		public function index() {
 			Acceso::redireccionUnlogged($this->smarty);
 //
@@ -374,6 +378,5 @@
 
 			echo $json;
 		}
-
 	}
 	

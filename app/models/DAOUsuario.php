@@ -162,6 +162,33 @@ class DAOUsuario extends Model {
             return FALSE;
         }
     }
+	
+	/**
+	* getListaJoinPerfil()
+	* Obtener la información todos los usuarios junto con la informacion de perfil
+	* 
+	* @author	<orlando.vazquez@cosof.cl>	15-03-2017
+	* 
+	*
+	* @return object Todos los usuarios junto la informacion de perfil.
+	*/
+    public function getListaJoinPerfil() {
+        $query	= "	SELECT 
+						u.id_usuario,
+						u.gl_nombres,
+						u.gl_apellidos,
+						u.gl_rut,
+						u.bo_activo,
+						p.gl_nombre_perfil
+					FROM pre_usuario u 
+						LEFT JOIN pre_perfil p ON u.id_perfil = p.id_perfil";
+        $result	= $this->db->getQuery($query);
+        if ($result->numRows > 0) {
+            return $result->rows;
+        } else {
+            return NULL;
+        }
+    }
 
 }
 

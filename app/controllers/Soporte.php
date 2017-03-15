@@ -39,7 +39,7 @@ class Soporte extends Controller{
      */
     function __construct(){
         parent::__construct();
-		
+		$this->load->lib('Fechas', false);
 		if(ENVIROMENT == 'PROD'){
 			define('WSDL_SOPORTE','http://127.0.0.1/soporte/ws/wsSoporte.php?wsdl');
 		}else{

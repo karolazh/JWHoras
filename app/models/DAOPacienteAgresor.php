@@ -101,7 +101,7 @@ class DAOPacienteAgresor extends Model{
 						".$parametros['id_tipo_genero'].",
 						".$parametros['id_orientacion_sexual'].",
 						".$parametros['nr_ingreso_mensual'].",
-						".$parametros['fc_nacimiento_agresor'].",
+						".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_nacimiento_agresor'])).",
 						".$parametros['nr_hijos_agresor'].",
 						".$parametros['nr_hijos_en_comun'].",
 						".$parametros['nr_denuncias_por_violencia'].",

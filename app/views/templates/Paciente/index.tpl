@@ -103,6 +103,13 @@
                                                                         class="btn btn-xs btn-primary">
                                                                         <i class="fa fa-info-circle"></i>
                                                                 </button>
+                                                                <button type="button"
+                                                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/ver/{$item->id_paciente}', 'Agenda Examen Paciente : {$item->id_paciente}', 85);" 
+                                                                        data-toggle="tooltip" 
+                                                                        data-title="Agenda Examen"
+                                                                        class="btn btn-xs btn-warning">
+                                                                        <i class="fa fa-calendar"></i>
+                                                                </button>
                                                         </td>
                                                 </tr>
                                                 {else}
@@ -169,6 +176,14 @@
                                                                         data-title="Revisar bitácora" 
                                                                         class="btn btn-xs btn-primary">
                                                                         <i class="fa fa-info-circle"></i>
+                                                                </button>
+                                                                <button type="button"
+                                                                        onclick="location.href = '{$base_url}/Agenda/ver/{$item->id_paciente}'"
+                                                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/ver/{$item->id_paciente}', 'Agenda Examen Paciente : {$item->id_paciente}', 85);" 
+                                                                        data-toggle="tooltip" 
+                                                                        data-title="Agenda Examen"
+                                                                        class="btn btn-xs btn-warning">
+                                                                        <i class="fa fa-calendar"></i>
                                                                 </button>
                                                         </td>
                                                 </tr>
