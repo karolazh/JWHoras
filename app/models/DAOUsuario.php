@@ -24,6 +24,7 @@ class DAOUsuario extends Model {
 
     protected $_tabla			= "pre_usuario";
     protected $_primaria		= "id_usuario";
+    protected $_transaccional	= false;
 
     function __construct(){
         parent::__construct();       

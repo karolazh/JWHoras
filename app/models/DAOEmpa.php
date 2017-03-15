@@ -24,6 +24,7 @@ class DAOEmpa extends Model{
 
     protected $_tabla		= "pre_empa";
     protected $_primaria	= "id_empa";
+    protected $_transaccional	= false;
     
     function __construct()
     {

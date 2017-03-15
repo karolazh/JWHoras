@@ -56,7 +56,6 @@ class Bitacora extends Controller {
 	 */
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
-        //
 	}
 
 	/**

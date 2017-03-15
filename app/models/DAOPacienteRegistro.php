@@ -23,6 +23,7 @@ class DAOPacienteRegistro extends Model{
 
     protected $_tabla		= "pre_paciente_registro";
     protected $_primaria	= "id_registro";
+    protected $_transaccional	= false;
 
     function __construct()
     {
