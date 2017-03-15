@@ -2,6 +2,73 @@
 	<div class="col-xs-12">
 		<form class="form-horizontal">
 			<input type="hidden" id="id_usuario" name="id_usuario" value="{$itm->id_usuario}" />
+			<div class="top-spaced"></div>
+        
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Datos del Paciente {$botonAyudaPaciente}
+            </div>
+            <div class="panel-body">
+					
+					<div class="col-md-12">
+						<div class="clearfix col-md-6">
+							<div class="col-md-4">
+								<label class="control-label required">Rut Usuario : </label>
+							</div>
+							<div class="col-md-8">
+								<input type="text"  value="{$itm->gl_rut}" class="form-control">
+							</div>
+						</div>
+						<div class="clearfix col-md-6">
+							<div class="col-md-4">
+								<label class="control-label required">Previsión : </label>
+							</div>
+							<div class="col-md-8">
+								<input type="text"  value="{$prevision}" class="form-control" readonly>
+							</div>
+						</div>
+					</div>
+				<div class="col-md-12">
+					<div class="clearfix col-md-6">
+						<div class="col-md-4">
+							<label class="control-label required">Nombres : </label>
+						</div>
+						<div class="col-md-8">
+							<input type="text"  value="{$nombres}" class="form-control" readonly>
+						</div>
+					</div>
+					<div class="clearfix col-md-6">
+						<div class="col-md-4">
+							<label class="control-label required">Apellidos : </label>
+						</div>
+						<div class="col-md-8">
+							<input type="text"  value="{$apellidos}" class="form-control" readonly>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="clearfix col-md-6">
+						<div class="col-md-4">
+							<label class="control-label required">Fecha Nacimiento : </label>
+						</div>
+						<div class="col-md-8">
+							<input type="text"  value="{$fecha_nacimiento}" class="form-control" readonly>
+						</div>
+					</div>
+					<div class="clearfix col-md-6">
+						<div class="col-md-4">
+							<label class="control-label required">Edad : </label>
+						</div>
+						<div class="col-md-8">
+							<input type="text"  value="{$edad}" class="form-control" readonly>
+						</div>
+					</div>
+				</div>
+            </div>
+                                                
+            <div class="top-spaced"></div>
+        </div>
+			<input type="hidden" id="id_usuario" name="id_usuario" value="{$itm->id_usuario}" />
 
 			<div class="form-group top-spaced">
 				<label for="gl_rut" class="col-xs-2 control-label clabel">RUT</label>

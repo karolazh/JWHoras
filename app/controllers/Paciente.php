@@ -262,9 +262,6 @@ class Paciente extends Controller {
 									'gl_latitud'			=> $parametros['gl_latitud'],
 									'gl_longitud'			=> $parametros['gl_longitud'],
 									'bo_estado'				=> 1,
-									'fc_ingreso'			=> $parametros['fechaingreso'],
-									'gl_motivo_consulta'	=> $parametros['motivoconsulta'], 
-									'fc_crea'				=> date('Y-m-d h:m:s'),
 									'id_usuario_crea'		=> $_SESSION['id'],
 								);
 			$desabilitadas					= $this->_DAOPacienteDireccion->disabDirecciones($id_paciente);
@@ -322,7 +319,7 @@ class Paciente extends Controller {
 				 $ins_paciente_registro = array('id_paciente'			=> $parametros['id_paciente'],
 												'id_institucion'		=> $parametros['centrosalud'],
 												'gl_hora_ingreso'       => $parametros['horaingreso'],
-												'fc_ingreso'			=> $parametros['fechaingreso'],
+												'fc_ingreso'			=> str_replace("'","",Fechas::formatearBaseDatos(str_replace("'","",$parametros['fechaingreso']))),
 												'gl_motivo_consulta'	=> $parametros['motivoconsulta'], 
 												'fc_crea'				=> date('Y-m-d h:m:s'),
 												'id_usuario_crea'		=> $_SESSION['id'],
@@ -335,9 +332,6 @@ class Paciente extends Controller {
 										'gl_latitud'			=> $parametros['gl_latitud'],
 										'gl_longitud'			=> $parametros['gl_longitud'],
 										'bo_estado'				=> 1,
-										'fc_ingreso'			=> $parametros['fechaingreso'],
-										'gl_motivo_consulta'	=> $parametros['motivoconsulta'], 
-										'fc_crea'				=> date('Y-m-d h:m:s'),
 										'id_usuario_crea'		=> $_SESSION['id'],
 								);
 				if ($parametros['cambio_direccion'] == "1"){

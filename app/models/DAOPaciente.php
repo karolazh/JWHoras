@@ -85,7 +85,7 @@ class DAOPaciente extends Model{
         }
     }
 
-    public function getListaDetalle($where=array()){
+    public function getListaDetalle($parametros=array()){
         $query = "  SELECT
                         paciente.id_paciente,
                         paciente.gl_rut,
@@ -109,14 +109,19 @@ class DAOPaciente extends Model{
                     LEFT JOIN pre_centro_salud i ON i.id_centro_salud = paciente.id_institucion
                     LEFT JOIN pre_comuna c ON c.id_comuna = paciente.id_comuna
                     LEFT JOIN pre_paciente_estado e ON e.id_paciente_estado = paciente.id_paciente_estado";
-
-		if(!empty($where)){
-			foreach($where as $w){
-				$query .= ' WHERE '.$w['campo'].' = '.$w['valor'];
+        $params = array();
+		if(!empty($parametros)){
+            $where = ' WHERE ';
+            
+			foreach($parametros as $campo=>$valor){
+				$where .= ' '.$campo.' = ? AND';
+                $params[] = $valor;
 			}
+            $where = trim($where,'AND');
+            $query .= $where;
 		}
-                
-        $result	= $this->db->getQuery($query);
+
+        $result	= $this->db->getQuery($query,$params);
 
         if($result->numRows>0){
 			return $result->rows;
