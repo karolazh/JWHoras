@@ -121,6 +121,30 @@ class Home extends Controller{
                     
                 }
             }   
+
+            if($_SESSION['perfil'] == 5){
+                $pacientes = $this->_DAOPaciente->getListaDetalle();    
+            }else{
+                $pacientes = $this->_DAOPaciente->getListaDetalle(array('paciente.id_region' => $_SESSION['id_region']));
+            }
+            
+            $arr_violencia = array();
+            $arr_pap = array();
+            if($pacientes){
+                foreach($pacientes as $pac){
+                    if($pac->bo_reconoce){
+                        $arr_violencia[] = $pac; 
+                    }
+
+                    if($pac->nr_examen_alterado > 0){
+                        $arr_pap[] = $pac;
+                    }
+                    
+                }
+            }
+
+            $this->smarty->assign('arr_violencia', $arr_violencia);
+            $this->smarty->assign('arr_pap', $arr_pap);
             
             $jscode = 'Home.graficoEstadosNacional('.json_encode($arr_estados).',"'.$tituloEstadoNacional.'");';
             $jscode .= 'Home.graficoReconoceAbuso('.json_encode($arr_abuso).',"'.$tituloReconoceAbuso.'");';

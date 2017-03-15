@@ -67,117 +67,29 @@
                         <div class="top-spaced"></div>
                     </div>
                 </div>
+                    
+                <div class="col-md-12">
+                    <div class="top-spaced"></div>
+                </div>
 				
                 <!-- EXÁMENES ALTERADOS -->
                 {if $muestra_examenes == "SI"}
-                    <div class="form-group">
-                        <div id="div_tabla" class="table-responsive small col-lg-12">
-                            <label class="control-label"><h5>Ex&aacute;menes Alterados</h5></label>
-                            <br>
-                            {*<table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">*}
-                            <table id="tablaPrincipal" class="table table-hover table-striped table-bordered dataTable no-footer">
-                                <thead>
-                                    <tr role="row">
-                                        <th align="center" width="5%">Fecha</th>
-                                        <th align="center" width="">Examen</th>
-                                        <th align="center" width="">Laboratorio</th>
-                                        <th align="center" width="10%">Resultado</th>                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {foreach $arrExamenes as $exa}
-                                    <tr>
-                                        <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->fc_crea}</td>
-                                        <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->gl_nombre_examen}</td>
-                                        <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->gl_nombre_laboratorio}</td>
-                                        <td style="background: #F7D3D2;"align="center">
-                                            <h6><b><span class="label label-danger" style="color:#ffffff">ALTERADO</span></b></h6>
-                                        </td>
-                                    </tr>
-                                {/foreach}
-                                </tbody>
-                            </table>
-                            <div class="top-spaced"></div>
-                        </div>
-                    </div>
+                    {include file='bitacora/grillaExamenesAlterados.tpl'}
                 {/if}
                 <!-- FIN EXÁMENES ALTERADOS -->
                 
                 <!-- MOTIVOS DE CONSULTA -->
-                <div id="div_tabla" class="table-responsive small col-lg-12">
-                    <label class="control-label"><h5>Atenciones de Urgencia</h5></label>
-                    <br>
-                    {*<table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">*}
-                    <table id="tablaPrincipal" class="table table-hover table-striped table-bordered dataTable no-footer">
-                        <thead>
-                            <tr role="row">
-                                <th align="center" width="10%">Fecha Ing</th>
-                                <th align="center" width="10%">Hora Ing</th>
-                                <th align="center" width="30%">Motivo Consulta</th>
-                                <th align="center" width="30%">Instituci&oacute;n</th>
-                                <th align="center" width="20%">Funcionario</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {foreach $arrMotivosConsulta as $item}
-                            <tr>
-                                <td>{$item->fc_ingreso}</td>
-                                <td>{$item->gl_hora_ingreso}</td>
-                                <td>{$item->gl_motivo_consulta}</td>
-                                <td>{$item->gl_nombre_establecimiento}</td>
-                                <td>{$item->funcionario}</td>
-                            </tr>
-                        {/foreach}
-                        </tbody>
-                    </table>
-                    <div class="top-spaced"></div>
-                </div>
+                {include file='bitacora/grillaConsultas.tpl'}
                 <!-- FIN MOTIVOS DE CONSULTA -->
-                
                             
                 <!-- DIRECCIONES -->
                 {if $muestra_direcciones == "SI"}
-                    <div class="form-group">
-                        <div id="div_tabla" class="table-responsive small col-lg-12">
-                            <br>
-                            <label class="control-label"><h5>Historial de Direcciones</h5></label>
-                            <br>
-                            {*<table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">*}
-                            <table id="tablaPrincipal" class="table table-hover table-striped table-bordered dataTable no-footer">
-                                <thead>
-                                    <th align="center" width="10%">Fecha</th>
-                                    <th align="center" width="20%">Direcci&oacute;n</th>
-                                    <th align="center" width="20%">Comuna</th>
-                                    <th align="center" width="20%">Regi&oacute;n</th>
-                                    <th align="center" width="10%">Estado</th>
-                                    <th align="center" width="20%">Funcionario</th>
-                                </thead>
-                                <tbody>
-                                {foreach $arrDirecciones as $dir}
-                                    <tr>
-                                        <td>{$dir->fc_crea}</td>
-                                        <td>{$dir->gl_direccion}</td>
-                                        <td>{$dir->gl_nombre_comuna}</td>
-                                        <td>{$dir->gl_nombre_region}</td>
-                                        <td align="center">
-                                            {if $dir->bo_estado == 1}
-                                                <h6><b><span class="label label-success small">VIGENTE</span></b></h6>                            
-                                            {else}
-                                                <h6><b><span class="label label-danger small">NO VIGENTE</span></b></h6>
-                                            {/if}
-                                        </td>
-                                        <td>{$dir->funcionario}</td>
-                                    </tr>
-                                {/foreach}
-                                </tbody>
-                            </table>            
-                        </div>
-                    </div>
+                    {include file='bitacora/grillaDirecciones.tpl'}
                 {/if}
                 
             </div>
         </div>
-        
+                
         <div class="top-spaced"></div>
         
         <div class="panel panel-primary">

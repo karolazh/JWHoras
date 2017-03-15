@@ -274,7 +274,7 @@ var Home = {
                   });
                   var id_paciente = response.pacientes[i].id;
                   google.maps.event.addListener(paciente, 'click', function (){
-                      xModal.open(BASE_URI + 'index.php/Paciente/bitacora/' + id_paciente, 'Registro número : ' + id_paciente, 85);
+                      xModal.open(BASE_URI + 'index.php/Bitacora/ver/' + id_paciente, 'Registro número : ' + id_paciente, 85);
                   });
 
 
