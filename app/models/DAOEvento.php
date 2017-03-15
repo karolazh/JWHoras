@@ -23,6 +23,7 @@ class DAOEvento extends Model{
 
     protected $_tabla           = "pre_evento";
     protected $_primaria		= "id_evento";
+    protected $_transaccional	= false;
 
     function __construct()
     {
