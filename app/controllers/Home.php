@@ -120,6 +120,25 @@ class Home extends Controller{
                     
                 }
             }   
+
+            $pacientes = $this->_DAOPaciente->getListaDetalle();
+            $arr_violencia = array();
+            $arr_pap = array();
+            if($pacientes){
+                foreach($pacientes as $pac){
+                    if($pac->bo_reconoce){
+                        $arr_violencia[] = $pac; 
+                    }
+
+                    if($pac->nr_examen_alterado > 0){
+                        $arr_pap[] = $pac;
+                    }
+                    
+                }
+            }
+
+            $this->smarty->assign('arr_violencia', $arr_violencia);
+            $this->smarty->assign('arr_pap', $arr_pap);
             
             $jscode = 'Home.graficoEstadosNacional('.json_encode($arr_estados).',"'.$tituloEstadoNacional.'");';
             $jscode .= 'Home.graficoReconoceAbuso('.json_encode($arr_abuso).',"'.$tituloReconoceAbuso.'");';
