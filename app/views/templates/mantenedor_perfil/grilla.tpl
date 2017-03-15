@@ -12,7 +12,7 @@
 		{foreach from=$arr_data item=itm}
 		<tr>
 			<td>{$itm->id_perfil}</td>
-			<td>{$itm->gl_nombre}</td>
+			<td>{$itm->gl_nombre_perfil}</td>
 			<td>{$itm->gl_descripcion}</td>
 			<td>
 				{if $itm->bo_estado == 1}
