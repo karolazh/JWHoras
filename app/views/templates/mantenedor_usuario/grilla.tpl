@@ -24,7 +24,13 @@
 				{/if}
 			</td>
 			<td>
-				<button type="button" class="btn btn-xs btn-success" title="Editar Perfil" onclick="xModal.open('{$smarty.const.BASE_URI}/mantenedor/editarUsuario/{$itm->id_usuario}','Editar Usuario','70');"><i class="fa fa-edit"></i></button>
+				<button type="button"
+						onclick="xModal.open('{$smarty.const.BASE_URI}/Mantenedor/editarUsuario/{$itm->id_usuario}','Editar Usuario',80);"
+						data-toggle="tooltip"
+						class="btn btn-xs btn-success" 
+						title="Editar Perfil">
+						<i class="fa fa-edit"></i>
+				</button>
 			</td>
 		</tr>
 		{/foreach}

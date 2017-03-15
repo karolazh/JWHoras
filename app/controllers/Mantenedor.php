@@ -41,9 +41,8 @@ class Mantenedor extends Controller{
 
 	/********************************************** USUARIO **********************************************/
 	public function usuario(){
-
-		$this->smarty->assign('arr_data',$this->_DAOUsuario->getLista());
 		
+		$this->smarty->assign('arr_data',$this->_DAOUsuario->getListaJoinPerfil());
 		$this->_display('mantenedor_usuario/bandeja.tpl');
 	}
 
@@ -52,7 +51,6 @@ class Mantenedor extends Controller{
 	}
 
 	public function editarUsuario(){
-
 		$parametros	= $this->request->getParametros();
 		$id_usuario	= $parametros[0];
 		$data		= $this->_DAOUsuario->getById($id_usuario);
@@ -60,7 +58,7 @@ class Mantenedor extends Controller{
 
 		$this->smarty->assign('itm',$data);
 		$this->smarty->assign('perfiles',$perfiles);
-		$this->_display('mantenedor_usuario/editar.tpl');
+		$this->smarty->display('mantenedor_usuario/editar.tpl');
 		$this->load->javascript(STATIC_FILES.'js/templates/mantenedor/mantenedor_usuario.js');
 	}
 
