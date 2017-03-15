@@ -3,10 +3,8 @@
 
 <div class="box-body">
     <div id="div_tabla" class="table-responsive small col-lg-12">
-        <br>
         <label class="control-label"><h5>Ex&aacute;menes Alterados</h5></label>
         <br>
-        {*<table id="tablaPrincipal" class="table table-hover table-striped table-bordered  table-middle dataTable no-footer">*}
         <table id="tablaPrincipal" class="table table-hover table-striped table-bordered dataTable no-footer">
             <thead>
                 <tr role="row">
@@ -19,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-            {foreach $arrExamenesAlt as $exalt}
+            {foreach $arrExamenesAlt as $exa}
                 <tr>
                     <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->fc_crea}</td>
                     <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->gl_nombre_examen}</td>

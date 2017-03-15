@@ -427,88 +427,85 @@ class Paciente extends Controller {
 	 * @author: 
 	 */
 	public function ver() {
+        Acceso::redireccionUnlogged($this->smarty);
+        
 		$parametros		= $this->request->getParametros();
 		$id_registro	= $parametros[0];
-		$info_paciente	= $this->_DAOPaciente->verInfoById($id_registro);
+        $id_paciente	= "";
+        $info_paciente	= $this->_DAOPaciente->verInfoById($id_registro);
 
 		if (!is_null($info_paciente)) {
 			$edad = Fechas::calcularEdadInv($info_paciente->fc_nacimiento);
-			$arrMotivosConsulta = $this->_DAOPacienteRegistro->getByIdPaciente($info_paciente->id_paciente);                        
+            $id_paciente = $info_paciente->id_paciente;
+            
+            $this->smarty->assign('id_paciente', $info_paciente->id_paciente);
+            $this->smarty->assign('rut', $info_paciente->gl_rut);
+            $this->smarty->assign('extranjero', $info_paciente->bo_extranjero);
+            $this->smarty->assign('run_pass', $info_paciente->gl_run_pass);
+            $this->smarty->assign('nombres', $info_paciente->gl_nombres);
+            $this->smarty->assign('apellidos', $info_paciente->gl_apellidos);
+            $this->smarty->assign('fecha_nacimiento', $info_paciente->fc_nacimiento);
+            $this->smarty->assign('sexo', $info_paciente->gl_sexo);
+            //$this->smarty->assign('direccion', $info_paciente->gl_direccion);
+            $this->smarty->assign('fono', $info_paciente->gl_fono);
+            $this->smarty->assign('celular', $info_paciente->gl_celular);
+            $this->smarty->assign('email', $info_paciente->gl_email);
+            $this->smarty->assign('latitud', $info_paciente->gl_latitud);
+            $this->smarty->assign('longitud', $info_paciente->gl_longitud);
+            $this->smarty->assign('reconoce', $info_paciente->bo_reconoce);
+            $this->smarty->assign('acepta', $info_paciente->bo_acepta_programa);
+            $this->smarty->assign('prevision', $info_paciente->gl_nombre_prevision);
+            //$this->smarty->assign('comuna', $info_paciente->gl_nombre_comuna);
+            //$this->smarty->assign('region', $info_paciente->gl_nombre_region);
+            $this->smarty->assign('edad', $edad);
+            $this->smarty->assign('nombre_registrador', $info_paciente->gl_nombre_usuario_crea);
+            $this->smarty->assign('estado_caso', $info_paciente->gl_nombre_estado_caso);
+            $this->smarty->assign('institucion', $info_paciente->gl_nombre_institucion);		
+            $this->smarty->assign('ruta_consentimiento', $info_paciente->gl_path);
+            $this->smarty->assign('bo_fono_seguro', $info_paciente->bo_fono_seguro);
 		}
 		
-		$this->smarty->assign('id_paciente', $info_paciente->id_paciente);
-		$this->smarty->assign('rut', $info_paciente->gl_rut);
-		$this->smarty->assign('extranjero', $info_paciente->bo_extranjero);
-		$this->smarty->assign('run_pass', $info_paciente->gl_run_pass);
-		$this->smarty->assign('nombres', $info_paciente->gl_nombres);
-		$this->smarty->assign('apellidos', $info_paciente->gl_apellidos);
-		$this->smarty->assign('fecha_nacimiento', $info_paciente->fc_nacimiento);
-		$this->smarty->assign('sexo', $info_paciente->gl_sexo);
-		//$this->smarty->assign('direccion', $info_paciente->gl_direccion);
-		$this->smarty->assign('fono', $info_paciente->gl_fono);
-		$this->smarty->assign('celular', $info_paciente->gl_celular);
-		$this->smarty->assign('email', $info_paciente->gl_email);
-		$this->smarty->assign('latitud', $info_paciente->gl_latitud);
-		$this->smarty->assign('longitud', $info_paciente->gl_longitud);
-		$this->smarty->assign('reconoce', $info_paciente->bo_reconoce);
-		$this->smarty->assign('acepta', $info_paciente->bo_acepta_programa);
-		$this->smarty->assign('prevision', $info_paciente->gl_nombre_prevision);
-		//$this->smarty->assign('comuna', $info_paciente->gl_nombre_comuna);
-		//$this->smarty->assign('region', $info_paciente->gl_nombre_region);
-		$this->smarty->assign('edad', $edad);
-		$this->smarty->assign('nombre_registrador', $info_paciente->gl_nombre_usuario_crea);
-		$this->smarty->assign('estado_caso', $info_paciente->gl_nombre_estado_caso);
-		$this->smarty->assign('institucion', $info_paciente->gl_nombre_institucion);
-		$this->smarty->assign('arrMotivosConsulta', $arrMotivosConsulta);
-		$this->smarty->assign('ruta_consentimiento', $info_paciente->gl_path);
-		$this->smarty->assign('bo_fono_seguro', $info_paciente->bo_fono_seguro);
-		
-                /* Caro 08-03-2017 */
-                $id_paciente = $info_paciente->id_paciente;
-                //die($id_paciente);
-                //Dirección Vigente de Paciente
-                $direccion = "";
-                $comuna = "";
-                $provincia = "";
-                $region = "";
-                $detDireccion = $this->_DAOPacienteDireccion->getByIdDireccionVigente($id_paciente);
-                //print_r($detDireccion);
-                //die();
-                if (!is_null($detDireccion)) {
-                    $direccion = $detDireccion->gl_direccion;
-                    $comuna = $detDireccion->gl_nombre_comuna;
-                    $provincia = $detDireccion->gl_nombre_provincia;
-                    $region = $detDireccion->gl_nombre_region;
-                    //die($direccion);
-                }
-                $this->smarty->assign("gl_nombre_comuna", $comuna);
-                $this->smarty->assign("gl_nombre_provincia", $provincia);
-                $this->smarty->assign("gl_nombre_region", $region);
-                $this->smarty->assign("gl_direccion", $direccion);
-                
-                //Grilla Direcciones
-                $muestra_direcciones = "NO";
-                $arrDirecciones = $this->_DAOPacienteDireccion->getByIdDirecciones($id_paciente);
-                //print_r($arrDirecciones);
-                //die();
-                if (!is_null($arrDirecciones)) {
-                    if($arrDirecciones->numRows>1){
-                        $this->smarty->assign('arrDirecciones', $arrDirecciones->rows);
-                        $muestra_direcciones = "SI";
-                    }
-                }
-                $this->smarty->assign("muestra_direcciones", $muestra_direcciones);
-                
-                //Grilla Exámenes Alterados x Paciente
-                $muestra_examenes = "NO";
-                $arrExamenes = $this->_DAOPacienteExamen->getExamenAleradoByIdPaciente($id_paciente);
-                if (!is_null($arrExamenes)) {
-                    $this->smarty->assign('arrExamenes', $arrExamenes);
-                    $muestra_examenes = "SI";
-                }
-                $this->smarty->assign("muestra_examenes", $muestra_examenes);
-                
-                $this->smarty->display('Paciente/ver.tpl');
+        /* Caro 08-03-2017 */
+        //Grilla Atenciones de Urgencia
+        $arrMotivosConsulta = $this->_DAOPacienteRegistro->getByIdPaciente($id_paciente);        
+        
+        //Dirección Vigente de Paciente
+        $detDireccion = $this->_DAOPacienteDireccion->getByIdDireccionVigente($id_paciente);
+        if (!is_null($detDireccion)) {
+            $direccion = $detDireccion->gl_direccion;
+            $comuna = $detDireccion->gl_nombre_comuna;
+            $provincia = $detDireccion->gl_nombre_provincia;
+            $region = $detDireccion->gl_nombre_region;
+        }
+        
+        //Grilla Direcciones
+        $muestra_direcciones = "NO";
+        $arrDirecciones = $this->_DAOPacienteDireccion->getByIdDirecciones($id_paciente);
+        if (!is_null($arrDirecciones)) {
+            if($arrDirecciones->numRows>1){
+                $this->smarty->assign('arrDirecciones', $arrDirecciones->rows);
+                $muestra_direcciones = "SI";
+            }
+        }
+        
+        //Grilla Exámenes Alterados x Paciente
+        $muestra_examenes = "NO";
+        $arrExamenesAlt = $this->_DAOPacienteExamen->getExamenAleradoByIdPaciente($id_paciente);
+        if (!is_null($arrExamenesAlt)) {
+            $this->smarty->assign('arrExamenesAlt', $arrExamenesAlt);
+            $muestra_examenes = "SI";
+        }
+
+        $this->smarty->assign('arrConsultas', $arrMotivosConsulta);
+        $this->smarty->assign("gl_nombre_comuna", $comuna);
+        $this->smarty->assign("gl_nombre_provincia", $provincia);
+        $this->smarty->assign("gl_nombre_region", $region);
+        $this->smarty->assign("gl_direccion", $direccion);
+        $this->smarty->assign("muestra_direcciones", $muestra_direcciones);
+        $this->smarty->assign("muestra_examenes", $muestra_examenes);        
+        /* Fin Caro */
+        
+        $this->smarty->display('Paciente/ver.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/paciente/ver.js");                
 	}
 
@@ -736,7 +733,8 @@ class Paciente extends Controller {
 		$session->tipo_adjunto	= 3;
 		$this->smarty->display('Paciente/cargar_adjunto.tpl');
 	}
-	/**
+	
+    /**
 	 * Descripción: Guarda adjunto
 	 * @author: 
 	 */

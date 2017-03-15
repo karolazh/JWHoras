@@ -176,4 +176,8 @@
             <input type="text" value="{$bo_acepta_programa}" class="form-control" readonly>
         </div>
     </div>
+        
+    <div class="col-md-12">
+        <div class="top-spaced"></div>
+    </div>
 </div>

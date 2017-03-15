@@ -17,7 +17,6 @@
             <div class="form-group">
                 <div class="box-body">
                     <div id="div_tabla" class="table-responsive small col-lg-12">
-                        <br><br>
                         <label class="control-label"><h5>Ex&aacute;menes</h5></label>
                     </div>
                 </div>
