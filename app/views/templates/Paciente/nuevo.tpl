@@ -1,6 +1,5 @@
 <link href="{$base_url}/template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$base_url}/template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-<link href="{$static}/template/plugins/datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css"/>
 
 <section class="content-header">
     <h1><i class="fa fa-plus"></i>Nuevo</h1>

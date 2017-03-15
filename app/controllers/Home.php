@@ -110,17 +110,43 @@ class Home extends Controller{
                     if($registros_paciente){
                         foreach($registros_paciente as $reg_pac){
                             $indice = str_replace('-','',$reg_pac->fc_ingreso);
-                            if(isset($arr_registros_fechas[$indice])){
-                                $arr_registros_fechas[$indice]['total'] = $arr_registros_fechas[$indice]['total'] + 1;
+                            $fecha = explode("-",$reg_pac->fc_ingreso);
+                            if(isset($arr_registros_fechas['fecha_'.$indice])){
+                                $arr_registros_fechas['fecha_'.$indice]['total'] = $arr_registros_fechas['fecha_'.$indice]['total'] + 1;
                             }else{
-                                $arr_registros_fechas[$indice]['fecha'] = $reg_pac->fc_ingreso;
-                                $arr_registros_fechas[$indice]['total'] =  1;
+                                
+                                $arr_registros_fechas['fecha_'.$indice]['fecha'] = $reg_pac->fc_ingreso;
+                                $arr_registros_fechas['fecha_'.$indice]['total'] =  1;
                             }        
                         }
                     }
                     
                 }
             }   
+
+            if($_SESSION['perfil'] == 5){
+                $pacientes = $this->_DAOPaciente->getListaDetalle();    
+            }else{
+                $pacientes = $this->_DAOPaciente->getListaDetalle(array('paciente.id_region' => $_SESSION['id_region']));
+            }
+            
+            $arr_violencia = array();
+            $arr_pap = array();
+            if($pacientes){
+                foreach($pacientes as $pac){
+                    if($pac->bo_reconoce){
+                        $arr_violencia[] = $pac; 
+                    }
+
+                    if($pac->nr_examen_alterado > 0){
+                        $arr_pap[] = $pac;
+                    }
+                    
+                }
+            }
+
+            $this->smarty->assign('arr_violencia', $arr_violencia);
+            $this->smarty->assign('arr_pap', $arr_pap);
             
             $jscode = 'Home.graficoEstadosNacional('.json_encode($arr_estados).',"'.$tituloEstadoNacional.'");';
             $jscode .= 'Home.graficoReconoceAbuso('.json_encode($arr_abuso).',"'.$tituloReconoceAbuso.'");';

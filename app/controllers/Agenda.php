@@ -124,6 +124,7 @@ class Agenda extends Controller {
         
         $this->smarty->assign('arrExamenes', $arrExamenes);
         $this->smarty->display('agenda/ver.tpl');
+		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
 	}
     
     /**

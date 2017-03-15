@@ -28,6 +28,77 @@
 
                     <div class="col-xs-12">
                         <legend>Alarmas</legend>
+                        <div class="row">
+                            <!-- contenedor alarma reconoce violencia -->
+                            <div class="col-xs-12 col-md-6">
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <div class="box-title">Reconoce Violencia</div>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-condensed table-hover table-bordered dataTable paginada" id="tabla-reconoce-violencia">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Días</th>
+                                                        <th>RUT</th>
+                                                        <th>Nombre</th>
+                                                        <th>Comuna</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {if $arr_violencia}
+                                                        {foreach from=$arr_violencia item=item}
+                                                        <tr>
+                                                            <td class="text-center">{$item->nr_dias_primera_visita}</td>
+                                                            <td class="text-center">{$item->gl_identificacion}</td>
+                                                            <td class="text-center">{$item->gl_nombres} {$item->gl_apellidos}</td>
+                                                            <td class="text-center">{$item->gl_nombre_comuna}</td>    
+                                                        </tr>
+                                                        {/foreach}
+                                                    {/if}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- fin alarma reconoce violencia -->
+
+                            <!-- contenedor alarma mamograficas -->
+                            <div class="col-xs-12 col-md-6">
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <div class="box-title">Exámen PAP o Mamografía Alterado</div>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-condensed table-hover table-bordered dataTable paginada" id="tabla-pap-alterado">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Días</th>
+                                                        <th>RUT</th>
+                                                        <th>Nombre</th>
+                                                        <th>Comuna</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {if $arr_violencia}
+                                                        {foreach from=$arr_pap item=item}
+                                                        <tr>
+                                                            <td class="text-center">{$item->nr_dias_primera_visita}</td>
+                                                            <td class="text-center">{$item->gl_identificacion}</td>
+                                                            <td class="text-center">{$item->gl_nombres} {$item->gl_apellidos}</td>
+                                                            <td class="text-center">{$item->gl_nombre_comuna}</td>    
+                                                        </tr>
+                                                        {/foreach}
+                                                    {/if}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- fin contenedor alarma mamograficas -->
+                        </div>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="mapa">

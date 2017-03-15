@@ -23,6 +23,7 @@ class DAOPacienteAgresorViolencia extends Model{
 
     protected $_tabla			= "pre_paciente_agresor_violencia";
     protected $_primaria		= "id_violencia";
+    protected $_transaccional	= false;
 
     function __construct()
     {

@@ -1,6 +1,5 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-<link href="{$static}/template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
 
 <section class="content-header">
     <h1><i class="fa fa-medkit"></i> Detalle Examen</h1>

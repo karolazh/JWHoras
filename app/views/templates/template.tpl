@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{$static}template/dist/css/skins/skin-blue.min.css">
 
     <link rel="stylesheet" href="{$static}css/style.css" type="text/css" />
+<link href="{$static}/template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
