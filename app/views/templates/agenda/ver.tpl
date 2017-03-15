@@ -1,6 +1,3 @@
-
-<link href="{$static}/template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
-
 <link href='{$static}template/plugins/fullcalendar/fullcalendar.min.css' rel='stylesheet' />
 <link href='{$static}template/plugins/fullcalendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
 <script src='{$static}template/plugins/fullcalendar/lib/moment.min.js'></script>
