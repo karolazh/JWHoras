@@ -212,7 +212,7 @@
                                 </div>
                             </div>
                         </div>
-								<input id="redirige_empa" class="redirige_empa" value="0">
+								<input id="redirige_empa" class="redirige_empa hidden" value="0">
                         <div class="form-group">
                             <div id="div_alcoholismo2" style="{if ($bo_consume_alcohol_1 != 'checked')}display: none{/if}">
                                 <div class="col-sm-3"></div>
