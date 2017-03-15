@@ -67,7 +67,9 @@ class DAOPacienteExamen extends Model{
                         examen.gl_resultado_descripcion,
                         date_format(examen.fc_crea,'%d-%m-%Y') AS fc_crea,
                         tipo.gl_nombre_examen,
-                        lab.gl_nombre_laboratorio
+                        lab.gl_nombre_laboratorio,
+                        date_format(examen.fc_toma,'%d-%m-%Y') AS fc_toma,
+                        date_format(examen.fc_resultado,'%d-%m-%Y') AS fc_resultado
                     FROM pre_paciente_examen examen
                     LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
                     LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio 
@@ -95,7 +97,9 @@ class DAOPacienteExamen extends Model{
                         examen.gl_resultado_descripcion,
                         date_format(examen.fc_crea,'%d-%m-%Y') AS fc_crea,
                         tipo.gl_nombre_examen,
-                        lab.gl_nombre_laboratorio
+                        lab.gl_nombre_laboratorio,
+                        date_format(examen.fc_toma,'%d-%m-%Y') AS fc_toma,
+                        date_format(examen.fc_resultado,'%d-%m-%Y') AS fc_resultado
                     FROM pre_paciente_examen examen
                     LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
                     LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio 

@@ -50,15 +50,13 @@ class Bitacora extends Controller {
 		$this->_DAOPacientePlanTratamiento	= $this->load->model("DAOPacientePlanTratamiento");
 	}
 
+    /**
+	 * Descripción: Index Bitacora
+	 * @author Carolina Zamora Hormazábal
+	 */
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
-//
-//		$arr = $this->_DAOPaciente->getListaDetalle();
-//		$this->smarty->assign('arrResultado', $arr);
-//		$this->smarty->assign('titulo', 'Pacientes');
-//
-//		$this->_display('Paciente/index.tpl');
-//		$this->load->javascript(STATIC_FILES . "js/templates/Paciente/index.js");
+        //
 	}
 
 	/**

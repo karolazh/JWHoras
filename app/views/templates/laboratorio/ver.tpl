@@ -2,10 +2,10 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="{$static}/template/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
 
-
 <section class="content-header">
     <h1><i class="fa fa-medkit"></i> Detalle Examen</h1>
     <div class="col-md-12 text-right">
+        {*{if $_SESSION['perfil'] == "1" or $_SESSION['perfil'] == "2" or $_SESSION['perfil'] == "3"}*}
         <button type="button"
                 href='javascript:void(0)' 
                 onClick="habilitarNuevoExamen();" 
@@ -14,6 +14,7 @@
                 class="btn btn-sm btn-flat btn-success">
 			<i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Examen
         </button>&nbsp;
+        {*{/if}*}
         <button type="button"
                 href='javascript:void(0)' 
                 onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$id_paciente}', 'Registro número : {$id_paciente}', 85);" 
@@ -35,107 +36,7 @@
         <div class="top-spaced"></div>
         
         <div class="panel-body">
-            <!-- DATOS DE REGISTRO -->
-            <div class="form-group">
-                <div class="clearfix col-md-6">
-                    <div class="col-md-4">
-                        <label class="control-label">RUT/RUN/Pasaporte : </label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" value="{$run}" class="form-control" readonly>
-                    </div>
-                </div>
-
-                <div class="clearfix col-md-6">
-                    <div class="col-md-4">
-                        <label class="control-label">Nombres : </label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" value="{$nombres}" class="form-control" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="clearfix col-md-6">
-                    <div class="col-md-4">
-                        <label class="control-label">Fecha Nacimiento : </label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" value="{$fc_nacimiento}" class="form-control" readonly>
-                    </div>
-                </div>
-
-                <div class="clearfix col-md-6">
-                    <div class="col-md-4">
-                        <label class="control-label">Edad : </label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" value="{$edad}" class="form-control" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="clearfix col-md-6">
-                    <div class="col-md-4">
-                        <label class="control-label">Sexo : </label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" value="{$gl_sexo}" class="form-control" readonly>
-                    </div>
-                </div>
-
-                <div class="clearfix col-md-6">
-                    <div class="col-md-4">
-                        <label class="control-label">Estado Caso : </label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" value="{$gl_nombre_estado_caso}" class="form-control" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="clearfix col-md-6">
-                    <div class="col-md-4">
-                        <label class="control-label">Previsi&oacute;n : </label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" value="{$gl_nombre_prevision}" class="form-control" readonly>
-                    </div>
-                </div>
-
-                <div class="clearfix col-md-6">
-                    <div class="col-md-4">
-                        <label class="control-label">Grupo : </label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" value="{$gl_grupo_tipo}" class="form-control" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="clearfix col-md-6">
-                    <div class="col-md-4">
-                        <label class="control-label">Reconoce: </label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" value="{$bo_reconoce}" class="form-control" readonly>
-                    </div>
-                </div>
-
-                <div class="clearfix col-md-6">
-                    <div class="col-md-4">
-                        <label class="control-label">Acepta Programa : </label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" value="{$bo_acepta_programa}" class="form-control" readonly>
-                    </div>
-                </div>
-            </div>
-            <!-- FIN DATOS DE REGISTRO -->
+            {include file='bitacora/datosPaciente.tpl'}
             
             <div class="top-spaced"></div>
                 
