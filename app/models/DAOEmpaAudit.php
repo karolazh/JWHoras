@@ -23,7 +23,6 @@ class DAOEmpaAudit extends Model{
 
     protected $_tabla           = "pre_empa_audit";
     protected $_primaria		= "id_audit";
-    protected $_transaccional	= false;
 
     function __construct()
     {

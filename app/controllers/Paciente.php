@@ -570,7 +570,7 @@ class Paciente extends Controller {
 		$json = array();
 
 		if ($registro) {
-			$direcciones	= $this->_DAOPacienteDireccion->getMultByIdPaciente($registro->id_paciente);
+			$direcciones	= $this->_DAOPacienteDireccion->getMultByIdPaciente($registro->id_paciente, false);
 			$info_comuna	= $this->_DAOComuna->getInfoComunaxID($direcciones->row_0->id_comuna);
 			$arrComunas		= $this->_DAORegion->getDetalleByIdRegion($direcciones->row_0->id_region);
 			$arrCentroSalud	= $this->_DAOCentroSalud->getByIdComuna($direcciones->row_0->id_comuna);
