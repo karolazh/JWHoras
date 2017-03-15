@@ -38,6 +38,7 @@ class Administracion extends Controller{
     //funcion construct
     function __construct(){
         parent::__construct();
+		$this->load->lib('Fechas', false);		
         $this->_DAOAdministracion = $this->load->model("DAOAdministracion");
     }
     

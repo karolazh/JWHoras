@@ -36,7 +36,7 @@ class Regiones extends Controller{
 	
 	function __construct(){
 		parent::__construct();
-		
+		$this->load->lib('Fechas', false);
 		$this->_DAORegion = $this->load->model('DAORegion');
         //$this->_DAOComuna = $this->load->model("DAOComuna");
 

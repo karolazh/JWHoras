@@ -24,7 +24,6 @@ class DAOEmpa extends Model{
 
     protected $_tabla		= "pre_empa";
     protected $_primaria	= "id_empa";
-    protected $_transaccional	= false;
     
     function __construct()
     {
@@ -103,6 +102,8 @@ class DAOEmpa extends Model{
     }
 
     public function updateEmpa($parametros){
+		$parametros['fc_empa'] = Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_empa']));
+		$parametros['fc_tomar_pap'] = Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_tomar_pap']));
         $query	= "	UPDATE pre_empa SET
 						id_comuna						= ".$_SESSION['id_comuna'].",
 						gl_sector						= '".$parametros['gl_sector']."',

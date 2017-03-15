@@ -3,9 +3,11 @@
 class Fechas{
 
 	public static function formatearBaseDatos($fecha,$separador="-"){
-		if(empty($fecha)){
+		print_r($fecha);
+		if(empty($fecha) || is_null($fecha)){
 			return '';
 		}
+		print_r($fecha);DIE();
 		if (strpos($fecha, " ") !== false){
 			$time = explode(" ",$fecha);
 			return self::formatearBaseDatos($time[0]) . " " . $time[1];
