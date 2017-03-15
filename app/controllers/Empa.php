@@ -300,6 +300,7 @@ class Empa extends Controller{
 		}
 		$this->smarty->assign("check", $check);
 		//calculo edad
+		$fc_nacimiento = str_replace("'","",Fechas::formatearBaseDatos($fc_nacimiento));
 		list($Y, $m, $d ) = explode("-", $fc_nacimiento);
 		$edad = ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );
 		$this->smarty->assign("edad", $edad);
