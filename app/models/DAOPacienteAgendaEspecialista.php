@@ -3,7 +3,7 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_paciente_plan_tratamiento
+* Descripcion	: Modelo para Tabla pre_paciente_agenda_especialista
 * Plataforma	: !PHP
 * Creacion		: 09/03/2017
 * @name			DAOPacienteAgendaEspecialista.php
@@ -57,10 +57,10 @@ class DAOPacienteAgendaEspecialista extends Model{
 
     public function getByIdPaciente($id_paciente){
         $query	= "	SELECT 
-						plan.*,
+						agenda.*,
 						e.gl_nombre_especialidad
-					FROM pre_paciente_agenda_especialista plan
-						LEFT JOIN pre_tipo_especialidad e ON e.id_tipo_especialidad = plan.id_tipo_especialidad
+					FROM pre_paciente_agenda_especialista agenda
+						LEFT JOIN pre_tipo_especialidad e ON e.id_tipo_especialidad = agenda.id_tipo_especialidad
 					WHERE id_paciente = ?";
 
 		$param	= array($id_paciente);

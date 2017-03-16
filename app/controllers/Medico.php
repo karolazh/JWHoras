@@ -34,10 +34,10 @@ class Medico extends Controller {
 		$this->load->lib('Seguridad', false);
 		$this->load->lib('Evento', false);
 
-		$this->_Evento							= new Evento();
-		$this->_DAOPaciente						= $this->load->model("DAOPaciente");
-		$this->_DAOEmpa							= $this->load->model("DAOEmpa");
-		$this->_DAOTipoEspecialidad				= $this->load->model("DAOTipoEspecialidad");
+		$this->_Evento						= new Evento();
+		$this->_DAOPaciente					= $this->load->model("DAOPaciente");
+		$this->_DAOEmpa						= $this->load->model("DAOEmpa");
+		$this->_DAOTipoEspecialidad			= $this->load->model("DAOTipoEspecialidad");
 		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
 	}
 
