@@ -48,7 +48,7 @@ class Medico extends Controller {
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
 
-		$where[]	= array('campo'=>'bo_acepta_programa','valor'=>1);
+		$where	= array('bo_acepta_programa'=>1);
 		$arr = $this->_DAOPaciente->getListaDetalle($where);
 		$this->smarty->assign('arrResultado', $arr);
 		$this->smarty->assign('titulo', 'Evaluación');

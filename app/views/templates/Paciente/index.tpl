@@ -96,6 +96,15 @@
                                                                         <i class="fa fa-medkit"></i>
                                                                 </button>
                                                                 {/if}
+																{if $mostrar_especialista == 1}
+                                                                <button type="button"
+                                                                        onclick="location.href = '{$base_url}/Medico/plan_tratamiento/{$item->id_paciente}'"
+                                                                        data-toggle="tooltip" 
+                                                                        data-title="Diagnóstico" 
+                                                                        class="btn btn-xs btn-default">
+                                                                        <i class="fa fa-user-md"></i>
+                                                                </button>
+                                                                {/if}
                                                                 <button type="button"
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
@@ -170,6 +179,15 @@
                                                                         <i class="fa fa-medkit"></i>
                                                                 </button>
                                                                 {/if}
+																{if $mostrar_especialista == 1}
+                                                                <button type="button"
+                                                                        onclick="location.href = '{$base_url}/Medico/plan_tratamiento/{$item->id_paciente}'"
+                                                                        data-toggle="tooltip" 
+                                                                        data-title="Diagnóstico" 
+                                                                        class="btn btn-xs btn-default">
+                                                                        <i class="fa fa-user-md"></i>
+                                                                </button>
+                                                                {/if}
                                                                 <button type="button"
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
@@ -194,7 +212,6 @@
                                 </tbody>
                         </table>
                 </div>
-
         </div>
     </div>    
 </section>
