@@ -2,8 +2,10 @@
 <link href="{$base_url}/template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="{$static}/template/plugins/datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css"/>
 
-<form class="form-horizontal" name="form-nuevo" id="form-nuevo" 
-      enctype="multipart/form-data" method="post" >
+<form class="form-horizontal" name="form-agendar" id="form-agendar" method="post">
+    <input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden" />
+    <input type="text" value="{$id_examen}" id="id_examen" name="id_examen" class="hidden" />
+    <input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden" />
     <div class="panel-body">
         <div class="top-spaced"></div>
 
@@ -41,18 +43,16 @@
                     <label class="control-label required col-sm-3">Fecha toma de examen</label>
                     <div class="col-sm-2">
                         <input type="date" class="form-control col-sm-2"                                
-                               name="fc_toma" id="fc_toma">
+                               name="fc_toma" id="fc_toma"
+                               onblur="validarVacio(this, 'Por favor Ingrese Fecha de Agenda'>
                         <span class="help-block hidden fa fa-warning"></span>
                         <span class="help-block hidden"></span>
                     </div>
                     <label for="fc_nacimiento" class="control-label col-sm-2 ">Hora toma de examen</label>
 					<div class="col-sm-2">
-                        <input type="time" name="horaingreso" id="horaingreso" value="{$smarty.now|date_format:"%H:%M"}" onblur="validarVacio(this, 'Por favor Ingrese Fecha y Hora de Ingreso')" placeholder="Fecha y Hora de Ingreso" class="form-control"/>
-                        {*<span class="help-block hidden"></span>*}
-                        
-                        {*<input type="date" class="form-control col-sm-2"                                
-                               name="fc_toma" id="fc_toma">*}
-                        {*<span class="help-block hidden fa fa-warning"></span>*}
+                        <input type="time" name="gl_hora_toma" id="gl_hora_toma" 
+                               class="form-control" value="" 
+                               {*onblur="validarVacio(this, 'Por favor Ingrese Hora de Agenda')"*} />
                         {*<span class="help-block hidden"></span>*}
                     </div>
                 </div>
@@ -78,8 +78,8 @@
                     <div class="col-sm-1"></div>
                     <div class="col-sm-10">
                         <textarea type="text" class="form-control col-sm-10" rows="10" 
-                                  id="gl_observacion" name="gl_observacion"
-                                  placeholder="Ingrese observaci&oacute;n" style="resize: none">{$gl_observacion}</textarea>
+                                  id="gl_observacion" name="gl_observacion_toma"
+                                  placeholder="Ingrese observaci&oacute;n" style="resize: none"></textarea>
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
@@ -90,7 +90,7 @@
     <!-- BOTONERA -->
     <div class="form-group col-sm-11" align="right">
         <button type="button" id="guardar" class="btn btn-success"
-                onclick=""
+                onclick="Agenda.guardarAgenda(this.form)"
                 {*onclick="Laboratorio.guardarNuevoExamen(this.form,this);">*}
             <i class="fa fa-save"></i>  Guardar
         </button>

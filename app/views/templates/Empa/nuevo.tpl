@@ -335,7 +335,7 @@
                                 {*<button type="button" id="verAgendaHipertension" style="{if $gl_pad < 90 and $gl_pas < 140}display: none{/if}" 
                                     class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>*}
                                 <button type="button" id="verAgendaHipertension" style="{if $gl_pad < 90 and $gl_pas < 140}display: none{/if}" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_hipertension}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_hipertension}/{$id_empa}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-file-o"></i> Agenda</button>
                             </div>
@@ -380,7 +380,7 @@
                                 {*<button type="button" id="verAgendaDiabetes"
                                         class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>*}
                                 <button type="button" id="verAgendaDiabetes" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_glicemia}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_glicemia}/{$id_empa}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-file-o"></i> Agenda</button>
                             </div>
@@ -415,7 +415,7 @@
                             <div class="col-sm-2" id="div_vdrl_agenda" style="{if $bo_vdrl_1 != 'checked'}display: none{/if}">
                                 {$botonInformacionAgendaITS}&nbsp;&nbsp;
                                 <button type="button" id="verAgendaVDRL" style="{if $bo_vdrl_1 != 'checked'}display: none{/if}"
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_vdrl}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_vdrl}/{$id_empa}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-file-o"></i> Agenda</button>
                             </div>
@@ -435,7 +435,7 @@
                                 {*<button type="button" id="verAgendaSifilis" style="{if $bo_vdrl_1 != 'checked' and $bo_rpr_1 != 'checked'}display: none{/if}"
                                         class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>*}
                                 <button type="button" id="verAgendaRPR" style="{if $bo_rpr_1 != 'checked'}display: none{/if}"
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_rpr}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_rpr}/{$id_empa}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">
                                     <i class="fa fa-file-o"></i> Agenda</button>
                             </div>
@@ -455,7 +455,7 @@
                                 {*<button type="button" id="verAgendaVIH" style="{if $bo_vih_1 != 'checked'}display: none{/if}"
                                         class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>*}
                                 <button type="button" id="verAgendaVIH" style="{if $bo_vih_1 != 'checked'}display: none{/if}"
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_vih}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_vih}/{$id_empa}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-file-o"></i> Agenda</button>
                             </div>
@@ -534,7 +534,7 @@
                             {*<button type="button" id="verAgendaPap1" 
                                     class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>*}
                             <button type="button" id="verAgendaPap1" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_pap}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_pap}/{$id_empa}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-file-o"></i> Agenda</button>
                         </div>
@@ -591,7 +591,7 @@
                             </div> -->
                             &nbsp;&nbsp;
                             <button type="button" id="verAgendaPap" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_pap}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_pap}/{$id_empa}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-file-o"></i> Agenda</button>
                         </div>
@@ -620,7 +620,7 @@
                                 {*<button type="button" id="verAgendaDislipidemia" style="{if !($gl_colesterol >= 240) }display: none{/if}" 
                                         class="btn btn-sm btn-success"><i class="fa fa-file-o"></i>Agenda</button>*}
                                 <button type="button" id="verAgendaDislipidemia" style="{if !($gl_colesterol >= 240) }display: none{/if}" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_colesterol}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_colesterol}/{$id_empa}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-file-o"></i> Agenda</button>
                             </div>
@@ -721,7 +721,7 @@
                             <div class="col-sm-3" id="div_mamografia_agenda">
                                 {$botonInformacionAgendaMamografia}&nbsp;&nbsp;
                                 <button type="button" id="verAgendaMamografia" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_mamografia}', 'Agenda Registro número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_mamografia}/{$id_empa}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-file-o"></i> Agenda</button>
                             </div> 

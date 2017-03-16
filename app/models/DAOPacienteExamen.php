@@ -158,7 +158,8 @@ class DAOPacienteExamen extends Model{
         }else{
             return NULL;
         }
-    }
+    }   
+    
 }
 
 ?>

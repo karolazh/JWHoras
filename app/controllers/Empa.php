@@ -82,8 +82,10 @@ class Empa extends Controller{
 		$parametros = $this->request->getParametros();
 		$id_paciente = $parametros[0];
 		$this->smarty->assign("id_paciente", $id_paciente);
-		$id_empa = $this->_DAOEmpa->getByIdPaciente($id_paciente);
+		
+        $id_empa = $this->_DAOEmpa->getByIdPaciente($id_paciente);
 		$this->smarty->assign("id_empa", $id_empa->id_empa);
+        
 		/* Obtener id de paciente a través de id de dau */
 		$id_pac = 1;
 		//Cargar Datos Enfermera
