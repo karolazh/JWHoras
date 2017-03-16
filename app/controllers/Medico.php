@@ -25,7 +25,7 @@ class Medico extends Controller {
 	protected $_DAOPaciente;
 	protected $_DAOEmpa;
 	protected $_DAOTipoEspecialidad;
-	protected $_DAOPacientePlanTratamiento;
+	protected $_DAOPacienteAgendaEspecialista;
 
 	function __construct() {
 		parent::__construct();
@@ -38,7 +38,7 @@ class Medico extends Controller {
 		$this->_DAOPaciente					= $this->load->model("DAOPaciente");
 		$this->_DAOEmpa						= $this->load->model("DAOEmpa");
 		$this->_DAOTipoEspecialidad			= $this->load->model("DAOTipoEspecialidad");
-		$this->_DAOPacientePlanTratamiento	= $this->load->model("DAOPacientePlanTratamiento");
+		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
 	}
 
 	/**
@@ -68,7 +68,7 @@ class Medico extends Controller {
 		$parametros			= $this->request->getParametros();
 		$id_paciente		= $parametros[0];
 		$arrEspecialidad	= $this->_DAOTipoEspecialidad->getLista();
-		$arr_plan			= $this->_DAOPacientePlanTratamiento->getByIdPaciente($id_paciente);
+		$arr_plan			= $this->_DAOPacienteAgendaEspecialista->getByIdPaciente($id_paciente);
 		
 		//$resp = $this->_Evento->guardarMostrarUltimo(21,0,$id_paciente,"Plan tratamiento Modificado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		
@@ -92,7 +92,7 @@ class Medico extends Controller {
 		$correcto						= false;
 		$id_paciente					= $parametros['id_paciente'];
 		
-		$id_plan						= $this->_DAOPacientePlanTratamiento->insert($parametros);
+		$id_plan						= $this->_DAOPacienteAgendaEspecialista->insert($parametros);
 		if($id_plan) {
 			$correcto			= true;
 			$arrEspecialidad	= $this->_DAOTipoEspecialidad->getById($parametros['id_tipo_especialidad']);
