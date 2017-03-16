@@ -82,8 +82,10 @@ class Empa extends Controller{
 		$parametros = $this->request->getParametros();
 		$id_paciente = $parametros[0];
 		$this->smarty->assign("id_paciente", $id_paciente);
-		$id_empa = $this->_DAOEmpa->getByIdPaciente($id_paciente);
+		
+        $id_empa = $this->_DAOEmpa->getByIdPaciente($id_paciente);
 		$this->smarty->assign("id_empa", $id_empa->id_empa);
+        
 		/* Obtener id de paciente a través de id de dau */
 		$id_pac = 1;
 		//Cargar Datos Enfermera
@@ -330,6 +332,19 @@ class Empa extends Controller{
 		} else {
 			$mamografia = "display: block";
 		}
+        
+        /* Caro 15-03-2017*/
+        //Exámenes fijos en formulario EMPA
+        $this->smarty->assign("id_glicemia", "1");
+        $this->smarty->assign("id_vdrl", "2");
+        $this->smarty->assign("id_rpr", "3");
+        $this->smarty->assign("id_vih", "4");
+        $this->smarty->assign("id_baciloscopia", "5");
+        $this->smarty->assign("id_pap", "6");
+        $this->smarty->assign("id_colesterol", "7");
+        $this->smarty->assign("id_mamografia", "8");
+        $this->smarty->assign("id_hipertension", "9");
+        /* Fin Caro */
 		
 		$this->smarty->assign("mamografia", $mamografia);
 		$this->smarty->assign("pap", $pap);

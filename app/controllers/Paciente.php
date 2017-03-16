@@ -22,6 +22,7 @@
  */
 class Paciente extends Controller {
 
+	protected $_Evento;
 	protected $_DAORegion;
 	protected $_DAOComuna;
 	protected $_DAOPaciente;
@@ -36,9 +37,8 @@ class Paciente extends Controller {
 	protected $_DAOPacienteExamen;
 	protected $_DAOPacienteDireccion;
 	protected $_DAOEmpaAudit;
-	protected $_Evento;
-	protected $_DAOPacientePlanTratamiento;
 	protected $_DAOCentroSalud;
+	protected $_DAOPacienteAgendaEspecialista;
 
 
 	function __construct() {
@@ -63,7 +63,7 @@ class Paciente extends Controller {
 		$this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
 		$this->_DAOEmpaAudit			= $this->load->model("DAOEmpaAudit");
 		$this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
-		$this->_DAOPacientePlanTratamiento	= $this->load->model("DAOPacientePlanTratamiento");
+		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
 	}
 
 	public function index() {
