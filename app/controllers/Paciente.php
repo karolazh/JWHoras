@@ -22,6 +22,7 @@
  */
 class Paciente extends Controller {
 
+	protected $_Evento;
 	protected $_DAORegion;
 	protected $_DAOComuna;
 	protected $_DAOPaciente;
@@ -36,9 +37,8 @@ class Paciente extends Controller {
 	protected $_DAOPacienteExamen;
 	protected $_DAOPacienteDireccion;
 	protected $_DAOEmpaAudit;
-	protected $_Evento;
-	protected $_DAOPacientePlanTratamiento;
 	protected $_DAOCentroSalud;
+	protected $_DAOPacienteAgendaEspecialista;
 
 
 	function __construct() {
@@ -47,23 +47,24 @@ class Paciente extends Controller {
 		$this->load->lib('Boton', false);
 		$this->load->lib('Seguridad', false);
 		$this->load->lib('Evento', false);
-		$this->_Evento = new Evento();
-		$this->_DAORegion				= $this->load->model("DAORegion");
-		$this->_DAOComuna				= $this->load->model("DAOComuna");
-		$this->_DAOPaciente				= $this->load->model("DAOPaciente");
-		$this->_DAOTipoEgreso			= $this->load->model("DAOTipoEgreso");
-		$this->_DAOPrevision			= $this->load->model("DAOPrevision");
-		$this->_DAOPacienteRegistro		= $this->load->model("DAOPacienteRegistro");
-		$this->_DAOEvento				= $this->load->model("DAOEvento");
-		$this->_DAOEventoTipo			= $this->load->model("DAOEventoTipo");
-		$this->_DAOAdjunto				= $this->load->model("DAOAdjunto");
-		$this->_DAOAdjuntoTipo			= $this->load->model("DAOAdjuntoTipo");
-		$this->_DAOEmpa					= $this->load->model("DAOEmpa");
-		$this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
-		$this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
-		$this->_DAOEmpaAudit			= $this->load->model("DAOEmpaAudit");
-		$this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
-		$this->_DAOPacientePlanTratamiento	= $this->load->model("DAOPacientePlanTratamiento");
+		$this->_Evento					= new Evento();
+
+		$this->_DAORegion						= $this->load->model("DAORegion");
+		$this->_DAOComuna						= $this->load->model("DAOComuna");
+		$this->_DAOPaciente						= $this->load->model("DAOPaciente");
+		$this->_DAOTipoEgreso					= $this->load->model("DAOTipoEgreso");
+		$this->_DAOPrevision					= $this->load->model("DAOPrevision");
+		$this->_DAOPacienteRegistro				= $this->load->model("DAOPacienteRegistro");
+		$this->_DAOEvento						= $this->load->model("DAOEvento");
+		$this->_DAOEventoTipo					= $this->load->model("DAOEventoTipo");
+		$this->_DAOAdjunto						= $this->load->model("DAOAdjunto");
+		$this->_DAOAdjuntoTipo					= $this->load->model("DAOAdjuntoTipo");
+		$this->_DAOEmpa							= $this->load->model("DAOEmpa");
+		$this->_DAOPacienteExamen				= $this->load->model("DAOPacienteExamen");
+		$this->_DAOPacienteDireccion			= $this->load->model("DAOPacienteDireccion");
+		$this->_DAOEmpaAudit					= $this->load->model("DAOEmpaAudit");
+		$this->_DAOCentroSalud					= $this->load->model("DAOCentroSalud");
+		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
 	}
 
 	public function index() {

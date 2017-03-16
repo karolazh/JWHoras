@@ -6,7 +6,7 @@
 * Descripcion	: Modelo para Tabla pre_paciente_plan_tratamiento
 * Plataforma	: !PHP
 * Creacion		: 09/03/2017
-* @name			DAOPacientePlanTratamiento.php
+* @name			DAOPacienteAgendaEspecialista.php
 * @version		1.0
 * @author		Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
@@ -19,10 +19,10 @@
 *****************************************************************************
 */
 
-class DAOPacientePlanTratamiento extends Model{
+class DAOPacienteAgendaEspecialista extends Model{
 
-    protected $_tabla			= "pre_paciente_plan_tratamiento";
-    protected $_primaria		= "id_plan_tratamiento";
+    protected $_tabla			= "pre_paciente_agenda_especialista";
+    protected $_primaria		= "id_agenda_especialista";
     protected $_transaccional	= false;
 
     function __construct()
@@ -59,7 +59,7 @@ class DAOPacientePlanTratamiento extends Model{
         $query	= "	SELECT 
 						plan.*,
 						e.gl_nombre_especialidad
-					FROM pre_paciente_plan_tratamiento plan
+					FROM pre_paciente_agenda_especialista plan
 						LEFT JOIN pre_tipo_especialidad e ON e.id_tipo_especialidad = plan.id_tipo_especialidad
 					WHERE id_paciente = ?";
 
