@@ -74,12 +74,14 @@
                                                                         data-title="Ver Registro">
                                                                         <i class="fa fa-search"></i>
                                                                 </button>
+																{if $mostrar_especialista != 1}
                                                                 <button type="button" 
                                                                         class="btn btn-xs btn-success" 
                                                                         onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_paciente}';" 
                                                                         data-toggle="tooltip" data-title="Formulario EMPA">
                                                                         <i class="fa fa-book"></i>
                                                                 </button>
+																{/if}
                                                                 {if $item->bo_reconoce == 0}
                                                                         <button type="button" class="btn btn-xs btn-danger" 
                                                                                 onClick="location.href='{$base_url}/Reconoce/identificarAgresor/{$item->id_paciente}';"
@@ -157,12 +159,14 @@
                                                                         data-title="Ver Registro">
                                                                         <i class="fa fa-search"></i>
                                                                 </button>
+																{if $mostrar_especialista != 1}
                                                                 <button type="button" 
                                                                         class="btn btn-xs btn-success" 
                                                                         onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_paciente}';" 
                                                                         data-toggle="tooltip" data-title="Formulario EMPA">
                                                                         <i class="fa fa-book"></i>
                                                                 </button>
+																{/if}
                                                                 {if $item->bo_reconoce == 0}
                                                                         <button type="button" class="btn btn-xs btn-danger" 
                                                                                 onClick="location.href='{$base_url}/Reconoce/identificarAgresor/{$item->id_paciente}';"
