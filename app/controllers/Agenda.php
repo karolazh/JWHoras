@@ -60,8 +60,32 @@ class Agenda extends Controller {
         //Grilla Exámenes x Paciente
         $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
         
+        //Genera string de fechas pa calendario
+        $arrAgenda = "";
+        if (!is_null($arrExamenes)) {
+            foreach($arrExamenes as $item){
+                $descripcion = "Toma Examen ". $item->gl_nombre_examen;
+                $fecha = $item->fc_toma_calendar;
+                
+                if (!is_null($item->gl_hora_toma)){
+                    $hora = $item->gl_hora_toma;                    
+                } else {
+                    $hora = "";
+                }
+                $arrAgenda = $arrAgenda.$descripcion.",".$fecha.",".$hora.";";
+                //$arrAgenda = $arrAgenda.$hora." ".$descripcion.",".$fecha.";";
+                
+                if (!is_null($item->fc_resultado_calendar)){
+                    $descripcion_result = "Resultado Examen ". $item->gl_nombre_examen;
+                    $fecha_result = $item->fc_resultado_calendar;
+                    //$arrAgenda = $arrAgenda.$descripcion_result.",".$fecha_result.";";
+                    $arrAgenda = $arrAgenda.$descripcion_result.",".$fecha_result.",;";
+                }                
+			}
+        }
+        
         //Datos de Paciente
-        $detPaciente = $this->_DAOPaciente->getByIdPaciente($id_paciente);        
+        $detPaciente = $this->_DAOPaciente->getByIdPaciente($id_paciente);
         if (!is_null($detPaciente)) {            
             $run = "";
             if ($detPaciente->bo_extranjero == 0) {
@@ -123,6 +147,7 @@ class Agenda extends Controller {
         }
         
         $this->smarty->assign('arrExamenes', $arrExamenes);
+        $this->smarty->assign('arrAgenda', $arrAgenda);
         $this->smarty->display('agenda/ver.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
 	}
