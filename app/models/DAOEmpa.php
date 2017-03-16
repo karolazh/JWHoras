@@ -207,7 +207,7 @@ class DAOEmpa extends Model{
 	
 	public function updateFinalizado($parametros){
         $query	= "	UPDATE pre_empa SET
-						bo_finalizado					= ".$parametros['bo_finalizado']."
+						bo_finalizado	= 1
 					WHERE id_empa = ".$parametros['id_empa']."
                     ";
 
