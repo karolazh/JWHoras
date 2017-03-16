@@ -31,7 +31,7 @@
 		protected $_DAOPacienteExamen;
 		protected $_DAOPacienteDireccion;
 		protected $_Evento;
-		protected $_DAOPacientePlanTratamiento;
+		protected $_DAOPacienteAgendaEspecialista;
 		protected $_DAOTipoVinculo;
 		protected $_DAOComuna;
 		protected $_DAOPacienteAgresorViolencia;
@@ -54,7 +54,7 @@
 			$this->_DAOEmpa							= $this->load->model("DAOEmpa");
 			$this->_DAOPacienteExamen				= $this->load->model("DAOPacienteExamen");
 			$this->_DAOPacienteDireccion			= $this->load->model("DAOPacienteDireccion");
-			$this->_DAOPacientePlanTratamiento		= $this->load->model("DAOPacientePlanTratamiento");
+			$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
 			$this->_DAOComuna						= $this->load->model("DAOComuna");
 			$this->_DAOPacienteAgresorViolencia		= $this->load->model("DAOPacienteAgresorViolencia");
 			$this->_DAOTipoViolencia				= $this->load->model("DAOTipoViolencia");
@@ -253,7 +253,7 @@
 				$this->smarty->assign('arrAdjuntos', $arrAdjuntos);
 
 				//Plan Tratamiento
-				$arr_plan = $this->_DAOPacientePlanTratamiento->getByIdPaciente($id_paciente);
+				$arr_plan = $this->_DAOPacienteAgendaEspecialista->getByIdPaciente($id_paciente);
 				$this->smarty->assign("arr_plan", $arr_plan);
 
 				//Dirección Vigente de Paciente
