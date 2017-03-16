@@ -31,7 +31,8 @@ class Loader{
                 
             }
         } else {
-            throw new Exception('Error de modelo '.$e->getMessage());
+            print_r($pathModel);
+            throw new Exception('<br>Error al cargar el modelo.');
             Error::errorLog($e->getMessage(),Error::SYSTEM_ERROR);
         }
     }
@@ -59,7 +60,7 @@ class Loader{
 
         } else {
             print_r($pathLibrary);
-            throw new Exception('Error al cargar libreria');
+            throw new Exception('<br>Error al cargar libreria');
             Error::errorLog($e->getMessage(),Error::SYSTEM_ERROR);
         }
     }
@@ -86,7 +87,8 @@ class Loader{
             }
 
         } else {
-            throw new Exception('Error al cargar libreria');
+            print_r($pathLibrary);
+            throw new Exception('<br>Error al cargar libreria');
             Error::errorLog($e->getMessage(),Error::SYSTEM_ERROR);
         }
     }
