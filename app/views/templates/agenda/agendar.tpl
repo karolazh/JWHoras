@@ -44,9 +44,8 @@
                     <div class="col-sm-2">
                         <input type="date" class="form-control col-sm-2"                                
                                name="fc_toma" id="fc_toma"
-                               onblur="validarVacio(this, 'Por favor Ingrese Fecha de Agenda'>
-                        <span class="help-block hidden fa fa-warning"></span>
-                        <span class="help-block hidden"></span>
+                               {*onblur="validarVacio(this, 'Por favor Ingrese Fecha de Agenda')"*} />
+                        {*<span class="help-block hidden"></span>*}
                     </div>
                     <label for="fc_nacimiento" class="control-label col-sm-2 ">Hora toma de examen</label>
 					<div class="col-sm-2">
@@ -78,7 +77,7 @@
                     <div class="col-sm-1"></div>
                     <div class="col-sm-10">
                         <textarea type="text" class="form-control col-sm-10" rows="10" 
-                                  id="gl_observacion" name="gl_observacion_toma"
+                                  id="gl_observacion_toma" name="gl_observacion_toma"
                                   placeholder="Ingrese observaci&oacute;n" style="resize: none"></textarea>
                     </div>
                     <div class="col-sm-1"></div>
@@ -94,10 +93,10 @@
                 {*onclick="Laboratorio.guardarNuevoExamen(this.form,this);">*}
             <i class="fa fa-save"></i>  Guardar
         </button>
-        {*&nbsp;
+        &nbsp;
         <button type="button" id="cancelar"  class="btn btn-default" 
-                onclick="deshabilitarNuevoExamen()">
+                onclick="xModal.close()">
             <i class="fa fa-remove"></i>  Cancelar
-        </button>*}
+        </button>
     </div>
 </form>

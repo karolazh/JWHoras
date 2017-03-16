@@ -37,6 +37,7 @@
     <div class="top-spaced"></div>
     
     <div class="panel panel-primary">
+        <input type="text" value="{$arrAgenda}" id="arrAgenda" name="arrAgenda" class="hidden" />
         <div class="panel-heading">
             Calendario
         </div>
