@@ -107,23 +107,45 @@
             </div>
             <div class="form-group">
                 <label class="control-label required col-sm-3">Fecha toma de examen</label>
-                <div class="col-sm-2">
+                <div class='col-sm-2'>
+						    <div class="input-group">
+								<input type='text' class="form-control datepicker col-sm-2"
+									   id='fc_toma' 
+									   name='fc_toma'
+									   />
+								<span class="help-block hidden fa fa-warning"></span>
+								<span class="input-group-addon" onClick="$('#fc_toma').focus();"><i class="fa fa-calendar" ></i></span>
+								
+							</div>
+				</div>
+<!--			<div class="col-sm-2">
                     <input type="date" class="form-control col-sm-2" 
                            {*onblur="validarVacio(this, 'Por favor Ingrese Fecha')" *}
                            name="fc_toma" id="fc_toma">
                     <span class="help-block hidden fa fa-warning"></span>
                     {*<span class="help-block hidden"></span>*}
-                </div>
+                </div> -->
             </div>
             <div class="form-group">
                 <label class="control-label required col-sm-3">Fecha resultado de examen</label>
-                <div class="col-sm-2">
+                <div class='col-sm-2'>
+						    <div class="input-group">
+								<input type='text' class="form-control datepicker col-sm-2"
+									   id='fc_resultado' 
+									   name='fc_resultado'
+									   />
+								<span class="help-block hidden fa fa-warning"></span>
+								<span class="input-group-addon" onClick="$('#fc_resultado').focus();"><i class="fa fa-calendar" ></i></span>
+								
+							</div>
+				</div>
+<!--				<div class="col-sm-2">
                     <input type="date" class="form-control col-sm-2" 
                            {*onblur="validarVacio(this, 'Por favor Ingrese Fecha')" *}
                            name="fc_resultado" id="fc_resultado">
                     <span class="help-block hidden fa fa-warning"></span>
                     {*<span class="help-block hidden"></span>*}
-                </div>
+                </div>-->
             </div>
                 <div class="form-group">
                 <label class="control-label required col-sm-3">Resultado examen</label>
