@@ -75,6 +75,7 @@ class DAOPacienteExamen extends Model{
                         date_format(examen.fc_toma,'%Y-%m-%d') AS fc_toma_calendar,
                         date_format(examen.fc_resultado,'%Y-%m-%d') AS fc_resultado_calendar
                     FROM pre_paciente_examen examen
+                    LEFT JOIN pre_empa empa ON (empa.id_empa = examen.id_empa AND empa.bo_finalizado = 0)
                     LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
                     LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio 
                     WHERE examen.id_paciente = ?
@@ -105,6 +106,7 @@ class DAOPacienteExamen extends Model{
                         date_format(examen.fc_toma,'%d-%m-%Y') AS fc_toma,
                         date_format(examen.fc_resultado,'%d-%m-%Y') AS fc_resultado
                     FROM pre_paciente_examen examen
+                    LEFT JOIN pre_empa empa ON (empa.id_empa = examen.id_empa AND empa.bo_finalizado = 0)
                     LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
                     LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio 
                     WHERE examen.id_paciente = ?
@@ -141,13 +143,14 @@ class DAOPacienteExamen extends Model{
                         (SELECT COUNT(*) FROM pre_paciente_examen paciente_examen 
                          WHERE paciente_examen.id_paciente = pac.id_paciente
                          AND paciente_examen.gl_resultado = 'A') AS nr_examen_alterado,
-                        datediff(now(), pac.fc_crea) AS nr_dias_primera_visita
-                    FROM pre_paciente pac -- , pre_paciente_examen AS pac_examen
+                        datediff(now(), pac.fc_crea) AS nr_dias_primera_visita,
+                        pac_examen.id_empa
+                    FROM pre_paciente pac
                     INNER JOIN pre_paciente_examen pac_examen ON pac_examen.id_paciente = pac.id_paciente
-                    -- LEFT JOIN pre_centro_salud i ON i.id_centro_salud = pac.id_institucion
-                    LEFT JOIN pre_centro_salud cs ON cs.id_centro_salud = pac.id_centro_salud
-                    LEFT JOIN pre_comuna com ON com.id_comuna = pac.id_comuna
-                    LEFT JOIN pre_paciente_estado est ON est.id_paciente_estado = pac.id_paciente_estado";
+                    LEFT JOIN  pre_empa empa ON (empa.id_empa = pac_examen.id_empa AND empa.bo_finalizado = 0)
+                    LEFT JOIN  pre_centro_salud cs ON cs.id_centro_salud = pac.id_centro_salud
+                    LEFT JOIN  pre_comuna com ON com.id_comuna = pac.id_comuna
+                    LEFT JOIN  pre_paciente_estado est ON est.id_paciente_estado = pac.id_paciente_estado";
 
 		if(!empty($where)){
 			foreach($where as $w){
