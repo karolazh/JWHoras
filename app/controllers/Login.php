@@ -24,7 +24,8 @@
 *--------------
 *!cProgramador					!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
-*<orlando.vazquezl@cosof.cl>	06-05-2017	Modificación referencias a DAO's de acuerdo a nueva estructura de BD.
+*<orlando.vazquezl@cosof.cl>	06-03-2017	Modificación referencias a DAO's de acuerdo a nueva estructura de BD.
+*<victor.retamal@cosof.cl>		17-03-2017	Add id_user_cambio e id_laboratorio a la session
 -----------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
@@ -111,10 +112,11 @@ class Login extends Controller {
 				}
 
 				$_SESSION['id']				= $usuario->id_usuario;
-				$_SESSION['id_user_cambio']	= 1;
+				$_SESSION['id_user_cambio']	= 0;
 				$_SESSION['perfil']			= $usuario->id_perfil;
 				$_SESSION['id_tipo_grupo']	= $usuario->id_tipo_grupo;
 				$_SESSION['id_institucion']	= $usuario->id_institucion;
+				$_SESSION['id_laboratorio']	= $usuario->id_laboratorio;
 				$_SESSION['nombre']			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
 				$_SESSION['rut']			= $usuario->gl_rut;
 				$_SESSION['mail']			= $usuario->gl_email;
@@ -227,6 +229,7 @@ class Login extends Controller {
 					$_SESSION['perfil']			= $usuario->id_perfil;
 					$_SESSION['id_tipo_grupo']	= $usuario->id_tipo_grupo;
 					$_SESSION['id_institucion']	= $usuario->id_institucion;
+					$_SESSION['id_laboratorio']	= $usuario->id_laboratorio;
 					$_SESSION['nombre']			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
 					$_SESSION['rut']			= $usuario->gl_rut;
 					$_SESSION['mail']			= $usuario->gl_email;
