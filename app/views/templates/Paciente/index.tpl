@@ -189,7 +189,7 @@
                                                                         data-toggle="tooltip" 
                                                                         data-title="Diagnóstico" 
                                                                         class="btn btn-xs btn-default">
-                                                                        <i class="fa fa-user-md"></i>
+                                                                        <i class="fa fa-file-text"></i>
                                                                 </button>
                                                                 {/if}
                                                                 <button type="button"
