@@ -53,9 +53,11 @@ var Agenda = {
                 contentType : false,
                 success : function(response){
                     if(response.correcto == true){
-                        xModal.success("OK: El paciente fue agendado", function(){
+						$('#verAgenda_' + id_examen).hide();
+						$('#verExamen_' + id_examen).show();
+                        xModal.success("OK: El paciente fue agendado" + $('#verExamen_' + id_examen).val(), function(){
                             xModal.closeAll();
-                        });                        
+                        });
                     }
                     else{
                         xModal.danger("ERROR: El paciente NO fue agendado",function(){
