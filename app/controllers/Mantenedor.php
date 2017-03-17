@@ -62,25 +62,26 @@ class Mantenedor extends Controller{
 	}
 
 	public function editarUsuarioBD(){
-		$id_usuario	= $_POST['id_usuario'];
-		$id_perfil	= $_POST['id_perfil'];
+		header('Content-type: application/json');
+		$id_usuario	= $this->_request->getParam("id_usuario");
+		$id_perfil	= $this->_request->getParam("id_perfil");
 		//$bo_estado	= $_POST['bo_estado'];
 		//$parameters	= array('id_perfil'=>$id_perfil, 'bo_estado'=>$bo_estado);
-		$parameters	= array('id_perfil'=>$id_perfil);
-		$estado		= $this->_DAOPerfil->_update($parameters, $id_usuario);
-
+		$estado		= $this->_DAOUsuario->update(array("id_perfil" => $id_perfil), $id_usuario, "id_usuario");
 		if($estado){
-			$json['estado']	= true;
-			$json['mensaje']= 'Los datos han sido Actualizados correctamente.';
+			$correcto	= true;
+			$mensaje = 'Los datos han sido Actualizados correctamente.';
 		}else{
-			$json['estado']	= false;
-			$json['mensaje']= '<b>Hubo un problema al Actualizar.</b><br>Favor intentar nuevamente o contactarse con Soporte.';
+			$correcto	= false;
+			$mensaje= 'Hubo un problema al Actualizar.</b><br>Favor intentar nuevamente o contactarse con Soporte.';
 		}
 
-		echo json_encode($json);
+		$salida = array("correcto" => $correcto, "mensaje" => $mensaje);
+        $json = Zend_Json::encode($salida);
+        echo $json;
 	}
 
-	public function updateGrillaUsuario(){		
+	public function updateGrillaUsuario(){
 		$this->smarty->assign('arr_data',$this->_DAOUsuario->getLista());
 		echo $this->view->fetch('mantenedor_usuario/grilla.tpl');
 	}
