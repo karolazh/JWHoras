@@ -43,12 +43,14 @@
                     {*<span class="help-block hidden fa fa-warning"></span>*}
                 </div>
                 <div class="col-sm-1">
-                    <span class="btn btn-xs btn-warning infoTip" 
-                          data-pos="pull-right" 
-                          data-titulo="Agregar Examen" 
-                          data-texto="En desarrollo">
-                        <li class="fa fa-plus-circle"></li>
-                    </span>
+                    <button type="button"
+                            href='javascript:void(0)' 
+                            onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}//{$id_centro_salud}/', 'Agenda Registro número : {$id_paciente}', 85);" 
+                            data-toggle="tooltip" 
+                            title="Nuevo Examen"
+                            class="btn btn-sm btn-flat btn-warning">
+                        <i class="fa fa-plus-circle"></i>
+                    </button>
                 </div>
             </div>
         </div>

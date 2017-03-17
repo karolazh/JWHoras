@@ -126,6 +126,7 @@ class Login extends Controller {
 				$_SESSION['id_region']		= $usuario->id_region;
 				$_SESSION['primer_login']	= $primer_login;
 				$_SESSION['autenticado']	= TRUE;
+                $_SESSION['laboratorio']	= $usuario->id_laboratorio;
 
 				if ($recordar == 1) {
 					setcookie('datos_usuario_carpeta', $usuario->id_usuario, time() + 365 * 24 * 60 * 60);
