@@ -74,12 +74,14 @@
                                                                         data-title="Ver Registro">
                                                                         <i class="fa fa-search"></i>
                                                                 </button>
+																{if $mostrar_especialista != 1}
                                                                 <button type="button" 
                                                                         class="btn btn-xs btn-success" 
                                                                         onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_paciente}';" 
                                                                         data-toggle="tooltip" data-title="Formulario EMPA">
                                                                         <i class="fa fa-book"></i>
                                                                 </button>
+																{/if}
                                                                 {if $item->bo_reconoce == 0}
                                                                         <button type="button" class="btn btn-xs btn-danger" 
                                                                                 onClick="location.href='{$base_url}/Reconoce/identificarAgresor/{$item->id_paciente}';"
@@ -94,6 +96,15 @@
                                                                         data-title="Plan Tratamiento" 
                                                                         class="btn btn-xs btn-default">
                                                                         <i class="fa fa-medkit"></i>
+                                                                </button>
+                                                                {/if}
+																{if $mostrar_especialista == 1}
+                                                                <button type="button"
+                                                                        onclick="location.href = '{$base_url}/Medico/plan_tratamiento/{$item->id_paciente}'"
+                                                                        data-toggle="tooltip" 
+                                                                        data-title="Diagnóstico" 
+                                                                        class="btn btn-xs btn-default">
+                                                                        <i class="fa fa-user-md"></i>
                                                                 </button>
                                                                 {/if}
                                                                 <button type="button"
@@ -148,12 +159,14 @@
                                                                         data-title="Ver Registro">
                                                                         <i class="fa fa-search"></i>
                                                                 </button>
+																{if $mostrar_especialista != 1}
                                                                 <button type="button" 
                                                                         class="btn btn-xs btn-success" 
                                                                         onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_paciente}';" 
                                                                         data-toggle="tooltip" data-title="Formulario EMPA">
                                                                         <i class="fa fa-book"></i>
                                                                 </button>
+																{/if}
                                                                 {if $item->bo_reconoce == 0}
                                                                         <button type="button" class="btn btn-xs btn-danger" 
                                                                                 onClick="location.href='{$base_url}/Reconoce/identificarAgresor/{$item->id_paciente}';"
@@ -170,6 +183,15 @@
                                                                         <i class="fa fa-medkit"></i>
                                                                 </button>
                                                                 {/if}
+																{if $mostrar_especialista == 1}
+                                                                <button type="button"
+                                                                        onclick="location.href = '{$base_url}/Medico/plan_tratamiento/{$item->id_paciente}'"
+                                                                        data-toggle="tooltip" 
+                                                                        data-title="Diagnóstico" 
+                                                                        class="btn btn-xs btn-default">
+                                                                        <i class="fa fa-user-md"></i>
+                                                                </button>
+                                                                {/if}
                                                                 <button type="button"
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
@@ -178,7 +200,6 @@
                                                                         <i class="fa fa-info-circle"></i>
                                                                 </button>
                                                                 <button type="button"
-                                                                        onclick="location.href = '{$base_url}/Agenda/ver/{$item->id_paciente}'"
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/ver/{$item->id_paciente}', 'Agenda Examen Paciente : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
                                                                         data-title="Agenda Examen"
@@ -194,7 +215,6 @@
                                 </tbody>
                         </table>
                 </div>
-
         </div>
     </div>    
 </section>

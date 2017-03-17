@@ -7,23 +7,26 @@ $("#guardar").on('click', function (e) {
 	
 	//Validar Caracterizacion de Violencia
 	var cant_pre = $('#cant_pre').val();
-	var bool_caracterizacion_violencia = false;
+	var bool_tipo_violencia = false;
+	var bool_tipo_riesgo = false;
 	for (i = 1; i <= cant_pre; i++) {
 		valor = $('input:radio[name=id_tipo_violencia_' + i + ']:checked').val();
 		if (valor != 1 && valor != 2 && valor != 3 && valor != 4) {
-			bool_caracterizacion_violencia = true;
+			bool_tipo_violencia = true;
 		}
 	}
 	if (!$('#id_tipo_riesgo_1').is(':checked') && !$('#id_tipo_riesgo_2').is(':checked') && !$('#id_tipo_riesgo_3').is(':checked') && !$('#id_tipo_riesgo_4').is(':checked')) {
-			bool_caracterizacion_violencia = true;
+			bool_tipo_riesgo = true;
 		}
 	//Validar Rut/Run/Pasaporte Agresor
 	if ((!$('#chkextranjero').is(':checked')) && gl_rut_agresor == '') {
 		xModal.danger('- El campo RUT de Agresor es Obligatorio');
 	} else if ($('#chkextranjero').is(':checked') && gl_run_pass_agresor == ''){
 		xModal.danger('- El campo RUN/Pasaporte de Agresor es Obligatorio');
-	} else if (bool_caracterizacion_violencia){
-		xModal.danger('- El cuadro Caracterización de Violencia es Obligatorio');
+	} else if (bool_tipo_violencia){
+		xModal.danger('- El cuadro Tipo de Violencia es Obligatorio');
+	} else if (bool_tipo_riesgo){
+		xModal.danger('- El Tipo de Riesgo es Obligatorio');
 	} else {
 		//Validar Vacios y otros
 		//Datos Pacientes para UPDATE
