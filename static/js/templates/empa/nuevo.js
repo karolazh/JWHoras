@@ -159,6 +159,16 @@ $(".bo_fuma").on('change', function (e) {
 	}
 });
 
+// Si Edita Peso -> IMC se borra
+$("#gl_peso").keyup(function (e) {
+	$('#gl_imc').val('');
+});
+
+// Si Edita Estatura -> IMC se borra
+$("#gl_estatura").keyup(function (e) {
+	$('#gl_imc').val('');
+});
+
 //HIPERTENSION = 9
 //Si PAS es >= 140 o PAD >= 90 Activar Funcionalidad de Agenda de Profesional
 $("#gl_pas").on('keyup', function (e) {

@@ -1,4 +1,10 @@
-{foreach $opciones as $opcion}    
+{if $smarty.session.id_user_cambio != 0}
+	<li>
+		<a href="{$base_url}/mantenedor/volver_usuario/"><i class="fa fa-undo"></i> <span>Volver a mi Usuario</span></a>
+	</li>
+{/if}
+{foreach $opciones as $opcion}  
+  
 	{if $opcion->id_opcion_padre == 0 AND !$opcion->bo_tiene_hijo}
 	<li>
 		<a href="{$base_url}{$opcion->gl_url}"><i class="{$opcion->gl_icono}"></i> <span>{$opcion->gl_nombre_opcion}</span></a>
