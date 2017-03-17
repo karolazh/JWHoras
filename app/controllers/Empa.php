@@ -603,23 +603,7 @@ class Empa extends Controller{
 			return FALSE;
 		}
 		
-		if ($parametros['bo_trabajadora_reclusa'] == 1 && $parametros['bo_vdrl'] == 'NULL') {
-			return FALSE;
-		}
-		
-		if ($parametros['bo_trabajadora_reclusa'] == 1 && $parametros['bo_rpr'] == 'NULL') {
-			return FALSE;
-		}
-		
-		if ($parametros['bo_trabajadora_reclusa'] == 1 && $parametros['bo_vih'] == 'NULL') {
-			return FALSE;
-		}
-		
 		if ($parametros['bo_tos_productiva'] == 'NULL') {
-			return FALSE;
-		}
-		
-		if ($parametros['bo_tos_productiva'] == 1 && $parametros['bo_baciloscopia_toma'] == 'NULL') {
 			return FALSE;
 		}
 		
@@ -627,7 +611,7 @@ class Empa extends Controller{
 			return FALSE;
 		}
 		
-		if ($parametros['bo_pap_realizado'] == 0 && $parametros['fc_tomar_pap'] == 'NULL' && 
+		if ($parametros['bo_pap_realizado'] == 0 && 
 			$parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0){
 			return FALSE;
 		}
@@ -650,11 +634,7 @@ class Empa extends Controller{
 			return FALSE;
 		}
 		
-		if ($parametros['bo_mamografia_requiere'] == 1 && $parametros['bo_mamografia_resultado'] == 'NULL' && $parametros['bo_embarazo'] == 0) {
-			return FALSE;
-		}
-		
-		if ($parametros['bo_mamografia_realizada'] == 1 && $parametros['bo_embarazo'] == 0 && ($parametros['fc_mamografia_mes'] == 'NULL' || $parametros['fc_mamografia_mes'] == 'NULL' ||
+		if ($parametros['bo_mamografia_realizada'] == 1 && $parametros['bo_embarazo'] == 0 && ($parametros['fc_mamografia_mes'] == 'NULL' || $parametros['fc_mamografia_ano'] == 'NULL' ||
 			$parametros['bo_mamografia_vigente'] == 'NULL' || $parametros['bo_mamografia_resultado_pasado'] == 'NULL')) {
 			return FALSE;
 		}

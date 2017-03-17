@@ -131,7 +131,6 @@ class DAOEmpa extends Model{
 						bo_baciloscopia_toma			= ".$parametros['bo_baciloscopia_toma'].",
 						bo_pap_realizado				= ".$parametros['bo_pap_realizado'].",
 						bo_pap_resultado				= ".$parametros['bo_pap_resultado'].",
-						fc_tomar_pap					= ".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_tomar_pap'])).",
 						fc_ultimo_pap_ano				= ".$parametros['fc_ultimo_pap_ano'].",	
 						fc_ultimo_pap_mes				= ".$parametros['fc_ultimo_pap_mes'].",	
 						bo_pap_vigente					= ".$parametros['bo_pap_vigente'].",

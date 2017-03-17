@@ -282,7 +282,7 @@
                                        value="{$gl_circunferencia_abdominal}" placeholder="" class="form-control"/>
                                 <span class="help-block hidden"></span>
                             </div>
-                            <div class="col-sm-1">  
+                            <div class="col-sm-2">  
                                 <div>
                                     {$botonAyudaCircunferenciaAbdominal}
                                 </div>
