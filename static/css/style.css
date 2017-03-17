@@ -3397,3 +3397,10 @@ table.dataTable tbody > tr > td {
 		border-color: #a3aba3;
 	}
 }
+
+.navbar-nav>.user-menu>.dropdown-menu>li.user-header
+{
+	height:130px !important;
+	padding:10px;
+	text-align:center
+}
