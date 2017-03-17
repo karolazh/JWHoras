@@ -100,7 +100,7 @@
                                                                 {/if}
 																{if $mostrar_especialista == 1}
                                                                 <button type="button"
-                                                                        onclick="location.href = '{$base_url}/Medico/plan_tratamiento/{$item->id_paciente}'"
+                                                                        onclick="location.href = '{$base_url}/Especialista/diagnostico/{$item->id_paciente}'"
                                                                         data-toggle="tooltip" 
                                                                         data-title="Diagnóstico" 
                                                                         class="btn btn-xs btn-default">
@@ -185,7 +185,7 @@
                                                                 {/if}
 																{if $mostrar_especialista == 1}
                                                                 <button type="button"
-                                                                        onclick="location.href = '{$base_url}/Medico/plan_tratamiento/{$item->id_paciente}'"
+                                                                        onclick="location.href = '{$base_url}/Especialista/diagnostico/{$item->id_paciente}'"
                                                                         data-toggle="tooltip" 
                                                                         data-title="Diagnóstico" 
                                                                         class="btn btn-xs btn-default">

@@ -74,7 +74,7 @@ class Paciente extends Controller {
 		$this->smarty->assign('titulo', 'Pacientes');
 
 		$this->_display('Paciente/index.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/Paciente/index.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/paciente/index.js");
 	}
 
 	/**
