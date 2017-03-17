@@ -35,6 +35,36 @@
 				</div>
 
 				<div class="top-spaced"></div>
+				
+				<div class="form-group">
+					<label for="cie10" class="control-label col-sm-2">CIE10 (*)</label>
+					<div class="col-sm-4">
+						<select class="form-control" id="cie10" name="cie10">
+							<option value="0">Seleccione CIE10</option>
+							{*foreach $arrMes as $item}
+								<option value="{$item->id_mes}" >{$item->gl_mes}</option>
+							{/foreach*}
+						</select>
+					</div>
+					<div class="col-sm-1"></div>
+				</div>
+
+				<div class="top-spaced"></div>
+				
+				<div class="form-group">
+					<label for="cie10" class="control-label col-sm-2">CIE10 (*)</label>
+					<div class="col-sm-4">
+						<select class="form-control" id="cie10" name="cie10">
+							<option value="0">Seleccione CIE10</option>
+							{*foreach $arrMes as $item}
+								<option value="{$item->id_mes}" >{$item->gl_mes}</option>
+							{/foreach*}
+						</select>
+					</div>
+					<div class="col-sm-1"></div>
+				</div>
+
+				<div class="top-spaced"></div>
 
 				<div class="form-group">
 					<label for="gl_diagnostico" class="control-label col-sm-2 ">Diagnóstico (*)</label>
@@ -57,11 +87,6 @@
 								placeholder="Ingrese una Observación" style="resize: none"></textarea>
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
-					<div class="col-sm-1">
-						<button type="button" id="verAgenda" class="btn btn-sm btn-success">
-							<i class="fa fa-file-o"></i>Agenda
-						</button>
-					</div>
 					<div class="col-sm-1"></div>
 				</div>
 
@@ -70,7 +95,11 @@
 				<div class="form-group clearfix col-sm-10 text-right">
 					<button type="button" id="guardar" class="btn btn-success">
 						<i class="fa fa-save"></i>  Guardar
-					</button>&nbsp;&nbsp;<button type="button" id="cancelar"  class="btn btn-default" 
+					</button>&nbsp;&nbsp; 
+					<button type="button" id="reagendar" class="btn btn-success">
+						<i class="fa fa-file-o"></i>  Re Agendar
+					</button>&nbsp;&nbsp;
+					<button type="button" id="cancelar"  class="btn btn-default" 
 							onclick="location.href = '{$base_url}/Especialista/'">
 						<i class="fa fa-remove"></i>  Cancelar
 					</button>

@@ -199,6 +199,7 @@
                                                                         class="btn btn-xs btn-primary">
                                                                         <i class="fa fa-info-circle"></i>
                                                                 </button>
+																{if $mostrar_especialista != 1}
                                                                 <button type="button"
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/ver/{$item->id_paciente}', 'Agenda Examen Paciente : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
@@ -206,6 +207,16 @@
                                                                         class="btn btn-xs btn-warning">
                                                                         <i class="fa fa-calendar"></i>
                                                                 </button>
+																{/if}
+																{if $mostrar_especialista == 1}
+                                                                <button type="button"
+                                                                        onClick="" 
+                                                                        data-toggle="tooltip" 
+                                                                        data-title="ReAgendar"
+                                                                        class="btn btn-xs btn-warning">
+                                                                        <i class="fa fa-calendar"></i>
+                                                                </button>
+																{/if}
                                                         </td>
                                                 </tr>
                                                         
