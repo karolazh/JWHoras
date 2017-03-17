@@ -2,6 +2,7 @@
         
         var agenda = new Array();
         var arrAgenda = $('#arrAgenda').val();
+        
         if (arrAgenda != "") {
             arrAgenda = arrAgenda.substring(0,arrAgenda.length-1);
             var arrayAgenda = arrAgenda.split(';');
