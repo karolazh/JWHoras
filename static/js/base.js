@@ -379,3 +379,70 @@
                 });
             });
 
+/*
+	$("#btnCambioRapido").click(function () {
+		var userID = $('#users').val();
+		$.get(siteUrl + "session/impersonar/userID/" + userID)
+			.done(function(data) {
+				window.location.href = siteUrl; //"/home_emergencias/index";
+			}).fail(function(data) { });
+	});
+
+	$(".btnCambioUsuario").livequery(function(){
+		$(this).unbind( "click" );
+        $(this).click(function(e){
+			var userID = $(this).attr("data");
+			bootbox.confirm({
+				message: "¿ Confirma el reemplazo de usuario ?",
+				buttons: {
+					confirm: {
+						label: 'Si',
+						className: 'btn-success'
+					},
+					cancel: {
+						label: 'No',
+						className: 'btn-danger'
+					}
+				},
+				callback: function (result) {
+						if(result){
+							$.get(siteUrl + "session/impersonar/userID/" + userID)
+								.done(function(data) {
+									window.location.href = siteUrl; //"/Home/dashboard";
+								}).fail(function(data) {
+								});
+						}
+				}
+			});
+        });
+    });
+
+	$(".btnCambioUsuarioVolver").livequery(function(){
+		$(this).unbind( "click" );
+        $(this).click(function(e){
+			var userID = $(this).attr("data");
+			bootbox.confirm({
+				message: "¿ Confirma desactivar el reemplazo de usuario ?",
+				buttons: {
+					confirm: {
+						label: 'Si',
+						className: 'btn-success'
+					},
+					cancel: {
+						label: 'No',
+						className: 'btn-danger'
+					}
+				},
+				callback: function (result) {
+						if(result){
+							$.get(siteUrl + "session/impersonar/userID/" + userID)
+								.done(function(data) {
+									window.location.href = siteUrl; //"/Home/dashboard";
+								}).fail(function(data) {
+								});
+						}
+				}
+			});
+        });
+    });
+	*/
