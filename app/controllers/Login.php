@@ -121,6 +121,7 @@ class Login extends Controller {
 				$_SESSION['comuna']			= $usuario->gl_nombre_comuna;
 				$_SESSION['provincia']		= $usuario->gl_nombre_provincia;
 				$_SESSION['region']			= $usuario->gl_nombre_region;
+				$_SESSION['id_region']		= $usuario->id_region;
 				$_SESSION['id_comuna']		= $usuario->id_comuna;
 				$_SESSION['id_provincia']	= $usuario->id_provincia;
 				$_SESSION['id_region']		= $usuario->id_region;
