@@ -1,6 +1,6 @@
 <div class="modal-body">
 	<div class="col-xs-12">
-		<form class="form-horizontal">
+		<form id="form" class="form-horizontal">
 			<input type="hidden" id="id_perfil" name="id_perfil" value="{$itm->id_perfil}" />
 
 			<div class="form-group top-spaced">

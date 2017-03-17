@@ -1,8 +1,7 @@
 
-var Mantenedor_usuario = {
+var Mantenedor_perfil = {
 
-	editarUsuario : function(form,btn){
-		btn.disabled	= true;
+	agregarPerfil : function(form,btn){
 		//$(form).submit();
         var parametros = $("#form").serialize();
         $.ajax({         
@@ -11,15 +10,16 @@ var Mantenedor_usuario = {
             async		: true,
             data		: parametros,
             type		: "post",
-            url			: BASE_URI + "index.php/Mantenedor/editarUsuarioBD", 
+            url			: BASE_URI + "index.php/Mantenedor/agregarPerfilBD", 
             error		: function(xhr, textStatus, errorThrown){
-							xModal.info('Error al Actualizar el usuario.');
+							xModal.info('Error al Actualizar el perfil.');
+							alert(errorThrown);
             },
             success		: function(data){
 							if(data.correcto){
 								xModal.success(data.mensaje);
 								setTimeout(function () {
-									location.href = BASE_URI + "index.php/Mantenedor/usuario";
+									location.href = BASE_URI + "index.php/Mantenedor/perfil";
 								}, 2000);
 							} else {
 								xModal.info(data.mensaje);

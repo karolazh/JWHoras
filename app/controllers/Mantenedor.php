@@ -106,12 +106,14 @@ class Mantenedor extends Controller{
 	}
 
 	public function agregarPerfilBD(){
-		$gl_nombre		= $_POST['gl_nombre'];
-		$gl_descripcion	= $_POST['gl_descripcion'];
-		$arr_opcion		= $_POST['arr_opcion'];
+		header('Content-type: application/json');
+		$parametros = $this->_request->getParams();
+		print_r($parametros);DIE;
+		//$gl_nombre		= $_POST['gl_nombre_perfil'];
+		//$gl_descripcion	= $_POST['gl_descripcion_perfil'];
+		//$arr_opcion		= $_POST['arr_opcion'];
 		$parameters		= array('gl_nombre'=>$gl_nombre,'gl_descripcion'=>$gl_descripcion,'id_usuario_creador'=>Session::getSession('id_usuario'));
-		
-		$id_perfil		= $this->_daoMaestroPerfil->_insert($parameters);
+		$id_perfil		= $this->_DAOPerfil->_insert($parameters);
 
 		foreach($arr_opcion as $id_opcion){
 			$param		= array('id_perfil'=>$id_perfil,'id_opcion'=>$id_opcion,'id_usuario_creador'=>Session::getSession('id_usuario'));
@@ -125,7 +127,7 @@ class Mantenedor extends Controller{
 			$json['estado']	= false;
 			$json['mensaje']= '<b>Hubo un problema al Actualizar.</b><br>Favor intentar nuevamente o contactarse con Soporte.';
 		}
-
+		print_r(json_encode($json));DIE();
 		echo json_encode($json);
 	}
 
