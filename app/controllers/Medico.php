@@ -55,7 +55,7 @@ class Medico extends Controller {
 		$this->smarty->assign('mostrar_plan', 1);
 
 		$this->_display('Paciente/index.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/Paciente/index.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/paciente/index.js");
 	}
 
 	/**

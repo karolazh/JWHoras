@@ -110,6 +110,8 @@ class Empa extends Controller{
 		$fc_nacimiento = date("d/m/Y", strtotime($fc_nacimiento));
 		$this->smarty->assign("fc_nacimiento", $fc_nacimiento);
 		$reconoce = $registro->bo_reconoce;
+        /* Caro 17-03-2017: guarda centro de salud para carga de laboratorios */
+        $this->smarty->assign("id_centro_salud", $registro->id_centro_salud);
 
 		//Cargar Datos DAU Examen
 		//INICIO

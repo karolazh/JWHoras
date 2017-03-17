@@ -59,7 +59,31 @@ class Especialista extends Controller {
 		$this->smarty->assign('titulo', 'Pacientes derivados a Especialista');
 
 		$this->_display('Paciente/index.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/Paciente/index.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/especialista/diagnostico.js");
+	}
+	
+	/**
+	* Descripción: Cargar Formulario de Diagnostico
+	* @author: David Guzmán <david.guzman@cosof.cl>
+	*/
+	public function diagnostico(){
+		Acceso::redireccionUnlogged($this->smarty);
+
+		$parametros			= $this->request->getParametros();
+		$id_paciente		= $parametros[0];
+		
+		//$resp = $this->_Evento->guardarMostrarUltimo(21,0,$id_paciente,"Plan tratamiento Modificado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
+		
+		$this->smarty->assign("id_paciente", $id_paciente);
+		$this->smarty->assign("botonAyudaTratamiento", Boton::botonAyuda('Ingrese Datos del Diagnóstico.', '', 'pull-right'));
+
+		$this->_display('Especialista/diagnostico.tpl');
+		$this->load->javascript(STATIC_FILES . "js/templates/medico/nuevo.js");
+		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
+	}
+	
+	public function GuardarDiagnostico(){
+		
 	}
 	
 }
