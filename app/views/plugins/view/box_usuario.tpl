@@ -9,22 +9,25 @@
     <ul class="dropdown-menu">
         <!-- The user image in the menu -->
         <li class="user-header">
-            <i  class="fa fa-user fa-3x img-circle" alt="User Image"></i>
+            <i  class="fa fa-user fa-3x img-circle"></i>
             <p>
-                {*{$usuario} <br/> {$rut}*}
                 <a href="{$smarty.const.BASE_URI}/Login/actualizar" class="h4">
-                    {$usuario} <br/> {$rut}
+                    {$usuario} <br/> {$gl_nombre_perfil}
                 </a>
             </p>
         </li>
 
         <!-- Menu Footer-->
         <li class="user-footer">
-            {*<div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
-            </div>*}
             <div class="pull-right">
-                <a href="{$smarty.const.BASE_URI}/Login/logoutUsuario" class="btn btn-success btn-flat">Cerrar Sesión</a>
+				 {if $id_perfil == 1}
+				<a onclick="xModal.open('{$smarty.const.BASE_URI}/mantenedor/cambiar_usuario/{$id_usuario}','Cambiar de Usuario','70');" class="btn btn-info btn-sm">
+					<i class="fa fa-exchange"></i> Cambiar de Usuario
+				</a>
+				 {/if}
+                <a href="{$smarty.const.BASE_URI}/Login/logoutUsuario" class="btn btn-danger btn-sm">
+					<i class="fa fa-sign-out"></i> Cerrar Sesión
+				</a>
             </div>
         </li>
     </ul>
