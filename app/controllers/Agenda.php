@@ -171,18 +171,47 @@ class Agenda extends Controller {
         $id_examen = $parametros[3];        
         
         //Combo Laboratorios
-        $arrLaboratorios = $this->_DAOLaboratorio->getLista();
+        //$arrLaboratorios = $this->_DAOLaboratorio->getLista();
+        $arrLaboratorios = $this->_DAOLaboratorio->getByIdCentroSalud($id_centro_salud);
         //Combos Tipo Examen
         $arrTipoExamen = $this->_DAOTipoExamen->getLista();
         
         $this->smarty->assign("id_paciente", $id_paciente);
-        $this->smarty->assign("id_examen", $id_examen);
         $this->smarty->assign("id_empa", $id_empa);
+        $this->smarty->assign("id_centro_salud", $id_centro_salud);
+        $this->smarty->assign("id_examen", $id_examen);
         
         $this->smarty->assign('arrLaboratorios', $arrLaboratorios);
         $this->smarty->assign('arrTipoExamen', $arrTipoExamen);
         $this->smarty->display('agenda/agendar.tpl');
         $this->load->javascript(STATIC_FILES . 'js/templates/agenda/ver.js');        
+    }
+    
+    /**
+	 * Descripción: Ver Agenda de Examenes
+	 * @author Carolina Zamora Hormazábal
+	 */
+    public function nuevo() {
+        Acceso::redireccionUnlogged($this->smarty);
+		$sesion = New Zend_Session_Namespace("usuario_carpeta");
+        
+        $parametros = $this->request->getParametros();
+        $id_paciente = $parametros[0];
+        $id_centro_salud = $parametros[1];
+        
+        //Combo Laboratorios
+        $arrLaboratorios = $this->_DAOLaboratorio->getByIdCentroSalud($id_centro_salud);
+        
+        //Combos Tipo Examen
+        $arrTipoExamen = $this->_DAOTipoExamen->getLista();
+        
+        $this->smarty->assign("id_paciente", $id_paciente);
+        $this->smarty->assign("id_centro_salud", $id_centro_salud);
+        
+        $this->smarty->assign('arrLaboratorios', $arrLaboratorios);
+        $this->smarty->assign('arrTipoExamen', $arrTipoExamen);
+        $this->smarty->display('agenda/nuevo.tpl');
+        $this->load->javascript(STATIC_FILES . 'js/templates/agenda/ver.js');
     }
     
     /**
