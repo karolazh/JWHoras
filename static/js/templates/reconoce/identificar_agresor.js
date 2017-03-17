@@ -24,9 +24,9 @@ $("#guardar").on('click', function (e) {
 	} else if ($('#chkextranjero').is(':checked') && gl_run_pass_agresor == ''){
 		xModal.danger('- El campo RUN/Pasaporte de Agresor es Obligatorio');
 	} else if (bool_tipo_violencia){
-		xModal.danger('- El cuadro Tipo de Violencia es Obligatorio');
+		xModal.danger('- El Tipo de Violencia es Obligatorio');
 	} else if (bool_tipo_riesgo){
-		xModal.danger('- El Tipo de Riesgo es Obligatorio');
+		xModal.danger('- El Nivel de Riesgo es Obligatorio');
 	} else {
 		//Validar Vacios y otros
 		//Datos Pacientes para UPDATE
