@@ -9,8 +9,8 @@
                     <th align="center" width="10%">Fecha Registro</th>
                     <th align="center" width="30%">Examen</th>
                     <th align="center" width="30%">Laboratorio</th>
-                    <th align="center" width="10%">Fecha Toma Muestra</th>
-                    <th align="center" width="10%">Fecha Resultado Muestra</th>
+                    <th align="center" width="10%">Fecha Toma Examen</th>
+                    <th align="center" width="10%">Fecha Resultado Examen</th>
                     <th align="center" width="10%">Resultado</th>
                 </tr>
             </thead>
