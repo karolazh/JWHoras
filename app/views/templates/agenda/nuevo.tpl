@@ -4,9 +4,7 @@
 
 <form class="form-horizontal" name="form-agendar" id="form-agendar" method="post">
     <input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden" />
-    <input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden" />
     <input type="text" value="{$id_centro_salud}" id="id_centro_salud" name="id_centro_salud" class="hidden" />
-    <input type="text" value="{$id_examen}" id="id_examen" name="id_examen" class="hidden" />
     <div class="panel-body">
         <div class="top-spaced"></div>
         {*{$id_centro_salud}*}
@@ -19,8 +17,7 @@
                 <div class="form-group">
                     <label class="control-label required col-sm-3">Tipo de Examen</label>
                     <div class="col-sm-3">
-                        <select id="examen" name="examen" for="examen" 
-                                class="form-control" readonly
+                        <select id="examen" name="examen" for="examen" class="form-control"
                                 onblur="validarVacio(this, 'Por favor Seleccione un Examen')">
                             <option  value="0">Seleccione un Examen</option>
                                 {foreach $arrTipoExamen as $examen}
@@ -46,7 +43,7 @@
                     <label class="control-label required col-sm-3">Laboratorios</label>
                     <div class="col-sm-3">
                         <select id="laboratorio" name="laboratorio" 
-                                for="laboratorio" class="form-control" readonly
+                                for="laboratorio" class="form-control"
                                 onblur="validarVacio(this, 'Por favor Seleccione un Laboratorio')">
                             <option  value="0">Seleccione un Laboratorio</option>
                                 {foreach $arrLaboratorios as $lab}

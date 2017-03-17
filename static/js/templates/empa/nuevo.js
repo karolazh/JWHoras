@@ -26,10 +26,6 @@ $("#form").ready(function () {
 		$("#fc_mamografia_mes option[value="+ $("#mamografia_mes").val() +"]").attr("selected",true);
 	}
 	
-    if ($("#bo_mamografia_toma").is(':checked')){
-        $("#bo_mamografia_requiere_1").prop('checked', true);
-    }
-	
 });
 
 //Poner Mensaje en span segun Puntos de AUDIT
@@ -116,7 +112,6 @@ function calculaIMC()
 	//Si IMC es mayor a 30 Mostrar Diabetes
 	if (imc > 30) {
 		$("#glicemia").show();
-		$("#antecedentes").hide();
 	}
         //funcion mensaje span IMC
         mensajeIMC(imc);
@@ -164,6 +159,17 @@ $(".bo_fuma").on('change', function (e) {
 	}
 });
 
+// Si Edita Peso -> IMC se borra
+$("#gl_peso").keyup(function (e) {
+	$('#gl_imc').val('');
+});
+
+// Si Edita Estatura -> IMC se borra
+$("#gl_estatura").keyup(function (e) {
+	$('#gl_imc').val('');
+});
+
+//HIPERTENSION = 9
 //Si PAS es >= 140 o PAD >= 90 Activar Funcionalidad de Agenda de Profesional
 $("#gl_pas").on('keyup', function (e) {
 	if ($("#gl_pad").val() >= 90 || $("#gl_pas").val() >= 140) {
@@ -182,15 +188,16 @@ $("#gl_pad").on('keyup', function (e) {
 
 // Si tiene Antecedentes de Diabetes Mellitus mostrar/ocultar Examen Glicemia
 $(".bo_antecedente").on('change', function (e) {
-	if ($('#bo_antecedente_0').is(':checked')) {
+	if ($('#bo_antecedente_0').is(':checked') && $('#gl_imc').val() < 30 && $('#nr_edad').val() < 41) {
 		$('#glicemia').hide();
-                $('#group_glicemia').hide();
+        $('#group_glicemia').hide();
 	} else {
 		$('#glicemia').show();
-                $('#group_glicemia').show();
+        $('#group_glicemia').show();
 	}
 });
 
+//GLICEMIA = 1
 //(Si Examen de Glicemia es = 100-125 mh/dl consejería alimentacion) (Si valor >= 126 Referir confirmación diagnóstica)
 $("#gl_glicemia").on('keyup', function (e) {
 	if ($("#gl_glicemia").val() >= 100 && $("#gl_glicemia").val() <= 125) {
@@ -199,10 +206,10 @@ $("#gl_glicemia").on('keyup', function (e) {
 		$('#div_glicemia_toma').hide();
 	}
 	if ($("#gl_glicemia").val() > 125) {
-		$('#verAgendaDiabetes').show();
+		$('#verAgenda_1').show();
 		$('#div_glicemia_agenda').show();
 	} else {
-		$('#verAgendaDiabetes').hide();
+		$('#verAgenda_1').hide();
 		$('#div_glicemia_agenda').hide();
 	}
 });
@@ -220,40 +227,41 @@ $(".bo_trabajadora_reclusa").on('change', function (e) {
 	}
 });
 
+//VDRL = 2  ,  RPR = 3  ,  VIH = 4
 //Si VDRL o RPR es positivo -> Activar Funcionalidad de Agenda para ITS
-$(".bo_rpr").on('change', function (e) {
+/*$(".bo_rpr").on('change', function (e) {
 
-	if ((!$('#bo_rpr_1').is(':checked')) && (!$('#bo_vdrl_1').is(':checked'))) {
-		$('#verAgendaSifilis').hide();
-		$('#div_ITS_agenda').hide();
+	if (!$('#bo_rpr_1').is(':checked')) {
+		$('#verAgenda_3').hide();
+		$('#div_rpr_agenda').hide();
 	} else {
-		$('#verAgendaSifilis').show();
-		$('#div_ITS_agenda').show();
+		$('#verAgenda_3').show();
+		$('#div_rpr_agenda').show();
 	}
 });
 
 $(".bo_vdrl").on('change', function (e) {
 
-	if ((!$('#bo_rpr_1').is(':checked')) && (!$('#bo_vdrl_1').is(':checked'))) {
-		$('#verAgendaSifilis').hide();
-		$('#div_ITS_agenda').hide();
+	if (!$('#bo_vdrl_1').is(':checked')) {
+		$('#verAgenda_2').hide();
+		$('#div_vdrl_agenda').hide();
 	} else {
-		$('#verAgendaSifilis').show();
-		$('#div_ITS_agenda').show();
+		$('#verAgenda_2').show();
+		$('#div_vdrl_agenda').show();
 	}
 });
 
 $(".bo_vih").on('change', function (e) {
 
 	if ((!$('#bo_vih_1').is(':checked'))) {
-		$('#verAgendaVIH').hide();
+		$('#verAgenda_4').hide();
 		$('#div_vih_agenda').hide();
 	} else {
-		$('#verAgendaVIH').show();
+		$('#verAgenda_4').show();
 		$('#div_vih_agenda').show();
 	}
 });
-
+*/
 //Si ha tenido Tos por + 15 dias -> mostrar Baciloscopia
 $(".bo_tos_productiva").on('change', function (e) {
 
@@ -267,19 +275,18 @@ $(".bo_tos_productiva").on('change', function (e) {
 //Se ha realizado PAP? Si -> Muestra ultima fecha ; No -> Muestra Input para tomar fecha
 $(".bo_pap_realizado").on('change', function (e) {
 	if ($('#bo_pap_realizado_0').is(':checked')) {
-		$('#tomar_fecha').show();
 		$('#ultimo_pap').hide();
 		$('#resultado_pap').hide();
 		$('#pap_vigente').hide();
 
 	} else {
-		$('#tomar_fecha').hide();
 		$('#resultado_pap').show();
 		$('#ultimo_pap').show();
 		$('#pap_vigente').show();
 	}
 });
 
+//PAP = 6
 //PAP Vigente? (automático Calculando si es <=3 años) SI -> Vigente   NO -> No Vigente (Tomar hora para otro)
 $("#fc_ultimo_pap_ano").on('change', function (e) {
         if ($("#fc_ultimo_pap_ano").val() == 0 || $("#fc_ultimo_pap_mes").val() == 0) {
@@ -298,7 +305,7 @@ $("#fc_ultimo_pap_ano").on('change', function (e) {
 				$('#tomar_fecha').show();
             }
             $('#pap_vigente').show();
-            $('#verAgendaPap1').show();
+            $('#verAgenda_6').show();
         }
 });
 $("#fc_ultimo_pap_mes").on('change', function (e) {
@@ -318,7 +325,7 @@ $("#fc_ultimo_pap_mes").on('change', function (e) {
 				$('#tomar_fecha').show();
             }
             $('#pap_vigente').show();
-            $('#verAgendaPap1').show();
+            $('#verAgenda_6').show();
         }
 });
 $(".bo_pap_vigente").on('change', function (e) {
@@ -329,24 +336,26 @@ $(".bo_pap_vigente").on('change', function (e) {
 		$('#tomar_fecha').show();
 	}
 });
-//Si valor colesterlo >= 200 y < 239 (Consejería Alimentaria y Actividad Fisica
+
+//COLESTEROL = 7
+//Si valor colesterol >= 200 y < 239 (Consejería Alimentaria y Actividad Fisica
 //Si valor colesterol >= 240 (Referir a confirmación diagnóstica
 $("#gl_colesterol").on('keyup', function (e) {
 	var valor_colesterol = $('#gl_colesterol').val();
 	if (valor_colesterol > 199 && valor_colesterol < 240) {
-		$('#verAgendaDislipidemia').hide();
+		$('#verAgenda_6').hide();
 		$('#div_colesterol_agenda').hide()
 		$('#div_colesterol').show();
 		$('#div_consejeria_colesterol').show();
 	} else if (valor_colesterol >= 240) {
 		$('#div_colesterol').hide();
 		$('#div_consejeria_colesterol').hide();
-		$('#verAgendaDislipidemia').show();
+		$('#verAgenda_6').show();
 		$('#div_colesterol_agenda').show();
 	} else {
 		$('#div_colesterol').hide();
 		$('#div_consejeria_colesterol').hide();
-		$('#verAgendaDislipidemia').hide();
+		$('#verAgenda_6').hide();
 		$('#div_colesterol_agenda').hide()
 	}
 });

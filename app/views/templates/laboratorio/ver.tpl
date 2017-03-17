@@ -1,13 +1,15 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
+<input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden" />
+<input type="text" value="{$id_centro_salud}" id="id_centro_salud" name="id_centro_salud" class="hidden" />
 <section class="content-header">
     <h1><i class="fa fa-medkit"></i> Detalle Examen</h1>
     <div class="col-md-12 text-right">
         {*{if $_SESSION['perfil'] == "1" or $_SESSION['perfil'] == "2" or $_SESSION['perfil'] == "3"}*}
         <button type="button"
                 href='javascript:void(0)' 
-                onClick="habilitarNuevoExamen();" 
+                onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/nuevo/{$id_paciente}/{$id_centro_salud}', 'Agenda Registro número : {$id_paciente}', 85);" 
                 data-toggle="tooltip" 
                 title="Nuevo Examen"
                 class="btn btn-sm btn-flat btn-success">
@@ -90,13 +92,5 @@
     
     function deshabilitarExamen() {
         $('#seccionExamen').toggle();
-    }
-    
-    function habilitarNuevoExamen() {
-        $('#seccionNuevoExamen').toggle();
-    }
-    
-    function deshabilitarNuevoExamen() {
-        $('#seccionNuevoExamen').toggle();
     }
 </script>

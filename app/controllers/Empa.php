@@ -365,6 +365,7 @@ class Empa extends Controller{
 		$this->smarty->assign("botonAyudaGlicemia", Boton::botonAyuda("en ayunas de 8 horas como mínimo", "Indicaciones", "", "btn-warning"));
 		$this->smarty->assign("botonConsejeriaGlicemia", Boton::botonAyuda("Reducir ingesta de azúcares y realizar actividad física (controlada)", "Consejería", "", "btn-danger"));
 		$this->smarty->assign("botonAyudaBasiloscopia", Boton::botonAyuda("1ra muestra de inmediato y entrega de una caja para muestra del día siguiente al despertar", "Indicaciones", "", "btn-warning"));
+		$this->smarty->assign("botonAyudaTomarFecha", Boton::botonAyuda("Tomar Fecha para Examen de Papanicolau (PAP)", "Info", "", "btn-warning"));
 		$this->smarty->assign("botonAyudaPAPVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 3 años", "Información", "", "btn-info"));
 		$this->smarty->assign("botonAyudaMamografiaVigente", Boton::botonAyuda("Fecha de vigencia: Menor o igual de 1 año", "Información", "", "btn-info"));
 		$this->smarty->assign("botonConsejeriaColesterol", Boton::botonAyuda("Reducir ingesta calorías y realizar actividad física (controlada)", "Consejería", "", "btn-danger"));
@@ -376,6 +377,7 @@ class Empa extends Controller{
 		$this->_display('Empa/nuevo.tpl');		
 		$this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
 		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/agenda/ver.js");
 	}
 
 	public function ver() {
@@ -601,23 +603,7 @@ class Empa extends Controller{
 			return FALSE;
 		}
 		
-		if ($parametros['bo_trabajadora_reclusa'] == 1 && $parametros['bo_vdrl'] == 'NULL') {
-			return FALSE;
-		}
-		
-		if ($parametros['bo_trabajadora_reclusa'] == 1 && $parametros['bo_rpr'] == 'NULL') {
-			return FALSE;
-		}
-		
-		if ($parametros['bo_trabajadora_reclusa'] == 1 && $parametros['bo_vih'] == 'NULL') {
-			return FALSE;
-		}
-		
 		if ($parametros['bo_tos_productiva'] == 'NULL') {
-			return FALSE;
-		}
-		
-		if ($parametros['bo_tos_productiva'] == 1 && $parametros['bo_baciloscopia_toma'] == 'NULL') {
 			return FALSE;
 		}
 		
@@ -625,7 +611,7 @@ class Empa extends Controller{
 			return FALSE;
 		}
 		
-		if ($parametros['bo_pap_realizado'] == 0 && $parametros['fc_tomar_pap'] == 'NULL' && 
+		if ($parametros['bo_pap_realizado'] == 0 && 
 			$parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0){
 			return FALSE;
 		}
@@ -648,11 +634,7 @@ class Empa extends Controller{
 			return FALSE;
 		}
 		
-		if ($parametros['bo_mamografia_requiere'] == 1 && $parametros['bo_mamografia_resultado'] == 'NULL' && $parametros['bo_embarazo'] == 0) {
-			return FALSE;
-		}
-		
-		if ($parametros['bo_mamografia_realizada'] == 1 && $parametros['bo_embarazo'] == 0 && ($parametros['fc_mamografia_mes'] == 'NULL' || $parametros['fc_mamografia_mes'] == 'NULL' ||
+		if ($parametros['bo_mamografia_realizada'] == 1 && $parametros['bo_embarazo'] == 0 && ($parametros['fc_mamografia_mes'] == 'NULL' || $parametros['fc_mamografia_ano'] == 'NULL' ||
 			$parametros['bo_mamografia_vigente'] == 'NULL' || $parametros['bo_mamografia_resultado_pasado'] == 'NULL')) {
 			return FALSE;
 		}
