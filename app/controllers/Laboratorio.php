@@ -139,7 +139,9 @@ class Laboratorio extends Controller {
             $this->smarty->assign("gl_nombre_comuna", $comuna);
             $this->smarty->assign("gl_nombre_provincia", $provincia);
             $this->smarty->assign("gl_nombre_region", $region);
-            $this->smarty->assign("gl_direccion", $direccion);            
+            $this->smarty->assign("gl_direccion", $direccion);
+            //Caro 17-03-2017: Agrega Centro de Salud
+            $this->smarty->assign("id_centro_salud", $detPaciente->id_centro_salud);
         }
         
         $this->smarty->assign('arrLaboratorios', $arrLaboratorios);
