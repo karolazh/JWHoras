@@ -20,11 +20,17 @@
         <!-- Menu Footer-->
         <li class="user-footer">
             <div class="pull-right">
-				 {if $id_perfil == 1}
-				<a onclick="xModal.open('{$smarty.const.BASE_URI}/mantenedor/cambiar_usuario/{$id_usuario}','Cambiar de Usuario','70');" class="btn btn-info btn-sm">
-					<i class="fa fa-exchange"></i> Cambiar de Usuario
-				</a>
-				 {/if}
+				{if $id_perfil == 1}
+					{if $smarty.session.id_user_cambio == 0}
+						<a onclick="xModal.open('{$smarty.const.BASE_URI}/mantenedor/cambiar_usuario/{$id_usuario}','Cambiar de Usuario','70');" class="btn btn-info btn-sm">
+							<i class="fa fa-exchange"></i> Cambiar de Usuario
+						</a>
+					{else}					
+						<a href="{$base_url}/mantenedor/volver_usuario/" class="btn btn-info btn-sm">
+							<i class="fa fa-undo"></i> Volver a mi Usuario
+						</a>
+					{/if}
+				{/if}
                 <a href="{$smarty.const.BASE_URI}/Login/logoutUsuario" class="btn btn-danger btn-sm">
 					<i class="fa fa-sign-out"></i> Cerrar Sesión
 				</a>

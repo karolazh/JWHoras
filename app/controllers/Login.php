@@ -96,13 +96,14 @@ class Login extends Controller {
 			if($usuario->bo_activo == 1){
 				$registro			= $this->_DAOAuditoriaLogin->registro_login($usuario->id_usuario, $rut, 'login');
 				
-				$session			= New Zend_Session_Namespace("usuario_carpeta");
-				$session->id		= $usuario->id_usuario;
-				$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-				$session->mail		= $usuario->gl_email;
-				$session->rut		= $usuario->gl_rut;
-				$session->fono		= $usuario->gl_fono;
-				$session->celular	= $usuario->gl_celular;
+				$session					= New Zend_Session_Namespace("usuario_carpeta");
+				$session->id				= $usuario->id_usuario;
+				$session->nombre			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+				$session->mail				= $usuario->gl_email;
+				$session->rut				= $usuario->gl_rut;
+				$session->fono				= $usuario->gl_fono;
+				$session->celular			= $usuario->gl_celular;
+				$session->id_user_cambio	= 0;
 
 				if (!$primer_login) {
 					$datos			= array($session->id);
@@ -110,6 +111,7 @@ class Login extends Controller {
 				}
 
 				$_SESSION['id']				= $usuario->id_usuario;
+				$_SESSION['id_user_cambio']	= 1;
 				$_SESSION['perfil']			= $usuario->id_perfil;
 				$_SESSION['id_tipo_grupo']	= $usuario->id_tipo_grupo;
 				$_SESSION['id_institucion']	= $usuario->id_institucion;
@@ -206,13 +208,14 @@ class Login extends Controller {
 			if ($usuario) {
 				if($usuario->bo_activo == 1){
 					$registro	= $this->_DAOAuditoriaLogin->registro_login($usuario->id_usuario, $arr['rut'], 'loginMIDAS', $token);
-					$session			= New Zend_Session_Namespace("usuario_carpeta");
-					$session->id		= $usuario->id_usuario;
-					$session->nombre	= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-					$session->mail		= $usuario->gl_email;
-					$session->rut		= $usuario->gl_rut;
-					$session->fono		= $usuario->gl_fono;
-					$session->celular	= $usuario->gl_celular;
+					$session					= New Zend_Session_Namespace("usuario_carpeta");
+					$session->id				= $usuario->id_usuario;
+					$session->nombre			= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+					$session->mail				= $usuario->gl_email;
+					$session->rut				= $usuario->gl_rut;
+					$session->fono				= $usuario->gl_fono;
+					$session->celular			= $usuario->gl_celular;
+					$session->id_user_cambio	= 0;
 
 					if (!$primer_login) {
 						$datos			= array($session->id);
@@ -220,6 +223,7 @@ class Login extends Controller {
 					}
 
 					$_SESSION['id']				= $usuario->id_usuario;
+					$_SESSION['id_user_cambio']	= 0;
 					$_SESSION['perfil']			= $usuario->id_perfil;
 					$_SESSION['id_tipo_grupo']	= $usuario->id_tipo_grupo;
 					$_SESSION['id_institucion']	= $usuario->id_institucion;
