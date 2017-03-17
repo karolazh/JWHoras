@@ -9,7 +9,7 @@
 		<div class="panel panel-info">
 		    <div class="panel-heading" style="overflow: hidden;line-height: 30px">
 				<strong>Listado de Perfiles</strong>
-				<button type="button" class="btn btn-success btn-xs pull-right" onclick="xModal.open('{$smarty.const.BASE_URI}/mantenedor/agregarPerfil','Agregar Perfil','70');">Agregar Perfil</button>
+				<button type="button" class="btn btn-success btn-xs pull-right" onclick="xModal.open('{$smarty.const.BASE_URI}/Mantenedor/agregarPerfil','Agregar Perfil','70');">Agregar Perfil</button>
 		  	</div>
 		  	<div class="panel-body">
 				<div id="contenedor-tabla">

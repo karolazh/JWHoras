@@ -101,7 +101,7 @@ class Mantenedor extends Controller{
 		
 		$this->smarty->assign('arr_padre',$arr_padre);
 		$this->smarty->assign('arr_opcion',$arr_opcion);
-		$this->_display('mantenedor_perfil/agregar.tpl');
+		$this->smarty->display('mantenedor_perfil/agregar.tpl');
 		$this->load->javascript(STATIC_FILES.'js/templates/mantenedor/mantenedor_perfil.js');
 	}
 
@@ -133,10 +133,11 @@ class Mantenedor extends Controller{
 
 		$parametros	= $this->request->getParametros();
 		$id_perfil	= $parametros[0];
-		$data		= $this->_daoMaestroPerfil->getPerfilPorID($id_perfil);
+		$data		= $this->_DAOPerfil->getById($id_perfil);
+		/*stdClass Object ( [id_perfil] => 1 [gl_nombre_perfil] => ADMINISTRADOR [id_usuario_crea] => [fc_crea] => )*/
 
 		$this->smarty->assign('itm',$data);
-		$this->_display('mantenedor_perfil/editar.tpl');
+		$this->smarty->display('mantenedor_perfil/editar.tpl');
 		$this->load->javascript(STATIC_FILES.'js/templates/mantenedor/mantenedor_perfil.js');
 	}
 
@@ -144,7 +145,8 @@ class Mantenedor extends Controller{
 
 		$parametros	= $this->request->getParametros();
 		$id_perfil	= $parametros[0];
-		$data		= $this->_daoMaestroPerfil->getPerfilPorID($id_perfil);
+		//$data		= $this->_daoMaestroPerfil->getPerfilPorID($id_perfil);
+		$data		= $this->_DAOPerfil->getById($id_perfil);
 		$arr_padre	= $this->_DAOPerfilOpcion->getAllMenuPadre();
 		$arr_opcion	= $this->_DAOPerfilOpcion->getAllMenuPerfilPorID($id_perfil);
 

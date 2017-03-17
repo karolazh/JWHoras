@@ -18,12 +18,16 @@
 
 			{foreach from=$arr_padre item=padre}
 				<div class="form-group top-spaced">
-					<label for="gl_nombre" class="col-xs-2 control-label clabel"> {$padre->gl_nombre} </label>
+					<label for="gl_nombre" class="col-xs-2 control-label clabel"> {$padre->gl_nombre_opcion} </label>
 					<div class="col-sm-9 top-spaced">
 						<div class="row col-sm-12">
 							<div class="form-check">
+								<div class="col-xs-3">
+									<input type="checkbox" name="opcion" id="opcion" value="{$padre->id_opcion}" {if $padre->activo == 1} checked {/if} >
+									&nbsp; <i class="{$padre->gl_class}"></i> {$padre->gl_nombre_opcion}
+								</div>
 								{foreach from=$arr_opcion item=opcion}
-									{if $opcion->id_padre == $padre->id_padre}
+									{if $opcion->id_opcion_padre == $padre->id_opcion}
 										<div class="col-xs-3">
 											<input type="checkbox" name="opcion" id="opcion" value="{$opcion->id_opcion}" {if $opcion->activo == 1} checked {/if} >
 											&nbsp; <i class="{$opcion->gl_class}"></i> {$opcion->gl_nombre_opcion}
