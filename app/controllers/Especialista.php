@@ -59,7 +59,6 @@ class Especialista extends Controller {
 		$this->smarty->assign('titulo', 'Pacientes derivados a Especialista');
 
 		$this->_display('Paciente/index.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/especialista/diagnostico.js");
 	}
 	
 	/**
@@ -71,18 +70,36 @@ class Especialista extends Controller {
 
 		$parametros			= $this->request->getParametros();
 		$id_paciente		= $parametros[0];
-		
+		$empa = $this->_DAOEmpa->getByIdPaciente($id_paciente);
 		//$resp = $this->_Evento->guardarMostrarUltimo(21,0,$id_paciente,"Plan tratamiento Modificado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		
+		$this->smarty->assign("id_empa", $empa->id_empa);
 		$this->smarty->assign("id_paciente", $id_paciente);
 		$this->smarty->assign("botonAyudaTratamiento", Boton::botonAyuda('Ingrese Datos del Diagnóstico.', '', 'pull-right'));
 
 		$this->_display('Especialista/diagnostico.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/medico/nuevo.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/especialista/diagnostico.js");
 		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
 	}
 	
 	public function GuardarDiagnostico(){
+		header('Content-type: application/json');
+		$parametros		= $this->_request->getParams();
+		$correcto		= FALSE;
+		$error			= FALSE;
+		//$bool_update = $this->_DAOPacienteAgendaEspecialista->insert($parametros);
+		if ($bool_update) {
+			//$resp = $this->_Evento->guardarMostrarUltimo(12,$id_empa,$id_paciente,"Empa modificado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
+			$correcto = TRUE;
+		} else {
+			$error = TRUE;
+		}
+
+		$salida = array("error" => $error,
+						"correcto" => $correcto);
+		$json = Zend_Json::encode($salida);
+
+		echo $json;
 		
 	}
 	

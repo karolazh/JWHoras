@@ -16,16 +16,18 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				 {$botonAyudaTratamiento}
-				<input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
 			</div>
+				<input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
+				<input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden">
 			<div class="panel-body">
 				<div class="top-spaced"></div>
 				
 				<div class="form-group">
-					<label for="cie10" class="control-label col-sm-2">CIE10 (*)</label>
+					<label for="cie10" class="control-label col-sm-2">CIE10 1(*)</label>
 					<div class="col-sm-4">
 						<select class="form-control" id="cie10" name="cie10">
 							<option value="0">Seleccione CIE10</option>
+							<option value="1">CIE10</option>
 							{*foreach $arrMes as $item}
 								<option value="{$item->id_mes}" >{$item->gl_mes}</option>
 							{/foreach*}
@@ -37,10 +39,11 @@
 				<div class="top-spaced"></div>
 				
 				<div class="form-group">
-					<label for="cie10" class="control-label col-sm-2">CIE10 (*)</label>
+					<label for="cie102" class="control-label col-sm-2">CIE10 2(*)</label>
 					<div class="col-sm-4">
-						<select class="form-control" id="cie10" name="cie10">
-							<option value="0">Seleccione CIE10</option>
+						<select class="form-control" id="cie102" name="cie102">
+							<option value="0">Seleccione CIE102</option>
+							<option value="1">CIE102</option>
 							{*foreach $arrMes as $item}
 								<option value="{$item->id_mes}" >{$item->gl_mes}</option>
 							{/foreach*}
@@ -52,10 +55,11 @@
 				<div class="top-spaced"></div>
 				
 				<div class="form-group">
-					<label for="cie10" class="control-label col-sm-2">CIE10 (*)</label>
+					<label for="cie103" class="control-label col-sm-2">CIE10 3(*)</label>
 					<div class="col-sm-4">
-						<select class="form-control" id="cie10" name="cie10">
-							<option value="0">Seleccione CIE10</option>
+						<select class="form-control" id="cie103" name="cie103">
+							<option value="0">Seleccione CIE103</option>
+							<option value="1">CIE103</option>
 							{*foreach $arrMes as $item}
 								<option value="{$item->id_mes}" >{$item->gl_mes}</option>
 							{/foreach*}

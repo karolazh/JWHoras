@@ -1,12 +1,21 @@
 $("#guardar").on('click', function (e) {
 	var button_process			= buttonStartProcess($(this), e);
 	var parametros				= $("#form").serializeArray();
+	var cie10					= $("#cie10").attr("selected",true).val();
+	var cie102					= $("#cie102").attr("selected",true).val();
+	var cie103					= $("#cie103").attr("selected",true).val();
 	var gl_observacion			= $("#gl_observacion").val();
 	var gl_diagnostico			= $("#gl_diagnostico").val();
 	
-	if (gl_observacion == '' ) {
-		xModal.danger('- El campo Diagnóstico es obligatorio');	
+	if (cie10 == 0) {
+		xModal.danger('- El campo CIE10 es obligatorio');	
+	} else if (cie102 == 0) {
+		xModal.danger('- El campo CIE102 es obligatorio');	
+	} else if (cie103 == 0) {
+		xModal.danger('- El campo CIE103 es obligatorio');	
 	} else if (gl_diagnostico == '' ) {
+		xModal.danger('- El campo Diagnóstico es obligatorio');	
+	} else if (gl_observacion == '' ) {
 		xModal.danger('- El campo Observación es obligatorio');
 	} else {
 		$.ajax({
