@@ -162,12 +162,13 @@ class Agenda extends Controller {
         
         $parametros = $this->request->getParametros();
         $id_paciente = $parametros[0];
-        $id_examen = $parametros[1];
-        if (isset($parametros[2])) {
-            $id_empa = $parametros[2]; //$_SESSION['id_empa']; //""; //
+        if (isset($parametros[1])) {
+            $id_empa = $parametros[1]; //$_SESSION['id_empa']; //""; //
         } else {
             $id_empa = "";
         }
+        $id_centro_salud = $parametros[2];
+        $id_examen = $parametros[3];        
         
         //Combo Laboratorios
         $arrLaboratorios = $this->_DAOLaboratorio->getLista();

@@ -54,6 +54,25 @@ class DAOLaboratorio extends Model{
             return NULL;
         }
     }
+    
+    public function getByIdCentroSalud($id_centro){
+        $query = "  SELECT  lab.id_laboratorio,
+							lab.gl_nombre_laboratorio,
+                            labCS.id_centro_salud
+                    FROM pre_laboratorio lab
+                    INNER JOIN pre_laboratorio_centro_salud labCS 
+							ON (labCS.id_laboratorio = lab.id_laboratorio
+                           AND labCS.id_centro_salud = ?)";
+
+        $param	= array($id_centro);
+        $result	= $this->db->getQuery($query, $param);
+
+        if ($result->numRows > 0) {
+            return $result->rows;
+        } else {
+            return NULL;
+        }
+    }
 }
 
 ?>
