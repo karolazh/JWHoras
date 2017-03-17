@@ -73,6 +73,47 @@ class DAOPacienteAgendaEspecialista extends Model{
         }
     }
 
+	public function insert($parametros){
+        $query	= "	INSERT INTO pre_paciente_agenda_especialista
+						(
+						id_especialista,
+						id_paciente,
+						id_empa,
+						id_estado,
+						cie10,
+						cie102,
+						cie103,
+						gl_observacion,
+						gl_diagnostico,
+						id_tipo_especialidad,
+						fecha_especialista,
+						fc_crea,
+						id_usuario_crea
+						)
+					VALUES
+						(
+						".$_SESSION['id'].",
+						".$parametros['id_paciente'].",
+						".$parametros['id_empa'].",
+						".$parametros['id_estado'].",
+						".$parametros['cie10'].",
+						".$parametros['cie102'].",
+						".$parametros['cie103'].",
+						".$parametros['gl_observacion'].",
+						".$parametros['gl_diagnostico'].",
+						".$parametros['id_tipo_especialidad'].",
+						now(),
+						now(),
+						".$_SESSION['id']."
+						)
+                    ";
+        if ($this->db->execQuery($query)) {
+            return $this->db->getLastId();
+        } else {
+            return NULL;
+        }
+    }
+	
 }
 
 ?>
