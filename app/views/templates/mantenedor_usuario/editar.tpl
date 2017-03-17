@@ -1,6 +1,6 @@
 <div class="modal-body">
 	<div class="col-xs-12">
-		<form class="form-horizontal" action="{$base_url}/Mantenedor/editarUsuario/" method="post" enctype="multipart/form-data"> 
+		<form class="form-horizontal" action="{$base_url}/Mantenedor/editarUsuarioBD/" method="post" enctype="multipart/form-data"> 
 			<input type="hidden" id="id_usuario" name="id_usuario" value="{$itm->id_usuario}" />
 			<div class="top-spaced"></div>
         
@@ -35,7 +35,7 @@
 						</div>
 					</div>
 
-
+					{*}
 					<div class="form-group top-spaced">
 						<label for="bo_estado" class="col-xs-2 control-label clabel">Estado Perfil</label>
 						<div class="col-xs-3">
@@ -45,7 +45,7 @@
 							</select>
 						</div>
 					</div>
-
+					{*}
 				</div>
 
 				<div class="top-spaced"></div>

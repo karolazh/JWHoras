@@ -67,7 +67,6 @@ class Mantenedor extends Controller{
 		//$bo_estado	= $_POST['bo_estado'];
 		//$parameters	= array('id_perfil'=>$id_perfil, 'bo_estado'=>$bo_estado);
 		$parameters	= array('id_perfil'=>$id_perfil);
-		
 		$estado		= $this->_DAOPerfil->_update($parameters, $id_usuario);
 
 		if($estado){

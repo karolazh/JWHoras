@@ -85,7 +85,7 @@ class DAOPaciente extends Model{
         }
     }
 
-    public function getListaDetalle($parametros=array()){
+    public function getListaDetalle($parametros=array(),$join=array()){
         $query = "  SELECT
                         paciente.id_paciente,
                         paciente.gl_rut,
@@ -110,6 +110,13 @@ class DAOPaciente extends Model{
                     LEFT JOIN pre_comuna c ON c.id_comuna = paciente.id_comuna
                     LEFT JOIN pre_paciente_estado e ON e.id_paciente_estado = paciente.id_paciente_estado";
         $params = array();
+		if (!empty($join)) {
+			
+			foreach($join as $campo=>$valor){
+				$query .= ' LEFT JOIN '.$valor['tabla'].' ON '.$valor['on'].' = '.$valor['igual'];
+			}
+		}
+		
 		if(!empty($parametros)){
             $where = ' WHERE ';
             
