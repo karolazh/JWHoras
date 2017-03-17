@@ -315,10 +315,8 @@ class Empa extends Controller{
 		//Mostrar/Ocultar Diabetes segun Edad y datos Glicemia
 		if ($edad > 40 || $empa->gl_glicemia) {
 			$diabetes = "display: block";
-			$antecedentes = "display: none";
 		} else {
 			$diabetes = "display: none";
-			$antecedentes = "display: block";
 		}
 		//Mostrar/Ocultar PAP segun edad
 		if (!($edad > 24 && $edad < 65) || ($empa->bo_embarazo == 1)) {
@@ -346,10 +344,10 @@ class Empa extends Controller{
         $this->smarty->assign("id_hipertension", "9");
         /* Fin Caro */
 		
+		$this->smarty->assign("bo_finalizado", $empa->bo_finalizado);
 		$this->smarty->assign("mamografia", $mamografia);
 		$this->smarty->assign("pap", $pap);
 		$this->smarty->assign("diabetes", $diabetes);
-		$this->smarty->assign("antecedentes", $antecedentes);
 		$this->smarty->assign("dislipidemia", $dislipidemia);
 		$this->smarty->assign("gl_fono", $registro->gl_fono);
 		$this->smarty->assign("gl_celular", $registro->gl_celular);
@@ -376,17 +374,6 @@ class Empa extends Controller{
 		$this->_display('Empa/nuevo.tpl');		
 		$this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
 		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
-	}
-
-	public function nuevoEmpa2() {
-		Acceso::redireccionUnlogged($this->smarty);
-		$sesion = New Zend_Session_Namespace("usuario_carpeta");
-		$this->smarty->assign("id_usuario", $sesion->id);
-		$this->smarty->assign("rut", $sesion->rut);
-		$this->smarty->assign("usuario", $sesion->usuario);
-
-		//llamado al template
-		$this->_display('Empa/nuevo_empa2.tpl');
 	}
 
 	public function ver() {
@@ -597,6 +584,10 @@ class Empa extends Controller{
 		}
 		
 		if ($parametros['gl_imc'] >= 30 && $parametros['gl_glicemia'] == 'NULL') {
+			return FALSE;
+		}
+		
+		if ($parametros['bo_antecedente_diabetes'] == 'NULL') {
 			return FALSE;
 		}
 		

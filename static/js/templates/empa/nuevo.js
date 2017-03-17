@@ -1,5 +1,10 @@
 //Cuando Carga FORM
 $("#form").ready(function () {
+	if ($('#bo_finalizado').val()==1){
+		$('#form').find('input, textarea, select').prop('disabled','true');
+		$('#btn_guardar').hide();
+		$('#btn_aceptar').show();
+	}
     var imc = $('#gl_imc').val();
     var pts_audit = $('#gl_puntos_audit').val();
     var edad = $('#nr_edad').val();
@@ -25,10 +30,6 @@ $("#form").ready(function () {
         $("#bo_mamografia_requiere_1").prop('checked', true);
     }
 	
-	if (imc>=30 || edad>=40){
-		$("#bo_antecedente_0").attr("checked",false);
-		$('#bo_antecedente_1').attr("checked",false);
-	}
 });
 
 //Poner Mensaje en span segun Puntos de AUDIT
@@ -458,7 +459,7 @@ $("#guardaraudit").livequery(function () {
 					},
 			success	: function (data) {
 						if (data.correcto) {
-							xModal.success('Éxito: Se Ingresó nuevo AUDIT!');
+							//xModal.success('Éxito: Se Ingresó nuevo AUDIT!');
 						} else {
 							xModal.info('Error: No se pudo Ingresar AUDIT');
 						}
@@ -1117,8 +1118,8 @@ $("#guardar").on('click', function (e) {
 		},
 		success: function (data) {
 			if (data.correcto) {
-				xModal.success('Éxito: Se Ingresó nuevo Registro!');
 				if ($("#redirige_empa").val() == 0) {
+					xModal.success('Éxito: Se Ingresó nuevo Registro!');
 					setTimeout(function () {
 						location.href = BASE_URI + "index.php/Paciente";
 					}, 2000);
