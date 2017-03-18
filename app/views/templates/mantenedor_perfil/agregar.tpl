@@ -23,13 +23,13 @@
 						<div class="row col-sm-12">
 							<div class="form-check">
 								<div class="col-xs-3">
-									<input type="checkbox" name="opcion_padre_{$padre->id_opcion}" id="opcion_padre_{$padre->id_opcion}" value="{$padre->id_opcion}" {if $padre->activo == 1} checked {/if} >
+									<input type="checkbox" name="opcion_padre_{$padre->id_opcion}" id="opcion_padre_{$padre->id_opcion}" value="{$padre->id_opcion}" data="{$padre->id_opcion}" {if $padre->activo == 1} checked {/if} >
 									&nbsp; <i class="{$padre->gl_class}"></i> {$padre->gl_nombre_opcion}
 								</div>
 								{foreach from=$arr_opcion item=opcion}
 									{if $opcion->id_opcion_padre == $padre->id_opcion}
 										<div class="col-xs-3">
-											<input type="checkbox" name="opcion_{$opcion->id_opcion}" id="opcion_{$opcion->id_opcion}" value="{$opcion->id_opcion}" {if $opcion->activo == 1} checked {/if} >
+											<input type="checkbox" name="opcion_{$opcion->id_opcion}" id="opcion_{$opcion->id_opcion}" value="{$opcion->id_opcion}" data="{$padre->id_opcion}" {if $opcion->activo == 1} checked {/if} >
 											&nbsp; <i class="{$opcion->gl_class}"></i> {$opcion->gl_nombre_opcion}
 										</div>
 									{/if}

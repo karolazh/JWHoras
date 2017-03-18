@@ -3,7 +3,8 @@ var Mantenedor_perfil = {
 
 	agregarPerfil : function(form,btn){
 		//$(form).submit();
-        var parametros = $("#form").serialize();
+        var parametros = $("#form").serializeArray();
+
         $.ajax({         
             dataType	: "json",
             cache		: false,

@@ -108,13 +108,21 @@ class Mantenedor extends Controller{
 	public function agregarPerfilBD(){
 		header('Content-type: application/json');
 		$parametros = $this->_request->getParams();
-		print_r($parametros);DIE;
-		//$gl_nombre		= $_POST['gl_nombre_perfil'];
-		//$gl_descripcion	= $_POST['gl_descripcion_perfil'];
+		/*
+			Array
+		(
+			[gl_nombre] => test
+			[gl_descripcion] => test
+			[opcion_padre_1] => 1
+			[opcion_padre_2] => 2
+		)
+		*/
+		$gl_nombre		= $parametros->gl_nombre;
+		$gl_descripcion	= $parametros->gl_descripcion;
 		//$arr_opcion		= $_POST['arr_opcion'];
-		$parameters		= array('gl_nombre'=>$gl_nombre,'gl_descripcion'=>$gl_descripcion,'id_usuario_creador'=>Session::getSession('id_usuario'));
-		$id_perfil		= $this->_DAOPerfil->_insert($parameters);
-
+		//$parameters		= array('gl_nombre'=>$gl_nombre,'gl_descripcion'=>$gl_descripcion,'id_usuario_creador'=>Session::getSession('id_usuario'));
+		//$id_perfil		= $this->_DAOPerfil->_insert($parameters);
+		/*
 		foreach($arr_opcion as $id_opcion){
 			$param		= array('id_perfil'=>$id_perfil,'id_opcion'=>$id_opcion,'id_usuario_creador'=>Session::getSession('id_usuario'));
 			$this->_DAOPerfilOpcion->_insert($param);
@@ -126,9 +134,11 @@ class Mantenedor extends Controller{
 		}else{
 			$json['estado']	= false;
 			$json['mensaje']= '<b>Hubo un problema al Actualizar.</b><br>Favor intentar nuevamente o contactarse con Soporte.';
-		}
-		print_r(json_encode($json));DIE();
-		echo json_encode($json);
+		}*/
+		
+		$salida = array("correcto" => $correcto, "mensaje" => $mensaje);
+        $json = Zend_Json::encode($salida);
+        echo $json;
 	}
 
 	public function editarPerfil(){
