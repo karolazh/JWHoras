@@ -7,9 +7,11 @@
     <input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden" />
     <input type="text" value="{$id_centro_salud}" id="id_centro_salud" name="id_centro_salud" class="hidden" />
     <input type="text" value="{$id_examen}" id="id_examen" name="id_examen" class="hidden" />
+    <input type="text" value="{$id_laboratorio}" id="id_laboratorio" name="id_laboratorio" class="hidden" />
     <div class="panel-body">
         <div class="top-spaced"></div>
         {*{$id_centro_salud}*}
+        {*{$id_laboratorio}*}
         <!-- TIPO DE EXAMEN -->
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
@@ -20,7 +22,8 @@
                     <label class="control-label required col-sm-3">Tipo de Examen</label>
                     <div class="col-sm-3">
                         <select id="examen" name="examen" for="examen" 
-                                class="form-control" readonly
+                                class="form-control" 
+                                {if $id_examen != ""}disabled{/if}
                                 onblur="validarVacio(this, 'Por favor Seleccione un Examen')">
                             <option  value="0">Seleccione un Examen</option>
                                 {foreach $arrTipoExamen as $examen}
@@ -46,20 +49,36 @@
                     <label class="control-label required col-sm-3">Laboratorios</label>
                     <div class="col-sm-3">
                         <select id="laboratorio" name="laboratorio" 
-                                for="laboratorio" class="form-control" readonly
+                                for="laboratorio" class="form-control"
+                                {if $id_laboratorio != ""}disabled{/if}
                                 onblur="validarVacio(this, 'Por favor Seleccione un Laboratorio')">
                             <option  value="0">Seleccione un Laboratorio</option>
                                 {foreach $arrLaboratorios as $lab}
-                                    <option  value="{$lab->id_laboratorio}">{$lab->gl_nombre_laboratorio}</option>
-                                    {*{if $id_laboratorio == $lab->id_laboratorio}
+                                    {*<option  value="{$lab->id_laboratorio}">{$lab->id_laboratorio}</option>*}
+                                    {*<option  value="{$lab->id_laboratorio}">{$lab->gl_nombre_laboratorio}</option>*}
+                                    {if $id_laboratorio == $lab->id_laboratorio}
                                         <option  value="{$lab->id_laboratorio}" selected="">{$lab->gl_nombre_laboratorio}</option>
                                     {else}
                                         <option  value="{$lab->id_laboratorio}">{$lab->gl_nombre_laboratorio}</option>
-                                    {/if}*}
+                                    {/if}
                                 {/foreach}
                         </select>
                     </div>
                 </div>
+                {*{if $perfil == "7"}
+                <div class="form-group">
+                    <label class="control-label required col-sm-3">RUT persona que toma examen</label>
+                    <div class="col-sm-2">
+                        <input type="text" name="gl_rut_toma" id="gl_rut_toma" maxlength="9" 
+                               value="{$rut_lab}" class="form-control" readonly />
+                    </div>
+                    <label class="control-label required col-sm-3">Nombre persona que toma examen</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="gl_nombre_toma" id="gl_nombre_toma" maxlength="" 
+                               value="{$nombre_lab}" class="form-control" readonly />
+                    </div>
+                </div>
+                {/if}*}
             </div>
         </div>
 

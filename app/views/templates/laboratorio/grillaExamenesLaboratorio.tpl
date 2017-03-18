@@ -35,14 +35,6 @@
                            data-toggle="tooltip" 
                            title="Ver Examen">
                            <i class="fa fa-eye"></i>
-                       </button>&nbsp;
-                       <button type="button" 
-                           {*onclick="habilitarExamen({$exa->id_paciente_examen})"*}
-                           onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"
-                           class="btn btn-xs btn-success"
-                           data-toggle="tooltip" 
-                           title="Ver Examen">
-                           <i class="fa fa-pencil"></i>
                        </button>
                    </td>
                 </tr>
@@ -55,7 +47,7 @@
                         {if $exa->gl_resultado == "N"}
                             <h6><b><span class="label label-success">NORMAL</span></b></h6>
                         {else}
-                            <h6><b><span class="label label-warning">SIN INFORMACI&Oacute;N</span></b></h6>
+                            <h6><b><span class="label label-warning">AGENDADO</span></b></h6>
                         {/if}
                     </td>
                     <!-- si perfil es "ADMINISTRADOR", "MÉDICO", "ENFERMERA", "LABORATORIO"-->
@@ -63,22 +55,25 @@
                         $_SESSION['perfil'] == "3" or $_SESSION['perfil'] == "7" }*}
                     {*{/if}*}
                     <td class="text-center" style="width:70px;">
-                       <button type="button" 
-                           {*onclick="habilitarExamen({$exa->id_paciente_examen})"*}
-                           onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"
-                           class="btn btn-xs btn-info"
-                           data-toggle="tooltip" 
-                           title="Ver Examen">
-                           <i class="fa fa-eye"></i>
-                       </button>&nbsp;
-                       <button type="button" 
-                           {*onclick="habilitarExamen({$exa->id_paciente_examen})"*}
-                           onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"
-                           class="btn btn-xs btn-success"
-                           data-toggle="tooltip" 
-                           title="Ver Examen">
-                           <i class="fa fa-pencil"></i>
-                       </button>
+                        {if $exa->gl_resultado == "N"}
+                            <button type="button" 
+                                {*onclick="habilitarExamen({$exa->id_paciente_examen})"*}
+                                onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"
+                                class="btn btn-xs btn-info"
+                                data-toggle="tooltip" 
+                                title="Ver Examen">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        {else}
+                            <button type="button" 
+                                {*onclick="habilitarExamen({$exa->id_paciente_examen})"*}
+                                onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"
+                                class="btn btn-xs btn-success"
+                                data-toggle="tooltip" 
+                                title="Registrar Resultado">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                        {/if}
                    </td>
                 </tr>
                 {/if}
