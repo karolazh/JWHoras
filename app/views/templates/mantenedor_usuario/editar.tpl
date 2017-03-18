@@ -2,12 +2,7 @@
 	<div class="col-xs-12">
 		<form id="form" class="form-horizontal" action="{$base_url}/Mantenedor/editarUsuarioBD/" method="post" enctype="multipart/form-data"> 
 			<input type="hidden" id="id_usuario" name="id_usuario" value="{$itm->id_usuario}" />
-			<div class="top-spaced"></div>
         
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-				</div>
-				<div class="panel-body">
 					<input type="hidden" id="id_usuario" name="id_usuario" value="{$itm->id_usuario}" />
 
 					<div class="form-group top-spaced">
@@ -46,10 +41,7 @@
 						</div>
 					</div>
 					{*}
-				</div>
 
-				<div class="top-spaced"></div>
-			</div>
 			
 
 			<div class="modal-footer top-spaced">

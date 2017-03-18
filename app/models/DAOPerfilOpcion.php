@@ -132,30 +132,23 @@ class DAOPerfilOpcion extends Model {
         }
     }
 
-	public function getAllMenuPadre(){
-        $query	= "	SELECT 
-						*
-					FROM pre_opcion
-					WHERE bo_activo = 1 AND id_opcion_padre = 0"
-					;
-
-        $result	= $this->db->getQuery($query);
-		
-        if($result->numRows > 0){
-            return $result->rows;
-        }else{
-            return null;
-        }
-    }
 	
-	public function getAllMenuPerfilPorID($id_opcion_padre){
+	
+	public function getAllMenuPerfilPorID($id_perfil){
         $query	= "	SELECT 
-						*
-					FROM pre_opcion
-					WHERE bo_activo = 1 AND id_opcion_padre != 0"
+						o.id_opcion AS id_opcion, 
+						id_opcion_padre, 
+						bo_tiene_hijo, 
+						gl_nombre_opcion, 
+						gl_icono, 
+						gl_url
+					FROM pre_perfil_opcion po
+					LEFT JOIN pre_opcion o  ON po.id_opcion = o.id_opcion
+					WHERE id_perfil = ? AND bo_activo = 1"
 					;
 
-        $result	= $this->db->getQuery($query);
+		$param	= array($id_perfil);
+        $result	= $this->db->getQuery($query,$param);
 		
         if($result->numRows > 0){
             return $result->rows;

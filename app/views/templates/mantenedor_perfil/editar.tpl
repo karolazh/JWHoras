@@ -6,7 +6,7 @@
 			<div class="form-group top-spaced">
 				<label for="gl_nombre" class="col-xs-2 control-label clabel"> Nombre </label>
 				<div class="col-xs-3">
-					<input type="text" class="form-control" id="gl_nombre" name="gl_nombre" value="{$itm->gl_nombre_perfil}" />
+					<input type="text" class="form-control" id="gl_nombre_perfil" name="gl_nombre_perfil" value="{$itm->gl_nombre_perfil}" />
 				</div>
 			</div>
 

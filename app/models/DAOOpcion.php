@@ -71,6 +71,38 @@ class DAOOpcion extends Model {
             return null;
         }
     }
+	
+	public function getAllOpcionRaiz(){
+        $query	= "	SELECT 
+						*
+					FROM pre_opcion
+					WHERE bo_activo = 1 AND id_opcion_padre = 0"
+					;
+
+        $result	= $this->db->getQuery($query);
+		
+        if($result->numRows > 0){
+            return $result->rows;
+        }else{
+            return null;
+        }
+    }
+	
+	public function getAllOpcionRama(){
+        $query	= "	SELECT 
+						*
+					FROM pre_opcion
+					WHERE bo_activo = 1 AND id_opcion_padre != 0"
+					;
+
+        $result	= $this->db->getQuery($query);
+		
+        if($result->numRows > 0){
+            return $result->rows;
+        }else{
+            return null;
+        }
+    }
 }
 
 ?>

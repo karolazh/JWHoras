@@ -23,6 +23,7 @@ class Mantenedor extends Controller{
 
     protected $_DAOPerfil;
     protected $_DAOPerfilOpcion;
+	protected $_DAOOpcion;
     protected $_DAOUsuario;
     protected $_DAOWebService;
 	
@@ -34,6 +35,7 @@ class Mantenedor extends Controller{
 
 
         $this->_DAOPerfil			= $this->load->model("DAOPerfil");
+		$this->_DAOOpcion			= $this->load->model("DAOOpcion");
         $this->_DAOPerfilOpcion		= $this->load->model("DAOPerfilOpcion");
         $this->_DAOUsuario			= $this->load->model("DAOUsuario");
         $this->_DAOWebService		= $this->load->model("DAOWebService");
@@ -96,8 +98,8 @@ class Mantenedor extends Controller{
 
 	public function agregarPerfil(){
 
-		$arr_padre	= $this->_DAOPerfilOpcion->getAllMenuPadre();
-		$arr_opcion	= $this->_DAOPerfilOpcion->getAllMenuPerfilPorID(0);
+		$arr_padre	= $this->_DAOOpcion->getAllOpcionRaiz();
+		$arr_opcion	= $this->_DAOOpcion->getAllOpcionRama();
 		
 		$this->smarty->assign('arr_padre',$arr_padre);
 		$this->smarty->assign('arr_opcion',$arr_opcion);
@@ -108,33 +110,24 @@ class Mantenedor extends Controller{
 	public function agregarPerfilBD(){
 		header('Content-type: application/json');
 		$parametros = $this->_request->getParams();
-		/*
-			Array
-		(
-			[gl_nombre] => test
-			[gl_descripcion] => test
-			[opcion_padre_1] => 1
-			[opcion_padre_2] => 2
-		)
-		*/
-		$gl_nombre		= $parametros->gl_nombre;
-		$gl_descripcion	= $parametros->gl_descripcion;
-		//$arr_opcion		= $_POST['arr_opcion'];
-		//$parameters		= array('gl_nombre'=>$gl_nombre,'gl_descripcion'=>$gl_descripcion,'id_usuario_creador'=>Session::getSession('id_usuario'));
-		//$id_perfil		= $this->_DAOPerfil->_insert($parameters);
-		/*
-		foreach($arr_opcion as $id_opcion){
-			$param		= array('id_perfil'=>$id_perfil,'id_opcion'=>$id_opcion,'id_usuario_creador'=>Session::getSession('id_usuario'));
-			$this->_DAOPerfilOpcion->_insert($param);
+		$gl_nombre		= $parametros['gl_nombre'];
+		$gl_descripcion	= $parametros['gl_descripcion'];
+		$parameters		= array('gl_nombre_perfil'=>$gl_nombre,
+								'gl_descripcion'=>$gl_descripcion,
+								'id_usuario_crea'=>$_SESSION['id']);
+		$id_perfil		= $this->_DAOPerfil->insert($parameters);
+		$arr_opcion		= json_decode($parametros['arr_opcion']);
+		if($id_perfil){
+			$correcto = true;
+			$mensaje  = 'El perfil se ha creado exitosamente';
+			foreach($arr_opcion as $opcion){
+				$param = array('id_perfil'=>$id_perfil,'id_opcion'=>$opcion->value,'id_usuario_crea'=>$_SESSION['id']);
+				$this->_DAOPerfilOpcion->insert($param);
+			}
+		} else {
+			$correcto = false;
+			$mensaje = "Hubo problemas al crear el perfil nuevo.";
 		}
-		
-		if($estado){
-			$json['estado']	= true;
-			$json['mensaje']= 'Los datos han sido Actualizados correctamente.';
-		}else{
-			$json['estado']	= false;
-			$json['mensaje']= '<b>Hubo un problema al Actualizar.</b><br>Favor intentar nuevamente o contactarse con Soporte.';
-		}*/
 		
 		$salida = array("correcto" => $correcto, "mensaje" => $mensaje);
         $json = Zend_Json::encode($salida);
@@ -142,7 +135,7 @@ class Mantenedor extends Controller{
 	}
 
 	public function editarPerfil(){
-
+		
 		$parametros	= $this->request->getParametros();
 		$id_perfil	= $parametros[0];
 		$data		= $this->_DAOPerfil->getById($id_perfil);
@@ -152,20 +145,45 @@ class Mantenedor extends Controller{
 		$this->smarty->display('mantenedor_perfil/editar.tpl');
 		$this->load->javascript(STATIC_FILES.'js/templates/mantenedor/mantenedor_perfil.js');
 	}
+	
+	public function editarPerfilBD(){
+		header('Content-type: application/json');
+		$id_perfil			= $this->_request->getParam("id_perfil");
+		$gl_nombre_perfil	= $this->_request->getParam("gl_nombre_perfil");
+		$gl_descripcion		= $this->_request->getParam("gl_descripcion");
+		//$bo_estado	= $_POST['bo_estado'];
+		//$parameters	= array('id_perfil'=>$id_perfil, 'bo_estado'=>$bo_estado);
+		$estado		= $this->_DAOPerfil->update(
+				array(	"gl_nombre_perfil"		=> $gl_nombre_perfil,
+						"gl_descripcion"		=> $gl_descripcion						
+					), 
+				$id_perfil, "id_perfil");
+		if($estado){
+			$correcto	= true;
+			$mensaje = 'Los datos han sido Actualizados correctamente.';
+		}else{
+			$correcto	= false;
+			$mensaje= 'Hubo un problema al Actualizar.</b><br>Favor intentar nuevamente o contactarse con Soporte.';
+		}
 
+		$salida = array("correcto" => $correcto, "mensaje" => $mensaje);
+        $json = Zend_Json::encode($salida);
+        echo $json;
+	}
+	
 	public function editarPerfilOpcion(){
 
-		$parametros	= $this->request->getParametros();
-		$id_perfil	= $parametros[0];
-		//$data		= $this->_daoMaestroPerfil->getPerfilPorID($id_perfil);
-		$data		= $this->_DAOPerfil->getById($id_perfil);
-		$arr_padre	= $this->_DAOPerfilOpcion->getAllMenuPadre();
-		$arr_opcion	= $this->_DAOPerfilOpcion->getAllMenuPerfilPorID($id_perfil);
-
+		$parametros		= $this->request->getParametros();
+		$id_perfil		= $parametros[0];
+		$data			= $this->_DAOPerfil->getById($id_perfil);
+		$arr_padre		= $this->_DAOOpcion->getAllOpcionRaiz();
+		$arr_opcion		= $this->_DAOOpcion->getAllOpcionRama($id_perfil);
+		$arr_opcion_act	= $this->_DAOPerfilOpcion->getAllMenuPerfilPorID($id_perfil);
 		$this->smarty->assign('itm',$data);
+		$this->smarty->assign('arr_opcion_act',(array)$arr_opcion_act);
 		$this->smarty->assign('arr_padre',$arr_padre);
 		$this->smarty->assign('arr_opcion',$arr_opcion);
-		$this->_display('mantenedor_perfil/editar_menu.tpl');
+		$this->smarty->display('mantenedor_perfil/editar_menu.tpl');
 		$this->load->javascript(STATIC_FILES.'js/templates/mantenedor/mantenedor_perfil.js');
 	}
 

@@ -6,7 +6,7 @@
 			<div class="form-group top-spaced">
 				<label for="gl_nombre_padre" class="col-xs-2 control-label clabel"> Padre </label>
 				<div class="col-xs-3">
-					<input type="text" class="form-control" id="gl_nombre_padre" name="gl_nombre_padre" value="{$itm->gl_nombre_padre}" readonly />
+					<input type="text" class="form-control" id="gl_nombre_padre" name="gl_nombre_padre" value="{$itm->gl_nombre__padre}" readonly />
 				</div>
 			</div>
 
