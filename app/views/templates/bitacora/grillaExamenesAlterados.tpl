@@ -20,15 +20,40 @@
             <tbody>
             {foreach $arrExamenesAlt as $exa}
                 <tr>
-                    <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->fc_crea}</td>
+                    <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">
+                        {if $exa->id_paciente_examen != 0}
+                            {$exa->fc_crea}
+                        {else}
+                            {$exa->fc_ultimo_pap_mes}-{$exa->fc_ultimo_pap_ano}
+                        {/if}
+                    </td>
                     <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->gl_nombre_examen}</td>
-                    <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->gl_nombre_laboratorio}</td>
-                    <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->fc_toma}</td>
-                    <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->fc_resultado}</td>
+                    <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">
+                        {if $exa->id_paciente_examen != 0}
+                            {$exa->gl_nombre_laboratorio}
+                        {else}
+                            EXAMEN EXTERNO
+                        {/if}
+                    </td>
+                    <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">
+                        {if $exa->id_paciente_examen != 0}
+                            {$exa->fc_toma}
+                        {else}
+                            SIN INFORMACION
+                        {/if}
+                    </td>
+                    <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">
+                        {if $exa->id_paciente_examen != 0}
+                            {$exa->fc_resultado}
+                        {else}
+                            SIN INFORMACION
+                        {/if}
+                    </td>
                     <td style="background: #F7D3D2;" align="center">
                         <h6><b><span class="label label-danger" style="color:#ffffff">ALTERADO</span></b></h6>
                     </td>
                     <td style="background: #F7D3D2;" class="text-center" style="width:70px;">
+                        {if $exa->id_paciente_examen != 0}
                         <button type="button" 
                             onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$exa->id_paciente_examen}/', 'Agenda Examen número : {$exa->id_paciente}', 85);" 
                             class="btn btn-xs btn-info"
@@ -36,11 +61,11 @@
                             title="Ver Examen">
                             <i class="fa fa-eye"></i>
                         </button>
+                        {/if}
                    </td>
                 </tr>
             {/foreach}
             </tbody>
         </table>
-        <div class="top-spaced"></div>
     </div>
 </div>

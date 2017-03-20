@@ -56,6 +56,31 @@ class DAOPacienteExamen extends Model{
     }
 
     public function getByIdPaciente($id_paciente){
+//        $query = "  SELECT 
+//                        examen.id_paciente_examen,
+//                        examen.id_tipo_examen,
+//                        examen.id_paciente,
+//                        examen.id_empa,
+//                        examen.id_laboratorio,
+//                        examen.gl_folio,
+//                        examen.gl_resultado,
+//                        examen.gl_resultado_descripcion,
+//                        date_format(examen.fc_crea,'%d-%m-%Y') AS fc_crea,
+//                        tipo.gl_nombre_examen,
+//                        lab.gl_nombre_laboratorio,
+//                        date_format(examen.fc_toma,'%d-%m-%Y') AS fc_toma,
+//                        date_format(examen.fc_resultado,'%d-%m-%Y') AS fc_resultado,
+//                        examen.gl_hora_toma,
+//                        examen.gl_observacion_toma,
+//                        date_format(examen.fc_toma,'%Y-%m-%d') AS fc_toma_calendar,
+//                        date_format(examen.fc_resultado,'%Y-%m-%d') AS fc_resultado_calendar
+//                    FROM pre_paciente_examen examen
+//                    LEFT JOIN pre_empa empa ON (empa.id_empa = examen.id_empa AND empa.bo_finalizado = 0)
+//                    LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
+//                    LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio 
+//                    WHERE examen.id_paciente = ?
+//                    ORDER BY examen.fc_crea DESC";
+        
         $query = "  SELECT 
                         examen.id_paciente_examen,
                         examen.id_tipo_examen,
@@ -73,16 +98,72 @@ class DAOPacienteExamen extends Model{
                         examen.gl_hora_toma,
                         examen.gl_observacion_toma,
                         date_format(examen.fc_toma,'%Y-%m-%d') AS fc_toma_calendar,
-                        date_format(examen.fc_resultado,'%Y-%m-%d') AS fc_resultado_calendar
+                        date_format(examen.fc_resultado,'%Y-%m-%d') AS fc_resultado_calendar,
+                        NULL AS fc_ultimo_pap_ano, 
+                        NULL AS fc_ultimo_pap_mes
                     FROM pre_paciente_examen examen
                     LEFT JOIN pre_empa empa ON (empa.id_empa = examen.id_empa AND empa.bo_finalizado = 0)
                     LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
-                    LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio 
-                    WHERE examen.id_paciente = ?
-                    ORDER BY examen.fc_crea DESC";
+                    LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio
+                    WHERE examen.id_paciente = ". $id_paciente ."
+                    UNION   
+                    SELECT  0 AS id_paciente_examen,
+                            6 AS id_tipo_examen,
+                            empa.id_paciente,
+                            empa.id_empa, 
+                            0 AS id_laboratorio,
+                            0 AS gl_folio,
+                            'A' AS gl_resultado, 
+                            'EXAMEN EXTERNO' as gl_resultado_descripcion,
+                            NULL AS fc_crea,
+                            tipo.gl_nombre_examen,
+                            'SIN INFORMACION' as gl_nombre_laboratorio,
+                            NULL AS fc_toma,
+                            NULL AS fc_resultado,
+                            NULL AS gl_hora_toma,
+                            'SIN INFORMACION' as gl_observacion_toma,
+                            NULL AS fc_toma_calendar,
+                            NULL AS fc_resultado_calendar,
+                            fc_ultimo_pap_ano, 
+                            fc_ultimo_pap_mes
+                    FROM pre_empa empa
+                    LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = 6
+                    WHERE bo_pap_realizado = 1
+                    AND bo_pap_resultado = 0
+                    AND bo_pap_vigente = 1
+                    AND bo_finalizado = 0
+                    AND empa.id_paciente = ". $id_paciente ."
+                    UNION   
+                    SELECT  0 AS id_paciente_examen,
+                            8 AS id_tipo_examen,
+                            empa.id_paciente,
+                            empa.id_empa, 
+                            0 AS id_laboratorio,
+                            0 AS gl_folio,
+                            'A' AS gl_resultado, 
+                            'EXAMEN EXTERNO' as gl_resultado_descripcion,
+                            NULL AS fc_crea,
+                            tipo.gl_nombre_examen,
+                            'SIN INFORMACION' as gl_nombre_laboratorio,
+                            NULL AS fc_toma,
+                            NULL AS fc_resultado,
+                            NULL AS gl_hora_toma,
+                            'SIN INFORMACION' as gl_observacion_toma,
+                            NULL AS fc_toma_calendar,
+                            NULL AS fc_resultado_calendar,
+                            fc_ultimo_pap_ano, 
+                            fc_ultimo_pap_mes
+                    FROM pre_empa empa
+                    LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = 8
+                    WHERE bo_mamografia_realizada = 1
+                    AND bo_mamografia_resultado_pasado = 0
+                    AND bo_mamografia_vigente = 1
+                    AND bo_finalizado = 0
+                    AND empa.id_paciente = ". $id_paciente;
 
-        $param	= array($id_paciente);
-        $result	= $this->db->getQuery($query, $param);
+        //$param	= array($id_paciente);
+        //$result	= $this->db->getQuery($query, $param);
+        $result	= $this->db->getQuery($query);
 
         if ($result->numRows > 0) {
             return $result->rows;
@@ -98,9 +179,31 @@ class DAOPacienteExamen extends Model{
      * @return array Listado de Exámenes x Paciente "Alterado"
 	 */
     public function getExamenAleradoByIdPaciente($id_paciente){
-        $query = "  SELECT
-                        examen.id_paciente_examen ,
+//        $query = "  SELECT
+//                        examen.id_paciente_examen ,
+//                        examen.id_tipo_examen,
+//                        examen.id_empa,
+//                        examen.id_laboratorio,
+//                        examen.gl_folio,
+//                        examen.gl_resultado,
+//                        examen.gl_resultado_descripcion,
+//                        date_format(examen.fc_crea,'%d-%m-%Y') AS fc_crea,
+//                        tipo.gl_nombre_examen,
+//                        lab.gl_nombre_laboratorio,
+//                        date_format(examen.fc_toma,'%d-%m-%Y') AS fc_toma,
+//                        date_format(examen.fc_resultado,'%d-%m-%Y') AS fc_resultado
+//                    FROM pre_paciente_examen examen
+//                    LEFT JOIN pre_empa empa ON (empa.id_empa = examen.id_empa AND empa.bo_finalizado = 0)
+//                    LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
+//                    LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio 
+//                    WHERE examen.id_paciente = ?
+//                    AND examen.gl_resultado = 'A'
+//                    ORDER BY examen.fc_crea DESC";
+        
+        $query = "  SELECT 
+                        examen.id_paciente_examen,
                         examen.id_tipo_examen,
+                        examen.id_paciente,
                         examen.id_empa,
                         examen.id_laboratorio,
                         examen.gl_folio,
@@ -110,17 +213,77 @@ class DAOPacienteExamen extends Model{
                         tipo.gl_nombre_examen,
                         lab.gl_nombre_laboratorio,
                         date_format(examen.fc_toma,'%d-%m-%Y') AS fc_toma,
-                        date_format(examen.fc_resultado,'%d-%m-%Y') AS fc_resultado
+                        date_format(examen.fc_resultado,'%d-%m-%Y') AS fc_resultado,
+                        examen.gl_hora_toma,
+                        examen.gl_observacion_toma,
+                        date_format(examen.fc_toma,'%Y-%m-%d') AS fc_toma_calendar,
+                        date_format(examen.fc_resultado,'%Y-%m-%d') AS fc_resultado_calendar,
+                        NULL AS fc_ultimo_pap_ano, 
+                        NULL AS fc_ultimo_pap_mes
                     FROM pre_paciente_examen examen
                     LEFT JOIN pre_empa empa ON (empa.id_empa = examen.id_empa AND empa.bo_finalizado = 0)
                     LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
-                    LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio 
-                    WHERE examen.id_paciente = ?
+                    LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio
+                    WHERE examen.id_paciente = ". $id_paciente ."
                     AND examen.gl_resultado = 'A'
-                    ORDER BY examen.fc_crea DESC";
+                    UNION   
+                    SELECT  0 AS id_paciente_examen,
+                            6 AS id_tipo_examen,
+                            empa.id_paciente,
+                            empa.id_empa, 
+                            0 AS id_laboratorio,
+                            0 AS gl_folio,
+                            'A' AS gl_resultado, 
+                            'EXAMEN EXTERNO' as gl_resultado_descripcion,
+                            NULL AS fc_crea,
+                            tipo.gl_nombre_examen,
+                            'SIN INFORMACION' as gl_nombre_laboratorio,
+                            NULL AS fc_toma,
+                            NULL AS fc_resultado,
+                            NULL AS gl_hora_toma,
+                            'SIN INFORMACION' as gl_observacion_toma,
+                            NULL AS fc_toma_calendar,
+                            NULL AS fc_resultado_calendar,
+                            fc_ultimo_pap_ano, 
+                            fc_ultimo_pap_mes
+                    FROM pre_empa empa
+                    LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = 6
+                    WHERE bo_pap_realizado = 1
+                    AND bo_pap_resultado = 0
+                    AND bo_pap_vigente = 1
+                    AND bo_finalizado = 0
+                    AND empa.id_paciente = ". $id_paciente ."
+                    UNION   
+                    SELECT  0 AS id_paciente_examen,
+                            8 AS id_tipo_examen,
+                            empa.id_paciente,
+                            empa.id_empa, 
+                            0 AS id_laboratorio,
+                            0 AS gl_folio,
+                            'A' AS gl_resultado, 
+                            'EXAMEN EXTERNO' as gl_resultado_descripcion,
+                            NULL AS fc_crea,
+                            tipo.gl_nombre_examen,
+                            'SIN INFORMACION' as gl_nombre_laboratorio,
+                            NULL AS fc_toma,
+                            NULL AS fc_resultado,
+                            NULL AS gl_hora_toma,
+                            'SIN INFORMACION' as gl_observacion_toma,
+                            NULL AS fc_toma_calendar,
+                            NULL AS fc_resultado_calendar,
+                            fc_ultimo_pap_ano, 
+                            fc_ultimo_pap_mes
+                    FROM pre_empa empa
+                    LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = 8
+                    WHERE bo_mamografia_realizada = 1
+                    AND bo_mamografia_resultado_pasado = 0
+                    AND bo_mamografia_vigente = 1
+                    AND bo_finalizado = 0
+                    AND empa.id_paciente = ". $id_paciente;
 
-        $param	= array($id_paciente);
-        $result	= $this->db->getQuery($query, $param);
+        //$param	= array($id_paciente);
+        //$result	= $this->db->getQuery($query, $param);
+        $result	= $this->db->getQuery($query);
 
         if ($result->numRows > 0) {
             return $result->rows;

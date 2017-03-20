@@ -38,7 +38,7 @@
                                 </thead>
                                 <tbody>
                                         {foreach $arrResultado as $item}
-                                                {if $item->nr_examen_alterado > 0}
+                                                {if $item->nr_examen_alterado > 0 or $item->gl_examen_alterado_externo > 0}
                                                 <tr>
                                                         <!-- td class="text-center"> {$item->id_paciente} </td -->
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-center" nowrap> {$item->gl_identificacion} </td>
