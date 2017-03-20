@@ -17,9 +17,9 @@ var Agenda = {
         var id_laboratorio = form.id_laboratorio.value;
         //alert(id_examen);
         
-        //laboratorio seleccionado en combo si es "nuevo"
+        //id de laboratorio seleccionado en combo si es "nuevo"
         var laboratorio = form.laboratorio.value;
-        //examen seleccionado en combo si es "nuevo"
+        //id de examen seleccionado en combo si es "nuevo"
         var examen = form.examen.value;
         
         var fecha_agenda = form.fc_toma.value;
@@ -30,8 +30,7 @@ var Agenda = {
         //alert(observacion);
         
         //Valida si está ingresando un examen nuevo o viene de EMPA
-        if (id_examen == "")
-        {
+        if (id_examen == "") {
             if (examen == "0") {
                 msg_error += 'Seleccione Tipo de Examen<br/>';
                 error = true;
@@ -39,8 +38,7 @@ var Agenda = {
         }
         
         //Valida si usuario loguedo es de tipo "Laboratorio"
-        if (id_laboratorio == "")
-        {
+        if (id_laboratorio == "") {
             if (laboratorio == "0") {
                 msg_error += 'Seleccione Laboratorio<br/>';
                 error = true;
@@ -79,7 +77,7 @@ var Agenda = {
             formulario.append('hora_agenda', hora_agenda);
             formulario.append('observacion', observacion);
 
-            console.log(formulario);
+            //console.log(formulario);
             $.ajax({
                 url : BASE_URI + 'index.php/Agenda/guardarAgenda', 
                 data : formulario,
@@ -91,10 +89,15 @@ var Agenda = {
                 contentType : false,
                 success : function(response){
                     if(response.correcto == true){
-						$('#verAgenda_' + id_examen).hide();
-						$('#verExamen_' + id_examen).show();
+                        $('#verAgenda_' + id_examen).hide();
+                        $('#verExamen_' + id_examen).show();
                         //alert(response.id_agenda);
-                        xModal.success("OK: El paciente fue agendado" + $('#verExamen_' + id_examen).val(), function(){                            
+                        xModal.success("OK: El paciente fue agendado" + $('#verExamen_' + id_examen).val(), function(){
+                            //Valida si está ingresando un examen nuevo desde laboratorio...
+                            //...para recargar grilla de exámenes
+                            if (id_examen == "") {
+                                $("#grilla-examenes").html(response.grilla);
+                            }
                             xModal.closeAll();
                         });
                     }

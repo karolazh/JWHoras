@@ -6,7 +6,7 @@
 <section class="content-header">
     <h1><i class="fa fa-medkit"></i> Detalle Examen</h1>
     <div class="col-md-12 text-right">
-        {*{if $_SESSION['perfil'] == "1" or $_SESSION['perfil'] == "2" or $_SESSION['perfil'] == "3"}*}
+        {if $perfil == "1" or $perfil == "2" or $perfil == "3"}
         <button type="button"
                 href='javascript:void(0)' 
                 onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}//{$id_centro_salud}/', 'Agenda Registro número : {$id_paciente}', 85);" 
@@ -15,7 +15,7 @@
                 class="btn btn-sm btn-flat btn-success">
 			<i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Examen
         </button>&nbsp;
-        {*{/if}*}
+        {/if}
         <button type="button"
                 href='javascript:void(0)' 
                 onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$id_paciente}', 'Registro número : {$id_paciente}', 85);" 
@@ -44,7 +44,7 @@
             <!-- EXÁMENES -->
             <div class="box-body">
                 <div class="col-md-12">
-                    <div class="form-group">
+                    <div class="form-group" id="grilla-examenes">
                         {include file='laboratorio/grillaExamenesLaboratorio.tpl'}
                     </div>
                 </div>
@@ -58,7 +58,7 @@
 
     <div class="top-spaced"></div>
     
-    <div id="seccionExamen" style="display:none">
+    {*<div id="seccionExamen" style="display:none">
         <!-- DATOS DEL EXAMEN -->
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -69,23 +69,11 @@
             <div class="top-spaced"></div>
         </div>
         <!-- FIN DATOS DEL EXAMEN -->
-    </div>
+    </div>*}
             
-    <div id="seccionNuevoExamen" style="display:none">
-        <!-- DATOS DEL EXAMEN -->
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Nuevo Examen
-            </div>
-            {include file='laboratorio/nuevoExamen.tpl'}
-            
-            <div class="top-spaced"></div>
-        </div>
-        <!-- FIN DATOS DEL EXAMEN -->
-    </div>
 </section>
                     
-<script type="text/javascript">
+{*<script type="text/javascript">
     function habilitarExamen() {
         $('#seccionExamen').toggle();
     }
@@ -93,4 +81,4 @@
     function deshabilitarExamen() {
         $('#seccionExamen').toggle();
     }
-</script>
+</script>*}

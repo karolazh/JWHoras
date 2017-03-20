@@ -41,7 +41,7 @@ class Agenda extends Controller {
 
     /**
 	 * Descripción: Index Agenda
-	 * @author Carolina Zamora Hormazábal
+	 * @author Carolina Zamora <carolina.zamora@cosof.cl>
 	 */
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
@@ -50,7 +50,7 @@ class Agenda extends Controller {
     
     /**
 	 * Descripción: Ver Agenda de Examenes
-	 * @author Carolina Zamora Hormazábal
+	 * @author Carolina Zamora <carolina.zamora@cosof.cl>
 	 */
     public function ver() {
         Acceso::redireccionUnlogged($this->smarty);
@@ -156,7 +156,7 @@ class Agenda extends Controller {
     
     /**
 	 * Descripción: Ver Agenda de Examenes
-	 * @author Carolina Zamora Hormazábal
+	 * * @author Carolina Zamora <carolina.zamora@cosof.cl>
 	 */
     public function agendar() {
         Acceso::redireccionUnlogged($this->smarty);
@@ -201,8 +201,6 @@ class Agenda extends Controller {
         $this->smarty->assign("id_centro_salud", $id_centro_salud);
         $this->smarty->assign("id_examen", $id_examen);        
         $this->smarty->assign("perfil", $perfil);
-        $this->smarty->assign("rut_lab", $rut_lab);
-        $this->smarty->assign("nombre_lab", $nombre_lab);
         $this->smarty->assign("id_laboratorio", $id_laboratorio);
         $this->smarty->assign('arrLaboratorios', $arrLaboratorios);
         $this->smarty->assign('arrTipoExamen', $arrTipoExamen);
@@ -212,7 +210,7 @@ class Agenda extends Controller {
     
     /**
 	 * Descripción: Guardar Fecha/Hora Paciente en Agenda
-	 * @author Carolina Zamora Hormazábal
+	 * @author Carolina Zamora <carolina.zamora@cosof.cl>
      * @return JSON
 	 */
     public function guardarAgenda() {
@@ -250,13 +248,9 @@ class Agenda extends Controller {
                             'id_usuario_crea' => $_SESSION['id'],
                         );
 
-        //if($this->_DAOPacienteExamen->insert($ins_agenda)) {
-        //    $id_agenda = $this->db->getLastId();        
-        $result = $this->_DAOPacienteExamen->insert($ins_agenda);
-        if ($result) {
-            $id_agenda = $result;
-            //print_r($id_agenda);
-            //die();
+        $grilla = "";
+        $id_agenda = $this->_DAOPacienteExamen->insert($ins_agenda);
+        if ($id_agenda) {
             //inserta ids en empa
             if ($id_empa != NULL){
 
@@ -277,13 +271,22 @@ class Agenda extends Controller {
                 }
             } else {
                 $correcto = true;
-            }            
+            }
+            
+            if (isset($_SESSION['laboratorio'])) {
+                $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['laboratorio']);
+            } else {
+                $arrExamenes = $this->_DAOPacienteExamen->getListaDetalle();
+            }
+            $this->smarty->assign('arrExamenes', $arrExamenes);
+            $grilla = $this->smarty->fetch('laboratorio/grillaExamenesLaboratorio.tpl');
         } else {
             $error = true;
         }
 
         $salida = array("error"    => $error,
                         "correcto" => $correcto,
+                        "grilla" => $grilla,
                         "id_agenda" => $id_agenda);
 
         $this->smarty->assign("hidden", "");
