@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1><i class="fa fa-book"></i>&nbsp; {$titulo} </h1>
     <div class="col-md-12 text-right">
-		{if $mostrar_plan != 1 and $mostrar_especialista != 1}
+		{if $mostrar_plan != 1 and $mostrar_especialista != 1 and $mostrar_gestor != 1}
         <button type="button" id="ingresar" onclick="location.href = '{$base_url}/Paciente/nuevo'"
                 class="btn btn-success">
             <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Registro
@@ -74,7 +74,7 @@
                                                                         data-title="Ver Registro">
                                                                         <i class="fa fa-search"></i>
                                                                 </button>
-																{if $mostrar_especialista != 1}
+																{if $mostrar_especialista != 1 and $mostrar_gestor != 1}
                                                                 <button type="button" 
                                                                         class="btn btn-xs btn-success" 
                                                                         onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_paciente}';" 
@@ -87,6 +87,13 @@
                                                                                 onClick="location.href='{$base_url}/Reconoce/identificarAgresor/{$item->id_paciente}';"
                                                                                 data-toggle="tooltip" data-title="Reconoce Violencia">
                                                                                 <i class="fa fa-bullhorn"></i>
+                                                                        </button>
+                                                                {/if}
+																{if $item->bo_reconoce == 1 and $mostrar_gestor == 1}
+                                                                        <button type="button" class="btn btn-xs btn-info" 
+                                                                                onClick=""
+                                                                                data-toggle="tooltip" data-title="Dimensiones">
+                                                                                <i class="fa fa-area-chart"></i>
                                                                         </button>
                                                                 {/if}
                                                                 {if $mostrar_plan == 1}
@@ -107,6 +114,15 @@
                                                                         <i class="fa fa-user-md"></i>
                                                                 </button>
                                                                 {/if}
+																{if $mostrar_gestor == 1}
+                                                                <button type="button"
+                                                                        onclick="location.href = '{$base_url}/Gestor/seguimiento/{$item->id_paciente}'"
+                                                                        data-toggle="tooltip" 
+                                                                        data-title="Seguimiento" 
+                                                                        class="btn btn-xs btn-default">
+                                                                        <i class="fa fa-file-text"></i>
+                                                                </button>
+                                                                {/if}
                                                                 <button type="button"
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
@@ -114,6 +130,7 @@
                                                                         class="btn btn-xs btn-primary">
                                                                         <i class="fa fa-info-circle"></i>
                                                                 </button>
+																{if $mostrar_especialista != 1 and $mostrar_gestor != 1}
                                                                 <button type="button"
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/ver/{$item->id_paciente}', 'Agenda Examen Paciente : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
@@ -121,6 +138,16 @@
                                                                         class="btn btn-xs btn-warning">
                                                                         <i class="fa fa-calendar"></i>
                                                                 </button>
+																{/if}
+																{if $mostrar_especialista == 1 or $mostrar_gestor == 1}
+                                                                <button type="button"
+                                                                        onClick="" 
+                                                                        data-toggle="tooltip" 
+                                                                        data-title="ReAgendar"
+                                                                        class="btn btn-xs btn-warning">
+                                                                        <i class="fa fa-calendar"></i>
+                                                                </button>
+																{/if}
                                                         </td>
                                                 </tr>
                                                 {else}
@@ -159,7 +186,7 @@
                                                                         data-title="Ver Registro">
                                                                         <i class="fa fa-search"></i>
                                                                 </button>
-																{if $mostrar_especialista != 1}
+																{if $mostrar_especialista != 1 and $mostrar_gestor != 1}
                                                                 <button type="button" 
                                                                         class="btn btn-xs btn-success" 
                                                                         onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_paciente}';" 
@@ -172,6 +199,14 @@
                                                                                 onClick="location.href='{$base_url}/Reconoce/identificarAgresor/{$item->id_paciente}';"
                                                                                 data-toggle="tooltip" data-title="Reconoce Violencia">
                                                                                 <i class="fa fa-bullhorn"></i>
+                                                                        </button>
+                                                                {/if}
+																
+																{if $item->bo_reconoce == 1 and $mostrar_gestor == 1}
+                                                                        <button type="button" class="btn btn-xs btn-info" 
+                                                                                onClick=""
+                                                                                data-toggle="tooltip" data-title="Dimensiones">
+                                                                                <i class="fa fa-area-chart"></i>
                                                                         </button>
                                                                 {/if}
                                                                 {if $mostrar_plan == 1}
@@ -192,6 +227,15 @@
                                                                         <i class="fa fa-file-text"></i>
                                                                 </button>
                                                                 {/if}
+																{if $mostrar_gestor == 1}
+                                                                <button type="button"
+                                                                        onclick="location.href = '{$base_url}/Gestor/seguimiento/{$item->id_paciente}'"
+                                                                        data-toggle="tooltip" 
+                                                                        data-title="Seguimiento" 
+                                                                        class="btn btn-xs btn-default">
+                                                                        <i class="fa fa-file-text"></i>
+                                                                </button>
+                                                                {/if}
                                                                 <button type="button"
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$item->id_paciente}', 'Registro número : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
@@ -199,7 +243,7 @@
                                                                         class="btn btn-xs btn-primary">
                                                                         <i class="fa fa-info-circle"></i>
                                                                 </button>
-																{if $mostrar_especialista != 1}
+																{if $mostrar_especialista != 1 and $mostrar_gestor != 1}
                                                                 <button type="button"
                                                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/ver/{$item->id_paciente}', 'Agenda Examen Paciente : {$item->id_paciente}', 85);" 
                                                                         data-toggle="tooltip" 
@@ -208,7 +252,7 @@
                                                                         <i class="fa fa-calendar"></i>
                                                                 </button>
 																{/if}
-																{if $mostrar_especialista == 1}
+																{if $mostrar_especialista == 1 or $mostrar_gestor == 1}
                                                                 <button type="button"
                                                                         onClick="" 
                                                                         data-toggle="tooltip" 

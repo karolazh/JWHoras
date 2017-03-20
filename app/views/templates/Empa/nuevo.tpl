@@ -297,11 +297,13 @@
                                 <input type="text" name="gl_imc" id="gl_imc" 
                                        value="{$gl_imc}" placeholder="" class="form-control" readonly/>
                                 <span class="help-block hidden"></span>
-                            </div>  
+                            </div>
                             <div class="col-sm-1">
                                 {$botonAyudaIMC} &nbsp;
+								{if $bo_finalizado != 1}
                                 <button type="button" id="calcular" onclick="calculaIMC()" class="btn btn-sm btn-success">
                                     <i class="fa fa-success"></i> Calcular IMC</button>
+								{/if}
                             </div>
                             <input type="text" name="id_clasificacion_imc" id="id_clasificacion_imc" 
                                    value="{$id_clasificacion_imc}" placeholder="" class="form-control hidden"/>
@@ -338,12 +340,14 @@
                         <div class="form-group" id="verAgendaHipertension" style="{if $gl_pad < 90 and $gl_pas < 140}display: none{/if}">
 							<div class="col-sm-3"></div>
                             <div class="col-sm-2">
+								{if $bo_finalizado != 1}
                                 {$botonInformacionAgenda}&nbsp;&nbsp;
                                 <button type="button" id="verAgenda_{$id_hipertension}"
                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_empa}/{$id_centro_salud}/{$id_hipertension}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
-								<button type="button" id="verExamen_{$id_hipertension}" style="display: none" 
+								{/if}
+								<button type="button" id="verExamen_{$id_hipertension}" style="{if $bo_finalizado != 1}display: none{/if}" 
                                         onClick="" 
                                         class="btn btn-sm btn-info">
                                     <i class="fa fa-file-text"></i> Ver Examen</button>
@@ -382,13 +386,15 @@
                             <div class="col-sm-2" style="{if !($gl_glicemia >= 100 and $gl_glicemia <= 125)}display: none{/if}" id="div_glicemia_toma">
                                     {$botonConsejeriaGlicemia}&nbsp;&nbsp;
                             </div>
-                            <div class="col-sm-2" id="div_glicemia_agenda" style="{if !($gl_glicemia > 125)}display: none{/if}"> 
+                            <div class="col-sm-2" id="div_glicemia_agenda" style="{if !($gl_glicemia > 125) and $bo_finalizado != 1}display: none{/if}">
+								{if $bo_finalizado != 1} 
                                 {$botonInformacionAgenda}&nbsp;&nbsp;
                                 <button type="button" id="verAgenda_{$id_glicemia}" 
                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_empa}/{$id_centro_salud}/{$id_glicemia}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
-								<button type="button" id="verExamen_{$id_glicemia}" style="display: none" 
+								{/if}
+								<button type="button" id="verExamen_{$id_glicemia}" style="{if $bo_finalizado != 1}display: none{/if}" 
                                         onClick="" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-file-text"></i> Ver Examen</button>
@@ -415,12 +421,14 @@
                         <div class="form-group" id="id_vdrl" style="{if $bo_trabajadora_reclusa_1 != 'checked'}display: none{/if}">
                             <label class="control-label required col-sm-3">¿Examen VDRL? (Sifilis)</label>
                             <div class="col-sm-2" id="div_vdrl_agenda">
+								{if $bo_finalizado != 1}
                                 {$botonInformacionAgendaITS}&nbsp;&nbsp;
                                 <button type="button" id="verAgenda_{$id_vdrl}"
                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_empa}/{$id_centro_salud}/{$id_vdrl}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
-								<button type="button" id="verExamen_{$id_vdrl}" style="display: none" 
+								{/if}
+								<button type="button" id="verExamen_{$id_vdrl}" style="{if $bo_finalizado != 1}display: none{/if}" 
                                         onClick="" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-file-text"></i> Ver Examen</button>
@@ -430,12 +438,14 @@
                         <div class="form-group" id="id_rpr" style="{if $bo_trabajadora_reclusa_1 != 'checked'}display: none{/if}">
                             <label class="control-label required col-sm-3">¿Examen RPR? (Sifilis)</label>
                             <div class="col-sm-2" id="div_rpr_agenda">
+								{if $bo_finalizado != 1}
                                 {$botonInformacionAgendaITS}&nbsp;&nbsp;
                                 <button type="button" id="verAgenda_{$id_rpr}"
                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_empa}/{$id_centro_salud}/{$id_rpr}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
-								<button type="button" id="verExamen_{$id_rpr}" style="display: none" 
+									{/if}
+								<button type="button" id="verExamen_{$id_rpr}" style="{if $bo_finalizado != 1}display: none{/if}" 
                                         onClick="" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-file-text"></i> Ver Examen</button>
@@ -445,12 +455,14 @@
 						<div class="form-group" id="id_vih" style="{if $bo_trabajadora_reclusa_1 != 'checked'}display: none{/if}">
                             <label class="control-label required col-sm-3">¿Examen Test Elisa? (VIH)</label>
                             <div class="col-sm-2" id="div_vih_agenda">
+								{if $bo_finalizado != 1}
                                 {$botonInformacionAgendaVIH}&nbsp;&nbsp;
                                 <button type="button" id="verAgenda_{$id_vih}" 
                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_empa}/{$id_centro_salud}/{$id_vih}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
-								<button type="button" id="verExamen_{$id_vih}" style="display: none" 
+									{/if}
+								<button type="button" id="verExamen_{$id_vih}" style="{if $bo_finalizado != 1}display: none{/if}" 
                                         onClick="" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-file-text"></i> Ver Examen</button>
@@ -476,12 +488,14 @@
                         <div class="form-group" id="id_baciloscopia" style="{if $bo_tos_productiva_1 != 'checked'}display: none{/if}">
                             <label class="control-label required col-sm-3">Basiloscopia</label>
 							<div class="col-sm-2" id="div_b_agenda">
+								{if $bo_finalizado != 1}
                                 {$botonAyudaBasiloscopia}&nbsp;&nbsp;
                                 <button type="button" id="verAgenda_{$id_baciloscopia}" 
                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_empa}/{$id_centro_salud}/{$id_baciloscopia}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
-								<button type="button" id="verExamen_{$id_baciloscopia}" style="display: none" 
+								{/if}
+								<button type="button" id="verExamen_{$id_baciloscopia}" style="{if $bo_finalizado != 1}display: none{/if}" 
                                         onClick="" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-file-text"></i> Ver Examen</button>
@@ -563,12 +577,14 @@
                         <div class="form-group" id="tomar_fecha">         
                             <label class="control-label required col-sm-3">Tomar Fecha para PAP</label>
 							<div class="col-sm-2">
+							{if $bo_finalizado != 1}
                             {$botonAyudaTomarFecha}&nbsp;&nbsp;
                             <button type="button" id="verAgenda_{$id_pap}" 
                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_empa}/{$id_centro_salud}/{$id_pap}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
-							<button type="button" id="verExamen_{$id_pap}" style="display: none" 
+							{/if}
+							<button type="button" id="verExamen_{$id_pap}" style="{if $bo_finalizado != 1}display: none{/if}" 
                                         onClick="" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-file-text"></i> Ver Examen</button>
@@ -595,12 +611,14 @@
                                 <label for="bo_colesterol_toma" class="control-label required">Toma de Colesterol</label>
                             </div>
                             <div class="col-sm-3" style="{if !($gl_colesterol >= 240) }display: none{/if}" id="div_colesterol_agenda">
+								{if $bo_finalizado != 1}
                                     {$botonInformacionAgenda}&nbsp;&nbsp;
                                 <button type="button" id="verAgenda_{$id_colesterol}" style="{if !($gl_colesterol >= 240) }display: none{/if}" 
                                         onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_empa}/{$id_centro_salud}/{$id_colesterol}', 'Agenda Registro número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-success">                                        
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
-								<button type="button" id="verExamen_{$id_colesterol}" style="display: none" 
+									{/if}
+								<button type="button" id="verExamen_{$id_colesterol}" style="{if $bo_finalizado != 1}display: none{/if}" 
                                         onClick="" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-file-text"></i> Ver Examen</button>
@@ -686,12 +704,14 @@
                             <div id="mam_resultado2" style="{if $bo_mamografia_requiere_1 != 'checked'}display: none{/if}"> 
                                 <label class="control-label required col-sm-3">Toma Fecha para Mamografía</label>
                                 <div class="col-sm-3" id="div_mamografia_agenda">
+									{if $bo_finalizado != 1}
 									{$botonInformacionAgendaMamografia}&nbsp;&nbsp;
 									<button type="button" id="verAgenda_{$id_mamografia}" 
 											onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}/{$id_empa}/{$id_centro_salud}/{$id_mamografia}', 'Agenda Registro número : {$id_paciente}', 85);" 
 											class="btn btn-sm btn-success">                                        
 										<i class="fa fa-calendar"></i> Agenda Examen</button>
-									<button type="button" id="verExamen_{$id_mamografia}" style="display: none" 
+									{/if}
+									<button type="button" id="verExamen_{$id_mamografia}" style="{if $bo_finalizado != 1}display: none{/if}" 
 											onClick="" 
 											class="btn btn-sm btn-info">                                        
 										<i class="fa fa-file-text"></i> Ver Examen</button>
