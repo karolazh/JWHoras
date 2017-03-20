@@ -100,8 +100,8 @@
 					<button type="button" id="guardar" class="btn btn-success">
 						<i class="fa fa-save"></i>  Guardar
 					</button>&nbsp;&nbsp; 
-					<button type="button" id="reagendar" class="btn btn-success">
-						<i class="fa fa-file-o"></i>  Re Agendar
+					<button type="button" id="reagendar" class="btn btn-warning">
+						<i class="fa fa-calendar"></i>  Re Agendar
 					</button>&nbsp;&nbsp;
 					<button type="button" id="cancelar"  class="btn btn-default" 
 							onclick="location.href = '{$base_url}/Especialista/'">
