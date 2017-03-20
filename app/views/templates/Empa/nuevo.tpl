@@ -750,7 +750,7 @@
                         </div>
 						<div class="form-group col-sm-11" align="right" id="btn_aceptar" style="display: none">
                             <button type="button" id="aceptar" class="btn btn-default"
-									onclick="location.href = '{$base_url}/Paciente/index'">
+									onclick="history.back(-1)">
                                 <i class="fa fa-arrow-circle-left"></i> Volver
                             </button>
                         </div>
