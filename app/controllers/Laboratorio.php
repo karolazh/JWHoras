@@ -49,8 +49,8 @@ class Laboratorio extends Controller {
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
 
-        if (isset($_SESSION['laboratorio'])) {
-            $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['laboratorio']);
+        if (isset($_SESSION['id_laboratorio'])) {
+            $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['id_laboratorio']);
         } else {
             $arrExamenes = $this->_DAOPacienteExamen->getListaDetalle();
         }
@@ -175,10 +175,10 @@ class Laboratorio extends Controller {
             $id_paciente = $detExamen->id_paciente;
             $id_laboratorio = $detExamen->id_laboratorio;
             
-            if ($perfil == "7") {
+            //if ($perfil == "7") {
                 $rut_lab = $_SESSION['rut'];
                 $nombre_lab = $_SESSION['nombre'];
-            }
+            //}
             
             if ($accion == "1") { //"Ver"
                 $rut_lab = $detExamen->gl_rut_persona_toma;
