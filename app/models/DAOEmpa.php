@@ -146,6 +146,7 @@ class DAOEmpa extends Model{
 						bo_mamografia_toma				= ".$parametros['bo_mamografia_toma'].",
 						bo_mamografia_requiere			= ".$parametros['bo_mamografia_requiere'].",
 						gl_observaciones_empa			= ".$parametros['gl_observaciones_empa'].",
+						bo_finalizado					= 0,
 						fc_actualiza					= now(),
 						id_usuario_act					= ".$_SESSION['id']."
 					WHERE id_empa = ".$parametros['id_empa']."
