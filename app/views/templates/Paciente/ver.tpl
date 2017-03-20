@@ -179,7 +179,7 @@
         
         <div class="panel panel-primary">
             <div class="panel-heading">
-                Datos de Contacto {$botonAyudaContacto}
+                Datos para Contactar al Paciente {$botonAyudaContacto}
             </div>
             <div class="box-body">
 

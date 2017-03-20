@@ -7,8 +7,8 @@ var MantenedorEmt = Class({
 
     bindMapa : function(){        
 		var mapa = new MapaFormulario("map");
-		mapa.seteaIcono("static/images/referencia.png");
-		mapa.seteaZoom(12);
+		mapa.seteaIcono("static/images/markers/femenino.png");
+		mapa.seteaZoom(17);
 		mapa.inicio();
 		mapa.cargaMapa();
 		mapa.setMarkerInputs();
