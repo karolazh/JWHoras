@@ -605,7 +605,7 @@ function borrarAdjunto(adjunto) {
 $(document).ready(function () {
 
 	var mapa = new MapaFormulario("map");
-	mapa.seteaIcono("static/images/referencia.png");
+	mapa.seteaIcono("static/images/markers/femenino.png");
 	mapa.seteaLongitud("-70.6504492");
 	mapa.seteaLatitud("-33.4378305");
 	mapa.seteaZoom(12);

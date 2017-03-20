@@ -160,7 +160,7 @@ var MapaFormulario = Class({
     seteaMarker : function(){
         var yo = this;       
         var draggable = false;
-        console.log($("#" + this.id_div_mapa).data("editable"));
+        //console.log($("#" + this.id_div_mapa).data("editable"));
         if($("#" + this.id_div_mapa).data("editable") == 1){
             draggable = true;
         }
@@ -232,7 +232,7 @@ var MapaFormulario = Class({
         var yo = this;       
         
         var draggable = false;
-        console.log($("#" + this.id_div_mapa).data("editable"));
+        //console.log("setMarker -> editable:" + $("#" + this.id_div_mapa).data("editable"));
         if($("#" + this.id_div_mapa).data("editable") == 1){
             draggable = true;
         }
@@ -271,6 +271,7 @@ var MapaFormulario = Class({
 
         map = new google.maps.Map(document.getElementById(yo.id_div_mapa), mapOptions);
 
+        //console.log("initialize -> editable:" + $("#" + this.id_div_mapa).data("editable"));
         if($("#" + this.id_div_mapa).data("editable") == 1){
             google.maps.event.addListener(map, "dblclick", function (e) { 
                 var lat = e.latLng.lat();
@@ -378,7 +379,7 @@ var MapaFormulario = Class({
                     gl_direccion = data.results[0].formatted_address;
                 }else{
                     alertify.error('Direccion no disponible en google maps');
-                    console.log('Direccion no disponible en google maps');
+                    //console.log('Direccion no disponible en google maps');
                 }
             }
         });
@@ -404,8 +405,8 @@ var MapaFormulario = Class({
                 this.marker = null;
             }
             
-            var draggable = true;
-            console.log($("#" + this.id_div_mapa).data("editable"));
+            var draggable = false;
+            //console.log("setMarkerInputs ->editable:" + $("#" + this.id_div_mapa).data("editable"));
             if($("#" + this.id_div_mapa).data("editable") == 1){
                  var draggable = true;
             }
