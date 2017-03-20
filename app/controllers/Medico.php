@@ -48,14 +48,19 @@ class Medico extends Controller {
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
 
-		$where	= array('bo_acepta_programa'=>1);
-		$arr = $this->_DAOPaciente->getListaDetalle($where);
+		$where	= array('bo_acepta_programa'=>1, 'pre_empa.nr_orden' =>1, 'pre_empa.bo_finalizado' =>1);
+		$join[]	= array('tabla'	=> 'pre_empa',
+						'on'	=> 'pre_empa.id_paciente',
+						'igual'	=> 'paciente.id_paciente'
+						);
+		$arr	= $this->_DAOPaciente->getListaDetalle($where,$join);
+
 		$this->smarty->assign('arrResultado', $arr);
 		$this->smarty->assign('titulo', 'Evaluación');
 		$this->smarty->assign('mostrar_plan', 1);
 
 		$this->_display('Paciente/index.tpl');
-		$this->load->javascript(STATIC_FILES . "js/templates/paciente/index.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/Paciente/index.js");
 	}
 
 	/**
