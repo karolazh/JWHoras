@@ -2,127 +2,153 @@
 
 var Laboratorio = {
     
-    buscarExamen: function (id) {
-		console.log(id);
+    buscarExamen: function (id_paciente_examen) {
+	//console.log(id);
         var error = false;
         var msg_error = '';
+        //alert(id_paciente_examen);
+        //alert(BASE_URI + 'index.php/Laboratorio/buscarExamen/' + id_paciente_examen);
         
-        $.ajax({
-            url : BASE_URI + 'index.php/Laboratorio/buscarExamen', 
-            //data : formulario,
-            processData : false,
-            cache : false,
-            async : true,
-            type : 'post',
-            dataType : 'json',
-            contentType : false,
-            success : function(response){
-                if(response.correcto == true){
-                    //xModal.success("OK: El archivo fue guardado", function(){
-                        habilitarExamen();
-                    //});
-                }
-                else{
-                    xModal.danger("ERROR: ",function(){
-                    });
-                }
-            }
-            , 
-            error : function(){
-                    xModal.danger('Error: Intente nuevamente',function(){
-                    });
-            }
-        });
-    }
-}
-        
-//        var idpac = form.id_paciente.value;
-//        //alert(idpac);
-//        var tipodoc = form.tipoDoc.value;
-//        //alert(tipodoc);
-//        var path = form.archivo.value;
-//        //alert(path);
-//        var comentario = form.comentario_adjunto.value;
-//        //alert(comentario);
-//        /* descripción tipo doc */
-//        var tipotxt = tipoDoc.options[tipoDoc.selectedIndex].text;
-//        /* nombre de tipo de documento a mayusculas*/
-//        tipotxt = tipotxt.toUpperCase();
-//        
-//        if (tipodoc == 0) {
-//            msg_error += 'Seleccione Tipo de documento<br/>';
-//            error = true;
-//        }
-//        
-//        if (path == "") {
-//            msg_error += 'Seleccione Archivo<br/>';
-//            error = true;
-//        }
-//        
-//        if (error) {
-//            xModal.danger(msg_error,function(){
-//            });
-//        } else {
-//            extensiones_permitidas = new Array('.jpeg', '.jpg', '.png', '.gif', 
-//                                               '.tiff', '.bmp', '.pdf', '.txt', 
-//                                               '.csv', '.doc', '.docx', '.ppt', 
-//                                               '.pptx', '.xls', '.xlsx');
-//            permitida   = false;
-//            string      = path;
-//            extension   = (string.substring(string.lastIndexOf("."))).toLowerCase();
-//
-//            for(var i = 0; i < extensiones_permitidas.length; i++) {
-//                if (extensiones_permitidas[i] == extension){
-//                    permitida = true;
-//                    break;
+//        $.ajax({
+//            url : BASE_URI + 'index.php/Laboratorio/buscarExamen/' + id_paciente_examen, 
+//            processData : false,
+//            cache : false,
+//            async : true,
+//            type : 'post',
+//            dataType : 'json',
+//            contentType : false,
+//            success : function(response){
+//                if(response.correcto == true){
+//                    //xModal.success("OK: El archivo fue guardado", function(){
+//                        habilitarExamen();
+//                    //});
+//                }
+//                else{
+//                    xModal.danger("ERROR: ",function(){
+//                    });
 //                }
 //            }
-//
-//            if (!permitida) {
-//                msg_error += 'El Tipo de archivo que intenta subir no está permitido.<br><br>'
-//                msg_error += 'Favor elija un archivo con las siguientes extensiones: <br>'
-//                msg_error += extensiones_permitidas.join(' ')+'<br/>';
-//                xModal.warning(msg_error);
-//            } else {
-//                //$(form).submit();
-//                
-//                var formulario = new FormData();
-//                formulario.append('idpac', idpac);
-//                formulario.append('tipodoc',tipodoc);
-//                formulario.append('tipotxt',tipotxt);
-//                formulario.append('comentario',comentario);
-//                
-//                var inputFileImage = document.getElementById("archivo");
-//                var file = inputFileImage.files[0];
-//                formulario.append('archivo',file);
-//                //alert(BASE_URI + 'index.php/Bitacora/guardarNuevoAdjunto');
-//                console.log(formulario);                
-//                $.ajax({
-//                    url : BASE_URI + 'index.php/Bitacora/guardarNuevoAdjunto', 
-//                    data : formulario,
-//                    processData : false,
-//                    cache : false,
-//                    async : true,
-//                    type : 'post',
-//                    dataType : 'json',
-//                    contentType : false,
-//                    success : function(response){
-//                        if(response.correcto == true){
-//                            xModal.success("OK: El archivo fue guardado", function(){
-//                                $("#grilla-adjuntos").html(response.grilla);
-//                                habilitarAdjunto();
-//                            });
-//                        }
-//                        else{
-//                            xModal.danger("ERROR: El archivo NO fue guardado",function(){
-//                            });
-//                        }
-//                    }
-//                    , 
-//                    error : function(){
-//                            xModal.danger('Error: Intente nuevamente',function(){
-//                            });
-//                    }
-//                });
+//            , 
+//            error : function(){
+//                    xModal.danger('Error: Intente nuevamente',function(){
+//                    });
 //            }
-//        }
+//        });
+    }
+    ,
+    guardarExamen: function (form) {
+        var error = false;
+        var msg_error = '';        
+        
+        var id_paciente_examen = form.id_paciente_examen.value;
+        //alert(id_paciente_examen);
+        var id_tipo_examen = form.id_tipo_examen.value;
+        var id_paciente = form.id_paciente.value;
+        var gl_folio = form.gl_folio.value; 
+        var gl_rut_toma = form.gl_rut_toma.value;
+        //alert(gl_rut_toma);
+        var gl_nombre_toma = form.gl_nombre_toma.value;
+        //alert(gl_nombre_toma);
+        var fc_resultado = form.fc_resultado.value;
+        //alert(fecha_resultado);
+        var gl_resultado = form.gl_resultado.value;
+        //alert(resultado);
+        var gl_resultado_descripcion = form.gl_resultado_descripcion.value;
+        //alert(descripcion);
+        var gl_resultado_indicacion = form.gl_resultado_indicacion.value;
+        //alert(indicacion);
+        var resultado = "";
+        
+        if (gl_rut_toma == "") {
+            msg_error += 'Ingrese RUT persona toma examen<br/>';
+            error = true;
+        }
+        
+        if (gl_nombre_toma == "") {
+            msg_error += 'Ingrese Nombre persona toma examen<br/>';
+            error = true;
+        }
+        
+        if (fc_resultado == "") {
+            msg_error += 'Ingrese Fecha de Resultado<br/>';
+            error = true;
+        }
+        
+        if (gl_resultado == "") {
+            msg_error += 'Ingrese Resultado de Examen<br/>';
+            error = true;
+        } else {
+            //valida si tipo de examen es VIH, VDRL, RPR
+            if ((id_tipo_examen == 2) || (id_tipo_examen == 3) || (id_tipo_examen == 4)) {
+                if (gl_resultado == 0) {
+                    resultado = "P";
+                } else {
+                    resultado = "N";
+                }
+            } else {
+                if (gl_resultado == 0) {
+                    resultado = "N";
+                } else {
+                    resultado = "A";
+                }
+            }
+        }
+        
+        if (gl_resultado_descripcion == "") {
+            msg_error += 'Ingrese Descripción de Resultado<br/>';
+            error = true;
+        }
+        
+        if (gl_resultado_indicacion == "") {
+            msg_error += 'Ingrese Indicación de Resultado<br/>';
+            error = true;
+        }
+        
+        if (error) {
+            xModal.danger(msg_error,function(){
+            });
+        } else {
+            var formulario = new FormData();
+            formulario.append('id_paciente_examen', id_paciente_examen);
+            formulario.append('id_tipo_examen', id_tipo_examen);
+            formulario.append('id_paciente', id_paciente);
+            formulario.append('gl_rut_toma', gl_rut_toma);
+            formulario.append('gl_nombre_toma', gl_nombre_toma);
+            formulario.append('gl_folio',gl_folio);
+            formulario.append('fc_resultado', fc_resultado);
+            formulario.append('gl_resultado', resultado);
+            formulario.append('gl_resultado_descripcion', gl_resultado_descripcion);
+            formulario.append('gl_resultado_indicacion', gl_resultado_indicacion);
+            
+            //console.log(formulario);
+            $.ajax({
+                url : BASE_URI + 'index.php/Laboratorio/guardarExamen', 
+                data : formulario,
+                processData : false,
+                cache : false,
+                async : true,
+                type : 'post',
+                dataType : 'json',
+                contentType : false,
+                success : function(response){
+                    if(response.correcto == true){
+                        xModal.success("OK: El Examen fue guardado", function(){
+                            //recarga grilla de exámenes
+                            $("#grilla-examenes").html(response.grilla);
+                            xModal.closeAll();
+                        });
+                    }
+                    else{
+                        xModal.danger("ERROR: El Examen NO fue guardado",function(){
+                        });
+                    }
+                }
+                , 
+                error : function(){
+                        xModal.danger('Error: Intente nuevamente',function(){
+                        });
+                }
+            });
+        }
+    }
+}

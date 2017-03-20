@@ -10,9 +10,9 @@ $("#guardar").on('click', function (e) {
 	if (cie10 == 0) {
 		xModal.danger('- El campo CIE10 es obligatorio');	
 	} else if (cie102 == 0) {
-		xModal.danger('- El campo CIE102 es obligatorio');	
+		xModal.danger('- El campo CIE10 es obligatorio');	
 	} else if (cie103 == 0) {
-		xModal.danger('- El campo CIE103 es obligatorio');	
+		xModal.danger('- El campo CIE10 es obligatorio');	
 	} else if (gl_diagnostico == '' ) {
 		xModal.danger('- El campo Diagnóstico es obligatorio');	
 	} else if (gl_observacion == '' ) {

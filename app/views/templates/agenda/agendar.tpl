@@ -54,8 +54,6 @@
                                 onblur="validarVacio(this, 'Por favor Seleccione un Laboratorio')">
                             <option  value="0">Seleccione un Laboratorio</option>
                                 {foreach $arrLaboratorios as $lab}
-                                    {*<option  value="{$lab->id_laboratorio}">{$lab->id_laboratorio}</option>*}
-                                    {*<option  value="{$lab->id_laboratorio}">{$lab->gl_nombre_laboratorio}</option>*}
                                     {if $id_laboratorio == $lab->id_laboratorio}
                                         <option  value="{$lab->id_laboratorio}" selected="">{$lab->gl_nombre_laboratorio}</option>
                                     {else}
@@ -65,20 +63,6 @@
                         </select>
                     </div>
                 </div>
-                {*{if $perfil == "7"}
-                <div class="form-group">
-                    <label class="control-label required col-sm-3">RUT persona que toma examen</label>
-                    <div class="col-sm-2">
-                        <input type="text" name="gl_rut_toma" id="gl_rut_toma" maxlength="9" 
-                               value="{$rut_lab}" class="form-control" readonly />
-                    </div>
-                    <label class="control-label required col-sm-3">Nombre persona que toma examen</label>
-                    <div class="col-sm-4">
-                        <input type="text" name="gl_nombre_toma" id="gl_nombre_toma" maxlength="" 
-                               value="{$nombre_lab}" class="form-control" readonly />
-                    </div>
-                </div>
-                {/if}*}
             </div>
         </div>
 
@@ -138,7 +122,6 @@
     <div class="form-group col-sm-11" align="right">
         <button type="button" id="guardar" class="btn btn-success"
                 onclick="Agenda.guardarAgenda(this.form)"
-                {*onclick="Laboratorio.guardarNuevoExamen(this.form,this);">*}
             <i class="fa fa-save"></i>  Guardar
         </button>
         &nbsp;

@@ -56,7 +56,7 @@ class DAOPacienteExamen extends Model{
     }
 
     public function getByIdPaciente($id_paciente){
-        $query = "  SELECT
+        $query = "  SELECT 
                         examen.id_paciente_examen,
                         examen.id_tipo_examen,
                         examen.id_paciente,
@@ -91,6 +91,12 @@ class DAOPacienteExamen extends Model{
         }
     }
 
+    /**
+	 * Descripción: Función que trae exámenes de paciente con resultado "Alterado"
+	 * @author Carolina Zamora <carolina.zamora@cosof.cl>
+     * @param  int   $id_paciente Id de Paciente
+     * @return array Listado de Exámenes x Paciente "Alterado"
+	 */
     public function getExamenAleradoByIdPaciente($id_paciente){
         $query = "  SELECT
                         examen.id_paciente_examen ,
@@ -143,8 +149,7 @@ class DAOPacienteExamen extends Model{
                         (SELECT COUNT(*) FROM pre_paciente_examen paciente_examen 
                          WHERE paciente_examen.id_paciente = pac.id_paciente
                          AND paciente_examen.gl_resultado = 'A') AS nr_examen_alterado,
-                        datediff(now(), pac.fc_crea) AS nr_dias_primera_visita,
-                        pac_examen.id_empa
+                        datediff(now(), pac.fc_crea) AS nr_dias_primera_visita
                     FROM pre_paciente pac
                     INNER JOIN pre_paciente_examen pac_examen ON pac_examen.id_paciente = pac.id_paciente
                     LEFT JOIN  pre_empa empa ON (empa.id_empa = pac_examen.id_empa AND empa.bo_finalizado = 0)
@@ -167,6 +172,51 @@ class DAOPacienteExamen extends Model{
         }
     }   
     
+    /**
+	 * Descripción: Función que trae exámenes por id de laboratorio
+	 * @author Carolina Zamora <carolina.zamora@cosof.cl>
+     * @param  int   $id_laboratorio Id de Laboratorio
+     * @return array Listado de Exámenes x Laboratorio
+	 */
+    public function getByIdLaboratorio($id_laboratorio){
+        $query = "  SELECT DISTINCT
+                        pac.id_paciente,
+                        pac.gl_rut,
+                        pac.gl_run_pass,
+                        pac.bo_reconoce,
+                        pac.bo_acepta_programa,
+                        pac.gl_nombres,
+                        pac.gl_apellidos,
+                        date_format(pac.fc_crea,'%d-%m-%Y') as fc_crea,
+                        IF(pac.bo_extranjero=1, pac.gl_run_pass, pac.gl_rut) AS gl_identificacion,
+                        cs.gl_nombre_establecimiento as gl_institucion,
+                        com.gl_nombre_comuna,
+                        est.gl_nombre_estado_caso,
+                        est.id_paciente_estado,
+                        (SELECT COUNT(*) FROM pre_paciente_registro 
+                         WHERE pre_paciente_registro.id_paciente = pac.id_paciente ) AS nr_motivo_consulta,
+                        (SELECT COUNT(*) FROM pre_paciente_examen paciente_examen 
+                         WHERE paciente_examen.id_paciente = pac.id_paciente
+                         AND paciente_examen.gl_resultado = 'A') AS nr_examen_alterado,
+                        datediff(now(), pac.fc_crea) AS nr_dias_primera_visita,
+                        pac_examen.id_laboratorio
+                    FROM pre_paciente pac
+                    INNER JOIN pre_paciente_examen pac_examen ON pac_examen.id_paciente = pac.id_paciente
+                    LEFT JOIN  pre_empa empa ON (empa.id_empa = pac_examen.id_empa AND empa.bo_finalizado = 0)
+                    LEFT JOIN  pre_centro_salud cs ON cs.id_centro_salud = pac.id_centro_salud
+                    LEFT JOIN  pre_comuna com ON com.id_comuna = pac.id_comuna
+                    LEFT JOIN  pre_paciente_estado est ON est.id_paciente_estado = pac.id_paciente_estado
+                    WHERE pac_examen.id_laboratorio = ?";
+        
+        $param	= array($id_laboratorio);
+        $result	= $this->db->getQuery($query, $param);
+
+        if ($result->numRows > 0) {
+            return $result->rows;
+        } else {
+            return NULL;
+        }
+    }
 }
 
 ?>
