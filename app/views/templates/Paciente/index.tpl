@@ -4,7 +4,7 @@
 <section class="content-header">
     <h1><i class="fa fa-book"></i>&nbsp; {$titulo} </h1>
     <div class="col-md-12 text-right">
-		{if $mostrar_plan != 1}
+		{if $mostrar_plan != 1 and $mostrar_especialista != 1}
         <button type="button" id="ingresar" onclick="location.href = '{$base_url}/Paciente/nuevo'"
                 class="btn btn-success">
             <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Registro
