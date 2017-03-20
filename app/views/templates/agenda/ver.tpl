@@ -1,11 +1,11 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="{$static}template/plugins/fullcalendar/fullcalendar.min.js"></script>
+<script type="text/javascript" src="{$static}template/plugins/fullcalendar/locale/es.js"></script>
 <link href='{$static}template/plugins/fullcalendar/fullcalendar.min.css' rel='stylesheet' />
 <link href='{$static}template/plugins/fullcalendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
 <script src='{$static}template/plugins/fullcalendar/lib/moment.min.js'></script>
-<script src='{$static}template/plugins/fullcalendar/lib/jquery.min.js'></script>
-<script type="text/javascript" src="{$static}template/plugins/fullcalendar/fullcalendar.min.js"></script>
-<script type="text/javascript" src="{$static}template/plugins/fullcalendar/locale/es.js"></script>
 
 <section class="content">
     <div class="panel panel-primary">
