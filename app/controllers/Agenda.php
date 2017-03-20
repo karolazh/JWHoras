@@ -182,7 +182,7 @@ class Agenda extends Controller {
         if ($perfil == 7) { //"Laboratorio"
             $rut_lab = $_SESSION['rut'];
             $nombre_lab = $_SESSION['nombre'];
-            $id_laboratorio = $_SESSION['laboratorio'];            
+            $id_laboratorio = $_SESSION['id_laboratorio'];            
             //Combo Laboratorios según tipo de usuario
             $arrLaboratorios = $this->_DAOLaboratorio->getLista();
         } else {
@@ -273,8 +273,8 @@ class Agenda extends Controller {
                 $correcto = true;
             }
             
-            if (isset($_SESSION['laboratorio'])) {
-                $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['laboratorio']);
+            if (isset($_SESSION['id_laboratorio'])) {
+                $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['id_laboratorio']);
             } else {
                 $arrExamenes = $this->_DAOPacienteExamen->getListaDetalle();
             }

@@ -49,8 +49,8 @@ class Laboratorio extends Controller {
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
 
-        if (isset($_SESSION['laboratorio'])) {
-            $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['laboratorio']);
+        if (isset($_SESSION['id_laboratorio'])) {
+            $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['id_laboratorio']);
         } else {
             $arrExamenes = $this->_DAOPacienteExamen->getListaDetalle();
         }
