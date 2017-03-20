@@ -749,9 +749,9 @@
                             </button>
                         </div>
 						<div class="form-group col-sm-11" align="right" id="btn_aceptar" style="display: none">
-                            <button type="button" id="aceptar" class="btn btn-success"
+                            <button type="button" id="aceptar" class="btn btn-default"
 									onclick="location.href = '{$base_url}/Paciente/index'">
-                                <i class="fa fa-check"></i>  Aceptar
+                                <i class="fa fa-arrow-circle-left"></i> Volver
                             </button>
                         </div>
                     </div>
