@@ -76,16 +76,6 @@
                     <i class="fa fa-sticky-note"></i> Datos Toma de Examen</h3></div>
             <div class="box-body">
                 <div class="form-group">
-                    <label class="control-label required col-sm-3">Folio examen</label>
-                    <div class="col-sm-2">
-                        <input type="text" name="gl_folio" id="gl_folio" maxlength="" 
-                               onKeyPress="return soloNumeros(event)"
-                               value="{$gl_folio}" placeholder="" class="form-control"
-                               {if $accion == "1"}readonly{/if}/>
-                    </div>
-                    <div class="col-sm-12"></div>
-                </div>
-                <div class="form-group">
                     <label class="control-label required col-sm-3">Fecha toma de examen</label>
                     <!-- <div class='col-sm-2'>
                         <div class="input-group">
@@ -102,13 +92,6 @@
                         <input type="date" class="form-control col-sm-2" 
                                name="fc_toma" id="fc_toma" value="{$fc_toma}" readonly />
                     </div>
-                    <label class="control-label required col-sm-3">Hora toma de examen</label>
-                    <div class="col-sm-2">
-                        <input type="time" class="form-control col-sm-2"                                
-                               name="gl_hora_toma" id="gl_hora_toma" value="{$gl_hora_toma}" readonly />
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="control-label required col-sm-3">Fecha resultado de examen</label>
                     <!-- <div class='col-sm-2'>
                         <div class="input-group">
@@ -126,6 +109,24 @@
                                name="fc_resultado" id="fc_resultado"  value="{$fc_resultado}"
                                {if $accion == "1"}readonly{/if} />
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label required col-sm-3">Hora toma de examen</label>
+                    <div class="col-sm-2">
+                        <input type="time" class="form-control col-sm-2"                                
+                               name="gl_hora_toma" id="gl_hora_toma" value="{$gl_hora_toma}" readonly />
+                    </div>
+                    <label class="control-label required col-sm-3">Folio examen</label>
+                    <div class="col-sm-2">
+                        <input type="text" name="gl_folio" id="gl_folio" maxlength="" 
+                               onKeyPress="return soloNumeros(event)"
+                               value="{$gl_folio}" placeholder="" class="form-control"
+                               {if $accion == "1"}readonly{/if}/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label required col-sm-3">&nbsp;</label>
+                    <div class="col-sm-2">&nbsp;</div>
                     <label class="control-label required col-sm-3">Resultado examen</label>
                     <div class="form-group col-sm-4">
                         &nbsp;&nbsp;&nbsp;&nbsp;
