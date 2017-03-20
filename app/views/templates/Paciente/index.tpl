@@ -89,6 +89,13 @@
                                                                                 <i class="fa fa-bullhorn"></i>
                                                                         </button>
                                                                 {/if}
+																{if $item->bo_reconoce == 1 and $mostrar_gestor == 1}
+                                                                        <button type="button" class="btn btn-xs btn-info" 
+                                                                                onClick=""
+                                                                                data-toggle="tooltip" data-title="Dimensiones">
+                                                                                <i class="fa fa-area-chart"></i>
+                                                                        </button>
+                                                                {/if}
                                                                 {if $mostrar_plan == 1}
                                                                 <button type="button"
                                                                         onclick="location.href = '{$base_url}/Medico/plan_tratamiento/{$item->id_paciente}'"
@@ -192,6 +199,14 @@
                                                                                 onClick="location.href='{$base_url}/Reconoce/identificarAgresor/{$item->id_paciente}';"
                                                                                 data-toggle="tooltip" data-title="Reconoce Violencia">
                                                                                 <i class="fa fa-bullhorn"></i>
+                                                                        </button>
+                                                                {/if}
+																
+																{if $item->bo_reconoce == 1 and $mostrar_gestor == 1}
+                                                                        <button type="button" class="btn btn-xs btn-info" 
+                                                                                onClick=""
+                                                                                data-toggle="tooltip" data-title="Dimensiones">
+                                                                                <i class="fa fa-area-chart"></i>
                                                                         </button>
                                                                 {/if}
                                                                 {if $mostrar_plan == 1}
