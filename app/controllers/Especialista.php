@@ -82,12 +82,16 @@ class Especialista extends Controller {
 		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
 	}
 	
+	/**
+	* Descripción: Guardar Diagnostico Especialista
+	* @author: David Guzmán <david.guzman@cosof.cl>
+	*/
 	public function GuardarDiagnostico(){
 		header('Content-type: application/json');
 		$parametros		= $this->_request->getParams();
 		$correcto		= FALSE;
 		$error			= FALSE;
-		//$bool_update = $this->_DAOPacienteAgendaEspecialista->insert($parametros);
+		$bool_update = $this->_DAOPacienteAgendaEspecialista->insert($parametros);
 		if ($bool_update) {
 			//$resp = $this->_Evento->guardarMostrarUltimo(12,$id_empa,$id_paciente,"Empa modificado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
 			$correcto = TRUE;
