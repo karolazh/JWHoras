@@ -12,11 +12,11 @@
             {include file='bitacora/datosPacienteBitacora.tpl'}
                     
             <!-- EXÁMENES ALTERADOS -->
-            {if $muestra_examenes == "SI"}
+            {* if $muestra_examenes == "SI"}
                 <div class="form-group">
                     {include file='bitacora/grillaExamenesAlterados.tpl'}
                 </div>
-            {/if}
+            {/if *}
             <!-- FIN EXÁMENES ALTERADOS -->
 
             <!-- MOTIVOS DE CONSULTA -->
