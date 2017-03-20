@@ -66,9 +66,17 @@
 
 			<div class="top-spaced"></div>
 			<div class="form-group col-sm-11" align="right">
+				{if $bo_finalizado != 1}
 				<button type="button" id="guardaraudit" class="btn btn-success">
 					<i class="fa fa-save"></i>  Guardar
 				</button>
+				{/if}
+				{if $bo_finalizado == 1}
+				<button type="button" id="volver" class="btn btn-default"
+						onclick="xModal.close()">
+					<i class="fa fa-arrow-circle-left"></i>  Volver
+				</button>
+				{/if}
 			</div>
 			<input type="text" value="{$cant_pre}" id="cant_pre" name="cant_pre" class="hidden">
 		</form>

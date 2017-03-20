@@ -395,6 +395,8 @@ class Empa extends Controller{
 		Acceso::redireccionUnlogged($this->smarty);
 		$params = $this->request->getParametros();
 		$id_empa = $params[0];
+		$arrEmpa = $this->_DAOEmpa->getById($id_empa);
+		$this->smarty->assign("bo_finalizado", $arrEmpa->bo_finalizado);
 		$arrPreguntas = $this->_DAOAuditPregunta->getLista();
 		$arrAudit = $this->_DAOEmpaAudit->getByIdEmpa($id_empa);
 		$total = 0;

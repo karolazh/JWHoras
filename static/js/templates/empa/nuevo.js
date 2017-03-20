@@ -90,7 +90,7 @@ function mensajeIMC(imc) {
 }
 
 //Calcular IMC segun Peso y Altura
-function calculaIMC()
+function calculaIMC(blur)
 {
 //hacemos la llamada a los datos introducidos
 	var peso = $('#gl_peso').val();
@@ -101,12 +101,13 @@ function calculaIMC()
 
 	//mensaje si no tiene valores y dar valor="" a gl_imc
 	if ((peso == "") || (altura == "")) {
-		xModal.danger("Ingrese Peso y Altura");
+		if(!blur){
+			xModal.danger("Ingrese Peso y Altura");
+		}
 		imc = "";
-                $('#gl_imc').css("borderColor", "");
-                $('#gl_imc').parent().find("span.help-block").css("color", "");
-                $('#gl_imc').parent().find('span.help-block').addClass("hidden");
-                $('#gl_peso').focus();
+        $('#gl_imc').css("borderColor", "");
+        $('#gl_imc').parent().find("span.help-block").css("color", "");
+        $('#gl_imc').parent().find('span.help-block').addClass("hidden");
 	}
 
 	//Si IMC es mayor a 30 Mostrar Diabetes
@@ -164,11 +165,27 @@ $(".bo_fuma").on('change', function (e) {
 // Si Edita Peso -> IMC se borra
 $("#gl_peso").keyup(function (e) {
 	$('#gl_imc').val('');
+	$('#gl_imc').css("borderColor", "");
+    $('#gl_imc').parent().find("span.help-block").css("color", "");
+    $('#gl_imc').parent().find('span.help-block').addClass("hidden");
+});
+
+$("#gl_peso").on('blur', function (e) {
+	var blur = true;
+	calculaIMC(blur);
 });
 
 // Si Edita Estatura -> IMC se borra
 $("#gl_estatura").keyup(function (e) {
 	$('#gl_imc').val('');
+	$('#gl_imc').css("borderColor", "");
+    $('#gl_imc').parent().find("span.help-block").css("color", "");
+    $('#gl_imc').parent().find('span.help-block').addClass("hidden");
+});
+
+$("#gl_estatura").on('blur', function (e) {
+	var blur = true;
+	calculaIMC(blur);
 });
 
 //HIPERTENSION = 9
