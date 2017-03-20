@@ -27,7 +27,7 @@
 					<div class="col-sm-4">
 						<select class="form-control" id="cie10" name="cie10">
 							<option value="0">Seleccione CIE10</option>
-							<option value="1">CIE10</option>
+							<option value="1">CIE10 L1</option>
 							{*foreach $arrMes as $item}
 								<option value="{$item->id_mes}" >{$item->gl_mes}</option>
 							{/foreach*}
@@ -42,8 +42,8 @@
 					<label for="cie102" class="control-label col-sm-2">CIE10 2(*)</label>
 					<div class="col-sm-4">
 						<select class="form-control" id="cie102" name="cie102">
-							<option value="0">Seleccione CIE102</option>
-							<option value="1">CIE102</option>
+							<option value="0">Seleccione CIE10</option>
+							<option value="1">CIE10 L2</option>
 							{*foreach $arrMes as $item}
 								<option value="{$item->id_mes}" >{$item->gl_mes}</option>
 							{/foreach*}
@@ -58,8 +58,8 @@
 					<label for="cie103" class="control-label col-sm-2">CIE10 3(*)</label>
 					<div class="col-sm-4">
 						<select class="form-control" id="cie103" name="cie103">
-							<option value="0">Seleccione CIE103</option>
-							<option value="1">CIE103</option>
+							<option value="0">Seleccione CIE10</option>
+							<option value="1">CIE10 L3</option>
 							{*foreach $arrMes as $item}
 								<option value="{$item->id_mes}" >{$item->gl_mes}</option>
 							{/foreach*}
