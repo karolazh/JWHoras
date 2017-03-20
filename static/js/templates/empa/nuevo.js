@@ -136,7 +136,9 @@ $(".bo_embarazo").on('change', function (e) {
 		$('#pap').hide();
 	} else {
 		$('#cancer_de_mama').show();
-		$('#pap').show();
+		if ($('#nr_edad').val() > 24 && $('#nr_edad').val() < 65){
+			$('#pap').show();
+		}
 	}
 });
 

@@ -326,7 +326,7 @@ class Empa extends Controller{
 		} else {
 			$pap = "display: block";
 		}
-		
+		//Mostrar/Ocultar MAMOGRAFIA segun embarazada
 		if ($empa->bo_embarazo == 1) {
 			$mamografia = "display: none";
 		} else {
