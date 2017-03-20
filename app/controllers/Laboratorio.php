@@ -175,10 +175,10 @@ class Laboratorio extends Controller {
             $id_paciente = $detExamen->id_paciente;
             $id_laboratorio = $detExamen->id_laboratorio;
             
-            if ($perfil == "7") {
+            //if ($perfil == "7") {
                 $rut_lab = $_SESSION['rut'];
                 $nombre_lab = $_SESSION['nombre'];
-            }
+            //}
             
             if ($accion == "1") { //"Ver"
                 $rut_lab = $detExamen->gl_rut_persona_toma;
