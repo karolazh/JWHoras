@@ -69,7 +69,7 @@
         <!-- DATOS TOMA DE EXAMEN -->
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
-                    <i class="fa fa-sticky-note"></i> Datos Toma de Examen</h3></div>
+                    <i class="fa fa-sticky-note"></i> Datos de Examen</h3></div>
             <div class="box-body">
                 <div class="form-group">
                     <label class="control-label required col-sm-3">Fecha toma de examen</label>
@@ -91,10 +91,10 @@
                     <label class="control-label required col-sm-3">Resultado examen</label>
                     <div class="col-sm-2">
                         <label><input class="gl_resultado"  type="radio" name="gl_resultado" 
-                                      id="gl_resultado" value="0">NORMAL</label>
+                                      id="gl_resultado" value="0"><span class="label label-success">NORMAL</span></label>
                         &nbsp;&nbsp;
                         <label><input class="gl_resultado" type="radio" name="gl_resultado" 
-                                      id="gl_resultado" value="0">ALTERADO</label>
+                                      id="gl_resultado" value="0"><span class="label label-danger" style="color:#ffffff">ALTERADO</span></label>
                     </div>
                 </div>*}
             </div>

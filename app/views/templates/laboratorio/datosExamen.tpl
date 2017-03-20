@@ -73,7 +73,7 @@
         <!-- DATOS TOMA DE EXAMEN -->
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
-                    <i class="fa fa-sticky-note"></i> Datos Toma de Examen</h3></div>
+                    <i class="fa fa-sticky-note"></i> Datos de Examen</h3></div>
             <div class="box-body">
                 <div class="form-group">
                     <label class="control-label required col-sm-3">Folio examen</label>
@@ -133,20 +133,20 @@
                             <label><input type="radio" name="gl_resultado" 
                                           id="gl_resultado_0" value="0" 
                                           {if $accion == "1"}readonly{/if} {$gl_resultado_0}>
-                                POSITIVO</label>&nbsp;&nbsp;
+                                <span class="label label-success">POSITIVO</span></label>&nbsp;&nbsp;
                             <label><input type="radio" name="gl_resultado" 
                                           id="gl_resultado_1" value="1" 
                                           {if $accion == "1"}readonly{/if} {$gl_resultado_1}>
-                                NEGATIVO</label>
+                                <span class="label label-danger" style="color:#ffffff">NEGATIVO</span></label>
                         {else}
                             <label><input type="radio" name="gl_resultado" 
                                           id="gl_resultado_0" value="0" 
                                           {if $accion == "1"}readonly{/if} {$gl_resultado_0}>
-                                NORMAL</label>&nbsp;&nbsp;
+                                <span class="label label-success">NORMAL</span></label>&nbsp;&nbsp;
                             <label><input type="radio" name="gl_resultado" 
                                           id="gl_resultado_1" value="1" 
                                           {if $accion == "1"}readonly{/if} {$gl_resultado_1}>
-                                ALTERADO</label>
+                                <span class="label label-danger" style="color:#ffffff">ALTERADO</span></label>
                         {/if}
                     </div>
                 </div>
