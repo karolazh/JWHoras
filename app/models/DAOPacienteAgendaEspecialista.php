@@ -73,7 +73,7 @@ class DAOPacienteAgendaEspecialista extends Model{
         }
     }
 
-	public function insert($parametros){
+	public function insertAgenda($parametros){
 		
 		//id_estado e id_tipo_especialidad faltan
         $query	= "	INSERT INTO pre_paciente_agenda_especialista
