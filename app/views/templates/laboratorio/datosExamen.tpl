@@ -31,11 +31,11 @@
         <!-- LABORATORIOS -->
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
-                    <i class="fa fa-sticky-note"></i> Laboratorios</h3>
+                    <i class="fa fa-sticky-note"></i> Datos del Laboratorio</h3>
             </div>
             <div class="box-body">            
                 <div class="form-group">
-                    <label class="control-label required col-sm-3">Laboratorios</label>
+                    <label class="control-label required col-sm-3">Laboratorio</label>
                     <div class="col-sm-3">
                         <select id="laboratorio" name="laboratorio" 
                                 for="laboratorio" class="form-control" disabled>
