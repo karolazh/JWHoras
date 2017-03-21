@@ -80,6 +80,9 @@ class DAOPacienteExamen extends Model{
 //                    LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio 
 //                    WHERE examen.id_paciente = ?
 //                    ORDER BY examen.fc_crea DESC";
+//                    
+        //$param	= array($id_paciente);
+        //$result	= $this->db->getQuery($query, $param);
         
         $query = "  SELECT 
                         examen.id_paciente_examen,
@@ -160,9 +163,7 @@ class DAOPacienteExamen extends Model{
                     AND bo_mamografia_vigente = 1
                     AND bo_finalizado = 0
                     AND empa.id_paciente = ". $id_paciente;
-
-        //$param	= array($id_paciente);
-        //$result	= $this->db->getQuery($query, $param);
+        
         $result	= $this->db->getQuery($query);
 
         if ($result->numRows > 0) {
@@ -199,6 +200,9 @@ class DAOPacienteExamen extends Model{
 //                    WHERE examen.id_paciente = ?
 //                    AND examen.gl_resultado = 'A'
 //                    ORDER BY examen.fc_crea DESC";
+        
+        //$param	= array($id_paciente);
+        //$result	= $this->db->getQuery($query, $param);
         
         $query = "  SELECT 
                         examen.id_paciente_examen,
@@ -280,9 +284,7 @@ class DAOPacienteExamen extends Model{
                     AND bo_mamografia_vigente = 1
                     AND bo_finalizado = 0
                     AND empa.id_paciente = ". $id_paciente;
-
-        //$param	= array($id_paciente);
-        //$result	= $this->db->getQuery($query, $param);
+        
         $result	= $this->db->getQuery($query);
 
         if ($result->numRows > 0) {
