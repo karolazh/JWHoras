@@ -66,23 +66,26 @@ class Agenda extends Controller {
         $arrAgenda = "";
         if (!is_null($arrExamenes)) {
             foreach($arrExamenes as $item){
-                $descripcion = "Toma Examen ". $item->gl_nombre_examen;
-                $fecha = $item->fc_toma_calendar;
-                
-                if (!is_null($item->gl_hora_toma)){
-                    $hora = $item->gl_hora_toma;                    
-                } else {
-                    $hora = "";
+                /* 2017-03-21 Valida que examen no sea "Externo"; no debe aparecer en Calendario */
+                if (($item->id_paciente_examen != 0) and (!is_null($item->gl_resultado))) {
+                    $descripcion = "Toma Examen ". $item->gl_nombre_examen;
+                    $fecha = $item->fc_toma_calendar;
+
+                    if (!is_null($item->gl_hora_toma)){
+                        $hora = $item->gl_hora_toma;                    
+                    } else {
+                        $hora = "";
+                    }
+                    $arrAgenda = $arrAgenda.$descripcion.",".$fecha.",".$hora.";";
+                    //$arrAgenda = $arrAgenda.$hora." ".$descripcion.",".$fecha.";";
+
+                    if (!is_null($item->fc_resultado_calendar)){
+                        $descripcion_result = "Resultado Examen ". $item->gl_nombre_examen;
+                        $fecha_result = $item->fc_resultado_calendar;
+                        //$arrAgenda = $arrAgenda.$descripcion_result.",".$fecha_result.";";
+                        $arrAgenda = $arrAgenda.$descripcion_result.",".$fecha_result.",;";
+                    }
                 }
-                $arrAgenda = $arrAgenda.$descripcion.",".$fecha.",".$hora.";";
-                //$arrAgenda = $arrAgenda.$hora." ".$descripcion.",".$fecha.";";
-                
-                if (!is_null($item->fc_resultado_calendar)){
-                    $descripcion_result = "Resultado Examen ". $item->gl_nombre_examen;
-                    $fecha_result = $item->fc_resultado_calendar;
-                    //$arrAgenda = $arrAgenda.$descripcion_result.",".$fecha_result.";";
-                    $arrAgenda = $arrAgenda.$descripcion_result.",".$fecha_result.",;";
-                }                
 			}
         }
         
