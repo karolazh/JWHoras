@@ -21,13 +21,11 @@
                         <table id="tablaPrincipal" class="table table-hover table-striped table-bordered dataTable no-footer">
                                 <thead>
                                         <tr role="row">
-                                                <!-- th class="text-center" width="1%">ID</th -->
                                                 <th class="text-center" width="5%">RUT / Pasaporte</th>
                                                 <th class="text-center" width="5%">Fecha Registro</th>
                                                 <th class="text-center" width="25%">Nombre</th>
                                                 <th class="text-center" width="10%">Comuna</th>
                                                 <th class="text-center" width="25%">Centro Salud</th>
-                                                <th class="text-center" width="10%">Estado</th>
                                                 <th class="text-center" width="5%">Cantidad atenciones</th>
                                                 <th class="text-center" width="5%">Reconoce violencia</th>
                                                 <th class="text-center" width="5%">Participa</th>
@@ -40,13 +38,11 @@
                                         {foreach $arrResultado as $item}
                                                 {if $item->nr_examen_alterado > 0 or $item->gl_examen_alterado_externo > 0}
                                                 <tr>
-                                                        <!-- td class="text-center"> {$item->id_paciente} </td -->
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-center" nowrap> {$item->gl_identificacion} </td>
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-center"> {$item->fc_crea} </td>
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-left"> {$item->gl_nombres} {$item->gl_apellidos} </td>
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-left"> {$item->gl_nombre_comuna} </td>
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-center"> {$item->gl_institucion} </td>
-                                                        <td style="color:#ff0000; background: #F7D3D2;" class="text-center" nowrap> {$item->gl_nombre_estado_caso} </td>
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-center" nowrap> {$item->nr_motivo_consulta} </td>
                                                         <td style="background: #F7D3D2;" class="text-center" nowrap>
                                                                 {if $item->bo_reconoce == 1}
@@ -152,13 +148,11 @@
                                                 </tr>
                                                 {else}
                                                 <tr>
-                                                        <!-- td class="text-center"> {$item->id_paciente} </td -->
                                                         <td class="text-center" nowrap> {$item->gl_identificacion} </td>
                                                         <td class="text-center"> {$item->fc_crea} </td>
                                                         <td class="text-left"> {$item->gl_nombres} {$item->gl_apellidos} </td>
                                                         <td class="text-left"> {$item->gl_nombre_comuna} </td>
                                                         <td class="text-center"> {$item->gl_institucion} </td>
-                                                        <td class="text-center" nowrap> {$item->gl_nombre_estado_caso} </td>
                                                         <td class="text-center" nowrap> {$item->nr_motivo_consulta} </td>
                                                         <td class="text-center" nowrap> 
                                                                 {if $item->bo_reconoce == 1}
