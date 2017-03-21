@@ -43,3 +43,31 @@ $("#guardar").on('click', function (e) {
 	buttonEndProcess(button_process);
 
 });
+
+
+var CIE10 ={
+    
+cargarSeccion1porCie10 : function(cie10,combo,seccion1){
+            console.log(cie10);
+		if(cie10 != 0){
+			$.post(BASE_URI+'index.php/Especialista/cargarSeccion1porCie10',{cie10:cie10},function(response){
+				if(response.length > 0){
+					var total = response.length;
+					var options = '<option value="0">Seleccione CIE10 L2</option>';
+					for(var i=0; i<total; i++){
+						if(seccion1 == response[i].id_indice){
+							options += '<option value="'+response[i].id_indice+'" selected >'+response[i].gl_codigo+' '+response[i].gl_descripcion+'</option>';	
+						}else{
+							options += '<option value="'+response[i].id_indice+'">'+response[i].gl_codigo+' '+response[i].gl_descripcion+'</option>';
+						}
+						
+					}
+					$('#'+combo).html(options);
+				}
+			},'json');
+		}else{
+                    $('#'+combo).html('<option value="0">Seleccione CIE10 L2</option>');
+		}
+	}
+
+};

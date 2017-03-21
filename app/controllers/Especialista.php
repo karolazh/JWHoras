@@ -25,6 +25,8 @@ class Especialista extends Controller {
 	protected $_DAOPaciente;
 	protected $_DAOEmpa;
 	protected $_DAOTipoEspecialidad;
+	protected $_DAOCie10Capitulo;
+	protected $_DAOCie10Seccion;
 	protected $_DAOPacienteAgendaEspecialista;
 
 	function __construct() {
@@ -39,6 +41,8 @@ class Especialista extends Controller {
 		$this->_DAOEmpa						= $this->load->model("DAOEmpa");
 		$this->_DAOTipoEspecialidad			= $this->load->model("DAOTipoEspecialidad");
 		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
+		$this->_DAOCie10Capitulo			= $this->load->model("DAOCie10Capitulo");
+		$this->_DAOCie10Seccion			= $this->load->model("DAOCie10Seccion");
 	}
 
 	/**
@@ -71,8 +75,10 @@ class Especialista extends Controller {
 		$parametros			= $this->request->getParametros();
 		$id_paciente		= $parametros[0];
 		$empa = $this->_DAOEmpa->getByIdPaciente($id_paciente);
+		$arrCIE10Capitulo = $this->_DAOCie10Capitulo->getLista();
 		//$resp = $this->_Evento->guardarMostrarUltimo(21,0,$id_paciente,"Plan tratamiento Modificado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		
+		$this->smarty->assign("arrCIE10Capitulo", $arrCIE10Capitulo);
 		$this->smarty->assign("id_empa", $empa->id_empa);
 		$this->smarty->assign("id_paciente", $id_paciente);
 		$this->smarty->assign("botonAyudaTratamiento", Boton::botonAyuda('Ingrese Datos del Diagnóstico.', '', 'pull-right'));
@@ -106,5 +112,21 @@ class Especialista extends Controller {
 		echo $json;
 		
 	}
+	
+	public function cargarSeccion1porCie10(){
+            $cie10 = $_POST['cie10'];
+            //$daoRegion = $this->load->model('DAORegion');
+            $seccion1 = $this->_DAOCie10Capitulo->getDetalleByIdCapitulo($cie10);
+            $json = array();
+            $i = 0;
+            foreach($seccion1 as $seccion){
+                    $json[$i]['id_indice'] = $seccion->id_indice;
+                    $json[$i]['gl_codigo'] = $seccion->gl_codigo;
+                    $json[$i]['gl_descripcion'] = $seccion->gl_descripcion;
+                    $i++;
+            }
+
+            echo json_encode($json);
+    }
 	
 }
