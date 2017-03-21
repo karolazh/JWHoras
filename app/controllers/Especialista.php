@@ -97,7 +97,7 @@ class Especialista extends Controller {
 		$parametros		= $this->_request->getParams();
 		$correcto		= FALSE;
 		$error			= FALSE;
-		$bool_update = $this->_DAOPacienteAgendaEspecialista->insert($parametros);
+		$bool_update = $this->_DAOPacienteAgendaEspecialista->insertAgenda($parametros);
 		if ($bool_update) {
 			//$resp = $this->_Evento->guardarMostrarUltimo(12,$id_empa,$id_paciente,"Empa modificado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
 			$correcto = TRUE;
