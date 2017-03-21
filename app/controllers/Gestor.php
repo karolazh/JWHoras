@@ -67,7 +67,8 @@ class Gestor extends Controller {
 	public function regional() {
 		Acceso::redireccionUnlogged($this->smarty);
 		
-		$where	= array('paciente.gl_grupo_tipo'=>'Tratamiento');
+		$where	= array('paciente.gl_grupo_tipo'=>'Tratamiento',
+						'paciente.id_region'	=>$_SESSION['id_region']);
 		$arr = $this->_DAOPaciente->getListaDetalle($where);
 		//$this->smarty->assign('id_usuario', $_SESSION['id']);
 		$this->smarty->assign('mostrar_gestor', 1);
