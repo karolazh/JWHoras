@@ -115,3 +115,18 @@ var Agenda = {
         }
     }
 }
+
+
+	// funcion para que funcione el calendario estilo ASD
+	$(function () {
+                $(".datepicker").datetimepicker({
+                    locale: "es",
+					format: "DD/MM/YYYY",
+                });
+    });
+	//funcion para que funcione la seleccion de hora estilo ASD
+	 $(function () {
+                $(".timepicker").datetimepicker({
+                    format: "LT"
+                });
+            });

@@ -348,9 +348,9 @@
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
 								{/if}
 								<button type="button" id="verExamen_{$id_hipertension}" style="{if $bo_finalizado != 1}display: none{/if}" 
-                                        onClick="" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$id_hipertension}/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">
-                                    <i class="fa fa-file-text"></i> Ver Examen</button>
+                                    <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
                         </div>
                     </div>
@@ -395,9 +395,9 @@
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
 								{/if}
 								<button type="button" id="verExamen_{$id_glicemia}" style="{if $bo_finalizado != 1}display: none{/if}" 
-                                        onClick="" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$id_glicemia}/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
-                                    <i class="fa fa-file-text"></i> Ver Examen</button>
+                                    <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
                         </div>
                     </div>
@@ -429,9 +429,9 @@
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
 								{/if}
 								<button type="button" id="verExamen_{$id_vdrl}" style="{if $bo_finalizado != 1}display: none{/if}" 
-                                        onClick="" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$id_vdrl}/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
-                                    <i class="fa fa-file-text"></i> Ver Examen</button>
+                                    <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
                         </div>
                         <!-- RPR -->
@@ -446,9 +446,9 @@
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
 									{/if}
 								<button type="button" id="verExamen_{$id_rpr}" style="{if $bo_finalizado != 1}display: none{/if}" 
-                                        onClick="" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$id_rpr}/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
-                                    <i class="fa fa-file-text"></i> Ver Examen</button>
+                                    <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
                         </div>
                         <!-- VIH -->
@@ -463,9 +463,9 @@
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
 									{/if}
 								<button type="button" id="verExamen_{$id_vih}" style="{if $bo_finalizado != 1}display: none{/if}" 
-                                        onClick="" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$id_vih}/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
-                                    <i class="fa fa-file-text"></i> Ver Examen</button>
+                                    <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
                         </div>
                     </div>
@@ -496,9 +496,9 @@
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
 								{/if}
 								<button type="button" id="verExamen_{$id_baciloscopia}" style="{if $bo_finalizado != 1}display: none{/if}" 
-                                        onClick="" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$id_baciloscopia}/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
-                                    <i class="fa fa-file-text"></i> Ver Examen</button>
+                                    <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
 							
 							
@@ -585,9 +585,9 @@
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
 							{/if}
 							<button type="button" id="verExamen_{$id_pap}" style="{if $bo_finalizado != 1}display: none{/if}" 
-                                        onClick="" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$id_pap}/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
-                                    <i class="fa fa-file-text"></i> Ver Examen</button>
+                                    <i class="fa fa-eye"></i> Ver Examen</button>
 							</div>
                         </div>
                     </div>
@@ -619,9 +619,9 @@
                                     <i class="fa fa-calendar"></i> Agenda Examen</button>
 									{/if}
 								<button type="button" id="verExamen_{$id_colesterol}" style="{if $bo_finalizado != 1}display: none{/if}" 
-                                        onClick="" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$id_colesterol}/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
-                                    <i class="fa fa-file-text"></i> Ver Examen</button>
+                                    <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
                     </div>
                     </div>
@@ -712,9 +712,9 @@
 										<i class="fa fa-calendar"></i> Agenda Examen</button>
 									{/if}
 									<button type="button" id="verExamen_{$id_mamografia}" style="{if $bo_finalizado != 1}display: none{/if}" 
-											onClick="" 
+											onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$id_mamografia}/', 'Agenda Examen número : {$id_paciente}', 85);" 
 											class="btn btn-sm btn-info">                                        
-										<i class="fa fa-file-text"></i> Ver Examen</button>
+										<i class="fa fa-eye"></i> Ver Examen</button>
 								</div>
                             </div>
                         </div>

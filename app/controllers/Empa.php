@@ -31,19 +31,20 @@ class Empa extends Controller{
 		$this->load->lib('Boton', false);
 		$this->load->lib('Fechas', false);
 		$this->load->lib('Evento', false);
-		$this->_Evento = new Evento();
-		$this->_DAOEmpa = $this->load->model("DAOEmpa");
-		$this->_DAOEmpaAudit = $this->load->model("DAOEmpaAudit");
-		$this->_DAOUsuario = $this->load->model("DAOUsuario");
-		$this->_DAOComuna = $this->load->model("DAOComuna");
-		$this->_DAOCentroSalud = $this->load->model("DAOCentroSalud");
-		$this->_DAOPaciente = $this->load->model("DAOPaciente");
-		$this->_DAOAuditPregunta = $this->load->model("DAOAuditPregunta");
-		$this->_DAOTipoIMC = $this->load->model("DAOTipoIMC");
-		$this->_DAOTipoAUDIT = $this->load->model("DAOTipoAUDIT");
-		$this->_DAOEvento = $this->load->model("DAOEvento");
-		$this->_DAOMes = $this->load->model("DAOMes");
-		$this->_DAOPacienteDireccion = $this->load->model("DAOPacienteDireccion");
+		$this->_Evento					= new Evento();
+		$this->_DAOEmpa					= $this->load->model("DAOEmpa");
+		$this->_DAOEmpaAudit			= $this->load->model("DAOEmpaAudit");
+		$this->_DAOUsuario				= $this->load->model("DAOUsuario");
+		$this->_DAOComuna				= $this->load->model("DAOComuna");
+		$this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
+		$this->_DAOPaciente				= $this->load->model("DAOPaciente");
+		$this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
+		$this->_DAOAuditPregunta		= $this->load->model("DAOAuditPregunta");
+		$this->_DAOTipoIMC				= $this->load->model("DAOTipoIMC");
+		$this->_DAOTipoAUDIT			= $this->load->model("DAOTipoAUDIT");
+		$this->_DAOEvento				= $this->load->model("DAOEvento");
+		$this->_DAOMes					= $this->load->model("DAOMes");
+		$this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
 	}
 
 	/*

@@ -3,10 +3,10 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_cie10_seccion
+* Descripcion	: Modelo para Tabla pre_cie10_3_grupo
 * Plataforma	: !PHP
 * Creacion		: 21/03/2017
-* @name			DAOCie10Seccion.php
+* @name			DAOCie10Grupo.php
 * @version		1.0
 * @author		David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
@@ -14,15 +14,15 @@
 *--------------
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
-*<david.guzman@cosof.cl>	21/03/2017	DAOCie10Seccion
+*<david.guzman@cosof.cl>	22/03/2017	DAOCie10Grupo
 *-----------------------------------------------------------------------------
 *****************************************************************************
 */
 
-class DAOCie10Seccion extends Model{
+class DAOCie10Grupo extends Model{
 
-    protected $_tabla           = "pre_cie10_2_seccion";
-    protected $_primaria		= "id_seccion";
+    protected $_tabla           = "pre_cie10_3_grupo";
+    protected $_primaria		= "id_grupo";
     protected $_transaccional	= false;
 
     function __construct()

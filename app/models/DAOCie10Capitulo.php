@@ -21,7 +21,7 @@
 
 class DAOCie10Capitulo extends Model{
 
-    protected $_tabla           = "pre_cie10_capitulo";
+    protected $_tabla           = "pre_cie10_1_capitulo";
     protected $_primaria		= "id_capitulo";
     protected $_transaccional	= false;
 
@@ -58,8 +58,8 @@ class DAOCie10Capitulo extends Model{
 	public function getDetalleByIdCapitulo($id_capitulo){
 		$query	= "	SELECT 
 						c2.*
-					FROM pre_cie10_capitulo c1
-						LEFT JOIN pre_cie10_seccion c2 ON c1.id_capitulo = c2.id_capitulo
+					FROM pre_cie10_1_capitulo c1
+						LEFT JOIN pre_cie10_2_seccion c2 ON c1.id_capitulo = c2.id_capitulo
 					WHERE c1.id_capitulo = ?";
 
 		$param	= array($id_capitulo);

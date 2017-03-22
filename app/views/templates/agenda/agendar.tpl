@@ -73,11 +73,15 @@
             <div class="box-body">
                 <div class="form-group">
                     <label class="control-label required col-sm-3">Fecha toma de examen</label>
-                    <div class="col-sm-2">
-                        <input type="date" class="form-control col-sm-2"                                
-                               name="fc_toma" id="fc_toma"
-                               {*onblur="validarVacio(this, 'Por favor Ingrese Fecha de Agenda')"*} />
-                        {*<span class="help-block hidden"></span>*}
+					<div class='col-sm-2'>
+                        <div class="input-group">
+                                <input type='text' class="form-control datepicker"
+                                           id='fc_toma' 
+                                           name='fc_toma'
+                                           />
+                                <span class="help-block hidden fa fa-warning"></span>
+                                <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_toma').focus();"></i></span>
+                        </div>
                     </div>
                     <label for="fc_nacimiento" class="control-label col-sm-2 ">Hora toma de examen</label>
 					<div class="col-sm-2">

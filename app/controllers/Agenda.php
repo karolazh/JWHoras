@@ -67,7 +67,8 @@ class Agenda extends Controller {
         if (!is_null($arrExamenes)) {
             foreach($arrExamenes as $item){
                 /* 2017-03-21 Valida que examen no sea "Externo"; no debe aparecer en Calendario */
-                if (($item->id_paciente_examen != 0) and (!is_null($item->gl_resultado))) {
+                //if (($item->id_paciente_examen != 0) and (!is_null($item->gl_resultado))) {
+                if ($item->id_paciente_examen != 0) {
                     $descripcion = "Toma Examen ". $item->gl_nombre_examen;
                     $fecha = $item->fc_toma_calendar;
 
