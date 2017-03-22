@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 192.168.0.200
--- Tiempo de generación: 20-03-2017 a las 21:18:49
+-- Tiempo de generación: 22-03-2017 a las 14:08:58
 -- Versión del servidor: 5.6.10
 -- Versión de PHP: 5.6.26
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `prevencion`
 --
+CREATE DATABASE IF NOT EXISTS `prevencion` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `prevencion`;
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria` (
   PRIMARY KEY (`id_auditoria`),
   KEY `IDX_gl_tipo` (`gl_tipo`),
   KEY `IDX_id_usuario` (`id_usuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=68 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=241 ;
 
 --
 -- Volcado de datos para la tabla `pre_auditoria`
@@ -178,7 +180,181 @@ INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`
 (64, 9, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0015439987182617', '2017-03-20 19:26:59'),
 (65, 9, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''2''', '::1', '0.00083303451538086', '2017-03-20 19:26:59'),
 (66, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0012640953063965', '2017-03-20 19:55:58'),
-(67, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0012831687927246', '2017-03-20 19:55:58');
+(67, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0012831687927246', '2017-03-20 19:55:58'),
+(68, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0012011528015137', '2017-03-20 21:26:59'),
+(69, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0011460781097412', '2017-03-20 21:26:59'),
+(70, 1, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.003040075302124', '2017-03-20 21:35:06'),
+(71, 1, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0017020702362061', '2017-03-20 21:35:06'),
+(72, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0018589496612549', '2017-03-21 12:12:09'),
+(73, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''2''', '::1', '0.00069999694824219', '2017-03-21 12:12:09'),
+(74, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0021491050720215', '2017-03-21 12:27:56'),
+(75, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.001384973526001', '2017-03-21 12:27:56'),
+(76, 1, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''25'',''7-2'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0020830631256104', '2017-03-21 14:34:43'),
+(77, 1, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''25''', '127.0.0.1', '0.0011589527130127', '2017-03-21 14:34:43'),
+(78, 25, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.00087404251098633', '2017-03-21 14:41:29'),
+(79, 25, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0010659694671631', '2017-03-21 14:41:29'),
+(80, 2, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0010769367218018', '2017-03-21 14:41:49'),
+(81, 2, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''2''', '::1', '0.0010530948638916', '2017-03-21 14:41:49'),
+(82, 1, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0020790100097656', '2017-03-21 14:44:14'),
+(83, 1, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0011260509490967', '2017-03-21 14:44:14'),
+(84, 2, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''9'',''1-4'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0019130706787109', '2017-03-21 16:29:50'),
+(85, 2, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''9''', '::1', '0.0011870861053467', '2017-03-21 16:29:50'),
+(86, 9, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''10'',''1-5'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0016911029815674', '2017-03-21 17:40:22'),
+(87, 9, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''10''', '::1', '0.001133918762207', '2017-03-21 17:40:22'),
+(88, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''9'',''1-4'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0011050701141357', '2017-03-21 17:42:42'),
+(89, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''9''', '::1', '0.0012290477752686', '2017-03-21 17:42:42'),
+(90, 10, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0018999576568604', '2017-03-21 17:47:15'),
+(91, 10, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''2''', '::1', '0.0012269020080566', '2017-03-21 17:47:15'),
+(92, 2, 'INSERT', 'INSERT INTO pre_paciente\n						(\n						id_institucion,\n						id_region,\n						id_comuna,\n						id_prevision,\n						gl_grupo_tipo,\n						gl_rut,\n						bo_extranjero,\n						gl_run_pass,\n						gl_nombres,\n						gl_apellidos,\n						fc_nacimiento,\n						gl_direccion,\n						gl_fono,\n						bo_fono_seguro,\n						gl_celular,\n						gl_email,\n						id_centro_salud,\n						gl_latitud,\n						gl_longitud,\n						bo_reconoce,\n						bo_acepta_programa,\n						fc_crea,\n						id_usuario_crea\n						)\n					VALUES\n						(\n						2462,\n						4,\n						374,\n						1,\n						''Control'',\n						''7135440-7'',\n						''0'',\n						'''',\n						''maria del carmen'',\n						''rodriguez'',\n						''1972-06-16'',\n						''Paul Munoz, La Serena, Región de Coquimbo, Chile'',\n						''123456'',\n						1,\n						''789486'',\n						''maria@cosof.cl'',\n						''2332'',\n						''-29.921799295021344'',\n						''-71.27609968185425'',\n						''0'',\n						1,\n						now(),\n						2\n						)', '::1', '0.0022728443145752', '2017-03-21 17:51:56'),
+(93, 2, 'INSERT', 'INSERT INTO pre_paciente_registro\n						(\n						id_paciente,\n						id_institucion,\n						fc_ingreso,\n						gl_hora_ingreso,\n						gl_motivo_consulta,\n						fc_crea,\n						id_usuario_crea\n						)\n					VALUES  \n						(\n						12,\n						2462,\n						''2017-03-21'',\n						''14:46'',\n						''golpe en la rodilla'',\n						now(),\n						''2''\n						)', '::1', '0.018217086791992', '2017-03-21 17:51:56'),
+(94, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''12'',1)', '::1', '0.023293972015381', '2017-03-21 17:51:56'),
+(95, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''12'',2)', '::1', '0.0011131763458252', '2017-03-21 17:51:56'),
+(96, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''23'',1,''2'')', '::1', '0.002047061920166', '2017-03-21 17:51:56'),
+(97, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''24'',1,''2'')', '::1', '0.00076889991760254', '2017-03-21 17:51:56'),
+(98, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''23'',2,''2'')', '::1', '0.0008699893951416', '2017-03-21 17:51:56'),
+(99, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''24'',2,''2'')', '::1', '0.00084805488586426', '2017-03-21 17:51:56'),
+(100, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''23'',3,''2'')', '::1', '0.0012781620025635', '2017-03-21 17:51:56'),
+(101, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''24'',3,''2'')', '::1', '0.0009768009185791', '2017-03-21 17:51:56'),
+(102, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''23'',4,''2'')', '::1', '0.00076079368591309', '2017-03-21 17:51:56'),
+(103, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''24'',4,''2'')', '::1', '0.00091099739074707', '2017-03-21 17:51:56'),
+(104, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''23'',5,''2'')', '::1', '0.00077700614929199', '2017-03-21 17:51:56'),
+(105, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''24'',5,''2'')', '::1', '0.0010700225830078', '2017-03-21 17:51:56'),
+(106, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''23'',6,''2'')', '::1', '0.001011848449707', '2017-03-21 17:51:56'),
+(107, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''24'',6,''2'')', '::1', '0.00097918510437012', '2017-03-21 17:51:56'),
+(108, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''23'',7,''2'')', '::1', '0.00086498260498047', '2017-03-21 17:51:56'),
+(109, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''24'',7,''2'')', '::1', '0.00085091590881348', '2017-03-21 17:51:56'),
+(110, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''23'',8,''2'')', '::1', '0.00090909004211426', '2017-03-21 17:51:56'),
+(111, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''24'',8,''2'')', '::1', '0.00087285041809082', '2017-03-21 17:51:56'),
+(112, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''23'',9,''2'')', '::1', '0.00096297264099121', '2017-03-21 17:51:56'),
+(113, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''24'',9,''2'')', '::1', '0.00088286399841309', '2017-03-21 17:51:56'),
+(114, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''23'',10,''2'')', '::1', '0.00085210800170898', '2017-03-21 17:51:56'),
+(115, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''24'',10,''2'')', '::1', '0.00098013877868652', '2017-03-21 17:51:56'),
+(116, 2, 'INSERT', 'INSERT into pre_evento values(null,1,''12'',0,''Paciente creado el : 21-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0022618770599365', '2017-03-21 17:51:56'),
+(117, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''12'',''23'',''Empa 23 creado el : 21-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010201930999756', '2017-03-21 17:51:56'),
+(118, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''12'',''24'',''Empa 24 creado el : 21-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011899471282959', '2017-03-21 17:51:56'),
+(119, 2, 'INSERT', 'INSERT into pre_evento values(null,14,''12'',''23'',''AUDIT del EMPA23 creado el : 21-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011420249938965', '2017-03-21 17:51:56'),
+(120, 2, 'INSERT', 'INSERT into pre_evento values(null,14,''12'',''24'',''AUDIT del EMPA24 creado el : 21-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00090599060058594', '2017-03-21 17:51:56'),
+(121, 2, 'INSERT', 'INSERT into pre_evento values(null,4,''12'',0,''AUDIT del EMPA24 creado el : Acepta el programa con fecha : 21-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00086188316345215', '2017-03-21 17:51:56'),
+(122, 2, 'UPDATE', 'UPDATE pre_paciente_direccion SET\n						bo_estado					= 0,\n						id_usuario_actualiza		= 2,\n						fc_actualiza				= now()\n					WHERE id_paciente = 12', '::1', '0.0020601749420166', '2017-03-21 17:51:56'),
+(123, 2, 'INSERT', 'INSERT INTO pre_paciente_direccion\n						(\n						id_paciente,\n						id_comuna,\n						id_region,\n						gl_direccion,\n						gl_latitud,\n						gl_longitud,\n						bo_estado,\n						id_usuario_crea,\n						fc_crea,\n						id_usuario_actualiza,\n						fc_actualiza\n						)\n					VALUES\n						(\n						12,\n						374,\n						4,\n						''Paul Munoz, La Serena, Región de Coquimbo, Chile'',\n						''-29.921799295021344'',\n						''-71.27609968185425'',\n						1,\n						2,\n						now(),\n						2,\n						now()\n						)', '::1', '0.00098896026611328', '2017-03-21 17:51:56'),
+(124, 9, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''22'',''4-2'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0020210742950439', '2017-03-21 17:52:55'),
+(125, 9, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''22''', '::1', '0.001345157623291', '2017-03-21 17:52:55'),
+(126, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.002173900604248', '2017-03-21 18:07:52'),
+(127, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0013558864593506', '2017-03-21 18:07:52'),
+(128, 2, 'INSERT', 'INSERT INTO pre_paciente\n						(\n						id_institucion,\n						id_region,\n						id_comuna,\n						id_prevision,\n						gl_grupo_tipo,\n						gl_rut,\n						bo_extranjero,\n						gl_run_pass,\n						gl_nombres,\n						gl_apellidos,\n						fc_nacimiento,\n						gl_direccion,\n						gl_fono,\n						bo_fono_seguro,\n						gl_celular,\n						gl_email,\n						id_centro_salud,\n						gl_latitud,\n						gl_longitud,\n						bo_reconoce,\n						bo_acepta_programa,\n						fc_crea,\n						id_usuario_crea\n						)\n					VALUES\n						(\n						2462,\n						4,\n						375,\n						1,\n						''Tratamiento'',\n						''11910556-0'',\n						''0'',\n						'''',\n						''marta'',\n						''simpson'',\n						''1973-09-03'',\n						''Maestranza 811, Coquimbo, Región de Coquimbo, Chile'',\n						''77777'',\n						1,\n						''777777'',\n						''marta@gmail.cl'',\n						''2291'',\n						''-29.971900745045595'',\n						''-71.33362802275394'',\n						''0'',\n						1,\n						now(),\n						2\n						)', '::1', '0.0015079975128174', '2017-03-21 18:40:38'),
+(129, 2, 'INSERT', 'INSERT INTO pre_paciente_registro\n						(\n						id_paciente,\n						id_institucion,\n						fc_ingreso,\n						gl_hora_ingreso,\n						gl_motivo_consulta,\n						fc_crea,\n						id_usuario_crea\n						)\n					VALUES  \n						(\n						13,\n						2462,\n						''2017-03-21'',\n						''15:33'',\n						''corte en estomago'',\n						now(),\n						''2''\n						)', '::1', '0.0017879009246826', '2017-03-21 18:40:38'),
+(130, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''13'',1)', '::1', '0.002345085144043', '2017-03-21 18:40:38'),
+(131, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''13'',2)', '::1', '0.00087809562683105', '2017-03-21 18:40:38'),
+(132, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''25'',1,''2'')', '::1', '0.0013890266418457', '2017-03-21 18:40:38'),
+(133, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''26'',1,''2'')', '::1', '0.00086808204650879', '2017-03-21 18:40:38'),
+(134, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''25'',2,''2'')', '::1', '0.00084590911865234', '2017-03-21 18:40:38'),
+(135, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''26'',2,''2'')', '::1', '0.00086712837219238', '2017-03-21 18:40:38'),
+(136, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''25'',3,''2'')', '::1', '0.00088715553283691', '2017-03-21 18:40:38'),
+(137, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''26'',3,''2'')', '::1', '0.00081801414489746', '2017-03-21 18:40:38'),
+(138, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''25'',4,''2'')', '::1', '0.00078105926513672', '2017-03-21 18:40:38'),
+(139, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''26'',4,''2'')', '::1', '0.00078606605529785', '2017-03-21 18:40:38'),
+(140, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''25'',5,''2'')', '::1', '0.00084400177001953', '2017-03-21 18:40:38'),
+(141, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''26'',5,''2'')', '::1', '0.0008080005645752', '2017-03-21 18:40:38'),
+(142, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''25'',6,''2'')', '::1', '0.00083017349243164', '2017-03-21 18:40:38'),
+(143, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''26'',6,''2'')', '::1', '0.0036511421203613', '2017-03-21 18:40:38'),
+(144, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''25'',7,''2'')', '::1', '0.00081205368041992', '2017-03-21 18:40:38'),
+(145, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''26'',7,''2'')', '::1', '0.00078296661376953', '2017-03-21 18:40:38'),
+(146, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''25'',8,''2'')', '::1', '0.00086498260498047', '2017-03-21 18:40:38'),
+(147, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''26'',8,''2'')', '::1', '0.0009307861328125', '2017-03-21 18:40:38'),
+(148, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''25'',9,''2'')', '::1', '0.00078487396240234', '2017-03-21 18:40:38'),
+(149, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''26'',9,''2'')', '::1', '0.00077199935913086', '2017-03-21 18:40:38'),
+(150, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''25'',10,''2'')', '::1', '0.0008699893951416', '2017-03-21 18:40:38'),
+(151, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''26'',10,''2'')', '::1', '0.00075578689575195', '2017-03-21 18:40:38'),
+(152, 2, 'INSERT', 'INSERT into pre_evento values(null,1,''13'',0,''Paciente creado el : 21-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0018630027770996', '2017-03-21 18:40:38'),
+(153, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''13'',''25'',''Empa 25 creado el : 21-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00099992752075195', '2017-03-21 18:40:38'),
+(154, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''13'',''26'',''Empa 26 creado el : 21-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00098085403442383', '2017-03-21 18:40:38'),
+(155, 2, 'INSERT', 'INSERT into pre_evento values(null,14,''13'',''25'',''AUDIT del EMPA25 creado el : 21-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0008389949798584', '2017-03-21 18:40:38'),
+(156, 2, 'INSERT', 'INSERT into pre_evento values(null,14,''13'',''26'',''AUDIT del EMPA26 creado el : 21-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011358261108398', '2017-03-21 18:40:38'),
+(157, 2, 'INSERT', 'INSERT into pre_evento values(null,4,''13'',0,''AUDIT del EMPA26 creado el : Acepta el programa con fecha : 21-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00086593627929688', '2017-03-21 18:40:38'),
+(158, 2, 'UPDATE', 'UPDATE pre_paciente_direccion SET\n						bo_estado					= 0,\n						id_usuario_actualiza		= 2,\n						fc_actualiza				= now()\n					WHERE id_paciente = 13', '::1', '0.0023200511932373', '2017-03-21 18:40:38'),
+(159, 2, 'INSERT', 'INSERT INTO pre_paciente_direccion\n						(\n						id_paciente,\n						id_comuna,\n						id_region,\n						gl_direccion,\n						gl_latitud,\n						gl_longitud,\n						bo_estado,\n						id_usuario_crea,\n						fc_crea,\n						id_usuario_actualiza,\n						fc_actualiza\n						)\n					VALUES\n						(\n						13,\n						375,\n						4,\n						''Maestranza 811, Coquimbo, Región de Coquimbo, Chile'',\n						''-29.971900745045595'',\n						''-71.33362802275394'',\n						1,\n						2,\n						now(),\n						2,\n						now()\n						)', '::1', '0.0011999607086182', '2017-03-21 18:40:38'),
+(160, 2, 'INSERT', 'INSERT INTO pre_paciente\n						(\n						id_institucion,\n						id_region,\n						id_comuna,\n						id_prevision,\n						id_tipo_grupo,\n						gl_grupo_tipo,\n						gl_rut,\n						bo_extranjero,\n						gl_run_pass,\n						gl_nombres,\n						gl_apellidos,\n						fc_nacimiento,\n						gl_direccion,\n						gl_fono,\n						bo_fono_seguro,\n						gl_celular,\n						gl_email,\n						id_centro_salud,\n						gl_latitud,\n						gl_longitud,\n						bo_reconoce,\n						bo_acepta_programa,\n						fc_crea,\n						id_usuario_crea\n						)\n					VALUES\n						(\n						2462,\n						4,\n						384,\n						1,\n						''2'',\n						''Tratamiento'',\n						''8709696-3'',\n						''0'',\n						'''',\n						''Herna'',\n						''zuñiga'',\n						''1980-04-06'',\n						''Avda. Manuel Peñafiel Olivares 410, Ovalle, Región de Coquimbo, Chile'',\n						''884455'',\n						1,\n						''8844555'',\n						''herna_zuniga@star.wars'',\n						''2273'',\n						''-30.582930763762054'',\n						''-71.18984298891598'',\n						''0'',\n						1,\n						now(),\n						2\n						)', '::1', '0.0017249584197998', '2017-03-21 18:47:06'),
+(161, 2, 'INSERT', 'INSERT INTO pre_paciente_registro\n						(\n						id_paciente,\n						id_institucion,\n						fc_ingreso,\n						gl_hora_ingreso,\n						gl_motivo_consulta,\n						fc_crea,\n						id_usuario_crea\n						)\n					VALUES  \n						(\n						14,\n						2462,\n						''2017-03-21'',\n						''15:42'',\n						''lesion de arma blanca'',\n						now(),\n						''2''\n						)', '::1', '0.0020389556884766', '2017-03-21 18:47:06'),
+(162, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''14'',1)', '::1', '0.0024230480194092', '2017-03-21 18:47:06'),
+(163, 2, 'INSERT', 'INSERT INTO pre_empa(id_paciente,nr_orden) VALUES(''14'',2)', '::1', '0.0013689994812012', '2017-03-21 18:47:06'),
+(164, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''27'',1,''2'')', '::1', '0.0017490386962891', '2017-03-21 18:47:06'),
+(165, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''28'',1,''2'')', '::1', '0.00095701217651367', '2017-03-21 18:47:06'),
+(166, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''27'',2,''2'')', '::1', '0.0010550022125244', '2017-03-21 18:47:06'),
+(167, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''28'',2,''2'')', '::1', '0.00098204612731934', '2017-03-21 18:47:06'),
+(168, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''27'',3,''2'')', '::1', '0.001140832901001', '2017-03-21 18:47:06'),
+(169, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''28'',3,''2'')', '::1', '0.00088882446289062', '2017-03-21 18:47:06'),
+(170, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''27'',4,''2'')', '::1', '0.00094199180603027', '2017-03-21 18:47:06'),
+(171, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''28'',4,''2'')', '::1', '0.0011110305786133', '2017-03-21 18:47:06'),
+(172, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''27'',5,''2'')', '::1', '0.0010900497436523', '2017-03-21 18:47:06'),
+(173, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''28'',5,''2'')', '::1', '0.0013229846954346', '2017-03-21 18:47:06'),
+(174, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''27'',6,''2'')', '::1', '0.0010819435119629', '2017-03-21 18:47:06'),
+(175, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''28'',6,''2'')', '::1', '0.0012080669403076', '2017-03-21 18:47:06'),
+(176, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''27'',7,''2'')', '::1', '0.0011909008026123', '2017-03-21 18:47:06'),
+(177, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''28'',7,''2'')', '::1', '0.0012571811676025', '2017-03-21 18:47:06'),
+(178, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''27'',8,''2'')', '::1', '0.0012500286102295', '2017-03-21 18:47:06'),
+(179, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''28'',8,''2'')', '::1', '0.0013439655303955', '2017-03-21 18:47:06'),
+(180, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''27'',9,''2'')', '::1', '0.0011138916015625', '2017-03-21 18:47:06'),
+(181, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''28'',9,''2'')', '::1', '0.0013070106506348', '2017-03-21 18:47:06'),
+(182, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''27'',10,''2'')', '::1', '0.0011858940124512', '2017-03-21 18:47:06'),
+(183, 2, 'INSERT', 'INSERT INTO pre_empa_audit(id_empa,id_pregunta,id_usuario_crea) VALUES(''28'',10,''2'')', '::1', '0.0010161399841309', '2017-03-21 18:47:06'),
+(184, 2, 'INSERT', 'INSERT into pre_evento values(null,1,''14'',0,''Paciente creado el : 21-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0020921230316162', '2017-03-21 18:47:06'),
+(185, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''14'',''27'',''Empa 27 creado el : 21-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011119842529297', '2017-03-21 18:47:06'),
+(186, 2, 'INSERT', 'INSERT into pre_evento values(null,13,''14'',''28'',''Empa 28 creado el : 21-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011999607086182', '2017-03-21 18:47:06'),
+(187, 2, 'INSERT', 'INSERT into pre_evento values(null,14,''14'',''27'',''AUDIT del EMPA27 creado el : 21-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.001086950302124', '2017-03-21 18:47:06'),
+(188, 2, 'INSERT', 'INSERT into pre_evento values(null,14,''14'',''28'',''AUDIT del EMPA28 creado el : 21-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011551380157471', '2017-03-21 18:47:06'),
+(189, 2, 'INSERT', 'INSERT into pre_evento values(null,4,''14'',0,''AUDIT del EMPA28 creado el : Acepta el programa con fecha : 21-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010931491851807', '2017-03-21 18:47:06'),
+(190, 2, 'UPDATE', 'UPDATE pre_paciente_direccion SET\n						bo_estado					= 0,\n						id_usuario_actualiza		= 2,\n						fc_actualiza				= now()\n					WHERE id_paciente = 14', '::1', '0.0023210048675537', '2017-03-21 18:47:06'),
+(191, 2, 'INSERT', 'INSERT INTO pre_paciente_direccion\n						(\n						id_paciente,\n						id_comuna,\n						id_region,\n						gl_direccion,\n						gl_latitud,\n						gl_longitud,\n						bo_estado,\n						id_usuario_crea,\n						fc_crea,\n						id_usuario_actualiza,\n						fc_actualiza\n						)\n					VALUES\n						(\n						14,\n						384,\n						4,\n						''Avda. Manuel Peñafiel Olivares 410, Ovalle, Región de Coquimbo, Chile'',\n						''-30.582930763762054'',\n						''-71.18984298891598'',\n						1,\n						2,\n						now(),\n						2,\n						now()\n						)', '::1', '0.00136399269104', '2017-03-21 18:47:06'),
+(192, 22, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''10'',''1-5'',''login'','''',''0.0.0'',''::1'')', '::1', '0.010987997055054', '2017-03-21 18:55:21'),
+(193, 22, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''10''', '::1', '0.0010371208190918', '2017-03-21 18:55:21'),
+(194, 10, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (0,''4-5'',''login'','''',''0.0.0'',''::1'')', '::1', '0.001600980758667', '2017-03-21 18:57:17'),
+(195, 10, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''9'',''1-4'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0010008811950684', '2017-03-21 18:57:22'),
+(196, 10, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''9''', '::1', '0.00065207481384277', '2017-03-21 18:57:22'),
+(197, 9, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''22'',''4-2'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0012049674987793', '2017-03-21 18:57:33'),
+(198, 9, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''22''', '::1', '0.0014338493347168', '2017-03-21 18:57:33');
+INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`, `gl_ip`, `gl_tiempo`, `fc_creacion`) VALUES
+(199, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''15'',''3-4'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0018658638000488', '2017-03-21 19:19:45'),
+(200, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''15''', '::1', '0.0013949871063232', '2017-03-21 19:19:45'),
+(201, 15, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (0,''2-2'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0013439655303955', '2017-03-21 19:20:30'),
+(202, 15, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''19'',''2-2'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0010039806365967', '2017-03-21 19:20:35'),
+(203, 15, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''19''', '::1', '0.0014100074768066', '2017-03-21 19:20:35'),
+(204, 19, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''28'',''7-5'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0010111331939697', '2017-03-21 19:21:33'),
+(205, 19, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''28''', '::1', '0.00099515914916992', '2017-03-21 19:21:33'),
+(206, 28, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''45'',''62-4'',''login'','''',''0.0.0'',''::1'')', '::1', '0.001054048538208', '2017-03-21 19:22:09'),
+(207, 28, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''45''', '::1', '0.00098991394042969', '2017-03-21 19:22:09'),
+(208, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (0,''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.00095582008361816', '2017-03-21 19:26:49'),
+(209, 2, 'INSERT', 'INSERT INTO pre_paciente_agenda_especialista\n						(\n						id_especialista,\n						id_paciente,\n						id_empa,\n						cie10,\n						cie102,\n						cie103,\n						gl_observacion,\n						gl_diagnostico,\n						id_tipo_especialidad,\n						fecha_especialista,\n						hora_especialista,\n						fc_crea,\n						id_usuario_crea\n						)\n					VALUES\n						(\n						2,\n						3,\n						5,\n						2,\n						22,\n						1,\n						''operar'',\n						''tumor en labio'',\n						(SELECT ue.id_tipo_especialidad FROM pre_usuario_especialidad ue WHERE ue.id_usuario = 2),\n						now(),\n						now(),\n						now(),\n						2\n						)', '::1', '0.10034203529358', '2017-03-21 20:58:23'),
+(210, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0025360584259033', '2017-03-22 12:18:12'),
+(211, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''2''', '::1', '0.0010600090026855', '2017-03-22 12:18:12'),
+(212, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (0,''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0018980503082275', '2017-03-22 12:47:06'),
+(213, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.00099301338195801', '2017-03-22 12:47:16'),
+(214, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0010721683502197', '2017-03-22 12:47:16'),
+(215, 2, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''21'',''4-1'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0018980503082275', '2017-03-22 13:00:13'),
+(216, 2, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''21''', '::1', '0.0011630058288574', '2017-03-22 13:00:13'),
+(217, 21, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (0,''6-3'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0026040077209473', '2017-03-22 13:08:49'),
+(218, 21, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (0,''6-3'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0010240077972412', '2017-03-22 13:08:57'),
+(219, 21, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''36'',''63-1'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0012421607971191', '2017-03-22 13:15:44'),
+(220, 21, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''36''', '::1', '0.0017249584197998', '2017-03-22 13:15:44'),
+(221, 36, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''34'',''61-1'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0016598701477051', '2017-03-22 13:17:48'),
+(222, 36, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''34''', '::1', '0.0017030239105225', '2017-03-22 13:17:48'),
+(223, 34, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''27'',''7-4'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0010440349578857', '2017-03-22 13:17:59'),
+(224, 34, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''27''', '::1', '0.00089001655578613', '2017-03-22 13:17:59'),
+(225, 27, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''24'',''7-1'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0021119117736816', '2017-03-22 13:45:04'),
+(226, 27, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''24''', '::1', '0.0013852119445801', '2017-03-22 13:45:04'),
+(227, 24, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''34'',''61-1'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0018661022186279', '2017-03-22 13:51:32'),
+(228, 24, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''34''', '::1', '0.0011301040649414', '2017-03-22 13:51:32'),
+(229, 34, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''21'',''4-1'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0015389919281006', '2017-03-22 13:51:45'),
+(230, 34, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''21''', '::1', '0.0012068748474121', '2017-03-22 13:51:45'),
+(231, 21, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''13'',''3-2'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0011320114135742', '2017-03-22 13:54:20'),
+(232, 21, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''13''', '::1', '0.0010640621185303', '2017-03-22 13:54:20'),
+(233, 13, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''14'',''3-3'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0018508434295654', '2017-03-22 14:00:13'),
+(234, 13, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''14''', '::1', '0.0011281967163086', '2017-03-22 14:00:13'),
+(235, 14, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''12'',''3-1'',''login'','''',''0.0.0'',''::1'')', '::1', '0.00093889236450195', '2017-03-22 14:00:57'),
+(236, 14, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''12''', '::1', '0.0010478496551514', '2017-03-22 14:00:57'),
+(237, 12, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''18'',''2-1'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0011489391326904', '2017-03-22 14:01:38'),
+(238, 12, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''18''', '::1', '0.001162052154541', '2017-03-22 14:01:38'),
+(239, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0011119842529297', '2017-03-22 14:02:11'),
+(240, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0013861656188965', '2017-03-22 14:02:11');
 
 -- --------------------------------------------------------
 
@@ -200,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria_login` (
   KEY `IDX_gl_rut` (`gl_rut`),
   KEY `IDX_ip_privada` (`ip_privada`),
   KEY `IDX_ip_publica` (`ip_publica`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
 
 --
 -- Volcado de datos para la tabla `pre_auditoria_login`
@@ -230,7 +406,48 @@ INSERT INTO `pre_auditoria_login` (`id_auditoria_login`, `id_usuario`, `gl_rut`,
 (21, 11, '1-6', 'login', '', '0.0.0', '::1', '2017-03-20 19:22:06'),
 (22, 9, '1-4', 'login', '', '0.0.0', '::1', '2017-03-20 19:24:25'),
 (23, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-20 19:26:59'),
-(24, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-20 19:55:58');
+(24, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-20 19:55:58'),
+(25, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-20 21:26:59'),
+(26, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-20 21:35:06'),
+(27, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-21 12:12:09'),
+(28, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-21 12:27:56'),
+(29, 25, '7-2', 'login', '', '0.0.0', '127.0.0.1', '2017-03-21 14:34:43'),
+(30, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-21 14:41:29'),
+(31, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-21 14:41:49'),
+(32, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-21 14:44:14'),
+(33, 9, '1-4', 'login', '', '0.0.0', '::1', '2017-03-21 16:29:50'),
+(34, 10, '1-5', 'login', '', '0.0.0', '::1', '2017-03-21 17:40:22'),
+(35, 9, '1-4', 'login', '', '0.0.0', '::1', '2017-03-21 17:42:42'),
+(36, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-21 17:47:15'),
+(37, 22, '4-2', 'login', '', '0.0.0', '::1', '2017-03-21 17:52:55'),
+(38, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-21 18:07:52'),
+(39, 10, '1-5', 'login', '', '0.0.0', '::1', '2017-03-21 18:55:21'),
+(40, 0, '4-5', 'login', '', '0.0.0', '::1', '2017-03-21 18:57:17'),
+(41, 9, '1-4', 'login', '', '0.0.0', '::1', '2017-03-21 18:57:22'),
+(42, 22, '4-2', 'login', '', '0.0.0', '::1', '2017-03-21 18:57:33'),
+(43, 15, '3-4', 'login', '', '0.0.0', '::1', '2017-03-21 19:19:45'),
+(44, 0, '2-2', 'login', '', '0.0.0', '::1', '2017-03-21 19:20:30'),
+(45, 19, '2-2', 'login', '', '0.0.0', '::1', '2017-03-21 19:20:35'),
+(46, 28, '7-5', 'login', '', '0.0.0', '::1', '2017-03-21 19:21:33'),
+(47, 45, '62-4', 'login', '', '0.0.0', '::1', '2017-03-21 19:22:09'),
+(48, 0, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-21 19:26:49'),
+(49, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-22 12:18:12'),
+(50, 0, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-22 12:47:06'),
+(51, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-22 12:47:16'),
+(52, 21, '4-1', 'login', '', '0.0.0', '::1', '2017-03-22 13:00:13'),
+(53, 0, '6-3', 'login', '', '0.0.0', '::1', '2017-03-22 13:08:49'),
+(54, 0, '6-3', 'login', '', '0.0.0', '::1', '2017-03-22 13:08:57'),
+(55, 36, '63-1', 'login', '', '0.0.0', '::1', '2017-03-22 13:15:44'),
+(56, 34, '61-1', 'login', '', '0.0.0', '::1', '2017-03-22 13:17:48'),
+(57, 27, '7-4', 'login', '', '0.0.0', '::1', '2017-03-22 13:17:59'),
+(58, 24, '7-1', 'login', '', '0.0.0', '::1', '2017-03-22 13:45:04'),
+(59, 34, '61-1', 'login', '', '0.0.0', '::1', '2017-03-22 13:51:32'),
+(60, 21, '4-1', 'login', '', '0.0.0', '::1', '2017-03-22 13:51:45'),
+(61, 13, '3-2', 'login', '', '0.0.0', '::1', '2017-03-22 13:54:20'),
+(62, 14, '3-3', 'login', '', '0.0.0', '::1', '2017-03-22 14:00:13'),
+(63, 12, '3-1', 'login', '', '0.0.0', '::1', '2017-03-22 14:00:57'),
+(64, 18, '2-1', 'login', '', '0.0.0', '::1', '2017-03-22 14:01:38'),
+(65, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-22 14:02:11');
 
 -- --------------------------------------------------------
 
@@ -2790,28 +3007,32 @@ INSERT INTO `pre_centro_salud` (`id_centro_salud`, `id_tipo_grupo`, `cd_establec
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pre_cie10_capitulo`
+-- Estructura de tabla para la tabla `pre_cie10_1_capitulo`
 --
 
-CREATE TABLE IF NOT EXISTS `pre_cie10_capitulo` (
+CREATE TABLE IF NOT EXISTS `pre_cie10_1_capitulo` (
   `id_capitulo` int(11) NOT NULL AUTO_INCREMENT,
   `gl_codigo` varchar(100) DEFAULT NULL,
   `gl_descripcion` varchar(255) DEFAULT NULL,
   `gl_codigo_inicio` varchar(100) DEFAULT NULL,
   `gl_codigo_fin` varchar(100) DEFAULT NULL,
-  `gl_nota` text NOT NULL,
-  `gl_incluye` text NOT NULL COMMENT '[LINK]codigo[/LINK]',
-  `gl_excluye` text NOT NULL COMMENT '[LINK]codigo[/LINK]',
+  `gl_nota` text,
+  `gl_incluye` text COMMENT '[LINK]codigo[/LINK]',
+  `gl_excluye` text COMMENT '[LINK]codigo[/LINK]',
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_capitulo`)
+  PRIMARY KEY (`id_capitulo`),
+  KEY `IDX_gl_codigo` (`gl_codigo`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
+  KEY `IDX_gl_codigo_inicio` (`gl_codigo_inicio`),
+  KEY `IDX_gl_codigo_fin` (`gl_codigo_fin`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
--- Volcado de datos para la tabla `pre_cie10_capitulo`
+-- Volcado de datos para la tabla `pre_cie10_1_capitulo`
 --
 
-INSERT INTO `pre_cie10_capitulo` (`id_capitulo`, `gl_codigo`, `gl_descripcion`, `gl_codigo_inicio`, `gl_codigo_fin`, `gl_nota`, `gl_incluye`, `gl_excluye`, `id_usuario_crea`, `fc_crea`) VALUES
+INSERT INTO `pre_cie10_1_capitulo` (`id_capitulo`, `gl_codigo`, `gl_descripcion`, `gl_codigo_inicio`, `gl_codigo_fin`, `gl_nota`, `gl_incluye`, `gl_excluye`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 'I', 'Ciertas enfermedades infecciosas y parasitarias', 'A00', 'B99', 'Use código adicional ([LINK]U80–U89[/LINK]) si desea identificar el antibiótico al cual el agente bacteriano es resistente.', 'Enfermedades generalmente reconocidas como contagiosas o transmisibles.', 'Ciertas infecciones localizadas —ver los capítulos de los correspondientes\r\nsistemas del cuerpo.<br>\r\nEnfermedades infecciosas y parasitarias propias del período perinatal [excepto tétanos neonatal, sífilis congénita, infección gonorreica perinatal y enfermedad perinatal por virus de la inmunodeficiencia humana [VIH]] ([LINK]P35–P39[/LINK]).<br>\r\nEnfermedades infecciosas y parasitarias que complican el embarazo, el parto y el puerperio [excepto tétanos obstétrico y enfermedad por virus de la inmunodeficiencia humana [VIH]] ([LINK]O98[/LINK]).<br>\r\nInfluenza y otras infecciones respiratorias agudas ([LINK]J00–J22[/LINK]).<br>\r\nPortador o presunto portador de enfermedad infecciosa ([LINK]Z22[/LINK])', NULL, '2017-03-20 19:55:14'),
 (2, 'II', 'Tumores [neoplasias]', 'C00', 'D48', '', '', '', NULL, '2017-03-20 19:55:58'),
 (3, 'III', 'Enfermedades de la sangre y de los órganos hematopoyéticos, y ciertos trastornos que afectan el mecanismo de la inmunidad ', 'D50', 'D89', '', '', '', NULL, '2017-03-20 19:56:43'),
@@ -2838,48 +3059,125 @@ INSERT INTO `pre_cie10_capitulo` (`id_capitulo`, `gl_codigo`, `gl_descripcion`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pre_cie10_seccion`
+-- Estructura de tabla para la tabla `pre_cie10_2_seccion`
 --
 
-CREATE TABLE IF NOT EXISTS `pre_cie10_seccion` (
-  `id_indice` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `pre_cie10_2_seccion` (
+  `id_seccion` int(11) NOT NULL AUTO_INCREMENT,
   `id_capitulo` int(11) NOT NULL,
   `gl_codigo` varchar(255) DEFAULT NULL,
   `gl_descripcion` varchar(255) DEFAULT NULL,
   `gl_codigo_inicio` varchar(100) DEFAULT NULL,
   `gl_codigo_fin` varchar(100) DEFAULT NULL,
+  `gl_nota` text,
+  `gl_incluye` text,
+  `gl_excluye` text,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_indice`)
+  PRIMARY KEY (`id_seccion`),
+  KEY `IDX_id_capitulo` (`id_capitulo`),
+  KEY `IDX_gl_codigo_fin` (`gl_codigo_fin`),
+  KEY `IDX_gl_codigo_inicio` (`gl_codigo_inicio`),
+  KEY `IDX_gl_codigo` (`gl_codigo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
--- Volcado de datos para la tabla `pre_cie10_seccion`
+-- Volcado de datos para la tabla `pre_cie10_2_seccion`
 --
 
-INSERT INTO `pre_cie10_seccion` (`id_indice`, `id_capitulo`, `gl_codigo`, `gl_descripcion`, `gl_codigo_inicio`, `gl_codigo_fin`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 1, 'I1', 'Enfermedades infecciosas intestinales', 'A00', 'A09', NULL, '2017-03-20 20:32:17'),
-(2, 1, 'I2', 'Tuberculosis', 'A15', 'A19', NULL, '2017-03-20 20:36:09'),
-(3, 1, 'I3', 'Ciertas zoonosis bacterianas', 'A20', 'A28', NULL, '2017-03-20 20:36:55'),
-(4, 1, 'I4', 'Otras enfermedades bacterianas', 'A30', 'A49', NULL, '2017-03-20 20:37:36'),
-(5, 1, 'I5', 'Infecciones con modo de transmisión predominantemente sexual', 'A50', 'A64', NULL, '2017-03-20 20:38:23'),
-(6, 1, 'I6', 'Otras enfermedades debidas a espiroquetas', 'A65', 'A69', NULL, '2017-03-20 20:38:47'),
-(7, 1, 'I7', 'Otras enfermedades causadas por clamidias', 'A70', 'A74', NULL, '2017-03-20 20:39:07'),
-(8, 1, 'I8', 'Rickettsiosis', 'A75', 'A79', NULL, '2017-03-20 20:39:40'),
-(9, 1, 'I9', 'Infecciones virales del sistema nervioso central', 'A80', 'A89', NULL, '2017-03-20 20:40:01'),
-(10, 1, 'I10', 'Fiebres virales transmitidas por artrópodos y fiebres virales hemorrágicas', 'A90', 'A99', NULL, '2017-03-20 20:40:26'),
-(11, 1, 'I11', 'Infecciones virales caracterizadas por lesiones de la piel y de las membranas mucosas', 'B00', 'B09', NULL, '2017-03-20 20:40:46'),
-(12, 1, 'I12', 'Hepatitis viral', 'B15', 'B19', NULL, '2017-03-20 20:41:08'),
-(13, 1, 'I13', 'Enfermedad por virus de la inmunodeficiencia humana [VIH]', 'B20', 'B24', NULL, '2017-03-20 20:41:31'),
-(14, 1, 'I14', 'Otras enfermedades virales', 'B25', 'B34', NULL, '2017-03-20 20:41:53'),
-(15, 1, 'I15', 'Micosis', 'B35', 'B49', NULL, '2017-03-20 20:42:28'),
-(16, 1, 'I16', 'Enfermedades debidas a protozoarios', 'B50', 'B64', NULL, '2017-03-20 20:42:46'),
-(17, 1, 'I17', 'Helmintiasis', 'B65', 'B83', NULL, '2017-03-20 20:43:07'),
-(18, 1, 'I18', 'Pediculosis, acariasis y otras infestaciones', 'B85', 'B89', NULL, '2017-03-20 20:43:33'),
-(19, 1, 'I19', 'Secuelas de enfermedades infecciosas y parasitarias', 'B90', 'B94', NULL, '2017-03-20 20:44:05'),
-(20, 1, 'I20', 'Bacterias, virus y otros agentes infecciosos', 'B95', 'B97', NULL, '2017-03-20 20:44:26'),
-(21, 1, 'I21', 'Otras enfermedades infecciosas', 'B99', NULL, NULL, '2017-03-20 20:44:49'),
-(22, 2, 'II1', 'Labio, cavidad bucal y faringe', 'C00', 'C14', NULL, '2017-03-20 21:18:06');
+INSERT INTO `pre_cie10_2_seccion` (`id_seccion`, `id_capitulo`, `gl_codigo`, `gl_descripcion`, `gl_codigo_inicio`, `gl_codigo_fin`, `gl_nota`, `gl_incluye`, `gl_excluye`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 1, 'I1', 'Enfermedades infecciosas intestinales', 'A00', 'A09', NULL, NULL, NULL, NULL, '2017-03-20 20:32:17'),
+(2, 1, 'I2', 'Tuberculosis', 'A15', 'A19', NULL, NULL, NULL, NULL, '2017-03-20 20:36:09'),
+(3, 1, 'I3', 'Ciertas zoonosis bacterianas', 'A20', 'A28', NULL, NULL, NULL, NULL, '2017-03-20 20:36:55'),
+(4, 1, 'I4', 'Otras enfermedades bacterianas', 'A30', 'A49', NULL, NULL, NULL, NULL, '2017-03-20 20:37:36'),
+(5, 1, 'I5', 'Infecciones con modo de transmisión predominantemente sexual', 'A50', 'A64', NULL, NULL, NULL, NULL, '2017-03-20 20:38:23'),
+(6, 1, 'I6', 'Otras enfermedades debidas a espiroquetas', 'A65', 'A69', NULL, NULL, NULL, NULL, '2017-03-20 20:38:47'),
+(7, 1, 'I7', 'Otras enfermedades causadas por clamidias', 'A70', 'A74', NULL, NULL, NULL, NULL, '2017-03-20 20:39:07'),
+(8, 1, 'I8', 'Rickettsiosis', 'A75', 'A79', NULL, NULL, NULL, NULL, '2017-03-20 20:39:40'),
+(9, 1, 'I9', 'Infecciones virales del sistema nervioso central', 'A80', 'A89', NULL, NULL, NULL, NULL, '2017-03-20 20:40:01'),
+(10, 1, 'I10', 'Fiebres virales transmitidas por artrópodos y fiebres virales hemorrágicas', 'A90', 'A99', NULL, NULL, NULL, NULL, '2017-03-20 20:40:26'),
+(11, 1, 'I11', 'Infecciones virales caracterizadas por lesiones de la piel y de las membranas mucosas', 'B00', 'B09', NULL, NULL, NULL, NULL, '2017-03-20 20:40:46'),
+(12, 1, 'I12', 'Hepatitis viral', 'B15', 'B19', NULL, NULL, NULL, NULL, '2017-03-20 20:41:08'),
+(13, 1, 'I13', 'Enfermedad por virus de la inmunodeficiencia humana [VIH]', 'B20', 'B24', NULL, NULL, NULL, NULL, '2017-03-20 20:41:31'),
+(14, 1, 'I14', 'Otras enfermedades virales', 'B25', 'B34', NULL, NULL, NULL, NULL, '2017-03-20 20:41:53'),
+(15, 1, 'I15', 'Micosis', 'B35', 'B49', NULL, NULL, NULL, NULL, '2017-03-20 20:42:28'),
+(16, 1, 'I16', 'Enfermedades debidas a protozoarios', 'B50', 'B64', NULL, NULL, NULL, NULL, '2017-03-20 20:42:46'),
+(17, 1, 'I17', 'Helmintiasis', 'B65', 'B83', NULL, NULL, NULL, NULL, '2017-03-20 20:43:07'),
+(18, 1, 'I18', 'Pediculosis, acariasis y otras infestaciones', 'B85', 'B89', NULL, NULL, NULL, NULL, '2017-03-20 20:43:33'),
+(19, 1, 'I19', 'Secuelas de enfermedades infecciosas y parasitarias', 'B90', 'B94', NULL, NULL, NULL, NULL, '2017-03-20 20:44:05'),
+(20, 1, 'I20', 'Bacterias, virus y otros agentes infecciosos', 'B95', 'B97', NULL, NULL, NULL, NULL, '2017-03-20 20:44:26'),
+(21, 1, 'I21', 'Otras enfermedades infecciosas', 'B99', NULL, NULL, NULL, NULL, NULL, '2017-03-20 20:44:49'),
+(22, 2, 'II1', 'Labio, cavidad bucal y faringe', 'C00', 'C14', NULL, NULL, NULL, NULL, '2017-03-20 21:18:06');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_cie10_3_grupo`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_cie10_3_grupo` (
+  `id_grupo` int(11) NOT NULL AUTO_INCREMENT,
+  `id_capitulo` int(11) NOT NULL,
+  `id_seccion` int(11) NOT NULL,
+  `gl_codigo` varchar(100) DEFAULT NULL,
+  `gl_descripcion` varchar(255) DEFAULT NULL,
+  `gl_codigo_inicio` varchar(100) DEFAULT NULL,
+  `gl_codigo_fin` varchar(100) DEFAULT NULL,
+  `gl_nota` text NOT NULL,
+  `gl_incluye` text NOT NULL COMMENT '[LINK]codigo[/LINK]',
+  `gl_excluye` text NOT NULL COMMENT '[LINK]codigo[/LINK]',
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_grupo`),
+  KEY `IDX_gl_codigo` (`gl_codigo`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
+  KEY `IDX_gl_codigo_inicio` (`gl_codigo_inicio`),
+  KEY `IDX_gl_codigo_fin` (`gl_codigo_fin`),
+  KEY `IDX_id_capitulo` (`id_capitulo`),
+  KEY `IDX_id_seccion` (`id_seccion`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `pre_cie10_3_grupo`
+--
+
+INSERT INTO `pre_cie10_3_grupo` (`id_grupo`, `id_capitulo`, `id_seccion`, `gl_codigo`, `gl_descripcion`, `gl_codigo_inicio`, `gl_codigo_fin`, `gl_nota`, `gl_incluye`, `gl_excluye`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 1, 1, 'A00', 'Cólera', 'A000', 'A009', '', '', '', NULL, '2017-03-22 13:51:36');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_cie10_4`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_cie10_4` (
+  `id_cie10` int(11) NOT NULL AUTO_INCREMENT,
+  `id_capitulo` int(11) NOT NULL,
+  `id_seccion` int(11) NOT NULL,
+  `id_grupo` int(11) NOT NULL,
+  `gl_codigo` varchar(100) DEFAULT NULL,
+  `gl_descripcion` varchar(255) DEFAULT NULL,
+  `gl_nota` text NOT NULL,
+  `gl_incluye` text NOT NULL COMMENT '[LINK]codigo[/LINK]',
+  `gl_excluye` text NOT NULL COMMENT '[LINK]codigo[/LINK]',
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_cie10`),
+  KEY `IDX_id_capitulo` (`id_capitulo`),
+  KEY `IDX_id_seccion` (`id_seccion`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
+  KEY `IDX_gl_codigo` (`gl_codigo`),
+  KEY `IDX_id_grupo` (`id_grupo`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `pre_cie10_4`
+--
+
+INSERT INTO `pre_cie10_4` (`id_cie10`, `id_capitulo`, `id_seccion`, `id_grupo`, `gl_codigo`, `gl_descripcion`, `gl_nota`, `gl_incluye`, `gl_excluye`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 1, 1, 1, 'A000', 'Colera debido a vibrio cholerae o1, biotipo cholerae', 'Cólera clásico', '', '', NULL, '2017-03-22 13:52:33'),
+(2, 1, 1, 1, 'A001', 'Cólera debido a Vibrio cholerae O1, biotipo El Tor', 'Cólera El Tor', '', '', NULL, '2017-03-22 13:53:05'),
+(3, 1, 1, 1, 'A009', 'Cólera, no especificado', '', '', '', NULL, '2017-03-22 13:53:30');
 
 -- --------------------------------------------------------
 
@@ -3358,7 +3656,7 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   KEY `IDX_id_usuario_act` (`id_usuario_act`),
   KEY `IDX_nr_orden` (`nr_orden`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
 
 --
 -- Volcado de datos para la tabla `pre_empa`
@@ -3386,7 +3684,13 @@ INSERT INTO `pre_empa` (`id_empa`, `id_paciente`, `nr_orden`, `bo_finalizado`, `
 (19, 11, 1, 1, 349, '800', 2462, 123, '2017-03-13 00:00:00', 1, 1, '34', 0, '180', '200', '45.00', '100', 8, '1232', '1232', NULL, 1, '1232', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'asd', 0, '2017-03-13 20:21:32', 2, '2017-03-20 18:13:54'),
 (20, 11, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-13 20:21:32', 0, NULL),
 (21, 13, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-15 16:56:28', 0, NULL),
-(22, 13, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-15 16:56:28', 0, NULL);
+(22, 13, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-15 16:56:28', 0, NULL),
+(23, 12, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-21 17:51:56', 0, NULL),
+(24, 12, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-21 17:51:56', 0, NULL),
+(25, 13, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-21 18:40:38', 0, NULL),
+(26, 13, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-21 18:40:38', 0, NULL),
+(27, 14, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-21 18:47:06', 0, NULL),
+(28, 14, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-21 18:47:06', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -3404,7 +3708,7 @@ CREATE TABLE IF NOT EXISTS `pre_empa_audit` (
   PRIMARY KEY (`id_audit`),
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=221 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=281 ;
 
 --
 -- Volcado de datos para la tabla `pre_empa_audit`
@@ -3630,7 +3934,67 @@ INSERT INTO `pre_empa_audit` (`id_audit`, `id_empa`, `id_pregunta`, `nr_valor`, 
 (217, 21, 9, NULL, 8, '2017-03-15 16:56:28'),
 (218, 22, 9, NULL, 8, '2017-03-15 16:56:28'),
 (219, 21, 10, NULL, 8, '2017-03-15 16:56:28'),
-(220, 22, 10, NULL, 8, '2017-03-15 16:56:28');
+(220, 22, 10, NULL, 8, '2017-03-15 16:56:28'),
+(221, 23, 1, NULL, 2, '2017-03-21 17:51:56'),
+(222, 24, 1, NULL, 2, '2017-03-21 17:51:56'),
+(223, 23, 2, NULL, 2, '2017-03-21 17:51:56'),
+(224, 24, 2, NULL, 2, '2017-03-21 17:51:56'),
+(225, 23, 3, NULL, 2, '2017-03-21 17:51:56'),
+(226, 24, 3, NULL, 2, '2017-03-21 17:51:56'),
+(227, 23, 4, NULL, 2, '2017-03-21 17:51:56'),
+(228, 24, 4, NULL, 2, '2017-03-21 17:51:56'),
+(229, 23, 5, NULL, 2, '2017-03-21 17:51:56'),
+(230, 24, 5, NULL, 2, '2017-03-21 17:51:56'),
+(231, 23, 6, NULL, 2, '2017-03-21 17:51:56'),
+(232, 24, 6, NULL, 2, '2017-03-21 17:51:56'),
+(233, 23, 7, NULL, 2, '2017-03-21 17:51:56'),
+(234, 24, 7, NULL, 2, '2017-03-21 17:51:56'),
+(235, 23, 8, NULL, 2, '2017-03-21 17:51:56'),
+(236, 24, 8, NULL, 2, '2017-03-21 17:51:56'),
+(237, 23, 9, NULL, 2, '2017-03-21 17:51:56'),
+(238, 24, 9, NULL, 2, '2017-03-21 17:51:56'),
+(239, 23, 10, NULL, 2, '2017-03-21 17:51:56'),
+(240, 24, 10, NULL, 2, '2017-03-21 17:51:56'),
+(241, 25, 1, NULL, 2, '2017-03-21 18:40:38'),
+(242, 26, 1, NULL, 2, '2017-03-21 18:40:38'),
+(243, 25, 2, NULL, 2, '2017-03-21 18:40:38'),
+(244, 26, 2, NULL, 2, '2017-03-21 18:40:38'),
+(245, 25, 3, NULL, 2, '2017-03-21 18:40:38'),
+(246, 26, 3, NULL, 2, '2017-03-21 18:40:38'),
+(247, 25, 4, NULL, 2, '2017-03-21 18:40:38'),
+(248, 26, 4, NULL, 2, '2017-03-21 18:40:38'),
+(249, 25, 5, NULL, 2, '2017-03-21 18:40:38'),
+(250, 26, 5, NULL, 2, '2017-03-21 18:40:38'),
+(251, 25, 6, NULL, 2, '2017-03-21 18:40:38'),
+(252, 26, 6, NULL, 2, '2017-03-21 18:40:38'),
+(253, 25, 7, NULL, 2, '2017-03-21 18:40:38'),
+(254, 26, 7, NULL, 2, '2017-03-21 18:40:38'),
+(255, 25, 8, NULL, 2, '2017-03-21 18:40:38'),
+(256, 26, 8, NULL, 2, '2017-03-21 18:40:38'),
+(257, 25, 9, NULL, 2, '2017-03-21 18:40:38'),
+(258, 26, 9, NULL, 2, '2017-03-21 18:40:38'),
+(259, 25, 10, NULL, 2, '2017-03-21 18:40:38'),
+(260, 26, 10, NULL, 2, '2017-03-21 18:40:38'),
+(261, 27, 1, NULL, 2, '2017-03-21 18:47:06'),
+(262, 28, 1, NULL, 2, '2017-03-21 18:47:06'),
+(263, 27, 2, NULL, 2, '2017-03-21 18:47:06'),
+(264, 28, 2, NULL, 2, '2017-03-21 18:47:06'),
+(265, 27, 3, NULL, 2, '2017-03-21 18:47:06'),
+(266, 28, 3, NULL, 2, '2017-03-21 18:47:06'),
+(267, 27, 4, NULL, 2, '2017-03-21 18:47:06'),
+(268, 28, 4, NULL, 2, '2017-03-21 18:47:06'),
+(269, 27, 5, NULL, 2, '2017-03-21 18:47:06'),
+(270, 28, 5, NULL, 2, '2017-03-21 18:47:06'),
+(271, 27, 6, NULL, 2, '2017-03-21 18:47:06'),
+(272, 28, 6, NULL, 2, '2017-03-21 18:47:06'),
+(273, 27, 7, NULL, 2, '2017-03-21 18:47:06'),
+(274, 28, 7, NULL, 2, '2017-03-21 18:47:06'),
+(275, 27, 8, NULL, 2, '2017-03-21 18:47:06'),
+(276, 28, 8, NULL, 2, '2017-03-21 18:47:06'),
+(277, 27, 9, NULL, 2, '2017-03-21 18:47:06'),
+(278, 28, 9, NULL, 2, '2017-03-21 18:47:06'),
+(279, 27, 10, NULL, 2, '2017-03-21 18:47:06'),
+(280, 28, 10, NULL, 2, '2017-03-21 18:47:06');
 
 -- --------------------------------------------------------
 
@@ -3693,7 +4057,7 @@ CREATE TABLE IF NOT EXISTS `pre_evento` (
   KEY `IDX_id_evento_tipo` (`id_evento_tipo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=528 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=546 ;
 
 --
 -- Volcado de datos para la tabla `pre_evento`
@@ -4226,7 +4590,26 @@ INSERT INTO `pre_evento` (`id_evento`, `id_evento_tipo`, `id_paciente`, `id_empa
 (524, 20, 3, 0, 'Plan de Tratamiento con Odontólogo Iniciado el : 20-03-2017', 1, 0, 2, '2017-03-20 15:14:59'),
 (525, 20, 3, 0, 'Plan de Tratamiento con Odontólogo Iniciado el : 20-03-2017', 1, 1, 2, '2017-03-20 15:14:59'),
 (526, 12, 2, 3, 'Empa modificado el : 20-03-2017 por usuario 2', 1, 0, 2, '2017-03-20 18:13:54'),
-(527, 12, 11, 19, 'Empa modificado el : 20-03-2017 por usuario 2', 1, 1, 2, '2017-03-20 18:13:54');
+(527, 12, 11, 19, 'Empa modificado el : 20-03-2017 por usuario 2', 1, 1, 2, '2017-03-20 18:13:54'),
+(528, 1, 12, 0, 'Paciente creado el : 21-03-2017', 1, 1, 2, '2017-03-21 17:51:56'),
+(529, 13, 12, 23, 'Empa 23 creado el : 21-03-2017', 1, 0, 2, '2017-03-21 17:51:56'),
+(530, 13, 12, 24, 'Empa 24 creado el : 21-03-2017', 1, 0, 2, '2017-03-21 17:51:56');
+INSERT INTO `pre_evento` (`id_evento`, `id_evento_tipo`, `id_paciente`, `id_empa`, `gl_descripcion`, `bo_estado`, `bo_mostrar`, `id_usuario_crea`, `fc_crea`) VALUES
+(531, 14, 12, 23, 'AUDIT del EMPA23 creado el : 21-03-2017', 1, 0, 2, '2017-03-21 17:51:56'),
+(532, 14, 12, 24, 'AUDIT del EMPA24 creado el : 21-03-2017', 1, 0, 2, '2017-03-21 17:51:56'),
+(533, 4, 12, 0, 'AUDIT del EMPA24 creado el : Acepta el programa con fecha : 21-03-2017', 1, 1, 2, '2017-03-21 17:51:56'),
+(534, 1, 13, 0, 'Paciente creado el : 21-03-2017', 1, 1, 2, '2017-03-21 18:40:38'),
+(535, 13, 13, 25, 'Empa 25 creado el : 21-03-2017', 1, 0, 2, '2017-03-21 18:40:38'),
+(536, 13, 13, 26, 'Empa 26 creado el : 21-03-2017', 1, 0, 2, '2017-03-21 18:40:38'),
+(537, 14, 13, 25, 'AUDIT del EMPA25 creado el : 21-03-2017', 1, 0, 2, '2017-03-21 18:40:38'),
+(538, 14, 13, 26, 'AUDIT del EMPA26 creado el : 21-03-2017', 1, 0, 2, '2017-03-21 18:40:38'),
+(539, 4, 13, 0, 'AUDIT del EMPA26 creado el : Acepta el programa con fecha : 21-03-2017', 1, 1, 2, '2017-03-21 18:40:38'),
+(540, 1, 14, 0, 'Paciente creado el : 21-03-2017', 1, 1, 2, '2017-03-21 18:47:06'),
+(541, 13, 14, 27, 'Empa 27 creado el : 21-03-2017', 1, 0, 2, '2017-03-21 18:47:06'),
+(542, 13, 14, 28, 'Empa 28 creado el : 21-03-2017', 1, 0, 2, '2017-03-21 18:47:06'),
+(543, 14, 14, 27, 'AUDIT del EMPA27 creado el : 21-03-2017', 1, 0, 2, '2017-03-21 18:47:06'),
+(544, 14, 14, 28, 'AUDIT del EMPA28 creado el : 21-03-2017', 1, 0, 2, '2017-03-21 18:47:06'),
+(545, 4, 14, 0, 'AUDIT del EMPA28 creado el : Acepta el programa con fecha : 21-03-2017', 1, 1, 2, '2017-03-21 18:47:06');
 
 -- --------------------------------------------------------
 
@@ -4391,7 +4774,7 @@ INSERT INTO `pre_opcion` (`id_opcion`, `id_opcion_padre`, `bo_tiene_hijo`, `gl_n
 (8, 0, 0, 'Evaluación', 'fa fa-plus-square', '/Medico/', 1, NULL, '2017-03-08 21:10:45', NULL, '2017-03-08 21:16:00'),
 (9, 0, 0, 'Laboratorio', 'fa fa-hospital-o', '/Laboratorio/index', 1, 1, '2017-03-07 00:00:00', NULL, '2017-03-10 16:16:44'),
 (11, 0, 0, 'Gestor Nacional', 'fa fa-cogs', '/Gestor/nacional', 1, 2, '2017-03-13 13:27:12', 2, '2017-03-20 19:21:03'),
-(12, 0, 0, 'Gestor', 'fa fa-cog', '/Gestor/regional', 1, 2, '2017-03-13 13:27:12', 2, '2017-03-20 19:20:59'),
+(12, 0, 0, 'Gestor Regional', 'fa fa-cog', '/Gestor/regional', 1, 2, '2017-03-13 13:27:12', 2, '2017-03-21 14:42:30'),
 (13, 0, 0, 'Especialista', 'fa fa-user-md', '/Especialista/', 1, 3, '2017-03-16 18:22:58', NULL, NULL),
 (8000, 0, 1, 'Mantenedor', 'fa fa-database', NULL, 1, 2, '2017-02-23 15:51:17', NULL, '2017-03-14 19:28:05'),
 (8001, 8000, 0, 'Usuario', 'fa fa-group', '/Mantenedor/usuario', 1, 2, '2017-02-23 15:55:19', NULL, '2017-03-14 13:19:37'),
@@ -4458,7 +4841,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente` (
   KEY `IDX_gl_rut` (`gl_rut`),
   KEY `IDX_id_centro_salud` (`id_centro_salud`),
   KEY `IDX_gl_run_pass` (`gl_run_pass`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Volcado de datos para la tabla `pre_paciente`
@@ -4471,9 +4854,12 @@ INSERT INTO `pre_paciente` (`id_paciente`, `id_institucion`, `id_region`, `id_co
 (4, 2462, 5, 35, 1, NULL, NULL, NULL, 2, 'Tratamiento', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 1, NULL, 1, '22222222-2', 0, '', 'Paciente', 'Prueba', '1981-03-09', 'F', 'Pedro Montt 2120, Valparaíso, Chile', '52121450', 0, '995874212', 'prueba@prueba.cl', 2457, '-33.047121', '-71.61455030000002', 2, '2017-03-09 18:11:33', NULL, '2017-03-20 19:11:36'),
 (5, 2462, 13, 590, 1, NULL, NULL, NULL, 1, 'Control', NULL, NULL, NULL, '2017-03-10', '04:08:00', NULL, 'A', 0, 1, 1, '21104126-9', 0, '', 'test_21104', 'test', '1970-02-01', 'F', 'Sta Genoveva 1353, Quinta Normal, Región Metropolitana, Chile', '123456', 0, '456456', 'o@g.cl', 1791, '-33.43477531071472', '-70.69851960288361', 2, '2017-03-10 13:05:14', NULL, '2017-03-17 18:11:35'),
 (6, 2462, 5, 35, 1, NULL, NULL, NULL, 2, 'Tratamiento', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 1, 0, 1, '', 1, '772', 'Prueba', 'Extranjero', '1980-03-10', 'F', 'Pedro Montt 1230, Valparaíso, Chile', '9805041', 1, '985045', 'prueba@prueba.cl', 2033, '-33.0465371', '-71.6194787', 2, '2017-03-10 14:15:58', NULL, '2017-03-20 19:11:47'),
-(7, 2462, 1, 350, 1, NULL, NULL, NULL, 1, 'Control', NULL, NULL, NULL, '2017-03-16', '06:21:00', NULL, 'A', 0, 1, 1, '33333333-3', 0, '', 'test', 'test', '1981-11-11', 'F', 'Gabriela Mistral 3614, Renca, Región Metropolitana, Chile', '', 0, '', '', 2443, '-33.41052296403486', '-70.69530487060547', 6, '2017-03-11 00:49:10', NULL, '2017-03-16 20:24:30'),
+(7, 2462, 1, 350, 1, NULL, NULL, NULL, 2, 'Tratamiento', NULL, NULL, NULL, '2017-03-16', '06:21:00', NULL, 'A', 0, 1, 1, '33333333-3', 0, '', 'test', 'test', '1981-11-11', 'F', 'Gabriela Mistral 3614, Renca, Región Metropolitana, Chile', '', 0, '', '', 2443, '-33.41052296403486', '-70.69530487060547', 6, '2017-03-11 00:49:10', NULL, '2017-03-22 13:07:58'),
 (8, 2462, 1, 350, 1, NULL, NULL, NULL, 1, 'Control', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 0, 0, 1, '44444444-4', 0, '', 'testa', 'testa', '1995-11-11', 'F', 'Los Jazmines 1847, Iquique, Región de Tarapacá, Chile', '', 0, '', '', 2462, '-20.23256320096955', '-70.13946533203125', 6, '2017-03-11 00:54:25', NULL, '2017-03-20 15:33:34'),
-(11, 2462, 5, 35, 1, NULL, NULL, NULL, 2, 'Tratamiento', NULL, NULL, NULL, '2017-03-17', '10:30:00', NULL, 'A', 1, 1, 1, '11111111-1', 0, '', 'Prueba', '13-03', '1981-03-13', 'F', 'Pedro Montt 1200, Valparaíso, Chile', '70578958', 1, '994050647', 'prueba@prueba.cl', 2056, '-33.0465371', '-71.6194787', 2, '2017-03-13 20:21:32', NULL, '2017-03-20 19:11:28');
+(11, 2462, 5, 35, 1, NULL, NULL, NULL, 2, 'Tratamiento', NULL, NULL, NULL, '2017-03-17', '10:30:00', NULL, 'A', 1, 1, 1, '11111111-1', 0, '', 'Prueba', '13-03', '1981-03-13', 'F', 'Pedro Montt 1200, Valparaíso, Chile', '70578958', 1, '994050647', 'prueba@prueba.cl', 2056, '-33.0465371', '-71.6194787', 2, '2017-03-13 20:21:32', NULL, '2017-03-20 19:11:28'),
+(12, 2462, 4, 374, 1, NULL, NULL, NULL, 2, 'Tratamiento', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 1, 0, 1, '7135440-7', 0, '', 'maria del carmen', 'rodriguez', '1972-06-16', 'F', 'Paul Munoz, La Serena, Región de Coquimbo, Chile', '123456', 1, '789486', 'maria@cosof.cl', 2332, '-29.921799295021344', '-71.27609968185425', 2, '2017-03-21 17:51:56', NULL, '2017-03-21 17:53:58'),
+(13, 2462, 4, 375, 1, NULL, NULL, NULL, 2, 'Tratamiento', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 1, 0, 1, '11910556-0', 0, '', 'marta', 'simpson', '1973-09-03', 'F', 'Maestranza 811, Coquimbo, Región de Coquimbo, Chile', '77777', 1, '777777', 'marta@gmail.cl', 2291, '-29.971900745045595', '-71.33362802275394', 2, '2017-03-21 18:40:38', NULL, '2017-03-21 18:48:43'),
+(14, 2462, 4, 384, 1, NULL, NULL, NULL, 2, 'Tratamiento', NULL, NULL, NULL, NULL, NULL, NULL, 'A', 1, 0, 1, '8709696-3', 0, '', 'Herna', 'zuñiga', '1980-04-06', 'F', 'Avda. Manuel Peñafiel Olivares 410, Ovalle, Región de Coquimbo, Chile', '884455', 1, '8844555', 'herna_zuniga@star.wars', 2273, '-30.582930763762054', '-71.18984298891598', 2, '2017-03-21 18:47:06', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4744,7 +5130,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_direccion` (
   `id_usuario_actualiza` int(11) DEFAULT NULL,
   `fc_actualiza` datetime DEFAULT NULL,
   PRIMARY KEY (`id_paciente_direccion`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
 
 --
 -- Volcado de datos para la tabla `pre_paciente_direccion`
@@ -4782,11 +5168,14 @@ INSERT INTO `pre_paciente_direccion` (`id_paciente_direccion`, `id_paciente`, `i
 (29, 11, 35, 5, 'Pedro Montt 1200, Valparaíso, Chile', '-33.0465371', '-71.6194787', 0, 2, '2017-03-13 20:21:32', 2, '2017-03-13 20:23:08'),
 (30, 11, 35, 5, 'Pedro Montt 1230, Valparaíso, Chile', '-33.0465371', '-71.6194787', 1, 2, '2017-03-13 20:23:08', 2, '2017-03-13 20:23:08'),
 (31, 4, 19, 15, 'Las Violetas 2201-2299, Arica, Región de Arica y Parinacota, Chile', '-18.47149592360231', '-70.2831771114142', 1, 8, '2017-03-15 14:45:05', 8, '2017-03-15 14:45:05'),
-(32, 13, 653, 15, 'Arica, Chile', '-18.4782534', '-70.31259879999999', 0, 8, '2017-03-15 16:56:28', 6, '2017-03-17 20:35:07'),
-(33, 13, 375, 4, 'Aldunate 1577, Coquimbo, Región de Coquimbo, Chile', '-29.957959823097173', '-71.33960494550786', 1, 6, '2017-03-17 20:35:07', 6, '2017-03-17 20:35:07'),
+(32, 13, 653, 15, 'Arica, Chile', '-18.4782534', '-70.31259879999999', 0, 8, '2017-03-15 16:56:28', 2, '2017-03-21 18:40:38'),
+(33, 13, 375, 4, 'Aldunate 1577, Coquimbo, Región de Coquimbo, Chile', '-29.957959823097173', '-71.33960494550786', 0, 6, '2017-03-17 20:35:07', 2, '2017-03-21 18:40:38'),
 (34, 1, 578, 12, 'Croacia 1100-1198, Punta Arenas, Región de Magallanes y de la Antártica Chilena, Chile', '-53.1595874066297', '-70.89689808820799', 0, 6, '2017-03-17 20:38:49', 6, '2017-03-17 21:07:06'),
 (35, 1, 578, 12, 'Paraguaya 511, Punta Arenas, Región de Magallanes y de la Antártica Chilena, Chile', '-53.1669717220404', '-70.91689663862303', 0, 6, '2017-03-17 20:55:15', 6, '2017-03-17 21:07:06'),
-(36, 1, 349, 1, 'Catorce Ote 2039, Iquique, Región de Tarapacá, Chile', '-20.22820667607805', '-70.13386675554193', 1, 6, '2017-03-17 21:07:06', 6, '2017-03-17 21:07:06');
+(36, 1, 349, 1, 'Catorce Ote 2039, Iquique, Región de Tarapacá, Chile', '-20.22820667607805', '-70.13386675554193', 1, 6, '2017-03-17 21:07:06', 6, '2017-03-17 21:07:06'),
+(37, 12, 374, 4, 'Paul Munoz, La Serena, Región de Coquimbo, Chile', '-29.921799295021344', '-71.27609968185425', 1, 2, '2017-03-21 17:51:56', 2, '2017-03-21 17:51:56'),
+(38, 13, 375, 4, 'Maestranza 811, Coquimbo, Región de Coquimbo, Chile', '-29.971900745045595', '-71.33362802275394', 1, 2, '2017-03-21 18:40:38', 2, '2017-03-21 18:40:38'),
+(39, 14, 384, 4, 'Avda. Manuel Peñafiel Olivares 410, Ovalle, Región de Coquimbo, Chile', '-30.582930763762054', '-71.18984298891598', 1, 2, '2017-03-21 18:47:06', 2, '2017-03-21 18:47:06');
 
 -- --------------------------------------------------------
 
@@ -4916,7 +5305,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_registro` (
   KEY `IDX_id_institucion` (`id_institucion`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
 
 --
 -- Volcado de datos para la tabla `pre_paciente_registro`
@@ -4968,7 +5357,262 @@ INSERT INTO `pre_paciente_registro` (`id_registro`, `id_paciente`, `id_instituci
 (43, 13, 2310, '2017-03-17', '17:32:00', '', 6, '2017-03-17 05:03:31'),
 (44, 1, 18, '2017-03-17', '17:34:00', 'Motivo', 6, '2017-03-17 05:03:12'),
 (45, 1, 18, '2017-03-17', '17:37:00', '', 6, '2017-03-17 05:03:39'),
-(46, 1, 0, '2017-03-17', '18:03:00', '', 6, '2017-03-17 06:03:30');
+(46, 1, 0, '2017-03-17', '18:03:00', '', 6, '2017-03-17 06:03:30'),
+(47, 12, 2462, '2017-03-21', '14:46:00', 'golpe en la rodilla', 2, '2017-03-21 17:51:56'),
+(48, 13, 2462, '2017-03-21', '15:33:00', 'corte en estomago', 2, '2017-03-21 18:40:38'),
+(49, 14, 2462, '2017-03-21', '15:42:00', 'lesion de arma blanca', 2, '2017-03-21 18:47:06');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_pais`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_pais` (
+  `id_pais` int(11) NOT NULL,
+  `gl_nombre_pais` varchar(150) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_pais`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Listado de Paises';
+
+--
+-- Volcado de datos para la tabla `pre_pais`
+--
+
+INSERT INTO `pre_pais` (`id_pais`, `gl_nombre_pais`, `id_usuario_crea`, `fc_crea`) VALUES
+(4, 'AFGANISTÁN', NULL, NULL),
+(8, 'ALBANIA', NULL, NULL),
+(10, 'ANTÁRTIDA', NULL, NULL),
+(12, 'ARGEL', NULL, NULL),
+(16, 'SAMOA AMERICANA', NULL, NULL),
+(20, 'ANDORRA', NULL, NULL),
+(24, 'ANGOLA', NULL, NULL),
+(28, 'ANTIGUA Y BARBUDA', NULL, NULL),
+(31, 'AZERBAIYÁN', NULL, NULL),
+(32, 'ARGENTINA', NULL, NULL),
+(36, 'AUSTRALIA', NULL, NULL),
+(40, 'AUSTRIA', NULL, NULL),
+(44, 'BAHAMAS', NULL, NULL),
+(48, 'BAHRÉIN', NULL, NULL),
+(50, 'BANGLADESH', NULL, NULL),
+(51, 'ARMENIA', NULL, NULL),
+(52, 'BARBADOS', NULL, NULL),
+(56, 'BÉLGICA', NULL, NULL),
+(60, 'BERMUDAS', NULL, NULL),
+(64, 'BHUTÁN', NULL, NULL),
+(68, 'BOLIVIA', NULL, NULL),
+(70, 'BOSNIA Y HERZEGOVINA', NULL, NULL),
+(72, 'BOTSUANA', NULL, NULL),
+(74, 'ISLA BOUVET', NULL, NULL),
+(76, 'BRASIL', NULL, NULL),
+(84, 'BELICE', NULL, NULL),
+(86, 'TERRITORIO BRITÁNICO DEL OCÉANO ÍNDICO', NULL, NULL),
+(90, 'ISLAS SOLOMÓN', NULL, NULL),
+(92, 'ISLAS VÍRGENES BRITÁNICAS', NULL, NULL),
+(96, 'BRUNÉI', NULL, NULL),
+(100, 'BULGARIA', NULL, NULL),
+(104, 'MYANMAR', NULL, NULL),
+(108, 'BURUNDI', NULL, NULL),
+(112, 'BELARÚS', NULL, NULL),
+(116, 'CAMBOYA', NULL, NULL),
+(120, 'CAMERÚN', NULL, NULL),
+(124, 'CANADÁ', NULL, NULL),
+(132, 'CABO VERDE', NULL, NULL),
+(136, 'ISLAS CAIMÁN', NULL, NULL),
+(140, 'REPÚBLICA CENTRO-AFRICANA', NULL, NULL),
+(144, 'SRI LANKA', NULL, NULL),
+(148, 'CHAD', NULL, NULL),
+(152, 'CHILE', NULL, NULL),
+(156, 'CHINA', NULL, NULL),
+(158, 'TAIWÁN', NULL, NULL),
+(162, 'ISLAS CHRISTMAS', NULL, NULL),
+(166, 'ISLAS COCOS', NULL, NULL),
+(170, 'COLOMBIA', NULL, NULL),
+(174, 'COMOROS', NULL, NULL),
+(175, 'MAYOTTE', NULL, NULL),
+(178, 'CONGO', NULL, NULL),
+(184, 'ISLAS COOK', NULL, NULL),
+(188, 'COSTA RICA', NULL, NULL),
+(203, 'REPÚBLICA CHECA', NULL, NULL),
+(204, 'BENIN', NULL, NULL),
+(208, 'DINAMARCA', NULL, NULL),
+(212, 'DOMÍNICA', NULL, NULL),
+(214, 'REPÚBLICA DOMINICANA', NULL, NULL),
+(218, 'ECUADOR', NULL, NULL),
+(222, 'EL SALVADOR', NULL, NULL),
+(226, 'GUINEA ECUATORIAL', NULL, NULL),
+(231, 'ETIOPÍA', NULL, NULL),
+(232, 'ERITREA', NULL, NULL),
+(233, 'ESTONIA', NULL, NULL),
+(234, 'ISLAS FAROE', NULL, NULL),
+(238, 'ISLAS MALVINAS', NULL, NULL),
+(239, 'GEORGIA DEL SUR E ISLAS SANDWICH DEL SUR', NULL, NULL),
+(242, 'FIJI', NULL, NULL),
+(246, 'FINLANDIA', NULL, NULL),
+(248, 'ISLAS ÁLAND', NULL, NULL),
+(250, 'FRANCIA', NULL, NULL),
+(254, 'GUAYANA FRANCESA', NULL, NULL),
+(258, 'POLINESIA FRANCESA', NULL, NULL),
+(260, 'TERRITORIOS AUSTRALES FRANCESES', NULL, NULL),
+(262, 'YIBUTI', NULL, NULL),
+(266, 'GABÓN', NULL, NULL),
+(268, 'GEORGIA', NULL, NULL),
+(270, 'GAMBIA', NULL, NULL),
+(275, 'PALESTINA', NULL, NULL),
+(276, 'ALEMANIA', NULL, NULL),
+(288, 'GHANA', NULL, NULL),
+(292, 'GIBRALTAR', NULL, NULL),
+(296, 'KIRIBATI', NULL, NULL),
+(300, 'GRECIA', NULL, NULL),
+(304, 'GROENLANDIA', NULL, NULL),
+(308, 'GRANADA', NULL, NULL),
+(312, 'GUADALUPE', NULL, NULL),
+(316, 'GUAM', NULL, NULL),
+(320, 'GUATEMALA', NULL, NULL),
+(324, 'GUINEA', NULL, NULL),
+(328, 'GUAYANA', NULL, NULL),
+(332, 'HAITÍ', NULL, NULL),
+(334, 'ISLAS HEARD Y MCDONALD', NULL, NULL),
+(336, 'CIUDAD DEL VATICANO', NULL, NULL),
+(340, 'HONDURAS', NULL, NULL),
+(344, 'HONG KONG', NULL, NULL),
+(348, 'HUNGRÍA', NULL, NULL),
+(352, 'ISLANDIA', NULL, NULL),
+(356, 'INDIA', NULL, NULL),
+(360, 'INDONESIA', NULL, NULL),
+(364, 'IRÁN', NULL, NULL),
+(368, 'IRAK', NULL, NULL),
+(372, 'IRLANDA', NULL, NULL),
+(376, 'ISRAEL', NULL, NULL),
+(400, 'JORDANIA', NULL, NULL),
+(404, 'KENIA', NULL, NULL),
+(408, 'COREA DEL NORTE', NULL, NULL),
+(410, 'COREA DEL SUR', NULL, NULL),
+(414, 'KUWAIT', NULL, NULL),
+(417, 'KIRGUISTÁN', NULL, NULL),
+(418, 'LAOS', NULL, NULL),
+(422, 'LÍBANO', NULL, NULL),
+(426, 'LESOTHO', NULL, NULL),
+(428, 'LETONIA', NULL, NULL),
+(430, 'LIBERIA', NULL, NULL),
+(434, 'LIBIA', NULL, NULL),
+(438, 'LIECHTENSTEIN', NULL, NULL),
+(440, 'LITUANIA', NULL, NULL),
+(442, 'LUXEMBURGO', NULL, NULL),
+(446, 'MACAO', NULL, NULL),
+(450, 'MADAGASCAR', NULL, NULL),
+(454, 'MALAWI', NULL, NULL),
+(458, 'MALASIA', NULL, NULL),
+(462, 'MALDIVAS', NULL, NULL),
+(466, 'MALI', NULL, NULL),
+(470, 'MALTA', NULL, NULL),
+(474, 'MARTINICA', NULL, NULL),
+(478, 'MAURITANIA', NULL, NULL),
+(480, 'MAURICIO', NULL, NULL),
+(484, 'MÉXICO', NULL, NULL),
+(492, 'MÓNACO', NULL, NULL),
+(496, 'MONGOLIA', NULL, NULL),
+(498, 'MOLDOVA', NULL, NULL),
+(499, 'MONTENEGRO', NULL, NULL),
+(500, 'MONTSERRAT', NULL, NULL),
+(504, 'MARRUECOS', NULL, NULL),
+(508, 'MOZAMBIQUE', NULL, NULL),
+(512, 'OMÁN', NULL, NULL),
+(516, 'NAMIBIA', NULL, NULL),
+(520, 'NAURU', NULL, NULL),
+(524, 'NEPAL', NULL, NULL),
+(528, 'PAÍSES BAJOS', NULL, NULL),
+(530, 'ANTILLAS NEERLANDESAS', NULL, NULL),
+(533, 'ARUBA', NULL, NULL),
+(540, 'NUEVA CALEDONIA', NULL, NULL),
+(548, 'VANUATU', NULL, NULL),
+(554, 'NUEVA ZELANDA', NULL, NULL),
+(558, 'NICARAGUA', NULL, NULL),
+(562, 'NÍGER', NULL, NULL),
+(566, 'NIGERIA', NULL, NULL),
+(570, 'NIUE', NULL, NULL),
+(574, 'ISLAS NORKFOLK', NULL, NULL),
+(578, 'NORUEGA', NULL, NULL),
+(583, 'MICRONESIA', NULL, NULL),
+(584, 'ISLAS MARSHALL', NULL, NULL),
+(585, 'ISLAS PALAOS', NULL, NULL),
+(586, 'PAKISTÁN', NULL, NULL),
+(591, 'PANAMÁ', NULL, NULL),
+(598, 'PAPÚA NUEVA GUINEA', NULL, NULL),
+(600, 'PARAGUAY', NULL, NULL),
+(604, 'PERÚ', NULL, NULL),
+(608, 'FILIPINAS', NULL, NULL),
+(612, 'ISLAS PITCAIRN', NULL, NULL),
+(616, 'POLONIA', NULL, NULL),
+(620, 'PORTUGAL', NULL, NULL),
+(624, 'GUINEA-BISSAU', NULL, NULL),
+(626, 'TIMOR-LESTE', NULL, NULL),
+(630, 'PUERTO RICO', NULL, NULL),
+(634, 'QATAR', NULL, NULL),
+(638, 'REUNIÓN', NULL, NULL),
+(642, 'RUMANÍA', NULL, NULL),
+(643, 'RUSIA', NULL, NULL),
+(646, 'RUANDA', NULL, NULL),
+(652, 'SAN BARTOLOMÉ', NULL, NULL),
+(654, 'SANTA ELENA', NULL, NULL),
+(659, 'SAN CRISTÓBAL Y NIEVES', NULL, NULL),
+(660, 'ANGUILA', NULL, NULL),
+(662, 'SANTA LUCÍA', NULL, NULL),
+(666, 'SAN PEDRO Y MIQUELÓN', NULL, NULL),
+(670, 'SAN VICENTE Y LAS GRANADINAS', NULL, NULL),
+(674, 'SAN MARINO', NULL, NULL),
+(678, 'SANTO TOMÉ Y PRÍNCIPE', NULL, NULL),
+(682, 'ARABIA SAUDITA', NULL, NULL),
+(686, 'SENEGAL', NULL, NULL),
+(688, 'SERBIA Y MONTENEGRO', NULL, NULL),
+(690, 'SEYCHELLES', NULL, NULL),
+(694, 'SIERRA LEONA', NULL, NULL),
+(702, 'SINGAPUR', NULL, NULL),
+(703, 'ESLOVAQUIA', NULL, NULL),
+(704, 'VIETNAM', NULL, NULL),
+(705, 'ESLOVENIA', NULL, NULL),
+(706, 'SOMALIA', NULL, NULL),
+(710, 'SUDÁFRICA', NULL, NULL),
+(724, 'ESPAÑA', NULL, NULL),
+(732, 'SAHARA OCCIDENTAL', NULL, NULL),
+(736, 'SUDÁN', NULL, NULL),
+(740, 'SURINAM', NULL, NULL),
+(744, 'ISLAS SVALBARD Y JAN MAYEN', NULL, NULL),
+(748, 'SUAZILANDIA', NULL, NULL),
+(752, 'SUECIA', NULL, NULL),
+(756, 'SUIZA', NULL, NULL),
+(760, 'SIRIA', NULL, NULL),
+(762, 'TAYIKISTÁN', NULL, NULL),
+(764, 'TAILANDIA', NULL, NULL),
+(768, 'TOGO', NULL, NULL),
+(772, 'TOKELAU', NULL, NULL),
+(776, 'TONGA', NULL, NULL),
+(780, 'TRINIDAD Y TOBAGO', NULL, NULL),
+(784, 'EMIRATOS ÁRABES UNIDOS', NULL, NULL),
+(788, 'TÚNEZ', NULL, NULL),
+(792, 'TURQUÍA', NULL, NULL),
+(795, 'TURKMENISTÁN', NULL, NULL),
+(796, 'ISLAS TURCAS Y CAICOS', NULL, NULL),
+(798, 'TUVALU', NULL, NULL),
+(800, 'UGANDA', NULL, NULL),
+(804, 'UCRANIA', NULL, NULL),
+(807, 'MACEDONIA', NULL, NULL),
+(818, 'EGIPTO', NULL, NULL),
+(826, 'REINO UNIDO', NULL, NULL),
+(831, 'GUERNSEY', NULL, NULL),
+(832, 'JERSEY', NULL, NULL),
+(833, 'ISLA DE MAN', NULL, NULL),
+(834, 'TANZANIA', NULL, NULL),
+(840, 'ESTADOS UNIDOS DE AMÉRICA', NULL, NULL),
+(850, 'ISLAS VÍRGENES DE LOS ESTADOS UNIDOS DE AMÉRICA', NULL, NULL),
+(854, 'BURKINA FASO', NULL, NULL),
+(858, 'URUGUAY', NULL, NULL),
+(860, 'UZBEKISTÁN', NULL, NULL),
+(862, 'VENEZUELA', NULL, NULL),
+(876, 'WALLIS Y FUTUNA', NULL, NULL),
+(882, 'SAMOA', NULL, NULL),
+(887, 'YEMEN', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -5074,7 +5718,7 @@ INSERT INTO `pre_perfil_opcion` (`id_perfil`, `id_opcion`, `id_usuario_crea`, `f
 
 CREATE TABLE IF NOT EXISTS `pre_prevision` (
   `id_prevision` int(11) NOT NULL,
-  `gl_nombre_prevision` varchar(150) DEFAULT NULL,
+  `gl_nombre_prevision` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_prevision`),
@@ -5088,7 +5732,49 @@ CREATE TABLE IF NOT EXISTS `pre_prevision` (
 INSERT INTO `pre_prevision` (`id_prevision`, `gl_nombre_prevision`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 'FONASA', NULL, NULL),
 (2, 'ISAPRE', NULL, NULL),
-(3, 'OTRO', NULL, NULL);
+(3, 'CAPREDENA', NULL, NULL),
+(4, 'DIPRECA', NULL, NULL),
+(5, 'SISA', NULL, NULL),
+(96, 'NINGUNA', NULL, NULL),
+(99, 'DESCONOCIDO', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_prevision_ley`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_prevision_ley` (
+  `id_prevision_ley` int(11) NOT NULL,
+  `gl_nombre_prevision_ley` varchar(100) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_prevision_ley`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista de Otras Leyes Previsionales';
+
+--
+-- Volcado de datos para la tabla `pre_prevision_ley`
+--
+
+INSERT INTO `pre_prevision_ley` (`id_prevision_ley`, `gl_nombre_prevision_ley`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'LEY 18.490: ACCIDENTES DE TRANSPORTE', NULL, NULL),
+(2, 'LEY 16.744: ACCIDENTES DEL TRABAJO Y ENFERMEDADES PROFESIONALES', NULL, NULL),
+(3, 'LEY 16.744: ACCIDENTE ESCOLAR', NULL, NULL),
+(4, 'LEY 19.650/99 DE URGENCIA', NULL, NULL),
+(5, 'LEY 19.992 PRAIS', NULL, NULL),
+(6, 'LEY 19.966 RÉGIMEN GENERAL DE GARANTÍAS EN SALUD GES', NULL, NULL),
+(21, 'TÉCNICOS NIVEL MEDIO EN SALUD', NULL, NULL),
+(22, 'LABORATORISTAS DENTALES', NULL, NULL),
+(23, 'PODÓLOGOS', NULL, NULL),
+(24, 'ÓPTICOS', NULL, NULL),
+(25, 'CONTACTÓLOGOS', NULL, NULL),
+(26, 'HOMEÓPATAS', NULL, NULL),
+(27, 'ACUPUNTURISTAS', NULL, NULL),
+(28, 'NATURÓPATAS', NULL, NULL),
+(29, 'COSMETÓLOGOS', NULL, NULL),
+(96, 'NINGUNA', NULL, NULL),
+(97, 'NO RECUERDA', NULL, NULL),
+(99, 'DESCONOCIDA', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -6025,6 +6711,28 @@ INSERT INTO `pre_tipo_alarma` (`id_tipo_alarma`, `gl_nombre_alarma`, `gl_detalle
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pre_tipo_area_urbano`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_tipo_area_urbano` (
+  `id_area_urbano` int(11) NOT NULL,
+  `gl_nombre_area_urbano` varchar(20) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_area_urbano`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Area Urbano Censal';
+
+--
+-- Volcado de datos para la tabla `pre_tipo_area_urbano`
+--
+
+INSERT INTO `pre_tipo_area_urbano` (`id_area_urbano`, `gl_nombre_area_urbano`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'URBANO', NULL, NULL),
+(2, 'RURAL', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pre_tipo_audit`
 --
 
@@ -6051,6 +6759,56 @@ INSERT INTO `pre_tipo_audit` (`id_tipo_audit`, `gl_descripcion`, `nr_min`, `nr_m
 (3, 'Problema', 16, 19, '#FF8C00', NULL, NULL),
 (4, 'Problema o Dependencia', 20, 40, '#FF0000', NULL, NULL),
 (5, 'Overkill de Alcoholismo', 41, 2147483647, '#FF0040', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_tipo_direccion_complemento`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_tipo_direccion_complemento` (
+  `id_tipo_direccion_complemento` int(11) NOT NULL,
+  `gl_nombre_tipo_direccion_complemento` varchar(50) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_tipo_direccion_complemento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Tipos de Vía de Dirección';
+
+--
+-- Volcado de datos para la tabla `pre_tipo_direccion_complemento`
+--
+
+INSERT INTO `pre_tipo_direccion_complemento` (`id_tipo_direccion_complemento`, `gl_nombre_tipo_direccion_complemento`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'BLOCK', NULL, NULL),
+(2, 'DEPARTAMENTO', NULL, NULL),
+(3, 'VILLA', NULL, NULL),
+(4, 'POBLACION', NULL, NULL),
+(5, 'OTRO', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_tipo_direccion_via`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_tipo_direccion_via` (
+  `id_tipo_direccion_via` int(11) NOT NULL,
+  `gl_nombre_tipo_direccion_via` varchar(50) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_tipo_direccion_via`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Tipos de Vía de Dirección';
+
+--
+-- Volcado de datos para la tabla `pre_tipo_direccion_via`
+--
+
+INSERT INTO `pre_tipo_direccion_via` (`id_tipo_direccion_via`, `gl_nombre_tipo_direccion_via`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'CALLE', NULL, NULL),
+(2, 'AVENIDA', NULL, NULL),
+(3, 'PASAJE', NULL, NULL),
+(4, 'CAMINO', NULL, NULL),
+(9, 'OTRO', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -6096,12 +6854,14 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_escolaridad` (
 --
 
 INSERT INTO `pre_tipo_escolaridad` (`id_tipo_escolaridad`, `gl_tipo_escolaridad`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'Educación Parvularia', NULL, NULL),
-(2, 'Educación Básica', NULL, NULL),
-(3, 'Educación Media', NULL, NULL),
-(4, 'Educación Adultos', NULL, NULL),
-(5, 'Educación Superior', NULL, NULL),
-(6, 'Educación Especial', NULL, NULL);
+(1, 'PREBÁSICA', NULL, NULL),
+(2, 'BÁSICA', NULL, NULL),
+(3, 'MEDIA', NULL, NULL),
+(4, 'TÉCNICO DE NIVEL SUPERIOR', NULL, NULL),
+(5, 'PROFESIONAL UNIVERSITARIO', NULL, NULL),
+(6, 'SIN INSTRUCCIÓN', NULL, NULL),
+(97, 'NO RECUERDA', NULL, NULL),
+(98, 'NO RESPONDE', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -6132,6 +6892,128 @@ INSERT INTO `pre_tipo_especialidad` (`id_tipo_especialidad`, `gl_nombre_especial
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pre_tipo_especialidad_medica`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_tipo_especialidad_medica` (
+  `id_tipo_especialidad_medica` int(11) NOT NULL,
+  `gl_nombre_especialidad_medica` varchar(100) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_tipo_especialidad_medica`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `pre_tipo_especialidad_medica`
+--
+
+INSERT INTO `pre_tipo_especialidad_medica` (`id_tipo_especialidad_medica`, `gl_nombre_especialidad_medica`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'ANATOMÍA PATOLÓGICA', NULL, NULL),
+(2, 'ANESTESIOLOGÍA', NULL, NULL),
+(3, 'CARDIOLOGÍA', NULL, NULL),
+(4, 'CIRUGÍA GENERAL', NULL, NULL),
+(5, 'CIRUGÍA DE CABEZA, CUELLO Y MAXILOFACIAL', NULL, NULL),
+(6, 'CIRUGÍA CARDIOVASCULAR', NULL, NULL),
+(7, 'CIRUGÍA DE TÓRAX', NULL, NULL),
+(8, 'CIRUGÍA PLÁSTICA Y REPARADORA', NULL, NULL),
+(9, 'CIRUGÍA PEDIÁTRICA', NULL, NULL),
+(10, 'CIRUGÍA VASCULAR PERIFÉRICA', NULL, NULL),
+(11, 'COLOPROCTOLOGÍA', NULL, NULL),
+(12, 'DERMATOLOGÍA', NULL, NULL),
+(13, 'DIABETOLOGÍA', NULL, NULL),
+(14, 'ENDOCRINOLOGÍA ADULTO', NULL, NULL),
+(15, 'ENDOCRINOLOGÍA PEDIÁTRICA', NULL, NULL),
+(16, 'ENFERMEDADES RESPIRATORIAS DEL ADULTO (BRONCOPULMONAR)', NULL, NULL),
+(17, 'ENFERMEDADES RESPIRATORIAS PEDIÁTRICAS (BRONCOPULMONAR PEDIATRICO)', NULL, NULL),
+(18, 'GASTROENTEROLOGÍA ADULTO', NULL, NULL),
+(19, 'GASTROENTEROLOGÍA PEDIÁTRICA', NULL, NULL),
+(20, 'GENÉTICA CLÍNICA', NULL, NULL),
+(21, 'GERIATRÍA', NULL, NULL),
+(22, 'GINECOLOGÍA PEDIÁTRICA Y DE LA ADOLESCENCIA', NULL, NULL),
+(23, 'HEMATOLOGÍA', NULL, NULL),
+(24, 'IMAGENOLOGÍA', NULL, NULL),
+(25, 'INFECTOLOGÍA', NULL, NULL),
+(26, 'INMUNOLOGÍA', NULL, NULL),
+(27, 'LABORATORIO CLÍNICO', NULL, NULL),
+(28, 'MEDICINA FAMILIAR', NULL, NULL),
+(29, 'MEDICINA FÍSICA Y REHABILITACIÓN (FISIATRIA ADULTO)', NULL, NULL),
+(30, 'MEDICINA INTERNA', NULL, NULL),
+(31, 'MEDICINA INTENSIVA ADULTO', NULL, NULL),
+(32, 'MEDICINA INTENSIVA PEDIÁTRICA', NULL, NULL),
+(33, 'MEDICINA LEGAL', NULL, NULL),
+(34, 'MEDICINA MATERNO INFANTIL', NULL, NULL),
+(35, 'MEDICINA NUCLEAR', NULL, NULL),
+(36, 'MEDICINA DE URGENCIA', NULL, NULL),
+(37, 'NEFROLOGÍA ADULTO', NULL, NULL),
+(38, 'NEFROLOGÍA PEDIÁTRICO', NULL, NULL),
+(39, 'NEONATOLOGÍA', NULL, NULL),
+(40, 'NEUROCIRUGÍA', NULL, NULL),
+(41, 'NEUROLOGÍA ADULTO', NULL, NULL),
+(42, 'NEUROLOGÍA PEDIÁTRICA', NULL, NULL),
+(43, 'OBSTETRICIA Y GINECOLOGÍA', NULL, NULL),
+(44, 'OFTALMOLOGÍA', NULL, NULL),
+(45, 'ONCOLOGÍA MÉDICA', NULL, NULL),
+(46, 'OTORRINOLARINGOLOGÍA', NULL, NULL),
+(47, 'PEDIATRÍA', NULL, NULL),
+(48, 'PSIQUIATRÍA ADULTO', NULL, NULL),
+(49, 'PSIQUIATRÍA PEDIÁTRICA Y DE LA ADOLESCENCIA', NULL, NULL),
+(50, 'RADIOTERAPIA ONCOLÓGICA', NULL, NULL),
+(51, 'REUMATOLOGÍA', NULL, NULL),
+(52, 'SALUD PÚBLICA', NULL, NULL),
+(53, 'TRAUMATOLOGÍA Y ORTOPEDIA', NULL, NULL),
+(54, 'UROLOGÍA', NULL, NULL),
+(55, 'CARDIOLOGÍA PEDIÁTRICA', NULL, NULL),
+(56, 'CIRUGÍA DIGESTIVA', NULL, NULL),
+(57, 'CIRUGÍA PLASTICA Y REPARADORA PEDIÁTRICA', NULL, NULL),
+(58, 'GINECOLOGÍA', NULL, NULL),
+(59, 'HEMATO-ONCOLOGÍA PEDIÁTRICA', NULL, NULL),
+(60, 'INFECTOLOGÍA PEDIATRICA', NULL, NULL),
+(61, 'MEDICINA FAMILIAR DEL NIÑO', NULL, NULL),
+(62, 'MEDICINA FISICA Y REHABILITACIÓN PEDIÁTRICA (FISIATRIA PEDIATRICA)', NULL, NULL),
+(63, 'NUTRIÓLOGO', NULL, NULL),
+(64, 'NUTRIÓLOGO PEDIÁTRICO', NULL, NULL),
+(65, 'REUMATOLOGÍA PEDIÁTRICA', NULL, NULL),
+(66, 'OBSTETRICIA', NULL, NULL),
+(67, 'TRAUMATOLOGÍA Y ORTOPEDIA PEDIÁTRICA', NULL, NULL),
+(68, 'UROLOGÍA PEDIÁTRICA', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_tipo_especialidad_odontologica`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_tipo_especialidad_odontologica` (
+  `id_tipo_especialidad_odontologica` int(11) NOT NULL,
+  `gl_nombre_especialidad_odontologica` varchar(100) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_tipo_especialidad_odontologica`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `pre_tipo_especialidad_odontologica`
+--
+
+INSERT INTO `pre_tipo_especialidad_odontologica` (`id_tipo_especialidad_odontologica`, `gl_nombre_especialidad_odontologica`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'CIRUGÍA Y TRAUMATOLOGÍA BUCO MAXILOFACIAL', NULL, NULL),
+(2, 'CIRUGÍA BUCAL', NULL, NULL),
+(3, 'ENDODONCIA', NULL, NULL),
+(4, 'IMAGENOLOGÍA ORAL Y MAXILOFACIAL', NULL, NULL),
+(5, 'IMPLANTOLOGIA BUCO MAXILOFACIAL', NULL, NULL),
+(6, 'ODONTOLOGÍA LEGAL', NULL, NULL),
+(7, 'ODONTOPEDIATRÍA', NULL, NULL),
+(8, 'ORTODONCIA Y ORTOPEDIA DENTO MÁXILO FACIAL', NULL, NULL),
+(9, 'PATOLOGÍA ORAL', NULL, NULL),
+(10, 'PERIODONCIA', NULL, NULL),
+(11, 'REHABILITACIÓN ORAL', NULL, NULL),
+(12, 'SALUD PÚBLICA', NULL, NULL),
+(13, 'SOMATO-PRÓTESIS', NULL, NULL),
+(14, 'TRASTORNOS TEMPOROMANDIBULARES Y DOLOR OROFACIAL', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pre_tipo_estado_civil`
 --
 
@@ -6148,14 +7030,13 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_estado_civil` (
 --
 
 INSERT INTO `pre_tipo_estado_civil` (`id_estado_civil`, `gl_estado_civil`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'Hijo/a', NULL, NULL),
-(2, 'Padre/Madre', NULL, NULL),
-(3, 'Soltero/a', NULL, NULL),
-(4, 'Casado/a', NULL, NULL),
-(5, 'Viudo/a', NULL, NULL),
-(6, 'Divorciada/a', NULL, NULL),
-(7, 'Separado/a', NULL, NULL),
-(8, 'Conviviente', NULL, NULL);
+(1, 'SOLTERO(A)', NULL, NULL),
+(2, 'CASADO(A)', NULL, NULL),
+(3, 'VIUDO(A)', NULL, NULL),
+(4, 'DIVORCIADO(A)', NULL, NULL),
+(5, 'SEPARADO(A) JUDICIALMENTE', NULL, NULL),
+(6, 'CONVIVIENTE CIVIL', NULL, NULL),
+(99, 'DESCONOCIDO', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -6191,6 +7072,53 @@ INSERT INTO `pre_tipo_examen` (`id_tipo_examen`, `gl_nombre_examen`, `gl_descrip
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pre_tipo_fonasa_modalidad`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_tipo_fonasa_modalidad` (
+  `id_fonasa_modalidad` int(11) NOT NULL,
+  `gl_nombre_fonasa_modalidad` varchar(50) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_fonasa_modalidad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Tipos Modalidad Fonasa';
+
+--
+-- Volcado de datos para la tabla `pre_tipo_fonasa_modalidad`
+--
+
+INSERT INTO `pre_tipo_fonasa_modalidad` (`id_fonasa_modalidad`, `gl_nombre_fonasa_modalidad`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'MODALIDAD DE ATENCIÓN INSTITUCIONAL (MAI)', NULL, NULL),
+(2, 'MODALIDAD DE ATENCIÓN LIBRE ELECCIÓN (MLE)', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_tipo_fonasa_tramo`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_tipo_fonasa_tramo` (
+  `id_fonasa_tramo` int(11) NOT NULL,
+  `cd_fonasa_tramo` char(1) DEFAULT NULL,
+  `gl_nombre_fonasa_tramo` varchar(50) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_fonasa_tramo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Tramos Fonasa';
+
+--
+-- Volcado de datos para la tabla `pre_tipo_fonasa_tramo`
+--
+
+INSERT INTO `pre_tipo_fonasa_tramo` (`id_fonasa_tramo`, `cd_fonasa_tramo`, `gl_nombre_fonasa_tramo`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'A', 'Tramo A', NULL, NULL),
+(2, 'B', 'Tramo B', NULL, NULL),
+(3, 'C', 'Tramo C', NULL, NULL),
+(4, 'D', 'Tramo D', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pre_tipo_genero`
 --
 
@@ -6207,9 +7135,9 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_genero` (
 --
 
 INSERT INTO `pre_tipo_genero` (`id_tipo_genero`, `gl_tipo_genero`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'HOMBRE', 1, '2017-03-07 00:00:00'),
-(2, 'MUJER', 2, '2017-03-07 00:00:00'),
-(3, 'INDEFINIDO', 1, '2017-03-07 00:00:00');
+(1, 'MASCULINO', 1, '2017-03-07 00:00:00'),
+(2, 'FEMENINO', 1, '2017-03-07 00:00:00'),
+(3, 'TRANSGÉNERO', 1, '2017-03-07 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -6292,7 +7220,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_ingreso_mensual` (
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_ocupacion` (
   `id_tipo_ocupacion` int(11) NOT NULL,
-  `gl_tipo_ocupacion` varchar(150) DEFAULT NULL,
+  `gl_tipo_ocupacion` varchar(300) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_ocupacion`)
@@ -6303,76 +7231,473 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_ocupacion` (
 --
 
 INSERT INTO `pre_tipo_ocupacion` (`id_tipo_ocupacion`, `gl_tipo_ocupacion`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'Abogados', NULL, NULL),
-(2, 'Agricultores y trabajadores calificados de cultivos extensivos', NULL, NULL),
-(3, 'Agricultores y trabajadores calificados de huertas, invernaderos, viveros y jardines', NULL, NULL),
-(4, 'Agricultores y trabajadores calificados de plantaciones de árboles y arbustos', NULL, NULL),
-(5, 'Albañiles y mamposteros', NULL, NULL),
-(6, 'Arquitectos, ingenieros y afines, no clasificados bajo otros epígrafes', NULL, NULL),
-(7, 'Ayudantes de enfermería en instituciones', NULL, NULL),
-(8, 'Cajeros y expendedores de billetes', NULL, NULL),
-(9, 'Camareros y taberneros', NULL, NULL),
-(10, 'Carpinteros de armar y de blanco', NULL, NULL),
-(11, 'Cocineros y cocineras', NULL, NULL),
-(12, 'Conductores de autobuses y tranvías', NULL, NULL),
-(13, 'Conductores de automóviles, taxis y camionetas', NULL, NULL),
-(14, 'Conductores de camiones pesados', NULL, NULL),
-(15, 'Conserjes', NULL, NULL),
-(16, 'Constructores con técnicas y materiales tradicionales', NULL, NULL),
-(17, 'Contadores', NULL, NULL),
-(18, 'Costureros, bordadores y afines', NULL, NULL),
-(19, 'Creadores y analistas de sistemas informáticos', NULL, NULL),
-(20, 'Decoradores y diseñadores', NULL, NULL),
-(21, 'Ebanistas y afines', NULL, NULL),
-(22, 'Electricistas de obras y afines', NULL, NULL),
-(23, 'Embaladores manuales y otros peones de la industria manufacturera', NULL, NULL),
-(24, 'Empleados de contabilidad y cálculo de costos', NULL, NULL),
-(25, 'Empleados de control de abastecimientos e inventario', NULL, NULL),
-(26, 'Especialistas en organización y administración de empresas y afines, no clasificados bajo otros epígrafes', NULL, NULL),
-(27, 'Fontaneros e instaladores de tuberías', NULL, NULL),
-(28, 'Fuerzas armadas', NULL, NULL),
-(29, 'Gerentes de comercios mayoristas y minoristas', NULL, NULL),
-(30, 'Gerentes de empresas de restauración y hostelería', NULL, NULL),
-(31, 'Gerentes de empresas, no clasificados bajo otros epígrafes', NULL, NULL),
-(32, 'Ingenieros civiles', NULL, NULL),
-(33, 'Limpiadores de oficinas, hoteles y otros establecimientos', NULL, NULL),
-(34, 'Maestros de nivel medio de la enseñanza preescolar', NULL, NULL),
-(35, 'Maestros de nivel superior de la enseñanza preescolar', NULL, NULL),
-(36, 'Maestros de nivel superior de la enseñanza primaria', NULL, NULL),
-(37, 'Mecánicos y ajustadores de máquinas agrícolas e industriales', NULL, NULL),
-(38, 'Mecánicos y ajustadores de vehículos de motor', NULL, NULL),
-(39, 'Mensajeros, porteadores y repartidores', NULL, NULL),
-(40, 'Mozos de labranza y peones agropecuarios', NULL, NULL),
-(41, 'Niñeras y celadoras infantiles', NULL, NULL),
-(42, 'Oficiales y operarios de la construcción (obra gruesa) y afines, no clasificados bajo otros epígrafes', NULL, NULL),
-(43, 'Operadores de máquinas de movimiento de tierras y afines', NULL, NULL),
-(44, 'Operadores de máquinas para elaborar carne, pescado y mariscos', NULL, NULL),
-(45, 'Panaderos, pasteleros y confiteros', NULL, NULL),
-(46, 'Peluqueros, especialistas en tratamientos de belleza y afines', NULL, NULL),
-(47, 'Peones de carga', NULL, NULL),
-(48, 'Peones de la construcción de edificios', NULL, NULL),
-(49, 'Personal de enfermería de nivel medio', NULL, NULL),
-(50, 'Personal de enfermería y partería de nivel superior', NULL, NULL),
-(51, 'Personal doméstico', NULL, NULL),
-(52, 'Pintores y empapeladores', NULL, NULL),
-(53, 'Policías', NULL, NULL),
-(54, 'Porteros y guardianes y afines', NULL, NULL),
-(55, 'Profesionales de nivel medio de servicios administrativos y afines', NULL, NULL),
-(56, 'Profesionales del trabajo social', NULL, NULL),
-(57, 'Profesores de la enseñanza secundaria', NULL, NULL),
-(58, 'Profesores de universidades y otros establecimientos de la enseñanza superior', NULL, NULL),
-(59, 'Psicólogos', NULL, NULL),
-(60, 'Recepcionistas y empleados de informaciones', NULL, NULL),
-(61, 'Representantes comerciales y técnicos de ventas', NULL, NULL),
-(62, 'Secretarios y secretarias', NULL, NULL),
-(63, 'Soldadores y oxicortadores', NULL, NULL),
-(64, 'Telefonistas', NULL, NULL),
-(65, 'Tenedores de libros', NULL, NULL),
-(66, 'Trabajadores agropecuarios y pesqueros de subsistencia', NULL, NULL),
-(67, 'Vendedores ambulantes de productos comestibles', NULL, NULL),
-(68, 'Vendedores ambulantes de productos no comestibles', NULL, NULL),
-(69, 'Vendedores de quioscos y de puestos de mercado', NULL, NULL),
-(70, 'Vendedores y demostradores de tiendas y almacenes', NULL, NULL);
+(1, 'MIEMBRO DEL PODER EJECUTIVO DE LOS CUERPOS LEGISLATIVOS, PERSONAL DIRECTIVO DE LA ADMINISTRACIÓN PÚBLICA Y DE EMPRESA', NULL, '2017-03-21 18:50:20'),
+(2, 'PROFESIONALES CIENTÍFICOS O INTELECTUALES', NULL, '2017-03-21 18:50:20'),
+(3, 'TÉCNICOS Y PROFESIONALES DE NIVEL MEDIO', NULL, '2017-03-21 18:50:20'),
+(4, 'EMPLEADOS DE OFICINA', NULL, '2017-03-21 18:50:20'),
+(5, 'TRABAJADORES DE LOS SERVICIOS Y VENDEDORES DE COMERCIO Y MERCADO', NULL, '2017-03-21 18:50:20'),
+(6, 'AGRICULTORES Y TRABAJADORES CALIFICADOS AGROPECUARIOS Y PESQUEROS', NULL, '2017-03-21 18:50:20'),
+(7, 'OFICIALES, OPERARIOS Y ARTESANOS DE ARTES MECÁNICAS Y DE OTROS OFICIOS', NULL, '2017-03-21 18:50:20'),
+(8, 'OPERADORES DE INSTALACIONES Y MÁQUINAS Y MONTADORAS', NULL, '2017-03-21 18:50:20'),
+(9, 'TRABAJADORES NO CALIFICADOS', NULL, '2017-03-21 18:50:20'),
+(10, 'FUERZAS ARMADAS', NULL, '2017-03-21 18:50:20'),
+(99, 'DESCONOCIDO', NULL, '2017-03-21 18:50:20');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_tipo_ocupacion_categoria`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_tipo_ocupacion_categoria` (
+  `id_ocupacion_categoria` int(11) NOT NULL,
+  `gl_nombre_ocupacion_categoria` varchar(100) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_ocupacion_categoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista de Categoría Ocupacional';
+
+--
+-- Volcado de datos para la tabla `pre_tipo_ocupacion_categoria`
+--
+
+INSERT INTO `pre_tipo_ocupacion_categoria` (`id_ocupacion_categoria`, `gl_nombre_ocupacion_categoria`, `id_usuario_crea`, `fc_crea`) VALUES
+(0, 'INACTIVOS', NULL, NULL),
+(1, 'ACTIVOS', NULL, NULL),
+(2, 'CESANTE O DESOCUPADOS', NULL, NULL),
+(99, 'DESCONOCIDO', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_tipo_ocupacion_detalle`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_tipo_ocupacion_detalle` (
+  `id_ocupacion_detalle` int(11) NOT NULL,
+  `gl_nombre_ocupacion_detalle` varchar(300) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_ocupacion_detalle`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista de Ocupaciones Detallada';
+
+--
+-- Volcado de datos para la tabla `pre_tipo_ocupacion_detalle`
+--
+
+INSERT INTO `pre_tipo_ocupacion_detalle` (`id_ocupacion_detalle`, `gl_nombre_ocupacion_detalle`, `id_usuario_crea`, `fc_crea`) VALUES
+(110, 'OFICIALES DE LAS FUERZAS ARMADAS', NULL, NULL),
+(210, 'SUBOFICIALES DE LAS FUERZAS ARMADAS', NULL, NULL),
+(310, 'OTROS MIEMBROS DE LAS FUERZAS ARMADAS', NULL, NULL),
+(1311, 'DIRECTORES DE PRODUCCIÓN AGROPECUARIA Y SILVICULTURA', NULL, NULL),
+(1312, 'DIRECTORES DE PRODUCCIÓN DE PISCICULTURA Y PESCA', NULL, NULL),
+(1321, 'DIRECTORES DE INDUSTRIAS MANUFACTURERAS', NULL, NULL),
+(1322, 'DIRECTORES DE EXPLOTACIONES DE MINERÍA', NULL, NULL),
+(1323, 'DIRECTORES DE EMPRESAS DE CONSTRUCCIÓN', NULL, NULL),
+(1324, 'DIRECTORES DE EMPRESAS DE ABASTECIMIENTO, DISTRIBUCIÓN Y AFINES', NULL, NULL),
+(1330, 'DIRECTORES DE SERVICIOS DE TECNOLOGÍA DE LA INFORMACIÓN Y LAS COMUNICACIONES', NULL, NULL),
+(1341, 'DIRECTORES DE SERVICIOS DE CUIDADOS INFANTILES', NULL, NULL),
+(1342, 'DIRECTORES DE SERVICIOS DE SALUD', NULL, NULL),
+(1343, 'DIRECTORES DE SERVICIOS DE CUIDADO DE LAS PERSONAS DE EDAD', NULL, NULL),
+(1344, 'DIRECTORES DE SERVICIOS DE BIENESTAR SOCIAL', NULL, NULL),
+(1345, 'DIRECTORES DE SERVICIOS DE EDUCACIÓN', NULL, NULL),
+(1346, 'GERENTES DE SUCURSALES DE BANCOS, DE SERVICIOS FINANCIEROS Y DE SEGUROS', NULL, NULL),
+(1349, 'DIRECTORES Y GERENTES DE SERVICIOS PROFESIONALES NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(1411, 'GERENTES DE HOTELES', NULL, NULL),
+(1412, 'GERENTES DE RESTAURANTES', NULL, NULL),
+(1420, 'GERENTES DE COMERCIOS AL POR MAYOR Y AL POR MENOR', NULL, NULL),
+(1431, 'GERENTES DE CENTROS DEPORTIVOS, DE ESPARCIMIENTO Y CULTURALES', NULL, NULL),
+(1439, 'GERENTES DE SERVICIOS NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(2111, 'FÍSICOS Y ASTRÓNOMOS', NULL, NULL),
+(2112, 'METEORÓLOGOS', NULL, NULL),
+(2113, 'QUÍMICOS', NULL, NULL),
+(2114, 'GEÓLOGOS Y GEOFÍSICOS', NULL, NULL),
+(2120, 'MATEMÁTICOS, ACTUARIOS Y ESTADÍSTICOS', NULL, NULL),
+(2131, 'BIÓLOGOS, BOTÁNICOS, ZOÓLOGOS Y AFINES', NULL, NULL),
+(2132, 'AGRÓNOMOS Y AFINES', NULL, NULL),
+(2133, 'PROFESIONALES DE LA PROTECCIÓN MEDIOAMBIENTAL', NULL, NULL),
+(2141, 'INGENIEROS INDUSTRIALES Y DE PRODUCCIÓN', NULL, NULL),
+(2142, 'INGENIEROS CIVILES', NULL, NULL),
+(2143, 'INGENIEROS MEDIOAMBIENTALES', NULL, NULL),
+(2144, 'INGENIEROS MECÁNICOS', NULL, NULL),
+(2145, 'INGENIEROS QUÍMICOS', NULL, NULL),
+(2146, 'INGENIEROS DE MINAS, METALÚRGICOS Y AFINES', NULL, NULL),
+(2149, 'INGENIEROS NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(2151, 'INGENIEROS ELECTRICISTAS', NULL, NULL),
+(2152, 'INGENIEROS ELECTRÓNICOS', NULL, NULL),
+(2221, 'PROFESIONALES DE ENFERMERÍA', NULL, NULL),
+(2222, 'PROFESIONALES DE PARTERÍA', NULL, NULL),
+(2230, 'PROFESIONALES DE MEDICINA TRADICIONAL Y ALTERNATIVA', NULL, NULL),
+(2240, 'PRACTICANTES PARAMÉDICOS', NULL, NULL),
+(2250, 'VETERINARIOS', NULL, NULL),
+(2261, 'DENTISTAS', NULL, NULL),
+(2262, 'FARMACÉUTICOS', NULL, NULL),
+(2263, 'PROFESIONALES DE LA SALUD Y LA HIGIENE LABORAL Y AMBIENTAL', NULL, NULL),
+(2264, 'FISIOTERAPEUTAS', NULL, NULL),
+(2265, 'DIETISTAS Y NUTRICIONISTAS', NULL, NULL),
+(2266, 'AUDIÓLOGOS Y LOGOPEDAS', NULL, NULL),
+(2267, 'OPTOMETRISTAS', NULL, NULL),
+(2269, 'PROFESIONALES DE LA SALUD NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(2310, 'PROFESORES DE UNIVERSIDADES Y DE LA ENSEÑANZA SUPERIOR', NULL, NULL),
+(2320, 'PROFESORES DE FORMACIÓN PROFESIONAL', NULL, NULL),
+(2330, 'PROFESORES DE ENSEÑANZA SECUNDARIA', NULL, NULL),
+(2341, 'MAESTROS DE ENSEÑANZA PRIMARIA', NULL, NULL),
+(2342, 'MAESTROS PREESCOLARES', NULL, NULL),
+(2351, 'ESPECIALISTAS EN MÉTODOS PEDAGÓGICOS', NULL, NULL),
+(2352, 'EDUCADORES PARA NECESIDADES ESPECIALES', NULL, NULL),
+(2353, 'OTROS PROFESORES DE IDIOMAS', NULL, NULL),
+(2354, 'OTROS PROFESORES DE MÚSICA', NULL, NULL),
+(2355, 'OTROS PROFESORES DE ARTES', NULL, NULL),
+(2356, 'INSTRUCTORES EN TECNOLOGÍA DE LA INFORMACIÓN', NULL, NULL),
+(2359, 'PROFESIONALES DE LA ENSEÑANZA NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(2411, 'CONTABLES', NULL, NULL),
+(2412, 'ASESORES FINANCIEROS Y EN INVERSIONES', NULL, NULL),
+(2413, 'ANALISTAS FINANCIEROS', NULL, NULL),
+(2421, 'ANALISTAS DE GESTIÓN Y ORGANIZACIÓN', NULL, NULL),
+(2422, 'ESPECIALISTAS EN POLÍTICAS DE ADMINISTRACIÓN', NULL, NULL),
+(2423, 'ESPECIALISTAS EN POLÍTICAS Y SERVICIOS DE PERSONAL Y AFINES', NULL, NULL),
+(2424, 'ESPECIALISTAS EN FORMACIÓN DEL PERSONAL', NULL, NULL),
+(2431, 'PROFESIONALES DE LA PUBLICIDAD Y LA COMERCIALIZACIÓN', NULL, NULL),
+(2432, 'PROFESIONALES DE RELACIONES PÚBLICAS', NULL, NULL),
+(2433, 'PROFESIONALES DE VENTAS TÉCNICAS Y MÉDICAS (EXCLUYENDO LA TIC)', NULL, NULL),
+(2434, 'PROFESIONALES DE VENTAS DE TECNOLOGÍA DE LA INFORMACIÓN Y LAS COMUNICACIONES', NULL, NULL),
+(2511, 'ANALISTAS DE SISTEMAS', NULL, NULL),
+(2512, 'DESARROLLADORES DE SOFTWARE', NULL, NULL),
+(2513, 'DESARROLLADORES WEB Y MULTIMEDIA', NULL, NULL),
+(2514, 'PROGRAMADORES DE APLICACIONES', NULL, NULL),
+(2519, 'DESARROLLADORES Y ANALISTAS DE SOFTWARE Y MULTIMEDIA Y ANALISTAS NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(2521, 'DISEÑADORES Y ADMINISTRADORES DE BASES DE DATOS', NULL, NULL),
+(2522, 'ADMINISTRADORES DE SISTEMAS', NULL, NULL),
+(2523, 'PROFESIONALES EN REDES DE COMPUTADORES', NULL, NULL),
+(2529, 'ESPECIALISTAS EN BASES DE DATOS Y EN REDES DE COMPUTADORES NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(2611, 'ABOGADOS', NULL, NULL),
+(2612, 'JUECES', NULL, NULL),
+(2619, 'PROFESIONALES EN DERECHO NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(2621, 'ARCHIVISTAS Y CURADORES DE MUSEOS', NULL, NULL),
+(2622, 'BIBLIOTECARIOS, DOCUMENTALISTAS Y AFINES', NULL, NULL),
+(2631, 'ECONOMISTAS', NULL, NULL),
+(2632, 'SOCIÓLOGOS, ANTROPÓLOGOS Y AFINES', NULL, NULL),
+(2633, 'FILÓSOFOS, HISTORIADORES Y ESPECIALISTAS EN CIENCIAS POLÍTICAS', NULL, NULL),
+(2634, 'PSICÓLOGOS', NULL, NULL),
+(2635, 'PROFESIONALES DEL TRABAJO SOCIAL', NULL, NULL),
+(2636, 'PROFESIONALES RELIGIOSOS', NULL, NULL),
+(2641, 'AUTORES Y OTROS ESCRITORES', NULL, NULL),
+(2642, 'PERIODISTAS', NULL, NULL),
+(2643, 'TRADUCTORES, INTÉRPRETES Y LINGÜISTAS', NULL, NULL),
+(2651, 'ARTISTAS DE ARTES PLÁSTICAS', NULL, NULL),
+(2652, 'MÚSICOS, CANTANTES Y COMPOSITORES', NULL, NULL),
+(2653, 'BAILARINES Y COREÓGRAFOS', NULL, NULL),
+(2654, 'DIRECTORES DE CINE, DE TEATRO Y AFINES', NULL, NULL),
+(2655, 'ACTORES', NULL, NULL),
+(2656, 'LOCUTORES DE RADIO, TELEVISIÓN Y OTROS MEDIOS DE COMUNICACIÓN', NULL, NULL),
+(2659, 'ARTISTAS CREATIVOS E INTERPRETATIVOS NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(3111, 'TÉCNICOS EN CIENCIAS FÍSICAS Y QUÍMICAS', NULL, NULL),
+(3112, 'TÉCNICOS EN INGENIERÍA CIVIL', NULL, NULL),
+(3113, 'ELECTROTÉCNICOS', NULL, NULL),
+(3114, 'TÉCNICOS EN ELECTRÓNICA', NULL, NULL),
+(3115, 'TÉCNICOS EN INGENIERÍA MECÁNICA', NULL, NULL),
+(3116, 'TÉCNICOS EN QUÍMICA INDUSTRIAL', NULL, NULL),
+(3117, 'TÉCNICOS EN INGENIERÍA DE MINAS Y METALURGIA', NULL, NULL),
+(3118, 'DELINEANTES Y DIBUJANTES TÉCNICOS', NULL, NULL),
+(3119, 'TÉCNICOS EN CIENCIAS FÍSICAS Y EN INGENIERÍA NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(3121, 'SUPERVISORES EN INGENIERÍA DE MINAS', NULL, NULL),
+(3122, 'SUPERVISORES DE INDUSTRIAS MANUFACTURERAS', NULL, NULL),
+(3123, 'SUPERVISORES DE LA CONSTRUCCIÓN', NULL, NULL),
+(3131, 'OPERADORES DE INSTALACIONES DE PRODUCCIÓN DE ENERGÍA', NULL, NULL),
+(3132, 'OPERADORES DE INCINERADORES, INSTALACIONES DE TRATAMIENTO DE AGUA Y AFINES', NULL, NULL),
+(3133, 'CONTROLADORES DE INSTALACIONES DE PROCESAMIENTO DE PRODUCTOS QUÍMICOS', NULL, NULL),
+(3134, 'OPERADORES DE INSTALACIONES DE REFINACIÓN DE PETRÓLEO Y GAS NATURAL', NULL, NULL),
+(3135, 'CONTROLADORES DE PROCESOS DE PRODUCCIÓN DE METALES', NULL, NULL),
+(3139, 'TÉCNICOS EN CONTROL DE PROCESOS NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(3141, 'TÉCNICOS EN CIENCIAS BIOLÓGICAS (EXCLUYENDO LA MEDICINA)', NULL, NULL),
+(3142, 'TÉCNICOS AGROPECUARIOS', NULL, NULL),
+(3143, 'TÉCNICOS FORESTALES', NULL, NULL),
+(3151, 'OFICIALES MAQUINISTAS EN NAVEGACIÓN', NULL, NULL),
+(3152, 'CAPITANES, OFICIALES DE CUBIERTA Y PRÁCTICOS', NULL, NULL),
+(3153, 'PILOTOS DE AVIACIÓN Y AFINES', NULL, NULL),
+(3154, 'CONTROLADORES DE TRÁFICO AÉREO', NULL, NULL),
+(3155, 'TÉCNICOS EN SEGURIDAD AERONÁUTICA', NULL, NULL),
+(3211, 'TÉCNICOS EN APARATOS DE DIAGNÓSTICO Y TRATAMIENTO MÉDICO', NULL, NULL),
+(3212, 'TÉCNICOS DE LABORATORIOS MÉDICOS', NULL, NULL),
+(3213, 'TÉCNICOS Y ASISTENTES FARMACÉUTICOS', NULL, NULL),
+(3214, 'TÉCNICOS DE PRÓTESIS MÉDICAS Y DENTALES', NULL, NULL),
+(3221, 'PROFESIONALES DE NIVEL MEDIO DE ENFERMERÍA', NULL, NULL),
+(3222, 'PROFESIONALES DE NIVEL MEDIO DE PARTERÍA', NULL, NULL),
+(3230, 'PROFESIONALES DE NIVEL MEDIO DE MEDICINA TRADICIONAL Y ALTERNATIVA', NULL, NULL),
+(3240, 'TÉCNICOS Y ASISTENTES VETERINARIOS', NULL, NULL),
+(3251, 'DENTISTAS AUXILIARES Y AYUDANTES DE ODONTOLOGÍA', NULL, NULL),
+(3252, 'TÉCNICOS EN DOCUMENTACIÓN SANITARIA', NULL, NULL),
+(3253, 'TRABAJADORES COMUNITARIOS DE LA SALUD', NULL, NULL),
+(3254, 'TÉCNICOS EN OPTOMETRÍA Y ÓPTICOS', NULL, NULL),
+(3255, 'TÉCNICOS Y ASISTENTES FISIOTERAPEUTAS', NULL, NULL),
+(3256, 'PRACTICANTES Y ASISTENTES MÉDICOS', NULL, NULL),
+(3257, 'INSPECTORES DE LA SALUD LABORAL, MEDIOAMBIENTAL Y AFINES', NULL, NULL),
+(3258, 'AYUDANTES DE AMBULANCIAS', NULL, NULL),
+(3259, 'PROFESIONALES DE LA SALUD DE NIVEL MEDIO NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(3311, 'AGENTES DE BOLSA, CAMBIO Y OTROS SERVICIOS FINANCIEROS', NULL, NULL),
+(3312, 'OFICIALES DE PRÉSTAMOS Y CRÉDITOS', NULL, NULL),
+(3313, 'TENEDORES DE LIBROS', NULL, NULL),
+(3314, 'PROFESIONALES DE NIVEL MEDIO DE SERVICIOS ESTADÍSTICOS, MATEMÁTICOS Y AFINES', NULL, NULL),
+(3315, 'TASADORES', NULL, NULL),
+(3321, 'AGENTES DE SEGUROS', NULL, NULL),
+(3322, 'REPRESENTANTES COMERCIALES', NULL, NULL),
+(3323, 'AGENTES DE COMPRAS', NULL, NULL),
+(3324, 'AGENTES DE COMPRAS Y CONSIGNATARIOS', NULL, NULL),
+(3331, 'DECLARANTES O GESTORES DE ADUANA', NULL, NULL),
+(3332, 'ORGANIZADORES DE CONFERENCIAS Y EVENTOS', NULL, NULL),
+(3333, 'AGENTES DE EMPLEO Y CONTRATISTAS DE MANO DE OBRA', NULL, NULL),
+(3334, 'AGENTES INMOBILIARIOS', NULL, NULL),
+(3339, 'AGENTES DE SERVICIOS COMERCIALES NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(3341, 'SUPERVISORES DE SECRETARÍA', NULL, NULL),
+(3342, 'SECRETARIOS JURÍDICOS', NULL, NULL),
+(3343, 'SECRETARIOS ADMINISTRATIVOS Y EJECUTIVOS', NULL, NULL),
+(3344, 'SECRETARIOS MÉDICOS', NULL, NULL),
+(3351, 'AGENTES DE ADUANA E INSPECTORES DE FRONTERAS', NULL, NULL),
+(3352, 'AGENTES DE ADMINISTRACIÓN TRIBUTARIA', NULL, NULL),
+(3353, 'AGENTES DE SERVICIOS DE SEGURIDAD SOCIAL', NULL, NULL),
+(3354, 'AGENTES DE SERVICIOS DE EXPEDICIÓN DE LICENCIAS Y PERMISOS', NULL, NULL),
+(3355, 'INSPECTORES DE POLICÍA Y DETECTIVES', NULL, NULL),
+(3359, 'AGENTES DE LA ADMINISTRACIÓN PÚBLICA PARA LA APLICACION DE LA LEY Y AFINES NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(3411, 'PROFESIONALES DE NIVEL MEDIO DEL DERECHO Y SERVICIOS LEGALES Y AFINES', NULL, NULL),
+(3412, 'TRABAJADORES Y ASISTENTES SOCIALES DE NIVEL MEDIO', NULL, NULL),
+(3413, 'AUXILIARES LAICOS DE LAS RELIGIONES', NULL, NULL),
+(3421, 'ATLETAS Y DEPORTISTAS', NULL, NULL),
+(3422, 'ENTRENADORES, INSTRUCTORES Y ÁRBITROS DE ACTIVIDADES DEPORTIVAS', NULL, NULL),
+(3423, 'INSTRUCTORES DE EDUCACIÓN FÍSICA Y ACTIVIDADES RECREATIVAS', NULL, NULL),
+(3431, 'FOTÓGRAFOS', NULL, NULL),
+(3432, 'DISEÑADORES Y DECORADORES DE INTERIOR', NULL, NULL),
+(3433, 'TÉCNICOS EN GALERÍAS DE ARTE, MUSEOS Y BIBLIOTECAS', NULL, NULL),
+(3434, 'CHEFS', NULL, NULL),
+(3435, 'OTROS PROFESIONALES DE NIVEL MEDIO EN ACTIVIDADES CULTURALES Y ARTÍSTICAS', NULL, NULL),
+(3511, 'TÉCNICOS EN OPERACIONES DE TECNOLOGÍA DE LA INFORMACIÓN Y LAS COMUNICACIONES', NULL, NULL),
+(3512, 'TÉCNICOS EN ASISTENCIA AL USUARIO DE TECNOLOGÍA DE LA INFORMACIÓN Y LAS COMUNICACIONES', NULL, NULL),
+(3513, 'TÉCNICOS EN REDES Y SISTEMAS DE COMPUTADORES', NULL, NULL),
+(3514, 'TÉCNICOS DE LA WEB', NULL, NULL),
+(3521, 'TÉCNICOS DE RADIODIFUSIÓN Y GRABACIÓN AUDIO VISUAL', NULL, NULL),
+(3522, 'TÉCNICOS DE INGENIERÍA DE LAS TELECOMUNICACIONES', NULL, NULL),
+(4110, 'OFICINISTAS GENERALES', NULL, NULL),
+(4120, 'SECRETARIOS (GENERAL)', NULL, NULL),
+(4131, 'OPERADORES DE MÁQUINAS DE PROCESAMIENTO DE TEXTO Y MECANÓGRAFOS', NULL, NULL),
+(4132, 'GRABADORES DE DATOS', NULL, NULL),
+(4211, 'CAJEROS DE BANCOS Y AFINES', NULL, NULL),
+(4212, 'RECEPTORES DE APUESTAS Y AFINES', NULL, NULL),
+(4213, 'PRESTAMISTAS', NULL, NULL),
+(4214, 'COBRADORES Y AFINES', NULL, NULL),
+(4221, 'EMPLEADOS DE AGENCIAS DE VIAJES', NULL, NULL),
+(4222, 'EMPLEADOS DE CENTROS DE LLAMADAS', NULL, NULL),
+(4223, 'TELEFONISTAS', NULL, NULL),
+(4224, 'RECEPCIONISTAS DE HOTELES', NULL, NULL),
+(4225, 'EMPLEADOS DE VENTANILLAS DE INFORMACIONES', NULL, NULL),
+(4226, 'RECEPCIONISTAS (GENERAL)', NULL, NULL),
+(4227, 'ENTREVISTADORES DE ENCUESTAS Y DE INVESTIGACIONES DE MERCADOS', NULL, NULL),
+(4229, 'EMPLEADOS DE SERVICIOS DE INFORMACIÓN AL CLIENTE NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(4311, 'EMPLEADOS DE CONTABILIDAD Y CÁLCULO DE COSTOS', NULL, NULL),
+(4312, 'EMPLEADOS DE SERVICIOS ESTADÍSTICOS, FINANCIEROS Y DE SEGUROS', NULL, NULL),
+(4313, 'EMPLEADOS ENCARGADOS DE LAS NÓMINAS', NULL, NULL),
+(4321, 'EMPLEADOS DE CONTROL DE ABASTECIMIENTOS E INVENTARIO', NULL, NULL),
+(4322, 'EMPLEADOS DE SERVICIOS DE APOYO A LA PRODUCCIÓN', NULL, NULL),
+(4323, 'EMPLEADOS DE SERVICIOS DE TRANSPORTE', NULL, NULL),
+(4411, 'EMPLEADOS DE BIBLIOTECAS', NULL, NULL),
+(4412, 'EMPLEADOS DE SERVICIOS DE CORREOS', NULL, NULL),
+(4413, 'CODIFICADORES DE DATOS, CORRECTORES DE PRUEBAS DE IMPRENTA Y AFINES', NULL, NULL),
+(4414, 'ESCRIBIENTES PÚBLICOS Y AFINES', NULL, NULL),
+(4415, 'EMPLEADOS DE ARCHIVOS', NULL, NULL),
+(4416, 'EMPLEADOS DEL SERVICIO DE PERSONAL', NULL, NULL),
+(4419, 'PERSONAL DE APOYO ADMINISTRATIVO NO CLASIFICADO BAJO OTROS EPÍGRAFES', NULL, NULL),
+(5111, 'AUXILIARES DE SERVICIO DE ABORDO', NULL, NULL),
+(5112, 'REVISORES Y COBRADORES DE LOS TRANSPORTES PÚBLICOS', NULL, NULL),
+(5113, 'GUÍAS DE TURISMO', NULL, NULL),
+(5120, 'COCINEROS', NULL, NULL),
+(5131, 'CAMAREROS DE MESAS', NULL, NULL),
+(5132, 'CAMAREROS DE BARRA', NULL, NULL),
+(5141, 'PELUQUEROS', NULL, NULL),
+(5142, 'ESPECIALISTAS EN TRATAMIENTOS DE BELLEZA Y AFINES', NULL, NULL),
+(5151, 'SUPERVISORES DE MANTENIMIENTO Y LIMPIEZA EN OFICINAS, HOTELES Y OTROS ESTABLECIMIENTOS', NULL, NULL),
+(5152, 'ECÓNOMOS Y MAYORDOMOS DOMÉSTICOS', NULL, NULL),
+(5153, 'CONSERJES', NULL, NULL),
+(5161, 'ASTRÓLOGOS, ADIVINADORES Y AFINES', NULL, NULL),
+(5162, 'ACOMPAÑANTES Y AYUDANTES DE CÁMARA', NULL, NULL),
+(5163, 'PERSONAL DE POMPAS FÚNEBRES Y EMBALSAMADORES', NULL, NULL),
+(5164, 'CUIDADORES DE ANIMALES', NULL, NULL),
+(5165, 'INSTRUCTORES DE AUTOESCUELA', NULL, NULL),
+(5169, 'TRABAJADORES DE SERVICIOS PERSONALES NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(5211, 'VENDEDORES DE QUIOSCOS Y DE PUESTOS DE MERCADO', NULL, NULL),
+(5212, 'VENDEDORES AMBULANTES DE PRODUCTOS COMESTIBLES', NULL, NULL),
+(5221, 'COMERCIANTES DE TIENDAS', NULL, NULL),
+(5222, 'SUPERVISORES DE TIENDAS Y ALMACENES', NULL, NULL),
+(5223, 'ASISTENTES DE VENTA DE TIENDAS Y ALMACENES', NULL, NULL),
+(5230, 'CAJEROS Y EXPENDEDORES DE BILLETES', NULL, NULL),
+(5241, 'MODELOS DE MODA, ARTE Y PUBLICIDAD', NULL, NULL),
+(5242, 'DEMOSTRADORES DE TIENDAS', NULL, NULL),
+(5243, 'VENDEDORES PUERTA A PUERTA', NULL, NULL),
+(5244, 'VENDEDORES POR TELÉFONO', NULL, NULL),
+(5245, 'EXPENDEDORES DE GASOLINERAS', NULL, NULL),
+(5246, 'VENDEDORES DE COMIDAS AL MOSTRADOR', NULL, NULL),
+(5249, 'VENDEDORES NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(5311, 'CUIDADORES DE NIÑOS', NULL, NULL),
+(5312, 'AUXILIARES DE MAESTROS', NULL, NULL),
+(5321, 'TRABAJADORES DE LOS CUIDADOS PERSONALES EN INSTITUCIONES', NULL, NULL),
+(5322, 'TRABAJADORES DE LOS CUIDADOS PERSONALES A DOMICILIO', NULL, NULL),
+(5329, 'TRABAJADORES DE LOS CUIDADOS PERSONALES EN SERVICIOS DE SALUD NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(5411, 'BOMBEROS', NULL, NULL),
+(5412, 'POLICÍAS', NULL, NULL),
+(5413, 'GUARDIANES DE PRISIÓN', NULL, NULL),
+(5414, 'GUARDIAS DE PROTECCIÓN', NULL, NULL),
+(5419, 'PERSONAL DE LOS SERVICIOS DE PROTECCIÓN NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(6111, 'AGRICULTORES Y TRABAJADORES CALIFICADOS DE CULTIVOS EXTENSIVOS', NULL, NULL),
+(6112, 'AGRICULTORES Y TRABAJADORES CALIFICADOS DE PLANTACIONES DE ÁRBOLES Y ARBUSTOS', NULL, NULL),
+(6113, 'AGRICULTORES Y TRABAJADORES CALIFICADOS DE HUERTAS, INVERNADEROS, VIVEROS Y JARDINES', NULL, NULL),
+(6114, 'AGRICULTORES Y TRABAJADORES CALIFICADOS DE CULTIVOS MIXTOS', NULL, NULL),
+(6121, 'CRIADORES DE GANADO', NULL, NULL),
+(6122, 'AVICULTORES Y TRABAJADORES CALIFICADOS DE LA AVICULTURA', NULL, NULL),
+(6123, 'APICULTORES Y SERICULTORES Y TRABAJADORES CALIFICADOS DE LA APICULTURA Y LA SERICULTURA', NULL, NULL),
+(6129, 'CRIADORES Y TRABAJADORES PECUARIOS CALIFICADOS DE LA CRÍA DE ANIMALES NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(6130, 'PRODUCTORES Y TRABAJADORES CALIFICADOS DE EXPLOTACIONES AGROPECUARIAS MIXTAS CUYA PRODUCCIÓN SE DESTINA AL MERCADO', NULL, NULL),
+(6210, 'TRABAJADORES FORESTALES CALIFICADOS Y AFINES', NULL, NULL),
+(6221, 'TRABAJADORES DE EXPLOTACIONES DE ACUICULTURA', NULL, NULL),
+(6222, 'PESCADORES DE AGUA DULCE Y EN AGUAS COSTERAS', NULL, NULL),
+(6223, 'PESCADORES DE ALTA MAR', NULL, NULL),
+(6224, 'CAZADORES Y TRAMPEROS', NULL, NULL),
+(6310, 'TRABAJADORES AGRÍCOLAS DE SUBSISTENCIA', NULL, NULL),
+(6320, 'TRABAJADORES PECUARIOS DE SUBSISTENCIA', NULL, NULL),
+(6330, 'TRABAJADORES AGROPECUARIOS DE SUBSISTENCIA', NULL, NULL),
+(6340, 'PESCADORES, CAZADORES, TRAMPEROS Y RECOLECTORES DE SUBSISTENCIA', NULL, NULL),
+(7111, 'CONSTRUCTORES DE CASAS', NULL, NULL),
+(7112, 'ALBAÑILES', NULL, NULL),
+(7113, 'MAMPOSTEROS, TRONZADORES, LABRANTES Y GRABADORES DE PIEDRA', NULL, NULL),
+(7114, 'OPERARIOS EN CEMENTO ARMADO, ENFOSCADORES Y AFINES', NULL, NULL),
+(7115, 'CARPINTEROS DE ARMAR Y DE OBRA BLANCA', NULL, NULL),
+(7119, 'OFICIALES Y OPERARIOS DE LA CONSTRUCCIÓN (OBRA GRUESA) Y AFINES NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(7121, 'TECHADORES', NULL, NULL),
+(7122, 'PARQUETEROS Y COLOCADORES DE SUELOS', NULL, NULL),
+(7123, 'REVOCADORES', NULL, NULL),
+(7124, 'INSTALADORES DE MATERIAL AISLANTE Y DE INSONORIZACIÓN', NULL, NULL),
+(7125, 'CRISTALEROS', NULL, NULL),
+(7126, 'FONTANEROS E INSTALADORES DE TUBERÍAS', NULL, NULL),
+(7127, 'MECÁNICOS-MONTADORES DE INSTALACIONES DE REFRIGERACIÓN Y CLIMATIZACIÓN', NULL, NULL),
+(7131, 'PINTORES Y EMPAPELADORES', NULL, NULL),
+(7132, 'BARNIZADORES Y AFINES', NULL, NULL),
+(7133, 'LIMPIADORES DE FACHADAS Y DESHOLLINADORES', NULL, NULL),
+(7211, 'MOLDEADORES Y MACHEROS', NULL, NULL),
+(7212, 'SOLDADORES Y OXICORTADORES', NULL, NULL),
+(7213, 'CHAPISTAS Y CALDEREROS', NULL, NULL),
+(7214, 'MONTADORES DE ESTRUCTURAS METÁLICAS', NULL, NULL),
+(7215, 'APAREJADORES Y EMPALMADORES DE CABLES', NULL, NULL),
+(7221, 'HERREROS Y FORJADORES', NULL, NULL),
+(7222, 'HERRAMENTISTAS Y AFINES', NULL, NULL),
+(7223, 'REGULADORES Y OPERADORES DE MÁQUINAS HERRAMIENTAS', NULL, NULL),
+(7224, 'PULIDORES DE METALES Y AFILADORES DE HERRAMIENTAS', NULL, NULL),
+(7231, 'MECÁNICOS Y REPARADORES DE VEHÍCULOS DE MOTOR', NULL, NULL),
+(7232, 'MECÁNICOS Y REPARADORES DE MOTORES DE AVIÓN', NULL, NULL),
+(7233, 'MECÁNICOS Y REPARADORES DE MÁQUINAS AGRÍCOLAS E INDUSTRIALES', NULL, NULL),
+(7234, 'REPARADORES DE BICICLETAS Y AFINES', NULL, NULL),
+(7311, 'MECÁNICOS Y REPARADORES DE INSTRUMENTOS DE PRECISIÓN', NULL, NULL),
+(7312, 'FABRICANTES Y AFINADORES DE INSTRUMENTOS MUSICALES', NULL, NULL),
+(7313, 'JOYEROS, ORFEBRES Y PLATEROS', NULL, NULL),
+(7314, 'ALFAREROS Y AFINES (BARRO, ARCILLA Y ABRASIVOS)', NULL, NULL),
+(7315, 'SOPLADORES, MODELADORES, LAMINADORES, CORTADORES Y PULIDORES DE VIDRIO', NULL, NULL),
+(7316, 'REDACTORES DE CARTELES, PINTORES DECORATIVOS Y GRABADORES', NULL, NULL),
+(7317, 'ARTESANOS EN MADERA, CESTERÍA Y MATERIALES SIMILARES', NULL, NULL),
+(7318, 'ARTESANOS DE LOS TEJIDOS, EL CUERO Y MATERIALES SIMILARES', NULL, NULL),
+(7319, 'ARTESANOS NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(7321, 'CAJISTAS, TIPÓGRAFOS Y AFINES', NULL, NULL),
+(7322, 'IMPRESORES', NULL, NULL),
+(7323, 'ENCUADERNADORES Y AFINES', NULL, NULL),
+(7411, 'ELECTRICISTAS DE OBRAS Y AFINES', NULL, NULL),
+(7412, 'MECÁNICOS Y AJUSTADORES ELECTRICISTAS', NULL, NULL),
+(7413, 'INSTALADORES Y REPARADORES DE LÍNEAS ELÉCTRICAS', NULL, NULL),
+(7421, 'MECÁNICOS Y REPARADORES EN ELECTRÓNICA', NULL, NULL),
+(7422, 'INSTALADORES Y REPARADORES EN TECNOLOGÍA DE LA INFORMACIÓN Y LAS COMUNICACIONES', NULL, NULL),
+(7511, 'CARNICEROS, PESCADEROS Y AFINES', NULL, NULL),
+(7512, 'PANADEROS, PASTELEROS Y CONFITEROS', NULL, NULL),
+(7513, 'OPERARIOS DE LA ELABORACIÓN DE PRODUCTOS LÁCTEOS', NULL, NULL),
+(7514, 'OPERARIOS DE LA CONSERVACIÓN DE FRUTAS, LEGUMBRES, VERDURAS Y AFINES', NULL, NULL),
+(7515, 'CATADORES Y CLASIFICADORES DE ALIMENTOS Y BEBIDAS', NULL, NULL),
+(7516, 'PREPARADORES Y ELABORADORES DE TABACO Y SUS PRODUCTOS', NULL, NULL),
+(7521, 'OPERARIOS DEL TRATAMIENTO DE LA MADERA', NULL, NULL),
+(7522, 'EBANISTAS Y AFINES', NULL, NULL),
+(7523, 'REGULADORES Y OPERADORES DE MÁQUINAS DE LABRAR MADERA', NULL, NULL),
+(7531, 'SASTRES, MODISTOS, PELETEROS Y SOMBREREROS', NULL, NULL),
+(7532, 'PATRONISTAS Y CORTADORES DE TELA Y AFINES', NULL, NULL),
+(7533, 'COSTUREROS, BORDADORES Y AFINES', NULL, NULL),
+(7534, 'TAPICEROS, COLCHONEROS Y AFINES', NULL, NULL),
+(7535, 'APELAMBRADORES, PELLEJEROS Y CURTIDORES', NULL, NULL),
+(7536, 'ZAPATEROS Y AFINES', NULL, NULL),
+(7541, 'BUZOS', NULL, NULL),
+(7542, 'DINAMITEROS Y PEGADORES', NULL, NULL),
+(7543, 'CLASIFICADORES Y PROBADORES DE PRODUCTOS (EXCLUYENDO ALIMENTOS Y BEBIDAS)', NULL, NULL),
+(7544, 'FUMIGADORES Y OTROS CONTROLADORES DE PLAGAS Y MALAS HIERBAS', NULL, NULL),
+(7549, 'OFICIALES, OPERARIOS Y ARTESANOS DE ARTES MECÁNICAS Y DE OTROS OFICIOS NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(8111, 'MINEROS Y OPERADORES DE INSTALACIONES MINERAS', NULL, NULL),
+(8112, 'OPERADORES DE INSTALACIONES DE PROCESAMIENTO DE MINERALES Y ROCAS', NULL, NULL),
+(8113, 'PERFORADORES Y SONDISTAS DE POZOS Y AFINES', NULL, NULL),
+(8114, 'OPERADORES DE MÁQUINAS PARA FABRICAR CEMENTO Y OTROS PRODUCTOS MINERALES', NULL, NULL),
+(8121, 'OPERADORES DE INSTALACIONES DE PROCESAMIENTO DE METALES', NULL, NULL),
+(8122, 'OPERADORES DE MÁQUINAS PULIDORAS, GALVANIZADORAS Y RECUBRIDORAS DE METALES', NULL, NULL),
+(8131, 'OPERADORES DE PLANTAS Y MÁQUINAS DE PRODUCTOS QUÍMICOS', NULL, NULL),
+(8132, 'OPERADORES DE MÁQUINAS PARA FABRICAR PRODUCTOS FOTOGRÁFICOS', NULL, NULL),
+(8141, 'OPERADORES DE MÁQUINAS PARA FABRICAR PRODUCTOS DE CAUCHO', NULL, NULL),
+(8142, 'OPERADORES DE MÁQUINAS PARA FABRICAR PRODUCTOS DE MATERIAL PLÁSTICO', NULL, NULL),
+(8143, 'OPERADORES DE MÁQUINAS PARA FABRICAR PRODUCTOS DE PAPEL', NULL, NULL),
+(8151, 'OPERADORES DE MÁQUINAS DE PREPARACIÓN DE FIBRAS, HILADO Y DEVANADO', NULL, NULL),
+(8152, 'OPERADORES DE TELARES Y OTRAS MÁQUINAS TEJEDORAS', NULL, NULL),
+(8153, 'OPERADORES DE MÁQUINAS DE COSER', NULL, NULL),
+(8154, 'OPERADORES DE MÁQUINAS DE BLANQUEAMIENTO, TEÑIDO Y LIMPIEZA DE TEJIDOS', NULL, NULL),
+(8155, 'OPERADORES DE MÁQUINAS DE TRATAMIENTO DE PIELES Y CUEROS', NULL, NULL),
+(8156, 'OPERADORES DE MÁQUINAS PARA LA FABRICACIÓN DE CALZADO Y AFINES', NULL, NULL),
+(8157, 'OPERADORES DE MÁQUINAS LAVARROPAS', NULL, NULL),
+(8159, 'OPERADORES DE MÁQUINAS PARA FABRICAR PRODUCTOS TEXTILES Y ARTÍCULOS DE PIEL Y CUERO NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(8160, 'OPERADORES DE MÁQUINAS PARA ELABORAR ALIMENTOS Y PRODUCTOS AFINES', NULL, NULL),
+(8171, 'OPERADORES DE INSTALACIONES PARA LA PREPARACIÓN DE PASTA PARA PAPEL Y PAPEL', NULL, NULL),
+(8172, 'OPERADORES DE INSTALACIONES DE PROCESAMIENTO DE LA MADERA', NULL, NULL),
+(8181, 'OPERADORES DE INSTALACIONES DE VIDRIERÍA Y CERÁMICA', NULL, NULL),
+(8182, 'OPERADORES DE MÁQUINAS DE VAPOR Y CALDERAS', NULL, NULL),
+(8183, 'OPERADORES DE MÁQUINAS DE EMBALAJE, EMBOTELLAMIENTO Y ETIQUETADO', NULL, NULL),
+(8189, 'OPERADORES DE MÁQUINAS Y DE INSTALACIONES FIJAS NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(8211, 'ENSAMBLADORES DE MAQUINARIA MECÁNICA', NULL, NULL),
+(8212, 'ENSAMBLADORES DE EQUIPOS ELÉCTRICOS Y ELECTRÓNICOS', NULL, NULL),
+(8219, 'ENSAMBLADORES NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(8311, 'MAQUINISTAS DE LOCOMOTORAS', NULL, NULL),
+(8312, 'GUARDAFRENOS, GUARDAGUJAS Y AGENTES DE MANIOBRAS', NULL, NULL),
+(8321, 'CONDUCTORES DE MOTOCICLETAS', NULL, NULL),
+(8322, 'CONDUCTORES DE AUTOMÓVILES, TAXIS Y CAMIONETAS', NULL, NULL),
+(8331, 'CONDUCTORES DE AUTOBUSES Y TRANVÍAS', NULL, NULL),
+(8332, 'CONDUCTORES DE CAMIONES PESADOS', NULL, NULL),
+(8341, 'OPERADORES DE MAQUINARIA AGRÍCOLA Y FORESTAL MÓVIL', NULL, NULL),
+(8342, 'OPERADORES DE MÁQUINAS DE MOVIMIENTO DE TIERRAS Y AFINES', NULL, NULL),
+(9111, 'LIMPIADORES Y ASISTENTES DOMÉSTICOS', NULL, NULL),
+(9112, 'LIMPIADORES Y ASISTENTES DE OFICINAS, HOTELES Y OTROS ESTABLECIMIENTOS', NULL, NULL),
+(9121, 'LAVANDEROS Y PLANCHADORES MANUALES', NULL, NULL),
+(9122, 'LAVADORES DE VEHÍCULOS', NULL, NULL),
+(9123, 'LAVADORES DE VENTANAS', NULL, NULL),
+(9129, 'OTRO PERSONAL DE LIMPIEZA', NULL, NULL),
+(9211, 'PEONES DE EXPLOTACIONES AGRÍCOLAS', NULL, NULL),
+(9212, 'PEONES DE EXPLOTACIONES GANADERAS', NULL, NULL),
+(9213, 'PEONES DE EXPLOTACIONES DE CULTIVOS MIXTOS Y GANADEROS', NULL, NULL),
+(9214, 'PEONES DE JARDINERÍA Y HORTICULTURA', NULL, NULL),
+(9215, 'PEONES FORESTALES', NULL, NULL),
+(9216, 'PEONES DE PESCA Y ACUICULTURA', NULL, NULL),
+(9311, 'PEONES DE MINAS Y CANTERAS', NULL, NULL),
+(9312, 'PEONES DE OBRAS PÚBLICAS Y MANTENIMIENTO', NULL, NULL),
+(9313, 'PEONES DE LA CONSTRUCCIÓN DE EDIFICIOS', NULL, NULL),
+(9321, 'EMPACADORES MANUALES', NULL, NULL),
+(9329, 'PEONES DE LA INDUSTRIA MANUFACTURERA NO CLASIFICADOS BAJO OTROS EPÍGRAFES', NULL, NULL),
+(9331, 'CONDUCTORES DE VEHÍCULOS ACCIONADOS A PEDAL O A BRAZO', NULL, NULL),
+(9332, 'CONDUCTORES DE VEHÍCULOS Y MÁQUINAS DE TRACCIÓN ANIMAL', NULL, NULL),
+(9333, 'PEONES DE CARGA', NULL, NULL),
+(9334, 'REPONEDORES DE ESTANTERÍAS', NULL, NULL),
+(9411, 'COCINEROS DE COMIDAS RÁPIDAS', NULL, NULL),
+(9412, 'AYUDANTES DE COCINA', NULL, NULL),
+(9510, 'TRABAJADORES AMBULANTES DE SERVICIOS Y AFINES', NULL, NULL),
+(9520, 'VENDEDORES AMBULANTES (EXCLUYENDO DE COMIDA)', NULL, NULL),
+(9611, 'RECOLECTORES DE BASURA Y MATERIAL RECICLABLE', NULL, NULL),
+(9612, 'CLASIFICADORES DE DESECHOS', NULL, NULL),
+(9613, 'BARRENDEROS Y AFINES', NULL, NULL),
+(9621, 'MENSAJEROS, MANDADEROS, MALETEROS Y REPARTIDORES', NULL, NULL),
+(9622, 'PERSONAS QUE REALIZAN TRABAJOS VARIOS', NULL, NULL),
+(9623, 'RECOLECTORES DE DINERO EN APARATOS DE VENTA AUTOMÁTICA Y LECTORES DE MEDIDORES', NULL, NULL),
+(9624, 'ACARREADORES DE AGUA Y RECOLECTORES DE LEÑA', NULL, NULL),
+(9629, 'OCUPACIONES ELEMENTALES NO CLASIFICADAS BAJO OTROS EPÍGRAFES', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -6403,6 +7728,68 @@ INSERT INTO `pre_tipo_orientacion_sexual` (`id_orientacion_sexual`, `gl_orientac
 (8, 'ANTROSEXUAL', 1, '2017-03-07 00:00:00'),
 (9, 'POLISEXUAL', 1, '2017-03-07 00:00:00'),
 (10, 'ASEXUAL', 1, '2017-03-07 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_tipo_pueblo_indigena`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_tipo_pueblo_indigena` (
+  `id_pueblo_indigena` int(11) NOT NULL,
+  `gl_nombre_pueblo_indigena` varchar(150) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_pueblo_indigena`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista de Pueblos Indígenas';
+
+--
+-- Volcado de datos para la tabla `pre_tipo_pueblo_indigena`
+--
+
+INSERT INTO `pre_tipo_pueblo_indigena` (`id_pueblo_indigena`, `gl_nombre_pueblo_indigena`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'MAPUCHE', NULL, NULL),
+(2, 'AYMARA', NULL, NULL),
+(3, 'RAPA NUI (PASCUENSE)', NULL, NULL),
+(4, 'LICAN ANTAI (ATACAMEÑO)', NULL, NULL),
+(5, 'QUECHUA', NULL, NULL),
+(6, 'COLLA', NULL, NULL),
+(7, 'DIAGUITA', NULL, NULL),
+(8, 'KAWÉSQAR', NULL, NULL),
+(9, 'YAGÁN (YÁMANA)', NULL, NULL),
+(10, 'OTRO (ESPECIFICAR)', NULL, NULL),
+(96, 'NINGUNO', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_tipo_religion`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_tipo_religion` (
+  `id_religion` int(11) NOT NULL DEFAULT '0',
+  `gl_nombre_religion` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_religion`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista de Religiones';
+
+--
+-- Volcado de datos para la tabla `pre_tipo_religion`
+--
+
+INSERT INTO `pre_tipo_religion` (`id_religion`, `gl_nombre_religion`) VALUES
+(1, 'CATOLICÍSMO'),
+(2, 'EVANGÉLICA O PROTESTANTE'),
+(3, 'JUDAÍSMO'),
+(4, 'ISLAM'),
+(5, 'MORMONISMO'),
+(6, 'ORTODOXA'),
+(7, 'BUDISMO'),
+(8, 'FE BAHÁ''Í'),
+(9, 'TESTIGO DE JEHOVÁ'),
+(10, 'ESPIRITUALIDAD INDÍGENA'),
+(11, 'OTRA RELIGIÓN O CREDO'),
+(96, 'NINGUNA'),
+(99, 'DESCONOCIDO');
 
 -- --------------------------------------------------------
 
@@ -6448,8 +7835,10 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_sexo` (
 --
 
 INSERT INTO `pre_tipo_sexo` (`id_tipo_sexo`, `gl_tipo_sexo`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'MASCULINO', 1, '2017-03-07 00:00:00'),
-(2, 'FEMENINO', 1, '2017-03-07 00:00:00');
+(1, 'HOMBRE', 1, '2017-03-07 00:00:00'),
+(2, 'MUJER', 1, '2017-03-07 00:00:00'),
+(3, 'INTERSEX (INDETERMINADO)', 1, '2017-03-21 00:00:00'),
+(99, 'DESCONOCIDO', 1, '2017-03-21 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -6511,6 +7900,56 @@ INSERT INTO `pre_tipo_violencia` (`id_tipo_violencia`, `gl_tipo_violencia`, `gl_
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pre_titulo_profesional`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_titulo_profesional` (
+  `id_titulo_profesional` int(11) NOT NULL,
+  `gl_nombre_titulo_profesional` varchar(100) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_titulo_profesional`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Título Profesional';
+
+--
+-- Volcado de datos para la tabla `pre_titulo_profesional`
+--
+
+INSERT INTO `pre_titulo_profesional` (`id_titulo_profesional`, `gl_nombre_titulo_profesional`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'MÉDICO CIRUJANO', NULL, NULL),
+(2, 'CIRUJANO DENTISTA', NULL, NULL),
+(3, 'ENFERMERAS(OS)', NULL, NULL),
+(4, 'ENFERMERAS(OS) MATRONAS(ES)', NULL, NULL),
+(5, 'MATRONAS(ES)', NULL, NULL),
+(6, 'TECNÓLOGOS MÉDICOS', NULL, NULL),
+(7, 'PSICÓLOGOS', NULL, NULL),
+(8, 'KINESIÓLOGOS', NULL, NULL),
+(9, 'FARMACÉUTICOS Y QUÍMICO-FARMACÉUTICOS', NULL, NULL),
+(10, 'BIOQUÍMICOS', NULL, NULL),
+(11, 'NUTRICIONISTAS', NULL, NULL),
+(12, 'FONOAUDIÓLOGOS', NULL, NULL),
+(13, 'TERAPEUTAS OCUPACIONALES', NULL, NULL),
+(14, 'AUXILIARES PARAMÉDICOS DE ALIMENTACIÓN', NULL, NULL),
+(15, 'A.P. DE RADIOLOGÍA, RADIOTERAPIA, LAB', NULL, NULL),
+(16, 'AUXILIARES PARAMÉDICOS DE ODONTOLOGÍA', NULL, NULL),
+(17, 'AUXILIARES PARAMÉDICOS DE FARMACIA', NULL, NULL),
+(18, 'AUXILIARES DE ENFERMERÍA', NULL, NULL),
+(19, 'TÉCNICO EN NIVEL SUPERIOR EN SALUD', NULL, NULL),
+(20, 'TÉCNICOS EN SALUD', NULL, NULL),
+(21, 'TÉCNICOS NIVEL MEDIO EN SALUD', NULL, NULL),
+(22, 'LABORATORISTAS DENTALES', NULL, NULL),
+(23, 'PODÓLOGOS', NULL, NULL),
+(24, 'ÓPTICOS', NULL, NULL),
+(25, 'CONTACTÓLOGOS', NULL, NULL),
+(26, 'HOMEÓPATAS', NULL, NULL),
+(27, 'ACUPUNTURISTAS', NULL, NULL),
+(28, 'NATURÓPATAS', NULL, NULL),
+(29, 'COSMETÓLOGOS', NULL, NULL),
+(99, 'DESCONOCIDA', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pre_transaccion_tipo`
 --
 
@@ -6567,38 +8006,38 @@ CREATE TABLE IF NOT EXISTS `pre_usuario` (
 --
 
 INSERT INTO `pre_usuario` (`id_usuario`, `id_perfil`, `gl_rut`, `gl_password`, `id_institucion`, `id_laboratorio`, `id_tipo_grupo`, `gl_nombres`, `gl_apellidos`, `id_region`, `id_comuna`, `gl_direccion`, `gl_email`, `gl_fono`, `gl_celular`, `bo_activo`, `fc_ultimo_login`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 1, '13225524-5', '7c63b8135f73d87fbd3ac01623823633c54f0cf2c320bbaf463d4d275d498060fcc6e5c40f2b49aaab881e4064c0d2803c5361a9eabe157ab1cf4d1da19120d3', 2462, NULL, '2', 'Administrador', 'Prevención', 1, 349, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, 1, '2017-03-20 19:55:58', NULL, '2017-03-17 16:07:14', 1, '2017-02-09 10:30:00'),
-(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', '', 1, 349, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-20 19:26:59', NULL, '2017-03-17 16:07:14', 1, '2017-02-09 10:30:00'),
+(1, 1, '13225524-5', '7c63b8135f73d87fbd3ac01623823633c54f0cf2c320bbaf463d4d275d498060fcc6e5c40f2b49aaab881e4064c0d2803c5361a9eabe157ab1cf4d1da19120d3', 2462, NULL, '2', 'Administrador', 'Prevención', 1, 349, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, 1, '2017-03-22 14:02:11', NULL, '2017-03-17 16:07:14', 1, '2017-02-09 10:30:00'),
+(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', '', 5, 349, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-22 12:18:12', NULL, '2017-03-17 16:07:14', 1, '2017-02-09 10:30:00'),
 (3, 5, '0-0', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'David', 'Guzmán', 1, 349, NULL, 'david.guzman@cosof.cl', NULL, NULL, 1, '2017-03-20 13:37:43', NULL, '2017-03-17 16:07:14', 1, '2017-02-09 10:30:00'),
 (6, 1, '1-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', '', 1, 349, NULL, 'ovazquez.gonzalez@gmail.com', NULL, NULL, 1, '2017-03-18 01:33:13', NULL, '2017-03-17 16:07:14', 1, NULL),
 (7, 2, '1-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1, NULL, '1', 'Médico', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'medicoarica@mail.cl', NULL, NULL, 1, '2017-03-20 13:36:31', 2, '2017-03-17 16:07:14', NULL, NULL),
 (8, 3, '1-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1, NULL, '1', 'Enfermera', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'enfermeraarica@mail.cl', NULL, NULL, 1, '2017-03-17 17:29:45', 2, '2017-03-17 16:07:14', 2, '2017-03-13 14:44:38'),
-(9, 4, '1-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, NULL, NULL, 'Gestor', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'gestorarica@mail.cl', NULL, NULL, 1, '2017-03-20 19:24:25', 2, '2017-03-17 16:07:14', 2, '2017-03-17 16:00:39'),
-(10, 5, '1-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1564, NULL, '1', 'Gestor', 'Nacional', 13, 631, 'Calle Camino San Manuel S/N', 'gestornacional@mail.cl', NULL, NULL, 1, '2017-03-20 19:02:18', 2, '2017-03-17 16:07:14', 2, '2017-03-13 14:54:23'),
+(9, 4, '1-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, NULL, NULL, 'Gestor', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'gestorarica@mail.cl', NULL, NULL, 1, '2017-03-21 18:57:22', 2, '2017-03-17 16:07:14', 2, '2017-03-17 16:00:39'),
+(10, 5, '1-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1564, NULL, '1', 'Gestor', 'Nacional', 13, 631, 'Calle Camino San Manuel S/N', 'gestornacional@mail.cl', NULL, NULL, 1, '2017-03-21 18:55:21', 2, '2017-03-17 16:07:14', 2, '2017-03-13 14:54:23'),
 (11, 7, '1-6', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, NULL, '1', 'Laboratorio', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'Laboratorio Arica', NULL, NULL, 1, '2017-03-20 19:22:06', 2, '2017-03-17 16:07:14', 2, '2017-03-13 14:54:23'),
-(12, 3, '3-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2457, NULL, '1', 'Enfermera', '(C) Tarapacá\r\n', 1, 349, 'Pasaje Chintaguay S/N\r\n', NULL, NULL, NULL, 1, '2017-03-17 17:51:52', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(13, 3, '3-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Enfermera', '(T) Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 20:09:56', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(14, 3, '3-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2327, NULL, '1', 'Enfermera', '(C) Coquimbo', 4, 374, NULL, NULL, NULL, NULL, 1, '2017-03-16 20:09:56', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(15, 3, '3-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Enfermera', '(T) Coquimbo', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-16 20:09:56', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(12, 3, '3-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2457, NULL, '1', 'Enfermera', '(C) Tarapacá\r\n', 1, 349, 'Pasaje Chintaguay S/N\r\n', NULL, NULL, NULL, 1, '2017-03-22 14:00:57', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(13, 3, '3-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Enfermera', '(T) Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 13:54:20', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(14, 3, '3-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2327, NULL, '1', 'Enfermera', '(C) Coquimbo', 4, 374, NULL, NULL, NULL, NULL, 1, '2017-03-22 14:00:13', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(15, 3, '3-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Enfermera', '(T) Coquimbo', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-21 19:19:45', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (16, 3, '3-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 24, NULL, '1', 'Enfermera', '(C) Magallanes', 12, 578, NULL, NULL, NULL, NULL, 1, '2017-03-16 20:09:56', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (17, 3, '3-6', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 18, NULL, '2', 'Enfermera', '(T) MAgallanes', 12, 578, NULL, NULL, NULL, NULL, 1, '2017-03-16 20:09:56', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(18, 2, '2-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Médico', 'Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 20:09:56', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(19, 2, '2-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Médico', 'Coquimbo', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-16 20:09:56', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(18, 2, '2-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Médico', 'Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 14:01:38', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(19, 2, '2-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Médico', 'Coquimbo', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-21 19:20:35', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (20, 2, '2-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 18, NULL, '2', 'Médico', 'Magallanes', 12, 578, NULL, NULL, NULL, NULL, 1, '2017-03-16 20:09:56', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(21, 4, '4-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Gestor', 'Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-17 17:50:18', NULL, '2017-03-17 16:07:14', NULL, '2017-03-17 16:00:39'),
-(22, 4, '4-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Gestor', 'Coquimbo', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-16 20:16:10', NULL, '2017-03-17 16:07:14', NULL, '2017-03-17 16:00:39'),
+(21, 4, '4-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Gestor', 'Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 13:51:45', NULL, '2017-03-17 16:07:14', NULL, '2017-03-17 16:00:39'),
+(22, 4, '4-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Gestor', 'Coquimbo', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-21 18:57:33', NULL, '2017-03-17 16:07:14', NULL, '2017-03-17 16:00:39'),
 (23, 4, '4-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 18, NULL, '2', 'Gestor', 'Magallanes', 12, 578, NULL, NULL, NULL, NULL, 1, '2017-03-16 20:16:26', NULL, '2017-03-17 16:07:14', NULL, '2017-03-17 16:00:39'),
-(24, 7, '7-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 1, '1', 'Laboratorista Uno', 'Tarapacá SAPU Cirujano Aguirre', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-20 14:32:27', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(25, 7, '7-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 1, '1', 'Laboratorista Dos', 'Tarapacá SAPU Cirujano Aguirre', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 21:25:06', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(24, 7, '7-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 1, '1', 'Laboratorista Uno', 'Tarapacá SAPU Cirujano Aguirre', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 13:45:04', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(25, 7, '7-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 1, '1', 'Laboratorista Dos', 'Tarapacá SAPU Cirujano Aguirre', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-21 14:34:43', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (26, 7, '7-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 2, '2', 'Laboratorista Uno', 'Tarapacá SAPU Cirujano Aguirre', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-17 14:37:45', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(27, 7, '7-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 2, '2', 'Laboratorista Dos', 'Tarapacá SAPU Cirujano Videla', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 21:30:15', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(28, 7, '7-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 3, '1', 'Laboratorista Uno', 'Coquimbo Hospital La Serena', 4, 374, NULL, NULL, NULL, NULL, 1, '2017-03-16 21:30:15', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(27, 7, '7-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 2, '2', 'Laboratorista Dos', 'Tarapacá SAPU Cirujano Videla', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 13:17:59', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(28, 7, '7-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 3, '1', 'Laboratorista Uno', 'Coquimbo Hospital La Serena', 4, 374, NULL, NULL, NULL, NULL, 1, '2017-03-21 19:21:33', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (31, 7, '7-6', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 4, '2', 'Laboratorista Uno', 'Coquimbo Hospital Coquimbo', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-16 21:38:58', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (32, 7, '7-7', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 5, '1', 'Laboratorista Uno', 'Magallanes SAPU Mateo Bencur', 12, 578, NULL, NULL, NULL, NULL, 1, '2017-03-16 21:41:58', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (33, 7, '7-8', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 6, '2', 'Laboratorista Uno', 'SAPU Juan Damianovic', 12, 578, NULL, NULL, NULL, NULL, 1, '2017-03-16 21:41:58', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(34, 6, '61-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista ', 'Tarapacá Odontólogo Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-20 13:35:51', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(34, 6, '61-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista ', 'Tarapacá Odontólogo Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 13:51:32', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (35, 6, '62-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psicólogo Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-20 13:37:27', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(36, 6, '63-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psiquiatra Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:25:03', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(36, 6, '63-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psiquiatra Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 13:15:44', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (37, 6, '64-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Dentista Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:25:03', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (38, 6, '65-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Nutricionista Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:25:03', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (39, 6, '612-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista ', 'Tarapacá Odontólogo Dos', 1, 349, 'Nutricionista', NULL, NULL, NULL, 1, '2017-03-16 22:27:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
@@ -6607,7 +8046,7 @@ INSERT INTO `pre_usuario` (`id_usuario`, `id_perfil`, `gl_rut`, `gl_password`, `
 (42, 6, '642-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Dentista Dos', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:27:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (43, 6, '652-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Nutricionista Dos', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:27:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (44, 6, '61-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Especialista', 'Coquimbo Odontólogo', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:33:37', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(45, 6, '62-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Especialista', 'Coquimbo Psicólogo', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:33:37', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(45, 6, '62-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Especialista', 'Coquimbo Psicólogo', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-21 19:22:09', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (46, 6, '63-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Especialista', 'Coquimbo Psiquiatra', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:33:37', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (47, 6, '64-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Especialista', 'Coquimbo Dentista', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:33:37', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (48, 6, '65-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Especialista', 'Coquimbo Nutricionista', 4, 375, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:33:37', NULL, '2017-03-17 16:07:14', NULL, NULL),
