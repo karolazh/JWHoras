@@ -14,6 +14,8 @@
 		<div class="panel-body">
 		
 			<form id="form" action="#" method="post" class="form-horizontal">
+				<input type="text" name="bool_region" id="bool_region" value="{$bool_region}" class="hidden"/>
+				<input type="text" name="reg" id="reg" value="{$reg}" class="hidden"/>
 				<div class="form-group">
 					<label for="rut" class="control-label col-sm-2">Rut</label>
 					<div class="col-sm-3">

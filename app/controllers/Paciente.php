@@ -955,12 +955,12 @@ class Paciente extends Controller {
 	public function buscar() {
 		Acceso::redireccionUnlogged($this->smarty);
 		
-		$arrUsuario = $this->_DAOUsuario->getById($_SESSION['id']);
-		
 		$arrRegiones = $this->_DAORegion->getLista();
 		$this->smarty->assign("arrRegiones", $arrRegiones);
 		
-		if ($arrUsuario->id_perfil != 1 && $arrUsuario->id_perfil != 5){
+		if ($_SESSION['perfil'] != 1 && $_SESSION['perfil'] != 5){
+			$this->smarty->assign('bool_region', 1);
+			$this->smarty->assign('reg', $_SESSION['id_region']);
 			$region = $_SESSION['id_region'];
 			$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
 			$this->_addJavascript($jscode);
@@ -983,7 +983,7 @@ class Paciente extends Controller {
 			$apellidos		= $parametros['apellidos'];
 			$cod_fonasa		= $parametros['cod_fonasa'];
 			$centro_salud	= $parametros['centro_salud'];
-			if ($arrUsuario->id_perfil != 1 && $arrUsuario->id_perfil != 5){
+			if ($_SESSION['perfil'] != 1 && $_SESSION['perfil'] != 5){
 				$region					= $_SESSION['id_region'];
 				$parametros['region']	= $_SESSION['id_region'];
 			} else {
@@ -1020,6 +1020,7 @@ class Paciente extends Controller {
 		$this->smarty->assign('mostrar',$mostrar);
 		$this->_display('Paciente/buscar.tpl');
 		$this->load->javascript(STATIC_FILES . "js/regiones.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/paciente/buscar.js");
 	}
 	
 }
