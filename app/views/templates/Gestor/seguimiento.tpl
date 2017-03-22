@@ -112,7 +112,7 @@
 						<i class="fa fa-save"></i>  Guardar
 					</button>&nbsp;
 					<button type="button" id="cancelar"  class="btn btn-default" 
-							onclick="location.href = '{$base_url}/Gestor/nacional'">
+							onclick="location.href = history.back()">
 						<i class="fa fa-remove"></i>  Cancelar
 					</button>
 				</div>

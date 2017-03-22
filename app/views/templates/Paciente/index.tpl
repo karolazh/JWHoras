@@ -36,7 +36,7 @@
                                 </thead>
                                 <tbody>
                                         {foreach $arrResultado as $item}
-                                                {if $item->nr_examen_alterado > 0 or $item->gl_examen_alterado_externo > 0}
+                                                {if $item->nr_examen_alterado > 0 or $item->gl_examen_alterado_externo > 0 or ($item->bo_reconoce == 1 and $mostrar_gestor == 1)}
                                                 <tr>
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-center" nowrap> {$item->gl_identificacion} </td>
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-center"> {$item->fc_crea} </td>
@@ -107,7 +107,7 @@
                                                                         data-toggle="tooltip" 
                                                                         data-title="Diagnóstico" 
                                                                         class="btn btn-xs btn-default">
-                                                                        <i class="fa fa-user-md"></i>
+                                                                        <i class="fa fa-file-text"></i>
                                                                 </button>
                                                                 {/if}
 																{if $mostrar_gestor == 1}
