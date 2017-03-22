@@ -1,6 +1,6 @@
 {if $smarty.session.id_usuario_original != 0}
 	<li>
-		<a id="btnVolverUsuario"><i class="fa fa-undo"></i> <span>Volver a mi Usuario</span></a>
+		<a href="#" id="btnVolverUsuario"><i class="fa fa-undo"></i> <span>Volver a mi Usuario</span></a>
 	</li>
 {/if}
 {foreach $opciones as $opcion}  
