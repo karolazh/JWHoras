@@ -120,7 +120,7 @@ class Especialista extends Controller {
             $json = array();
             $i = 0;
             foreach($seccion1 as $seccion){
-                    $json[$i]['id_indice'] = $seccion->id_indice;
+                    $json[$i]['id_seccion'] = $seccion->id_seccion;
                     $json[$i]['gl_codigo'] = $seccion->gl_codigo;
                     $json[$i]['gl_descripcion'] = $seccion->gl_descripcion;
                     $i++;

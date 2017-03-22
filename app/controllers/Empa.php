@@ -96,6 +96,106 @@ class Empa extends Controller{
 		$this->smarty->assign("gl_comuna", $gl_comuna->gl_nombre_comuna);
 		$this->smarty->assign("gl_institucion", $gl_institucion->gl_nombre_establecimiento);
 		
+		//Cargar Datos Examen Paciente
+		$hipertension = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,9);
+		if ($hipertension){
+			$this->smarty->assign("examen_hipertension", '1');
+			$this->smarty->assign("agenda_hipertension", '0');
+			$this->smarty->assign("id_paciente_examen_hipertension", $hipertension->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_hipertension", '1');
+			$this->smarty->assign("examen_hipertension", '0');
+		}
+		
+		$glicemia = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,1);
+		if ($glicemia){
+			$this->smarty->assign("examen_glicemia", '1');
+			$this->smarty->assign("agenda_glicemia", '0');
+			$this->smarty->assign("id_paciente_examen_glicemia", $glicemia->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_glicemia", '1');
+			$this->smarty->assign("examen_glicemia", '0');
+		}
+		
+		$vdrl = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,2);
+		if ($vdrl){
+			$this->smarty->assign("examen_vdrl", '1');
+			$this->smarty->assign("agenda_vdrl", '0');
+			$this->smarty->assign("id_paciente_examen_vdrl", $vdrl->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_vdrl", '1');
+			$this->smarty->assign("examen_vdrl", '0');
+		}
+		
+		$rpr = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,3);
+		if ($rpr){
+			$this->smarty->assign("examen_rpr", '1');
+			$this->smarty->assign("agenda_rpr", '0');
+			$this->smarty->assign("id_paciente_examen_rpr", $rpr->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_rpr", '1');
+			$this->smarty->assign("examen_rpr", '0');
+		}
+		
+		$vih = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,4);
+		if ($vih){
+			$this->smarty->assign("examen_vih", '1');
+			$this->smarty->assign("agenda_vih", '0');
+			$this->smarty->assign("id_paciente_examen_vih", $vih->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_vih", '1');
+			$this->smarty->assign("examen_vih", '0');
+		}
+		
+		$baciloscopia = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,5);
+		if ($baciloscopia){
+			$this->smarty->assign("examen_baciloscopia", '1');
+			$this->smarty->assign("agenda_baciloscopia", '0');
+			$this->smarty->assign("id_paciente_examen_baciloscopia", $baciloscopia->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_baciloscopia", '1');
+			$this->smarty->assign("examen_baciloscopia", '0');
+		}
+		
+		$pap = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,6);
+		if ($pap){
+			$this->smarty->assign("examen_pap", '1');
+			$this->smarty->assign("agenda_pap", '0');
+			$this->smarty->assign("id_paciente_examen_pap", $pap->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_pap", '1');
+			$this->smarty->assign("examen_pap", '0');
+		}
+		
+		$colesterol = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,7);
+		if ($colesterol){
+			$this->smarty->assign("examen_colesterol", '1');
+			$this->smarty->assign("agenda_colesterol", '0');
+			$this->smarty->assign("id_paciente_examen_colesterol", $colesterol->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_colesterol", '1');
+			$this->smarty->assign("examen_colesterol", '0');
+		}
+		
+		$mamografia = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,8);
+		if ($mamografia){
+			$this->smarty->assign("examen_mamografia", '1');
+			$this->smarty->assign("agenda_mamografia", '0');
+			$this->smarty->assign("id_paciente_examen_mamografia", $mamografia->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_mamografia", '1');
+			$this->smarty->assign("examen_mamografia", '0');
+		}
+		
 		//Cargar Datos Paciente
 		$registro = $this->_DAOPaciente->getById($id_paciente);
 		$direccion = $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);

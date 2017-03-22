@@ -234,6 +234,7 @@ class Agenda extends Controller {
         $id_examen = $_POST['id_examen'];
         
         $fecha_agenda = $_POST['fecha_agenda'];
+		$fecha_agenda = str_replace("'","",Fechas::formatearBaseDatos($fecha_agenda));
         if ($_POST['hora_agenda'] != "") {
             $hora_agenda = $_POST['hora_agenda'];
         } else {
@@ -248,7 +249,7 @@ class Agenda extends Controller {
                             'fc_toma' => $fecha_agenda,
                             'gl_hora_toma' => $hora_agenda,
                             'gl_observacion_toma' => $observacion,
-                            'fc_crea' => date('Y-m-d h:m:s'),
+                            'fc_crea' => date('Y-m-d H:m:s'),
                             'id_usuario_crea' => $_SESSION['id'],
                         );
 

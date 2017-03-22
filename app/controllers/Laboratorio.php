@@ -271,6 +271,7 @@ class Laboratorio extends Controller {
             $gl_folio = NULL;
         }
         $fc_resultado = $_POST['fc_resultado'];
+		$fc_resultado = str_replace("'","",Fechas::formatearBaseDatos($fc_resultado));
         $gl_resultado = $_POST['gl_resultado'];
         $gl_resultado_descripcion = $_POST['gl_resultado_descripcion'];
         $gl_resultado_indicacion = $_POST['gl_resultado_indicacion'];
@@ -284,7 +285,7 @@ class Laboratorio extends Controller {
                                                             'gl_resultado' => $gl_resultado,
                                                             'gl_resultado_descripcion' => $gl_resultado_descripcion,
                                                             'gl_resultado_indicacion' => $gl_resultado_indicacion,
-                                                            'fc_actualiza' => date('Y-m-d h:m:s'),
+                                                            'fc_actualiza' => date('Y-m-d H:m:s'),
                                                             'id_usuario_act' => $_SESSION['id']
                                                             ), 
                                                             $id_paciente_examen, 'id_paciente_examen');
