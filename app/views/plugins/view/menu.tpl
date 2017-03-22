@@ -1,6 +1,6 @@
 {if $smarty.session.id_usuario_original != 0}
 	<li>
-		<a href="{$base_url}/mantenedor/volver_usuario/"><i class="fa fa-undo"></i> <span>Volver a mi Usuario</span></a>
+		<a id="btnVolverUsuario"><i class="fa fa-undo"></i> <span>Volver a mi Usuario</span></a>
 	</li>
 {/if}
 {foreach $opciones as $opcion}  

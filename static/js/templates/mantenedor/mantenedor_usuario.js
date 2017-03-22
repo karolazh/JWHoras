@@ -50,7 +50,7 @@ var Mantenedor_usuario = {
 				},
 				success		: function(data){
 								if(data.correcto){
-									xModal.success('Se proceder· con el Cambio de Usuario');
+									xModal.success('Se proceder√° con el Cambio de Usuario');
 									setTimeout(function () {
 										location.href = BASE_URI;
 									}, 2000);
@@ -64,37 +64,6 @@ var Mantenedor_usuario = {
         });
 
 	});
-
-	/*
-	$(".btnCambioUsuarioVolver").livequery(function(){
-		$(this).unbind( "click" );
-        $(this).click(function(e){
-			var userID = $(this).attr("data");
-			bootbox.confirm({
-				message: "ø Confirma desactivar el reemplazo de usuario ?",
-				buttons: {
-					confirm: {
-						label: 'Si',
-						className: 'btn-success'
-					},
-					cancel: {
-						label: 'No',
-						className: 'btn-default'
-					}
-				},
-				callback: function (result) {
-						if(result){
-							$.get(siteUrl + "session/impersonar/userID/" + userID)
-								.done(function(data) {
-									window.location.href = siteUrl; //"/Home/dashboard";
-								}).fail(function(data) {
-								});
-						}
-				}
-			});
-        });
-    });
-	*/
 
 	$(".select2").select2({
 							language: "es",
