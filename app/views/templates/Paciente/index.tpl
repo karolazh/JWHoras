@@ -21,8 +21,8 @@
                         <table id="tablaPrincipal" class="table table-hover table-striped table-bordered dataTable no-footer">
                                 <thead>
                                         <tr role="row">
-                                                <th class="text-center" width="5%">RUT / Pasaporte</th>
-                                                <th class="text-center" width="5%">Fecha Registro</th>
+                                                <th class="text-center" width="3%">RUT / Pasaporte</th>
+                                                <th class="text-center" width="3%">Fecha Registro</th>
                                                 <th class="text-center" width="25%">Nombre</th>
                                                 <th class="text-center" width="10%">Comuna</th>
                                                 <th class="text-center" width="25%">Centro Salud</th>
@@ -31,7 +31,7 @@
                                                 <th class="text-center" width="5%">Participa</th>
                                                 <th class="text-center" width="5%">Exámen PAP o Mamografía Alterado</th>
                                                 <th class="text-center" width="1px">Dias primera visita?</th>
-                                                <th class="text-center">Acciones</th>
+                                                <th class="text-center">Opciones</th>
                                         </tr>
                                 </thead>
                                 <tbody>
