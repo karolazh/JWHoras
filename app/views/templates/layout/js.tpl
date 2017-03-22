@@ -21,7 +21,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.html5.min.js"></script>*}
 	
-    <script type="text/javascript" src="{$static}js/plugins/select2.full.min.js"></script>
     <script type="text/javascript" src="{$static}js/plugins/jquery.mask.js"></script>
 	<script type="text/javascript" src="{$static}js/plugins/jquery.colorbox.js"></script>
     <script type="text/javascript" src="{$static}js/plugins/xmodal.js"></script>

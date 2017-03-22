@@ -88,6 +88,75 @@ class Mantenedor extends Controller{
 		echo $this->view->fetch('mantenedor_usuario/grilla.tpl');
 	}
 
+	public function cambiarUsuario(){
+		Acceso::redireccionUnlogged($this->smarty);
+		$where		= array('bo_activo' => 1);
+		
+		if($_SESSION['id_usuario_original'] == 0){
+			$this->smarty->assign('id_usuario',$_SESSION['id']);
+		}else{
+			$this->smarty->assign('id_usuario',$_SESSION['id_usuario_original']);
+		}
+
+		$this->smarty->assign('arr_data',$this->_DAOUsuario->getListaJoinPerfil($where));
+		$this->smarty->display('mantenedor_usuario/cambiar_usuario.tpl');
+		$this->load->javascript(STATIC_FILES.'js/templates/mantenedor/mantenedor_usuario.js');
+	}
+	
+	
+	public function procesarCambio(){
+		Acceso::redireccionUnlogged($this->smarty);
+
+		$correcto			= false;
+		$mensaje			= '';
+		$parametros			= $this->_request->getParams();
+		$id_usuario			= $parametros['id_usuario'];
+		$id_usuario_cambio	= $parametros['id_usuario_cambio'];
+
+		//revisar que id_usuario sea ADMIN
+		
+		$usuario			= $this->_DAOUsuario->getLoginByID($id_usuario_cambio);
+		if(true){
+			$correcto		= true;
+			// Evento
+				$session						= New Zend_Session_Namespace("usuario_carpeta");
+				$session->id					= $usuario->id_usuario;
+				$session->nombre				= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+				$session->mail					= $usuario->gl_email;
+				$session->rut					= $usuario->gl_rut;
+				$session->fono					= $usuario->gl_fono;
+				$session->celular				= $usuario->gl_celular;
+				$session->id_usuario_original	= $id_usuario;
+
+				$_SESSION['id']					= $usuario->id_usuario;
+				$_SESSION['id_usuario_original']= $id_usuario;
+				$_SESSION['perfil']				= $usuario->id_perfil;
+				$_SESSION['id_tipo_grupo']		= $usuario->id_tipo_grupo;
+				$_SESSION['id_institucion']		= $usuario->id_institucion;
+				$_SESSION['id_laboratorio']		= $usuario->id_laboratorio;
+				$_SESSION['nombre']				= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+				$_SESSION['rut']				= $usuario->gl_rut;
+				$_SESSION['mail']				= $usuario->gl_email;
+				$_SESSION['fono']				= $usuario->gl_fono;
+				$_SESSION['celular']			= $usuario->gl_celular;
+				$_SESSION['comuna']				= $usuario->gl_nombre_comuna;
+				$_SESSION['provincia']			= $usuario->gl_nombre_provincia;
+				$_SESSION['region']				= $usuario->gl_nombre_region;
+				$_SESSION['id_region']			= $usuario->id_region;
+				$_SESSION['id_comuna']			= $usuario->id_comuna;
+				$_SESSION['id_provincia']		= $usuario->id_provincia;
+				$_SESSION['id_region']			= $usuario->id_region;
+				$_SESSION['primer_login']		= FALSE;
+				$_SESSION['autenticado']		= TRUE;
+		}else{
+			$mensaje	= 'Hubo un problema.</b><br>Favor intentar nuevamente o contactarse con Soporte.';
+		}
+
+		$salida	= array("correcto" => $correcto, "mensaje" => $mensaje);
+        $json	= Zend_Json::encode($salida);
+        echo $json;
+	}
+
 	/********************************************** PERFIL **********************************************/
 	public function perfil(){
 

@@ -5,36 +5,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Minsal :: Prevenci&oacute;n de Femicidios</title>
-    <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="{$static}template/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{$static}/css/plugins/font-awesome/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{$static}template/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="{$static}template/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{$static}css/plugins/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+    <link rel="stylesheet" href="{$static}template/dist/css/AdminLTE.min.css" />
 	
-    <link rel="stylesheet" href="{$static}js/plugins/qtip/jquery.qtip.min.css">
+    <link rel="stylesheet" href="{$static}js/plugins/qtip/jquery.qtip.min.css" />
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
       -->
-    <link rel="stylesheet" href="{$static}template/dist/css/skins/skin-blue.min.css">
-
-    <link rel="stylesheet" href="{$static}css/style.css" type="text/css" />
-<link href="{$static}/template/plugins/datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css"/>
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-    <link rel="icon" type="image/png" href="{$static}/images/logo_minsal_32.png" />
+	<link rel="stylesheet" href="{$static}template/dist/css/skins/skin-blue.min.css" />
+	<link rel="stylesheet" href="{$static}css/style.css" type="text/css" />
+	<link href="{$static}template/plugins/datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+	<link rel="icon" type="image/png" href="{$static}images/logo_minsal_32.png" />
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
@@ -46,11 +32,11 @@
         <!-- Logo -->
         <a href="javascript:void(0);" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><img src="{$static}/images/logo_minsal_32.png"></span>
+            <span class="logo-mini"><img src="{$static}images/logo_minsal_32.png"></span>
             <!-- logo for regular state and mobile devices -->
             <span class="logo-lg" style="">
                 <!-- <img src="{$static}/images/cosof.png" width="50" height="50"><b>T</b>ickets -->
-                <img src="{$static}/images/logo_minsal_32.png">&nbsp;<b>Prevenci&oacute;n</b>
+                <img src="{$static}images/logo_minsal_32.png">&nbsp;<b>Prevenci&oacute;n</b>
             </span>
         </a>
 

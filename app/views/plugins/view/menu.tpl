@@ -1,4 +1,4 @@
-{if $smarty.session.id_user_cambio != 0}
+{if $smarty.session.id_usuario_original != 0}
 	<li>
 		<a href="{$base_url}/mantenedor/volver_usuario/"><i class="fa fa-undo"></i> <span>Volver a mi Usuario</span></a>
 	</li>
