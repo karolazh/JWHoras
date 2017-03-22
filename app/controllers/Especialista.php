@@ -42,7 +42,7 @@ class Especialista extends Controller {
 		$this->_DAOTipoEspecialidad			= $this->load->model("DAOTipoEspecialidad");
 		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
 		$this->_DAOCie10Capitulo			= $this->load->model("DAOCie10Capitulo");
-		$this->_DAOCie10Seccion			= $this->load->model("DAOCie10Seccion");
+		$this->_DAOCie10Seccion				= $this->load->model("DAOCie10Seccion");
 	}
 
 	/**
