@@ -55,9 +55,9 @@ class Especialista extends Controller {
 		$id_region 		= $_SESSION['id_region'];
 		
 		if($id_perfil == 1 || $id_perfil == 5){
-			$where	= array('esp.id_especialista'=>$_SESSION['id']);
+			$where	= array('esp.id_tipo_especialidad'=>$_SESSION['id']);
 		}else{
-			$where	= array('esp.id_especialista'=>$_SESSION['id'],'paciente.id_region'=>$id_region);
+			$where	= array('esp.id_tipo_especialidad'=>$_SESSION['id_tipo_especialidad'],'paciente.id_region'=>$id_region);
 		}
 
 		$join[]	= array('tabla'=>'pre_paciente_agenda_especialista esp',

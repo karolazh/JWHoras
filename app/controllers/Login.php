@@ -111,25 +111,26 @@ class Login extends Controller {
 					$upd						= $this->_DAOUsuario->setUltimoLogin($datos);
 				}
 
-				$_SESSION['id']					= $usuario->id_usuario;
-				$_SESSION['id_usuario_original']= 0;
-				$_SESSION['perfil']				= $usuario->id_perfil;
-				$_SESSION['id_tipo_grupo']		= $usuario->id_tipo_grupo;
-				$_SESSION['id_institucion']		= $usuario->id_institucion;
-				$_SESSION['id_laboratorio']		= $usuario->id_laboratorio;
-				$_SESSION['nombre']				= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-				$_SESSION['rut']				= $usuario->gl_rut;
-				$_SESSION['mail']				= $usuario->gl_email;
-				$_SESSION['fono']				= $usuario->gl_fono;
-				$_SESSION['celular']			= $usuario->gl_celular;
-				$_SESSION['comuna']				= $usuario->gl_nombre_comuna;
-				$_SESSION['provincia']			= $usuario->gl_nombre_provincia;
-				$_SESSION['region']				= $usuario->gl_nombre_region;
-				$_SESSION['id_comuna']			= $usuario->id_comuna;
-				$_SESSION['id_provincia']		= $usuario->id_provincia;
-				$_SESSION['id_region']			= $usuario->id_region;
-				$_SESSION['primer_login']		= $primer_login;
-				$_SESSION['autenticado']		= TRUE;
+				$_SESSION['id']						= $usuario->id_usuario;
+				$_SESSION['id_usuario_original']	= 0;
+				$_SESSION['perfil']					= $usuario->id_perfil;
+				$_SESSION['id_tipo_grupo']			= $usuario->id_tipo_grupo;
+				$_SESSION['id_institucion']			= $usuario->id_institucion;
+				$_SESSION['id_laboratorio']			= $usuario->id_laboratorio;
+				$_SESSION['nombre']					= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+				$_SESSION['rut']					= $usuario->gl_rut;
+				$_SESSION['mail']					= $usuario->gl_email;
+				$_SESSION['fono']					= $usuario->gl_fono;
+				$_SESSION['celular']				= $usuario->gl_celular;
+				$_SESSION['comuna']					= $usuario->gl_nombre_comuna;
+				$_SESSION['provincia']				= $usuario->gl_nombre_provincia;
+				$_SESSION['region']					= $usuario->gl_nombre_region;
+				$_SESSION['id_comuna']				= $usuario->id_comuna;
+				$_SESSION['id_provincia']			= $usuario->id_provincia;
+				$_SESSION['id_region']				= $usuario->id_region;
+				$_SESSION['id_tipo_especialidad']	= $usuario->id_tipo_especialidad;
+				$_SESSION['primer_login']			= $primer_login;
+				$_SESSION['autenticado']			= TRUE;
 
 				if ($recordar == 1) {
 					setcookie('datos_usuario_carpeta', $usuario->id_usuario, time() + 365 * 24 * 60 * 60);
@@ -225,25 +226,26 @@ class Login extends Controller {
 						$upd						= $this->_DAOUsuario->setUltimoLogin($datos);
 					}
 
-					$_SESSION['id']					= $usuario->id_usuario;
-					$_SESSION['id_usuario_original']= 0;
-					$_SESSION['perfil']				= $usuario->id_perfil;
-					$_SESSION['id_tipo_grupo']		= $usuario->id_tipo_grupo;
-					$_SESSION['id_institucion']		= $usuario->id_institucion;
-					$_SESSION['id_laboratorio']		= $usuario->id_laboratorio;
-					$_SESSION['nombre']				= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-					$_SESSION['rut']				= $usuario->gl_rut;
-					$_SESSION['mail']				= $usuario->gl_email;
-					$_SESSION['fono']				= $usuario->gl_fono;
-					$_SESSION['celular']			= $usuario->gl_celular;
-					$_SESSION['comuna']				= $usuario->gl_nombre_comuna;
-					$_SESSION['provincia']			= $usuario->gl_nombre_provincia;
-					$_SESSION['region']				= $usuario->gl_nombre_region;
-					$_SESSION['id_comuna']			= $usuario->id_comuna;
-					$_SESSION['id_provincia']		= $usuario->id_provincia;
-					$_SESSION['id_region']			= $usuario->id_region;
-					$_SESSION['primer_login']		= $primer_login;
-					$_SESSION['autenticado']		= TRUE;
+					$_SESSION['id']						= $usuario->id_usuario;
+					$_SESSION['id_usuario_original']	= 0;
+					$_SESSION['perfil']					= $usuario->id_perfil;
+					$_SESSION['id_tipo_grupo']			= $usuario->id_tipo_grupo;
+					$_SESSION['id_institucion']			= $usuario->id_institucion;
+					$_SESSION['id_laboratorio']			= $usuario->id_laboratorio;
+					$_SESSION['nombre']					= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+					$_SESSION['rut']					= $usuario->gl_rut;
+					$_SESSION['mail']					= $usuario->gl_email;
+					$_SESSION['fono']					= $usuario->gl_fono;
+					$_SESSION['celular']				= $usuario->gl_celular;
+					$_SESSION['comuna']					= $usuario->gl_nombre_comuna;
+					$_SESSION['provincia']				= $usuario->gl_nombre_provincia;
+					$_SESSION['region']					= $usuario->gl_nombre_region;
+					$_SESSION['id_comuna']				= $usuario->id_comuna;
+					$_SESSION['id_provincia']			= $usuario->id_provincia;
+					$_SESSION['id_region']				= $usuario->id_region;
+					$_SESSION['id_tipo_especialidad']	= $usuario->id_tipo_especialidad;
+					$_SESSION['primer_login']			= $primer_login;
+					$_SESSION['autenticado']			= TRUE;
 
 					if ($recordar == 1) {
 						setcookie('datos_usuario_carpeta', $usuario->id_usuario, time() + 365 * 24 * 60 * 60);

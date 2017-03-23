@@ -87,11 +87,13 @@ class DAOUsuario extends Model {
 						r.gl_nombre_region,
 						p.gl_nombre_provincia,
 						c.id_provincia,
-						c.gl_nombre_comuna
+						c.gl_nombre_comuna,
+						esp.id_tipo_especialidad
 					FROM pre_usuario u 
 						LEFT JOIN pre_region r ON u.id_region = r.id_region
 						LEFT JOIN pre_comuna c ON u.id_comuna = c.id_comuna
 						LEFT JOIN pre_provincia p ON c.id_provincia = p.id_provincia
+						LEFT JOIN pre_usuario_especialidad esp ON esp.id_usuario = u.id_usuario
 					WHERE u.gl_rut = ? 
 						AND u.gl_password = ?";
 
@@ -122,11 +124,13 @@ class DAOUsuario extends Model {
                         r.gl_nombre_region,
                         p.gl_nombre_provincia,
                         c.id_provincia,
-                        c.gl_nombre_comuna
+                        c.gl_nombre_comuna,
+						esp.id_tipo_especialidad
 					FROM pre_usuario u 
                         LEFT JOIN pre_region r ON u.id_region = r.id_region
                         LEFT JOIN pre_comuna c ON u.id_comuna = c.id_comuna
                         LEFT JOIN pre_provincia p ON c.id_provincia = p.id_provincia
+						LEFT JOIN pre_usuario_especialidad esp ON esp.id_usuario = u.id_usuario
 					WHERE u.gl_rut = ? ";
 
         $param	= array($gl_rut);
@@ -146,11 +150,13 @@ class DAOUsuario extends Model {
                         r.gl_nombre_region,
                         p.gl_nombre_provincia,
                         c.id_provincia,
-                        c.gl_nombre_comuna
+                        c.gl_nombre_comuna,
+						esp.id_tipo_especialidad
 					FROM pre_usuario u 
                         LEFT JOIN pre_region r ON u.id_region = r.id_region
                         LEFT JOIN pre_comuna c ON u.id_comuna = c.id_comuna
                         LEFT JOIN pre_provincia p ON c.id_provincia = p.id_provincia
+						LEFT JOIN pre_usuario_especialidad esp ON esp.id_usuario = u.id_usuario
 					WHERE u.id_usuario = ? ";
 
         $param	= array($id_usuario);

@@ -109,7 +109,7 @@ class Mantenedor extends Controller{
 		$correcto			= false;
 		$mensaje			= '';
 		$parametros			= $this->_request->getParams();
-		$id_usuario			= $parametros['id_usuario'];
+		$id_usuario			= $parametros['id_usuario']; // revisar el paso de variable cuando existe GET
 		$id_usuario_cambio	= $parametros['id_usuario_cambio'];
 
 		//revisar que id_usuario sea ADMIN
@@ -118,35 +118,36 @@ class Mantenedor extends Controller{
 		if($usuario){
 			$correcto		= true;
 			// Evento
-				$session						= New Zend_Session_Namespace("usuario_carpeta");
-				$session->id					= $usuario->id_usuario;
-				$session->nombre				= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-				$session->mail					= $usuario->gl_email;
-				$session->rut					= $usuario->gl_rut;
-				$session->fono					= $usuario->gl_fono;
-				$session->celular				= $usuario->gl_celular;
-				$session->id_usuario_original	= $id_usuario;
+				$session							= New Zend_Session_Namespace("usuario_carpeta");
+				$session->id						= $usuario->id_usuario;
+				$session->nombre					= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+				$session->mail						= $usuario->gl_email;
+				$session->rut						= $usuario->gl_rut;
+				$session->fono						= $usuario->gl_fono;
+				$session->celular					= $usuario->gl_celular;
+				$session->id_usuario_original		= $id_usuario;
 
-				$_SESSION['id']					= $usuario->id_usuario;
-				$_SESSION['id_usuario_original']= $id_usuario;
-				$_SESSION['perfil']				= $usuario->id_perfil;
-				$_SESSION['id_tipo_grupo']		= $usuario->id_tipo_grupo;
-				$_SESSION['id_institucion']		= $usuario->id_institucion;
-				$_SESSION['id_laboratorio']		= $usuario->id_laboratorio;
-				$_SESSION['nombre']				= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-				$_SESSION['rut']				= $usuario->gl_rut;
-				$_SESSION['mail']				= $usuario->gl_email;
-				$_SESSION['fono']				= $usuario->gl_fono;
-				$_SESSION['celular']			= $usuario->gl_celular;
-				$_SESSION['comuna']				= $usuario->gl_nombre_comuna;
-				$_SESSION['provincia']			= $usuario->gl_nombre_provincia;
-				$_SESSION['region']				= $usuario->gl_nombre_region;
-				$_SESSION['id_region']			= $usuario->id_region;
-				$_SESSION['id_comuna']			= $usuario->id_comuna;
-				$_SESSION['id_provincia']		= $usuario->id_provincia;
-				$_SESSION['id_region']			= $usuario->id_region;
-				$_SESSION['primer_login']		= FALSE;
-				$_SESSION['autenticado']		= TRUE;
+				$_SESSION['id']						= $usuario->id_usuario;
+				$_SESSION['id_usuario_original']	= $id_usuario;
+				$_SESSION['perfil']					= $usuario->id_perfil;
+				$_SESSION['id_tipo_grupo']			= $usuario->id_tipo_grupo;
+				$_SESSION['id_institucion']			= $usuario->id_institucion;
+				$_SESSION['id_laboratorio']			= $usuario->id_laboratorio;
+				$_SESSION['nombre']					= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+				$_SESSION['rut']					= $usuario->gl_rut;
+				$_SESSION['mail']					= $usuario->gl_email;
+				$_SESSION['fono']					= $usuario->gl_fono;
+				$_SESSION['celular']				= $usuario->gl_celular;
+				$_SESSION['comuna']					= $usuario->gl_nombre_comuna;
+				$_SESSION['provincia']				= $usuario->gl_nombre_provincia;
+				$_SESSION['region']					= $usuario->gl_nombre_region;
+				$_SESSION['id_region']				= $usuario->id_region;
+				$_SESSION['id_comuna']				= $usuario->id_comuna;
+				$_SESSION['id_provincia']			= $usuario->id_provincia;
+				$_SESSION['id_region']				= $usuario->id_region;
+				$_SESSION['id_tipo_especialidad']	= $usuario->id_tipo_especialidad;
+				$_SESSION['primer_login']			= FALSE;
+				$_SESSION['autenticado']			= TRUE;
 		}else{
 			$mensaje	= 'Hubo un problema.</b><br>Favor intentar nuevamente o contactarse con Soporte.';
 		}
@@ -177,26 +178,27 @@ class Mantenedor extends Controller{
 				$session->celular				= $usuario->gl_celular;
 				$session->id_usuario_original	= 0;
 
-				$_SESSION['id']					= $usuario->id_usuario;
-				$_SESSION['id_usuario_original']= 0;
-				$_SESSION['perfil']				= $usuario->id_perfil;
-				$_SESSION['id_tipo_grupo']		= $usuario->id_tipo_grupo;
-				$_SESSION['id_institucion']		= $usuario->id_institucion;
-				$_SESSION['id_laboratorio']		= $usuario->id_laboratorio;
-				$_SESSION['nombre']				= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
-				$_SESSION['rut']				= $usuario->gl_rut;
-				$_SESSION['mail']				= $usuario->gl_email;
-				$_SESSION['fono']				= $usuario->gl_fono;
-				$_SESSION['celular']			= $usuario->gl_celular;
-				$_SESSION['comuna']				= $usuario->gl_nombre_comuna;
-				$_SESSION['provincia']			= $usuario->gl_nombre_provincia;
-				$_SESSION['region']				= $usuario->gl_nombre_region;
-				$_SESSION['id_region']			= $usuario->id_region;
-				$_SESSION['id_comuna']			= $usuario->id_comuna;
-				$_SESSION['id_provincia']		= $usuario->id_provincia;
-				$_SESSION['id_region']			= $usuario->id_region;
-				$_SESSION['primer_login']		= FALSE;
-				$_SESSION['autenticado']		= TRUE;
+				$_SESSION['id']						= $usuario->id_usuario;
+				$_SESSION['id_usuario_original']	= 0;
+				$_SESSION['perfil']					= $usuario->id_perfil;
+				$_SESSION['id_tipo_grupo']			= $usuario->id_tipo_grupo;
+				$_SESSION['id_institucion']			= $usuario->id_institucion;
+				$_SESSION['id_laboratorio']			= $usuario->id_laboratorio;
+				$_SESSION['nombre']					= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
+				$_SESSION['rut']					= $usuario->gl_rut;
+				$_SESSION['mail']					= $usuario->gl_email;
+				$_SESSION['fono']					= $usuario->gl_fono;
+				$_SESSION['celular']				= $usuario->gl_celular;
+				$_SESSION['comuna']					= $usuario->gl_nombre_comuna;
+				$_SESSION['provincia']				= $usuario->gl_nombre_provincia;
+				$_SESSION['region']					= $usuario->gl_nombre_region;
+				$_SESSION['id_region']				= $usuario->id_region;
+				$_SESSION['id_comuna']				= $usuario->id_comuna;
+				$_SESSION['id_provincia']			= $usuario->id_provincia;
+				$_SESSION['id_region']				= $usuario->id_region;
+				$_SESSION['id_tipo_especialidad']	= $usuario->id_tipo_especialidad;
+				$_SESSION['primer_login']			= FALSE;
+				$_SESSION['autenticado']			= TRUE;
 		}else{
 			$mensaje	= 'Hubo un problema.</b><br>Favor intentar nuevamente o contactarse con Soporte.';
 		}
