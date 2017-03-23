@@ -171,7 +171,7 @@
 					$muestra_examenes = "SI";
 				}
 				$this->smarty->assign("muestra_examenes", $muestra_examenes);
-				$this->smarty->assign("bo_reconoce", $detPaciente->bo_reconoce);
+				//$this->smarty->assign("bo_reconoce", $detPaciente->bo_reconoce);
 
 				//Datos del Agresor
 				if ($detPaciente->bo_reconoce == 1) {
