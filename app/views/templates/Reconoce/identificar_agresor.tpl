@@ -444,7 +444,7 @@
 							<i class="fa fa-save"></i>  Guardar
 						</button>&nbsp;
 						<button type="button" id="cancelar"  class="btn btn-default" 
-								onclick="location.href = '{$base_url}/Paciente/index'">
+								onclick="history.back(-1)">
 							<i class="fa fa-remove"></i>  Cancelar
 						</button>
 						<br/><br/>
