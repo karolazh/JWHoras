@@ -545,15 +545,22 @@ class Paciente extends Controller {
 		$json = array();
 
 		if (!empty($_POST['comuna'])) {
-			$comuna = $_POST['comuna'];
-			$daoCentroSalud = $this->load->model('DAOCentroSalud');
-			$centrosalud = $daoCentroSalud->getByIdComuna($comuna);
+			$comuna			= $_POST['comuna'];
+			$id_region		= $_SESSION['id_region'];
+			$daoCentroSalud	= $this->load->model('DAOCentroSalud');
+			$centrosalud	= $daoCentroSalud->getByIdComuna($comuna);
 
-			$i = 0;
-			foreach ($centrosalud as $cSalud) {
-				$json[$i]['id_centro_salud'] = $cSalud->id_centro_salud;
-				$json[$i]['gl_nombre_establecimiento'] = $cSalud->gl_nombre_establecimiento;
-				$i++;
+			if(empty($centrosalud)){
+				$centrosalud	= $daoCentroSalud->getByIdRegion($id_region);
+			}
+
+			if(!empty($centrosalud)){
+				$i = 0;
+				foreach ($centrosalud as $cSalud) {
+					$json[$i]['id_centro_salud']			= $cSalud->id_centro_salud;
+					$json[$i]['gl_nombre_establecimiento']	= $cSalud->gl_nombre_establecimiento;
+					$i++;
+				}
 			}
 		}
 		echo json_encode($json);
