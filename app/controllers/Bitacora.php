@@ -131,6 +131,7 @@
 				//$this->smarty->assign("region", $detPaciente->gl_nombre_region);
 				$this->smarty->assign("fc_crea", $detPaciente->fc_crea);
 
+				/*
 				$reconoce = "NO";
 				if (!is_null($detPaciente->bo_reconoce)) {
 					if ($detPaciente->bo_reconoce) {
@@ -145,6 +146,7 @@
 				}
 				$this->smarty->assign("bo_reconoce", $reconoce);
 				$this->smarty->assign("bo_acepta_programa", $acepta);
+				*/
 
 				//Grilla Direcciones
 				$muestra_direcciones = "NO";
@@ -171,7 +173,8 @@
 					$muestra_examenes = "SI";
 				}
 				$this->smarty->assign("muestra_examenes", $muestra_examenes);
-				//$this->smarty->assign("bo_reconoce", $detPaciente->bo_reconoce);
+				$this->smarty->assign("bo_reconoce", $detPaciente->bo_reconoce);
+				$this->smarty->assign("bo_acepta_programa", $detPaciente->bo_acepta_programa);
 
 				//Datos del Agresor
 				if ($detPaciente->bo_reconoce == 1) {
