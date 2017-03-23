@@ -76,39 +76,43 @@
                     <i class="fa fa-sticky-note"></i> Datos de Examen</h3></div>
             <div class="box-body">
                 <div class="form-group">
-                    <label class="control-label required col-sm-3">Fecha toma de examen</label>
-                    <!-- <div class='col-sm-2'>
+                    <label for="fc_toma" class="control-label col-sm-3">Fecha toma de examen</label>
+                    <div class='col-sm-2'>
                         <div class="input-group">
-                                <input type='text' class="form-control datepicker col-sm-2"
+                                <input type='text' class="form-control datepicker"
                                            id='fc_toma' 
                                            name='fc_toma'
+										   value="{$fc_toma|date_format:"%d/%m/%Y"}"
+										   readonly
                                            />
                                 <span class="help-block hidden fa fa-warning"></span>
-                                <span class="input-group-addon" onClick="$('#fc_toma').focus();"><i class="fa fa-calendar" ></i></span>
+                                <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_toma').focus();"></i></span>
 
                         </div>
-                    </div>-->
-                    <div class="col-sm-2">
+                    </div>
+
+                    <!--<div class="col-sm-2">
                         <input type="date" class="form-control col-sm-2" 
                                name="fc_toma" id="fc_toma" value="{$fc_toma}" readonly />
-                    </div>
-                    <label class="control-label required col-sm-3">Fecha resultado de examen</label>
-                    <!-- <div class='col-sm-2'>
+                    </div>-->
+                    <label for="fc_resultado" class="control-label col-sm-3">Fecha resultado de examen</label>
+                    <div class='col-sm-2'>
                         <div class="input-group">
-                                <input type='text' class="form-control datepicker col-sm-2"
+                                <input type='text' class="form-control datepicker"
                                            id='fc_resultado' 
                                            name='fc_resultado'
+										   value="{$fc_resultado|date_format:"%d/%m/%Y"}"
+										    {if $accion == "1"}readonly{/if}
                                            />
                                 <span class="help-block hidden fa fa-warning"></span>
-                                <span class="input-group-addon" onClick="$('#fc_resultado').focus();"><i class="fa fa-calendar" ></i></span>
-
+                                <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_resultado').focus();"></i></span>
                         </div>
-                    </div> -->
-                    <div class="col-sm-2">
+                    </div>
+                    <!-- <div class="col-sm-2">
                         <input type="date" class="form-control col-sm-2"
                                name="fc_resultado" id="fc_resultado"  value="{$fc_resultado}"
                                {if $accion == "1"}readonly{/if} />
-                    </div>
+                    </div> -->
                 </div>
                 <div class="form-group">
                     <label class="control-label required col-sm-3">Hora toma de examen</label>
