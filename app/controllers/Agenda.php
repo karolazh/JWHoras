@@ -253,7 +253,6 @@ class Agenda extends Controller {
                             'id_usuario_crea' => $_SESSION['id'],
                         );
 
-        $grilla = "";
         $id_agenda = $this->_DAOPacienteExamen->insert($ins_agenda);
         if ($id_agenda) {
             //inserta ids en empa
@@ -276,18 +275,20 @@ class Agenda extends Controller {
                 }
             } else {
                 $correcto = true;
-            }
-            
-            if (isset($_SESSION['id_laboratorio'])) {
-                $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['id_laboratorio']);
-            } else {
-                $arrExamenes = $this->_DAOPacienteExamen->getListaDetalle();
-            }
-            $this->smarty->assign('arrExamenes', $arrExamenes);
-            $grilla = $this->smarty->fetch('laboratorio/grillaExamenesLaboratorio.tpl');
+            }            
         } else {
             $error = true;
         }
+        
+        //Actualiza Grilla Exámenes x Paciente
+        //$grilla = "";
+        if (isset($_SESSION['id_laboratorio'])) {
+            $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['id_laboratorio']);
+        } else {
+            $arrExamenes = $this->_DAOPacienteExamen->getListaDetalle();
+        }
+        $this->smarty->assign('arrExamenes', $arrExamenes);
+        $grilla = $this->smarty->fetch('laboratorio/grillaExamenesLaboratorio.tpl');
 
         $salida = array("error"    => $error,
                         "correcto" => $correcto,

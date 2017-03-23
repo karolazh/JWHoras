@@ -2,6 +2,7 @@
     <input type="text" value="{$id_paciente_examen}" id="id_paciente_examen" name="id_paciente_examen" class="hidden">
     <input type="text" value="{$id_tipo_examen}" id="id_tipo_examen" name="id_tipo_examen" class="hidden">
     <input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
+    <input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden">
     <div class="panel-body">
         <!-- TIPO DE EXAMEN -->
         <div class="box box-success">
@@ -220,7 +221,6 @@
                     <i class="fa fa-save"></i>  Guardar
                 </button>&nbsp;
                 <button type="button" id="cancelar"  class="btn btn-default" 
-                        {*onclick="deshabilitarExamen()"*}
                         onclick="xModal.close()">
                     <i class="fa fa-remove"></i>  Cancelar
                 </button>

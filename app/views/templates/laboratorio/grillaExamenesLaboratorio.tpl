@@ -30,7 +30,7 @@
                     <td style="background: #F7D3D2;" class="text-center" style="width:70px;">
                        <button type="button" 
                            {*onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"*}
-                           onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$exa->id_paciente_examen}/', 'Agenda Examen número : {$exa->id_paciente}', 85);" 
+                           onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$exa->id_paciente_examen}/', 'Agenda Examen registro número : {$exa->id_paciente}', 85);" 
                            class="btn btn-xs btn-info"
                            data-toggle="tooltip" 
                            title="Ver Examen">
@@ -56,7 +56,7 @@
                         {if $exa->gl_resultado == "N"}
                             <button type="button" 
                                 {*onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"*}
-                                onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$exa->id_paciente_examen}/', 'Agenda Examen número : {$exa->id_paciente}', 85);" 
+                                onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$exa->id_paciente_examen}/', 'Agenda Examen registro número : {$exa->id_paciente}', 85);" 
                                 class="btn btn-xs btn-info"
                                 data-toggle="tooltip" 
                                 title="Ver Examen">

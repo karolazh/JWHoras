@@ -74,22 +74,47 @@ class DAOEmpa extends Model{
     }
 
     public function getListaEmpa($id_paciente, $nr_orden=1){
-        $query	=   "SELECT 
+//        $query	=   "SELECT 
+//                        emp.id_empa,
+//                        emp.id_paciente,
+//                        date_format(emp.fc_empa,'%d-%m-%Y') AS fc_empa,
+//                        pac.gl_rut,
+//                        com.gl_nombre_comuna,
+//                        cs.gl_nombre_establecimiento,
+//                        usr.gl_rut,
+//                        concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
+//                    FROM pre_empa emp
+//                    LEFT JOIN pre_paciente pac ON pac.id_paciente = emp.id_paciente
+//                    LEFT JOIN pre_comuna com ON com.id_comuna = emp.id_comuna
+//                    LEFT JOIN pre_centro_salud cs ON cs.id_centro_salud = emp.id_institucion
+//                    LEFT JOIN pre_usuario usr ON usr.id_usuario = emp.id_usuario_crea
+//                    WHERE emp.id_paciente = ?
+//                    AND nr_orden = ?
+//                    ORDER BY emp.fc_empa DESC";
+        
+        $query = "  SELECT 
                         emp.id_empa,
+                        emp.bo_finalizado,
                         emp.id_paciente,
                         date_format(emp.fc_empa,'%d-%m-%Y') AS fc_empa,
+                        date_format(emp.fc_crea,'%d-%m-%Y') AS fc_crea,
                         pac.gl_rut,
-                        com.gl_nombre_comuna,
+                        pac.bo_extranjero,
+                        pac.gl_run_pass,
                         cs.gl_nombre_establecimiento,
+                        -- comuna de institucion donde se registra paciente
+                        cs.id_comuna,
+                        com.gl_nombre_comuna,
                         usr.gl_rut,
-                        concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
+                        concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario                        
                     FROM pre_empa emp
                     LEFT JOIN pre_paciente pac ON pac.id_paciente = emp.id_paciente
-                    LEFT JOIN pre_comuna com ON com.id_comuna = emp.id_comuna
                     LEFT JOIN pre_centro_salud cs ON cs.id_centro_salud = emp.id_institucion
+                    LEFT JOIN pre_comuna com ON com.id_comuna = cs.id_comuna
                     LEFT JOIN pre_usuario usr ON usr.id_usuario = emp.id_usuario_crea
                     WHERE emp.id_paciente = ?
                     AND nr_orden = ?
+                    -- AND bo_finalizado = 0
                     ORDER BY emp.fc_empa DESC";
 
         $param	= array($id_paciente,$nr_orden);
