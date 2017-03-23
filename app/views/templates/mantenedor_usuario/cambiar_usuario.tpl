@@ -15,7 +15,7 @@
 					<label class="control-label">Seleccione un Usuario : </label>
 				</div>
 				<div class="col-lg-6 col-xs-8">
-					<select id="id_usuario_cambio" name="id_usuario_cambio" class="select2" style="width: 450px;">
+					<select id="id_usuario_cambio" name="id_usuario_cambio" class="select22" style="width: 450px;">
 						{foreach $arr_data as $data}
 							<option value="{$data->id_usuario}">{$data->gl_nombres} {$data->gl_apellidos} [{$data->gl_nombre_perfil}]</option>
 						{/foreach}
