@@ -51,8 +51,15 @@ class Especialista extends Controller {
 	*/
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
+		$id_perfil 		= $_SESSION['perfil'];
+		$id_region 		= $_SESSION['id_region'];
 		
-		$where	= array('esp.id_especialista'=>$_SESSION['id']);
+		if($id_perfil == 1 || $id_perfil == 5){
+			$where	= array('esp.id_especialista'=>$_SESSION['id']);
+		}else{
+			$where	= array('esp.id_especialista'=>$_SESSION['id'],'paciente.id_region'=>$id_region);
+		}
+
 		$join[]	= array('tabla'=>'pre_paciente_agenda_especialista esp',
 						'on'=>'esp.id_paciente',
 						'igual'=>'paciente.id_paciente');
