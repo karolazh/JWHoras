@@ -372,7 +372,7 @@
 					<div class="col-xs-12" id="listado-adjuntos" name="listado-adjuntos"></div>
 				</div>
 				<div class="form-group clearfix  text-right">
-					<button type="button" id="guardar" class="btn btn-success">
+					<button type="button" id="guardar" onclick="javascript:$(this).attr('disabled', 'disabled');" class="btn btn-success">
 						<i class="fa fa-save"></i>  Guardar
 					</button>
 					<button type="button" id="guardarMotivo" class="btn btn-success" style="display: none">
