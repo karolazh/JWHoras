@@ -148,10 +148,10 @@ class Paciente extends Controller {
 			$gl_grupo_tipo = 'Tratamiento';
 			$id_tipo_grupo = 2;
 		}
-		
+		$viene_adjunto_fonasa = FALSE;
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
 		$parametros['id_tipo_grupo'] = $id_tipo_grupo;
-		if ($parametros['prevision'] == "1"){
+		if ($parametros['chkextranjero'] == "1"){
 			if ($parametros['gl_codigo_fonasa'] != ""){
 				if (!empty($_SESSION['adjuntos'])) {
 					foreach ($_SESSION['adjuntos'] as $adjunto){
