@@ -388,7 +388,7 @@ class DAOPaciente extends Model{
 						'".$parametros['gl_longitud']."',
 						'".$parametros['chkReconoce']."',
 						".$parametros['chkAcepta'].",
-						".$parametros['gl_codigo_fonasa'].",
+						'".$parametros['gl_codigo_fonasa']."',
 						now(),
 						".$_SESSION['id']."
 						)
