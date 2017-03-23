@@ -152,7 +152,7 @@ class Paciente extends Controller {
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
 		$parametros['id_tipo_grupo'] = $id_tipo_grupo;
 		if ($parametros['prevision'] == "1"){
-			if ($parametros['gl_codigo_fonasa'] != ""){
+			if (!empty($parametros['gl_codigo_fonasa'])){
 				if (!empty($_SESSION['adjuntos'])) {
 					foreach ($_SESSION['adjuntos'] as $adjunto){
 							if (($adjunto['tipo_adjunto'] == 3)){
@@ -161,15 +161,15 @@ class Paciente extends Controller {
 					}
 					if (!$viene_adjunto_fonasa){
 						$error			= true;
-						$mensaje_error	= "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
+						//$mensaje_error	= "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
 					}
 				} else {
 						$error = true;
-						$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
+						//$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
 				}
 			} else {
 				$error = true;
-				$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe indicar su código.";
+				//$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe indicar su código.";
 			}
 		}
 

@@ -88,6 +88,7 @@ class Mantenedor extends Controller{
 		echo $this->view->fetch('mantenedor_usuario/grilla.tpl');
 	}
 
+
 	public function cambiarUsuario(){
 		//Acceso::redireccionUnlogged($this->smarty);
 		$where		= array('bo_activo' => 1);
