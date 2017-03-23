@@ -21,6 +21,8 @@
     <input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden">
     <input type="text" value="{$bo_finalizado}" id="bo_finalizado" name="bo_finalizado" class="hidden">
     <input type="text" value="{$id_centro_salud}" id="id_centro_salud" name="id_centro_salud" class="hidden">
+    <input type="text" value="{$id_comuna}" id="id_comuna" name="id_comuna" class="hidden">
+    <input type="text" value="{$id_institucion}" id="id_institucion" name="id_institucion" class="hidden">
     <section class="content">
         <div class="panel panel-primary">
             <div class="panel-heading">
