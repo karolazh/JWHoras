@@ -112,7 +112,7 @@
                 <div class="form-group">
                     <div class="col-sm-1"></div>
                     <div class="col-sm-10">
-                        <textarea type="text" class="form-control col-sm-10" rows="10" 
+                        <textarea type="text" class="form-control col-sm-10" rows="5" 
                                   id="gl_observacion_toma" name="gl_observacion_toma"
                                   placeholder="Ingrese observaci&oacute;n" style="resize: none"></textarea>
                     </div>
