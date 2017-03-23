@@ -115,7 +115,7 @@ class Mantenedor extends Controller{
 		//revisar que id_usuario sea ADMIN
 		
 		$usuario			= $this->_DAOUsuario->getLoginByID($id_usuario_cambio);
-		if(true){
+		if($usuario){
 			$correcto		= true;
 			// Evento
 				$session						= New Zend_Session_Namespace("usuario_carpeta");
@@ -165,7 +165,7 @@ class Mantenedor extends Controller{
 		$id_usuario_cambio	= $_SESSION['id_usuario_original'];
 		
 		$usuario			= $this->_DAOUsuario->getLoginByID($id_usuario_cambio);
-		if(true){
+		if($usuario){
 			$correcto		= true;
 			// Evento
 				$session						= New Zend_Session_Namespace("usuario_carpeta");
