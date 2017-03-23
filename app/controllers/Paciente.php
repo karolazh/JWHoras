@@ -177,9 +177,16 @@ class Paciente extends Controller {
 			$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
 		}
 		if ($id_paciente) {
-			$correcto	= true;
-			$session	= New Zend_Session_Namespace("usuario_carpeta");
+			$correcto		= true;
+			$session		= New Zend_Session_Namespace("usuario_carpeta");
+			$rut			= $parametros['rut'];
+			$codigo_fonasa	= $parametros['gl_codigo_fonasa'];
 
+			if(!empty($rut)){
+				$identificador	= $rut;
+			}else{
+				$identificador		= $codigo_fonasa;
+			}
 			if (!empty($_SESSION['adjuntos'])) {
 				foreach ($_SESSION['adjuntos'] as $adjunto){
 					$nombre_adjunto		= $adjunto['nombre_adjunto'];
@@ -187,8 +194,9 @@ class Paciente extends Controller {
 					$nombre_adjunto		= strtolower(trim($nombre_adjunto));
 					$nombre_adjunto		= trim($nombre_adjunto, ".");
 					$extension			= substr(strrchr($nombre_adjunto, "."), 1);
+
 					if ($adjunto['tipo_adjunto'] == 1){
-						$gl_nombre_archivo	= 'Consentimiento_' . $parametros['rut'] . '.' . $extension;
+						$gl_nombre_archivo	= 'Consentimiento_' . $identificador . '.' . $extension;
 						$directorio			= "archivos/$id_paciente/";
 						$gl_path			= $directorio . $gl_nombre_archivo;
 						$ins_adjunto		= array('id_paciente'		=> $id_paciente,
@@ -202,7 +210,7 @@ class Paciente extends Controller {
 											);
 						$id_adjunto			= $this->_DAOAdjunto->insert($ins_adjunto);
 					} else if ($adjunto['tipo_adjunto'] == 3){
-						$gl_nombre_archivo	= 'Archivo_Fonasa_' . $parametros['rut'] . '.' . $extension;
+						$gl_nombre_archivo	= 'Archivo_Fonasa_' . $identificador . '.' . $extension;
 						$directorio			= "archivos/$id_paciente/";
 						$gl_path			= $directorio . $gl_nombre_archivo;
 						$ins_adjunto		= array('id_paciente'		=> $id_paciente,
