@@ -41,22 +41,22 @@
 
                 <div class="col-md-12">
                     <div class="clearfix col-md-3">
-                            <div class="checkbox">
-                                    <label>
-                                            <input type="checkbox" id="chkReconoce" {if $reconoce}checked="checked"{/if} disabled="disabled">
-                                            <strong>Reconoce maltrato</strong>
-                                    </label>
-                            </div>
+						<div class="checkbox">
+							<label>
+									<strong>Reconoce Violencia de Género:</strong>
+									{if $reconoce}<span class="label label-danger">Si</span>
+									{else} <span class="label label-success">No</span> {/if}
+							</label>
+						</div>
                     </div>
                     <div class="clearfix col-md-3">
-                            <div class="checkbox">
-                                    <label>
-                                            <input type="checkbox" id="chkAcepta" {if $acepta}checked="checked"{/if} disabled="disabled">
-                                            <strong>Acepta Programa</strong>
-
-
-                                    </label>
-                            </div>
+						<div class="checkbox">
+							<label>
+								<strong>Acepta Programa</strong>
+								{if $acepta}<span class="label label-danger">Si</span>
+								{else} <span class="label label-success">No</span> {/if}
+							</label>
+						</div>
                     </div>
                     <div class="clearfix col-md-3">
                             {if $ruta_consentimiento != ""}
