@@ -21,7 +21,7 @@
         <li class="user-footer">
             <div class="pull-right">
 				{if $id_perfil == 1 || $smarty.session.id_usuario_original != 0}
-					<a onclick="xModal.open('{$smarty.const.BASE_URI}/mantenedor/cambiarUsuario/','Cambiar de Usuario','70');" class="btn btn-info btn-sm">
+					<a onclick="xModal.open('{$smarty.const.BASE_URI}/Mantenedor/cambiarUsuario/','Cambiar de Usuario','70');" class="btn btn-info btn-sm">
 						<i class="fa fa-exchange"></i> Cambiar de Usuario
 					</a>
 				{/if}

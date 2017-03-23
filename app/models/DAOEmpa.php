@@ -57,11 +57,18 @@ class DAOEmpa extends Model{
     }
 
     public function getByIdPaciente($id_paciente, $nr_orden=1){
-        $query	=   "SELECT *,
+        $query	=   "SELECT e.*,
+							c.gl_nombre_comuna as gl_comuna,
+							p.id_comuna as id_comuna_paciente,
+							cs.gl_nombre_establecimiento as gl_institucion,
+							p.id_centro_salud as id_institucion_paciente,
 							date_format(fc_empa,'%Y-%m-%d') AS fc_empa
-					FROM pre_empa 
-                    WHERE id_paciente = ?
-                    AND nr_orden = ?";
+					FROM pre_empa e
+					LEFT JOIN pre_paciente p ON p.id_paciente = e.id_paciente
+					LEFT JOIN pre_comuna c ON c.id_comuna = p.id_comuna
+					LEFT JOIN pre_centro_salud cs ON cs.id_centro_salud = p.id_centro_salud
+                    WHERE e.id_paciente = ?
+                    AND e.nr_orden = ?";
 
 	$param	= array($id_paciente,$nr_orden);
         $result	= $this->db->getQuery($query,$param);
@@ -129,9 +136,9 @@ class DAOEmpa extends Model{
 
     public function updateEmpa($parametros){
         $query	= "	UPDATE pre_empa SET
-						id_comuna						= ".$_SESSION['id_comuna'].",
-						gl_sector						= '".$parametros['gl_sector']."',
-						id_institucion					= ".$_SESSION['id_institucion'].",
+						id_comuna						= ".$parametros['id_comuna'].",
+						gl_sector						= ".$parametros['gl_sector'].",
+						id_institucion					= ".$parametros['id_institucion'].",
 						nr_ficha						= ".$parametros['nr_ficha'].",
 						fc_empa							= ".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_empa'])).",
 						bo_embarazo						= ".$parametros['bo_embarazo'].",
@@ -198,6 +205,7 @@ class DAOEmpa extends Model{
 	public function verInfoById($id_empa) {
         $query	= "	SELECT 
 						pre_empa.*,
+						IFNULL(gl_sector,0) as gl_sector,
 						IFNULL(fc_mamografia,0) as fc_mamografia,
 						IFNULL(bo_embarazo,-1) as bo_embarazo,
 						IFNULL(bo_consume_alcohol,-1) as bo_consume_alcohol,

@@ -54,6 +54,23 @@ class DAOCie10Seccion extends Model{
             return NULL;
         }
     }
+	
+	public function getDetalleByIdSeccion($id_seccion){
+		$query	= "	SELECT 
+						g.*
+					FROM pre_cie10_2_seccion s
+						LEFT JOIN pre_cie10_3_grupo g ON s.id_seccion = g.id_seccion
+					WHERE s.id_seccion = ?";
+
+		$param	= array($id_seccion);
+        $resul	= $this->db->getQuery($query,$param);
+
+        if($resul->numRows > 0){
+            return $resul->rows;
+        }else{
+            return NULL;
+        }
+    }
 
 }
 

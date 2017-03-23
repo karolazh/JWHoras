@@ -27,6 +27,7 @@ class Especialista extends Controller {
 	protected $_DAOTipoEspecialidad;
 	protected $_DAOCie10Capitulo;
 	protected $_DAOCie10Seccion;
+	protected $_DAOCie10Grupo;
 	protected $_DAOPacienteAgendaEspecialista;
 
 	function __construct() {
@@ -43,6 +44,7 @@ class Especialista extends Controller {
 		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
 		$this->_DAOCie10Capitulo			= $this->load->model("DAOCie10Capitulo");
 		$this->_DAOCie10Seccion				= $this->load->model("DAOCie10Seccion");
+		$this->_DAOCie10Grupo				= $this->load->model("DAOCie10Grupo");
 	}
 
 	/**
@@ -120,7 +122,7 @@ class Especialista extends Controller {
 		
 	}
 	
-	public function cargarSeccion1porCie10(){
+	public function cargarSeccionporCapitulo(){
             $cie10 = $_POST['cie10'];
             //$daoRegion = $this->load->model('DAORegion');
             $seccion1 = $this->_DAOCie10Capitulo->getDetalleByIdCapitulo($cie10);
@@ -130,6 +132,38 @@ class Especialista extends Controller {
                     $json[$i]['id_seccion'] = $seccion->id_seccion;
                     $json[$i]['gl_codigo'] = $seccion->gl_codigo;
                     $json[$i]['gl_descripcion'] = $seccion->gl_descripcion;
+                    $i++;
+            }
+
+            echo json_encode($json);
+    }
+	
+	public function cargarGrupoporSeccion(){
+            $seccion = $_POST['seccion'];
+            //$daoRegion = $this->load->model('DAORegion');
+            $grupo1 = $this->_DAOCie10Seccion->getDetalleByIdSeccion($seccion);
+            $json = array();
+            $i = 0;
+            foreach($grupo1 as $grupo){
+                    $json[$i]['id_grupo'] = $grupo->id_grupo;
+                    $json[$i]['gl_codigo'] = $grupo->gl_codigo;
+                    $json[$i]['gl_descripcion'] = $grupo->gl_descripcion;
+                    $i++;
+            }
+
+            echo json_encode($json);
+    }
+	
+	public function cargarCIE10porGrupo(){
+            $grupo = $_POST['grupo'];
+            //$daoRegion = $this->load->model('DAORegion');
+            $cie101 = $this->_DAOCie10Grupo->getDetalleByIdGrupo($grupo);
+            $json = array();
+            $i = 0;
+            foreach($cie101 as $cie10){
+                    $json[$i]['id_cie10'] = $cie10->id_cie10;
+                    $json[$i]['gl_codigo'] = $cie10->gl_codigo;
+                    $json[$i]['gl_descripcion'] = $cie10->gl_descripcion;
                     $i++;
             }
 
