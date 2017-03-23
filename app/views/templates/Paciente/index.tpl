@@ -42,7 +42,7 @@
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-center"> {$item->fc_crea} </td>
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-left"> {$item->gl_nombres} {$item->gl_apellidos} </td>
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-left"> {$item->gl_nombre_comuna} </td>
-                                                        <td style="color:#ff0000; background: #F7D3D2;" class="text-center"> {$item->gl_institucion} </td>
+                                                        <td style="color:#ff0000; background: #F7D3D2;" class="text-center"> {$item->gl_centro_salud} </td>
                                                         <td style="color:#ff0000; background: #F7D3D2;" class="text-center" nowrap> {$item->nr_motivo_consulta} </td>
                                                         <td style="background: #F7D3D2;" class="text-center" nowrap>
                                                                 {if $item->bo_reconoce == 1}
@@ -152,7 +152,7 @@
                                                         <td class="text-center"> {$item->fc_crea} </td>
                                                         <td class="text-left"> {$item->gl_nombres} {$item->gl_apellidos} </td>
                                                         <td class="text-left"> {$item->gl_nombre_comuna} </td>
-                                                        <td class="text-center"> {$item->gl_institucion} </td>
+                                                        <td class="text-center"> {$item->gl_centro_salud} </td>
                                                         <td class="text-center" nowrap> {$item->nr_motivo_consulta} </td>
                                                         <td class="text-center" nowrap> 
                                                                 {if $item->bo_reconoce == 1}

@@ -121,6 +121,7 @@ class DAOPaciente extends Model{
                         date_format(paciente.fc_crea,'%d-%m-%Y') as fc_crea,
                         IF(paciente.bo_extranjero=1,paciente.gl_run_pass,paciente.gl_rut) AS gl_identificacion,
                         i.gl_nombre_establecimiento as gl_institucion,
+                        centro.gl_nombre_establecimiento as gl_centro_salud,
                         c.gl_nombre_comuna,
                         e.gl_nombre_estado_caso,
                         e.id_paciente_estado,
@@ -136,6 +137,7 @@ class DAOPaciente extends Model{
                          AND (empa.bo_pap_resultado = 0 OR empa.bo_mamografia_resultado_pasado = 0)) AS gl_examen_alterado_externo
                     FROM pre_paciente paciente 
                     LEFT JOIN pre_centro_salud i ON i.id_centro_salud = paciente.id_institucion
+                    LEFT JOIN pre_centro_salud centro ON centro.id_centro_salud = paciente.id_centro_salud
                     LEFT JOIN pre_comuna c ON c.id_comuna = paciente.id_comuna
                     LEFT JOIN pre_paciente_estado e ON e.id_paciente_estado = paciente.id_paciente_estado";
 
