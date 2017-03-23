@@ -1,1 +1,6 @@
 ALTER TABLE  `pre_paciente` CHANGE  `gl_codigo_fonasa`  `gl_codigo_fonasa` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL
+
+INSERT INTO `prevencion`.`pre_perfil_opcion` (`id_perfil`, `id_opcion`, `id_usuario_crea`, `fc_crea`)
+VALUES ('6',  '1', NULL , NULL);
+INSERT INTO `prevencion`.`pre_perfil_opcion` (`id_perfil`, `id_opcion`, `id_usuario_crea`, `fc_crea`) 
+VALUES ('6', '13', NULL, NULL);
