@@ -102,6 +102,7 @@
                                            id='fc_resultado' 
                                            name='fc_resultado'
 										   value="{$fc_resultado|date_format:"%d/%m/%Y"}"
+										    {if $accion == "1"}readonly{/if}
                                            />
                                 <span class="help-block hidden fa fa-warning"></span>
                                 <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_resultado').focus();"></i></span>
