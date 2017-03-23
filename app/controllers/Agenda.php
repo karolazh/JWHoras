@@ -233,6 +233,17 @@ class Agenda extends Controller {
         $id_laboratorio = $_POST['id_laboratorio'];
         $id_examen = $_POST['id_examen'];
         
+		if($id_examen==1){$gl_examen = 'glicemia';}
+		if($id_examen==2){$gl_examen = 'vdrl';}
+		if($id_examen==3){$gl_examen = 'rpr';}
+		if($id_examen==4){$gl_examen = 'vih';}
+		if($id_examen==5){$gl_examen = 'baciloscopia';}
+		if($id_examen==6){$gl_examen = 'pap';}
+		if($id_examen==7){$gl_examen = 'colesterol';}
+		if($id_examen==8){$gl_examen = 'mamografia';}
+		if($id_examen==9){$gl_examen = 'hipertension';}
+		
+		
         $fecha_agenda = $_POST['fecha_agenda'];
 		$fecha_agenda = str_replace("'","",Fechas::formatearBaseDatos($fecha_agenda));
         if ($_POST['hora_agenda'] != "") {
@@ -256,6 +267,7 @@ class Agenda extends Controller {
         $grilla = "";
         $id_agenda = $this->_DAOPacienteExamen->insert($ins_agenda);
         if ($id_agenda) {
+			$ultimoId = $this->_DAOPacienteExamen->getLastId();
             //inserta ids en empa
             if ($id_empa != NULL){
 
@@ -292,7 +304,9 @@ class Agenda extends Controller {
         $salida = array("error"    => $error,
                         "correcto" => $correcto,
                         "grilla" => $grilla,
-                        "id_agenda" => $id_agenda);
+                        "id_agenda" => $id_agenda,
+						"ultimo_id" => $ultimoId->id_paciente_examen,
+						"gl_examen" => $gl_examen);
 
         $this->smarty->assign("hidden", "");
         $json = Zend_Json::encode($salida);

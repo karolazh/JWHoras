@@ -398,6 +398,21 @@ class DAOPacienteExamen extends Model{
             return NULL;
         }
     }
+	
+	public function getLastId(){
+        $query = "SELECT
+						MAX(id_paciente_examen) AS id_paciente_examen
+					FROM pre_paciente_examen
+					";
+        
+        $result	= $this->db->getQuery($query);
+
+        if ($result->numRows > 0) {
+            return $result->rows->row_0;
+        } else {
+            return NULL;
+        }
+    }
 }
 
 ?>
