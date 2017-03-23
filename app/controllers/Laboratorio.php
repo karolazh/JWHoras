@@ -163,10 +163,10 @@ class Laboratorio extends Controller {
      * @return 
 	 */
     public function buscar() {
-        $parametros = $this->request->getParametros();
-        $accion = $parametros[0]; //1="Ver" //2="Editar"
-        $id_paciente_examen = $parametros[1];
-        $perfil = $_SESSION['perfil'];
+        $parametros			= $this->request->getParametros();
+        $accion				= $parametros[0]; //1="Ver" //2="Editar"
+        $id_paciente_examen	= $parametros[1];
+        $perfil				= $_SESSION['perfil'];
         
         //Detalle de Examen
         $detExamen = $this->_DAOPacienteExamen->getById($id_paciente_examen);
@@ -210,32 +210,33 @@ class Laboratorio extends Controller {
             }
             $gl_resultado_descripcion = $detExamen->gl_resultado_descripcion;
             $gl_resultado_indicacion = $detExamen->gl_resultado_indicacion;
+			
+			//Combo Laboratorios
+			$arrLaboratorios = $this->_DAOLaboratorio->getLista();
+			//Combos Tipo Examen
+			$arrTipoExamen = $this->_DAOTipoExamen->getLista();
+			
+			$this->smarty->assign("id_paciente_examen", $id_paciente_examen);
+			$this->smarty->assign("id_tipo_examen", $id_tipo_examen);
+			$this->smarty->assign("id_paciente", $id_paciente);
+			$this->smarty->assign("id_laboratorio", $id_laboratorio);
+			$this->smarty->assign("rut_lab", $rut_lab);
+			$this->smarty->assign("nombre_lab", $nombre_lab);
+			$this->smarty->assign("gl_folio", $gl_folio);
+			$this->smarty->assign("fc_toma", $fc_toma);
+			$this->smarty->assign("gl_hora_toma", $gl_hora_toma);
+			$this->smarty->assign("gl_observacion_toma", $gl_observacion_toma);
+			$this->smarty->assign("fc_resultado", $fc_resultado);
+			$this->smarty->assign("gl_resultado_0", $gl_resultado_0);
+			$this->smarty->assign("gl_resultado_1", $gl_resultado_1);
+			$this->smarty->assign("gl_resultado_descripcion", $gl_resultado_descripcion);
+			$this->smarty->assign("gl_resultado_indicacion", $gl_resultado_indicacion);
+			$this->smarty->assign('arrLaboratorios', $arrLaboratorios);
+			$this->smarty->assign('arrTipoExamen', $arrTipoExamen);
         }
+		$this->smarty->assign("perfil", $perfil);
+		$this->smarty->assign("accion", $accion);
         
-        //Combo Laboratorios
-        $arrLaboratorios = $this->_DAOLaboratorio->getLista();
-        //Combos Tipo Examen
-        $arrTipoExamen = $this->_DAOTipoExamen->getLista();
-        
-        $this->smarty->assign("accion", $accion);
-        $this->smarty->assign("perfil", $perfil);
-        $this->smarty->assign("id_paciente_examen", $id_paciente_examen);
-        $this->smarty->assign("id_tipo_examen", $id_tipo_examen);
-        $this->smarty->assign("id_paciente", $id_paciente);
-        $this->smarty->assign("id_laboratorio", $id_laboratorio);
-        $this->smarty->assign("rut_lab", $rut_lab);
-        $this->smarty->assign("nombre_lab", $nombre_lab);
-        $this->smarty->assign("gl_folio", $gl_folio);
-        $this->smarty->assign("fc_toma", $fc_toma);
-        $this->smarty->assign("gl_hora_toma", $gl_hora_toma);
-        $this->smarty->assign("gl_observacion_toma", $gl_observacion_toma);
-        $this->smarty->assign("fc_resultado", $fc_resultado);
-        $this->smarty->assign("gl_resultado_0", $gl_resultado_0);
-        $this->smarty->assign("gl_resultado_1", $gl_resultado_1);
-        $this->smarty->assign("gl_resultado_descripcion", $gl_resultado_descripcion);
-        $this->smarty->assign("gl_resultado_indicacion", $gl_resultado_indicacion);
-        $this->smarty->assign('arrLaboratorios', $arrLaboratorios);
-        $this->smarty->assign('arrTipoExamen', $arrTipoExamen);
         //muestra template
         $this->smarty->display('laboratorio/datosExamen.tpl');
         $this->load->javascript(STATIC_FILES . 'js/templates/laboratorio/ver.js');
