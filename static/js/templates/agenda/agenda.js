@@ -41,5 +41,32 @@
 				}
 			}
 		});
-		
+        
+        $('#calendarEditar').fullCalendar({
+			header		: {
+				left	: 'prev,next today',
+				center	: 'title',
+				right	: 'month, listWeek'
+			},
+			navLinks	: true,
+			height		: 650,
+			editable	: true,
+			eventLimit	: true,
+            events		: agenda,
+			eventClick	: function(event) {
+				if (event.url) {
+					xModal.open(event.url, 'Agenda Examen', 85);
+					return false;
+				}
+			},
+			eventDrop: function(event, delta, revertFunc) {
+				// add ajax con Guardado, Envio de Email y Evento
+				alert(event.title + " was dropped on " + event.start.format());
+				if (!confirm("Are you sure about this change?")) {
+					revertFunc();
+				}
+
+			}
+		});
+
 	});

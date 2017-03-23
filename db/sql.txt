@@ -1,2 +1,2 @@
-INSERT INTO `prevencion`.`pre_opcion` (`id_opcion`, `id_opcion_padre`, `bo_tiene_hijo`, `gl_nombre_opcion`, `gl_icono`, `gl_url`, `bo_activo`, `id_usuario_crea`, `fc_crea`, `id_usuario_actualiza`, `fc_actualiza`) VALUES ('14', '0', '0', 'Agenda Laboratorio', 'fa fa-calendar', '/Agenda/agendaLaboratorio', '1', NULL, CURRENT_TIMESTAMP, NULL, NULL);
-INSERT INTO `prevencion`.`pre_perfil_opcion` (`id_perfil`, `id_opcion`, `id_usuario_crea`, `fc_crea`) VALUES ('7', '14', NULL, CURRENT_TIMESTAMP);
+INSERT INTO `pre_opcion` (`id_opcion`, `id_opcion_padre`, `bo_tiene_hijo`, `gl_nombre_opcion`, `gl_icono`, `gl_url`, `bo_activo`, `id_usuario_crea`, `fc_crea`, `id_usuario_actualiza`, `fc_actualiza`) VALUES ('14', '0', '0', 'Agenda Laboratorio', 'fa fa-calendar', '/Agenda/agendaLaboratorio', '1', NULL, CURRENT_TIMESTAMP, NULL, NULL);
+INSERT INTO `pre_perfil_opcion` (`id_perfil`, `id_opcion`, `id_usuario_crea`, `fc_crea`) VALUES ('7', '14', NULL, CURRENT_TIMESTAMP);
