@@ -283,10 +283,17 @@ function validarVacio(metodo, mensaje_error){
 
 //Calcular Edad
 function calcularYear(Fecha){
-    fecha = new Date(Fecha);
-    hoy = new Date();
-    ed = (hoy -fecha)/365/24/60/60/1000;
-	ed = ed.toFixed(2);	
+	var fields = Fecha.split('/');
+	var dd		= fields[0]; 
+	var mm		= fields[1];
+	var yyyy	= fields[2];
+	
+	Fecha		= mm+'/'+dd+'/'+yyyy;
+	
+    fecha		= new Date(Fecha);
+    hoy			= new Date();
+    ed			= (hoy -fecha)/365/24/60/60/1000;
+	ed			= ed.toFixed(2);	
     if (ed >= 0)
      {return ed;}
      else{return null;}
@@ -294,9 +301,15 @@ function calcularYear(Fecha){
 
 //Calcular Edad
 function calcularEdad(Fecha,input){
-    fecha = new Date(Fecha);
-    hoy = new Date();
-    ed = parseInt((hoy -fecha)/365/24/60/60/1000);
+	var fields = Fecha.split('/');
+	var dd		= fields[0]; 
+	var mm		= fields[1];
+	var yyyy	= fields[2];
+	
+	Fecha		= mm+'/'+dd+'/'+yyyy;
+    fecha		= new Date(Fecha);
+    hoy			= new Date();
+    ed			= parseInt((hoy -fecha)/365/24/60/60/1000);
     if (ed >= 0)
      {$(input).val(ed);}
 }
