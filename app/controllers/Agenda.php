@@ -77,15 +77,16 @@ class Agenda extends Controller {
                     } else {
                         $hora = "";
                     }
-                    $arrAgenda = $arrAgenda.$descripcion.",".$fecha.",".$hora.";";
-                    //$arrAgenda = $arrAgenda.$hora." ".$descripcion.",".$fecha.";";
+					$id_paciente_examen	= $item->id_paciente_examen;
+                    $arrAgenda			= "$arrAgenda $descripcion,$fecha,$hora,$id_paciente_examen;"; 
 
+					/*
                     if (!is_null($item->fc_resultado_calendar)){
-                        $descripcion_result = "Resultado Examen ". $item->gl_nombre_examen;
-                        $fecha_result = $item->fc_resultado_calendar;
-                        //$arrAgenda = $arrAgenda.$descripcion_result.",".$fecha_result.";";
-                        $arrAgenda = $arrAgenda.$descripcion_result.",".$fecha_result.",;";
+                        $descripcion_result	= "Resultado Examen ". $item->gl_nombre_examen;
+                        $fecha_result		= $item->fc_resultado_calendar;
+                        $arrAgenda			= $arrAgenda.$descripcion_result.",".$fecha_result.",;";
                     }
+					*/
                 }
 			}
         }
@@ -158,6 +159,55 @@ class Agenda extends Controller {
 		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
 	}
     
+	
+    public function agendaLaboratorio() {
+        Acceso::redireccionUnlogged($this->smarty);
+		$sesion			= New Zend_Session_Namespace("usuario_carpeta");
+
+        $id_laboratorio	= $_SESSION['id_laboratorio'];
+        
+        //Grilla Exámenes x Paciente
+        $arrExamenes = $this->_DAOPacienteExamen->getAllByIdLaboratorio($id_laboratorio); // Obtener por Laboratorio
+
+        $arrAgenda		= "";
+        if (!is_null($arrExamenes)) {
+            foreach($arrExamenes as $item){
+                /* 2017-03-21 Valida que examen no sea "Externo"; no debe aparecer en Calendario */
+                //if (($item->id_paciente_examen != 0) and (!is_null($item->gl_resultado))) {
+                if ($item->id_paciente_examen != 0) {
+                    $descripcion = "Toma Examen ". $item->gl_nombre_examen;
+                    $fecha = $item->fc_toma_calendar;
+
+                    if (!is_null($item->gl_hora_toma)){
+                        $hora = $item->gl_hora_toma;                    
+                    } else {
+                        $hora = "";
+                    }
+					$id_paciente_examen	= $item->id_paciente_examen;
+                    $arrAgenda = "$arrAgenda $descripcion,$fecha,$hora,$id_paciente_examen;"; 
+                    //$arrAgenda = $arrAgenda.$hora." ".$descripcion.",".$fecha.";";
+
+					/*
+                    if (!is_null($item->fc_resultado_calendar)){
+                        $descripcion_result = "Resultado Examen ". $item->gl_nombre_examen;
+                        $fecha_result = $item->fc_resultado_calendar;
+                        //$arrAgenda = $arrAgenda.$descripcion_result.",".$fecha_result.";";
+                        $arrAgenda = $arrAgenda.$descripcion_result.",".$fecha_result.",;";
+                    }
+					*/
+                }
+			}
+        }
+        
+        $this->smarty->assign('arrExamenes', $arrExamenes);
+        $this->smarty->assign('arrAgenda', $arrAgenda);
+        $this->_display('agenda/agendaLaboratorio.tpl');
+		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
+		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/fullcalendar.min.js");
+		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/locale/es.js");
+		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/lib/moment.min.js");
+	}
+	
     /**
 	 * Descripción: Ver Agenda de Examenes
 	 * * @author Carolina Zamora <carolina.zamora@cosof.cl>
