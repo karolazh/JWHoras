@@ -51,8 +51,15 @@ class Especialista extends Controller {
 	*/
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
+		$id_perfil 		= $_SESSION['perfil'];
+		$id_region 		= $_SESSION['id_region'];
 		
-		$where	= array('esp.id_especialista'=>$_SESSION['id']);
+		if($id_perfil == 1 || $id_perfil == 5){
+			$where	= array('esp.id_tipo_especialidad'=>$_SESSION['id']);
+		}else{
+			$where	= array('esp.id_tipo_especialidad'=>$_SESSION['id_tipo_especialidad'],'paciente.id_region'=>$id_region);
+		}
+
 		$join[]	= array('tabla'=>'pre_paciente_agenda_especialista esp',
 						'on'=>'esp.id_paciente',
 						'igual'=>'paciente.id_paciente');
@@ -120,7 +127,7 @@ class Especialista extends Controller {
             $json = array();
             $i = 0;
             foreach($seccion1 as $seccion){
-                    $json[$i]['id_indice'] = $seccion->id_indice;
+                    $json[$i]['id_seccion'] = $seccion->id_seccion;
                     $json[$i]['gl_codigo'] = $seccion->gl_codigo;
                     $json[$i]['gl_descripcion'] = $seccion->gl_descripcion;
                     $i++;

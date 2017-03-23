@@ -87,11 +87,13 @@ class DAOUsuario extends Model {
 						r.gl_nombre_region,
 						p.gl_nombre_provincia,
 						c.id_provincia,
-						c.gl_nombre_comuna
+						c.gl_nombre_comuna,
+						esp.id_tipo_especialidad
 					FROM pre_usuario u 
 						LEFT JOIN pre_region r ON u.id_region = r.id_region
 						LEFT JOIN pre_comuna c ON u.id_comuna = c.id_comuna
 						LEFT JOIN pre_provincia p ON c.id_provincia = p.id_provincia
+						LEFT JOIN pre_usuario_especialidad esp ON esp.id_usuario = u.id_usuario
 					WHERE u.gl_rut = ? 
 						AND u.gl_password = ?";
 
@@ -122,14 +124,42 @@ class DAOUsuario extends Model {
                         r.gl_nombre_region,
                         p.gl_nombre_provincia,
                         c.id_provincia,
-                        c.gl_nombre_comuna
+                        c.gl_nombre_comuna,
+						esp.id_tipo_especialidad
 					FROM pre_usuario u 
                         LEFT JOIN pre_region r ON u.id_region = r.id_region
                         LEFT JOIN pre_comuna c ON u.id_comuna = c.id_comuna
                         LEFT JOIN pre_provincia p ON c.id_provincia = p.id_provincia
+						LEFT JOIN pre_usuario_especialidad esp ON esp.id_usuario = u.id_usuario
 					WHERE u.gl_rut = ? ";
 
         $param	= array($gl_rut);
+        $result	= $this->db->getQuery($query, $param);
+
+        if ($result->numRows > 0) {
+            return $result->rows->row_0;
+        } else {
+            return NULL;
+        }
+    }
+	
+	
+    public function getLoginByID($id_usuario) {
+        $query	= "	SELECT 
+                        u.*,
+                        r.gl_nombre_region,
+                        p.gl_nombre_provincia,
+                        c.id_provincia,
+                        c.gl_nombre_comuna,
+						esp.id_tipo_especialidad
+					FROM pre_usuario u 
+                        LEFT JOIN pre_region r ON u.id_region = r.id_region
+                        LEFT JOIN pre_comuna c ON u.id_comuna = c.id_comuna
+                        LEFT JOIN pre_provincia p ON c.id_provincia = p.id_provincia
+						LEFT JOIN pre_usuario_especialidad esp ON esp.id_usuario = u.id_usuario
+					WHERE u.id_usuario = ? ";
+
+        $param	= array($id_usuario);
         $result	= $this->db->getQuery($query, $param);
 
         if ($result->numRows > 0) {
@@ -172,7 +202,7 @@ class DAOUsuario extends Model {
 	*
 	* @return object Todos los usuarios junto la informacion de perfil.
 	*/
-    public function getListaJoinPerfil() {
+    public function getListaJoinPerfil($parametros=array()) {
         $query	= "	SELECT 
 						u.id_usuario,
 						u.gl_nombres,
@@ -182,7 +212,18 @@ class DAOUsuario extends Model {
 						p.gl_nombre_perfil
 					FROM pre_usuario u 
 						LEFT JOIN pre_perfil p ON u.id_perfil = p.id_perfil";
-        $result	= $this->db->getQuery($query);
+
+		if(!empty($parametros)){
+            $where	= ' WHERE ';
+			foreach($parametros as $campo=>$valor){
+				$where		.= ' '.$campo.' = ? AND';
+				$params[]	= $valor;
+			}
+            $where	= trim($where,'AND');
+            $query	.= $where;
+		}
+
+        $result	= $this->db->getQuery($query,$params);
         if ($result->numRows > 0) {
             return $result->rows;
         } else {

@@ -24,11 +24,9 @@
 	var HOST = window.location.protocol + "//" + window.location.hostname;
 
 	var tablas;
-
+	
 	$(document).ready(function () {
 		tablas = new Array();
-
-		$(".select2").select2();
 
 		$("table.dataTable").DataTable({
 			pageLength	: 10,
@@ -379,70 +377,36 @@
                 });
             });
 
-/*
-	$("#btnCambioRapido").click(function () {
-		var userID = $('#users').val();
-		$.get(siteUrl + "session/impersonar/userID/" + userID)
-			.done(function(data) {
-				window.location.href = siteUrl; //"/home_emergencias/index";
-			}).fail(function(data) { });
-	});
 
-	$(".btnCambioUsuario").livequery(function(){
-		$(this).unbind( "click" );
-        $(this).click(function(e){
-			var userID = $(this).attr("data");
-			bootbox.confirm({
-				message: "¿ Confirma el reemplazo de usuario ?",
-				buttons: {
-					confirm: {
-						label: 'Si',
-						className: 'btn-success'
-					},
-					cancel: {
-						label: 'No',
-						className: 'btn-danger'
-					}
+
+	$("#btnVolverUsuario").livequery(function(){
+		btn	= this;
+        $(btn).click(function(e){
+			btn.disabled = true;
+			var btnTexto = $(btn).html();
+			$(btn).html('Cambiando...');
+
+			$.ajax({
+				dataType	: "json",
+				cache		: false,
+				async		: true,
+				type		: "post",
+				url			: BASE_URI + "index.php/Mantenedor/volver_usuario", 
+				error		: function(xhr, textStatus, errorThrown){
+								xModal.info('Error al cambiar de usuario.');
 				},
-				callback: function (result) {
-						if(result){
-							$.get(siteUrl + "session/impersonar/userID/" + userID)
-								.done(function(data) {
-									window.location.href = siteUrl; //"/Home/dashboard";
-								}).fail(function(data) {
-								});
-						}
+				success		: function(data){
+								if(data.correcto){
+									xModal.success('Se procederá con el Cambio de Usuario');
+									setTimeout(function () {
+										location.href = BASE_URI;
+									}, 2000);
+								}else{
+									xModal.info(data.mensaje);
+								}
 				}
 			});
-        });
-    });
 
-	$(".btnCambioUsuarioVolver").livequery(function(){
-		$(this).unbind( "click" );
-        $(this).click(function(e){
-			var userID = $(this).attr("data");
-			bootbox.confirm({
-				message: "¿ Confirma desactivar el reemplazo de usuario ?",
-				buttons: {
-					confirm: {
-						label: 'Si',
-						className: 'btn-success'
-					},
-					cancel: {
-						label: 'No',
-						className: 'btn-danger'
-					}
-				},
-				callback: function (result) {
-						if(result){
-							$.get(siteUrl + "session/impersonar/userID/" + userID)
-								.done(function(data) {
-									window.location.href = siteUrl; //"/Home/dashboard";
-								}).fail(function(data) {
-								});
-						}
-				}
-			});
+			$(btn).html(btnTexto).attr('disabled', false);
         });
     });
-	*/

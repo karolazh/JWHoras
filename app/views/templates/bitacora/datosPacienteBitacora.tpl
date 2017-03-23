@@ -158,13 +158,14 @@
     </div>
 </div>
 
-<div class="form-group">
+<div class="col-md-12 top-spaced">
     <div class="clearfix col-md-6">
         <div class="col-md-4">
-            <label class="control-label">Reconoce: </label>
+            <label class="control-label">Reconoce Violencia de Género: </label>
         </div>
         <div class="col-md-8">
-            <input type="text" value="{$bo_reconoce}" class="form-control" readonly>
+			{if $bo_reconoce}<span class="label label-danger">Si</span>
+			{else} <span class="label label-success">No</span> {/if}
         </div>
     </div>
 
@@ -173,7 +174,8 @@
             <label class="control-label">Acepta Programa : </label>
         </div>
         <div class="col-md-8">
-            <input type="text" value="{$bo_acepta_programa}" class="form-control" readonly>
+			{if $bo_acepta_programa}<span class="label label-danger">Si</span>
+			{else} <span class="label label-success">No</span> {/if}
         </div>
     </div>
         

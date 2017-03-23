@@ -31,19 +31,20 @@ class Empa extends Controller{
 		$this->load->lib('Boton', false);
 		$this->load->lib('Fechas', false);
 		$this->load->lib('Evento', false);
-		$this->_Evento = new Evento();
-		$this->_DAOEmpa = $this->load->model("DAOEmpa");
-		$this->_DAOEmpaAudit = $this->load->model("DAOEmpaAudit");
-		$this->_DAOUsuario = $this->load->model("DAOUsuario");
-		$this->_DAOComuna = $this->load->model("DAOComuna");
-		$this->_DAOCentroSalud = $this->load->model("DAOCentroSalud");
-		$this->_DAOPaciente = $this->load->model("DAOPaciente");
-		$this->_DAOAuditPregunta = $this->load->model("DAOAuditPregunta");
-		$this->_DAOTipoIMC = $this->load->model("DAOTipoIMC");
-		$this->_DAOTipoAUDIT = $this->load->model("DAOTipoAUDIT");
-		$this->_DAOEvento = $this->load->model("DAOEvento");
-		$this->_DAOMes = $this->load->model("DAOMes");
-		$this->_DAOPacienteDireccion = $this->load->model("DAOPacienteDireccion");
+		$this->_Evento					= new Evento();
+		$this->_DAOEmpa					= $this->load->model("DAOEmpa");
+		$this->_DAOEmpaAudit			= $this->load->model("DAOEmpaAudit");
+		$this->_DAOUsuario				= $this->load->model("DAOUsuario");
+		$this->_DAOComuna				= $this->load->model("DAOComuna");
+		$this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
+		$this->_DAOPaciente				= $this->load->model("DAOPaciente");
+		$this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
+		$this->_DAOAuditPregunta		= $this->load->model("DAOAuditPregunta");
+		$this->_DAOTipoIMC				= $this->load->model("DAOTipoIMC");
+		$this->_DAOTipoAUDIT			= $this->load->model("DAOTipoAUDIT");
+		$this->_DAOEvento				= $this->load->model("DAOEvento");
+		$this->_DAOMes					= $this->load->model("DAOMes");
+		$this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
 	}
 
 	/*
@@ -94,6 +95,106 @@ class Empa extends Controller{
 
 		$this->smarty->assign("gl_comuna", $gl_comuna->gl_nombre_comuna);
 		$this->smarty->assign("gl_institucion", $gl_institucion->gl_nombre_establecimiento);
+		
+		//Cargar Datos Examen Paciente
+		$hipertension = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,9);
+		if ($hipertension){
+			$this->smarty->assign("examen_hipertension", '1');
+			$this->smarty->assign("agenda_hipertension", '0');
+			$this->smarty->assign("id_paciente_examen_hipertension", $hipertension->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_hipertension", '1');
+			$this->smarty->assign("examen_hipertension", '0');
+		}
+		
+		$glicemia = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,1);
+		if ($glicemia){
+			$this->smarty->assign("examen_glicemia", '1');
+			$this->smarty->assign("agenda_glicemia", '0');
+			$this->smarty->assign("id_paciente_examen_glicemia", $glicemia->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_glicemia", '1');
+			$this->smarty->assign("examen_glicemia", '0');
+		}
+		
+		$vdrl = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,2);
+		if ($vdrl){
+			$this->smarty->assign("examen_vdrl", '1');
+			$this->smarty->assign("agenda_vdrl", '0');
+			$this->smarty->assign("id_paciente_examen_vdrl", $vdrl->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_vdrl", '1');
+			$this->smarty->assign("examen_vdrl", '0');
+		}
+		
+		$rpr = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,3);
+		if ($rpr){
+			$this->smarty->assign("examen_rpr", '1');
+			$this->smarty->assign("agenda_rpr", '0');
+			$this->smarty->assign("id_paciente_examen_rpr", $rpr->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_rpr", '1');
+			$this->smarty->assign("examen_rpr", '0');
+		}
+		
+		$vih = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,4);
+		if ($vih){
+			$this->smarty->assign("examen_vih", '1');
+			$this->smarty->assign("agenda_vih", '0');
+			$this->smarty->assign("id_paciente_examen_vih", $vih->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_vih", '1');
+			$this->smarty->assign("examen_vih", '0');
+		}
+		
+		$baciloscopia = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,5);
+		if ($baciloscopia){
+			$this->smarty->assign("examen_baciloscopia", '1');
+			$this->smarty->assign("agenda_baciloscopia", '0');
+			$this->smarty->assign("id_paciente_examen_baciloscopia", $baciloscopia->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_baciloscopia", '1');
+			$this->smarty->assign("examen_baciloscopia", '0');
+		}
+		
+		$pap = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,6);
+		if ($pap){
+			$this->smarty->assign("examen_pap", '1');
+			$this->smarty->assign("agenda_pap", '0');
+			$this->smarty->assign("id_paciente_examen_pap", $pap->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_pap", '1');
+			$this->smarty->assign("examen_pap", '0');
+		}
+		
+		$colesterol = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,7);
+		if ($colesterol){
+			$this->smarty->assign("examen_colesterol", '1');
+			$this->smarty->assign("agenda_colesterol", '0');
+			$this->smarty->assign("id_paciente_examen_colesterol", $colesterol->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_colesterol", '1');
+			$this->smarty->assign("examen_colesterol", '0');
+		}
+		
+		$mamografia = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,8);
+		if ($mamografia){
+			$this->smarty->assign("examen_mamografia", '1');
+			$this->smarty->assign("agenda_mamografia", '0');
+			$this->smarty->assign("id_paciente_examen_mamografia", $mamografia->id_paciente_examen);
+			
+		} else {
+			$this->smarty->assign("agenda_mamografia", '1');
+			$this->smarty->assign("examen_mamografia", '0');
+		}
 		
 		//Cargar Datos Paciente
 		$registro = $this->_DAOPaciente->getById($id_paciente);
@@ -533,115 +634,140 @@ class Empa extends Controller{
 
 	
 	public function guardarFinalizado($parametros){
-		//print_r($parametros); die;
+		//print_r($parametros);die;
 		if ($parametros['gl_sector'] == 'NULL') {
-			return FALSE;
+			//return FALSE;
 		}
 		if ($parametros['nr_ficha'] == 'NULL') {
-			return FALSE;
+			//return FALSE;
 		}
 
 		if ($parametros['fc_empa'] == 'NULL') {
+			//die('1');
 			return FALSE;
 		}
 
 		if ($parametros['bo_embarazo'] == 'NULL') {
+			//die('2');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_consume_alcohol'] == 'NULL') {
+			//die('3');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_consume_alcohol'] == 1 && $parametros['gl_puntos_audit'] == 'NULL') {
+			//die('4');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_fuma'] == 'NULL') {
+			//die('5');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_peso'] == 'NULL') {
+			//die('6');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_estatura'] == 'NULL') {
+			//die('7');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_imc'] == 'NULL') {
+			//die('8');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_circunferencia_abdominal'] == 'NULL') {
+			//die('9');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_pas'] == 'NULL') {
+			//die('10');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_pad'] == 'NULL') {
+			//die('11');
 			return FALSE;
 		}
 		
 		if ($parametros['nr_edad'] > 40 && $parametros['gl_glicemia'] == 'NULL') {
+			//die('12');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_imc'] >= 30 && $parametros['gl_glicemia'] == 'NULL') {
+			//die('13');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_antecedente_diabetes'] == 'NULL') {
+			//die('14');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_antecedente_diabetes'] == 1 && $parametros['gl_glicemia'] == 'NULL') {
+			//die('15');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_trabajadora_reclusa'] == 'NULL') {
+			//die('16');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_tos_productiva'] == 'NULL') {
+			//die('17');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_pap_realizado'] == 'NULL' && $parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0) {
+			//die('18');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_pap_realizado'] == 0 && 
 			$parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0){
+			//die('19');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_pap_realizado'] == 1 && ($parametros['bo_pap_resultado'] == 'NULL' || $parametros['fc_ultimo_pap_ano'] == 'NULL' || 
 			$parametros['fc_ultimo_pap_mes'] == 'NULL' || $parametros['bo_pap_vigente'] == 'NULL') && 
-			$parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0){
+			($parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0)){
+			//die('20');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_colesterol'] == 'NULL' && $parametros['nr_edad'] >= 40) {
+			//die('21');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_mamografia_realizada'] == 'NULL' && $parametros['bo_embarazo'] == 0) {
+			//die('22');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_mamografia_requiere'] == 'NULL' && $parametros['bo_embarazo'] == 0) {
+			//die('23');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_mamografia_realizada'] == 1 && $parametros['bo_embarazo'] == 0 && ($parametros['fc_mamografia_mes'] == 'NULL' || $parametros['fc_mamografia_ano'] == 'NULL' ||
 			$parametros['bo_mamografia_vigente'] == 'NULL' || $parametros['bo_mamografia_resultado_pasado'] == 'NULL')) {
+			//die('24');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_observaciones_empa'] == 'NULL') {
+			//die('25');
 			return FALSE;
 		}
 		

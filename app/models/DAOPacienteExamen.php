@@ -382,6 +382,22 @@ class DAOPacienteExamen extends Model{
             return NULL;
         }
     }
+	
+	public function getByIdPacienteExamen($id_paciente,$id_tipo_examen){
+        $query = "  SELECT 
+							*
+                    FROM pre_paciente_examen
+                    WHERE	id_paciente = ". $id_paciente ."
+					AND		id_tipo_examen = ". $id_tipo_examen;
+        
+        $result	= $this->db->getQuery($query);
+
+        if ($result->numRows > 0) {
+            return $result->rows->row_0;
+        } else {
+            return NULL;
+        }
+    }
 }
 
 ?>

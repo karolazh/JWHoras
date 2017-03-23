@@ -70,13 +70,20 @@ class Paciente extends Controller {
 
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
-		$id_perfil = $_SESSION['perfil'];
-		$id_region = $_SESSION['id_region'];
+		$id_perfil 		= $_SESSION['perfil'];
+		$id_region 		= $_SESSION['id_region'];
+		$id_institucion = $_SESSION['id_institucion'];
+
 		if($id_perfil == 1 || $id_perfil == 5){
-			$arr = $this->_DAOPaciente->getListaDetalle();
+			$arr	= $this->_DAOPaciente->getListaDetalle();
+		} else if($id_perfil == 3){
+			$where	= array('paciente.id_region'=>$id_region, 'paciente.id_institucion' =>$id_institucion);
+			$arr	= $this->_DAOPaciente->getListaDetalle($where);
 		} else {
-			$arr = $this->_DAOPaciente->getListaDetalleRegion($id_region);
+			$where	= array('paciente.id_region'=>$id_region);
+			$arr	= $this->_DAOPaciente->getListaDetalle($where);
 		}
+
 		$this->smarty->assign('arrResultado', $arr);
 		$this->smarty->assign('titulo', 'Pacientes');
 
@@ -148,7 +155,7 @@ class Paciente extends Controller {
 			if ($parametros['gl_codigo_fonasa'] != ""){
 				if (!empty($_SESSION['adjuntos'])) {
 					foreach ($_SESSION['adjuntos'] as $adjunto){
-							if (($adjunt->tipo_adjunto == 3)){
+							if (($adjunto['tipo_adjunto'] == 3)){
 								$viene_adjunto_fonasa = TRUE;
 							}
 					}
@@ -165,14 +172,21 @@ class Paciente extends Controller {
 				$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe indicar su código.";
 			}
 		}
-		
-		if($mensaje_error != ''){
+
+		if($mensaje_error == ''){
 			$id_paciente =	$this->_DAOPaciente->insertarPaciente($parametros);
 		}
 		if ($id_paciente) {
-			$correcto	= true;
-			$session	= New Zend_Session_Namespace("usuario_carpeta");
+			$correcto		= true;
+			$session		= New Zend_Session_Namespace("usuario_carpeta");
+			$rut			= $parametros['rut'];
+			$codigo_fonasa	= $parametros['gl_codigo_fonasa'];
 
+			if(!empty($rut)){
+				$identificador	= $rut;
+			}else{
+				$identificador		= $codigo_fonasa;
+			}
 			if (!empty($_SESSION['adjuntos'])) {
 				foreach ($_SESSION['adjuntos'] as $adjunto){
 					$nombre_adjunto		= $adjunto['nombre_adjunto'];
@@ -180,8 +194,9 @@ class Paciente extends Controller {
 					$nombre_adjunto		= strtolower(trim($nombre_adjunto));
 					$nombre_adjunto		= trim($nombre_adjunto, ".");
 					$extension			= substr(strrchr($nombre_adjunto, "."), 1);
+
 					if ($adjunto['tipo_adjunto'] == 1){
-						$gl_nombre_archivo	= 'Consentimiento_' . $parametros['rut'] . '.' . $extension;
+						$gl_nombre_archivo	= 'Consentimiento_' . $identificador . '.' . $extension;
 						$directorio			= "archivos/$id_paciente/";
 						$gl_path			= $directorio . $gl_nombre_archivo;
 						$ins_adjunto		= array('id_paciente'		=> $id_paciente,
@@ -195,7 +210,7 @@ class Paciente extends Controller {
 											);
 						$id_adjunto			= $this->_DAOAdjunto->insert($ins_adjunto);
 					} else if ($adjunto['tipo_adjunto'] == 3){
-						$gl_nombre_archivo	= 'Archivo_Fonasa_' . $parametros['rut'] . '.' . $extension;
+						$gl_nombre_archivo	= 'Archivo_Fonasa_' . $identificador . '.' . $extension;
 						$directorio			= "archivos/$id_paciente/";
 						$gl_path			= $directorio . $gl_nombre_archivo;
 						$ins_adjunto		= array('id_paciente'		=> $id_paciente,
@@ -278,7 +293,9 @@ class Paciente extends Controller {
 
 		} else {
 			$error = true;
-			$mensaje_error = 'Error al Guardar los datos. Favor comuníquese con Mesa de Ayuda.';
+			if($mensaje_error == ''){
+				$mensaje_error = 'Error al Guardar los datos. Favor comuníquese con Mesa de Ayuda.';
+			}
 		}
 		$salida = array("error" => $error, "correcto" => $correcto, "mensaje_error" => $mensaje_error);
 		$json = Zend_Json::encode($salida);
@@ -538,15 +555,22 @@ class Paciente extends Controller {
 		$json = array();
 
 		if (!empty($_POST['comuna'])) {
-			$comuna = $_POST['comuna'];
-			$daoCentroSalud = $this->load->model('DAOCentroSalud');
-			$centrosalud = $daoCentroSalud->getByIdComuna($comuna);
+			$comuna			= $_POST['comuna'];
+			$id_region		= $_SESSION['id_region'];
+			$daoCentroSalud	= $this->load->model('DAOCentroSalud');
+			$centrosalud	= $daoCentroSalud->getByIdComuna($comuna);
 
-			$i = 0;
-			foreach ($centrosalud as $cSalud) {
-				$json[$i]['id_centro_salud'] = $cSalud->id_centro_salud;
-				$json[$i]['gl_nombre_establecimiento'] = $cSalud->gl_nombre_establecimiento;
-				$i++;
+			if(empty($centrosalud)){
+				$centrosalud	= $daoCentroSalud->getByIdRegion($id_region);
+			}
+
+			if(!empty($centrosalud)){
+				$i = 0;
+				foreach ($centrosalud as $cSalud) {
+					$json[$i]['id_centro_salud']			= $cSalud->id_centro_salud;
+					$json[$i]['gl_nombre_establecimiento']	= $cSalud->gl_nombre_establecimiento;
+					$i++;
+				}
 			}
 		}
 		echo json_encode($json);
@@ -955,12 +979,12 @@ class Paciente extends Controller {
 	public function buscar() {
 		Acceso::redireccionUnlogged($this->smarty);
 		
-		$arrUsuario = $this->_DAOUsuario->getById($_SESSION['id']);
-		
 		$arrRegiones = $this->_DAORegion->getLista();
 		$this->smarty->assign("arrRegiones", $arrRegiones);
 		
-		if ($arrUsuario->id_perfil != 1 && $arrUsuario->id_perfil != 5){
+		if ($_SESSION['perfil'] != 1 && $_SESSION['perfil'] != 5){
+			$this->smarty->assign('bool_region', 1);
+			$this->smarty->assign('reg', $_SESSION['id_region']);
 			$region = $_SESSION['id_region'];
 			$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
 			$this->_addJavascript($jscode);
@@ -983,7 +1007,7 @@ class Paciente extends Controller {
 			$apellidos		= $parametros['apellidos'];
 			$cod_fonasa		= $parametros['cod_fonasa'];
 			$centro_salud	= $parametros['centro_salud'];
-			if ($arrUsuario->id_perfil != 1 && $arrUsuario->id_perfil != 5){
+			if ($_SESSION['perfil'] != 1 && $_SESSION['perfil'] != 5){
 				$region					= $_SESSION['id_region'];
 				$parametros['region']	= $_SESSION['id_region'];
 			} else {
@@ -1020,6 +1044,7 @@ class Paciente extends Controller {
 		$this->smarty->assign('mostrar',$mostrar);
 		$this->_display('Paciente/buscar.tpl');
 		$this->load->javascript(STATIC_FILES . "js/regiones.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/paciente/buscar.js");
 	}
 	
 }

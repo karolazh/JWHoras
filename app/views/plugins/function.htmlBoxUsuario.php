@@ -21,6 +21,7 @@ function smarty_function_htmlBoxUsuario($params, &$smarty) {
     if(!is_null($usuario)){
         $smarty->assign("rut", $usuario->gl_rut);
         $smarty->assign("id_usuario", $usuario->id_usuario);
+        $smarty->assign("id_usuario_original", $sesion->id_usuario_original);
         $smarty->assign("usuario", $usuario->gl_nombres . " " . $usuario->gl_apellidos);
         $smarty->assign("gl_nombre_perfil", $perfil->gl_nombre_perfil);
         $smarty->assign("id_perfil", $perfil->id_perfil);

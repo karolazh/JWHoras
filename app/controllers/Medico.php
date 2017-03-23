@@ -47,8 +47,14 @@ class Medico extends Controller {
 	*/
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
+		$id_perfil 		= $_SESSION['perfil'];
+		$id_region 		= $_SESSION['id_region'];
 
-		$where	= array('bo_acepta_programa'=>1, 'pre_empa.nr_orden' =>1, 'pre_empa.bo_finalizado' =>1);
+		if($id_perfil == 1 || $id_perfil == 5){
+			$where	= array('bo_acepta_programa'=>1, 'pre_empa.nr_orden' =>1, 'pre_empa.bo_finalizado' =>1);
+		} else {
+			$where	= array('bo_acepta_programa'=>1, 'pre_empa.nr_orden' =>1, 'pre_empa.bo_finalizado' =>1,'paciente.id_region'=>$id_region);
+		}
 		$join[]	= array('tabla'	=> 'pre_empa',
 						'on'	=> 'pre_empa.id_paciente',
 						'igual'	=> 'paciente.id_paciente'
@@ -68,7 +74,7 @@ class Medico extends Controller {
 	* @author: Victor Retamal <victor.retamal@cosof.cl>
 	*/
 	public function plan_tratamiento(){
-		Acceso::redireccionUnlogged($this->smarty);
+		//Acceso::redireccionUnlogged($this->smarty);
 
 		$parametros			= $this->request->getParametros();
 		$id_paciente		= $parametros[0];
