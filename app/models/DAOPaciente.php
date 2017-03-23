@@ -360,6 +360,7 @@ class DAOPaciente extends Model{
 						gl_longitud,
 						bo_reconoce,
 						bo_acepta_programa,
+						gl_codigo_fonasa,
 						fc_crea,
 						id_usuario_crea
 						)
@@ -387,6 +388,7 @@ class DAOPaciente extends Model{
 						'".$parametros['gl_longitud']."',
 						'".$parametros['chkReconoce']."',
 						".$parametros['chkAcepta'].",
+						".$parametros['gl_codigo_fonasa'].",
 						now(),
 						".$_SESSION['id']."
 						)
