@@ -112,7 +112,7 @@ class DAOEmpa extends Model{
     public function updateEmpa($parametros){
         $query	= "	UPDATE pre_empa SET
 						id_comuna						= ".$parametros['id_comuna'].",
-						gl_sector						= '".$parametros['gl_sector']."',
+						gl_sector						= ".$parametros['gl_sector'].",
 						id_institucion					= ".$parametros['id_institucion'].",
 						nr_ficha						= ".$parametros['nr_ficha'].",
 						fc_empa							= ".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_empa'])).",
@@ -180,6 +180,7 @@ class DAOEmpa extends Model{
 	public function verInfoById($id_empa) {
         $query	= "	SELECT 
 						pre_empa.*,
+						IFNULL(gl_sector,0) as gl_sector,
 						IFNULL(fc_mamografia,0) as fc_mamografia,
 						IFNULL(bo_embarazo,-1) as bo_embarazo,
 						IFNULL(bo_consume_alcohol,-1) as bo_consume_alcohol,
