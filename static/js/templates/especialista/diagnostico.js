@@ -47,10 +47,10 @@ $("#guardar").on('click', function (e) {
 
 var CIE10 ={
     
-cargarSeccion1porCie10 : function(cie10,combo,seccion){
+cargarSeccionporCapitulo : function(cie10,combo,seccion){
             console.log(cie10);
 		if(cie10 != 0){
-			$.post(BASE_URI+'index.php/Especialista/cargarSeccion1porCie10',{cie10:cie10},function(response){
+			$.post(BASE_URI+'index.php/Especialista/cargarSeccionporCapitulo',{cie10:cie10},function(response){
 				if(response.length > 0){
 					var total = response.length;
 					var options = '<option value="0">Seleccione CIE10 L2</option>';
@@ -68,6 +68,72 @@ cargarSeccion1porCie10 : function(cie10,combo,seccion){
 		}else{
                     $('#'+combo).html('<option value="0">Seleccione CIE10 L2</option>');
 		}
+	},
+    
+cargarGrupoporSeccion : function(seccion,combo,grupo){
+            console.log(seccion);
+		if(seccion != 0){
+			$.post(BASE_URI+'index.php/Especialista/cargarGrupoporSeccion',{seccion:seccion},function(response){
+				if(response.length > 0){
+					var total = response.length;
+					var options = '<option value="0">Seleccione CIE10 L3</option>';
+					for(var i=0; i<total; i++){
+						if(grupo == response[i].id_grupo){
+							options += '<option value="'+response[i].id_grupo+'" selected >'+response[i].gl_codigo+' '+response[i].gl_descripcion+'</option>';	
+						}else{
+							options += '<option value="'+response[i].id_grupo+'">'+response[i].gl_codigo+' '+response[i].gl_descripcion+'</option>';
+						}
+						
+					}
+					$('#'+combo).html(options);
+				}
+			},'json');
+		}else{
+                    $('#'+combo).html('<option value="0">Seleccione CIE10 L3</option>');
+		}
+	},
+    
+cargarCIE10porGrupo : function(grupo,combo,cie10){
+            console.log(grupo);
+		if(grupo != 0){
+			$.post(BASE_URI+'index.php/Especialista/cargarCIE10porGrupo',{grupo:grupo},function(response){
+				if(response.length > 0){
+					var total = response.length;
+					var options = '<option value="0">Seleccione CIE10 L4</option>';
+					for(var i=0; i<total; i++){
+						if(cie10 == response[i].id_cie10){
+							options += '<option value="'+response[i].id_cie10+'" selected >'+response[i].gl_codigo+' '+response[i].gl_descripcion+'</option>';	
+						}else{
+							options += '<option value="'+response[i].id_cie10+'">'+response[i].gl_codigo+' '+response[i].gl_descripcion+'</option>';
+						}
+						
+					}
+					$('#'+combo).html(options);
+				}
+			},'json');
+		}else{
+                    $('#'+combo).html('<option value="0">Seleccione CIE10 L4</option>');
+		}
 	}
 
 };
+
+$("#cie10").on('change', function (e) {
+	if ($("#cie102").val() > 0 || $("#cie103").val() > 0 || $("#cie104").val() > 0) {
+		//$("#cie102").val(0);
+		$("#cie103")
+				.empty()
+				.append('<option value="0">Seleccione CIE10 L3</option>');
+		$("#cie104")
+				.empty()
+				.append('<option value="0">Seleccione CIE10 L4</option>');
+	}
+});
+
+$("#cie102").on('change', function (e) {
+	if ($("#cie103").val() > 0 || $("#cie104").val() > 0) {
+		$("#cie104")
+				.empty()
+				.append('<option value="0">Seleccione CIE10 L4</option>');
+	}
+});

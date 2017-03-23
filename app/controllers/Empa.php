@@ -90,11 +90,13 @@ class Empa extends Controller{
 		/* Obtener id de paciente a través de id de dau */
 		$id_pac = 1;
 		//Cargar Datos Enfermera
-		$gl_comuna = $this->_DAOComuna->getById($_SESSION['id_comuna']);
-		$gl_institucion = $this->_DAOCentroSalud->getById($_SESSION['id_institucion']);
+		//$gl_comuna = $this->_DAOComuna->getById($_SESSION['id_comuna']);
+		//$gl_institucion = $this->_DAOCentroSalud->getById($_SESSION['id_institucion']);
 
-		$this->smarty->assign("gl_comuna", $gl_comuna->gl_nombre_comuna);
-		$this->smarty->assign("gl_institucion", $gl_institucion->gl_nombre_establecimiento);
+		$this->smarty->assign("gl_comuna", $id_empa->gl_comuna);
+		$this->smarty->assign("id_comuna", $id_empa->id_comuna_paciente);
+		$this->smarty->assign("gl_institucion", $id_empa->gl_institucion);
+		$this->smarty->assign("id_institucion", $id_empa->id_institucion_paciente);
 		
 		//Cargar Datos Examen Paciente
 		$hipertension = $this->_DAOPacienteExamen->getByIdPacienteExamen($id_paciente,9);

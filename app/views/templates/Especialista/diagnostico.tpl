@@ -23,9 +23,9 @@
 				<div class="top-spaced"></div>
 				
 				<div class="form-group">
-					<label for="cie10" class="control-label col-sm-2">CIE10 1(*)</label>
+					<label for="cie10" class="control-label col-sm-2">CIE10 1</label>
 					<div class="col-sm-4">
-						<select class="form-control" id="cie10" name="cie10" onchange="CIE10.cargarSeccion1porCie10(this.value, 'cie102')">
+						<select class="form-control" id="cie10" name="cie10" onchange="CIE10.cargarSeccionporCapitulo(this.value, 'cie102')">
 							<option value="0">Seleccione CIE10 L1</option>
 							{foreach $arrCIE10Capitulo as $item}
 								<option value="{$item->id_capitulo}" >{$item->gl_codigo} {$item->gl_descripcion} </option>
@@ -38,13 +38,10 @@
 				<div class="top-spaced"></div>
 				
 				<div class="form-group">
-					<label for="cie102" class="control-label col-sm-2">CIE10 2(*)</label>
+					<label for="cie102" class="control-label col-sm-2">CIE10 2</label>
 					<div class="col-sm-4">
-						<select class="form-control" id="cie102" name="cie102">
+						<select class="form-control" id="cie102" name="cie102" onchange="CIE10.cargarGrupoporSeccion(this.value, 'cie103')">
 							<option value="0">Seleccione CIE10 L2</option>
-							{*foreach $arrMes as $item}
-								<option value="{$item->id_mes}" >{$item->gl_mes}</option>
-							{/foreach*}
 						</select>
 					</div>
 					<div class="col-sm-1"></div>
@@ -53,14 +50,22 @@
 				<div class="top-spaced"></div>
 				
 				<div class="form-group">
-					<label for="cie103" class="control-label col-sm-2">CIE10 3(*)</label>
+					<label for="cie103" class="control-label col-sm-2">CIE10 3</label>
 					<div class="col-sm-4">
-						<select class="form-control" id="cie103" name="cie103">
-							<option value="0">Seleccione CIE10</option>
-							<option value="1">CIE10 L3</option>
-							{*foreach $arrMes as $item}
-								<option value="{$item->id_mes}" >{$item->gl_mes}</option>
-							{/foreach*}
+						<select class="form-control" id="cie103" name="cie103" onchange="CIE10.cargarCIE10porGrupo(this.value, 'cie104')">
+							<option value="0">Seleccione CIE10 L3</option>
+						</select>
+					</div>
+					<div class="col-sm-1"></div>
+				</div>
+
+				<div class="top-spaced"></div>
+				
+				<div class="form-group">
+					<label for="cie104" class="control-label col-sm-2">CIE10 4</label>
+					<div class="col-sm-4">
+						<select class="form-control" id="cie104" name="cie104">
+							<option value="0">Seleccione CIE10 L4</option>
 						</select>
 					</div>
 					<div class="col-sm-1"></div>
@@ -102,7 +107,7 @@
 						<i class="fa fa-calendar"></i>  Re Agendar
 					</button>&nbsp;&nbsp;
 					<button type="button" id="cancelar"  class="btn btn-default" 
-							onclick="location.href = '{$base_url}/Especialista/'">
+							onclick="history.back(-1)">
 						<i class="fa fa-remove"></i>  Cancelar
 					</button>
 					<br/><br/>

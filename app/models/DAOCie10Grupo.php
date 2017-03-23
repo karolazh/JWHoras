@@ -55,6 +55,23 @@ class DAOCie10Grupo extends Model{
         }
     }
 
+	public function getDetalleByIdGrupo($id_grupo){
+		$query	= "	SELECT 
+						c.*
+					FROM pre_cie10_3_grupo g
+						LEFT JOIN pre_cie10_4 c ON g.id_grupo = c.id_grupo
+					WHERE g.id_grupo = ?";
+
+		$param	= array($id_grupo);
+        $resul	= $this->db->getQuery($query,$param);
+
+        if($resul->numRows > 0){
+            return $resul->rows;
+        }else{
+            return NULL;
+        }
+    }
+	
 }
 
 ?>

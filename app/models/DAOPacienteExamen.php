@@ -56,6 +56,34 @@ class DAOPacienteExamen extends Model{
     }
 
     public function getByIdPaciente($id_paciente){
+//        $query = "  SELECT 
+//                        examen.id_paciente_examen,
+//                        examen.id_tipo_examen,
+//                        examen.id_paciente,
+//                        examen.id_empa,
+//                        examen.id_laboratorio,
+//                        examen.gl_folio,
+//                        examen.gl_resultado,
+//                        examen.gl_resultado_descripcion,
+//                        date_format(examen.fc_crea,'%d-%m-%Y') AS fc_crea,
+//                        tipo.gl_nombre_examen,
+//                        lab.gl_nombre_laboratorio,
+//                        date_format(examen.fc_toma,'%d-%m-%Y') AS fc_toma,
+//                        date_format(examen.fc_resultado,'%d-%m-%Y') AS fc_resultado,
+//                        examen.gl_hora_toma,
+//                        examen.gl_observacion_toma,
+//                        date_format(examen.fc_toma,'%Y-%m-%d') AS fc_toma_calendar,
+//                        date_format(examen.fc_resultado,'%Y-%m-%d') AS fc_resultado_calendar
+//                    FROM pre_paciente_examen examen
+//                    LEFT JOIN pre_empa empa ON (empa.id_empa = examen.id_empa AND empa.bo_finalizado = 0)
+//                    LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
+//                    LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio 
+//                    WHERE examen.id_paciente = ?
+//                    ORDER BY examen.fc_crea DESC";
+//                    
+        //$param	= array($id_paciente);
+        //$result	= $this->db->getQuery($query, $param);
+        
         $query = "  SELECT 
                         examen.id_paciente_examen,
                         examen.id_tipo_examen,
@@ -151,7 +179,31 @@ class DAOPacienteExamen extends Model{
      * @param  int   $id_paciente Id de Paciente
      * @return array Listado de Exámenes x Paciente "Alterado"
 	 */
-    public function getExamenAleradoByIdPaciente($id_paciente){        
+    public function getExamenAleradoByIdPaciente($id_paciente){
+//        $query = "  SELECT
+//                        examen.id_paciente_examen ,
+//                        examen.id_tipo_examen,
+//                        examen.id_empa,
+//                        examen.id_laboratorio,
+//                        examen.gl_folio,
+//                        examen.gl_resultado,
+//                        examen.gl_resultado_descripcion,
+//                        date_format(examen.fc_crea,'%d-%m-%Y') AS fc_crea,
+//                        tipo.gl_nombre_examen,
+//                        lab.gl_nombre_laboratorio,
+//                        date_format(examen.fc_toma,'%d-%m-%Y') AS fc_toma,
+//                        date_format(examen.fc_resultado,'%d-%m-%Y') AS fc_resultado
+//                    FROM pre_paciente_examen examen
+//                    LEFT JOIN pre_empa empa ON (empa.id_empa = examen.id_empa AND empa.bo_finalizado = 0)
+//                    LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
+//                    LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio 
+//                    WHERE examen.id_paciente = ?
+//                    AND examen.gl_resultado = 'A'
+//                    ORDER BY examen.fc_crea DESC";
+        
+        //$param	= array($id_paciente);
+        //$result	= $this->db->getQuery($query, $param);
+        
         $query = "  SELECT 
                         examen.id_paciente_examen,
                         examen.id_tipo_examen,
@@ -332,11 +384,11 @@ class DAOPacienteExamen extends Model{
     }
 	
 	public function getByIdPacienteExamen($id_paciente,$id_tipo_examen){
-        $query	= "	SELECT 
-						*
+        $query = "  SELECT 
+							*
                     FROM pre_paciente_examen
-                    WHERE id_paciente = ". $id_paciente ."
-						AND id_tipo_examen = ". $id_tipo_examen;
+                    WHERE	id_paciente = ". $id_paciente ."
+					AND		id_tipo_examen = ". $id_tipo_examen;
         
         $result	= $this->db->getQuery($query);
 
@@ -346,48 +398,21 @@ class DAOPacienteExamen extends Model{
             return NULL;
         }
     }
+	
+	public function getLastId(){
+        $query = "SELECT
+						MAX(id_paciente_examen) AS id_paciente_examen
+					FROM pre_paciente_examen
+					";
+        
+        $result	= $this->db->getQuery($query);
 
-    public function getAllByIdLaboratorio($id_laboratorio){
-        $query	= "	SELECT 
-                        examen.id_paciente_examen,
-                        examen.id_tipo_examen,
-                        examen.id_paciente,
-                        examen.id_empa,
-                        examen.id_laboratorio,
-                        examen.gl_folio,
-                        examen.gl_resultado,
-                        examen.gl_resultado_descripcion,
-                        date_format(examen.fc_crea,'%d-%m-%Y') AS fc_crea,
-                        tipo.gl_nombre_examen,
-                        lab.gl_nombre_laboratorio,
-                        date_format(examen.fc_toma,'%d-%m-%Y') AS fc_toma,
-                        date_format(examen.fc_resultado,'%d-%m-%Y') AS fc_resultado,
-                        examen.gl_hora_toma,
-                        examen.gl_observacion_toma,
-                        date_format(examen.fc_toma,'%Y-%m-%d') AS fc_toma_calendar,
-                        date_format(examen.fc_resultado,'%Y-%m-%d') AS fc_resultado_calendar,
-                        NULL AS fc_ultimo_pap_ano, 
-                        NULL AS fc_ultimo_pap_mes,
-						paciente.gl_rut,
-						paciente.gl_nombres,
-						paciente.gl_apellidos
-                    FROM pre_paciente_examen examen
-						LEFT JOIN pre_empa empa ON (empa.id_empa = examen.id_empa AND empa.bo_finalizado = 0)
-						LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
-						LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio
-						LEFT JOIN pre_paciente paciente ON paciente.id_paciente = examen.id_paciente
-                    WHERE examen.id_laboratorio = ?";
-
-        $param	= array($id_laboratorio);
-        $result	= $this->db->getQuery($query,$param);
-
-        if($result->numRows > 0) {
-            return $result->rows;
-        }else{
+        if ($result->numRows > 0) {
+            return $result->rows->row_0;
+        } else {
             return NULL;
         }
     }
-
 }
 
 ?>

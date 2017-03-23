@@ -148,11 +148,11 @@ class Paciente extends Controller {
 			$gl_grupo_tipo = 'Tratamiento';
 			$id_tipo_grupo = 2;
 		}
-		
+		$viene_adjunto_fonasa = FALSE;
 		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
 		$parametros['id_tipo_grupo'] = $id_tipo_grupo;
-		if ($parametros['prevision'] == "1"){
-			if (!empty($parametros['gl_codigo_fonasa'])){
+		if ($parametros['chkextranjero'] == "1"){
+			if ($parametros['gl_codigo_fonasa'] != ""){
 				if (!empty($_SESSION['adjuntos'])) {
 					foreach ($_SESSION['adjuntos'] as $adjunto){
 							if (($adjunto['tipo_adjunto'] == 3)){
@@ -161,15 +161,15 @@ class Paciente extends Controller {
 					}
 					if (!$viene_adjunto_fonasa){
 						$error			= true;
-						//$mensaje_error	= "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
+						$mensaje_error	= "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
 					}
 				} else {
 						$error = true;
-						//$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
+						$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
 				}
 			} else {
 				$error = true;
-				//$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe indicar su código.";
+				$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe indicar su código.";
 			}
 		}
 
@@ -240,8 +240,8 @@ class Paciente extends Controller {
 			}
 
 			$id_registro	= $this->_DAOPacienteRegistro->insertarRegistro($parametros, $id_paciente); /* id_registro real */
-			$id_empa1		= $this->_DAOEmpa->insert(array('id_paciente' => $id_paciente, 'nr_orden' => 1,'id_usuario_crea' => $_SESSION['id']));
-			$id_empa2		= $this->_DAOEmpa->insert(array('id_paciente' => $id_paciente, 'nr_orden' => 2,'id_usuario_crea' => $_SESSION['id']));
+			$id_empa1		= $this->_DAOEmpa->insert(array('id_paciente' => $id_paciente, 'nr_orden' => 1));
+			$id_empa2		= $this->_DAOEmpa->insert(array('id_paciente' => $id_paciente, 'nr_orden' => 2));
 
 			for($i=1; $i<=10; $i++ ){
 				$id_audit1	= $this->_DAOEmpaAudit->insert(array('id_empa' => $id_empa1,'id_pregunta' => $i,'id_usuario_crea' => $_SESSION['id']));

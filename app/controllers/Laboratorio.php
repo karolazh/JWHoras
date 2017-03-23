@@ -83,7 +83,7 @@ class Laboratorio extends Controller {
         
         //Datos de Paciente
         $detPaciente = $this->_DAOPaciente->getByIdPaciente($id_paciente);        
-        if (!is_null($detPaciente)) {            
+        if (!is_null($detPaciente)) {
             $run = "";
             if ($detPaciente->bo_extranjero == 0) {
                 $run = $detPaciente->gl_rut;
@@ -174,6 +174,12 @@ class Laboratorio extends Controller {
             $id_tipo_examen = $detExamen->id_tipo_examen;
             $id_paciente = $detExamen->id_paciente;
             $id_laboratorio = $detExamen->id_laboratorio;
+            //guarda id_empa para validar origen de examen
+            if (!is_null($detExamen->id_empa)) {
+                $id_empa = $detExamen->id_empa;
+            } else {
+                $id_empa = "";
+            }
             
             //if ($perfil == "7") {
                 $rut_lab = $_SESSION['rut'];
@@ -220,6 +226,7 @@ class Laboratorio extends Controller {
 			$this->smarty->assign("id_tipo_examen", $id_tipo_examen);
 			$this->smarty->assign("id_paciente", $id_paciente);
 			$this->smarty->assign("id_laboratorio", $id_laboratorio);
+            $this->smarty->assign("id_empa", $id_empa);
 			$this->smarty->assign("rut_lab", $rut_lab);
 			$this->smarty->assign("nombre_lab", $nombre_lab);
 			$this->smarty->assign("gl_folio", $gl_folio);
@@ -259,6 +266,13 @@ class Laboratorio extends Controller {
         $id_paciente_examen = $_POST['id_paciente_examen'];
         $id_tipo_examen = $_POST['id_tipo_examen'];
         $id_paciente = $_POST['id_paciente'];
+        //$id_empa = $_POST['id_empa'];
+        //if (isset($_POST['id_empa'])) {
+        if ($_POST['id_empa'] != "") {
+            $id_empa = $_POST['id_empa'];
+        } else {
+            $id_empa = NULL;
+        }
         if ($id_perfil == 7){
             $id_usuario_toma = $id_usuario;
         } else {
@@ -277,7 +291,6 @@ class Laboratorio extends Controller {
         $gl_resultado_descripcion = $_POST['gl_resultado_descripcion'];
         $gl_resultado_indicacion = $_POST['gl_resultado_indicacion'];
         
-        $grilla = "";
         $upd_examen = $this->_DAOPacienteExamen->update(array('id_usuario_toma' => $id_usuario_toma,
                                                             'gl_rut_persona_toma' => $gl_rut_toma,
                                                             'gl_nombre_persona_toma' => $gl_nombre_toma,
@@ -290,38 +303,70 @@ class Laboratorio extends Controller {
                                                             'id_usuario_act' => $_SESSION['id']
                                                             ), 
                                                             $id_paciente_examen, 'id_paciente_examen');
-
+        
+        $resultado = NULL;
         if ($upd_examen) {
-            //Actualiza Grilla Exámenes x Paciente
-            $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
-            $this->smarty->assign('arrExamenes', $arrExamenes);
-            $grilla = $this->smarty->fetch('laboratorio/grillaExamenesLaboratorio.tpl');
-            
-            $correcto = true;
+            //*** Caro 2017-03-21: Actualiza resultado de examen si fue agendado en EMPA ***//
+            if (!is_null($id_empa)) {
+            //if ($id_empa != NULL){
+                if (($id_tipo_examen == 1) or ($id_tipo_examen == 7) or ($id_tipo_examen == 9)){
+                    //Si examen es "Glicemia"/"Colesterol"/"Hipertensión"
+                    //ESTOS SE GUARDARÁN EN EXAMENES AGENDAD0S, 
+                    //YA QUE SE INGRESAN LOS PRIMEROS VALORES EN EMPA
+                } elseif (($id_tipo_examen == 2) or ($id_tipo_examen == 3) or ($id_tipo_examen == 4)) {
+                    //Si examen es "VDRL, RPR, VIH"
+                    if ($gl_resultado == "P") {
+                        $resultado = 0; //POSITIVO
+                    } elseif ($gl_resultado == "N") {
+                        $resultado = 1; //NEGATIVO
+                    }
+                    //actualiza resultado según tipo de examen
+                    if ($id_tipo_examen == 2) {
+                        $resp = $this->_DAOEmpa->update(array('bo_vdrl' => $resultado), $id_empa, 'id_empa');
+                    } elseif ($id_tipo_examen == 3) {
+                        $resp = $this->_DAOEmpa->update(array('bo_rpr' => $resultado), $id_empa, 'id_empa');
+                    } elseif ($id_tipo_examen == 4) {
+                        $resp = $this->_DAOEmpa->update(array('bo_vih' => $resultado), $id_empa, 'id_empa');
+                    }
+                } elseif (($id_tipo_examen == 5) or ($id_tipo_examen == 6) or ($id_tipo_examen == 8)) {
+                    //Si examen es "Baciloscipia"/"PAP"/"Mamografía"
+                    if ($gl_resultado == "A") {
+                        $resultado = 0; //ALTERADO
+                    } elseif ($gl_resultado == "N") {
+                        $resultado = 1; //NEGATIVO
+                    }
+                    //actualiza resultado según tipo de examen
+                    if ($id_tipo_examen == 5) {
+                        $resp = $this->_DAOEmpa->update(array('bo_baciloscopia_resultado' => $resultado), $id_empa, 'id_empa');
+                    } elseif ($id_tipo_examen == 6) {
+                        $resp = $this->_DAOEmpa->update(array('bo_pap_resultado_nuevo' => $resultado), $id_empa, 'id_empa');
+                    } elseif ($id_tipo_examen == 8) {
+                        $resp = $this->_DAOEmpa->update(array('bo_mamografia_resultado' => $resultado), $id_empa, 'id_empa');
+                    }
+                }
+                
+                if ($resp) {
+                    $correcto = true;
+                } else {
+                    $error = true;
+                }
+            } else {
+                $correcto = true;
+            }
         } else {
             $error = true;
         }
         
+        //Actualiza Grilla Exámenes x Paciente
+        //$grilla = "";
+        $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
+        $this->smarty->assign('arrExamenes', $arrExamenes);
+        $grilla = $this->smarty->fetch('laboratorio/grillaExamenesLaboratorio.tpl');
+        
         $salida = array("error"    => $error,
                         "correcto" => $correcto,
-                        "grilla" => $grilla);
-
-        $this->smarty->assign("hidden", "");
-        $json = Zend_Json::encode($salida);
-
-        echo $json;
-    }
-    
-    public function buscarExamen() {
-        header('Content-type: application/json');
-
-        $correcto = true;
-        $error = false;
-        
-        //...
-        
-        $salida = array("error"    => $error,
-                        "correcto" => $correcto);
+                        "grilla" => $grilla,
+                        "idempa" => $id_empa);
 
         $this->smarty->assign("hidden", "");
         $json = Zend_Json::encode($salida);

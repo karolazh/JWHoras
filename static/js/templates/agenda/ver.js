@@ -89,10 +89,13 @@ var Agenda = {
                 contentType : false,
                 success : function(response){
                     if(response.correcto == true){
+
                         $('#verAgenda_' + id_examen).hide();
                         $('#verExamen_' + id_examen).show();
+						$('#id_paciente_examen_' + response.gl_examen).val(response.ultimo_id);
                         //alert(response.id_agenda);
-                        xModal.success("OK: El paciente fue agendado" + $('#verExamen_' + id_examen).val(), function(){
+                        //xModal.success("OK: El paciente fue agendado" + $('#verExamen_' + id_examen).val(), function(){
+                        xModal.success("OK: El paciente fue agendado", function(){
                             //Valida si está ingresando un examen nuevo desde laboratorio...
                             //...para recargar grilla de exámenes
                             if (id_examen == "") {
