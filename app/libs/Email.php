@@ -5,7 +5,6 @@ class Email{
 	function __construct(){
 		
 	}
-	
 
 	/**
 	 * Enviar correo electronico
@@ -22,26 +21,24 @@ class Email{
 		
 		$mail = new PHPMailer();
 		$mail->IsSMTP(); // telling the class to use SMTP
-		$mail->Host       = "mail.minsal.cl";           // SMTP server
-		//$mail->SMTPDebug  = 2;                         // enables SMTP debug information (for testing)
-		$mail->SMTPAuth   = true;                         // enable SMTP authentication
-		$mail->Host       = "mail.minsal.cl";           // sets the SMTP server
-		$mail->Port       = 25;                      // set the SMTP port for the GMAIL server 465
-		$mail->Username   = "sistemas";            // SMTP account username
-		$mail->Password   = "siste14S";               // SMTP account password
-		//$mail->AddReplyTo("noresponder@minsal.cl","No responder - RAPSINET");
-		$nombre_remitente = 'noresponder@minsal.cl';
-		$mail->CharSet = 'utf-8';
+		$mail->Host			= "mail.minsal.cl";			// SMTP server
+		//$mail->SMTPDebug	= 2;						// enables SMTP debug information (for testing)
+		$mail->SMTPAuth		= true;						// enable SMTP authentication
+		$mail->Host			= "mail.minsal.cl";			// sets the SMTP server
+		$mail->Port			= 25;						// set the SMTP port for the GMAIL server 465
+		$mail->Username		= "sistemas";				// SMTP account username
+		$mail->Password		= "siste14S";				// SMTP account password
+		$nombre_remitente	= 'noresponder@minsal.cl';
+		$mail->CharSet		= 'utf-8';
 		$mail->IsHTML(true);
-		$mail->From = $nombre_remitente;
-		$mail->FromName = 'Minsal - PREDEFEM';
-		$mail->Subject = $asunto;
+		$mail->From			= $nombre_remitente;
+		$mail->FromName		= 'No responder - Minsal';
+		$mail->Subject		= $asunto;
 		$mail->AddAddress($destinatario);
-		$mail->Body = $mensaje;
+		$mail->Body			= $mensaje;
+
 		if($adjuntos){
 			if(is_array($adjuntos)){
-
-			}else{
 
 			}
 		}
@@ -51,9 +48,7 @@ class Email{
 		}else{
 			return false;
 		}
-		
 	}
 }
-
 
 ?>
