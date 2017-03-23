@@ -70,13 +70,20 @@ class Paciente extends Controller {
 
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
-		$id_perfil = $_SESSION['perfil'];
-		$id_region = $_SESSION['id_region'];
+		$id_perfil 		= $_SESSION['perfil'];
+		$id_region 		= $_SESSION['id_region'];
+		$id_institucion = $_SESSION['id_institucion'];
+
 		if($id_perfil == 1 || $id_perfil == 5){
-			$arr = $this->_DAOPaciente->getListaDetalle();
+			$arr	= $this->_DAOPaciente->getListaDetalle();
+		} else if($id_perfil == 3){
+			$where	= array('paciente.id_region'=>$id_region, 'paciente.id_institucion' =>$id_institucion);
+			$arr	= $this->_DAOPaciente->getListaDetalle($where);
 		} else {
-			$arr = $this->_DAOPaciente->getListaDetalleRegion($id_region);
+			$where	= array('paciente.id_region'=>$id_region);
+			$arr	= $this->_DAOPaciente->getListaDetalle($where);
 		}
+
 		$this->smarty->assign('arrResultado', $arr);
 		$this->smarty->assign('titulo', 'Pacientes');
 
