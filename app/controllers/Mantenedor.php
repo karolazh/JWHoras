@@ -89,7 +89,7 @@ class Mantenedor extends Controller{
 	}
 
 	public function cambiarUsuario(){
-		Acceso::redireccionUnlogged($this->smarty);
+		//Acceso::redireccionUnlogged($this->smarty);
 		$where		= array('bo_activo' => 1);
 		
 		if($_SESSION['id_usuario_original'] == 0){
@@ -104,7 +104,7 @@ class Mantenedor extends Controller{
 	}
 
 	public function procesarCambio(){
-		Acceso::redireccionUnlogged($this->smarty);
+		//Acceso::redireccionUnlogged($this->smarty);
 
 		$correcto			= false;
 		$mensaje			= '';
@@ -157,7 +157,7 @@ class Mantenedor extends Controller{
 	}
 
 	public function volver_usuario(){
-		Acceso::redireccionUnlogged($this->smarty);
+		//Acceso::redireccionUnlogged($this->smarty);
 
 		$correcto			= false;
 		$mensaje			= '';

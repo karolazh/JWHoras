@@ -1,6 +1,8 @@
+{* 
 <script type="text/javascript" src="{$static}js/plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript" src="{$static}js/plugins/select2/i18n/es.js"></script>
 <link rel="stylesheet" href="{$static}js/plugins/select2/select2.min.css" />
+*}
 	
 <form id="form">
 

@@ -65,6 +65,7 @@ var Mantenedor_usuario = {
 
 	});
 
+	/*
 	$(".select2").select2({
 							language: "es",
 							//tags: false,
@@ -73,3 +74,4 @@ var Mantenedor_usuario = {
 							//minimumResultsForSearch: -1
 							dropdownParent: $(".modal.fade.in")
 						});
+						*/

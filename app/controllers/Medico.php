@@ -74,7 +74,7 @@ class Medico extends Controller {
 	* @author: Victor Retamal <victor.retamal@cosof.cl>
 	*/
 	public function plan_tratamiento(){
-		Acceso::redireccionUnlogged($this->smarty);
+		//Acceso::redireccionUnlogged($this->smarty);
 
 		$parametros			= $this->request->getParametros();
 		$id_paciente		= $parametros[0];
