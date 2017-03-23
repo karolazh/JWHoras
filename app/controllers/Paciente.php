@@ -155,7 +155,7 @@ class Paciente extends Controller {
 			if ($parametros['gl_codigo_fonasa'] != ""){
 				if (!empty($_SESSION['adjuntos'])) {
 					foreach ($_SESSION['adjuntos'] as $adjunto){
-							if (($adjunt->tipo_adjunto == 3)){
+							if (($adjunto['tipo_adjunto'] == 3)){
 								$viene_adjunto_fonasa = TRUE;
 							}
 					}
