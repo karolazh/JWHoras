@@ -634,115 +634,140 @@ class Empa extends Controller{
 
 	
 	public function guardarFinalizado($parametros){
-		//print_r($parametros); die;
+		//print_r($parametros);die;
 		if ($parametros['gl_sector'] == 'NULL') {
-			return FALSE;
+			//return FALSE;
 		}
 		if ($parametros['nr_ficha'] == 'NULL') {
-			return FALSE;
+			//return FALSE;
 		}
 
 		if ($parametros['fc_empa'] == 'NULL') {
+			//die('1');
 			return FALSE;
 		}
 
 		if ($parametros['bo_embarazo'] == 'NULL') {
+			//die('2');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_consume_alcohol'] == 'NULL') {
+			//die('3');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_consume_alcohol'] == 1 && $parametros['gl_puntos_audit'] == 'NULL') {
+			//die('4');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_fuma'] == 'NULL') {
+			//die('5');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_peso'] == 'NULL') {
+			//die('6');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_estatura'] == 'NULL') {
+			//die('7');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_imc'] == 'NULL') {
+			//die('8');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_circunferencia_abdominal'] == 'NULL') {
+			//die('9');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_pas'] == 'NULL') {
+			//die('10');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_pad'] == 'NULL') {
+			//die('11');
 			return FALSE;
 		}
 		
 		if ($parametros['nr_edad'] > 40 && $parametros['gl_glicemia'] == 'NULL') {
+			//die('12');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_imc'] >= 30 && $parametros['gl_glicemia'] == 'NULL') {
+			//die('13');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_antecedente_diabetes'] == 'NULL') {
+			//die('14');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_antecedente_diabetes'] == 1 && $parametros['gl_glicemia'] == 'NULL') {
+			//die('15');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_trabajadora_reclusa'] == 'NULL') {
+			//die('16');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_tos_productiva'] == 'NULL') {
+			//die('17');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_pap_realizado'] == 'NULL' && $parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0) {
+			//die('18');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_pap_realizado'] == 0 && 
 			$parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0){
+			//die('19');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_pap_realizado'] == 1 && ($parametros['bo_pap_resultado'] == 'NULL' || $parametros['fc_ultimo_pap_ano'] == 'NULL' || 
 			$parametros['fc_ultimo_pap_mes'] == 'NULL' || $parametros['bo_pap_vigente'] == 'NULL') && 
-			$parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0){
+			($parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0)){
+			//die('20');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_colesterol'] == 'NULL' && $parametros['nr_edad'] >= 40) {
+			//die('21');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_mamografia_realizada'] == 'NULL' && $parametros['bo_embarazo'] == 0) {
+			//die('22');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_mamografia_requiere'] == 'NULL' && $parametros['bo_embarazo'] == 0) {
+			//die('23');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_mamografia_realizada'] == 1 && $parametros['bo_embarazo'] == 0 && ($parametros['fc_mamografia_mes'] == 'NULL' || $parametros['fc_mamografia_ano'] == 'NULL' ||
 			$parametros['bo_mamografia_vigente'] == 'NULL' || $parametros['bo_mamografia_resultado_pasado'] == 'NULL')) {
+			//die('24');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_observaciones_empa'] == 'NULL') {
+			//die('25');
 			return FALSE;
 		}
 		
