@@ -180,7 +180,7 @@ class DAOEmpa extends Model{
 						gl_observaciones_empa			= ".$parametros['gl_observaciones_empa'].",
 						bo_finalizado					= 0,
 						fc_actualiza					= now(),
-						id_usuario_act					= ".$_SESSION['id']."
+						id_usuario_actualiza			= ".$_SESSION['id']."
 					WHERE id_empa = ".$parametros['id_empa']."
                     ";
 
