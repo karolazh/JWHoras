@@ -40,6 +40,7 @@ class Laboratorio extends Controller {
         $this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
         $this->_DAOLaboratorio			= $this->load->model("DAOLaboratorio");
         $this->_DAOTipoExamen			= $this->load->model("DAOTipoExamen");
+        $this->_DAOEmpa					= $this->load->model("DAOEmpa");
 	}
 
     /**
@@ -304,7 +305,7 @@ class Laboratorio extends Controller {
             $gl_pas = $_POST['gl_pas'];
         }
         $gl_resultado = $_POST['gl_resultado'];
-        
+
         $upd_examen = $this->_DAOPacienteExamen->update(array('id_usuario_toma' => $id_usuario_toma,
                                                             'gl_rut_persona_toma' => $gl_rut_toma,
                                                             'gl_nombre_persona_toma' => $gl_nombre_toma,
@@ -320,14 +321,15 @@ class Laboratorio extends Controller {
                                                             'id_usuario_actualiza' => $_SESSION['id']
                                                             ), 
                                                             $id_paciente_examen, 'id_paciente_examen');
+
         $resultado = NULL;
-        if ($upd_examen) {
+        if (true) {
             //*** Caro: Actualiza resultado de examen si fue agendado en EMPA ***//
             if ($id_empa != ""){
                 if ($id_tipo_examen == 1) { $resp = $this->_DAOEmpa->update(array('gl_glicemia' => $gl_glicemia), $id_empa, 'id_empa'); }
                 if ($id_tipo_examen == 7) { $resp = $this->_DAOEmpa->update(array('gl_colesterol' => $gl_colesterol), $id_empa, 'id_empa'); }
-                if ($id_tipo_examen == 9) { $resp = $this->_DAOEmpa->update(array('gl_pad' => $gl_glicemia), $id_empa, 'id_empa'); 
-                                            $resp = $this->_DAOEmpa->update(array('gl_pas' => $gl_glicemia), $id_empa, 'id_empa'); }
+                if ($id_tipo_examen == 9) { $resp = $this->_DAOEmpa->update(array('gl_pad' => $gl_pad), $id_empa, 'id_empa'); 
+                                            $resp = $this->_DAOEmpa->update(array('gl_pas' => $gl_pas), $id_empa, 'id_empa'); }
                 if (($id_tipo_examen == 2) || ($id_tipo_examen == 3) || ($id_tipo_examen == 4)) {
                     //Si examen es "VDRL, RPR, VIH"
                     if ($gl_resultado == "P") {
@@ -367,10 +369,12 @@ class Laboratorio extends Controller {
         
         //Actualiza Grilla Exámenes x Paciente
         //$grilla = "";
+		
         $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
         $this->smarty->assign('arrExamenes', $arrExamenes);
         $grilla = $this->smarty->fetch('laboratorio/grillaExamenesLaboratorio.tpl');
         
+		
         $salida = array("error"    => $error,
                         "correcto" => $correcto,
                         "grilla" => $grilla,
