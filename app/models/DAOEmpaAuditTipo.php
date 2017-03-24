@@ -3,10 +3,10 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_audit
+* Descripcion	: Modelo para Tabla pre_empa_audit_tipo
 * Plataforma	: !PHP
 * Creacion		: 03/03/2017
-* @name			DAOTipoAUDIT.php
+* @name			DAOEmpaAuditTipo.php
 * @version		1.0
 * @author		Orlando Vazquez <orlando.vazquez@cosof.cl>
 *=============================================================================
@@ -19,10 +19,10 @@
 *****************************************************************************
 */
 
-class DAOTipoAUDIT extends Model{
+class DAOEmpaAuditTipo extends Model{
 
-    protected $_tabla			= "pre_tipo_audit";
-    protected $_primaria		= "id_tipo_audit";
+    protected $_tabla			= "pre_empa_audit_tipo";
+    protected $_primaria		= "id_audit_tipo";
     protected $_transaccional	= false;
 
     function __construct()

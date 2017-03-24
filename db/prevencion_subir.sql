@@ -5445,27 +5445,27 @@ INSERT INTO `pre_tipo_area_urbano` (`id_area_urbano`, `gl_nombre_area_urbano`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pre_tipo_audit`
+-- Estructura de tabla para la tabla `pre_empa_audit_tipo`
 --
 
-CREATE TABLE IF NOT EXISTS `pre_tipo_audit` (
-  `id_tipo_audit` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pre_empa_audit_tipo` (
+  `id_audit_tipo` int(11) NOT NULL,
   `gl_descripcion` varchar(250) DEFAULT NULL,
   `nr_min` int(11) NOT NULL,
   `nr_max` int(11) NOT NULL,
   `gl_color` varchar(20) NOT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_audit`),
+  PRIMARY KEY (`id_audit_tipo`),
   KEY `IDX_nr_min` (`nr_min`),
   KEY `IDX_nr_max` (`nr_max`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `pre_tipo_audit`
+-- Volcado de datos para la tabla `pre_empa_audit_tipo`
 --
 
-INSERT INTO `pre_tipo_audit` (`id_tipo_audit`, `gl_descripcion`, `nr_min`, `nr_max`, `gl_color`, `id_usuario_crea`, `fc_crea`) VALUES
+INSERT INTO `pre_empa_audit_tipo` (`id_audit_tipo`, `gl_descripcion`, `nr_min`, `nr_max`, `gl_color`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 'Bajo Riesgo', 0, 7, '#008000', NULL, NULL),
 (2, 'Riesgo', 8, 15, '#BDB76B', NULL, NULL),
 (3, 'Problema', 16, 19, '#FF8C00', NULL, NULL),
