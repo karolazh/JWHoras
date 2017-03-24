@@ -109,15 +109,14 @@ class DAOEmpa extends Model{
                         pac.bo_extranjero,
                         pac.gl_run_pass,
                         cs.gl_nombre_establecimiento,
-                        -- comuna de institucion donde se registra paciente
                         cs.id_comuna,
                         com.gl_nombre_comuna,
                         usr.gl_rut,
                         concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario                        
                     FROM pre_empa emp
                     LEFT JOIN pre_paciente pac ON pac.id_paciente = emp.id_paciente
-                    LEFT JOIN pre_centro_salud cs ON cs.id_centro_salud = emp.id_institucion
-                    LEFT JOIN pre_comuna com ON com.id_comuna = cs.id_comuna
+                    LEFT JOIN pre_centro_salud cs ON cs.id_centro_salud = pac.id_institucion
+                    LEFT JOIN pre_comuna com ON com.id_comuna = pac.id_comuna
                     LEFT JOIN pre_usuario usr ON usr.id_usuario = emp.id_usuario_crea
                     WHERE emp.id_paciente = ?
                     AND nr_orden = ?

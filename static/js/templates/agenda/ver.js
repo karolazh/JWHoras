@@ -89,7 +89,6 @@ var Agenda = {
                 contentType : false,
                 success : function(response){
                     if(response.correcto == true){
-
                         $('#verAgenda_' + id_examen).hide();
                         $('#verExamen_' + id_examen).show();
 						$('#id_paciente_examen_' + response.gl_examen).val(response.ultimo_id);
@@ -98,9 +97,9 @@ var Agenda = {
                         xModal.success("OK: El paciente fue agendado", function(){
                             //Valida si está ingresando un examen nuevo desde laboratorio...
                             //...para recargar grilla de exámenes
-                            if (id_examen == "") {
+                            //if (id_examen == "") {
                                 $("#grilla-examenes").html(response.grilla);
-                            }
+                            //}
                             xModal.closeAll();
                         });
                     }
@@ -119,17 +118,16 @@ var Agenda = {
     }
 }
 
-
-	// funcion para que funcione el calendario estilo ASD
-	$(function () {
-                $(".datepicker").datetimepicker({
-                    locale: "es",
-					format: "DD/MM/YYYY",
-                });
+// funcion para que funcione el calendario estilo ASD
+$(function () {
+    $(".datepicker").datetimepicker({
+        locale: "es",
+        format: "DD/MM/YYYY",
     });
-	//funcion para que funcione la seleccion de hora estilo ASD
-	 $(function () {
-                $(".timepicker").datetimepicker({
-                    format: "LT"
-                });
-            });
+});
+//funcion para que funcione la seleccion de hora estilo ASD
+ $(function () {
+    $(".timepicker").datetimepicker({
+        format: "LT"
+    });
+});

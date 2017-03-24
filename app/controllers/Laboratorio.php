@@ -26,6 +26,7 @@ class Laboratorio extends Controller {
     protected $_DAOPacienteDireccion;
     protected $_DAOLaboratorio;
     protected $_DAOTipoExamen;
+    protected $_DAOEmpa;
 
 	function __construct() {
 		parent::__construct();
@@ -69,21 +70,20 @@ class Laboratorio extends Controller {
         Acceso::redireccionUnlogged($this->smarty);
 		$sesion = New Zend_Session_Namespace("usuario_carpeta");
         
-        $parametros = $this->request->getParametros();
-        $id_paciente = $parametros[0];
-        $perfil = $_SESSION['perfil'];
+        $parametros     = $this->request->getParametros();
+        $id_paciente    = $parametros[0];
+        $perfil         = $_SESSION['perfil'];
         
         //Combo Laboratorios
         $arrLaboratorios = $this->_DAOLaboratorio->getLista();
         //Combos Tipo Examen
-        $arrTipoExamen = $this->_DAOTipoExamen->getLista();
+        $arrTipoExamen   = $this->_DAOTipoExamen->getLista();
         //Grilla Exámenes x Paciente
-        $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
-        //*Pendiente Filtrar por exámenes de paciente*
+        $arrExamenes     = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
         $arrExamenesEmpa = $this->_DAOTipoExamen->getLista();
         
         //Datos de Paciente
-        $detPaciente = $this->_DAOPaciente->getByIdPaciente($id_paciente);        
+        $detPaciente     = $this->_DAOPaciente->getByIdPaciente($id_paciente);
         if (!is_null($detPaciente)) {
             $run = "";
             if ($detPaciente->bo_extranjero == 0) {
@@ -111,16 +111,16 @@ class Laboratorio extends Controller {
                 }
             }
             //Dirección Vigente de Paciente
-            $direccion = "";
-            $comuna = "";
-            $provincia = "";
-            $region = "";
+            $direccion  = "";
+            $comuna     = "";
+            $provincia  = "";
+            $region     = "";
             $detDireccion = $this->_DAOPacienteDireccion->getByIdDireccionVigente($id_paciente);
             if (!is_null($detDireccion)) {
-                $direccion = $detDireccion->gl_direccion;
-                $comuna = $detDireccion->gl_nombre_comuna;
-                $provincia = $detDireccion->gl_nombre_provincia;
-                $region = $detDireccion->gl_nombre_region;
+                $direccion  = $detDireccion->gl_direccion;
+                $comuna     = $detDireccion->gl_nombre_comuna;
+                $provincia  = $detDireccion->gl_nombre_provincia;
+                $region     = $detDireccion->gl_nombre_region;
             }
             
             $this->smarty->assign("id_paciente", $id_paciente);
@@ -150,12 +150,8 @@ class Laboratorio extends Controller {
         $this->smarty->assign('arrLaboratorios', $arrLaboratorios);
         $this->smarty->assign('arrTipoExamen', $arrTipoExamen);
         $this->smarty->assign('arrExamenes', $arrExamenes);
-        //$this->smarty->display('laboratorio/ver.tpl');
         $this->_display('laboratorio/ver.tpl');
         $this->load->javascript(STATIC_FILES . 'js/templates/laboratorio/ver.js');
-		//$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/bootstrap-datepicker.js');
-        //$this->load->javascript(STATIC_FILES . 'template/plugins/datepicker/locales/bootstrap-datepicker.es.js');
-		//$this->load->javascript('$(".datepicker").datepicker({ todayBtn: true,language: "es",   todayHighlight: true,autoclose: true});');
 	}
     
     /**
@@ -173,7 +169,7 @@ class Laboratorio extends Controller {
         $detExamen = $this->_DAOPacienteExamen->getById($id_paciente_examen);
         if (!is_null($detExamen)) {
             $id_tipo_examen = $detExamen->id_tipo_examen;
-            $id_paciente = $detExamen->id_paciente;
+            $id_paciente    = $detExamen->id_paciente;
             $id_laboratorio = $detExamen->id_laboratorio;
             //guarda id_empa para validar origen de examen
             if (!is_null($detExamen->id_empa)) {
@@ -182,26 +178,24 @@ class Laboratorio extends Controller {
                 $id_empa = "";
             }
             
-            //if ($perfil == "7") {
-                $rut_lab = $_SESSION['rut'];
-                $nombre_lab = $_SESSION['nombre'];
-            //}
-            
             if ($accion == "1") { //"Ver"
-                $rut_lab = $detExamen->gl_rut_persona_toma;
+                $rut_lab    = $detExamen->gl_rut_persona_toma;
                 $nombre_lab = $detExamen->gl_nombre_persona_toma;
+            } else {
+                $rut_lab    = $_SESSION['rut'];
+                $nombre_lab = $_SESSION['nombre'];
             }
             
             //Datos de Ingreso
-            $gl_folio = $detExamen->gl_folio;
-            $fc_toma = $detExamen->fc_toma;
-            $gl_hora_toma = $detExamen->gl_hora_toma;
+            $gl_folio            = $detExamen->gl_folio;
+            $fc_toma             = $detExamen->fc_toma;
+            $gl_hora_toma        = $detExamen->gl_hora_toma;
             $gl_observacion_toma = $detExamen->gl_observacion_toma;
             
             //Datos de registro
             $gl_resultado_0 = "";
             $gl_resultado_1 = "";
-            $fc_resultado = $detExamen->fc_resultado;
+            $fc_resultado   = $detExamen->fc_resultado;
             if (($id_tipo_examen == 2) or ($id_tipo_examen == 3) or ($id_tipo_examen == 3)) {
                 if ($detExamen->gl_resultado == "P") {
                     $gl_resultado_0 = "checked";
@@ -216,16 +210,16 @@ class Laboratorio extends Controller {
                 }
             }
             $gl_resultado_descripcion = $detExamen->gl_resultado_descripcion;
-            $gl_resultado_indicacion = $detExamen->gl_resultado_indicacion;
-            $gl_pad = $detExamen->gl_pad;
-            $gl_pas = $detExamen->gl_pas;
-            $gl_glicemia = $detExamen->gl_glicemia;
-            $gl_colesterol = $detExamen->gl_colesterol;
+            $gl_resultado_indicacion  = $detExamen->gl_resultado_indicacion;
+            $gl_pad                   = $detExamen->gl_pad;
+            $gl_pas                   = $detExamen->gl_pas;
+            $gl_glicemia              = $detExamen->gl_glicemia;
+            $gl_colesterol            = $detExamen->gl_colesterol;
 			
 			//Combo Laboratorios
 			$arrLaboratorios = $this->_DAOLaboratorio->getLista();
 			//Combos Tipo Examen
-			$arrTipoExamen = $this->_DAOTipoExamen->getLista();
+			$arrTipoExamen   = $this->_DAOTipoExamen->getLista();
 			
 			$this->smarty->assign("id_paciente_examen", $id_paciente_examen);
 			$this->smarty->assign("id_tipo_examen", $id_tipo_examen);
@@ -252,8 +246,6 @@ class Laboratorio extends Controller {
         }
 		$this->smarty->assign("perfil", $perfil);
 		$this->smarty->assign("accion", $accion);
-        
-        //muestra template
         $this->smarty->display("laboratorio/datosExamen.tpl");
         $this->load->javascript(STATIC_FILES . "js/templates/laboratorio/ver.js");
     }
@@ -267,69 +259,68 @@ class Laboratorio extends Controller {
         header('Content-type: application/json');
 
         $correcto = false;
-        $error = true;
+        $error    = true;
         
-        $id_perfil = $_SESSION['perfil'];
+        $id_perfil  = $_SESSION['perfil'];
         $id_usuario = $_SESSION['id'];
         
         $id_paciente_examen = $_POST['id_paciente_examen'];
-        $id_tipo_examen = $_POST['id_tipo_examen'];
-        $id_paciente = $_POST['id_paciente'];
-        $id_empa = $_POST['id_empa'];
+        $id_tipo_examen     = $_POST['id_tipo_examen'];
+        $id_paciente        = $_POST['id_paciente'];
+        $id_empa            = $_POST['id_empa'];
         if ($id_perfil == 7){
             $id_usuario_toma = $id_usuario;
         } else {
             $id_usuario_toma = NULL;
         }
-        $gl_rut_toma = $_POST['gl_rut_toma'];
-        $gl_nombre_toma = $_POST['gl_nombre_toma'];
+        $gl_rut_toma        = $_POST['gl_rut_toma'];
+        $gl_nombre_toma     = $_POST['gl_nombre_toma'];
         if (isset($_POST['gl_folio'])) {
             $gl_folio = $_POST['gl_folio'];
         } else {
             $gl_folio = NULL;
         }
-        $fc_resultado = $_POST['fc_resultado'];
-		$fc_resultado = str_replace("'","",Fechas::formatearBaseDatos($fc_resultado));
-        $gl_resultado_descripcion = $_POST['gl_resultado_descripcion'];
-        $gl_resultado_indicacion = $_POST['gl_resultado_indicacion'];
-        $gl_glicemia = NULL;
-        $gl_colesterol = NULL;
-        $gl_pad = NULL;
-        $gl_pas = NULL;
+        $fc_resultado       = $_POST['fc_resultado'];
+		$fc_resultado       = str_replace("'","",Fechas::formatearBaseDatos($fc_resultado));
+        $gl_glicemia        = NULL;
+        $gl_colesterol      = NULL;
+        $gl_pad             = NULL;
+        $gl_pas             = NULL;
         if ($id_tipo_examen == 1){
-            $gl_glicemia = $_POST['gl_glicemia'];
+            $gl_glicemia    = $_POST['gl_glicemia'];
         } elseif ($id_tipo_examen == 7){
-            $gl_colesterol = $_POST['gl_colesterol'];
+            $gl_colesterol  = $_POST['gl_colesterol'];
         } elseif ($id_tipo_examen == 9){
             $gl_pad = $_POST['gl_pad'];
             $gl_pas = $_POST['gl_pas'];
         }
-        $gl_resultado = $_POST['gl_resultado'];
+        $gl_resultado             = $_POST['gl_resultado'];
+        $gl_resultado_descripcion = $_POST['gl_resultado_descripcion'];
+        $gl_resultado_indicacion  = $_POST['gl_resultado_indicacion'];
 
-        $upd_examen = $this->_DAOPacienteExamen->update(array('id_usuario_toma' => $id_usuario_toma,
-                                                            'gl_rut_persona_toma' => $gl_rut_toma,
-                                                            'gl_nombre_persona_toma' => $gl_nombre_toma,
-                                                            'gl_folio' => $gl_folio,
-                                                            'fc_resultado' => $fc_resultado,
-                                                            'gl_resultado' => $gl_resultado,
-                                                            'gl_resultado_descripcion' => $gl_resultado_descripcion,
-                                                            'gl_resultado_indicacion' => $gl_resultado_indicacion,
-                                                            'gl_glicemia' => $gl_glicemia,
-                                                            'gl_colesterol' => $gl_colesterol,
-                                                            'gl_pad' => $gl_pad,
-                                                            'gl_pas' => $gl_pas,
-                                                            'id_usuario_actualiza' => $_SESSION['id']
-                                                            ), 
-                                                            $id_paciente_examen, 'id_paciente_examen');
+        $upd_examen = $this->_DAOPacienteExamen->update(array('id_usuario_toma'          => $id_usuario_toma,
+                                                              'gl_rut_persona_toma'      => $gl_rut_toma,
+                                                              'gl_nombre_persona_toma'   => $gl_nombre_toma,
+                                                              'gl_folio'                 => $gl_folio,
+                                                              'fc_resultado'             => $fc_resultado,
+                                                              'gl_glicemia'              => $gl_glicemia,
+                                                              'gl_colesterol'            => $gl_colesterol,
+                                                              'gl_pad'                   => $gl_pad,
+                                                              'gl_pas'                   => $gl_pas,
+                                                              'gl_resultado'             => $gl_resultado,
+                                                              'gl_resultado_descripcion' => $gl_resultado_descripcion,
+                                                              'gl_resultado_indicacion'  => $gl_resultado_indicacion,
+                                                              'id_usuario_actualiza'     => $_SESSION['id']
+                                                             ), $id_paciente_examen, 'id_paciente_examen');
 
         $resultado = NULL;
         if (true) {
             //*** Caro: Actualiza resultado de examen si fue agendado en EMPA ***//
             if ($id_empa != ""){
-                if ($id_tipo_examen == 1) { $resp = $this->_DAOEmpa->update(array('gl_glicemia' => $gl_glicemia), $id_empa, 'id_empa'); }
+                if ($id_tipo_examen == 1) { $resp = $this->_DAOEmpa->update(array('gl_glicemia'   => $gl_glicemia), $id_empa, 'id_empa'); }
                 if ($id_tipo_examen == 7) { $resp = $this->_DAOEmpa->update(array('gl_colesterol' => $gl_colesterol), $id_empa, 'id_empa'); }
-                if ($id_tipo_examen == 9) { $resp = $this->_DAOEmpa->update(array('gl_pad' => $gl_pad), $id_empa, 'id_empa'); 
-                                            $resp = $this->_DAOEmpa->update(array('gl_pas' => $gl_pas), $id_empa, 'id_empa'); }
+                if ($id_tipo_examen == 9) { $resp = $this->_DAOEmpa->update(array('gl_pad'        => $gl_pad), $id_empa, 'id_empa'); 
+                                            $resp = $this->_DAOEmpa->update(array('gl_pas'        => $gl_pas), $id_empa, 'id_empa'); }
                 if (($id_tipo_examen == 2) || ($id_tipo_examen == 3) || ($id_tipo_examen == 4)) {
                     //Si examen es "VDRL, RPR, VIH"
                     if ($gl_resultado == "P") {
@@ -339,8 +330,8 @@ class Laboratorio extends Controller {
                     }
                     //actualiza resultado según tipo de examen
                     if ($id_tipo_examen == 2) { $resp = $this->_DAOEmpa->update(array('bo_vdrl' => $resultado), $id_empa, 'id_empa'); }
-                    if ($id_tipo_examen == 3) { $resp = $this->_DAOEmpa->update(array('bo_rpr' => $resultado), $id_empa, 'id_empa'); } 
-                    if ($id_tipo_examen == 4) { $resp = $this->_DAOEmpa->update(array('bo_vih' => $resultado), $id_empa, 'id_empa'); }
+                    if ($id_tipo_examen == 3) { $resp = $this->_DAOEmpa->update(array('bo_rpr'  => $resultado), $id_empa, 'id_empa'); } 
+                    if ($id_tipo_examen == 4) { $resp = $this->_DAOEmpa->update(array('bo_vih'  => $resultado), $id_empa, 'id_empa'); }
 
                 } elseif (($id_tipo_examen == 5) || ($id_tipo_examen == 6) || ($id_tipo_examen == 8)) {
                     //Si examen es "Baciloscipia"/"PAP"/"Mamografía"
@@ -351,8 +342,8 @@ class Laboratorio extends Controller {
                     }
                     //actualiza resultado según tipo de examen
                     if ($id_tipo_examen == 5) { $resp = $this->_DAOEmpa->update(array('bo_baciloscopia_resultado' => $resultado), $id_empa, 'id_empa'); }
-                    if ($id_tipo_examen == 6) { $resp = $this->_DAOEmpa->update(array('bo_pap_resultado_nuevo' => $resultado), $id_empa, 'id_empa'); }
-                    if ($id_tipo_examen == 8) { $resp = $this->_DAOEmpa->update(array('bo_mamografia_resultado' => $resultado), $id_empa, 'id_empa'); }
+                    if ($id_tipo_examen == 6) { $resp = $this->_DAOEmpa->update(array('bo_pap_resultado_nuevo'    => $resultado), $id_empa, 'id_empa'); }
+                    if ($id_tipo_examen == 8) { $resp = $this->_DAOEmpa->update(array('bo_mamografia_resultado'   => $resultado), $id_empa, 'id_empa'); }
                 }
                 
                 if ($resp) {
@@ -369,16 +360,13 @@ class Laboratorio extends Controller {
         
         //Actualiza Grilla Exámenes x Paciente
         //$grilla = "";
-		
         $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
         $this->smarty->assign('arrExamenes', $arrExamenes);
         $grilla = $this->smarty->fetch('laboratorio/grillaExamenesLaboratorio.tpl');
-        
 		
-        $salida = array("error"    => $error,
-                        "correcto" => $correcto,
-                        "grilla" => $grilla,
-                        "idempa" => $id_empa);
+        $salida = array("error"     => $error,
+                        "correcto"  => $correcto,
+                        "grilla"    => $grilla);
 
         $this->smarty->assign("hidden", "");
         $json = Zend_Json::encode($salida);

@@ -56,21 +56,21 @@ class Agenda extends Controller {
         Acceso::redireccionUnlogged($this->smarty);
 		$sesion = New Zend_Session_Namespace("usuario_carpeta");
         
-        $parametros = $this->request->getParametros();
+        $parametros  = $this->request->getParametros();
         $id_paciente = $parametros[0];
         
         //Grilla Exámenes x Paciente
         $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
         
         //Genera string de fechas pa calendario
-        $arrAgenda = "";
+        $arrAgenda   = "";
         if (!is_null($arrExamenes)) {
             foreach($arrExamenes as $item){
                 /* 2017-03-21 Valida que examen no sea "Externo"; no debe aparecer en Calendario */
                 //if (($item->id_paciente_examen != 0) and (!is_null($item->gl_resultado))) {
                 if ($item->id_paciente_examen != 0) {
                     $descripcion = "Toma Examen ". $item->gl_nombre_examen;
-                    $fecha = $item->fc_toma_calendar;
+                    $fecha       = $item->fc_toma_calendar;
 
                     if (!is_null($item->gl_hora_toma)){
                         $hora = $item->gl_hora_toma;                    
@@ -78,7 +78,7 @@ class Agenda extends Controller {
                         $hora = "";
                     }
 					$id_paciente_examen	= $item->id_paciente_examen;
-                    $arrAgenda			= "$arrAgenda $descripcion,$fecha,$hora,$id_paciente_examen;"; 
+                    $arrAgenda   = "$arrAgenda $descripcion,$fecha,$hora,$id_paciente_examen;"; 
 
 					/*
                     if (!is_null($item->fc_resultado_calendar)){
@@ -120,16 +120,16 @@ class Agenda extends Controller {
                 }
             }
             //Dirección Vigente de Paciente
-            $direccion = "";
-            $comuna = "";
-            $provincia = "";
-            $region = "";
+            $direccion    = "";
+            $comuna       = "";
+            $provincia    = "";
+            $region       = "";
             $detDireccion = $this->_DAOPacienteDireccion->getByIdDireccionVigente($id_paciente);
             if (!is_null($detDireccion)) {
                 $direccion = $detDireccion->gl_direccion;
-                $comuna = $detDireccion->gl_nombre_comuna;
+                $comuna    = $detDireccion->gl_nombre_comuna;
                 $provincia = $detDireccion->gl_nombre_provincia;
-                $region = $detDireccion->gl_nombre_region;
+                $region    = $detDireccion->gl_nombre_region;
             }
             
             $this->smarty->assign("id_paciente", $id_paciente);
@@ -158,7 +158,6 @@ class Agenda extends Controller {
         $this->smarty->display('agenda/ver.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
 	}
-    
 	
     public function agendaLaboratorio() {
         Acceso::redireccionUnlogged($this->smarty);
@@ -216,7 +215,7 @@ class Agenda extends Controller {
         Acceso::redireccionUnlogged($this->smarty);
 		$sesion = New Zend_Session_Namespace("usuario_carpeta");
         
-        $parametros = $this->request->getParametros();
+        $parametros  = $this->request->getParametros();
         $id_paciente = $parametros[0];
         //valida si agenda examen de empa o de laboratorio
         if (isset($parametros[1])) {
@@ -234,15 +233,15 @@ class Agenda extends Controller {
         
         $perfil = $_SESSION['perfil'];
         if ($perfil == 7) { //"Laboratorio"
-            $rut_lab = $_SESSION['rut'];
-            $nombre_lab = $_SESSION['nombre'];
-            $id_laboratorio = $_SESSION['id_laboratorio'];            
+            $rut_lab         = $_SESSION['rut'];
+            $nombre_lab      = $_SESSION['nombre'];
+            $id_laboratorio  = $_SESSION['id_laboratorio'];            
             //Combo Laboratorios según tipo de usuario
             $arrLaboratorios = $this->_DAOLaboratorio->getLista();
         } else {
-            $rut_lab = "";
-            $nombre_lab = "";
-            $id_laboratorio = "";
+            $rut_lab         = "";
+            $nombre_lab      = "";
+            $id_laboratorio  = "";
             //Combo Laboratorios según tipo de usuario
             $arrLaboratorios = $this->_DAOLaboratorio->getByIdCentroSalud($id_centro_salud);
         }        
@@ -270,8 +269,8 @@ class Agenda extends Controller {
     public function guardarAgenda() {
         header('Content-type: application/json');
 
-        $correcto = false;
-        $error = true;
+        $correcto   = false;
+        $error      = true;
         
         $id_paciente = $_POST['id_paciente'];
         if ($_POST['id_empa'] != "") {
@@ -281,18 +280,17 @@ class Agenda extends Controller {
         }
         //$id_centro_salud = $_POST['id_centro_salud'];
         $id_laboratorio = $_POST['id_laboratorio'];
-        $id_examen = $_POST['id_examen'];
+        $id_examen      = $_POST['id_examen'];
         
-		if($id_examen==1){$gl_examen = 'glicemia';}
-		if($id_examen==2){$gl_examen = 'vdrl';}
-		if($id_examen==3){$gl_examen = 'rpr';}
-		if($id_examen==4){$gl_examen = 'vih';}
-		if($id_examen==5){$gl_examen = 'baciloscopia';}
-		if($id_examen==6){$gl_examen = 'pap';}
-		if($id_examen==7){$gl_examen = 'colesterol';}
-		if($id_examen==8){$gl_examen = 'mamografia';}
-		if($id_examen==9){$gl_examen = 'hipertension';}
-		
+		if($id_examen==1){ $gl_examen = 'glicemia'; }
+		if($id_examen==2){ $gl_examen = 'vdrl'; }
+		if($id_examen==3){ $gl_examen = 'rpr'; }
+		if($id_examen==4){ $gl_examen = 'vih'; }
+		if($id_examen==5){ $gl_examen = 'baciloscopia'; }
+		if($id_examen==6){ $gl_examen = 'pap'; }
+		if($id_examen==7){ $gl_examen = 'colesterol'; }
+		if($id_examen==8){ $gl_examen = 'mamografia'; }
+		if($id_examen==9){ $gl_examen = 'hipertension'; }
 		
         $fecha_agenda = $_POST['fecha_agenda'];
 		$fecha_agenda = str_replace("'","",Fechas::formatearBaseDatos($fecha_agenda));
@@ -303,15 +301,15 @@ class Agenda extends Controller {
         }
         $observacion = $_POST['observacion'];
         
-        $ins_agenda = array('id_tipo_examen' => $id_examen,
-                            'id_paciente' => $id_paciente,
-                            'id_empa' => $id_empa,
-                            'id_laboratorio' => $id_laboratorio,
-                            'fc_toma' => $fecha_agenda,
-                            'gl_hora_toma' => $hora_agenda,
+        $ins_agenda = array('id_tipo_examen'      => $id_examen,
+                            'id_paciente'         => $id_paciente,
+                            'id_empa'             => $id_empa,
+                            'id_laboratorio'      => $id_laboratorio,
+                            'fc_toma'             => $fecha_agenda,
+                            'gl_hora_toma'        => $hora_agenda,
                             'gl_observacion_toma' => $observacion,
-                            'fc_crea' => date('Y-m-d H:m:s'),
-                            'id_usuario_crea' => $_SESSION['id'],
+                            'fc_crea'             => date('Y-m-d H:m:s'),
+                            'id_usuario_crea'     => $_SESSION['id']
                         );
 
         $id_agenda = $this->_DAOPacienteExamen->insert($ins_agenda);
@@ -320,14 +318,14 @@ class Agenda extends Controller {
             //inserta ids en empa
             if ($id_empa != NULL){
 
-                if ($id_examen == 1) { $resp = $this->_DAOEmpa->update(array('id_examen_glicemia' => $id_agenda), $id_empa, 'id_empa'); }
-                if ($id_examen == 2) { $resp = $this->_DAOEmpa->update(array('id_examen_vdrl' => $id_agenda), $id_empa, 'id_empa'); }
-                if ($id_examen == 3) { $resp = $this->_DAOEmpa->update(array('id_examen_rpr' => $id_agenda), $id_empa, 'id_empa'); }
-                if ($id_examen == 4) { $resp = $this->_DAOEmpa->update(array('id_examen_vih' => $id_agenda), $id_empa, 'id_empa'); }
+                if ($id_examen == 1) { $resp = $this->_DAOEmpa->update(array('id_examen_glicemia'     => $id_agenda), $id_empa, 'id_empa'); }
+                if ($id_examen == 2) { $resp = $this->_DAOEmpa->update(array('id_examen_vdrl'         => $id_agenda), $id_empa, 'id_empa'); }
+                if ($id_examen == 3) { $resp = $this->_DAOEmpa->update(array('id_examen_rpr'          => $id_agenda), $id_empa, 'id_empa'); }
+                if ($id_examen == 4) { $resp = $this->_DAOEmpa->update(array('id_examen_vih'          => $id_agenda), $id_empa, 'id_empa'); }
                 if ($id_examen == 5) { $resp = $this->_DAOEmpa->update(array('id_examen_baciloscopia' => $id_agenda), $id_empa, 'id_empa'); }
-                if ($id_examen == 6) { $resp = $this->_DAOEmpa->update(array('id_examen_pap' => $id_agenda), $id_empa, 'id_empa'); }
-                if ($id_examen == 7) { $resp = $this->_DAOEmpa->update(array('id_examen_colesterol' => $id_agenda), $id_empa, 'id_empa'); }
-                if ($id_examen == 8) { $resp = $this->_DAOEmpa->update(array('id_examen_mamografia' => $id_agenda), $id_empa, 'id_empa'); }
+                if ($id_examen == 6) { $resp = $this->_DAOEmpa->update(array('id_examen_pap'          => $id_agenda), $id_empa, 'id_empa'); }
+                if ($id_examen == 7) { $resp = $this->_DAOEmpa->update(array('id_examen_colesterol'   => $id_agenda), $id_empa, 'id_empa'); }
+                if ($id_examen == 8) { $resp = $this->_DAOEmpa->update(array('id_examen_mamografia'   => $id_agenda), $id_empa, 'id_empa'); }
                 if ($id_examen == 9) { $resp = $this->_DAOEmpa->update(array('id_examen_hipertension' => $id_agenda), $id_empa, 'id_empa'); }
                 
                 if ($resp) {
@@ -352,9 +350,9 @@ class Agenda extends Controller {
         $this->smarty->assign('arrExamenes', $arrExamenes);
         $grilla = $this->smarty->fetch('laboratorio/grillaExamenesLaboratorio.tpl');
 
-        $salida = array("error"    => $error,
-                        "correcto" => $correcto,
-                        "grilla" => $grilla,
+        $salida = array("error"     => $error,
+                        "correcto"  => $correcto,
+                        "grilla"    => $grilla,
                         "id_agenda" => $id_agenda,
 						"ultimo_id" => $ultimoId->id_paciente_examen,
 						"gl_examen" => $gl_examen);

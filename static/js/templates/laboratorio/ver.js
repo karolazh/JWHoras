@@ -64,7 +64,7 @@ var Laboratorio = {
                     //alert("gl_colesterol:"+form.gl_pad.value);
                     //alert("gl_colesterol:"+form.gl_pas.value);
                     gl_pad = form.gl_pad.value;
-                    gl_pas = form.gl_pad.value;
+                    gl_pas = form.gl_pas.value;
                     if ((gl_pad == "") && (gl_pas == "")){
                         msg_error += 'Ingrese Hipertensión PAS/PAD (mm/Hg)<br/>';
                         error = true;
@@ -120,13 +120,13 @@ var Laboratorio = {
             formulario.append('gl_nombre_toma', gl_nombre_toma);
             formulario.append('gl_folio',gl_folio);
             formulario.append('fc_resultado', fc_resultado);
-            formulario.append('gl_resultado', resultado);
-            formulario.append('gl_resultado_descripcion', gl_resultado_descripcion);
-            formulario.append('gl_resultado_indicacion', gl_resultado_indicacion);
             formulario.append('gl_glicemia', gl_glicemia);
             formulario.append('gl_colesterol', gl_colesterol);
             formulario.append('gl_pad', gl_pad);
             formulario.append('gl_pas', gl_pas);
+            formulario.append('gl_resultado', resultado);
+            formulario.append('gl_resultado_descripcion', gl_resultado_descripcion);
+            formulario.append('gl_resultado_indicacion', gl_resultado_indicacion);
             
             //console.log(formulario);
             $.ajax({
