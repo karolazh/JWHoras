@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 192.168.0.200
--- Tiempo de generación: 24-03-2017 a las 19:15:02
+-- Tiempo de generación: 24-03-2017 a las 21:04:00
 -- Versión del servidor: 5.6.10
 -- Versión de PHP: 5.6.26
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria` (
   KEY `IDX_id_usuario` (`id_usuario`),
   KEY `IDX_gl_ip` (`gl_ip`),
   KEY `IDX_gl_tiempo` (`gl_tiempo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=495 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=595 ;
 
 --
 -- Volcado de datos para la tabla `pre_auditoria`
@@ -603,7 +603,108 @@ INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`
 (491, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = '''',fc_resultado = ''2017-03-31'',gl_resultado_descripcion = ''Desc1'',gl_resultado_indicacion = ''Indic1'',gl_glicemia = ''250'',gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ,fc_actualiza = ''2017-03-24 14:03:14'',id_usuario_act = ''1'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0014181137084961', '2017-03-24 17:13:51'),
 (492, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''111'',fc_resultado = ''2017-03-27'',gl_resultado_descripcion = ''PRUEBA 1'',gl_resultado_indicacion = ''INDICA 1'',gl_glicemia = ,gl_colesterol = ,gl_pad = ''1234'',gl_pas = ''1234'',gl_resultado = ,fc_actualiza = ''2017-03-24 16:03:00'',id_usuario_act = ''1'' WHERE id_paciente_examen = ''7''', '127.0.0.1', '0.0010678768157959', '2017-03-24 19:05:38'),
 (493, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''111'',fc_resultado = ''2017-03-27'',gl_resultado_descripcion = ''PRUEBA 1'',gl_resultado_indicacion = ''INDIC 1'',gl_glicemia = ,gl_colesterol = ,gl_pad = ''1234'',gl_pas = ''1234'',gl_resultado = ''N'',fc_actualiza = ''2017-03-24 16:03:35'',id_usuario_act = ''1'' WHERE id_paciente_examen = ''7''', '127.0.0.1', '0.0010969638824463', '2017-03-24 19:08:13'),
-(494, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-31'',gl_resultado_descripcion = ''DESC 1'',gl_resultado_indicacion = '' IND 1'',gl_glicemia = ,gl_colesterol = ''250'',gl_pad = ,gl_pas = ,gl_resultado = ''N'',fc_actualiza = ''2017-03-24 16:03:04'',id_usuario_act = ''1'' WHERE id_paciente_examen = ''13''', '127.0.0.1', '0.0011329650878906', '2017-03-24 19:13:42');
+(494, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-31'',gl_resultado_descripcion = ''DESC 1'',gl_resultado_indicacion = '' IND 1'',gl_glicemia = ,gl_colesterol = ''250'',gl_pad = ,gl_pas = ,gl_resultado = ''N'',fc_actualiza = ''2017-03-24 16:03:04'',id_usuario_act = ''1'' WHERE id_paciente_examen = ''13''', '127.0.0.1', '0.0011329650878906', '2017-03-24 19:13:42'),
+(495, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-27'',gl_resultado_descripcion = ''DESC'',gl_resultado_indicacion = ''IND'',gl_glicemia = ''125'',gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ''N'',fc_actualiza = ''2017-03-24 16:03:25'',id_usuario_act = ''1'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0011560916900635', '2017-03-24 19:16:03'),
+(496, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-27'',gl_resultado_descripcion = ''DESC'',gl_resultado_indicacion = ''IND'',gl_glicemia = ''125'',gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ''N'',fc_actualiza = ''2017-03-24 16:03:49'',id_usuario_act = ''1'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0010209083557129', '2017-03-24 19:17:27'),
+(497, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-31'',gl_resultado_descripcion = ''DESC'',gl_resultado_indicacion = ''IND'',gl_glicemia = ''125'',gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ''N'',fc_actualiza = ''2017-03-24 16:03:15'',id_usuario_act = ''1'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0010130405426025', '2017-03-24 19:17:52'),
+(498, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-31'',gl_resultado_descripcion = ''DESC'',gl_resultado_indicacion = ''IND'',gl_glicemia = ''125'',gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ''N'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0023229122161865', '2017-03-24 19:19:52'),
+(499, 1, '', '', '127.0.0.1', '0.0012819766998291', '2017-03-24 19:23:47'),
+(500, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-31'',gl_resultado_descripcion = ''desc'',gl_resultado_indicacion = ''ind'',gl_glicemia = ''124'',gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ''N'',fc_actualiza = ''now()'',id_usuario_act = ''1'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0011839866638184', '2017-03-24 19:28:09'),
+(501, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-31'',gl_resultado_descripcion = ''desc'',gl_resultado_indicacion = ''indic'',gl_glicemia = ''124'',gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ''N'',id_usuario_act = ''1'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0011050701141357', '2017-03-24 19:28:55'),
+(502, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-31'',gl_resultado_descripcion = ''DESC 1'',gl_resultado_indicacion = ''INDIC 1'',gl_glicemia = ''124'',gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ''N'',fc_actualiza = ''now()'',id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0014400482177734', '2017-03-24 19:30:55'),
+(503, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-31'',gl_resultado = ''N'',gl_resultado_descripcion = ''DESC 1'',gl_resultado_indicacion = ''INDIC 1'',gl_glicemia = ''124'',gl_colesterol = ,gl_pad = ,gl_pas = ,fc_actualiza = ''now()'',id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0013699531555176', '2017-03-24 19:33:47'),
+(504, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-31'',gl_resultado = ''N'',gl_resultado_descripcion = ''DESC 1'',gl_resultado_indicacion = ''INDIC 1'',gl_glicemia = ''124'',gl_colesterol = ,gl_pad = ,gl_pas = ,id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0015318393707275', '2017-03-24 19:35:16'),
+(505, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-31'',gl_resultado = ''N'',gl_resultado_descripcion = ''DESC 1'',gl_resultado_indicacion = ''INDIC 1'',gl_glicemia = ''124'',gl_colesterol = ,gl_pad = ,gl_pas = ,id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0015201568603516', '2017-03-24 19:40:26'),
+(506, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-31'',gl_resultado = ''N'',gl_resultado_descripcion = ''DESC 1'',gl_resultado_indicacion = ''INDIC 1'',gl_glicemia = ''124'',gl_colesterol = ,gl_pad = ,gl_pas = ,id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0016191005706787', '2017-03-24 19:43:51'),
+(507, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''1'',fc_resultado = ''2017-03-31'',gl_resultado = ''N'',gl_resultado_descripcion = ''DESC 1'',gl_resultado_indicacion = ''INDIC 1'',gl_glicemia = ''124'',gl_colesterol = ,gl_pad = ,gl_pas = ,id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''8''', '127.0.0.1', '0.0024869441986084', '2017-03-24 19:46:19'),
+(508, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''2'',fc_resultado = ''2017-03-31'',gl_resultado = ''N'',gl_resultado_descripcion = ''DESC 2'',gl_resultado_indicacion = ''INDIC 2'',gl_glicemia = ,gl_colesterol = ,gl_pad = ''1234'',gl_pas = ''1234'',id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''7''', '127.0.0.1', '0.0021400451660156', '2017-03-24 19:48:59'),
+(509, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''3'',fc_resultado = ''2017-03-31'',gl_resultado = ''N'',gl_resultado_descripcion = ''DESC 3'',gl_resultado_indicacion = ''INDIC 3'',gl_glicemia = ,gl_colesterol = ''250'',gl_pad = ,gl_pas = ,id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''13''', '127.0.0.1', '0.00160813331604', '2017-03-24 19:51:29'),
+(510, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''4'',fc_resultado = ''2017-03-31'',gl_resultado = ''N'',gl_resultado_descripcion = ''DESC 5'',gl_resultado_indicacion = ''INDIC 5'',gl_glicemia = ,gl_colesterol = ,gl_pad = ,gl_pas = ,id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''9''', '127.0.0.1', '0.0013668537139893', '2017-03-24 19:55:32'),
+(511, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''5'',fc_resultado = ''2017-03-31'',gl_resultado = ''A'',gl_resultado_descripcion = ''DESC 6'',gl_resultado_indicacion = ''INDIC 6'',gl_glicemia = ,gl_colesterol = ,gl_pad = ,gl_pas = ,id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''10''', '127.0.0.1', '0.0015361309051514', '2017-03-24 19:57:00'),
+(512, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = '''',fc_resultado = ''2017-03-31'',gl_resultado = ''N'',gl_resultado_descripcion = ''DESC 7'',gl_resultado_indicacion = ''INDIC 7'',gl_glicemia = ,gl_colesterol = ,gl_pad = ,gl_pas = ,id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''12''', '127.0.0.1', '0.0016229152679443', '2017-03-24 19:57:32'),
+(513, 2, 'INSERT', 'INSERT INTO pre_paciente_examen(id_tipo_examen,id_paciente,id_empa,id_laboratorio,fc_toma,gl_hora_toma,gl_observacion_toma,fc_crea,id_usuario_crea) VALUES(''9'',''5'',''9'',''1'',''2017-03-24'',''09:15'',''Tomar Examen'',''2017-03-24 18:03:22'',''2'')', '::1', '0.00099992752075195', '2017-03-24 20:05:37'),
+(514, 2, 'UPDATE', 'UPDATE pre_empa SET id_examen_hipertension = ''15'' WHERE id_empa = ''9''', '::1', '0.014001131057739', '2017-03-24 20:05:37'),
+(515, 2, 'INSERT', 'INSERT INTO pre_paciente_examen(id_tipo_examen,id_paciente,id_empa,id_laboratorio,fc_toma,gl_hora_toma,gl_observacion_toma,fc_crea,id_usuario_crea) VALUES(''2'',''5'',''9'',''1'',''2017-03-24'',''10:00'',''ok'',''2017-03-24 18:03:05'',''2'')', '::1', '0.0010001659393311', '2017-03-24 20:06:20'),
+(516, 2, 'UPDATE', 'UPDATE pre_empa SET id_examen_vdrl = ''16'' WHERE id_empa = ''9''', '::1', '0.00099992752075195', '2017-03-24 20:06:20'),
+(517, 2, 'INSERT', 'INSERT INTO pre_paciente_examen(id_tipo_examen,id_paciente,id_empa,id_laboratorio,fc_toma,gl_hora_toma,gl_observacion_toma,fc_crea,id_usuario_crea) VALUES(''3'',''5'',''9'',''1'',''2017-03-24'',''11:00'',''ok'',''2017-03-24 18:03:26'',''2'')', '::1', '0.002000093460083', '2017-03-24 20:06:41'),
+(518, 2, 'UPDATE', 'UPDATE pre_empa SET id_examen_rpr = ''17'' WHERE id_empa = ''9''', '::1', '0.00099992752075195', '2017-03-24 20:06:41'),
+(519, 2, 'INSERT', 'INSERT INTO pre_paciente_examen(id_tipo_examen,id_paciente,id_empa,id_laboratorio,fc_toma,gl_hora_toma,gl_observacion_toma,fc_crea,id_usuario_crea) VALUES(''4'',''5'',''9'',''1'',''2017-03-24'',''12:00'',''ok'',''2017-03-24 18:03:41'',''2'')', '::1', '0.00099992752075195', '2017-03-24 20:06:56'),
+(520, 2, 'UPDATE', 'UPDATE pre_empa SET id_examen_vih = ''18'' WHERE id_empa = ''9''', '::1', '0.002000093460083', '2017-03-24 20:06:56'),
+(521, 2, 'INSERT', 'INSERT INTO pre_paciente_examen(id_tipo_examen,id_paciente,id_empa,id_laboratorio,fc_toma,gl_hora_toma,gl_observacion_toma,fc_crea,id_usuario_crea) VALUES(''6'',''5'',''9'',''1'',''2017-03-25'',''09:00'',''ok'',''2017-03-24 18:03:57'',''2'')', '::1', '0.00099992752075195', '2017-03-24 20:07:12'),
+(522, 2, 'UPDATE', 'UPDATE pre_empa SET id_examen_pap = ''19'' WHERE id_empa = ''9''', '::1', '0.003000020980835', '2017-03-24 20:07:12'),
+(523, 2, 'UPDATE', 'UPDATE pre_empa SET gl_pad = ''85'' WHERE id_empa = ''9''', '::1', '0.0010001659393311', '2017-03-24 20:23:02'),
+(524, 2, 'UPDATE', 'UPDATE pre_empa SET gl_pas = ''85'' WHERE id_empa = ''9''', '::1', '0.0019998550415039', '2017-03-24 20:23:02'),
+(525, 2, 'UPDATE', 'UPDATE pre_empa SET gl_pad = ''85'' WHERE id_empa = ''9''', '::1', '0.00099992752075195', '2017-03-24 20:23:43'),
+(526, 2, 'UPDATE', 'UPDATE pre_empa SET gl_pas = ''85'' WHERE id_empa = ''9''', '::1', '0.00099992752075195', '2017-03-24 20:23:43'),
+(527, 2, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''1-9'',gl_nombre_persona_toma = ''Administrador '',gl_folio = ''7777'',fc_resultado = ''2017-03-26'',gl_resultado = ''N'',gl_resultado_descripcion = ''Todo ok'',gl_resultado_indicacion = ''Sin indicación.'',gl_glicemia = ,gl_colesterol = ,gl_pad = ''80'',gl_pas = ''100'',id_usuario_actualiza = ''2'' WHERE id_paciente_examen = ''15''', '::1', '0.0019998550415039', '2017-03-24 20:28:51'),
+(528, 2, 'UPDATE', 'UPDATE pre_empa SET gl_pad = ''80'' WHERE id_empa = ''9''', '::1', '0.0010001659393311', '2017-03-24 20:28:51'),
+(529, 2, 'UPDATE', 'UPDATE pre_empa SET gl_pas = ''100'' WHERE id_empa = ''9''', '::1', '0.002000093460083', '2017-03-24 20:28:51'),
+(530, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= 525,\n						id_institucion					= 2453,\n						nr_ficha						= 75877,\n						fc_empa							= ''2017-03-23'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= 1,\n						gl_puntos_audit					= 40,\n						bo_fuma							= 0,\n						gl_peso							= ''90'',\n						gl_estatura						= ''170'',\n						gl_imc							= ''31.14'',\n						gl_circunferencia_abdominal		= ''90'',\n						id_clasificacion_imc			= 6,\n						gl_pas							= ''110'',\n						gl_pad							= ''80'',\n						bo_antecedente_diabetes			= 1,\n						gl_glicemia						= ''50'',\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= 0,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= 1,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 0,\n						bo_pap_resultado				= NULL,\n						fc_ultimo_pap_ano				= NULL,	\n						fc_ultimo_pap_mes				= NULL,	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 0,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia_ano				= NULL,	\n						fc_mamografia_mes				= NULL,	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						bo_mamografia_requiere			= 1,\n						gl_observaciones_empa			= NULL,\n						bo_finalizado					= 0,\n						fc_actualiza					= now(),\n						id_usuario_actualiza			= 2\n					WHERE id_empa = 1', '::1', '0.0015439987182617', '2017-03-24 20:53:07'),
+(531, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 1', '::1', '0.0017809867858887', '2017-03-24 20:53:07'),
+(532, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 2', '::1', '0.0018858909606934', '2017-03-24 20:53:07'),
+(533, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 3', '::1', '0.0018050670623779', '2017-03-24 20:53:07'),
+(534, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 4', '::1', '0.0017850399017334', '2017-03-24 20:53:07'),
+(535, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 5', '::1', '0.0018939971923828', '2017-03-24 20:53:07'),
+(536, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 6', '::1', '0.0017480850219727', '2017-03-24 20:53:07'),
+(537, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 7', '::1', '0.0015759468078613', '2017-03-24 20:53:07'),
+(538, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 8', '::1', '0.0013279914855957', '2017-03-24 20:53:07'),
+(539, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 9', '::1', '0.0015099048614502', '2017-03-24 20:53:07'),
+(540, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 10', '::1', '0.0015668869018555', '2017-03-24 20:53:07'),
+(541, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 15', '::1', '0.0021040439605713', '2017-03-24 20:53:07'),
+(542, 2, 'INSERT', 'INSERT into pre_evento values(null,15,0,''1'',''AUDIT del EMPA 1  modificado el : 2017-03-24'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010509490966797', '2017-03-24 20:53:07'),
+(543, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 1', '::1', '0.0017409324645996', '2017-03-24 20:55:22'),
+(544, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 2', '::1', '0.0014469623565674', '2017-03-24 20:55:22'),
+(545, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 3', '::1', '0.0017449855804443', '2017-03-24 20:55:22'),
+(546, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 4', '::1', '0.0016191005706787', '2017-03-24 20:55:22'),
+(547, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 5', '::1', '0.0015158653259277', '2017-03-24 20:55:22'),
+(548, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 6', '::1', '0.0015180110931396', '2017-03-24 20:55:22'),
+(549, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 7', '::1', '0.0013139247894287', '2017-03-24 20:55:22'),
+(550, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 8', '::1', '0.0012140274047852', '2017-03-24 20:55:22'),
+(551, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 9', '::1', '0.0013868808746338', '2017-03-24 20:55:22'),
+(552, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 10', '::1', '0.0013039112091064', '2017-03-24 20:55:22'),
+(553, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 15', '::1', '0.0013120174407959', '2017-03-24 20:55:22'),
+(554, 2, 'INSERT', 'INSERT into pre_evento values(null,15,0,''1'',''AUDIT del EMPA 1  modificado el : 2017-03-24'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00079703330993652', '2017-03-24 20:55:22'),
+(555, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= 525,\n						id_institucion					= 2453,\n						nr_ficha						= 75877,\n						fc_empa							= ''2017-03-23'',\n						bo_embarazo						= 1,\n						bo_consume_alcohol				= 1,\n						gl_puntos_audit					= 40,\n						bo_fuma							= 0,\n						gl_peso							= ''90'',\n						gl_estatura						= ''170'',\n						gl_imc							= ''31.14'',\n						gl_circunferencia_abdominal		= ''90'',\n						id_clasificacion_imc			= 6,\n						gl_pas							= ''110'',\n						gl_pad							= ''80'',\n						bo_antecedente_diabetes			= 1,\n						gl_glicemia						= ''50'',\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= 0,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= 1,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 0,\n						bo_pap_resultado				= NULL,\n						fc_ultimo_pap_ano				= NULL,	\n						fc_ultimo_pap_mes				= NULL,	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 0,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia_ano				= NULL,	\n						fc_mamografia_mes				= NULL,	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						bo_mamografia_requiere			= 1,\n						gl_observaciones_empa			= NULL,\n						bo_finalizado					= 0,\n						fc_actualiza					= now(),\n						id_usuario_actualiza			= 2\n					WHERE id_empa = 1', '::1', '0.0016038417816162', '2017-03-24 20:55:23'),
+(556, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 1', '::1', '0.0023062229156494', '2017-03-24 20:56:31'),
+(557, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 2', '::1', '0.001823902130127', '2017-03-24 20:56:31'),
+(558, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 3', '::1', '0.0015511512756348', '2017-03-24 20:56:31'),
+(559, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 4', '::1', '0.0014150142669678', '2017-03-24 20:56:31'),
+(560, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 5', '::1', '0.0017008781433105', '2017-03-24 20:56:31'),
+(561, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 6', '::1', '0.0018429756164551', '2017-03-24 20:56:31'),
+(562, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 7', '::1', '0.0021471977233887', '2017-03-24 20:56:31'),
+(563, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 8', '::1', '0.0015058517456055', '2017-03-24 20:56:31'),
+(564, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 9', '::1', '0.0017020702362061', '2017-03-24 20:56:31'),
+(565, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 10', '::1', '0.0017440319061279', '2017-03-24 20:56:31'),
+(566, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 15', '::1', '0.0016400814056396', '2017-03-24 20:56:31');
+INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`, `gl_ip`, `gl_tiempo`, `fc_crea`) VALUES
+(567, 2, 'INSERT', 'INSERT into pre_evento values(null,15,0,''1'',''AUDIT del EMPA 1  modificado el : 2017-03-24'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010240077972412', '2017-03-24 20:56:31'),
+(568, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= 525,\n						id_institucion					= 2453,\n						nr_ficha						= 75877,\n						fc_empa							= ''2017-03-23'',\n						bo_embarazo						= 0,\n						bo_consume_alcohol				= 1,\n						gl_puntos_audit					= 40,\n						bo_fuma							= 0,\n						gl_peso							= ''90'',\n						gl_estatura						= ''170'',\n						gl_imc							= ''31.14'',\n						gl_circunferencia_abdominal		= ''90'',\n						id_clasificacion_imc			= 6,\n						gl_pas							= ''110'',\n						gl_pad							= ''80'',\n						bo_antecedente_diabetes			= 1,\n						gl_glicemia						= ''50'',\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= 0,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= 1,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 0,\n						bo_pap_resultado				= NULL,\n						fc_ultimo_pap_ano				= NULL,	\n						fc_ultimo_pap_mes				= NULL,	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 0,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia_ano				= NULL,	\n						fc_mamografia_mes				= NULL,	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						bo_mamografia_requiere			= 1,\n						gl_observaciones_empa			= NULL,\n						bo_finalizado					= 0,\n						fc_actualiza					= now(),\n						id_usuario_actualiza			= 2\n					WHERE id_empa = 1', '::1', '0.0014259815216064', '2017-03-24 20:56:31'),
+(569, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 1', '::1', '0.0018668174743652', '2017-03-24 20:57:46'),
+(570, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 2', '::1', '0.0018818378448486', '2017-03-24 20:57:46'),
+(571, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 3', '::1', '0.0022859573364258', '2017-03-24 20:57:46'),
+(572, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 4', '::1', '0.0016849040985107', '2017-03-24 20:57:46'),
+(573, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 5', '::1', '0.0018479824066162', '2017-03-24 20:57:46'),
+(574, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 6', '::1', '0.0016269683837891', '2017-03-24 20:57:46'),
+(575, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 7', '::1', '0.0019190311431885', '2017-03-24 20:57:46'),
+(576, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 8', '::1', '0.0018329620361328', '2017-03-24 20:57:46'),
+(577, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 9', '::1', '0.0017430782318115', '2017-03-24 20:57:46'),
+(578, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 10', '::1', '0.0018398761749268', '2017-03-24 20:57:46'),
+(579, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 15', '::1', '0.0021319389343262', '2017-03-24 20:57:46'),
+(580, 2, 'INSERT', 'INSERT into pre_evento values(null,15,0,''1'',''AUDIT del EMPA 1  modificado el : 2017-03-24'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00142502784729', '2017-03-24 20:57:46'),
+(581, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= 525,\n						id_institucion					= 2453,\n						nr_ficha						= 75877,\n						fc_empa							= ''2017-03-23'',\n						bo_embarazo						= 0,\n						bo_consume_alcohol				= 1,\n						gl_puntos_audit					= 40,\n						bo_fuma							= 0,\n						gl_peso							= ''90'',\n						gl_estatura						= ''170'',\n						gl_imc							= ''31.14'',\n						gl_circunferencia_abdominal		= ''90'',\n						id_clasificacion_imc			= 6,\n						gl_pas							= ''110'',\n						gl_pad							= ''80'',\n						bo_antecedente_diabetes			= 1,\n						gl_glicemia						= ''50'',\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= 0,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= 1,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 0,\n						bo_pap_resultado				= NULL,\n						fc_ultimo_pap_ano				= NULL,	\n						fc_ultimo_pap_mes				= NULL,	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 0,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia_ano				= NULL,	\n						fc_mamografia_mes				= NULL,	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						bo_mamografia_requiere			= 1,\n						gl_observaciones_empa			= NULL,\n						bo_finalizado					= 0,\n						fc_actualiza					= now(),\n						id_usuario_actualiza			= 2\n					WHERE id_empa = 1', '::1', '0.0014331340789795', '2017-03-24 20:57:46'),
+(582, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 1', '::1', '0.0018560886383057', '2017-03-24 21:01:45'),
+(583, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 2', '::1', '0.0018179416656494', '2017-03-24 21:01:45'),
+(584, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	4\n					WHERE id_empa = 1 AND id_pregunta = 3', '::1', '0.0016191005706787', '2017-03-24 21:01:45'),
+(585, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	0\n					WHERE id_empa = 1 AND id_pregunta = 4', '::1', '0.0017390251159668', '2017-03-24 21:01:45'),
+(586, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	0\n					WHERE id_empa = 1 AND id_pregunta = 5', '::1', '0.010639905929565', '2017-03-24 21:01:45'),
+(587, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	0\n					WHERE id_empa = 1 AND id_pregunta = 6', '::1', '0.0016219615936279', '2017-03-24 21:01:45'),
+(588, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	0\n					WHERE id_empa = 1 AND id_pregunta = 7', '::1', '0.0021350383758545', '2017-03-24 21:01:45'),
+(589, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	0\n					WHERE id_empa = 1 AND id_pregunta = 8', '::1', '0.0018210411071777', '2017-03-24 21:01:45'),
+(590, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	0\n					WHERE id_empa = 1 AND id_pregunta = 9', '::1', '0.0016870498657227', '2017-03-24 21:01:45'),
+(591, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	0\n					WHERE id_empa = 1 AND id_pregunta = 10', '::1', '0.0021679401397705', '2017-03-24 21:01:45'),
+(592, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 15', '::1', '0.0016500949859619', '2017-03-24 21:01:45'),
+(593, 2, 'INSERT', 'INSERT into pre_evento values(null,15,0,''1'',''AUDIT del EMPA 1  modificado el : 2017-03-24'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012879371643066', '2017-03-24 21:01:45'),
+(594, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= 525,\n						id_institucion					= 2453,\n						nr_ficha						= 75877,\n						fc_empa							= ''2017-03-23'',\n						bo_embarazo						= 0,\n						bo_consume_alcohol				= 1,\n						gl_puntos_audit					= 12,\n						bo_fuma							= 0,\n						gl_peso							= ''90'',\n						gl_estatura						= ''170'',\n						gl_imc							= ''31.14'',\n						gl_circunferencia_abdominal		= ''90'',\n						id_clasificacion_imc			= 6,\n						gl_pas							= ''110'',\n						gl_pad							= ''80'',\n						bo_antecedente_diabetes			= 1,\n						gl_glicemia						= ''50'',\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= 0,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= 1,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 0,\n						bo_pap_resultado				= NULL,\n						fc_ultimo_pap_ano				= NULL,	\n						fc_ultimo_pap_mes				= NULL,	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 0,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia_ano				= NULL,	\n						fc_mamografia_mes				= NULL,	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						bo_mamografia_requiere			= 1,\n						gl_observaciones_empa			= NULL,\n						bo_finalizado					= 0,\n						fc_actualiza					= now(),\n						id_usuario_actualiza			= 2\n					WHERE id_empa = 1', '::1', '0.0014638900756836', '2017-03-24 21:01:45');
 
 -- --------------------------------------------------------
 
@@ -3590,7 +3691,7 @@ CREATE TABLE IF NOT EXISTS `pre_cie10_3_grupo` (
   KEY `IDX_gl_codigo_fin` (`gl_codigo_fin`),
   KEY `IDX_id_capitulo` (`id_capitulo`),
   KEY `IDX_id_seccion` (`id_seccion`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=171 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=238 ;
 
 --
 -- Volcado de datos para la tabla `pre_cie10_3_grupo`
@@ -3766,7 +3867,74 @@ INSERT INTO `pre_cie10_3_grupo` (`id_grupo`, `id_capitulo`, `id_seccion`, `gl_co
 (167, 1, 20, 'B95', 'Estreptococos y estafilococos como causa de enfermedades clasificadas en otros capítulos', 'B95.0', 'B95.8', '', '', '', NULL, '2017-03-24 19:13:17'),
 (168, 1, 20, 'B96', 'Otros agentes bacterianos como causa de enfermedades clasificadas en otros capítulos', 'B96.0', 'B96.8', '', '', '', NULL, '2017-03-24 19:13:17'),
 (169, 1, 20, 'B97', 'Agentes virales como causa de enfermedades clasificadas en otros capítulos', 'B97.0', 'B97.8', '', '', '', NULL, '2017-03-24 19:14:01'),
-(170, 1, 20, 'B99', 'Otras enfermedades infecciosas y las no especificadas', NULL, NULL, '', '', '', NULL, '2017-03-24 19:14:01');
+(170, 1, 21, 'B99', 'Otras enfermedades infecciosas y las no especificadas', NULL, NULL, '', '', '', NULL, '2017-03-24 19:14:01'),
+(171, 2, 22, 'C00', 'Tumor maligno del labio', 'C00.0', 'C00.9', '', '', 'piel del labio ([LINK]C43.0, C44.0[LINK])', NULL, '2017-03-24 19:28:07'),
+(172, 2, 22, 'C01', 'Tumor maligno de la base de la lengua', NULL, NULL, 'Cara dorsal de la base de la lengua\r\nRaíz de la lengua SAI\r\nTercio posterior de la lengua', '', '', NULL, '2017-03-24 19:28:07'),
+(173, 2, 22, 'C02', 'Tumor maligno de otras partes y de las no especificadas de la lengua', 'C02.0', 'C02.9', '', '', '', NULL, '2017-03-24 19:28:07'),
+(174, 2, 22, 'C03', 'Tumor maligno de la encía', 'C03.0', 'C03.9', '', 'mucosa del reborde alveolar\r\ngingiva', 'tumores malignos odontogénicos ([LINK]C41.0–C41.1[LINK])', NULL, '2017-03-24 19:28:07'),
+(175, 2, 22, 'C04', 'Tumor maligno del piso de la boca', 'C04.0', 'C04.9', '', '', '', NULL, '2017-03-24 19:28:07'),
+(176, 2, 22, 'C05', 'Tumor maligno del paladar', 'C05.0', 'C05.9', '', '', '', NULL, '2017-03-24 19:28:07'),
+(177, 2, 22, 'C06', 'Tumor maligno de otras partes y de las no especificadas de la boca', 'C06.0', 'C06.9', '', '', '', NULL, '2017-03-24 19:28:07'),
+(178, 2, 22, 'C07', 'Tumor maligno de la glándula parótida', NULL, NULL, '', '', '', NULL, '2017-03-24 19:28:07'),
+(179, 2, 22, 'C08', 'Tumor maligno de otras glándulas salivales mayores y de las no especificadas', 'C08.0', 'C08.9', '', '', 'glándula parótida ([LINK]C07[LINK]) tumores malignos especificados de las glándulas salivales menores que deben clasificarse de acuerdo con su localización anatómica tumores malignos de las glándulas salivales menores SAI ([LINK]C06.9[LINK])', NULL, '2017-03-24 19:28:07'),
+(180, 2, 22, 'C09', 'Tumor maligno de la amígdala', 'C09.0', 'C09.9', '', '', 'amígdala faríngea ([LINK]C11.1[LINK])\r\namígdala lingual ([LINK]C02.4[LINK])', NULL, '2017-03-24 19:28:07'),
+(181, 2, 22, 'C10', 'Tumor maligno de la orofaringe', 'C10.0', 'C10.9', '', '', 'amígdala (C09.–)', NULL, '2017-03-24 19:37:12'),
+(182, 2, 22, 'C11', 'Tumor maligno de la nasofaringe', 'C11.0', 'C11.9', '', '', '', NULL, '2017-03-24 19:37:12'),
+(183, 2, 22, 'C12', 'Tumor maligno del seno piriforme', NULL, NULL, 'Fosa piriforme', '', '', NULL, '2017-03-24 19:37:12'),
+(184, 2, 22, 'C13', 'Tumor maligno de la hipofaringe', 'C13.0', 'C13.9', '', '', 'seno piriforme ([LINK]C12[LINK])', NULL, '2017-03-24 19:37:12'),
+(185, 2, 22, 'C14', 'Tumor maligno de otros sitios y de los mal definidos del labio, de la cavidad bucal y de la faringe', 'C14.0', 'C14.8', '', '', 'cavidad bucal SAI ([LINK]C06.9[LINK])', NULL, '2017-03-24 19:37:12'),
+(186, 2, 23, 'C15', 'Tumor maligno del esófago', 'C15.0', 'C15.9', 'Se dan dos alternativas de subclasificación:\r\n.0 –.2 por descripción anatómica\r\n.3 –.5 por tercios\r\nEsta separación parte del principio de que las categorías deben ser mutuamente excluyentes, pues ambas ter­mi­no­lo­gías están en uso, pero la división anatómica resultante no es análoga.', '', '', NULL, '2017-03-24 19:37:12'),
+(187, 2, 23, 'C16', 'Tumor maligno del estómago', 'C16.0', 'C16.9', '', '', '', NULL, '2017-03-24 19:37:12'),
+(188, 2, 23, 'C17', 'Tumor maligno del intestino delgado', 'C17.0', 'C17.9', '', '', '', NULL, '2017-03-24 19:37:12'),
+(189, 2, 23, 'C18', 'Tumor maligno del colon', 'C18.0', 'C18.9', '', '', '', NULL, '2017-03-24 19:37:12'),
+(190, 2, 23, 'C19', 'Tumor maligno de la unión rectosigmoidea', NULL, NULL, 'Colon y recto\r\nColon rectosigmoideo', '', '', NULL, '2017-03-24 19:37:12'),
+(191, 2, 23, 'C20', 'Tumor maligno del recto', NULL, NULL, 'Ampolla rectal', '', '', NULL, '2017-03-24 19:47:04'),
+(192, 2, 23, 'C21', 'Tumor maligno del ano y del conducto anal', 'C21.0', 'C21.8', '', '', '', NULL, '2017-03-24 19:47:04'),
+(193, 2, 23, 'C22', 'Tumor maligno del hígado y de las vías biliares intrahepáticas', 'C22.0', 'C22.9', '', '', 'tumor maligno secundario del hígado ([LINK]C78.7[LINK])\r\nvías biliares SAI ([LINK]C24.9[LINK])', NULL, '2017-03-24 19:47:04'),
+(194, 2, 23, 'C23', 'Tumor maligno de la vesícula biliar', NULL, NULL, '', '', '', NULL, '2017-03-24 19:47:04'),
+(195, 2, 23, 'C24', 'Tumor maligno de otras partes y de las no especificadas de las vías biliares', 'C24.0', 'C24.9', '', '', 'conducto biliar intrahepático ([LINK]C22.1[LINK])', NULL, '2017-03-24 19:47:04'),
+(196, 2, 23, 'C25', 'Tumor maligno del páncreas', 'C25.0', 'C25.9', '', '', '', NULL, '2017-03-24 19:47:04'),
+(197, 2, 23, 'C26', 'Tumor maligno de otros sitios y de los mal definidos de los órganos digestivos', 'C26.0', 'C26.9', '', '', 'peritoneo y retroperitoneo ([LINK]C48.–[LINK])', NULL, '2017-03-24 19:47:04'),
+(198, 2, 24, 'C30', 'Tumor maligno de las fosas nasales y del oído medio', 'C30.0', 'C30.1', '', '', '', NULL, '2017-03-24 19:47:04'),
+(199, 2, 24, 'C31', 'Tumor maligno de los senos paranasales', 'C31.0', 'C31.9', '', '', '', NULL, '2017-03-24 19:47:04'),
+(200, 2, 24, 'C32', 'Tumor maligno de la laringe', 'C32.0', 'C32.9', '', '', '', NULL, '2017-03-24 19:47:04'),
+(201, 2, 24, 'C33', 'Tumor maligno de la tráquea', NULL, NULL, '', '', '', NULL, '2017-03-24 19:55:36'),
+(202, 2, 24, 'C34', 'Tumor maligno de los bronquios y del pulmón', 'C34.0', 'C34.9', '', '', '', NULL, '2017-03-24 19:55:36'),
+(203, 2, 24, 'C37', 'Tumor maligno del timo', NULL, NULL, '', '', '', NULL, '2017-03-24 19:55:36'),
+(204, 2, 24, 'C38', 'Tumor maligno del corazón, del mediastino y de la pleura', 'C38.0', 'C38.8', '', '', 'mesotelioma ([LINK]C45.–[LINK])', NULL, '2017-03-24 19:55:36'),
+(205, 2, 24, 'C39', 'Tumor maligno de otros sitios y de los mal definidos del sistema respiratorio y de los órganos intratorácicos', 'C39.0', 'C39.9', '', '', 'intratorácico SAI ([LINK]C76.1[LINK])\r\ntorácico SAI ([LINK]C76.1[LINK])', NULL, '2017-03-24 19:55:36'),
+(206, 2, 25, 'C40', 'Tumor maligno de los huesos y de los cartílagos articulares de los miembros', 'C40.0', 'C40.9', '', '', '', NULL, '2017-03-24 19:55:36'),
+(207, 2, 25, 'C41', 'Tumor maligno de los huesos y de los cartílagos articulares, de otros sitios y de sitios no especificados', 'C41.0', 'C41.9', '', '', 'cartílago (de los, de la)\r\n• laríngeo ([LINK]C32.3[LINK])\r\n• miembros ([LINK]C40.–[LINK])\r\n• nariz ([LINK]C30.0[LINK])\r\n• oreja ([LINK]C49.0[LINK])\r\n• huesos de los miembros ([LINK]C40.–[LINK])', NULL, '2017-03-24 19:55:36'),
+(208, 2, 26, 'C43', 'Melanoma maligno de la piel', 'C43.0', 'C43.9', '', 'los tipos morfológicos clasificables en M872–M879 con código de comportamiento /3', 'melanoma maligno de la piel de los órganos genitales ([LINK]C51[LINK]–[LINK]C52[LINK], [LINK]C60.–[LINK], [LINK]C63.–[LINK])', NULL, '2017-03-24 19:55:36'),
+(209, 2, 26, 'C44', 'Otros tumores malignos de la piel', 'C44.0', 'C44.9', '', 'tumor maligno de:\r\n• glándulas sebáceas\r\n• glándulas sudoríparas', 'melanoma maligno de la piel ([LINK]C43.–[LINK])\r\npiel de los órganos genitales ([LINK]C51–C52[LINK], [LINK]C60.–[LINK], [LINK]C63.–[LINK])\r\nsarcoma de Kaposi ([LINK]C46.–[LINK])', NULL, '2017-03-24 19:55:36'),
+(210, 2, 27, 'C45', 'Mesotelioma', 'C45.0', 'C45.9', '', 'los tipos morfológicos clasificables en M905 con código de comportamiento /3', '', NULL, '2017-03-24 19:55:36'),
+(211, 2, 27, 'C46', 'Sarcoma de Kaposi', 'C46.0', 'C46.9', '', 'los tipos morfológicos clasificables en M9140 con código de comportamiento /3', '', NULL, '2017-03-24 20:06:02'),
+(212, 2, 27, 'C47', 'Tumor maligno de los nervios periféricos y del sistema nervioso autónomo', 'C47.0', 'C47.9', '', 'nervios y ganglios simpáticos y parasimpáticos', '', NULL, '2017-03-24 20:06:02'),
+(213, 2, 27, 'C48', 'Tumor maligno del peritoneo y del retroperitoneo', 'C48.0', 'C48.8', '', '', 'mesotelioma ([LINK]C45.–[/LINK])\r\nsarcoma de Kaposi ([LINK]C46.1[/LINK])', NULL, '2017-03-24 20:06:02'),
+(214, 2, 27, 'C49', 'Tumor maligno de otros tejidos conjuntivos y de tejidos blandos', 'C49.0', 'C49.9', '', 'bolsa sinovial (bursa)\r\ncartílago\r\nfascia\r\nligamento, excepto el uterino\r\nmembrana sinovial\r\nmúsculo\r\ntejido graso\r\ntendón (aponeurosis)\r\nvaso linfático\r\nvaso sanguíneo', 'cartílago:\r\n• articular ([LINK]C40–C41[/LINK])\r\n• laríngeo ([LINK]C32.3[/LINK])\r\n• nasal ([LINK]C30.0[/LINK])\r\nmesotelioma ([LINK]C45.–[/LINK])\r\nnervios periféricos y sistema nervioso autónomo ([LINK]C47.–[/LINK])\r\nperitoneo ([LINK]C48.–[/LINK])\r\nretroperitoneo ([LINK]C48.0[/LINK])\r\nsarcoma de Kaposi ([LINK]C46.–[/LINK])\r\ntejido conjuntivo de la mama ([LINK]C50.–[/LINK])', NULL, '2017-03-24 20:06:02'),
+(215, 2, 28, 'C50', 'Tumor maligno de la mama', 'C50.0', 'C50.9', '', 'tejido conjuntivo de la mama', 'piel de la mama ([LINK]C43.5[/LINK], [LINK]C44.5[/LINK])', NULL, '2017-03-24 20:06:02'),
+(216, 2, 29, 'C51', 'Tumor maligno de la vulva', 'C51.0', 'C51.9', '', '', '', NULL, '2017-03-24 20:06:02'),
+(217, 2, 29, 'C52', 'Tumor maligno de la vagina', NULL, NULL, '', '', '', NULL, '2017-03-24 20:06:02'),
+(218, 2, 29, 'C53', 'Tumor maligno del cuello del útero', NULL, NULL, '', '', '', NULL, '2017-03-24 20:06:02'),
+(219, 2, 29, 'C54', 'Tumor maligno del cuerpo del útero', 'C54.0', 'C54.9', '', '', '', NULL, '2017-03-24 20:06:02'),
+(220, 2, 29, 'C55', 'Tumor maligno del útero, parte no especificada', NULL, NULL, '', '', '', NULL, '2017-03-24 20:06:02'),
+(221, 2, 29, 'C56', 'Tumor maligno del ovario', NULL, NULL, '', '', '', NULL, '2017-03-24 20:12:33'),
+(222, 2, 29, 'C57', 'Tumor maligno de otros órganos genitales femeninos y de los no especificados', 'C57.0', 'C57.9', '', '', '', NULL, '2017-03-24 20:12:33'),
+(223, 2, 29, 'C58', NULL, NULL, NULL, 'Coriocarcinoma SAI\r\nCorionepitelioma SAI', '', 'corioadenoma (destruens) (D39.2)\r\nmola hidatiforme:\r\n• SAI ([LINK]O01.9[/LINK])\r\n• invasora ([LINK]D39.2[/LINK])\r\n• maligna ([LINK]D39.2[/LINK])', NULL, '2017-03-24 20:12:33'),
+(224, 2, 30, 'C60', 'Tumor maligno del pene', 'C60.0', 'C60.9', '', '', '', NULL, '2017-03-24 20:12:33'),
+(225, 2, 30, 'C61', 'Tumor maligno de la próstata', NULL, NULL, '', '', '', NULL, '2017-03-24 20:12:33'),
+(226, 2, 30, 'C62', 'Tumor maligno del testículo', 'C62.0', 'C62.9', '', '', '', NULL, '2017-03-24 20:12:33'),
+(227, 2, 30, 'C63', 'Tumor maligno de otros órganos genitales masculinos y de los no especificados', 'C63.0', 'C63.9', '', '', '', NULL, '2017-03-24 20:12:33'),
+(228, 2, 31, 'C64', 'Tumor maligno del riñón, excepto de la pelvis renal', NULL, NULL, '', '', 'Cálices } renal(es) ([LINK]C65[/LINK])\r\nPelvis }', NULL, '2017-03-24 20:36:15'),
+(229, 2, 31, 'C65', 'Tumor maligno de la pelvis renal', NULL, NULL, 'Cálices renales\r\nUnión pelviureteral', '', '', NULL, '2017-03-24 20:36:15'),
+(230, 2, 31, 'C66', 'Tumor maligno del uréter', NULL, NULL, '', '', 'Excluye:  orificio ureteral de la vejiga ([LINK]C67.6[/LINK])', NULL, '2017-03-24 20:36:15'),
+(231, 2, 31, 'C67', 'Tumor maligno de la vejiga urinaria', 'C67.0', 'C67.9', '', '', '', NULL, '2017-03-24 20:36:15'),
+(232, 2, 31, 'C68', 'Tumor maligno de otros órganos urinarios y de los no especificados', 'C68.0', 'C68.9', '', '', 'vías genitourinarias SAI:\r\n• femeninas ([LINK]C57.9[/LINK])\r\n• masculinas ([LINK]C63.9[/LINK])', NULL, '2017-03-24 20:36:15'),
+(233, 2, 32, 'C69', 'Tumor maligno del ojo y sus anexos', 'C69.0', 'C69.9', '', '', 'nervio óptico ([LINK]C72.3[/LINK])\r\npárpado (piel) ([LINK]C43.1[/LINK], [LINK]C44.1[/LINK])\r\ntejido conjuntivo del párpado ([LINK]C49.0[/LINK])', NULL, '2017-03-24 20:36:15'),
+(234, 2, 32, 'C70', 'Tumor maligno de las meninges', 'C70.0', 'C70.9', '', '', '', NULL, '2017-03-24 20:36:15'),
+(235, 2, 32, 'C71', 'Tumor maligno del encéfalo', 'C71.0', 'C71.9', '', '', 'nervios craneales ([LINK]C72.2–C72.5[/LINK])\r\ntejido retrobulbar ([LINK]C69.6[/LINK])', NULL, '2017-03-24 20:36:15'),
+(236, 2, 32, 'C72', 'Tumor maligno de la médula espinal, de los nervios craneales y de otras partes del sistema nervioso central', 'C72.0', 'C72.9', '', '', 'Meninges ([LINK]C70.–[/LINK])\r\nNervios periféricos (del simpático) y del sistema nervioso autónomo ([LINK]C47.–[/LINK])', NULL, '2017-03-24 20:36:15'),
+(237, 2, 33, 'C73', 'Tumor maligno de la glándula tiroides', NULL, NULL, '', '', '', NULL, '2017-03-24 20:36:15');
 
 -- --------------------------------------------------------
 
@@ -4296,7 +4464,7 @@ INSERT INTO `pre_empa` (`id_empa`, `id_paciente`, `nr_orden`, `bo_finalizado`, `
 (6, 3, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:35:26'),
 (7, 4, 1, 0, NULL, NULL, '2017-03-23 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, NULL, 1, 2017, 1, NULL, NULL, NULL, NULL, NULL, 13, '2017-03-23 18:46:54', 2, '2017-03-23 13:53:07'),
 (8, 4, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-23 17:55:12', 2, '2017-03-23 13:53:07'),
-(9, 5, 1, 0, NULL, NULL, '2017-03-23 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-23 18:53:10', 2, '2017-03-23 13:55:16'),
+(9, 5, 1, 0, NULL, NULL, '2017-03-23 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '100', '80', 15, NULL, NULL, NULL, NULL, NULL, NULL, 16, NULL, 17, NULL, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-24 20:28:51', 2, '2017-03-23 13:55:16'),
 (10, 5, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-23 17:55:40', 2, '2017-03-23 13:55:16'),
 (11, 6, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:55:28'),
 (12, 6, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:55:28'),
@@ -4333,25 +4501,25 @@ CREATE TABLE IF NOT EXISTS `pre_empa_audit` (
 --
 
 INSERT INTO `pre_empa_audit` (`id_audit`, `id_empa`, `id_pregunta`, `nr_valor`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 1, 1, NULL, 2, '2017-03-23 13:33:02'),
+(1, 1, 1, 4, 2, '2017-03-23 13:33:02'),
 (2, 2, 1, NULL, 2, '2017-03-23 13:33:02'),
-(3, 1, 2, NULL, 2, '2017-03-23 13:33:02'),
+(3, 1, 2, 4, 2, '2017-03-23 13:33:02'),
 (4, 2, 2, NULL, 2, '2017-03-23 13:33:02'),
-(5, 1, 3, NULL, 2, '2017-03-23 13:33:02'),
+(5, 1, 3, 4, 2, '2017-03-23 13:33:02'),
 (6, 2, 3, NULL, 2, '2017-03-23 13:33:02'),
-(7, 1, 4, NULL, 2, '2017-03-23 13:33:02'),
+(7, 1, 4, 0, 2, '2017-03-23 13:33:02'),
 (8, 2, 4, NULL, 2, '2017-03-23 13:33:02'),
-(9, 1, 5, NULL, 2, '2017-03-23 13:33:02'),
+(9, 1, 5, 0, 2, '2017-03-23 13:33:02'),
 (10, 2, 5, NULL, 2, '2017-03-23 13:33:02'),
-(11, 1, 6, NULL, 2, '2017-03-23 13:33:02'),
+(11, 1, 6, 0, 2, '2017-03-23 13:33:02'),
 (12, 2, 6, NULL, 2, '2017-03-23 13:33:02'),
-(13, 1, 7, NULL, 2, '2017-03-23 13:33:02'),
+(13, 1, 7, 0, 2, '2017-03-23 13:33:02'),
 (14, 2, 7, NULL, 2, '2017-03-23 13:33:02'),
-(15, 1, 8, NULL, 2, '2017-03-23 13:33:02'),
+(15, 1, 8, 0, 2, '2017-03-23 13:33:02'),
 (16, 2, 8, NULL, 2, '2017-03-23 13:33:02'),
-(17, 1, 9, NULL, 2, '2017-03-23 13:33:02'),
+(17, 1, 9, 0, 2, '2017-03-23 13:33:02'),
 (18, 2, 9, NULL, 2, '2017-03-23 13:33:02'),
-(19, 1, 10, NULL, 2, '2017-03-23 13:33:02'),
+(19, 1, 10, 0, 2, '2017-03-23 13:33:02'),
 (20, 2, 10, NULL, 2, '2017-03-23 13:33:02'),
 (21, 3, 1, NULL, 2, '2017-03-23 13:33:11'),
 (22, 4, 1, NULL, 2, '2017-03-23 13:33:11'),
@@ -4541,7 +4709,7 @@ INSERT INTO `pre_empa_audit` (`id_audit`, `id_empa`, `id_pregunta`, `nr_valor`, 
 --
 
 CREATE TABLE IF NOT EXISTS `pre_empa_audit_pregunta` (
-  `id_pregunta` int(11) NOT NULL,
+  `id_pregunta` int(11) NOT NULL AUTO_INCREMENT,
   `gl_pregunta` varchar(1000) DEFAULT NULL,
   `gl_respuesta1` varchar(50) DEFAULT NULL,
   `nr_respuesta1_puntos` int(11) DEFAULT NULL,
@@ -4557,7 +4725,7 @@ CREATE TABLE IF NOT EXISTS `pre_empa_audit_pregunta` (
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_pregunta`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `pre_empa_audit_pregunta`
@@ -4574,6 +4742,36 @@ INSERT INTO `pre_empa_audit_pregunta` (`id_pregunta`, `gl_pregunta`, `gl_respues
 (8, '8. ¿ Con qué frecuencia en el curso del último año no ha podido recordar lo que sucedió la noche anterior porque había estado bebiendo?', 'Nunca', 0, 'Menos de una vez al mes', 1, 'Mensualmente', 2, 'Semanalmente', 3, 'A diario o casi a diario', 4, NULL, NULL),
 (9, '9. ¿Usted o alguna otra persona ha resultado herido porque usted había bebido?', 'No', 0, '', 1, 'Sí, pero no en el curso del último año', 2, '', 3, 'Sí, el último año', 4, NULL, NULL),
 (10, '10. ¿Algún familiar, amigo, médico o profesional sanitario ha mostrado preocupación por un consumo de bebidas alcohólicas o le ha sugerido que deje de beber?', 'No', 0, '', 1, 'Sí, pero no en el curso del último año', 2, '', 3, 'Sí, el último año', 4, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_empa_audit_tipo`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_empa_audit_tipo` (
+  `id_audit_tipo` int(11) NOT NULL AUTO_INCREMENT,
+  `gl_descripcion` varchar(250) DEFAULT NULL,
+  `nr_min` int(11) NOT NULL,
+  `nr_max` int(11) NOT NULL,
+  `gl_color` varchar(20) NOT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_audit_tipo`),
+  KEY `IDX_nr_min` (`nr_min`),
+  KEY `IDX_nr_max` (`nr_max`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `pre_empa_audit_tipo`
+--
+
+INSERT INTO `pre_empa_audit_tipo` (`id_audit_tipo`, `gl_descripcion`, `nr_min`, `nr_max`, `gl_color`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'Bajo Riesgo', 0, 7, '#008000', NULL, NULL),
+(2, 'Riesgo', 8, 15, '#BDB76B', NULL, NULL),
+(3, 'Problema', 16, 19, '#FF8C00', NULL, NULL),
+(4, 'Dependencia', 20, 40, '#FF0000', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4597,7 +4795,7 @@ CREATE TABLE IF NOT EXISTS `pre_evento` (
   KEY `IDX_id_paciente` (`id_paciente`),
   KEY `IDX_bo_estado` (`bo_estado`),
   KEY `IDX_bo_mostrar` (`bo_mostrar`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=77 ;
 
 --
 -- Volcado de datos para la tabla `pre_evento`
@@ -4652,9 +4850,9 @@ INSERT INTO `pre_evento` (`id_evento`, `id_evento_tipo`, `id_paciente`, `id_empa
 (46, 14, 8, 15, 'AUDIT del EMPA15 creado el : 23-03-2017', 1, 0, 13, '2017-03-23 14:13:07'),
 (47, 14, 8, 16, 'AUDIT del EMPA16 creado el : 23-03-2017', 1, 0, 13, '2017-03-23 14:13:07'),
 (48, 4, 8, 0, 'AUDIT del EMPA16 creado el : Acepta el programa con fecha : 23-03-2017', 1, 1, 13, '2017-03-23 14:13:07'),
-(49, 15, 0, 15, 'AUDIT del EMPA 15  modificado el : 2017-03-23', 1, 0, 13, '2017-03-23 14:16:00'),
-(50, 15, 0, 15, 'AUDIT del EMPA 15  modificado el : 2017-03-23', 1, 0, 13, '2017-03-23 14:16:00'),
-(51, 15, 0, 15, 'AUDIT del EMPA 15  modificado el : 2017-03-23', 1, 1, 13, '2017-03-23 14:16:00'),
+(49, 15, 0, 15, 'AUDIT del EMPA 15  modificado el : 2017-03-23', 1, 0, 2, '2017-03-24 21:01:45'),
+(50, 15, 0, 15, 'AUDIT del EMPA 15  modificado el : 2017-03-23', 1, 0, 2, '2017-03-24 21:01:45'),
+(51, 15, 0, 15, 'AUDIT del EMPA 15  modificado el : 2017-03-23', 1, 0, 2, '2017-03-24 21:01:45'),
 (52, 12, 8, 15, 'Empa modificado el : 23-03-2017 por usuario 13', 1, 0, 2, '2017-03-23 18:53:10'),
 (53, 1, 9, 0, 'Paciente creado el : 23-03-2017', 1, 1, 2, '2017-03-23 14:58:06'),
 (54, 13, 9, 17, 'Empa 17 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 14:58:06'),
@@ -4674,7 +4872,12 @@ INSERT INTO `pre_evento` (`id_evento`, `id_evento_tipo`, `id_paciente`, `id_empa
 (68, 12, 4, 7, 'Empa modificado el : 23-03-2017 por usuario 13', 1, 0, 2, '2017-03-23 18:53:10'),
 (69, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-23 18:53:10'),
 (70, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-23 18:53:10'),
-(71, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 1, 2, '2017-03-23 18:53:10');
+(71, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 1, 2, '2017-03-23 18:53:10'),
+(72, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 0, 2, '2017-03-24 21:01:45'),
+(73, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 0, 2, '2017-03-24 21:01:45'),
+(74, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 0, 2, '2017-03-24 21:01:45'),
+(75, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 0, 2, '2017-03-24 21:01:45'),
+(76, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 1, 2, '2017-03-24 21:01:45');
 
 -- --------------------------------------------------------
 
@@ -5224,7 +5427,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor_violencia` (
 
 CREATE TABLE IF NOT EXISTS `pre_paciente_alarma` (
   `id_alarma` int(11) NOT NULL AUTO_INCREMENT,
-  `id_tipo_alarma` int(11) NOT NULL DEFAULT '0',
+  `id_alarma_tipo` int(11) NOT NULL DEFAULT '0',
   `id_perfil` int(11) DEFAULT '0' COMMENT 'Verá la Alarma',
   `id_alarma_estado` int(11) DEFAULT '1',
   `bo_apagar` int(11) DEFAULT '0' COMMENT '1=SI',
@@ -5234,7 +5437,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_alarma` (
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_alarma`),
-  KEY `IDX_id_tipo_alarma` (`id_tipo_alarma`),
+  KEY `IDX_id_tipo_alarma` (`id_alarma_tipo`),
   KEY `IDX_id_alarma_estado` (`id_alarma_estado`),
   KEY `IDX_id_perfil` (`id_perfil`),
   KEY `IDX_bo_apagar` (`bo_apagar`),
@@ -5268,6 +5471,34 @@ INSERT INTO `pre_paciente_alarma_estado` (`id_alarma_estado`, `gl_nombre_alarma`
 (1, 'Ingresada', 1, NULL, '2017-03-16 15:49:51'),
 (2, 'Vista', 1, NULL, '2017-03-16 15:50:13'),
 (3, 'Apagada', 1, NULL, '2017-03-16 15:50:21');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_paciente_alarma_tipo`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_paciente_alarma_tipo` (
+  `id_tipo_alarma` int(11) NOT NULL AUTO_INCREMENT,
+  `gl_nombre_alarma` varchar(255) DEFAULT NULL,
+  `gl_detalle` text,
+  `bo_estado` int(11) NOT NULL DEFAULT '1' COMMENT '1=activo',
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_tipo_alarma`),
+  KEY `IDX_bo_estado` (`bo_estado`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_alarma_tipo`
+--
+
+INSERT INTO `pre_paciente_alarma_tipo` (`id_tipo_alarma`, `gl_nombre_alarma`, `gl_detalle`, `bo_estado`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'PAP Alterado', NULL, 1, 0, '2017-03-16 15:39:10'),
+(2, 'Mamografía Alterada', NULL, 1, 0, '2017-03-16 15:39:29'),
+(3, 'Reconoce Violencia de Género', NULL, 1, 0, '2017-03-16 15:40:34'),
+(4, 'No Asiste a hora Con Especialista', NULL, 1, 0, '2017-03-16 15:41:02');
 
 -- --------------------------------------------------------
 
@@ -5402,21 +5633,26 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_examen` (
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_id_usuario_toma` (`id_usuario_toma`),
   KEY `IDX_gl_rut_persona_toma` (`gl_rut_persona_toma`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Volcado de datos para la tabla `pre_paciente_examen`
 --
 
 INSERT INTO `pre_paciente_examen` (`id_paciente_examen`, `id_tipo_examen`, `id_paciente`, `id_empa`, `id_laboratorio`, `id_usuario_toma`, `gl_rut_persona_toma`, `gl_nombre_persona_toma`, `json_resultado`, `gl_folio`, `fc_toma`, `gl_hora_toma`, `gl_observacion_toma`, `fc_resultado`, `gl_resultado`, `gl_resultado_descripcion`, `gl_resultado_indicacion`, `gl_pas`, `gl_pad`, `gl_glicemia`, `gl_colesterol`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
-(7, 9, 8, 15, 1, NULL, NULL, NULL, NULL, NULL, '2017-03-25', '12:50:00', 'asd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-24 19:03:52', 13, '2017-03-23 11:03:11'),
-(8, 1, 8, 15, 1, NULL, NULL, NULL, NULL, '', '2017-03-29', '23:00:00', 'glicemia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-24 00:00:00'),
-(9, 2, 8, 15, 1, NULL, NULL, NULL, NULL, '', '2017-03-29', '06:30:00', 'vdrl sifilis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-23 12:03:26'),
-(10, 5, 1, 1, 1, NULL, NULL, NULL, NULL, '', '2017-03-24', '15:00:00', 'Revisar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '2017-03-23 15:03:34'),
+(7, 9, 8, 15, 1, NULL, '13225524-5', 'Administrador Prevención', NULL, '2', '2017-03-25', '12:50:00', 'asd', '2017-03-31', 'N', 'DESC 2', 'INDIC 2', '1234', '1234', NULL, NULL, 1, '2017-03-24 19:48:59', 13, '2017-03-23 11:03:11'),
+(8, 1, 8, 15, 1, NULL, '13225524-5', 'Administrador Prevención', NULL, '1', '2017-03-29', '23:00:00', 'glicemia', '2017-03-31', 'N', 'DESC 1', 'INDIC 1', NULL, NULL, '124', NULL, 1, '2017-03-24 19:46:19', 13, '2017-03-24 00:00:00'),
+(9, 2, 8, 15, 1, NULL, '13225524-5', 'Administrador Prevención', NULL, '4', '2017-03-29', '06:30:00', 'vdrl sifilis', '2017-03-31', 'N', 'DESC 5', 'INDIC 5', NULL, NULL, NULL, NULL, 1, '2017-03-24 19:55:32', 2, '2017-03-23 12:03:26'),
+(10, 5, 1, 1, 1, NULL, '13225524-5', 'Administrador Prevención', NULL, '5', '2017-03-24', '15:00:00', 'Revisar', '2017-03-31', 'A', 'DESC 6', 'INDIC 6', NULL, NULL, NULL, NULL, 1, '2017-03-24 19:57:00', 13, '2017-03-23 15:03:34'),
 (11, 6, 1, 1, 1, NULL, NULL, NULL, NULL, '', '2017-03-24', '11:30:00', 'ok', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '2017-03-23 16:03:26'),
-(12, 8, 1, 1, 1, NULL, NULL, NULL, NULL, '', '2017-03-25', '09:00:00', 'ok', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '2017-03-23 16:03:56'),
-(13, 7, 8, NULL, 9, NULL, NULL, NULL, NULL, NULL, '2017-03-27', NULL, 'Sin Observación.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-24 10:03:34'),
-(14, 9, 1, NULL, 7, NULL, NULL, NULL, NULL, NULL, '2017-03-31', NULL, 'Prueba.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-24 11:03:15');
+(12, 8, 1, 1, 1, NULL, '13225524-5', 'Administrador Prevención', NULL, '', '2017-03-25', '09:00:00', 'ok', '2017-03-31', 'N', 'DESC 7', 'INDIC 7', NULL, NULL, NULL, NULL, 1, '2017-03-24 19:57:32', 13, '2017-03-23 16:03:56'),
+(13, 7, 8, NULL, 9, NULL, '13225524-5', 'Administrador Prevención', NULL, '3', '2017-03-27', NULL, 'Sin Observación.', '2017-03-31', 'N', 'DESC 3', 'INDIC 3', NULL, NULL, NULL, '250', 1, '2017-03-24 19:51:29', 1, '2017-03-24 10:03:34'),
+(14, 9, 1, NULL, 7, NULL, NULL, NULL, NULL, NULL, '2017-03-31', NULL, 'Prueba.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-24 11:03:15'),
+(15, 9, 5, 9, 1, NULL, '1-9', 'Administrador ', NULL, '7777', '2017-03-24', '09:15:00', 'Tomar Examen', '2017-03-26', 'N', 'Todo ok', 'Sin indicación.', '100', '80', NULL, NULL, 2, '2017-03-24 20:28:51', 2, '2017-03-24 18:03:22'),
+(16, 2, 5, 9, 1, NULL, NULL, NULL, NULL, NULL, '2017-03-24', '10:00:00', 'ok', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-24 18:03:05'),
+(17, 3, 5, 9, 1, NULL, NULL, NULL, NULL, NULL, '2017-03-24', '11:00:00', 'ok', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-24 18:03:26'),
+(18, 4, 5, 9, 1, NULL, NULL, NULL, NULL, NULL, '2017-03-24', '12:00:00', 'ok', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-24 18:03:41'),
+(19, 6, 5, 9, 1, NULL, NULL, NULL, NULL, NULL, '2017-03-25', '09:00:00', 'ok', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-24 18:03:57');
 
 -- --------------------------------------------------------
 
@@ -5462,13 +5698,13 @@ INSERT INTO `pre_paciente_registro` (`id_registro`, `id_paciente`, `id_instituci
 --
 
 CREATE TABLE IF NOT EXISTS `pre_pais` (
-  `id_pais` int(11) NOT NULL,
+  `id_pais` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_pais` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_pais`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Listado de Paises';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Listado de Paises' AUTO_INCREMENT=888 ;
 
 --
 -- Volcado de datos para la tabla `pre_pais`
@@ -6761,45 +6997,17 @@ INSERT INTO `pre_tipo_actividad_economica` (`id_actividad_economica`, `gl_codigo
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pre_tipo_alarma`
---
-
-CREATE TABLE IF NOT EXISTS `pre_tipo_alarma` (
-  `id_tipo_alarma` int(11) NOT NULL AUTO_INCREMENT,
-  `gl_nombre_alarma` varchar(255) DEFAULT NULL,
-  `gl_detalle` text,
-  `bo_estado` int(11) NOT NULL DEFAULT '1' COMMENT '1=activo',
-  `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_tipo_alarma`),
-  KEY `IDX_bo_estado` (`bo_estado`),
-  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
---
--- Volcado de datos para la tabla `pre_tipo_alarma`
---
-
-INSERT INTO `pre_tipo_alarma` (`id_tipo_alarma`, `gl_nombre_alarma`, `gl_detalle`, `bo_estado`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'PAP Alterado', NULL, 1, 0, '2017-03-16 15:39:10'),
-(2, 'Mamografía Alterada', NULL, 1, 0, '2017-03-16 15:39:29'),
-(3, 'Reconoce Violencia de Género', NULL, 1, 0, '2017-03-16 15:40:34'),
-(4, 'No Asiste a hora Con Especialista', NULL, 1, 0, '2017-03-16 15:41:02');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `pre_tipo_area_urbano`
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_area_urbano` (
-  `id_area_urbano` int(11) NOT NULL,
+  `id_area_urbano` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_area_urbano` varchar(20) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_area_urbano`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Area Urbano Censal';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Area Urbano Censal' AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_area_urbano`
@@ -6812,48 +7020,17 @@ INSERT INTO `pre_tipo_area_urbano` (`id_area_urbano`, `gl_nombre_area_urbano`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pre_tipo_audit`
---
-
-CREATE TABLE IF NOT EXISTS `pre_tipo_audit` (
-  `id_tipo_audit` int(11) NOT NULL,
-  `gl_descripcion` varchar(250) DEFAULT NULL,
-  `nr_min` int(11) NOT NULL,
-  `nr_max` int(11) NOT NULL,
-  `gl_color` varchar(20) NOT NULL,
-  `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_tipo_audit`),
-  KEY `IDX_nr_min` (`nr_min`),
-  KEY `IDX_nr_max` (`nr_max`),
-  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `pre_tipo_audit`
---
-
-INSERT INTO `pre_tipo_audit` (`id_tipo_audit`, `gl_descripcion`, `nr_min`, `nr_max`, `gl_color`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'Bajo Riesgo', 0, 7, '#008000', NULL, NULL),
-(2, 'Riesgo', 8, 15, '#BDB76B', NULL, NULL),
-(3, 'Problema', 16, 19, '#FF8C00', NULL, NULL),
-(4, 'Problema o Dependencia', 20, 40, '#FF0000', NULL, NULL),
-(5, 'Overkill de Alcoholismo', 41, 2147483647, '#FF0040', NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `pre_tipo_direccion_complemento`
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_direccion_complemento` (
-  `id_direccion_complemento` int(11) NOT NULL,
+  `id_direccion_complemento` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_direccion_complemento` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_direccion_complemento`),
   KEY `id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Tipos de Vía de Dirección';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Lista Tipos de Vía de Dirección' AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_direccion_complemento`
@@ -6953,13 +7130,13 @@ INSERT INTO `pre_tipo_escolaridad` (`id_tipo_escolaridad`, `gl_tipo_escolaridad`
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_especialidad` (
-  `id_tipo_especialidad` int(11) NOT NULL,
+  `id_tipo_especialidad` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_especialidad` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_especialidad`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_especialidad`
@@ -6979,13 +7156,13 @@ INSERT INTO `pre_tipo_especialidad` (`id_tipo_especialidad`, `gl_nombre_especial
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_especialidad_medica` (
-  `id_especialidad_medica` int(11) NOT NULL,
+  `id_especialidad_medica` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_especialidad_medica` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_especialidad_medica`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=69 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_especialidad_medica`
@@ -7068,13 +7245,13 @@ INSERT INTO `pre_tipo_especialidad_medica` (`id_especialidad_medica`, `gl_nombre
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_especialidad_odontologica` (
-  `id_especialidad_odontologica` int(11) NOT NULL,
+  `id_especialidad_odontologica` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_especialidad_odontologica` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_especialidad_odontologica`),
   KEY `id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_especialidad_odontologica`
@@ -7162,13 +7339,13 @@ INSERT INTO `pre_tipo_examen` (`id_tipo_examen`, `gl_nombre_examen`, `gl_descrip
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_fonasa_modalidad` (
-  `id_fonasa_modalidad` int(11) NOT NULL,
+  `id_fonasa_modalidad` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_fonasa_modalidad` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_fonasa_modalidad`),
   KEY `id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Tipos Modalidad Fonasa';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Lista Tipos Modalidad Fonasa' AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_fonasa_modalidad`
@@ -7185,7 +7362,7 @@ INSERT INTO `pre_tipo_fonasa_modalidad` (`id_fonasa_modalidad`, `gl_nombre_fonas
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_fonasa_tramo` (
-  `id_fonasa_tramo` int(11) NOT NULL,
+  `id_fonasa_tramo` int(11) NOT NULL AUTO_INCREMENT,
   `cd_fonasa_tramo` char(1) DEFAULT NULL,
   `gl_nombre_fonasa_tramo` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
@@ -7193,7 +7370,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_fonasa_tramo` (
   PRIMARY KEY (`id_fonasa_tramo`),
   KEY `cd_fonasa_tramo` (`cd_fonasa_tramo`),
   KEY `id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Tramos Fonasa';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Lista Tramos Fonasa' AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_fonasa_tramo`
@@ -7212,13 +7389,13 @@ INSERT INTO `pre_tipo_fonasa_tramo` (`id_fonasa_tramo`, `cd_fonasa_tramo`, `gl_n
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_genero` (
-  `id_tipo_genero` int(11) NOT NULL,
+  `id_tipo_genero` int(11) NOT NULL AUTO_INCREMENT,
   `gl_tipo_genero` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_genero`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_genero`
@@ -7259,7 +7436,7 @@ INSERT INTO `pre_tipo_grupo` (`id_tipo_grupo`, `gl_nombre_tipo_grupo`, `id_usuar
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_imc` (
-  `id_tipo_imc` int(11) NOT NULL,
+  `id_tipo_imc` int(11) NOT NULL AUTO_INCREMENT,
   `gl_descripcion` varchar(250) DEFAULT NULL,
   `nr_min` decimal(10,2) DEFAULT NULL,
   `nr_max` decimal(10,2) DEFAULT NULL,
@@ -7270,7 +7447,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_imc` (
   KEY `IDX_nr_min` (`nr_min`),
   KEY `IDX_nr_max` (`nr_max`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_imc`
@@ -7853,13 +8030,13 @@ INSERT INTO `pre_tipo_ocupacion_detalle` (`id_ocupacion_detalle`, `gl_nombre_ocu
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_orientacion_sexual` (
-  `id_orientacion_sexual` int(11) NOT NULL,
+  `id_orientacion_sexual` int(11) NOT NULL AUTO_INCREMENT,
   `gl_orientacion_sexual` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_orientacion_sexual`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_orientacion_sexual`
@@ -7950,14 +8127,14 @@ INSERT INTO `pre_tipo_religion` (`id_religion`, `gl_nombre_religion`, `id_usuari
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_riesgo` (
-  `id_tipo_riesgo` int(11) NOT NULL,
+  `id_tipo_riesgo` int(11) NOT NULL AUTO_INCREMENT,
   `gl_tipo_riesgo` varchar(50) DEFAULT NULL,
   `color_riesgo` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_riesgo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_riesgo`
@@ -8001,13 +8178,13 @@ INSERT INTO `pre_tipo_sexo` (`id_tipo_sexo`, `gl_tipo_sexo`, `id_usuario_crea`, 
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_vinculo` (
-  `id_tipo_vinculo` int(11) NOT NULL,
+  `id_tipo_vinculo` int(11) NOT NULL AUTO_INCREMENT,
   `gl_tipo_vinculo` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_vinculo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_vinculo`
@@ -8031,7 +8208,7 @@ INSERT INTO `pre_tipo_vinculo` (`id_tipo_vinculo`, `gl_tipo_vinculo`, `id_usuari
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_violencia` (
-  `id_tipo_violencia` int(11) NOT NULL,
+  `id_tipo_violencia` int(11) NOT NULL AUTO_INCREMENT,
   `gl_tipo_violencia` varchar(50) DEFAULT NULL,
   `gl_respuesta_1` int(11) DEFAULT NULL,
   `gl_respuesta_2` int(11) DEFAULT NULL,
@@ -8041,7 +8218,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_violencia` (
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_violencia`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_violencia`
