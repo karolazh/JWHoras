@@ -49,7 +49,7 @@ function mensajeAUDIT(pts_audit){
                     $('#gl_puntos_audit').parent().find("span.help-block").css("color", "'" + data.gl_color + "'");
                     $('#gl_puntos_audit').parent().find('span.help-block').html(data.gl_mensaje);
                     $('#gl_puntos_audit').parent().find('span.help-block').removeClass("hidden");
-                    $('#id_clasificacion_audit').val(data.id_tipo_audit);
+                    $('#id_clasificacion_audit').val(data.id_audit_tipo);
                 } else {
                     xModal.info('Error!');
                 }

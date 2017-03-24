@@ -41,7 +41,7 @@ class Empa extends Controller{
 		$this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
 		$this->_DAOAuditPregunta		= $this->load->model("DAOAuditPregunta");
 		$this->_DAOTipoIMC				= $this->load->model("DAOTipoIMC");
-		$this->_DAOTipoAUDIT			= $this->load->model("DAOTipoAUDIT");
+		$this->_DAOEmpaAuditTipo		= $this->load->model("DAOEmpaAuditTipo");
 		$this->_DAOEvento				= $this->load->model("DAOEvento");
 		$this->_DAOMes					= $this->load->model("DAOMes");
 		$this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
@@ -616,12 +616,12 @@ class Empa extends Controller{
 		$parametros = $this->_request->getParams();
 		$correcto = false;
 		$error = false;
-		$datos = $this->_DAOTipoAUDIT->getTipoAUDIT($parametros['pts_audit']);
+		$datos = $this->_DAOEmpaAuditTipo->getTipoAUDIT($parametros['pts_audit']);
 		if ($datos) {
 			$correcto = true;
 			$gl_color = $datos->gl_color;
 			$gl_descripcion = $datos->gl_descripcion;
-			$id_tipo_audit = $datos->id_tipo_audit;
+			$id_audit_tipo = $datos->id_audit_tipo;
 		} else {
 			$error = true;
 		}
@@ -629,7 +629,7 @@ class Empa extends Controller{
 			"correcto" => $correcto,
 			"gl_color" => $gl_color,
 			"gl_mensaje" => $gl_descripcion,
-			"id_tipo_audit" => $id_tipo_audit);
+			"id_audit_tipo" => $id_audit_tipo);
 		$json = Zend_Json::encode($salida);
 		echo $json;
 	}
