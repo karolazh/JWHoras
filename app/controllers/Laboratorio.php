@@ -40,6 +40,7 @@ class Laboratorio extends Controller {
         $this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
         $this->_DAOLaboratorio			= $this->load->model("DAOLaboratorio");
         $this->_DAOTipoExamen			= $this->load->model("DAOTipoExamen");
+        $this->_DAOEmpa					= $this->load->model("DAOEmpa");
 	}
 
     /**
@@ -216,6 +217,10 @@ class Laboratorio extends Controller {
             }
             $gl_resultado_descripcion = $detExamen->gl_resultado_descripcion;
             $gl_resultado_indicacion = $detExamen->gl_resultado_indicacion;
+            $gl_pad = $detExamen->gl_pad;
+            $gl_pas = $detExamen->gl_pas;
+            $gl_glicemia = $detExamen->gl_glicemia;
+            $gl_colesterol = $detExamen->gl_colesterol;
 			
 			//Combo Laboratorios
 			$arrLaboratorios = $this->_DAOLaboratorio->getLista();
@@ -238,15 +243,19 @@ class Laboratorio extends Controller {
 			$this->smarty->assign("gl_resultado_1", $gl_resultado_1);
 			$this->smarty->assign("gl_resultado_descripcion", $gl_resultado_descripcion);
 			$this->smarty->assign("gl_resultado_indicacion", $gl_resultado_indicacion);
-			$this->smarty->assign('arrLaboratorios', $arrLaboratorios);
-			$this->smarty->assign('arrTipoExamen', $arrTipoExamen);
+            $this->smarty->assign("gl_pad", $gl_pad);
+            $this->smarty->assign("gl_pas", $gl_pas);
+            $this->smarty->assign("gl_glicemia", $gl_glicemia);
+            $this->smarty->assign("gl_colesterol", $gl_colesterol);
+			$this->smarty->assign("arrLaboratorios", $arrLaboratorios);
+			$this->smarty->assign("arrTipoExamen", $arrTipoExamen);
         }
 		$this->smarty->assign("perfil", $perfil);
 		$this->smarty->assign("accion", $accion);
         
         //muestra template
-        $this->smarty->display('laboratorio/datosExamen.tpl');
-        $this->load->javascript(STATIC_FILES . 'js/templates/laboratorio/ver.js');
+        $this->smarty->display("laboratorio/datosExamen.tpl");
+        $this->load->javascript(STATIC_FILES . "js/templates/laboratorio/ver.js");
     }
     
     /**
@@ -266,13 +275,7 @@ class Laboratorio extends Controller {
         $id_paciente_examen = $_POST['id_paciente_examen'];
         $id_tipo_examen = $_POST['id_tipo_examen'];
         $id_paciente = $_POST['id_paciente'];
-        //$id_empa = $_POST['id_empa'];
-        //if (isset($_POST['id_empa'])) {
-        if ($_POST['id_empa'] != "") {
-            $id_empa = $_POST['id_empa'];
-        } else {
-            $id_empa = NULL;
-        }
+        $id_empa = $_POST['id_empa'];
         if ($id_perfil == 7){
             $id_usuario_toma = $id_usuario;
         } else {
@@ -287,10 +290,22 @@ class Laboratorio extends Controller {
         }
         $fc_resultado = $_POST['fc_resultado'];
 		$fc_resultado = str_replace("'","",Fechas::formatearBaseDatos($fc_resultado));
-        $gl_resultado = $_POST['gl_resultado'];
         $gl_resultado_descripcion = $_POST['gl_resultado_descripcion'];
         $gl_resultado_indicacion = $_POST['gl_resultado_indicacion'];
-        
+        $gl_glicemia = NULL;
+        $gl_colesterol = NULL;
+        $gl_pad = NULL;
+        $gl_pas = NULL;
+        if ($id_tipo_examen == 1){
+            $gl_glicemia = $_POST['gl_glicemia'];
+        } elseif ($id_tipo_examen == 7){
+            $gl_colesterol = $_POST['gl_colesterol'];
+        } elseif ($id_tipo_examen == 9){
+            $gl_pad = $_POST['gl_pad'];
+            $gl_pas = $_POST['gl_pas'];
+        }
+        $gl_resultado = $_POST['gl_resultado'];
+
         $upd_examen = $this->_DAOPacienteExamen->update(array('id_usuario_toma' => $id_usuario_toma,
                                                             'gl_rut_persona_toma' => $gl_rut_toma,
                                                             'gl_nombre_persona_toma' => $gl_nombre_toma,
@@ -299,21 +314,23 @@ class Laboratorio extends Controller {
                                                             'gl_resultado' => $gl_resultado,
                                                             'gl_resultado_descripcion' => $gl_resultado_descripcion,
                                                             'gl_resultado_indicacion' => $gl_resultado_indicacion,
-                                                            'fc_actualiza' => date('Y-m-d H:m:s'),
-                                                            'id_usuario_act' => $_SESSION['id']
+                                                            'gl_glicemia' => $gl_glicemia,
+                                                            'gl_colesterol' => $gl_colesterol,
+                                                            'gl_pad' => $gl_pad,
+                                                            'gl_pas' => $gl_pas,
+                                                            'id_usuario_actualiza' => $_SESSION['id']
                                                             ), 
                                                             $id_paciente_examen, 'id_paciente_examen');
-        
+
         $resultado = NULL;
-        if ($upd_examen) {
-            //*** Caro 2017-03-21: Actualiza resultado de examen si fue agendado en EMPA ***//
-            if (!is_null($id_empa)) {
-            //if ($id_empa != NULL){
-                if (($id_tipo_examen == 1) or ($id_tipo_examen == 7) or ($id_tipo_examen == 9)){
-                    //Si examen es "Glicemia"/"Colesterol"/"Hipertensión"
-                    //ESTOS SE GUARDARÁN EN EXAMENES AGENDAD0S, 
-                    //YA QUE SE INGRESAN LOS PRIMEROS VALORES EN EMPA
-                } elseif (($id_tipo_examen == 2) or ($id_tipo_examen == 3) or ($id_tipo_examen == 4)) {
+        if (true) {
+            //*** Caro: Actualiza resultado de examen si fue agendado en EMPA ***//
+            if ($id_empa != ""){
+                if ($id_tipo_examen == 1) { $resp = $this->_DAOEmpa->update(array('gl_glicemia' => $gl_glicemia), $id_empa, 'id_empa'); }
+                if ($id_tipo_examen == 7) { $resp = $this->_DAOEmpa->update(array('gl_colesterol' => $gl_colesterol), $id_empa, 'id_empa'); }
+                if ($id_tipo_examen == 9) { $resp = $this->_DAOEmpa->update(array('gl_pad' => $gl_pad), $id_empa, 'id_empa'); 
+                                            $resp = $this->_DAOEmpa->update(array('gl_pas' => $gl_pas), $id_empa, 'id_empa'); }
+                if (($id_tipo_examen == 2) || ($id_tipo_examen == 3) || ($id_tipo_examen == 4)) {
                     //Si examen es "VDRL, RPR, VIH"
                     if ($gl_resultado == "P") {
                         $resultado = 0; //POSITIVO
@@ -321,14 +338,11 @@ class Laboratorio extends Controller {
                         $resultado = 1; //NEGATIVO
                     }
                     //actualiza resultado según tipo de examen
-                    if ($id_tipo_examen == 2) {
-                        $resp = $this->_DAOEmpa->update(array('bo_vdrl' => $resultado), $id_empa, 'id_empa');
-                    } elseif ($id_tipo_examen == 3) {
-                        $resp = $this->_DAOEmpa->update(array('bo_rpr' => $resultado), $id_empa, 'id_empa');
-                    } elseif ($id_tipo_examen == 4) {
-                        $resp = $this->_DAOEmpa->update(array('bo_vih' => $resultado), $id_empa, 'id_empa');
-                    }
-                } elseif (($id_tipo_examen == 5) or ($id_tipo_examen == 6) or ($id_tipo_examen == 8)) {
+                    if ($id_tipo_examen == 2) { $resp = $this->_DAOEmpa->update(array('bo_vdrl' => $resultado), $id_empa, 'id_empa'); }
+                    if ($id_tipo_examen == 3) { $resp = $this->_DAOEmpa->update(array('bo_rpr' => $resultado), $id_empa, 'id_empa'); } 
+                    if ($id_tipo_examen == 4) { $resp = $this->_DAOEmpa->update(array('bo_vih' => $resultado), $id_empa, 'id_empa'); }
+
+                } elseif (($id_tipo_examen == 5) || ($id_tipo_examen == 6) || ($id_tipo_examen == 8)) {
                     //Si examen es "Baciloscipia"/"PAP"/"Mamografía"
                     if ($gl_resultado == "A") {
                         $resultado = 0; //ALTERADO
@@ -336,13 +350,9 @@ class Laboratorio extends Controller {
                         $resultado = 1; //NEGATIVO
                     }
                     //actualiza resultado según tipo de examen
-                    if ($id_tipo_examen == 5) {
-                        $resp = $this->_DAOEmpa->update(array('bo_baciloscopia_resultado' => $resultado), $id_empa, 'id_empa');
-                    } elseif ($id_tipo_examen == 6) {
-                        $resp = $this->_DAOEmpa->update(array('bo_pap_resultado_nuevo' => $resultado), $id_empa, 'id_empa');
-                    } elseif ($id_tipo_examen == 8) {
-                        $resp = $this->_DAOEmpa->update(array('bo_mamografia_resultado' => $resultado), $id_empa, 'id_empa');
-                    }
+                    if ($id_tipo_examen == 5) { $resp = $this->_DAOEmpa->update(array('bo_baciloscopia_resultado' => $resultado), $id_empa, 'id_empa'); }
+                    if ($id_tipo_examen == 6) { $resp = $this->_DAOEmpa->update(array('bo_pap_resultado_nuevo' => $resultado), $id_empa, 'id_empa'); }
+                    if ($id_tipo_examen == 8) { $resp = $this->_DAOEmpa->update(array('bo_mamografia_resultado' => $resultado), $id_empa, 'id_empa'); }
                 }
                 
                 if ($resp) {
@@ -352,17 +362,19 @@ class Laboratorio extends Controller {
                 }
             } else {
                 $correcto = true;
-            }
+            }   
         } else {
             $error = true;
         }
         
         //Actualiza Grilla Exámenes x Paciente
         //$grilla = "";
+		
         $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
         $this->smarty->assign('arrExamenes', $arrExamenes);
         $grilla = $this->smarty->fetch('laboratorio/grillaExamenesLaboratorio.tpl');
         
+		
         $salida = array("error"    => $error,
                         "correcto" => $correcto,
                         "grilla" => $grilla,

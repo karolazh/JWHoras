@@ -80,18 +80,15 @@
                     <label for="fc_toma" class="control-label col-sm-3">Fecha toma de examen</label>
                     <div class='col-sm-2'>
                         <div class="input-group">
-                                <input type='text' class="form-control datepicker"
-                                           id='fc_toma' 
-                                           name='fc_toma'
-										   value="{$fc_toma|date_format:"%d/%m/%Y"}"
-										   readonly
-                                           />
-                                <span class="help-block hidden fa fa-warning"></span>
-                                <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_toma').focus();"></i></span>
-
+                            <input type='text' class="form-control datepicker"
+                                   id='fc_toma' 
+                                   name='fc_toma'
+                                   value="{$fc_toma|date_format:"%d/%m/%Y"}" 
+                                   readonly />
+                            <span class="help-block hidden fa fa-warning"></span>
+                            <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_toma').focus();"></i></span>
                         </div>
                     </div>
-
                     <!--<div class="col-sm-2">
                         <input type="date" class="form-control col-sm-2" 
                                name="fc_toma" id="fc_toma" value="{$fc_toma}" readonly />
@@ -99,14 +96,13 @@
                     <label for="fc_resultado" class="control-label col-sm-3">Fecha resultado de examen</label>
                     <div class='col-sm-2'>
                         <div class="input-group">
-                                <input type='text' class="form-control datepicker"
-                                           id='fc_resultado' 
-                                           name='fc_resultado'
-										   value="{$fc_resultado|date_format:"%d/%m/%Y"}"
-										    {if $accion == "1"}readonly{/if}
-                                           />
-                                <span class="help-block hidden fa fa-warning"></span>
-                                <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_resultado').focus();"></i></span>
+                            <input type='text' class="form-control datepicker" 
+                                   id='fc_resultado' 
+                                   name='fc_resultado'
+                                   value="{$fc_resultado|date_format:"%d/%m/%Y"}"
+                                   {if $accion == "1"}readonly{/if} />
+                            <span class="help-block hidden fa fa-warning"></span>
+                            <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_resultado').focus();"></i></span>
                         </div>
                     </div>
                     <!-- <div class="col-sm-2">
@@ -132,29 +128,30 @@
                 <div class="form-group">
                     <label class="control-label required col-sm-3">&nbsp;</label>
                     <div class="col-sm-2">&nbsp;</div>
-                    <label class="control-label required col-sm-3">Resultado examen</label>
-                    <div class="form-group col-sm-4">
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        {if $id_tipo_examen == "2" or $id_tipo_examen == "3" or $id_tipo_examen == "4"}
-                            <label><input type="radio" name="gl_resultado" 
-                                          id="gl_resultado_0" value="0" 
-                                          {if $accion == "1"}readonly{/if} {$gl_resultado_0}>
-                                <span class="label label-success">POSITIVO</span></label>&nbsp;&nbsp;
-                            <label><input type="radio" name="gl_resultado" 
-                                          id="gl_resultado_1" value="1" 
-                                          {if $accion == "1"}readonly{/if} {$gl_resultado_1}>
-                                <span class="label label-danger" style="color:#ffffff">NEGATIVO</span></label>
+                    {if $id_tipo_examen == "1"}
+                        {include file='laboratorio/inputGlicemia.tpl'}                        
+                    {else}
+                        {if $id_tipo_examen == "7"}
+                            {include file='laboratorio/inputColesterol.tpl'}                            
                         {else}
-                            <label><input type="radio" name="gl_resultado" 
-                                          id="gl_resultado_0" value="0" 
-                                          {if $accion == "1"}readonly{/if} {$gl_resultado_0}>
-                                <span class="label label-success">NORMAL</span></label>&nbsp;&nbsp;
-                            <label><input type="radio" name="gl_resultado" 
-                                          id="gl_resultado_1" value="1" 
-                                          {if $accion == "1"}readonly{/if} {$gl_resultado_1}>
-                                <span class="label label-danger" style="color:#ffffff">ALTERADO</span></label>
+                            {if $id_tipo_examen == "9"}
+                                {include file='laboratorio/inputHipertension.tpl'}
+                            {else}
+                                {if $id_tipo_examen == "2" or $id_tipo_examen == "3" or $id_tipo_examen == "4"}
+                                    {include file='laboratorio/selectPositivoNegativo.tpl'}
+                                {else}
+                                    {include file='laboratorio/selectNormalAlterado.tpl'}
+                                {/if}
+                            {/if}
                         {/if}
-                    </div>
+                    {/if}
+                </div>
+                <div class="form-group">
+                    {if $id_tipo_examen == "1" or $id_tipo_examen == "7" or $id_tipo_examen == "9"}
+                        <label class="control-label required col-sm-3">&nbsp;</label>
+                        <div class="col-sm-2">&nbsp;</div>
+                        {include file='laboratorio/selectNormalAlterado.tpl'}
+                    {/if}
                 </div>
             </div>
         </div>

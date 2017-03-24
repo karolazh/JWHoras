@@ -1,0 +1,16 @@
+TRUNCATE TABLE `pre_adjunto`;
+TRUNCATE TABLE `pre_auditoria`;
+TRUNCATE TABLE `pre_auditoria_login`;
+TRUNCATE TABLE `pre_diagnostico`;
+TRUNCATE TABLE `pre_empa`;
+TRUNCATE TABLE `pre_empa_audit`;
+TRUNCATE TABLE `pre_evento`;
+TRUNCATE TABLE `pre_paciente`;
+TRUNCATE TABLE `pre_paciente_agenda_especialista`;
+TRUNCATE TABLE `pre_paciente_agresor`;
+TRUNCATE TABLE `pre_paciente_agresor_violencia`;
+TRUNCATE TABLE `pre_paciente_alarma`;
+TRUNCATE TABLE `pre_paciente_derivar`;
+TRUNCATE TABLE `pre_paciente_direccion`;
+TRUNCATE TABLE `pre_paciente_examen`;
+TRUNCATE TABLE `pre_paciente_registro`;

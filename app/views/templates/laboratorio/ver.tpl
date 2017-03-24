@@ -24,6 +24,14 @@
                 class="btn btn-sm btn-flat btn-primary">
 			<i class="fa fa-info-circle"></i>&nbsp;&nbsp;Bitácora
         </button>
+        <button type="button"
+                href='javascript:void(0)' 
+                onclick="history.back(-1)"
+                data-toggle="tooltip" 
+                title="Bitácora"
+                class="btn btn-sm btn-flat btn btn-default">
+			<i class="fa fa-arrow-circle-left"></i>&nbsp;&nbsp;Volver
+        </button>
     </div>
     <br/><br/>
 </section>
@@ -58,27 +66,4 @@
 
     <div class="top-spaced"></div>
     
-    {*<div id="seccionExamen" style="display:none">
-        <!-- DATOS DEL EXAMEN -->
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Datos del Examen
-            </div>
-            {include file='laboratorio/datosExamen.tpl'}
-            
-            <div class="top-spaced"></div>
-        </div>
-        <!-- FIN DATOS DEL EXAMEN -->
-    </div>*}
-            
 </section>
-                    
-{*<script type="text/javascript">
-    function habilitarExamen() {
-        $('#seccionExamen').toggle();
-    }
-    
-    function deshabilitarExamen() {
-        $('#seccionExamen').toggle();
-    }
-</script>*}
