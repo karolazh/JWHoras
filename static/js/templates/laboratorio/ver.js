@@ -9,6 +9,7 @@ var Laboratorio = {
         var id_paciente_examen = form.id_paciente_examen.value;
         //alert(id_paciente_examen);
         var id_tipo_examen = form.id_tipo_examen.value;
+        //alert(id_tipo_examen);
         var id_paciente = form.id_paciente.value;
         var id_empa = form.id_empa.value;
         //alert(id_empa);
@@ -19,13 +20,10 @@ var Laboratorio = {
         //alert(gl_nombre_toma);
         var fc_resultado = form.fc_resultado.value;
         //alert(fecha_resultado);
-        var gl_resultado = form.gl_resultado.value;
-        //alert(resultado);
         var gl_resultado_descripcion = form.gl_resultado_descripcion.value;
         //alert(descripcion);
         var gl_resultado_indicacion = form.gl_resultado_indicacion.value;
         //alert(indicacion);
-        var resultado = "";
         
         if (gl_rut_toma == "") {
             msg_error += 'Ingrese RUT persona toma examen<br/>';
@@ -38,29 +36,66 @@ var Laboratorio = {
         }
         
         if (fc_resultado == "") {
-            msg_error += 'Ingrese Fecha de Resultado<br/>';
+            msg_error += 'Ingrese Fecha resultado de examen<br/>';
             error = true;
         }
+
+        var gl_glicemia = "";
+        var gl_colesterol = "";
+        var gl_pad = "";
+        var gl_pas = "";
+        if (id_tipo_examen == "1"){
+            //alert("gl_glicemia:"+form.gl_glicemia.value);
+            gl_glicemia = form.gl_glicemia.value;
+            if (gl_glicemia == "") {
+                msg_error += 'Ingrese Glicemia (mg/dl)<br/>';
+                error = true;
+            }
+        } else {
+            if (id_tipo_examen == "7"){
+                //alert("gl_colesterol:"+form.gl_colesterol.value);
+                gl_colesterol = form.gl_colesterol.value;
+                if (gl_colesterol == "") {
+                    msg_error += 'Ingrese Colesterol total (mg/dl)<br/>';
+                    error = true;
+                }
+            } else {
+                if (id_tipo_examen == "9") {
+                    //alert("gl_colesterol:"+form.gl_pad.value);
+                    //alert("gl_colesterol:"+form.gl_pas.value);
+                    gl_pad = form.gl_pad.value;
+                    gl_pas = form.gl_pad.value;
+                    if ((gl_pad == "") && (gl_pas == "")){
+                        msg_error += 'Ingrese Hipertensión PAS/PAD (mm/Hg)<br/>';
+                        error = true;
+                    }
+                }
+            }
+        }
         
+        var resultado = "";
+        var gl_resultado = form.gl_resultado.value;
         if (gl_resultado == "") {
-            msg_error += 'Ingrese Resultado de Examen<br/>';
+            msg_error += 'Ingrese Resultado examen<br/>';
             error = true;
         } else {
             //valida si tipo de examen es VIH, VDRL, RPR
             if ((id_tipo_examen == 2) || (id_tipo_examen == 3) || (id_tipo_examen == 4)) {
-                if (gl_resultado == 0) {
+                if(gl_resultado == '0'){
                     resultado = "P";
-                } else {
+                }else if(gl_resultado == '1'){
                     resultado = "N";
                 }
             } else {
-                if (gl_resultado == 0) {
-                    resultado = "N";
-                } else {
+                if(gl_resultado == '0'){
                     resultado = "A";
+                }else if(gl_resultado == '1'){
+                    resultado = "N";
                 }
             }
         }
+        //alert("gl_resultado:"+gl_resultado);
+        //alert("resultado:"+resultado);
         
         if (gl_resultado_descripcion == "") {
             msg_error += 'Ingrese Descripción de Resultado<br/>';
@@ -88,6 +123,10 @@ var Laboratorio = {
             formulario.append('gl_resultado', resultado);
             formulario.append('gl_resultado_descripcion', gl_resultado_descripcion);
             formulario.append('gl_resultado_indicacion', gl_resultado_indicacion);
+            formulario.append('gl_glicemia', gl_glicemia);
+            formulario.append('gl_colesterol', gl_colesterol);
+            formulario.append('gl_pad', gl_pad);
+            formulario.append('gl_pas', gl_pas);
             
             //console.log(formulario);
             $.ajax({
@@ -122,17 +161,16 @@ var Laboratorio = {
     }
 }
 
-
 // funcion para que funcione el calendario estilo ASD
 $(function () {
-            $(".datepicker").datetimepicker({
-                locale: "es",
-                format: "DD/MM/YYYY",
-            });
+    $(".datepicker").datetimepicker({
+        locale: "es",
+        format: "DD/MM/YYYY",
+    });
 });
 //funcion para que funcione la seleccion de hora estilo ASD
  $(function () {
-            $(".timepicker").datetimepicker({
-                format: "LT"
-            });
-        });
+    $(".timepicker").datetimepicker({
+        format: "LT"
+    });
+});
