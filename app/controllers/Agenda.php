@@ -1,23 +1,24 @@
 <?php
 
 /**
- * *****************************************************************************
- * Sistema          : PREVENCION DE FEMICIDIOS
- * Descripcion      : Controller para Exámenes de Pacientes
- * Plataforma       : !PHP
- * Creacion         : 15/03/2017
- * @name			Agenda.php
- * @version         1.0
- * @author          Carolina Zamora <carolina.zamora@cosof.cl>
- * =============================================================================
- * !ControlCambio
- * --------------
- * !cProgramador				!cFecha		!cDescripcion 
- * -----------------------------------------------------------------------------
- * 
- * -----------------------------------------------------------------------------
- * *****************************************************************************
- */
+*******************************************************************************
+* Sistema          : PREVENCION DE FEMICIDIOS
+* Descripcion      : Controller para Exámenes de Pacientes
+* Plataforma       : !PHP
+* Creacion         : 15/03/2017
+* @name			Agenda.php
+* @version         1.0
+* @author          Carolina Zamora <carolina.zamora@cosof.cl>
+* =============================================================================
+* !ControlCambio
+* --------------
+* !cProgramador				!cFecha		!cDescripcion 
+* -----------------------------------------------------------------------------
+* 
+* -----------------------------------------------------------------------------
+*******************************************************************************
+*/
+
 class Agenda extends Controller {
     
     protected $_DAOEmpa;
@@ -45,7 +46,6 @@ class Agenda extends Controller {
 	 */
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
-        //
 	}
     
     /**
@@ -54,7 +54,6 @@ class Agenda extends Controller {
 	 */
     public function ver() {
         Acceso::redireccionUnlogged($this->smarty);
-		$sesion = New Zend_Session_Namespace("usuario_carpeta");
         
         $parametros  = $this->request->getParametros();
         $id_paciente = $parametros[0];
@@ -161,7 +160,6 @@ class Agenda extends Controller {
 	
     public function agendaLaboratorio() {
         Acceso::redireccionUnlogged($this->smarty);
-		$sesion			= New Zend_Session_Namespace("usuario_carpeta");
 
         $id_laboratorio	= $_SESSION['id_laboratorio'];
         
@@ -213,7 +211,6 @@ class Agenda extends Controller {
 	 */
     public function agendar() {
         Acceso::redireccionUnlogged($this->smarty);
-		$sesion = New Zend_Session_Namespace("usuario_carpeta");
         
         $parametros  = $this->request->getParametros();
         $id_paciente = $parametros[0];

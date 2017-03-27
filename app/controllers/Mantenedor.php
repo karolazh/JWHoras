@@ -16,7 +16,7 @@
 *-----------------------------------------------------------------------------
 *
 *-----------------------------------------------------------------------------
-*****************************************************************************
+******************************************************************************
 */
 
 class Mantenedor extends Controller{
@@ -32,7 +32,6 @@ class Mantenedor extends Controller{
         $this->load->lib('Seguridad', false);
 		$this->load->lib('Fechas', false);
 		$this->load->lib('Evento', false);
-
 
         $this->_DAOPerfil			= $this->load->model("DAOPerfil");
 		$this->_DAOOpcion			= $this->load->model("DAOOpcion");
@@ -90,7 +89,6 @@ class Mantenedor extends Controller{
 
 
 	public function cambiarUsuario(){
-		//Acceso::redireccionUnlogged($this->smarty);
 		$where		= array('bo_activo' => 1);
 		
 		if($_SESSION['id_usuario_original'] == 0){
@@ -105,8 +103,6 @@ class Mantenedor extends Controller{
 	}
 
 	public function procesarCambio(){
-		//Acceso::redireccionUnlogged($this->smarty);
-
 		$correcto			= false;
 		$mensaje			= '';
 		$parametros			= $this->_request->getParams();
@@ -118,7 +114,7 @@ class Mantenedor extends Controller{
 		$usuario			= $this->_DAOUsuario->getLoginByID($id_usuario_cambio);
 		if($usuario){
 			$correcto		= true;
-			// Evento
+			// Agregar Evento
 				$session							= New Zend_Session_Namespace("usuario_carpeta");
 				$session->id						= $usuario->id_usuario;
 				$session->nombre					= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
@@ -159,8 +155,6 @@ class Mantenedor extends Controller{
 	}
 
 	public function volver_usuario(){
-		//Acceso::redireccionUnlogged($this->smarty);
-
 		$correcto			= false;
 		$mensaje			= '';
 		$parametros			= $this->_request->getParams();
@@ -169,7 +163,7 @@ class Mantenedor extends Controller{
 		$usuario			= $this->_DAOUsuario->getLoginByID($id_usuario_cambio);
 		if($usuario){
 			$correcto		= true;
-			// Evento
+			// Agregar Evento
 				$session						= New Zend_Session_Namespace("usuario_carpeta");
 				$session->id					= $usuario->id_usuario;
 				$session->nombre				= $usuario->gl_nombres . " " . $usuario->gl_apellidos;
@@ -260,7 +254,6 @@ class Mantenedor extends Controller{
 		$parametros	= $this->request->getParametros();
 		$id_perfil	= $parametros[0];
 		$data		= $this->_DAOPerfil->getById($id_perfil);
-		/*stdClass Object ( [id_perfil] => 1 [gl_nombre_perfil] => ADMINISTRADOR [id_usuario_crea] => [fc_crea] => )*/
 
 		$this->smarty->assign('itm',$data);
 		$this->smarty->display('mantenedor_perfil/editar.tpl');

@@ -17,16 +17,13 @@
 *<david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
 *
 *-----------------------------------------------------------------------------
-*****************************************************************************
+******************************************************************************
 */
 
 require_once(APP_PATH . "libs/Helpers/View/Grid.php");
 
 class Home extends Controller{
 
-    /**
-     * Constructor
-     */
     function __construct(){
         parent::__construct();
 		$this->load->lib('Fechas', false);		
@@ -40,9 +37,6 @@ class Home extends Controller{
         
     }
 
-    /**
-     * Inicio
-     */
     public function dashboard(){
         Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
@@ -196,9 +190,6 @@ class Home extends Controller{
             $jscode .= 'Home.graficoAceptaPrograma('.json_encode($arr_programa).');';
         }
 
-        
-        
-
         $this->_display($template);
         
         $this->load->javascript(STATIC_FILES.'js/plugins/amcharts/amcharts.js');
@@ -209,8 +200,6 @@ class Home extends Controller{
         $this->load->javascript(STATIC_FILES.'js/formulario.js');
         $this->load->javascript($jscode);
     }
-
-
 
     public function pacientesMapaDashboard(){
         $daoPacientes = $this->load->model('DAOPaciente');
@@ -223,8 +212,6 @@ class Home extends Controller{
             $id_region = $_SESSION['id_region'];
             $pacientes =  $daoPacientes->getLista(array('region' => $id_region));
         }
-
-        //$pacientes =  $daoPacientes->getLista();
 
         if($pacientes){
             foreach($pacientes as $paciente){
@@ -240,5 +227,3 @@ class Home extends Controller{
     }
 
 }
-
-?>

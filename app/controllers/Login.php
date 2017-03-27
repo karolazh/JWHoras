@@ -1,36 +1,23 @@
 <?php
 
-/* 
-!IniHeaderDoc
-*****************************************************************************
-!NombreObjeto 		: Login.php
-!Sistema 	  		: PREVENCION DE FEMICIDIOS
-!Modulo 	  		: NA
-!Descripcion  		: 
-!Plataforma   		: !PHP
-!Perfil       		: 
-!Itinerado    		: NA
-!Uso          		: NA
-!Autor        		: Victor Retamal <victor.retamal@cosof.cl>
-!Creacion     		: 20/02/2017
-!Retornos/Salidas 	: NA
-!OrigenReq        	: NA
-=============================================================================
-!Parametros 		: NA 
-=============================================================================
-!Testing 			: NA
-=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador					!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
+/**
+******************************************************************************
+* Sistema			: PREVENCION DE FEMICIDIOS
+* Descripcion		: Controller para Login
+* Plataforma		: !PHP
+* Creacion			: 20/02/2017
+* @name				Login.php
+* @version			1.0
+* @author			Victor Retamal <victor.retamal@cosof.co>
+* =============================================================================
+* !ControlCambio
+* --------------
+* !cProgramador				!cFecha		!cDescripcion 
+* -----------------------------------------------------------------------------
 *<orlando.vazquezl@cosof.cl>	06-03-2017	Modificación referencias a DAO's de acuerdo a nueva estructura de BD.
 *<victor.retamal@cosof.cl>		17-03-2017	Add id_usuario_original e id_laboratorio a la session
------------------------------------------------------------------------------
-
------------------------------------------------------------------------------
-*****************************************************************************
-!EndHeaderDoc 
+* -----------------------------------------------------------------------------
+*******************************************************************************
 */
 
 class Login extends Controller {
@@ -41,7 +28,6 @@ class Login extends Controller {
     protected $_DAOProvincia;
     protected $DAOAuditoriaLogin;
 
-    /*** Constructor ***/
     function __construct() {
         parent::__construct();
 		include_once("app/libs/nusoap/lib/nusoap.php");
@@ -324,11 +310,10 @@ class Login extends Controller {
     public function logoutUsuario() {
         if (isset($_COOKIE['datos_usuario_carpeta'])) {
             unset($_COOKIE['datos_usuario_carpeta']);
-            setcookie('datos_usuario_carpeta', '', time() - 1); // empty value and old timestamp
+            setcookie('datos_usuario_carpeta', '', time() - 1);
         }
         unset($_SESSION['usuario_carpeta']);
         unset($_SESSION['adjuntos']);
-        //session_destroy();
         header('Location:' . BASE_URI);
     }
     

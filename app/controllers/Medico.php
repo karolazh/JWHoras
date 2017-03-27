@@ -1,22 +1,22 @@
 <?php
 
 /**
- * ****************************************************************************
- * Sistema		: PREVENCION DE FEMICIDIOS
- * Descripcion	: Controller para las funciones del ROL Medico
- * Plataforma	: !PHP
- * Creacion		: 08/03/2017
- * @name		Medico.php
- * @version		1.0
- * @author		Victor Retamal <victor.retamal@cosof.cl>
- * =============================================================================
- * !ControlCambio
- * --------------
- * !cProgramador				!cFecha		!cDescripcion 
- * -----------------------------------------------------------------------------
- *<orlando.vazquez@cosof.cl>	08-03-2017	Agregado Evento
- * -----------------------------------------------------------------------------
- * ****************************************************************************
+******************************************************************************
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Controller para las funciones del ROL Medico
+* Plataforma	: !PHP
+* Creacion		: 08/03/2017
+* @name			Medico.php
+* @version		1.0
+* @author		Victor Retamal <victor.retamal@cosof.cl>
+* =============================================================================
+* !ControlCambio
+* --------------
+* !cProgramador				!cFecha		!cDescripcion 
+* -----------------------------------------------------------------------------
+*<orlando.vazquez@cosof.cl>	08-03-2017	Agregado Evento
+* -----------------------------------------------------------------------------
+******************************************************************************
 */
 
 class Medico extends Controller {
@@ -34,10 +34,10 @@ class Medico extends Controller {
 		$this->load->lib('Seguridad', false);
 		$this->load->lib('Evento', false);
 
-		$this->_Evento						= new Evento();
-		$this->_DAOPaciente					= $this->load->model("DAOPaciente");
-		$this->_DAOEmpa						= $this->load->model("DAOEmpa");
-		$this->_DAOTipoEspecialidad			= $this->load->model("DAOTipoEspecialidad");
+		$this->_Evento							= new Evento();
+		$this->_DAOPaciente						= $this->load->model("DAOPaciente");
+		$this->_DAOEmpa							= $this->load->model("DAOEmpa");
+		$this->_DAOTipoEspecialidad				= $this->load->model("DAOTipoEspecialidad");
 		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
 	}
 
@@ -74,7 +74,7 @@ class Medico extends Controller {
 	* @author: Victor Retamal <victor.retamal@cosof.cl>
 	*/
 	public function plan_tratamiento(){
-		//Acceso::redireccionUnlogged($this->smarty);
+		Acceso::redireccionUnlogged($this->smarty);
 
 		$parametros			= $this->request->getParametros();
 		$id_paciente		= $parametros[0];

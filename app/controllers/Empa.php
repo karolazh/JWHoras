@@ -17,20 +17,21 @@
 *<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a DAO's
 *<david.guzman@cosof.cl>	03-07-2017	Modificacion en funcion nuevo
 *-----------------------------------------------------------------------------
-*****************************************************************************
+******************************************************************************
 */
 
 class Empa extends Controller{
 	
     protected $_DAOEmpa;
 	protected $_Evento;
-	//funcion construct
+
 	function __construct() {
 		parent::__construct();
-		//Acceso::set("ADMINISTRADOR");
+
 		$this->load->lib('Boton', false);
 		$this->load->lib('Fechas', false);
 		$this->load->lib('Evento', false);
+
 		$this->_Evento					= new Evento();
 		$this->_DAOEmpa					= $this->load->model("DAOEmpa");
 		$this->_DAOEmpaAudit			= $this->load->model("DAOEmpaAudit");
@@ -47,27 +48,10 @@ class Empa extends Controller{
 		$this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
 	}
 
-	/*
-	 * Index
-	 */
-
 	public function index() {
-		$sesion = New Zend_Session_Namespace("usuario_carpeta");
-		$this->smarty->assign("id_usuario", $sesion->id);
-		$this->smarty->assign("rut", $sesion->rut);
-		$this->smarty->assign("usuario", $sesion->usuario);
+		Acceso::redireccionUnlogged($this->smarty);
 
-		/*
-		 * Si tengo perfil 1="ADMIN" / 3="GESTOR NACIONAL" puedo ver todas las DAU
-		 * Si tengo perfil 2="ENFERMERA" puedo ver solo las DAU ingresadas en mi institución
-		 * Si tengo perfil 4="GESTOR REGIONAL" puedo ver solo las DAU correspondientes a la región
-		 * REALIZAR FUNCIÓN PARA LISTAR SEGÚN PERFIL
-		 */
-		//$arr = $this->_DAODau->getListaDAU();
-		//$this->smarty->assign('arrResultado', $arr);
-		//llamado al template
-
-		$arrResultado = $this->_DAOPaciente->getLista();
+		$arrResultado	= $this->_DAOPaciente->getLista();
 		$this->smarty->assign("arrResultado", $arrResultado);
 
 		$this->_display('empa/index.tpl');
@@ -86,12 +70,6 @@ class Empa extends Controller{
 		
         $id_empa = $this->_DAOEmpa->getByIdPaciente($id_paciente);
 		$this->smarty->assign("id_empa", $id_empa->id_empa);
-        
-		/* Obtener id de paciente a través de id de dau */
-		$id_pac = 1;
-		//Cargar Datos Enfermera
-		//$gl_comuna = $this->_DAOComuna->getById($_SESSION['id_comuna']);
-		//$gl_institucion = $this->_DAOCentroSalud->getById($_SESSION['id_institucion']);
 
 		$this->smarty->assign("gl_comuna", $id_empa->gl_comuna);
 		$this->smarty->assign("id_comuna", $id_empa->id_comuna_paciente);
@@ -483,16 +461,6 @@ class Empa extends Controller{
 		$this->load->javascript(STATIC_FILES . "js/templates/agenda/ver.js");
 	}
 
-	public function ver() {
-		Acceso::redireccionUnlogged($this->smarty);
-		$sesion = New Zend_Session_Namespace("usuario_carpeta");
-		$this->smarty->assign("id_usuario", $sesion->id);
-		$this->smarty->assign("rut", $sesion->rut);
-		$this->smarty->assign("usuario", $sesion->usuario);
-
-		$this->_display('empa/ver.tpl');
-	}
-
 	public function audit() {
 		Acceso::redireccionUnlogged($this->smarty);
 		$params = $this->request->getParametros();
@@ -505,12 +473,9 @@ class Empa extends Controller{
 		if (!is_null($arrAudit)) {
 			foreach ($arrAudit as $item) {
 				if (is_null($item->nr_valor)) {
-
-					//$item->nr_valor = 0;
 					$total += $item->nr_valor;
 				} else {
 					$total += $item->nr_valor;
-
 				}
 			}
 		}
@@ -523,13 +488,6 @@ class Empa extends Controller{
 
 	public function guardar() {
 		header('Content-type: application/json');
-		$session = New Zend_Session_Namespace("usuario_carpeta");
-		/*  Acceso::redireccionUnlogged($this->smarty);
-
-		  $this->smarty->assign("id_usuario", $sesion->id);
-		  $this->smarty->assign("rut", $sesion->rut);
-		  $this->smarty->assign("usuario", $sesion->usuario);
-		 */
 
 		$parametros		= $this->_request->getParams();
 		$correcto		= FALSE;
@@ -540,12 +498,11 @@ class Empa extends Controller{
 		
 		$bool_update = $this->_DAOEmpa->updateEmpa($parametros);
 		if ($bool_update) {
-			$resp = $this->_Evento->guardarMostrarUltimo(12,$id_empa,$id_paciente,"Empa modificado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
+			$resp = $this->_Evento->guardarMostrarUltimo(12,$id_empa,$id_paciente,"Empa modificado el : " . Fechas::fechaHoyVista()." por usuario ".$_SESSION['nombre'],1,1,$_SESSION['id']);
 			$correcto = TRUE;
 			$finalizado = $this->guardarFinalizado($parametros);
 			if ($finalizado){
 				$this->_DAOEmpa->updateFinalizado($parametros);
-				//$resp = $this->_Evento->guardar(2,$id_empa,$id_paciente,"Empa finalizado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
 			}
 		} else {
 			$error = TRUE;
@@ -561,9 +518,7 @@ class Empa extends Controller{
 
 	public function guardarAudit() {
 		header('Content-type: application/json');
-		$session = New Zend_Session_Namespace("usuario_carpeta");
 		$parametros = $this->_request->getParams();
-		//print_r($parametros); die;
 		$correcto = false;
 		$error = false;
 		$cant_preguntas = $parametros['cant_pre'];
@@ -572,10 +527,9 @@ class Empa extends Controller{
 			$id_pregunta = $i;
 			$valor = $parametros['pregunta_' . $i];
 			$id_empa_audit = $this->_DAOEmpaAudit->updateEmpaAudit($id_empa, $id_pregunta, $valor);
-			//$bool_update = $this->_DAOEmpa->updateEmpa($parametros);
 		}
 		if ($id_empa_audit) {
-			$correcto = $this->_Evento->guardarMostrarUltimo(15,$id_empa,0,"AUDIT del EMPA ".$id_empa."  modificado el : " . Fechas::fechaHoy(),1,1,$session->id);
+			$correcto = $this->_Evento->guardarMostrarUltimo(15,$id_empa,0,"AUDIT del EMPA ".$id_empa."  modificado el : " . Fechas::fechaHoy(),1,1,$_SESSION['id']);
 		} else {
 			$error = true;
 		}
@@ -635,7 +589,6 @@ class Empa extends Controller{
 
 	
 	public function guardarFinalizado($parametros){
-		//print_r($parametros);die;
 		if ($parametros['gl_sector'] == 'NULL') {
 			//return FALSE;
 		}
@@ -644,131 +597,106 @@ class Empa extends Controller{
 		}
 
 		if ($parametros['fc_empa'] == 'NULL') {
-			//die('1');
 			return FALSE;
 		}
 
 		if ($parametros['bo_embarazo'] == 'NULL') {
-			//die('2');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_consume_alcohol'] == 'NULL') {
-			//die('3');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_consume_alcohol'] == 1 && $parametros['gl_puntos_audit'] == 'NULL') {
-			//die('4');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_fuma'] == 'NULL') {
-			//die('5');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_peso'] == 'NULL') {
-			//die('6');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_estatura'] == 'NULL') {
-			//die('7');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_imc'] == 'NULL') {
-			//die('8');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_circunferencia_abdominal'] == 'NULL') {
-			//die('9');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_pas'] == 'NULL') {
-			//die('10');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_pad'] == 'NULL') {
-			//die('11');
 			return FALSE;
 		}
 		
 		if ($parametros['nr_edad'] > 40 && $parametros['gl_glicemia'] == 'NULL') {
-			//die('12');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_imc'] >= 30 && $parametros['gl_glicemia'] == 'NULL') {
-			//die('13');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_antecedente_diabetes'] == 'NULL') {
-			//die('14');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_antecedente_diabetes'] == 1 && $parametros['gl_glicemia'] == 'NULL') {
-			//die('15');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_trabajadora_reclusa'] == 'NULL') {
-			//die('16');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_tos_productiva'] == 'NULL') {
-			//die('17');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_pap_realizado'] == 'NULL' && $parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0) {
-			//die('18');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_pap_realizado'] == 0 && 
 			$parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0){
-			//die('19');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_pap_realizado'] == 1 && ($parametros['bo_pap_resultado'] == 'NULL' || $parametros['fc_ultimo_pap_ano'] == 'NULL' || 
 			$parametros['fc_ultimo_pap_mes'] == 'NULL' || $parametros['bo_pap_vigente'] == 'NULL') && 
 			($parametros['nr_edad'] >= 25 && $parametros['nr_edad'] <= 64 && $parametros['bo_embarazo'] == 0)){
-			//die('20');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_colesterol'] == 'NULL' && $parametros['nr_edad'] >= 40) {
-			//die('21');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_mamografia_realizada'] == 'NULL' && $parametros['bo_embarazo'] == 0) {
-			//die('22');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_mamografia_requiere'] == 'NULL' && $parametros['bo_embarazo'] == 0) {
-			//die('23');
 			return FALSE;
 		}
 		
 		if ($parametros['bo_mamografia_realizada'] == 1 && $parametros['bo_embarazo'] == 0 && ($parametros['fc_mamografia_mes'] == 'NULL' || $parametros['fc_mamografia_ano'] == 'NULL' ||
 			$parametros['bo_mamografia_vigente'] == 'NULL' || $parametros['bo_mamografia_resultado_pasado'] == 'NULL')) {
-			//die('24');
 			return FALSE;
 		}
 		
 		if ($parametros['gl_observaciones_empa'] == 'NULL') {
-			//die('25');
 			return FALSE;
 		}
 		

@@ -1,22 +1,22 @@
 <?php
 
 /**
- * ****************************************************************************
- * Sistema		: PREVENCION DE FEMICIDIOS
- * Descripcion	: Controller para las funciones del ROL Especialista
- * Plataforma	: !PHP
- * Creacion		: 08/03/2017
- * @name		Especialista.php
- * @version		1.0
- * @author		David Guzmán <david.guzman@cosof.cl>
- * =============================================================================
- * !ControlCambio
- * --------------
- * !cProgramador				!cFecha		!cDescripcion 
- * -----------------------------------------------------------------------------
- *<david.guzman@cosof.cl>		16-03-2017	index
- * -----------------------------------------------------------------------------
- * ****************************************************************************
+******************************************************************************
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Controller para las funciones del ROL Especialista
+* Plataforma	: !PHP
+* Creacion		: 08/03/2017
+* @name		Especialista.php
+* @version		1.0
+* @author		David Guzmán <david.guzman@cosof.cl>
+* =============================================================================
+* !ControlCambio
+* --------------
+* !cProgramador				!cFecha		!cDescripcion 
+* -----------------------------------------------------------------------------
+*<david.guzman@cosof.cl>		16-03-2017	index
+* -----------------------------------------------------------------------------
+*******************************************************************************
 */
 
 class Especialista extends Controller {
@@ -37,14 +37,14 @@ class Especialista extends Controller {
 		$this->load->lib('Seguridad', false);
 		$this->load->lib('Evento', false);
 
-		$this->_Evento						= new Evento();
-		$this->_DAOPaciente					= $this->load->model("DAOPaciente");
-		$this->_DAOEmpa						= $this->load->model("DAOEmpa");
-		$this->_DAOTipoEspecialidad			= $this->load->model("DAOTipoEspecialidad");
+		$this->_Evento							= new Evento();
+		$this->_DAOPaciente						= $this->load->model("DAOPaciente");
+		$this->_DAOEmpa							= $this->load->model("DAOEmpa");
+		$this->_DAOTipoEspecialidad				= $this->load->model("DAOTipoEspecialidad");
 		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
-		$this->_DAOCie10Capitulo			= $this->load->model("DAOCie10Capitulo");
-		$this->_DAOCie10Seccion				= $this->load->model("DAOCie10Seccion");
-		$this->_DAOCie10Grupo				= $this->load->model("DAOCie10Grupo");
+		$this->_DAOCie10Capitulo				= $this->load->model("DAOCie10Capitulo");
+		$this->_DAOCie10Seccion					= $this->load->model("DAOCie10Seccion");
+		$this->_DAOCie10Grupo					= $this->load->model("DAOCie10Grupo");
 	}
 
 	/**
@@ -66,7 +66,6 @@ class Especialista extends Controller {
 						'on'=>'esp.id_paciente',
 						'igual'=>'paciente.id_paciente');
 		$arr = $this->_DAOPaciente->getListaDetalle($where,$join);
-		//$this->smarty->assign('id_usuario', $_SESSION['id']);
 		$this->smarty->assign('mostrar_especialista', 1);
 		$this->smarty->assign('arrResultado', $arr);
 		$this->smarty->assign('titulo', 'Pacientes derivados a Especialista');
@@ -124,7 +123,6 @@ class Especialista extends Controller {
 	
 	public function cargarSeccionporCapitulo(){
             $cie10 = $_POST['cie10'];
-            //$daoRegion = $this->load->model('DAORegion');
             $seccion1 = $this->_DAOCie10Capitulo->getDetalleByIdCapitulo($cie10);
             $json = array();
             $i = 0;
@@ -140,7 +138,6 @@ class Especialista extends Controller {
 	
 	public function cargarGrupoporSeccion(){
             $seccion = $_POST['seccion'];
-            //$daoRegion = $this->load->model('DAORegion');
             $grupo1 = $this->_DAOCie10Seccion->getDetalleByIdSeccion($seccion);
             $json = array();
             $i = 0;
@@ -156,7 +153,6 @@ class Especialista extends Controller {
 	
 	public function cargarCIE10porGrupo(){
             $grupo = $_POST['grupo'];
-            //$daoRegion = $this->load->model('DAORegion');
             $cie101 = $this->_DAOCie10Grupo->getDetalleByIdGrupo($grupo);
             $json = array();
             $i = 0;

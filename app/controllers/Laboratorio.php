@@ -1,7 +1,7 @@
 <?php
 
 /**
- * *****************************************************************************
+ *******************************************************************************
  * Sistema          : PREVENCION DE FEMICIDIOS
  * Descripcion      : Controller para Exámenes de Pacientes
  * Plataforma       : !PHP
@@ -16,8 +16,9 @@
  * -----------------------------------------------------------------------------
  * 
  * -----------------------------------------------------------------------------
- * *****************************************************************************
+ *******************************************************************************
  */
+ 
 class Laboratorio extends Controller {
     
     protected $_Evento;
@@ -316,6 +317,8 @@ class Laboratorio extends Controller {
         $resultado = NULL;
         if (true) {
             //*** Caro: Actualiza resultado de examen si fue agendado en EMPA ***//
+			
+			// Crear una funcion updateByIdTipoExamen que tenga esta lógica 
             if ($id_empa != ""){
                 if ($id_tipo_examen == 1) { $resp = $this->_DAOEmpa->update(array('gl_glicemia'   => $gl_glicemia), $id_empa, 'id_empa'); }
                 if ($id_tipo_examen == 7) { $resp = $this->_DAOEmpa->update(array('gl_colesterol' => $gl_colesterol), $id_empa, 'id_empa'); }
@@ -359,7 +362,6 @@ class Laboratorio extends Controller {
         }
         
         //Actualiza Grilla Exámenes x Paciente
-        //$grilla = "";
         $arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
         $this->smarty->assign('arrExamenes', $arrExamenes);
         $grilla = $this->smarty->fetch('laboratorio/grillaExamenesLaboratorio.tpl');

@@ -1,25 +1,26 @@
 <?php
 
 /**
- * ****************************************************************************
- * Sistema			: PREVENCION DE FEMICIDIOS
- * Descripcion		: Controller para Registro de Paciente
- * Plataforma		: !PHP
- * Creacion			: 14/02/2017
- * @name			Paciente.php
- * @version			1.0
- * @author			Victor Retamal <victor.retamal@cosof.co>
- * =============================================================================
- * !ControlCambio
- * --------------
- * !cProgramador				!cFecha		!cDescripcion 
- * -----------------------------------------------------------------------------
- * <david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
- * <orlando.vazquez@cosof.co> 06-03-2017  Adaptacion a nueva BD de DAO's y funciones
- * <victor.retamal@cosof.co> 07-03-2017  fix GuardarRegistro() para nueva BD
- * -----------------------------------------------------------------------------
- * ****************************************************************************
- */
+******************************************************************************
+* Sistema			: PREVENCION DE FEMICIDIOS
+* Descripcion		: Controller para Registro de Paciente
+* Plataforma		: !PHP
+* Creacion			: 14/02/2017
+* @name				Paciente.php
+* @version			1.0
+* @author			Victor Retamal <victor.retamal@cosof.co>
+* =============================================================================
+* !ControlCambio
+* --------------
+* !cProgramador				!cFecha		!cDescripcion 
+* -----------------------------------------------------------------------------
+* <david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
+* <orlando.vazquez@cosof.co> 06-03-2017  Adaptacion a nueva BD de DAO's y funciones
+* <victor.retamal@cosof.co> 07-03-2017  fix GuardarRegistro() para nueva BD
+* -----------------------------------------------------------------------------
+*******************************************************************************
+*/
+
 class Paciente extends Controller {
 
 	protected $_Evento;
@@ -116,16 +117,11 @@ class Paciente extends Controller {
 		$arrPrevision = $this->_DAOPrevision->getLista();
 		$this->smarty->assign("arrPrevision", $arrPrevision);
 
-		//$arrCasoEgreso = $this->_DAOTipoEgreso->getLista();
-		//$this->smarty->assign("arrCasoEgreso", $arrCasoEgreso);
-
 		$this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.', '', 'pull-right'));
 
-		//llamado al template
 		$this->_display('paciente/nuevo.tpl');
 		$this->load->javascript(STATIC_FILES . "js/regiones.js");
 		$this->load->javascript(STATIC_FILES . "js/templates/paciente/nuevo.js");
-		//$this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
 		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
 	}
 
@@ -135,8 +131,7 @@ class Paciente extends Controller {
 	 */
 	public function GuardarRegistro() {
 		header('Content-type: application/json');
-		$session = New Zend_Session_Namespace("usuario_carpeta");
-		$parametros		= $this->_request->getParams();
+		$parametros			= $this->_request->getParams();
 		$correcto			= false;
 		$error				= false;
 		$mensaje_error		= '';
@@ -178,7 +173,6 @@ class Paciente extends Controller {
 		}
 		if ($id_paciente) {
 			$correcto		= true;
-			$session		= New Zend_Session_Namespace("usuario_carpeta");
 			$rut			= $parametros['rut'];
 			$codigo_fonasa	= $parametros['gl_codigo_fonasa'];
 
@@ -265,13 +259,6 @@ class Paciente extends Controller {
 			if ($parametros['chkAcepta']) {
 				$resp = $this->_Evento->guardar(4,0,$id_paciente,"AUDIT del EMPA".$id_empa2." creado el : " . "Acepta el programa con fecha : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 			}
-			/*
-			if ($parametros['chkReconoce']) {
-				$datos_evento['eventos_tipo']	= 5;
-				$datos_evento['gl_descripcion']	= "Reconoce violencia con fecha : " . Fechas::fechaHoy();
-				$resp							= $this->_DAOEvento->insEvento($datos_evento);
-			}
-			*/
 
 			$parametros['bo_estado']		= 1;
 			$parametros['id_usuario_crea']	= $_SESSION['id'];
@@ -308,7 +295,6 @@ class Paciente extends Controller {
 	 */
 	public function GuardarMotivo() {
 		header('Content-type: application/json');
-		$session			= New Zend_Session_Namespace("usuario_carpeta");
 		$parametros			= $this->_request->getParams();
 		$correcto			= false;
 		$error				= false;
@@ -328,7 +314,7 @@ class Paciente extends Controller {
 			$gl_grupo_tipo = 'Tratamiento';
 			$id_tipo_grupo = 2;
 			if ($gl_grupo_tipo_ant != $gl_grupo_tipo){
-				$resp = $this->_Evento->guardar(10,0,$id_paciente,"Paciente RUT : ". $rut ." en Grupo Tratamiento desde : " . Fechas::fechaHoyVista(),1,1,$session->id);				
+				$resp = $this->_Evento->guardar(10,0,$id_paciente,"Paciente RUT : ". $rut ." en Grupo Tratamiento desde : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);				
 			}
 		}else{
 			$gl_grupo_tipo = 'Control';
@@ -372,7 +358,6 @@ class Paciente extends Controller {
 				$res_update_centro_fono			= $this->_DAOPaciente->update(array('gl_fono' => $gl_fono), $id_paciente, 'id_paciente');
 				$res_update_fono_seguro			= $this->_DAOPaciente->update(array('bo_fono_seguro' => $bo_fono_seguro), $id_paciente, 'id_paciente');
 
-				$session							= New Zend_Session_Namespace("usuario_carpeta");
 				$res_evento = $this->_Evento->guardar(16,0,$id_paciente,"Motivo consulta agregada el : " . Fechas::fechaHoyVista(),1,0,$_SESSION['id']);
 				if($res_update_centro_salud && $res_evento && $res_update_centro_fono && $res_update_fono_seguro){
 					$correcto = TRUE;
@@ -389,14 +374,6 @@ class Paciente extends Controller {
 				}
 			}
 
-			/*
-			if ($parametros['chkReconoce']) {
-				$resp = $this->_DAOPaciente->update(array('bo_reconoce' => 1), $id_paciente, 'id_paciente');
-				$datos_evento['eventos_tipo'] = 5;
-				$datos_evento['gl_descripcion'] = "Reconoce violencia con fecha : " . Fechas::fechaHoy();
-				$resp = $this->_DAOEvento->insEvento($datos_evento);
-			}
-			*/
 		}else{
 			$error	= true;
 		}
@@ -424,9 +401,7 @@ class Paciente extends Controller {
 		$resp = $this->_DAOPaciente->update(array('bo_reconoce' => 1), $id_paciente, 'id_paciente');
 		if ($resp) {
 			$correcto = true;
-
-			$session = New Zend_Session_Namespace("usuario_carpeta");
-			$resp = $this->_Evento->guardar(5,0,$id_paciente,"Reconoce violencia con fecha : " . Fechas::fechaHoyVista(),1,1,$session->id);
+			$resp = $this->_Evento->guardar(5,0,$id_paciente,"Reconoce violencia con fecha : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 
 		} else {
 			$error = true;
@@ -464,7 +439,6 @@ class Paciente extends Controller {
             $this->smarty->assign('apellidos', $info_paciente->gl_apellidos);
             $this->smarty->assign('fecha_nacimiento', $info_paciente->fc_nacimiento);
             $this->smarty->assign('sexo', $info_paciente->gl_sexo);
-            //$this->smarty->assign('direccion', $info_paciente->gl_direccion);
             $this->smarty->assign('fono', $info_paciente->gl_fono);
             $this->smarty->assign('celular', $info_paciente->gl_celular);
             $this->smarty->assign('email', $info_paciente->gl_email);
@@ -473,8 +447,6 @@ class Paciente extends Controller {
             $this->smarty->assign('reconoce', $info_paciente->bo_reconoce);
             $this->smarty->assign('acepta', $info_paciente->bo_acepta_programa);
             $this->smarty->assign('prevision', $info_paciente->gl_nombre_prevision);
-            //$this->smarty->assign('comuna', $info_paciente->gl_nombre_comuna);
-            //$this->smarty->assign('region', $info_paciente->gl_nombre_region);
             $this->smarty->assign('edad', $edad);
             $this->smarty->assign('nombre_registrador', $info_paciente->gl_nombre_usuario_crea);
             $this->smarty->assign('estado_caso', $info_paciente->gl_nombre_estado_caso);
@@ -748,7 +720,7 @@ class Paciente extends Controller {
 	 * @author: 
 	 */
 	public function cargarAdjunto() {
-		$session				= New Zend_Session_Namespace("adj");
+		$session				= New Zend_Session_Namespace("adj"); // Revisar si utiliza este o el que está dentro del adjunto
 		$session->tipo_adjunto	= 1;
 		$this->smarty->display('paciente/cargar_adjunto.tpl');
 	}
@@ -795,7 +767,6 @@ class Paciente extends Controller {
 
 		if ($success == 1) {
 			echo "<script>parent.cargarListadoAdjuntos('listado-adjuntos'); parent.xModal.close();</script>";
-			//echo "<script> parent.$('#btnUploadUno').prop('disabled', true);</script>";
 		} else {
 			$this->view->assign('success', $success);
 			$this->view->assign('mensaje', $mensaje);

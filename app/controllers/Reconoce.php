@@ -1,4 +1,5 @@
 <?php
+
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
@@ -16,7 +17,7 @@
 *<david.guzman@cosof.cl>	07-03-2017	Function identificarAgresor mejoras,
 *<orlando.vazquez@cosof.cl>	08-03-2017	Agregados Eventos
 *-----------------------------------------------------------------------------
-*****************************************************************************
+******************************************************************************
 */
 
 class Reconoce extends Controller {
@@ -44,10 +45,6 @@ class Reconoce extends Controller {
 	protected $_DAOPacienteAgresorViolencia;
 	protected $_Evento;
 
-    /**
-     * Descripción: Constructor
-     * @author: 
-     */
     function __construct() {
         parent::__construct();
         $this->load->lib('Fechas', false);

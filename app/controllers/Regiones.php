@@ -1,33 +1,22 @@
 <?php
 
-/* 
-!IniHeaderDoc
-*****************************************************************************
-!NombreObjeto 		: Regiones.php
-!Sistema 	  		: PREVENCION DE FEMICIDIOS
-!Modulo 	  		: NA
-!Descripcion  		: 	
-!Plataforma   		: !PHP
-!Perfil       		: 
-!Itinerado    		: NA
-!Uso          		: NA
-!Autor        		: Carolina Zamora <carolina.zamora@cosof.cl>
-!Creacion     		: 14/02/2017
-!Retornos/Salidas 	: NA
-!OrigenReq        	: NA
-=============================================================================
-!Parametros 		: NA 
-=============================================================================
-!Testing 			: NA
-=============================================================================
-!ControlCambio
---------------
-!cVersion !cFecha   !cProgramador   !cDescripcion 
------------------------------------------------------------------------------
-
------------------------------------------------------------------------------
-*****************************************************************************
-!EndHeaderDoc 
+/**
+******************************************************************************
+* Sistema			: PREVENCION DE FEMICIDIOS
+* Descripcion		: Controller para Region
+* Plataforma		: !PHP
+* Creacion			: 14/02/2017
+* @name			Paciente.php
+* @version			1.0
+* @author			Carolina Zamora <carolina.zamora@cosof.cl>
+* =============================================================================
+* !ControlCambio
+* --------------
+* !cProgramador				!cFecha		!cDescripcion 
+* -----------------------------------------------------------------------------
+*
+* -----------------------------------------------------------------------------
+*******************************************************************************
 */
 
 class Regiones extends Controller{
@@ -38,23 +27,20 @@ class Regiones extends Controller{
 		parent::__construct();
 		$this->load->lib('Fechas', false);
 		$this->_DAORegion = $this->load->model('DAORegion');
-        //$this->_DAOComuna = $this->load->model("DAOComuna");
-
 	}
 
     public function cargarComunasPorRegion(){
-            $region = $_POST['region'];
-            //$daoRegion = $this->load->model('DAORegion');
-            $comunas = $this->_DAORegion->getDetalleByIdRegion($region);
-            $json = array();
-            $i = 0;
-            foreach($comunas as $comuna){
-                    $json[$i]['id_comuna'] = $comuna->id_comuna;
-                    $json[$i]['nombre_comuna'] = $comuna->gl_nombre_comuna;
-                    $i++;
-            }
+		$region		= $_POST['region'];
+		$comunas	= $this->_DAORegion->getDetalleByIdRegion($region);
+		$json		= array();
+		$i			= 0;
+		foreach($comunas as $comuna){
+			$json[$i]['id_comuna'] = $comuna->id_comuna;
+			$json[$i]['nombre_comuna'] = $comuna->gl_nombre_comuna;
+			$i++;
+		}
 
-            echo json_encode($json);
+		echo json_encode($json);
     }
-	
+
 }

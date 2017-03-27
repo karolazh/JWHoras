@@ -1,42 +1,28 @@
 <?php
 
-/* 
-!IniHeaderDoc
-*****************************************************************************
-!NombreObjeto 		: Login.php
-!Sistema 	  		: PREVENCION DE FEMICIDIOS
-!Modulo 	  		: NA
-!Descripcion  		: 
-!Plataforma   		: !PHP
-!Perfil       		: 
-!Itinerado    		: NA
-!Uso          		: NA
-!Autor        		: Domingo Cortez <domingo.cortez@cosof.cl>
-!Creacion     		: 20/02/2017
-!Retornos/Salidas 	: NA
-!OrigenReq        	: NA
-=============================================================================
-!Parametros 		: NA 
-=============================================================================
-!Testing 			: NA
-=============================================================================
-!ControlCambio
---------------
-!cVersion !cFecha   !cProgramador   !cDescripcion 
------------------------------------------------------------------------------
-
------------------------------------------------------------------------------
-*****************************************************************************
-!EndHeaderDoc 
+/**
+******************************************************************************
+* Sistema			: PREVENCION DE FEMICIDIOS
+* Descripcion		: Controller para Registro de Soporte
+* Plataforma		: !PHP
+* Creacion			: 20/02/2017
+* @name				Soporte.php
+* @version			1.0
+* @author			Domingo Cortez <domingo.cortez@cosof.cl>
+* =============================================================================
+* !ControlCambio
+* --------------
+* !cProgramador				!cFecha		!cDescripcion 
+* -----------------------------------------------------------------------------
+* <david.guzman@cosof.cl>	25-02-2017	Enviar RUT del usuario
+* -----------------------------------------------------------------------------
+*******************************************************************************
 */
 
 class Soporte extends Controller{
 
     protected $_wsdl;
 
-    /**
-     * Constructor
-     */
     function __construct(){
         parent::__construct();
 		$this->load->lib('Fechas', false);
@@ -130,8 +116,7 @@ class Soporte extends Controller{
     }
 
 	
-	public function verDetalleSoporte()
-	{
+	public function verDetalleSoporte(){
 		$sesion			= New Zend_Session_Namespace("usuario_carpeta");
 		$parametros		= $this->request->getParametros();
 		
@@ -159,7 +144,6 @@ class Soporte extends Controller{
 												);
 			$param						= array('data' => $ws_data);
 			$result						= $ws->call('obtenerSoportesDetalle', $param);
-			
 			
 			if(empty($result['arr_detalle'])){
 				$this->smarty->assign('errorWS',$result['gl_glosa']);
@@ -197,8 +181,7 @@ class Soporte extends Controller{
 		$this->smarty->display('soporte/detalle_soporte.tpl');
 	}
   
-	public function imprimir()
-	{
+	public function imprimir(){
 		$sesion			= New Zend_Session_Namespace("usuario_carpeta");
 		$parametros		= $this->request->getParametros();
 		
@@ -240,13 +223,11 @@ class Soporte extends Controller{
 		}
 	}
 	
-	public function cargarAdjunto()
-	{
+	public function cargarAdjunto(){
 		$this->smarty->display('soporte/cargar_adjunto.tpl');
 	}
 	
-	public function guardarAdjunto()
-	{
+	public function guardarAdjunto(){
 		$adjunto	= $_FILES['adjunto'];
 
 		if($adjunto['tmp_name'] != ""){
@@ -285,8 +266,7 @@ class Soporte extends Controller{
 		}
 	}
 	
-	public function cargarListadoAdjuntos()
-	{
+	public function cargarListadoAdjuntos(){
 		$adjuntos	= array();
 		$template	= '';
 	
@@ -331,8 +311,7 @@ class Soporte extends Controller{
 		echo $template;
 	}
 
-	public function borrarAdjunto()
-	{
+	public function borrarAdjunto(){
 		$parametros		= $this->request->getParametros();
 		$id_adjunto		= $parametros[0];
 		
@@ -383,8 +362,7 @@ class Soporte extends Controller{
 		echo $template;
 	}
 	
-    public function verAdjunto()
-	{
+    public function verAdjunto(){
 		$parametros		= $this->request->getParametros();
 		$id_adjunto		= $parametros[0];
 
