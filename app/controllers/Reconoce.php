@@ -104,6 +104,7 @@ class Reconoce extends Controller {
         $fc_nacimiento			= $paciente->fc_nacimiento;
         list($Y, $m, $d )		= explode("-", $fc_nacimiento);
         $edad					= ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );
+		// EL calculo de la edad se debe hacer en el helper de Fecha o desde la query
 
 		if($paciente->gl_rut != ""){
 			$this->smarty->assign("gl_rut", $paciente->gl_rut);
