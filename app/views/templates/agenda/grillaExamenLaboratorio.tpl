@@ -9,7 +9,7 @@
                     <th align="center" width="10%">Fecha Asignado</th>
                     <th align="center" width="10%">Fecha Toma</th>
                     <th align="center" width="30%">Examen</th>
-                    <th align="center" width="30%">RUT</th>
+                    <th align="center" width="30%">RUT / Pasaporte</th>
                     <th align="center" width="30%">Paciente</th>
                     <th align="center" width="10%">Fecha Resultado Examen</th>
                     <th align="center" width="5%">Resultado</th>
@@ -39,7 +39,7 @@
                         {/if}
                     </td>
                     <td style="{$color}">{$exa->gl_nombre_examen}</td>
-                    <td style="{$color}">{$exa->gl_rut}</td>
+                    <td style="{$color}">{$exa->gl_identificacion}</td>
                     <td style="{$color}">{$exa->gl_nombres} {$exa->gl_apellidos}</td>
                     <td style="{$color}">{$exa->fc_resultado}</td>
                     <td style="{$color}" align="center">

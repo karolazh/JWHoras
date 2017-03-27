@@ -435,6 +435,7 @@ class DAOPacienteExamen extends Model{
                         date_format(examen.fc_resultado,'%Y-%m-%d') AS fc_resultado_calendar,
                         NULL AS fc_ultimo_pap_ano, 
                         NULL AS fc_ultimo_pap_mes,
+                        IF(paciente.bo_extranjero=1,paciente.gl_run_pass,paciente.gl_rut) AS gl_identificacion,
 						paciente.gl_rut,
 						paciente.gl_nombres,
 						paciente.gl_apellidos
