@@ -49,7 +49,8 @@ class Paciente extends Controller {
 		$this->load->lib('Boton', false);
 		$this->load->lib('Seguridad', false);
 		$this->load->lib('Evento', false);
-		$this->_Evento = new Evento();
+
+		$this->_Evento					= new Evento();
 		$this->_DAOUsuario				= $this->load->model("DAOUsuario");
 		$this->_DAORegion				= $this->load->model("DAORegion");
 		$this->_DAOComuna				= $this->load->model("DAOComuna");
@@ -66,7 +67,7 @@ class Paciente extends Controller {
 		$this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
 		$this->_DAOEmpaAudit			= $this->load->model("DAOEmpaAudit");
 		$this->_DAOCentroSalud			= $this->load->model("DAOCentroSalud");
-		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
+		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista"); // DAO NO USADO
 	}
 
 	public function index() {
