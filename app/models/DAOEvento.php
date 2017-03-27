@@ -3,8 +3,8 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion           : Modelo para Tabla pre_evento
-* Plataforma            : !PHP
+* Descripcion	: Helper de Eventos
+* Plataforma	: !PHP
 * Creacion		: 24/02/2017
 * @name			DAOEvento.php
 * @version		1.0
@@ -43,15 +43,15 @@ class DAOEvento extends Model{
 
     public function getById($id){
         $query	= "	SELECT * FROM ".$this->_tabla."
-						WHERE ".$this->_primaria." = ?";
+					WHERE ".$this->_primaria." = ?";
 
 		$param	= array($id);
         $result	= $this->db->getQuery($query,$param);
 		
         if($result->numRows > 0){
-            return $result->rows->row_0;
+			return $result->rows->row_0;
         }else{
-            return NULL;
+			return NULL;
         }
     }
 
@@ -66,13 +66,13 @@ class DAOEvento extends Model{
 					WHERE 1 ";
 
 		if(!empty($parametros["gl_descripcion"])){
-				$query	.= " AND e.gl_descripcion LIKE %" . $parametros["gl_descripcion"] . "%";
+			$query	.= " AND e.gl_descripcion LIKE %" . $parametros["gl_descripcion"] . "%";
 		}
 		if(!empty($parametros["id_evento_tipo"])){
-				$query	.= " AND e.id_evento_tipo = " . $parametros["id_evento_tipo"];
+			$query	.= " AND e.id_evento_tipo = " . $parametros["id_evento_tipo"];
 		}
 		if(!empty($parametros["id_paciente"])){
-				$query	.= " AND e.id_paciente = " . $parametros["id_paciente"];
+			$query	.= " AND e.id_paciente = " . $parametros["id_paciente"];
 		}
 
 		$result	= $this->db->getQuery($query);
@@ -106,15 +106,15 @@ class DAOEvento extends Model{
 
     public function updTipoEvento($datos){
 		$query	= "	UPDATE ".$this->_tabla."
-										SET    id_evento_tipo = ?
-										WHERE  " . $this->_primaria . " = ? ";
+					SET    id_evento_tipo = ?
+					WHERE  " . $this->_primaria . " = ? ";
 
-				$param	= array($datos['id_evento_tipo'], $datos['id_evento']);
+		$param	= array($datos['id_evento_tipo'], $datos['id_evento']);
 
 		if($this->db->execQuery($query, $param)) {
-						return TRUE;
+			return TRUE;
 		}else{
-						return FALSE;
+			return FALSE;
 		}
 	}
 
@@ -133,7 +133,7 @@ class DAOEvento extends Model{
 	}
 
     public function getEventosPaciente($id_paciente){
-        $query	=   "SELECT
+        $query	= "	SELECT
                         eve.id_evento, 
                         eve.id_evento_tipo, 
                         tip.gl_nombre_evento_tipo,
@@ -157,20 +157,19 @@ class DAOEvento extends Model{
             return NULL;
         }
     }
+
 	public function ocultarEventos($id_evento_tipo){
-		 $query	= "	UPDATE pre_evento SET
+		$query	= "	UPDATE pre_evento SET
 						bo_mostrar			= 0,
 						id_usuario_crea		= ".$_SESSION['id'].",
 						fc_crea				= now()
-					WHERE id_evento_tipo = ".$id_evento_tipo."
-                    ";
+					WHERE id_evento_tipo	= ".$id_evento_tipo;
 
         if($this->db->execQuery($query)) {
-            return TRUE;
+			return TRUE;
         }else{
-            return FALSE;
+			return FALSE;
         }
-		 
-	 }
+	}
 
 }
