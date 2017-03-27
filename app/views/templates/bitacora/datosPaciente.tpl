@@ -41,7 +41,7 @@
 <div class="form-group">
     <div class="clearfix col-md-6">
         <div class="col-md-4">
-            <label class="control-label">Sexo : </label>
+            <label class="control-label">G&eacute;nero : </label>
         </div>
         <div class="col-md-8">
             <input type="text" value="{$gl_sexo}" class="form-control" readonly>
