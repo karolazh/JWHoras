@@ -101,16 +101,6 @@ class Reconoce extends Controller {
         $arrTipoViolencia		= $this->_DAOTipoViolencia->getLista();
 		$arrPuntos				= $this->_DAOPacienteAgresorViolencia->getByIdPaciente($id_paciente);
 
-		if (!is_null($arrPuntos)) {
-			foreach ($arrPuntos as $item) {
-				if (is_null($item->nr_valor)) {
-					$item->nr_valor = 0; 
-					// Esto esta mal, primero $item->nr_valor no se asigna a nada despues
-					// Segundo, esto se debe obtener listo desde el DAO
-				}
-			}
-		}
-
         $fc_nacimiento			= $paciente->fc_nacimiento;
         list($Y, $m, $d )		= explode("-", $fc_nacimiento);
         $edad					= ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );

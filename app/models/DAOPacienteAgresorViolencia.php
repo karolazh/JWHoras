@@ -57,7 +57,8 @@ class DAOPacienteAgresorViolencia extends Model{
 
 	public function getByIdPaciente($id_paciente){
         $query	= "	SELECT 
-						*
+						*,
+						IFNULL(nr_valor,0) as nr_valor
 					FROM pre_paciente_agresor_violencia 
 					WHERE id_paciente = ".$id_paciente;
 
