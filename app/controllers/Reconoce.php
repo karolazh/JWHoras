@@ -101,11 +101,7 @@ class Reconoce extends Controller {
         $arrTipoViolencia		= $this->_DAOTipoViolencia->getLista();
 		$arrPuntos				= $this->_DAOPacienteAgresorViolencia->getByIdPaciente($id_paciente);
 
-        $fc_nacimiento			= $paciente->fc_nacimiento;
-        list($Y, $m, $d )		= explode("-", $fc_nacimiento);
-        $edad					= ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );
-		// EL calculo de la edad se debe hacer en el helper de Fecha o desde la query
-
+		//traer desde query
 		if($paciente->gl_rut != ""){
 			$this->smarty->assign("gl_rut", $paciente->gl_rut);
 		}else{
@@ -129,7 +125,7 @@ class Reconoce extends Controller {
         $this->smarty->assign('gl_apellidos', $paciente->gl_apellidos);
         $this->smarty->assign('fc_nacimiento', $paciente->fc_nacimiento);
         $this->smarty->assign('gl_direccion', $direccion->gl_direccion);
-        $this->smarty->assign('edad', $edad);
+        $this->smarty->assign('edad', $paciente->edad);
         $this->smarty->assign('fc_reconoce', Fechas::fechaHoy());
         $this->smarty->assign('fc_hora', date('h:i'));
 
