@@ -2,13 +2,13 @@
 
 /**
 *******************************************************************************
-* Sistema          : PREVENCION DE FEMICIDIOS
-* Descripcion      : Controller para Exámenes de Pacientes
-* Plataforma       : !PHP
-* Creacion         : 10/03/2017
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Controller para Exámenes de Pacientes
+* Plataforma	: !PHP
+* Creacion		: 10/03/2017
 * @name			Laboratorio.php
-* @version         1.0
-* @author          Carolina Zamora <carolina.zamora@cosof.cl>
+* @version		1.0
+* @author		Carolina Zamora <carolina.zamora@cosof.cl>
 * =============================================================================
 * !ControlCambio
 * --------------
@@ -35,8 +35,7 @@ class Laboratorio extends Controller {
 		$this->load->lib('Fechas', false);
         $this->load->lib('Seguridad', false);
 		$this->load->lib('Evento', false);
-        
-		$this->_Evento = new Evento();
+        $this->_Evento					= new Evento();
 		$this->_DAOEvento				= $this->load->model("DAOEvento");
         $this->_DAOPaciente				= $this->load->model("DAOPaciente");
         $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");

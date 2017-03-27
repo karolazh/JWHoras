@@ -1,5 +1,24 @@
 <?php
 
+/**
+*****************************************************************************
+* Sistema		: PREVENCION DE FEMICIDIOS
+* Descripcion	: Helper de Fechas
+* Plataforma	: !PHP
+* Creacion		: 24/02/2017
+* @name			Fechas.php
+* @version		1.0
+* @author		David Gusmán <david.guzman@cosof.cl>
+*=============================================================================
+*!ControlCambio
+*--------------
+*!cProgramador				!cFecha		!cDescripcion 
+*-----------------------------------------------------------------------------
+*
+*-----------------------------------------------------------------------------
+*****************************************************************************
+*/
+
 class Fechas{
 
 	public static function formatearBaseDatos($fecha,$separador="-"){
@@ -7,14 +26,12 @@ class Fechas{
 			return 'NULL';
 		}
 		if (strpos($fecha, " ") !== false){
-			$time = explode(" ",$fecha);
+			$time	= explode(" ",$fecha);
 			return self::formatearBaseDatos($time[0]) . " " . $time[1];
 		}else{
-			$fecha = explode("/",$fecha);
+			$fecha	= explode("/",$fecha);
 			return "'".$fecha[2] . $separador . $fecha[1] . $separador . $fecha[0]."'";
 		}
-
-
 	}
 
 	public static function formatearHtml($fecha,$separador="/"){
@@ -28,7 +45,6 @@ class Fechas{
 			$fecha = explode("-",$fecha);
 			return $fecha[2] . $separador . $fecha[1] . $separador . $fecha[0];
 		}
-		
 	}
 
 	public static function traducirFecha($fecha){
@@ -42,7 +58,6 @@ class Fechas{
 		return $fecha[0]." de ".ucfirst($fecha[2])." de ".$fecha[4]; 
 	}
 
-
 	public static function diffDias($fecha_i,$fecha_f,$solo_dias=false){
 		if($solo_dias){
 			$fecha_i	= explode(" ",$fecha_i);
@@ -51,6 +66,7 @@ class Fechas{
 			$dias		= abs($dias); $dias = floor($dias);		
 			return $dias;
 		}
+
 		$dias	= (strtotime($fecha_i)-strtotime($fecha_f))/86400;
 		$dias 	= abs($dias); $dias = floor($dias);		
 		return $dias;
@@ -60,7 +76,8 @@ class Fechas{
         $creacion	= date_create($fecha_creacion);
         $entrega	= date_create($fecha_entrega);
         $diferencia	= date_diff($creacion, $entrega);
-        if($diferencia->invert == 1){
+        
+		if($diferencia->invert == 1){
             $diferencia_dias	= ($diferencia->days * -1); 
         }else{
             $diferencia_dias	= $diferencia->days;
@@ -83,7 +100,6 @@ class Fechas{
         if($diferencia_dias <=7){
         	$alerta	= "rojo.png";
         }
-
 		return $alerta;
 	}
 
@@ -97,9 +113,10 @@ class Fechas{
 	    $ano_diferencia			= date("Y") - $ano;
 	    $mes_diferencia			= date("m") - $mes;
 	    $dia_diferencia			= date("d") - $dia;
-	    if ($dia_diferencia < 0 || $mes_diferencia < 0){
-	        $ano_diferencia--;
-            }
+	   
+		if ($dia_diferencia < 0 || $mes_diferencia < 0){
+			$ano_diferencia--;
+		}
 	    return $ano_diferencia;
 	}
         
@@ -108,8 +125,10 @@ class Fechas{
 	    $ano_diferencia			= date("Y") - $ano;
 	    $mes_diferencia			= date("m") - $mes;
 	    $dia_diferencia			= date("d") - $dia;
-	    if ($dia_diferencia < 0 || $mes_diferencia < 0)
-	        $ano_diferencia--;
+
+		if ($dia_diferencia < 0 || $mes_diferencia < 0){
+			$ano_diferencia--;
+		}
 	    return $ano_diferencia;
 	}
 
@@ -119,7 +138,7 @@ class Fechas{
 	}
 	
 	public static function fechaHoyVista(){
-		$fechaHoy = date("d-m-Y");
+		$fechaHoy	= date("d-m-Y");
 		return $fechaHoy;
 	}
 }

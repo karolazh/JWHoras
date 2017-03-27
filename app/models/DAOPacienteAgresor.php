@@ -60,6 +60,7 @@ class DAOPacienteAgresor extends Model{
 						(
 						id_paciente,
 						id_tipo_vinculo,
+						gl_tipo_vinculo,
 						gl_nombres_agresor,
 						gl_apellidos_agresor,
 						bo_extranjero,
@@ -74,7 +75,7 @@ class DAOPacienteAgresor extends Model{
 						id_tipo_sexo,
 						id_tipo_genero,
 						id_orientacion_sexual,
-						nr_ingreso_mensual,
+						id_ingreso_mensual,
 						fc_nacimiento_agresor,
 						nr_hijos,
 						nr_hijos_en_comun,
@@ -86,6 +87,7 @@ class DAOPacienteAgresor extends Model{
 						(
 						".$parametros['id_paciente'].",
 						".$parametros['id_tipo_vinculo'].",
+						".$parametros['gl_tipo_vinculo'].",
 						".$parametros['gl_nombres_agresor'].",
 						".$parametros['gl_apellidos_agresor'].",
 						".$parametros['bo_extranjero'].",
@@ -100,7 +102,7 @@ class DAOPacienteAgresor extends Model{
 						".$parametros['id_tipo_sexo'].",
 						".$parametros['id_tipo_genero'].",
 						".$parametros['id_orientacion_sexual'].",
-						".$parametros['nr_ingreso_mensual'].",
+						".$parametros['id_ingreso_mensual'].",
 						".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_nacimiento_agresor'])).",
 						".$parametros['nr_hijos_agresor'].",
 						".$parametros['nr_hijos_en_comun'].",
