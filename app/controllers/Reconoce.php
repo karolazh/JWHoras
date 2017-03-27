@@ -101,14 +101,8 @@ class Reconoce extends Controller {
         $arrTipoViolencia		= $this->_DAOTipoViolencia->getLista();
 		$arrPuntos				= $this->_DAOPacienteAgresorViolencia->getByIdPaciente($id_paciente);
 
-		//traer desde query
-		if($paciente->gl_rut != ""){
-			$this->smarty->assign("gl_rut", $paciente->gl_rut);
-		}else{
-			$this->smarty->assign("gl_rut", $paciente->gl_run_pass);
-		}
-
 		$this->smarty->assign("id_paciente", $id_paciente);
+		$this->smarty->assign("gl_rut", $paciente->gl_identificacion);
 		$this->smarty->assign("arrTipoOcupacion", $arrTipoOcupacion);
 		$this->smarty->assign("arrTipoEstadoCivil", $arrTipoEstadoCivil);
 		$this->smarty->assign("arrEscolaridad", $arrEscolaridad);
@@ -171,7 +165,7 @@ class Reconoce extends Controller {
 		$resp			= $this->_Evento->guardarMostrarUltimo(19,0,$id_paciente," Agresor creado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		$bool_update	= $this->_DAOPaciente->updatePaciente($parametros);
 		$resp			= $this->_Evento->guardarMostrarUltimo(5,0,$id_paciente,"Paciente Reconoce Violencia el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
-		
+
 		if($bool_update && $bool_insert) {
 			$resp		= $this->_Evento->guardarMostrarUltimo(12,0,$id_paciente,"Reconoce Agresor : " . Fechas::fechaHoy(),1,1,$_SESSION['id']);
 			$correcto	= TRUE;

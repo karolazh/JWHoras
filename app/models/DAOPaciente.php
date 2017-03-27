@@ -260,6 +260,7 @@ class DAOPaciente extends Model{
 							IFNULL(paciente.gl_run_pass,'N/D') as gl_run_pass,
 							IFNULL(paciente.gl_nombres,'N/D') as gl_nombres,
 							IFNULL(paciente.gl_apellidos,'N/D') as gl_apellidos,
+							TIMESTAMPDIFF(YEAR, fc_nacimiento, CURDATE()) as edad,
 							IFNULL(paciente.fc_nacimiento,'00-00-1900') as fc_nacimiento,
 							IFNULL(paciente.gl_sexo,'N/D') as gl_sexo,
 							IFNULL(paciente.gl_direccion,'N/D') as gl_direccion,
@@ -277,7 +278,8 @@ class DAOPaciente extends Model{
 							IFNULL(r.gl_nombre_region, 'N/D') as gl_nombre_region,
 							IFNULL(CONCAT(u.gl_nombres, ' ',u.gl_apellidos),'N/D') as gl_nombre_usuario_crea,
 							IFNULL(ec.gl_nombre_estado_caso, 'N/D') as gl_nombre_estado_caso,
-							IFNULL(i.gl_nombre_establecimiento, 'N/D') as gl_nombre_institucion
+							IFNULL(i.gl_nombre_establecimiento, 'N/D') as gl_nombre_institucion,
+							IF(paciente.bo_extranjero=1,paciente.gl_run_pass,paciente.gl_rut) AS gl_identificacion
 						FROM pre_paciente AS paciente
 							LEFT JOIN pre_adjunto AS a on (paciente.id_paciente = a.id_paciente AND a.id_adjunto_tipo = 1)
 							LEFT JOIN pre_prevision AS p USING (id_prevision)
