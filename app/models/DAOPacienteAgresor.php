@@ -60,6 +60,7 @@ class DAOPacienteAgresor extends Model{
 						(
 						id_paciente,
 						id_tipo_vinculo,
+						gl_tipo_vinculo,
 						gl_nombres_agresor,
 						gl_apellidos_agresor,
 						bo_extranjero,
@@ -86,6 +87,7 @@ class DAOPacienteAgresor extends Model{
 						(
 						".$parametros['id_paciente'].",
 						".$parametros['id_tipo_vinculo'].",
+						".$parametros['gl_tipo_vinculo'].",
 						".$parametros['gl_nombres_agresor'].",
 						".$parametros['gl_apellidos_agresor'].",
 						".$parametros['bo_extranjero'].",

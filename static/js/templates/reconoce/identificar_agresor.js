@@ -189,6 +189,18 @@ $("#guardar").on('click', function (e) {
 					"value": $('#id_tipo_vinculo').val()
 				});
 			}
+			
+			if ($('#gl_tipo_vinculo').val() == "") {
+				parametros.push({
+					"name": 'gl_tipo_vinculo',
+					"value": 'NULL'
+				});
+			} else {
+				parametros.push({
+					"name": 'gl_tipo_vinculo',
+					"value": "'" + $('#gl_tipo_vinculo').val() + "'"
+				});
+			}
 
 			if ($('#gl_nombres_agresor').val() == "") {
 				parametros.push({
@@ -464,5 +476,13 @@ $("#chkextranjero").on('click', function (e) {
 		$('#nacional').show();
 		$('#extranjero').hide();
 		$('#groupFonasaExtranjero').addClass("hidden");
+	}
+});
+
+$("#id_tipo_vinculo").on('change', function (e) {
+	if ($("#id_tipo_vinculo option:selected").text().indexOf("Otro") != -1){
+		$("#especificar_vinculo").show();
+	} else {
+		$("#especificar_vinculo").hide();
 	}
 });

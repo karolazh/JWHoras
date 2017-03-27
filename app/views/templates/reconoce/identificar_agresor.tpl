@@ -269,6 +269,14 @@
 							</select>
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
+						<div id="especificar_vinculo" style="display: none">
+							<label for="gl_tipo_vinculo" class="control-label col-sm-1">Vínculo (Especificar)</label>
+							<div class="col-sm-3">
+								<input type="text" name="gl_tipo_vinculo" id="gl_tipo_vinculo" value=""
+									   placeholder="Ingrese Tipo de Vínculo" class="form-control" />
+								<span class="help-block hidden fa fa-warning"></span>
+							</div>
+						</div>
 					</div>
 
 					<div class="form-group">
