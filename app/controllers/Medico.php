@@ -51,9 +51,9 @@ class Medico extends Controller {
 		$id_region 		= $_SESSION['id_region'];
 
 		if($id_perfil == 1 || $id_perfil == 5){
-			$where	= array('bo_acepta_programa'=>1, 'pre_empa.nr_orden' =>1, 'pre_empa.bo_finalizado' =>1);
+			$where	= array('pre_empa.nr_orden' => 1, 'pre_empa.bo_finalizado' => 1);
 		} else {
-			$where	= array('bo_acepta_programa'=>1, 'pre_empa.nr_orden' =>1, 'pre_empa.bo_finalizado' =>1,'paciente.id_region'=>$id_region);
+			$where	= array('pre_empa.nr_orden' => 1, 'pre_empa.bo_finalizado' => 1, 'paciente.id_region' => $id_region);
 		}
 		$join[]	= array('tabla'	=> 'pre_empa',
 						'on'	=> 'pre_empa.id_paciente',
