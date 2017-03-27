@@ -38,12 +38,14 @@ class Bitacora extends Controller {
 	protected $_DAOPacienteAgresorViolencia;
 	protected $_DAOTipoViolencia;
 	protected $_DAOTipoRiesgo;
+    protected $_DAOTipoGenero;
 
 	function __construct() {
 		parent::__construct();
 		$this->load->lib('Fechas', false);
 		$this->load->lib('Seguridad', false);
 		$this->load->lib('Evento', false);
+        
 		$this->_Evento = new Evento();
 		$this->_DAOPaciente						= $this->load->model("DAOPaciente");
 		$this->_DAOPacienteRegistro				= $this->load->model("DAOPacienteRegistro");
@@ -59,7 +61,8 @@ class Bitacora extends Controller {
 		$this->_DAOComuna						= $this->load->model("DAOComuna");
 		$this->_DAOPacienteAgresorViolencia		= $this->load->model("DAOPacienteAgresorViolencia");
 		$this->_DAOTipoViolencia				= $this->load->model("DAOTipoViolencia");
-		$this->_DAOTipoRiesgo = $this->load->model("DAOTipoRiesgo");
+		$this->_DAOTipoRiesgo                   = $this->load->model("DAOTipoRiesgo");
+        $this->_DAOTipoGenero                   = $this->load->model("DAOTipoGenero");
 	}
 
 	/**
@@ -75,64 +78,44 @@ class Bitacora extends Controller {
 	 * @author Carolina Zamora Hormazábal
 	 */
 	public function ver() {
+        Acceso::redireccionUnlogged($this->smarty);
 		$parametros = $this->request->getParametros();
 		$id_paciente = $parametros[0];
+        
 		$detPaciente = $this->_DAOPaciente->getByIdPaciente($id_paciente);
-
 		if (!is_null($detPaciente)) {
-
-			$this->smarty->assign("id_paciente", $id_paciente);
-
 			//Datos de Paciente
-			$run = "";
 			if ($detPaciente->bo_extranjero == 0) {
 				$run = $detPaciente->gl_rut;
 			} else {
 				$run = $detPaciente->gl_run_pass;
 			}
-			$this->smarty->assign("run", $run);
 
 			$nombres = $detPaciente->gl_nombres . ' ' . $detPaciente->gl_apellidos;
-			$this->smarty->assign("nombres", $nombres);
-
 			$edad = Fechas::calcularEdadInv($detPaciente->fc_nacimiento);
-			$this->smarty->assign("fc_nacimiento", $detPaciente->fc_nacimiento);
-			$this->smarty->assign("edad", $edad);
 
-			if ($detPaciente->gl_sexo == "F") {
-				$sexo = "FEMENINO";
-			} else {
-				$sexo = $detPaciente->gl_sexo;
-			}
-			$this->smarty->assign("gl_sexo", $sexo);
-			$this->smarty->assign("gl_nombre_estado_caso", $detPaciente->gl_nombre_estado_caso);
-
-			$this->smarty->assign("gl_nombre_prevision", $detPaciente->gl_nombre_prevision);
-			$this->smarty->assign("gl_grupo_tipo", $detPaciente->gl_grupo_tipo);
-
-			$this->smarty->assign("gl_fono", $detPaciente->gl_fono);
-			$this->smarty->assign("bo_fono_seguro", $detPaciente->bo_fono_seguro);
-
-			$this->smarty->assign("gl_celular", $detPaciente->gl_celular);
-			$this->smarty->assign("gl_email", $detPaciente->gl_email);
-			$this->smarty->assign("fc_crea", $detPaciente->fc_crea);
-
-			//Grilla Direcciones
+            $cod_gen = $detPaciente->gl_sexo;
+            /* OJO que busca detalle en "Tipo de Género" 
+             * por cambio de datos según normativa */
+            $tipoGenero = $this->_DAOTipoGenero->getByCodigo($cod_gen);
+            $sexo = $tipoGenero->gl_tipo_genero;
+            
+//			if ($detPaciente->gl_sexo == "F") {
+//				$sexo = "FEMENINO";
+//			} else {
+//				$sexo = $detPaciente->gl_sexo;
+//			}
+            
+            //Grilla Direcciones
 			$muestra_direcciones = "NO";
 			$arrDirecciones = $this->_DAOPacienteDireccion->getByIdDirecciones($id_paciente);
-
 			if (!is_null($arrDirecciones)) {
 				if ($arrDirecciones->numRows > 1) {
 					$this->smarty->assign('arrDirecciones', $arrDirecciones->rows);
 					$muestra_direcciones = "SI";
 				}
 			}
-			$this->smarty->assign("muestra_direcciones", $muestra_direcciones);
-
-			//Grilla Motivos de Consulta (Paciente-Registro)
-			$arrConsultas = $this->_DAOPacienteRegistro->getByIdPaciente($id_paciente);
-			$this->smarty->assign('arrConsultas', $arrConsultas);
-
+            
 			//Grilla Exámenes Alterados x Paciente
 			$muestra_examenes = "NO";
 			$arrExamenesAlt = $this->_DAOPacienteExamen->getExamenAleradoByIdPaciente($id_paciente);
@@ -140,10 +123,7 @@ class Bitacora extends Controller {
 				$this->smarty->assign('arrExamenesAlt', $arrExamenesAlt);
 				$muestra_examenes = "SI";
 			}
-			$this->smarty->assign("muestra_examenes", $muestra_examenes);
-			$this->smarty->assign("bo_reconoce", $detPaciente->bo_reconoce);
-			$this->smarty->assign("bo_acepta_programa", $detPaciente->bo_acepta_programa);
-
+			
 			//Datos del Agresor
 			if ($detPaciente->bo_reconoce == 1) {
 				$arrAgresor = $this->_DAOPacienteAgresor->getByIdPaciente($id_paciente);
@@ -199,53 +179,73 @@ class Bitacora extends Controller {
 					$this->smarty->assign("color", $arrTipoRiesgo->color_riesgo);
 				}
 			}
+            
+            //Grilla Motivos de Consulta (Paciente-Registro)
+			$arrConsultas = $this->_DAOPacienteRegistro->getByIdPaciente($id_paciente);
 			
 			//Grilla Empa
-			$arrEmpa = $this->_DAOEmpa->getListaEmpa($id_paciente);
-			$this->smarty->assign('arrEmpa', $arrEmpa);
+			$arrEmpa = $this->_DAOEmpa->getListaEmpa($id_paciente);			
 
 			//Grilla Exámenes x Paciente
-			$arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
-			$this->smarty->assign('arrExamenes', $arrExamenes);
+			$arrExamenes = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);			
 
 			//Tipos de Eventos
-			$arrTipoEvento = $this->_DAOEventoTipo->getLista();
-			$this->smarty->assign('arrTipoEvento', $arrTipoEvento);
+			$arrTipoEvento = $this->_DAOEventoTipo->getLista();			
 
 			//Grilla Eventos
 			$arrEventos = $this->_DAOEvento->getEventosPaciente($id_paciente);
-			$this->smarty->assign('arrEventos', $arrEventos);
 
 			//Tipos de Adjuntos
-			$arrTipoDocumento = $this->_DAOAdjuntoTipo->getLista();
-			$this->smarty->assign('arrTipoDocumento', $arrTipoDocumento);
+			$arrTipoDocumento = $this->_DAOAdjuntoTipo->getLista();			
 
 			//Grilla Adjuntos
 			$arrAdjuntos = $this->_DAOAdjunto->getDetalleByIdPaciente($id_paciente);
-			$this->smarty->assign('arrAdjuntos', $arrAdjuntos);
 
 			//Plan Tratamiento
 			$arr_plan = $this->_DAOPacienteAgendaEspecialista->getByIdPaciente($id_paciente);
-			$this->smarty->assign("arr_plan", $arr_plan);
 
 			//Dirección Vigente de Paciente
-			$direccion = "";
-			$comuna = "";
-			$provincia = "";
-			$region = "";
 			$detDireccion = $this->_DAOPacienteDireccion->getByIdDireccionVigente($id_paciente);
-
 			if (!is_null($detDireccion)) {
 				$direccion = $detDireccion->gl_direccion;
 				$comuna = $detDireccion->gl_nombre_comuna;
 				$provincia = $detDireccion->gl_nombre_provincia;
 				$region = $detDireccion->gl_nombre_region;
 			}
+            
+            $this->smarty->assign("id_paciente", $id_paciente);
+            $this->smarty->assign("run", $run);
+            $this->smarty->assign("nombres", $nombres);
+            $this->smarty->assign("fc_nacimiento", $detPaciente->fc_nacimiento);
+			$this->smarty->assign("edad", $edad);
+			$this->smarty->assign("gl_sexo", $sexo);
+			$this->smarty->assign("gl_nombre_estado_caso", $detPaciente->gl_nombre_estado_caso);
+			$this->smarty->assign("gl_nombre_prevision", $detPaciente->gl_nombre_prevision);
+			$this->smarty->assign("gl_grupo_tipo", $detPaciente->gl_grupo_tipo);
+			$this->smarty->assign("gl_fono", $detPaciente->gl_fono);
+			$this->smarty->assign("bo_fono_seguro", $detPaciente->bo_fono_seguro);
+			$this->smarty->assign("gl_celular", $detPaciente->gl_celular);
+			$this->smarty->assign("gl_email", $detPaciente->gl_email);
+			$this->smarty->assign("fc_crea", $detPaciente->fc_crea);
+            $this->smarty->assign("muestra_direcciones", $muestra_direcciones);
 			$this->smarty->assign("gl_nombre_comuna", $comuna);
 			$this->smarty->assign("gl_nombre_provincia", $provincia);
 			$this->smarty->assign("gl_nombre_region", $region);
 			$this->smarty->assign("gl_direccion", $direccion);
-
+            
+            $this->smarty->assign("muestra_examenes", $muestra_examenes);
+			$this->smarty->assign("bo_reconoce", $detPaciente->bo_reconoce);
+			$this->smarty->assign("bo_acepta_programa", $detPaciente->bo_acepta_programa);
+            
+            $this->smarty->assign('arrConsultas', $arrConsultas);
+            $this->smarty->assign('arrEmpa', $arrEmpa);
+            $this->smarty->assign('arrExamenes', $arrExamenes);
+            $this->smarty->assign('arrTipoEvento', $arrTipoEvento);
+            $this->smarty->assign('arrEventos', $arrEventos);
+            $this->smarty->assign('arrTipoDocumento', $arrTipoDocumento);
+            $this->smarty->assign('arrAdjuntos', $arrAdjuntos);
+            $this->smarty->assign("arr_plan", $arr_plan);
+            
 			$this->smarty->display('bitacora/ver.tpl');
 			$this->load->javascript(STATIC_FILES . 'js/templates/bitacora/ver.js');
 		} else {
@@ -262,54 +262,53 @@ class Bitacora extends Controller {
 	public function guardarNuevoAdjunto() {
 		header('Content-type: application/json');
 
-		$correcto = false;
-		$error = true;
+		$correcto   = false;
+		$error      = true;
 
-		$adjunto = $_FILES['archivo'];
-		$id_paciente = $_POST['idpac'];
-		$tipo_doc = $_POST['tipodoc'];
-		$tipo_txt = $_POST['tipotxt'];
-		$glosa = $_POST['comentario'];
-		$glosa = trim($glosa);
-
+		$adjunto        = $_FILES['archivo'];
+		$id_paciente    = $_POST['idpac'];
+		$tipo_doc       = $_POST['tipodoc'];
+		$tipo_txt       = $_POST['tipotxt'];
+		$glosa          = $_POST['comentario'];
+		$glosa          = trim($glosa);
 		if ($glosa == "") {
 			$glosa = "Adjunta Documento por Bitácora";
 		}
 
 		$nombre_adjunto = $adjunto['name'];
 
-		$arr_extension = array('jpeg', 'jpg', 'png', 'gif', 'tiff', 'bmp',
-			'pdf', 'txt', 'csv', 'doc', 'docx', 'ppt',
-			'pptx', 'xls', 'xlsx', 'eml');
+		$arr_extension  = array('jpeg', 'jpg', 'png', 'gif', 'tiff', 'bmp',
+                                'pdf', 'txt', 'csv', 'doc', 'docx', 'ppt',
+                                'pptx', 'xls', 'xlsx', 'eml');
 
 		$nombre_adjunto = strtolower(trim($nombre_adjunto));
 		$nombre_adjunto = trim($nombre_adjunto, ".");
 
-		$extension = substr(strrchr($nombre_adjunto, "."), 1);
+		$extension      = substr(strrchr($nombre_adjunto, "."), 1);
 
 		//obtiene fecha y hora
-		$date = new DateTime();
-		$result = $date->format('Y-m-d_H-i-s');
-		$krr = explode('-', $result);
-		$result = implode("", $krr);
+		$date           = new DateTime();
+		$result         = $date->format('Y-m-d_H-i-s');
+		$krr            = explode('-', $result);
+		$result         = implode("", $krr);
 
 		$gl_nombre_archivo = $result . '_' . $tipo_txt . '.' . $extension;
 
-		$directorio = "archivos/$id_paciente/";
-		$gl_path = $directorio . $gl_nombre_archivo;
+		$directorio     = "archivos/$id_paciente/";
+		$gl_path        = $directorio . $gl_nombre_archivo;
 
-		$ins_adjunto = array('id_paciente' => $id_paciente,
-			'id_adjunto_tipo' => $tipo_doc,
-			'gl_nombre' => $gl_nombre_archivo,
-			'gl_path' => $gl_path,
-			'gl_glosa' => $glosa,
-			'sha256' => Seguridad::generar_sha256($gl_path),
-			'fc_crea' => date('Y-m-d h:m:s'),
-			'id_usuario_crea' => $_SESSION['id'],
-		);
+		$ins_adjunto    = array('id_paciente'       => $id_paciente,
+                                'id_adjunto_tipo'   => $tipo_doc,
+                                'gl_nombre'         => $gl_nombre_archivo,
+                                'gl_path'           => $gl_path,
+                                'gl_glosa'          => $glosa,
+                                'sha256'            => Seguridad::generar_sha256($gl_path),
+                                'fc_crea'           => date('Y-m-d h:m:s'),
+                                'id_usuario_crea'   => $_SESSION['id'],
+                               );
 
-		$id_adjunto = $this->_DAOAdjunto->insert($ins_adjunto);
-		$grilla = "";
+		$id_adjunto     = $this->_DAOAdjunto->insert($ins_adjunto);
+		$grilla         = "";
 
 		if ($id_adjunto) {
 			if (!is_dir($directorio)) {
@@ -320,11 +319,11 @@ class Bitacora extends Controller {
 				fclose($out);
 			}
 
-			$file = fopen($adjunto['tmp_name'], 'r+b');
-			$contenido = fread($file, filesize($adjunto['tmp_name']));
+			$file       = fopen($adjunto['tmp_name'], 'r+b');
+			$contenido  = fread($file, filesize($adjunto['tmp_name']));
 			fclose($file);
 
-			$out = fopen($gl_path, "w");
+			$out        = fopen($gl_path, "w");
 			fwrite($out, $contenido);
 			fclose($out);
 
@@ -338,13 +337,13 @@ class Bitacora extends Controller {
 			$error = true;
 		}
 
-		$salida = array("error" => $error,
-			"correcto" => $correcto,
-			"grilla" => $grilla);
+		$salida = array("error"     => $error,
+                        "correcto"  => $correcto,
+                        "grilla"    => $grilla);
 
 		$this->smarty->assign("hidden", "");
 		$json = Zend_Json::encode($salida);
 
 		echo $json;
 	}
-}	
+}

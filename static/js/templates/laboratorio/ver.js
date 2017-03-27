@@ -7,23 +7,15 @@ var Laboratorio = {
         var msg_error = '';        
         
         var id_paciente_examen = form.id_paciente_examen.value;
-        //alert(id_paciente_examen);
         var id_tipo_examen = form.id_tipo_examen.value;
-        //alert(id_tipo_examen);
         var id_paciente = form.id_paciente.value;
         var id_empa = form.id_empa.value;
-        //alert(id_empa);
         var gl_folio = form.gl_folio.value; 
         var gl_rut_toma = form.gl_rut_toma.value;
-        //alert(gl_rut_toma);
         var gl_nombre_toma = form.gl_nombre_toma.value;
-        //alert(gl_nombre_toma);
         var fc_resultado = form.fc_resultado.value;
-        //alert(fecha_resultado);
         var gl_resultado_descripcion = form.gl_resultado_descripcion.value;
-        //alert(descripcion);
         var gl_resultado_indicacion = form.gl_resultado_indicacion.value;
-        //alert(indicacion);
         
         if (gl_rut_toma == "") {
             msg_error += 'Ingrese RUT persona toma examen<br/>';
@@ -45,7 +37,6 @@ var Laboratorio = {
         var gl_pad = "";
         var gl_pas = "";
         if (id_tipo_examen == "1"){
-            //alert("gl_glicemia:"+form.gl_glicemia.value);
             gl_glicemia = form.gl_glicemia.value;
             if (gl_glicemia == "") {
                 msg_error += 'Ingrese Glicemia (mg/dl)<br/>';
@@ -53,7 +44,6 @@ var Laboratorio = {
             }
         } else {
             if (id_tipo_examen == "7"){
-                //alert("gl_colesterol:"+form.gl_colesterol.value);
                 gl_colesterol = form.gl_colesterol.value;
                 if (gl_colesterol == "") {
                     msg_error += 'Ingrese Colesterol total (mg/dl)<br/>';
@@ -61,8 +51,6 @@ var Laboratorio = {
                 }
             } else {
                 if (id_tipo_examen == "9") {
-                    //alert("gl_colesterol:"+form.gl_pad.value);
-                    //alert("gl_colesterol:"+form.gl_pas.value);
                     gl_pad = form.gl_pad.value;
                     gl_pas = form.gl_pas.value;
                     if ((gl_pad == "") && (gl_pas == "")){
@@ -94,8 +82,6 @@ var Laboratorio = {
                 }
             }
         }
-        //alert("gl_resultado:"+gl_resultado);
-        //alert("resultado:"+resultado);
         
         if (gl_resultado_descripcion == "") {
             msg_error += 'Ingrese Descripción de Resultado<br/>';
@@ -128,7 +114,6 @@ var Laboratorio = {
             formulario.append('gl_resultado_descripcion', gl_resultado_descripcion);
             formulario.append('gl_resultado_indicacion', gl_resultado_indicacion);
             
-            //console.log(formulario);
             $.ajax({
                 url : BASE_URI + 'index.php/Laboratorio/guardarExamen', 
                 data : formulario,
