@@ -82,47 +82,25 @@ class Reconoce extends Controller {
 	* @return valores con Smarty a identificar_agresor.tpl
 	*/    
     public function identificarAgresor(){
-		$parametros = $this->request->getParametros();
-		$id_paciente = $parametros[0]; //esto esta mal
+		Acceso::redireccionUnlogged($this->smarty);
+		$parametros				= $this->request->getParametros();
+		$id_paciente			= $parametros[0];
 
-		$this->smarty->assign("id_paciente", $id_paciente);
-		
-        $arrTipoOcupacion = $this->_DAOTipoOcupacion->getLista();
-		$this->smarty->assign("arrTipoOcupacion", $arrTipoOcupacion);
-        
-        $arrTipoEstadoCivil = $this->_DAOEstadoCivil->getLista();
-		$this->smarty->assign("arrTipoEstadoCivil", $arrTipoEstadoCivil);
-        
-        $arrEscolaridad = $this->_DAOTipoEscolaridad->getLista();
-		$this->smarty->assign("arrEscolaridad", $arrEscolaridad);
-		
-		$arrComuna = $this->_DAOComuna->getLista();
-		$this->smarty->assign("arrComuna", $arrComuna);
-                
-        $arrActividadEconomica = $this->_DAOTipoActividadEconomica->getLista();
-		$this->smarty->assign("arrActividadEconomica", $arrActividadEconomica);
-        
-        $arrTipoRiesgo = $this->_DAOTipoRiesgo->getLista();
-		$this->smarty->assign("arrTipoRiesgo", $arrTipoRiesgo);
-		
-		$arrSexo = $this->_DAOTipoSexo->getLista();
-		$this->smarty->assign("arrSexo", $arrSexo);
-		
-		$arrGenero = $this->_DAOTipoGenero->getLista();
-		$this->smarty->assign("arrGenero", $arrGenero);
-		
-		$arrOrientacion = $this->_DAOTipoOrientacionSexual->getLista();
-		$this->smarty->assign("arrOrientacion", $arrOrientacion);
-	
-		$arrTipoVinculo = $this->_DAOTipoVinculo->getLista();
-		$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);
-        
-		$direccion = $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
-		
-        $arrTipoViolencia = $this->_DAOTipoViolencia->getLista();
-		$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
-		
-		$arrPuntos = $this->_DAOPacienteAgresorViolencia->getByIdPaciente($id_paciente);
+        $paciente				= $this->_DAOPaciente->verInfoById($id_paciente);
+        $arrTipoOcupacion		= $this->_DAOTipoOcupacion->getLista();
+        $arrTipoEstadoCivil		= $this->_DAOEstadoCivil->getLista();
+        $arrEscolaridad			= $this->_DAOTipoEscolaridad->getLista();
+		$arrComuna				= $this->_DAOComuna->getLista();
+        $arrActividadEconomica	= $this->_DAOTipoActividadEconomica->getLista();
+        $arrTipoRiesgo			= $this->_DAOTipoRiesgo->getLista();
+		$arrSexo				= $this->_DAOTipoSexo->getLista();
+		$arrGenero				= $this->_DAOTipoGenero->getLista();
+		$arrOrientacion			= $this->_DAOTipoOrientacionSexual->getLista();
+		$arrTipoVinculo			= $this->_DAOTipoVinculo->getLista();
+		$direccion				= $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
+        $arrTipoViolencia		= $this->_DAOTipoViolencia->getLista();
+		$arrPuntos				= $this->_DAOPacienteAgresorViolencia->getByIdPaciente($id_paciente);
+
 		if (!is_null($arrPuntos)) {
 			foreach ($arrPuntos as $item) {
 				if (is_null($item->nr_valor)) {
@@ -130,25 +108,33 @@ class Reconoce extends Controller {
 				}
 			}
 		}
-		$this->smarty->assign("arrPuntos", $arrPuntos);
 
-        $parametros = $this->request->getParametros();
-        $id_registro = $parametros[0]; //esto esta mal
-        $this->smarty->assign("id_registro", $id_registro);
-        $obj_registro	= $this->_DAOPaciente->verInfoById($id_registro);
-        $fc_nacimiento = $obj_registro->fc_nacimiento;
-        list($Y, $m, $d ) = explode("-", $fc_nacimiento);
-        $edad = ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );
-        
-		if ($obj_registro->gl_rut != ""){
-			$this->smarty->assign("gl_rut", $obj_registro->gl_rut);
-		} else {
-		$this->smarty->assign("gl_rut", $obj_registro->gl_run_pass);
+        $fc_nacimiento			= $paciente->fc_nacimiento;
+        list($Y, $m, $d )		= explode("-", $fc_nacimiento);
+        $edad					= ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );
+
+		if($paciente->gl_rut != ""){
+			$this->smarty->assign("gl_rut", $paciente->gl_rut);
+		}else{
+			$this->smarty->assign("gl_rut", $paciente->gl_run_pass);
 		}
-		
-        $this->smarty->assign('gl_nombres', $obj_registro->gl_nombres);
-        $this->smarty->assign('gl_apellidos', $obj_registro->gl_apellidos);
-        $this->smarty->assign('fc_nacimiento', $obj_registro->fc_nacimiento);
+
+		$this->smarty->assign("id_paciente", $id_paciente);
+		$this->smarty->assign("arrTipoOcupacion", $arrTipoOcupacion);
+		$this->smarty->assign("arrTipoEstadoCivil", $arrTipoEstadoCivil);
+		$this->smarty->assign("arrEscolaridad", $arrEscolaridad);
+		$this->smarty->assign("arrComuna", $arrComuna);
+		$this->smarty->assign("arrActividadEconomica", $arrActividadEconomica);
+		$this->smarty->assign("arrTipoRiesgo", $arrTipoRiesgo);
+		$this->smarty->assign("arrSexo", $arrSexo);
+		$this->smarty->assign("arrGenero", $arrGenero);
+		$this->smarty->assign("arrOrientacion", $arrOrientacion);
+		$this->smarty->assign("arrTipoVinculo", $arrTipoVinculo);
+		$this->smarty->assign("arrTipoViolencia", $arrTipoViolencia);
+		$this->smarty->assign("arrPuntos", $arrPuntos);
+        $this->smarty->assign('gl_nombres', $paciente->gl_nombres);
+        $this->smarty->assign('gl_apellidos', $paciente->gl_apellidos);
+        $this->smarty->assign('fc_nacimiento', $paciente->fc_nacimiento);
         $this->smarty->assign('gl_direccion', $direccion->gl_direccion);
         $this->smarty->assign('edad', $edad);
         $this->smarty->assign('fc_reconoce', Fechas::fechaHoy());
@@ -173,28 +159,30 @@ class Reconoce extends Controller {
 	*/   
 	public function guardar(){
 		header('Content-type: application/json');
-		$parametros = $this->_request->getParams();
-		$correcto = FALSE;
-		$error = FALSE;
-		$cant_preguntas = $parametros['cant_pre'];
-		$id_paciente = $parametros['id_paciente'];
+		$parametros		= $this->_request->getParams();
+		$correcto		= FALSE;
+		$error			= FALSE;
+		$cant_preguntas	= $parametros['cant_pre'];
+		$id_paciente	= $parametros['id_paciente'];
+
 		for ($i = 1; $i <= $cant_preguntas; $i++) {
-			$id_pregunta = $i;
-			$valor = $parametros['id_tipo_violencia_' . $i];
-			$bool_existe = $this->_DAOPacienteAgresorViolencia->getByIdPacientePregunta($id_paciente,$id_pregunta);
+			$id_pregunta	= $i;
+			$valor			= $parametros['id_tipo_violencia_' . $i];
+			$bool_existe	= $this->_DAOPacienteAgresorViolencia->getByIdPacientePregunta($id_paciente,$id_pregunta);
 			if (!$bool_existe){
-					$bool_violencia = $this->_DAOPacienteAgresorViolencia->insertViolencia($id_paciente, $id_pregunta, $valor);
-					$resp = $this->_Evento->guardarMostrarUltimo(17,0,$id_paciente,"Paciente Agresor Violencia creada el : " . Fechas::fechaHoyVista(),1,0,$_SESSION['id']);
-			} else {
-					$bool_violencia = $this->_DAOPacienteAgresorViolencia->updateViolencia($id_paciente, $id_pregunta, $valor);
-					$resp = $this->_Evento->guardarMostrarUltimo(18,0,$id_paciente,"Paciente Agresor Violencia modificada el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
+				$bool_violencia	= $this->_DAOPacienteAgresorViolencia->insertViolencia($id_paciente, $id_pregunta, $valor);
+				$resp			= $this->_Evento->guardarMostrarUltimo(17,0,$id_paciente,"Paciente Agresor Violencia creada el : " . Fechas::fechaHoyVista(),1,0,$_SESSION['id']);
+			}else{
+				$bool_violencia	= $this->_DAOPacienteAgresorViolencia->updateViolencia($id_paciente, $id_pregunta, $valor);
+				$resp			= $this->_Evento->guardarMostrarUltimo(18,0,$id_paciente,"Paciente Agresor Violencia modificada el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 			}
 		}
+
+		$bool_insert	= $this->_DAOPacienteAgresor->insertarAgresor($parametros);
+		$resp			= $this->_Evento->guardarMostrarUltimo(19,0,$id_paciente," Agresor creado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
+		$bool_update	= $this->_DAOPaciente->updatePaciente($parametros);
+		$resp			= $this->_Evento->guardarMostrarUltimo(5,0,$id_paciente,"Paciente Reconoce Violencia el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		
-		$bool_insert = $this->_DAOPacienteAgresor->insertarAgresor($parametros);
-		$resp = $this->_Evento->guardarMostrarUltimo(19,0,$id_paciente," Agresor creado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
-		$bool_update = $this->_DAOPaciente->updatePaciente($parametros);
-		$resp = $this->_Evento->guardarMostrarUltimo(5,0,$id_paciente,"Paciente Reconoce Violencia el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		if ($bool_update && $bool_insert) {
 			$resp = $this->_Evento->guardarMostrarUltimo(12,0,$id_paciente,"Reconoce Agresor : " . Fechas::fechaHoy(),1,1,$_SESSION['id']);
 			if ($resp) {
@@ -206,11 +194,10 @@ class Reconoce extends Controller {
 			$error = TRUE;
 		}
 
-		$salida = array("error" => $error,
-			"correcto" => $correcto);
-		$json = Zend_Json::encode($salida);
+		$salida	= array("error" => $error, "correcto" => $correcto);
+		$json	= Zend_Json::encode($salida);
 
 		echo $json;
 	}
-    
+
 }
