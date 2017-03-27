@@ -32,7 +32,7 @@
 
 				<div class="form-group">
 					<div id="nacional">
-						<label for="rut" class="control-label col-sm-2 ">Rut Paciente (*)</label>
+						<label for="rut" class="control-label col-sm-2 ">Rut Paciente(*)</label>
 						<div class="col-sm-2">
 							<input type="text" name="rut" id="rut" maxlength="12" onkeyup="formateaRut(this), this.value = this.value.toUpperCase()" onkeypress ="return soloNumerosYK(event)" onblur="validarVacio(this, 'Por favor Ingrese RUT');if (Valida_Rut(this)){ldelim}
 										validarVacio(this, 'Por favor Ingrese Rut');
@@ -72,12 +72,12 @@
 				</div>
 
 				<div class="form-group">
-					<label for="nombres" class="control-label col-sm-2 ">Nombres (*)</label>
+					<label for="nombres" class="control-label col-sm-2 ">Nombres(*)</label>
 					<div class="col-sm-3">
 						<input type="text" name="nombres" id="nombres" onblur="validarVacio(this, 'Por favor Ingrese Nombres')" onkeyup="validarVacio(this, 'Por favor Ingrese Nombres')" placeholder="Nombres" class="form-control">
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
-					<label for="apellidos" class="control-label col-sm-2 ">Apellidos (*)</label>
+					<label for="apellidos" class="control-label col-sm-2 ">Apellidos(*)</label>
 					<div class="col-sm-3">
 						<input type="text" name="apellidos" id="apellidos" onblur="validarVacio(this, 'Por favor Ingrese Apellidos')" onkeyup="validarVacio(this, 'Por favor Ingrese Apellidos')" placeholder="Apellidos" class="form-control">
 						<span class="help-block hidden fa fa-warning"></span>
@@ -98,14 +98,14 @@
 								
 							</div>
 					</div>
-					<label for="edad" class="control-label col-sm-2 ">Edad (*)</label>
+					<label for="edad" class="control-label col-sm-2 ">Edad(*)</label>
 					<div class="col-sm-1">					
 						<input type="text" name="edad" id="edad" placeholder="Edad" class="form-control" readonly />
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="genero" class="control-label col-sm-2 ">Sexo(*)</label>
+					<label for="genero" class="control-label col-sm-2 ">Género(*)</label>
 					<div class="col-sm-3">
 						<select for="genero" class="form-control" disabled id="genero" name="genero">
 							<option value="F">Femenino</option>
@@ -114,7 +114,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="prevision" class="control-label col-sm-2">Previsión (*)</label>
+					<label for="prevision" class="control-label col-sm-2">Previsión(*)</label>
 					<div class="col-sm-3">
 						<select id="opcionPrevision" for="prevision" class="form-control" id="prevision" name="prevision" onchange="mostrarFonasaExtranjero(this.value, 'id_prevision')" onblur="validarVacio(this, 'Por favor Seleccione una Previsión')">
 							<option  value="0">Seleccione una Previsión</option>
@@ -126,7 +126,7 @@
 					</div>
 				</div>
 				<div id="groupFonasaExtranjero" class="form-group hidden">
-					<label for="gl_codigo_fonasa" class="control-label col-sm-2 ">Código Fonasa</label>
+					<label for="gl_codigo_fonasa" class="control-label col-sm-2 ">Código Fonasa(*)</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control col-sm-2" name="gl_codigo_fonasa" id="gl_codigo_fonasa">
 						<span class="help-block hidden fa fa-warning"></span>
@@ -134,7 +134,7 @@
 					<div class="col-sm-1">					
 						<button type="button" id="btnUploadFonasa" class="btn btn-sm btn-success"
 								onclick="xModal.open('{$smarty.const.BASE_URI}/Paciente/cargarAdjuntoFonasa', 'Cargar Adjunto', '', 1, true, '150');" >
-							<i class="fa fa-upload" aria-hidden="true"></i> Subir Archivo Fonasa
+							<i class="fa fa-upload" aria-hidden="true"></i> Subir Archivo Fonasa(*)
 						</button>
 					</div>
 				</div>
