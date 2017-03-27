@@ -83,7 +83,7 @@ class Reconoce extends Controller {
 	*/    
     public function identificarAgresor(){
 		$parametros = $this->request->getParametros();
-		$id_paciente = $parametros[0];
+		$id_paciente = $parametros[0]; //esto esta mal
 
 		$this->smarty->assign("id_paciente", $id_paciente);
 		
@@ -133,7 +133,7 @@ class Reconoce extends Controller {
 		$this->smarty->assign("arrPuntos", $arrPuntos);
 
         $parametros = $this->request->getParametros();
-        $id_registro = $parametros[0];
+        $id_registro = $parametros[0]; //esto esta mal
         $this->smarty->assign("id_registro", $id_registro);
         $obj_registro	= $this->_DAOPaciente->verInfoById($id_registro);
         $fc_nacimiento = $obj_registro->fc_nacimiento;
