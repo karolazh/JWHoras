@@ -183,15 +183,11 @@ class Reconoce extends Controller {
 		$bool_update	= $this->_DAOPaciente->updatePaciente($parametros);
 		$resp			= $this->_Evento->guardarMostrarUltimo(5,0,$id_paciente,"Paciente Reconoce Violencia el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		
-		if ($bool_update && $bool_insert) {
-			$resp = $this->_Evento->guardarMostrarUltimo(12,0,$id_paciente,"Reconoce Agresor : " . Fechas::fechaHoy(),1,1,$_SESSION['id']);
-			if ($resp) {
-				$correcto = TRUE;
-			} else {
-				$error = TRUE;
-			}
-		} else {
-			$error = TRUE;
+		if($bool_update && $bool_insert) {
+			$resp		= $this->_Evento->guardarMostrarUltimo(12,0,$id_paciente,"Reconoce Agresor : " . Fechas::fechaHoy(),1,1,$_SESSION['id']);
+			$correcto	= TRUE;
+		}else{
+			$error		= TRUE;
 		}
 
 		$salida	= array("error" => $error, "correcto" => $correcto);
