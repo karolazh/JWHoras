@@ -3,10 +3,10 @@
 /**
 *****************************************************************************
 * Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_genero
+* Descripcion	: Modelo para Tabla pre_tipo_ingreso_mensual
 * Plataforma	: !PHP
-* Creacion		: 08/03/2017
-* @name			DAOTipoGenero.php
+* Creacion		: 06/03/2017
+* @name			DAOTipoIngresoMensual.php
 * @version		1.0
 * @author		David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
@@ -15,27 +15,30 @@
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
 *
+* 
 *-----------------------------------------------------------------------------
 *****************************************************************************
 */
 
-class DAOTipoGenero extends Model{
+class DAOTipoIngresoMensual extends Model{
 
-    protected $_tabla			= "pre_tipo_genero";
-    protected $_primaria		= "id_tipo_genero";
+    protected $_tabla			= "pre_tipo_ingreso_mensual";
+    protected $_primaria		= "id_ingreso_mensual";
     protected $_transaccional	= false;
 
-    function __construct()
-    {
+    function __construct(){
         parent::__construct();
     }
-
+    
+    /*
+     * 20170203 - Lista Ingresos Mensuales
+     */
     public function getLista(){
-        $query	= "	SELECT * FROM ".$this->_tabla;
-        $result	= $this->db->getQuery($query);
+        $query		= $this->db->select("*")->from($this->_tabla);
+        $resultado	= $query->getResult();
 
-        if($result->numRows>0){
-            return $result->rows;
+        if($resultado->numRows>0){
+            return $resultado->rows;
         }else{
             return NULL;
         }
@@ -47,27 +50,14 @@ class DAOTipoGenero extends Model{
 
 		$param	= array($id);
         $result	= $this->db->getQuery($query,$param);
-
+		
         if($result->numRows > 0){
             return $result->rows->row_0;
         }else{
             return NULL;
         }
     }
-    
-    public function getByCodigo($cod){
-        $query	= "	SELECT * FROM ".$this->_tabla."
-					WHERE cd_tipo_genero = ?";
-
-		$param	= array($cod);
-        $result	= $this->db->getQuery($query,$param);
-
-        if($result->numRows > 0){
-            return $result->rows->row_0;
-        }else{
-            return NULL;
-        }
-    }
+	
 }
 
 ?>

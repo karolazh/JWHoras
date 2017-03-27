@@ -1,5 +1,7 @@
-<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet"
+      type="text/css"/>
+<link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet"
+      type="text/css"/>
 
 <section class="content-header">
     <h1><i class="fa fa-home"></i> <span>Inicio</span></h1>
@@ -7,7 +9,7 @@
 
 <section class="content">
     <div class="row">
-        
+
         <div role="tabpanel">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
@@ -21,7 +23,7 @@
                     <a href="#estadisticas" aria-controls="estadisticas" role="tab" data-toggle="tab">Estadísticas</a>
                 </li>
             </ul>
-        
+
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="alarmas">
@@ -36,27 +38,48 @@
                                         <div class="box-title">Reconoce Violencia</div>
                                     </div>
                                     <div class="box-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-condensed table-hover table-bordered dataTable paginada" id="tabla-reconoce-violencia">
+                                        <div class="col-xs-12">
+                                            <div class="info-box bg-red">
+                                                <span class="info-box-icon"><i class="fa fa-female"></i></span>
+
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Casos en que reconoce violencia</span>
+                                                    <span class="info-box-number">{$total_violencia}</span>
+
+                                                    <div class="progress" style="height:34px">
+                                                        <div class="progress-bar" style="width: 0%" id="barra-reconoce-violencia"></div>
+                                                    </div>
+                                                    <span class="progress-description text-right">
+                                                        <strong>{$porcentaje_violencia}%</strong> de un total de <strong>{$total_pacientes}</strong> pacientes
+                                                    </span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                            <!-- /.info-box -->
+                                        </div>
+
+                                        <div class="table-responsive col-xs-12">
+                                            <table class="table table-condensed table-hover table-bordered dataTable paginada"
+                                                   id="tabla-reconoce-violencia">
                                                 <thead>
-                                                    <tr>
-                                                        <th>Días</th>
-                                                        <th>RUT</th>
-                                                        <th>Nombre</th>
-                                                        <th>Comuna</th>
-                                                    </tr>
+                                                <tr>
+                                                    <th>Días</th>
+                                                    <th>RUT</th>
+                                                    <th>Nombre</th>
+                                                    <th>Comuna</th>
+                                                </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {if $arr_violencia}
-                                                        {foreach from=$arr_violencia item=item}
+                                                {if $arr_violencia}
+                                                    {foreach from=$arr_violencia item=item}
                                                         <tr>
                                                             <td class="text-center">{$item->nr_dias_primera_visita}</td>
                                                             <td class="text-center">{$item->gl_identificacion}</td>
                                                             <td class="text-center">{$item->gl_nombres} {$item->gl_apellidos}</td>
-                                                            <td class="text-center">{$item->gl_nombre_comuna}</td>    
+                                                            <td class="text-center">{$item->gl_nombre_comuna}</td>
                                                         </tr>
-                                                        {/foreach}
-                                                    {/if}
+                                                    {/foreach}
+                                                {/if}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -71,27 +94,48 @@
                                         <div class="box-title">Exámen PAP o Mamografía Alterado</div>
                                     </div>
                                     <div class="box-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-condensed table-hover table-bordered dataTable paginada" id="tabla-pap-alterado">
+                                        <div class="col-xs-12">
+                                            <div class="info-box bg-yellow">
+                                                <span class="info-box-icon"><i class="fa fa-stethoscope"></i></span>
+
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Casos con examen PAP o mamografía alterado</span>
+                                                    <span class="info-box-number">{$total_pap}</span>
+
+                                                    <div class="progress" style="height: 34px;">
+                                                        <div class="progress-bar" style="width: 0%" id="barra-pap-alterado"></div>
+                                                    </div>
+                                                    <span class="progress-description text-right">
+                                                        <strong>{$porcentaje_pap}%</strong> de un total de <strong>{$total_pacientes}</strong> pacientes
+                                                    </span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                            <!-- /.info-box -->
+                                        </div>
+
+                                        <div class="table-responsive col-xs-12">
+                                            <table class="table table-condensed table-hover table-bordered dataTable paginada"
+                                                   id="tabla-pap-alterado">
                                                 <thead>
-                                                    <tr>
-                                                        <th>Días</th>
-                                                        <th>RUT</th>
-                                                        <th>Nombre</th>
-                                                        <th>Comuna</th>
-                                                    </tr>
+                                                <tr>
+                                                    <th>Días</th>
+                                                    <th>RUT</th>
+                                                    <th>Nombre</th>
+                                                    <th>Comuna</th>
+                                                </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {if $arr_violencia}
-                                                        {foreach from=$arr_pap item=item}
+                                                {if $arr_violencia}
+                                                    {foreach from=$arr_pap item=item}
                                                         <tr>
                                                             <td class="text-center">{$item->nr_dias_primera_visita}</td>
                                                             <td class="text-center">{$item->gl_identificacion}</td>
                                                             <td class="text-center">{$item->gl_nombres} {$item->gl_apellidos}</td>
-                                                            <td class="text-center">{$item->gl_nombre_comuna}</td>    
+                                                            <td class="text-center">{$item->gl_nombre_comuna}</td>
                                                         </tr>
-                                                        {/foreach}
-                                                    {/if}
+                                                    {/foreach}
+                                                {/if}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -138,7 +182,7 @@
                                     </div>
                                 </div>
                             </div>
-                                    
+
                             <div class="col-xs-12 col-md-4">
                                 <div class="box box-primary">
                                     <div class="box-header">
@@ -171,7 +215,7 @@
         </div>
 
     </div>
-    
+
     <!-- <div class="row">
         <div class="col-xs-12 col-md-12">
             <div class="box box-primary">
@@ -213,5 +257,5 @@
         </div>
     </div> -->
 </section>
-                        
+
 </body>

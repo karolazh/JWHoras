@@ -7,27 +7,18 @@ var Agenda = {
         var msg_error = '';        
         
         var id_paciente = form.id_paciente.value;
-        //alert(id_paciente);
         var id_empa = form.id_empa.value;
-        //alert(id_empa);
         var id_centro_salud = form.id_centro_salud.value;
-        //alert(id_centro_salud);
         var id_examen = form.id_examen.value;
-        //alert(id_examen);
         var id_laboratorio = form.id_laboratorio.value;
-        //alert(id_examen);
+        var fecha_agenda = form.fc_toma.value;
+        var hora_agenda = form.gl_hora_toma.value;
+        var observacion = form.gl_observacion_toma.value;
         
         //id de laboratorio seleccionado en combo si es "nuevo"
         var laboratorio = form.laboratorio.value;
         //id de examen seleccionado en combo si es "nuevo"
         var examen = form.examen.value;
-        
-        var fecha_agenda = form.fc_toma.value;
-        //alert(fecha_agenda);
-        var hora_agenda = form.gl_hora_toma.value;
-        //alert(hora_agenda);
-        var observacion = form.gl_observacion_toma.value;
-        //alert(observacion);
         
         //Valida si está ingresando un examen nuevo o viene de EMPA
         if (id_examen == "") {
@@ -77,7 +68,6 @@ var Agenda = {
             formulario.append('hora_agenda', hora_agenda);
             formulario.append('observacion', observacion);
 
-            //console.log(formulario);
             $.ajax({
                 url : BASE_URI + 'index.php/Agenda/guardarAgenda', 
                 data : formulario,
@@ -92,14 +82,9 @@ var Agenda = {
                         $('#verAgenda_' + id_examen).hide();
                         $('#verExamen_' + id_examen).show();
 						$('#id_paciente_examen_' + response.gl_examen).val(response.ultimo_id);
-                        //alert(response.id_agenda);
                         //xModal.success("OK: El paciente fue agendado" + $('#verExamen_' + id_examen).val(), function(){
                         xModal.success("OK: El paciente fue agendado", function(){
-                            //Valida si está ingresando un examen nuevo desde laboratorio...
-                            //...para recargar grilla de exámenes
-                            //if (id_examen == "") {
-                                $("#grilla-examenes").html(response.grilla);
-                            //}
+                            $("#grilla-examenes").html(response.grilla);
                             xModal.closeAll();
                         });
                     }

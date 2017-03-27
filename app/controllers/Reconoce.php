@@ -44,6 +44,7 @@ class Reconoce extends Controller {
 	protected $_DAOPacienteDireccion;
 	protected $_DAOPacienteAgresorViolencia;
 	protected $_Evento;
+	protected $_DAOTipoIngresoMensual;
 
     function __construct() {
         parent::__construct();
@@ -70,6 +71,7 @@ class Reconoce extends Controller {
 		$this->_DAOTipoSexo					= $this->load->model("DAOTipoSexo");
 		$this->_DAOPacienteDireccion		= $this->load->model("DAOPacienteDireccion");
 		$this->_DAOPacienteAgresorViolencia	= $this->load->model("DAOPacienteAgresorViolencia");
+		$this->_DAOTipoIngresoMensual		= $this->load->model("DAOTipoIngresoMensual");
     }
 	
 	/**
@@ -100,6 +102,7 @@ class Reconoce extends Controller {
 		$direccion				= $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
         $arrTipoViolencia		= $this->_DAOTipoViolencia->getLista();
 		$arrPuntos				= $this->_DAOPacienteAgresorViolencia->getByIdPaciente($id_paciente);
+		$arrIngresosMensuales	= $this->_DAOTipoIngresoMensual->getLista();
 
 		$this->smarty->assign("id_paciente", $id_paciente);
 		$this->smarty->assign("gl_rut", $paciente->gl_identificacion);
@@ -122,6 +125,7 @@ class Reconoce extends Controller {
         $this->smarty->assign('edad', $paciente->edad);
         $this->smarty->assign('fc_reconoce', Fechas::fechaHoy());
         $this->smarty->assign('fc_hora', date('h:i'));
+        $this->smarty->assign('arrIngresosMensuales', $arrIngresosMensuales);
 
         $this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.','','pull-right'));
         $this->smarty->assign("botonAyudaViolencia", Boton::botonAyuda('Seleccione el o los tipos de violencia que la víctima vive o ha vivido de parte del agresor.','','pull-right'));

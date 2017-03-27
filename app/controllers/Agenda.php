@@ -31,11 +31,8 @@ class Agenda extends Controller {
 	function __construct() {
 		parent::__construct();
         $this->load->lib('Fechas', false);
-		$this->load->lib('Boton', false);
-		$this->load->lib('Seguridad', false);
-		$this->load->lib('Evento', false);
-
-		$this->_Evento					= new Evento();
+        $this->load->lib('Seguridad', false);
+        
         $this->_DAOEmpa                 = $this->load->model("DAOEmpa");
 		$this->_DAOPaciente				= $this->load->model("DAOPaciente");
         $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
@@ -58,7 +55,6 @@ class Agenda extends Controller {
 	 */
     public function ver() {
         Acceso::redireccionUnlogged($this->smarty);
-        
         $parametros  = $this->request->getParametros();
         $id_paciente = $parametros[0];
         
@@ -70,7 +66,6 @@ class Agenda extends Controller {
         if (!is_null($arrExamenes)) {
             foreach($arrExamenes as $item){
                 /* 2017-03-21 Valida que examen no sea "Externo"; no debe aparecer en Calendario */
-                //if (($item->id_paciente_examen != 0) and (!is_null($item->gl_resultado))) {
                 if ($item->id_paciente_examen != 0) {
                     $descripcion = "Toma Examen ". $item->gl_nombre_examen;
                     $fecha       = $item->fc_toma_calendar;
@@ -81,15 +76,7 @@ class Agenda extends Controller {
                         $hora = "";
                     }
 					$id_paciente_examen	= $item->id_paciente_examen;
-                    $arrAgenda   = "$arrAgenda $descripcion,$fecha,$hora,$id_paciente_examen;"; 
-
-					/*
-                    if (!is_null($item->fc_resultado_calendar)){
-                        $descripcion_result	= "Resultado Examen ". $item->gl_nombre_examen;
-                        $fecha_result		= $item->fc_resultado_calendar;
-                        $arrAgenda			= $arrAgenda.$descripcion_result.",".$fecha_result.",;";
-                    }
-					*/
+                    $arrAgenda   = "$arrAgenda $descripcion,$fecha,$hora,$id_paciente_examen;";
                 }
 			}
         }
@@ -123,10 +110,6 @@ class Agenda extends Controller {
                 }
             }
             //Dirección Vigente de Paciente
-            $direccion    = "";
-            $comuna       = "";
-            $provincia    = "";
-            $region       = "";
             $detDireccion = $this->_DAOPacienteDireccion->getByIdDireccionVigente($id_paciente);
             if (!is_null($detDireccion)) {
                 $direccion = $detDireccion->gl_direccion;
@@ -214,10 +197,10 @@ class Agenda extends Controller {
 	 * * @author Carolina Zamora <carolina.zamora@cosof.cl>
 	 */
     public function agendar() {
-        Acceso::redireccionUnlogged($this->smarty);
-        
+        Acceso::redireccionUnlogged($this->smarty);        
         $parametros  = $this->request->getParametros();
         $id_paciente = $parametros[0];
+        
         //valida si agenda examen de empa o de laboratorio
         if (isset($parametros[1])) {
             $id_empa = $parametros[1];
@@ -258,6 +241,7 @@ class Agenda extends Controller {
         $this->smarty->assign("id_laboratorio", $id_laboratorio);
         $this->smarty->assign('arrLaboratorios', $arrLaboratorios);
         $this->smarty->assign('arrTipoExamen', $arrTipoExamen);
+        
         $this->smarty->display('agenda/agendar.tpl');
         $this->load->javascript(STATIC_FILES . 'js/templates/agenda/ver.js');
     }
@@ -279,7 +263,6 @@ class Agenda extends Controller {
         } else {
             $id_empa = NULL;
         }
-        //$id_centro_salud = $_POST['id_centro_salud'];
         $id_laboratorio = $_POST['id_laboratorio'];
         $id_examen      = $_POST['id_examen'];
         
@@ -342,11 +325,10 @@ class Agenda extends Controller {
         }
         
         //Actualiza Grilla Exámenes x Paciente
-        //$grilla = "";
         if (isset($_SESSION['id_laboratorio'])) {
-            $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['id_laboratorio']);
+            $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['id_laboratorio'], $id_paciente);
         } else {
-            $arrExamenes = $this->_DAOPacienteExamen->getListaDetalle();
+            $arrExamenes     = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
         }
         $this->smarty->assign('arrExamenes', $arrExamenes);
         $grilla = $this->smarty->fetch('laboratorio/grillaExamenesLaboratorio.tpl');

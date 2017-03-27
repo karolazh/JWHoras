@@ -35,8 +35,7 @@ class Laboratorio extends Controller {
 		$this->load->lib('Fechas', false);
         $this->load->lib('Seguridad', false);
 		$this->load->lib('Evento', false);
-
-		$this->_Evento					= new Evento();
+        $this->_Evento					= new Evento();
 		$this->_DAOEvento				= $this->load->model("DAOEvento");
         $this->_DAOPaciente				= $this->load->model("DAOPaciente");
         $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
@@ -78,8 +77,7 @@ class Laboratorio extends Controller {
 	 */
     public function ver() {
         Acceso::redireccionUnlogged($this->smarty);
-        
-        $parametros     = $this->request->getParametros();
+		$parametros     = $this->request->getParametros();
         $id_paciente    = $parametros[0];
         $perfil         = $_SESSION['perfil'];
         
@@ -88,7 +86,11 @@ class Laboratorio extends Controller {
         //Combos Tipo Examen
         $arrTipoExamen   = $this->_DAOTipoExamen->getLista();
         //Grilla Exámenes x Paciente
-        $arrExamenes     = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
+        if ($perfil == 7) {
+            $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['id_laboratorio'], $id_paciente);
+        } else {
+            $arrExamenes     = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
+        }
         $arrExamenesEmpa = $this->_DAOTipoExamen->getLista();
         
         //Datos de Paciente
@@ -120,10 +122,6 @@ class Laboratorio extends Controller {
                 }
             }
             //Dirección Vigente de Paciente
-            $direccion  = "";
-            $comuna     = "";
-            $provincia  = "";
-            $region     = "";
             $detDireccion = $this->_DAOPacienteDireccion->getByIdDireccionVigente($id_paciente);
             if (!is_null($detDireccion)) {
                 $direccion  = $detDireccion->gl_direccion;
@@ -201,7 +199,7 @@ class Laboratorio extends Controller {
             $gl_hora_toma        = $detExamen->gl_hora_toma;
             $gl_observacion_toma = $detExamen->gl_observacion_toma;
             
-            //Datos de registro
+            //Datos de Registro
             $gl_resultado_0 = "";
             $gl_resultado_1 = "";
             $fc_resultado   = $detExamen->fc_resultado;
@@ -253,6 +251,7 @@ class Laboratorio extends Controller {
 			$this->smarty->assign("arrLaboratorios", $arrLaboratorios);
 			$this->smarty->assign("arrTipoExamen", $arrTipoExamen);
         }
+        
 		$this->smarty->assign("perfil", $perfil);
 		$this->smarty->assign("accion", $accion);
         $this->smarty->display("laboratorio/datosExamen.tpl");
