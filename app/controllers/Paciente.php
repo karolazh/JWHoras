@@ -85,7 +85,9 @@ class Paciente extends Controller {
 			$arr	= $this->_DAOPaciente->getListaDetalle($where);
 		}
 
+		$arrOpcion = ''; // incluir opcion con un Helper
 		$this->smarty->assign('arrResultado', $arr);
+		$this->smarty->assign('arrOpcion', $arrOpcion);
 		$this->smarty->assign('titulo', 'Pacientes');
 
 		$this->_display('grilla/pacientes.tpl');
