@@ -32,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {foreach $arrExamenes as $item}
+                        {foreach $arrResultado as $item}
                             {if $item->nr_examen_alterado > 0}
                             <tr>
                                 <td style="color:#ff0000; background: #F7D3D2;" class="text-center" nowrap> {$item->gl_identificacion} </td>

@@ -158,6 +158,7 @@ class DAOPaciente extends Model{
             $query	.= $where;
 		}
 
+		$query	.= 'GROUP BY paciente.id_paciente';
         $result	= $this->db->getQuery($query,$params);
 
         if($result->numRows>0){

@@ -51,14 +51,22 @@ class Laboratorio extends Controller {
 	 */
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
+		$id_perfil 		= $_SESSION['perfil'];
+		$id_region 		= $_SESSION['id_region'];
+		$id_laboratorio = $_SESSION['id_laboratorio'];
 
-        if (isset($_SESSION['id_laboratorio'])) {
-            $arrResultado = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['id_laboratorio']);
-        } else {
-            $arrResultado = $this->_DAOPacienteExamen->getListaDetalle();
+		if($id_perfil == 7){
+			$where	= array('pac_examen.id_laboratorio'=>$id_laboratorio);
+			$join[]	= array('tabla'	=> 'pre_paciente_examen pac_examen',
+							'on'	=> 'pac_examen.id_paciente',
+							'igual'	=> 'paciente.id_paciente'
+						);
+			$arr	= $this->_DAOPaciente->getListaDetalle($where,$join);
+        }else{
+			$arr	= $this->_DAOPaciente->getListaDetalle();
         }
 		
-        $this->smarty->assign('arrResultado', $arrResultado);
+        $this->smarty->assign('arrResultado', $arr);
 		$this->smarty->assign('titulo', 'Examenes');
 		$this->_display('grilla/pacientes.tpl');
 	}
