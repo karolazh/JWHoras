@@ -31,7 +31,11 @@ class Agenda extends Controller {
 	function __construct() {
 		parent::__construct();
         $this->load->lib('Fechas', false);
-        $this->load->lib('Seguridad', false);
+		$this->load->lib('Boton', false);
+		$this->load->lib('Seguridad', false);
+		$this->load->lib('Evento', false);
+
+		$this->_Evento					= new Evento();
         $this->_DAOEmpa                 = $this->load->model("DAOEmpa");
 		$this->_DAOPaciente				= $this->load->model("DAOPaciente");
         $this->_DAOPacienteExamen		= $this->load->model("DAOPacienteExamen");
