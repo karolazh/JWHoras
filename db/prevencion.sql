@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 192.168.0.200
--- Tiempo de generación: 24-03-2017 a las 21:04:00
+-- Tiempo de generación: 27-03-2017 a las 20:32:25
 -- Versión del servidor: 5.6.10
 -- Versión de PHP: 5.6.26
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria` (
   KEY `IDX_id_usuario` (`id_usuario`),
   KEY `IDX_gl_ip` (`gl_ip`),
   KEY `IDX_gl_tiempo` (`gl_tiempo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=595 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=833 ;
 
 --
 -- Volcado de datos para la tabla `pre_auditoria`
@@ -704,7 +704,246 @@ INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`
 (591, 2, 'UPDATE', 'UPDATE pre_empa_audit \n					SET	nr_valor =	0\n					WHERE id_empa = 1 AND id_pregunta = 10', '::1', '0.0021679401397705', '2017-03-24 21:01:45'),
 (592, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo = 15', '::1', '0.0016500949859619', '2017-03-24 21:01:45'),
 (593, 2, 'INSERT', 'INSERT into pre_evento values(null,15,0,''1'',''AUDIT del EMPA 1  modificado el : 2017-03-24'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012879371643066', '2017-03-24 21:01:45'),
-(594, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= 525,\n						id_institucion					= 2453,\n						nr_ficha						= 75877,\n						fc_empa							= ''2017-03-23'',\n						bo_embarazo						= 0,\n						bo_consume_alcohol				= 1,\n						gl_puntos_audit					= 12,\n						bo_fuma							= 0,\n						gl_peso							= ''90'',\n						gl_estatura						= ''170'',\n						gl_imc							= ''31.14'',\n						gl_circunferencia_abdominal		= ''90'',\n						id_clasificacion_imc			= 6,\n						gl_pas							= ''110'',\n						gl_pad							= ''80'',\n						bo_antecedente_diabetes			= 1,\n						gl_glicemia						= ''50'',\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= 0,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= 1,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 0,\n						bo_pap_resultado				= NULL,\n						fc_ultimo_pap_ano				= NULL,	\n						fc_ultimo_pap_mes				= NULL,	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 0,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia_ano				= NULL,	\n						fc_mamografia_mes				= NULL,	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						bo_mamografia_requiere			= 1,\n						gl_observaciones_empa			= NULL,\n						bo_finalizado					= 0,\n						fc_actualiza					= now(),\n						id_usuario_actualiza			= 2\n					WHERE id_empa = 1', '::1', '0.0014638900756836', '2017-03-24 21:01:45');
+(594, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= 525,\n						id_institucion					= 2453,\n						nr_ficha						= 75877,\n						fc_empa							= ''2017-03-23'',\n						bo_embarazo						= 0,\n						bo_consume_alcohol				= 1,\n						gl_puntos_audit					= 12,\n						bo_fuma							= 0,\n						gl_peso							= ''90'',\n						gl_estatura						= ''170'',\n						gl_imc							= ''31.14'',\n						gl_circunferencia_abdominal		= ''90'',\n						id_clasificacion_imc			= 6,\n						gl_pas							= ''110'',\n						gl_pad							= ''80'',\n						bo_antecedente_diabetes			= 1,\n						gl_glicemia						= ''50'',\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= 0,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= 1,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 0,\n						bo_pap_resultado				= NULL,\n						fc_ultimo_pap_ano				= NULL,	\n						fc_ultimo_pap_mes				= NULL,	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 0,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia_ano				= NULL,	\n						fc_mamografia_mes				= NULL,	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						bo_mamografia_requiere			= 1,\n						gl_observaciones_empa			= NULL,\n						bo_finalizado					= 0,\n						fc_actualiza					= now(),\n						id_usuario_actualiza			= 2\n					WHERE id_empa = 1', '::1', '0.0014638900756836', '2017-03-24 21:01:45'),
+(595, 2, 'UPDATE', 'UPDATE pre_empa SET\n						id_comuna						= 349,\n						gl_sector						= 525,\n						id_institucion					= 2453,\n						nr_ficha						= 75877,\n						fc_empa							= ''2017-03-23'',\n						bo_embarazo						= 0,\n						bo_consume_alcohol				= 1,\n						gl_puntos_audit					= 12,\n						bo_fuma							= 0,\n						gl_peso							= ''90'',\n						gl_estatura						= ''170'',\n						gl_imc							= ''31.14'',\n						gl_circunferencia_abdominal		= ''90'',\n						id_clasificacion_imc			= 6,\n						gl_pas							= ''110'',\n						gl_pad							= ''80'',\n						bo_antecedente_diabetes			= 1,\n						gl_glicemia						= ''50'',\n						bo_glicemia_toma				= NULL,\n						bo_trabajadora_reclusa			= 0,\n						bo_vdrl							= NULL,\n						bo_rpr							= NULL,\n						bo_vih							= NULL,	\n						bo_tos_productiva				= 1,\n						bo_baciloscopia_toma			= NULL,\n						bo_pap_realizado				= 0,\n						bo_pap_resultado				= NULL,\n						fc_ultimo_pap_ano				= NULL,	\n						fc_ultimo_pap_mes				= NULL,	\n						bo_pap_vigente					= NULL,\n						bo_pap_toma						= NULL,\n						gl_colesterol					= NULL,\n						bo_colesterol_toma				= NULL,\n						bo_mamografia_realizada			= 0,\n						bo_mamografia_resultado_pasado	= NULL,\n						bo_mamografia_resultado			= NULL,\n						fc_mamografia_ano				= NULL,	\n						fc_mamografia_mes				= NULL,	\n						bo_mamografia_vigente			= NULL,\n						bo_mamografia_toma				= NULL,\n						bo_mamografia_requiere			= 1,\n						gl_observaciones_empa			= NULL,\n						bo_finalizado					= 0,\n						fc_actualiza					= now(),\n						id_usuario_actualiza			= 2\n					WHERE id_empa = 1', '::1', '0.0015180110931396', '2017-03-24 21:06:02'),
+(596, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0011720657348633', '2017-03-24 21:06:07'),
+(597, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0011069774627686', '2017-03-24 21:06:07'),
+(598, 1, 'INSERT', 'INSERT INTO pre_paciente_examen(id_tipo_examen,id_paciente,id_laboratorio,fc_toma,gl_hora_toma,gl_observacion_toma,fc_crea,id_usuario_crea) VALUES(''7'',''5'',''9'',''2017-03-27'',''08:00'',''Prueba Ingresa Examen desde Laboratorio.'',''2017-03-24 18:03:47'',''1'')', '127.0.0.1', '0.0011610984802246', '2017-03-24 21:07:24'),
+(599, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''11111'',fc_resultado = ''2017-03-31'',gl_glicemia = ,gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ''N'',gl_resultado_descripcion = ''11111'',gl_resultado_indicacion = ''11111'',id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''16''', '127.0.0.1', '0.0015389919281006', '2017-03-24 21:11:45'),
+(600, 1, 'UPDATE', 'UPDATE pre_empa SET bo_vdrl = 1 WHERE id_empa = ''9''', '127.0.0.1', '0.0012490749359131', '2017-03-24 21:11:45'),
+(601, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''22222'',fc_resultado = ''2017-03-31'',gl_glicemia = ,gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ''N'',gl_resultado_descripcion = ''22222'',gl_resultado_indicacion = ''22222'',id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''17''', '127.0.0.1', '0.0013768672943115', '2017-03-24 21:13:55'),
+(602, 1, 'UPDATE', 'UPDATE pre_empa SET bo_rpr = 1 WHERE id_empa = ''9''', '127.0.0.1', '0.0015509128570557', '2017-03-24 21:13:55'),
+(603, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''33333'',fc_resultado = ''2017-03-31'',gl_glicemia = ,gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ''N'',gl_resultado_descripcion = ''33333'',gl_resultado_indicacion = ''33333'',id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''18''', '127.0.0.1', '0.0022249221801758', '2017-03-24 21:14:55'),
+(604, 1, 'UPDATE', 'UPDATE pre_empa SET bo_vih = 1 WHERE id_empa = ''9''', '127.0.0.1', '0.001539945602417', '2017-03-24 21:14:55'),
+(605, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''44444'',fc_resultado = ''2017-03-27'',gl_glicemia = ,gl_colesterol = ,gl_pad = ''86'',gl_pas = ''101'',gl_resultado = ''N'',gl_resultado_descripcion = ''44444'',gl_resultado_indicacion = ''44444'',id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''14''', '127.0.0.1', '0.0015208721160889', '2017-03-24 21:16:48'),
+(606, 1, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ,gl_rut_persona_toma = ''13225524-5'',gl_nombre_persona_toma = ''Administrador Prevención'',gl_folio = ''555555'',fc_resultado = ''2017-04-03'',gl_glicemia = ,gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ''N'',gl_resultado_descripcion = ''55555'',gl_resultado_indicacion = ''55555'',id_usuario_actualiza = ''1'' WHERE id_paciente_examen = ''19''', '127.0.0.1', '0.0023760795593262', '2017-03-24 21:20:25'),
+(607, 1, 'UPDATE', 'UPDATE pre_empa SET bo_pap_resultado_nuevo = 1 WHERE id_empa = ''9''', '127.0.0.1', '0.0018899440765381', '2017-03-24 21:20:25'),
+(608, 1, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.00096011161804199', '2017-03-24 21:27:04'),
+(609, 1, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0010390281677246', '2017-03-24 21:27:04'),
+(610, 1, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0019230842590332', '2017-03-24 21:39:53'),
+(611, 1, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0016951560974121', '2017-03-24 21:39:53'),
+(612, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0018250942230225', '2017-03-27 12:21:46'),
+(613, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''2''', '::1', '0.00067305564880371', '2017-03-27 12:21:46'),
+(614, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (0,''1-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.00085282325744629', '2017-03-27 12:44:29'),
+(615, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''10'',''1-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0010180473327637', '2017-03-27 12:44:34'),
+(616, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''10''', '127.0.0.1', '0.0010900497436523', '2017-03-27 12:44:34'),
+(617, 1, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (0,''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.001295804977417', '2017-03-27 12:56:00'),
+(618, 1, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0012788772583008', '2017-03-27 12:56:08'),
+(619, 1, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0010449886322021', '2017-03-27 12:56:08'),
+(620, 1, 'INSERT', 'INSERT INTO pre_paciente_examen(id_tipo_examen,id_paciente,id_laboratorio,fc_toma,gl_hora_toma,gl_observacion_toma,fc_crea,id_usuario_crea) VALUES(''5'',''8'',''9'',''2017-03-28'',''08:00'',''Prueba ingresa desde Lab'',''2017-03-27 11:03:44'',''1'')', '127.0.0.1', '0.0011920928955078', '2017-03-27 14:37:22'),
+(621, 1, 'INSERT', 'INSERT INTO pre_paciente_examen(id_tipo_examen,id_paciente,id_laboratorio,fc_toma,gl_hora_toma,gl_observacion_toma,fc_crea,id_usuario_crea) VALUES(''3'',''8'',''1'',''2017-03-29'',''12:00'',''RPR.'',''2017-03-27 12:03:10'',''1'')', '127.0.0.1', '0.0010819435119629', '2017-03-27 15:21:48'),
+(622, 1, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''25'',''7-2'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0012731552124023', '2017-03-27 15:22:19'),
+(623, 1, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''25''', '127.0.0.1', '0.0014150142669678', '2017-03-27 15:22:19'),
+(624, 25, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''24'',''7-1'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0011692047119141', '2017-03-27 15:30:33'),
+(625, 25, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''24''', '127.0.0.1', '0.0011160373687744', '2017-03-27 15:30:33'),
+(626, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									8,\n									1,\n									2	\n								)', '::1', '0.0015349388122559', '2017-03-27 15:53:47'),
+(627, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 17', '::1', '0.00223708152771', '2017-03-27 15:53:47'),
+(628, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''8'',0,''Paciente Agresor Violencia creada el : 27-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0015208721160889', '2017-03-27 15:53:47'),
+(629, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									8,\n									2,\n									3	\n								)', '::1', '0.00082516670227051', '2017-03-27 15:53:47'),
+(630, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 17', '::1', '0.0021929740905762', '2017-03-27 15:53:47'),
+(631, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''8'',0,''Paciente Agresor Violencia creada el : 27-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012578964233398', '2017-03-27 15:53:47'),
+(632, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									8,\n									3,\n									3	\n								)', '::1', '0.00085306167602539', '2017-03-27 15:53:47'),
+(633, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 17', '::1', '0.0012719631195068', '2017-03-27 15:53:47'),
+(634, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''8'',0,''Paciente Agresor Violencia creada el : 27-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.0014121532440186', '2017-03-27 15:53:47'),
+(635, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor_violencia \n								(\n									id_paciente,\n									id_pregunta,\n									nr_valor\n								)\n							VALUES\n								(\n									8,\n									4,\n									2	\n								)', '::1', '0.0014400482177734', '2017-03-27 15:53:47'),
+(636, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 17', '::1', '0.0012187957763672', '2017-03-27 15:53:47'),
+(637, 2, 'INSERT', 'INSERT into pre_evento values(null,17,''8'',0,''Paciente Agresor Violencia creada el : 27-03-2017'',1,0,''2'',CURRENT_TIMESTAMP)', '::1', '0.00095200538635254', '2017-03-27 15:53:47'),
+(638, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						bo_extranjero,\n						gl_rut_agresor,\n						gl_run_pass,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						id_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						8,\n						9,\n						Hermanastra,\n						''Ruth'',\n						''Novoa'',\n						0,\n						''8390223-K'',\n						NULL,\n						2,\n						6,\n						3,\n						2,\n						NULL,\n						NULL,\n						2,\n						2,\n						10,\n						4,\n						''1973-05-16'',\n						NULL,\n						NULL,\n						6,\n						2,\n						now()\n						)', '::1', '0.0029041767120361', '2017-03-27 15:53:47'),
+(639, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 19', '::1', '0.0011360645294189', '2017-03-27 15:53:47'),
+(640, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''8'',0,'' Agresor creado el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010709762573242', '2017-03-27 15:53:48'),
+(641, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= ''Chilena'',\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= 2,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= 2,\n						id_tipo_escolaridad				= 5,\n						fc_reconoce						= ''2017-03-27'',\n						fc_hora_reconoce				= ''12:43'',\n						gl_acompañante					= NULL,\n						bo_reconoce						= 1,\n						fc_actualiza					= now()\n					WHERE id_paciente = 8', '::1', '0.0019609928131104', '2017-03-27 15:53:48'),
+(642, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 5', '::1', '0.00093483924865723', '2017-03-27 15:53:48'),
+(643, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''8'',0,''Paciente Reconoce Violencia el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00089716911315918', '2017-03-27 15:53:48'),
+(644, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 1', '::1', '0.00087308883666992', '2017-03-27 16:01:31'),
+(645, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.00086212158203125', '2017-03-27 16:01:31'),
+(646, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0013890266418457', '2017-03-27 16:01:31'),
+(647, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 2', '::1', '0.00098800659179688', '2017-03-27 16:01:31'),
+(648, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0017991065979004', '2017-03-27 16:01:31'),
+(649, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010819435119629', '2017-03-27 16:01:31'),
+(650, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 3', '::1', '0.0012819766998291', '2017-03-27 16:01:31'),
+(651, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0017969608306885', '2017-03-27 16:01:31'),
+(652, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0013511180877686', '2017-03-27 16:01:31'),
+(653, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 4', '::1', '0.00063300132751465', '2017-03-27 16:01:31'),
+(654, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0011258125305176', '2017-03-27 16:01:31'),
+(655, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00054192543029785', '2017-03-27 16:01:31'),
+(656, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						bo_extranjero,\n						gl_rut_agresor,\n						gl_run_pass,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						id_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						8,\n						9,\n						Hermanastra,\n						''Ruth'',\n						''Novoa'',\n						0,\n						''8390223-K'',\n						NULL,\n						2,\n						6,\n						3,\n						2,\n						NULL,\n						NULL,\n						2,\n						2,\n						10,\n						4,\n						''1973-05-16'',\n						1,\n						0,\n						6,\n						2,\n						now()\n						)', '::1', '0.00075006484985352', '2017-03-27 16:01:31'),
+(657, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 19', '::1', '0.001007080078125', '2017-03-27 16:01:31'),
+(658, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''8'',0,'' Agresor creado el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00078582763671875', '2017-03-27 16:01:31'),
+(659, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= ''Chilena'',\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= 2,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= 2,\n						id_tipo_escolaridad				= 5,\n						fc_reconoce						= ''2017-03-27'',\n						fc_hora_reconoce				= ''12:43'',\n						gl_acompañante					= NULL,\n						bo_reconoce						= 1,\n						fc_actualiza					= now()\n					WHERE id_paciente = 8', '::1', '0.0010290145874023', '2017-03-27 16:01:31'),
+(660, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 5', '::1', '0.0013258457183838', '2017-03-27 16:01:31'),
+(661, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''8'',0,''Paciente Reconoce Violencia el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0007169246673584', '2017-03-27 16:01:31'),
+(662, 24, 'UPDATE', 'UPDATE pre_paciente_examen SET id_usuario_toma = ''24'',gl_rut_persona_toma = ''7-1'',gl_nombre_persona_toma = ''Laboratorista Uno LABORATORIO 1 Tarapacá'',gl_folio = ''777'',fc_resultado = ''2017-03-31'',gl_glicemia = ,gl_colesterol = ,gl_pad = ,gl_pas = ,gl_resultado = ''N'',gl_resultado_descripcion = ''desc prueba'',gl_resultado_indicacion = ''indic prueba'',id_usuario_actualiza = ''24'' WHERE id_paciente_examen = ''21''', '127.0.0.1', '0.0014219284057617', '2017-03-27 16:04:24'),
+(663, 24, 'UPDATE', 'UPDATE pre_empa SET bo_mamografia_resultado = 1 WHERE id_empa = ''1''', '127.0.0.1', '0.0018208026885986', '2017-03-27 16:04:24'),
+(664, 24, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0019049644470215', '2017-03-27 16:04:55'),
+(665, 24, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0011248588562012', '2017-03-27 16:04:55'),
+(666, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 1', '::1', '0.0013341903686523', '2017-03-27 16:10:31'),
+(667, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0018179416656494', '2017-03-27 16:10:31'),
+(668, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011928081512451', '2017-03-27 16:10:31'),
+(669, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 2', '::1', '0.0013949871063232', '2017-03-27 16:10:31'),
+(670, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0023760795593262', '2017-03-27 16:10:31'),
+(671, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012030601501465', '2017-03-27 16:10:31'),
+(672, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 3', '::1', '0.0014529228210449', '2017-03-27 16:10:31'),
+(673, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0017929077148438', '2017-03-27 16:10:31'),
+(674, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012791156768799', '2017-03-27 16:10:31'),
+(675, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 4', '::1', '0.0014700889587402', '2017-03-27 16:10:31'),
+(676, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0018188953399658', '2017-03-27 16:10:31'),
+(677, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0013761520385742', '2017-03-27 16:10:31'),
+(678, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						bo_extranjero,\n						gl_rut_agresor,\n						gl_run_pass,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						id_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						8,\n						9,\n						Hermanastra,\n						''Ruth'',\n						''Novoa'',\n						0,\n						''8390223-K'',\n						NULL,\n						2,\n						6,\n						3,\n						2,\n						NULL,\n						NULL,\n						2,\n						2,\n						10,\n						4,\n						''1973-05-16'',\n						1,\n						0,\n						6,\n						2,\n						now()\n						)', '::1', '0.001093864440918', '2017-03-27 16:10:31'),
+(679, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 19', '::1', '0.0012400150299072', '2017-03-27 16:10:31'),
+(680, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''8'',0,'' Agresor creado el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0013828277587891', '2017-03-27 16:10:31'),
+(681, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 1', '::1', '0.0018360614776611', '2017-03-27 16:11:53'),
+(682, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0018889904022217', '2017-03-27 16:11:53'),
+(683, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0013110637664795', '2017-03-27 16:11:53'),
+(684, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 2', '::1', '0.0014979839324951', '2017-03-27 16:11:53'),
+(685, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0023369789123535', '2017-03-27 16:11:53'),
+(686, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012030601501465', '2017-03-27 16:11:53'),
+(687, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 3', '::1', '0.0011379718780518', '2017-03-27 16:11:53'),
+(688, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0013630390167236', '2017-03-27 16:11:53'),
+(689, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00062108039855957', '2017-03-27 16:11:53'),
+(690, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 4', '::1', '0.00075912475585938', '2017-03-27 16:11:53'),
+(691, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0012381076812744', '2017-03-27 16:11:53'),
+(692, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011110305786133', '2017-03-27 16:11:53'),
+(693, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						bo_extranjero,\n						gl_rut_agresor,\n						gl_run_pass,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						id_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						8,\n						9,\n						Hermanastra,\n						''Ruth'',\n						''Novoa'',\n						0,\n						''8390223-K'',\n						NULL,\n						2,\n						6,\n						3,\n						2,\n						NULL,\n						NULL,\n						2,\n						2,\n						10,\n						4,\n						''1973-05-16'',\n						1,\n						0,\n						6,\n						2,\n						now()\n						)', '::1', '0.00099992752075195', '2017-03-27 16:11:53'),
+(694, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 19', '::1', '0.0015010833740234', '2017-03-27 16:11:53'),
+(695, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''8'',0,'' Agresor creado el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00056099891662598', '2017-03-27 16:11:53'),
+(696, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= ''Chilena'',\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= 2,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= 2,\n						id_tipo_escolaridad				= 5,\n						fc_reconoce						= ''2017-03-27'',\n						fc_hora_reconoce				= ''12:43'',\n						gl_acompañante					= NULL,\n						bo_reconoce						= 1,\n						fc_actualiza					= now()\n					WHERE id_paciente = 8', '::1', '0.00077199935913086', '2017-03-27 16:11:53'),
+(697, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 1', '::1', '0.0013620853424072', '2017-03-27 17:07:54'),
+(698, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0015537738800049', '2017-03-27 17:07:54'),
+(699, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.001107931137085', '2017-03-27 17:07:54'),
+(700, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 2', '::1', '0.001309871673584', '2017-03-27 17:07:54'),
+(701, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0018041133880615', '2017-03-27 17:07:54'),
+(702, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010480880737305', '2017-03-27 17:07:54'),
+(703, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 3', '::1', '0.0013108253479004', '2017-03-27 17:07:54'),
+(704, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0025348663330078', '2017-03-27 17:07:54'),
+(705, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010559558868408', '2017-03-27 17:07:54'),
+(706, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 4', '::1', '0.0017838478088379', '2017-03-27 17:07:54'),
+(707, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0030131340026855', '2017-03-27 17:07:54'),
+(708, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00094294548034668', '2017-03-27 17:07:54'),
+(709, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						bo_extranjero,\n						gl_rut_agresor,\n						gl_run_pass,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						id_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						8,\n						9,\n						Hermanastra,\n						''Ruth'',\n						''Novoa'',\n						0,\n						''8390223-K'',\n						NULL,\n						2,\n						6,\n						3,\n						2,\n						NULL,\n						NULL,\n						2,\n						2,\n						10,\n						4,\n						''1973-05-16'',\n						1,\n						0,\n						6,\n						2,\n						now()\n						)', '::1', '0.00093698501586914', '2017-03-27 17:07:54'),
+(710, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 19', '::1', '0.0013129711151123', '2017-03-27 17:07:54'),
+(711, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''8'',0,'' Agresor creado el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00124192237854', '2017-03-27 17:07:54'),
+(712, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= ''Chilena'',\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= 2,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= 2,\n						id_tipo_escolaridad				= 5,\n						fc_reconoce						= ''2017-03-27'',\n						fc_hora_reconoce				= ''12:43'',\n						gl_acompañante					= NULL,\n						bo_reconoce						= 1,\n						fc_actualiza					= now()\n					WHERE id_paciente = 8', '::1', '0.0014059543609619', '2017-03-27 17:07:54'),
+(713, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 5', '::1', '0.0015649795532227', '2017-03-27 17:07:54'),
+(714, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''8'',0,''Paciente Reconoce Violencia el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0013790130615234', '2017-03-27 17:07:54'),
+(715, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 1', '::1', '0.0012447834014893', '2017-03-27 17:09:26'),
+(716, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0017361640930176', '2017-03-27 17:09:26'),
+(717, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010008811950684', '2017-03-27 17:09:26'),
+(718, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 2', '::1', '0.00097894668579102', '2017-03-27 17:09:26'),
+(719, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0019850730895996', '2017-03-27 17:09:26'),
+(720, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00095105171203613', '2017-03-27 17:09:26'),
+(721, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 3', '::1', '0.022809028625488', '2017-03-27 17:09:26'),
+(722, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0017290115356445', '2017-03-27 17:09:26'),
+(723, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010139942169189', '2017-03-27 17:09:26'),
+(724, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 4', '::1', '0.0015771389007568', '2017-03-27 17:09:26'),
+(725, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0024311542510986', '2017-03-27 17:09:26'),
+(726, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011041164398193', '2017-03-27 17:09:26'),
+(727, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						bo_extranjero,\n						gl_rut_agresor,\n						gl_run_pass,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						id_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						8,\n						9,\n						Hermanastra,\n						''Ruth'',\n						''Novoa'',\n						0,\n						''8390223-K'',\n						NULL,\n						2,\n						6,\n						3,\n						2,\n						NULL,\n						NULL,\n						2,\n						2,\n						10,\n						4,\n						''1973-05-16'',\n						1,\n						0,\n						6,\n						2,\n						now()\n						)', '::1', '0.00074315071105957', '2017-03-27 17:09:26'),
+(728, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 19', '::1', '0.0011520385742188', '2017-03-27 17:09:26'),
+(729, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''8'',0,'' Agresor creado el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00070500373840332', '2017-03-27 17:09:26'),
+(730, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= ''Chilena'',\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= 2,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= 2,\n						id_tipo_escolaridad				= 5,\n						fc_reconoce						= ''2017-03-27'',\n						fc_hora_reconoce				= ''12:43'',\n						gl_acompañante					= NULL,\n						bo_reconoce						= 1,\n						fc_actualiza					= now()\n					WHERE id_paciente = 8', '::1', '0.0011959075927734', '2017-03-27 17:09:26'),
+(731, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 5', '::1', '0.0010640621185303', '2017-03-27 17:09:26'),
+(732, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''8'',0,''Paciente Reconoce Violencia el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.001007080078125', '2017-03-27 17:09:26'),
+(733, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 1', '::1', '0.0013999938964844', '2017-03-27 17:09:41'),
+(734, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.004979133605957', '2017-03-27 17:09:41'),
+(735, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.001068115234375', '2017-03-27 17:09:41'),
+(736, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 2', '::1', '0.0012969970703125', '2017-03-27 17:09:41'),
+(737, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0030999183654785', '2017-03-27 17:09:41'),
+(738, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010170936584473', '2017-03-27 17:09:41'),
+(739, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 3', '::1', '0.0015561580657959', '2017-03-27 17:09:41'),
+(740, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0031068325042725', '2017-03-27 17:09:41'),
+(741, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.001183032989502', '2017-03-27 17:09:41');
+INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`, `gl_ip`, `gl_tiempo`, `fc_crea`) VALUES
+(742, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 4', '::1', '0.001194953918457', '2017-03-27 17:09:41'),
+(743, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0034759044647217', '2017-03-27 17:09:41'),
+(744, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00078392028808594', '2017-03-27 17:09:41'),
+(745, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						bo_extranjero,\n						gl_rut_agresor,\n						gl_run_pass,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						id_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						8,\n						9,\n						Hermanastra,\n						''Ruth'',\n						''Novoa'',\n						0,\n						''8390223-K'',\n						NULL,\n						2,\n						6,\n						3,\n						2,\n						NULL,\n						NULL,\n						2,\n						2,\n						10,\n						4,\n						''1973-05-16'',\n						1,\n						0,\n						6,\n						2,\n						now()\n						)', '::1', '0.00065803527832031', '2017-03-27 17:09:41'),
+(746, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 19', '::1', '0.0011980533599854', '2017-03-27 17:09:41'),
+(747, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''8'',0,'' Agresor creado el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00069999694824219', '2017-03-27 17:09:41'),
+(748, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= ''Chilena'',\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= 2,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= 2,\n						id_tipo_escolaridad				= 5,\n						fc_reconoce						= ''2017-03-27'',\n						fc_hora_reconoce				= ''12:43'',\n						gl_acompañante					= NULL,\n						bo_reconoce						= 1,\n						fc_actualiza					= now()\n					WHERE id_paciente = 8', '::1', '0.00080299377441406', '2017-03-27 17:09:41'),
+(749, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 5', '::1', '0.00089812278747559', '2017-03-27 17:09:41'),
+(750, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''8'',0,''Paciente Reconoce Violencia el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00065302848815918', '2017-03-27 17:09:41'),
+(751, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 1', '::1', '0.0013349056243896', '2017-03-27 17:11:35'),
+(752, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0037682056427002', '2017-03-27 17:11:35'),
+(753, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010919570922852', '2017-03-27 17:11:35'),
+(754, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 2', '::1', '0.0013730525970459', '2017-03-27 17:11:35'),
+(755, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.004216194152832', '2017-03-27 17:11:35'),
+(756, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011589527130127', '2017-03-27 17:11:35'),
+(757, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 3', '::1', '0.0013802051544189', '2017-03-27 17:11:35'),
+(758, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0039780139923096', '2017-03-27 17:11:35'),
+(759, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011429786682129', '2017-03-27 17:11:35'),
+(760, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 4', '::1', '0.0014448165893555', '2017-03-27 17:11:35'),
+(761, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0043988227844238', '2017-03-27 17:11:35'),
+(762, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0014500617980957', '2017-03-27 17:11:35'),
+(763, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 1', '::1', '0.001121997833252', '2017-03-27 17:13:05'),
+(764, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0042128562927246', '2017-03-27 17:13:05'),
+(765, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0010459423065186', '2017-03-27 17:13:05'),
+(766, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 2', '::1', '0.00077605247497559', '2017-03-27 17:13:05'),
+(767, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0014569759368896', '2017-03-27 17:13:05'),
+(768, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0086491107940674', '2017-03-27 17:13:05'),
+(769, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 3', '::1', '0.0013530254364014', '2017-03-27 17:13:05'),
+(770, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0028688907623291', '2017-03-27 17:13:05'),
+(771, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011560916900635', '2017-03-27 17:13:05'),
+(772, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 4', '::1', '0.0019540786743164', '2017-03-27 17:13:05'),
+(773, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0035309791564941', '2017-03-27 17:13:05'),
+(774, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0009758472442627', '2017-03-27 17:13:05'),
+(775, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						bo_extranjero,\n						gl_rut_agresor,\n						gl_run_pass,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						id_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						8,\n						9,\n						''Ruth'',\n						''Novoa'',\n						0,\n						''8390223-K'',\n						NULL,\n						2,\n						6,\n						3,\n						2,\n						NULL,\n						NULL,\n						2,\n						2,\n						10,\n						4,\n						''1973-05-16'',\n						1,\n						0,\n						6,\n						2,\n						now()\n						)', '::1', '0.0012140274047852', '2017-03-27 17:13:05'),
+(776, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 19', '::1', '0.0016310214996338', '2017-03-27 17:13:05'),
+(777, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''8'',0,'' Agresor creado el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00085806846618652', '2017-03-27 17:13:05'),
+(778, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= ''Chilena'',\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= 2,\n						nr_hijos						= NULL,\n						id_tipo_ocupacion				= 2,\n						id_tipo_escolaridad				= 5,\n						fc_reconoce						= ''2017-03-27'',\n						fc_hora_reconoce				= ''12:43'',\n						gl_acompañante					= NULL,\n						bo_reconoce						= 1,\n						fc_actualiza					= now()\n					WHERE id_paciente = 8', '::1', '0.0014309883117676', '2017-03-27 17:13:05'),
+(779, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 5', '::1', '0.0010850429534912', '2017-03-27 17:13:05'),
+(780, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''8'',0,''Paciente Reconoce Violencia el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00086593627929688', '2017-03-27 17:13:05'),
+(781, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 12', '::1', '0.0014770030975342', '2017-03-27 17:13:05'),
+(782, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''8'',0,''Reconoce Agresor : 2017-03-27'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00087690353393555', '2017-03-27 17:13:05'),
+(783, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 1', '::1', '0.0014438629150391', '2017-03-27 17:19:23'),
+(784, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0060770511627197', '2017-03-27 17:19:23'),
+(785, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0016589164733887', '2017-03-27 17:19:23'),
+(786, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 2', '::1', '0.0010688304901123', '2017-03-27 17:19:23'),
+(787, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0020952224731445', '2017-03-27 17:19:23'),
+(788, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0009300708770752', '2017-03-27 17:19:23'),
+(789, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 3', '::1', '0.0012781620025635', '2017-03-27 17:19:23'),
+(790, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0045990943908691', '2017-03-27 17:19:23'),
+(791, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011341571807861', '2017-03-27 17:19:23'),
+(792, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 4', '::1', '0.0014328956604004', '2017-03-27 17:19:23'),
+(793, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0047080516815186', '2017-03-27 17:19:23'),
+(794, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012099742889404', '2017-03-27 17:19:23'),
+(795, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						bo_extranjero,\n						gl_rut_agresor,\n						gl_run_pass,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						id_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						8,\n						9,\n						''Hermanastra'',\n						''Ruth'',\n						''Novoa'',\n						0,\n						''8390223-K'',\n						NULL,\n						2,\n						3,\n						3,\n						1,\n						2,\n						NULL,\n						2,\n						2,\n						10,\n						7,\n						''1972-07-12'',\n						1,\n						0,\n						6,\n						2,\n						now()\n						)', '::1', '0.0022540092468262', '2017-03-27 17:19:23'),
+(796, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 19', '::1', '0.0019738674163818', '2017-03-27 17:19:23'),
+(797, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''8'',0,'' Agresor creado el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0011870861053467', '2017-03-27 17:19:23'),
+(798, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= ''Chilena'',\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= 1,\n						nr_hijos						= 1,\n						id_tipo_ocupacion				= 1,\n						id_tipo_escolaridad				= 4,\n						fc_reconoce						= ''2017-03-27'',\n						fc_hora_reconoce				= ''02:16'',\n						gl_acompañante					= NULL,\n						bo_reconoce						= 1,\n						fc_actualiza					= now()\n					WHERE id_paciente = 8', '::1', '0.0022969245910645', '2017-03-27 17:19:23'),
+(799, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 5', '::1', '0.0021018981933594', '2017-03-27 17:19:23'),
+(800, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''8'',0,''Paciente Reconoce Violencia el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0021638870239258', '2017-03-27 17:19:23'),
+(801, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 12', '::1', '0.0020768642425537', '2017-03-27 17:19:23'),
+(802, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''8'',0,''Reconoce Agresor : 2017-03-27'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.001115083694458', '2017-03-27 17:19:23'),
+(803, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 1', '::1', '0.0012640953063965', '2017-03-27 17:20:06'),
+(804, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0037550926208496', '2017-03-27 17:20:06'),
+(805, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.010324001312256', '2017-03-27 17:20:06'),
+(806, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 2', '::1', '0.0015881061553955', '2017-03-27 17:20:06'),
+(807, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0018069744110107', '2017-03-27 17:20:06'),
+(808, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00094985961914062', '2017-03-27 17:20:06'),
+(809, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	3\n					WHERE id_paciente = 8 AND id_pregunta = 3', '::1', '0.0014081001281738', '2017-03-27 17:20:06'),
+(810, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0025448799133301', '2017-03-27 17:20:06'),
+(811, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00076913833618164', '2017-03-27 17:20:06'),
+(812, 2, 'UPDATE', 'UPDATE pre_paciente_agresor_violencia \n					SET	nr_valor =	2\n					WHERE id_paciente = 8 AND id_pregunta = 4', '::1', '0.0013868808746338', '2017-03-27 17:20:06'),
+(813, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 18', '::1', '0.0041790008544922', '2017-03-27 17:20:06'),
+(814, 2, 'INSERT', 'INSERT into pre_evento values(null,18,''8'',0,''Paciente Agresor Violencia modificada el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.001101016998291', '2017-03-27 17:20:07'),
+(815, 2, 'INSERT', 'INSERT INTO pre_paciente_agresor\n						(\n						id_paciente,\n						id_tipo_vinculo,\n						gl_tipo_vinculo,\n						gl_nombres_agresor,\n						gl_apellidos_agresor,\n						bo_extranjero,\n						gl_rut_agresor,\n						gl_run_pass,\n						id_tipo_riesgo,\n						id_comuna_vive,\n						id_comuna_trabaja,\n						id_estado_civil,\n						id_tipo_ocupacion,\n						id_actividad_economica,\n						id_tipo_sexo,\n						id_tipo_genero,\n						id_orientacion_sexual,\n						id_ingreso_mensual,\n						fc_nacimiento_agresor,\n						nr_hijos,\n						nr_hijos_en_comun,\n						nr_denuncias_por_violencia,\n						id_usuario_crea,\n						fc_crea\n						)\n					VALUES\n						(\n						8,\n						9,\n						''Hermanastra'',\n						''Ruth'',\n						''Novoa'',\n						0,\n						''8390223-K'',\n						NULL,\n						2,\n						3,\n						3,\n						1,\n						2,\n						NULL,\n						2,\n						2,\n						10,\n						7,\n						''1972-07-12'',\n						1,\n						0,\n						6,\n						2,\n						now()\n						)', '::1', '0.0010619163513184', '2017-03-27 17:20:07'),
+(816, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 19', '::1', '0.0044958591461182', '2017-03-27 17:20:07'),
+(817, 2, 'INSERT', 'INSERT into pre_evento values(null,19,''8'',0,'' Agresor creado el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.0012760162353516', '2017-03-27 17:20:07'),
+(818, 2, 'UPDATE', 'UPDATE pre_paciente SET\n						gl_nacionalidad					= ''Chilena'',\n						gl_direccion_alternativa		= NULL,\n						id_estado_civil					= 1,\n						nr_hijos						= 1,\n						id_tipo_ocupacion				= 1,\n						id_tipo_escolaridad				= 4,\n						fc_reconoce						= ''2017-03-27'',\n						fc_hora_reconoce				= ''02:16'',\n						gl_acompañante					= NULL,\n						bo_reconoce						= 1,\n						fc_actualiza					= now()\n					WHERE id_paciente = 8', '::1', '0.0013442039489746', '2017-03-27 17:20:07'),
+(819, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 5', '::1', '0.0021867752075195', '2017-03-27 17:20:07'),
+(820, 2, 'INSERT', 'INSERT into pre_evento values(null,5,''8'',0,''Paciente Reconoce Violencia el : 27-03-2017'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00099992752075195', '2017-03-27 17:20:07'),
+(821, 2, 'UPDATE', 'UPDATE pre_evento SET\n						bo_mostrar			= 0,\n						id_usuario_crea		= 2,\n						fc_crea				= now()\n					WHERE id_evento_tipo	= 12', '::1', '0.0014300346374512', '2017-03-27 17:20:07'),
+(822, 2, 'INSERT', 'INSERT into pre_evento values(null,12,''8'',0,''Reconoce Agresor : 2017-03-27'',1,1,''2'',CURRENT_TIMESTAMP)', '::1', '0.00087499618530273', '2017-03-27 17:20:07'),
+(823, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0012750625610352', '2017-03-27 17:57:03'),
+(824, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0013408660888672', '2017-03-27 17:57:03'),
+(825, 1, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''25'',''7-2'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0010988712310791', '2017-03-27 17:57:19'),
+(826, 1, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''25''', '127.0.0.1', '0.0012950897216797', '2017-03-27 17:57:19'),
+(827, 25, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0011050701141357', '2017-03-27 18:12:47'),
+(828, 25, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.00083780288696289', '2017-03-27 18:12:47'),
+(829, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''10'',''1-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0022919178009033', '2017-03-27 18:26:10'),
+(830, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''10''', '127.0.0.1', '0.0068089962005615', '2017-03-27 18:26:10'),
+(831, 1, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''1'',''13225524-5'',''login'','''',''0.0.0'',''127.0.0.1'')', '127.0.0.1', '0.0015668869018555', '2017-03-27 19:00:39'),
+(832, 1, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''1''', '127.0.0.1', '0.0012369155883789', '2017-03-27 19:00:39');
 
 -- --------------------------------------------------------
 
@@ -727,7 +966,7 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria_login` (
   KEY `IDX_ip_privada` (`ip_privada`),
   KEY `IDX_ip_publica` (`ip_publica`),
   KEY `IDX_gl_origen` (`gl_origen`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=46 ;
 
 --
 -- Volcado de datos para la tabla `pre_auditoria_login`
@@ -762,7 +1001,23 @@ INSERT INTO `pre_auditoria_login` (`id_auditoria_login`, `id_usuario`, `gl_rut`,
 (26, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 14:42:47'),
 (27, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 15:18:04'),
 (28, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 15:48:27'),
-(29, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 16:53:02');
+(29, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 16:53:02'),
+(30, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 21:06:07'),
+(31, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 21:27:04'),
+(32, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 21:39:53'),
+(33, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-27 12:21:46'),
+(34, 0, '1-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 12:44:29'),
+(35, 10, '1-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 12:44:34'),
+(36, 0, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 12:56:00'),
+(37, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 12:56:08'),
+(38, 25, '7-2', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 15:22:19'),
+(39, 24, '7-1', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 15:30:33'),
+(40, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 16:04:55'),
+(41, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 17:57:03'),
+(42, 25, '7-2', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 17:57:19'),
+(43, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 18:12:47'),
+(44, 10, '1-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 18:26:10'),
+(45, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 19:00:39');
 
 -- --------------------------------------------------------
 
@@ -3691,7 +3946,7 @@ CREATE TABLE IF NOT EXISTS `pre_cie10_3_grupo` (
   KEY `IDX_gl_codigo_fin` (`gl_codigo_fin`),
   KEY `IDX_id_capitulo` (`id_capitulo`),
   KEY `IDX_id_seccion` (`id_seccion`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=238 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=418 ;
 
 --
 -- Volcado de datos para la tabla `pre_cie10_3_grupo`
@@ -3934,7 +4189,188 @@ INSERT INTO `pre_cie10_3_grupo` (`id_grupo`, `id_capitulo`, `id_seccion`, `gl_co
 (234, 2, 32, 'C70', 'Tumor maligno de las meninges', 'C70.0', 'C70.9', '', '', '', NULL, '2017-03-24 20:36:15'),
 (235, 2, 32, 'C71', 'Tumor maligno del encéfalo', 'C71.0', 'C71.9', '', '', 'nervios craneales ([LINK]C72.2–C72.5[/LINK])\r\ntejido retrobulbar ([LINK]C69.6[/LINK])', NULL, '2017-03-24 20:36:15'),
 (236, 2, 32, 'C72', 'Tumor maligno de la médula espinal, de los nervios craneales y de otras partes del sistema nervioso central', 'C72.0', 'C72.9', '', '', 'Meninges ([LINK]C70.–[/LINK])\r\nNervios periféricos (del simpático) y del sistema nervioso autónomo ([LINK]C47.–[/LINK])', NULL, '2017-03-24 20:36:15'),
-(237, 2, 33, 'C73', 'Tumor maligno de la glándula tiroides', NULL, NULL, '', '', '', NULL, '2017-03-24 20:36:15');
+(237, 2, 33, 'C73', 'Tumor maligno de la glándula tiroides', NULL, NULL, '', '', '', NULL, '2017-03-24 20:36:15'),
+(238, 2, 33, 'C74', 'Tumor maligno de la glándula suprarrenal', 'C74.0', 'C74.9', '', '', '', NULL, '2017-03-27 12:55:15'),
+(239, 2, 33, 'C75', 'Tumor maligno de otras glándulas endocrinas y de estructuras afines', 'C75.0', 'C75.9', '', '', 'glándula:\r\n• suprarrenal ([LINK]C74.–[/LINK])\r\n• tiroides ([LINK]C73[/LINK])\r\novario ([LINK]C56[/LINK])\r\npáncreas endocrino ([LINK]C25.4[/LINK])\r\ntestículo ([LINK]C62.–[/LINK])\r\ntimo ([LINK]C37[/LINK])', NULL, '2017-03-27 12:55:15'),
+(240, 2, 34, 'C76', 'Tumor maligno de otros sitios y de sitios mal definidos', 'C76.0', 'C76.8', '', '', 'tumor maligno de:\r\n• sitio no especificado ([LINK]C80[/LINK])\r\n• tejido linfático, hematopoyético y tejidos afines ([LINK]C81–C96[/LINK])\r\n• vías genitourinarias SAI:\r\n• femeninas ([LINK]C57.9[/LINK])\r\n• masculinas ([LINK]C63.9[/LINK])', NULL, '2017-03-27 13:09:12'),
+(241, 2, 34, 'C77', 'Tumor maligno secundario y el no especificado de los ganglios linfáticos', 'C77.0', 'C77.9', '', '', 'tumor maligno de los ganglios linfáticos, especificado como primario ([LINK]C81–C88[/LINK], [LINK]C96.–[/LINK])', NULL, '2017-03-27 13:09:12'),
+(242, 2, 34, 'C78', 'Tumor maligno secundario de los órganos respiratorios y digestivos', 'C78.0', 'C78.8', '', '', '', NULL, '2017-03-27 13:09:12'),
+(243, 2, 34, 'C79', 'Tumor maligno secundario de otros sitios', 'C79.0', 'C79.8', '', '', '', NULL, '2017-03-27 13:09:12'),
+(244, 2, 34, 'C80', 'Tumor maligno de sitios no especificados', NULL, NULL, 'Cáncer [tumor maligno]:}	 \r\n• SAI}\r\n• generalizado}\r\n• múltiple}  sitio no especificado (primario)\r\nCarcinoma}  (secundario)\r\nCarcinomatosis}\r\nMalignidad}\r\nNeoplasia maligna}\r\nCaquexia maligna\r\nSitio primario desconocido', '', '', NULL, '2017-03-27 13:09:12'),
+(245, 2, 35, 'C81', 'Enfermedad de Hodgkin', 'C81.0', 'C81.9', '', 'los tipos morfológicos clasificables en M965–M966 con código de comportamiento /3', '', NULL, '2017-03-27 13:09:12'),
+(246, 2, 35, 'C82', 'Linfoma no Hodgkin folicular [nodular]', 'C82.0', 'C82.9', '', 'linfomas foliculares no Hodgkin con o sin áreas difusas  tipos morfológicos clasificables en M969 con código de comportamiento /3', '', NULL, '2017-03-27 13:09:12'),
+(247, 2, 35, 'C83', 'Linfoma no Hodgkin difuso', 'C83.0', 'C83.9', '', 'los tipos morfológicos clasificables en M9593, M9595, M967–M968 con código de comportamiento /3', '', NULL, '2017-03-27 13:09:12'),
+(248, 2, 35, 'C84', 'Linfoma de células T, periférico y cutáneo', 'C84.0', 'C84.5', '', 'los tipos morfológicos clasificables en M970 con código de comportamiento /3', '', NULL, '2017-03-27 13:09:12'),
+(249, 2, 35, 'C85', 'Linfoma no Hodgkin de otro tipo y el no especificado', 'C85.0', 'C85.9', '', 'os tipos morfológicos clasificables en M9590–M9592, M9594, M971 con código de comportamiento /3', '', NULL, '2017-03-27 13:09:12'),
+(250, 2, 35, 'C88', 'Enfermedades inmunoproliferativas malignas', 'C88.0', 'C88.9', '', 'los tipos morfológicos clasificables en M976 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(251, 2, 35, 'C90', 'Mieloma múltiple y tumores malignos de células plasmáticas', 'C90.0', 'C90.2', '', 'los tipos morfológicos clasificables en M973, M9830 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(252, 2, 35, 'C91', 'Leucemia linfoide', 'C91.0', 'C91.9', '', 'los tipos morfológicos clasificables en M982, M9940–M9941 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(253, 2, 35, 'C92', 'Leucemia mieloide', 'C92.0', 'C92.9', '', 'leucemia:\r\n• granulocítica\r\n• mielógena\r\nlos tipos morfológicos clasificables en M986–M988, M9930 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(254, 2, 35, 'C93', 'Leucemia monocítica', 'C93.0', 'C93.9', '', 'leucemia monocitoide los tipos morfológicos clasificables en M989 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(255, 2, 35, 'C94', 'Otras leucemias de tipo celular especificado', 'C94.0', 'C94.7', '', 'los tipos morfológicos clasificables en M984, M9850, M9900, M9910, M9931–M9932 con código de comportamiento /3', 'leucemia de células plasmáticas ([LINK]C90.1[/LINK])\r\nreticuloendoteliosis leucémica ([LINK]C91.4[/LINK])', NULL, '2017-03-27 13:18:56'),
+(256, 2, 35, 'C95', 'Leucemia de células de tipo no especificado', 'C95.0', 'C95.9', '', 'tipos morfológicos clasificables en M980 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(257, 2, 35, 'C96', 'Otros tumores malignos y los no especificados del tejido linfático, de los órganos hematopoyéticos y de tejidos afines', 'C96.0', 'C96.9', '', 'los tipos morfológicos clasificables en M972, M974 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(258, 2, 36, 'C97', 'Tumores malignos (primarios) de sitios múltiples independientes', '', '', 'Para el uso de esta categoría deben consultarse las indicaciones y reglas de codificación de la  mortalidad en el Volumen 2.', '', '', NULL, '2017-03-27 13:18:56'),
+(259, 2, 37, 'D00', 'Carcinoma in situ de la cavidad bucal, del esófago y del estómago', 'D00.0', 'D00.2', '', '', 'melanoma in situ ([LINK]D03.–[/LINK])', NULL, '2017-03-27 13:18:56'),
+(260, 2, 37, 'D01', 'Carcinoma in situ de otros órganos digestivos y de los no especificados', 'D01.0', 'D01.9', '', '', 'melanoma in situ ([LINK]D03.–[/LINK])', NULL, '2017-03-27 13:27:10'),
+(261, 2, 37, 'D02', 'Carcinoma in situ del sistema respiratorio y del oído medio', 'D02.0', 'D02.4', '', '', 'melanoma in situ ([LINK]D03.–[/LINK])', NULL, '2017-03-27 13:27:10'),
+(262, 2, 37, 'D03', 'Melanoma in situ', 'D03.0', 'D03.9', '', 'los tipos morfológicos clasificables en M872–M879 con  código de comportamiento /2', '', NULL, '2017-03-27 13:27:10'),
+(263, 2, 37, 'D04', 'Carcinoma in situ de la piel', 'D04.0', 'D04.9', '', '', 'eritroplasia de Queyrat (pene) SAI ([LINK]D07.4[/LINK])\r\nmelanoma in situ ([LINK]D03.–[/LINK])', NULL, '2017-03-27 13:27:10'),
+(264, 2, 37, 'D05', 'Carcinoma in situ de la mama', 'D05.0', 'D05.9', '', '', 'carcinoma in situ de la piel de la mama ([LINK]D04.5[/LINK])\r\nmelanoma in situ de la mama (piel) ([LINK]D03.5[/LINK])', NULL, '2017-03-27 13:27:10'),
+(265, 2, 37, 'D06', 'Carcinoma in situ del cuello del útero', 'D06.0', 'D06.9', '', 'neoplasia intraepitelial cervical [NIC], grado III, con o sin mención de displasia severa', 'displasia severa del cuello SAI ([LINK]N87.2[/LINK])\r\nmelanoma in situ del cuello ([LINK]D03.5[/LINK])', NULL, '2017-03-27 13:27:10'),
+(266, 2, 37, 'D07', 'Carcinoma in situ de otros órganos genitales y de los no especificados', 'D07.0', 'D07.6', '', '', 'melanoma in situ ([LINK]D03.5[/LINK])', NULL, '2017-03-27 13:27:10'),
+(267, 2, 37, 'D09', 'Carcinoma in situ de otros sitios y de los no especificados', 'D09.0', 'D09.9', '', '', 'melanoma in situ ([LINK]D03.–[/LINK])', NULL, '2017-03-27 13:27:10'),
+(268, 2, 38, 'D10', 'Tumor benigno de la boca y de la faringe', 'D10.0', 'D10.9', '', '', '', NULL, '2017-03-27 13:27:10'),
+(269, 2, 38, 'D11', 'Tumor benigno de las glándulas salivales mayores', 'D11.0', 'D11.9', '', '', 'tumores benignos de las glándulas salivales menores, los que se clasifican de acuerdo con su localización anatómica tumores benignos de las glándulas salivales menores SAI ([LINK]D10.3[/LINK])', NULL, '2017-03-27 13:27:10'),
+(270, 2, 38, 'D12', 'Tumor benigno del colon, del recto, del conducto anal y del ano', 'D12.0', 'D12.9', '', '', '', NULL, '2017-03-27 13:28:52'),
+(271, 2, 38, 'D13', 'Tumor benigno de otras partes y de las mal definidas del sistema digestivo', 'D13.0', 'D13.9', '', '', '', NULL, '2017-03-27 13:28:52'),
+(272, 2, 38, 'D14', 'Tumor benigno del oído medio y del sistema respiratorio', 'D14.0', 'D14.4', '', '', '', NULL, '2017-03-27 13:30:00'),
+(273, 2, 38, 'D15', 'Tumor benigno de otros órganos intratorácicos y de los no especificados', 'D15.0', 'D15.9', '', '', 'tejido mesotelial ([LINK]D19.–[/LINK])', NULL, '2017-03-27 13:30:00'),
+(274, 2, 38, 'D16', 'Tumor benigno del hueso y del cartílago articular', 'D16.0', 'D16.9', '', '', 'sinovial ([LINK]D21.–[/LINK])\r\ntumor benigno del tejido conjuntivo de:\r\n• laringe ([LINK]D14.1[/LINK])\r\n• nariz ([LINK]D14.0[/LINK])\r\n• oreja ([LINK]D21.0[/LINK])\r\n• párpado ([LINK]D21.0[/LINK])', NULL, '2017-03-27 13:42:09'),
+(275, 2, 38, 'D17', 'Tumores benignos lipomatosos', 'D17.0', 'D17.9', '', 'tipos morfológicos clasificables en M885–M888 con código de comportamiento /0', '', NULL, '2017-03-27 13:42:09'),
+(276, 2, 38, 'D18', 'Hemangioma y linfangioma de cualquier sitio', 'D18.0', 'D18.1', '', 'tipos morfológicos clasificables en M912–M917 con código de comportamiento /0', 'nevo azul o pigmentado ([LINK]D22.–[/LINK])', NULL, '2017-03-27 13:42:09'),
+(277, 2, 38, 'D19', 'Tumores benignos del tejido mesotelial', 'D19.0', 'D19.9', '', 'tipos morfológicos clasificables en M905 con código de comportamiento /0', '', NULL, '2017-03-27 13:42:09'),
+(278, 2, 38, 'D20', 'Tumor benigno del tejido blando del peritoneo y del retroperitoneo', 'D20.0', 'D20.1', '', '', 'tejido mesotelial ([LINK]D19.–[/LINK])\r\ntumor benigno lipomatoso del peritoneo y del retroperitoneo ([LINK]D17.7[/LINK]) ', NULL, '2017-03-27 13:42:09'),
+(279, 2, 38, 'D21', 'Otros tumores benignos del tejido conjuntivo y de los tejidos blandos', 'D21.0', 'D21.9', '', 'bolsa sinovial (bursa)\r\ncanal linfático\r\ncartílago\r\nfascia\r\ngrasa\r\nligamento, excepto el uterino\r\nmembrana sinovial\r\nmúsculo\r\ntendón (aponeurosis)\r\nvaso sanguíneo', 'cartílago:\r\n• articular ([LINK]D16.–[/LINK])\r\n• laríngeo ([LINK]D14.1[/LINK])\r\n• nasal ([LINK]D14.0[/LINK])\r\nhemangioma ([LINK]D18.0[/LINK])\r\nleiomioma uterino ([LINK]D25.–[/LINK])\r\nligamento uterino, cualquiera ([LINK]D28.2[/LINK])\r\nlinfangioma ([LINK]D18.1[/LINK])\r\nperitoneo ([LINK]D20.1[/LINK])\r\nretroperitoneo ([LINK]D20.0[/LINK])\r\nsistema nervioso autónomo y nervios periféricos ([LINK]D36.1[/LINK])\r\ntejido:\r\n• conjuntivo de la mama ([LINK]D24[/LINK])\r\n• vascular ([LINK]D18.–[/LINK])\r\ntumor lipomatoso ([LINK]D17.–[/LINK])', NULL, '2017-03-27 13:42:09'),
+(280, 2, 38, 'D22', 'Nevo melanocítico', 'D22.0', 'D22.9', '', 'nevo:\r\n• SAI\r\n• azul\r\n• pigmentado\r\n• velloso\r\ntipos morfológicos clasificables en M872–M879 con código de comportamiento /0', '', NULL, '2017-03-27 13:42:09'),
+(281, 2, 38, 'D23', 'Otros tumores benignos de la piel', 'D23.0', 'D23.9', '', 'tumor benigno de:\r\n• folículo piloso\r\n• glándulas sebáceas\r\n• glándulas sudoríparas', 'nevo melanocítico ([LINK]D22.–[/LINK])\r\ntumores benignos lipomatosos ([LINK]D17.0–D17.3[/LINK])', NULL, '2017-03-27 13:42:09'),
+(282, 2, 38, 'D24', 'Tumor benigno de la mama', NULL, NULL, 'Mama:\r\n• partes blandas\r\n• tejido conjuntivo', '', 'displasia mamaria benigna ([LINK]N60.–[/LINK])\r\npiel de la mama ([LINK]D22.5[/LINK], [LINK]D23.5[/LINK])', NULL, '2017-03-27 13:42:09'),
+(283, 2, 38, 'D25', 'Leiomioma del útero', 'D25.0', 'D25.9', '', 'fibromioma uterino tumor benigno del útero con tipos morfológicos clasificables en M889 y código de comportamiento /0', '', NULL, '2017-03-27 13:42:09'),
+(284, 2, 38, 'D26', 'Otros tumores benignos del útero', 'D26.0', 'D26.9', '', '', '', NULL, '2017-03-27 13:50:18'),
+(285, 2, 38, 'D27', 'Tumor benigno del ovario', NULL, NULL, '', '', '', NULL, '2017-03-27 13:50:18');
+INSERT INTO `pre_cie10_3_grupo` (`id_grupo`, `id_capitulo`, `id_seccion`, `gl_codigo`, `gl_descripcion`, `gl_codigo_inicio`, `gl_codigo_fin`, `gl_nota`, `gl_incluye`, `gl_excluye`, `id_usuario_crea`, `fc_crea`) VALUES
+(286, 2, 38, 'D28', 'Tumor benigno de otros órganos genitales femeninos y de los no especificados', 'D28.0', 'D28.9', '', 'piel de los órganos genitales femeninos pólipo adenomatoso', '', NULL, '2017-03-27 13:50:18'),
+(287, 2, 38, 'D29', 'Tumor benigno de los órganos genitales masculinos', 'D29.0', 'D29.9', '', 'piel de los órganos genitales masculinos', '', NULL, '2017-03-27 13:50:18'),
+(288, 2, 38, 'D30', 'Tumor benigno de los órganos urinarios', 'D30.0', 'D30.9', '', '', '', NULL, '2017-03-27 13:50:18'),
+(289, 2, 38, 'D31', 'Tumor benigno del ojo y sus anexos', 'D31.0', 'D31.9', '', '', 'nervio óptico ([LINK]D33.3[/LINK])\r\npiel del párpado ([LINK]D22.1[/LINK], [LINK]D23.1[/LINK])\r\ntejido conjuntivo del párpado ([LINK]D21.0[/LINK])', NULL, '2017-03-27 13:50:18'),
+(290, 2, 38, 'D32', 'Tumores benignos de las meninges', 'D32.0', 'D32.9', '', '', '', NULL, '2017-03-27 13:50:18'),
+(291, 2, 38, 'D33', 'Tumor benigno del encéfalo y de otras partes del sistema nervioso central', 'D33.0', 'D33.9', '', '', 'angioma ([LINK]D18.0[/LINK])\r\nmeninges ([LINK]D32.–[/LINK])\r\nnervios periféricos y sistema nervioso autónomo ([LINK]D36.1[/LINK])\r\ntejido retroocular ([LINK]D31.6[/LINK])', NULL, '2017-03-27 13:50:18'),
+(292, 2, 38, 'D34', 'Tumor benigno de la glándula tiroides', NULL, NULL, '', '', '', NULL, '2017-03-27 13:50:18'),
+(293, 2, 38, 'D35', 'Tumor benigno de otras glándulas endocrinas y de las no especificadas', 'D35.0', 'D35.9', '', '', 'ovario ([LINK]D27[/LINK])\r\npáncreas endocrino ([LINK]D13.7[/LINK])\r\ntestículo ([LINK]D29.2[/LINK])\r\ntimo ([LINK]D15.0[/LINK])', NULL, '2017-03-27 13:50:18'),
+(294, 2, 38, 'D36', 'Tumor benigno de otros sitios y de los no especificados', 'D36.0', 'D36.9', '', '', '', NULL, '2017-03-27 13:56:32'),
+(295, 2, 39, 'D37', 'Tumor de comportamiento incierto o desconocido de la cavidad bucal y de los órganos digestivos', 'D37.0', 'D37.9', '', '', '', NULL, '2017-03-27 13:56:32'),
+(296, 2, 39, 'D38', 'Tumor de comportamiento incierto o desconocido del oído medio y de los órganos respiratorios e intratorácicos', 'D38.0', 'D38.6', '', '', 'corazón ([LINK]D48.7[/LINK])', NULL, '2017-03-27 13:56:32'),
+(297, 2, 39, 'D39', 'Tumor de comportamiento incierto o desconocido de los órganos genitales femeninos', 'D39.0', 'D39.9', '', '', '', NULL, '2017-03-27 13:56:32'),
+(298, 2, 39, 'D40', 'Tumor de comportamiento incierto o desconocido de los órganos genitales masculinos', 'D40.0', 'D40.9', '', '', '', NULL, '2017-03-27 13:56:32'),
+(299, 2, 39, 'D41', 'Tumor de comportamiento incierto o desconocido de los órganos urinarios', 'D41.0', 'D41.9', '', '', '', NULL, '2017-03-27 13:56:32'),
+(300, 2, 39, 'D42', 'Tumor de comportamiento incierto o desconocido de las meninges', 'D42.0', 'D42.9', '', '', '', NULL, '2017-03-27 13:56:32'),
+(301, 2, 39, 'D43', 'Tumor de comportamiento incierto o desconocido del encéfalo y del sistema nervioso central', 'D43.0', 'D43.9', '', '', 'nervios periféricos y sistema nervioso autónomo ([LINK]D48.2[/LINK])', NULL, '2017-03-27 13:56:32'),
+(302, 2, 39, 'D44', 'Tumor de comportamiento incierto o desconocido de las glándulas endocrinas', 'D44.0', 'D44.9', '', '', 'ovario ([LINK]D39.1[/LINK])\r\npáncreas endocrino ([LINK]D37.7[/LINK])\r\ntestículo ([LINK]D40.1[/LINK])\r\ntimo ([LINK]D38.4[/LINK])', NULL, '2017-03-27 13:56:32'),
+(303, 2, 39, 'D45', 'Policitemia vera', NULL, NULL, '', 'Tipos morfológicos clasificables en M9950 con código de comportamiento /1', '', NULL, '2017-03-27 13:56:32'),
+(304, 2, 39, 'D46', 'Síndromes mielodisplásicos', 'D46.0', 'D46.9', '', 'Tipos morfológicos clasificables en M998 con código de comportamiento /1', '', NULL, '2017-03-27 14:06:18'),
+(305, 2, 39, 'D47', 'Otros tumores de comportamiento incierto o desconocido del tejido linfático, de los órganos hematopoyéticos y de tejidos afines', 'D47.0', 'D47.9', '', 'tipos morfológicos clasificables en M974, M976, M996–M997 con código de comportamiento /1', '', NULL, '2017-03-27 14:06:18'),
+(306, 2, 39, 'D48', 'Tumor de comportamiento incierto o desconocido de otros sitios y de los no especificados', 'D48.0', 'D48.9', '', '', 'neurofibromatosis (no maligna) ([LINK]Q85.0[/LINK])', NULL, '2017-03-27 14:06:18'),
+(307, 3, 40, 'D50', 'Anemias por deficiencia de hierro', 'D50.0', 'D50.9', '', 'anemia:\r\n• ferropénica\r\n• hipocrómica\r\n• sideropénica', '', NULL, '2017-03-27 14:06:18'),
+(308, 3, 40, 'D51', 'Anemia por deficiencia de vitamina B12', 'D51.0', 'D51.9', '', '', 'deficiencia de vitamina B12 ([LINK]E53.8[/LINK])', NULL, '2017-03-27 14:06:18'),
+(309, 3, 40, 'D52', 'Anemia por deficiencia de folatos', 'D52.0', 'D52.9', '', '', '', NULL, '2017-03-27 14:06:18'),
+(310, 3, 40, 'D53', 'Otras anemias nutricionales', 'D53.0', 'D53.9', '', 'anemia megaloblástica insensible a vitamina B12 o terapia con folatos', '', NULL, '2017-03-27 14:06:18'),
+(311, 3, 41, 'D55', 'Anemia debida a trastornos enzimáticos', 'D55.0', 'D55.9', '', '', 'anemia debida a deficiencia enzimática inducida por drogas ([LINK]D59.2[/LINK])', NULL, '2017-03-27 14:06:18'),
+(312, 3, 41, 'D56', 'Talasemia', 'D56.0', 'D56.9', '', '', '', NULL, '2017-03-27 14:06:18'),
+(313, 3, 41, 'D57', 'Trastornos falciformes', 'D57.0', 'D57.8', '', '', 'otras hemoglobinopatías ([LINK]D58.–[/LINK])', NULL, '2017-03-27 14:06:18'),
+(314, 3, 41, 'D58', 'Otras anemias hemolíticas hereditarias', 'D58.0', 'D58.9', '', '', '', NULL, '2017-03-27 14:15:58'),
+(315, 3, 41, 'D59', 'Anemia hemolítica adquirida', 'D59.0', 'D59.9', '', '', '', NULL, '2017-03-27 14:15:58'),
+(316, 3, 42, 'D60', 'Aplasia adquirida, exclusiva de la serie roja [eritroblastopenia]', 'D60.0', 'D60.9', '', 'aplasia eritrocítica (adquirida) (del adulto) (con timoma)', '', NULL, '2017-03-27 14:15:58'),
+(317, 3, 42, 'D61', 'Otras anemias aplásticas', 'D61.0', 'D61.9', '', '', 'agranulocitosis ([LINK]D70[/LINK])', NULL, '2017-03-27 14:15:58'),
+(318, 3, 42, 'D62', 'Anemia posthemorrágica aguda', NULL, NULL, '', '', 'anemia congénita debida a pérdida de sangre fetal ([LINK]P61.3[/LINK])', NULL, '2017-03-27 14:15:58'),
+(319, 3, 42, 'D63', 'Anemia en enfermedades crónicas clasificadas en otra parte', 'D63.0', 'D63.8', '', '', '', NULL, '2017-03-27 14:15:58'),
+(320, 3, 42, 'D64', 'Otras anemias', 'D64.0', 'D64.9', '', '', 'anemia refractaria (con):\r\n• SAI ([LINK]D46.4[/LINK])\r\n• exceso de blastos ([LINK]D46.2[/LINK])\r\n• con transformación ([LINK]D46.3[/LINK])\r\n• sideroblastos ([LINK]D46.1[/LINK])\r\n• sin sideroblastos ([LINK]D46.0[/LINK])', NULL, '2017-03-27 14:15:58'),
+(321, 3, 43, 'D65', 'Coagulación intravascular diseminada [síndrome de desfibrinación]', NULL, NULL, '', 'Afibrinogenemia adquirida\r\nCoagulación intravascular difusa o diseminada (CID)\r\nCoagulopatía de consumo\r\nHemorragia fibrinolítica adquirida\r\nPúrpura:\r\n• fibrinolítica\r\n• fulminante', 'en (que complica el):\r\n• aborto, embarazo molar o ectópico ([LINK]O00–O07[/LINK], [LINK]O08.1[/LINK])\r\n• embarazo, parto y puerperio ([LINK]O45.0[/LINK], [LINK]O46.0[/LINK], [LINK]O67.0[/LINK], [LINK]O72.3[/LINK])\r\n• recién nacido ([LINK]P60[/LINK])', NULL, '2017-03-27 14:15:58'),
+(322, 3, 43, 'D66', 'Deficiencia hereditaria del factor VIII', NULL, NULL, '', 'Deficiencia del factor VIII (con defecto funcional)\r\nHemofilia:\r\n• SAI\r\n• A\r\n• clásica', 'deficiencia del factor VIII con defecto vascular ([LINK]D68.0[/LINK])', NULL, '2017-03-27 14:15:58'),
+(323, 3, 43, 'D67', 'Deficiencia hereditaria del factor IX', NULL, NULL, 'Deficiencia del:\r\n• componente tromboplastínico del plasma [CTP]\r\n• factor IX (con defecto funcional)\r\nEnfermedad de Christmas\r\nHemofilia B', '', '', NULL, '2017-03-27 14:15:58'),
+(324, 3, 43, 'D68', 'Otros defectos de la coagulación', 'D68.0', 'D68.9', '', 'Angiohemofilia\r\nDeficiencia del factor VIII con defecto vascular\r\nHemofilia vascular', 'deficiencia del factor VIII:\r\n• SAI ([LINK]D66[/LINK])\r\n• con defecto funcional ([LINK]D66[/LINK])\r\nfragilidad capilar (hereditaria) ([LINK]D69.8[/LINK])', NULL, '2017-03-27 14:18:06'),
+(325, 3, 43, 'D69', 'Púrpura y otras afecciones hemorrágicas', 'D69.0', 'D69.9', '', '', 'púrpura:\r\n• crioglobulinémica ([LINK]D89.1[/LINK])\r\n• fulminante ([LINK]D65[/LINK])\r\n• hipergammaglobulinémica benigna ([LINK]D89.0[/LINK])\r\n• trombocitopénica trombótica ([LINK]M31.1[/LINK])\r\ntrombocitemia (hemorrágica) esencial ([LINK]D47.3[/LINK])', NULL, '2017-03-27 14:18:06'),
+(326, 3, 44, 'D70', 'Agranulocitosis', NULL, NULL, '', 'Agranulocitosis genética infantil\r\nAngina agranulocítica\r\nEnfermedad de Kostman\r\nEsplenomegalia neutropénica\r\nNeutropenia:\r\n• SAI\r\n• cíclica\r\n• congénita\r\n• esplénica (primaria)\r\n• inducida por drogas\r\n• periódica\r\n• tóxica\r\nUse código adicional de causa externa (Capítulo XX) si desea identificar la droga, en los casos de inducción.', 'neutropenia neonatal transitoria ([LINK]P61.5[/LINK])', NULL, '2017-03-27 14:27:27'),
+(327, 3, 44, 'D71', 'Trastornos funcionales de los polimorfonucleares neutrófilos', NULL, NULL, '', 'Defecto del complejo receptor [CR3] de la membrana celular\r\nDisfagocitosis congénita\r\nEnfermedad granulomatosa (infantil) crónica\r\nGranulomatosis séptica progresiva', '', NULL, '2017-03-27 14:27:27'),
+(328, 3, 44, 'D72', 'Otros trastornos de los leucocitos', 'D72.0', 'D72.9', '', '', 'basofilia ([LINK]D75.8[/LINK])\r\nneutropenia ([LINK]D70[/LINK])\r\npreleucemia (síndrome) ([LINK]D46.9[/LINK])\r\ntrastornos de la inmunidad ([LINK]D80–D89[/LINK])', NULL, '2017-03-27 14:27:27'),
+(329, 3, 44, 'D73', 'Enfermedades del bazo', 'D73.0', 'D73.9', '', '', '', NULL, '2017-03-27 14:27:27'),
+(330, 3, 44, 'D74', 'Metahemoglobinemia', 'D74.0', 'D74.9', '', '', '', NULL, '2017-03-27 14:27:27'),
+(331, 3, 44, 'D75', 'Otras enfermedades de la sangre y de los órganos hematopoyéticos', 'D75.0', 'D75.9', '', '', 'agrandamiento de los ganglios linfáticos ([LINK]R59.–[/LINK])\r\nhipergammaglobulinemia SAI ([LINK]D89.2[/LINK])\r\nlinfadenitis:\r\n• SAI ([LINK]I88.9[/LINK])\r\n• aguda ([LINK]L04.–[/LINK])\r\n• crónica ([LINK]I88.1[/LINK])\r\n• mesentérica (aguda) (crónica) ([LINK]I88.0[/LINK])', NULL, '2017-03-27 14:27:27'),
+(332, 3, 44, 'D76', 'Ciertas enfermedades que afectan al tejido linforreticular y al sistema reticuloendotelial', 'D76.0', 'D76.3', '', '', 'enfermedad de Letterer–Siwe ()([LINK]C96.0[/LINK])\r\nhistiocitosis maligna ([LINK]C96.1[/LINK])\r\nreticuloendoteliosis o reticulosis:\r\n• leucémica ([LINK]C91.4[/LINK])\r\n• lipomelanótica ([LINK]I89.8[/LINK])\r\n• maligna ([LINK]C85.7[/LINK])\r\n• medular histiocítica ([LINK]C96.1[/LINK])\r\n• no lipídica ([LINK]C96.0[/LINK])', NULL, '2017-03-27 14:27:27'),
+(333, 3, 44, 'D77', 'Otros trastornos de la sangre y de los órganos hematopoyéticos en enfermedades clasificadas en otra parte', NULL, NULL, 'Fibrosis del bazo en la esquistosomiasis [bilharziasis] (B65.–†)', '', '', NULL, '2017-03-27 14:27:27'),
+(334, 3, 45, 'D80', 'Inmunodeficiencia con predominio de defectos de los anticuerpos', 'D80.0', 'D80.9', '', '', '', NULL, '2017-03-27 14:27:27'),
+(335, 3, 45, 'D81', 'Inmunodeficiencias combinadas', 'D81.0', 'D81.9', '', '', 'agammaglobulinemia recesiva autosómica (tipo suizo) ([LINK]D80.0[/LINK])', NULL, '2017-03-27 14:27:27'),
+(336, 3, 45, 'D82', 'Inmunodeficiencia asociada con otros defectos mayores', 'D82.0', 'D82.9', '', '', 'ataxia telangiectasia [Louis–Bar] ([LINK]G11.3[/LINK])', NULL, '2017-03-27 14:30:58'),
+(337, 3, 45, 'D83', 'Inmunodeficiencia variable común', 'D83.0', 'D83.9', '', '', '', NULL, '2017-03-27 14:30:58'),
+(338, 3, 45, 'D84', 'Otras inmunodeficiencias', 'D84.0', 'D84.9', '', '', '', NULL, '2017-03-27 14:30:58'),
+(339, 3, 45, 'D86', 'Sarcoidosis', 'D86.0', 'D86.9', '', '', '', NULL, '2017-03-27 14:30:58'),
+(340, 3, 45, 'D89', 'Otros trastornos que afectan el mecanismo de la inmunidad, no clasificados en otra parte', 'D89.0', 'D89.9', '', '', 'falla y rechazo de trasplante ([LINK]T86.–[/LINK])\r\ngammopatía monoclonal ([LINK]D47.2[/LINK])\r\nhiperglobulinemia SAI ([LINK]R77.1[/LINK])', NULL, '2017-03-27 14:30:58'),
+(341, 4, 46, 'E00', 'Síndrome congénito de deficiencia de yodo', 'E00.0', 'E00.9', '', 'afecciones endémicas asociadas directamente con deficiencia de yodo en el medio ambiente o como consecuencia de deficiencia materna de yodo. Algunas de estas afecciones no tienen hipotiroidismo concomitante pero son consecuencia de secreción inadecuada de hormona tiroidea durante el desarrollo fetal. Pueden asociarse bociógenos ambientales.\r\nUse código adicional (F70–F79), si desea identificar la asociación con retraso mental.', 'hipotiroidismo subclínico por deficiencia de yodo ([LINK]E02[/LINK])', NULL, '2017-03-27 14:34:41'),
+(342, 4, 46, 'E01', 'Trastornos tiroideos vinculados a deficiencia de yodo y afecciones relacionadas', 'E01.0', 'E01.8', '', '', 'hipotiroidismo subclínico por deficiencia de yodo (E02) síndrome congénito de deficiencia de yodo ([LINK]E00.–[/LINK])', NULL, '2017-03-27 14:34:41'),
+(343, 4, 46, 'E02', 'Hipotiroidismo subclínico por deficiencia de yodo', NULL, NULL, '', '', '', NULL, '2017-03-27 14:38:47'),
+(344, 4, 46, 'E03', 'Otros hipotiroidismos', 'E03.0', 'E03.9', '', '', 'hipotiroidismo consecutivo a procedimientos ([LINK]E89.0[/LINK])\r\nhipotiroidismo relacionado con deficiencia de yodo ([LINK]E00–E02[/LINK])', NULL, '2017-03-27 14:38:47'),
+(345, 4, 46, 'E04', 'Otros bocios no tóxicos', 'E04.0', 'E04.9', '', '', 'bocio congénito:\r\n• SAI}	\r\n• difuso}([LINK]E03.0[/LINK])\r\n• parenquimatoso}bocio relacionado con deficiencia de yodo ([LINK]E00–E02[/LINK])', NULL, '2017-03-27 14:53:05'),
+(346, 4, 46, 'E05', 'Tirotoxicosis [hipertiroidismo]', 'E05.0', 'E05.9', '', '', 'tiroiditis crónica con tirotoxicosis transitoria ([LINK]E06.2[/LINK])\r\ntirotoxicosis neonatal ([LINK]P72.1[/LINK])', NULL, '2017-03-27 14:53:05'),
+(347, 4, 46, 'E06', 'Tiroiditis', 'E06.0', 'E06.9', '', '', 'tiroiditis postparto ([LINK]O90.5[/LINK])', NULL, '2017-03-27 14:53:05'),
+(348, 4, 46, 'E07', 'Otros trastornos tiroideos', 'E07.0', 'E07.9', '', '', '', NULL, '2017-03-27 14:53:05'),
+(349, 4, 47, 'E10', 'Diabetes mellitus insulinodependiente', '', '', '', 'diabetes (mellitus) (con):\r\n• juvenil\r\n• lábil\r\n• propensión a la cetosis\r\n• tipo I', 'alteración de la tolerancia a la glucosa ([LINK]R73.0[/LINK])\r\ndiabetes mellitus (en):\r\n• asociada a desnutrición ([LINK]E12.–[/LINK])\r\n• embarazo, parto y puerperio ([LINK]O24.–[/LINK])\r\n• neonatal ([LINK]P70.2[/LINK])\r\nglucosuria:\r\n• SAI ([LINK]R81[/LINK])\r\n• renal ([LINK]E74.8[/LINK])\r\nhipoinsulinemia postquirúrgica ([LINK]E89.1[/LINK])', NULL, '2017-03-27 14:53:05'),
+(350, 4, 47, 'E11', 'Diabetes mellitus no insulinodependiente', '', '', '', 'diabetes (mellitus) (sin obesidad) (con obesidad):\r\n• de comienzo en el adulto\r\n• de comienzo en la madurez del adulto\r\n• estable\r\n• no cetósica\r\n• tipo II\r\ndiabetes no insulinodependiente juvenil', 'alteración de la tolerancia a la glucosa ([LINK]R73.0[/LINK])\r\ndiabetes mellitus (en):\r\n• desnutrición ([LINK]E12.–[/LINK])\r\n• embarazo, parto y puerperio ([LINK]O24.–[/LINK])\r\n• neonatal ([LINK]P70.2[/LINK])\r\nglucosuria:\r\n• SAI ([LINK]R81[/LINK])\r\n• renal ([LINK]E74.8[/LINK])\r\nhipoinsulinemia postquirúrgica ([LINK]E89.1[/LINK])', NULL, '2017-03-27 14:53:05'),
+(351, 4, 47, 'E12', 'Diabetes mellitus asociada con desnutrición', '', '', '', 'desnutrición relacionada con diabetes mellitus:\r\n• insulinodependiente\r\n• no insulinodependiente', 'alteración de la tolerancia a la glucosa ([LINK]R73.0[/LINK])\r\ndiabetes mellitus (en):\r\n• embarazo, parto y puerperio ([LINK]O24.–[/LINK])\r\n• neonatal ([LINK]P70.2[/LINK])\r\nglucosuria:\r\n• SAI ([LINK]R81[/LINK])           \r\n• renal ([LINK]E74.8[/LINK])       \r\nhipoinsulinemia postquirúrgica ([LINK]E89.1[/LINK])', NULL, '2017-03-27 14:53:05'),
+(352, 4, 47, 'E13', 'Otras diabetes mellitus especificadas', '', '', '', '', 'alteración de la tolerancia a la glucosa ([LINK]R73.0[/LINK])\r\ndiabetes mellitus (en):\r\n• asociada con desnutrición ([LINK]E12.–[/LINK])  \r\n• embarazo, parto y puerperio ([LINK]O24.–[/LINK])\r\n• insulinodependiente ([LINK]E10.–[/LINK])\r\n• neonatal ([LINK]P70.2[/LINK])\r\n• no insulinodependiente ([LINK]E11.–[/LINK])\r\nglucosuria:\r\n• SAI ([LINK]R81[/LINK])\r\n• renal ([LINK]E74.8[/LINK])\r\nhipoinsulinemia postquirúrgica ([LINK]E89.1[/LINK])', NULL, '2017-03-27 14:53:05'),
+(353, 4, 47, 'E14', 'Diabetes mellitus, no especificada', '', '', '', 'diabetes SAI', 'alteración de la tolerancia a la glucosa ([LINK]R73.0[/LINK])\r\ndiabetes mellitus (en):\r\n• asociada con desnutrición ([LINK]E12.–[/LINK])\r\n• embarazo, parto y puerperio ([LINK]O24.–[/LINK])\r\n• insulinodependiente ([LINK]E10.–[/LINK])\r\n• neonatal ([LINK]P70.2[/LINK])\r\n• no insulinodependiente ([LINK]E11.–[/LINK])\r\nglucosuria:\r\n• SAI ([LINK]R81[/LINK])\r\n• renal ([LINK]E74.8[/LINK])\r\nhipoinsulinemia postquirúrgica ([LINK]E89.1[/LINK])', NULL, '2017-03-27 14:53:05'),
+(354, 4, 48, 'E15', 'Coma hipoglicémico no diabético', '', '', '', 'Coma:\r\n• en hiperinsulinismo\r\n• hipoglicémico SAI\r\n• insulínico inducido por drogas en un no diabético\r\nUse código adicional de causa externa (Capítulo XX), si desea identificar la droga en los casos inducidos por drogas.', '', NULL, '2017-03-27 14:53:05'),
+(355, 4, 48, 'E16', 'Otros trastornos de la secreción interna del páncreas', 'E16.0', 'E16.9', '', '', '', NULL, '2017-03-27 14:54:33'),
+(356, 4, 49, 'E20', 'Hipoparatiroidismo', 'E20.0', 'E20.9', '', '', 'hipoparatiroidismo consecutivo a procedimientos ([LINK]E89.2[/LINK])\r\nhipoparatiroidismo neonatal transitorio ([LINK]P71.4[/LINK])\r\nsíndrome de Di George ([LINK]D82.1[/LINK])\r\ntetania SAI ([LINK]R29.0[/LINK])', NULL, '2017-03-27 14:54:33'),
+(357, 4, 49, 'E21', 'Hiperparatiroidismo y otros trastornos de la glándula paratiroides', 'E21.0', 'E21.5', '', '', 'osteomalacia:\r\n• del adulto ([LINK]M83.–[/LINK])\r\n• infantil y juvenil ([LINK]E55.0[/LINK])', NULL, '2017-03-27 19:02:03'),
+(358, 4, 49, 'E22', 'Hiperfunción de la glándula hipófisis', 'E22.0', 'E22.9', '', '', 'síndrome de Cushing ([LINK]E24.–[/LINK])\r\nsíndrome de Nelson ([LINK]E24.1[/LINK])\r\nsobreproducción de:\r\n• ACTH hipofisaria ([LINK]E24.0[/LINK])\r\n• ACTH no asociada con la enfermedad de Cushing ([LINK]E27.0[/LINK])    \r\n• hormona estimulante de la tiroides ([LINK]E05.8[/LINK])', NULL, '2017-03-27 19:02:03'),
+(359, 4, 49, 'E23', 'Hipofunción y otros trastornos de la glándula hipófisis', 'E23.0', 'E23.7', '', 'las afecciones enumeradas, sea el trastorno de la glándula hipófisis o del hipotálamo', 'hipopituitarismo consecutivo a procedimientos ([LINK]E89.3[/LINK]) ', NULL, '2017-03-27 19:03:22'),
+(360, 4, 49, 'E24', 'Síndrome de Cushing', 'E24.0', 'E24.9', '', '', '', NULL, '2017-03-27 19:03:22'),
+(361, 4, 49, 'E25', 'Trastornos adrenogenitales', 'E25.0', 'E25.9', '', 'hiperplasia suprarrenal con sexualidad precoz} \r\nmacrogenitosomía precoz} masculina\r\nseudopubertad isosexual precoz}	 \r\nseudohermafroditismo suprarrenal} femenino(a)\r\nseudopubertad heterosexual precoz}\r\nsíndromes adrenogenitales, virilizantes o feminizantes, ya sean adquiridos o como consecuencia de hiperplasia suprarrenal por defectos innatos en la síntesis ­hormonal virilización (femenina)', '', NULL, '2017-03-27 19:05:01'),
+(362, 4, 49, 'E26', 'Hiperaldosteronismo', 'E26.0', 'E26.9', '', '', '', NULL, '2017-03-27 19:05:01'),
+(363, 4, 49, 'E27', 'Otros trastornos de la glándula suprarrenal', 'E27.0', 'E27.9', '', '', '', NULL, '2017-03-27 19:07:28'),
+(364, 4, 49, 'E28', 'Disfunción ovárica', 'E28.0', 'E28.9', '', '', 'deficiencia aislada de gonadotropina ([LINK]E23.0[/LINK])\r\ninsuficiencia ovárica consecutiva a procedimientos ([LINK]E89.4[/LINK])', NULL, '2017-03-27 19:07:28'),
+(365, 4, 49, 'E29', 'Disfunción testicular', 'E29.0', 'E29.9', '', '', 'azoospermia u oligospermia SAI ([LINK]N46[/LINK])\r\ndeficiencia aislada de gonadotropina ([LINK]E23.0[/LINK])\r\nfeminización testicular (síndrome) ([LINK]E34.5[/LINK])\r\nhipofunción testicular consecutiva a procedimientos ([LINK]E89.5[/LINK])\r\nsíndrome de Klinefelter ( [LINK]Q98.0–Q98.2[/LINK], [LINK]Q98.4[/LINK])\r\nsíndrome de resistencia androgénica ([LINK]E34.5[/LINK])', NULL, '2017-03-27 19:17:47'),
+(366, 4, 49, 'E30', 'Trastornos de la pubertad, no clasificados en otra parte', 'E30.0', 'E30.9', '', '', '', NULL, '2017-03-27 19:17:47'),
+(367, 4, 49, 'E31', 'Disfunción poliglandular', 'E31.0', 'E31.9', '', '', 'ataxia telangiectasia [Louis–Bar] ([LINK]G11.3[/LINK])\r\ndistrofia miotónica [Steinert] ([LINK]G71.1[/LINK])\r\nseudohipoparatiroidismo ([LINK]E20.[/LINK])(1)', NULL, '2017-03-27 19:17:47'),
+(368, 4, 49, 'E32', 'Enfermedades del timo', 'E32.0', 'E32.9', '', '', 'aplasia o hipoplasia con inmunodeficiencia ([LINK]D82.1[/LINK])\r\nmiastenia gravis ([LINK]G70.0[/LINK])', NULL, '2017-03-27 19:17:47'),
+(369, 4, 49, 'E34', 'Otros trastornos endocrinos', 'E34.0', 'E34.9', '', '', 'seudohipoparatiroidismo ([LINK]E20.1[/LINK])', NULL, '2017-03-27 19:17:47'),
+(370, 4, 49, 'E35', 'Trastornos endocrinos en enfermedades clasificadas en otra parte', 'E35.0', 'E35.8', '', '', '', NULL, '2017-03-27 19:17:47'),
+(371, 4, 50, 'E40', 'Kwashiorkor', NULL, NULL, 'Desnutrición severa con edema nutricional con despigmentación de la piel y del cabello.', '', 'kwashiorkor marasmático ([LINK]E42[/LINK])', NULL, '2017-03-27 19:17:47'),
+(372, 4, 50, 'E41', 'Marasmo nutricional', NULL, NULL, 'Desnutrición severa con marasmo', '', 'kwashiorkor marasmático ([LINK]E42[/LINK])', NULL, '2017-03-27 19:17:47'),
+(373, 4, 50, 'E42', 'Kwashiorkor marasmático', NULL, NULL, 'Desnutrición severa proteicocalórica [como en E43]:\r\n• con signos de marasmo y kwashiorkor\r\n• forma intermedia', '', '', NULL, '2017-03-27 19:17:47'),
+(374, 4, 50, 'E43', 'Desnutrición proteicocalórica severa, no especificada', NULL, NULL, 'Pérdida severa de peso en niños o adultos, o ausencia de ganancia de peso en niños con un peso observado de por lo menos 3 desviaciones típicas por debajo del peso promedio de la población de referencia (o una pérdida similar expresada a través de otros métodos estadísticos). Cuando sólo se dispone de una medición, hay una alta probabilidad de desnutrición severa si el peso observado está 3 o más desviaciones típicas por debajo del promedio de la población de referencia.\r\nEdema por inanición', '', '', NULL, '2017-03-27 19:17:47'),
+(375, 4, 50, 'E44', 'Desnutrición proteicocalórica de grado moderado y leve', 'E44.0', 'E44.1', '', '', '', NULL, '2017-03-27 19:25:45'),
+(376, 4, 50, 'E45', 'Retardo del desarrollo debido a desnutrición proteicocalórica', NULL, NULL, 'Enanismo nutricional\r\nRetardo físico debido a desnutrición', '', '', NULL, '2017-03-27 19:25:45'),
+(377, 4, 50, 'E46', 'Desnutrición proteicocalórica, no especificada', NULL, NULL, 'Desequilibrio proteicocalórico SAI\r\nDesnutrición SAI', '', '', NULL, '2017-03-27 19:25:45'),
+(378, 4, 51, 'E50', 'Deficiencia de vitamina A', 'E50.0', 'E50.9', '', '', 'secuelas de la deficiencia de vitamina A ([LINK]E64.1[/LINK])', NULL, '2017-03-27 19:25:45'),
+(379, 4, 51, 'E51', 'Deficiencia de tiamina', 'E51.1', 'E51.9', '', '', 'secuelas de deficiencia de tiamina ([LINK]E64.8[/LINK])', NULL, '2017-03-27 19:25:45'),
+(380, 4, 51, 'E52', 'Deficiencia de niacina [pelagra]', NULL, NULL, 'Deficiencia de:\r\n• niacina(-triptófano)\r\n• nicotinamida\r\nPelagra (alcohólica)', '', 'secuelas de la deficiencia de niacina ([LINK]E64.8[/LINK])', NULL, '2017-03-27 19:25:45'),
+(381, 4, 51, 'E53', 'Deficiencias de otras vitaminas del grupo B', 'E53.0', 'E53.9', '', '', 'anemias por deficiencia de vitamina B12 ([LINK]D51.–[/LINK])\r\nsecuelas de la deficiencia de vitamina B ([LINK]E64.8[/LINK])', NULL, '2017-03-27 19:25:45'),
+(382, 4, 51, 'E54', 'Deficiencia de ácido ascórbico', NULL, NULL, 'Deficiencia de vitamina C\r\nEscorbuto', '', 'anemia escorbútica ([LINK]D53.2[/LINK])\r\nsecuelas de la deficiencia de vitamina C ([LINK]E64.2[/LINK])', NULL, '2017-03-27 19:25:45'),
+(383, 4, 51, 'E55', 'Deficiencia de vitamina D', 'E55.0', 'E55.9', '', '', 'osteomalacia del adulto ([LINK]M83.–[/LINK])\r\nosteoporosis ([LINK]M80–M81[/LINK])\r\nsecuelas del raquitismo ([LINK]E64.3[/LINK])', NULL, '2017-03-27 19:25:45'),
+(384, 4, 51, 'E56', 'Otras deficiencias de vitaminas', 'E56.0', 'E56.9', '', '', 'secuelas de otras deficiencias de vitaminas ([LINK]E64.8[/LINK])', NULL, '2017-03-27 19:25:45'),
+(385, 4, 51, 'E58', 'Deficiencia dietética de calcio', NULL, NULL, '', '', 'secuelas de la deficiencia de calcio ([LINK]E64.8[/LINK])\r\ntrastornos del metabolismo del calcio ([LINK]E83.5[/LINK])', NULL, '2017-03-27 19:35:36'),
+(386, 4, 51, 'E59', 'Deficiencia dietética de selenio', NULL, NULL, 'Enfermedad de Keshan', '', 'secuelas de deficiencia de selenio ([LINK]E64.8[/LINK])', NULL, '2017-03-27 19:35:36'),
+(387, 4, 51, 'E60', 'Deficiencia dietética de zinc', NULL, NULL, '', '', '', NULL, '2017-03-27 19:35:36'),
+(388, 4, 51, 'E61', 'Deficiencias de otros elementos nutricionales', 'E61.0', 'E61.9', '', '', 'secuelas de la desnutrición y de otras deficiencias ­nutricionales ([LINK]E64.–[/LINK])\r\ntrastornos del metabolismo de los minerales ([LINK]E83.–[/LINK])\r\ntrastornos tiroideos relacionados con deficiencia de yodo ([LINK]E00–E02[/LINK])', NULL, '2017-03-27 19:35:36'),
+(389, 4, 51, 'E63', 'Otras deficiencias nutricionales', 'E63.0', 'E63.9', '', '', 'deshidratación ([LINK]E86[/LINK])\r\nfalla en la maduración ([LINK]R62.8[/LINK])\r\nproblemas de la ingestión de alimentos del recién nacido ([LINK]P92.–[/LINK])\r\nsecuelas de la desnutrición y de otras deficiencias ­nutricionales ([LINK]E64.–[/LINK])', NULL, '2017-03-27 19:35:36'),
+(390, 4, 51, 'E64', 'Secuelas de la desnutrición y de otras deficiencias nutricionales', 'E64.0', 'E64.9', '', '', '', NULL, '2017-03-27 19:35:36'),
+(391, 4, 52, 'E65', 'Adiposidad localizada', NULL, NULL, 'Masa grasa', '', '', NULL, '2017-03-27 19:35:36'),
+(392, 4, 52, 'E66', 'Obesidad', 'E66.0', 'E66.9', '', '', 'distrofia adiposogenital (E23.6)\r\nlipomatosis:\r\n• SAI ([LINK]E88.2[/LINK])\r\n• dolorosa [Dercum] ([LINK]E88.2[/LINK])\r\nsíndrome de Prader–Willi ([LINK]Q87.1[/LINK])', NULL, '2017-03-27 19:35:36'),
+(393, 4, 52, 'E67', 'Otros tipos de hiperalimentación', 'E67.0', 'E67.8', '', '', 'hiperalimentación SAI ([LINK]R63.2[/LINK])\r\nsecuelas de hiperalimentación ([LINK]E68[/LINK])', NULL, '2017-03-27 19:35:36'),
+(394, 4, 52, 'E68', 'Secuelas de hiperalimentación', NULL, NULL, '', '', '', NULL, '2017-03-27 19:35:36'),
+(395, 4, 53, 'E70', 'Trastornos del metabolismo de los aminoácidos aromáticos', 'E70.0', 'E70.9', '', '', '', NULL, '2017-03-27 19:50:23'),
+(396, 4, 53, 'E71', 'Trastornos del metabolismo de los aminoácidos de cadena ramificada y de los ácidos grasos', 'E71.0', 'E71.3', '', '', '', NULL, '2017-03-27 19:50:23'),
+(397, 4, 53, 'E72', 'Otros trastornos del metabolismo de los aminoácidos', 'E72.0', 'E72.9', '', '', 'gota ([LINK]M10.–[/LINK])\r\nhallazgos anormales sin enfermedad manifiesta ([LINK]R70–R89[/LINK])\r\ntrastornos del metabolismo (de las, de los):\r\n• ácidos grasos ([LINK]E71.3[/LINK])\r\n• aminoácidos aromáticos ([LINK]E70.–[/LINK])\r\n• aminoácidos de cadena ramificada ([LINK]E71.0–E71.2[/LINK])\r\n• purinas y pirimidinas ([LINK]E79.–[/LINK])', NULL, '2017-03-27 19:50:23'),
+(398, 4, 53, 'E73', 'Intolerancia a la lactosa', 'E73.0', 'E73.9', '', '', '', NULL, '2017-03-27 19:50:23'),
+(399, 4, 53, 'E74', 'Otros trastornos del metabolismo de los carbohidratos', 'E74.0', 'E74.9', '', '', 'diabetes mellitus ([LINK]E10–E14[/LINK])\r\nhipoglicemia SAI ([LINK]E16.2[/LINK])\r\nincremento en la secreción del glucagón ([LINK]E16.3[/LINK])\r\nmucopolisacaridosis ([LINK]E76.0–E76.3[/LINK])', NULL, '2017-03-27 19:50:23'),
+(400, 4, 53, 'E75', 'Trastornos del metabolismo de los esfingolípidos y otros trastornos por almacenamiento de lípidos', 'E75.0', 'E75.6', '', '', 'enfermedad de Refsum ([LINK]G60.1[/LINK])\r\nmucolipidosis tipos I–III ([LINK]E77.0–E77.1[/LINK])', NULL, '2017-03-27 19:50:23'),
+(401, 4, 53, 'E76', 'Trastornos del metabolismo de los glucosaminoglicanos', 'E76.0', 'E76.9', '', '', '', NULL, '2017-03-27 19:50:23'),
+(402, 4, 53, 'E77', 'Trastornos del metabolismo de las glucoproteínas', 'E77.0', 'E77.9', '', '', '', NULL, '2017-03-27 19:50:23'),
+(403, 4, 53, 'E78', 'Trastornos del metabolismo de las lipoproteínas y otras lipidemias', 'E78.0', 'E78.9', '', '', 'esfingolipidosis ([LINK]E75.0–E75.3[/LINK])', NULL, '2017-03-27 19:50:23'),
+(404, 4, 53, 'E79', 'Trastornos del metabolismo de las purinas y de las pirimidinas', 'E79.0', 'E79.9', '', '', 'anemia orotacidúrica ([LINK]D53.0[/LINK])\r\ngota ([LINK]M10.–[/LINK])\r\nnefrolitiasis ([LINK]N20.0[/LINK])\r\ntrastornos de la inmunodeficiencia combinados ([LINK]D81.–[/LINK])\r\nxeroderma pigmentoso ([LINK]Q82.1[/LINK])', NULL, '2017-03-27 19:50:23'),
+(405, 4, 53, 'E80', 'Trastornos del metabolismo de las porfirinas y de la bilirrubina', 'E80.0', 'E80.7', '', 'defectos de catalasa y peroxidasa', '', NULL, '2017-03-27 19:51:54'),
+(406, 4, 53, 'E83', 'Trastornos del metabolismo de los minerales', 'E83.0', 'E83.9', '', '', 'deficiencia dietética de minerales ([LINK]E58–E61[/LINK])\r\ndeficiencia de vitamina D ([LINK]E55.–[/LINK])     \r\ntrastornos paratiroideos ([LINK]E20–E21[/LINK])', NULL, '2017-03-27 19:51:54'),
+(407, 4, 53, 'E84', 'Fibrosis quística', 'E84.0', 'E84.9', '', 'mucoviscidosis', '', NULL, '2017-03-27 19:52:54'),
+(408, 4, 53, 'E85', 'Amiloidosis', 'E85.0', 'E85.9', '', '', 'enfermedad de Alzheimer ([LINK]G30.–[/LINK])', NULL, '2017-03-27 19:52:54'),
+(409, 4, 53, 'E86', 'Depleción del volumen', NULL, NULL, 'Depleción del volumen del plasma o del líquido extracelular\r\nDeshidratación\r\nHipovolemia', '', 'causante de policitemia ([LINK]D75.1[/LINK])\r\nchoque hipovolémico:\r\n• SAI ([LINK]R57.1[/LINK])\r\n• postoperatorio ([LINK]T81.1[/LINK])\r\n• traumático ([LINK]T79.4[/LINK])\r\ndebida a diarrea y gastroenteritis de presunto origen infeccioso ([LINK]A09[/LINK])\r\ndeshidratación del recién nacido ([LINK]P74.1[/LINK])', NULL, '2017-03-27 19:54:39'),
+(410, 4, 53, 'E87', 'Otros trastornos de los líquidos, de los electrólitos y del equilibrio ácido-básico', 'E87.0', 'E87.8', '', '', '', NULL, '2017-03-27 19:54:39'),
+(411, 4, 53, 'E88', 'Otros trastornos metabólicos', 'E88.0', 'E88.9', '', '', 'histiocitosis X (crónica) ([LINK]D76.0[/LINK])', NULL, '2017-03-27 19:59:36'),
+(412, 4, 53, 'E89', 'Trastornos endocrinos y metabólicos consecutivos a procedimientos, no clasificados en otra parte', 'E89.0', 'E89.9', '', '', '', NULL, '2017-03-27 19:59:36'),
+(413, 4, 53, 'E90', 'Trastornos nutricionales y metabólicos en enfermedades clasificadas en otra parte', NULL, NULL, '', '', '', NULL, '2017-03-27 20:00:26'),
+(414, 5, 54, 'F00', 'Demencia en la enfermedad de Alzheimer', 'F00.0', 'F00.9', 'La enfermedad de Alzheimer es una enfermedad cerebral degenerativa primaria de etiología desconocida, cuyos rasgos neuropatológicos y neuroquímicos son característicos. Habitualmente este trastorno es de comienzo insidioso, y después progresa lenta pero sostenidamente en un lapso de varios años.', '', '', NULL, '2017-03-27 20:28:57'),
+(415, 5, 54, 'F01', 'Demencia vascular', 'F01.0', 'F01.9', 'La demencia vascular es producto del infarto cerebral debido a una enfermedad vascular, incluida la enfermedad cerebrovascular hipertensiva. Por lo común los infartos son pequeños, pero sus efectos son acumulativos. Generalmente comienza en etapas avanzadas de la vida.', 'demencia arteriosclerótica', '', NULL, '2017-03-27 20:28:57'),
+(416, 5, 54, 'F02', 'Demencia en otras enfermedades clasificadas en otra parte', 'F02.0', 'F02.8', 'Casos de demencia debidos, o supuestamente debidos, a causas distintas de la enfermedad de Alzheimer o de la enfermedad cerebrovascular. El comienzo puede darse en cualquier momento de la vida, aunque rara vez tiene lugar en la senectud.', '', '', NULL, '2017-03-27 20:30:28'),
+(417, 5, 54, 'F03', 'Demencia, no especificada', NULL, NULL, 'Demencia:\r\n• degenerativa primaria SAI\r\n• presenil SAI\r\n• senil SAI\r\n• senil, tipo depresivo o tipo paranoide\r\nPsicosis:\r\n• presenil SAI\r\n• senil SAI', '', 'demencia senil con delirio o con estado confusional agudo ([LINK]F05.1[/LINK])\r\nsenilidad, no especificada ([LINK]R54[/LINK])\r\n', NULL, '2017-03-27 20:30:28');
 
 -- --------------------------------------------------------
 
@@ -4456,7 +4892,7 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
 --
 
 INSERT INTO `pre_empa` (`id_empa`, `id_paciente`, `nr_orden`, `bo_finalizado`, `gl_sector`, `nr_ficha`, `fc_empa`, `bo_embarazo`, `bo_consume_alcohol`, `gl_puntos_audit`, `bo_fuma`, `gl_peso`, `gl_estatura`, `gl_imc`, `gl_circunferencia_abdominal`, `id_clasificacion_imc`, `gl_pas`, `gl_pad`, `id_examen_hipertension`, `bo_antecedente_diabetes`, `bo_glicemia_toma`, `gl_glicemia`, `id_examen_glicemia`, `bo_trabajadora_reclusa`, `bo_vdrl`, `id_examen_vdrl`, `bo_rpr`, `id_examen_rpr`, `bo_vih`, `id_examen_vih`, `bo_tos_productiva`, `bo_baciloscopia_toma`, `bo_baciloscopia_resultado`, `id_examen_baciloscopia`, `bo_pap_realizado`, `bo_pap_resultado`, `fc_ultimo_pap`, `fc_ultimo_pap_ano`, `fc_ultimo_pap_mes`, `fc_tomar_pap`, `bo_pap_vigente`, `bo_pap_toma`, `bo_pap_resultado_nuevo`, `id_examen_pap`, `bo_colesterol_toma`, `gl_colesterol`, `id_examen_colesterol`, `bo_mamografia_realizada`, `bo_mamografia_resultado_pasado`, `fc_mamografia`, `fc_mamografia_mes`, `fc_mamografia_ano`, `bo_mamografia_vigente`, `bo_mamografia_requiere`, `bo_mamografia_toma`, `bo_mamografia_resultado`, `id_examen_mamografia`, `gl_observaciones_empa`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 1, 1, 0, '525', 75877, '2017-03-23 00:00:00', 0, 0, NULL, 0, '90', '170', '31.14', '90', 6, '110', '80', NULL, 1, NULL, '50', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 10, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 12, NULL, 13, '2017-03-23 18:05:37', 2, '2017-03-23 13:33:02'),
+(1, 1, 1, 0, '525', 75877, '2017-03-23 00:00:00', 0, 0, NULL, 0, '90', '170', '31.14', '90', 6, '110', '80', NULL, 1, NULL, '50', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 10, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, 1, 12, NULL, 13, '2017-03-27 16:04:24', 2, '2017-03-23 13:33:02'),
 (2, 1, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-23 17:54:48', 2, '2017-03-23 13:33:02'),
 (3, 2, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:33:11'),
 (4, 2, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:33:11'),
@@ -4464,7 +4900,7 @@ INSERT INTO `pre_empa` (`id_empa`, `id_paciente`, `nr_orden`, `bo_finalizado`, `
 (6, 3, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:35:26'),
 (7, 4, 1, 0, NULL, NULL, '2017-03-23 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, NULL, 1, 2017, 1, NULL, NULL, NULL, NULL, NULL, 13, '2017-03-23 18:46:54', 2, '2017-03-23 13:53:07'),
 (8, 4, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-23 17:55:12', 2, '2017-03-23 13:53:07'),
-(9, 5, 1, 0, NULL, NULL, '2017-03-23 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '100', '80', 15, NULL, NULL, NULL, NULL, NULL, NULL, 16, NULL, 17, NULL, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-24 20:28:51', 2, '2017-03-23 13:55:16'),
+(9, 5, 1, 0, NULL, NULL, '2017-03-23 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '100', '80', 15, NULL, NULL, NULL, NULL, NULL, 1, 16, 1, 17, 1, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-24 21:20:25', 2, '2017-03-23 13:55:16'),
 (10, 5, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-23 17:55:40', 2, '2017-03-23 13:55:16'),
 (11, 6, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:55:28'),
 (12, 6, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:55:28'),
@@ -4795,7 +5231,7 @@ CREATE TABLE IF NOT EXISTS `pre_evento` (
   KEY `IDX_id_paciente` (`id_paciente`),
   KEY `IDX_bo_estado` (`bo_estado`),
   KEY `IDX_bo_mostrar` (`bo_mostrar`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=77 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=142 ;
 
 --
 -- Volcado de datos para la tabla `pre_evento`
@@ -4853,7 +5289,7 @@ INSERT INTO `pre_evento` (`id_evento`, `id_evento_tipo`, `id_paciente`, `id_empa
 (49, 15, 0, 15, 'AUDIT del EMPA 15  modificado el : 2017-03-23', 1, 0, 2, '2017-03-24 21:01:45'),
 (50, 15, 0, 15, 'AUDIT del EMPA 15  modificado el : 2017-03-23', 1, 0, 2, '2017-03-24 21:01:45'),
 (51, 15, 0, 15, 'AUDIT del EMPA 15  modificado el : 2017-03-23', 1, 0, 2, '2017-03-24 21:01:45'),
-(52, 12, 8, 15, 'Empa modificado el : 23-03-2017 por usuario 13', 1, 0, 2, '2017-03-23 18:53:10'),
+(52, 12, 8, 15, 'Empa modificado el : 23-03-2017 por usuario 13', 1, 0, 2, '2017-03-27 17:20:07'),
 (53, 1, 9, 0, 'Paciente creado el : 23-03-2017', 1, 1, 2, '2017-03-23 14:58:06'),
 (54, 13, 9, 17, 'Empa 17 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 14:58:06'),
 (55, 13, 9, 18, 'Empa 18 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 14:58:06'),
@@ -4864,20 +5300,85 @@ INSERT INTO `pre_evento` (`id_evento`, `id_evento_tipo`, `id_paciente`, `id_empa
 (60, 13, 9, 20, 'Empa 20 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 15:25:02'),
 (61, 14, 9, 19, 'AUDIT del EMPA19 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 15:25:02'),
 (62, 14, 9, 20, 'AUDIT del EMPA20 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 15:25:02'),
-(63, 12, 8, 15, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-23 18:53:10'),
+(63, 12, 8, 15, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-27 17:20:07'),
 (64, 20, 8, 0, 'Plan de Tratamiento con Psicólogo Iniciado el : 23-03-2017', 1, 1, 2, '2017-03-23 15:31:37'),
-(65, 12, 1, 1, 'Empa modificado el : 23-03-2017 por usuario 13', 1, 0, 2, '2017-03-23 18:53:10'),
-(66, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-23 18:53:10'),
-(67, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-23 18:53:10'),
-(68, 12, 4, 7, 'Empa modificado el : 23-03-2017 por usuario 13', 1, 0, 2, '2017-03-23 18:53:10'),
-(69, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-23 18:53:10'),
-(70, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-23 18:53:10'),
-(71, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 1, 2, '2017-03-23 18:53:10'),
+(65, 12, 1, 1, 'Empa modificado el : 23-03-2017 por usuario 13', 1, 0, 2, '2017-03-27 17:20:07'),
+(66, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-27 17:20:07'),
+(67, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-27 17:20:07'),
+(68, 12, 4, 7, 'Empa modificado el : 23-03-2017 por usuario 13', 1, 0, 2, '2017-03-27 17:20:07'),
+(69, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-27 17:20:07'),
+(70, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-27 17:20:07'),
+(71, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-27 17:20:07'),
 (72, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 0, 2, '2017-03-24 21:01:45'),
 (73, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 0, 2, '2017-03-24 21:01:45'),
 (74, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 0, 2, '2017-03-24 21:01:45'),
 (75, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 0, 2, '2017-03-24 21:01:45'),
-(76, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 1, 2, '2017-03-24 21:01:45');
+(76, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 1, 2, '2017-03-24 21:01:45'),
+(77, 17, 8, 0, 'Paciente Agresor Violencia creada el : 27-03-2017', 1, 0, 2, '2017-03-27 15:53:47'),
+(78, 17, 8, 0, 'Paciente Agresor Violencia creada el : 27-03-2017', 1, 0, 2, '2017-03-27 15:53:47'),
+(79, 17, 8, 0, 'Paciente Agresor Violencia creada el : 27-03-2017', 1, 0, 2, '2017-03-27 15:53:47'),
+(80, 17, 8, 0, 'Paciente Agresor Violencia creada el : 27-03-2017', 1, 0, 2, '2017-03-27 15:53:47'),
+(81, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(82, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(83, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(84, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(85, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(86, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(87, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(88, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(89, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(90, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(91, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(92, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(93, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(94, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(95, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(96, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(97, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(98, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(99, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(100, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(101, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(102, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(103, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(104, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(105, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(106, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(107, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(108, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(109, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(110, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(111, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(112, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(113, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(114, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(115, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(116, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(117, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(118, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(119, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(120, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(121, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(122, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(123, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(124, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(125, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(126, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(127, 12, 8, 0, 'Reconoce Agresor : 2017-03-27', 1, 0, 2, '2017-03-27 17:20:07'),
+(128, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(129, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(130, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(131, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(132, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(133, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(134, 12, 8, 0, 'Reconoce Agresor : 2017-03-27', 1, 0, 2, '2017-03-27 17:20:07'),
+(135, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(136, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(137, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(138, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 1, 2, '2017-03-27 17:20:06'),
+(139, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 1, 2, '2017-03-27 17:20:07'),
+(140, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 1, 2, '2017-03-27 17:20:07'),
+(141, 12, 8, 0, 'Reconoce Agresor : 2017-03-27', 1, 1, 2, '2017-03-27 17:20:07');
 
 -- --------------------------------------------------------
 
@@ -5195,15 +5696,15 @@ INSERT INTO `pre_opcion` (`id_opcion`, `id_opcion_padre`, `bo_tiene_hijo`, `gl_n
 (4, 0, 0, 'Bandeja Pacientes', 'fa fa-th', '/Paciente/index', 1, NULL, '2017-03-16 20:03:21', 2, '2017-02-23 15:44:32'),
 (8, 0, 0, 'Evaluación', 'fa fa-plus-square', '/Medico/', 1, NULL, '2017-03-08 21:16:00', NULL, '2017-03-08 21:10:45'),
 (9, 0, 0, 'Laboratorio', 'fa fa-hospital-o', '/Laboratorio/index', 1, NULL, '2017-03-10 16:16:44', 1, '2017-03-07 00:00:00'),
-(11, 0, 0, 'Gestor Nacional', 'fa fa-cogs', '/Gestor/nacional', 1, 2, '2017-03-20 19:21:03', 2, '2017-03-13 13:27:12'),
-(12, 0, 0, 'Gestor Regional', 'fa fa-cog', '/Gestor/regional', 1, 2, '2017-03-21 14:42:30', 2, '2017-03-13 13:27:12'),
+(11, 0, 0, 'Gestor Nacional', 'fa fa-bar-chart', '/Gestor/nacional', 1, 2, '2017-03-27 13:06:54', 2, '2017-03-13 13:27:12'),
+(12, 0, 0, 'Gestor Regional', 'fa fa-bar-chart', '/Gestor/regional', 1, 2, '2017-03-27 13:20:43', 2, '2017-03-13 13:27:12'),
 (13, 0, 0, 'Especialista', 'fa fa-user-md', '/Especialista/', 1, NULL, NULL, 3, '2017-03-16 18:22:58'),
 (14, 0, 0, 'Agenda Laboratorio', 'fa fa-calendar', '/Agenda/agendaLaboratorio', 1, NULL, '2017-03-23 15:58:10', NULL, '2017-03-23 15:51:37'),
 (8000, 0, 1, 'Mantenedor', 'fa fa-database', NULL, 1, NULL, '2017-03-14 19:28:05', 2, '2017-02-23 15:51:17'),
 (8001, 8000, 0, 'Usuario', 'fa fa-group', '/Mantenedor/usuario', 1, NULL, '2017-03-14 13:19:37', 2, '2017-02-23 15:55:19'),
 (8002, 8000, 0, 'Perfil', 'fa fa-plus-circle', '/Mantenedor/perfil', 1, 2, '2017-03-14 13:19:50', 2, '2017-03-13 15:34:54'),
 (8003, 8000, 0, 'Menú', 'fa fa-list', '/Mantenedor/menu', 1, 2, '2017-03-14 13:19:56', 2, '2017-03-13 15:36:52'),
-(9998, 0, 0, 'Buscar Paciente', ' fa fa-search', '/Paciente/buscar', 1, 2, '2017-03-13 18:45:01', 2, '2017-03-13 13:27:12'),
+(9998, 0, 0, 'Buscar Paciente', ' fa fa-search', '/Buscar/buscarPaciente/', 1, 2, '2017-03-27 15:31:47', 2, '2017-03-13 13:27:12'),
 (9999, 0, 0, 'Mesa de Ayuda', 'fa fa-life-ring', '/Soporte/', 1, NULL, '2017-03-08 21:16:25', 2, '2017-02-23 16:01:37'),
 (10000, 0, 0, 'Cerrar Sesión', 'fa fa-sign-out', '/Login/logoutUsuario', 1, NULL, '2017-03-17 19:04:56', NULL, '2017-03-17 19:01:22');
 
@@ -5281,7 +5782,7 @@ INSERT INTO `pre_paciente` (`id_paciente`, `gl_rut`, `id_institucion`, `id_regio
 (1, '18301265-7', 2462, 1, 349, 1, NULL, NULL, NULL, 1, 2, 2453, 'Tratamiento', 0, '', '', 'Luisa', 'Mcdonald', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, '1992-02-12', 'F', 'Aníbal Pinto 805, Iquique, Región de Tarapacá, Chile', '123123', 1, '123123', 'mcdonald@gmail.cl', '-20.215518862566977', '-70.152919444458', NULL, NULL, 2, '2017-03-23 13:33:02'),
 (4, '3501109-9', 2462, 1, 351, 1, NULL, NULL, NULL, 1, 1, 2441, 'Control', 0, '', '', 'Beatriz', 'Godoy', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-23', 'F', 'Manaos 1717, Iquique, Región de Tarapacá, Chile', '123123', 1, '123123', 'bea.godoy@gmail.com', '-20.206497732243577', '-70.14055982531738', NULL, NULL, 2, '2017-03-23 13:53:07'),
 (5, '', 2462, 1, 350, 1, NULL, NULL, NULL, 1, 2, 2443, 'Tratamiento', 1, '12312323', '123', 'Steffany', 'Piper', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, '1974-01-23', 'F', 'Dieciocho de Septiembre 1924, Iquique, Región de Tarapacá, Chile', '', 0, '', '', '-20.227036152695224', '-70.14356389941406', NULL, NULL, 2, '2017-03-23 13:55:16'),
-(8, '11396268-2', 2462, 1, 355, 1, NULL, NULL, NULL, 1, 2, 2439, 'Tratamiento', 0, '', '', 'Giovanna', 'Alfaro', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, '1982-03-28', 'F', 'Blanco Encalada, Pica, Región de Tarapacá, Chile', '999999', 1, '999999', 'alfaro.gio@gio.cl', '-20.489724202015143', '-69.32716360314936', NULL, NULL, 13, '2017-03-23 14:13:07');
+(8, '11396268-2', 2462, 1, 355, 1, 1, 1, 4, 1, 2, 2439, 'Tratamiento', 0, '', '', 'Giovanna', 'Alfaro', 1, 1, '2017-03-27', '02:16:00', 1, 'Chilena', NULL, NULL, '1982-03-28', 'F', 'Blanco Encalada, Pica, Región de Tarapacá, Chile', '999999', 1, '999999', 'alfaro.gio@gio.cl', '-20.489724202015143', '-69.32716360314936', NULL, '2017-03-27 17:20:07', 13, '2017-03-23 14:13:07');
 
 -- --------------------------------------------------------
 
@@ -5358,6 +5859,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor` (
   `id_agresor` int(11) NOT NULL AUTO_INCREMENT,
   `id_paciente` int(11) NOT NULL,
   `id_tipo_vinculo` int(11) DEFAULT NULL,
+  `gl_tipo_vinculo` varchar(100) DEFAULT NULL,
   `bo_extranjero` int(1) DEFAULT NULL,
   `gl_rut_agresor` varchar(12) DEFAULT NULL,
   `gl_run_pass` varchar(12) DEFAULT NULL,
@@ -5371,7 +5873,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor` (
   `id_tipo_sexo` int(11) DEFAULT NULL,
   `id_tipo_genero` int(11) DEFAULT NULL,
   `id_orientacion_sexual` int(11) DEFAULT NULL,
-  `nr_ingreso_mensual` int(11) DEFAULT NULL COMMENT 'Estimado',
+  `id_ingreso_mensual` int(11) DEFAULT NULL COMMENT 'Estimado',
   `gl_nombres_agresor` varchar(100) DEFAULT NULL,
   `gl_apellidos_agresor` varchar(100) DEFAULT NULL,
   `fc_nacimiento_agresor` date DEFAULT NULL,
@@ -5398,7 +5900,14 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor` (
   KEY `IDX_id_orientacion_sexual` (`id_orientacion_sexual`),
   KEY `IDX_id_tipo_genero` (`id_tipo_genero`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_agresor`
+--
+
+INSERT INTO `pre_paciente_agresor` (`id_agresor`, `id_paciente`, `id_tipo_vinculo`, `gl_tipo_vinculo`, `bo_extranjero`, `gl_rut_agresor`, `gl_run_pass`, `id_region`, `id_tipo_riesgo`, `id_comuna_vive`, `id_comuna_trabaja`, `id_estado_civil`, `id_tipo_ocupacion`, `id_actividad_economica`, `id_tipo_sexo`, `id_tipo_genero`, `id_orientacion_sexual`, `id_ingreso_mensual`, `gl_nombres_agresor`, `gl_apellidos_agresor`, `fc_nacimiento_agresor`, `nr_hijos`, `nr_hijos_en_comun`, `nr_denuncias_por_violencia`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
+(2, 8, 9, 'Hermanastra', 0, '8390223-K', NULL, NULL, 2, 3, 3, 1, 2, NULL, 2, 2, 10, 7, 'Ruth', 'Novoa', '1972-07-12', 1, 0, 6, NULL, NULL, 2, '2017-03-27 17:19:23');
 
 -- --------------------------------------------------------
 
@@ -5417,7 +5926,17 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor_violencia` (
   KEY `IDX_id_paciente` (`id_paciente`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_pregunta` (`id_pregunta`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_agresor_violencia`
+--
+
+INSERT INTO `pre_paciente_agresor_violencia` (`id_violencia`, `id_paciente`, `id_pregunta`, `nr_valor`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 8, 1, 2, NULL, '2017-03-27 15:53:47'),
+(2, 8, 2, 3, NULL, '2017-03-27 15:53:47'),
+(3, 8, 3, 3, NULL, '2017-03-27 15:53:47'),
+(4, 8, 4, 2, NULL, '2017-03-27 15:53:47');
 
 -- --------------------------------------------------------
 
@@ -5427,6 +5946,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor_violencia` (
 
 CREATE TABLE IF NOT EXISTS `pre_paciente_alarma` (
   `id_alarma` int(11) NOT NULL AUTO_INCREMENT,
+  `id_paciente` int(11) DEFAULT NULL,
   `id_alarma_tipo` int(11) NOT NULL DEFAULT '0',
   `id_perfil` int(11) DEFAULT '0' COMMENT 'Verá la Alarma',
   `id_alarma_estado` int(11) DEFAULT '1',
@@ -5444,7 +5964,15 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_alarma` (
   KEY `IDX_bo_mostrar` (`bo_mostrar`),
   KEY `IDX_id_usuario_actualiza` (`id_usuario_actualiza`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_alarma`
+--
+
+INSERT INTO `pre_paciente_alarma` (`id_alarma`, `id_paciente`, `id_alarma_tipo`, `id_perfil`, `id_alarma_estado`, `bo_apagar`, `bo_mostrar`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 8, 1, 5, 1, 0, 1, NULL, NULL, NULL, '2017-03-27 17:58:32'),
+(2, 8, 2, 5, 1, 0, 1, NULL, NULL, NULL, '2017-03-27 17:58:32');
 
 -- --------------------------------------------------------
 
@@ -5633,7 +6161,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_examen` (
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_id_usuario_toma` (`id_usuario_toma`),
   KEY `IDX_gl_rut_persona_toma` (`gl_rut_persona_toma`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Volcado de datos para la tabla `pre_paciente_examen`
@@ -5647,12 +6175,16 @@ INSERT INTO `pre_paciente_examen` (`id_paciente_examen`, `id_tipo_examen`, `id_p
 (11, 6, 1, 1, 1, NULL, NULL, NULL, NULL, '', '2017-03-24', '11:30:00', 'ok', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '2017-03-23 16:03:26'),
 (12, 8, 1, 1, 1, NULL, '13225524-5', 'Administrador Prevención', NULL, '', '2017-03-25', '09:00:00', 'ok', '2017-03-31', 'N', 'DESC 7', 'INDIC 7', NULL, NULL, NULL, NULL, 1, '2017-03-24 19:57:32', 13, '2017-03-23 16:03:56'),
 (13, 7, 8, NULL, 9, NULL, '13225524-5', 'Administrador Prevención', NULL, '3', '2017-03-27', NULL, 'Sin Observación.', '2017-03-31', 'N', 'DESC 3', 'INDIC 3', NULL, NULL, NULL, '250', 1, '2017-03-24 19:51:29', 1, '2017-03-24 10:03:34'),
-(14, 9, 1, NULL, 7, NULL, NULL, NULL, NULL, NULL, '2017-03-31', NULL, 'Prueba.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-24 11:03:15'),
+(14, 9, 1, NULL, 7, NULL, '13225524-5', 'Administrador Prevención', NULL, '44444', '2017-03-31', NULL, 'Prueba.', '2017-03-27', 'N', '44444', '44444', '101', '86', NULL, NULL, 1, '2017-03-24 21:16:48', 1, '2017-03-24 11:03:15'),
 (15, 9, 5, 9, 1, NULL, '1-9', 'Administrador ', NULL, '7777', '2017-03-24', '09:15:00', 'Tomar Examen', '2017-03-26', 'N', 'Todo ok', 'Sin indicación.', '100', '80', NULL, NULL, 2, '2017-03-24 20:28:51', 2, '2017-03-24 18:03:22'),
-(16, 2, 5, 9, 1, NULL, NULL, NULL, NULL, NULL, '2017-03-24', '10:00:00', 'ok', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-24 18:03:05'),
-(17, 3, 5, 9, 1, NULL, NULL, NULL, NULL, NULL, '2017-03-24', '11:00:00', 'ok', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-24 18:03:26'),
-(18, 4, 5, 9, 1, NULL, NULL, NULL, NULL, NULL, '2017-03-24', '12:00:00', 'ok', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-24 18:03:41'),
-(19, 6, 5, 9, 1, NULL, NULL, NULL, NULL, NULL, '2017-03-25', '09:00:00', 'ok', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-24 18:03:57');
+(16, 2, 5, 9, 1, NULL, '13225524-5', 'Administrador Prevención', NULL, '11111', '2017-03-24', '10:00:00', 'ok', '2017-03-31', 'N', '11111', '11111', NULL, NULL, NULL, NULL, 1, '2017-03-24 21:11:45', 2, '2017-03-24 18:03:05'),
+(17, 3, 5, 9, 1, NULL, '13225524-5', 'Administrador Prevención', NULL, '22222', '2017-03-24', '11:00:00', 'ok', '2017-03-31', 'N', '22222', '22222', NULL, NULL, NULL, NULL, 1, '2017-03-24 21:13:55', 2, '2017-03-24 18:03:26'),
+(18, 4, 5, 9, 1, NULL, '13225524-5', 'Administrador Prevención', NULL, '33333', '2017-03-24', '12:00:00', 'ok', '2017-03-31', 'N', '33333', '33333', NULL, NULL, NULL, NULL, 1, '2017-03-24 21:14:55', 2, '2017-03-24 18:03:41'),
+(19, 6, 5, 9, 1, NULL, '13225524-5', 'Administrador Prevención', NULL, '555555', '2017-03-25', '09:00:00', 'ok', '2017-04-03', 'N', '55555', '55555', NULL, NULL, NULL, NULL, 1, '2017-03-24 21:20:25', 2, '2017-03-24 18:03:57'),
+(20, 7, 5, NULL, 9, NULL, NULL, NULL, NULL, NULL, '2017-03-27', '08:00:00', 'Prueba Ingresa Examen desde Laboratorio.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-24 18:03:47'),
+(21, 8, 1, 1, 1, 24, '7-1', 'Laboratorista Uno LABORATORIO 1 Tarapacá', NULL, '777', '2017-03-25', '09:00:00', 'ok', '2017-03-31', 'N', 'desc prueba', 'indic prueba', NULL, NULL, NULL, NULL, 24, '2017-03-27 16:04:24', 13, '2017-03-23 16:03:56'),
+(22, 5, 8, NULL, 9, NULL, NULL, NULL, NULL, NULL, '2017-03-28', '08:00:00', 'Prueba ingresa desde Lab', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-27 11:03:44'),
+(23, 3, 8, NULL, 1, NULL, NULL, NULL, NULL, NULL, '2017-03-29', '12:00:00', 'RPR.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-27 12:03:10');
 
 -- --------------------------------------------------------
 
@@ -7020,37 +7552,6 @@ INSERT INTO `pre_tipo_area_urbano` (`id_area_urbano`, `gl_nombre_area_urbano`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pre_empa_audit_tipo`
---
-
-CREATE TABLE IF NOT EXISTS `pre_empa_audit_tipo` (
-  `id_audit_tipo` int(11) NOT NULL,
-  `gl_descripcion` varchar(250) DEFAULT NULL,
-  `nr_min` int(11) NOT NULL,
-  `nr_max` int(11) NOT NULL,
-  `gl_color` varchar(20) NOT NULL,
-  `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_audit_tipo`),
-  KEY `IDX_nr_min` (`nr_min`),
-  KEY `IDX_nr_max` (`nr_max`),
-  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `pre_empa_audit_tipo`
---
-
-INSERT INTO `pre_empa_audit_tipo` (`id_audit_tipo`, `gl_descripcion`, `nr_min`, `nr_max`, `gl_color`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'Bajo Riesgo', 0, 7, '#008000', NULL, NULL),
-(2, 'Riesgo', 8, 15, '#BDB76B', NULL, NULL),
-(3, 'Problema', 16, 19, '#FF8C00', NULL, NULL),
-(4, 'Problema o Dependencia', 20, 40, '#FF0000', NULL, NULL),
-(5, 'Overkill de Alcoholismo', 41, 2147483647, '#FF0040', NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `pre_tipo_direccion_complemento`
 --
 
@@ -7421,6 +7922,7 @@ INSERT INTO `pre_tipo_fonasa_tramo` (`id_fonasa_tramo`, `cd_fonasa_tramo`, `gl_n
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_genero` (
   `id_tipo_genero` int(11) NOT NULL AUTO_INCREMENT,
+  `cd_tipo_genero` char(1) DEFAULT NULL,
   `gl_tipo_genero` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -7432,10 +7934,10 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_genero` (
 -- Volcado de datos para la tabla `pre_tipo_genero`
 --
 
-INSERT INTO `pre_tipo_genero` (`id_tipo_genero`, `gl_tipo_genero`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'MASCULINO', 1, '2017-03-07 00:00:00'),
-(2, 'FEMENINO', 1, '2017-03-07 00:00:00'),
-(3, 'TRANSGÉNERO', 1, '2017-03-07 00:00:00');
+INSERT INTO `pre_tipo_genero` (`id_tipo_genero`, `cd_tipo_genero`, `gl_tipo_genero`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'M', 'MASCULINO', 1, '2017-03-07 00:00:00'),
+(2, 'F', 'FEMENINO', 1, '2017-03-07 00:00:00'),
+(3, 'T', 'TRANSGÉNERO', 1, '2017-03-07 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -8374,14 +8876,14 @@ CREATE TABLE IF NOT EXISTS `pre_usuario` (
 --
 
 INSERT INTO `pre_usuario` (`id_usuario`, `id_perfil`, `gl_rut`, `gl_password`, `id_institucion`, `id_laboratorio`, `id_tipo_grupo`, `gl_nombres`, `gl_apellidos`, `id_region`, `id_comuna`, `gl_direccion`, `gl_email`, `gl_fono`, `gl_celular`, `bo_activo`, `fc_ultimo_login`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 1, '13225524-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', 'Prevención', 1, 349, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, 1, '2017-03-24 16:53:02', NULL, '2017-03-17 16:07:14', 1, '2017-02-09 10:30:00'),
-(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', '', 5, 349, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-24 12:30:47', NULL, '2017-03-17 16:07:14', 1, '2017-02-09 10:30:00'),
+(1, 1, '13225524-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', 'Prevención', 1, 349, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, 1, '2017-03-27 19:00:39', NULL, '2017-03-27 19:00:39', 1, '2017-02-09 10:30:00'),
+(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', '', 5, 349, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-27 12:21:46', NULL, '2017-03-27 12:21:46', 1, '2017-02-09 10:30:00'),
 (3, 5, '0-0', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'David', 'Guzmán', 1, 349, NULL, 'david.guzman@cosof.cl', NULL, NULL, NULL, '2017-03-20 13:37:43', NULL, '2017-03-17 16:07:14', 1, '2017-02-09 10:30:00'),
 (6, 1, '1-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', '', 1, 349, NULL, 'ovazquez.gonzalez@gmail.com', NULL, NULL, NULL, '2017-03-18 01:33:13', NULL, '2017-03-17 16:07:14', 1, NULL),
 (7, 2, '1-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1, NULL, '1', 'Médico', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'medicoarica@mail.cl', NULL, NULL, NULL, '2017-03-20 13:36:31', 2, '2017-03-17 16:07:14', NULL, NULL),
 (8, 3, '1-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1, NULL, '1', 'Enfermera', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'enfermeraarica@mail.cl', NULL, NULL, NULL, '2017-03-17 17:29:45', 2, '2017-03-17 16:07:14', 2, '2017-03-13 14:44:38'),
 (9, 4, '1-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, NULL, NULL, 'Gestor', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'gestorarica@mail.cl', NULL, NULL, 0, '2017-03-21 18:57:22', 2, '2017-03-17 16:07:14', 2, '2017-03-17 16:00:39'),
-(10, 5, '1-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1564, NULL, '1', 'Gestor', 'Nacional', 13, 631, 'Calle Camino San Manuel S/N', 'gestornacional@mail.cl', NULL, NULL, 1, '2017-03-24 12:31:48', 2, '2017-03-17 16:07:14', 2, '2017-03-13 14:54:23'),
+(10, 5, '1-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1564, NULL, '1', 'Gestor', 'Nacional', 13, 631, 'Calle Camino San Manuel S/N', 'gestornacional@mail.cl', NULL, NULL, 1, '2017-03-27 18:26:10', 2, '2017-03-27 18:26:10', 2, '2017-03-13 14:54:23'),
 (11, 7, '1-6', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, NULL, '1', 'Laboratorio', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'Laboratorio Arica', NULL, NULL, NULL, '2017-03-20 19:22:06', 2, '2017-03-17 16:07:14', 2, '2017-03-13 14:54:23'),
 (12, 3, '3-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2457, NULL, '1', 'Enfermera', '(C) Tarapacá\r\n', 1, 349, 'Pasaje Chintaguay S/N\r\n', NULL, NULL, NULL, 1, '2017-03-23 13:28:49', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (13, 3, '3-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Enfermera', '(T) Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 14:11:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
@@ -8395,10 +8897,10 @@ INSERT INTO `pre_usuario` (`id_usuario`, `id_perfil`, `gl_rut`, `gl_password`, `
 (21, 4, '4-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Gestor', 'Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 13:29:12', NULL, '2017-03-17 16:07:14', NULL, '2017-03-17 16:00:39'),
 (22, 4, '4-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Gestor', 'Coquimbo', 4, 375, NULL, NULL, NULL, NULL, 0, '2017-03-21 18:57:33', NULL, '2017-03-17 16:07:14', NULL, '2017-03-17 16:00:39'),
 (23, 4, '4-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 18, NULL, '2', 'Gestor', 'Magallanes', 12, 578, NULL, NULL, NULL, NULL, 0, '2017-03-16 20:16:26', NULL, '2017-03-17 16:07:14', NULL, '2017-03-17 16:00:39'),
-(24, 7, '7-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 1, '1', 'Laboratorista Uno', 'LABORATORIO 1 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 21:55:32', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(25, 7, '7-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 1, '1', 'Laboratorista Dos', 'LABORATORIO 1 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-21 14:34:43', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(26, 7, '7-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 2, '2', 'Laboratorista Uno', 'LABORATORIO 2 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-17 14:37:45', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(27, 7, '7-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 2, '2', 'Laboratorista Dos', 'LABORATORIO 2 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 13:29:00', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(24, 7, '7-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 1, '1', 'Laboratorista Uno', 'LABORATORIO 1 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-27 15:30:33', NULL, '2017-03-27 15:30:33', NULL, NULL),
+(25, 7, '7-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 1, '1', 'Laboratorista Dos', 'LABORATORIO 1 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 0, '2017-03-27 17:57:19', NULL, '2017-03-27 20:25:26', NULL, NULL),
+(26, 7, '7-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 2, '2', 'Laboratorista Uno', 'LABORATORIO 2 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 0, '2017-03-17 14:37:45', NULL, '2017-03-27 20:29:02', NULL, NULL),
+(27, 7, '7-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 2, '2', 'Laboratorista Dos', 'LABORATORIO 2 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 13:29:00', NULL, '2017-03-27 20:26:40', NULL, NULL),
 (28, 7, '7-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 3, '1', 'Laboratorista Uno', 'Coquimbo', 4, 374, NULL, NULL, NULL, NULL, 0, '2017-03-21 19:21:33', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (31, 7, '7-6', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 4, '2', 'Laboratorista Uno', 'Coquimbo', 4, 375, NULL, NULL, NULL, NULL, 0, '2017-03-16 21:38:58', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (32, 7, '7-7', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 5, '1', 'Laboratorista Uno', 'Magallanes', 12, 578, NULL, NULL, NULL, NULL, 0, '2017-03-16 21:41:58', NULL, '2017-03-17 16:07:14', NULL, NULL),
@@ -8408,11 +8910,11 @@ INSERT INTO `pre_usuario` (`id_usuario`, `id_perfil`, `gl_rut`, `gl_password`, `
 (36, 6, '63-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psiquiatra Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 15:09:31', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (37, 6, '64-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Dentista Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:25:03', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (38, 6, '65-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Nutricionista Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:25:03', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(39, 6, '612-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista ', 'Tarapacá Odontólogo Dos', 1, 349, 'Nutricionista', NULL, NULL, NULL, 1, '2017-03-16 22:27:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(40, 6, '622-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psicólogo Dos', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:27:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(41, 6, '632-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psiquiatra Dos', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:27:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(42, 6, '642-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Dentista Dos', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:27:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(43, 6, '652-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Nutricionista Dos', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 15:15:25', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(39, 6, '612-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista ', 'Tarapacá Odontólogo Dos', 1, 349, 'Nutricionista', NULL, NULL, NULL, 0, '2017-03-16 22:27:46', NULL, '2017-03-27 20:28:11', NULL, NULL),
+(40, 6, '622-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psicólogo Dos', 1, 349, NULL, NULL, NULL, NULL, 0, '2017-03-16 22:27:46', NULL, '2017-03-27 20:28:04', NULL, NULL),
+(41, 6, '632-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psiquiatra Dos', 1, 349, NULL, NULL, NULL, NULL, 0, '2017-03-16 22:27:46', NULL, '2017-03-27 20:27:54', NULL, NULL),
+(42, 6, '642-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Dentista Dos', 1, 349, NULL, NULL, NULL, NULL, 0, '2017-03-16 22:27:46', NULL, '2017-03-27 20:27:16', NULL, NULL),
+(43, 6, '652-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Nutricionista Dos', 1, 349, NULL, NULL, NULL, NULL, 0, '2017-03-23 15:15:25', NULL, '2017-03-27 20:27:03', NULL, NULL),
 (44, 6, '61-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Especialista', 'Coquimbo Odontólogo', 4, 375, NULL, NULL, NULL, NULL, 0, '2017-03-16 22:33:37', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (45, 6, '62-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Especialista', 'Coquimbo Psicólogo', 4, 375, NULL, NULL, NULL, NULL, 0, '2017-03-21 19:22:09', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (46, 6, '63-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Especialista', 'Coquimbo Psiquiatra', 4, 375, NULL, NULL, NULL, NULL, 0, '2017-03-16 22:33:37', NULL, '2017-03-17 16:07:14', NULL, NULL),
