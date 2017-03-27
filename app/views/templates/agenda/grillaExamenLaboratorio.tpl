@@ -41,6 +41,7 @@
                     <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">
 						{$exa->gl_nombres} {$exa->gl_apellidos}
                     </td>
+                    <td style="color:#ff0000; background: #F7D3D2; font-weight: bold;">{$exa->fc_resultado}</td>
                     <td style="background: #F7D3D2;" align="center">
                         <h6><b><span class="label label-danger" style="color:#ffffff">ALTERADO</span></b></h6>
                     </td>
