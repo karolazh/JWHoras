@@ -60,6 +60,10 @@ class Home extends Controller{
 
             $arr_estados[0]['total'] = 0;
             $arr_estados[0]['nombre'] = 'Sin Estado';
+
+
+            $total_pacientes = 0;
+
             foreach($estados as $estado){
                 $arr_estados[$estado->id_paciente_estado]['total'] = 0;
                 $arr_estados[$estado->id_paciente_estado]['nombre'] = $estado->gl_nombre_estado_caso;
@@ -126,26 +130,49 @@ class Home extends Controller{
             
             $arr_violencia = array();
             $arr_pap = array();
+            $total_violencia = 0;
+            $total_pap = 0;
+            $porcentaje_violencia = 0;
+            $porcentaje_pap = 0;
             if($pacientes){
                 foreach($pacientes as $pac){
                     if($pac->bo_reconoce){
-                        $arr_violencia[] = $pac; 
+                        $arr_violencia[] = $pac;
+                        $total_violencia++;
                     }
 
                     if($pac->nr_examen_alterado > 0){
+                        $total_pap++;
                         $arr_pap[] = $pac;
                     }
-                    
+                    $total_pacientes++;
+                }
+
+                if($total_violencia > 0){
+                    $porcentaje_violencia = number_format((100*$total_violencia)/$total_pacientes,2);
+                }
+
+                if($total_pap > 0){
+                    $porcentaje_pap = number_format((100*$total_violencia)/$total_pacientes,2);
                 }
             }
 
             $this->smarty->assign('arr_violencia', $arr_violencia);
             $this->smarty->assign('arr_pap', $arr_pap);
+            $this->smarty->assign('total_pacientes',$total_pacientes);
+            $this->smarty->assign('total_violencia',$total_violencia);
+            $this->smarty->assign('total_pap',$total_pap);
+            $this->smarty->assign('porcentaje_violencia', $porcentaje_violencia);
+            $this->smarty->assign('porcentaje_pap', $porcentaje_pap);
+
+            $arr_alarmas['reconoce_violencia'] = $porcentaje_violencia;
+            $arr_alarmas['pap_alterado'] = $porcentaje_pap;
             
             $jscode = 'Home.graficoEstadosNacional('.json_encode($arr_estados).',"'.$tituloEstadoNacional.'");';
             $jscode .= 'Home.graficoReconoceAbuso('.json_encode($arr_abuso).',"'.$tituloReconoceAbuso.'");';
             $jscode .= 'Home.graficoAceptaPrograma('.json_encode($arr_programa).',"'.$tituloAceptaPrograma.'");';
             $jscode .= 'Home.graficoFechasRegistros('.json_encode($arr_registros_fechas).',"'.$tituloFechasRegistros.'");';
+            $jscode .= 'Home.initAlarmas('.json_encode($arr_alarmas).');';
 
 
         }else{

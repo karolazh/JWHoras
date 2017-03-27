@@ -289,6 +289,16 @@ var Home = {
         
         
 
+    },
+
+    initAlarmas : function(datos){
+        $("#barra-reconoce-violencia").animate(
+            {'width':datos.reconoce_violencia+'%'}
+            ,500);
+
+        $("#barra-pap-alterado").animate(
+            {'width':datos.pap_alterado+'%'}
+            ,500);
     }
 
 }
