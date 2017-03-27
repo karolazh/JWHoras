@@ -9,7 +9,7 @@
         {if $perfil == "1" or $perfil == "2" or $perfil == "3"}
         <button type="button"
                 href='javascript:void(0)' 
-                onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}//{$id_centro_salud}/', 'Agenda Registro registro número : {$id_paciente}', 85);" 
+                onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}//{$id_centro_salud}/', 'Agenda registro número : {$id_paciente}', 85);" 
                 data-toggle="tooltip" 
                 title="Nuevo Examen"
                 class="btn btn-sm btn-flat btn-success">

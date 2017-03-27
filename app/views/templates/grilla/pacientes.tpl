@@ -144,6 +144,12 @@
 														<i class="fa fa-calendar"></i>
 												</button>
 												{/if}
+												<button type="button" 
+														class="btn btn-xs btn-default" 
+														onClick="location.href='{$base_url}/Laboratorio/ver/{$item->id_paciente}';"
+														data-toggle="tooltip" title="Formulario Examen">
+														<i class="fa fa-book"></i>
+												</button>
 										</td>
 								</tr>
 								{else}
@@ -255,6 +261,12 @@
 														<i class="fa fa-calendar"></i>
 												</button>
 												{/if}
+												<button type="button" 
+														class="btn btn-xs btn-default" 
+														onClick="location.href='{$base_url}/Laboratorio/ver/{$item->id_paciente}';"
+														data-toggle="tooltip" title="Formulario Examen">
+														<i class="fa fa-book"></i>
+												</button>
 										</td>
 								</tr>
 										

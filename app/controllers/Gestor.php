@@ -6,7 +6,7 @@
 * Descripcion	: Controller para las funciones del ROL Gestor
 * Plataforma	: !PHP
 * Creacion		: 20/03/2017
-* @name		Gestor.php
+* @name			Gestor.php
 * @version		1.0
 * @author		David Guzmán <david.guzman@cosof.cl>
 * =============================================================================
