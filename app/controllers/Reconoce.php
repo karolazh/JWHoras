@@ -104,7 +104,9 @@ class Reconoce extends Controller {
 		if (!is_null($arrPuntos)) {
 			foreach ($arrPuntos as $item) {
 				if (is_null($item->nr_valor)) {
-					$item->nr_valor = 0;
+					$item->nr_valor = 0; 
+					// Esto esta mal, primero $item->nr_valor no se asigna a nada despues
+					// Segundo, esto se debe obtener listo desde el DAO
 				}
 			}
 		}
