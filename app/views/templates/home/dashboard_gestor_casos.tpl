@@ -105,7 +105,7 @@
                                                     <div class="progress" style="height: 34px;">
                                                         <div class="progress-bar" style="width: 0%" id="barra-pap-alterado"></div>
                                                     </div>
-                                                    <span class="progress-description">
+                                                    <span class="progress-description text-right">
                                                         <strong>{$porcentaje_pap}%</strong> de un total de <strong>{$total_pacientes}</strong> pacientes
                                                     </span>
                                                 </div>
