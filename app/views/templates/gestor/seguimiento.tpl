@@ -95,7 +95,35 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Alarmas</div>
             <div class="panel-body">
-                
+                <div class="table-responsive">
+					<table class="table table-condensed table-hover table-bordered dataTable paginada" id="tabla-pap-alterado">
+						<thead>
+							<tr>
+								<th>Tipo de Alarma</th>
+								<th>Perfil</th>
+								<th>Estado Alarma</th>
+								<th>Apagar Alarma</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach $alarmas as $item}
+								<tr>
+									<td class="text-center">{$item->gl_tipo_alarma}</td>
+									<td class="text-center">{$item->gl_nombre_perfil}</td>
+									<td class="text-center">{$item->gl_estado_alarma}</td>
+									<td class="text-center">
+										<button type="button" 
+												onClick="" 
+												data-toggle="tooltip" 
+												class="btn btn-xs btn-danger"
+												title="Apagar Alarma">
+											<i class="fa fa-bullhorn"></i>
+										</button>
+									</td>    
+								</tr>
+							{/foreach}
+					</table>
+				</div>
             </div>
         </div>
 
