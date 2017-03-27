@@ -1,4 +1,3 @@
-
 <?php
 /**
 *****************************************************************************
@@ -14,7 +13,6 @@
 *--------------
 *!cProgramador				!cFecha		!cDescripcion 
 *-----------------------------------------------------------------------------
-*<orlando.vazquez@cosof.cl>	06-03-2017	Incluida la información del autor en la cabecera, 
 *<david.guzman@cosof.cl>	07-03-2017	Function identificarAgresor mejoras,
 *<orlando.vazquez@cosof.cl>	08-03-2017	Agregados Eventos
 *-----------------------------------------------------------------------------
@@ -56,7 +54,8 @@ class Reconoce extends Controller {
         $this->load->lib('Boton', false);
         $this->load->lib('Seguridad', false);
 		$this->load->lib('Evento', false);
-		$this->_Evento = new Evento();
+
+		$this->_Evento						= new Evento();
         $this->_DAORegion                   = $this->load->model("DAORegion");
         $this->_DAOComuna                   = $this->load->model("DAOComuna");
         $this->_DAOPaciente                 = $this->load->model("DAOPaciente");
@@ -83,16 +82,12 @@ class Reconoce extends Controller {
 	* los .js  "validador.js" y "identificar_agresor.js". 
 	* 
 	* @author	<david.guzman@cosof.cl>	07-03-2017
-	* 
-	* @param -
-	*
 	* @return valores con Smarty a identificar_agresor.tpl
 	*/    
     public function identificarAgresor(){
-	
-    //Cargar Arrays
 		$parametros = $this->request->getParametros();
 		$id_paciente = $parametros[0];
+
 		$this->smarty->assign("id_paciente", $id_paciente);
 		
         $arrTipoOcupacion = $this->_DAOTipoOcupacion->getLista();
@@ -139,8 +134,7 @@ class Reconoce extends Controller {
 			}
 		}
 		$this->smarty->assign("arrPuntos", $arrPuntos);
-		
-    //Obtener Datos de la BD    
+
         $parametros = $this->request->getParametros();
         $id_registro = $parametros[0];
         $this->smarty->assign("id_registro", $id_registro);
@@ -162,15 +156,12 @@ class Reconoce extends Controller {
         $this->smarty->assign('edad', $edad);
         $this->smarty->assign('fc_reconoce', Fechas::fechaHoy());
         $this->smarty->assign('fc_hora', date('h:i'));
-        
-    //Botones
+
         $this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.','','pull-right'));
         $this->smarty->assign("botonAyudaViolencia", Boton::botonAyuda('Seleccione el o los tipos de violencia que la víctima vive o ha vivido de parte del agresor.','','pull-right'));
         $this->smarty->assign("botonAyudaAgresor", Boton::botonAyuda('Vínculo con el Agresor e Identificación del Agresor.','','pull-right'));
-        
-    //Llamado al template
-        $this->_display('Reconoce/identificar_agresor.tpl');
-    //Llamado al Javascript
+
+        $this->_display('reconoce/identificar_agresor.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/reconoce/identificar_agresor.js");
         $this->load->javascript(STATIC_FILES . "js/lib/validador.js");
     }
@@ -181,9 +172,6 @@ class Reconoce extends Controller {
 	* Y hace un Update con nuevos Datos de Paciente
 	* 
 	* @author	<david.guzman@cosof.cl>	08-03-2017
-	* 
-	* @param -
-	*
 	* @return booleanos -> correcto o error
 	*/   
 	public function guardar(){
@@ -226,8 +214,6 @@ class Reconoce extends Controller {
 		$json = Zend_Json::encode($salida);
 
 		echo $json;
-		
-		
 	}
     
 }

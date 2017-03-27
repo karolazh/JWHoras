@@ -52,14 +52,14 @@ class Laboratorio extends Controller {
 		Acceso::redireccionUnlogged($this->smarty);
 
         if (isset($_SESSION['id_laboratorio'])) {
-            $arrExamenes = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['id_laboratorio']);
+            $arrResultado = $this->_DAOPacienteExamen->getByIdLaboratorio($_SESSION['id_laboratorio']);
         } else {
-            $arrExamenes = $this->_DAOPacienteExamen->getListaDetalle();
+            $arrResultado = $this->_DAOPacienteExamen->getListaDetalle();
         }
 		
-        $this->smarty->assign('arrExamenes', $arrExamenes);
+        $this->smarty->assign('arrResultado', $arrResultado);
 		$this->smarty->assign('titulo', 'Examenes');
-		$this->_display('laboratorio/index.tpl');
+		$this->_display('grilla/pacientes.tpl');
 	}
     
     /**

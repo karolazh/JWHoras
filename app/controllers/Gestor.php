@@ -57,7 +57,7 @@ class Gestor extends Controller {
 		$this->smarty->assign('arrResultado', $arr);
 		$this->smarty->assign('titulo', 'Pacientes Gestor Nacional');
 
-		$this->_display('Paciente/index.tpl');
+		$this->_display('grilla/pacientes.tpl');
 	}
 
 	/**
@@ -75,7 +75,7 @@ class Gestor extends Controller {
 		$this->smarty->assign('arrResultado', $arr);
 		$this->smarty->assign('titulo', 'Pacientes Gestor Regional');
 
-		$this->_display('Paciente/index.tpl');
+		$this->_display('grilla/pacientes.tpl');
 	}
 	
 	/**
@@ -116,7 +116,7 @@ class Gestor extends Controller {
 		$this->smarty->assign("gl_email", $registro->gl_email);
 		$this->smarty->assign("gl_direccion", $direccion->gl_direccion);
 		
-		$this->_display('Gestor/seguimiento.tpl');
+		$this->_display('gestor/seguimiento.tpl');
 	}
 	
 }

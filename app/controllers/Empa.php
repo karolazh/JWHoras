@@ -70,7 +70,7 @@ class Empa extends Controller{
 		$arrResultado = $this->_DAOPaciente->getLista();
 		$this->smarty->assign("arrResultado", $arrResultado);
 
-		$this->_display('Empa/index.tpl');
+		$this->_display('empa/index.tpl');
 	}
 
 	public function nuevo() {
@@ -476,8 +476,8 @@ class Empa extends Controller{
 		$this->smarty->assign("botonInformacionAgendaITS", Boton::botonAyuda("Referir a profesional de ITS por Sifilis.", "Consejeria", "", "btn-danger"));
 		$this->smarty->assign("botonInformacionAgendaMamografia", Boton::botonAyuda("Agendar nueva mamografía.", "Información", "", "btn-info"));
 		$this->smarty->assign("botonInformacionAgendaVIH", Boton::botonAyuda("Referir a Profesional de ITS por VIH.", "Información", "", "btn-danger"));
-		//llamado al template
-		$this->_display('Empa/nuevo.tpl');		
+
+		$this->_display('empa/nuevo.tpl');		
 		$this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
 		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
 		$this->load->javascript(STATIC_FILES . "js/templates/agenda/ver.js");
@@ -490,8 +490,7 @@ class Empa extends Controller{
 		$this->smarty->assign("rut", $sesion->rut);
 		$this->smarty->assign("usuario", $sesion->usuario);
 
-		//llamado al template
-		$this->_display('Empa/ver.tpl');
+		$this->_display('empa/ver.tpl');
 	}
 
 	public function audit() {
@@ -519,7 +518,7 @@ class Empa extends Controller{
 		$this->smarty->assign("total", $total);
 		$this->smarty->assign("arrAudit", $arrAudit);
 		$this->smarty->assign("arrPreguntas", $arrPreguntas);
-		$this->smarty->display('Empa/audit.tpl');
+		$this->smarty->display('empa/audit.tpl');
 	}
 
 	public function guardar() {

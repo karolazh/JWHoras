@@ -2,13 +2,13 @@
 
 /**
  * ****************************************************************************
- * Sistema		: PREVENCION DE FEMICIDIOS
- * Descripcion   : Controller para Registro de Paciente
- * Plataforma    : !PHP
- * Creacion		: 14/02/2017
+ * Sistema			: PREVENCION DE FEMICIDIOS
+ * Descripcion		: Controller para Registro de Paciente
+ * Plataforma		: !PHP
+ * Creacion			: 14/02/2017
  * @name			Paciente.php
- * @version		1.0
- * @author		Carolina Zamora <carolina.zamora@cosof.cl>
+ * @version			1.0
+ * @author			Victor Retamal <victor.retamal@cosof.co>
  * =============================================================================
  * !ControlCambio
  * --------------
@@ -87,7 +87,7 @@ class Paciente extends Controller {
 		$this->smarty->assign('arrResultado', $arr);
 		$this->smarty->assign('titulo', 'Pacientes');
 
-		$this->_display('Paciente/index.tpl');
+		$this->_display('grilla/pacientes.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/paciente/index.js");
 	}
 
@@ -122,7 +122,7 @@ class Paciente extends Controller {
 		$this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.', '', 'pull-right'));
 
 		//llamado al template
-		$this->_display('Paciente/nuevo.tpl');
+		$this->_display('paciente/nuevo.tpl');
 		$this->load->javascript(STATIC_FILES . "js/regiones.js");
 		$this->load->javascript(STATIC_FILES . "js/templates/paciente/nuevo.js");
 		//$this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
@@ -523,7 +523,7 @@ class Paciente extends Controller {
         $this->smarty->assign("muestra_examenes", $muestra_examenes);        
         /* Fin Caro */
         
-        $this->smarty->display('Paciente/ver.tpl');
+        $this->smarty->display('paciente/ver.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/paciente/ver.js");                
 	}
 
@@ -750,13 +750,13 @@ class Paciente extends Controller {
 	public function cargarAdjunto() {
 		$session				= New Zend_Session_Namespace("adj");
 		$session->tipo_adjunto	= 1;
-		$this->smarty->display('Paciente/cargar_adjunto.tpl');
+		$this->smarty->display('paciente/cargar_adjunto.tpl');
 	}
 	
 	public function cargarAdjuntoFonasa() {
 		$session				= New Zend_Session_Namespace("adj");
 		$session->tipo_adjunto	= 3;
-		$this->smarty->display('Paciente/cargar_adjunto.tpl');
+		$this->smarty->display('paciente/cargar_adjunto.tpl');
 	}
 	
     /**
@@ -800,7 +800,7 @@ class Paciente extends Controller {
 			$this->view->assign('success', $success);
 			$this->view->assign('mensaje', $mensaje);
 
-			$this->view->assign('template', $this->view->fetch('Paciente/cargar_adjunto.tpl'));
+			$this->view->assign('template', $this->view->fetch('paciente/cargar_adjunto.tpl'));
 			$this->view->display('template_iframe.tpl');
 		}
 	}
@@ -1042,7 +1042,7 @@ class Paciente extends Controller {
 		}
 		
 		$this->smarty->assign('mostrar',$mostrar);
-		$this->_display('Paciente/buscar.tpl');
+		$this->_display('paciente/buscar.tpl');
 		$this->load->javascript(STATIC_FILES . "js/regiones.js");
 		$this->load->javascript(STATIC_FILES . "js/templates/paciente/buscar.js");
 	}

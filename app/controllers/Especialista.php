@@ -71,7 +71,7 @@ class Especialista extends Controller {
 		$this->smarty->assign('arrResultado', $arr);
 		$this->smarty->assign('titulo', 'Pacientes derivados a Especialista');
 
-		$this->_display('Paciente/index.tpl');
+		$this->_display('grilla/pacientes.tpl');
 	}
 	
 	/**
@@ -92,7 +92,7 @@ class Especialista extends Controller {
 		$this->smarty->assign("id_paciente", $id_paciente);
 		$this->smarty->assign("botonAyudaTratamiento", Boton::botonAyuda('Ingrese Datos del Diagnóstico.', '', 'pull-right'));
 
-		$this->_display('Especialista/diagnostico.tpl');
+		$this->_display('especialista/diagnostico.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/especialista/diagnostico.js");
 		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
 	}
