@@ -346,15 +346,15 @@ $("#guardar").on('click', function (e) {
 				});
 			}
 
-			if ($('#nr_ingreso_mensual').val() == "") {
+			if ($('#id_ingreso_mensual').val() == 0) {
 				parametros.push({
-					"name": 'nr_ingreso_mensual',
+					"name": 'id_ingreso_mensual',
 					"value": 'NULL'
 				});
 			} else {
 				parametros.push({
-					"name": 'nr_ingreso_mensual',
-					"value": $('#nr_ingreso_mensual').val()
+					"name": 'id_ingreso_mensual',
+					"value": $('#id_ingreso_mensual').val()
 				});
 			}
 

@@ -351,10 +351,14 @@
 							</select>
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
-						<label for="nr_ingreso_mensual" class="control-label col-sm-1">Ingresos Mensuales</label>
+						<label for="id_ingreso_mensual" class="control-label col-sm-1">Ingresos Mensuales</label>
 						<div class="col-sm-3">
-							<input type="number" name="nr_ingreso_mensual" id="nr_ingreso_mensual" min="0" value=""
-								   placeholder="Ingresos Mensuales Estimados" class="form-control" />
+							<select class="form-control" id="id_ingreso_mensual" name="id_ingreso_mensual">
+								<option value="0">Seleccione Ingresos Mensuales</option>
+								{foreach $arrIngresosMensuales as $item}
+									<option value="{$item->id_ingreso_mensual}" >{$item->nr_minimo} - {$item->nr_maximo}</option>
+								{/foreach}
+							</select>
 							<span class="help-block hidden fa fa-warning"></span>
 						</div>
 					</div>
