@@ -87,7 +87,7 @@ class Paciente extends Controller {
 		}
 
 		$this->smarty->assign('arrResultado', $arr);
-		$this->smarty->assign('arrOpcion', Boton::botonAyuda('Ingrese Datos del Paciente.', '', 'pull-right'));
+		$this->smarty->assign('arrOpcion', Boton::botonGrillaPaciente());
 		$this->smarty->assign('titulo', 'Pacientes');
 
 		$this->_display('grilla/pacientes.tpl');
