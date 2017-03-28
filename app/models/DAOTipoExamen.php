@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_examen
-* Plataforma	: !PHP
-* Creacion		: 01/03/2017
-* @name			DAOTipoExamen.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_tipo_examen
+* Plataforma        : !PHP
+* Creacion          : 01/03/2017
+* @name             DAOTipoExamen.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------

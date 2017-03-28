@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_perfil
-* Plataforma	: !PHP
-* Creacion		: 06/05/2017
-* @name			DAOPerfil.php
-* @version		1.0
-* @author		Orlando Vazquez <orlando.vazquez@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_perfil
+* Plataforma        : !PHP
+* Creacion          : 06/03/2017
+* @name             DAOPerfil.php
+* @version          1.0
+* @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -29,16 +29,7 @@ class DAOPerfil extends Model {
         parent::__construct();       
     }
 
-	/**
-	* getLista()
-	* Obtiene toda la informacion de la tabla
-	* 
-	* @author	<orlando.vazquez@cosof.cl>	06-03-2017
-	* 
-	*
-	* @return object Informacion de toda la tabla
-	*/
-    public function getLista(){
+	public function getLista(){
         $query	= "	SELECT * FROM ".$this->_tabla;
         $result	= $this->db->getQuery($query);
 
@@ -48,16 +39,7 @@ class DAOPerfil extends Model {
             return NULL;
         }
     }
-	/**
-	* getById()
-	* Obtiene informacion del perfil por id
-	* 
-	* @author	<orlando.vazquez@cosof.cl>	06-03-2017
-	* 
-	* @param	int		$id_perfil
-	*
-	* @return	object	Informacion del perfil por id
-	*/
+	
     public function getById($id_perfil){
         $query	= "	SELECT * FROM ".$this->_tabla."
 					WHERE ".$this->_primaria." = ?";

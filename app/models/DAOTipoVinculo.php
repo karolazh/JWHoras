@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_vinculo
-* Plataforma	: !PHP
-* Creacion		: 07/03/2017
-* @name			DAOTipoVinculo.php
-* @version		1.0
-* @author		David Guzmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_tipo_vinculo
+* Plataforma        : !PHP
+* Creacion          : 07/03/2017
+* @name             DAOTipoVinculo.php
+* @version          1.0
+* @author           David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -30,9 +30,6 @@ class DAOTipoVinculo extends Model{
         parent::__construct();
     }
     
-    /*
-     * 20170203 - Lista Regiones
-     */
     public function getLista(){
         $query		= $this->db->select("*")->from($this->_tabla);
         $resultado	= $query->getResult();

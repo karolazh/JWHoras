@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion           : Modelo para Tabla pre_adjunto
-* Plataforma            : !PHP
-* Creacion		: 24/02/2017
-* @name			DAOAdjunto.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_adjunto
+* Plataforma        : !PHP
+* Creacion          : 24/02/2017
+* @name             DAOAdjunto.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,6 +55,10 @@ class DAOAdjunto extends Model{
         }
     }
     
+    /**
+	 * Descripción : Obtiene archivos por Id de Paciente
+	 * @author  S/N
+	 */
     public function getByIdPaciente($id_paciente) {
         $query	= "	SELECT gl_path 
 			FROM pre_adjunto
@@ -70,6 +74,11 @@ class DAOAdjunto extends Model{
         }
     }
     
+    /**
+	 * Descripción : Obtiene detalle de archivos por Id de Paciente
+	 * @author  Carolina Zamora <carolina.zamora@cosof.cl>
+     * @param   int $id_paciente
+	 */
     public function getDetalleByIdPaciente($id_paciente){
         $query	=   "SELECT 
                         adj.id_adjunto,

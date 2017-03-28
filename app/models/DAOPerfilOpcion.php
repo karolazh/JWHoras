@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_perfil_opcion
-* Plataforma	: !PHP
-* Creacion		: 06/05/2017
-* @name			DAOPerfilOpcion.php
-* @version		1.0
-* @author		Orlando Vazquez <orlando.vazquez@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_perfil_opcion
+* Plataforma        : !PHP
+* Creacion          : 06/03/2017
+* @name             DAOPerfilOpcion.php
+* @version          1.0
+* @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -30,16 +30,7 @@ class DAOPerfilOpcion extends Model {
         parent::__construct();       
     }
 
-	/**
-	* getLista()
-	* Obtiene toda la informacion de la tabla
-	* 
-	* @author	<orlando.vazquez@cosof.cl>	06-03-2017
-	* 
-	*
-	* @return object toda la información de la tabla
-	*/
-    public function getLista(){
+	public function getLista(){
         $query	= "	SELECT * FROM ".$this->_tabla;
         $result	= $this->db->getQuery($query);
 
@@ -49,15 +40,6 @@ class DAOPerfilOpcion extends Model {
             return NULL;
         }
     }
-	/**
-	* getById()
-	* Obtiene las opciones de perfil_opcion por id_perfil
-	* 
-	* @author	<orlando.vazquez@cosof.cl>	06-03-2017
-	* 
-	* @param	int		$id_perfil
-	* @return	object	Informacion del perfil_opcion por id_perfil
-	*/
 	
 	public function getById($id_perfil){
         $query	= "	SELECT * FROM ".$this->_tabla."
@@ -73,8 +55,13 @@ class DAOPerfilOpcion extends Model {
         }
     }
 	
+    /**
+	 * Descripción : Obtiene Opciones Raiz
+     * @author  S/N
+     * @param   int $id_perfil
+	 */
 	public function getOpcionesRaiz($id_perfil){
-        $query	= "	SELECT 
+        $query = "  SELECT 
 						o.id_opcion AS id_opcion, 
 						id_opcion_padre, 
 						bo_tiene_hijo, 
@@ -83,8 +70,7 @@ class DAOPerfilOpcion extends Model {
 						gl_url
 					FROM pre_perfil_opcion po
 					LEFT JOIN pre_opcion o  ON po.id_opcion = o.id_opcion
-					WHERE id_perfil = ? AND bo_activo = 1 AND id_opcion_padre = 0"
-					;
+					WHERE id_perfil = ? AND bo_activo = 1 AND id_opcion_padre = 0";
 
 		$param	= array($id_perfil);
         $result	= $this->db->getQuery($query,$param);
@@ -96,7 +82,13 @@ class DAOPerfilOpcion extends Model {
         }
     }
 	
-    public function getByIdCompuesta($id_perfil,$id_opcion){
+    /**
+	 * Descripción : Obtiene Opciones Compuestas
+     * @author  S/N
+     * @param   int $id_perfil
+     * @param   int $id_opcion
+	 */
+    public function getByIdCompuesta($id_perfil, $id_opcion){
         $query	= "	SELECT * FROM ".$this->_tabla."
 					WHERE ".$this->_primaria_1." = ? AND ".$this->_primaria_2." = ? " ;
 
@@ -109,6 +101,12 @@ class DAOPerfilOpcion extends Model {
             return null;
         }
     }
+    
+    /**
+	 * Descripción : Obtiene Sub-Opciones
+     * @author  S/N
+     * @param   int $id_perfil
+	 */
 	public function getSubOpciones($id_perfil){
         $query	= "	SELECT 
 						o.id_opcion AS id_opcion, 
@@ -132,8 +130,11 @@ class DAOPerfilOpcion extends Model {
         }
     }
 
-	
-	
+    /**
+	 * Descripción : Obtiene Menú-Perfil por Id
+     * @author  S/N
+     * @param   int $id_perfil
+	 */
 	public function getAllMenuPerfilPorID($id_perfil){
         $query	= "	SELECT 
 						o.id_opcion AS id_opcion, 
@@ -156,7 +157,6 @@ class DAOPerfilOpcion extends Model {
             return null;
         }
     }
-	
 	
 }
 

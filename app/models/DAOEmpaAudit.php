@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_empa_audit
-* Plataforma	: !PHP
-* Creacion		: 27/02/2017
-* @name			DAOEmpaAudit.php
-* @version		1.0
-* @author		Orlando Vázquez <orlando.vazquez@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_empa_audit
+* Plataforma        : !PHP
+* Creacion          : 27/02/2017
+* @name             DAOEmpaAudit.php
+* @version          1.0
+* @author           Orlando Vázquez <orlando.vazquez@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,8 +55,13 @@ class DAOEmpaAudit extends Model{
         }
     }
 
+    /**
+	 * Descripción : Obtiene detalle de Audit x Id de Empa
+	 * @author  S/N
+     * @param   int $id_empa
+	 */
     public function getByIdEmpa($id_empa){
-        $query	= "	SELECT 
+        $query = "  SELECT 
 						id_audit,
 						id_empa,
 						id_pregunta,
@@ -74,8 +79,15 @@ class DAOEmpaAudit extends Model{
         }
     }
     
-	public function updateEmpaAudit( $id_empa, $id_pregunta, $valor){
-        $query	= "	UPDATE pre_empa_audit 
+    /**
+	 * Descripción : Actualiza Audit de Empa por Id y Pregunta
+	 * @author  S/N
+     * @param   int $id_empa
+     * @param   int $id_pregunta
+     * @param   int $valor
+	 */
+	public function updateEmpaAudit($id_empa, $id_pregunta, $valor){
+        $query = "  UPDATE pre_empa_audit 
 					SET	nr_valor =	".$valor."
 					WHERE id_empa = ".$id_empa." AND id_pregunta = ".$id_pregunta."";
 

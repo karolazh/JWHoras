@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_prevision
-* Plataforma	: !PHP
-* Creacion		: 01/03/2017
-* @name			DAOPrevision.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_prevision
+* Plataforma        : !PHP
+* Creacion          : 01/03/2017
+* @name             DAOPrevision.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------

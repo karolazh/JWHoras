@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_evento_tipo
-* Plataforma	: !PHP
-* Creacion		: 24/02/2017
-* @name			DAOEventoTipo.php
-* @version		1.0
-* @author		Orlando Vázquez <orlando.vazquez@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_evento_tipo
+* Plataforma        : !PHP
+* Creacion          : 24/02/2017
+* @name             DAOEventoTipo.php
+* @version          1.0
+* @author           Orlando Vázquez <orlando.vazquez@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------

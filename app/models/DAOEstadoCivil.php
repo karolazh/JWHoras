@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_estado_civil
-* Plataforma	: !PHP
-* Creacion		: 06/03/2017
-* @name			DAOEstadoCivil.php
-* @version		1.0
-* @author		David Gusman <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_tipo_estado_civil
+* Plataforma        : !PHP
+* Creacion          : 06/03/2017
+* @name             DAOEstadoCivil.php
+* @version          1.0
+* @author           David Gusman <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------

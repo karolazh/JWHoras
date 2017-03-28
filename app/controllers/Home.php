@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion   : Controller para Registro de Paciente
-* Plataforma    : !PHP
-* Creacion		: 14/02/2017
-* @name			Home.php
-* @version		1.0
-* @author		Orlando Vazquez <orlando.vazquez@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Controller para Registro de Paciente
+* Plataforma        : !PHP
+* Creacion          : 14/02/2017
+* @name             Home.php
+* @version          1.0
+* @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------

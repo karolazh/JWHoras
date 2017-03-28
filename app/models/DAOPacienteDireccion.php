@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_paciente_direccion
-* Plataforma	: !PHP
-* Creacion		: 07/03/2017
-* @name			DAOPacienteDireccion.php
-* @version		1.0
-* @author		Orlando Vazquez <orlando.vazquez@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_paciente_direccion
+* Plataforma        : !PHP
+* Creacion          : 07/03/2017
+* @name             DAOPacienteDireccion.php
+* @version          1.0
+* @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -28,15 +28,6 @@ class DAOPacienteDireccion extends Model {
         parent::__construct();       
     }
 	
-	/**
-	* getLista()
-	* Obtiene toda la informacion de la tabla
-	* 
-	* @author	<orlando.vazquez@cosof.cl>	07-03-2017
-	* 
-	*
-	* @return object Informacion de toda la tabla
-	*/
     public function getLista(){
         $query	= "	SELECT * FROM ".$this->_tabla;
         $result	= $this->db->getQuery($query);
@@ -48,17 +39,7 @@ class DAOPacienteDireccion extends Model {
         }
     }
 
-	/**
-	* getById()
-	* Obtiene informacion de la direccion por id_direccion
-	* 
-	* @author	<orlando.vazquez@cosof.cl>	07-03-2017
-	* 
-	* @param	int		$id_direccion
-	*
-	* @return	object	Informacion de la direccion por id_direccion
-	*/
-    public function getById($id_direccion){
+	public function getById($id_direccion){
         $query	= "	SELECT * FROM ".$this->_tabla."
 					WHERE ".$this->_primaria." = ?";
 
@@ -73,18 +54,12 @@ class DAOPacienteDireccion extends Model {
     }
 	
 	/**
-	* insertar()
-	* Lleva la informacion de la direccion a la base de datos.
-	* 
-	* @author	<orlando.vazquez@cosof.cl>	07-03-2017
-	* 
-	* @param	array		$parametros
-	*
-	* @return	object	Informacion de la direccion por id_direccion
-	*/
+	 * Descripción : Lleva la informacion de la direccion a la base de datos.
+	 * @author  Orlando Vasquez <orlando.vazquez@cosof.cl>
+     * @param   array $datos
+	 */
     public function insertarDireccion($datos){
-		$query	= "	INSERT INTO ".$this->_tabla."
-						(
+		$query = "  INSERT INTO ".$this->_tabla." (
 						id_paciente,
 						id_comuna,
 						id_region,
@@ -96,9 +71,7 @@ class DAOPacienteDireccion extends Model {
 						fc_crea,
 						id_usuario_actualiza,
 						fc_actualiza
-						)
-					VALUES
-						(
+					) VALUES (
 						".$datos['id_paciente'].",
 						".$datos['id_comuna'].",
 						".$datos['id_region'].",
@@ -110,8 +83,7 @@ class DAOPacienteDireccion extends Model {
 						now(),
 						".$_SESSION['id'].",
 						now()
-						)
-                    ";
+						)";
 		
         if ($this->db->execQuery($query)) {
 			return $this->db->getLastId();
@@ -120,17 +92,11 @@ class DAOPacienteDireccion extends Model {
         }
     }
 	
-	
 	/**
-	* insertar()
-	* Lleva la informacion de la direccion a la base de datos.
-	* 
-	* @author	<david.guzman@cosof.cl>	07-03-2017
-	* 
-	* @param	array		$id_paciente
-	*
-	* @return	object	Obtener Informacion segun Id Paciente y bo_estado = 1 (vigente)
-	*/
+	 * Descripción : Obtiene dirección(es) de paciente
+	 * @author  David Guzmán <david.guzman@cosof.cl> 07-03-2017
+     * @param   int $id_paciente
+	 */
 	public function getByIdPaciente($id_paciente){
 		$query	= "	SELECT * FROM ".$this->_tabla."
 					WHERE id_paciente = ?
@@ -145,8 +111,15 @@ class DAOPacienteDireccion extends Model {
             return NULL;
         }
 	}
+    
+    /**
+	 * Descripción : Obtiene dirección(es) de paciente con estado = 1
+	 * @author  S/N
+     * @param   int $id_paciente
+     * @param   int $bo_estado
+	 */
 	public function getMultByIdPaciente($id_paciente, $bo_estado=1){
-		$query	= "	SELECT 
+		$query = "  SELECT 
                         pac.id_paciente_direccion,
                         pac.id_paciente,
                         com.id_comuna,
@@ -170,9 +143,10 @@ class DAOPacienteDireccion extends Model {
                     LEFT JOIN pre_usuario usr ON usr.id_usuario = pac.id_usuario_crea
                     WHERE pac.id_paciente = ?";
 
-if($bo_estado==1){
-	$query .= ' AND bo_estado = 1';
-}
+        if($bo_estado==1){
+            $query .= ' AND bo_estado = 1';
+        }
+        
 		$param	= array($id_paciente);
         $result	= $this->db->getQuery($query,$param);
 		
@@ -182,32 +156,32 @@ if($bo_estado==1){
             return NULL;
         }
 	}
+    
+    /**
+	 * Descripción : Actualiza estado en tabla "pre_paciente_direccion"
+	 * @author  S/N
+     * @param   int $id_paciente
+	 */
 	public function disabDirecciones($id_paciente){
-		 $query	= "	UPDATE pre_paciente_direccion SET
-						bo_estado					= 0,
-						id_usuario_actualiza		= ".$_SESSION['id'].",
-						fc_actualiza				= now()
-					WHERE id_paciente = ".$id_paciente."
-                    ";
+        $query = "  UPDATE pre_paciente_direccion 
+                    SET bo_estado				= 0,
+						id_usuario_actualiza    = ".$_SESSION['id'].",
+						fc_actualiza			= now()
+					WHERE id_paciente = ".$id_paciente."";
 
         if($this->db->execQuery($query)) {
             return TRUE;
         }else{
             return FALSE;
-        }
-		 
+        }		 
 	 }
          
     /**
-    * Descripción: Obtiene historial de direcciones por Id de Paciente
-    * 
-    * @author   <carolina.zamora@cosof.cl>  08-03-2017
-    * 
-    * @param    int $id_paciente
-    *
-    * @return   object
-    */
-    public function getByIdDirecciones($id_paciente){
+	 * Descripción : Obtiene historial de direcciones por Id de Paciente
+	 * @author  Carolina Zamora <carolina.zamora@cosof.cl>  08-03-2017
+     * @param   int $id_paciente
+	 */
+    public function getDireccionesById($id_paciente){
         $query = "  SELECT 
                         pac.id_paciente_direccion,
                         pac.id_paciente,
@@ -244,15 +218,11 @@ if($bo_estado==1){
     }
 
     /**
-    * Descripción: Obtiene dirección vigente por Id de Paciente
-    * 
-    * @author   <carolina.zamora@cosof.cl>  08-03-2017
-    * 
-    * @param    int $id_paciente
-    *
-    * @return  object
-    */
-    public function getByIdDireccionVigente($id_paciente){
+	 * Descripción : Obtiene dirección vigente por Id de Paciente
+	 * @author  Carolina Zamora <carolina.zamora@cosof.cl>  08-03-2017
+     * @param   int $id_paciente
+	 */
+    public function getDireccionVigenteById($id_paciente){
         $query = "  SELECT 
                         pac.id_paciente_direccion,
                         pac.id_paciente,

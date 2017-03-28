@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_comuna
-* Plataforma	: !PHP
-* Creacion		: 24/02/2017
-* @name			DAOComuna.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_comuna
+* Plataforma        : !PHP
+* Creacion          : 24/02/2017
+* @name             DAOComuna.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -54,6 +54,11 @@ class DAOComuna extends Model {
         }
     }
 
+    /**
+	 * Descripción : Obtiene Comunas por Id de Provincia
+	 * @author  S/N
+     * @param   int $id_provincia
+	 */
     public function getByIdProvincia($id_provincia) {
         $query		= "	SELECT * 
 						FROM pre_comuna
@@ -69,6 +74,11 @@ class DAOComuna extends Model {
         }
     }
 
+    /**
+	 * Descripción : Obtiene detalle por comuna por Id
+	 * @author  S/N
+     * @param   int $id_comuna
+	 */
     public function getInfoComunaxID($id_comuna) {
         $query	= "	SELECT 
 						c.id_comuna,
@@ -92,11 +102,15 @@ class DAOComuna extends Model {
         }
     }
 
+    /**
+	 * Descripción : Obtiene Comunas por Id de Región
+	 * @author  S/N
+     * @param   int $id_region
+	 */
 	public function getComunasByIdRegion($id_region){
-		$query	= "	SELECT 
-						c.*
+		$query	= "	SELECT c.*
 					FROM pre_comuna c
-						LEFT JOIN pre_region r ON c.id_region = r.id_region
+                    LEFT JOIN pre_region r ON c.id_region = r.id_region
 					WHERE c.id_region = ?";
 
 		$param	= array($id_region);

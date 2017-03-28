@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_imc
-* Plataforma	: !PHP
-* Creacion		: 03/03/2017
-* @name			DAOTipoIMC.php
-* @version		1.0
-* @author		David Gusmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_tipo_imc
+* Plataforma        : !PHP
+* Creacion          : 03/03/2017
+* @name             DAOTipoIMC.php
+* @version          1.0
+* @author           David Gusmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,6 +55,11 @@ class DAOTipoIMC extends Model{
         }
     }
 
+    /**
+	 * Descripción : Obtiene tipo de IMC
+     * @author  S/N
+     * @param   int $imc
+	 */
     public function getTipoIMC($imc){
         $query	= "	SELECT  * 
 					FROM pre_tipo_imc

@@ -110,7 +110,7 @@ class Agenda extends Controller {
                 }
             }
             //Dirección Vigente de Paciente
-            $detDireccion = $this->_DAOPacienteDireccion->getByIdDireccionVigente($id_paciente);
+            $detDireccion = $this->_DAOPacienteDireccion->getDireccionVigenteById($id_paciente);
             if (!is_null($detDireccion)) {
                 $direccion = $detDireccion->gl_direccion;
                 $comuna    = $detDireccion->gl_nombre_comuna;
