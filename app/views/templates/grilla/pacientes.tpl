@@ -132,15 +132,6 @@
 														<i class="fa fa-calendar"></i>
 												</button>
 												{/if}
-												{if $mostrar_gestor == 1}
-												<button type="button"
-														onClick="" 
-														data-toggle="tooltip" 
-														data-title="ReAgendar"
-														class="btn btn-xs btn-warning">
-														<i class="fa fa-calendar"></i>
-												</button>
-												{/if}
 												<button type="button" 
 														class="btn btn-xs btn-success" 
 														onClick="location.href='{$base_url}/Laboratorio/ver/{$item->id_paciente}';"
@@ -245,15 +236,6 @@
 														onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/ver/{$item->id_paciente}', 'Agenda Examen Paciente : {$item->id_paciente}', 85);" 
 														data-toggle="tooltip" 
 														data-title="Agenda Examen"
-														class="btn btn-xs btn-warning">
-														<i class="fa fa-calendar"></i>
-												</button>
-												{/if}
-												{if $mostrar_gestor == 1}
-												<button type="button"
-														onClick="" 
-														data-toggle="tooltip" 
-														data-title="ReAgendar"
 														class="btn btn-xs btn-warning">
 														<i class="fa fa-calendar"></i>
 												</button>

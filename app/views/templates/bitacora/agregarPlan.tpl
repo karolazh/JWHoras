@@ -15,8 +15,8 @@
 				{foreach $arr_plan as $item}
 					<tr>
 						<td class="text-center" nowrap> {$item->gl_nombre_especialidad} </td>
-						<td class="text-center" nowrap> {$item->gl_observacion} </td>
-						<td class="text-center" nowrap> {$item->fc_crea} </td>
+						<td class="text-center" nowrap> {$item->gl_agenda_observacion} {$item->gl_observacion_diagnostico}</td>
+						<td class="text-center" nowrap> {$item->fecha_agenda} {$item->hora_agenda} {$item->fecha_diagnostico} {$item->hora_diagnostico}</td>
 					</tr>
 				{/foreach}
 			</tbody>

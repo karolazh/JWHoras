@@ -100,7 +100,7 @@
 				<div class="top-spaced"></div>
 				
 				<div class="form-group clearfix col-sm-10 text-right">
-					<button type="button" id="guardar" class="btn btn-success">
+					<button type="button" id="guardardiagnostico" class="btn btn-success">
 						<i class="fa fa-save"></i>  Guardar
 					</button>&nbsp;&nbsp; 
 					<button type="button" id="reagendar" class="btn btn-warning"
