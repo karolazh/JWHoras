@@ -129,7 +129,9 @@ class DAOPacienteAgresor extends Model{
 						s.gl_tipo_sexo,
 						g.gl_tipo_genero,
 						os.gl_orientacion_sexual,
-						date_format(fc_nacimiento_agresor,'%d-%m-%Y') as fc_nacimiento_agresor
+						date_format(fc_nacimiento_agresor,'%d-%m-%Y') as fc_nacimiento_agresor,
+						ingreso.nr_minimo,
+						ingreso.nr_maximo
 
 					FROM pre_paciente_agresor a
 					LEFT JOIN pre_tipo_vinculo v ON a.id_tipo_vinculo = v.id_tipo_vinculo
@@ -139,7 +141,7 @@ class DAOPacienteAgresor extends Model{
 					LEFT JOIN pre_tipo_sexo s ON a.id_tipo_sexo = s.id_tipo_sexo
 					LEFT JOIN pre_tipo_genero g ON a.id_tipo_genero = g.id_tipo_genero
 					LEFT JOIN pre_tipo_orientacion_sexual os ON a.id_orientacion_sexual = os.id_orientacion_sexual
-					
+					LEFT JOIN pre_tipo_ingreso_mensual ingreso ON ingreso.id_ingreso_mensual = a.id_ingreso_mensual
                     
 					WHERE id_paciente = ?
 					ORDER BY id_agresor ASC

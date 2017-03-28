@@ -147,8 +147,9 @@ class Bitacora extends Controller {
 					$arrComuna2 = $this->_DAOComuna->getById($arrAgresor->id_comuna_trabaja);
 					$this->smarty->assign('comuna_trabaja_agresor', $arrComuna2->gl_nombre_comuna);
 				}
-
-				$this->smarty->assign('ingresos_agresor', $arrAgresor->nr_ingreso_mensual);
+				
+				$ingresos_agresor = $arrAgresor->nr_minimo . " - " . $arrAgresor->nr_maximo;
+				$this->smarty->assign('ingresos_agresor', $ingresos_agresor);
 				$this->smarty->assign('genero_agresor', $arrAgresor->gl_tipo_genero);
 				$this->smarty->assign('sexo_agresor', $arrAgresor->gl_tipo_sexo);
 				$this->smarty->assign('orientacion_agresor', $arrAgresor->gl_orientacion_sexual);
