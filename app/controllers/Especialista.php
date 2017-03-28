@@ -244,4 +244,33 @@ class Especialista extends Controller {
         $this->load->javascript(STATIC_FILES . 'js/templates/especialista/diagnostico.js');
     }
 
+	public function guardarReAgendado(){
+		header('Content-type: application/json');
+		
+        $parametros		= $this->_request->getParams();
+		$bool_insert	= FALSE;
+		$bool_update	= FALSE;
+		//print_r($_SESSION); die;
+		$parametros['id_laboratorio']	= $_SESSION['id_laboratorio'];
+		$parametros['id_tipo_especialidad']	= $_SESSION['id_tipo_especialidad'];
+		
+		$correcto		= FALSE;
+		$error			= FALSE;
+		$bool_update	= $this->_DAOPacienteAgendaEspecialista->updateReAgendar($parametros);
+		if ($bool_update) {
+			$bool_insert	= $this->_DAOPacienteAgendaEspecialista->insertReAgendar($parametros);
+		}
+		
+		if ($bool_insert) {
+			$correcto	= TRUE;
+		} else {
+			$error		= TRUE;
+		}
+
+		$salida	= array("error" => $error, "correcto" => $correcto);
+		$json	= Zend_Json::encode($salida);
+
+		echo $json;
+	}
+	
 }

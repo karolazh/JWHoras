@@ -85,11 +85,9 @@ class DAOPacienteAgendaEspecialista extends Model{
 						id_cie10_seccion,
 						id_cie10_grupo,
 						id_cie10,
-						gl_observacion,
+						gl_observacion_diagnostico,
 						gl_diagnostico,
 						id_tipo_especialidad,
-						fecha_especialista,
-						hora_especialista,
 						fc_crea,
 						id_usuario_crea
 						)
@@ -106,7 +104,40 @@ class DAOPacienteAgendaEspecialista extends Model{
 						'".$parametros['gl_diagnostico']."',
 						(SELECT ue.id_tipo_especialidad FROM pre_usuario_especialidad ue WHERE ue.id_usuario = ".$_SESSION['id']."),
 						now(),
-						now(),
+						".$_SESSION['id']."
+						)
+                    ";
+        if ($this->db->execQuery($query)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+	
+	
+	public function insertReAgendar($parametros){
+		
+        $query	= "	INSERT INTO pre_paciente_agenda_especialista
+						(
+						id_especialista,
+						id_paciente,
+						id_empa,
+						fecha_agenda,
+						hora_agenda,
+						gl_agenda_observacion,
+						id_tipo_especialidad,
+						fc_crea,
+						id_usuario_crea
+						)
+					VALUES
+						(
+						".$_SESSION['id'].",
+						".$parametros['id_paciente'].",
+						".$parametros['id_empa'].",
+						".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_toma'])).",
+						'".$parametros['gl_hora_toma']."',
+						'".$parametros['gl_agenda_observacion']."',
+						(SELECT ue.id_tipo_especialidad FROM pre_usuario_especialidad ue WHERE ue.id_usuario = ".$_SESSION['id']."),
 						now(),
 						".$_SESSION['id']."
 						)
@@ -117,6 +148,22 @@ class DAOPacienteAgendaEspecialista extends Model{
             return FALSE;
         }
     }
+	
+	public function updateReAgendar($parametros){
+		
+		$query	= "	UPDATE pre_paciente_agenda_especialista SET
+						id_estado						= 4,
+						id_usuario_actualiza			= ".$_SESSION['id'].",
+						fc_actualiza					= now()
+					WHERE id_tipo_especialidad = ".$parametros['id_tipo_especialidad']."
+                    ";
+
+        if($this->db->execQuery($query)) {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+	}
 	
 }
 

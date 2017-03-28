@@ -1,4 +1,4 @@
-$("#guardar").on('click', function (e) {
+$("#guardardiagnostico").on('click', function (e) {
 	var button_process			= buttonStartProcess($(this), e);
 	var parametros				= $("#form").serializeArray();
 	var cie10					= $("#cie10").attr("selected",true).val();
@@ -137,3 +137,56 @@ $("#seccion_cie10").on('change', function (e) {
 	}
 });
 
+// funcion para que funcione el calendario estilo ASD
+$(function () {
+    $(".datepicker").datetimepicker({
+        locale: "es",
+        format: "DD/MM/YYYY",
+    });
+});
+//funcion para que funcione la seleccion de hora estilo ASD
+ $(function () {
+    $(".timepicker").datetimepicker({
+        format: "LT"
+    });
+});
+
+$("#guardar").on('click', function (e) {
+	var button_process			= buttonStartProcess($(this), e);
+	var parametros				= $("#form-agendar").serializeArray();
+	var fc_toma					= $("#fc_toma").val();
+	var gl_hora_toma			= $("#gl_hora_toma").val();
+	var gl_agenda_observacion	= $("#gl_agenda_observacion").val();
+	
+	if (fc_toma == '') {
+		xModal.danger('- El campo Fecha es obligatorio');
+	} else if (gl_hora_toma == '') {
+		xModal.danger('- El campo Hora es obligatorio');
+	} else if (gl_agenda_observacion == '') {
+		xModal.danger('- El campo Observaciones es obligatorio');	
+	} else {
+		$.ajax({
+			dataType: "json",
+			cache	: false,
+			async	: true,
+			data	: parametros,
+			type	: "post",
+			url		: BASE_URI + "index.php/Especialista/guardarReAgendado",
+			error	: function (xhr, textStatus, errorThrown) {
+						xModal.danger('Error: No se pudo Guardar.');
+					},
+			success	: function (data) {
+						if (data.correcto) {
+							xModal.success('Éxito: Reagendado!');
+							setTimeout(function () {
+								location.href = BASE_URI + "index.php/Especialista";
+							}, 2000);
+						} else {
+							xModal.info('Error: No se pudo Reagendar');
+						}
+					}
+		});
+	}
+	buttonEndProcess(button_process);
+
+});
