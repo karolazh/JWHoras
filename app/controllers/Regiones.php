@@ -29,6 +29,10 @@ class Regiones extends Controller{
 		$this->_DAORegion = $this->load->model('DAORegion');
 	}
 
+    /**
+	 * Descripción: Carga comunas por región
+	 * @author: S/N
+	 */
     public function cargarComunasPorRegion(){
 		$region		= $_POST['region'];
 		$comunas	= $this->_DAORegion->getDetalleByIdRegion($region);
@@ -42,5 +46,4 @@ class Regiones extends Controller{
 
 		echo json_encode($json);
     }
-
 }

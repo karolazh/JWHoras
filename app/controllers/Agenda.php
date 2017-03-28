@@ -6,7 +6,7 @@
 * Descripcion      : Controller para Exámenes de Pacientes
 * Plataforma       : !PHP
 * Creacion         : 15/03/2017
-* @name			Agenda.php
+* @name            Agenda.php
 * @version         1.0
 * @author          Carolina Zamora <carolina.zamora@cosof.cl>
 * =============================================================================
@@ -44,11 +44,7 @@ class Agenda extends Controller {
         $this->_DAOTipoExamen			= $this->load->model("DAOTipoExamen");
 	}
 
-    /**
-	 * Descripción: Index Agenda
-	 * @author Carolina Zamora <carolina.zamora@cosof.cl>
-	 */
-	public function index() {
+    public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
 	}
     
@@ -149,9 +145,12 @@ class Agenda extends Controller {
 		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
 	}
 	
+    /**
+	 * Descripción: Agenda Laboratorio
+	 * @author S/N
+	 */
     public function agendaLaboratorio() {
         Acceso::redireccionUnlogged($this->smarty);
-
         $id_laboratorio	= $_SESSION['id_laboratorio'];
         
         //Grilla Exámenes x Paciente

@@ -164,7 +164,6 @@ class Laboratorio extends Controller {
     /**
 	 * Descripción: Buscar detalle de examen agendado
 	 * @author Carolina Zamora <carolina.zamora@cosof.cl>
-     * @return 
 	 */
     public function buscar() {
         $parametros			= $this->request->getParametros();
