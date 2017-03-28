@@ -104,7 +104,7 @@ Class Boton{
 
 		//Todos
 		$ver	= "	<button type='button' 
-						onClick=\"xModal.open('".BASE_URI."/Paciente/ver/\$id_paciente', 'Detalle Paciente', 85)\" 
+						onClick=\"xModal.open('".BASE_URI."/Paciente/ver/'+$('#id_paciente').val(), 'Detalle Paciente', 85)\" 
 						data-toggle='tooltip' 
 						class='btn btn-xs btn-info'
 						data-title='Ver Paciente'>
