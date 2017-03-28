@@ -29,6 +29,8 @@ class Especialista extends Controller {
 	protected $_DAOCie10Seccion;
 	protected $_DAOCie10Grupo;
 	protected $_DAOPacienteAgendaEspecialista;
+	protected $_DAOLaboratorio;
+	protected $_DAOTipoExamen;
 
 	function __construct() {
 		parent::__construct();
@@ -45,6 +47,8 @@ class Especialista extends Controller {
 		$this->_DAOCie10Capitulo				= $this->load->model("DAOCie10Capitulo");
 		$this->_DAOCie10Seccion					= $this->load->model("DAOCie10Seccion");
 		$this->_DAOCie10Grupo					= $this->load->model("DAOCie10Grupo");
+		$this->_DAOLaboratorio					= $this->load->model("DAOLaboratorio");
+		$this->_DAOTipoExamen					= $this->load->model("DAOTipoExamen");
 	}
 
 	/**
@@ -171,4 +175,58 @@ class Especialista extends Controller {
 		echo json_encode($json);
     }
 
+	/**
+	 * Descripción: Ver Agenda de Examenes
+	 * * @author Carolina Zamora <carolina.zamora@cosof.cl>
+	 */
+    public function reagendar() {
+        Acceso::redireccionUnlogged($this->smarty);        
+        $parametros		= $this->request->getParametros();
+        $id_paciente	= $parametros[0];
+        $reagendar		= 1;
+		$registro		= $this->_DAOPaciente->getById($id_paciente);
+		
+		//print_r($_SESSION); die;
+        //valida si agenda examen de empa o de laboratorio
+        if (isset($parametros[1])) {
+            $id_empa = $parametros[1];
+        } else {
+            $id_empa = "";
+        }
+        $id_centro_salud = $registro->id_centro_salud;
+        //valida si agenda examen de empa o de laboratorio
+        /*if (isset($parametros[3])) {
+            $id_examen = $parametros[3];
+        } else {
+            $id_examen = "";
+        }*/
+        
+        $perfil = $_SESSION['perfil'];
+		//"Especialista"
+            $rut_esp         = $_SESSION['rut'];
+            $nombre_esp      = $_SESSION['nombre'];
+            $id_laboratorio  = $_SESSION['id_laboratorio'];            
+            //Combo Laboratorios según tipo de usuario
+            //$arrLaboratorios = $this->_DAOLaboratorio->getLista();
+			$arrLaboratorios = $this->_DAOLaboratorio->getByIdCentroSalud($id_centro_salud);
+        
+        //Combos Tipo Examen
+        $arrTipoExamen = $this->_DAOTipoExamen->getLista();
+        
+        $this->smarty->assign("reagendar", $reagendar);
+        $this->smarty->assign("id_paciente", $id_paciente);
+        $this->smarty->assign("id_empa", $id_empa);
+        $this->smarty->assign("id_centro_salud", $id_centro_salud);
+        $this->smarty->assign("rut_esp", $rut_esp);
+        $this->smarty->assign("nombre_esp", $nombre_esp);
+        //$this->smarty->assign("id_examen", $id_examen);        
+        $this->smarty->assign("perfil", $perfil);
+        $this->smarty->assign("id_laboratorio", $id_laboratorio);
+        $this->smarty->assign('arrLaboratorios', $arrLaboratorios);
+        $this->smarty->assign('arrTipoExamen', $arrTipoExamen);
+        
+        $this->smarty->display('agenda/agendar.tpl');
+        $this->load->javascript(STATIC_FILES . 'js/templates/especialista/diagnostico.js');
+    }
+	
 }

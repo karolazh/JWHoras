@@ -71,6 +71,15 @@
                                 title="Registrar Resultado">
                                 <i class="fa fa-pencil"></i>
                             </button>
+							
+							<button type="button" 
+                                {*onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"*}
+                                onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/3/{$exa->id_paciente_examen}/', 'Agenda Examen número : {$exa->id_paciente}', 85);" 
+                                class="btn btn-xs btn-warning"
+                                data-toggle="tooltip" 
+                                title="ReAgendar">
+                                <i class="fa fa-calendar"></i>
+                            </button>
                         {/if}
                    </td>
                 </tr>

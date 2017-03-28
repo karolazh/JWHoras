@@ -59,13 +59,13 @@
                                onkeyup="formateaRut(this), validaRut(this), this.value = this.value.toUpperCase()"
                                onkeypress ="return soloNumerosYK(event)" 
                                value="{$rut_lab}" class="form-control" 
-                               {if $perfil == "7" or $accion == "1"}readonly{/if} />
+                               {if $perfil == "7" or $accion == "1" or $accion == "3"}readonly{/if} />
                     </div>
                     <label class="control-label required col-sm-3">Nombre persona toma examen</label>
                     <div class="col-sm-4">
                         <input type="text" name="gl_nombre_toma" id="gl_nombre_toma" maxlength="" 
                                value="{$nombre_lab}" class="form-control"
-                               {if $perfil == "7" or $accion == "1"}readonly{/if} />
+                               {if $perfil == "7" or $accion == "1" or $accion == "3"}readonly{/if} />
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                                    id='fc_toma' 
                                    name='fc_toma'
                                    value="{$fc_toma|date_format:"%d/%m/%Y"}" 
-                                   readonly />
+                                   {if $accion != 3}readonly{/if} />
                             <span class="help-block hidden fa fa-warning"></span>
                             <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_toma').focus();"></i></span>
                         </div>
@@ -93,6 +93,7 @@
                         <input type="date" class="form-control col-sm-2" 
                                name="fc_toma" id="fc_toma" value="{$fc_toma}" readonly />
                     </div>-->
+					{if $accion != 3}
                     <label for="fc_resultado" class="control-label col-sm-3">Fecha resultado de examen</label>
                     <div class='col-sm-2'>
                         <div class="input-group">
@@ -105,6 +106,7 @@
                             <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_resultado').focus();"></i></span>
                         </div>
                     </div>
+					{/if}
                     <!-- <div class="col-sm-2">
                         <input type="date" class="form-control col-sm-2"
                                name="fc_resultado" id="fc_resultado"  value="{$fc_resultado}"
@@ -115,8 +117,9 @@
                     <label class="control-label required col-sm-3">Hora toma de examen</label>
                     <div class="col-sm-2">
                         <input type="time" class="form-control col-sm-2"                                
-                               name="gl_hora_toma" id="gl_hora_toma" value="{$gl_hora_toma}" readonly />
+                               name="gl_hora_toma" id="gl_hora_toma" value="{$gl_hora_toma}" {if $accion != 3}readonly{/if} />
                     </div>
+					{if $accion != 3}
                     <label class="control-label required col-sm-3">Folio examen</label>
                     <div class="col-sm-2">
                         <input type="text" name="gl_folio" id="gl_folio" maxlength="" 
@@ -124,7 +127,9 @@
                                value="{$gl_folio}" placeholder="" class="form-control"
                                {if $accion == "1"}readonly{/if}/>
                     </div>
+					{/if}
                 </div>
+				{if $accion != 3}
                 <div class="form-group">
                     <label class="control-label required col-sm-3">&nbsp;</label>
                     <div class="col-sm-2">&nbsp;</div>
@@ -209,13 +214,25 @@
                 </div>
             </div>
         </div>
-
+		{/if}
         {if $accion == "2"}
             <!-- BOTONERA -->
             <div class="form-group col-sm-11" align="right">
                 <button type="button" id="guardar" class="btn btn-success"
                         onclick="Laboratorio.guardarExamen(this.form)">
                     <i class="fa fa-save"></i>  Guardar
+                </button>&nbsp;
+                <button type="button" id="cancelar"  class="btn btn-default" 
+                        onclick="xModal.close()">
+                    <i class="fa fa-remove"></i>  Cancelar
+                </button>
+            </div>
+        {/if}
+		{if $accion == "3"}
+            <!-- BOTONERA -->
+            <div class="form-group col-sm-11" align="right">
+                <button type="button" id="reagendar" class="btn btn-warning">
+                    <i class="fa fa-save"></i>  ReAgendar
                 </button>&nbsp;
                 <button type="button" id="cancelar"  class="btn btn-default" 
                         onclick="xModal.close()">

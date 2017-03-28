@@ -103,7 +103,8 @@
 					<button type="button" id="guardar" class="btn btn-success">
 						<i class="fa fa-save"></i>  Guardar
 					</button>&nbsp;&nbsp; 
-					<button type="button" id="reagendar" class="btn btn-warning">
+					<button type="button" id="reagendar" class="btn btn-warning"
+							onClick="xModal.open('{$smarty.const.BASE_URI}/Especialista/reagendar/{$id_paciente}/{$id_empa}', 'Agenda Registro número : {$id_paciente}', 85);" >
 						<i class="fa fa-calendar"></i>  Re Agendar
 					</button>&nbsp;&nbsp;
 					<button type="button" id="cancelar"  class="btn btn-default" 
