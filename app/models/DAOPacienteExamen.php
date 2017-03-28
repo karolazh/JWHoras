@@ -87,6 +87,7 @@ class DAOPacienteExamen extends Model{
                     LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
                     LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio
                     WHERE examen.id_paciente = ". $id_paciente ."
+					AND	  examen.bo_activo = 1
                     UNION   
                     SELECT  0 AS id_paciente_examen,
                             6 AS id_tipo_examen,
@@ -183,6 +184,7 @@ class DAOPacienteExamen extends Model{
                     LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio
                     WHERE examen.id_paciente = ". $id_paciente ."
                     AND examen.gl_resultado = 'A'
+					AND	  examen.bo_activo = 1
                     UNION   
                     SELECT  0 AS id_paciente_examen,
                             6 AS id_tipo_examen,
@@ -278,7 +280,8 @@ class DAOPacienteExamen extends Model{
                     LEFT JOIN  pre_empa empa ON (empa.id_empa = pac_examen.id_empa AND empa.bo_finalizado = 0)
                     LEFT JOIN  pre_centro_salud cs ON cs.id_centro_salud = pac.id_centro_salud
                     LEFT JOIN  pre_comuna com ON com.id_comuna = pac.id_comuna
-                    LEFT JOIN  pre_paciente_estado est ON est.id_paciente_estado = pac.id_paciente_estado";
+                    LEFT JOIN  pre_paciente_estado est ON est.id_paciente_estado = pac.id_paciente_estado
+					WHERE examen.bo_activo = 1";
 
 		if(!empty($where)){
 			foreach($where as $w){
@@ -327,7 +330,8 @@ class DAOPacienteExamen extends Model{
                     LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
                     LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio
                     WHERE examen.id_laboratorio = ". $id_laboratorio ." 
-                    AND examen.id_paciente = ". $id_paciente;
+                    AND examen.id_paciente = ". $id_paciente ."
+					AND examen.bo_activo = 1";
         
         $result	= $this->db->getQuery($query);
 
@@ -348,7 +352,8 @@ class DAOPacienteExamen extends Model{
         $query = "  SELECT *
                     FROM pre_paciente_examen
                     WHERE	id_paciente = ". $id_paciente ."
-					AND		id_tipo_examen = ". $id_tipo_examen;
+					AND		id_tipo_examen = ". $id_tipo_examen ."
+					AND		bo_activo = 1";
         
         $result	= $this->db->getQuery($query);
 
@@ -411,7 +416,8 @@ class DAOPacienteExamen extends Model{
                     LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
                     LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio
                     LEFT JOIN pre_paciente paciente ON paciente.id_paciente = examen.id_paciente
-                    WHERE examen.id_laboratorio = ?";
+                    WHERE examen.id_laboratorio = ?
+					AND	 examen.bo_activo = 1";
 
         $param	= array($id_laboratorio);
         $result	= $this->db->getQuery($query,$param);
@@ -422,6 +428,66 @@ class DAOPacienteExamen extends Model{
             return NULL;
         }
     }
+	
+    /**
+	 * Descripción: Inserta registro en tabla "pre_paciente_examen"
+	 * @author S/N
+     * @param  array   $parametros
+	 */
+	public function insertExamen($parametros){
+		
+        $query	= "	INSERT INTO pre_paciente_examen (
+						id_tipo_examen,
+						id_paciente,
+						id_empa,
+						id_laboratorio,
+						id_usuario_toma,
+						gl_rut_persona_toma,
+						gl_nombre_persona_toma,
+						fc_toma,
+						gl_hora_toma,
+						fc_actualiza,
+						id_usuario_crea
+                    ) VALUES (
+						".$parametros['id_tipo_examen'].",
+						".$parametros['id_paciente'].",
+						".$parametros['id_empa'].",
+						".$parametros['id_laboratorio'].",
+						'".$_SESSION['id']."',
+						'".$parametros['gl_rut_toma']."',
+						'".$parametros['gl_nombre_toma']."',
+						".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_toma'])).",
+						'".$parametros['gl_hora_toma']."',
+						now(),
+						".$_SESSION['id']."
+						)";
+        
+        if ($this->db->execQuery($query)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+	
+    /**
+	 * Descripción: Actualiza registro en tabla "pre_paciente_examen"
+	 * @author S/N
+     * @param  array   $parametros
+	 */
+	public function updateExamenReAgendado($parametros){
+		
+		$query	= "	UPDATE pre_paciente_examen 
+                    SET bo_activo				= 0,
+						id_usuario_actualiza    = ".$_SESSION['id'].",
+						fc_actualiza			= now()
+					WHERE id_paciente_examen = ".$parametros['id_paciente_examen']."";
+
+        if($this->db->execQuery($query)) {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+	}
 
 }
 

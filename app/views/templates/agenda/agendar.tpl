@@ -63,6 +63,24 @@
                         </select>
                     </div>
                 </div>
+				{if $reagendar == 1}
+				<div class="form-group">
+                    <label class="control-label required col-sm-3">RUT persona toma examen</label>
+                    <div class="col-sm-3">
+                        <input type="text" name="gl_rut_toma" id="gl_rut_toma" maxlength="9" 
+                               onkeyup="formateaRut(this), validaRut(this), this.value = this.value.toUpperCase()"
+                               onkeypress ="return soloNumerosYK(event)" 
+                               value="{$rut_esp}" class="form-control" 
+                               {if $perfil == "7" or $accion == "1"}readonly{/if} />
+                    </div>
+                    <label class="control-label required col-sm-3">Nombre persona toma examen</label>
+                    <div class="col-sm-3">
+                        <input type="text" name="gl_nombre_toma" id="gl_nombre_toma" maxlength="" 
+                               value="{$nombre_esp}" class="form-control"
+                               {if $perfil == "7" or $accion == "1"}readonly{/if} />
+                    </div>
+                </div>
+				{/if}
             </div>
         </div>
 
@@ -103,7 +121,7 @@
                 </div>*}
             </div>
         </div>
-
+		{if $reagendar != 1}
          <!-- OBSERVACION -->
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
@@ -121,7 +139,7 @@
             </div>
         </div>
     </div>
-                    
+    {/if}                
     <!-- BOTONERA -->
     <div class="form-group col-sm-11" align="right">
         <button type="button" id="guardar" class="btn btn-success"

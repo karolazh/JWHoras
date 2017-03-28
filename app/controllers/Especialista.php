@@ -29,6 +29,8 @@ class Especialista extends Controller {
 	protected $_DAOCie10Seccion;
 	protected $_DAOCie10Grupo;
 	protected $_DAOPacienteAgendaEspecialista;
+	protected $_DAOLaboratorio;
+	protected $_DAOTipoExamen;
 
 	function __construct() {
 		parent::__construct();
@@ -45,6 +47,8 @@ class Especialista extends Controller {
 		$this->_DAOCie10Capitulo				= $this->load->model("DAOCie10Capitulo");
 		$this->_DAOCie10Seccion					= $this->load->model("DAOCie10Seccion");
 		$this->_DAOCie10Grupo					= $this->load->model("DAOCie10Grupo");
+		$this->_DAOLaboratorio					= $this->load->model("DAOLaboratorio");
+		$this->_DAOTipoExamen					= $this->load->model("DAOTipoExamen");
 	}
 
 	/**
@@ -108,10 +112,10 @@ class Especialista extends Controller {
 		$parametros		= $this->_request->getParams();
 		$correcto		= FALSE;
 		$error			= FALSE;
+		
 		$bool_update	= $this->_DAOPacienteAgendaEspecialista->insertAgenda($parametros);
 
 		if ($bool_update) {
-			//$resp = $this->_Evento->guardarMostrarUltimo(12,$id_empa,$id_paciente,"Empa modificado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
 			$correcto	= TRUE;
 		} else {
 			$error		= TRUE;
@@ -127,23 +131,25 @@ class Especialista extends Controller {
 	 * Descripción: cargar Seccion por Capitulo
 	 * @author S/N
 	 */
-	public function cargarSeccionporCapitulo(){
-		$cie10		= $_POST['cie10'];
-		$seccion1	= $this->_DAOCie10Capitulo->getDetalleByIdCapitulo($cie10);
-		$json		= array();
-		$i			= 0;
+	public function cargarSeccionporCapitulo() {
+		$cie10 = $_POST['cie10'];
+		$seccion1 = $this->_DAOCie10Capitulo->getDetalleByIdCapitulo($cie10);
+		$json = array();
+		$i = 0;
 
-		foreach($seccion1 as $seccion){
-				$json[$i]['id_seccion']		= $seccion->id_seccion;
-				$json[$i]['gl_codigo']		= $seccion->gl_codigo;
-				$json[$i]['gl_descripcion']	= $seccion->gl_descripcion;
+		if ($seccion1->row_0->id_seccion) {
+			foreach ($seccion1 as $seccion) {
+				$json[$i]['id_seccion'] = $seccion->id_seccion;
+				$json[$i]['gl_codigo'] = $seccion->gl_codigo;
+				$json[$i]['gl_descripcion'] = $seccion->gl_descripcion;
 				$i++;
+			}
+
+			echo json_encode($json);
 		}
+	}
 
-		echo json_encode($json);
-    }
-
-    /**
+		/**
 	 * Descripción: cargar Grupo por Seccion
 	 * @author S/N
 	 */
@@ -152,15 +158,16 @@ class Especialista extends Controller {
 		$grupo1		= $this->_DAOCie10Seccion->getDetalleByIdSeccion($seccion);
 		$json		= array();
 		$i			= 0;
-
-		foreach($grupo1 as $grupo){
-			$json[$i]['id_grupo']		= $grupo->id_grupo;
-			$json[$i]['gl_codigo']		= $grupo->gl_codigo;
-			$json[$i]['gl_descripcion']	= $grupo->gl_descripcion;
-			$i++;
+		
+		if ($grupo1->row_0->id_grupo) {
+			foreach ($grupo1 as $grupo) {
+				$json[$i]['id_grupo'] = $grupo->id_grupo;
+				$json[$i]['gl_codigo'] = $grupo->gl_codigo;
+				$json[$i]['gl_descripcion'] = $grupo->gl_descripcion;
+				$i++;
+			}
+			echo json_encode($json);
 		}
-
-		echo json_encode($json);
     }
 
     /**
@@ -173,13 +180,68 @@ class Especialista extends Controller {
 		$json	= array();
 		$i		= 0;
 
-		foreach($cie101 as $cie10){
-			$json[$i]['id_cie10']		= $cie10->id_cie10;
-			$json[$i]['gl_codigo']		= $cie10->gl_codigo;
-			$json[$i]['gl_descripcion']	= $cie10->gl_descripcion;
-			$i++;
+		if ($cie101->row_0->id_cie10) {
+			foreach($cie101 as $cie10){
+				$json[$i]['id_cie10']		= $cie10->id_cie10;
+				$json[$i]['gl_codigo']		= $cie10->gl_codigo;
+				$json[$i]['gl_descripcion']	= $cie10->gl_descripcion;
+				$i++;
+			}
+			echo json_encode($json);
 		}
-
-		echo json_encode($json);
+	}
+	/**
+	 * Descripción: ReAgendar Especialista
+	 * * @author David Guzmán <david.guzman@cosof.cl>
+	 */
+    public function reagendar() {
+        Acceso::redireccionUnlogged($this->smarty);        
+        $parametros		= $this->request->getParametros();
+        $id_paciente	= $parametros[0];
+        $reagendar		= 1;
+		$registro		= $this->_DAOPaciente->getById($id_paciente);
+		
+		//print_r($_SESSION); die;
+        //valida si agenda examen de empa o de laboratorio
+        if (isset($parametros[1])) {
+            $id_empa = $parametros[1];
+        } else {
+            $id_empa = "";
+        }
+        $id_centro_salud = $registro->id_centro_salud;
+        //valida si agenda examen de empa o de laboratorio
+        /*if (isset($parametros[3])) {
+            $id_examen = $parametros[3];
+        } else {
+            $id_examen = "";
+        }*/
+        
+        $perfil = $_SESSION['perfil'];
+		//"Especialista"
+            $rut_esp         = $_SESSION['rut'];
+            $nombre_esp      = $_SESSION['nombre'];
+            $id_laboratorio  = $_SESSION['id_laboratorio'];            
+            //Combo Laboratorios según tipo de usuario
+            //$arrLaboratorios = $this->_DAOLaboratorio->getLista();
+			$arrLaboratorios = $this->_DAOLaboratorio->getByIdCentroSalud($id_centro_salud);
+        
+        //Combos Tipo Examen
+        $arrTipoExamen = $this->_DAOTipoExamen->getLista();
+        
+        $this->smarty->assign("reagendar", $reagendar);
+        $this->smarty->assign("id_paciente", $id_paciente);
+        $this->smarty->assign("id_empa", $id_empa);
+        $this->smarty->assign("id_centro_salud", $id_centro_salud);
+        $this->smarty->assign("rut_esp", $rut_esp);
+        $this->smarty->assign("nombre_esp", $nombre_esp);
+        //$this->smarty->assign("id_examen", $id_examen);        
+        $this->smarty->assign("perfil", $perfil);
+        $this->smarty->assign("id_laboratorio", $id_laboratorio);
+        $this->smarty->assign('arrLaboratorios', $arrLaboratorios);
+        $this->smarty->assign('arrTipoExamen', $arrTipoExamen);
+        
+        $this->smarty->display('agenda/agendar.tpl');
+        $this->load->javascript(STATIC_FILES . 'js/templates/especialista/diagnostico.js');
     }
+
 }
