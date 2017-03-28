@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_cie10_capitulo
-* Plataforma	: !PHP
-* Creacion		: 21/03/2017
-* @name			DAOCie10Capitulo.php
-* @version		1.0
-* @author		David Guzmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_cie10_capitulo
+* Plataforma        : !PHP
+* Creacion          : 21/03/2017
+* @name             DAOCie10Capitulo.php
+* @version          1.0
+* @author           David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,11 +55,16 @@ class DAOCie10Capitulo extends Model{
         }
     }
 	
+    /**
+	 * Descripción : Obtiene detalle por Id de Capítulo
+	 * @author  S/N
+     * @param   int $id_capitulo
+	 */
 	public function getDetalleByIdCapitulo($id_capitulo){
-		$query	= "	SELECT 
+		$query = "  SELECT 
 						c2.*
 					FROM pre_cie10_1_capitulo c1
-						LEFT JOIN pre_cie10_2_seccion c2 ON c1.id_capitulo = c2.id_capitulo
+					LEFT JOIN pre_cie10_2_seccion c2 ON c1.id_capitulo = c2.id_capitulo
 					WHERE c1.id_capitulo = ?";
 
 		$param	= array($id_capitulo);

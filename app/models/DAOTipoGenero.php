@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_genero
-* Plataforma	: !PHP
-* Creacion		: 08/03/2017
-* @name			DAOTipoGenero.php
-* @version		1.0
-* @author		David Guzmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_tipo_genero
+* Plataforma        : !PHP
+* Creacion          : 08/03/2017
+* @name             DAOTipoGenero.php
+* @version          1.0
+* @author           David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,6 +55,11 @@ class DAOTipoGenero extends Model{
         }
     }
     
+    /**
+	 * Descripción : Obtiene descripción de tipo de género por código (M/F/T)
+     * @author  Carolina Zamora <carolina.zamora@cosof.cl>
+     * @param   int $cod
+	 */
     public function getByCodigo($cod){
         $query	= "	SELECT * FROM ".$this->_tabla."
 					WHERE cd_tipo_genero = ?";

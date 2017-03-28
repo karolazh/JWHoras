@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_region
-* Plataforma	: !PHP
-* Creacion		: 25/02/2017
-* @name			DAORegion.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_region
+* Plataforma        : !PHP
+* Creacion          : 25/02/2017
+* @name             DAORegion.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -54,6 +54,11 @@ class DAORegion extends Model{
         }
     }
 
+    /**
+	 * Descripción : Obtiene detalle por Región
+     * @author  S/N
+     * @param   int $id_region
+	 */
     public function getDetalleByIdRegion($id_region){
 		$query	= "	SELECT 
 						c.*,
@@ -63,8 +68,8 @@ class DAORegion extends Model{
 						r.gl_latitud,
 						r.gl_longitud
 					FROM pre_region r
-						LEFT JOIN pre_provincia p  ON r.id_region = p.id_region
-						LEFT JOIN pre_comuna c ON p.id_provincia = c.id_provincia
+                    LEFT JOIN pre_provincia p  ON r.id_region = p.id_region
+                    LEFT JOIN pre_comuna c ON p.id_provincia = c.id_provincia
 					WHERE c.id_region = ?";
 
 		$param	= array($id_region);

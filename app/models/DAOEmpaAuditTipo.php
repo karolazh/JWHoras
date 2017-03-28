@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_empa_audit_tipo
-* Plataforma	: !PHP
-* Creacion		: 03/03/2017
-* @name			DAOEmpaAuditTipo.php
-* @version		1.0
-* @author		Orlando Vazquez <orlando.vazquez@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_empa_audit_tipo
+* Plataforma        : !PHP
+* Creacion          : 03/03/2017
+* @name             DAOEmpaAuditTipo.php
+* @version          1.0
+* @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,6 +55,11 @@ class DAOEmpaAuditTipo extends Model{
         }
     }
 
+    /**
+	 * Descripción : Obtiene Tipo Audit
+	 * @author  S/N
+     * @param   int $audit
+	 */
     public function getTipoAUDIT($audit){
         $query	= "	SELECT * 
 					FROM ".$this->_tabla."

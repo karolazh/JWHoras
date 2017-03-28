@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Controlador para el formulario EMPA
-* Plataforma	: !PHP
-* Creacion		: 16/02/2017
-* @name			Empa.php
-* @version		1.0
-* @author		Carolina Zamora <carolina.zamora@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Controlador para el formulario EMPA
+* Plataforma        : !PHP
+* Creacion          : 16/02/2017
+* @name             Empa.php
+* @version          1.0
+* @author           Carolina Zamora <carolina.zamora@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -613,7 +613,8 @@ class Empa extends Controller{
 
     /**
 	 * Descripción: Guarda Finalizado
-	 * @author S/N
+	 * @author  S/N
+     * @param   array   $parametros
 	 */
 	public function guardarFinalizado($parametros){
 		if ($parametros['gl_sector'] == 'NULL') {

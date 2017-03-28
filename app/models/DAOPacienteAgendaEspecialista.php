@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_paciente_agenda_especialista
-* Plataforma	: !PHP
-* Creacion		: 09/03/2017
-* @name			DAOPacienteAgendaEspecialista.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_paciente_agenda_especialista
+* Plataforma        : !PHP
+* Creacion          : 09/03/2017
+* @name             DAOPacienteAgendaEspecialista.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,12 +55,17 @@ class DAOPacienteAgendaEspecialista extends Model{
         }
     }
 
+    /**
+	 * Descripción : Obtiene Paciente-Agenda-Especialista por Id de Paciente
+	 * @author  S/N
+     * @param   int $id_paciente
+	 */
     public function getByIdPaciente($id_paciente){
-        $query	= "	SELECT 
+        $query = "  SELECT 
 						agenda.*,
 						e.gl_nombre_especialidad
 					FROM pre_paciente_agenda_especialista agenda
-						LEFT JOIN pre_tipo_especialidad e ON e.id_tipo_especialidad = agenda.id_tipo_especialidad
+					LEFT JOIN pre_tipo_especialidad e ON e.id_tipo_especialidad = agenda.id_tipo_especialidad
 					WHERE id_paciente = ?";
 
 		$param	= array($id_paciente);
@@ -73,11 +78,14 @@ class DAOPacienteAgendaEspecialista extends Model{
         }
     }
 
+    /**
+	 * Descripción : Inserta en tabla "pre_paciente_agenda_especialista"
+	 * @author  S/N
+     * @param   array   $parametros
+	 */
 	public function insertAgenda($parametros){
-		
 		//id_estado e id_tipo_especialidad faltan
-        $query	= "	INSERT INTO pre_paciente_agenda_especialista
-						(
+        $query	= "	INSERT INTO pre_paciente_agenda_especialista (
 						id_especialista,
 						id_paciente,
 						id_empa,
@@ -91,9 +99,7 @@ class DAOPacienteAgendaEspecialista extends Model{
 						hora_especialista,
 						fc_crea,
 						id_usuario_crea
-						)
-					VALUES
-						(
+					) VALUES (
 						".$_SESSION['id'].",
 						".$parametros['id_paciente'].",
 						".$parametros['id_empa'].",
@@ -107,8 +113,8 @@ class DAOPacienteAgendaEspecialista extends Model{
 						now(),
 						now(),
 						".$_SESSION['id']."
-						)
-                    ";
+						)";
+        
         if ($this->db->execQuery($query)) {
             return TRUE;
         } else {

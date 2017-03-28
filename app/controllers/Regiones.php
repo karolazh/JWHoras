@@ -6,7 +6,7 @@
 * Descripcion		: Controller para Region
 * Plataforma		: !PHP
 * Creacion			: 14/02/2017
-* @name			Paciente.php
+* @name             Paciente.php
 * @version			1.0
 * @author			Carolina Zamora <carolina.zamora@cosof.cl>
 * =============================================================================

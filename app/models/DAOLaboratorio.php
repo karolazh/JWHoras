@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_laboratorio
-* Plataforma	: !PHP
-* Creacion		: 13/03/2017
-* @name			DAOLaboratorio.php
-* @version		1.0
-* @author		Carolina Zamora H. <carolina.zamora@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_laboratorio
+* Plataforma        : !PHP
+* Creacion          : 13/03/2017
+* @name             DAOLaboratorio.php
+* @version          1.0
+* @author           Carolina Zamora H. <carolina.zamora@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,9 +55,14 @@ class DAOLaboratorio extends Model{
         }
     }
     
+    /**
+	 * Descripción : Obtiene Laboratorios por Centro de Salud
+	 * @author  Carolina Zamora <carolina.zamora@cosof.cl>
+     * @param   int $id_centro
+	 */
     public function getByIdCentroSalud($id_centro){
         $query = "  SELECT  lab.id_laboratorio,
-							lab.gl_nombre_laboratorio,
+                            lab.gl_nombre_laboratorio,
                             labCS.id_centro_salud
                     FROM pre_laboratorio lab
                     INNER JOIN pre_laboratorio_centro_salud labCS 

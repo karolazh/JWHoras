@@ -2,13 +2,13 @@
 
 /**
 ******************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Controller para las funciones del ROL Especialista
-* Plataforma	: !PHP
-* Creacion		: 08/03/2017
-* @name			Especialista.php
-* @version		1.0
-* @author		David Guzmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Controller para las funciones del ROL Especialista
+* Plataforma        : !PHP
+* Creacion          : 08/03/2017
+* @name             Especialista.php
+* @version          1.0
+* @author           David Guzmán <david.guzman@cosof.cl>
 * =============================================================================
 * !ControlCambio
 * --------------

@@ -2,13 +2,13 @@
 
 /**
 *******************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Controller para Exámenes de Pacientes
-* Plataforma	: !PHP
-* Creacion		: 10/03/2017
-* @name			Laboratorio.php
-* @version		1.0
-* @author		Carolina Zamora <carolina.zamora@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Controller para Exámenes de Pacientes
+* Plataforma        : !PHP
+* Creacion          : 10/03/2017
+* @name             Laboratorio.php
+* @version          1.0
+* @author           Carolina Zamora <carolina.zamora@cosof.cl>
 * =============================================================================
 * !ControlCambio
 * --------------
@@ -122,7 +122,7 @@ class Laboratorio extends Controller {
                 }
             }
             //Dirección Vigente de Paciente
-            $detDireccion = $this->_DAOPacienteDireccion->getByIdDireccionVigente($id_paciente);
+            $detDireccion = $this->_DAOPacienteDireccion->getDireccionVigenteById($id_paciente);
             if (!is_null($detDireccion)) {
                 $direccion  = $detDireccion->gl_direccion;
                 $comuna     = $detDireccion->gl_nombre_comuna;

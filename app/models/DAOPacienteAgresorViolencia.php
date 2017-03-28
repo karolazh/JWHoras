@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_paciente_agresor_violencia
-* Plataforma	: !PHP
-* Creacion		: 08/03/2017
-* @name			DAOPacienteAgresorViolencia.php
-* @version		1.0
-* @author		David Guzmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_paciente_agresor_violencia
+* Plataforma        : !PHP
+* Creacion          : 08/03/2017
+* @name             DAOPacienteAgresorViolencia.php
+* @version          1.0
+* @author           David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,8 +55,14 @@ class DAOPacienteAgresorViolencia extends Model{
         }
     }
 
+    /**
+	 * Descripción : Obtiene información desde "pre_paciente_agresor_violencia"
+     * por Id de Paciente
+	 * @author  S/N
+     * @param   int $id_paciente
+	 */
 	public function getByIdPaciente($id_paciente){
-        $query	= "	SELECT 
+        $query = "  SELECT 
 						*,
 						IFNULL(nr_valor,0) as nr_valor
 					FROM pre_paciente_agresor_violencia 
@@ -72,9 +78,15 @@ class DAOPacienteAgresorViolencia extends Model{
         }
     }
 	
-	public function getByIdPacientePregunta($id_paciente,$id_pregunta){
-        $query	= "	SELECT 
-						*
+    /**
+	 * Descripción : Obtiene información desde "pre_paciente_agresor_violencia"
+     * por Id de Paciente y Pregunta
+	 * @author S/N
+     * @param   int $id_paciente
+     * @param   int $id_pregunta
+	 */
+	public function getByIdPacientePregunta($id_paciente, $id_pregunta){
+        $query = "  SELECT *
 					FROM pre_paciente_agresor_violencia 
 					WHERE	id_paciente = ".$id_paciente."
 				    AND	id_pregunta = ".$id_pregunta;
@@ -89,20 +101,23 @@ class DAOPacienteAgresorViolencia extends Model{
         }
     }
     
+    /**
+	 * Descripción : Inserta registro "pre_paciente_agresor_violencia"
+	 * @author  S/N
+     * @param   int $id_paciente
+     * @param   int $id_pregunta
+     * @param   int $valor
+	 */
 	public function insertViolencia($id_paciente, $id_pregunta, $valor){
-        $query	= "	INSERT INTO pre_paciente_agresor_violencia 
-								(
-									id_paciente,
-									id_pregunta,
-									nr_valor
-								)
-							VALUES
-								(
-									".$id_paciente.",
-									".$id_pregunta.",
-									".$valor."	
-								)
-					";
+        $query = "  INSERT INTO pre_paciente_agresor_violencia (
+                        id_paciente,
+                        id_pregunta,
+                        nr_valor
+                    ) VALUES (
+                        ".$id_paciente.",
+                        ".$id_pregunta.",
+                        ".$valor."	
+                    )";
 
         if ($this->db->execQuery($query)) {
 			return $this->db->getLastId();
@@ -111,10 +126,18 @@ class DAOPacienteAgresorViolencia extends Model{
         }
     }
 	
+    /**
+	 * Descripción : Actualiza registro en "pre_paciente_agresor_violencia"
+	 * @author S/N
+     * @param   int $id_paciente
+     * @param   int $id_pregunta
+     * @param   int $valor
+	 */
 	public function updateViolencia($id_paciente, $id_pregunta, $valor){
-        $query	= "	UPDATE pre_paciente_agresor_violencia 
+        $query = "  UPDATE pre_paciente_agresor_violencia 
 					SET	nr_valor =	".$valor."
-					WHERE id_paciente = ".$id_paciente." AND id_pregunta = ".$id_pregunta."";
+					WHERE id_paciente = ".$id_paciente."
+                    AND id_pregunta = ".$id_pregunta."";
 
         if ($this->db->execQuery($query)) {
             return TRUE;

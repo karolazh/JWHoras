@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Controlador de archivos adjuntos
-* Plataforma	: !PHP
-* Creacion		: 13/02/2017
-* @name			Adjunto.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Controlador de archivos adjuntos
+* Plataforma        : !PHP
+* Creacion          : 13/02/2017
+* @name             Adjunto.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------

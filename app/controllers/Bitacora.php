@@ -104,7 +104,7 @@ class Bitacora extends Controller {
             
             //Grilla Direcciones
 			$muestra_direcciones = "NO";
-			$arrDirecciones = $this->_DAOPacienteDireccion->getByIdDirecciones($id_paciente);
+			$arrDirecciones = $this->_DAOPacienteDireccion->getDireccionesById($id_paciente);
 			if (!is_null($arrDirecciones)) {
 				if ($arrDirecciones->numRows > 1) {
 					$this->smarty->assign('arrDirecciones', $arrDirecciones->rows);
@@ -201,7 +201,7 @@ class Bitacora extends Controller {
 			$arr_plan = $this->_DAOPacienteAgendaEspecialista->getByIdPaciente($id_paciente);
 
 			//Dirección Vigente de Paciente
-			$detDireccion = $this->_DAOPacienteDireccion->getByIdDireccionVigente($id_paciente);
+			$detDireccion = $this->_DAOPacienteDireccion->getDireccionVigenteById($id_paciente);
 			if (!is_null($detDireccion)) {
 				$direccion = $detDireccion->gl_direccion;
 				$comuna = $detDireccion->gl_nombre_comuna;

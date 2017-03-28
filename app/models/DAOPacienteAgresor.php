@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_paciente_agresor
-* Plataforma	: !PHP
-* Creacion		: 01/03/2017
-* @name			DAOPacienteAgresor.php
-* @version		1.0
-* @author		David Guzmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_paciente_agresor
+* Plataforma        : !PHP
+* Creacion          : 01/03/2017
+* @name             DAOPacienteAgresor.php
+* @version          1.0
+* @author           David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,9 +55,13 @@ class DAOPacienteAgresor extends Model{
         }
     }
 
+    /**
+	 * Descripción : Inserta registro en tabla "pre_paciente_agresor"
+	 * @author  S/N
+     * @param   array   $parametros
+	 */
 	public function insertarAgresor($parametros) {
-		$query	= "	INSERT INTO pre_paciente_agresor
-						(
+		$query	= "	INSERT INTO pre_paciente_agresor (
 						id_paciente,
 						id_tipo_vinculo,
 						gl_tipo_vinculo,
@@ -82,9 +86,7 @@ class DAOPacienteAgresor extends Model{
 						nr_denuncias_por_violencia,
 						id_usuario_crea,
 						fc_crea
-						)
-					VALUES
-						(
+					) VALUES (
 						".$parametros['id_paciente'].",
 						".$parametros['id_tipo_vinculo'].",
 						".$parametros['gl_tipo_vinculo'].",
@@ -109,8 +111,7 @@ class DAOPacienteAgresor extends Model{
 						".$parametros['nr_denuncias_por_violencia'].",
 						".$_SESSION['id'].",
 						now()
-						)
-                    ";
+						)";
 
         if ($this->db->execQuery($query)) {
             return TRUE;
@@ -119,8 +120,13 @@ class DAOPacienteAgresor extends Model{
         }
 	}
 	
+    /**
+	 * Descripción : Obtiene información de Agresor de Paciente
+	 * @author  S/N
+     * @param   int $id Id de Paciente
+	 */
 	public function getByIdPaciente($id){
-        $query	= "	SELECT
+        $query = "  SELECT
 						a.*,
 						v.gl_tipo_vinculo,
 						e.gl_estado_civil,
@@ -130,7 +136,6 @@ class DAOPacienteAgresor extends Model{
 						g.gl_tipo_genero,
 						os.gl_orientacion_sexual,
 						date_format(fc_nacimiento_agresor,'%d-%m-%Y') as fc_nacimiento_agresor
-
 					FROM pre_paciente_agresor a
 					LEFT JOIN pre_tipo_vinculo v ON a.id_tipo_vinculo = v.id_tipo_vinculo
 					LEFT JOIN pre_tipo_estado_civil e ON a.id_estado_civil = e.id_estado_civil
@@ -139,8 +144,6 @@ class DAOPacienteAgresor extends Model{
 					LEFT JOIN pre_tipo_sexo s ON a.id_tipo_sexo = s.id_tipo_sexo
 					LEFT JOIN pre_tipo_genero g ON a.id_tipo_genero = g.id_tipo_genero
 					LEFT JOIN pre_tipo_orientacion_sexual os ON a.id_orientacion_sexual = os.id_orientacion_sexual
-					
-                    
 					WHERE id_paciente = ?
 					ORDER BY id_agresor ASC
 					LIMIT 1";

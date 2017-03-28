@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_escolaridad
-* Plataforma	: !PHP
-* Creacion		: 06/03/2017
-* @name			DAOTipoEscolaridad.php
-* @version		1.0
-* @author		David Gusmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_tipo_escolaridad
+* Plataforma        : !PHP
+* Creacion          : 06/03/2017
+* @name             DAOTipoEscolaridad.php
+* @version          1.0
+* @author           David Gusmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
