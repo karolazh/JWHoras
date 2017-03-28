@@ -11,7 +11,7 @@
                 href='javascript:void(0)' 
                 onClick="xModal.open('{$smarty.const.BASE_URI}/Agenda/agendar/{$id_paciente}//{$id_centro_salud}/', 'Agenda registro número : {$id_paciente}', 85);" 
                 data-toggle="tooltip" 
-                title="Nuevo Examen"
+                data-title="Nuevo Examen"
                 class="btn btn-sm btn-flat btn-success">
 			<i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Examen
         </button>&nbsp;
@@ -20,7 +20,7 @@
                 href='javascript:void(0)' 
                 onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$id_paciente}', 'Registro número : {$id_paciente}', 85);" 
                 data-toggle="tooltip" 
-                title="Bitácora"
+                data-title="Bitácora"
                 class="btn btn-sm btn-flat btn-primary">
 			<i class="fa fa-info-circle"></i>&nbsp;&nbsp;Bitácora
         </button>
@@ -28,7 +28,7 @@
                 href='javascript:void(0)' 
                 onclick="history.back(-1)"
                 data-toggle="tooltip" 
-                title="Bitácora"
+                data-title="Bitácora"
                 class="btn btn-sm btn-flat btn btn-default">
 			<i class="fa fa-arrow-circle-left"></i>&nbsp;&nbsp;Volver
         </button>

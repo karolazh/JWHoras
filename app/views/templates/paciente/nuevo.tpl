@@ -42,7 +42,7 @@
 						<div class="col-sm-1">
 							<button type="button" id="btnBitacora" style="display:none;"									
 									data-toggle="tooltip" 
-									title="Revisar bitácora" 
+									data-title="Revisar bitácora" 
 									class="btn btn-xs btn-primary">
 								<i class="fa fa-info-circle"></i>
 							</button>

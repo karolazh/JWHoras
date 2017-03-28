@@ -24,8 +24,8 @@
 				{/if}
 			</td>
 			<td>
-				<button type="button" class="btn btn-xs btn-success" title="Editar" onclick="xModal.open('{$smarty.const.BASE_URI}/mantenedor/editarMenuOpcion/{$itm->id_opcion}','Editar Menú Opción','70');"><i class="fa fa-edit"></i></button>
-				<button type="button" class="btn btn-xs btn-info" title="Editar MENU" onclick="xModal.open('{$smarty.const.BASE_URI}/mantenedor/editarMenuPerfil/{$itm->id_opcion}','Editar Menú Perfil','70');"><i class="fa fa-cogs"></i></button>
+				<button type="button" class="btn btn-xs btn-success" data-title="Editar" onclick="xModal.open('{$smarty.const.BASE_URI}/mantenedor/editarMenuOpcion/{$itm->id_opcion}','Editar Menú Opción','70');"><i class="fa fa-edit"></i></button>
+				<button type="button" class="btn btn-xs btn-info" data-title="Editar MENU" onclick="xModal.open('{$smarty.const.BASE_URI}/mantenedor/editarMenuPerfil/{$itm->id_opcion}','Editar Menú Perfil','70');"><i class="fa fa-cogs"></i></button>
 			</td>
 		</tr>
 		{/foreach}

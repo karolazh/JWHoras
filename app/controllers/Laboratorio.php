@@ -67,7 +67,8 @@ class Laboratorio extends Controller {
         }
 		
         $this->smarty->assign('arrResultado', $arr);
-		$this->smarty->assign('titulo', 'Examenes');
+		$this->smarty->assign('arrOpcion', Boton::botonGrillaPaciente('Laboratorio'));
+		$this->smarty->assign('origen', 'Pacientes con Examenes');
 		$this->_display('grilla/pacientes.tpl');
 	}
     

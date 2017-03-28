@@ -62,8 +62,8 @@ class Medico extends Controller {
 		$arr		= $this->_DAOPaciente->getListaDetalle($where,$join);
 
 		$this->smarty->assign('arrResultado', $arr);
-		$this->smarty->assign('titulo', 'Evaluación');
-		$this->smarty->assign('mostrar_plan', 1);
+		$this->smarty->assign('arrOpcion', Boton::botonGrillaPaciente('Medico'));
+		$this->smarty->assign('origen', 'Evaluación');
 
 		$this->_display('grilla/pacientes.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/Paciente/index.js");
