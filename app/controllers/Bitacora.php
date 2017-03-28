@@ -6,7 +6,7 @@
 * Descripcion      : Controller para Bitácora de Paciente
 * Plataforma       : !PHP
 * Creacion         : 09/03/2017
-* @name			Bitacora.php
+* @name            Bitacora.php
 * @version         1.0
 * @author          Carolina Zamora <carolina.zamora@cosof.cl>
 * =============================================================================
@@ -65,10 +65,6 @@ class Bitacora extends Controller {
         $this->_DAOTipoGenero                   = $this->load->model("DAOTipoGenero");
 	}
 
-	/**
-	 * Descripción: Index Bitacora
-	 * @author Carolina Zamora Hormazábal
-	 */
 	public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
 	}
@@ -256,7 +252,6 @@ class Bitacora extends Controller {
 	/**
 	 * Descripción : permite guardar nuevo archivo adjunto desde bitácora
 	 * @author Carolina Zamora H.
-	 * @param
 	 * @return JSON
 	 */
 	public function guardarNuevoAdjunto() {

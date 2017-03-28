@@ -47,6 +47,10 @@ class Soporte extends Controller{
         $this->_display('soporte/index.tpl');
     }
 	
+    /**
+	 * Descripción: Guardar Soporte
+	 * @author: Domingo Cortez <domingo.cortez@cosof.cl>
+	 */
 	public function guardar()	{
 		$sesion					= New Zend_Session_Namespace("usuario_carpeta");
 		$data					= $this->_request->getParams();
@@ -115,7 +119,10 @@ class Soporte extends Controller{
         echo $json;
     }
 
-	
+	/**
+	 * Descripción: Ver Detalle Soporte
+	 * @author: Domingo Cortez <domingo.cortez@cosof.cl>
+	 */
 	public function verDetalleSoporte(){
 		$sesion			= New Zend_Session_Namespace("usuario_carpeta");
 		$parametros		= $this->request->getParametros();
@@ -181,6 +188,10 @@ class Soporte extends Controller{
 		$this->smarty->display('soporte/detalle_soporte.tpl');
 	}
   
+    /**
+	 * Descripción: Imprimir
+	 * @author: Domingo Cortez <domingo.cortez@cosof.cl>
+	 */
 	public function imprimir(){
 		$sesion			= New Zend_Session_Namespace("usuario_carpeta");
 		$parametros		= $this->request->getParametros();
@@ -223,10 +234,18 @@ class Soporte extends Controller{
 		}
 	}
 	
+    /**
+	 * Descripción: Guardar Soporte
+	 * @author: Domingo Cortez <domingo.cortez@cosof.cl>
+	 */
 	public function cargarAdjunto(){
 		$this->smarty->display('soporte/cargar_adjunto.tpl');
 	}
 	
+    /**
+	 * Descripción: Guardar Adjunto
+	 * @author: Domingo Cortez <domingo.cortez@cosof.cl>
+	 */
 	public function guardarAdjunto(){
 		$adjunto	= $_FILES['adjunto'];
 
@@ -266,6 +285,10 @@ class Soporte extends Controller{
 		}
 	}
 	
+    /**
+	 * Descripción: Cargar Listado Adjuntos
+	 * @author: Domingo Cortez <domingo.cortez@cosof.cl>
+	 */
 	public function cargarListadoAdjuntos(){
 		$adjuntos	= array();
 		$template	= '';
@@ -311,6 +334,10 @@ class Soporte extends Controller{
 		echo $template;
 	}
 
+    /**
+	 * Descripción: Borrar Adjunto
+	 * @author: Domingo Cortez <domingo.cortez@cosof.cl>
+	 */
 	public function borrarAdjunto(){
 		$parametros		= $this->request->getParametros();
 		$id_adjunto		= $parametros[0];
@@ -362,6 +389,10 @@ class Soporte extends Controller{
 		echo $template;
 	}
 	
+    /**
+	 * Descripción: Ver Adjunto
+	 * @author: Domingo Cortez <domingo.cortez@cosof.cl>
+	 */
     public function verAdjunto(){
 		$parametros		= $this->request->getParametros();
 		$id_adjunto		= $parametros[0];

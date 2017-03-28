@@ -97,7 +97,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Nuevo Registro
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function nuevo() {
 		Acceso::redireccionUnlogged($this->smarty);
@@ -130,7 +130,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Guardar Registro
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function GuardarRegistro() {
 		header('Content-type: application/json');
@@ -294,7 +294,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Guardar Motivo
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function GuardarMotivo() {
 		header('Content-type: application/json');
@@ -391,7 +391,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Guardar Reconoce
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function GuardarReconoce() {
 		header('Content-type: application/json');
@@ -420,7 +420,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Ver
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function ver() {
         Acceso::redireccionUnlogged($this->smarty);
@@ -504,7 +504,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Carga comunas por región
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function cargarComunasPorRegion() {
 		$region = $_POST['region'];
@@ -524,7 +524,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Carga centros de salud por comuna
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function cargarCentroSaludporComuna() {
 		$json = array();
@@ -720,7 +720,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Carga adjunto
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function cargarAdjunto() {
 		$session				= New Zend_Session_Namespace("adj"); // Revisar si utiliza este o el que está dentro del adjunto
@@ -728,6 +728,10 @@ class Paciente extends Controller {
 		$this->smarty->display('paciente/cargar_adjunto.tpl');
 	}
 	
+    /**
+	 * Descripción: Carga adjunto Fonasa
+	 * @author: S/N
+	 */
 	public function cargarAdjuntoFonasa() {
 		$session				= New Zend_Session_Namespace("adj");
 		$session->tipo_adjunto	= 3;
@@ -736,7 +740,7 @@ class Paciente extends Controller {
 	
     /**
 	 * Descripción: Guarda adjunto
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function guardarAdjunto() {
 		$adjunto = $_FILES['adjunto'];
@@ -781,7 +785,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Carga listado de adjuntos
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function cargarListadoAdjuntos() {
 		$adjuntos = array();
@@ -828,7 +832,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Borrar adjunto
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function borrarAdjunto() {
 		$parametros = $this->request->getParametros();
@@ -883,7 +887,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Ver adjunto
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function verAdjunto() {
 		$parametros = $this->request->getParametros();
@@ -950,6 +954,10 @@ class Paciente extends Controller {
 		echo $json;
 	}
 
+    /**
+	 * Descripción: Buscar
+	 * @author: S/N
+	 */
 	public function buscar() {
 		Acceso::redireccionUnlogged($this->smarty);
 		

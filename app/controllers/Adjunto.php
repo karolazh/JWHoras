@@ -30,11 +30,19 @@ class Adjunto extends Controller{
         $this->_DAOAdjunto			= $this->load->model("DAOAdjunto");
 	}
 
+    /**
+	 * Descripción : Cargar Adjunto
+	 * @author S/N
+	 */
 	public function cargarAdjunto(){
 		$this->smarty->display('adjunto/cargar_adjunto.tpl');
         $this->load->javascript(STATIC_FILES . "js/templates/adjunto/adjunto.js");
 	}
 
+    /**
+	 * Descripción : Guardar Adjunto
+	 * @author S/N
+	 */
 	public function guardarAdjunto(){
 		$adjunto	= $_FILES['adjunto'];
 
@@ -74,6 +82,10 @@ class Adjunto extends Controller{
 		}
 	}
 
+    /**
+	 * Descripción : Cargar Listado
+	 * @author S/N
+	 */
 	public function cargarListado(){
 		$adjuntos	= array();
 		$template	= '';
@@ -119,6 +131,10 @@ class Adjunto extends Controller{
 		echo $template;
 	}
 
+    /**
+	 * Descripción : Borrar Adjunto
+	 * @author S/N
+	 */
 	public function borrar(){
 		$id_adjunto	= $_POST['adjunto'];
 		$template	= '';
@@ -168,6 +184,10 @@ class Adjunto extends Controller{
 		echo $template;
 	}
 
+    /**
+	 * Descripción : Ver Adjunto
+	 * @author S/N
+	 */
     public function ver(){
         $id_adjunto = Request::getParametros(0);
 

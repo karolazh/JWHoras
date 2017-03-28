@@ -82,9 +82,9 @@ class Especialista extends Controller {
 	*/
 	public function diagnostico(){
 		Acceso::redireccionUnlogged($this->smarty);
-
 		$parametros			= $this->request->getParametros();
 		$id_paciente		= $parametros[0];
+        
 		$empa				= $this->_DAOEmpa->getByIdPaciente($id_paciente);
 		$arrCIE10Capitulo	= $this->_DAOCie10Capitulo->getLista();
 		//$resp = $this->_Evento->guardarMostrarUltimo(21,0,$id_paciente,"Plan tratamiento Modificado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
@@ -123,6 +123,10 @@ class Especialista extends Controller {
 		echo $json;
 	}
 
+    /**
+	 * Descripción: cargar Seccion por Capitulo
+	 * @author S/N
+	 */
 	public function cargarSeccionporCapitulo(){
 		$cie10		= $_POST['cie10'];
 		$seccion1	= $this->_DAOCie10Capitulo->getDetalleByIdCapitulo($cie10);
@@ -139,6 +143,10 @@ class Especialista extends Controller {
 		echo json_encode($json);
     }
 
+    /**
+	 * Descripción: cargar Grupo por Seccion
+	 * @author S/N
+	 */
 	public function cargarGrupoporSeccion(){
 		$seccion	= $_POST['seccion'];
 		$grupo1		= $this->_DAOCie10Seccion->getDetalleByIdSeccion($seccion);
@@ -155,6 +163,10 @@ class Especialista extends Controller {
 		echo json_encode($json);
     }
 
+    /**
+	 * Descripción: Cargar CIE10 por Grupo
+	 * @author S/N
+	 */
 	public function cargarCIE10porGrupo(){
 		$grupo	= $_POST['grupo'];
 		$cie101	= $this->_DAOCie10Grupo->getDetalleByIdGrupo($grupo);
@@ -170,5 +182,4 @@ class Especialista extends Controller {
 
 		echo json_encode($json);
     }
-
 }

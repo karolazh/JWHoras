@@ -56,13 +56,19 @@ class Login extends Controller {
         $this->smarty->display('login/login.tpl');
     }
 
-    /*** Recuperar Password ***/
+    /**
+	 * Descripción : Recuperar Password
+	 * @author S/N
+	 */
     public function recuperar_password() {
         $this->_addJavascript(STATIC_FILES . 'js/templates/login/recuperar_password.js');
         $this->_display('login/recuperar_password.tpl', false);
     }
 
-    /*** 20170127 - Procesa Login de Usuario***/
+    /**
+	 * Descripción : Procesa Login
+	 * @author S/N
+	 */
     public function procesar() {
         $rut			= trim($this->_request->getParam("rut"));
         $password		= Seguridad::generar_sha512($this->_request->getParam("password"));
@@ -139,6 +145,10 @@ class Login extends Controller {
         }
     }
 
+    /**
+	 * Descripción : Valida Rut Midas
+	 * @author S/N
+	 */
     public function validaRutMidas() {
 		$parametros		= $this->request->getParametros();
 		$rut_usuario	= $parametros[0];
@@ -155,7 +165,12 @@ class Login extends Controller {
 		}
 
 	}
+    
 
+    /**
+	 * Descripción : Login Remoto Midas
+	 * @author S/N
+	 */
 	public function loginRemotoMidas(){
         define('MIDAS_WS_AUTH_USER','Midas_Soap_User');
         define('MIDAS_WS_AUTH_PASS','BQT9U4Ni2yVZHhPQq3T2YpM8RsvwPCSNK0mQX33nBjmfIbvgQK3UeRsLJJxRELetXk8iL9Gj'); 
@@ -255,13 +270,19 @@ class Login extends Controller {
 		}
 	}
 
-    //*** 20170127 - Formulario para obtener cuenta de usuario **//
+    /**
+	 * Descripción : Obtener cuenta de usuario
+	 * @author S/N
+	 */
     public function obtener_cuenta() {
         $this->_addJavascript(STATIC_FILES . 'js/templates/login/obtener_cuenta.js');
         $this->_display('login/obtener_cuenta.tpl', false);
     }
 
-    //*** 20170127 - Formulario Actualiza Password ***//
+    /**
+	 * Descripción : Actualiza Password
+	 * @author S/N
+	 */
     public function actualizar() {
 		$this->smarty->assign("id_usuario", $_SESSION['id']);
         $this->smarty->assign("nombre", $_SESSION['nombre']);
@@ -278,7 +299,10 @@ class Login extends Controller {
         $this->_display('login/actualizar.tpl');
     }
 
-    /** 20170201 - Funcion guarda nueva password */
+    /**
+	 * Descripción : Guardar Nueva Password
+	 * @author S/N
+	 */
     public function ajax_guardar_nuevo_password() {
         header('Content-type: application/json');
 		$correcto = false;
@@ -307,6 +331,10 @@ class Login extends Controller {
         echo $json;
     }
 
+    /**
+	 * Descripción : Logout Password
+	 * @author S/N
+	 */
     public function logoutUsuario() {
         if (isset($_COOKIE['datos_usuario_carpeta'])) {
             unset($_COOKIE['datos_usuario_carpeta']);
@@ -317,6 +345,10 @@ class Login extends Controller {
         header('Location:' . BASE_URI);
     }
     
+    /**
+	 * Descripción : Recuperar Password Rut
+	 * @author S/N
+	 */
     public function recuperar_password_rut() {
         header('Content-type: application/json');
         $rut			= trim($this->_request->getParam("rut"));
