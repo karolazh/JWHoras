@@ -67,13 +67,13 @@
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-success btn-flat" 
                                                 onClick="location.href='{$base_url}/Empa/nuevo/{$item->id_registro}'" 
-                                                data-toggle="tooltip" title="Empa">
+                                                data-toggle="tooltip" data-title="Empa">
                                             <i class="fa fa-eye"></i>&nbsp;&nbsp;EMPA
                                         </button>
                                         <button href='javascript:void(0)' 
                                             onClick="xModal.open('{$smarty.const.BASE_URI}/Registro/bitacora/{$item->id_registro}', 'Registro número : {$item->id_registro}', 85);" 
                                             data-toggle="tooltip" 
-                                            title="Bitácora" 
+                                            data-title="Bitácora" 
                                             class="btn btn-sm btn-flat btn-primary">
                                         <i class="fa fa-eye">&nbsp;&nbsp;Bitácora</i></button>
                                     </div>			

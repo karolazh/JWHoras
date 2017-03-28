@@ -41,7 +41,7 @@
                                     {*onClick="xModal.open('{$base_url}/Empa/nuevo/{$emp->id_registro}', 'Registro número : {$item->id_registro}', 85);" *}
                                     {*onClick="location.href='{$base_url}/Empa/nuevo/{$emp->id_registro}'" *}
                                     onClick="location.href='{$base_url}/Empa/nuevo/{$emp->id_paciente}'" 
-                                    data-toggle="tooltip" title="Ver EMPA">
+                                    data-toggle="tooltip" data-title="Ver EMPA">
                                 <i class="fa fa-book"></i>&nbsp;&nbsp;EMPA
                             </button>
                         </div>

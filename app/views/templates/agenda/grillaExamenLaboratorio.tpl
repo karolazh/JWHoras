@@ -57,7 +57,7 @@
                             onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$exa->id_paciente_examen}/', 'Agenda Examen Paciente : {$exa->id_paciente}', 85);" 
                             class="btn btn-xs btn-info"
                             data-toggle="tooltip" 
-                            title="Ver Examen">
+                            data-title="Ver Examen">
                             <i class="fa fa-eye"></i>
                         </button>
                         {else}
