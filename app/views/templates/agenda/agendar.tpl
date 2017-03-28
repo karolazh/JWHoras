@@ -14,12 +14,14 @@
         {*{$id_laboratorio}*}
         <!-- TIPO DE EXAMEN -->
 		{if $reagendar != 1}
+                        
+        <!-- LABORATORIOS -->
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
-                    <i class="fa fa-sticky-note"></i> Tipo de Examen</h3>
+                    <i class="fa fa-sticky-note"></i> Datos del Examen</h3>
             </div>
-            <div class="box-body">            
-                <div class="form-group">
+            <div class="box-body">
+				<div class="form-group">
                     <label class="control-label required col-sm-3">Tipo de Examen</label>
                     <div class="col-sm-3">
                         <select id="examen" name="examen" for="examen" 
@@ -37,15 +39,6 @@
                         </select>
                     </div>
                 </div>
-            </div>
-        </div>
-                        
-        <!-- LABORATORIOS -->
-        <div class="box box-success">
-            <div class="box-header with-border"><h3 class="box-title">
-                    <i class="fa fa-sticky-note"></i> Datos del Laboratorio</h3>
-            </div>
-            <div class="box-body">            
                 <div class="form-group">
                     <label class="control-label required col-sm-3">Laboratorio</label>
                     <div class="col-sm-3">
