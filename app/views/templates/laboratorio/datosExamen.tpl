@@ -4,13 +4,14 @@
     <input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
     <input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden">
     <div class="panel-body">
-        <!-- TIPO DE EXAMEN -->
+		
+        <!-- DATOS DEL EXAMEN -->
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
-                    <i class="fa fa-sticky-note"></i> Tipo de Examen</h3>
+                    <i class="fa fa-sticky-note"></i> Datos del Examen</h3>
             </div>
-            <div class="box-body">            
-                <div class="form-group">
+            <div class="box-body">
+				<div class="form-group">
                     <label class="control-label required col-sm-3">Tipo de Examen</label>
                     <div class="col-sm-3">
                         <select id="examen" name="examen" for="examen" 
@@ -26,15 +27,6 @@
                         </select>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- LABORATORIOS -->
-        <div class="box box-success">
-            <div class="box-header with-border"><h3 class="box-title">
-                    <i class="fa fa-sticky-note"></i> Datos del Laboratorio</h3>
-            </div>
-            <div class="box-body">            
                 <div class="form-group">
                     <label class="control-label required col-sm-3">Laboratorio</label>
                     <div class="col-sm-3">
@@ -161,33 +153,25 @@
             </div>
         </div>
 
-        <!-- OBSERVACIÒN EN TOMA DE EXAMEN -->
+        <!-- RESULTADO DESCRIPCIÓN -->
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
-                    <i class="fa fa-sticky-note"></i> Observaci&oacute;n</h3></div>
+                    <i class="fa fa-sticky-note"></i> Descripci&oacute;n</h3></div>
             <div class="box-body">
-                <div class="form-group">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-10">
-                        <textarea type="text" class="form-control col-sm-10" rows="5" 
+				<div class="form-group">
+					<label class="control-label required col-sm-3">Observación</label>
+                    <div class="col-sm-6">
+                        <textarea type="text" class="form-control col-sm-6" rows="5" 
                                   id="gl_observacion_toma" name="gl_observacion_toma"
                                   placeholder="Observación en toma de examen" style="resize: none"
                                   readonly>{$gl_observacion_toma}</textarea>
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
-            </div>
-        </div>
-
-        <!-- RESULTADO DESCRIPCIÓN -->
-        <div class="box box-success">
-            <div class="box-header with-border"><h3 class="box-title">
-                    <i class="fa fa-sticky-note"></i> Descripci&oacute;n</h3></div>
-            <div class="box-body">
                 <div class="form-group">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-10">
-                        <textarea type="text" class="form-control col-sm-10" rows="5" 
+                    <label class="control-label required col-sm-3">Descripción</label>
+                    <div class="col-sm-6">
+                        <textarea type="text" class="form-control col-sm-6" rows="5" 
                                   id="gl_resultado_descripcion" name="gl_resultado_descripcion"
                                   placeholder="Indicaci&oacute;n de Resultado" style="resize: none"
                                   {if $accion == "1"}readonly{/if}>{$gl_resultado_descripcion}</textarea>
@@ -203,9 +187,9 @@
                     <i class="fa fa-sticky-note"></i> Indicaciones</h3></div>
             <div class="box-body">
                 <div class="form-group">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-10">
-                        <textarea type="text" class="form-control col-sm-10" rows="5" 
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+                        <textarea type="text" class="form-control col-sm-6" rows="5" 
                                   id="gl_resultado_indicacion" name="gl_resultado_indicacion"
                                   placeholder="Indicaci&oacute;n de Resultado" style="resize: none"
                                   {if $accion == "1"}readonly{/if}>{$gl_resultado_indicacion}</textarea>
