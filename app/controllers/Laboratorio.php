@@ -2,13 +2,13 @@
 
 /**
 *******************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Controller para Exámenes de Pacientes
-* Plataforma	: !PHP
-* Creacion		: 10/03/2017
-* @name			Laboratorio.php
-* @version		1.0
-* @author		Carolina Zamora <carolina.zamora@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Controller para Exámenes de Pacientes
+* Plataforma        : !PHP
+* Creacion          : 10/03/2017
+* @name             Laboratorio.php
+* @version          1.0
+* @author           Carolina Zamora <carolina.zamora@cosof.cl>
 * =============================================================================
 * !ControlCambio
 * --------------
@@ -123,7 +123,7 @@ class Laboratorio extends Controller {
                 }
             }
             //Dirección Vigente de Paciente
-            $detDireccion = $this->_DAOPacienteDireccion->getByIdDireccionVigente($id_paciente);
+            $detDireccion = $this->_DAOPacienteDireccion->getDireccionVigenteById($id_paciente);
             if (!is_null($detDireccion)) {
                 $direccion  = $detDireccion->gl_direccion;
                 $comuna     = $detDireccion->gl_nombre_comuna;
@@ -165,11 +165,10 @@ class Laboratorio extends Controller {
     /**
 	 * Descripción: Buscar detalle de examen agendado
 	 * @author Carolina Zamora <carolina.zamora@cosof.cl>
-     * @return 
 	 */
     public function buscar() {
         $parametros			= $this->request->getParametros();
-        $accion				= $parametros[0]; //1="Ver" //2="Editar"
+        $accion				= $parametros[0]; //1="Ver" //2="Editar" //3="ReAgendar"
         $id_paciente_examen	= $parametros[1];
         $perfil				= $_SESSION['perfil'];
         
@@ -189,7 +188,7 @@ class Laboratorio extends Controller {
             if ($accion == "1") { //"Ver"
                 $rut_lab    = $detExamen->gl_rut_persona_toma;
                 $nombre_lab = $detExamen->gl_nombre_persona_toma;
-            } else {
+            } else if ($accion == "2" or $accion == "3"){ //"Editar" y "ReAgendar"
                 $rut_lab    = $_SESSION['rut'];
                 $nombre_lab = $_SESSION['nombre'];
             }
@@ -382,5 +381,35 @@ class Laboratorio extends Controller {
         $json = Zend_Json::encode($salida);
 
         echo $json;
+    }
+	
+	public function reAgendar() {
+		header('Content-type: application/json');
+		
+        $parametros		= $this->_request->getParams();
+        $id_empa		= $this->_DAOEmpa->getByIdPaciente($parametros['id_paciente']);
+		$bool_insert	= FALSE;
+		$bool_update	= FALSE;
+		
+		$parametros['id_empa']			= $id_empa->id_empa;
+		$parametros['id_laboratorio']	= $_SESSION['id_laboratorio'];
+		
+		$correcto		= FALSE;
+		$error			= FALSE;
+		$bool_insert	= $this->_DAOPacienteExamen->insertExamen($parametros);
+		if ($bool_insert) {
+			$bool_update	= $this->_DAOPacienteExamen->updateExamenReAgendado($parametros);
+		}
+		
+		if ($bool_update) {
+			$correcto	= TRUE;
+		} else {
+			$error		= TRUE;
+		}
+
+		$salida	= array("error" => $error, "correcto" => $correcto);
+		$json	= Zend_Json::encode($salida);
+
+		echo $json;
     }
 }

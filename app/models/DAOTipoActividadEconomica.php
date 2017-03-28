@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_actividad_economica
-* Plataforma	: !PHP
-* Creacion		: 06/03/2017
-* @name			DAOTipoActividadEconomica.php
-* @version		1.0
-* @author		David Gusmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_tipo_actividad_economica
+* Plataforma        : !PHP
+* Creacion          : 06/03/2017
+* @name             DAOTipoActividadEconomica.php
+* @version          1.0
+* @author           David Gusmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -30,9 +30,6 @@ class DAOTipoActividadEconomica extends Model{
         parent::__construct();
     }
     
-    /*
-     * 20170203 - Lista Regiones
-     */
     public function getLista(){
         $query		= $this->db->select("*")->from($this->_tabla);
         $resultado	= $query->getResult();

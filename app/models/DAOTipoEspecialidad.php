@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_tipo_especialidad
-* Plataforma	: !PHP
-* Creacion		: 09/03/2017
-* @name			DAOTipoEspecialidad.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_tipo_especialidad
+* Plataforma        : !PHP
+* Creacion          : 09/03/2017
+* @name             DAOTipoEspecialidad.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------

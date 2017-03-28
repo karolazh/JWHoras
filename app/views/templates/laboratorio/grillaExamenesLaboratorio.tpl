@@ -33,7 +33,7 @@
                            onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$exa->id_paciente_examen}/', 'Agenda Examen registro número : {$exa->id_paciente}', 85);" 
                            class="btn btn-xs btn-info"
                            data-toggle="tooltip" 
-                           title="Ver Examen">
+                           data-title="Ver Examen">
                            <i class="fa fa-eye"></i>
                        </button>
                    </td>
@@ -59,7 +59,7 @@
                                 onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/{$exa->id_paciente_examen}/', 'Agenda Examen registro número : {$exa->id_paciente}', 85);" 
                                 class="btn btn-xs btn-info"
                                 data-toggle="tooltip" 
-                                title="Ver Examen">
+                                data-title="Ver Examen">
                                 <i class="fa fa-eye"></i>
                             </button>
                         {else}
@@ -68,8 +68,17 @@
                                 onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/2/{$exa->id_paciente_examen}/', 'Agenda Examen número : {$exa->id_paciente}', 85);" 
                                 class="btn btn-xs btn-success"
                                 data-toggle="tooltip" 
-                                title="Registrar Resultado">
+                                data-title="Registrar Resultado">
                                 <i class="fa fa-pencil"></i>
+                            </button>
+							
+							<button type="button" 
+                                {*onclick="Laboratorio.buscarExamen({$exa->id_paciente_examen});"*}
+                                onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/3/{$exa->id_paciente_examen}/', 'Agenda Examen número : {$exa->id_paciente}', 85);" 
+                                class="btn btn-xs btn-warning"
+                                data-toggle="tooltip" 
+                                data-title="ReAgendar">
+                                <i class="fa fa-calendar"></i>
                             </button>
                         {/if}
                    </td>

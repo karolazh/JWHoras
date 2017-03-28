@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion           : Modelo para Tabla pre_paciente_registro
-* Plataforma            : !PHP
-* Creacion		: 27/02/2017
-* @name			DAOPacienteRegistro.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_paciente_registro
+* Plataforma        : !PHP
+* Creacion          : 27/02/2017
+* @name             DAOPacienteRegistro.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,8 +55,13 @@ class DAOPacienteRegistro extends Model{
         }
     }
 
+    /**
+	 * Descripción : Obtiene detalle de consultas por Id de Paciente
+     * @author  S/N
+     * @param   int $id_paciente
+	 */
     public function getByIdPaciente($id_paciente) {
-        $query	=   "SELECT 
+        $query = "  SELECT 
                         registro.id_registro,
                         registro.id_paciente,
                         registro.id_institucion,
@@ -86,9 +91,13 @@ class DAOPacienteRegistro extends Model{
         }
     }
 
+    /**
+	 * Descripción : Inserta registro en tabla "pre_paciente_registro"
+     * @author  S/N
+     * @param   int $id_paciente
+	 */
     public function insertarRegistro($parametros, $id_paciente) {
-        $query	= "INSERT INTO pre_paciente_registro
-						(
+        $query = "  INSERT INTO pre_paciente_registro (
 						id_paciente,
 						id_institucion,
 						fc_ingreso,
@@ -96,9 +105,7 @@ class DAOPacienteRegistro extends Model{
 						gl_motivo_consulta,
 						fc_crea,
 						id_usuario_crea
-						)
-					VALUES  
-						(
+					) VALUES (
 						" .$id_paciente . ",
 						" .$_SESSION['id_institucion']. ",
 						".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fechaingreso'])). ",

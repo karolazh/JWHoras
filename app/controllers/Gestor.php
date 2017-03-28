@@ -2,13 +2,13 @@
 
 /**
 ******************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Controller para las funciones del ROL Gestor
-* Plataforma	: !PHP
-* Creacion		: 20/03/2017
-* @name			Gestor.php
-* @version		1.0
-* @author		David Guzmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Controller para las funciones del ROL Gestor
+* Plataforma        : !PHP
+* Creacion          : 20/03/2017
+* @name             Gestor.php
+* @version          1.0
+* @author           David Guzmán <david.guzman@cosof.cl>
 * =============================================================================
 * !ControlCambio
 * --------------

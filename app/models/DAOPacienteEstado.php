@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_paciente_estado
-* Plataforma	: !PHP
-* Creacion		: 03/03/2017
-* @name			DAOPacienteEstado.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_paciente_estado
+* Plataforma        : !PHP
+* Creacion          : 03/03/2017
+* @name             DAOPacienteEstado.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------

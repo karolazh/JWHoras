@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Maneja los casos de violencia a la mujer
-* Plataforma	: !PHP
-* Creacion		: 03/03/2017
-* @name			Reconoce.php
-* @version		1.0
-* @author		David Guzmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Maneja los casos de violencia a la mujer
+* Plataforma        : !PHP
+* Creacion          : 03/03/2017
+* @name             Reconoce.php
+* @version          1.0
+* @author           David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -75,13 +75,11 @@ class Reconoce extends Controller {
     }
 	
 	/**
-	* identificarAgresor()
-	* Genera los Array y Datos respectivos de la BD para luego llenar con Smarty 
-	* el "identificar_agresor.tpl" y cargar finalmente la vista junto con 
-	* los .js  "validador.js" y "identificar_agresor.js". 
-	* 
-	* @author	<david.guzman@cosof.cl>	07-03-2017
-	* @return valores con Smarty a identificar_agresor.tpl
+	* Descripción: Genera los Array y Datos respectivos de la BD para luego 
+    * llenar con Smarty el "identificar_agresor.tpl" y cargar finalmente 
+    * la vista junto con los .js  "validador.js" y "identificar_agresor.js".
+	* @author   David Guzmán <david.guzman@cosof.cl>	07-03-2017
+	* @return   Smarty  identificar_agresor.tpl
 	*/    
     public function identificarAgresor(){
 		Acceso::redireccionUnlogged($this->smarty);
@@ -137,12 +135,10 @@ class Reconoce extends Controller {
     }
 	
 	/**
-	* guardar()
-	* Inserta datos del Agresor de la Paciente
-	* Y hace un Update con nuevos Datos de Paciente
-	* 
-	* @author	<david.guzman@cosof.cl>	08-03-2017
-	* @return booleanos -> correcto o error
+	* Descripción: Inserta datos del Agresor de la Paciente y hace un Update con
+    *  nuevos Datos de Paciente
+	* @author   David Guzmán <david.guzman@cosof.cl>	08-03-2017
+	* @return   JSON
 	*/   
 	public function guardar(){
 		header('Content-type: application/json');

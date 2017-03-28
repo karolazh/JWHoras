@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_mes
-* Plataforma	: !PHP
-* Creacion		: 07/03/2017
-* @name			DAOMes.php
-* @version		1.0
-* @author		David Guzmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_mes
+* Plataforma        : !PHP
+* Creacion          : 07/03/2017
+* @name             DAOMes.php
+* @version          1.0
+* @author           David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------

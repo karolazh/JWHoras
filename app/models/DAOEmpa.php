@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion           : Modelo para Tabla pre_empa
-* Plataforma            : !PHP
-* Creacion		: 22/02/2017
-* @name			DAOEmpa.php
-* @version		1.0
-* @author		David Gusman <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_empa
+* Plataforma        : !PHP
+* Creacion          : 22/02/2017
+* @name             DAOEmpa.php
+* @version          1.0
+* @author           David Gusman <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -56,6 +56,12 @@ class DAOEmpa extends Model{
         }
     }
 
+    /**
+	 * Descripción : Obtiene Comunas por Id de Región
+	 * @author  S/N
+     * @param   int $id_paciente
+     * @param   int $nr_orden
+	 */
     public function getByIdPaciente($id_paciente, $nr_orden=1){
         $query	=   "SELECT e.*,
 							c.gl_nombre_comuna as gl_comuna,
@@ -80,25 +86,13 @@ class DAOEmpa extends Model{
         }
     }
 
+    /**
+	 * Descripción : Obtiene Lista de Empa x Id de Paciente para Grilla
+	 * @author  Carolina Zamora <carolina.zamora@cosof.cl>
+     * @param   int $id_paciente
+     * @param   int $nr_orden
+	 */
     public function getListaEmpa($id_paciente, $nr_orden=1){
-//        $query	=   "SELECT 
-//                        emp.id_empa,
-//                        emp.id_paciente,
-//                        date_format(emp.fc_empa,'%d-%m-%Y') AS fc_empa,
-//                        pac.gl_rut,
-//                        com.gl_nombre_comuna,
-//                        cs.gl_nombre_establecimiento,
-//                        usr.gl_rut,
-//                        concat_ws(' ' , usr.gl_nombres, usr.gl_apellidos) AS funcionario
-//                    FROM pre_empa emp
-//                    LEFT JOIN pre_paciente pac ON pac.id_paciente = emp.id_paciente
-//                    LEFT JOIN pre_comuna com ON com.id_comuna = emp.id_comuna
-//                    LEFT JOIN pre_centro_salud cs ON cs.id_centro_salud = emp.id_institucion
-//                    LEFT JOIN pre_usuario usr ON usr.id_usuario = emp.id_usuario_crea
-//                    WHERE emp.id_paciente = ?
-//                    AND nr_orden = ?
-//                    ORDER BY emp.fc_empa DESC";
-        
         $query = "  SELECT 
                         emp.id_empa,
                         emp.bo_finalizado,
@@ -133,8 +127,13 @@ class DAOEmpa extends Model{
         }
     }
 
+    /**
+	 * Descripción : Actualiza tabla "pre_empa"
+	 * @author  S/N
+     * @param   array  $parametros
+	 */
     public function updateEmpa($parametros){
-        $query	= "	UPDATE pre_empa SET
+        $query = "  UPDATE pre_empa SET
 						id_comuna						= ".$parametros['id_comuna'].",
 						gl_sector						= ".$parametros['gl_sector'].",
 						id_institucion					= ".$parametros['id_institucion'].",
@@ -180,8 +179,7 @@ class DAOEmpa extends Model{
 						bo_finalizado					= 0,
 						fc_actualiza					= now(),
 						id_usuario_actualiza			= ".$_SESSION['id']."
-					WHERE id_empa = ".$parametros['id_empa']."
-                    ";
+					WHERE id_empa = ".$parametros['id_empa']."";
 
         if($this->db->execQuery($query)) {
             return TRUE;
@@ -190,9 +188,9 @@ class DAOEmpa extends Model{
         }
     }
 
-    //Parametros para usar despues mas completo con id's de examenes
-    /*
-		id_examen_glicemia              =       ".$parametros['id_examen_glicemia'].",
+    /** 
+     * Parametros para usar despues mas completo con id's de examenes
+     	id_examen_glicemia              =       ".$parametros['id_examen_glicemia'].",
 		id_examen_vdrl                  =       ".$parametros['id_examen_vdrl'].",
 		id_examen_rpr                   =       ".$parametros['id_examen_rpr'].",
 		id_examen_baciloscopia          =       ".$parametros['id_examen_baciloscopia'].",
@@ -201,8 +199,13 @@ class DAOEmpa extends Model{
 		id_examen_mamografia            =       ".$parametros['id_examen_mamografia'].",
 	*/
     
+    /**
+	 * Descripción : Obtiene información de Empa por Id
+	 * @author  S/N
+     * @param   int $id_empa
+	 */
 	public function verInfoById($id_empa) {
-        $query	= "	SELECT 
+        $query = "  SELECT 
 						pre_empa.*,
 						IFNULL(gl_sector,0) as gl_sector,
 						IFNULL(fc_mamografia,0) as fc_mamografia,
@@ -237,11 +240,15 @@ class DAOEmpa extends Model{
         }
     }
 	
+    /**
+	 * Descripción : Actualiza estado de Empa (Finalizado)
+	 * @author  S/N
+     * @param   array  $parametros
+	 */
 	public function updateFinalizado($parametros){
-        $query	= "	UPDATE pre_empa SET
-						bo_finalizado	= 1
-					WHERE id_empa = ".$parametros['id_empa']."
-                    ";
+        $query = "  UPDATE pre_empa 
+                    SET bo_finalizado	= 1
+					WHERE id_empa = ".$parametros['id_empa']."";
 
         if($this->db->execQuery($query)) {
             return TRUE;

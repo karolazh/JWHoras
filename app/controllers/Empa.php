@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Controlador para el formulario EMPA
-* Plataforma	: !PHP
-* Creacion		: 16/02/2017
-* @name			Empa.php
-* @version		1.0
-* @author		Carolina Zamora <carolina.zamora@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Controlador para el formulario EMPA
+* Plataforma        : !PHP
+* Creacion          : 16/02/2017
+* @name             Empa.php
+* @version          1.0
+* @author           Carolina Zamora <carolina.zamora@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -48,7 +48,7 @@ class Empa extends Controller{
 		$this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
 	}
 
-	public function index() {
+    public function index() {
 		Acceso::redireccionUnlogged($this->smarty);
 
 		$arrResultado	= $this->_DAOPaciente->getLista();
@@ -57,6 +57,10 @@ class Empa extends Controller{
 		$this->_display('empa/index.tpl');
 	}
 
+    /**
+	 * Descripción: Nuevo
+	 * @author S/N
+	 */
 	public function nuevo() {
 		Acceso::redireccionUnlogged($this->smarty);
 		$sesion = New Zend_Session_Namespace("usuario_carpeta");
@@ -461,6 +465,10 @@ class Empa extends Controller{
 		$this->load->javascript(STATIC_FILES . "js/templates/agenda/ver.js");
 	}
 
+    /**
+	 * Descripción: Audit
+	 * @author S/N
+	 */
 	public function audit() {
 		Acceso::redireccionUnlogged($this->smarty);
 		$params = $this->request->getParametros();
@@ -485,7 +493,11 @@ class Empa extends Controller{
 		$this->smarty->assign("arrPreguntas", $arrPreguntas);
 		$this->smarty->display('empa/audit.tpl');
 	}
-
+    
+    /**
+	 * Descripción: Guardar
+	 * @author S/N
+	 */
 	public function guardar() {
 		header('Content-type: application/json');
 
@@ -516,6 +528,10 @@ class Empa extends Controller{
 		echo $json;
 	}
 
+    /**
+	 * Descripción: Guardar Audit
+	 * @author S/N
+	 */
 	public function guardarAudit() {
 		header('Content-type: application/json');
 		$parametros = $this->_request->getParams();
@@ -541,6 +557,10 @@ class Empa extends Controller{
 		echo $json;
 	}
 
+    /**
+	 * Descripción: Mensaje IMC
+	 * @author S/N
+	 */
 	public function mensajeIMC() {
 		header('Content-type: application/json');
 		$parametros = $this->_request->getParams();
@@ -564,6 +584,10 @@ class Empa extends Controller{
 		echo $json;
 	}
 
+    /**
+	 * Descripción: Mensaje Audit
+	 * @author S/N
+	 */
 	public function mensajeAUDIT() {
 		header('Content-type: application/json');
 		$parametros = $this->_request->getParams();
@@ -587,7 +611,11 @@ class Empa extends Controller{
 		echo $json;
 	}
 
-	
+    /**
+	 * Descripción: Guarda Finalizado
+	 * @author  S/N
+     * @param   array   $parametros
+	 */
 	public function guardarFinalizado($parametros){
 		if ($parametros['gl_sector'] == 'NULL') {
 			//return FALSE;

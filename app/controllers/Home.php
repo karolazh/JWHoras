@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion           : Controller para Registro de Paciente
-* Plataforma            : !PHP
-* Creacion		: 14/02/2017
-* @name			Home.php
-* @version		1.0
-* @author		Orlando Vazquez <orlando.vazquez@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Controller para Registro de Paciente
+* Plataforma        : !PHP
+* Creacion          : 14/02/2017
+* @name             Home.php
+* @version          1.0
+* @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -34,9 +34,13 @@ class Home extends Controller{
     }
 
     public function index(){
-        
+        Acceso::redireccionUnlogged($this->smarty);
     }
 
+    /**
+	 * Descripción : Dashboard
+	 * @author S/N
+	 */
     public function dashboard(){
         Acceso::redireccionUnlogged($this->smarty);
         $sesion = New Zend_Session_Namespace("usuario_carpeta");
@@ -228,6 +232,10 @@ class Home extends Controller{
         $this->load->javascript($jscode);
     }
 
+    /**
+	 * Descripción : Pacientes Mapa Dashboard
+	 * @author S/N
+	 */
     public function pacientesMapaDashboard(){
         $daoPacientes = $this->load->model('DAOPaciente');
 

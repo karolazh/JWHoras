@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_paciente_agenda_especialista
-* Plataforma	: !PHP
-* Creacion		: 09/03/2017
-* @name			DAOPacienteAgendaEspecialista.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_paciente_agenda_especialista
+* Plataforma        : !PHP
+* Creacion          : 09/03/2017
+* @name             DAOPacienteAgendaEspecialista.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,12 +55,17 @@ class DAOPacienteAgendaEspecialista extends Model{
         }
     }
 
+    /**
+	 * Descripción : Obtiene Paciente-Agenda-Especialista por Id de Paciente
+	 * @author  S/N
+     * @param   int $id_paciente
+	 */
     public function getByIdPaciente($id_paciente){
-        $query	= "	SELECT 
+        $query = "  SELECT 
 						agenda.*,
 						e.gl_nombre_especialidad
 					FROM pre_paciente_agenda_especialista agenda
-						LEFT JOIN pre_tipo_especialidad e ON e.id_tipo_especialidad = agenda.id_tipo_especialidad
+					LEFT JOIN pre_tipo_especialidad e ON e.id_tipo_especialidad = agenda.id_tipo_especialidad
 					WHERE id_paciente = ?";
 
 		$param	= array($id_paciente);
@@ -73,38 +78,37 @@ class DAOPacienteAgendaEspecialista extends Model{
         }
     }
 
+    /**
+	 * Descripción : Inserta en tabla "pre_paciente_agenda_especialista"
+	 * @author  S/N
+     * @param   array   $parametros
+	 */
 	public function insertAgenda($parametros){
-		
 		//id_estado e id_tipo_especialidad faltan
-        $query	= "	INSERT INTO pre_paciente_agenda_especialista
-						(
+        $query	= "	INSERT INTO pre_paciente_agenda_especialista (
 						id_especialista,
 						id_paciente,
 						id_empa,
-						cie10,
-						cie102,
-						cie103,
-						gl_observacion,
+						id_cie10_capitulo,
+						id_cie10_seccion,
+						id_cie10_grupo,
+						id_cie10,
+						gl_observacion_diagnostico,
 						gl_diagnostico,
 						id_tipo_especialidad,
-						fecha_especialista,
-						hora_especialista,
 						fc_crea,
 						id_usuario_crea
-						)
-					VALUES
-						(
+					) VALUES (
 						".$_SESSION['id'].",
 						".$parametros['id_paciente'].",
 						".$parametros['id_empa'].",
+						".$parametros['capitulo_cie10'].",
+						".$parametros['seccion_cie10'].",
+						".$parametros['grupo_cie10'].",
 						".$parametros['cie10'].",
-						".$parametros['cie102'].",
-						".$parametros['cie103'].",
 						'".$parametros['gl_observacion']."',
 						'".$parametros['gl_diagnostico']."',
 						(SELECT ue.id_tipo_especialidad FROM pre_usuario_especialidad ue WHERE ue.id_usuario = ".$_SESSION['id']."),
-						now(),
-						now(),
 						now(),
 						".$_SESSION['id']."
 						)
@@ -115,6 +119,57 @@ class DAOPacienteAgendaEspecialista extends Model{
             return FALSE;
         }
     }
+	
+	
+	public function insertReAgendar($parametros){
+		
+        $query	= "	INSERT INTO pre_paciente_agenda_especialista
+						(
+						id_especialista,
+						id_paciente,
+						id_empa,
+						fecha_agenda,
+						hora_agenda,
+						gl_agenda_observacion,
+						id_tipo_especialidad,
+						fc_crea,
+						id_usuario_crea
+						)
+					VALUES
+						(
+						".$_SESSION['id'].",
+						".$parametros['id_paciente'].",
+						".$parametros['id_empa'].",
+						".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_toma'])).",
+						'".$parametros['gl_hora_toma']."',
+						'".$parametros['gl_agenda_observacion']."',
+						(SELECT ue.id_tipo_especialidad FROM pre_usuario_especialidad ue WHERE ue.id_usuario = ".$_SESSION['id']."),
+						now(),
+						".$_SESSION['id']."
+						)";
+        
+        if ($this->db->execQuery($query)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+	
+	public function updateReAgendar($parametros){
+		
+		$query	= "	UPDATE pre_paciente_agenda_especialista SET
+						id_estado						= 4,
+						id_usuario_actualiza			= ".$_SESSION['id'].",
+						fc_actualiza					= now()
+					WHERE id_tipo_especialidad = ".$parametros['id_tipo_especialidad']."
+                    ";
+
+        if($this->db->execQuery($query)) {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+	}
 	
 }
 

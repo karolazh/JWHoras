@@ -40,10 +40,10 @@
 			<td align="center">{$itm->nr_total_ambitos}</td>
 			<td align="center">{$itm->nr_total_actividades}</td>
 			<td nowrap>
-				<button data-toggle="tooltip" type="button" class="btn btn-xs btn-success" title="Ver Detalle" onClick="detalle({$itm->ins_ia_id})">
+				<button data-toggle="tooltip" type="button" class="btn btn-xs btn-success" data-title="Ver Detalle" onClick="detalle({$itm->ins_ia_id})">
 					<i class="fa fa-edit"></i>&nbsp;&nbsp;VER
 				</button>
-				<button data-toggle="tooltip" type="button" class="btn btn-xs btn-success" title="Ver Detalle" onClick="colorbox('carpeta_digital/index.php/AdjuntosInstalacion/editar/?id_instalacion={$itm->ins_ia_id}');">
+				<button data-toggle="tooltip" type="button" class="btn btn-xs btn-success" data-title="Ver Detalle" onClick="colorbox('carpeta_digital/index.php/AdjuntosInstalacion/editar/?id_instalacion={$itm->ins_ia_id}');">
 					<i class="fa fa-edit"></i>&nbsp;&nbsp;Editar
 				</button>				
 			</td>

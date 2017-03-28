@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_auditoria_login
-* Plataforma	: !PHP
-* Creacion		: 03/03/2017
-* @name			DAOAuditoriaLogin.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_auditoria_login
+* Plataforma        : !PHP
+* Creacion          : 03/03/2017
+* @name             DAOAuditoriaLogin.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -54,6 +54,11 @@ class DAOAuditoriaLogin extends Model {
         }
     }
 
+    /**
+	 * Descripción : Obtiene información por Id de Usuario
+	 * @author  S/N
+     * @param   int $id_usuario
+	 */
     public function getByIdUsuario($id_usuario) {
         $query	= "	SELECT * 
 					FROM pre_auditoria_login
@@ -69,6 +74,11 @@ class DAOAuditoriaLogin extends Model {
         }
     }
 
+    /**
+	 * Descripción : Obtiene información por Rut de Usuario
+	 * @author  S/N
+     * @param   string $gl_rut
+	 */
     public function getByRut($gl_rut) {
         $query	= "	SELECT * 
 					FROM pre_auditoria_login
@@ -84,6 +94,14 @@ class DAOAuditoriaLogin extends Model {
         }
     }
 
+    /**
+	 * Descripción : Inserta registro en tabla "pre_auditoria_login"
+	 * @author  S/N
+     * @param   int    $id_usuario
+     * @param   string $rut_usuario
+     * @param   string $gl_origen
+     * @param   string $token
+	 */
 	public function registro_login($id_usuario, $rut_usuario, $gl_origen, $token = ''){
 		$ip_privada	= '0.0.0';
 		$ip_publica	= '0.0.0';

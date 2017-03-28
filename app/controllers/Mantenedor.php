@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Controlador de Mantenedor
-* Plataforma	: !PHP
-* Creacion		: 15/03/2017
-* @name			Mantenedor.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Controlador de Mantenedor
+* Plataforma        : !PHP
+* Creacion          : 15/03/2017
+* @name             Mantenedor.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -40,17 +40,29 @@ class Mantenedor extends Controller{
         $this->_DAOWebService		= $this->load->model("DAOWebService");
 	}
 
-	/********************************************** USUARIO **********************************************/
+	/****************************** USUARIO ***********************************/
+    /**
+	 * Descripción : Usuario
+	 * @author S/N
+	 */
 	public function usuario(){
 		
 		$this->smarty->assign('arr_data',$this->_DAOUsuario->getListaJoinPerfil());
 		$this->_display('mantenedor_usuario/bandeja.tpl');
 	}
 
+    /**
+	 * Descripción : Agregar Usuario
+	 * @author S/N
+	 */
 	public function agregarUsuario(){
 		$this->_display('mantenedor_usuario/agregar.tpl');
 	}
 
+    /**
+	 * Descripción : Editar Usuario
+	 * @author S/N
+	 */
 	public function editarUsuario(){
 		$parametros	= $this->request->getParametros();
 		$id_usuario	= $parametros[0];
@@ -62,6 +74,10 @@ class Mantenedor extends Controller{
 		$this->load->javascript(STATIC_FILES.'js/templates/mantenedor/mantenedor_usuario.js');
 	}
 
+    /**
+	 * Descripción : Editar Usuario BD
+	 * @author S/N
+	 */
 	public function editarUsuarioBD(){
 		header('Content-type: application/json');
 		$id_usuario	= $this->_request->getParam("id_usuario");
@@ -81,13 +97,20 @@ class Mantenedor extends Controller{
         $json = Zend_Json::encode($salida);
         echo $json;
 	}
-
+    
+    /**
+	 * Descripción : Update Grilla Usuario
+	 * @author S/N
+	 */
 	public function updateGrillaUsuario(){
 		$this->smarty->assign('arr_data',$this->_DAOUsuario->getLista());
 		echo $this->view->fetch('mantenedor_usuario/grilla.tpl');
 	}
 
-
+    /**
+	 * Descripción : Cambiar Usuario
+	 * @author S/N
+	 */
 	public function cambiarUsuario(){
 		$where		= array('bo_activo' => 1);
 		
@@ -102,6 +125,10 @@ class Mantenedor extends Controller{
 		$this->load->javascript(STATIC_FILES.'js/templates/mantenedor/mantenedor_usuario.js');
 	}
 
+    /**
+	 * Descripción : Procesar Cambio
+	 * @author S/N
+	 */
 	public function procesarCambio(){
 		$correcto			= false;
 		$mensaje			= '';
@@ -154,6 +181,10 @@ class Mantenedor extends Controller{
         echo $json;
 	}
 
+    /**
+	 * Descripción : Volver Usuario
+	 * @author S/N
+	 */
 	public function volver_usuario(){
 		$correcto			= false;
 		$mensaje			= '';
@@ -203,7 +234,11 @@ class Mantenedor extends Controller{
         echo $json;
 	}
 
-	/********************************************** PERFIL **********************************************/
+	/****************************** PERFIL ************************************/
+    /**
+	 * Descripción : Perfil
+	 * @author S/N
+	 */
 	public function perfil(){
 
 		$this->smarty->assign('arr_data',$this->_DAOPerfil->getLista());
@@ -211,6 +246,10 @@ class Mantenedor extends Controller{
 		$this->_display('mantenedor_perfil/bandeja.tpl');
 	}
 
+    /**
+	 * Descripción : Agregar Perfil
+	 * @author S/N
+	 */
 	public function agregarPerfil(){
 
 		$arr_padre	= $this->_DAOOpcion->getAllOpcionRaiz();
@@ -222,6 +261,10 @@ class Mantenedor extends Controller{
 		$this->load->javascript(STATIC_FILES.'js/templates/mantenedor/mantenedor_perfil.js');
 	}
 
+    /**
+	 * Descripción : Agregar Perfil BD
+	 * @author S/N
+	 */
 	public function agregarPerfilBD(){
 		header('Content-type: application/json');
 		$parametros = $this->_request->getParams();
@@ -249,6 +292,10 @@ class Mantenedor extends Controller{
         echo $json;
 	}
 
+    /**
+	 * Descripción : Editar Perfil
+	 * @author S/N
+	 */
 	public function editarPerfil(){
 		
 		$parametros	= $this->request->getParametros();
@@ -260,6 +307,10 @@ class Mantenedor extends Controller{
 		$this->load->javascript(STATIC_FILES.'js/templates/mantenedor/mantenedor_perfil.js');
 	}
 	
+    /**
+	 * Descripción : Editar Perfil BD
+	 * @author S/N
+	 */
 	public function editarPerfilBD(){
 		header('Content-type: application/json');
 		$id_perfil			= $this->_request->getParam("id_perfil");
@@ -285,6 +336,9 @@ class Mantenedor extends Controller{
         echo $json;
 	}
 	
+    /**
+	 * Descripción : Editar Perfil Opción
+	 */
 	public function editarPerfilOpcion(){
 
 		$parametros		= $this->request->getParametros();
@@ -301,7 +355,11 @@ class Mantenedor extends Controller{
 		$this->load->javascript(STATIC_FILES.'js/templates/mantenedor/mantenedor_perfil.js');
 	}
 
-	/********************************************** WEBSERVICE **********************************************/
+	/**************************** WEBSERVICE **********************************/
+    /**
+	 * Descripción : Webservice
+	 * @author S/N
+	 */
 	public function webservice(){
 
 		$this->smarty->assign('arr_data',$this->_DAOWebService->getLista());
@@ -309,10 +367,18 @@ class Mantenedor extends Controller{
 		$this->_display('mantenedor_ws/bandeja.tpl');
 	}
 
+    /**
+	 * Descripción : Agregar Webservice
+	 * @author S/N
+	 */
 	public function agregarWebService(){
 		$this->_display('mantenedor_ws/agregar.tpl');
 	}
 
+    /**
+	 * Descripción : Editar Webservice
+	 * @author S/N
+	 */
 	public function editarWebService(){
 
 		$parametros	= $this->request->getParametros();
@@ -323,7 +389,11 @@ class Mantenedor extends Controller{
 		$this->_display('mantenedor_ws/editar.tpl');
 	}
 
-	/********************************************** MENU **********************************************/
+	/******************************* MENU *************************************/
+    /**
+	 * Descripción : Menú
+	 * @author S/N
+	 */
 	public function menu(){
 
 		$this->smarty->assign('arr_data',$this->_DAOPerfilOpcion->getLista());
@@ -331,10 +401,18 @@ class Mantenedor extends Controller{
 		$this->_display('mantenedor_menu/bandeja.tpl');
 	}
 
+    /**
+	 * Descripción : Agregar Menú Padre
+	 * @author S/N
+	 */
 	public function agregarMenuPadre(){
 		$this->_display('mantenedor_menu/agregar_padre.tpl');
 	}
 
+    /**
+	 * Descripción : Agregar Menú Opción
+	 * @author S/N
+	 */
 	public function agregarMenuOpcion(){
 
 		$arr_padre	= $this->_DAOPerfilOpcion->getAllMenuPadre();
@@ -345,6 +423,10 @@ class Mantenedor extends Controller{
 		$this->_display('mantenedor_menu/agregar_opcion.tpl');
 	}
 
+    /**
+	 * Descripción : Editar Menú Opción
+	 * @author S/N
+	 */
 	public function editarMenuOpcion(){
 
 		$parametros	= $this->request->getParametros();
@@ -357,6 +439,10 @@ class Mantenedor extends Controller{
 		$this->_display('mantenedor_menu/editar_opcion.tpl');
 	}
 
+    /**
+	 * Descripción : Editar Menú Perfil
+	 * @author S/N
+	 */
 	public function editarMenuPerfil(){
 
 		$parametros	= $this->request->getParametros();

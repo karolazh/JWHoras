@@ -13,6 +13,7 @@
         {*{$id_centro_salud}*}
         {*{$id_laboratorio}*}
         <!-- TIPO DE EXAMEN -->
+		{if $reagendar != 1}
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
                     <i class="fa fa-sticky-note"></i> Tipo de Examen</h3>
@@ -63,9 +64,25 @@
                         </select>
                     </div>
                 </div>
+				<div class="form-group">
+                    <label class="control-label required col-sm-3">RUT persona toma examen</label>
+                    <div class="col-sm-3">
+                        <input type="text" name="gl_rut_toma" id="gl_rut_toma" maxlength="9" 
+                               onkeyup="formateaRut(this), validaRut(this), this.value = this.value.toUpperCase()"
+                               onkeypress ="return soloNumerosYK(event)" 
+                               value="{$rut_esp}" class="form-control" 
+                               {if $perfil == "7" or $accion == "1"}readonly{/if} />
+                    </div>
+                    <label class="control-label required col-sm-3">Nombre persona toma examen</label>
+                    <div class="col-sm-3">
+                        <input type="text" name="gl_nombre_toma" id="gl_nombre_toma" maxlength="" 
+                               value="{$nombre_esp}" class="form-control"
+                               {if $perfil == "7" or $accion == "1"}readonly{/if} />
+                    </div>
+                </div>
             </div>
         </div>
-
+		{/if}
         <!-- DATOS TOMA DE EXAMEN -->
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
@@ -91,6 +108,17 @@
                         {*<span class="help-block hidden"></span>*}
                     </div>
                 </div>
+					
+				{if $reagendar == 1}
+				<div class="form-group">
+                    <label for="gl_agenda_observacion" class="control-label required col-sm-3">Observaciones</label>
+					<div class='col-sm-6'>
+							<textarea type="text" class="form-control" rows="5" id="gl_agenda_observacion" name="gl_agenda_observacion"
+							onblur="validarVacio(this, 'Por favor Ingrese Observación')" 
+							placeholder="Ingrese Observación" style="resize: none"></textarea>
+                    </div>
+                </div>
+				{/if}
                 {*<div class="form-group">
                     <label class="control-label required col-sm-3">Resultado examen</label>
                     <div class="col-sm-2">
@@ -103,7 +131,8 @@
                 </div>*}
             </div>
         </div>
-
+		
+		{if $reagendar != 1}
          <!-- OBSERVACION -->
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
@@ -120,8 +149,9 @@
                 </div>
             </div>
         </div>
+		 {/if} 
     </div>
-                    
+                   
     <!-- BOTONERA -->
     <div class="form-group col-sm-11" align="right">
         <button type="button" id="guardar" class="btn btn-success"

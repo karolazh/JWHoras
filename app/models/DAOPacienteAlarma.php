@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_paciente_alarma
-* Plataforma	: !PHP
-* Creacion		: 27/03/2017
-* @name			DAOPacienteAlarma.php
-* @version		1.0
-* @author		David Guzmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_paciente_alarma
+* Plataforma        : !PHP
+* Creacion          : 27/03/2017
+* @name             DAOPacienteAlarma.php
+* @version          1.0
+* @author           David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,6 +55,11 @@ class DAOPacienteAlarma extends Model{
         }
     }
 	
+    /**
+	 * Descripción : Obtiene información más detalle de tabla "pre_paciente_alarma"
+	 * @author  S/N
+     * @param   int $id_paciente
+	 */
 	public function getByIdPaciente($id_paciente){
         $query	= "	SELECT	pa.*,
 							pat.gl_nombre_alarma AS gl_tipo_alarma,

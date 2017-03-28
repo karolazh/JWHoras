@@ -466,7 +466,7 @@ class Paciente extends Controller {
         $arrMotivosConsulta = $this->_DAOPacienteRegistro->getByIdPaciente($id_paciente);        
         
         //Dirección Vigente de Paciente
-        $detDireccion = $this->_DAOPacienteDireccion->getByIdDireccionVigente($id_paciente);
+        $detDireccion = $this->_DAOPacienteDireccion->getDireccionVigenteById($id_paciente);
         if (!is_null($detDireccion)) {
             $direccion = $detDireccion->gl_direccion;
             $comuna = $detDireccion->gl_nombre_comuna;
@@ -476,7 +476,7 @@ class Paciente extends Controller {
         
         //Grilla Direcciones
         $muestra_direcciones = "NO";
-        $arrDirecciones = $this->_DAOPacienteDireccion->getByIdDirecciones($id_paciente);
+        $arrDirecciones = $this->_DAOPacienteDireccion->getDireccionesById($id_paciente);
         if (!is_null($arrDirecciones)) {
             if($arrDirecciones->numRows>1){
                 $this->smarty->assign('arrDirecciones', $arrDirecciones->rows);
@@ -507,7 +507,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Carga comunas por región
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function cargarComunasPorRegion() {
 		$region		= $_POST['region'];
@@ -527,7 +527,7 @@ class Paciente extends Controller {
 
 	/**
 	 * Descripción: Carga centros de salud por comuna
-	 * @author: 
+	 * @author: S/N
 	 */
 	public function cargarCentroSaludporComuna() {
 		$json = array();
@@ -736,6 +736,10 @@ class Paciente extends Controller {
 		$this->smarty->display('paciente/cargar_adjunto.tpl');
 	}
 	
+    /**
+	 * Descripción: Carga adjunto Fonasa
+	 * @author: S/N
+	 */
 	public function cargarAdjuntoFonasa() {
 		$session				= New Zend_Session_Namespace("adj");
 		$session->tipo_adjunto	= 3;
@@ -961,4 +965,79 @@ class Paciente extends Controller {
 		echo $json;
 	}
 
+    /**
+	 * Descripción: Buscar
+	 * @author: S/N
+	 */
+	public function buscar() {
+		Acceso::redireccionUnlogged($this->smarty);
+		
+		$arrRegiones = $this->_DAORegion->getLista();
+		$this->smarty->assign("arrRegiones", $arrRegiones);
+		
+		if ($_SESSION['perfil'] != 1 && $_SESSION['perfil'] != 5){
+			$this->smarty->assign('bool_region', 1);
+			$this->smarty->assign('reg', $_SESSION['id_region']);
+			$region = $_SESSION['id_region'];
+			$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
+			$this->_addJavascript($jscode);
+			$jscode = "$('#region').attr('readonly',true);";
+			$this->_addJavascript($jscode);
+			$jscode = "setTimeout(function(){ $('#region').trigger('change'); },100);";
+			$this->_addJavascript($jscode);
+		}
+		
+		$arrCentroSalud	= $this->_DAOCentroSalud->getListaOrdenada();
+		$this->smarty->assign("arrCentroSalud", $arrCentroSalud);	
+		
+		$mostrar = 0;
+		$parametros = $this->_request->getParams();
+		
+		if($parametros){
+			$rut			= $parametros['rut'];
+			$pasaporte		= $parametros['pasaporte'];
+			$nombres		= $parametros['nombres'];
+			$apellidos		= $parametros['apellidos'];
+			$cod_fonasa		= $parametros['cod_fonasa'];
+			$centro_salud	= $parametros['centro_salud'];
+			if ($_SESSION['perfil'] != 1 && $_SESSION['perfil'] != 5){
+				$region					= $_SESSION['id_region'];
+				$parametros['region']	= $_SESSION['id_region'];
+			} else {
+				$region		= $parametros['region'];
+			}
+			$comuna			= $parametros['comuna'];
+			
+			if ($rut != '' && $pasaporte != ''){
+				$jscode = "xModal.danger('Error: No se puede buscar por Rut y Pasaporte a la vez');";
+				$this->_addJavascript($jscode);
+			} else if($rut != '' || $pasaporte != '' || $nombres != '' || $apellidos != '' || $cod_fonasa != '' || $centro_salud != 0 || $region != 0 || $comuna != 0){
+				$mostrar = 1;
+				$arr = $this->_DAOPaciente->buscarPaciente($parametros);
+
+				$this->smarty->assign('arrResultado', $arr);
+				$this->smarty->assign('rut',$rut);
+				$this->smarty->assign('pasaporte',$pasaporte);
+				$this->smarty->assign('nombres',$nombres);
+				$this->smarty->assign('apellidos',$apellidos);
+				$this->smarty->assign('cod_fonasa',$cod_fonasa);
+				$this->_addJavascript(STATIC_FILES . "js/regiones.js");
+
+				$jscode = "$(\"#centro_salud option[value='".$centro_salud."']\").attr('selected',true);";
+				$this->_addJavascript($jscode);
+				$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
+				$this->_addJavascript($jscode);
+				$jscode = "$('#region').trigger('change')";
+				$this->_addJavascript($jscode);
+				$jscode = "setTimeout(function(){ $(\"#comuna option[value='".$comuna."']\").attr('selected',true); },100);";
+				$this->_addJavascript($jscode);
+			}
+		}
+		
+		$this->smarty->assign('mostrar',$mostrar);
+		$this->_display('paciente/buscar.tpl');
+		$this->load->javascript(STATIC_FILES . "js/regiones.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/paciente/buscar.js");
+	}
+	
 }

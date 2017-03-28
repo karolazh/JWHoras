@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_usuario
-* Plataforma	: !PHP
-* Creacion		: 20/02/2017
-* @name			DAOUsuario.php
-* @version		1.0
-* @author		Orlando Vazquez <orlando.vazquez@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_usuario
+* Plataforma        : !PHP
+* Creacion          : 20/02/2017
+* @name             DAOUsuario.php
+* @version          1.0
+* @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,6 +55,11 @@ class DAOUsuario extends Model {
         }
     }
 
+    /**
+	 * Descripción : Obtiene Usuario por RUT
+     * @author  Orlando Vazquez <orlando.vazquez@cosof.cl>
+     * @param   string $gl_rut
+	 */
     public function getByRut($gl_rut) {
         $query	= "	SELECT * 
 					FROM pre_usuario
@@ -71,16 +76,12 @@ class DAOUsuario extends Model {
     }
 
 	/**
-	* getLogin($gl_rut, $gl_password)
-	* Obtener la información para Validar al usuario e Iniciar la Session
-	* 
-	* @author	<victor.retamal@cosof.cl>	27-02-2017
-	* 
-	* @param string	$gl_rut del usuario.
-	* @param string	$gl_password  del usuario.
-	*
-	* @return object Información del usuario
-	*/
+	 * Descripción : Obtener la información para Validar al usuario e Iniciar la Session
+     * @author  Victor Retamal <victor.retamal@cosof.cl>	27-02-2017
+     * @param   string	$gl_rut del usuario.
+	 * @param   string	$gl_password  del usuario.
+     * @return  object  Información del usuario
+	 */
     public function getLogin($gl_rut, $gl_password) {
         $query	= "	SELECT 
 						u.*,
@@ -108,16 +109,12 @@ class DAOUsuario extends Model {
     }
 
 	/**
-	* getLoginMidas($gl_rut)
-	* Obtener la información para Validar al usuario que ingresa desde MIDAS e Iniciar la Session
-	* 
-	* @author	<victor.retamal@cosof.cl>	27-02-2017
-	* 
-	* @param string	$gl_rut del usuario.
-	*
-	* @return object Información del usuario
-	*/
-
+	 * Descripción : Obtener la información para Validar al usuario que ingresa 
+     * desde MIDAS e Iniciar la Session
+     * @author  Victor Retamal <victor.retamal@cosof.cl>	27-02-2017
+     * @param   string	$gl_rut del usuario.
+     * @return  object  Información del usuario
+	 */
     public function getLoginMidas($gl_rut) {
         $query	= "	SELECT 
                         u.*,
@@ -143,7 +140,11 @@ class DAOUsuario extends Model {
         }
     }
 	
-	
+    /**
+	 * Descripción : Obtiene datos de Usuario Logueado
+     * @author  S/N
+     * @param   int $id_usuario
+	 */
     public function getLoginByID($id_usuario) {
         $query	= "	SELECT 
                         u.*,
@@ -169,6 +170,11 @@ class DAOUsuario extends Model {
         }
     }
 
+    /**
+	 * Descripción : Setea Login
+     * @author  S/N
+     * @param   array   $datos
+	 */
     public function setUltimoLogin($datos){
         $query	= "	UPDATE pre_usuario
 					SET fc_ultimo_login = now()
@@ -181,6 +187,11 @@ class DAOUsuario extends Model {
         }
     }
 
+    /**
+	 * Descripción : Setea Password
+     * @author  S/N
+     * @param   array   $datos
+	 */
     public function setPassword($datos){
         $query	= "	UPDATE pre_usuario
 					SET gl_password = ? , fc_ultimo_login = ?
@@ -194,14 +205,12 @@ class DAOUsuario extends Model {
     }
 	
 	/**
-	* getListaJoinPerfil()
-	* Obtener la información todos los usuarios junto con la informacion de perfil
-	* 
-	* @author	<orlando.vazquez@cosof.cl>	15-03-2017
-	* 
-	*
-	* @return object Todos los usuarios junto la informacion de perfil.
-	*/
+	 * Descripción : Obtener la información todos los usuarios junto con la 
+     * informacion de perfil
+     * @author  Orlando Vazquez <orlando.vazquez@cosof.cl>	15-03-2017
+     * @param   array   $parametros
+     * @return  object  Todos los usuarios junto la informacion de perfil.
+	 */
     public function getListaJoinPerfil($parametros=array()) {
         $query	= "	SELECT 
 						u.id_usuario,

@@ -159,3 +159,39 @@ $(function () {
         format: "LT"
     });
 });
+
+$("#reagendar").on('click', function (e) {
+	var button_process			= buttonStartProcess($(this), e);
+	var parametros				= $("#form-agendar").serializeArray();
+	
+	
+	if ($("#fc_toma").val() == "") {
+		xModal.danger('- El campo Fecha es obligatorio');	
+	} else if ($("#gl_hora_toma").val() == "") {
+		xModal.danger('- El campo Hora es obligatorio');
+	} else {
+		$.ajax({
+			dataType: "json",
+			cache	: false,
+			async	: true,
+			data	: parametros,
+			type	: "post",
+			url		: BASE_URI + "index.php/Laboratorio/reAgendar",
+			error	: function (xhr, textStatus, errorThrown) {
+						xModal.danger('Error: No se pudo Guardar.');
+					},
+			success	: function (data) {
+						if (data.correcto) {
+							xModal.success('Éxito: Fecha y Hora ReAgendada!');
+							setTimeout(function () {
+								location.href = BASE_URI + "index.php/Laboratorio/ver";
+							}, 2000);
+						} else {
+							xModal.info('Error: No se pudo ReAgendar!');
+						}
+					}
+		});
+	}
+	buttonEndProcess(button_process);
+
+});

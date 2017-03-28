@@ -8,7 +8,7 @@
                 href='javascript:void(0)' 
                 onClick="xModal.open('{$smarty.const.BASE_URI}/Bitacora/ver/{$id_paciente}', 'Registro número : {$id_paciente}', 85);" 
                 data-toggle="tooltip" 
-                title="Bitácora"
+                data-title="Bitácora"
                 class="btn btn-sm btn-flat btn-primary">
 			<i class="fa fa-info-circle"></i>&nbsp;&nbsp;Bitácora
         </button>
@@ -206,7 +206,7 @@
                                     <button href='javascript:void(0)'
                                             onClick="xModal.open('{$smarty.const.BASE_URI}/Empa/audit/{$id_empa}', 'AUDIT (Auto-diagnostico sobre Riesgos en el Uso de Alcohol)', 80);"
                                             data-toggle="tooltip"
-                                            title="Ver Registro"
+                                            data-title="Ver Registro"
                                             type="button" id="btnaudit" class="btn btn-sm btn-info btn-flat">
                                         <i class="fa fa-file-text-o"></i>&nbsp;AUDIT 
                                     </button>

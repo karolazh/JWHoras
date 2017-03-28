@@ -6,7 +6,7 @@
 * Descripcion		: Controller para Region
 * Plataforma		: !PHP
 * Creacion			: 14/02/2017
-* @name			Paciente.php
+* @name             Paciente.php
 * @version			1.0
 * @author			Carolina Zamora <carolina.zamora@cosof.cl>
 * =============================================================================
@@ -29,6 +29,10 @@ class Regiones extends Controller{
 		$this->_DAORegion = $this->load->model('DAORegion');
 	}
 
+    /**
+	 * Descripción: Carga comunas por región
+	 * @author: S/N
+	 */
     public function cargarComunasPorRegion(){
 		$region		= $_POST['region'];
 		$comunas	= $this->_DAORegion->getDetalleByIdRegion($region);
@@ -42,5 +46,4 @@ class Regiones extends Controller{
 
 		echo json_encode($json);
     }
-
 }

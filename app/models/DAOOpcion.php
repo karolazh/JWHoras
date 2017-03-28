@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_opcion
-* Plataforma	: !PHP
-* Creacion		: 06/05/2017
-* @name			DAOOpcion.php
-* @version		1.0
-* @author		Orlando Vazquez <orlando.vazquez@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_opcion
+* Plataforma        : !PHP
+* Creacion          : 06/05/2017
+* @name             DAOOpcion.php
+* @version          1.0
+* @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -29,16 +29,7 @@ class DAOOpcion extends Model {
         parent::__construct();       
     }
 
-	/**
-	* getLista()
-	* Obtiene toda la informacion de la tabla
-	* 
-	* @author	<orlando.vazquez@cosof.cl>	06-03-2017
-	* 
-	*
-	* @return object Informacion de toda la tabla
-	*/
-    public function getLista(){
+	public function getLista(){
         $query	= "	SELECT * FROM ".$this->_tabla;
         $result	= $this->db->getQuery($query);
 
@@ -48,16 +39,7 @@ class DAOOpcion extends Model {
             return NULL;
         }
     }
-	/**
-	* getById()
-	* Obtiene informacion de la opcion por id
-	* 
-	* @author	<orlando.vazquez@cosof.cl>	06-03-2017
-	* 
-	* @param	int		$id_opcion
-	*
-	* @return	object	Informacion de la opcion por id
-	*/
+	
     public function getById($id_opcion){
         $query	= "	SELECT * FROM ".$this->_tabla."
 					WHERE ".$this->_primaria." = ?";
@@ -72,14 +54,16 @@ class DAOOpcion extends Model {
         }
     }
 	
+    /**
+	 * Descripción : Obtiene Opción Raiz
+	 * @author S/N
+	 */
 	public function getAllOpcionRaiz(){
-        $query	= "	SELECT 
-						*
+        $query = "  SELECT *
 					FROM pre_opcion
-					WHERE bo_activo = 1 AND id_opcion_padre = 0"
-					;
+					WHERE bo_activo = 1 AND id_opcion_padre = 0";
 
-        $result	= $this->db->getQuery($query);
+        $result = $this->db->getQuery($query);
 		
         if($result->numRows > 0){
             return $result->rows;
@@ -88,12 +72,14 @@ class DAOOpcion extends Model {
         }
     }
 	
+    /**
+	 * Descripción : Obtiene Opción Rama
+	 * @author S/N
+	 */
 	public function getAllOpcionRama(){
-        $query	= "	SELECT 
-						*
+        $query = "  SELECT *
 					FROM pre_opcion
-					WHERE bo_activo = 1 AND id_opcion_padre != 0"
-					;
+					WHERE bo_activo = 1 AND id_opcion_padre != 0";
 
         $result	= $this->db->getQuery($query);
 		

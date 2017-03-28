@@ -82,7 +82,7 @@
 					
 				<div class="clearfix col-md-4">
                     <div class="col-md-4">
-                        <label class="control-label">Ingresos : </label>
+                        <label class="control-label">Ingresos (Estimado) : </label>
                     </div>
                     <div class="col-md-8">
                         <input type="text" value="{$ingresos_agresor}" class="form-control" readonly>

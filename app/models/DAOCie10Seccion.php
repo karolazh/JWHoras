@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_cie10_seccion
-* Plataforma	: !PHP
-* Creacion		: 21/03/2017
-* @name			DAOCie10Seccion.php
-* @version		1.0
-* @author		David Guzmán <david.guzman@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_cie10_seccion
+* Plataforma        : !PHP
+* Creacion          : 21/03/2017
+* @name             DAOCie10Seccion.php
+* @version          1.0
+* @author           David Guzmán <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,11 +55,15 @@ class DAOCie10Seccion extends Model{
         }
     }
 	
+    /**
+	 * Descripción : Obtiene detalle por Id de Sección
+	 * @author  S/N
+     * @param   int $id_seccion
+	 */
 	public function getDetalleByIdSeccion($id_seccion){
-		$query	= "	SELECT 
-						g.*
+		$query = "  SELECT g.*
 					FROM pre_cie10_2_seccion s
-						LEFT JOIN pre_cie10_3_grupo g ON s.id_seccion = g.id_seccion
+                    LEFT JOIN pre_cie10_3_grupo g ON s.id_seccion = g.id_seccion
 					WHERE s.id_seccion = ?";
 
 		$param	= array($id_seccion);

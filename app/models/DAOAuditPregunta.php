@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Modelo para Tabla pre_empa_audit_pregunta
-* Plataforma	: !PHP
-* Creacion		: 25/02/2017
-* @name			DAOAuditPregunta.php
-* @version		1.0
-* @author		Victor Retamal <victor.retamal@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Modelo para Tabla pre_empa_audit_pregunta
+* Plataforma        : !PHP
+* Creacion          : 25/02/2017
+* @name             DAOAuditPregunta.php
+* @version          1.0
+* @author           Victor Retamal <victor.retamal@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------

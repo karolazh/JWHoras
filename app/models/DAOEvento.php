@@ -2,13 +2,13 @@
 
 /**
 *****************************************************************************
-* Sistema		: PREVENCION DE FEMICIDIOS
-* Descripcion	: Helper de Eventos
-* Plataforma	: !PHP
-* Creacion		: 24/02/2017
-* @name			DAOEvento.php
-* @version		1.0
-* @author		Orlando Vázquez <orlando.vazquez@cosof.cl>
+* Sistema           : PREVENCION DE FEMICIDIOS
+* Descripcion       : Helper de Eventos
+* Plataforma        : !PHP
+* Creacion          : 24/02/2017
+* @name             DAOEvento.php
+* @version          1.0
+* @author           Orlando Vázquez <orlando.vazquez@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -55,8 +55,13 @@ class DAOEvento extends Model{
         }
     }
 
+    /**
+	 * Descripción : Busqueda de Eventos
+	 * @author  S/N
+     * @param   array  $parametros
+	 */
     public function selBusquedaEventos($parametros){
-		$query	= "	SELECT
+		$query = "  SELECT
 						e.id_evento, 
 						e.gl_descripcion,
 						e.id_evento_tipo,
@@ -84,8 +89,13 @@ class DAOEvento extends Model{
 		}
     }
 
+    /**
+	 * Descripción : Inserta Evento
+	 * @author  S/N
+     * @param   array  $data
+	 */
     public function insEvento($data){
-		$query	= "INSERT into pre_evento values(null,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)";
+		$query 	= "INSERT into pre_evento values(null,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)";
 
 		$param	= array(
 						$data['eventos_tipo'],
@@ -104,6 +114,11 @@ class DAOEvento extends Model{
 		}
 	}
 
+    /**
+	 * Descripción : Actualiza Tipo de Evento
+	 * @author  S/N
+     * @param   array  $datos
+	 */
     public function updTipoEvento($datos){
 		$query	= "	UPDATE ".$this->_tabla."
 					SET    id_evento_tipo = ?
@@ -118,12 +133,17 @@ class DAOEvento extends Model{
 		}
 	}
 
+    /**
+	 * Descripción : Actualiza descripción de Evento
+	 * @author  S/N
+     * @param   array  $datos
+	 */
     public function updDescripcion($datos){
 		$query	= "	UPDATE ".$this->_tabla."
-										SET    gl_descripcion = ?
-										WHERE  " . $this->_primaria . " = ? ";
+                    SET    gl_descripcion = ?
+                    WHERE  " . $this->_primaria . " = ? ";
 
-				$param	= array($datos['gl_descripcion'], $datos['id_evento']);
+        $param	= array($datos['gl_descripcion'], $datos['id_evento']);
 
 		if($this->db->execQuery($query, $param)) {
 			return TRUE;
@@ -132,8 +152,13 @@ class DAOEvento extends Model{
 		}
 	}
 
+    /**
+	 * Descripción : Obtiene Eventos por Paciente
+	 * @author  Carolina Zamora <carolina.zamora@cosof.cl>
+     * @param   int $id_paciente
+	 */
     public function getEventosPaciente($id_paciente){
-        $query	= "	SELECT
+        $query = "  SELECT
                         eve.id_evento, 
                         eve.id_evento_tipo, 
                         tip.gl_nombre_evento_tipo,
@@ -146,7 +171,7 @@ class DAOEvento extends Model{
                     LEFT JOIN pre_evento_tipo tip ON tip.id_evento_tipo = eve.id_evento_tipo
                     LEFT JOIN pre_usuario usr ON usr.id_usuario = eve.id_usuario_crea
                     WHERE eve.id_paciente = ?
-						AND bo_mostrar = 1";
+					AND bo_mostrar = 1";
 
         $param	= array($id_paciente);
         $result	= $this->db->getQuery($query,$param);
@@ -158,9 +183,14 @@ class DAOEvento extends Model{
         }
     }
 
+    /**
+	 * Descripción : Actualiza Eventos, actualiza estado a "0"
+	 * @author  S/N
+     * @param   int $id_evento_tipo
+	 */
 	public function ocultarEventos($id_evento_tipo){
-		$query	= "	UPDATE pre_evento SET
-						bo_mostrar			= 0,
+		$query = "  UPDATE pre_evento 
+                    SET bo_mostrar			= 0,
 						id_usuario_crea		= ".$_SESSION['id'].",
 						fc_crea				= now()
 					WHERE id_evento_tipo	= ".$id_evento_tipo;
