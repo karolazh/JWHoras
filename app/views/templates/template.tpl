@@ -73,7 +73,7 @@
 
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu">
-                <li class="header" style="color:#fff; font-size:16px; text-align: center">Menu Principal</li>
+                <!-- li class="header" style="color:#fff; font-size:16px; text-align: center">Menu Principal</li -->
                 {htmlMenu}
             </ul><!-- /.sidebar-menu -->
         </section>
