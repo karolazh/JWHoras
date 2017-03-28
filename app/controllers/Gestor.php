@@ -95,6 +95,11 @@ class Gestor extends Controller {
 		$direccion		= $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
 		$alarmas		= $this->_DAOPacienteAlarma->getByIdPaciente($id_paciente);
 		
+		if($_SESSION['perfil'] == 5){
+                $pacientes = $this->_DAOPaciente->getListaDetalle();    
+            }else{
+                $pacientes = $this->_DAOPaciente->getListaDetalle(array('paciente.id_region' => $_SESSION['id_region']));
+            }
 		
 		$fc_nacimiento = date("d/m/Y", strtotime($registro->fc_nacimiento));
 		//calculo edad
