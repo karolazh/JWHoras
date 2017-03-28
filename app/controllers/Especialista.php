@@ -112,10 +112,10 @@ class Especialista extends Controller {
 		$parametros		= $this->_request->getParams();
 		$correcto		= FALSE;
 		$error			= FALSE;
+		
 		$bool_update	= $this->_DAOPacienteAgendaEspecialista->insertAgenda($parametros);
 
 		if ($bool_update) {
-			//$resp = $this->_Evento->guardarMostrarUltimo(12,$id_empa,$id_paciente,"Empa modificado el : " . Fechas::fechaHoyVista()." por usuario ".$session->id,1,1,$_SESSION['id']);
 			$correcto	= TRUE;
 		} else {
 			$error		= TRUE;
@@ -131,23 +131,25 @@ class Especialista extends Controller {
 	 * Descripción: cargar Seccion por Capitulo
 	 * @author S/N
 	 */
-	public function cargarSeccionporCapitulo(){
-		$cie10		= $_POST['cie10'];
-		$seccion1	= $this->_DAOCie10Capitulo->getDetalleByIdCapitulo($cie10);
-		$json		= array();
-		$i			= 0;
+	public function cargarSeccionporCapitulo() {
+		$cie10 = $_POST['cie10'];
+		$seccion1 = $this->_DAOCie10Capitulo->getDetalleByIdCapitulo($cie10);
+		$json = array();
+		$i = 0;
 
-		foreach($seccion1 as $seccion){
-				$json[$i]['id_seccion']		= $seccion->id_seccion;
-				$json[$i]['gl_codigo']		= $seccion->gl_codigo;
-				$json[$i]['gl_descripcion']	= $seccion->gl_descripcion;
+		if ($seccion1->row_0->id_seccion) {
+			foreach ($seccion1 as $seccion) {
+				$json[$i]['id_seccion'] = $seccion->id_seccion;
+				$json[$i]['gl_codigo'] = $seccion->gl_codigo;
+				$json[$i]['gl_descripcion'] = $seccion->gl_descripcion;
 				$i++;
+			}
+
+			echo json_encode($json);
 		}
+	}
 
-		echo json_encode($json);
-    }
-
-    /**
+		/**
 	 * Descripción: cargar Grupo por Seccion
 	 * @author S/N
 	 */
@@ -156,15 +158,16 @@ class Especialista extends Controller {
 		$grupo1		= $this->_DAOCie10Seccion->getDetalleByIdSeccion($seccion);
 		$json		= array();
 		$i			= 0;
-
-		foreach($grupo1 as $grupo){
-			$json[$i]['id_grupo']		= $grupo->id_grupo;
-			$json[$i]['gl_codigo']		= $grupo->gl_codigo;
-			$json[$i]['gl_descripcion']	= $grupo->gl_descripcion;
-			$i++;
+		
+		if ($grupo1->row_0->id_grupo) {
+			foreach ($grupo1 as $grupo) {
+				$json[$i]['id_grupo'] = $grupo->id_grupo;
+				$json[$i]['gl_codigo'] = $grupo->gl_codigo;
+				$json[$i]['gl_descripcion'] = $grupo->gl_descripcion;
+				$i++;
+			}
+			echo json_encode($json);
 		}
-
-		echo json_encode($json);
     }
 
     /**
@@ -177,16 +180,16 @@ class Especialista extends Controller {
 		$json	= array();
 		$i		= 0;
 
-		foreach($cie101 as $cie10){
-			$json[$i]['id_cie10']		= $cie10->id_cie10;
-			$json[$i]['gl_codigo']		= $cie10->gl_codigo;
-			$json[$i]['gl_descripcion']	= $cie10->gl_descripcion;
-			$i++;
+		if ($cie101->row_0->id_cie10) {
+			foreach($cie101 as $cie10){
+				$json[$i]['id_cie10']		= $cie10->id_cie10;
+				$json[$i]['gl_codigo']		= $cie10->gl_codigo;
+				$json[$i]['gl_descripcion']	= $cie10->gl_descripcion;
+				$i++;
+			}
+			echo json_encode($json);
 		}
-
-		echo json_encode($json);
-    }
-
+	}
 	/**
 	 * Descripción: ReAgendar Especialista
 	 * * @author David Guzmán <david.guzman@cosof.cl>
