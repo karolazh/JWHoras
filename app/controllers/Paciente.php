@@ -86,9 +86,8 @@ class Paciente extends Controller {
 			$arr	= $this->_DAOPaciente->getListaDetalle($where);
 		}
 
-		$arrOpcion = ''; // incluir opcion con un Helper
 		$this->smarty->assign('arrResultado', $arr);
-		$this->smarty->assign('arrOpcion', $arrOpcion);
+		$this->smarty->assign('arrOpcion', Boton::botonGrillaPaciente());
 		$this->smarty->assign('titulo', 'Pacientes');
 
 		$this->_display('grilla/pacientes.tpl');
@@ -96,30 +95,32 @@ class Paciente extends Controller {
 	}
 
 	/**
-	 * Descripción: Nuevo Registro
-	 * @author: 
-	 */
+	* Descripción: Nuevo Registro
+	* @author: Victor Retamal <victor.retamal@cosof.co>
+	*/
 	public function nuevo() {
 		Acceso::redireccionUnlogged($this->smarty);
-		$region_usuario = "";
 		unset($_SESSION['adjuntos']);
-		$es_admin = FALSE;
-		if ($_SESSION['perfil'] =="1" || $_SESSION['perfil'] == "5"){
-			$arrRegiones = $this->_DAORegion->getLista();
-			$this->smarty->assign("arrRegiones", $arrRegiones);
-			$es_admin = TRUE;
-			
-		} else	{
-			$region_usuario = $this->_DAORegion->getById($_SESSION['id_region']);
-			$this->smarty->assign("region_usuario",$region_usuario);
-			$arrComunas = $this->_DAOComuna->getComunasByIdRegion($_SESSION['id_region']);
-			$this->smarty->assign("arrComunas", $arrComunas);
+
+		$region_usuario	= "";
+		$arrComunas		= array();
+		$arrRegiones	= array();
+		$es_admin		= FALSE;
+		$arrPrevision	= $this->_DAOPrevision->getLista();
+
+		if($_SESSION['perfil'] == '1' || $_SESSION['perfil'] == '5'){
+			$arrRegiones	= $this->_DAORegion->getLista();
+			$es_admin		= TRUE;
+		}else{
+			$region_usuario	= $this->_DAORegion->getById($_SESSION['id_region']);
+			$arrComunas		= $this->_DAOComuna->getComunasByIdRegion($_SESSION['id_region']);
 		}
+
+		$this->smarty->assign("arrRegiones", $arrRegiones);
+		$this->smarty->assign("arrComunas", $arrComunas);
 		$this->smarty->assign("region_usuario",$region_usuario);
 		$this->smarty->assign("es_admin", $es_admin);
-		$arrPrevision = $this->_DAOPrevision->getLista();
 		$this->smarty->assign("arrPrevision", $arrPrevision);
-
 		$this->smarty->assign("botonAyudaPaciente", Boton::botonAyuda('Ingrese Datos del Paciente.', '', 'pull-right'));
 
 		$this->_display('paciente/nuevo.tpl');
@@ -129,11 +130,12 @@ class Paciente extends Controller {
 	}
 
 	/**
-	 * Descripción: Guardar Registro
-	 * @author: 
-	 */
+	* Descripción: Guardar Registro
+	* @author: Victor Retamal <victor.retamal@cosof.co>
+	*/
 	public function GuardarRegistro() {
 		header('Content-type: application/json');
+
 		$parametros			= $this->_request->getParams();
 		$correcto			= false;
 		$error				= false;
@@ -142,32 +144,36 @@ class Paciente extends Controller {
 		$gl_grupo_tipo		= 'Control';
 		$id_tipo_grupo		= 1;
 		$count				= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
+
 		if ($parametros['edad'] > 15 AND $_SESSION['id_tipo_grupo'] == 2 AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
-			$gl_grupo_tipo = 'Tratamiento';
-			$id_tipo_grupo = 2;
+			$gl_grupo_tipo	= 'Tratamiento';
+			$id_tipo_grupo	= 2;
 		}
-		$viene_adjunto_fonasa = FALSE;
-		$parametros['gl_grupo_tipo'] = $gl_grupo_tipo;
-		$parametros['id_tipo_grupo'] = $id_tipo_grupo;
+
+		$viene_adjunto_fonasa			= FALSE;
+		$parametros['gl_grupo_tipo']	= $gl_grupo_tipo;
+		$parametros['id_tipo_grupo']	= $id_tipo_grupo;
+
+		// mejorar este código
 		if ($parametros['chkextranjero'] == "1"){
 			if ($parametros['gl_codigo_fonasa'] != ""){
 				if (!empty($_SESSION['adjuntos'])) {
 					foreach ($_SESSION['adjuntos'] as $adjunto){
-							if (($adjunto['tipo_adjunto'] == 3)){
-								$viene_adjunto_fonasa = TRUE;
-							}
+						if (($adjunto['tipo_adjunto'] == 3)){
+							$viene_adjunto_fonasa = TRUE;
+						}
 					}
 					if (!$viene_adjunto_fonasa){
 						$error			= true;
 						$mensaje_error	= "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
 					}
-				} else {
-						$error = true;
-						$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
+				}else{
+					$error			= true;
+					$mensaje_error	= "Si la paciente es extranjera afiliada a FONASA, debe adjuntar un certificado FONASA.";
 				}
-			} else {
-				$error = true;
-				$mensaje_error = "Si la paciente es extranjera afiliada a FONASA, debe indicar su código.";
+			}else{
+				$error			= true;
+				$mensaje_error	= "Si la paciente es extranjera afiliada a FONASA, debe indicar su código.";
 			}
 		}
 
@@ -293,11 +299,12 @@ class Paciente extends Controller {
 	}
 
 	/**
-	 * Descripción: Guardar Motivo
-	 * @author: 
-	 */
+	* Descripción: Guardar Motivo
+	* @author: Victor Retamal <victor.retamal@cosof.co>
+	*/
 	public function GuardarMotivo() {
 		header('Content-type: application/json');
+
 		$parametros			= $this->_request->getParams();
 		$correcto			= false;
 		$error				= false;
@@ -313,22 +320,22 @@ class Paciente extends Controller {
 		$count				= $this->_DAOPaciente->countPacientesxRegion($_SESSION['id_region']);
 		$mensaje_error		= "";
 
+		// Mejorar código
 		if($parametros['edad'] > 15 AND  $_SESSION['id_tipo_grupo'] == 2 AND $parametros['chkAcepta'] == 1 AND $parametros['prevision'] == 1 and $count < 50) {
-			$gl_grupo_tipo = 'Tratamiento';
-			$id_tipo_grupo = 2;
+			$gl_grupo_tipo	= 'Tratamiento';
+			$id_tipo_grupo	= 2;
 			if ($gl_grupo_tipo_ant != $gl_grupo_tipo){
-				$resp = $this->_Evento->guardar(10,0,$id_paciente,"Paciente RUT : ". $rut ." en Grupo Tratamiento desde : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);				
+				$resp		= $this->_Evento->guardar(10,0,$id_paciente,"Paciente RUT : ". $rut ." en Grupo Tratamiento desde : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);				
 			}
 		}else{
-			$gl_grupo_tipo = 'Control';
-			$id_tipo_grupo = 1;
+			$gl_grupo_tipo	= 'Control';
+			$id_tipo_grupo	= 1;
 		}
 
 		$parametros['gl_grupo_tipo']	= $gl_grupo_tipo;
 		$parametros['id_tipo_grupo']	= $id_tipo_grupo;
 		
-		if ($id_paciente &&  $confirma_fono == "1" &&   $confirma_direccion == "1") {
-				
+		if ($id_paciente &&  $confirma_fono == "1" &&   $confirma_direccion == "1") {				
 				 $ins_paciente_registro = array('id_paciente'			=> $parametros['id_paciente'],
 												'id_institucion'		=> $parametros['centrosalud'],
 												'gl_hora_ingreso'       => $parametros['horaingreso'],
@@ -381,47 +388,43 @@ class Paciente extends Controller {
 			$error	= true;
 		}
 
-		$salida	= array("error"			=> $error,
-						"correcto"		=> $correcto,
-						"mensaje_error" => $mensaje_error );
+		$salida	= array("error" => $error, "correcto" => $correcto, "mensaje_error" => $mensaje_error);
 		$json	= Zend_Json::encode($salida);
 
 		echo $json;
 	}
 
 	/**
-	 * Descripción: Guardar Reconoce
-	 * @author: 
-	 */
+	* Descripción: Guardar Reconoce
+	* @author: Victor Retamal <victor.retamal@cosof.cl>
+	*/
 	public function GuardarReconoce() {
 		header('Content-type: application/json');
-		$parametros = $this->_request->getParams();
-		$correcto = false;
-		$error = false;
 
-		$id_registro = $parametros['id_registro'];
+		$parametros		= $this->_request->getParams();
+		$correcto		= false;
+		$error			= false;
+		$id_registro	= $parametros['id_registro'];
 
-		$resp = $this->_DAOPaciente->update(array('bo_reconoce' => 1), $id_paciente, 'id_paciente');
-		if ($resp) {
-			$correcto = true;
-			$resp = $this->_Evento->guardar(5,0,$id_paciente,"Reconoce violencia con fecha : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
+		$resp			= $this->_DAOPaciente->update(array('bo_reconoce' => 1), $id_paciente, 'id_paciente');
+		if($resp) {
+			$correcto	= true;
+			$resp		= $this->_Evento->guardar(5,0,$id_paciente,"Reconoce violencia con fecha : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 
-		} else {
-			$error = true;
+		}else{
+			$error		= true;
 		}
 
-		$salida = array("error" => $error,
-			"correcto" => $correcto);
-		$this->smarty->assign("hidden", "");
-		$json = Zend_Json::encode($salida);
+		$salida			= array("error" => $error,"correcto" => $correcto);
+		$json			= Zend_Json::encode($salida);
 
 		echo $json;
 	}
 
 	/**
-	 * Descripción: Ver
-	 * @author: 
-	 */
+	* Descripción: Ver
+	* @author: Victor Retamal <victor.retamal@cosof.cl>
+	*/
 	public function ver() {
         Acceso::redireccionUnlogged($this->smarty);
         
@@ -507,15 +510,15 @@ class Paciente extends Controller {
 	 * @author: 
 	 */
 	public function cargarComunasPorRegion() {
-		$region = $_POST['region'];
-		$daoRegion = $this->load->model('DAORegion');
-		$comunas = $daoRegion->getDetalleByIdRegion($region)->rows;
+		$region		= $_POST['region'];
+		$daoRegion	= $this->load->model('DAORegion');
+		$comunas	= $daoRegion->getDetalleByIdRegion($region)->rows;
+		$json		= array();
+		$i			= 0;
 
-		$json = array();
-		$i = 0;
 		foreach ($comunas as $comuna) {
-			$json[$i]['id_comuna'] = $comuna->id_comuna;
-			$json[$i]['nombre_comuna'] = $comuna->gl_nombre_comuna;
+			$json[$i]['id_comuna']		= $comuna->id_comuna;
+			$json[$i]['nombre_comuna']	= $comuna->gl_nombre_comuna;
 			$i++;
 		}
 
@@ -552,28 +555,32 @@ class Paciente extends Controller {
 	}
 
 	/**
-	 * Descripción: Carga data del Paciente
-	 * @author: Victor Retamal
-	 */
+	* Descripción: Carga data del Paciente
+	* @author: David Gusmán <david.guzman@cosof.cl>
+	*/
 	public function cargarPaciente() {
 		header('Content-type: application/json');
-		$rut = $_POST['rut'];
-		$pasaporte = $_POST['inputextranjero'];
-		if (!is_null($rut) && ($rut !== "")) {
-			$registro = $this->_DAOPaciente->getByRut($rut);
-		} else if (!is_null($pasaporte) && ($pasaporte !== "")) {
-			$registro = $this->_DAOPaciente->getByPasaporte($pasaporte);
-		}
-		$json = array();
 
-		if ($registro) {
-			$direcciones	= $this->_DAOPacienteDireccion->getMultByIdPaciente($registro->id_paciente, false);
-			$info_comuna	= $this->_DAOComuna->getInfoComunaxID($direcciones->row_0->id_comuna);
-			$arrComunas		= $this->_DAORegion->getDetalleByIdRegion($direcciones->row_0->id_region);
-			$arrCentroSalud	= $this->_DAOCentroSalud->getByIdComuna($direcciones->row_0->id_comuna);
-			$jsonComuna = '';
-			$jsonCentroSalud = '';
-            $i = 0;
+		$json		= array();
+		$rut		= $_POST['rut'];
+		$pasaporte	= $_POST['inputextranjero'];
+
+		if(!is_null($rut) && ($rut !== "")) {
+			$registro	= $this->_DAOPaciente->getByRut($rut);
+		}else if (!is_null($pasaporte) && ($pasaporte !== "")) {
+			$registro	= $this->_DAOPaciente->getByPasaporte($pasaporte);
+		}
+
+		if($registro) {
+			$direcciones		= $this->_DAOPacienteDireccion->getMultByIdPaciente($registro->id_paciente, false);
+			$info_comuna		= $this->_DAOComuna->getInfoComunaxID($direcciones->row_0->id_comuna);
+			$arrComunas			= $this->_DAORegion->getDetalleByIdRegion($direcciones->row_0->id_region);
+			$arrCentroSalud		= $this->_DAOCentroSalud->getByIdComuna($direcciones->row_0->id_comuna);
+			$jsonComuna			= '';
+			$jsonCentroSalud	= '';
+            $i					= 0;
+
+			//Mejorar el código, usar un helper
             foreach($arrComunas as $comuna){
 				if ($direcciones->row_0->id_comuna == $comuna->id_comuna){
                     $jsonComuna .= '<option value="' . $comuna->id_comuna . '"selected>' . $comuna->gl_nombre_comuna . '</option>';
@@ -581,23 +588,25 @@ class Paciente extends Controller {
 					$jsonComuna .= '<option value="' . $comuna->id_comuna . '">' . $comuna->gl_nombre_comuna . '</option>';
 				}
             }
-			 foreach($arrCentroSalud as $centro){
-				if ($registro->id_centro_salud == $centro->id_centro_salud){
+			foreach($arrCentroSalud as $centro){
+				if($registro->id_centro_salud == $centro->id_centro_salud){
                     $jsonCentroSalud .= '<option value="' . $centro->id_centro_salud . '"selected>' . $centro->gl_nombre_establecimiento . '</option>';
-				} else {
+				}else{
 					$jsonCentroSalud .= '<option value="' . $centro->id_centro_salud . '">' . $centro->gl_nombre_establecimiento . '</option>';
 				}
             }
-			$arr_motivos = $this->_DAOPacienteRegistro->getByIdPaciente($registro->id_paciente);
-			$tabla_motivos = "";
-			$tabla_direcciones = "";
-			$div_superior = "<div class='top-spaced'></div>
-								<div class='panel panel-primary'>
+
+			// Grilla Motivo y Direcciones usar un include, como la Bitácora
+			$arr_motivos		= $this->_DAOPacienteRegistro->getByIdPaciente($registro->id_paciente);
+			$tabla_motivos		= "";
+			$tabla_direcciones	= "";
+			$div_superior		= "<div class='top-spaced'></div>
+									<div class='panel panel-primary'>
 									<div class='panel-heading'>Atenciones de Urgencia</div>";
-			$div_inferior = "</div>";
+			$div_inferior		= "</div>";
 
 			if (!is_null($arr_motivos)) {
-				$encabezado_tabla = "<div class='panel-body'>
+				$encabezado_tabla	= "<div class='panel-body'>
 										<div class='table-responsive col-lg-12' data-row='5'>
 											<table id='tablaPrincipal' class='table table-hover table-striped table-bordered  table-middle dataTable no-footer'>
 												<thead>
@@ -612,75 +621,74 @@ class Paciente extends Controller {
 												</thead>
 												<tbody>
 											";
-				$tabla_motivos = $encabezado_tabla;
-				$break_count = 0;
-				foreach (array_reverse((array) $arr_motivos) as $item) {
-					if ($break_count < 5) {
-						$cuerpo_tabla = "<tr>
-													<td align='center'>" . $item->fc_ingreso . "</td>
-													<td align='center'>" . $item->gl_hora_ingreso . "</td>
-													<td>" . $item->gl_motivo_consulta . "</td>
-													<td>" . $item->gl_nombre_establecimiento . "</td>
-													<td>" . $item->gl_nombres . " " . $item->gl_apellidos . "</td>
-												</tr>
-												";
-						$tabla_motivos = $tabla_motivos . $cuerpo_tabla;
-						$break_count += 1;
-					} else {
+				$tabla_motivos		= $encabezado_tabla;
+				$break_count		= 0;
+
+				foreach(array_reverse((array) $arr_motivos) as $item) {
+					if($break_count < 5) {
+						$cuerpo_tabla	= "	<tr>
+												<td align='center'>" . $item->fc_ingreso . "</td>
+												<td align='center'>" . $item->gl_hora_ingreso . "</td>
+												<td>" . $item->gl_motivo_consulta . "</td>
+												<td>" . $item->gl_nombre_establecimiento . "</td>
+												<td>" . $item->gl_nombres . " " . $item->gl_apellidos . "</td>
+											</tr>";
+						$tabla_motivos	= $tabla_motivos . $cuerpo_tabla;
+						$break_count	+= 1;
+					}else{
 						break;
 					}
 				}
-				$pie_tabla = "	</tbody>
+				$pie_tabla		= "	</tbody>
 											</table>
 										</div>
 									</div>";
-				$tabla_motivos = $tabla_motivos . $pie_tabla;
+				$tabla_motivos	= $tabla_motivos . $pie_tabla;
 			}
+
 			if (!is_null($direcciones)) {
-				$encabezado_tabla_direcciones = "<div class='table-responsive col-sm-12 center' data-row='5'>
-							<table id='tablaDireccion' class='table table-hover table-striped table-bordered dataTable no-footer'>
-								<thead>
-									<tr role='row'>
-										<th align='center' width='10%'>Fecha</th>
-										<th align='center' width='20%'>Direcci&oacute;nes</th>
-										<th align='center' width='20%'>Comuna</th>
-										<th align='center' width='20%'>Regi&oacute;n</th>
-										<th align='center' width='10%'>Estado</th>
-										<th align='center' width='20%'>Funcionario</th>
-									</tr>
-								</thead>
-								<tbody>";
-				$tabla_direcciones = $encabezado_tabla_direcciones;
-				$break_count = 0;
+				$tabla_direcciones	= "	<div class='table-responsive col-sm-12 center' data-row='5'>
+											<table id='tablaDireccion' class='table table-hover table-striped table-bordered dataTable no-footer'>
+												<thead>
+													<tr role='row'>
+														<th align='center' width='10%'>Fecha</th>
+														<th align='center' width='20%'>Direcci&oacute;nes</th>
+														<th align='center' width='20%'>Comuna</th>
+														<th align='center' width='20%'>Regi&oacute;n</th>
+														<th align='center' width='10%'>Estado</th>
+														<th align='center' width='20%'>Funcionario</th>
+													</tr>
+												</thead>
+												<tbody>";
+				$break_count		= 0;
+
 				foreach (array_reverse((array) $direcciones) as $dir) {
 					if ($break_count < 5) {
-						$cuerpo_tabla_direcciones = "<tr>
-															<td align='center'>$dir->fc_crea</td>
-															<td>$dir->gl_direccion</td>
-															<td>$dir->gl_nombre_comuna</td>
-															<td>$dir->gl_nombre_region</td>
-															<td align='center'>";
+						$gl_vigente		= "<span class='label label-danger small'>NO VIGENTE</span>";
 						if($dir->bo_estado == 1){
-							$cuerpo_tabla_direcciones .="		<h6><b><span class='label label-success small'>VIGENTE</span></b></h6>";
-						}else {
-							$cuerpo_tabla_direcciones .="		<h6><b><span class='label label-danger small'>NO VIGENTE</span></b></h6>";
+							$gl_vigente	= "<span class='label label-success small'>VIGENTE</span>";
 						}
-						
-						$cuerpo_tabla_direcciones .= "		</td>
-															<td>$dir->funcionario</td>	
-													</tr>
-												";
-						$tabla_direcciones = $tabla_direcciones . $cuerpo_tabla_direcciones;
-						$break_count += 1;
-					} else {
+						$cuerpo				= "	<tr>
+													<td align='center'>$dir->fc_crea</td>
+													<td>$dir->gl_direccion</td>
+													<td>$dir->gl_nombre_comuna</td>
+													<td>$dir->gl_nombre_region</td>
+													<td align='center'> <h6><b>$gl_vigente</b></h6> </td>
+													<td>$dir->funcionario</td>	
+												</tr>";
+						$tabla_direcciones	= $tabla_direcciones . $cuerpo;
+						$break_count		+= 1;
+					}else{
 						break;
 					}
 				}
-				$pie_tabla_direcciones = "	 </tbody>
-								 </table>
-								</div>";
-				$tabla_direcciones = $tabla_direcciones . $pie_tabla_direcciones;
+
+				$pie_tabla_direcciones	= "			</tbody>
+												</table>
+											</div>";
+				$tabla_direcciones		= $tabla_direcciones . $pie_tabla_direcciones;
 			}
+
 			$json['correcto']				= TRUE;
 			$json['div_superior']			= $div_superior;
 			$json['div_inferior']			= $div_inferior;
@@ -719,9 +727,9 @@ class Paciente extends Controller {
 	}
 
 	/**
-	 * Descripción: Carga adjunto
-	 * @author: 
-	 */
+	* Descripción: Carga adjunto
+	* @author: Victor Retamal <victor.retamal@cosof.co>
+	*/
 	public function cargarAdjunto() {
 		$session				= New Zend_Session_Namespace("adj"); // Revisar si utiliza este o el que está dentro del adjunto
 		$session->tipo_adjunto	= 1;
@@ -734,147 +742,147 @@ class Paciente extends Controller {
 		$this->smarty->display('paciente/cargar_adjunto.tpl');
 	}
 	
-    /**
-	 * Descripción: Guarda adjunto
-	 * @author: 
-	 */
+	/**
+	* Descripción: Guarda adjunto
+	* @author: Victor Retamal <victor.retamal@cosof.cl>
+	*/
 	public function guardarAdjunto() {
-		$adjunto = $_FILES['adjunto'];
-		$parametros = $this->request->getParametros();
-		$tipo_adjunto = $parametros[0];
+		$adjunto		= $_FILES['adjunto'];
+		$parametros		= $this->request->getParametros();
+		$tipo_adjunto	= $parametros[0];
+
 		if ($adjunto['tmp_name'] != "") {
-			$file = fopen($adjunto['tmp_name'], 'r+b');
-			$contenido = fread($file, filesize($adjunto['tmp_name']));
+			$file		= fopen($adjunto['tmp_name'], 'r+b');
+			$contenido	= fread($file, filesize($adjunto['tmp_name']));
 			fclose($file);
 
 			if (!empty($contenido)) {
-				$arr_adjunto = array(
-					'id_adjunto' => 1,
-					'id_mensaje' => 1,
-					'nombre_adjunto' => $adjunto['name'],
-					'mime_adjunto' => $adjunto['type'],
-					'contenido' => base64_encode($contenido),
-					'tipo_adjunto' => $tipo_adjunto
-				);
-				$_SESSION['adjuntos'][] = $arr_adjunto;
-				$success = 1;
-				$mensaje = "El archivo <strong>" . $adjunto['name'] . "</strong > ha sido Adjuntado";
+				$arr_adjunto			= array(
+												'id_adjunto'		=> 1,
+												'id_mensaje'		=> 1,
+												'nombre_adjunto'	=> $adjunto['name'],
+												'mime_adjunto'		=> $adjunto['type'],
+												'contenido'			=> base64_encode($contenido),
+												'tipo_adjunto'		=> $tipo_adjunto
+											);
+				$_SESSION['adjuntos'][]	= $arr_adjunto;
+				$success				= 1;
+				$mensaje				= "El archivo <strong>" . $adjunto['name'] . "</strong > ha sido Adjuntado";
 			} else {
-				$success = 0;
-				$mensaje = "No se ha podido leer el archivo adjunto. Intente nuevamente";
+				$success				= 0;
+				$mensaje				= "No se ha podido leer el archivo adjunto. Intente nuevamente";
 			}
-		} else {
-			$success = 0;
-			$mensaje = "Error al cargar el Adjunto. Intente nuevamente";
+		}else{
+			$success	= 0;
+			$mensaje	= "Error al cargar el Adjunto. Intente nuevamente";
 		}
 
 		if ($success == 1) {
 			echo "<script>parent.cargarListadoAdjuntos('listado-adjuntos'); parent.xModal.close();</script>";
-		} else {
+		}else{
 			$this->view->assign('success', $success);
 			$this->view->assign('mensaje', $mensaje);
 
-			$this->view->assign('template', $this->view->fetch('paciente/cargar_adjunto.tpl'));
+			$this->view->assign('template', $this->view->fetch('paciente/cargar_adjunto.tpl')); // revisar ya que es forma de otro sistema de asignar
 			$this->view->display('template_iframe.tpl');
 		}
 	}
 
 	/**
-	 * Descripción: Carga listado de adjuntos
-	 * @author: 
-	 */
+	* Descripción: Carga listado de adjuntos
+	* @author: Victor Retamal <victor.retamal@cosof.cl>
+	*/
 	public function cargarListadoAdjuntos() {
-		$adjuntos = array();
-		$template = '';
+		$adjuntos	= array();
+		$template	= '';
 
 		if (isset($_SESSION['adjuntos'])) {
-			$template.= '<div class="col-xs-6 col-xs-offset-3" id="div_adjuntos" name="div_adjuntos">
-                                                    <table id="adjuntos" class="table table-hover table-condensed table-bordered" align=center>
-                                                            <thead>
-                                                            <tr>
-                                                                    <th>Nombre Archivo</th>
-                                                                    <th width="50px" nowrap>Descargar</th>
-                                                                    <th width="50px" nowrap>Eliminar</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>';
-			$adjuntos = $_SESSION['adjuntos'];
-			$i = 0;
+			$template	.= '	<div class="col-xs-6 col-xs-offset-3" id="div_adjuntos" name="div_adjuntos">
+									<table id="adjuntos" class="table table-hover table-condensed table-bordered" align=center>
+										<thead>
+											<tr>
+												<th>Nombre Archivo</th>
+												<th width="50px" nowrap>Descargar</th>
+												<th width="50px" nowrap>Eliminar</th>
+											</tr>
+										</thead>
+										<tbody>';
+			$adjuntos	= $_SESSION['adjuntos'];
+			$i			= 0;
+
 			foreach ($adjuntos as $adjunto) {
-				$template.= '		<tr>
-                                                                            <td>										
-                                                                                    <strong>' . $adjunto['nombre_adjunto'] . '</strong>
-                                                                            </td>
-                                                                            <td align="center"><a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\'' . BASE_URI . '/Paciente/verAdjunto/' . $i . '\',\'_blank\');">
-                                                                                            <i class="fa fa-download"></i>
-                                                                                    </a>
-                                                                            </td>										
-                                                                            <td align="center">										
-                                                                                    <button class="btn btn-xs btn-danger" type="button" onclick="borrarAdjunto(' . $i . ')">
-                                                                                            <i class="fa fa-trash-o"></i>
-                                                                                    </button>
-                                                                            </td>
-                                                                    </tr>';
+				$template	.= '			<tr>
+												<td><strong>' . $adjunto['nombre_adjunto'] . '</strong></td>
+												<td align="center">
+													<a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\'' . BASE_URI . '/Paciente/verAdjunto/' . $i . '\',\'_blank\');">
+														<i class="fa fa-download"></i>
+													</a>
+												</td>
+												<td align="center">
+													<button class="btn btn-xs btn-danger" type="button" onclick="borrarAdjunto(' . $i . ')">
+														<i class="fa fa-trash-o"></i>
+													</button>
+												</td>
+											</tr>';
 				$i++;
 			}
 
-			$template.= '		</tbody>
-                                                    </table>
-                                            </div>';
+			$template	.= '			</tbody>
+									</table>
+								</div>';
 		}
 
 		echo $template;
 	}
 
 	/**
-	 * Descripción: Borrar adjunto
-	 * @author: 
-	 */
+	* Descripción: Borrar adjunto
+	* @author: Victor Retamal <victor.retamal@cosof.cl>
+	*/
 	public function borrarAdjunto() {
-		$parametros = $this->request->getParametros();
-		$id_adjunto = $parametros[0];
 
-		$template = '';
+		$parametros	= $this->request->getParametros();
+		$id_adjunto = $parametros[0];
+		$template	= '';
 		unset($_SESSION['adjuntos'][$id_adjunto]);
 
 		if (count($_SESSION['adjuntos']) > 0) {
-			$template.= '<div class="col-xs-6 col-xs-offset-3" id="div_adjuntos" name="div_adjuntos">
-                                                    <table id="adjuntos" class="table table-hover table-condensed table-bordered" align=center>
-                                                            <thead>
-                                                            <tr>
-                                                                    <th>Nombre Archivo</th>
-                                                                    <th width="50px" nowrap>Descargar</th>
-                                                                    <th width="50px" nowrap>Eliminar</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>';
-			$adjuntos = $_SESSION['adjuntos'];
-			$i = 0;
+			$template	.= '	<div class="col-xs-6 col-xs-offset-3" id="div_adjuntos" name="div_adjuntos">
+									<table id="adjuntos" class="table table-hover table-condensed table-bordered" align=center>
+										<thead>
+											<tr>
+												<th>Nombre Archivo</th>
+												<th width="50px" nowrap>Descargar</th>
+												<th width="50px" nowrap>Eliminar</th>
+											</tr>
+										</thead>
+										<tbody>';
+			$adjuntos	= $_SESSION['adjuntos'];
+			$i			= 0;
 			unset($_SESSION['adjuntos']);
 
 			foreach ($adjuntos as $adjunto) {
-				$_SESSION['adjuntos'][] = $adjunto;
-				$template.= '		<tr>
-                                                                            <td>										
-                                                                                    <strong>' . $adjunto['nombre_adjunto'] . '</strong>
-                                                                            </td>
-                                                                            <td align="center"><a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\'' . BASE_URI . '/Paciente/verAdjunto/' . $i . '\',\'_blank\');">
-                                                                                            <i class="fa fa-download"></i>
-                                                                                    </a>
-                                                                            </td>										
-                                                                            <td align="center">										
-                                                                                    <button class="btn btn-xs btn-danger" type="button" onclick="borrarAdjunto(' . $i . ')">
-                                                                                            <i class="fa fa-trash-o"></i>
-                                                                                    </button>
-                                                                            </td>
-                                                                    </tr>';
+				$_SESSION['adjuntos'][]	= $adjunto;
+				$template				.= '<tr>
+												<td><strong>' . $adjunto['nombre_adjunto'] . '</strong></td>
+												<td align="center">
+													<a class="btn btn-xs btn-primary" href="javascript:void(0);" onclick="window.open(\'' . BASE_URI . '/Paciente/verAdjunto/' . $i . '\',\'_blank\');">
+														<i class="fa fa-download"></i>
+													</a>
+												</td>
+												<td align="center">
+													<button class="btn btn-xs btn-danger" type="button" onclick="borrarAdjunto(' . $i . ')">
+														<i class="fa fa-trash-o"></i>
+													</button>
+												</td>
+											</tr>';
 				$i++;
 			}
 
-			$template.= '		</tbody>
-                                                    </table>
-                                            </div>';
-		} else {
+			$template	.= '				</tbody>
+										</table>
+									</div>';
+		}else{
 			echo "<script> $('#btnUploadUno').prop('disabled', false);</script>";
 		}
 
@@ -882,21 +890,23 @@ class Paciente extends Controller {
 	}
 
 	/**
-	 * Descripción: Ver adjunto
-	 * @author: 
-	 */
+	* Descripción: Ver adjunto
+	* @author: Victor Retamal <victor.retamal@cosof.cl>
+	*/
 	public function verAdjunto() {
-		$parametros = $this->request->getParametros();
-		$id_adjunto = $parametros[0];
+		$parametros	= $this->request->getParametros();
+		$id_adjunto	= $parametros[0];
 
 		if (isset($_SESSION['adjuntos'][$id_adjunto])) {
-			$adjunto = $_SESSION['adjuntos'][$id_adjunto];
+			$adjunto	= $_SESSION['adjuntos'][$id_adjunto];
+
 			header("Content-Type: " . $adjunto['mime_adjunto']);
 			header("Content-Disposition: inline; filename=" . $adjunto['nombre_adjunto']);
 			header('Expires: 0');
 			header('Cache-Control: must-revalidate');
 			header('Pragma: public');
 			ob_end_clean();
+
 			echo base64_decode($adjunto['contenido']);
 			exit();
 		} else {
@@ -912,6 +922,7 @@ class Paciente extends Controller {
 	 */
 	public function generarConsentimiento() {
 		$this->load->lib('Mpdf', false);
+
 		$param			= $this->_request->getParams();
 		$correcto		= false;
 		$base64			= '';
@@ -950,75 +961,4 @@ class Paciente extends Controller {
 		echo $json;
 	}
 
-	public function buscar() {
-		Acceso::redireccionUnlogged($this->smarty);
-		
-		$arrRegiones = $this->_DAORegion->getLista();
-		$this->smarty->assign("arrRegiones", $arrRegiones);
-		
-		if ($_SESSION['perfil'] != 1 && $_SESSION['perfil'] != 5){
-			$this->smarty->assign('bool_region', 1);
-			$this->smarty->assign('reg', $_SESSION['id_region']);
-			$region = $_SESSION['id_region'];
-			$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
-			$this->_addJavascript($jscode);
-			$jscode = "$('#region').attr('readonly',true);";
-			$this->_addJavascript($jscode);
-			$jscode = "setTimeout(function(){ $('#region').trigger('change'); },100);";
-			$this->_addJavascript($jscode);
-		}
-		
-		$arrCentroSalud	= $this->_DAOCentroSalud->getListaOrdenada();
-		$this->smarty->assign("arrCentroSalud", $arrCentroSalud);	
-		
-		$mostrar = 0;
-		$parametros = $this->_request->getParams();
-		
-		if($parametros){
-			$rut			= $parametros['rut'];
-			$pasaporte		= $parametros['pasaporte'];
-			$nombres		= $parametros['nombres'];
-			$apellidos		= $parametros['apellidos'];
-			$cod_fonasa		= $parametros['cod_fonasa'];
-			$centro_salud	= $parametros['centro_salud'];
-			if ($_SESSION['perfil'] != 1 && $_SESSION['perfil'] != 5){
-				$region					= $_SESSION['id_region'];
-				$parametros['region']	= $_SESSION['id_region'];
-			} else {
-				$region		= $parametros['region'];
-			}
-			$comuna			= $parametros['comuna'];
-			
-			if ($rut != '' && $pasaporte != ''){
-				$jscode = "xModal.danger('Error: No se puede buscar por Rut y Pasaporte a la vez');";
-				$this->_addJavascript($jscode);
-			} else if($rut != '' || $pasaporte != '' || $nombres != '' || $apellidos != '' || $cod_fonasa != '' || $centro_salud != 0 || $region != 0 || $comuna != 0){
-				$mostrar = 1;
-				$arr = $this->_DAOPaciente->buscarPaciente($parametros);
-
-				$this->smarty->assign('arrResultado', $arr);
-				$this->smarty->assign('rut',$rut);
-				$this->smarty->assign('pasaporte',$pasaporte);
-				$this->smarty->assign('nombres',$nombres);
-				$this->smarty->assign('apellidos',$apellidos);
-				$this->smarty->assign('cod_fonasa',$cod_fonasa);
-				$this->_addJavascript(STATIC_FILES . "js/regiones.js");
-
-				$jscode = "$(\"#centro_salud option[value='".$centro_salud."']\").attr('selected',true);";
-				$this->_addJavascript($jscode);
-				$jscode = "$(\"#region option[value='".$region."']\").attr('selected',true);";
-				$this->_addJavascript($jscode);
-				$jscode = "$('#region').trigger('change')";
-				$this->_addJavascript($jscode);
-				$jscode = "setTimeout(function(){ $(\"#comuna option[value='".$comuna."']\").attr('selected',true); },100);";
-				$this->_addJavascript($jscode);
-			}
-		}
-		
-		$this->smarty->assign('mostrar',$mostrar);
-		$this->_display('paciente/buscar.tpl');
-		$this->load->javascript(STATIC_FILES . "js/regiones.js");
-		$this->load->javascript(STATIC_FILES . "js/templates/paciente/buscar.js");
-	}
-	
 }

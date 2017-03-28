@@ -19,7 +19,6 @@
 *****************************************************************************
 */
 
-
 Class Boton{
 
 	/**
@@ -35,10 +34,22 @@ Class Boton{
 					<li class="fa fa-question-circle"></li>
 				</span>';
 	}
-	
+
 	public static function botonGrillaPaciente(){
-		
-		return '';
+		$id_perfil		= $_SESSION['perfil'];
+		$id_region		= $_SESSION['id_region'];
+		$id_institucion	= $_SESSION['id_institucion'];
+		$id_laboratorio = $_SESSION['id_laboratorio'];
+
+		$xModal		= BASE_URI."/Paciente/ver/+$('#id_paciente').val()+/', 'Detalle Registro', 85";
+		$botones 	= "	<button type='button' 
+								onClick='xModal.open($xModal);' 
+								data-toggle='tooltip' 
+								class='btn btn-xs btn-info'
+								data-title='Ver Registro'>
+								<i class='fa fa-search'></i>
+						</button>";
+		return $botones;
 	}
-	
+
 }
