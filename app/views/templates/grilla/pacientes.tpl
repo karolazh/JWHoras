@@ -21,7 +21,7 @@
 				<table id="tablaPrincipal" class="table table-hover table-striped table-bordered dataTable no-footer">
 					<thead>
 						<tr role="row">
-							<th class="text-center" width="3%">RUT / Pasaporte</th>
+							<th class="text-center" width="3%">{$arrOpcion}</th>
 							<th class="text-center" width="3%">Fecha Registro</th>
 							<th class="text-center" width="25%">Nombre</th>
 							<th class="text-center" width="10%">Comuna</th>
@@ -36,7 +36,8 @@
 					</thead>
 					<tbody>
 						{foreach $arrResultado as $item}
-								{if $item->nr_examen_alterado > 0 or $item->gl_examen_alterado_externo > 0 or ($item->bo_reconoce == 1 and $mostrar_gestor == 1)}
+							<input type="text" value="{$item->id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
+							{if $item->nr_examen_alterado > 0 or $item->gl_examen_alterado_externo > 0 or ($item->bo_reconoce == 1 and $mostrar_gestor == 1)}
 								<tr>
 										<td style="color:#ff0000; background: #F7D3D2;" class="text-center" nowrap> {$item->gl_identificacion} </td>
 										<td style="color:#ff0000; background: #F7D3D2;" class="text-center"> {$item->fc_crea} </td>
@@ -45,31 +46,27 @@
 										<td style="color:#ff0000; background: #F7D3D2;" class="text-center"> {$item->gl_centro_salud} </td>
 										<td style="color:#ff0000; background: #F7D3D2;" class="text-center" nowrap> {$item->nr_motivo_consulta} </td>
 										<td style="background: #F7D3D2;" class="text-center" nowrap>
-												{if $item->bo_reconoce == 1}
-														<span class="label label-danger">Si</span>
-												{else}
-														<span class="label label-success">No</span>
-												{/if}
+											{if $item->bo_reconoce == 1}
+												<span class="label label-danger">Si</span>
+											{else}
+												<span class="label label-success">No</span>
+											{/if}
 										</td>
 										<td style="background: #F7D3D2;" class="text-center" nowrap>
-												{if $item->bo_acepta_programa == 1}
-														<span class="label label-danger">Si</span>
-												{else}
-														<span class="label label-success">No</span>
-												{/if}
+											{if $item->bo_acepta_programa == 1}
+												<span class="label label-danger">Si</span>
+											{else}
+												<span class="label label-success">No</span>
+											{/if}
 										</td>
 										<td style="background: #F7D3D2;" class="text-center" nowrap>
 												<span class="label label-danger">Si</span>
 										</td>
 										<td style="color:#ff0000; background: #F7D3D2;" class="text-center" nowrap> {$item->nr_dias_primera_visita} </td>
 										<td style="background: #F7D3D2;" class="text-center" nowrap>
-												<button type="button" 
-														onClick="xModal.open('{$smarty.const.BASE_URI}/Paciente/ver/{$item->id_paciente}', 'Detalle Registro', 85);" 
-														data-toggle="tooltip" 
-														class="btn btn-xs btn-info"
-														data-title="Ver Registro">
-														<i class="fa fa-search"></i>
-												</button>
+												
+												{$arrOpcion}
+												
 												{if $mostrar_especialista != 1 and $mostrar_gestor != 1}
 												<button type="button" 
 														class="btn btn-xs btn-success" 
@@ -145,7 +142,7 @@
 												</button>
 												{/if}
 												<button type="button" 
-														class="btn btn-xs btn-default" 
+														class="btn btn-xs btn-success" 
 														onClick="location.href='{$base_url}/Laboratorio/ver/{$item->id_paciente}';"
 														data-toggle="tooltip" title="Formulario Examen">
 														<i class="fa fa-book"></i>
@@ -262,7 +259,7 @@
 												</button>
 												{/if}
 												<button type="button" 
-														class="btn btn-xs btn-default" 
+														class="btn btn-xs btn-success" 
 														onClick="location.href='{$base_url}/Laboratorio/ver/{$item->id_paciente}';"
 														data-toggle="tooltip" title="Formulario Examen">
 														<i class="fa fa-book"></i>

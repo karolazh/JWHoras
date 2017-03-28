@@ -358,6 +358,49 @@ class DAOPacienteExamen extends Model{
             return NULL;
         }
     }
+
+    public function getAllByIdLaboratorio($id_laboratorio){
+        $query	= "	SELECT 
+                        examen.id_paciente_examen,
+                        examen.id_tipo_examen,
+                        examen.id_paciente,
+                        examen.id_empa,
+                        examen.id_laboratorio,
+                        examen.gl_folio,
+                        examen.gl_resultado,
+                        examen.gl_resultado_descripcion,
+                        date_format(examen.fc_crea,'%d-%m-%Y') AS fc_crea,
+                        tipo.gl_nombre_examen,
+                        lab.gl_nombre_laboratorio,
+                        date_format(examen.fc_toma,'%d-%m-%Y') AS fc_toma,
+                        date_format(examen.fc_resultado,'%d-%m-%Y') AS fc_resultado,
+                        examen.gl_hora_toma,
+                        examen.gl_observacion_toma,
+                        date_format(examen.fc_toma,'%Y-%m-%d') AS fc_toma_calendar,
+                        date_format(examen.fc_resultado,'%Y-%m-%d') AS fc_resultado_calendar,
+                        NULL AS fc_ultimo_pap_ano, 
+                        NULL AS fc_ultimo_pap_mes,
+                        IF(paciente.bo_extranjero=1,paciente.gl_run_pass,paciente.gl_rut) AS gl_identificacion,
+						paciente.gl_rut,
+						paciente.gl_nombres,
+						paciente.gl_apellidos
+                    FROM pre_paciente_examen examen
+						LEFT JOIN pre_empa empa ON (empa.id_empa = examen.id_empa AND empa.bo_finalizado = 0)
+						LEFT JOIN pre_tipo_examen tipo ON tipo.id_tipo_examen = examen.id_tipo_examen
+						LEFT JOIN pre_laboratorio lab ON lab.id_laboratorio = examen.id_laboratorio
+						LEFT JOIN pre_paciente paciente ON paciente.id_paciente = examen.id_paciente
+                    WHERE examen.id_laboratorio = ?";
+
+        $param	= array($id_laboratorio);
+        $result	= $this->db->getQuery($query,$param);
+
+        if($result->numRows > 0) {
+            return $result->rows;
+        }else{
+            return NULL;
+        }
+    }
+
 }
 
 ?>
