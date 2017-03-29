@@ -37,7 +37,7 @@ var Mantenedor_usuario = {
 			var btnTexto = $(btn).html();
 			$(btn).html('Cambiando...');
 
-			var parametros = $("#form").serialize();
+			var parametros = $("#formCambioUsuario").serialize();
 			$.ajax({
 				dataType	: "json",
 				cache		: false,

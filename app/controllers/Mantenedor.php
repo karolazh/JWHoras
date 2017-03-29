@@ -133,8 +133,15 @@ class Mantenedor extends Controller{
 		$correcto			= false;
 		$mensaje			= '';
 		$parametros			= $this->_request->getParams();
-		$id_usuario			= $parametros['id_usuario']; // revisar el paso de variable cuando existe GET
-		$id_usuario_cambio	= $parametros['id_usuario_cambio'];
+		
+		if(isset($parametros['id_usuario'])){
+			$id_usuario			= $parametros['id_usuario'];
+			$id_usuario_cambio	= $parametros['id_usuario_cambio'];
+		}else{
+			$parametros			= $_REQUEST;
+			$id_usuario			= $parametros['id_usuario'];
+			$id_usuario_cambio	= $parametros['id_usuario_cambio'];
+		}
 
 		//revisar que id_usuario sea ADMIN
 		

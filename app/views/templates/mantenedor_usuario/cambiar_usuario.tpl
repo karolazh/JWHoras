@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{$static}js/plugins/select2/select2.min.css" />
 *}
 	
-<form id="form">
+<form id="formCambioUsuario">
 
 	<input type="text" value="{$id_usuario}" id="id_usuario" name="id_usuario" class="hidden" readonly>
 	<div class="box box-success">
