@@ -99,7 +99,7 @@ Class Boton{
 
 	public static function getBotonAgendaEspecialista($id_paciente='0'){
 		return	"	<button type='button' 
-						onClick=\"xModal.open('".BASE_URI."/Agenda/especialista/$id_paciente', 'Agenda Especialista', 85)\" 
+						onClick=\"xModal.open('".BASE_URI."/Agenda/verEspecialista/$id_paciente', 'Agenda Especialista', 85)\" 
 						data-toggle='tooltip' 
 						class='btn btn-xs btn-primary'
 						data-title='Ver Agenda Especialista'>
@@ -154,7 +154,7 @@ Class Boton{
 		}else if($bandeja == 'Laboratorio'){
 			$botones	= $examen.$agendaExamen.$ver.$bitacora;
 		}else if($bandeja == 'Especialista'){
-			$botones	= $diagnostico.$agendaExamen.$ver.$bitacora;
+			$botones	= $diagnostico.$agendaEspecialista.$agendaExamen.$ver.$bitacora;
 		}else if($bandeja == 'Gestor'){
 			$botones	= $seguimiento.$agendaExamen.$ver.$bitacora;
 		}
