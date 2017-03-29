@@ -56,7 +56,8 @@ class Gestor extends Controller {
 		$arr = $this->_DAOPaciente->getListaDetalle($where);
 		$this->smarty->assign('mostrar_gestor', 1);
 		$this->smarty->assign('arrResultado', $arr);
-		$this->smarty->assign('titulo', 'Pacientes Gestor Nacional');
+		$this->smarty->assign('bandeja', 'Gestor');
+		$this->smarty->assign('origen', 'Pacientes Gestor Nacional');
 
 		$this->_display('grilla/pacientes.tpl');
 	}
@@ -68,12 +69,13 @@ class Gestor extends Controller {
 	public function regional() {
 		Acceso::redireccionUnlogged($this->smarty);
 		
-		$where	= array('paciente.gl_grupo_tipo'=>'Tratamiento',
-						'paciente.id_region'	=>$_SESSION['id_region']);
+		$where	= array('paciente.gl_grupo_tipo'=> 'Tratamiento',
+						'paciente.id_region'	=> $_SESSION['id_region']);
 		$arr = $this->_DAOPaciente->getListaDetalle($where);
 		$this->smarty->assign('mostrar_gestor', 1);
 		$this->smarty->assign('arrResultado', $arr);
-		$this->smarty->assign('titulo', 'Pacientes Gestor Regional');
+		$this->smarty->assign('bandeja', 'Gestor');
+		$this->smarty->assign('origen', 'Pacientes Gestor Regional');
 
 		$this->_display('grilla/pacientes.tpl');
 	}
@@ -84,7 +86,6 @@ class Gestor extends Controller {
 	*/
 	public function seguimiento() {
 		Acceso::redireccionUnlogged($this->smarty);
-		
 		
 		$parametros		= $this->request->getParametros();
 		$id_paciente	= $parametros[0];

@@ -87,8 +87,9 @@ class Paciente extends Controller {
 		}
 
 		$this->smarty->assign('arrResultado', $arr);
-		$this->smarty->assign('arrOpcion', Boton::botonGrillaPaciente('Paciente'));
+		$this->smarty->assign('bandeja', 'Paciente');
 		$this->smarty->assign('origen', 'Pacientes');
+		$this->smarty->assign('smart', $this->smarty);
 
 		$this->_display('grilla/pacientes.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/paciente/index.js");

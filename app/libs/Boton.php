@@ -40,7 +40,7 @@ Class Boton{
 	* @param string $bandeja [de donde se llama]
 	* @return string html
 	*/
-	public static function botonGrillaPaciente($bandeja){
+	public static function botonGrillaPaciente($bandeja='',$id_paciente='0'){
 		$id_perfil		= $_SESSION['perfil'];
 		$id_region		= $_SESSION['id_region'];
 		$id_institucion	= $_SESSION['id_institucion'];
@@ -48,7 +48,7 @@ Class Boton{
 
 		//if $mostrar_especialista != 1 and $mostrar_gestor != 1 Enfermera/Medico
 		$empa 	= "	<button type='button' 
-						onClick=\"location.href=('".BASE_URI."/Empa/nuevo/'+$('#id_paciente').val())\" 
+						onClick=\"location.href=('".BASE_URI."/Empa/nuevo/$id_paciente'\" 
 						data-toggle='tooltip' 
 						class='btn btn-xs btn-success'
 						data-title='Formulario EMPA'>
@@ -57,7 +57,7 @@ Class Boton{
 
 		//Medico - Incluir en el EMPA
 		$plan 	= "	<button type='button' 
-						onClick=\"location.href=('".BASE_URI."/Medico/plan_tratamiento/'+$('#id_paciente').val())\" 
+						onClick=\"location.href=('".BASE_URI."/Medico/plan_tratamiento/$id_paciente'\" 
 						data-toggle='tooltip' 
 						class='btn btn-xs btn-default'
 						data-title='Plan Tratamiento'>
@@ -66,7 +66,7 @@ Class Boton{
 
 		//{if $mostrar_especialista == 1} Especialista
 		$diagnostico 	= "	<button type='button' 
-								onClick=\"location.href=('".BASE_URI."/Especialista/diagnostico/'+$('#id_paciente').val())\" 
+								onClick=\"location.href=('".BASE_URI."/Especialista/diagnostico/$id_paciente'\" 
 								data-toggle='tooltip' 
 								class='btn btn-xs btn-default'
 								data-title='Diagnóstico'>
@@ -75,7 +75,7 @@ Class Boton{
 
 		//{if $mostrar_gestor == 1} Gestor
 		$seguimiento 	= "	<button type='button' 
-								onClick=\"location.href=('".BASE_URI."/Gestor/seguimiento/'+$('#id_paciente').val())\" 
+								onClick=\"location.href=('".BASE_URI."/Gestor/seguimiento/$id_paciente'\" 
 								data-toggle='tooltip' 
 								class='btn btn-xs btn-danger'
 								data-title='Seguimiento'>
@@ -84,7 +84,7 @@ Class Boton{
 
 		// Laboratorio
 		$examen 	= "	<button type='button' 
-								onClick=\"location.href=('".BASE_URI."/Laboratorio/ver/'+$('#id_paciente').val())\" 
+								onClick=\"location.href=('".BASE_URI."/Laboratorio/ver/$id_paciente'\" 
 								data-toggle='tooltip' 
 								class='btn btn-xs btn-success'
 								data-title='Formulario Examen'>
@@ -93,7 +93,7 @@ Class Boton{
 
 		//Enfermera - Especialista - Medico
 		$agendaExamen 	= "	<button type='button' 
-								onClick=\"xModal.open('".BASE_URI."/Agenda/ver/'+$('#id_paciente').val(), 'Agenda Examen Paciente', 85)\" 
+								onClick=\"xModal.open('".BASE_URI."/Agenda/ver/$id_paciente', 'Agenda Examen Paciente', 85)\" 
 								data-toggle='tooltip' 
 								class='btn btn-xs btn-info'
 								data-title='Ver Agenda Examen'>
@@ -104,7 +104,7 @@ Class Boton{
 
 		//Todos
 		$ver	= "	<button type='button' 
-						onClick=\"xModal.open('".BASE_URI."/Paciente/ver/'+$('#id_paciente').val(), 'Detalle Paciente', 85)\" 
+						onClick=\"xModal.open('".BASE_URI."/Paciente/ver/$id_paciente', 'Detalle Paciente', 85)\" 
 						data-toggle='tooltip' 
 						class='btn btn-xs btn-info'
 						data-title='Ver Paciente'>
@@ -113,7 +113,7 @@ Class Boton{
 
 		//Todos
 		$bitacora	= "	<button type='button' 
-						onClick=\"xModal.open('".BASE_URI."/Bitacora/ver/'+$('#id_paciente').val(), 'Bitácora Paciente', 85)\" 
+						onClick=\"xModal.open('".BASE_URI."/Bitacora/ver/$id_paciente', 'Bitácora Paciente', 85)\" 
 						data-toggle='tooltip' 
 						class='btn btn-xs btn-primary'
 						data-title='Bitácora'>

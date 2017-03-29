@@ -62,7 +62,7 @@ class Medico extends Controller {
 		$arr		= $this->_DAOPaciente->getListaDetalle($where,$join);
 
 		$this->smarty->assign('arrResultado', $arr);
-		$this->smarty->assign('arrOpcion', Boton::botonGrillaPaciente('Medico'));
+		$this->smarty->assign('bandeja', 'Medico');
 		$this->smarty->assign('origen', 'Evaluación');
 
 		$this->_display('grilla/pacientes.tpl');

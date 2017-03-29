@@ -83,7 +83,8 @@
 											<i class="fa fa-key"></i>
 										</button>
 									{/if}
-									{$arrOpcion}
+									{assign var="id_paciente" value=$item->id_paciente}
+									{php} echo Boton::botonGrillaPaciente($template->getTemplateVars('bandeja'),$template->getTemplateVars('id_paciente')); {/php}
 								</td>
 							</tr>
 						{/foreach}
