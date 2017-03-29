@@ -1,6 +1,8 @@
+{*
 <link href="{$base_url}/template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$base_url}/template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-
+*}
+{*
 <section class="content-header">
     <h1><i class="fa fa-plus"></i> Plan de Tratamiento</h1>
 	<ol class="breadcrumb">
@@ -9,13 +11,14 @@
 		<li class="active"> &nbsp;Plan de Tratamiento</li>
 	</ol>
 </section>
+*}
 
-<form id="form" class="form-horizontal" enctype="multipart/form-data">
+<form id="formPlan" class="form-horizontal" enctype="multipart/form-data">
 
 	<section class="content">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				 {$botonAyudaTratamiento}
+				Plan de Tratamiento {$botonAyudaTratamiento}
 				<input type="text" value="{$id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
 			</div>
 			<div class="panel-body">
@@ -56,7 +59,7 @@
 				<div class="top-spaced"></div>
 				
 				<div class="form-group clearfix  text-right">
-					<button type="button" id="guardar" class="btn btn-success">
+					<button type="button" id="guardarPlan" class="btn btn-success">
 						<i class="fa fa-save"></i>  Guardar
 					</button>
 					<button type="button" id="guardarMotivo" class="btn btn-success" style="display: none">
@@ -78,7 +81,7 @@
 {if count($arr_plan) > 0}
 <section class="content">
 	<div class="panel panel-primary">
-		<div class="panel-heading"> Lista </div>
+		<div class="panel-heading"> Agenda con Especialistas </div>
 		<div class="panel-body">
 			<div class="table-responsive col-lg-12" data-row="10">
 				<table id="tablaPrincipal" class="table table-hover table-striped table-bordered  no-footer">

@@ -1,8 +1,8 @@
 /* global BASE_URI */
 
-$("#guardar").on('click', function (e) {
+$("#guardarPlan").on('click', function (e) {
 	var button_process			= buttonStartProcess($(this), e);
-	var parametros				= $("#form").serializeArray();
+	var parametros				= $("#formPlan").serializeArray();
 	var gl_observacion			= $("#gl_observacion").val();
 	var id_tipo_especialidad	= $("#id_tipo_especialidad").val();
 

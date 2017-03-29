@@ -45,6 +45,7 @@ Class Boton{
 					</button>";
 	}
 
+	/*
 	public static function getBotonPlan($id_paciente='0'){
 		return	"	<button type='button' 
 						onClick=\"location.href=('".BASE_URI."/Medico/plan_tratamiento/$id_paciente')\" 
@@ -54,6 +55,7 @@ Class Boton{
 						<i class='fa fa-medkit'></i>
 					</button>";
 	}
+	*/
 
 	public static function getBotonDiagnostico($id_paciente='0'){
 		return	"	<button type='button' 
@@ -134,7 +136,7 @@ Class Boton{
 	public static function botonGrillaPaciente($bandeja='',$id_paciente='0'){
 
 		$empa 					= Boton::getBotonEmpa($id_paciente);
-		$plan 					= Boton::getBotonPlan($id_paciente);
+		//$plan 					= Boton::getBotonPlan($id_paciente);
 		$diagnostico 			= Boton::getBotonDiagnostico($id_paciente);
 		$seguimiento			= Boton::getBotonSeguimiento($id_paciente);
 		$examen 				= Boton::getBotonExamen($id_paciente);
@@ -147,7 +149,8 @@ Class Boton{
 		if($bandeja == 'Paciente'){
 			$botones	= $empa.$agendaExamen.$ver.$bitacora;
 		}else if($bandeja == 'Medico'){
-			$botones	= $empa.$plan.$agendaExamen.$ver.$bitacora;
+			//$botones	= $empa.$plan.$agendaExamen.$ver.$bitacora;
+			$botones	= $empa.$agendaExamen.$ver.$bitacora;
 		}else if($bandeja == 'Laboratorio'){
 			$botones	= $examen.$agendaExamen.$ver.$bitacora;
 		}else if($bandeja == 'Especialista'){

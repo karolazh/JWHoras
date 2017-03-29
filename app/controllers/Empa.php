@@ -46,6 +46,8 @@ class Empa extends Controller{
 		$this->_DAOEvento				= $this->load->model("DAOEvento");
 		$this->_DAOMes					= $this->load->model("DAOMes");
 		$this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
+		$this->_DAOTipoEspecialidad		= $this->load->model("DAOTipoEspecialidad");
+		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
 	}
 
     public function index() {
@@ -67,9 +69,19 @@ class Empa extends Controller{
 		$this->smarty->assign("id_usuario", $sesion->id);
 		$this->smarty->assign("rut", $sesion->rut);
 		$this->smarty->assign("usuario", $sesion->usuario);
+		
+		$parametros			= $this->request->getParametros();
+		$id_paciente		= $parametros[0];
+		$arrEspecialidad	= $this->_DAOTipoEspecialidad->getLista();
+		$arr_plan			= $this->_DAOPacienteAgendaEspecialista->getByIdPaciente($id_paciente);
+		
+		//$resp = $this->_Evento->guardarMostrarUltimo(21,0,$id_paciente,"Plan tratamiento Modificado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
+		
+		$this->smarty->assign("arr_plan", $arr_plan);
+		$this->smarty->assign("arrEspecialidad", $arrEspecialidad);
+		$this->smarty->assign("botonAyudaTratamiento", Boton::botonAyuda('Ingrese Datos del Tratamiento.', '', 'pull-right'));
 
-		$parametros = $this->request->getParametros();
-		$id_paciente = $parametros[0];
+		//$this->smarty->assign('plan_tratamiento',$this->smarty->fetch('medico/tratamiento.tpl'));
 		$this->smarty->assign("id_paciente", $id_paciente);
 		
         $id_empa = $this->_DAOEmpa->getByIdPaciente($id_paciente);
@@ -463,6 +475,7 @@ class Empa extends Controller{
 		$this->load->javascript(STATIC_FILES . "js/templates/empa/nuevo.js");
 		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
 		$this->load->javascript(STATIC_FILES . "js/templates/agenda/ver.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/medico/nuevo.js");
 	}
 
     /**

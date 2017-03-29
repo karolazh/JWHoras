@@ -73,6 +73,7 @@ class Medico extends Controller {
 	* Descripción: Cargar Formulario de Plan de Tratamiento
 	* @author: Victor Retamal <victor.retamal@cosof.cl>
 	*/
+	/*
 	public function plan_tratamiento(){
 		Acceso::redireccionUnlogged($this->smarty);
 
@@ -92,6 +93,7 @@ class Medico extends Controller {
 		$this->load->javascript(STATIC_FILES . "js/templates/medico/nuevo.js");
 		$this->load->javascript(STATIC_FILES . "js/lib/validador.js");
 	}
+	*/
 
 	/**
 	* Descripción: Guardar Plan de Tratamiento
