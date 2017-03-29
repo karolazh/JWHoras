@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 192.168.0.200
--- Tiempo de generación: 23-03-2017 a las 13:00:29
+-- Tiempo de generación: 28-03-2017 a las 21:13:37
 -- Versión del servidor: 5.6.10
 -- Versión de PHP: 5.6.26
 
@@ -39,15 +39,24 @@ CREATE TABLE IF NOT EXISTS `pre_adjunto` (
   `sha256` varchar(255) DEFAULT NULL,
   `bo_estado` int(1) DEFAULT '1' COMMENT '1=activo',
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_adjunto`),
   UNIQUE KEY `UNIQ_gl_path` (`gl_path`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_paciente` (`id_paciente`),
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_sha256` (`sha256`),
-  KEY `IDX_id_tipo_adjunto` (`id_adjunto_tipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `IDX_id_adjunto_tipo` (`id_adjunto_tipo`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `pre_adjunto`
+--
+
+INSERT INTO `pre_adjunto` (`id_adjunto`, `id_paciente`, `id_adjunto_tipo`, `id_empa`, `gl_nombre`, `gl_path`, `gl_glosa`, `sha256`, `bo_estado`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 1, 1, 0, 'Consentimiento_18301265-7.pdf', 'archivos/1/Consentimiento_18301265-7.pdf', 'Consentimiento Firmado', '56e808597caf562554d05eba3068173f3c99a2552763ffb230cc4987e0b1cc7a', 1, 2, '2017-03-23 10:03:24'),
+(2, 2, 1, 0, 'Consentimiento_18301265-7.pdf', 'archivos/2/Consentimiento_18301265-7.pdf', 'Consentimiento Firmado', '063451d67c5a58ae5e3b1885f5f6ad8829a46b14deb3767c33437d338b804533', 1, 2, '2017-03-23 10:03:33'),
+(3, 5, 3, 0, 'Archivo_Fonasa_123.pdf', 'archivos/5/Archivo_Fonasa_123.pdf', 'Archivo Fonasa', '02a34af8e945e0e7631e376e6baba798e66851b74a8dc5b783d9312215275844', 1, 2, '2017-03-23 10:03:39');
 
 -- --------------------------------------------------------
 
@@ -59,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `pre_adjunto_tipo` (
   `id_adjunto_tipo` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_tipo_adjunto` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_adjunto_tipo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
@@ -84,23 +93,15 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria` (
   `id_usuario` int(11) DEFAULT '0',
   `gl_tipo` varchar(255) DEFAULT NULL,
   `gl_query` longtext,
-  `gl_ip` varchar(500) DEFAULT '0.0.0.0',
+  `gl_ip` varchar(255) DEFAULT '0.0.0.0',
   `gl_tiempo` varchar(100) DEFAULT NULL COMMENT 'Tiempo de Ejecucion de Script',
-  `fc_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_auditoria`),
   KEY `IDX_gl_tipo` (`gl_tipo`),
-  KEY `IDX_id_usuario` (`id_usuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
---
--- Volcado de datos para la tabla `pre_auditoria`
---
-
-INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`, `gl_ip`, `gl_tiempo`, `fc_creacion`) VALUES
-(1, 34, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0013339519500732', '2017-03-23 12:45:40'),
-(2, 34, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''2''', '::1', '0.0010139942169189', '2017-03-23 12:45:40'),
-(3, 2, 'INSERT', 'INSERT INTO pre_auditoria_login \r\n						(\r\n							id_usuario,\r\n							gl_rut,\r\n							gl_origen,\r\n							gl_token,\r\n							ip_privada,\r\n							ip_publica\r\n						)\r\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0019998550415039', '2017-03-23 12:59:33'),
-(4, 2, 'UPDATE', 'UPDATE pre_usuario\r\n					SET fc_ultimo_login = now()\r\n					WHERE id_usuario = ''2''', '::1', '0.00099992752075195', '2017-03-23 12:59:33');
+  KEY `IDX_id_usuario` (`id_usuario`),
+  KEY `IDX_gl_ip` (`gl_ip`),
+  KEY `IDX_gl_tiempo` (`gl_tiempo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -116,20 +117,71 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria_login` (
   `gl_token` varchar(255) DEFAULT NULL,
   `ip_privada` varchar(50) DEFAULT '0.0.0.0',
   `ip_publica` varchar(50) DEFAULT '0.0.0.0',
-  `fc_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_auditoria_login`),
   KEY `IDX_id_usuario` (`id_usuario`),
   KEY `IDX_gl_rut` (`gl_rut`),
   KEY `IDX_ip_privada` (`ip_privada`),
-  KEY `IDX_ip_publica` (`ip_publica`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  KEY `IDX_ip_publica` (`ip_publica`),
+  KEY `IDX_gl_origen` (`gl_origen`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 --
 -- Volcado de datos para la tabla `pre_auditoria_login`
 --
 
-INSERT INTO `pre_auditoria_login` (`id_auditoria_login`, `id_usuario`, `gl_rut`, `gl_origen`, `gl_token`, `ip_privada`, `ip_publica`, `fc_creacion`) VALUES
-(1, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-23 12:59:33');
+INSERT INTO `pre_auditoria_login` (`id_auditoria_login`, `id_usuario`, `gl_rut`, `gl_origen`, `gl_token`, `ip_privada`, `ip_publica`, `fc_crea`) VALUES
+(1, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-23 12:59:33'),
+(2, 13, '3-2', 'login', '', '0.0.0', '::1', '2017-03-23 13:06:32'),
+(3, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-23 13:16:31'),
+(4, 13, '3-2', 'login', '', '0.0.0', '::1', '2017-03-23 13:20:29'),
+(5, 13, '3-2', 'login', '', '0.0.0', '::1', '2017-03-23 13:28:09'),
+(6, 12, '3-1', 'login', '', '0.0.0', '::1', '2017-03-23 13:28:36'),
+(7, 12, '3-1', 'login', '', '0.0.0', '::1', '2017-03-23 13:28:49'),
+(8, 27, '7-4', 'login', '', '0.0.0', '::1', '2017-03-23 13:29:00'),
+(9, 21, '4-1', 'login', '', '0.0.0', '::1', '2017-03-23 13:29:12'),
+(10, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-23 13:29:22'),
+(11, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-23 13:38:52'),
+(12, 13, '3-2', 'login', '', '0.0.0', '::1', '2017-03-23 13:40:16'),
+(13, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-23 13:45:30'),
+(14, 13, '3-2', 'login', '', '0.0.0', '::1', '2017-03-23 14:11:46'),
+(15, 34, '61-1', 'login', '', '0.0.0', '::1', '2017-03-23 15:08:31'),
+(16, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-23 15:08:48'),
+(17, 36, '63-1', 'login', '', '0.0.0', '::1', '2017-03-23 15:09:31'),
+(18, 43, '652-1', 'login', '', '0.0.0', '::1', '2017-03-23 15:15:25'),
+(19, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-23 15:24:15'),
+(20, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-23 15:33:54'),
+(21, 0, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-23 17:46:44'),
+(22, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-23 17:47:00'),
+(23, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-24 12:30:47'),
+(24, 10, '1-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 12:31:48'),
+(25, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 12:57:01'),
+(26, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 14:42:47'),
+(27, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 15:18:04'),
+(28, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 15:48:27'),
+(29, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 16:53:02'),
+(30, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 21:06:07'),
+(31, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 21:27:04'),
+(32, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-24 21:39:53'),
+(33, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-27 12:21:46'),
+(34, 0, '1-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 12:44:29'),
+(35, 10, '1-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 12:44:34'),
+(36, 0, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 12:56:00'),
+(37, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 12:56:08'),
+(38, 25, '7-2', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 15:22:19'),
+(39, 24, '7-1', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 15:30:33'),
+(40, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 16:04:55'),
+(41, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 17:57:03'),
+(42, 25, '7-2', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 17:57:19'),
+(43, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 18:12:47'),
+(44, 10, '1-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 18:26:10'),
+(45, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-27 19:00:39'),
+(46, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-27 20:39:19'),
+(47, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-28 12:04:55'),
+(48, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-28 12:25:43'),
+(49, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-28 12:39:15'),
+(50, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-28 12:45:42'),
+(51, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-28 18:00:19');
 
 -- --------------------------------------------------------
 
@@ -153,13 +205,14 @@ CREATE TABLE IF NOT EXISTS `pre_centro_salud` (
   `gl_longitud` varchar(30) DEFAULT NULL,
   `bo_estado` int(1) DEFAULT '1',
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_centro_salud`),
-  UNIQUE KEY `cd_establecimiento` (`cd_establecimiento`),
+  UNIQUE KEY `UNIQ_cd_establecimiento` (`cd_establecimiento`),
   KEY `IDX_id_region` (`id_region`),
   KEY `IDX_id_comuna` (`id_comuna`),
   KEY `IDX_id_servicio_salud` (`id_servicio_salud`),
-  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
+  KEY `IDX_bo_estado` (`bo_estado`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2514 ;
 
 --
@@ -2698,11 +2751,11 @@ CREATE TABLE IF NOT EXISTS `pre_cie10_1_capitulo` (
   `gl_descripcion` varchar(255) DEFAULT NULL,
   `gl_codigo_inicio` varchar(100) DEFAULT NULL,
   `gl_codigo_fin` varchar(100) DEFAULT NULL,
-  `gl_nota` text,
-  `gl_incluye` text COMMENT '[LINK]codigo[/LINK]',
-  `gl_excluye` text COMMENT '[LINK]codigo[/LINK]',
+  `gl_nota` longtext,
+  `gl_incluye` longtext COMMENT '[LINK]codigo[/LINK]',
+  `gl_excluye` longtext COMMENT '[LINK]codigo[/LINK]',
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_capitulo`),
   KEY `IDX_gl_codigo` (`gl_codigo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
@@ -2716,7 +2769,7 @@ CREATE TABLE IF NOT EXISTS `pre_cie10_1_capitulo` (
 
 INSERT INTO `pre_cie10_1_capitulo` (`id_capitulo`, `gl_codigo`, `gl_descripcion`, `gl_codigo_inicio`, `gl_codigo_fin`, `gl_nota`, `gl_incluye`, `gl_excluye`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 'I', 'Ciertas enfermedades infecciosas y parasitarias', 'A00', 'B99', 'Use código adicional ([LINK]U80–U89[/LINK]) si desea identificar el antibiótico al cual el agente bacteriano es resistente.', 'Enfermedades generalmente reconocidas como contagiosas o transmisibles.', 'Ciertas infecciones localizadas —ver los capítulos de los correspondientes\r\nsistemas del cuerpo.<br>\r\nEnfermedades infecciosas y parasitarias propias del período perinatal [excepto tétanos neonatal, sífilis congénita, infección gonorreica perinatal y enfermedad perinatal por virus de la inmunodeficiencia humana [VIH]] ([LINK]P35–P39[/LINK]).<br>\r\nEnfermedades infecciosas y parasitarias que complican el embarazo, el parto y el puerperio [excepto tétanos obstétrico y enfermedad por virus de la inmunodeficiencia humana [VIH]] ([LINK]O98[/LINK]).<br>\r\nInfluenza y otras infecciones respiratorias agudas ([LINK]J00–J22[/LINK]).<br>\r\nPortador o presunto portador de enfermedad infecciosa ([LINK]Z22[/LINK])', NULL, '2017-03-20 19:55:14'),
-(2, 'II', 'Tumores [neoplasias]', 'C00', 'D48', '', '', '', NULL, '2017-03-20 19:55:58'),
+(2, 'II', 'Tumores [neoplasias]', 'C00', 'D48', '', '[LINK]C00–C14[/LINK] Labio, cavidad bucal y faringe.<br>\r\n[LINK]C15–C26[/LINK] Órganos digestivos.<br>\r\n[LINK]C30–C39[/LINK] Órganos respiratorios e intratorácicos.<br>\r\n[LINK]C40–C41[/LINK] Huesos y cartílagos articulares.<br>\r\n[LINK]C43–C44[/LINK] Piel.<br>\r\n[LINK]C45–C49[/LINK] Tejidos mesoteliales y tejidos blandos.<br>\r\n[LINK]C50[/LINK] Mama.<br>\r\n[LINK]C51–C58[/LINK] Órganos genitales femeninos.<br>\r\n[LINK]C60–C63[/LINK] Órganos genitales masculinos.<br>\r\n[LINK]C64–C68[/LINK] Vías urinarias.<br>\r\n[LINK]C69–C72[/LINK] Ojo, encéfalo y otras partes del sistema nervioso central.<br>\r\n[LINK]C73–C75[/LINK] Glándula tiroides y otras glándulas ­endocrinas.<br>\r\n[LINK]C76–C80[/LINK] Tumores malignos de sitios mal definidos, secundarios y de sitios no especificados.<br>\r\n[LINK]C81–C96[/LINK] Tumores malignos (declarados o presuntos como primarios) del tejido linfático, de los órganos hematopoyéticos y de tejidos afines.<br>\r\n[LINK]C97[/LINK] Tumores malignos (primarios) de sitios múltiples ­independientes.<br>\r\n[LINK]D00–D09[/LINK] Tumores in situ.<br>\r\n[LINK]D10–D36[/LINK] Tumores benignos.<br>\r\n[LINK]D37–D48[/LINK] Tumores de comportamiento incierto o desconocido [ver nota antes de D37]', '', NULL, '2017-03-20 19:55:58'),
 (3, 'III', 'Enfermedades de la sangre y de los órganos hematopoyéticos, y ciertos trastornos que afectan el mecanismo de la inmunidad ', 'D50', 'D89', '', '', '', NULL, '2017-03-20 19:56:43'),
 (4, 'IV', 'Enfermedades endocrinas, nutricionales y metabólicas', 'E00', 'E90', '', '', '', NULL, '2017-03-20 19:57:20'),
 (5, 'V', 'Trastornos mentales y del comportamiento', 'F00', 'F99', '', '', '', NULL, '2017-03-20 20:03:09'),
@@ -2751,17 +2804,18 @@ CREATE TABLE IF NOT EXISTS `pre_cie10_2_seccion` (
   `gl_descripcion` varchar(255) DEFAULT NULL,
   `gl_codigo_inicio` varchar(100) DEFAULT NULL,
   `gl_codigo_fin` varchar(100) DEFAULT NULL,
-  `gl_nota` text,
-  `gl_incluye` text,
-  `gl_excluye` text,
+  `gl_nota` longtext,
+  `gl_incluye` longtext,
+  `gl_excluye` longtext,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_seccion`),
   KEY `IDX_id_capitulo` (`id_capitulo`),
   KEY `IDX_gl_codigo_fin` (`gl_codigo_fin`),
   KEY `IDX_gl_codigo_inicio` (`gl_codigo_inicio`),
-  KEY `IDX_gl_codigo` (`gl_codigo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+  KEY `IDX_gl_codigo` (`gl_codigo`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=284 ;
 
 --
 -- Volcado de datos para la tabla `pre_cie10_2_seccion`
@@ -2789,7 +2843,246 @@ INSERT INTO `pre_cie10_2_seccion` (`id_seccion`, `id_capitulo`, `gl_codigo`, `gl
 (19, 1, 'I19', 'Secuelas de enfermedades infecciosas y parasitarias', 'B90', 'B94', NULL, NULL, NULL, NULL, '2017-03-20 20:44:05'),
 (20, 1, 'I20', 'Bacterias, virus y otros agentes infecciosos', 'B95', 'B97', NULL, NULL, NULL, NULL, '2017-03-20 20:44:26'),
 (21, 1, 'I21', 'Otras enfermedades infecciosas', 'B99', NULL, NULL, NULL, NULL, NULL, '2017-03-20 20:44:49'),
-(22, 2, 'II1', 'Labio, cavidad bucal y faringe', 'C00', 'C14', NULL, NULL, NULL, NULL, '2017-03-20 21:18:06');
+(22, 2, 'II1', 'Labio, cavidad bucal y faringe', 'C00', 'C14', NULL, NULL, NULL, NULL, '2017-03-20 21:18:06'),
+(23, 2, 'II2', 'Órganos digestivos', 'C15   ', 'C26', NULL, NULL, NULL, NULL, '2017-03-23 17:18:41'),
+(24, 2, 'II3', 'Órganos respiratorios e intratorácicos', 'C30', 'C39', NULL, NULL, NULL, NULL, '2017-03-23 19:32:55'),
+(25, 2, 'II4', 'Huesos y cartílagos articulares', 'C40', 'C41', NULL, NULL, NULL, NULL, '2017-03-23 19:32:55'),
+(26, 2, 'II5', 'Piel', 'C43', 'C44', NULL, NULL, NULL, NULL, '2017-03-23 19:38:14'),
+(27, 2, 'II6', 'Tejidos mesoteliales y tejidos blandos', 'C45', 'C49', NULL, NULL, NULL, NULL, '2017-03-23 19:38:14'),
+(28, 2, 'II7', 'Mama', 'C50', NULL, NULL, NULL, NULL, NULL, '2017-03-23 19:38:14'),
+(29, 2, 'II8', 'Órganos genitales femeninos', 'C51', 'C58', NULL, NULL, NULL, NULL, '2017-03-23 19:38:14'),
+(30, 2, 'II9', 'Órganos genitales masculinos', 'C60', 'C63', NULL, NULL, NULL, NULL, '2017-03-23 19:38:14'),
+(31, 2, 'II10', 'Vías urinarias', 'C64', 'C68', NULL, NULL, NULL, NULL, '2017-03-23 19:49:28'),
+(32, 2, 'II11', 'Ojo, encéfalo y otras partes del sistema nervioso central', 'C69', 'C72', NULL, NULL, NULL, NULL, '2017-03-23 19:49:28'),
+(33, 2, 'II12', 'Glándula tiroides y otras glándulas ­endocrinas', 'C73', 'C75', NULL, NULL, NULL, NULL, '2017-03-23 19:49:28'),
+(34, 2, 'II13', 'Tumores malignos de sitios mal definidos, secundarios y de sitios no especificados', 'C76', 'C80', NULL, NULL, NULL, NULL, '2017-03-23 19:49:28'),
+(35, 2, 'II14', 'Tumores malignos (declarados o presuntos como primarios) del tejido linfático, de los órganos hematopoyéticos y de tejidos afines', 'C81', 'C96', NULL, NULL, NULL, NULL, '2017-03-23 19:49:28'),
+(36, 2, 'II15', 'Tumores malignos (primarios) de sitios múltiples ­independientes', 'C97', NULL, NULL, NULL, NULL, NULL, '2017-03-23 19:49:28'),
+(37, 2, 'II16', 'Tumores in situ', 'D00', 'D09', NULL, NULL, NULL, NULL, '2017-03-23 19:49:28'),
+(38, 2, 'II17', 'Tumores benignos', 'D10', 'D36', NULL, NULL, NULL, NULL, '2017-03-23 19:49:28'),
+(39, 2, 'II18', 'Tumores de comportamiento incierto o desconocido', 'D37', 'D48', NULL, NULL, NULL, NULL, '2017-03-23 19:49:28'),
+(40, 3, 'III1', 'Anemias nutricionales', 'D50', 'D53', NULL, NULL, NULL, NULL, '2017-03-23 19:59:02'),
+(41, 3, 'III2', 'Anemias hemolíticas', 'D55', 'D59', NULL, NULL, NULL, NULL, '2017-03-23 19:59:02'),
+(42, 3, 'III3', 'Anemias aplásticas y otras anemias', 'D60', 'D64', NULL, NULL, NULL, NULL, '2017-03-23 19:59:02'),
+(43, 3, 'III4', 'Defectos de la coagulación, púrpura y otras afecciones hemorrágicas', 'D65', 'D69', NULL, NULL, NULL, NULL, '2017-03-23 19:59:02'),
+(44, 3, 'III5', 'Otras enfermedades de la sangre y de los órganos hematopoyéticos', 'D70', 'D77', NULL, NULL, NULL, NULL, '2017-03-23 19:59:02'),
+(45, 3, 'III6', 'Ciertos trastornos que afectan el mecanismo de la inmunidad', 'D80', 'D89', NULL, NULL, NULL, NULL, '2017-03-23 19:59:02'),
+(46, 4, 'IV1', 'Trastornos de la glándula tiroides', 'E00', 'E07', NULL, NULL, NULL, NULL, '2017-03-23 20:06:29'),
+(47, 4, 'IV2', 'Diabetes mellitus', 'E10', 'E14', NULL, NULL, NULL, NULL, '2017-03-23 20:06:29'),
+(48, 4, 'IV3', 'Otros trastornos de la regulación de la glucosa y de la secreción interna del páncreas', 'E15', 'E16', NULL, NULL, NULL, NULL, '2017-03-23 20:06:29'),
+(49, 4, 'IV4', 'Trastornos de otras glándulas endocrinas', 'E20', 'E35', NULL, NULL, NULL, NULL, '2017-03-23 20:06:29'),
+(50, 4, 'IV5', 'Desnutrición', 'E40', 'E46', NULL, NULL, NULL, NULL, '2017-03-23 20:06:29'),
+(51, 4, 'IV6', 'Otras deficiencias nutricionales', 'E50', 'E64', NULL, NULL, NULL, NULL, '2017-03-23 20:06:29'),
+(52, 4, 'IV7', 'Obesidad y otros tipos de hiperalimentación', 'E65', 'E68', NULL, NULL, NULL, NULL, '2017-03-23 20:06:29'),
+(53, 4, 'IV8', 'Trastornos metabólicos', 'E70', 'E90', NULL, NULL, NULL, NULL, '2017-03-23 20:06:29'),
+(54, 5, 'V1', 'Trastornos mentales orgánicos, incluidos los trastornos sintomáticos', 'F00', 'F09', NULL, NULL, NULL, NULL, '2017-03-23 20:11:47'),
+(55, 5, 'V2', 'Trastornos mentales y del comportamiento debidos al uso de sustancias psicoactivas', 'F10', 'F19', NULL, NULL, NULL, NULL, '2017-03-23 20:11:47'),
+(66, 5, 'V3', 'Esquizofrenia, trastornos esquizotípicos y trastornos delirantes', 'F20', 'F29', NULL, NULL, NULL, NULL, '2017-03-23 20:19:51'),
+(67, 5, 'V4', 'Trastornos del humor [afectivos]', 'F30', 'F39', NULL, NULL, NULL, NULL, '2017-03-23 20:19:51'),
+(68, 5, 'V5', 'Trastornos neuróticos, trastornos relacionados con el estrés y trastornos somatomorfos', 'F40', 'F48', NULL, NULL, NULL, NULL, '2017-03-23 20:19:51'),
+(69, 5, 'V6', 'Síndromes del comportamiento asociados con alteraciones fisioló­gicas y factores físicos', 'F50', 'F59', NULL, NULL, NULL, NULL, '2017-03-23 20:19:51'),
+(70, 5, 'V7', 'Trastornos de la personalidad y del comportamiento en adultos', 'F60', 'F69', NULL, NULL, NULL, NULL, '2017-03-23 20:19:51'),
+(71, 5, 'V8', 'Retraso mental', 'F70', 'F79', NULL, NULL, NULL, NULL, '2017-03-23 20:19:51'),
+(72, 5, 'V9', 'Trastornos del desarrollo psicológico', 'F80', 'F89', NULL, NULL, NULL, NULL, '2017-03-23 20:19:51'),
+(73, 5, 'V10', 'Trastornos emocionales y del comportamiento que aparecen ha­bi­­tualmente en la niñez y en la adolescencia', 'F90', 'F98', NULL, NULL, NULL, NULL, '2017-03-23 20:19:51'),
+(74, 5, 'V11', 'Trastorno mental no especificado', 'F99', NULL, NULL, NULL, NULL, NULL, '2017-03-23 20:19:51'),
+(75, 6, 'VI1', 'Enfermedades inflamatorias del sistema nervioso central', 'G00', 'G09', NULL, NULL, NULL, NULL, '2017-03-23 20:28:34'),
+(76, 6, 'VI2', 'Atrofias sistémicas que afectan principalmente el sistema nervioso central', 'G10', 'G13', NULL, NULL, NULL, NULL, '2017-03-23 20:28:34'),
+(77, 6, 'VI3', 'Trastornos extrapiramidales y del movimiento', 'G20', 'G26', NULL, NULL, NULL, NULL, '2017-03-23 20:28:34'),
+(78, 6, 'VI4', 'Otras enfermedades degenerativas del sistema nervioso', 'G30', 'G32', NULL, NULL, NULL, NULL, '2017-03-23 20:28:34'),
+(79, 6, 'VI5', 'Enfermedades desmielinizantes del sistema nervioso central', 'G35', 'G37', NULL, NULL, NULL, NULL, '2017-03-23 20:28:34'),
+(80, 6, 'VI6', 'Trastornos episódicos y paroxísticos', 'G40', 'G47', NULL, NULL, NULL, NULL, '2017-03-23 20:28:34'),
+(81, 6, 'VI7', 'Trastornos de los nervios, de las raíces y de los plexos nerviosos', 'G50', 'G59', NULL, NULL, NULL, NULL, '2017-03-23 20:28:34'),
+(82, 6, 'VI8', 'Polineuropatías y otros trastornos del sistema nervioso periférico', 'G60', 'G64', NULL, NULL, NULL, NULL, '2017-03-23 20:28:34'),
+(83, 6, 'VI9', 'Enfermedades musculares y de la unión neuromuscular', 'G70', 'G73', NULL, NULL, NULL, NULL, '2017-03-23 20:28:34'),
+(84, 6, 'VI10', 'Parálisis cerebral y otros síndromes paralíticos', 'G80', 'G83', NULL, NULL, NULL, NULL, '2017-03-23 20:28:34'),
+(85, 6, 'VI11', 'Otros trastornos del sistema nervioso', 'G90', 'G99', NULL, NULL, NULL, NULL, '2017-03-23 20:29:18'),
+(86, 7, 'VII1', 'Trastornos del párpado, aparato lagrimal y órbita', 'H00', 'H06', NULL, NULL, NULL, NULL, '2017-03-23 20:43:53'),
+(87, 7, 'VII2', 'Trastornos de la conjuntiva', 'H10', 'H13', NULL, NULL, NULL, NULL, '2017-03-23 20:43:53'),
+(88, 7, 'VII3', 'Trastornos de la esclerótica, córnea, iris y cuerpo ciliar', 'H15', 'H22', NULL, NULL, NULL, NULL, '2017-03-23 20:43:53'),
+(89, 7, 'VII4', 'Trastornos del cristalino', 'H25', 'H28', NULL, NULL, NULL, NULL, '2017-03-23 20:43:53'),
+(90, 7, 'VII5', 'Trastornos de la coroides y de la retina', 'H30', 'H36', NULL, NULL, NULL, NULL, '2017-03-23 20:43:53'),
+(91, 7, 'VII6', 'Glaucoma', 'H40', 'H42', NULL, NULL, NULL, NULL, '2017-03-23 20:43:53'),
+(92, 7, 'VII7', 'Trastornos del cuerpo vítreo y del globo ocular', 'H43', 'H45', NULL, NULL, NULL, NULL, '2017-03-23 20:43:53'),
+(93, 7, 'VII8', 'Trastornos del nervio óptico y de las vías ópticas', 'H46', 'H48', NULL, NULL, NULL, NULL, '2017-03-23 20:43:53'),
+(94, 7, 'VII9', 'Trastornos de los músculos oculares, del movimiento binocular, de la acomodación y de la refracción', 'H49', 'H52', NULL, NULL, NULL, NULL, '2017-03-23 20:43:53'),
+(95, 7, 'VII10', 'Alteraciones de la visión y ceguera', 'H53', 'H54', NULL, NULL, NULL, NULL, '2017-03-23 20:43:53'),
+(96, 7, 'VII11', 'Otros trastornos del ojo y sus anexos', 'H55', 'H59', NULL, NULL, NULL, NULL, '2017-03-23 20:44:23'),
+(97, 8, 'VIII1', 'Enfermedades del oído externo', 'H60', 'H62', NULL, NULL, NULL, NULL, '2017-03-23 20:48:39'),
+(98, 8, 'VIII2', 'Enfermedades del oído medio y de la mastoides', 'H65', 'H75', NULL, NULL, NULL, NULL, '2017-03-23 20:48:39'),
+(99, 8, 'VIII3', 'Enfermedades del oído interno', 'H80', 'H83', NULL, NULL, NULL, NULL, '2017-03-23 20:48:39'),
+(100, 8, 'VIII4', 'Otros trastornos del oído', 'H90', 'H95', NULL, NULL, NULL, NULL, '2017-03-23 20:48:39'),
+(101, 9, 'IX1', 'Fiebre reumática aguda', 'I01', 'I02', NULL, NULL, NULL, NULL, '2017-03-23 20:58:04'),
+(102, 9, 'IX2', 'Enfermedades cardíacas reumáticas crónicas', 'I05', 'I09', NULL, NULL, NULL, NULL, '2017-03-23 20:58:04'),
+(103, 9, 'IX3', 'Enfermedades hipertensivas', 'I10', 'I15', NULL, NULL, NULL, NULL, '2017-03-23 20:58:04'),
+(104, 9, 'IX4', 'Enfermedades isquémicas del corazón', 'I20', 'I25', NULL, NULL, NULL, NULL, '2017-03-23 20:58:04'),
+(105, 9, 'IX5', 'Enfermedad cardiopulmonar y enfermedades de la circulación ­pulmonar', 'I26', 'I28', NULL, NULL, NULL, NULL, '2017-03-23 20:58:04'),
+(106, 9, 'IX6', 'Otras formas de enfermedad del corazón', 'I30', 'I52', NULL, NULL, NULL, NULL, '2017-03-23 20:58:04'),
+(107, 9, 'IX7', 'Enfermedades cerebrovasculares', 'I60', 'I69', NULL, NULL, NULL, NULL, '2017-03-23 20:58:04'),
+(108, 9, 'IX8', 'Enfermedades de las arterias, de las arteriolas y de los vasos ­capilares', 'I70', 'I79', NULL, NULL, NULL, NULL, '2017-03-23 20:58:04'),
+(109, 9, 'IX9', 'Enfermedades de las venas y de los vasos y ganglios linfáticos, no clasificadas en otra parte', 'I80', 'I89', NULL, NULL, NULL, NULL, '2017-03-23 20:58:04'),
+(110, 9, 'IX10', 'Otros trastornos y los no especificados del sistema circulatorio', 'I95', 'I99', NULL, NULL, NULL, NULL, '2017-03-23 20:58:04'),
+(111, 10, 'X1', 'Infecciones agudas de las vías respiratorias superiores', 'J00', 'J06', NULL, NULL, NULL, NULL, '2017-03-24 13:08:58'),
+(112, 10, 'X2', 'Influenza [gripe] y neumonía', 'J09', 'J18', NULL, NULL, NULL, NULL, '2017-03-24 13:08:58'),
+(113, 10, 'X3', 'Otras infecciones agudas de las vías respiratorias inferiores', 'J20', 'J22', NULL, NULL, NULL, NULL, '2017-03-24 13:08:58'),
+(114, 10, 'X4', 'Otras enfermedades de las vías respiratorias superiores', 'J30', 'J39', NULL, NULL, NULL, NULL, '2017-03-24 13:08:58'),
+(115, 10, 'X5', 'Enfermedades crónicas de las vías respiratorias inferiores', 'J40', 'J47', NULL, NULL, NULL, NULL, '2017-03-24 13:08:58'),
+(116, 10, 'X6', 'Enfermedades del pulmón debidas a agentes externos', 'J60', 'J70', NULL, NULL, NULL, NULL, '2017-03-24 13:08:58'),
+(117, 10, 'X7', 'Otras enfermedades respiratorias que afectan principalmente \r\nel intersticio', 'J80', 'J84', NULL, NULL, NULL, NULL, '2017-03-24 13:08:58'),
+(118, 10, 'X8', 'Afecciones supurativas y necróticas de las vías respiratorias ­inferiores', 'J85', 'J86', NULL, NULL, NULL, NULL, '2017-03-24 13:08:58'),
+(119, 10, 'X9', 'Otras enfermedades de la pleura', 'J90', 'J94', NULL, NULL, NULL, NULL, '2017-03-24 13:08:58'),
+(120, 10, 'X10', 'Otras enfermedades del sistema respiratorio', 'J95', 'J99', NULL, NULL, NULL, NULL, '2017-03-24 13:08:58'),
+(121, 11, 'XI1', 'Enfermedades de la cavidad bucal, de las glándulas salivales y de los maxilares', 'K00', 'K14', NULL, NULL, NULL, NULL, '2017-03-24 13:18:38'),
+(122, 11, 'XI2', 'Enfermedades del esófago, del estómago y del duoden', 'K20', 'K31', NULL, NULL, NULL, NULL, '2017-03-24 13:18:38'),
+(123, 11, 'XI3', 'Enfermedades del apéndice', 'K35', 'K38', NULL, NULL, NULL, NULL, '2017-03-24 13:18:38'),
+(124, 11, 'XI4', 'Hernia', 'K40', 'K46', NULL, NULL, NULL, NULL, '2017-03-24 13:18:38'),
+(125, 11, 'XI5', 'Enteritis y colitis no infecciosas', 'K50', 'K52', NULL, NULL, NULL, NULL, '2017-03-24 13:18:38'),
+(126, 11, 'XI6', 'Otras enfermedades de los intestinos', 'K55', 'K63', NULL, NULL, NULL, NULL, '2017-03-24 13:18:38'),
+(127, 11, 'XI7', 'Enfermedades del peritoneo', 'K65', 'K67', NULL, NULL, NULL, NULL, '2017-03-24 13:18:38'),
+(128, 11, 'XI8', 'Enfermedades del hígado', 'K70', 'K77', NULL, NULL, NULL, NULL, '2017-03-24 13:18:38'),
+(129, 11, 'XI9', 'Trastornos de la vesícula biliar, de las vías biliares y del páncreas', 'K80', 'K87', NULL, NULL, NULL, NULL, '2017-03-24 13:18:38'),
+(130, 11, 'XI10', 'Otras enfermedades del sistema digestivo', 'K90', 'K93', NULL, NULL, NULL, NULL, '2017-03-24 13:18:38'),
+(131, 12, 'XII1', 'Infecciones de la piel y del tejido subcutáneo', 'L00', 'L08', NULL, NULL, NULL, NULL, '2017-03-24 13:23:09'),
+(132, 12, 'XII2', 'Trastornos flictenulares', 'L10', 'L14', NULL, NULL, NULL, NULL, '2017-03-24 13:23:09'),
+(133, 12, 'XII3', 'Dermatitis y eczema', 'L20', 'L30', NULL, NULL, NULL, NULL, '2017-03-24 13:23:09'),
+(134, 12, 'XII4', 'Trastornos papuloescamosos', 'L40', 'L45', NULL, NULL, NULL, NULL, '2017-03-24 13:23:09'),
+(135, 12, 'XII5', 'Urticaria y eritema', 'L50', 'L54', NULL, NULL, NULL, NULL, '2017-03-24 13:23:09'),
+(136, 12, 'XII6', 'Trastornos de la piel y del tejido subcutáneo relacionados con ­radiación', 'L55', 'L59', NULL, NULL, NULL, NULL, '2017-03-24 13:23:09'),
+(137, 12, 'XII7', 'Trastornos de las faneras', 'L60', 'L75', NULL, NULL, NULL, NULL, '2017-03-24 13:23:09'),
+(138, 12, 'XII8', 'Otros trastornos de la piel y del tejido subcutáneo', 'L80', 'L99', NULL, NULL, NULL, NULL, '2017-03-24 13:23:09'),
+(139, 13, 'XIII1', 'Artropatías infecciosas', 'M00', 'M03', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(140, 13, 'XIII2', 'Poliartropatías inflamatorias', 'M05', 'M14', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(141, 13, 'XIII3', 'Artropatías', 'M15', 'M19', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(142, 13, 'XIII4', 'Otros trastornos articulares', 'M20', 'M25', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(143, 13, 'XIII5', 'Trastornos sistémicos del tejido conjuntivo', 'M30', 'M36', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(144, 13, 'XIII6', 'Dorsopatías deformantes', 'M40', 'M43', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(145, 13, 'XIII7', 'Espondilopatías', 'M45', 'M49', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(146, 13, 'XIII8', 'Otras dorsopatías', 'M50', 'M54', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(147, 13, 'XIII9', 'Trastornos de los músculos', 'M60', 'M63', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(148, 13, 'XIII10', 'Trastornos de los tendones y de la sinovia', 'M65', 'M68', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(149, 13, 'XIII11', 'Otros trastornos de los tejidos blandos', 'M70', 'M79', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(150, 13, 'XIII12', 'Trastornos de la densidad y de la estructura óseas', 'M80', 'M85', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(151, 13, 'XIII13', 'Otras osteopatías', 'M86', 'M90', NULL, NULL, NULL, NULL, '2017-03-24 13:51:43'),
+(152, 13, 'XIII14', 'Condropatías', 'M91', 'M94', NULL, NULL, NULL, NULL, '2017-03-24 13:53:00'),
+(153, 13, 'XIII15', 'Otros trastornos del sistema osteomuscular y del tejido conjuntivo', 'M95', 'M99', NULL, NULL, NULL, NULL, '2017-03-24 13:53:00'),
+(166, 14, 'XIV1', 'Enfermedades glomerulares', 'N00', 'N08', NULL, NULL, NULL, NULL, '2017-03-24 14:04:15'),
+(167, 14, 'XIV2', 'Enfermedad renal tubulointersticial', 'N10', 'N16', NULL, NULL, NULL, NULL, '2017-03-24 14:04:15'),
+(168, 14, 'XIV3', 'Insuficiencia renal', 'N17', 'N19', NULL, NULL, NULL, NULL, '2017-03-24 14:04:15'),
+(169, 14, 'XIV4', 'Litiasis urinaria', 'N20', 'N23', NULL, NULL, NULL, NULL, '2017-03-24 14:04:15'),
+(170, 14, 'XIV5', 'Otros trastornos del riñón y del uréter', 'N25', 'N29', NULL, NULL, NULL, NULL, '2017-03-24 14:04:15'),
+(171, 14, 'XIV6', 'Otras enfermedades del sistema urinario', 'N30', 'N39', NULL, NULL, NULL, NULL, '2017-03-24 14:04:15'),
+(172, 14, 'XIV7', 'Enfermedades de los órganos genitales masculinos', 'N40', 'N51', NULL, NULL, NULL, NULL, '2017-03-24 14:04:15'),
+(173, 14, 'XIV8', 'Trastornos de la mama', 'N60', 'N64', NULL, NULL, NULL, NULL, '2017-03-24 14:04:15'),
+(174, 14, 'XIV9', 'Enfermedades inflamatorias de los órganos pélvicos femeninos', 'N70', 'N77', NULL, NULL, NULL, NULL, '2017-03-24 14:04:15'),
+(175, 14, 'XIV10', 'Trastornos no inflamatorios de los órganos genitales femeninos', 'N80', 'N98', NULL, NULL, NULL, NULL, '2017-03-24 14:04:15'),
+(176, 14, 'XIV11', 'Otros trastornos del sistema genitourinario', 'N99', NULL, NULL, NULL, NULL, NULL, '2017-03-24 14:04:15'),
+(177, 15, 'XV1', 'Embarazo terminado en aborto', 'O00', 'O08', NULL, NULL, NULL, NULL, '2017-03-24 14:13:51'),
+(178, 15, 'XV2', 'Edema, proteinuria y trastornos hipertensivos en el embarazo, el parto y el puerperio', 'O10', 'O16', NULL, NULL, NULL, NULL, '2017-03-24 14:13:51'),
+(179, 15, 'XV3', 'Otros trastornos maternos relacionados principalmente con el embarazo', 'O20', 'O29', NULL, NULL, NULL, NULL, '2017-03-24 14:13:51'),
+(180, 15, 'XV4', 'Atención materna relacionada con el feto y la cavidad amniótica y con posibles problemas del parto', 'O30', 'O48', NULL, NULL, NULL, NULL, '2017-03-24 14:13:51'),
+(181, 15, 'XV5', 'Complicaciones del trabajo de parto y del parto', 'O60', 'O75', NULL, NULL, NULL, NULL, '2017-03-24 14:13:51'),
+(182, 15, 'XV6', 'Parto', 'O80', 'O84', NULL, NULL, NULL, NULL, '2017-03-24 14:13:51'),
+(183, 15, 'XV7', 'Complicaciones principalmente relacionadas con el puerperio', 'O85', 'O92', NULL, NULL, NULL, NULL, '2017-03-24 14:13:51'),
+(184, 15, 'XV8', 'Otras afecciones obstétricas no clasificadas en otra parte', 'O94', 'O99', NULL, NULL, NULL, NULL, '2017-03-24 14:13:51'),
+(185, 16, 'XVI1', 'Feto y recién nacido afectados por factores maternos y por complicaciones del embarazo, del trabajo de parto y del parto', 'P00', 'P04', NULL, NULL, NULL, NULL, '2017-03-24 14:24:43'),
+(186, 16, 'XVI2', 'Trastornos relacionados con la duración de la gestación y el crecimiento fetal', 'P05', 'P08', NULL, NULL, NULL, NULL, '2017-03-24 14:24:43'),
+(187, 16, 'XVI3', 'Traumatismo del nacimiento', 'P10', 'P15', NULL, NULL, NULL, NULL, '2017-03-24 14:24:43'),
+(188, 16, 'XVI4', 'Trastornos respiratorios y cardiovasculares específicos del período perinatal', 'P20', 'P29', NULL, NULL, NULL, NULL, '2017-03-24 14:24:43'),
+(189, 16, 'XVI5', 'Infecciones específicas del período perinatal', 'P35', 'P39', NULL, NULL, NULL, NULL, '2017-03-24 14:24:43'),
+(190, 16, 'XVI6', 'Trastornos hemorrágicos y hematológicos del feto y del recién nacido', 'P50', 'P61', NULL, NULL, NULL, NULL, '2017-03-24 14:24:43'),
+(191, 16, 'XVI7', 'Trastornos endocrinos y metabólicos transitorios específicos del feto y del recién nacido', 'P70', 'P74', NULL, NULL, NULL, NULL, '2017-03-24 14:24:43'),
+(192, 16, 'XVI8', 'Trastornos del sistema digestivo del feto y del recién nacido', 'P75', 'P78', NULL, NULL, NULL, NULL, '2017-03-24 14:24:43'),
+(193, 16, 'XVI9', 'Afecciones asociadas con la regulación tegumentaria y la temperatura del feto y del recién nacido', 'P80', 'P83', NULL, NULL, NULL, NULL, '2017-03-24 14:24:43'),
+(194, 16, 'XVI10', 'Otros trastornos originados en el período perinatal', 'P90', 'P96', NULL, NULL, NULL, NULL, '2017-03-24 14:24:43'),
+(195, 17, 'XVII1', 'Malformaciones congénitas del sistema nervioso', 'Q00', 'Q07', NULL, NULL, NULL, NULL, '2017-03-24 14:31:35'),
+(196, 17, 'XVII2', 'Malformaciones congénitas del ojo, del oído, de la cara y del ­cuello', 'Q10', 'Q18', NULL, NULL, NULL, NULL, '2017-03-24 14:31:35'),
+(197, 17, 'XVII3', 'Malformaciones congénitas del sistema circulatorio', 'Q20', 'Q28', NULL, NULL, NULL, NULL, '2017-03-24 14:31:35'),
+(198, 17, 'XVII4', 'Malformaciones congénitas del sistema respiratorio', 'Q30', 'Q34', NULL, NULL, NULL, NULL, '2017-03-24 14:31:35'),
+(199, 17, 'XVII5', 'Fisura del paladar y labio leporino', 'Q35', 'Q37', NULL, NULL, NULL, NULL, '2017-03-24 14:31:35'),
+(200, 17, 'XVII6', 'Otras malformaciones congénitas del sistema digestivo', 'Q38', 'Q45', NULL, NULL, NULL, NULL, '2017-03-24 14:31:35'),
+(201, 17, 'XVII7', 'Malformaciones congénitas de los órganos genitales', 'Q50', 'Q56', NULL, NULL, NULL, NULL, '2017-03-24 14:31:35'),
+(202, 17, 'XVII8', 'Malformaciones congénitas del sistema urinario', 'Q60', 'Q64', NULL, NULL, NULL, NULL, '2017-03-24 14:31:35'),
+(203, 17, 'XVII9', 'Malformaciones y deformidades congénitas del sistema ­osteomuscular', 'Q65', 'Q79', NULL, NULL, NULL, NULL, '2017-03-24 14:31:35'),
+(204, 17, 'XVII10', 'Otras malformaciones congénitas', 'Q80', 'Q89', NULL, NULL, NULL, NULL, '2017-03-24 14:31:35'),
+(205, 17, 'XVII11', 'Anomalías cromosómicas, no clasificadas en otra parte', 'Q90', 'Q99', NULL, NULL, NULL, NULL, '2017-03-24 14:31:35'),
+(206, 18, 'XVIII1', 'Síntomas y signos que involucran los sistemas circulatorio y ­respiratorio', 'R00', 'R09', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(207, 18, 'XVIII2', 'Síntomas y signos que involucran el sistema digestivo y el ­abdomen', 'R10', 'R19', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(208, 18, 'XVIII3', 'Síntomas y signos que involucran la piel y el tejido subcutáneo', 'R20', 'R23', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(209, 18, 'XVIII4', 'Síntomas y signos que involucran los sistemas nervioso y ­osteomuscular', 'R25', 'R29', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(210, 18, 'XVIII5', 'Síntomas y signos que involucran el sistema urinario', 'R30', 'R39', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(211, 18, 'XVIII6', 'Síntomas y signos que involucran el conocimiento, la percepción, el estado emocional y la conducta', 'R40', 'R46', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(212, 18, 'XVIII7', 'Síntomas y signos que involucran el habla y la voz', 'R47', 'R49', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(213, 18, 'XVIII8', 'Síntomas y signos generales', 'R50', 'R69', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(214, 18, 'XVIII9', 'Hallazgos anormales en el examen de sangre, sin diagnóstico', 'R70', 'R79', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(215, 18, 'XVIII10', 'Hallazgos anormales en el examen de orina, sin diagnóstico', 'R80', 'R82', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(216, 18, 'XVIII11', 'Hallazgos anormales en el examen de otros líquidos, sustancias y tejidos corporales, sin diagnóstico', 'R83', 'R89', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(217, 18, 'XVIII12', 'Hallazgos anormales en diagnóstico por imágenes y en estudios funcionales, sin diagnóstico', 'R90', 'R94', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(218, 18, 'XVIII13', 'Causas de mortalidad mal definidas y desconocidas', 'R95', 'R99', NULL, NULL, NULL, NULL, '2017-03-24 14:39:27'),
+(219, 19, 'XIX1', 'Traumatismos de la cabeza', 'S00', 'S09', NULL, NULL, NULL, NULL, '2017-03-24 14:53:25'),
+(220, 19, 'XIX2', 'Traumatismos del cuello', 'S10', 'S19', NULL, NULL, NULL, NULL, '2017-03-24 14:53:25'),
+(221, 19, 'XIX3', 'Traumatismos del tórax', 'S20', 'S29', NULL, NULL, NULL, NULL, '2017-03-24 14:53:25'),
+(222, 19, 'XIX4', 'Traumatismos del abdomen, de la región lumbosacra, de la columna   lumbar y de la pelvis', 'S30', 'S39', NULL, NULL, NULL, NULL, '2017-03-24 14:53:25'),
+(223, 19, 'XIX5', 'Traumatismos del hombro y del brazo', 'S40', 'S49', NULL, NULL, NULL, NULL, '2017-03-24 14:53:25'),
+(224, 19, 'XIX6', 'Traumatismos del antebrazo y del codo', 'S50', 'S59', NULL, NULL, NULL, NULL, '2017-03-24 14:53:25'),
+(225, 19, 'XIX7', 'Traumatismos de la muñeca y de la mano', 'S60', 'S69', NULL, NULL, NULL, NULL, '2017-03-24 14:53:25'),
+(226, 19, 'XIX8', 'Traumatismos de la cadera y del muslo', 'S70', 'S79', NULL, NULL, NULL, NULL, '2017-03-24 14:53:25'),
+(227, 19, 'XIX9', 'Traumatismos de la rodilla y de la pierna', 'S80', 'S89', NULL, NULL, NULL, NULL, '2017-03-24 14:53:25'),
+(228, 19, 'XIX10', 'Traumatismos del tobillo y del pie', 'S90', 'S99', NULL, NULL, NULL, NULL, '2017-03-24 14:53:25'),
+(229, 19, 'XIX11', 'Traumatismos que afectan múltiples regiones del cuerpo', 'T00', 'T07', NULL, NULL, NULL, NULL, '2017-03-24 15:00:38'),
+(230, 19, 'XIX12', 'Traumatismos de parte no especificada del tronco, miembro o región   del cuerpo', 'T08', 'T14', NULL, NULL, NULL, NULL, '2017-03-24 15:00:38'),
+(231, 19, 'XIX13', 'Efectos de cuerpos extraños que penetran por orificios naturales', 'T15', 'T19', NULL, NULL, NULL, NULL, '2017-03-24 15:00:38'),
+(232, 19, 'XIX14', 'Quemaduras y corrosiones', 'T20', 'T32', NULL, NULL, NULL, NULL, '2017-03-24 15:00:38'),
+(233, 19, 'XIX15', 'Congelamiento', 'T33', 'T35', NULL, NULL, NULL, NULL, '2017-03-24 15:00:38'),
+(234, 19, 'XIX16', 'Envenenamiento por drogas, medicamentos y sustancias biológicas', 'T36', 'T50', NULL, NULL, NULL, NULL, '2017-03-24 15:00:38'),
+(235, 19, 'XIX17', 'Efectos tóxicos de sustancias de procedencia principalmente no medicinal', 'T51', 'T65', NULL, NULL, NULL, NULL, '2017-03-24 15:00:38'),
+(236, 19, 'XIX18', 'Otros efectos y los no especificados de causas externas', 'T66', 'T78', NULL, NULL, NULL, NULL, '2017-03-24 15:00:38'),
+(237, 19, 'XIX19', 'Algunas complicaciones precoces de traumatismos', 'T79', NULL, NULL, NULL, NULL, NULL, '2017-03-24 15:00:38'),
+(238, 19, 'XIX20', 'Complicaciones de la atención médica y quirúrgica, no clasificadas en otra parte', 'T80', 'T88', NULL, NULL, NULL, NULL, '2017-03-24 15:00:38'),
+(239, 19, 'XIX21', 'Secuelas de traumatismos, de envenenamientos y de otras consecuencias de \r\ncausas externas', 'T90', 'T98', NULL, NULL, NULL, NULL, '2017-03-24 15:00:38'),
+(240, 20, 'XX1', 'Peatón lesionado en accidente de transporte', 'V01', 'V09', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(241, 20, 'XX2', 'Ciclista lesionado en accidente de transporte', 'V10', 'V19', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(242, 20, 'XX3', 'Motociclista lesionado en accidente de transporte', 'V20', 'V29', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(243, 20, 'XX4', 'Ocupante de vehículo de motor de tres ruedas lesionado en accidente de transporte', 'V30', 'V39', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(244, 20, 'XX5', 'Ocupante de automóvil lesionado en accidente de transporte', 'V40', 'V49', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(245, 20, 'XX6', 'Ocupante de camioneta o furgoneta lesionado en accidente de transporte', 'V50', 'V59', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(246, 20, 'XX7', 'Ocupante de vehículo de transporte pesado lesionado en accidente de transporte', 'V60', 'V69', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(247, 20, 'XX8', 'Ocupante de autobús lesionado en accidente de transporte', 'V70', 'V79', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(248, 20, 'XX9', 'Otros accidentes de transporte terrestre', 'V80', 'V89', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(249, 20, 'XX10', 'Accidentes de transporte por agua', 'V90', 'V94', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(250, 20, 'XX11', 'Accidentes de transporte aéreo y espacial', 'V95', 'V97', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(251, 20, 'XX12', 'Otros accidentes de transporte, y los no especificados', 'V98', 'V99', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(252, 20, 'XX13', 'Caídas', 'W00', 'W19', NULL, NULL, NULL, NULL, '2017-03-24 15:15:52'),
+(253, 20, 'XX14', 'Exposición a fuerzas mecánicas inanimadas', 'W20', 'W49', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(254, 20, 'XX15', 'Exposición a fuerzas mecánicas animadas', 'W50', 'W64', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(255, 20, 'XX16', 'Ahogamiento y sumersión accidentales', 'W65', 'W74', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(256, 20, 'XX17', 'Otros accidentes que obstruyen la respiración', 'W75', 'W84', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(257, 20, 'XX18', 'Exposición a la corriente eléctrica, radiación y temperatura, y presión del aire ambientales extremas', 'W85', 'W99', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(258, 20, 'XX19', 'Exposición al humo, fuego y llamas', 'X00', 'X09', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(259, 20, 'XX20', 'Contacto con calor y sustancias calientes', 'X10', 'X19', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(260, 20, 'XX21', 'Contacto traumático con animales y plantas venenosos', 'X20', 'X29', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(261, 20, 'XX22', 'Exposición a fuerzas de la naturaleza', 'X30', 'X39', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(262, 20, 'XX23', 'Envenenamiento accidental por, y exposición a sustancias nocivas', 'X40', 'X49', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(263, 20, 'XX24', 'Exceso de esfuerzo, viajes y privación', 'X50', 'X57', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(264, 20, 'XX25', 'Exposición accidental a otros factores y a los no especificados', 'X58', 'X59', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(265, 20, 'XX26', 'Lesiones autoinfligidas intencionalmente', 'X60', 'X84', NULL, NULL, NULL, NULL, '2017-03-24 15:22:04'),
+(266, 20, 'XX27', 'Agresiones', 'X85', 'Y09', NULL, NULL, NULL, NULL, '2017-03-24 15:31:16'),
+(267, 20, 'XX28', 'Eventos de intención no determinada', 'Y10', 'Y34', NULL, NULL, NULL, NULL, '2017-03-24 15:31:16'),
+(268, 20, 'XX29', 'Intervención legal y operaciones de guerra', 'Y35', 'Y36', NULL, NULL, NULL, NULL, '2017-03-24 15:31:16'),
+(269, 20, 'XX30', 'Drogas, medicamentos y sustancias biológicas causantes de efectos adversos en su uso terapéutico', 'Y40', 'Y59', NULL, NULL, NULL, NULL, '2017-03-24 15:31:16'),
+(270, 20, 'XX31', 'Incidentes ocurridos al paciente durante la atención médica y quirúrgica', 'Y60', 'Y69', NULL, NULL, NULL, NULL, '2017-03-24 15:31:16'),
+(271, 20, 'XX32', 'Dispositivos médicos de diagnóstico y de uso terapéutico asociados con incidentes adversos', 'Y70', 'Y82', NULL, NULL, NULL, NULL, '2017-03-24 15:31:16'),
+(272, 20, 'XX33', 'Procedimientos quirúrgicos y otros procedimientos médicos como la causa de reacción anormal del paciente o de complicación posterior, sin mención de incidente en el momento de efectuar el procedimiento', 'Y83', 'Y84', NULL, NULL, NULL, NULL, '2017-03-24 15:31:16'),
+(273, 20, 'XX34', 'Secuelas de causas externas de morbilidad y de mortalidad', 'Y85', 'Y89', NULL, NULL, NULL, NULL, '2017-03-24 15:31:16'),
+(274, 20, 'XX35', 'Factores suplementarios relacionados con causas de morbilidad y de mortalidad clasificadas en otra parte', 'Y90', 'Y98', NULL, NULL, NULL, NULL, '2017-03-24 15:31:16'),
+(275, 21, 'XXI1', 'Personas en contacto con los servicios de salud para investigación y exámenes', 'Z00', 'Z13', NULL, NULL, NULL, NULL, '2017-03-24 15:36:26'),
+(276, 21, 'XXI2', 'Personas con riesgos potenciales para su salud, relacionados con enfermedades transmisibles', 'Z20', 'Z29', NULL, NULL, NULL, NULL, '2017-03-24 15:36:26'),
+(277, 21, 'XXI3', 'Personas en contacto con los servicios de salud en circunstancias relacionadas con la reproducción', 'Z30', 'Z39', NULL, NULL, NULL, NULL, '2017-03-24 15:36:26'),
+(278, 21, 'XXI4', 'Personas en contacto con los servicios de salud para procedimientos específicos y cuidados de salud', 'Z40', 'Z54', NULL, NULL, NULL, NULL, '2017-03-24 15:36:26'),
+(279, 21, 'XXI5', 'Personas con riesgos potenciales para su salud, relacionados con circunstancias socioeconómicas y psicosociales', 'Z55', 'Z65', NULL, NULL, NULL, NULL, '2017-03-24 15:36:26'),
+(280, 21, 'XXI6', 'Personas en contacto con los servicios de salud por otras ­circunstancias', 'Z70', 'Z76', NULL, NULL, NULL, NULL, '2017-03-24 15:36:26'),
+(281, 21, 'XXI7', 'Personas con riesgos potenciales para su salud, relacionados con su historia familiar y personal, y algunas condiciones que influyen sobre su estado de salud', 'Z80', 'Z99', NULL, NULL, NULL, NULL, '2017-03-24 15:36:26'),
+(282, 22, 'XXII1', 'Asignación provisoria de nuevas afecciones de etiología incierta', 'U00', 'U49', NULL, NULL, NULL, NULL, '2017-03-24 15:40:42'),
+(283, 22, 'XXII2', 'Códigos para investigaciones y subclasificaciones alternativas', 'U50', 'U99', NULL, NULL, NULL, NULL, '2017-03-24 15:40:42');
 
 -- --------------------------------------------------------
 
@@ -2805,11 +3098,11 @@ CREATE TABLE IF NOT EXISTS `pre_cie10_3_grupo` (
   `gl_descripcion` varchar(255) DEFAULT NULL,
   `gl_codigo_inicio` varchar(100) DEFAULT NULL,
   `gl_codigo_fin` varchar(100) DEFAULT NULL,
-  `gl_nota` text NOT NULL,
-  `gl_incluye` text NOT NULL COMMENT '[LINK]codigo[/LINK]',
-  `gl_excluye` text NOT NULL COMMENT '[LINK]codigo[/LINK]',
+  `gl_nota` longtext NOT NULL,
+  `gl_incluye` longtext NOT NULL COMMENT '[LINK]codigo[/LINK]',
+  `gl_excluye` longtext NOT NULL COMMENT '[LINK]codigo[/LINK]',
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_grupo`),
   KEY `IDX_gl_codigo` (`gl_codigo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
@@ -2817,14 +3110,436 @@ CREATE TABLE IF NOT EXISTS `pre_cie10_3_grupo` (
   KEY `IDX_gl_codigo_fin` (`gl_codigo_fin`),
   KEY `IDX_id_capitulo` (`id_capitulo`),
   KEY `IDX_id_seccion` (`id_seccion`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=423 ;
 
 --
 -- Volcado de datos para la tabla `pre_cie10_3_grupo`
 --
 
 INSERT INTO `pre_cie10_3_grupo` (`id_grupo`, `id_capitulo`, `id_seccion`, `gl_codigo`, `gl_descripcion`, `gl_codigo_inicio`, `gl_codigo_fin`, `gl_nota`, `gl_incluye`, `gl_excluye`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 1, 1, 'A00', 'Cólera', 'A000', 'A009', '', '', '', NULL, '2017-03-22 13:51:36');
+(1, 1, 1, 'A00', 'Cólera', 'A00.0', 'A00.9', '', '', '', NULL, '2017-03-22 13:51:36'),
+(2, 1, 1, 'A01', 'Fiebres tifoidea y paratifoidea', 'A01.0', 'A01.4', '', '', '', NULL, '2017-03-24 16:11:57'),
+(3, 1, 1, 'A02', 'Otras infecciones debidas a Salmonella', 'A02.0', 'A02.9', '', '', '', NULL, '2017-03-24 16:11:57'),
+(4, 1, 1, 'A03', 'Shigelosis', 'A03.0', 'A03.9', '', '', '', NULL, '2017-03-24 16:11:57'),
+(5, 1, 1, 'A04', 'Otras infecciones intestinales bacterianas', 'A04.0', 'A04.9', '', '', '', NULL, '2017-03-24 16:11:57'),
+(6, 1, 1, 'A05', 'Otras intoxicaciones alimentarias bacterianas, no clasificadas en otra parte', 'A05.0', 'A05.9', '', '', '', NULL, '2017-03-24 16:11:57'),
+(7, 1, 1, 'A06', 'Amebiasis', 'A06.0', 'A06.9', '', '', '', NULL, '2017-03-24 16:11:57'),
+(8, 1, 1, 'A07', 'Otras enfermedades intestinales debidas a protozoarios', 'A07.0', 'A07.9', '', '', '', NULL, '2017-03-24 16:11:57'),
+(9, 1, 1, 'A08', 'Infecciones intestinales debidas a virus y otros organismos especificados', 'A08.0', 'A08.5', '', '', '', NULL, '2017-03-24 16:11:57'),
+(10, 1, 1, 'A09', 'Diarrea y gastroenteritis de presunto origen infeccioso', NULL, NULL, 'En los países donde se puede suponer que a cualquier afección listada en ([LINK]A09[/LINK]), sin otra especificación, le corresponde un origen no infeccioso, la afección debe ser clasificada en ([LINK]K52.9[/LINK]).\r\nCatarro entérico o intestinal\r\nColitis  	}	\r\nEnteritis 	}	SAI hemorrágica séptica\r\nGastroenteritis	}	\r\nDiarrea:\r\n•   SAI\r\n•   disentérica\r\n•   epidémica\r\nEnfermedad diarreica infecciosa SAI', '', 'diarrea no infecciosa ([LINK]K52.9[/LINK]), neonatal ([LINK]P78.3[/LINK]), la debida a bacterias, protozoarios, virus y otros agentes infecciosos especificados ([LINK]A00–A08[/LINK])', NULL, '2017-03-24 16:11:57'),
+(11, 1, 2, 'A15', 'Tuberculosis respiratoria, confirmada bacteriológica e histológicamente ', 'A15.0', 'A15.9', '', '', '', NULL, '2017-03-24 17:07:50'),
+(12, 1, 2, 'A16', 'Tuberculosis respiratoria, no confirmada bacteriológica o histológicamente', 'A16.0', 'A16.9', '', '', '', NULL, '2017-03-24 17:07:50'),
+(13, 1, 2, 'A17', 'Tuberculosis del sistema nervioso', 'A17.0', 'A17.9', '', '', '', NULL, '2017-03-24 17:07:50'),
+(14, 1, 2, 'A18', 'Tuberculosis de otros órganos', 'A18.0', 'A18.8', '', '', '', NULL, '2017-03-24 17:07:50'),
+(15, 1, 2, 'A19', 'Tuberculosis miliar', 'A19.0', 'A19.9', '', '', '', NULL, '2017-03-24 17:07:50'),
+(16, 1, 3, 'A20', 'Peste', 'A20.0', 'A20.9', '', '', '', NULL, '2017-03-24 17:18:14'),
+(17, 1, 3, 'A21', 'Tularemia', 'A21.0', 'A21.9', '', '', '', NULL, '2017-03-24 17:18:14'),
+(18, 1, 3, 'A22', 'Carbunco [ántrax]', 'A22.0', 'A22.9', '', '', '', NULL, '2017-03-24 17:18:14'),
+(19, 1, 3, 'A23', 'Brucelosis', 'A23.0', 'A23.9', '', '', '', NULL, '2017-03-24 17:18:14'),
+(20, 1, 3, 'A24', 'Muermo y melioidosis', 'A24.0', 'A24.4', '', '', '', NULL, '2017-03-24 17:18:14'),
+(21, 1, 3, 'A25', 'Fiebres por mordedura de rata', 'A25.0', 'A25.9', '', '', '', NULL, '2017-03-24 17:18:14'),
+(22, 1, 3, 'A26', 'Erisipeloide', 'A26.0', 'A26.9', '', '', '', NULL, '2017-03-24 17:18:14'),
+(23, 1, 3, 'A27', 'Leptospirosis', 'A27.0', 'A27.9', '', '', '', NULL, '2017-03-24 17:18:14'),
+(24, 1, 3, 'A28', 'Otras enfermedades zoonóticas bacterianas, no clasificadas en otra parte', 'A28.0', 'A28.9', '', '', '', NULL, '2017-03-24 17:18:14'),
+(25, 1, 4, 'A30', 'Lepra [enfermedad de Hansen]', 'A30.0', 'A30.9', '', '', '', NULL, '2017-03-24 17:33:37'),
+(26, 1, 4, 'A31', 'Infecciones debidas a otras micobacterias', 'A31.0', 'A31.9', '', '', '', NULL, '2017-03-24 17:33:37'),
+(27, 1, 4, 'A32', 'Listeriosis', 'A32.0', 'A32.9', '', '', '', NULL, '2017-03-24 17:33:37'),
+(28, 1, 4, 'A33', 'Tétanos neonatal', NULL, NULL, '', '', '', NULL, '2017-03-24 17:33:37'),
+(29, 1, 4, 'A34', 'Tétanos obstétrico', NULL, NULL, '', '', '', NULL, '2017-03-24 17:33:37'),
+(30, 1, 4, 'A35', 'Otros tétanos', NULL, NULL, '', '', 'tétanos: neonatal ([LINK]A33[LINK]), obstétrico ([LINK]A34[LINK])', NULL, '2017-03-24 17:33:37'),
+(31, 1, 4, 'A36', 'Difteria', 'A36.0', 'A36.9', '', '', '', NULL, '2017-03-24 17:33:37'),
+(32, 1, 4, 'A37', 'Tos ferina [tos convulsiva]', 'A37.0', 'A37.9', '', '', '', NULL, '2017-03-24 17:33:37'),
+(33, 1, 4, 'A38', 'Escarlatina', NULL, NULL, 'Fiebre escarlatina', '', 'angina estreptocócica ([LINK]J02.0[LINK])', NULL, '2017-03-24 17:33:37'),
+(34, 1, 4, 'A39', 'Enfermedad meningocócica', 'A39.0', 'A39.9', '', '', 'infección asintomática ([LINK]Z22.3[LINK])', NULL, '2017-03-24 17:33:37'),
+(35, 1, 4, 'A40', 'Septicemia estreptocócica', 'A40.0', 'A40.9', '', '', '', NULL, '2017-03-24 17:38:58'),
+(36, 1, 4, 'A41', 'Otras septicemias', 'A41.0', 'A41.9', '', '', '', NULL, '2017-03-24 17:38:58'),
+(37, 1, 4, 'A42', 'Actinomicosis', 'A42.0', 'A42.9', '', '', 'actinomicetoma ([LINK]B47.1[LINK])', NULL, '2017-03-24 17:38:58'),
+(38, 1, 4, 'A43', 'Nocardiosis', 'A43.0', 'A43.9', '', '', '', NULL, '2017-03-24 17:38:58'),
+(39, 1, 4, 'A44', 'Bartonelosis', 'A44.0', 'A44.9', '', '', '', NULL, '2017-03-24 17:38:58'),
+(40, 1, 4, 'A46', 'Erisipela', '', '', '', '', 'erisipela postparto o puerperal ([LINK]O86.8[LINK])', NULL, '2017-03-24 17:38:58'),
+(41, 1, 4, 'A48', 'Otras enfermedades bacterianas, no clasificadas en otra parte', 'A48.0', 'A48.8', '', '', '', NULL, '2017-03-24 17:38:58'),
+(42, 1, 4, 'A49', 'Infección bacteriana de sitio no especificado', 'A49.0', 'A49.9', '', '', '', NULL, '2017-03-24 17:38:58'),
+(43, 1, 5, 'A50', 'Sífilis congénita', 'A50.0', 'A50.9', '', '', '', NULL, '2017-03-24 17:38:58'),
+(44, 1, 5, 'A51', 'Sífilis precoz', 'A51.0', 'A51.9', '', '', '', NULL, '2017-03-24 17:38:58'),
+(45, 1, 5, 'A52', 'Sífilis tardía', 'A52.0', 'A52.9', '', '', '', NULL, '2017-03-24 17:49:04'),
+(46, 1, 5, 'A53', 'Otras sífilis y las no especificadas', 'A53.0', 'A53.9', '', '', '', NULL, '2017-03-24 17:49:04'),
+(47, 1, 5, 'A54', 'Infección gonocócica', 'A54.0', 'A54.9', '', '', '', NULL, '2017-03-24 17:49:04'),
+(48, 1, 5, 'A55', 'Linfogranuloma (venéreo) por clamidias', NULL, NULL, 'Bubón climático o tropical\r\nEnfermedad de Durand-Nicolas-Favre\r\nEstiómeno\r\nLinfogranuloma inguinal', '', '', NULL, '2017-03-24 17:49:04'),
+(49, 1, 5, 'A56', 'Otras enfermedades de transmisión sexual debidas a clamidias', 'A56.0', 'A56.8', '', 'enfermedades de transmisión sexual debidas a\r\nChlamydia trachomatis', 'aquellas condiciones clasificadas en [LINK]A74[LINK].', NULL, '2017-03-24 17:49:04'),
+(50, 1, 5, 'A57', 'Chancro blando', NULL, NULL, 'Chancroide\r\nUlcus molle', '', '', NULL, '2017-03-24 17:49:04'),
+(51, 1, 5, 'A58', 'Granuloma inguinal', NULL, NULL, 'Donovanosis', '', '', NULL, '2017-03-24 17:49:04'),
+(52, 1, 5, 'A59', 'Tricomoniasis', 'A59.0', 'A59.9', '', '', 'tricomoniasis intestinal ([LINK]A07.8[LINK])', NULL, '2017-03-24 17:49:04'),
+(53, 1, 5, 'A60', 'Infección anogenital debida a virus del herpes [herpes simple]', 'A60.0', 'A60.9', '', '', '', NULL, '2017-03-24 17:49:04'),
+(54, 1, 5, 'A63', 'Otras enfermedades de transmisión predominantemente sexual, no clasificadas en otra parte', 'A63.0', 'A63.8', '', '', 'molusco contagioso ([LINK]B08.1[LINK]), papiloma de cuello del útero ([LINK]D26.0[LINK])', NULL, '2017-03-24 17:49:04'),
+(55, 1, 5, 'A64', 'Enfermedad de transmisión sexual no ­especificada', NULL, NULL, 'Enfermedad venérea SAI', '', '', NULL, '2017-03-24 17:59:33'),
+(56, 1, 6, 'A65', 'Sífilis no venérea', NULL, NULL, 'Bejel\r\nNjovera\r\nSífilis endémica', '', '', NULL, '2017-03-24 17:59:33'),
+(57, 1, 6, 'A66', 'Frambesia', 'A66.0', 'A66.9', '', 'buba, frambesia (tropical), pian', '', NULL, '2017-03-24 17:59:33'),
+(58, 1, 6, 'A67', 'Pinta [carate]', 'A67.0', 'A67.9', '', '', '', NULL, '2017-03-24 17:59:33'),
+(59, 1, 6, 'A68', 'Fiebres recurrentes', 'A68.0', 'A68.9', '', 'fiebre recidivante', 'enfermedad de Lyme ([LINK]A69.2[LINK])', NULL, '2017-03-24 17:59:33'),
+(60, 1, 6, 'A69', 'Otras infecciones causadas por espiroquetas', 'A69.0', 'A69.9', '', '', '', NULL, '2017-03-24 17:59:33'),
+(61, 1, 7, 'A70', 'Infección debida a Chlamydia psittaci', 'A71.0', 'A71.9', '', '', 'secuela de tracoma ([LINK]B94.0[LINK])', NULL, '2017-03-24 17:59:33'),
+(62, 1, 7, 'A74', 'Otras enfermedades causadas por clamidias', 'A74.0', 'A74.9', '', '', 'conjuntivitis ([LINK]P39.1[LINK]) } neonatal por clamidias, neumonía ([LINK]P23.1[LINK]) } enfermedad de transmisión sexual debida a clamidias ([LINK]A55–A56[LINK]), neumonía debida a clamidias ([LINK]J16.0[LINK])', NULL, '2017-03-24 17:59:33'),
+(63, 1, 8, 'A75', 'Tifus', 'A75.0', 'A75.9', '', '', 'rickettsiosis debida a Ehrlichia sennetsu ([LINK]A79.8[LINK])', NULL, '2017-03-24 17:59:33'),
+(64, 1, 8, 'A77', 'Fiebre maculosa [rickettsiosis transmitida por garrapatas]', 'A77.0', 'A77.9', '', '', '', NULL, '2017-03-24 17:59:33'),
+(65, 1, 8, 'A78', 'Fiebre Q', NULL, NULL, 'Fiebre cuadrilateral\r\nFiebre de nueve millas\r\nInfección por Coxiella burnetii', '', '', NULL, '2017-03-24 18:07:06'),
+(66, 1, 8, 'A79', 'Otras rickettsiosis', 'A79.0', 'A79.9', '', '', '', NULL, '2017-03-24 18:07:06'),
+(67, 1, 9, 'A80', 'Poliomielitis aguda', 'A80.0', 'A80.9', '', '', '', NULL, '2017-03-24 18:07:06'),
+(68, 1, 9, 'A81', 'Infecciones del sistema nervioso central por virus atípico', 'A81.0', 'A81.9', '', 'Enfermedades del sistema nervioso central causadas por prión', '', NULL, '2017-03-24 18:07:06'),
+(69, 1, 9, 'A82', 'Rabia', 'A82.0', 'A82.9', '', '', '', NULL, '2017-03-24 18:07:06'),
+(70, 1, 9, 'A83', 'Encefalitis viral transmitida por mosquitos', 'A83.0', 'A83.9', '', 'meningoencefalitis viral transmitida por mosquitos', 'encefalitis equina venezolana ([LINK]A92.2[LINK])', NULL, '2017-03-24 18:07:06'),
+(71, 1, 9, 'A84', 'Encefalitis viral transmitida por garrapatas', 'A84.0', 'A84.9', '', 'meningoencefalitis viral transmitidas por garrapatas', '', NULL, '2017-03-24 18:07:06'),
+(72, 1, 9, 'A85', 'Otras encefalitis virales, no clasificadas en otra parte', 'A85.0', 'A85.8', '', 'encefalomielitis } especificada como virales NCOP\r\nmeningoencefalitis }', 'coriomeningitis linfocítica ([LINK]A87.2[LINK])\r\n                   encefalitis debida a virus del (de la):\r\n                   •   herpes (simple) ([LINK]B00.4[LINK])\r\n                   •   herpes zoster ([LINK]B02.0[LINK])\r\n                   •   sarampión ([LINK]B05.0[LINK])\r\n                   •   parotiditis ([LINK]B26.2[LINK])\r\n                   •   poliomielitis ([LINK]A80.–[LINK])\r\n                   encefalomielitis miálgica benigna ([LINK]G93.3[LINK])', NULL, '2017-03-24 18:07:06'),
+(73, 1, 9, 'A86', 'Encefalitis viral, no especificada', NULL, NULL, 'Encefalomielitis     	}	viral SAI\r\nMeningoencefalitis  	}', '', '', NULL, '2017-03-24 18:07:06'),
+(74, 1, 9, 'A87', 'Meningitis viral', 'A87.0', 'A87.9', '', '', 'meningitis debida a virus del (de la):\r\n                 •  herpes simple ([LINK]B00.3[LINK])\r\n                 •  herpes zoster ([LINK]B02.1[LINK])\r\n                 •  parotiditis ([LINK]B26.1[LINK])\r\n                 •  poliomielitis ([LINK]A80.–[LINK])\r\n                 •  sarampión ([LINK]B05.1[LINK])', NULL, '2017-03-24 18:07:06'),
+(75, 1, 9, 'A88', 'Otras infecciones virales del sistema nervioso central, no clasificadas en otra parte', 'A88.0', 'A88.8', '', '', 'encefalitis ([LINK]A86[LINK]), meningitis ([LINK]A87.9[LINK])  ', NULL, '2017-03-24 18:15:07'),
+(76, 1, 9, 'A89', 'Infección viral del sistema nervioso central, no especificada', NULL, NULL, '', '', '', NULL, '2017-03-24 18:15:07'),
+(77, 1, 10, 'A90', 'Fiebre del dengue [dengue clásico]', NULL, NULL, '', '', 'fiebre del dengue hemorrágico ([LINK]A91[LINK])', NULL, '2017-03-24 18:15:07'),
+(78, 1, 10, 'A91', 'Fiebre del dengue hemorrágico', NULL, NULL, '', '', '', NULL, '2017-03-24 18:15:07'),
+(79, 1, 10, 'A92', 'Otras fiebres virales transmitidas por mosquitos', 'A92.0', 'A92.9', '', '', 'enfermedad del río Ross ([LINK]B33.1[LINK])', NULL, '2017-03-24 18:15:07'),
+(80, 1, 10, 'A93', 'Otras fiebres virales transmitidas por artrópodos, no clasificadas en otra parte', 'A93.0', 'A93.8', '', '', '', NULL, '2017-03-24 18:15:07'),
+(81, 1, 10, 'A94', 'Fiebre viral transmitida por artrópodos, no ­especificada', NULL, NULL, 'Fiebre arboviral SAI\r\nInfección debida a arbovirus SAI', '', '', NULL, '2017-03-24 18:15:07'),
+(82, 1, 10, 'A95', 'Fiebre amarilla', 'A95.0', 'A95.9', '', '', '', NULL, '2017-03-24 18:15:07'),
+(83, 1, 10, 'A96', 'Fiebre hemorrágica por arenavirus', 'A96.0', 'A96.9', '', '', '', NULL, '2017-03-24 18:15:07'),
+(84, 1, 10, 'A98', 'Otras fiebres virales hemorrágicas, no clasificadas en otra parte', 'A98.0', 'A98.8', '', '', 'fiebre hemorrágica Chikungunya ([LINK]A92.0[LINK]), fiebre por virus del dengue hemorrágico ([LINK]A91[LINK])', NULL, '2017-03-24 18:15:07'),
+(85, 1, 10, 'A99', 'Fiebre viral hemorrágica, no especificada', NULL, NULL, '', '', '', NULL, '2017-03-24 18:25:00'),
+(86, 1, 11, 'B00', 'Infecciones herpéticas [herpes simple]', 'B00.0', 'B00.9', '', '', 'herpangina ([LINK]B08.5[LINK]), \r\ninfección anogenital debida a herpes simple ([LINK]A60.–[LINK]), \r\ninfección congénita debida a herpes simple ([LINK]P35.2[LINK]),\r\nmononucleosis infecciosa debida a herpesvirus gamma ([LINK]B27.0[LINK])', NULL, '2017-03-24 18:25:00'),
+(87, 1, 11, 'B01', 'Varicela', 'B01.0', 'B01.9', '', '', '', NULL, '2017-03-24 18:25:00'),
+(88, 1, 11, 'B02', 'Herpes zoster', 'B02.0', 'B02.9', '', 'zona zoster', '', NULL, '2017-03-24 18:25:00'),
+(89, 1, 11, 'B03', 'Viruela', NULL, NULL, '', '', '', NULL, '2017-03-24 18:25:00'),
+(90, 1, 11, 'B04', 'Viruela de los monos', NULL, NULL, '', '', '', NULL, '2017-03-24 18:25:00'),
+(91, 1, 11, 'B05', 'Sarampión', 'B05.0', 'B05.9', '', 'morbilli', 'panencefalitis esclerosante subaguda ([LINK]A81.1[LINK])', NULL, '2017-03-24 18:25:00'),
+(92, 1, 11, 'B06', 'Rubéola [sarampión alemán]', 'B06.0', 'B06.9', '', '', 'rubéola congénita ([LINK]P35.0[LINK])', NULL, '2017-03-24 18:25:00'),
+(93, 1, 11, 'B07', 'Verrugas víricas', NULL, NULL, 'Verruga:\r\n•   simple\r\n•   vulgar', '', 'papiloma de:\r\n•   cuello del útero ([LINK]D26.0[LINK])\r\n•   laringe ([LINK]D14.1[LINK])\r\n•   vejiga ([LINK]D41.4[LINK])\r\n•   verrugas anogenitales (venéreas) ([LINK]A63.0[LINK])', NULL, '2017-03-24 18:25:00'),
+(94, 1, 11, 'B08', 'Otras infecciones víricas caracterizadas por lesiones de la piel y de las membranas mucosas, no clasificadas en otra parte', 'B08.0', 'B08.8', '', '', 'estomatitis vesicular vírica ([LINK]A93.8[LINK])', NULL, '2017-03-24 18:25:00'),
+(95, 1, 11, 'B09', 'Infección viral no especificada, caracterizada por lesiones de la piel y de las membranas mucosas', NULL, NULL, 'Enantema      	}	viral SAL\r\nExantema  	}', '', '', NULL, '2017-03-24 18:33:14'),
+(96, 1, 12, 'B15', 'Hepatitis aguda tipo A', 'B15.0', 'B15.9', '', '', '', NULL, '2017-03-24 18:33:14'),
+(97, 1, 12, 'B16', 'Hepatitis aguda tipo B', 'B16.0', 'B16.9', '', '', '', NULL, '2017-03-24 18:33:14'),
+(98, 1, 12, 'B17', 'Otras hepatitis virales agudas', 'B17.0', 'B17.8', '', '', '', NULL, '2017-03-24 18:33:14'),
+(99, 1, 12, 'B18', 'Hepatitis viral crónica', 'B18.0', 'B18.9', '', '', '', NULL, '2017-03-24 18:33:14'),
+(100, 1, 12, 'B19', 'Hepatitis viral, sin otra especificación', 'B19.0', 'B19.9', '', '', '', NULL, '2017-03-24 18:33:14'),
+(101, 1, 13, 'B20', 'Enfermedad por virus de la inmunodeficiencia humana [VIH], resultante en enfermedades ­infecciosas y parasitarias', 'B20.0', 'B20.9', '', '', 'síndrome de infección primaria aguda debida a VIH ([LINK]B23.0[LINK])', NULL, '2017-03-24 18:33:14'),
+(102, 1, 13, 'B21', 'Enfermedad por virus de la inmunodeficiencia humana [VIH], resultante en tumores malignos', 'B21.0', 'B21.9', '', '', '', NULL, '2017-03-24 18:33:14'),
+(103, 1, 13, 'B22', 'Enfermedad por virus de la inmunodeficiencia humana [VIH], resultante en otras enfermedades especificadas', 'B22.0', 'B22.7', '', '', '', NULL, '2017-03-24 18:33:14'),
+(104, 1, 13, 'B23', 'Enfermedad por virus de la inmunodeficiencia humana [VIH], resultante en otras afecciones', 'B23.0', 'B23.8', '', '', '', NULL, '2017-03-24 18:33:14'),
+(105, 1, 13, 'B24', 'Enfermedad por virus de la inmunodeficiencia humana [VIH], sin otra especificación', NULL, NULL, 'Complejo relacionado con el SIDA [CRS] SAI\r\nSíndrome de inmunodeficiencia adquirida [SIDA] SAI', '', '', NULL, '2017-03-24 18:41:14'),
+(106, 1, 14, 'B25', 'Enfermedad debida a virus citomegálico', 'B25.0', 'B25.9', '', '', 'infección congénita debida a virus citomegálico ([LINK]P35.1[LINK])\r\nmononucleosis por citomegalovirus ([LINK]B27.1[LINK])', NULL, '2017-03-24 18:41:14'),
+(107, 1, 14, 'B26', 'Parotiditis infecciosa', 'B26.0', 'B26.9', '', 'parotiditis:\r\n•   epidémica\r\n•   urliana', '', NULL, '2017-03-24 18:41:14'),
+(108, 1, 14, 'B27', 'Mononucleosis infecciosa', 'B27.0', 'B27.9', '', 'angina monocítica\r\nenfermedad de Pfeiffer\r\nfiebre glandular', '', NULL, '2017-03-24 18:41:14'),
+(109, 1, 14, 'B30', 'Conjuntivitis viral', 'B30.0', 'B30.9', '', '', 'oculopatías por:\r\n•   virus del herpes [herpes simple] ([LINK]B00.5[LINK])\r\n•   herpes zoster ([LINK]B02.3[LINK])', NULL, '2017-03-24 18:41:14'),
+(110, 1, 14, 'B33', 'Otras enfermedades virales, no clasificadas en otra parte', 'B33.0', 'B33.8', '', '', '', NULL, '2017-03-24 18:41:14'),
+(111, 1, 14, 'B34', 'Infección viral de sitio no especificado', 'B34.0', 'B34.9', '', '', 'agentes virales como causa de enfermedades clasificadas en otros capítulos ([LINK]B97.–[LINK])\r\nenfermedad citomegálica SAI ([LINK]B25.9[LINK])\r\ninfección debida a retrovirus SAI ([LINK]B33.3[LINK])\r\ninfección herpética [herpes simple] SAI ([LINK]B00.9[LINK])', NULL, '2017-03-24 18:41:14'),
+(112, 1, 15, 'B35', 'Dermatofitosis', 'B35.0', 'B35.9', '', 'favus\r\ninfección debida a especies de Epidermophyton, Microsporum y Trichophyton\r\ntiña, cualquier tipo excepto las clasificadas en ([LINK]B36.–[LINK])', '', NULL, '2017-03-24 18:41:14'),
+(113, 1, 15, 'B36', 'Otras micosis superficiales', 'B36.0', 'B36.9', '', '', '', NULL, '2017-03-24 18:41:14'),
+(114, 1, 15, 'B37', 'Candidiasis', 'B37.0', 'B37.9', '', 'candidosis, moniliasis', 'candidiasis neonatal ([LINK]P37.5[LINK])', NULL, '2017-03-24 18:41:14'),
+(115, 1, 15, 'B38', 'Coccidioidomicosis', 'B38.0', 'B38.9', '', '', '', NULL, '2017-03-24 18:46:56'),
+(116, 1, 15, 'B39', 'Histoplasmosis', 'B39.0', 'B39.9', '', '', '', NULL, '2017-03-24 18:46:56'),
+(117, 1, 15, 'B40', 'Blastomicosis', 'B40.0', 'B40.9', '', '', 'blastomicosis brasileña ([LINK]B41.–[LINK])\r\nblastomicosis queloidal ([LINK]B48.0[LINK])', NULL, '2017-03-24 18:46:56'),
+(118, 1, 15, 'B41', 'Paracoccidioidomicosis', 'B41.0', 'B41.9', '', 'blastomicosis brasileña\r\nenfermedad de Lutz', '', NULL, '2017-03-24 18:46:56'),
+(119, 1, 15, 'B42', 'Esporotricosis', 'B42.0', 'B42.9', '', '', '', NULL, '2017-03-24 18:46:56'),
+(120, 1, 15, 'B43', 'Cromomicosis y absceso feomicótico', 'B43.0', 'B43.9', '', '', '', NULL, '2017-03-24 18:46:56'),
+(121, 1, 15, 'B44', 'Aspergilosis', 'B44.0', 'B44.9', '', 'aspergiloma', '', NULL, '2017-03-24 18:46:56'),
+(122, 1, 15, 'B45', 'Criptococosis', 'B45.0', 'B45.9', '', '', '', NULL, '2017-03-24 18:46:56'),
+(123, 1, 15, 'B46', 'Cigomicosis', 'B46.0', 'B46.9', '', '', '', NULL, '2017-03-24 18:46:56'),
+(124, 1, 15, 'B47', 'Micetoma', 'B47.0', 'B47.9', '', '', '', NULL, '2017-03-24 18:46:56'),
+(125, 1, 15, 'B48', 'Otras micosis, no clasificadas en otra parte', 'B48.0', 'B48.8', '', '', '', NULL, '2017-03-24 18:47:42'),
+(126, 1, 15, 'B49', 'Micosis, no especificada', NULL, NULL, 'Funguemia SAI', '', '', NULL, '2017-03-24 18:47:42'),
+(127, 1, 16, 'B50', 'Paludismo [malaria] debido a Plasmodium falciparum', 'B50.0', 'B50.9', '', 'infecciones mixtas de Plasmodium falciparum con cualquier otra especie de Plasmodium', '', NULL, '2017-03-24 18:56:13'),
+(128, 1, 16, 'B51', 'Paludismo [malaria] debido a Plasmodium vivax', 'B51.0', 'B51.9', '', 'infecciones mixtas debidas a Plasmodium vivax con otras especies de Plasmodium excepto Plasmodium falciparum', 'cuando es mixto con Plasmodium falciparum ([LINK]B50.–[LINK])', NULL, '2017-03-24 18:56:13'),
+(129, 1, 16, 'B52', 'Paludismo [malaria] debido a Plasmodium malariae', 'B52.0', 'B52.9', '', 'infecciones mixtas de Plasmodium malariae con otras especies de Plasmodium, excepto Plasmodium falciparum y Plasmodium vivax', 'cuando son mixtas con Plasmodium:\r\n•   falciparum ([LINK]B50.–[LINK])\r\n•   vivax ([LINK]B51.–[LINK])', NULL, '2017-03-24 18:56:13'),
+(130, 1, 16, 'B53', 'Otro paludismo [malaria] confirmado parasitológicamente', 'B53.0', 'B53.8', '', '', '', NULL, '2017-03-24 18:56:13'),
+(131, 1, 16, 'B54', 'Paludismo [malaria] no especificado', NULL, NULL, 'Paludismo diagnosticado clínicamente sin confirmación parasitológica\r\nMalaria SAI', '', '', NULL, '2017-03-24 18:56:13'),
+(132, 1, 16, 'B55', 'Leishmaniasis', 'B55.0', 'B55.9', '', '', '', NULL, '2017-03-24 18:56:13'),
+(133, 1, 16, 'B56', 'Tripanosomiasis africana', 'B56.0', 'B56.9', '', '', '', NULL, '2017-03-24 18:56:13'),
+(134, 1, 16, 'B57', 'Enfermedad de Chagas', 'B57.0', 'B57.5', '', 'infección debida a Trypanosoma cruzi\r\ntripanosomiasis americana', '', NULL, '2017-03-24 18:56:13'),
+(135, 1, 16, 'B58', 'Toxoplasmosis', 'B58.0', 'B58.9', '', 'infección debida a Toxoplasma gondii', 'toxoplasmosis congénita ([LINK]P37.1[LINK])', NULL, '2017-03-24 18:56:13'),
+(136, 1, 16, 'B59', 'Neumocistosis', NULL, NULL, 'Neumonía debida a:\r\n•   Pneumocystis carinii\r\n•   Pneumocystis jirovecii', '', '', NULL, '2017-03-24 18:56:13'),
+(137, 1, 16, 'B60', 'Otras enfermedades debidas a protozoarios, no clasificadas en otra parte', 'B60.0', 'B60.8', '', '', 'criptosporidiosis ([LINK]A07.2[LINK])\r\nisosporiasis ([LINK]A07.3[LINK])\r\nmicrosporidiosis intestinal ([LINK]A07.8[LINK])', NULL, '2017-03-24 18:57:12'),
+(138, 1, 16, 'B64', 'Enfermedad debida a protozoarios, no especificada', NULL, NULL, '', '', '', NULL, '2017-03-24 18:57:12'),
+(139, 1, 17, 'B65', 'Esquistosomiasis [bilharziasis]', 'B65.0', 'B65.9', '', 'fiebre debida al caracol', '', NULL, '2017-03-24 19:02:35'),
+(140, 1, 17, 'B66', 'Otras infecciones debidas a trematodos', 'B66.0', 'B66.9', '', '', '', NULL, '2017-03-24 19:02:35'),
+(141, 1, 17, 'B67', 'Equinococosis', 'B67.0', 'B67.9', '', 'hidatidosis', '', NULL, '2017-03-24 19:02:35'),
+(142, 1, 17, 'B68', 'Teniasis', 'B68.0', 'B68.9', '', '', 'cisticercosis ([LINK]B69.–[LINK])', NULL, '2017-03-24 19:02:35'),
+(143, 1, 17, 'B69', 'Cisticercosis', 'B69.0', 'B69.9', '', 'Infección por cisticercosis debida a la forma larvaria de Taenia solium', '', NULL, '2017-03-24 19:02:35'),
+(144, 1, 17, 'B70', 'Difilobotriasis y esparganosis', 'B70.0', 'B70.1', '', '', '', NULL, '2017-03-24 19:02:35'),
+(145, 1, 17, 'B71', 'Otras infecciones debidas a cestodos', 'B71.0', 'B71.9', '', '', '', NULL, '2017-03-24 19:02:35'),
+(146, 1, 17, 'B72', 'Dracontiasis', NULL, NULL, 'Infección debida a Dracunculus medinensis\r\nInfección debida a gusano de Guinea', '', '', NULL, '2017-03-24 19:02:35'),
+(147, 1, 17, 'B73', 'Oncocercosis', NULL, NULL, 'Ceguera de los ríos\r\nInfección debida a Onchocerca volvulus\r\nOncocerciasis', '', '', NULL, '2017-03-24 19:02:35'),
+(148, 1, 17, 'B74', 'Filariasis', 'B74.0', 'B74.9', '', '', 'eosinofilia tropical (pulmonar) SAI ([LINK]J82[LINK])\r\noncocercosis ([LINK]B73[LINK])', NULL, '2017-03-24 19:02:35'),
+(149, 1, 17, 'B75', 'Triquinosis', NULL, NULL, 'Infección debida a especies de Trichinella\r\nTriquinelosis', '', '', NULL, '2017-03-24 19:07:47'),
+(150, 1, 17, 'B76', 'Anquilostomiasis y necatoriasis', 'B76.0', 'B76.9', '', 'uncinariasis', '', NULL, '2017-03-24 19:07:47'),
+(151, 1, 17, 'B77', 'Ascariasis', 'B77.0', 'B77.9', '', 'ascaridiasis\r\ninfección debida a nematodos', '', NULL, '2017-03-24 19:07:47'),
+(152, 1, 17, 'B78', 'Estrongiloidiasis', 'B78.0', 'B78.9', '', '', 'tricoestrongiliasis ([LINK]B81.2[LINK])', NULL, '2017-03-24 19:07:47'),
+(153, 1, 17, 'B79', 'Tricuriasis', NULL, NULL, '(Enfermedad) (infección) debida a tricocéfalo\r\nTricocefaliasis', '', '', NULL, '2017-03-24 19:07:47'),
+(154, 1, 17, 'B80', 'Enterobiasis', NULL, NULL, 'Infección debida a Enterobius vermicularis\r\nOxiuriasis', '', '', NULL, '2017-03-24 19:07:47'),
+(155, 1, 17, 'B81', 'Otras helmintiasis intestinales, no clasificadas en otra parte', 'B81.0', 'B81.8', '', '', 'angioestrongiliasis debida a\r\nAngiostrongylus cantonensis ([LINK]B83.2[LINK])', NULL, '2017-03-24 19:07:47'),
+(156, 1, 17, 'B82', 'Parasitosis intestinales, sin otra especificación', 'B82.0', 'B82.9', '', '', '', NULL, '2017-03-24 19:07:47'),
+(157, 1, 17, 'B83', 'Otras helmintiasis', 'B83.0', 'B83.9', '', '', 'capilariasis:\r\n•   SAI ([LINK]B81.1[LINK])\r\n•   intestinal ([LINK]B81.1[LINK])', NULL, '2017-03-24 19:07:47'),
+(158, 1, 18, 'B85', 'Pediculosis y phthiriasis', 'B85.0', 'B85.4', '', '', '', NULL, '2017-03-24 19:07:47'),
+(159, 1, 18, 'B86', 'Escabiosis', NULL, NULL, 'Prurito por sarna', '', '', NULL, '2017-03-24 19:13:17'),
+(160, 1, 18, 'B87', 'Miasis', 'B87.0', 'B87.9', '', 'infestación debida a larvas de mosca', '', NULL, '2017-03-24 19:13:17'),
+(161, 1, 18, 'B88', 'Otras infestaciones', 'B88.0', 'B88.9', '', '', '', NULL, '2017-03-24 19:13:17'),
+(162, 1, 18, 'B89', 'Enfermedad parasitaria, no especificada', NULL, NULL, '', '', '', NULL, '2017-03-24 19:13:17'),
+(163, 1, 19, 'B90', 'Secuelas de tuberculosis', 'B90.0', 'B90.9', '', '', '', NULL, '2017-03-24 19:13:17'),
+(164, 1, 19, 'B91', 'Secuelas de poliomielitis', NULL, NULL, '', '', '', NULL, '2017-03-24 19:13:17'),
+(165, 1, 19, 'B92', 'Secuelas de lepra', NULL, NULL, '', '', '', NULL, '2017-03-24 19:13:17'),
+(166, 1, 19, 'B94', 'Secuelas de otras enfermedades infecciosas y parasitarias y de las no especificadas', 'B94.0', 'B94.9', '', '', '', NULL, '2017-03-24 19:13:17'),
+(167, 1, 20, 'B95', 'Estreptococos y estafilococos como causa de enfermedades clasificadas en otros capítulos', 'B95.0', 'B95.8', '', '', '', NULL, '2017-03-24 19:13:17'),
+(168, 1, 20, 'B96', 'Otros agentes bacterianos como causa de enfermedades clasificadas en otros capítulos', 'B96.0', 'B96.8', '', '', '', NULL, '2017-03-24 19:13:17'),
+(169, 1, 20, 'B97', 'Agentes virales como causa de enfermedades clasificadas en otros capítulos', 'B97.0', 'B97.8', '', '', '', NULL, '2017-03-24 19:14:01'),
+(170, 1, 21, 'B99', 'Otras enfermedades infecciosas y las no especificadas', NULL, NULL, '', '', '', NULL, '2017-03-24 19:14:01'),
+(171, 2, 22, 'C00', 'Tumor maligno del labio', 'C00.0', 'C00.9', '', '', 'piel del labio ([LINK]C43.0, C44.0[LINK])', NULL, '2017-03-24 19:28:07'),
+(172, 2, 22, 'C01', 'Tumor maligno de la base de la lengua', NULL, NULL, 'Cara dorsal de la base de la lengua\r\nRaíz de la lengua SAI\r\nTercio posterior de la lengua', '', '', NULL, '2017-03-24 19:28:07'),
+(173, 2, 22, 'C02', 'Tumor maligno de otras partes y de las no especificadas de la lengua', 'C02.0', 'C02.9', '', '', '', NULL, '2017-03-24 19:28:07'),
+(174, 2, 22, 'C03', 'Tumor maligno de la encía', 'C03.0', 'C03.9', '', 'mucosa del reborde alveolar\r\ngingiva', 'tumores malignos odontogénicos ([LINK]C41.0–C41.1[LINK])', NULL, '2017-03-24 19:28:07'),
+(175, 2, 22, 'C04', 'Tumor maligno del piso de la boca', 'C04.0', 'C04.9', '', '', '', NULL, '2017-03-24 19:28:07'),
+(176, 2, 22, 'C05', 'Tumor maligno del paladar', 'C05.0', 'C05.9', '', '', '', NULL, '2017-03-24 19:28:07'),
+(177, 2, 22, 'C06', 'Tumor maligno de otras partes y de las no especificadas de la boca', 'C06.0', 'C06.9', '', '', '', NULL, '2017-03-24 19:28:07'),
+(178, 2, 22, 'C07', 'Tumor maligno de la glándula parótida', NULL, NULL, '', '', '', NULL, '2017-03-24 19:28:07'),
+(179, 2, 22, 'C08', 'Tumor maligno de otras glándulas salivales mayores y de las no especificadas', 'C08.0', 'C08.9', '', '', 'glándula parótida ([LINK]C07[LINK]) tumores malignos especificados de las glándulas salivales menores que deben clasificarse de acuerdo con su localización anatómica tumores malignos de las glándulas salivales menores SAI ([LINK]C06.9[LINK])', NULL, '2017-03-24 19:28:07'),
+(180, 2, 22, 'C09', 'Tumor maligno de la amígdala', 'C09.0', 'C09.9', '', '', 'amígdala faríngea ([LINK]C11.1[LINK])\r\namígdala lingual ([LINK]C02.4[LINK])', NULL, '2017-03-24 19:28:07'),
+(181, 2, 22, 'C10', 'Tumor maligno de la orofaringe', 'C10.0', 'C10.9', '', '', 'amígdala (C09.–)', NULL, '2017-03-24 19:37:12'),
+(182, 2, 22, 'C11', 'Tumor maligno de la nasofaringe', 'C11.0', 'C11.9', '', '', '', NULL, '2017-03-24 19:37:12'),
+(183, 2, 22, 'C12', 'Tumor maligno del seno piriforme', NULL, NULL, 'Fosa piriforme', '', '', NULL, '2017-03-24 19:37:12'),
+(184, 2, 22, 'C13', 'Tumor maligno de la hipofaringe', 'C13.0', 'C13.9', '', '', 'seno piriforme ([LINK]C12[LINK])', NULL, '2017-03-24 19:37:12'),
+(185, 2, 22, 'C14', 'Tumor maligno de otros sitios y de los mal definidos del labio, de la cavidad bucal y de la faringe', 'C14.0', 'C14.8', '', '', 'cavidad bucal SAI ([LINK]C06.9[LINK])', NULL, '2017-03-24 19:37:12'),
+(186, 2, 23, 'C15', 'Tumor maligno del esófago', 'C15.0', 'C15.9', 'Se dan dos alternativas de subclasificación:\r\n.0 –.2 por descripción anatómica\r\n.3 –.5 por tercios\r\nEsta separación parte del principio de que las categorías deben ser mutuamente excluyentes, pues ambas ter­mi­no­lo­gías están en uso, pero la división anatómica resultante no es análoga.', '', '', NULL, '2017-03-24 19:37:12'),
+(187, 2, 23, 'C16', 'Tumor maligno del estómago', 'C16.0', 'C16.9', '', '', '', NULL, '2017-03-24 19:37:12'),
+(188, 2, 23, 'C17', 'Tumor maligno del intestino delgado', 'C17.0', 'C17.9', '', '', '', NULL, '2017-03-24 19:37:12'),
+(189, 2, 23, 'C18', 'Tumor maligno del colon', 'C18.0', 'C18.9', '', '', '', NULL, '2017-03-24 19:37:12'),
+(190, 2, 23, 'C19', 'Tumor maligno de la unión rectosigmoidea', NULL, NULL, 'Colon y recto\r\nColon rectosigmoideo', '', '', NULL, '2017-03-24 19:37:12'),
+(191, 2, 23, 'C20', 'Tumor maligno del recto', NULL, NULL, 'Ampolla rectal', '', '', NULL, '2017-03-24 19:47:04'),
+(192, 2, 23, 'C21', 'Tumor maligno del ano y del conducto anal', 'C21.0', 'C21.8', '', '', '', NULL, '2017-03-24 19:47:04'),
+(193, 2, 23, 'C22', 'Tumor maligno del hígado y de las vías biliares intrahepáticas', 'C22.0', 'C22.9', '', '', 'tumor maligno secundario del hígado ([LINK]C78.7[LINK])\r\nvías biliares SAI ([LINK]C24.9[LINK])', NULL, '2017-03-24 19:47:04'),
+(194, 2, 23, 'C23', 'Tumor maligno de la vesícula biliar', NULL, NULL, '', '', '', NULL, '2017-03-24 19:47:04'),
+(195, 2, 23, 'C24', 'Tumor maligno de otras partes y de las no especificadas de las vías biliares', 'C24.0', 'C24.9', '', '', 'conducto biliar intrahepático ([LINK]C22.1[LINK])', NULL, '2017-03-24 19:47:04'),
+(196, 2, 23, 'C25', 'Tumor maligno del páncreas', 'C25.0', 'C25.9', '', '', '', NULL, '2017-03-24 19:47:04'),
+(197, 2, 23, 'C26', 'Tumor maligno de otros sitios y de los mal definidos de los órganos digestivos', 'C26.0', 'C26.9', '', '', 'peritoneo y retroperitoneo ([LINK]C48.–[LINK])', NULL, '2017-03-24 19:47:04'),
+(198, 2, 24, 'C30', 'Tumor maligno de las fosas nasales y del oído medio', 'C30.0', 'C30.1', '', '', '', NULL, '2017-03-24 19:47:04'),
+(199, 2, 24, 'C31', 'Tumor maligno de los senos paranasales', 'C31.0', 'C31.9', '', '', '', NULL, '2017-03-24 19:47:04'),
+(200, 2, 24, 'C32', 'Tumor maligno de la laringe', 'C32.0', 'C32.9', '', '', '', NULL, '2017-03-24 19:47:04'),
+(201, 2, 24, 'C33', 'Tumor maligno de la tráquea', NULL, NULL, '', '', '', NULL, '2017-03-24 19:55:36'),
+(202, 2, 24, 'C34', 'Tumor maligno de los bronquios y del pulmón', 'C34.0', 'C34.9', '', '', '', NULL, '2017-03-24 19:55:36'),
+(203, 2, 24, 'C37', 'Tumor maligno del timo', NULL, NULL, '', '', '', NULL, '2017-03-24 19:55:36'),
+(204, 2, 24, 'C38', 'Tumor maligno del corazón, del mediastino y de la pleura', 'C38.0', 'C38.8', '', '', 'mesotelioma ([LINK]C45.–[LINK])', NULL, '2017-03-24 19:55:36'),
+(205, 2, 24, 'C39', 'Tumor maligno de otros sitios y de los mal definidos del sistema respiratorio y de los órganos intratorácicos', 'C39.0', 'C39.9', '', '', 'intratorácico SAI ([LINK]C76.1[LINK])\r\ntorácico SAI ([LINK]C76.1[LINK])', NULL, '2017-03-24 19:55:36'),
+(206, 2, 25, 'C40', 'Tumor maligno de los huesos y de los cartílagos articulares de los miembros', 'C40.0', 'C40.9', '', '', '', NULL, '2017-03-24 19:55:36'),
+(207, 2, 25, 'C41', 'Tumor maligno de los huesos y de los cartílagos articulares, de otros sitios y de sitios no especificados', 'C41.0', 'C41.9', '', '', 'cartílago (de los, de la)\r\n• laríngeo ([LINK]C32.3[LINK])\r\n• miembros ([LINK]C40.–[LINK])\r\n• nariz ([LINK]C30.0[LINK])\r\n• oreja ([LINK]C49.0[LINK])\r\n• huesos de los miembros ([LINK]C40.–[LINK])', NULL, '2017-03-24 19:55:36'),
+(208, 2, 26, 'C43', 'Melanoma maligno de la piel', 'C43.0', 'C43.9', '', 'los tipos morfológicos clasificables en M872–M879 con código de comportamiento /3', 'melanoma maligno de la piel de los órganos genitales ([LINK]C51[LINK]–[LINK]C52[LINK], [LINK]C60.–[LINK], [LINK]C63.–[LINK])', NULL, '2017-03-24 19:55:36'),
+(209, 2, 26, 'C44', 'Otros tumores malignos de la piel', 'C44.0', 'C44.9', '', 'tumor maligno de:\r\n• glándulas sebáceas\r\n• glándulas sudoríparas', 'melanoma maligno de la piel ([LINK]C43.–[LINK])\r\npiel de los órganos genitales ([LINK]C51–C52[LINK], [LINK]C60.–[LINK], [LINK]C63.–[LINK])\r\nsarcoma de Kaposi ([LINK]C46.–[LINK])', NULL, '2017-03-24 19:55:36'),
+(210, 2, 27, 'C45', 'Mesotelioma', 'C45.0', 'C45.9', '', 'los tipos morfológicos clasificables en M905 con código de comportamiento /3', '', NULL, '2017-03-24 19:55:36'),
+(211, 2, 27, 'C46', 'Sarcoma de Kaposi', 'C46.0', 'C46.9', '', 'los tipos morfológicos clasificables en M9140 con código de comportamiento /3', '', NULL, '2017-03-24 20:06:02'),
+(212, 2, 27, 'C47', 'Tumor maligno de los nervios periféricos y del sistema nervioso autónomo', 'C47.0', 'C47.9', '', 'nervios y ganglios simpáticos y parasimpáticos', '', NULL, '2017-03-24 20:06:02'),
+(213, 2, 27, 'C48', 'Tumor maligno del peritoneo y del retroperitoneo', 'C48.0', 'C48.8', '', '', 'mesotelioma ([LINK]C45.–[/LINK])\r\nsarcoma de Kaposi ([LINK]C46.1[/LINK])', NULL, '2017-03-24 20:06:02'),
+(214, 2, 27, 'C49', 'Tumor maligno de otros tejidos conjuntivos y de tejidos blandos', 'C49.0', 'C49.9', '', 'bolsa sinovial (bursa)\r\ncartílago\r\nfascia\r\nligamento, excepto el uterino\r\nmembrana sinovial\r\nmúsculo\r\ntejido graso\r\ntendón (aponeurosis)\r\nvaso linfático\r\nvaso sanguíneo', 'cartílago:\r\n• articular ([LINK]C40–C41[/LINK])\r\n• laríngeo ([LINK]C32.3[/LINK])\r\n• nasal ([LINK]C30.0[/LINK])\r\nmesotelioma ([LINK]C45.–[/LINK])\r\nnervios periféricos y sistema nervioso autónomo ([LINK]C47.–[/LINK])\r\nperitoneo ([LINK]C48.–[/LINK])\r\nretroperitoneo ([LINK]C48.0[/LINK])\r\nsarcoma de Kaposi ([LINK]C46.–[/LINK])\r\ntejido conjuntivo de la mama ([LINK]C50.–[/LINK])', NULL, '2017-03-24 20:06:02'),
+(215, 2, 28, 'C50', 'Tumor maligno de la mama', 'C50.0', 'C50.9', '', 'tejido conjuntivo de la mama', 'piel de la mama ([LINK]C43.5[/LINK], [LINK]C44.5[/LINK])', NULL, '2017-03-24 20:06:02'),
+(216, 2, 29, 'C51', 'Tumor maligno de la vulva', 'C51.0', 'C51.9', '', '', '', NULL, '2017-03-24 20:06:02'),
+(217, 2, 29, 'C52', 'Tumor maligno de la vagina', NULL, NULL, '', '', '', NULL, '2017-03-24 20:06:02'),
+(218, 2, 29, 'C53', 'Tumor maligno del cuello del útero', NULL, NULL, '', '', '', NULL, '2017-03-24 20:06:02'),
+(219, 2, 29, 'C54', 'Tumor maligno del cuerpo del útero', 'C54.0', 'C54.9', '', '', '', NULL, '2017-03-24 20:06:02'),
+(220, 2, 29, 'C55', 'Tumor maligno del útero, parte no especificada', NULL, NULL, '', '', '', NULL, '2017-03-24 20:06:02'),
+(221, 2, 29, 'C56', 'Tumor maligno del ovario', NULL, NULL, '', '', '', NULL, '2017-03-24 20:12:33'),
+(222, 2, 29, 'C57', 'Tumor maligno de otros órganos genitales femeninos y de los no especificados', 'C57.0', 'C57.9', '', '', '', NULL, '2017-03-24 20:12:33'),
+(223, 2, 29, 'C58', NULL, NULL, NULL, 'Coriocarcinoma SAI\r\nCorionepitelioma SAI', '', 'corioadenoma (destruens) (D39.2)\r\nmola hidatiforme:\r\n• SAI ([LINK]O01.9[/LINK])\r\n• invasora ([LINK]D39.2[/LINK])\r\n• maligna ([LINK]D39.2[/LINK])', NULL, '2017-03-24 20:12:33'),
+(224, 2, 30, 'C60', 'Tumor maligno del pene', 'C60.0', 'C60.9', '', '', '', NULL, '2017-03-24 20:12:33'),
+(225, 2, 30, 'C61', 'Tumor maligno de la próstata', NULL, NULL, '', '', '', NULL, '2017-03-24 20:12:33'),
+(226, 2, 30, 'C62', 'Tumor maligno del testículo', 'C62.0', 'C62.9', '', '', '', NULL, '2017-03-24 20:12:33'),
+(227, 2, 30, 'C63', 'Tumor maligno de otros órganos genitales masculinos y de los no especificados', 'C63.0', 'C63.9', '', '', '', NULL, '2017-03-24 20:12:33'),
+(228, 2, 31, 'C64', 'Tumor maligno del riñón, excepto de la pelvis renal', NULL, NULL, '', '', 'Cálices } renal(es) ([LINK]C65[/LINK])\r\nPelvis }', NULL, '2017-03-24 20:36:15'),
+(229, 2, 31, 'C65', 'Tumor maligno de la pelvis renal', NULL, NULL, 'Cálices renales\r\nUnión pelviureteral', '', '', NULL, '2017-03-24 20:36:15'),
+(230, 2, 31, 'C66', 'Tumor maligno del uréter', NULL, NULL, '', '', 'Excluye:  orificio ureteral de la vejiga ([LINK]C67.6[/LINK])', NULL, '2017-03-24 20:36:15'),
+(231, 2, 31, 'C67', 'Tumor maligno de la vejiga urinaria', 'C67.0', 'C67.9', '', '', '', NULL, '2017-03-24 20:36:15'),
+(232, 2, 31, 'C68', 'Tumor maligno de otros órganos urinarios y de los no especificados', 'C68.0', 'C68.9', '', '', 'vías genitourinarias SAI:\r\n• femeninas ([LINK]C57.9[/LINK])\r\n• masculinas ([LINK]C63.9[/LINK])', NULL, '2017-03-24 20:36:15'),
+(233, 2, 32, 'C69', 'Tumor maligno del ojo y sus anexos', 'C69.0', 'C69.9', '', '', 'nervio óptico ([LINK]C72.3[/LINK])\r\npárpado (piel) ([LINK]C43.1[/LINK], [LINK]C44.1[/LINK])\r\ntejido conjuntivo del párpado ([LINK]C49.0[/LINK])', NULL, '2017-03-24 20:36:15'),
+(234, 2, 32, 'C70', 'Tumor maligno de las meninges', 'C70.0', 'C70.9', '', '', '', NULL, '2017-03-24 20:36:15'),
+(235, 2, 32, 'C71', 'Tumor maligno del encéfalo', 'C71.0', 'C71.9', '', '', 'nervios craneales ([LINK]C72.2–C72.5[/LINK])\r\ntejido retrobulbar ([LINK]C69.6[/LINK])', NULL, '2017-03-24 20:36:15'),
+(236, 2, 32, 'C72', 'Tumor maligno de la médula espinal, de los nervios craneales y de otras partes del sistema nervioso central', 'C72.0', 'C72.9', '', '', 'Meninges ([LINK]C70.–[/LINK])\r\nNervios periféricos (del simpático) y del sistema nervioso autónomo ([LINK]C47.–[/LINK])', NULL, '2017-03-24 20:36:15'),
+(237, 2, 33, 'C73', 'Tumor maligno de la glándula tiroides', NULL, NULL, '', '', '', NULL, '2017-03-24 20:36:15'),
+(238, 2, 33, 'C74', 'Tumor maligno de la glándula suprarrenal', 'C74.0', 'C74.9', '', '', '', NULL, '2017-03-27 12:55:15'),
+(239, 2, 33, 'C75', 'Tumor maligno de otras glándulas endocrinas y de estructuras afines', 'C75.0', 'C75.9', '', '', 'glándula:\r\n• suprarrenal ([LINK]C74.–[/LINK])\r\n• tiroides ([LINK]C73[/LINK])\r\novario ([LINK]C56[/LINK])\r\npáncreas endocrino ([LINK]C25.4[/LINK])\r\ntestículo ([LINK]C62.–[/LINK])\r\ntimo ([LINK]C37[/LINK])', NULL, '2017-03-27 12:55:15'),
+(240, 2, 34, 'C76', 'Tumor maligno de otros sitios y de sitios mal definidos', 'C76.0', 'C76.8', '', '', 'tumor maligno de:\r\n• sitio no especificado ([LINK]C80[/LINK])\r\n• tejido linfático, hematopoyético y tejidos afines ([LINK]C81–C96[/LINK])\r\n• vías genitourinarias SAI:\r\n• femeninas ([LINK]C57.9[/LINK])\r\n• masculinas ([LINK]C63.9[/LINK])', NULL, '2017-03-27 13:09:12'),
+(241, 2, 34, 'C77', 'Tumor maligno secundario y el no especificado de los ganglios linfáticos', 'C77.0', 'C77.9', '', '', 'tumor maligno de los ganglios linfáticos, especificado como primario ([LINK]C81–C88[/LINK], [LINK]C96.–[/LINK])', NULL, '2017-03-27 13:09:12'),
+(242, 2, 34, 'C78', 'Tumor maligno secundario de los órganos respiratorios y digestivos', 'C78.0', 'C78.8', '', '', '', NULL, '2017-03-27 13:09:12'),
+(243, 2, 34, 'C79', 'Tumor maligno secundario de otros sitios', 'C79.0', 'C79.8', '', '', '', NULL, '2017-03-27 13:09:12'),
+(244, 2, 34, 'C80', 'Tumor maligno de sitios no especificados', NULL, NULL, 'Cáncer [tumor maligno]:}	 \r\n• SAI}\r\n• generalizado}\r\n• múltiple}  sitio no especificado (primario)\r\nCarcinoma}  (secundario)\r\nCarcinomatosis}\r\nMalignidad}\r\nNeoplasia maligna}\r\nCaquexia maligna\r\nSitio primario desconocido', '', '', NULL, '2017-03-27 13:09:12'),
+(245, 2, 35, 'C81', 'Enfermedad de Hodgkin', 'C81.0', 'C81.9', '', 'los tipos morfológicos clasificables en M965–M966 con código de comportamiento /3', '', NULL, '2017-03-27 13:09:12'),
+(246, 2, 35, 'C82', 'Linfoma no Hodgkin folicular [nodular]', 'C82.0', 'C82.9', '', 'linfomas foliculares no Hodgkin con o sin áreas difusas  tipos morfológicos clasificables en M969 con código de comportamiento /3', '', NULL, '2017-03-27 13:09:12'),
+(247, 2, 35, 'C83', 'Linfoma no Hodgkin difuso', 'C83.0', 'C83.9', '', 'los tipos morfológicos clasificables en M9593, M9595, M967–M968 con código de comportamiento /3', '', NULL, '2017-03-27 13:09:12'),
+(248, 2, 35, 'C84', 'Linfoma de células T, periférico y cutáneo', 'C84.0', 'C84.5', '', 'los tipos morfológicos clasificables en M970 con código de comportamiento /3', '', NULL, '2017-03-27 13:09:12'),
+(249, 2, 35, 'C85', 'Linfoma no Hodgkin de otro tipo y el no especificado', 'C85.0', 'C85.9', '', 'os tipos morfológicos clasificables en M9590–M9592, M9594, M971 con código de comportamiento /3', '', NULL, '2017-03-27 13:09:12'),
+(250, 2, 35, 'C88', 'Enfermedades inmunoproliferativas malignas', 'C88.0', 'C88.9', '', 'los tipos morfológicos clasificables en M976 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(251, 2, 35, 'C90', 'Mieloma múltiple y tumores malignos de células plasmáticas', 'C90.0', 'C90.2', '', 'los tipos morfológicos clasificables en M973, M9830 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(252, 2, 35, 'C91', 'Leucemia linfoide', 'C91.0', 'C91.9', '', 'los tipos morfológicos clasificables en M982, M9940–M9941 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(253, 2, 35, 'C92', 'Leucemia mieloide', 'C92.0', 'C92.9', '', 'leucemia:\r\n• granulocítica\r\n• mielógena\r\nlos tipos morfológicos clasificables en M986–M988, M9930 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(254, 2, 35, 'C93', 'Leucemia monocítica', 'C93.0', 'C93.9', '', 'leucemia monocitoide los tipos morfológicos clasificables en M989 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(255, 2, 35, 'C94', 'Otras leucemias de tipo celular especificado', 'C94.0', 'C94.7', '', 'los tipos morfológicos clasificables en M984, M9850, M9900, M9910, M9931–M9932 con código de comportamiento /3', 'leucemia de células plasmáticas ([LINK]C90.1[/LINK])\r\nreticuloendoteliosis leucémica ([LINK]C91.4[/LINK])', NULL, '2017-03-27 13:18:56'),
+(256, 2, 35, 'C95', 'Leucemia de células de tipo no especificado', 'C95.0', 'C95.9', '', 'tipos morfológicos clasificables en M980 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(257, 2, 35, 'C96', 'Otros tumores malignos y los no especificados del tejido linfático, de los órganos hematopoyéticos y de tejidos afines', 'C96.0', 'C96.9', '', 'los tipos morfológicos clasificables en M972, M974 con código de comportamiento /3', '', NULL, '2017-03-27 13:18:56'),
+(258, 2, 36, 'C97', 'Tumores malignos (primarios) de sitios múltiples independientes', '', '', 'Para el uso de esta categoría deben consultarse las indicaciones y reglas de codificación de la  mortalidad en el Volumen 2.', '', '', NULL, '2017-03-27 13:18:56'),
+(259, 2, 37, 'D00', 'Carcinoma in situ de la cavidad bucal, del esófago y del estómago', 'D00.0', 'D00.2', '', '', 'melanoma in situ ([LINK]D03.–[/LINK])', NULL, '2017-03-27 13:18:56'),
+(260, 2, 37, 'D01', 'Carcinoma in situ de otros órganos digestivos y de los no especificados', 'D01.0', 'D01.9', '', '', 'melanoma in situ ([LINK]D03.–[/LINK])', NULL, '2017-03-27 13:27:10'),
+(261, 2, 37, 'D02', 'Carcinoma in situ del sistema respiratorio y del oído medio', 'D02.0', 'D02.4', '', '', 'melanoma in situ ([LINK]D03.–[/LINK])', NULL, '2017-03-27 13:27:10'),
+(262, 2, 37, 'D03', 'Melanoma in situ', 'D03.0', 'D03.9', '', 'los tipos morfológicos clasificables en M872–M879 con  código de comportamiento /2', '', NULL, '2017-03-27 13:27:10'),
+(263, 2, 37, 'D04', 'Carcinoma in situ de la piel', 'D04.0', 'D04.9', '', '', 'eritroplasia de Queyrat (pene) SAI ([LINK]D07.4[/LINK])\r\nmelanoma in situ ([LINK]D03.–[/LINK])', NULL, '2017-03-27 13:27:10'),
+(264, 2, 37, 'D05', 'Carcinoma in situ de la mama', 'D05.0', 'D05.9', '', '', 'carcinoma in situ de la piel de la mama ([LINK]D04.5[/LINK])\r\nmelanoma in situ de la mama (piel) ([LINK]D03.5[/LINK])', NULL, '2017-03-27 13:27:10'),
+(265, 2, 37, 'D06', 'Carcinoma in situ del cuello del útero', 'D06.0', 'D06.9', '', 'neoplasia intraepitelial cervical [NIC], grado III, con o sin mención de displasia severa', 'displasia severa del cuello SAI ([LINK]N87.2[/LINK])\r\nmelanoma in situ del cuello ([LINK]D03.5[/LINK])', NULL, '2017-03-27 13:27:10'),
+(266, 2, 37, 'D07', 'Carcinoma in situ de otros órganos genitales y de los no especificados', 'D07.0', 'D07.6', '', '', 'melanoma in situ ([LINK]D03.5[/LINK])', NULL, '2017-03-27 13:27:10'),
+(267, 2, 37, 'D09', 'Carcinoma in situ de otros sitios y de los no especificados', 'D09.0', 'D09.9', '', '', 'melanoma in situ ([LINK]D03.–[/LINK])', NULL, '2017-03-27 13:27:10'),
+(268, 2, 38, 'D10', 'Tumor benigno de la boca y de la faringe', 'D10.0', 'D10.9', '', '', '', NULL, '2017-03-27 13:27:10'),
+(269, 2, 38, 'D11', 'Tumor benigno de las glándulas salivales mayores', 'D11.0', 'D11.9', '', '', 'tumores benignos de las glándulas salivales menores, los que se clasifican de acuerdo con su localización anatómica tumores benignos de las glándulas salivales menores SAI ([LINK]D10.3[/LINK])', NULL, '2017-03-27 13:27:10'),
+(270, 2, 38, 'D12', 'Tumor benigno del colon, del recto, del conducto anal y del ano', 'D12.0', 'D12.9', '', '', '', NULL, '2017-03-27 13:28:52'),
+(271, 2, 38, 'D13', 'Tumor benigno de otras partes y de las mal definidas del sistema digestivo', 'D13.0', 'D13.9', '', '', '', NULL, '2017-03-27 13:28:52'),
+(272, 2, 38, 'D14', 'Tumor benigno del oído medio y del sistema respiratorio', 'D14.0', 'D14.4', '', '', '', NULL, '2017-03-27 13:30:00'),
+(273, 2, 38, 'D15', 'Tumor benigno de otros órganos intratorácicos y de los no especificados', 'D15.0', 'D15.9', '', '', 'tejido mesotelial ([LINK]D19.–[/LINK])', NULL, '2017-03-27 13:30:00'),
+(274, 2, 38, 'D16', 'Tumor benigno del hueso y del cartílago articular', 'D16.0', 'D16.9', '', '', 'sinovial ([LINK]D21.–[/LINK])\r\ntumor benigno del tejido conjuntivo de:\r\n• laringe ([LINK]D14.1[/LINK])\r\n• nariz ([LINK]D14.0[/LINK])\r\n• oreja ([LINK]D21.0[/LINK])\r\n• párpado ([LINK]D21.0[/LINK])', NULL, '2017-03-27 13:42:09'),
+(275, 2, 38, 'D17', 'Tumores benignos lipomatosos', 'D17.0', 'D17.9', '', 'tipos morfológicos clasificables en M885–M888 con código de comportamiento /0', '', NULL, '2017-03-27 13:42:09'),
+(276, 2, 38, 'D18', 'Hemangioma y linfangioma de cualquier sitio', 'D18.0', 'D18.1', '', 'tipos morfológicos clasificables en M912–M917 con código de comportamiento /0', 'nevo azul o pigmentado ([LINK]D22.–[/LINK])', NULL, '2017-03-27 13:42:09'),
+(277, 2, 38, 'D19', 'Tumores benignos del tejido mesotelial', 'D19.0', 'D19.9', '', 'tipos morfológicos clasificables en M905 con código de comportamiento /0', '', NULL, '2017-03-27 13:42:09'),
+(278, 2, 38, 'D20', 'Tumor benigno del tejido blando del peritoneo y del retroperitoneo', 'D20.0', 'D20.1', '', '', 'tejido mesotelial ([LINK]D19.–[/LINK])\r\ntumor benigno lipomatoso del peritoneo y del retroperitoneo ([LINK]D17.7[/LINK]) ', NULL, '2017-03-27 13:42:09'),
+(279, 2, 38, 'D21', 'Otros tumores benignos del tejido conjuntivo y de los tejidos blandos', 'D21.0', 'D21.9', '', 'bolsa sinovial (bursa)\r\ncanal linfático\r\ncartílago\r\nfascia\r\ngrasa\r\nligamento, excepto el uterino\r\nmembrana sinovial\r\nmúsculo\r\ntendón (aponeurosis)\r\nvaso sanguíneo', 'cartílago:\r\n• articular ([LINK]D16.–[/LINK])\r\n• laríngeo ([LINK]D14.1[/LINK])\r\n• nasal ([LINK]D14.0[/LINK])\r\nhemangioma ([LINK]D18.0[/LINK])\r\nleiomioma uterino ([LINK]D25.–[/LINK])\r\nligamento uterino, cualquiera ([LINK]D28.2[/LINK])\r\nlinfangioma ([LINK]D18.1[/LINK])\r\nperitoneo ([LINK]D20.1[/LINK])\r\nretroperitoneo ([LINK]D20.0[/LINK])\r\nsistema nervioso autónomo y nervios periféricos ([LINK]D36.1[/LINK])\r\ntejido:\r\n• conjuntivo de la mama ([LINK]D24[/LINK])\r\n• vascular ([LINK]D18.–[/LINK])\r\ntumor lipomatoso ([LINK]D17.–[/LINK])', NULL, '2017-03-27 13:42:09'),
+(280, 2, 38, 'D22', 'Nevo melanocítico', 'D22.0', 'D22.9', '', 'nevo:\r\n• SAI\r\n• azul\r\n• pigmentado\r\n• velloso\r\ntipos morfológicos clasificables en M872–M879 con código de comportamiento /0', '', NULL, '2017-03-27 13:42:09'),
+(281, 2, 38, 'D23', 'Otros tumores benignos de la piel', 'D23.0', 'D23.9', '', 'tumor benigno de:\r\n• folículo piloso\r\n• glándulas sebáceas\r\n• glándulas sudoríparas', 'nevo melanocítico ([LINK]D22.–[/LINK])\r\ntumores benignos lipomatosos ([LINK]D17.0–D17.3[/LINK])', NULL, '2017-03-27 13:42:09'),
+(282, 2, 38, 'D24', 'Tumor benigno de la mama', NULL, NULL, 'Mama:\r\n• partes blandas\r\n• tejido conjuntivo', '', 'displasia mamaria benigna ([LINK]N60.–[/LINK])\r\npiel de la mama ([LINK]D22.5[/LINK], [LINK]D23.5[/LINK])', NULL, '2017-03-27 13:42:09'),
+(283, 2, 38, 'D25', 'Leiomioma del útero', 'D25.0', 'D25.9', '', 'fibromioma uterino tumor benigno del útero con tipos morfológicos clasificables en M889 y código de comportamiento /0', '', NULL, '2017-03-27 13:42:09'),
+(284, 2, 38, 'D26', 'Otros tumores benignos del útero', 'D26.0', 'D26.9', '', '', '', NULL, '2017-03-27 13:50:18'),
+(285, 2, 38, 'D27', 'Tumor benigno del ovario', NULL, NULL, '', '', '', NULL, '2017-03-27 13:50:18');
+INSERT INTO `pre_cie10_3_grupo` (`id_grupo`, `id_capitulo`, `id_seccion`, `gl_codigo`, `gl_descripcion`, `gl_codigo_inicio`, `gl_codigo_fin`, `gl_nota`, `gl_incluye`, `gl_excluye`, `id_usuario_crea`, `fc_crea`) VALUES
+(286, 2, 38, 'D28', 'Tumor benigno de otros órganos genitales femeninos y de los no especificados', 'D28.0', 'D28.9', '', 'piel de los órganos genitales femeninos pólipo adenomatoso', '', NULL, '2017-03-27 13:50:18'),
+(287, 2, 38, 'D29', 'Tumor benigno de los órganos genitales masculinos', 'D29.0', 'D29.9', '', 'piel de los órganos genitales masculinos', '', NULL, '2017-03-27 13:50:18'),
+(288, 2, 38, 'D30', 'Tumor benigno de los órganos urinarios', 'D30.0', 'D30.9', '', '', '', NULL, '2017-03-27 13:50:18'),
+(289, 2, 38, 'D31', 'Tumor benigno del ojo y sus anexos', 'D31.0', 'D31.9', '', '', 'nervio óptico ([LINK]D33.3[/LINK])\r\npiel del párpado ([LINK]D22.1[/LINK], [LINK]D23.1[/LINK])\r\ntejido conjuntivo del párpado ([LINK]D21.0[/LINK])', NULL, '2017-03-27 13:50:18'),
+(290, 2, 38, 'D32', 'Tumores benignos de las meninges', 'D32.0', 'D32.9', '', '', '', NULL, '2017-03-27 13:50:18'),
+(291, 2, 38, 'D33', 'Tumor benigno del encéfalo y de otras partes del sistema nervioso central', 'D33.0', 'D33.9', '', '', 'angioma ([LINK]D18.0[/LINK])\r\nmeninges ([LINK]D32.–[/LINK])\r\nnervios periféricos y sistema nervioso autónomo ([LINK]D36.1[/LINK])\r\ntejido retroocular ([LINK]D31.6[/LINK])', NULL, '2017-03-27 13:50:18'),
+(292, 2, 38, 'D34', 'Tumor benigno de la glándula tiroides', NULL, NULL, '', '', '', NULL, '2017-03-27 13:50:18'),
+(293, 2, 38, 'D35', 'Tumor benigno de otras glándulas endocrinas y de las no especificadas', 'D35.0', 'D35.9', '', '', 'ovario ([LINK]D27[/LINK])\r\npáncreas endocrino ([LINK]D13.7[/LINK])\r\ntestículo ([LINK]D29.2[/LINK])\r\ntimo ([LINK]D15.0[/LINK])', NULL, '2017-03-27 13:50:18'),
+(294, 2, 38, 'D36', 'Tumor benigno de otros sitios y de los no especificados', 'D36.0', 'D36.9', '', '', '', NULL, '2017-03-27 13:56:32'),
+(295, 2, 39, 'D37', 'Tumor de comportamiento incierto o desconocido de la cavidad bucal y de los órganos digestivos', 'D37.0', 'D37.9', '', '', '', NULL, '2017-03-27 13:56:32'),
+(296, 2, 39, 'D38', 'Tumor de comportamiento incierto o desconocido del oído medio y de los órganos respiratorios e intratorácicos', 'D38.0', 'D38.6', '', '', 'corazón ([LINK]D48.7[/LINK])', NULL, '2017-03-27 13:56:32'),
+(297, 2, 39, 'D39', 'Tumor de comportamiento incierto o desconocido de los órganos genitales femeninos', 'D39.0', 'D39.9', '', '', '', NULL, '2017-03-27 13:56:32'),
+(298, 2, 39, 'D40', 'Tumor de comportamiento incierto o desconocido de los órganos genitales masculinos', 'D40.0', 'D40.9', '', '', '', NULL, '2017-03-27 13:56:32'),
+(299, 2, 39, 'D41', 'Tumor de comportamiento incierto o desconocido de los órganos urinarios', 'D41.0', 'D41.9', '', '', '', NULL, '2017-03-27 13:56:32'),
+(300, 2, 39, 'D42', 'Tumor de comportamiento incierto o desconocido de las meninges', 'D42.0', 'D42.9', '', '', '', NULL, '2017-03-27 13:56:32'),
+(301, 2, 39, 'D43', 'Tumor de comportamiento incierto o desconocido del encéfalo y del sistema nervioso central', 'D43.0', 'D43.9', '', '', 'nervios periféricos y sistema nervioso autónomo ([LINK]D48.2[/LINK])', NULL, '2017-03-27 13:56:32'),
+(302, 2, 39, 'D44', 'Tumor de comportamiento incierto o desconocido de las glándulas endocrinas', 'D44.0', 'D44.9', '', '', 'ovario ([LINK]D39.1[/LINK])\r\npáncreas endocrino ([LINK]D37.7[/LINK])\r\ntestículo ([LINK]D40.1[/LINK])\r\ntimo ([LINK]D38.4[/LINK])', NULL, '2017-03-27 13:56:32'),
+(303, 2, 39, 'D45', 'Policitemia vera', NULL, NULL, '', 'Tipos morfológicos clasificables en M9950 con código de comportamiento /1', '', NULL, '2017-03-27 13:56:32'),
+(304, 2, 39, 'D46', 'Síndromes mielodisplásicos', 'D46.0', 'D46.9', '', 'Tipos morfológicos clasificables en M998 con código de comportamiento /1', '', NULL, '2017-03-27 14:06:18'),
+(305, 2, 39, 'D47', 'Otros tumores de comportamiento incierto o desconocido del tejido linfático, de los órganos hematopoyéticos y de tejidos afines', 'D47.0', 'D47.9', '', 'tipos morfológicos clasificables en M974, M976, M996–M997 con código de comportamiento /1', '', NULL, '2017-03-27 14:06:18'),
+(306, 2, 39, 'D48', 'Tumor de comportamiento incierto o desconocido de otros sitios y de los no especificados', 'D48.0', 'D48.9', '', '', 'neurofibromatosis (no maligna) ([LINK]Q85.0[/LINK])', NULL, '2017-03-27 14:06:18'),
+(307, 3, 40, 'D50', 'Anemias por deficiencia de hierro', 'D50.0', 'D50.9', '', 'anemia:\r\n• ferropénica\r\n• hipocrómica\r\n• sideropénica', '', NULL, '2017-03-27 14:06:18'),
+(308, 3, 40, 'D51', 'Anemia por deficiencia de vitamina B12', 'D51.0', 'D51.9', '', '', 'deficiencia de vitamina B12 ([LINK]E53.8[/LINK])', NULL, '2017-03-27 14:06:18'),
+(309, 3, 40, 'D52', 'Anemia por deficiencia de folatos', 'D52.0', 'D52.9', '', '', '', NULL, '2017-03-27 14:06:18'),
+(310, 3, 40, 'D53', 'Otras anemias nutricionales', 'D53.0', 'D53.9', '', 'anemia megaloblástica insensible a vitamina B12 o terapia con folatos', '', NULL, '2017-03-27 14:06:18'),
+(311, 3, 41, 'D55', 'Anemia debida a trastornos enzimáticos', 'D55.0', 'D55.9', '', '', 'anemia debida a deficiencia enzimática inducida por drogas ([LINK]D59.2[/LINK])', NULL, '2017-03-27 14:06:18'),
+(312, 3, 41, 'D56', 'Talasemia', 'D56.0', 'D56.9', '', '', '', NULL, '2017-03-27 14:06:18'),
+(313, 3, 41, 'D57', 'Trastornos falciformes', 'D57.0', 'D57.8', '', '', 'otras hemoglobinopatías ([LINK]D58.–[/LINK])', NULL, '2017-03-27 14:06:18'),
+(314, 3, 41, 'D58', 'Otras anemias hemolíticas hereditarias', 'D58.0', 'D58.9', '', '', '', NULL, '2017-03-27 14:15:58'),
+(315, 3, 41, 'D59', 'Anemia hemolítica adquirida', 'D59.0', 'D59.9', '', '', '', NULL, '2017-03-27 14:15:58'),
+(316, 3, 42, 'D60', 'Aplasia adquirida, exclusiva de la serie roja [eritroblastopenia]', 'D60.0', 'D60.9', '', 'aplasia eritrocítica (adquirida) (del adulto) (con timoma)', '', NULL, '2017-03-27 14:15:58'),
+(317, 3, 42, 'D61', 'Otras anemias aplásticas', 'D61.0', 'D61.9', '', '', 'agranulocitosis ([LINK]D70[/LINK])', NULL, '2017-03-27 14:15:58'),
+(318, 3, 42, 'D62', 'Anemia posthemorrágica aguda', NULL, NULL, '', '', 'anemia congénita debida a pérdida de sangre fetal ([LINK]P61.3[/LINK])', NULL, '2017-03-27 14:15:58'),
+(319, 3, 42, 'D63', 'Anemia en enfermedades crónicas clasificadas en otra parte', 'D63.0', 'D63.8', '', '', '', NULL, '2017-03-27 14:15:58'),
+(320, 3, 42, 'D64', 'Otras anemias', 'D64.0', 'D64.9', '', '', 'anemia refractaria (con):\r\n• SAI ([LINK]D46.4[/LINK])\r\n• exceso de blastos ([LINK]D46.2[/LINK])\r\n• con transformación ([LINK]D46.3[/LINK])\r\n• sideroblastos ([LINK]D46.1[/LINK])\r\n• sin sideroblastos ([LINK]D46.0[/LINK])', NULL, '2017-03-27 14:15:58'),
+(321, 3, 43, 'D65', 'Coagulación intravascular diseminada [síndrome de desfibrinación]', NULL, NULL, '', 'Afibrinogenemia adquirida\r\nCoagulación intravascular difusa o diseminada (CID)\r\nCoagulopatía de consumo\r\nHemorragia fibrinolítica adquirida\r\nPúrpura:\r\n• fibrinolítica\r\n• fulminante', 'en (que complica el):\r\n• aborto, embarazo molar o ectópico ([LINK]O00–O07[/LINK], [LINK]O08.1[/LINK])\r\n• embarazo, parto y puerperio ([LINK]O45.0[/LINK], [LINK]O46.0[/LINK], [LINK]O67.0[/LINK], [LINK]O72.3[/LINK])\r\n• recién nacido ([LINK]P60[/LINK])', NULL, '2017-03-27 14:15:58'),
+(322, 3, 43, 'D66', 'Deficiencia hereditaria del factor VIII', NULL, NULL, '', 'Deficiencia del factor VIII (con defecto funcional)\r\nHemofilia:\r\n• SAI\r\n• A\r\n• clásica', 'deficiencia del factor VIII con defecto vascular ([LINK]D68.0[/LINK])', NULL, '2017-03-27 14:15:58'),
+(323, 3, 43, 'D67', 'Deficiencia hereditaria del factor IX', NULL, NULL, 'Deficiencia del:\r\n• componente tromboplastínico del plasma [CTP]\r\n• factor IX (con defecto funcional)\r\nEnfermedad de Christmas\r\nHemofilia B', '', '', NULL, '2017-03-27 14:15:58'),
+(324, 3, 43, 'D68', 'Otros defectos de la coagulación', 'D68.0', 'D68.9', '', 'Angiohemofilia\r\nDeficiencia del factor VIII con defecto vascular\r\nHemofilia vascular', 'deficiencia del factor VIII:\r\n• SAI ([LINK]D66[/LINK])\r\n• con defecto funcional ([LINK]D66[/LINK])\r\nfragilidad capilar (hereditaria) ([LINK]D69.8[/LINK])', NULL, '2017-03-27 14:18:06'),
+(325, 3, 43, 'D69', 'Púrpura y otras afecciones hemorrágicas', 'D69.0', 'D69.9', '', '', 'púrpura:\r\n• crioglobulinémica ([LINK]D89.1[/LINK])\r\n• fulminante ([LINK]D65[/LINK])\r\n• hipergammaglobulinémica benigna ([LINK]D89.0[/LINK])\r\n• trombocitopénica trombótica ([LINK]M31.1[/LINK])\r\ntrombocitemia (hemorrágica) esencial ([LINK]D47.3[/LINK])', NULL, '2017-03-27 14:18:06'),
+(326, 3, 44, 'D70', 'Agranulocitosis', NULL, NULL, '', 'Agranulocitosis genética infantil\r\nAngina agranulocítica\r\nEnfermedad de Kostman\r\nEsplenomegalia neutropénica\r\nNeutropenia:\r\n• SAI\r\n• cíclica\r\n• congénita\r\n• esplénica (primaria)\r\n• inducida por drogas\r\n• periódica\r\n• tóxica\r\nUse código adicional de causa externa (Capítulo XX) si desea identificar la droga, en los casos de inducción.', 'neutropenia neonatal transitoria ([LINK]P61.5[/LINK])', NULL, '2017-03-27 14:27:27'),
+(327, 3, 44, 'D71', 'Trastornos funcionales de los polimorfonucleares neutrófilos', NULL, NULL, '', 'Defecto del complejo receptor [CR3] de la membrana celular\r\nDisfagocitosis congénita\r\nEnfermedad granulomatosa (infantil) crónica\r\nGranulomatosis séptica progresiva', '', NULL, '2017-03-27 14:27:27'),
+(328, 3, 44, 'D72', 'Otros trastornos de los leucocitos', 'D72.0', 'D72.9', '', '', 'basofilia ([LINK]D75.8[/LINK])\r\nneutropenia ([LINK]D70[/LINK])\r\npreleucemia (síndrome) ([LINK]D46.9[/LINK])\r\ntrastornos de la inmunidad ([LINK]D80–D89[/LINK])', NULL, '2017-03-27 14:27:27'),
+(329, 3, 44, 'D73', 'Enfermedades del bazo', 'D73.0', 'D73.9', '', '', '', NULL, '2017-03-27 14:27:27'),
+(330, 3, 44, 'D74', 'Metahemoglobinemia', 'D74.0', 'D74.9', '', '', '', NULL, '2017-03-27 14:27:27'),
+(331, 3, 44, 'D75', 'Otras enfermedades de la sangre y de los órganos hematopoyéticos', 'D75.0', 'D75.9', '', '', 'agrandamiento de los ganglios linfáticos ([LINK]R59.–[/LINK])\r\nhipergammaglobulinemia SAI ([LINK]D89.2[/LINK])\r\nlinfadenitis:\r\n• SAI ([LINK]I88.9[/LINK])\r\n• aguda ([LINK]L04.–[/LINK])\r\n• crónica ([LINK]I88.1[/LINK])\r\n• mesentérica (aguda) (crónica) ([LINK]I88.0[/LINK])', NULL, '2017-03-27 14:27:27'),
+(332, 3, 44, 'D76', 'Ciertas enfermedades que afectan al tejido linforreticular y al sistema reticuloendotelial', 'D76.0', 'D76.3', '', '', 'enfermedad de Letterer–Siwe ()([LINK]C96.0[/LINK])\r\nhistiocitosis maligna ([LINK]C96.1[/LINK])\r\nreticuloendoteliosis o reticulosis:\r\n• leucémica ([LINK]C91.4[/LINK])\r\n• lipomelanótica ([LINK]I89.8[/LINK])\r\n• maligna ([LINK]C85.7[/LINK])\r\n• medular histiocítica ([LINK]C96.1[/LINK])\r\n• no lipídica ([LINK]C96.0[/LINK])', NULL, '2017-03-27 14:27:27'),
+(333, 3, 44, 'D77', 'Otros trastornos de la sangre y de los órganos hematopoyéticos en enfermedades clasificadas en otra parte', NULL, NULL, 'Fibrosis del bazo en la esquistosomiasis [bilharziasis] (B65.–†)', '', '', NULL, '2017-03-27 14:27:27'),
+(334, 3, 45, 'D80', 'Inmunodeficiencia con predominio de defectos de los anticuerpos', 'D80.0', 'D80.9', '', '', '', NULL, '2017-03-27 14:27:27'),
+(335, 3, 45, 'D81', 'Inmunodeficiencias combinadas', 'D81.0', 'D81.9', '', '', 'agammaglobulinemia recesiva autosómica (tipo suizo) ([LINK]D80.0[/LINK])', NULL, '2017-03-27 14:27:27'),
+(336, 3, 45, 'D82', 'Inmunodeficiencia asociada con otros defectos mayores', 'D82.0', 'D82.9', '', '', 'ataxia telangiectasia [Louis–Bar] ([LINK]G11.3[/LINK])', NULL, '2017-03-27 14:30:58'),
+(337, 3, 45, 'D83', 'Inmunodeficiencia variable común', 'D83.0', 'D83.9', '', '', '', NULL, '2017-03-27 14:30:58'),
+(338, 3, 45, 'D84', 'Otras inmunodeficiencias', 'D84.0', 'D84.9', '', '', '', NULL, '2017-03-27 14:30:58'),
+(339, 3, 45, 'D86', 'Sarcoidosis', 'D86.0', 'D86.9', '', '', '', NULL, '2017-03-27 14:30:58'),
+(340, 3, 45, 'D89', 'Otros trastornos que afectan el mecanismo de la inmunidad, no clasificados en otra parte', 'D89.0', 'D89.9', '', '', 'falla y rechazo de trasplante ([LINK]T86.–[/LINK])\r\ngammopatía monoclonal ([LINK]D47.2[/LINK])\r\nhiperglobulinemia SAI ([LINK]R77.1[/LINK])', NULL, '2017-03-27 14:30:58'),
+(341, 4, 46, 'E00', 'Síndrome congénito de deficiencia de yodo', 'E00.0', 'E00.9', '', 'afecciones endémicas asociadas directamente con deficiencia de yodo en el medio ambiente o como consecuencia de deficiencia materna de yodo. Algunas de estas afecciones no tienen hipotiroidismo concomitante pero son consecuencia de secreción inadecuada de hormona tiroidea durante el desarrollo fetal. Pueden asociarse bociógenos ambientales.\r\nUse código adicional (F70–F79), si desea identificar la asociación con retraso mental.', 'hipotiroidismo subclínico por deficiencia de yodo ([LINK]E02[/LINK])', NULL, '2017-03-27 14:34:41'),
+(342, 4, 46, 'E01', 'Trastornos tiroideos vinculados a deficiencia de yodo y afecciones relacionadas', 'E01.0', 'E01.8', '', '', 'hipotiroidismo subclínico por deficiencia de yodo (E02) síndrome congénito de deficiencia de yodo ([LINK]E00.–[/LINK])', NULL, '2017-03-27 14:34:41'),
+(343, 4, 46, 'E02', 'Hipotiroidismo subclínico por deficiencia de yodo', NULL, NULL, '', '', '', NULL, '2017-03-27 14:38:47'),
+(344, 4, 46, 'E03', 'Otros hipotiroidismos', 'E03.0', 'E03.9', '', '', 'hipotiroidismo consecutivo a procedimientos ([LINK]E89.0[/LINK])\r\nhipotiroidismo relacionado con deficiencia de yodo ([LINK]E00–E02[/LINK])', NULL, '2017-03-27 14:38:47'),
+(345, 4, 46, 'E04', 'Otros bocios no tóxicos', 'E04.0', 'E04.9', '', '', 'bocio congénito:\r\n• SAI}	\r\n• difuso}([LINK]E03.0[/LINK])\r\n• parenquimatoso}bocio relacionado con deficiencia de yodo ([LINK]E00–E02[/LINK])', NULL, '2017-03-27 14:53:05'),
+(346, 4, 46, 'E05', 'Tirotoxicosis [hipertiroidismo]', 'E05.0', 'E05.9', '', '', 'tiroiditis crónica con tirotoxicosis transitoria ([LINK]E06.2[/LINK])\r\ntirotoxicosis neonatal ([LINK]P72.1[/LINK])', NULL, '2017-03-27 14:53:05'),
+(347, 4, 46, 'E06', 'Tiroiditis', 'E06.0', 'E06.9', '', '', 'tiroiditis postparto ([LINK]O90.5[/LINK])', NULL, '2017-03-27 14:53:05'),
+(348, 4, 46, 'E07', 'Otros trastornos tiroideos', 'E07.0', 'E07.9', '', '', '', NULL, '2017-03-27 14:53:05'),
+(349, 4, 47, 'E10', 'Diabetes mellitus insulinodependiente', '', '', '', 'diabetes (mellitus) (con):\r\n• juvenil\r\n• lábil\r\n• propensión a la cetosis\r\n• tipo I', 'alteración de la tolerancia a la glucosa ([LINK]R73.0[/LINK])\r\ndiabetes mellitus (en):\r\n• asociada a desnutrición ([LINK]E12.–[/LINK])\r\n• embarazo, parto y puerperio ([LINK]O24.–[/LINK])\r\n• neonatal ([LINK]P70.2[/LINK])\r\nglucosuria:\r\n• SAI ([LINK]R81[/LINK])\r\n• renal ([LINK]E74.8[/LINK])\r\nhipoinsulinemia postquirúrgica ([LINK]E89.1[/LINK])', NULL, '2017-03-27 14:53:05'),
+(350, 4, 47, 'E11', 'Diabetes mellitus no insulinodependiente', '', '', '', 'diabetes (mellitus) (sin obesidad) (con obesidad):\r\n• de comienzo en el adulto\r\n• de comienzo en la madurez del adulto\r\n• estable\r\n• no cetósica\r\n• tipo II\r\ndiabetes no insulinodependiente juvenil', 'alteración de la tolerancia a la glucosa ([LINK]R73.0[/LINK])\r\ndiabetes mellitus (en):\r\n• desnutrición ([LINK]E12.–[/LINK])\r\n• embarazo, parto y puerperio ([LINK]O24.–[/LINK])\r\n• neonatal ([LINK]P70.2[/LINK])\r\nglucosuria:\r\n• SAI ([LINK]R81[/LINK])\r\n• renal ([LINK]E74.8[/LINK])\r\nhipoinsulinemia postquirúrgica ([LINK]E89.1[/LINK])', NULL, '2017-03-27 14:53:05'),
+(351, 4, 47, 'E12', 'Diabetes mellitus asociada con desnutrición', '', '', '', 'desnutrición relacionada con diabetes mellitus:\r\n• insulinodependiente\r\n• no insulinodependiente', 'alteración de la tolerancia a la glucosa ([LINK]R73.0[/LINK])\r\ndiabetes mellitus (en):\r\n• embarazo, parto y puerperio ([LINK]O24.–[/LINK])\r\n• neonatal ([LINK]P70.2[/LINK])\r\nglucosuria:\r\n• SAI ([LINK]R81[/LINK])           \r\n• renal ([LINK]E74.8[/LINK])       \r\nhipoinsulinemia postquirúrgica ([LINK]E89.1[/LINK])', NULL, '2017-03-27 14:53:05'),
+(352, 4, 47, 'E13', 'Otras diabetes mellitus especificadas', '', '', '', '', 'alteración de la tolerancia a la glucosa ([LINK]R73.0[/LINK])\r\ndiabetes mellitus (en):\r\n• asociada con desnutrición ([LINK]E12.–[/LINK])  \r\n• embarazo, parto y puerperio ([LINK]O24.–[/LINK])\r\n• insulinodependiente ([LINK]E10.–[/LINK])\r\n• neonatal ([LINK]P70.2[/LINK])\r\n• no insulinodependiente ([LINK]E11.–[/LINK])\r\nglucosuria:\r\n• SAI ([LINK]R81[/LINK])\r\n• renal ([LINK]E74.8[/LINK])\r\nhipoinsulinemia postquirúrgica ([LINK]E89.1[/LINK])', NULL, '2017-03-27 14:53:05'),
+(353, 4, 47, 'E14', 'Diabetes mellitus, no especificada', '', '', '', 'diabetes SAI', 'alteración de la tolerancia a la glucosa ([LINK]R73.0[/LINK])\r\ndiabetes mellitus (en):\r\n• asociada con desnutrición ([LINK]E12.–[/LINK])\r\n• embarazo, parto y puerperio ([LINK]O24.–[/LINK])\r\n• insulinodependiente ([LINK]E10.–[/LINK])\r\n• neonatal ([LINK]P70.2[/LINK])\r\n• no insulinodependiente ([LINK]E11.–[/LINK])\r\nglucosuria:\r\n• SAI ([LINK]R81[/LINK])\r\n• renal ([LINK]E74.8[/LINK])\r\nhipoinsulinemia postquirúrgica ([LINK]E89.1[/LINK])', NULL, '2017-03-27 14:53:05'),
+(354, 4, 48, 'E15', 'Coma hipoglicémico no diabético', '', '', '', 'Coma:\r\n• en hiperinsulinismo\r\n• hipoglicémico SAI\r\n• insulínico inducido por drogas en un no diabético\r\nUse código adicional de causa externa (Capítulo XX), si desea identificar la droga en los casos inducidos por drogas.', '', NULL, '2017-03-27 14:53:05'),
+(355, 4, 48, 'E16', 'Otros trastornos de la secreción interna del páncreas', 'E16.0', 'E16.9', '', '', '', NULL, '2017-03-27 14:54:33'),
+(356, 4, 49, 'E20', 'Hipoparatiroidismo', 'E20.0', 'E20.9', '', '', 'hipoparatiroidismo consecutivo a procedimientos ([LINK]E89.2[/LINK])\r\nhipoparatiroidismo neonatal transitorio ([LINK]P71.4[/LINK])\r\nsíndrome de Di George ([LINK]D82.1[/LINK])\r\ntetania SAI ([LINK]R29.0[/LINK])', NULL, '2017-03-27 14:54:33'),
+(357, 4, 49, 'E21', 'Hiperparatiroidismo y otros trastornos de la glándula paratiroides', 'E21.0', 'E21.5', '', '', 'osteomalacia:\r\n• del adulto ([LINK]M83.–[/LINK])\r\n• infantil y juvenil ([LINK]E55.0[/LINK])', NULL, '2017-03-27 19:02:03'),
+(358, 4, 49, 'E22', 'Hiperfunción de la glándula hipófisis', 'E22.0', 'E22.9', '', '', 'síndrome de Cushing ([LINK]E24.–[/LINK])\r\nsíndrome de Nelson ([LINK]E24.1[/LINK])\r\nsobreproducción de:\r\n• ACTH hipofisaria ([LINK]E24.0[/LINK])\r\n• ACTH no asociada con la enfermedad de Cushing ([LINK]E27.0[/LINK])    \r\n• hormona estimulante de la tiroides ([LINK]E05.8[/LINK])', NULL, '2017-03-27 19:02:03'),
+(359, 4, 49, 'E23', 'Hipofunción y otros trastornos de la glándula hipófisis', 'E23.0', 'E23.7', '', 'las afecciones enumeradas, sea el trastorno de la glándula hipófisis o del hipotálamo', 'hipopituitarismo consecutivo a procedimientos ([LINK]E89.3[/LINK]) ', NULL, '2017-03-27 19:03:22'),
+(360, 4, 49, 'E24', 'Síndrome de Cushing', 'E24.0', 'E24.9', '', '', '', NULL, '2017-03-27 19:03:22'),
+(361, 4, 49, 'E25', 'Trastornos adrenogenitales', 'E25.0', 'E25.9', '', 'hiperplasia suprarrenal con sexualidad precoz} \r\nmacrogenitosomía precoz} masculina\r\nseudopubertad isosexual precoz}	 \r\nseudohermafroditismo suprarrenal} femenino(a)\r\nseudopubertad heterosexual precoz}\r\nsíndromes adrenogenitales, virilizantes o feminizantes, ya sean adquiridos o como consecuencia de hiperplasia suprarrenal por defectos innatos en la síntesis ­hormonal virilización (femenina)', '', NULL, '2017-03-27 19:05:01'),
+(362, 4, 49, 'E26', 'Hiperaldosteronismo', 'E26.0', 'E26.9', '', '', '', NULL, '2017-03-27 19:05:01'),
+(363, 4, 49, 'E27', 'Otros trastornos de la glándula suprarrenal', 'E27.0', 'E27.9', '', '', '', NULL, '2017-03-27 19:07:28'),
+(364, 4, 49, 'E28', 'Disfunción ovárica', 'E28.0', 'E28.9', '', '', 'deficiencia aislada de gonadotropina ([LINK]E23.0[/LINK])\r\ninsuficiencia ovárica consecutiva a procedimientos ([LINK]E89.4[/LINK])', NULL, '2017-03-27 19:07:28'),
+(365, 4, 49, 'E29', 'Disfunción testicular', 'E29.0', 'E29.9', '', '', 'azoospermia u oligospermia SAI ([LINK]N46[/LINK])\r\ndeficiencia aislada de gonadotropina ([LINK]E23.0[/LINK])\r\nfeminización testicular (síndrome) ([LINK]E34.5[/LINK])\r\nhipofunción testicular consecutiva a procedimientos ([LINK]E89.5[/LINK])\r\nsíndrome de Klinefelter ( [LINK]Q98.0–Q98.2[/LINK], [LINK]Q98.4[/LINK])\r\nsíndrome de resistencia androgénica ([LINK]E34.5[/LINK])', NULL, '2017-03-27 19:17:47'),
+(366, 4, 49, 'E30', 'Trastornos de la pubertad, no clasificados en otra parte', 'E30.0', 'E30.9', '', '', '', NULL, '2017-03-27 19:17:47'),
+(367, 4, 49, 'E31', 'Disfunción poliglandular', 'E31.0', 'E31.9', '', '', 'ataxia telangiectasia [Louis–Bar] ([LINK]G11.3[/LINK])\r\ndistrofia miotónica [Steinert] ([LINK]G71.1[/LINK])\r\nseudohipoparatiroidismo ([LINK]E20.[/LINK])(1)', NULL, '2017-03-27 19:17:47'),
+(368, 4, 49, 'E32', 'Enfermedades del timo', 'E32.0', 'E32.9', '', '', 'aplasia o hipoplasia con inmunodeficiencia ([LINK]D82.1[/LINK])\r\nmiastenia gravis ([LINK]G70.0[/LINK])', NULL, '2017-03-27 19:17:47'),
+(369, 4, 49, 'E34', 'Otros trastornos endocrinos', 'E34.0', 'E34.9', '', '', 'seudohipoparatiroidismo ([LINK]E20.1[/LINK])', NULL, '2017-03-27 19:17:47'),
+(370, 4, 49, 'E35', 'Trastornos endocrinos en enfermedades clasificadas en otra parte', 'E35.0', 'E35.8', '', '', '', NULL, '2017-03-27 19:17:47'),
+(371, 4, 50, 'E40', 'Kwashiorkor', NULL, NULL, 'Desnutrición severa con edema nutricional con despigmentación de la piel y del cabello.', '', 'kwashiorkor marasmático ([LINK]E42[/LINK])', NULL, '2017-03-27 19:17:47'),
+(372, 4, 50, 'E41', 'Marasmo nutricional', NULL, NULL, 'Desnutrición severa con marasmo', '', 'kwashiorkor marasmático ([LINK]E42[/LINK])', NULL, '2017-03-27 19:17:47'),
+(373, 4, 50, 'E42', 'Kwashiorkor marasmático', NULL, NULL, 'Desnutrición severa proteicocalórica [como en E43]:\r\n• con signos de marasmo y kwashiorkor\r\n• forma intermedia', '', '', NULL, '2017-03-27 19:17:47'),
+(374, 4, 50, 'E43', 'Desnutrición proteicocalórica severa, no especificada', NULL, NULL, 'Pérdida severa de peso en niños o adultos, o ausencia de ganancia de peso en niños con un peso observado de por lo menos 3 desviaciones típicas por debajo del peso promedio de la población de referencia (o una pérdida similar expresada a través de otros métodos estadísticos). Cuando sólo se dispone de una medición, hay una alta probabilidad de desnutrición severa si el peso observado está 3 o más desviaciones típicas por debajo del promedio de la población de referencia.\r\nEdema por inanición', '', '', NULL, '2017-03-27 19:17:47'),
+(375, 4, 50, 'E44', 'Desnutrición proteicocalórica de grado moderado y leve', 'E44.0', 'E44.1', '', '', '', NULL, '2017-03-27 19:25:45'),
+(376, 4, 50, 'E45', 'Retardo del desarrollo debido a desnutrición proteicocalórica', NULL, NULL, 'Enanismo nutricional\r\nRetardo físico debido a desnutrición', '', '', NULL, '2017-03-27 19:25:45'),
+(377, 4, 50, 'E46', 'Desnutrición proteicocalórica, no especificada', NULL, NULL, 'Desequilibrio proteicocalórico SAI\r\nDesnutrición SAI', '', '', NULL, '2017-03-27 19:25:45'),
+(378, 4, 51, 'E50', 'Deficiencia de vitamina A', 'E50.0', 'E50.9', '', '', 'secuelas de la deficiencia de vitamina A ([LINK]E64.1[/LINK])', NULL, '2017-03-27 19:25:45'),
+(379, 4, 51, 'E51', 'Deficiencia de tiamina', 'E51.1', 'E51.9', '', '', 'secuelas de deficiencia de tiamina ([LINK]E64.8[/LINK])', NULL, '2017-03-27 19:25:45'),
+(380, 4, 51, 'E52', 'Deficiencia de niacina [pelagra]', NULL, NULL, 'Deficiencia de:\r\n• niacina(-triptófano)\r\n• nicotinamida\r\nPelagra (alcohólica)', '', 'secuelas de la deficiencia de niacina ([LINK]E64.8[/LINK])', NULL, '2017-03-27 19:25:45'),
+(381, 4, 51, 'E53', 'Deficiencias de otras vitaminas del grupo B', 'E53.0', 'E53.9', '', '', 'anemias por deficiencia de vitamina B12 ([LINK]D51.–[/LINK])\r\nsecuelas de la deficiencia de vitamina B ([LINK]E64.8[/LINK])', NULL, '2017-03-27 19:25:45'),
+(382, 4, 51, 'E54', 'Deficiencia de ácido ascórbico', NULL, NULL, 'Deficiencia de vitamina C\r\nEscorbuto', '', 'anemia escorbútica ([LINK]D53.2[/LINK])\r\nsecuelas de la deficiencia de vitamina C ([LINK]E64.2[/LINK])', NULL, '2017-03-27 19:25:45'),
+(383, 4, 51, 'E55', 'Deficiencia de vitamina D', 'E55.0', 'E55.9', '', '', 'osteomalacia del adulto ([LINK]M83.–[/LINK])\r\nosteoporosis ([LINK]M80–M81[/LINK])\r\nsecuelas del raquitismo ([LINK]E64.3[/LINK])', NULL, '2017-03-27 19:25:45'),
+(384, 4, 51, 'E56', 'Otras deficiencias de vitaminas', 'E56.0', 'E56.9', '', '', 'secuelas de otras deficiencias de vitaminas ([LINK]E64.8[/LINK])', NULL, '2017-03-27 19:25:45'),
+(385, 4, 51, 'E58', 'Deficiencia dietética de calcio', NULL, NULL, '', '', 'secuelas de la deficiencia de calcio ([LINK]E64.8[/LINK])\r\ntrastornos del metabolismo del calcio ([LINK]E83.5[/LINK])', NULL, '2017-03-27 19:35:36'),
+(386, 4, 51, 'E59', 'Deficiencia dietética de selenio', NULL, NULL, 'Enfermedad de Keshan', '', 'secuelas de deficiencia de selenio ([LINK]E64.8[/LINK])', NULL, '2017-03-27 19:35:36'),
+(387, 4, 51, 'E60', 'Deficiencia dietética de zinc', NULL, NULL, '', '', '', NULL, '2017-03-27 19:35:36'),
+(388, 4, 51, 'E61', 'Deficiencias de otros elementos nutricionales', 'E61.0', 'E61.9', '', '', 'secuelas de la desnutrición y de otras deficiencias ­nutricionales ([LINK]E64.–[/LINK])\r\ntrastornos del metabolismo de los minerales ([LINK]E83.–[/LINK])\r\ntrastornos tiroideos relacionados con deficiencia de yodo ([LINK]E00–E02[/LINK])', NULL, '2017-03-27 19:35:36'),
+(389, 4, 51, 'E63', 'Otras deficiencias nutricionales', 'E63.0', 'E63.9', '', '', 'deshidratación ([LINK]E86[/LINK])\r\nfalla en la maduración ([LINK]R62.8[/LINK])\r\nproblemas de la ingestión de alimentos del recién nacido ([LINK]P92.–[/LINK])\r\nsecuelas de la desnutrición y de otras deficiencias ­nutricionales ([LINK]E64.–[/LINK])', NULL, '2017-03-27 19:35:36'),
+(390, 4, 51, 'E64', 'Secuelas de la desnutrición y de otras deficiencias nutricionales', 'E64.0', 'E64.9', '', '', '', NULL, '2017-03-27 19:35:36'),
+(391, 4, 52, 'E65', 'Adiposidad localizada', NULL, NULL, 'Masa grasa', '', '', NULL, '2017-03-27 19:35:36'),
+(392, 4, 52, 'E66', 'Obesidad', 'E66.0', 'E66.9', '', '', 'distrofia adiposogenital (E23.6)\r\nlipomatosis:\r\n• SAI ([LINK]E88.2[/LINK])\r\n• dolorosa [Dercum] ([LINK]E88.2[/LINK])\r\nsíndrome de Prader–Willi ([LINK]Q87.1[/LINK])', NULL, '2017-03-27 19:35:36'),
+(393, 4, 52, 'E67', 'Otros tipos de hiperalimentación', 'E67.0', 'E67.8', '', '', 'hiperalimentación SAI ([LINK]R63.2[/LINK])\r\nsecuelas de hiperalimentación ([LINK]E68[/LINK])', NULL, '2017-03-27 19:35:36'),
+(394, 4, 52, 'E68', 'Secuelas de hiperalimentación', NULL, NULL, '', '', '', NULL, '2017-03-27 19:35:36'),
+(395, 4, 53, 'E70', 'Trastornos del metabolismo de los aminoácidos aromáticos', 'E70.0', 'E70.9', '', '', '', NULL, '2017-03-27 19:50:23'),
+(396, 4, 53, 'E71', 'Trastornos del metabolismo de los aminoácidos de cadena ramificada y de los ácidos grasos', 'E71.0', 'E71.3', '', '', '', NULL, '2017-03-27 19:50:23'),
+(397, 4, 53, 'E72', 'Otros trastornos del metabolismo de los aminoácidos', 'E72.0', 'E72.9', '', '', 'gota ([LINK]M10.–[/LINK])\r\nhallazgos anormales sin enfermedad manifiesta ([LINK]R70–R89[/LINK])\r\ntrastornos del metabolismo (de las, de los):\r\n• ácidos grasos ([LINK]E71.3[/LINK])\r\n• aminoácidos aromáticos ([LINK]E70.–[/LINK])\r\n• aminoácidos de cadena ramificada ([LINK]E71.0–E71.2[/LINK])\r\n• purinas y pirimidinas ([LINK]E79.–[/LINK])', NULL, '2017-03-27 19:50:23'),
+(398, 4, 53, 'E73', 'Intolerancia a la lactosa', 'E73.0', 'E73.9', '', '', '', NULL, '2017-03-27 19:50:23'),
+(399, 4, 53, 'E74', 'Otros trastornos del metabolismo de los carbohidratos', 'E74.0', 'E74.9', '', '', 'diabetes mellitus ([LINK]E10–E14[/LINK])\r\nhipoglicemia SAI ([LINK]E16.2[/LINK])\r\nincremento en la secreción del glucagón ([LINK]E16.3[/LINK])\r\nmucopolisacaridosis ([LINK]E76.0–E76.3[/LINK])', NULL, '2017-03-27 19:50:23'),
+(400, 4, 53, 'E75', 'Trastornos del metabolismo de los esfingolípidos y otros trastornos por almacenamiento de lípidos', 'E75.0', 'E75.6', '', '', 'enfermedad de Refsum ([LINK]G60.1[/LINK])\r\nmucolipidosis tipos I–III ([LINK]E77.0–E77.1[/LINK])', NULL, '2017-03-27 19:50:23'),
+(401, 4, 53, 'E76', 'Trastornos del metabolismo de los glucosaminoglicanos', 'E76.0', 'E76.9', '', '', '', NULL, '2017-03-27 19:50:23'),
+(402, 4, 53, 'E77', 'Trastornos del metabolismo de las glucoproteínas', 'E77.0', 'E77.9', '', '', '', NULL, '2017-03-27 19:50:23'),
+(403, 4, 53, 'E78', 'Trastornos del metabolismo de las lipoproteínas y otras lipidemias', 'E78.0', 'E78.9', '', '', 'esfingolipidosis ([LINK]E75.0–E75.3[/LINK])', NULL, '2017-03-27 19:50:23'),
+(404, 4, 53, 'E79', 'Trastornos del metabolismo de las purinas y de las pirimidinas', 'E79.0', 'E79.9', '', '', 'anemia orotacidúrica ([LINK]D53.0[/LINK])\r\ngota ([LINK]M10.–[/LINK])\r\nnefrolitiasis ([LINK]N20.0[/LINK])\r\ntrastornos de la inmunodeficiencia combinados ([LINK]D81.–[/LINK])\r\nxeroderma pigmentoso ([LINK]Q82.1[/LINK])', NULL, '2017-03-27 19:50:23'),
+(405, 4, 53, 'E80', 'Trastornos del metabolismo de las porfirinas y de la bilirrubina', 'E80.0', 'E80.7', '', 'defectos de catalasa y peroxidasa', '', NULL, '2017-03-27 19:51:54'),
+(406, 4, 53, 'E83', 'Trastornos del metabolismo de los minerales', 'E83.0', 'E83.9', '', '', 'deficiencia dietética de minerales ([LINK]E58–E61[/LINK])\r\ndeficiencia de vitamina D ([LINK]E55.–[/LINK])     \r\ntrastornos paratiroideos ([LINK]E20–E21[/LINK])', NULL, '2017-03-27 19:51:54'),
+(407, 4, 53, 'E84', 'Fibrosis quística', 'E84.0', 'E84.9', '', 'mucoviscidosis', '', NULL, '2017-03-27 19:52:54'),
+(408, 4, 53, 'E85', 'Amiloidosis', 'E85.0', 'E85.9', '', '', 'enfermedad de Alzheimer ([LINK]G30.–[/LINK])', NULL, '2017-03-27 19:52:54'),
+(409, 4, 53, 'E86', 'Depleción del volumen', NULL, NULL, 'Depleción del volumen del plasma o del líquido extracelular\r\nDeshidratación\r\nHipovolemia', '', 'causante de policitemia ([LINK]D75.1[/LINK])\r\nchoque hipovolémico:\r\n• SAI ([LINK]R57.1[/LINK])\r\n• postoperatorio ([LINK]T81.1[/LINK])\r\n• traumático ([LINK]T79.4[/LINK])\r\ndebida a diarrea y gastroenteritis de presunto origen infeccioso ([LINK]A09[/LINK])\r\ndeshidratación del recién nacido ([LINK]P74.1[/LINK])', NULL, '2017-03-27 19:54:39'),
+(410, 4, 53, 'E87', 'Otros trastornos de los líquidos, de los electrólitos y del equilibrio ácido-básico', 'E87.0', 'E87.8', '', '', '', NULL, '2017-03-27 19:54:39'),
+(411, 4, 53, 'E88', 'Otros trastornos metabólicos', 'E88.0', 'E88.9', '', '', 'histiocitosis X (crónica) ([LINK]D76.0[/LINK])', NULL, '2017-03-27 19:59:36'),
+(412, 4, 53, 'E89', 'Trastornos endocrinos y metabólicos consecutivos a procedimientos, no clasificados en otra parte', 'E89.0', 'E89.9', '', '', '', NULL, '2017-03-27 19:59:36'),
+(413, 4, 53, 'E90', 'Trastornos nutricionales y metabólicos en enfermedades clasificadas en otra parte', NULL, NULL, '', '', '', NULL, '2017-03-27 20:00:26'),
+(414, 5, 54, 'F00', 'Demencia en la enfermedad de Alzheimer', 'F00.0', 'F00.9', 'La enfermedad de Alzheimer es una enfermedad cerebral degenerativa primaria de etiología desconocida, cuyos rasgos neuropatológicos y neuroquímicos son característicos. Habitualmente este trastorno es de comienzo insidioso, y después progresa lenta pero sostenidamente en un lapso de varios años.', '', '', NULL, '2017-03-27 20:28:57'),
+(415, 5, 54, 'F01', 'Demencia vascular', 'F01.0', 'F01.9', 'La demencia vascular es producto del infarto cerebral debido a una enfermedad vascular, incluida la enfermedad cerebrovascular hipertensiva. Por lo común los infartos son pequeños, pero sus efectos son acumulativos. Generalmente comienza en etapas avanzadas de la vida.', 'demencia arteriosclerótica', '', NULL, '2017-03-27 20:28:57'),
+(416, 5, 54, 'F02', 'Demencia en otras enfermedades clasificadas en otra parte', 'F02.0', 'F02.8', 'Casos de demencia debidos, o supuestamente debidos, a causas distintas de la enfermedad de Alzheimer o de la enfermedad cerebrovascular. El comienzo puede darse en cualquier momento de la vida, aunque rara vez tiene lugar en la senectud.', '', '', NULL, '2017-03-27 20:30:28'),
+(417, 5, 54, 'F03', 'Demencia, no especificada', NULL, NULL, 'Demencia:\r\n• degenerativa primaria SAI\r\n• presenil SAI\r\n• senil SAI\r\n• senil, tipo depresivo o tipo paranoide\r\nPsicosis:\r\n• presenil SAI\r\n• senil SAI', '', 'demencia senil con delirio o con estado confusional agudo ([LINK]F05.1[/LINK])\r\nsenilidad, no especificada ([LINK]R54[/LINK])\r\n', NULL, '2017-03-27 20:30:28'),
+(418, 5, 54, 'F04', 'Síndrome amnésico orgánico, no inducido por ­alcohol o por otras sustancias psicoactivas', NULL, NULL, 'Síndrome de deterioro importante de la memoria reciente y de evocación mientras que se conserva la memoria inmediata, con reducción de la capacidad de aprendizaje de nuevos materiales y desorientación temporal. La confabulación puede ser un rasgo notorio de este cuadro, pero habitualmente se conservan la percepción y otras funciones cognoscitivas, entre ellas la inteligencia. El pronóstico depende de la evolución de la lesión primaria.\r\nPsicosis o síndrome de Korsakov no alcohólico', '', 'amnesia:\r\n• SAI ([LINK]R41.3[/LINK])\r\n• anterógrada ([LINK]R41.1[/LINK])\r\n• disociativa ([LINK]F44.0[/LINK])\r\n• retrógrada ([LINK]R41.2[/LINK])\r\nsíndrome de Korsakov:\r\n• inducido por alcohol o no especificado ([LINK]F10.6[/LINK])\r\n• inducido por otras sustancias psicoactivas ([LINK]F11–F19[/LINK] con cuarto carácter común .6)', NULL, '2017-03-27 20:33:19'),
+(419, 4, 54, 'F05', 'Delirio, no inducido por alcohol o por otras ­sustancias psicoactivas', 'F05.8', 'F05.9', 'Síndrome orgánico cerebral, de etiología inespecífica, caracterizado por perturbaciones simultáneas de la conciencia y la atención, de la percepción, del pensamiento, de la memoria, del comportamiento psicomotor, de la emoción y del ciclo sueño-vigilia. Su duración es variable y su gravedad fluctúa de leve a muy severa.', 'estado confusional (no alcohólico) }\r\npsicosis  infecciosa }   aguda(o)\r\nreacción orgánica }   o subaguda(o)\r\nsíndrome cerebral }\r\nsíndrome psico-orgánico	}', 'delirium tremens inducido por alcohol o no especificado ([LINK]F10.4[/LINK])', NULL, '2017-03-27 20:33:19'),
+(420, 5, 54, 'F06', 'Otros trastornos mentales debidos a lesión y disfunción cerebral, y a enfermedad física', 'F06.0', 'F06.9', 'Esta categoría incluye una variedad de afecciones relacionadas causalmente con un trastorno cerebral debido a una enfermedad cerebral primaria, a una enfermedad sistémica que afecta secundariamente al cerebro, a hormonas o sustancias tóxicas exógenas, a trastornos endocrinos o a otras enfermedades somáticas.', '', 'afecciones asociadas con:\r\n• delirio([LINK]F05.–[/LINK])\r\n• demencia tal como se clasifica en ([LINK]F00–F03[/LINK])\r\ntrastornos resultantes del consumo de alcohol o de otras sustancias psicoactivas ([LINK]F10–F19[/LINK])', NULL, '2017-03-27 20:35:12'),
+(421, 5, 54, 'F07', 'Trastornos de la personalidad y del comportamiento debidos a enfermedad, lesión o disfunción cerebral', 'F07.0', 'F07.9', 'La alteración de la personalidad y del comportamiento puede ser un trastorno residual o concomitante a la enfermedad, a la lesión o a una disfunción cerebrales.', '', '', NULL, '2017-03-27 20:35:12'),
+(422, 5, 54, 'F09', 'Trastorno mental orgánico o sintomático, no especificado', NULL, NULL, 'Psicosis:\r\n• orgánica SAI\r\n• sintomática SAI', '', 'psicosis SAI ([LINK]F29[/LINK])', NULL, '2017-03-27 20:36:40');
 
 -- --------------------------------------------------------
 
@@ -2839,11 +3554,11 @@ CREATE TABLE IF NOT EXISTS `pre_cie10_4` (
   `id_grupo` int(11) NOT NULL,
   `gl_codigo` varchar(100) DEFAULT NULL,
   `gl_descripcion` varchar(255) DEFAULT NULL,
-  `gl_nota` text NOT NULL,
-  `gl_incluye` text NOT NULL COMMENT '[LINK]codigo[/LINK]',
-  `gl_excluye` text NOT NULL COMMENT '[LINK]codigo[/LINK]',
+  `gl_nota` longtext NOT NULL,
+  `gl_incluye` longtext NOT NULL COMMENT '[LINK]codigo[/LINK]',
+  `gl_excluye` longtext NOT NULL COMMENT '[LINK]codigo[/LINK]',
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_cie10`),
   KEY `IDX_id_capitulo` (`id_capitulo`),
   KEY `IDX_id_seccion` (`id_seccion`),
@@ -2873,7 +3588,7 @@ CREATE TABLE IF NOT EXISTS `pre_comuna` (
   `id_provincia` int(11) DEFAULT '0',
   `gl_nombre_comuna` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_comuna`),
   KEY `IDX_id_provincia` (`id_provincia`),
   KEY `IDX_id_region` (`id_region`)
@@ -3244,14 +3959,14 @@ CREATE TABLE IF NOT EXISTS `pre_diagnostico` (
   `id_diagnostico` int(11) NOT NULL AUTO_INCREMENT,
   `id_paciente` int(11) NOT NULL,
   `gl_diagnostico` longtext,
+  `id_usuario_actualiza` int(11) DEFAULT NULL,
+  `fc_actualiza` timestamp NULL DEFAULT NULL ,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  `id_usuario_act` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_diagnostico`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
-  KEY `IDX_id_usuario_act` (`id_usuario_act`),
-  KEY `IDX_id_paciente` (`id_paciente`)
+  KEY `IDX_id_paciente` (`id_paciente`),
+  KEY `IDX_id_usuario_actualiza` (`id_usuario_actualiza`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -3265,9 +3980,7 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   `id_paciente` int(11) NOT NULL,
   `nr_orden` int(11) DEFAULT '0',
   `bo_finalizado` int(1) DEFAULT '0' COMMENT '1=SI',
-  `id_comuna` int(11) DEFAULT '0',
   `gl_sector` varchar(250) DEFAULT NULL,
-  `id_institucion` int(11) DEFAULT NULL,
   `nr_ficha` int(11) DEFAULT NULL,
   `fc_empa` datetime DEFAULT NULL,
   `bo_embarazo` int(1) DEFAULT NULL,
@@ -3283,8 +3996,8 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   `gl_pad` varchar(100) DEFAULT NULL,
   `id_examen_hipertension` int(11) DEFAULT NULL,
   `bo_antecedente_diabetes` int(1) DEFAULT NULL,
-  `gl_glicemia` varchar(100) DEFAULT NULL,
   `bo_glicemia_toma` int(1) DEFAULT NULL,
+  `gl_glicemia` varchar(100) DEFAULT NULL,
   `id_examen_glicemia` int(11) DEFAULT NULL,
   `bo_trabajadora_reclusa` int(1) DEFAULT NULL,
   `bo_vdrl` int(1) DEFAULT NULL,
@@ -3295,6 +4008,7 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   `id_examen_vih` int(11) DEFAULT NULL,
   `bo_tos_productiva` int(1) DEFAULT NULL,
   `bo_baciloscopia_toma` int(1) DEFAULT NULL,
+  `bo_baciloscopia_resultado` int(11) DEFAULT NULL,
   `id_examen_baciloscopia` int(11) DEFAULT NULL,
   `bo_pap_realizado` int(1) DEFAULT NULL,
   `bo_pap_resultado` int(1) DEFAULT NULL,
@@ -3304,28 +4018,27 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   `fc_tomar_pap` date DEFAULT NULL,
   `bo_pap_vigente` int(1) DEFAULT NULL,
   `bo_pap_toma` int(1) DEFAULT NULL,
+  `bo_pap_resultado_nuevo` int(11) DEFAULT NULL,
   `id_examen_pap` int(11) DEFAULT NULL,
-  `gl_colesterol` varchar(100) DEFAULT NULL,
   `bo_colesterol_toma` int(1) DEFAULT NULL,
+  `gl_colesterol` varchar(100) DEFAULT NULL,
   `id_examen_colesterol` int(11) DEFAULT NULL,
   `bo_mamografia_realizada` int(1) DEFAULT NULL,
   `bo_mamografia_resultado_pasado` int(1) DEFAULT NULL,
+  `fc_mamografia` date DEFAULT NULL,
+  `fc_mamografia_mes` int(3) DEFAULT NULL,
+  `fc_mamografia_ano` int(4) DEFAULT NULL,
   `bo_mamografia_vigente` int(1) DEFAULT NULL,
   `bo_mamografia_requiere` int(1) DEFAULT NULL,
   `bo_mamografia_toma` int(1) DEFAULT NULL,
   `bo_mamografia_resultado` int(1) DEFAULT NULL,
   `id_examen_mamografia` int(11) DEFAULT NULL,
-  `fc_mamografia` date DEFAULT NULL,
-  `fc_mamografia_ano` int(4) DEFAULT NULL,
-  `fc_mamografia_mes` int(3) DEFAULT NULL,
   `gl_observaciones_empa` varchar(2000) DEFAULT NULL,
+  `id_usuario_actualiza` int(11) DEFAULT NULL,
+  `fc_actualiza` timestamp NULL DEFAULT NULL ,
   `id_usuario_crea` int(11) DEFAULT '0',
-  `fc_crea` datetime DEFAULT NULL,
-  `id_usuario_act` int(11) DEFAULT '0',
-  `fc_actualiza` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_empa`),
-  KEY `IDX_id_comuna` (`id_comuna`),
-  KEY `IDX_id_institucion` (`id_institucion`),
   KEY `IDX_id_clasificacion_imc` (`id_clasificacion_imc`),
   KEY `IDX_id_examen_glicemia` (`id_examen_glicemia`),
   KEY `IDX_id_examen_vdrl` (`id_examen_vdrl`),
@@ -3335,10 +4048,39 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   KEY `IDX_id_examen_colesterol` (`id_examen_colesterol`),
   KEY `IDX_id_examen_mamografia` (`id_examen_mamografia`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
-  KEY `IDX_id_usuario_act` (`id_usuario_act`),
   KEY `IDX_nr_orden` (`nr_orden`),
-  KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `IDX_id_paciente` (`id_paciente`),
+  KEY `IDX_id_usuario_actualiza` (`id_usuario_actualiza`),
+  KEY `IDX_bo_finalizado` (`bo_finalizado`),
+  KEY `IDX_id_examen_vih` (`id_examen_vih`),
+  KEY `IDX_id_examen_hipertension` (`id_examen_hipertension`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+
+--
+-- Volcado de datos para la tabla `pre_empa`
+--
+
+INSERT INTO `pre_empa` (`id_empa`, `id_paciente`, `nr_orden`, `bo_finalizado`, `gl_sector`, `nr_ficha`, `fc_empa`, `bo_embarazo`, `bo_consume_alcohol`, `gl_puntos_audit`, `bo_fuma`, `gl_peso`, `gl_estatura`, `gl_imc`, `gl_circunferencia_abdominal`, `id_clasificacion_imc`, `gl_pas`, `gl_pad`, `id_examen_hipertension`, `bo_antecedente_diabetes`, `bo_glicemia_toma`, `gl_glicemia`, `id_examen_glicemia`, `bo_trabajadora_reclusa`, `bo_vdrl`, `id_examen_vdrl`, `bo_rpr`, `id_examen_rpr`, `bo_vih`, `id_examen_vih`, `bo_tos_productiva`, `bo_baciloscopia_toma`, `bo_baciloscopia_resultado`, `id_examen_baciloscopia`, `bo_pap_realizado`, `bo_pap_resultado`, `fc_ultimo_pap`, `fc_ultimo_pap_ano`, `fc_ultimo_pap_mes`, `fc_tomar_pap`, `bo_pap_vigente`, `bo_pap_toma`, `bo_pap_resultado_nuevo`, `id_examen_pap`, `bo_colesterol_toma`, `gl_colesterol`, `id_examen_colesterol`, `bo_mamografia_realizada`, `bo_mamografia_resultado_pasado`, `fc_mamografia`, `fc_mamografia_mes`, `fc_mamografia_ano`, `bo_mamografia_vigente`, `bo_mamografia_requiere`, `bo_mamografia_toma`, `bo_mamografia_resultado`, `id_examen_mamografia`, `gl_observaciones_empa`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 1, 1, 0, '525', 75877, '2017-03-23 00:00:00', 0, 0, NULL, 0, '90', '170', '31.14', '90', 6, '110', '80', NULL, 1, NULL, '50', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 10, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 11, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, 1, 12, NULL, 13, '2017-03-28 20:41:54', 2, '2017-03-23 13:33:02'),
+(2, 1, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-23 17:54:48', 2, '2017-03-23 13:33:02'),
+(3, 2, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:33:11'),
+(4, 2, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:33:11'),
+(5, 3, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:35:26'),
+(6, 3, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:35:26'),
+(7, 4, 1, 0, NULL, NULL, '2017-03-23 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, NULL, 1, 2017, 1, NULL, NULL, NULL, NULL, NULL, 13, '2017-03-23 18:46:54', 2, '2017-03-23 13:53:07'),
+(8, 4, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-23 17:55:12', 2, '2017-03-23 13:53:07'),
+(9, 5, 1, 0, NULL, NULL, '2017-03-23 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '100', '80', 15, NULL, NULL, NULL, NULL, NULL, 1, 16, 1, 17, 1, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2017-03-24 21:20:25', 2, '2017-03-23 13:55:16'),
+(10, 5, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-23 17:55:40', 2, '2017-03-23 13:55:16'),
+(11, 6, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:55:28'),
+(12, 6, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 13:55:28'),
+(13, 7, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 14:05:19'),
+(14, 7, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, '2017-03-23 14:05:19'),
+(15, 8, 1, 1, '123', 123, '2017-03-23 00:00:00', 1, 1, '33', 1, '80', '180', '24.69', '80', 4, '123', '1233', 7, 1, NULL, '233', 8, 1, NULL, 9, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'prueba observa', 2, '2017-03-23 17:56:22', 2, '2017-03-23 14:13:07'),
+(16, 8, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-03-23 17:56:35', 2, '2017-03-23 14:13:07'),
+(17, 9, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 2, '2017-03-23 14:58:05'),
+(18, 9, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 2, '2017-03-23 14:58:05'),
+(19, 9, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 2, '2017-03-23 15:25:02'),
+(20, 9, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 2, '2017-03-23 15:25:02');
 
 -- --------------------------------------------------------
 
@@ -3352,11 +4094,218 @@ CREATE TABLE IF NOT EXISTS `pre_empa_audit` (
   `id_pregunta` int(11) NOT NULL,
   `nr_valor` int(11) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_audit`),
   KEY `IDX_id_empa` (`id_empa`),
-  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
+  KEY `IDX_id_pregunta` (`id_pregunta`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=201 ;
+
+--
+-- Volcado de datos para la tabla `pre_empa_audit`
+--
+
+INSERT INTO `pre_empa_audit` (`id_audit`, `id_empa`, `id_pregunta`, `nr_valor`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 1, 1, 4, 2, '2017-03-23 13:33:02'),
+(2, 2, 1, NULL, 2, '2017-03-23 13:33:02'),
+(3, 1, 2, 4, 2, '2017-03-23 13:33:02'),
+(4, 2, 2, NULL, 2, '2017-03-23 13:33:02'),
+(5, 1, 3, 4, 2, '2017-03-23 13:33:02'),
+(6, 2, 3, NULL, 2, '2017-03-23 13:33:02'),
+(7, 1, 4, 0, 2, '2017-03-23 13:33:02'),
+(8, 2, 4, NULL, 2, '2017-03-23 13:33:02'),
+(9, 1, 5, 0, 2, '2017-03-23 13:33:02'),
+(10, 2, 5, NULL, 2, '2017-03-23 13:33:02'),
+(11, 1, 6, 0, 2, '2017-03-23 13:33:02'),
+(12, 2, 6, NULL, 2, '2017-03-23 13:33:02'),
+(13, 1, 7, 0, 2, '2017-03-23 13:33:02'),
+(14, 2, 7, NULL, 2, '2017-03-23 13:33:02'),
+(15, 1, 8, 0, 2, '2017-03-23 13:33:02'),
+(16, 2, 8, NULL, 2, '2017-03-23 13:33:02'),
+(17, 1, 9, 0, 2, '2017-03-23 13:33:02'),
+(18, 2, 9, NULL, 2, '2017-03-23 13:33:02'),
+(19, 1, 10, 0, 2, '2017-03-23 13:33:02'),
+(20, 2, 10, NULL, 2, '2017-03-23 13:33:02'),
+(21, 3, 1, NULL, 2, '2017-03-23 13:33:11'),
+(22, 4, 1, NULL, 2, '2017-03-23 13:33:11'),
+(23, 3, 2, NULL, 2, '2017-03-23 13:33:11'),
+(24, 4, 2, NULL, 2, '2017-03-23 13:33:11'),
+(25, 3, 3, NULL, 2, '2017-03-23 13:33:11'),
+(26, 4, 3, NULL, 2, '2017-03-23 13:33:11'),
+(27, 3, 4, NULL, 2, '2017-03-23 13:33:11'),
+(28, 4, 4, NULL, 2, '2017-03-23 13:33:11'),
+(29, 3, 5, NULL, 2, '2017-03-23 13:33:11'),
+(30, 4, 5, NULL, 2, '2017-03-23 13:33:11'),
+(31, 3, 6, NULL, 2, '2017-03-23 13:33:11'),
+(32, 4, 6, NULL, 2, '2017-03-23 13:33:11'),
+(33, 3, 7, NULL, 2, '2017-03-23 13:33:11'),
+(34, 4, 7, NULL, 2, '2017-03-23 13:33:11'),
+(35, 3, 8, NULL, 2, '2017-03-23 13:33:11'),
+(36, 4, 8, NULL, 2, '2017-03-23 13:33:11'),
+(37, 3, 9, NULL, 2, '2017-03-23 13:33:11'),
+(38, 4, 9, NULL, 2, '2017-03-23 13:33:11'),
+(39, 3, 10, NULL, 2, '2017-03-23 13:33:11'),
+(40, 4, 10, NULL, 2, '2017-03-23 13:33:11'),
+(41, 5, 1, NULL, 2, '2017-03-23 13:35:26'),
+(42, 6, 1, NULL, 2, '2017-03-23 13:35:26'),
+(43, 5, 2, NULL, 2, '2017-03-23 13:35:26'),
+(44, 6, 2, NULL, 2, '2017-03-23 13:35:26'),
+(45, 5, 3, NULL, 2, '2017-03-23 13:35:26'),
+(46, 6, 3, NULL, 2, '2017-03-23 13:35:26'),
+(47, 5, 4, NULL, 2, '2017-03-23 13:35:26'),
+(48, 6, 4, NULL, 2, '2017-03-23 13:35:26'),
+(49, 5, 5, NULL, 2, '2017-03-23 13:35:26'),
+(50, 6, 5, NULL, 2, '2017-03-23 13:35:26'),
+(51, 5, 6, NULL, 2, '2017-03-23 13:35:26'),
+(52, 6, 6, NULL, 2, '2017-03-23 13:35:26'),
+(53, 5, 7, NULL, 2, '2017-03-23 13:35:26'),
+(54, 6, 7, NULL, 2, '2017-03-23 13:35:26'),
+(55, 5, 8, NULL, 2, '2017-03-23 13:35:26'),
+(56, 6, 8, NULL, 2, '2017-03-23 13:35:26'),
+(57, 5, 9, NULL, 2, '2017-03-23 13:35:26'),
+(58, 6, 9, NULL, 2, '2017-03-23 13:35:26'),
+(59, 5, 10, NULL, 2, '2017-03-23 13:35:26'),
+(60, 6, 10, NULL, 2, '2017-03-23 13:35:26'),
+(61, 7, 1, NULL, 2, '2017-03-23 13:53:07'),
+(62, 8, 1, NULL, 2, '2017-03-23 13:53:07'),
+(63, 7, 2, NULL, 2, '2017-03-23 13:53:07'),
+(64, 8, 2, NULL, 2, '2017-03-23 13:53:07'),
+(65, 7, 3, NULL, 2, '2017-03-23 13:53:07'),
+(66, 8, 3, NULL, 2, '2017-03-23 13:53:07'),
+(67, 7, 4, NULL, 2, '2017-03-23 13:53:07'),
+(68, 8, 4, NULL, 2, '2017-03-23 13:53:07'),
+(69, 7, 5, NULL, 2, '2017-03-23 13:53:07'),
+(70, 8, 5, NULL, 2, '2017-03-23 13:53:07'),
+(71, 7, 6, NULL, 2, '2017-03-23 13:53:07'),
+(72, 8, 6, NULL, 2, '2017-03-23 13:53:07'),
+(73, 7, 7, NULL, 2, '2017-03-23 13:53:07'),
+(74, 8, 7, NULL, 2, '2017-03-23 13:53:07'),
+(75, 7, 8, NULL, 2, '2017-03-23 13:53:07'),
+(76, 8, 8, NULL, 2, '2017-03-23 13:53:07'),
+(77, 7, 9, NULL, 2, '2017-03-23 13:53:07'),
+(78, 8, 9, NULL, 2, '2017-03-23 13:53:07'),
+(79, 7, 10, NULL, 2, '2017-03-23 13:53:07'),
+(80, 8, 10, NULL, 2, '2017-03-23 13:53:07'),
+(81, 9, 1, NULL, 2, '2017-03-23 13:55:16'),
+(82, 10, 1, NULL, 2, '2017-03-23 13:55:16'),
+(83, 9, 2, NULL, 2, '2017-03-23 13:55:16'),
+(84, 10, 2, NULL, 2, '2017-03-23 13:55:16'),
+(85, 9, 3, NULL, 2, '2017-03-23 13:55:16'),
+(86, 10, 3, NULL, 2, '2017-03-23 13:55:16'),
+(87, 9, 4, NULL, 2, '2017-03-23 13:55:16'),
+(88, 10, 4, NULL, 2, '2017-03-23 13:55:16'),
+(89, 9, 5, NULL, 2, '2017-03-23 13:55:16'),
+(90, 10, 5, NULL, 2, '2017-03-23 13:55:16'),
+(91, 9, 6, NULL, 2, '2017-03-23 13:55:16'),
+(92, 10, 6, NULL, 2, '2017-03-23 13:55:16'),
+(93, 9, 7, NULL, 2, '2017-03-23 13:55:16'),
+(94, 10, 7, NULL, 2, '2017-03-23 13:55:16'),
+(95, 9, 8, NULL, 2, '2017-03-23 13:55:16'),
+(96, 10, 8, NULL, 2, '2017-03-23 13:55:16'),
+(97, 9, 9, NULL, 2, '2017-03-23 13:55:16'),
+(98, 10, 9, NULL, 2, '2017-03-23 13:55:16'),
+(99, 9, 10, NULL, 2, '2017-03-23 13:55:16'),
+(100, 10, 10, NULL, 2, '2017-03-23 13:55:16'),
+(101, 11, 1, NULL, 2, '2017-03-23 13:55:28'),
+(102, 12, 1, NULL, 2, '2017-03-23 13:55:28'),
+(103, 11, 2, NULL, 2, '2017-03-23 13:55:28'),
+(104, 12, 2, NULL, 2, '2017-03-23 13:55:28'),
+(105, 11, 3, NULL, 2, '2017-03-23 13:55:28'),
+(106, 12, 3, NULL, 2, '2017-03-23 13:55:28'),
+(107, 11, 4, NULL, 2, '2017-03-23 13:55:28'),
+(108, 12, 4, NULL, 2, '2017-03-23 13:55:28'),
+(109, 11, 5, NULL, 2, '2017-03-23 13:55:28'),
+(110, 12, 5, NULL, 2, '2017-03-23 13:55:28'),
+(111, 11, 6, NULL, 2, '2017-03-23 13:55:28'),
+(112, 12, 6, NULL, 2, '2017-03-23 13:55:28'),
+(113, 11, 7, NULL, 2, '2017-03-23 13:55:28'),
+(114, 12, 7, NULL, 2, '2017-03-23 13:55:28'),
+(115, 11, 8, NULL, 2, '2017-03-23 13:55:28'),
+(116, 12, 8, NULL, 2, '2017-03-23 13:55:28'),
+(117, 11, 9, NULL, 2, '2017-03-23 13:55:28'),
+(118, 12, 9, NULL, 2, '2017-03-23 13:55:28'),
+(119, 11, 10, NULL, 2, '2017-03-23 13:55:28'),
+(120, 12, 10, NULL, 2, '2017-03-23 13:55:28'),
+(121, 13, 1, NULL, 2, '2017-03-23 14:05:19'),
+(122, 14, 1, NULL, 2, '2017-03-23 14:05:19'),
+(123, 13, 2, NULL, 2, '2017-03-23 14:05:19'),
+(124, 14, 2, NULL, 2, '2017-03-23 14:05:19'),
+(125, 13, 3, NULL, 2, '2017-03-23 14:05:19'),
+(126, 14, 3, NULL, 2, '2017-03-23 14:05:19'),
+(127, 13, 4, NULL, 2, '2017-03-23 14:05:19'),
+(128, 14, 4, NULL, 2, '2017-03-23 14:05:19'),
+(129, 13, 5, NULL, 2, '2017-03-23 14:05:19'),
+(130, 14, 5, NULL, 2, '2017-03-23 14:05:19'),
+(131, 13, 6, NULL, 2, '2017-03-23 14:05:19'),
+(132, 14, 6, NULL, 2, '2017-03-23 14:05:19'),
+(133, 13, 7, NULL, 2, '2017-03-23 14:05:19'),
+(134, 14, 7, NULL, 2, '2017-03-23 14:05:19'),
+(135, 13, 8, NULL, 2, '2017-03-23 14:05:19'),
+(136, 14, 8, NULL, 2, '2017-03-23 14:05:19'),
+(137, 13, 9, NULL, 2, '2017-03-23 14:05:19'),
+(138, 14, 9, NULL, 2, '2017-03-23 14:05:19'),
+(139, 13, 10, NULL, 2, '2017-03-23 14:05:19'),
+(140, 14, 10, NULL, 2, '2017-03-23 14:05:19'),
+(141, 15, 1, 4, 13, '2017-03-23 14:13:07'),
+(142, 16, 1, NULL, 13, '2017-03-23 14:13:07'),
+(143, 15, 2, 4, 13, '2017-03-23 14:13:07'),
+(144, 16, 2, NULL, 13, '2017-03-23 14:13:07'),
+(145, 15, 3, 3, 13, '2017-03-23 14:13:07'),
+(146, 16, 3, NULL, 13, '2017-03-23 14:13:07'),
+(147, 15, 4, 3, 13, '2017-03-23 14:13:07'),
+(148, 16, 4, NULL, 13, '2017-03-23 14:13:07'),
+(149, 15, 5, 4, 13, '2017-03-23 14:13:07'),
+(150, 16, 5, NULL, 13, '2017-03-23 14:13:07'),
+(151, 15, 6, 4, 13, '2017-03-23 14:13:07'),
+(152, 16, 6, NULL, 13, '2017-03-23 14:13:07'),
+(153, 15, 7, 4, 13, '2017-03-23 14:13:07'),
+(154, 16, 7, NULL, 13, '2017-03-23 14:13:07'),
+(155, 15, 8, 3, 13, '2017-03-23 14:13:07'),
+(156, 16, 8, NULL, 13, '2017-03-23 14:13:07'),
+(157, 15, 9, 2, 13, '2017-03-23 14:13:07'),
+(158, 16, 9, NULL, 13, '2017-03-23 14:13:07'),
+(159, 15, 10, 2, 13, '2017-03-23 14:13:07'),
+(160, 16, 10, NULL, 13, '2017-03-23 14:13:07'),
+(161, 17, 1, NULL, 2, '2017-03-23 14:58:05'),
+(162, 18, 1, NULL, 2, '2017-03-23 14:58:05'),
+(163, 17, 2, NULL, 2, '2017-03-23 14:58:05'),
+(164, 18, 2, NULL, 2, '2017-03-23 14:58:05'),
+(165, 17, 3, NULL, 2, '2017-03-23 14:58:05'),
+(166, 18, 3, NULL, 2, '2017-03-23 14:58:05'),
+(167, 17, 4, NULL, 2, '2017-03-23 14:58:05'),
+(168, 18, 4, NULL, 2, '2017-03-23 14:58:05'),
+(169, 17, 5, NULL, 2, '2017-03-23 14:58:05'),
+(170, 18, 5, NULL, 2, '2017-03-23 14:58:05'),
+(171, 17, 6, NULL, 2, '2017-03-23 14:58:05'),
+(172, 18, 6, NULL, 2, '2017-03-23 14:58:05'),
+(173, 17, 7, NULL, 2, '2017-03-23 14:58:05'),
+(174, 18, 7, NULL, 2, '2017-03-23 14:58:05'),
+(175, 17, 8, NULL, 2, '2017-03-23 14:58:05'),
+(176, 18, 8, NULL, 2, '2017-03-23 14:58:05'),
+(177, 17, 9, NULL, 2, '2017-03-23 14:58:06'),
+(178, 18, 9, NULL, 2, '2017-03-23 14:58:06'),
+(179, 17, 10, NULL, 2, '2017-03-23 14:58:06'),
+(180, 18, 10, NULL, 2, '2017-03-23 14:58:06'),
+(181, 19, 1, NULL, 2, '2017-03-23 15:25:02'),
+(182, 20, 1, NULL, 2, '2017-03-23 15:25:02'),
+(183, 19, 2, NULL, 2, '2017-03-23 15:25:02'),
+(184, 20, 2, NULL, 2, '2017-03-23 15:25:02'),
+(185, 19, 3, NULL, 2, '2017-03-23 15:25:02'),
+(186, 20, 3, NULL, 2, '2017-03-23 15:25:02'),
+(187, 19, 4, NULL, 2, '2017-03-23 15:25:02'),
+(188, 20, 4, NULL, 2, '2017-03-23 15:25:02'),
+(189, 19, 5, NULL, 2, '2017-03-23 15:25:02'),
+(190, 20, 5, NULL, 2, '2017-03-23 15:25:02'),
+(191, 19, 6, NULL, 2, '2017-03-23 15:25:02'),
+(192, 20, 6, NULL, 2, '2017-03-23 15:25:02'),
+(193, 19, 7, NULL, 2, '2017-03-23 15:25:02'),
+(194, 20, 7, NULL, 2, '2017-03-23 15:25:02'),
+(195, 19, 8, NULL, 2, '2017-03-23 15:25:02'),
+(196, 20, 8, NULL, 2, '2017-03-23 15:25:02'),
+(197, 19, 9, NULL, 2, '2017-03-23 15:25:02'),
+(198, 20, 9, NULL, 2, '2017-03-23 15:25:02'),
+(199, 19, 10, NULL, 2, '2017-03-23 15:25:02'),
+(200, 20, 10, NULL, 2, '2017-03-23 15:25:02');
 
 -- --------------------------------------------------------
 
@@ -3365,7 +4314,7 @@ CREATE TABLE IF NOT EXISTS `pre_empa_audit` (
 --
 
 CREATE TABLE IF NOT EXISTS `pre_empa_audit_pregunta` (
-  `id_pregunta` int(11) NOT NULL,
+  `id_pregunta` int(11) NOT NULL AUTO_INCREMENT,
   `gl_pregunta` varchar(1000) DEFAULT NULL,
   `gl_respuesta1` varchar(50) DEFAULT NULL,
   `nr_respuesta1_puntos` int(11) DEFAULT NULL,
@@ -3378,10 +4327,10 @@ CREATE TABLE IF NOT EXISTS `pre_empa_audit_pregunta` (
   `gl_respuesta5` varchar(50) DEFAULT NULL,
   `nr_respuesta5_puntos` int(11) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_pregunta`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `pre_empa_audit_pregunta`
@@ -3402,6 +4351,36 @@ INSERT INTO `pre_empa_audit_pregunta` (`id_pregunta`, `gl_pregunta`, `gl_respues
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pre_empa_audit_tipo`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_empa_audit_tipo` (
+  `id_audit_tipo` int(11) NOT NULL AUTO_INCREMENT,
+  `gl_descripcion` varchar(250) DEFAULT NULL,
+  `nr_min` int(11) NOT NULL,
+  `nr_max` int(11) NOT NULL,
+  `gl_color` varchar(20) NOT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_audit_tipo`),
+  KEY `IDX_nr_min` (`nr_min`),
+  KEY `IDX_nr_max` (`nr_max`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `pre_empa_audit_tipo`
+--
+
+INSERT INTO `pre_empa_audit_tipo` (`id_audit_tipo`, `gl_descripcion`, `nr_min`, `nr_max`, `gl_color`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'Bajo Riesgo', 0, 7, '#008000', NULL, NULL),
+(2, 'Riesgo', 8, 15, '#BDB76B', NULL, NULL),
+(3, 'Problema', 16, 19, '#FF8C00', NULL, NULL),
+(4, 'Dependencia', 20, 40, '#FF0000', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pre_evento`
 --
 
@@ -3414,12 +4393,162 @@ CREATE TABLE IF NOT EXISTS `pre_evento` (
   `bo_estado` int(1) DEFAULT '1',
   `bo_mostrar` int(1) DEFAULT '1' COMMENT '1=SI',
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_evento`),
   KEY `IDX_id_evento_tipo` (`id_evento_tipo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
-  KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+  KEY `IDX_id_paciente` (`id_paciente`),
+  KEY `IDX_bo_estado` (`bo_estado`),
+  KEY `IDX_bo_mostrar` (`bo_mostrar`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=143 ;
+
+--
+-- Volcado de datos para la tabla `pre_evento`
+--
+
+INSERT INTO `pre_evento` (`id_evento`, `id_evento_tipo`, `id_paciente`, `id_empa`, `gl_descripcion`, `bo_estado`, `bo_mostrar`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 1, 1, 0, 'Paciente creado el : 23-03-2017', 1, 1, 2, '2017-03-23 13:33:02'),
+(2, 13, 1, 1, 'Empa 1 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:33:02'),
+(3, 13, 1, 2, 'Empa 2 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:33:02'),
+(4, 14, 1, 1, 'AUDIT del EMPA1 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:33:02'),
+(5, 14, 1, 2, 'AUDIT del EMPA2 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:33:02'),
+(6, 4, 1, 0, 'AUDIT del EMPA2 creado el : Acepta el programa con fecha : 23-03-2017', 1, 1, 2, '2017-03-23 13:33:02'),
+(7, 1, 2, 0, 'Paciente creado el : 23-03-2017', 1, 1, 2, '2017-03-23 13:33:11'),
+(8, 13, 2, 3, 'Empa 3 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:33:11'),
+(9, 13, 2, 4, 'Empa 4 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:33:11'),
+(10, 14, 2, 3, 'AUDIT del EMPA3 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:33:11'),
+(11, 14, 2, 4, 'AUDIT del EMPA4 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:33:11'),
+(12, 4, 2, 0, 'AUDIT del EMPA4 creado el : Acepta el programa con fecha : 23-03-2017', 1, 1, 2, '2017-03-23 13:33:11'),
+(13, 1, 3, 0, 'Paciente creado el : 23-03-2017', 1, 1, 2, '2017-03-23 13:35:26'),
+(14, 13, 3, 5, 'Empa 5 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:35:26'),
+(15, 13, 3, 6, 'Empa 6 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:35:26'),
+(16, 14, 3, 5, 'AUDIT del EMPA5 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:35:26'),
+(17, 14, 3, 6, 'AUDIT del EMPA6 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:35:26'),
+(18, 4, 3, 0, 'AUDIT del EMPA6 creado el : Acepta el programa con fecha : 23-03-2017', 1, 1, 2, '2017-03-23 13:35:26'),
+(19, 1, 4, 0, 'Paciente creado el : 23-03-2017', 1, 1, 2, '2017-03-23 13:53:07'),
+(20, 13, 4, 7, 'Empa 7 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:53:07'),
+(21, 13, 4, 8, 'Empa 8 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:53:07'),
+(22, 14, 4, 7, 'AUDIT del EMPA7 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:53:07'),
+(23, 14, 4, 8, 'AUDIT del EMPA8 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:53:07'),
+(24, 4, 4, 0, 'AUDIT del EMPA8 creado el : Acepta el programa con fecha : 23-03-2017', 1, 1, 2, '2017-03-23 13:53:07'),
+(25, 1, 5, 0, 'Paciente creado el : 23-03-2017', 1, 1, 2, '2017-03-23 13:55:16'),
+(26, 13, 5, 9, 'Empa 9 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:55:16'),
+(27, 13, 5, 10, 'Empa 10 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:55:16'),
+(28, 14, 5, 9, 'AUDIT del EMPA9 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:55:16'),
+(29, 14, 5, 10, 'AUDIT del EMPA10 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:55:16'),
+(30, 4, 5, 0, 'AUDIT del EMPA10 creado el : Acepta el programa con fecha : 23-03-2017', 1, 1, 2, '2017-03-23 13:55:16'),
+(31, 1, 6, 0, 'Paciente creado el : 23-03-2017', 1, 1, 2, '2017-03-23 13:55:28'),
+(32, 13, 6, 11, 'Empa 11 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:55:28'),
+(33, 13, 6, 12, 'Empa 12 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:55:28'),
+(34, 14, 6, 11, 'AUDIT del EMPA11 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:55:28'),
+(35, 14, 6, 12, 'AUDIT del EMPA12 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 13:55:28'),
+(36, 4, 6, 0, 'AUDIT del EMPA12 creado el : Acepta el programa con fecha : 23-03-2017', 1, 1, 2, '2017-03-23 13:55:28'),
+(37, 1, 7, 0, 'Paciente creado el : 23-03-2017', 1, 1, 2, '2017-03-23 14:05:19'),
+(38, 13, 7, 13, 'Empa 13 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 14:05:19'),
+(39, 13, 7, 14, 'Empa 14 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 14:05:19'),
+(40, 14, 7, 13, 'AUDIT del EMPA13 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 14:05:19'),
+(41, 14, 7, 14, 'AUDIT del EMPA14 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 14:05:19'),
+(42, 4, 7, 0, 'AUDIT del EMPA14 creado el : Acepta el programa con fecha : 23-03-2017', 1, 1, 2, '2017-03-23 14:05:19'),
+(43, 1, 8, 0, 'Paciente creado el : 23-03-2017', 1, 1, 13, '2017-03-23 14:13:07'),
+(44, 13, 8, 15, 'Empa 15 creado el : 23-03-2017', 1, 0, 13, '2017-03-23 14:13:07'),
+(45, 13, 8, 16, 'Empa 16 creado el : 23-03-2017', 1, 0, 13, '2017-03-23 14:13:07'),
+(46, 14, 8, 15, 'AUDIT del EMPA15 creado el : 23-03-2017', 1, 0, 13, '2017-03-23 14:13:07'),
+(47, 14, 8, 16, 'AUDIT del EMPA16 creado el : 23-03-2017', 1, 0, 13, '2017-03-23 14:13:07'),
+(48, 4, 8, 0, 'AUDIT del EMPA16 creado el : Acepta el programa con fecha : 23-03-2017', 1, 1, 13, '2017-03-23 14:13:07'),
+(49, 15, 0, 15, 'AUDIT del EMPA 15  modificado el : 2017-03-23', 1, 0, 2, '2017-03-24 21:01:45'),
+(50, 15, 0, 15, 'AUDIT del EMPA 15  modificado el : 2017-03-23', 1, 0, 2, '2017-03-24 21:01:45'),
+(51, 15, 0, 15, 'AUDIT del EMPA 15  modificado el : 2017-03-23', 1, 0, 2, '2017-03-24 21:01:45'),
+(52, 12, 8, 15, 'Empa modificado el : 23-03-2017 por usuario 13', 1, 0, 2, '2017-03-27 17:20:07'),
+(53, 1, 9, 0, 'Paciente creado el : 23-03-2017', 1, 1, 2, '2017-03-23 14:58:06'),
+(54, 13, 9, 17, 'Empa 17 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 14:58:06'),
+(55, 13, 9, 18, 'Empa 18 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 14:58:06'),
+(56, 14, 9, 17, 'AUDIT del EMPA17 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 14:58:06'),
+(57, 14, 9, 18, 'AUDIT del EMPA18 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 14:58:06'),
+(58, 1, 9, 0, 'Paciente creado el : 23-03-2017', 1, 1, 2, '2017-03-23 15:25:02'),
+(59, 13, 9, 19, 'Empa 19 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 15:25:02'),
+(60, 13, 9, 20, 'Empa 20 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 15:25:02'),
+(61, 14, 9, 19, 'AUDIT del EMPA19 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 15:25:02'),
+(62, 14, 9, 20, 'AUDIT del EMPA20 creado el : 23-03-2017', 1, 0, 2, '2017-03-23 15:25:02'),
+(63, 12, 8, 15, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-27 17:20:07'),
+(64, 20, 8, 0, 'Plan de Tratamiento con Psicólogo Iniciado el : 23-03-2017', 1, 0, 18, '2017-03-28 17:43:47'),
+(65, 12, 1, 1, 'Empa modificado el : 23-03-2017 por usuario 13', 1, 0, 2, '2017-03-27 17:20:07'),
+(66, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-27 17:20:07'),
+(67, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-27 17:20:07'),
+(68, 12, 4, 7, 'Empa modificado el : 23-03-2017 por usuario 13', 1, 0, 2, '2017-03-27 17:20:07'),
+(69, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-27 17:20:07'),
+(70, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-27 17:20:07'),
+(71, 12, 5, 9, 'Empa modificado el : 23-03-2017 por usuario 2', 1, 0, 2, '2017-03-27 17:20:07'),
+(72, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 0, 2, '2017-03-24 21:01:45'),
+(73, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 0, 2, '2017-03-24 21:01:45'),
+(74, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 0, 2, '2017-03-24 21:01:45'),
+(75, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 0, 2, '2017-03-24 21:01:45'),
+(76, 15, 0, 1, 'AUDIT del EMPA 1  modificado el : 2017-03-24', 1, 1, 2, '2017-03-24 21:01:45'),
+(77, 17, 8, 0, 'Paciente Agresor Violencia creada el : 27-03-2017', 1, 0, 2, '2017-03-27 15:53:47'),
+(78, 17, 8, 0, 'Paciente Agresor Violencia creada el : 27-03-2017', 1, 0, 2, '2017-03-27 15:53:47'),
+(79, 17, 8, 0, 'Paciente Agresor Violencia creada el : 27-03-2017', 1, 0, 2, '2017-03-27 15:53:47'),
+(80, 17, 8, 0, 'Paciente Agresor Violencia creada el : 27-03-2017', 1, 0, 2, '2017-03-27 15:53:47'),
+(81, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(82, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(83, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(84, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(85, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(86, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(87, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(88, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(89, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(90, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(91, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(92, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(93, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(94, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(95, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(96, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(97, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(98, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(99, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(100, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(101, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(102, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(103, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(104, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(105, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(106, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(107, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(108, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(109, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(110, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(111, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(112, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(113, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(114, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(115, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(116, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(117, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(118, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(119, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(120, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(121, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(122, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(123, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(124, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(125, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(126, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(127, 12, 8, 0, 'Reconoce Agresor : 2017-03-27', 1, 0, 2, '2017-03-27 17:20:07'),
+(128, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(129, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(130, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(131, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(132, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(133, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:07'),
+(134, 12, 8, 0, 'Reconoce Agresor : 2017-03-27', 1, 0, 2, '2017-03-27 17:20:07'),
+(135, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(136, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(137, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 0, 2, '2017-03-27 17:20:06'),
+(138, 18, 8, 0, 'Paciente Agresor Violencia modificada el : 27-03-2017', 1, 1, 2, '2017-03-27 17:20:06'),
+(139, 19, 8, 0, ' Agresor creado el : 27-03-2017', 1, 1, 2, '2017-03-27 17:20:07'),
+(140, 5, 8, 0, 'Paciente Reconoce Violencia el : 27-03-2017', 1, 1, 2, '2017-03-27 17:20:07'),
+(141, 12, 8, 0, 'Reconoce Agresor : 2017-03-27', 1, 1, 2, '2017-03-27 17:20:07'),
+(142, 20, 8, 0, 'Plan de Tratamiento con Nutricionista Iniciado el : 28-03-2017', 1, 1, 18, '2017-03-28 17:43:47');
 
 -- --------------------------------------------------------
 
@@ -3431,7 +4560,7 @@ CREATE TABLE IF NOT EXISTS `pre_evento_tipo` (
   `id_evento_tipo` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_evento_tipo` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_evento_tipo`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
@@ -3473,7 +4602,7 @@ CREATE TABLE IF NOT EXISTS `pre_laboratorio` (
   `id_laboratorio` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_laboratorio` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_laboratorio`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
@@ -3506,8 +4635,12 @@ CREATE TABLE IF NOT EXISTS `pre_laboratorio_centro_salud` (
   `id_centro_salud` int(11) NOT NULL,
   `bo_activo` int(11) DEFAULT '1' COMMENT '1=SI',
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_laboratorio_centro_salud`)
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_laboratorio_centro_salud`),
+  KEY `IDX_id_laboratorio` (`id_laboratorio`),
+  KEY `IDX_bo_activo` (`bo_activo`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
+  KEY `IDX_id_centro_salud` (`id_centro_salud`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=152 ;
 
 --
@@ -3711,37 +4844,39 @@ CREATE TABLE IF NOT EXISTS `pre_opcion` (
   `gl_icono` varchar(50) DEFAULT NULL,
   `gl_url` varchar(255) DEFAULT NULL,
   `bo_activo` int(1) DEFAULT '1',
-  `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL,
+  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_opcion`),
   KEY `IDX_id_opcion_padre` (`id_opcion_padre`),
   KEY `IDX_bo_activo` (`bo_activo`),
-  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
+  KEY `bo_tiene_hijo` (`bo_tiene_hijo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10001 ;
 
 --
 -- Volcado de datos para la tabla `pre_opcion`
 --
 
-INSERT INTO `pre_opcion` (`id_opcion`, `id_opcion_padre`, `bo_tiene_hijo`, `gl_nombre_opcion`, `gl_icono`, `gl_url`, `bo_activo`, `id_usuario_crea`, `fc_crea`, `id_usuario_actualiza`, `fc_actualiza`) VALUES
-(1, 0, 0, 'Inicio', 'fa fa-home', '/Home/dashboard', 1, 2, '2017-02-23 15:40:27', NULL, NULL),
-(2, 0, 0, 'Nuevo Registro', 'fa fa-book', '/Paciente/nuevo', 1, 2, '2017-02-23 15:40:27', NULL, '2017-03-06 20:21:10'),
-(3, 0, 0, 'Atención', 'fa fa-medkit', '/Empa/index', 0, 2, '2017-02-23 15:44:32', NULL, '2017-03-07 12:31:43'),
-(4, 0, 0, 'Bandeja Pacientes', 'fa fa-th', '/Paciente/index', 1, 2, '2017-02-23 15:44:32', NULL, '2017-03-16 20:03:21'),
-(8, 0, 0, 'Evaluación', 'fa fa-plus-square', '/Medico/', 1, NULL, '2017-03-08 21:10:45', NULL, '2017-03-08 21:16:00'),
-(9, 0, 0, 'Laboratorio', 'fa fa-hospital-o', '/Laboratorio/index', 1, 1, '2017-03-07 00:00:00', NULL, '2017-03-10 16:16:44'),
-(11, 0, 0, 'Gestor Nacional', 'fa fa-cogs', '/Gestor/nacional', 1, 2, '2017-03-13 13:27:12', 2, '2017-03-20 19:21:03'),
-(12, 0, 0, 'Gestor Regional', 'fa fa-cog', '/Gestor/regional', 1, 2, '2017-03-13 13:27:12', 2, '2017-03-21 14:42:30'),
-(13, 0, 0, 'Especialista', 'fa fa-user-md', '/Especialista/', 1, 3, '2017-03-16 18:22:58', NULL, NULL),
-(8000, 0, 1, 'Mantenedor', 'fa fa-database', NULL, 1, 2, '2017-02-23 15:51:17', NULL, '2017-03-14 19:28:05'),
-(8001, 8000, 0, 'Usuario', 'fa fa-group', '/Mantenedor/usuario', 1, 2, '2017-02-23 15:55:19', NULL, '2017-03-14 13:19:37'),
-(8002, 8000, 0, 'Perfil', 'fa fa-plus-circle', '/Mantenedor/perfil', 1, 2, '2017-03-13 15:34:54', 2, '2017-03-14 13:19:50'),
-(8003, 8000, 0, 'Menú', 'fa fa-list', '/Mantenedor/menu', 1, 2, '2017-03-13 15:36:52', 2, '2017-03-14 13:19:56'),
-(9998, 0, 0, 'Buscar Paciente', ' fa fa-search', '/Paciente/buscar', 1, 2, '2017-03-13 13:27:12', 2, '2017-03-13 18:45:01'),
-(9999, 0, 0, 'Mesa de Ayuda', 'fa fa-life-ring', '/Soporte/', 1, 2, '2017-02-23 16:01:37', NULL, '2017-03-08 21:16:25'),
-(10000, 0, 0, 'Cerrar Sesión', 'fa fa-sign-out', '/Login/logoutUsuario', 1, NULL, '2017-03-17 19:01:22', NULL, '2017-03-17 19:04:56');
+INSERT INTO `pre_opcion` (`id_opcion`, `id_opcion_padre`, `bo_tiene_hijo`, `gl_nombre_opcion`, `gl_icono`, `gl_url`, `bo_activo`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 0, 0, 'Inicio', 'fa fa-home fa-2x', '/Home/dashboard', 1, NULL, NULL, 2, '2017-02-23 15:40:27'),
+(2, 0, 0, 'Nuevo Registro', 'fa fa-user-plus fa-2x', '/Paciente/nuevo/', 1, NULL, '2017-03-28 15:39:31', 2, '2017-02-23 15:40:27'),
+(3, 0, 0, 'Atención', 'fa fa-medkit fa-2x', '/Empa/index', 0, NULL, '2017-03-28 15:39:37', 2, '2017-02-23 15:44:32'),
+(4, 0, 0, 'Bandeja Pacientes', 'fa fa-th fa-2x', '/Paciente/index', 1, NULL, '2017-03-28 15:24:47', 2, '2017-02-23 15:44:32'),
+(8, 0, 0, 'Médico', 'fa fa fa-medkit fa-2x', '/Medico/', 1, NULL, '2017-03-28 18:06:54', NULL, '2017-03-08 21:10:45'),
+(9, 0, 0, 'Laboratorio', 'fa fa-hospital-o fa-2x', '/Laboratorio/index', 1, NULL, '2017-03-28 15:24:57', 1, '2017-03-07 00:00:00'),
+(11, 0, 0, 'Gestor', 'fa fa-bar-chart fa-2x', '/Gestor/nacional/', 1, 2, '2017-03-28 18:16:13', 2, '2017-03-13 13:27:12'),
+(12, 0, 0, 'Gestor', 'fa fa-bar-chart fa-2x', '/Gestor/regional/', 1, 2, '2017-03-28 18:16:20', 2, '2017-03-13 13:27:12'),
+(13, 0, 0, 'Especialista', 'fa fa-user-md fa-2x', '/Especialista/', 1, NULL, NULL, 3, '2017-03-16 18:22:58'),
+(14, 0, 0, 'Agenda Laboratorio', 'fa fa-calendar fa-2x', '/Agenda/agendaLaboratorio/', 1, NULL, '2017-03-28 15:25:12', NULL, '2017-03-23 15:51:37'),
+(8000, 0, 1, 'Mantenedor', 'fa fa-cog fa-2x', NULL, 1, NULL, '2017-03-28 15:50:47', 2, '2017-02-23 15:51:17'),
+(8001, 8000, 0, 'Usuario', 'fa fa-group', '/Mantenedor/usuario/', 1, NULL, '2017-03-28 15:26:33', 2, '2017-02-23 15:55:19'),
+(8002, 8000, 0, 'Perfil', 'fa fa-plus-circle', '/Mantenedor/perfil/', 1, 2, '2017-03-28 15:26:40', 2, '2017-03-13 15:34:54'),
+(8003, 8000, 0, 'Menú', 'fa fa-list', '/Mantenedor/menu/', 1, 2, '2017-03-28 15:26:48', 2, '2017-03-13 15:36:52'),
+(9998, 0, 0, 'Buscar Paciente', ' fa fa-search fa-2x', '/Buscar/buscarPaciente/', 1, 2, '2017-03-28 15:25:41', 2, '2017-03-13 13:27:12'),
+(9999, 0, 0, 'Mesa de Ayuda', 'fa fa-commenting-o fa-2x', '/Soporte/', 1, NULL, '2017-03-28 15:33:55', 2, '2017-02-23 16:01:37'),
+(10000, 0, 0, 'Cerrar Sesión', 'fa fa-sign-out fa-2x', '/Login/logoutUsuario', 1, NULL, '2017-03-28 15:25:50', NULL, '2017-03-17 19:01:22');
 
 -- --------------------------------------------------------
 
@@ -3751,6 +4886,7 @@ INSERT INTO `pre_opcion` (`id_opcion`, `id_opcion_padre`, `bo_tiene_hijo`, `gl_n
 
 CREATE TABLE IF NOT EXISTS `pre_paciente` (
   `id_paciente` int(11) NOT NULL AUTO_INCREMENT,
+  `gl_rut` varchar(11) DEFAULT NULL,
   `id_institucion` int(11) NOT NULL COMMENT 'id_centro_salud_registro',
   `id_region` int(11) DEFAULT NULL,
   `id_comuna` int(11) DEFAULT NULL,
@@ -3758,23 +4894,23 @@ CREATE TABLE IF NOT EXISTS `pre_paciente` (
   `id_estado_civil` int(11) DEFAULT NULL,
   `id_tipo_ocupacion` int(11) DEFAULT NULL,
   `id_tipo_escolaridad` int(11) DEFAULT NULL,
+  `id_paciente_estado` int(11) DEFAULT '1',
   `id_tipo_grupo` int(11) DEFAULT '1',
+  `id_centro_salud` int(11) DEFAULT NULL COMMENT 'Consultorio/otro donde se atiende regularmente',
   `gl_grupo_tipo` varchar(100) DEFAULT NULL,
+  `bo_extranjero` int(1) DEFAULT '0',
+  `gl_run_pass` varchar(15) DEFAULT NULL,
+  `gl_codigo_fonasa` varchar(100) DEFAULT NULL,
+  `gl_nombres` varchar(100) DEFAULT NULL,
+  `gl_apellidos` varchar(100) DEFAULT NULL,
+  `bo_acepta_programa` int(1) DEFAULT NULL,
+  `bo_reconoce` int(1) DEFAULT NULL,
+  `fc_reconoce` date DEFAULT NULL,
+  `fc_hora_reconoce` time DEFAULT NULL,
   `nr_hijos` int(2) DEFAULT NULL,
   `gl_nacionalidad` varchar(100) DEFAULT NULL,
   `gl_direccion_alternativa` varchar(100) DEFAULT NULL,
-  `fc_reconoce` date DEFAULT NULL,
-  `fc_hora_reconoce` time DEFAULT NULL,
   `gl_acompañante` varchar(100) DEFAULT NULL,
-  `gl_codigo_fonasa` varchar(100) DEFAULT NULL,
-  `bo_acepta_programa` int(1) DEFAULT NULL,
-  `bo_reconoce` int(1) DEFAULT NULL,
-  `id_paciente_estado` int(11) DEFAULT '1',
-  `gl_rut` varchar(11) DEFAULT NULL,
-  `bo_extranjero` int(1) DEFAULT '0',
-  `gl_run_pass` varchar(15) DEFAULT NULL,
-  `gl_nombres` varchar(100) DEFAULT NULL,
-  `gl_apellidos` varchar(100) DEFAULT NULL,
   `fc_nacimiento` date DEFAULT NULL,
   `gl_sexo` char(1) DEFAULT 'F',
   `gl_direccion` varchar(255) DEFAULT NULL,
@@ -3782,25 +4918,41 @@ CREATE TABLE IF NOT EXISTS `pre_paciente` (
   `bo_fono_seguro` int(1) DEFAULT '0',
   `gl_celular` varchar(20) DEFAULT NULL,
   `gl_email` varchar(150) DEFAULT NULL,
-  `id_centro_salud` int(11) DEFAULT NULL COMMENT 'Consultorio/otro donde se atiende regularmente',
   `gl_latitud` varchar(30) DEFAULT NULL,
   `gl_longitud` varchar(30) DEFAULT NULL,
-  `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL,
+  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_paciente`),
   KEY `IDX_id_institucion` (`id_institucion`),
   KEY `IDX_id_comuna` (`id_comuna`),
   KEY `IDX_id_prevision` (`id_prevision`),
   KEY `IDX_id_estado_caso` (`id_paciente_estado`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
-  KEY `IDX_id_usuario_act` (`id_usuario_actualiza`),
   KEY `IDX_id_region` (`id_region`),
   KEY `IDX_gl_rut` (`gl_rut`),
   KEY `IDX_id_centro_salud` (`id_centro_salud`),
-  KEY `IDX_gl_run_pass` (`gl_run_pass`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `IDX_gl_run_pass` (`gl_run_pass`),
+  KEY `IDX_id_usuario_actualiza` (`id_usuario_actualiza`),
+  KEY `IDX_id_estado_civil` (`id_estado_civil`),
+  KEY `IDX_id_tipo_ocupacion` (`id_tipo_ocupacion`),
+  KEY `IDX_id_tipo_escolaridad` (`id_tipo_escolaridad`),
+  KEY `IDX_id_tipo_grupo` (`id_tipo_grupo`),
+  KEY `IDX_gl_codigo_fonasa` (`gl_codigo_fonasa`),
+  KEY `IDX_bo_acepta_programa` (`bo_acepta_programa`),
+  KEY `IDX_bo_reconoce` (`bo_reconoce`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente`
+--
+
+INSERT INTO `pre_paciente` (`id_paciente`, `gl_rut`, `id_institucion`, `id_region`, `id_comuna`, `id_prevision`, `id_estado_civil`, `id_tipo_ocupacion`, `id_tipo_escolaridad`, `id_paciente_estado`, `id_tipo_grupo`, `id_centro_salud`, `gl_grupo_tipo`, `bo_extranjero`, `gl_run_pass`, `gl_codigo_fonasa`, `gl_nombres`, `gl_apellidos`, `bo_acepta_programa`, `bo_reconoce`, `fc_reconoce`, `fc_hora_reconoce`, `nr_hijos`, `gl_nacionalidad`, `gl_direccion_alternativa`, `gl_acompañante`, `fc_nacimiento`, `gl_sexo`, `gl_direccion`, `gl_fono`, `bo_fono_seguro`, `gl_celular`, `gl_email`, `gl_latitud`, `gl_longitud`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, '18301265-7', 2462, 1, 349, 1, NULL, NULL, NULL, 1, 2, 2453, 'Tratamiento', 0, '', '', 'Luisa', 'Mcdonald', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, '1992-02-12', 'F', 'Aníbal Pinto 805, Iquique, Región de Tarapacá, Chile', '123123', 1, '123123', 'mcdonald@gmail.cl', '-20.215518862566977', '-70.152919444458', NULL, NULL, 2, '2017-03-23 13:33:02'),
+(4, '3501109-9', 2462, 1, 351, 1, NULL, NULL, NULL, 1, 1, 2441, 'Control', 0, '', '', 'Beatriz', 'Godoy', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-23', 'F', 'Manaos 1717, Iquique, Región de Tarapacá, Chile', '123123', 1, '123123', 'bea.godoy@gmail.com', '-20.206497732243577', '-70.14055982531738', NULL, NULL, 2, '2017-03-23 13:53:07'),
+(5, '', 2462, 1, 350, 1, NULL, NULL, NULL, 1, 2, 2443, 'Tratamiento', 1, '12312323', '123', 'Steffany', 'Piper', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, '1974-01-23', 'F', 'Dieciocho de Septiembre 1924, Iquique, Región de Tarapacá, Chile', '', 0, '', '', '-20.227036152695224', '-70.14356389941406', NULL, NULL, 2, '2017-03-23 13:55:16'),
+(8, '11396268-2', 2462, 1, 355, 1, 1, 1, 4, 1, 2, 2439, 'Tratamiento', 0, '', '', 'Giovanna', 'Alfaro', 1, 1, '2017-03-27', '02:16:00', 1, 'Chilena', NULL, NULL, '1982-03-28', 'F', 'Blanco Encalada, Pica, Región de Tarapacá, Chile', '999999', 1, '999999', 'alfaro.gio@gio.cl', '-20.489724202015143', '-69.32716360314936', NULL, '2017-03-27 17:20:07', 13, '2017-03-23 14:13:07');
 
 -- --------------------------------------------------------
 
@@ -3813,26 +4965,42 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agenda_especialista` (
   `id_especialista` int(11) DEFAULT NULL,
   `id_paciente` int(11) NOT NULL,
   `id_empa` int(11) DEFAULT NULL,
-  `id_estado` int(11) NOT NULL DEFAULT '1',
-  `cie10` int(11) DEFAULT NULL,
-  `cie102` int(11) DEFAULT NULL,
-  `cie103` int(11) DEFAULT NULL,
-  `gl_observacion` longtext,
-  `gl_diagnostico` longtext,
   `id_tipo_especialidad` int(11) DEFAULT NULL,
+  `id_estado` int(11) DEFAULT '1',
+  `fecha_agenda` date DEFAULT NULL,
+  `hora_agenda` time DEFAULT NULL,
+  `gl_agenda_observacion` longtext,
+  `id_cie10_capitulo` int(11) DEFAULT NULL,
+  `id_cie10_seccion` int(11) DEFAULT NULL,
+  `id_cie10_grupo` int(11) DEFAULT NULL,
+  `id_cie10` int(11) DEFAULT NULL,
+  `gl_observacion_diagnostico` longtext,
+  `gl_diagnostico` longtext,
+  `fecha_diagnostico` date DEFAULT NULL,
+  `hora_diagnostico` time DEFAULT NULL,
+  `id_usuario_actualiza` int(11) DEFAULT NULL,
+  `fc_actualiza` timestamp NULL DEFAULT NULL ,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  `id_usuario_act` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL,
-  `fecha_especialista` date DEFAULT NULL,
-  `hora_especialista` time DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_agenda_especialista`),
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_paciente` (`id_paciente`),
   KEY `IDX_id_tipo_especialidad` (`id_tipo_especialidad`),
-  KEY `IDX_id_profesional` (`id_especialista`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `IDX_id_profesional` (`id_especialista`),
+  KEY `IDX_id_cie10` (`id_cie10`),
+  KEY `IDX_id_estado` (`id_estado`),
+  KEY `IDX_id_usuario_actualiza` (`id_usuario_actualiza`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_agenda_especialista`
+--
+
+INSERT INTO `pre_paciente_agenda_especialista` (`id_agenda_especialista`, `id_especialista`, `id_paciente`, `id_empa`, `id_tipo_especialidad`, `id_estado`, `fecha_agenda`, `hora_agenda`, `gl_agenda_observacion`, `id_cie10_capitulo`, `id_cie10_seccion`, `id_cie10_grupo`, `id_cie10`, `gl_observacion_diagnostico`, `gl_diagnostico`, `fecha_diagnostico`, `hora_diagnostico`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
+(2, 24, 8, 15, 1, 1, NULL, NULL, NULL, 22, 282, 0, 0, 'observacion prueba', 'diagnostico prueba', '2017-03-28', '17:24:08', NULL, NULL, 24, '2017-03-28 17:24:08'),
+(3, NULL, 8, NULL, 5, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'necesita buena alimentacion', NULL, NULL, NULL, 38, '2017-03-28 20:44:18', 18, '2017-03-28 17:43:47'),
+(4, 38, 8, 15, 5, 1, '2017-03-31', '15:40:00', 'prueba observacion', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 38, '2017-03-28 20:44:18');
 
 -- --------------------------------------------------------
 
@@ -3843,20 +5011,21 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agenda_especialista` (
 CREATE TABLE IF NOT EXISTS `pre_paciente_agenda_especialista_estado` (
   `id_estado` int(11) NOT NULL AUTO_INCREMENT,
   `gl_estado` varchar(100) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_estado`)
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_estado`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `pre_paciente_agenda_especialista_estado`
 --
 
-INSERT INTO `pre_paciente_agenda_especialista_estado` (`id_estado`, `gl_estado`, `fc_crea`, `id_usuario_crea`) VALUES
-(1, 'Ingresado', '2017-03-17 15:48:46', 1),
-(2, 'Revisado', '2017-03-17 15:48:46', 1),
-(3, 'Finalizado', '2017-03-17 15:48:46', 1),
-(4, 'ReAgendado', '2017-03-17 15:48:46', 1);
+INSERT INTO `pre_paciente_agenda_especialista_estado` (`id_estado`, `gl_estado`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'Ingresado', 1, '2017-03-17 15:48:46'),
+(2, 'Revisado', 1, '2017-03-17 15:48:46'),
+(3, 'Finalizado', 1, '2017-03-17 15:48:46'),
+(4, 'ReAgendado', 1, '2017-03-17 15:48:46');
 
 -- --------------------------------------------------------
 
@@ -3868,6 +5037,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor` (
   `id_agresor` int(11) NOT NULL AUTO_INCREMENT,
   `id_paciente` int(11) NOT NULL,
   `id_tipo_vinculo` int(11) DEFAULT NULL,
+  `gl_tipo_vinculo` varchar(100) DEFAULT NULL,
   `bo_extranjero` int(1) DEFAULT NULL,
   `gl_rut_agresor` varchar(12) DEFAULT NULL,
   `gl_run_pass` varchar(12) DEFAULT NULL,
@@ -3881,17 +5051,41 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor` (
   `id_tipo_sexo` int(11) DEFAULT NULL,
   `id_tipo_genero` int(11) DEFAULT NULL,
   `id_orientacion_sexual` int(11) DEFAULT NULL,
-  `nr_ingreso_mensual` int(11) DEFAULT NULL COMMENT 'Estimado',
+  `id_ingreso_mensual` int(11) DEFAULT NULL COMMENT 'Estimado',
   `gl_nombres_agresor` varchar(100) DEFAULT NULL,
   `gl_apellidos_agresor` varchar(100) DEFAULT NULL,
   `fc_nacimiento_agresor` date DEFAULT NULL,
   `nr_hijos` int(11) DEFAULT NULL,
   `nr_hijos_en_comun` int(11) DEFAULT NULL,
   `nr_denuncias_por_violencia` int(11) DEFAULT NULL,
+  `id_usuario_actualiza` int(11) DEFAULT NULL,
+  `fc_actualiza` timestamp NULL DEFAULT NULL ,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_agresor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_agresor`),
+  KEY `IDX_id_paciente` (`id_paciente`),
+  KEY `IDX_id_tipo_vinculo` (`id_tipo_vinculo`),
+  KEY `IDX_gl_rut_agresor` (`gl_rut_agresor`),
+  KEY `IDX_gl_run_pass` (`gl_run_pass`),
+  KEY `IDX_id_region` (`id_region`),
+  KEY `IDX_id_comuna_vive` (`id_comuna_vive`),
+  KEY `IDX_id_tipo_riesgo` (`id_tipo_riesgo`),
+  KEY `IDX_id_comuna_trabaja` (`id_comuna_trabaja`),
+  KEY `IDX_id_estado_civil` (`id_estado_civil`),
+  KEY `IDX_id_tipo_ocupacion` (`id_tipo_ocupacion`),
+  KEY `IDX_id_actividad_economica` (`id_actividad_economica`),
+  KEY `IDX_id_tipo_sexo` (`id_tipo_sexo`),
+  KEY `IDX_id_orientacion_sexual` (`id_orientacion_sexual`),
+  KEY `IDX_id_tipo_genero` (`id_tipo_genero`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_agresor`
+--
+
+INSERT INTO `pre_paciente_agresor` (`id_agresor`, `id_paciente`, `id_tipo_vinculo`, `gl_tipo_vinculo`, `bo_extranjero`, `gl_rut_agresor`, `gl_run_pass`, `id_region`, `id_tipo_riesgo`, `id_comuna_vive`, `id_comuna_trabaja`, `id_estado_civil`, `id_tipo_ocupacion`, `id_actividad_economica`, `id_tipo_sexo`, `id_tipo_genero`, `id_orientacion_sexual`, `id_ingreso_mensual`, `gl_nombres_agresor`, `gl_apellidos_agresor`, `fc_nacimiento_agresor`, `nr_hijos`, `nr_hijos_en_comun`, `nr_denuncias_por_violencia`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
+(2, 8, 9, 'Hermanastra', 0, '8390223-K', NULL, NULL, 2, 3, 3, 1, 2, NULL, 2, 2, 10, 7, 'Ruth', 'Novoa', '1972-07-12', 1, 0, 6, NULL, NULL, 2, '2017-03-27 17:19:23');
 
 -- --------------------------------------------------------
 
@@ -3905,9 +5099,22 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor_violencia` (
   `id_pregunta` int(11) NOT NULL,
   `nr_valor` int(11) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` date DEFAULT NULL,
-  PRIMARY KEY (`id_violencia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_violencia`),
+  KEY `IDX_id_paciente` (`id_paciente`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
+  KEY `IDX_id_pregunta` (`id_pregunta`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_agresor_violencia`
+--
+
+INSERT INTO `pre_paciente_agresor_violencia` (`id_violencia`, `id_paciente`, `id_pregunta`, `nr_valor`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 8, 1, 2, NULL, '2017-03-27 15:53:47'),
+(2, 8, 2, 3, NULL, '2017-03-27 15:53:47'),
+(3, 8, 3, 3, NULL, '2017-03-27 15:53:47'),
+(4, 8, 4, 2, NULL, '2017-03-27 15:53:47');
 
 -- --------------------------------------------------------
 
@@ -3917,17 +5124,33 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor_violencia` (
 
 CREATE TABLE IF NOT EXISTS `pre_paciente_alarma` (
   `id_alarma` int(11) NOT NULL AUTO_INCREMENT,
-  `id_tipo_alarma` int(11) NOT NULL DEFAULT '0',
+  `id_paciente` int(11) DEFAULT NULL,
+  `id_alarma_tipo` int(11) NOT NULL DEFAULT '0',
   `id_perfil` int(11) DEFAULT '0' COMMENT 'Verá la Alarma',
   `id_alarma_estado` int(11) DEFAULT '1',
   `bo_apagar` int(11) DEFAULT '0' COMMENT '1=SI',
   `bo_mostrar` int(1) DEFAULT '1' COMMENT '1=SI',
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL,
+  `fc_actualiza` timestamp NULL DEFAULT NULL ,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_alarma`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_alarma`),
+  KEY `IDX_id_tipo_alarma` (`id_alarma_tipo`),
+  KEY `IDX_id_alarma_estado` (`id_alarma_estado`),
+  KEY `IDX_id_perfil` (`id_perfil`),
+  KEY `IDX_bo_apagar` (`bo_apagar`),
+  KEY `IDX_bo_mostrar` (`bo_mostrar`),
+  KEY `IDX_id_usuario_actualiza` (`id_usuario_actualiza`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_alarma`
+--
+
+INSERT INTO `pre_paciente_alarma` (`id_alarma`, `id_paciente`, `id_alarma_tipo`, `id_perfil`, `id_alarma_estado`, `bo_apagar`, `bo_mostrar`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 8, 1, 5, 1, 0, 1, NULL, NULL, NULL, '2017-03-27 17:58:32'),
+(2, 8, 2, 5, 1, 0, 1, NULL, NULL, NULL, '2017-03-27 17:58:32');
 
 -- --------------------------------------------------------
 
@@ -3940,8 +5163,10 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_alarma_estado` (
   `gl_nombre_alarma` varchar(255) DEFAULT NULL,
   `bo_estado` int(1) DEFAULT '1',
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_alarma_estado`)
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_alarma_estado`),
+  KEY `IDX_bo_estado` (`bo_estado`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
@@ -3956,6 +5181,34 @@ INSERT INTO `pre_paciente_alarma_estado` (`id_alarma_estado`, `gl_nombre_alarma`
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pre_paciente_alarma_tipo`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_paciente_alarma_tipo` (
+  `id_tipo_alarma` int(11) NOT NULL AUTO_INCREMENT,
+  `gl_nombre_alarma` varchar(255) DEFAULT NULL,
+  `gl_detalle` text,
+  `bo_estado` int(11) NOT NULL DEFAULT '1' COMMENT '1=activo',
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_tipo_alarma`),
+  KEY `IDX_bo_estado` (`bo_estado`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_alarma_tipo`
+--
+
+INSERT INTO `pre_paciente_alarma_tipo` (`id_tipo_alarma`, `gl_nombre_alarma`, `gl_detalle`, `bo_estado`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'PAP Alterado', NULL, 1, 0, '2017-03-16 15:39:10'),
+(2, 'Mamografía Alterada', NULL, 1, 0, '2017-03-16 15:39:29'),
+(3, 'Reconoce Violencia de Género', NULL, 1, 0, '2017-03-16 15:40:34'),
+(4, 'No Asiste a hora Con Especialista', NULL, 1, 0, '2017-03-16 15:41:02');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pre_paciente_derivar`
 --
 
@@ -3964,14 +5217,15 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_derivar` (
   `id_paciente` int(11) NOT NULL,
   `id_empa` int(11) DEFAULT NULL,
   `id_profesional` int(11) DEFAULT NULL,
+  `id_usuario_actualiza` int(11) DEFAULT NULL,
+  `fc_actualiza` timestamp NULL DEFAULT NULL ,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  `id_usuario_act` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_derivar`),
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
-  KEY `IDX_id_paciente` (`id_paciente`)
+  KEY `IDX_id_paciente` (`id_paciente`),
+  KEY `IDX_id_profesional` (`id_profesional`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -3989,12 +5243,34 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_direccion` (
   `gl_latitud` varchar(30) NOT NULL,
   `gl_longitud` varchar(30) NOT NULL,
   `bo_estado` tinyint(1) NOT NULL,
-  `id_usuario_crea` int(11) NOT NULL,
-  `fc_crea` datetime NOT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_paciente_direccion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `id_usuario_crea` int(11) NOT NULL,
+  `fc_crea` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_paciente_direccion`),
+  KEY `IDX_id_paciente` (`id_paciente`),
+  KEY `IDX_id_comuna` (`id_comuna`),
+  KEY `IDX_id_region` (`id_region`),
+  KEY `IDX_bo_estado` (`bo_estado`),
+  KEY `IDX_id_usuario_actualiza` (`id_usuario_actualiza`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_direccion`
+--
+
+INSERT INTO `pre_paciente_direccion` (`id_paciente_direccion`, `id_paciente`, `id_comuna`, `id_region`, `gl_direccion`, `gl_latitud`, `gl_longitud`, `bo_estado`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 1, 349, 1, 'Aníbal Pinto 805, Iquique, Región de Tarapacá, Chile', '-20.215518862566977', '-70.152919444458', 1, 2, '2017-03-23 13:33:02', 2, '2017-03-23 13:33:02'),
+(2, 2, 349, 1, 'Aníbal Pinto 805, Iquique, Región de Tarapacá, Chile', '-20.215518862566977', '-70.152919444458', 1, 2, '2017-03-23 13:33:11', 2, '2017-03-23 13:33:11'),
+(3, 3, 349, 1, 'Aníbal Pinto 805, Iquique, Región de Tarapacá, Chile', '-20.215518862566977', '-70.152919444458', 1, 2, '2017-03-23 13:35:26', 2, '2017-03-23 13:35:26'),
+(4, 4, 351, 1, 'Manaos 1717, Iquique, Región de Tarapacá, Chile', '-20.206497732243577', '-70.14055982531738', 1, 2, '2017-03-23 13:53:07', 2, '2017-03-23 13:53:07'),
+(5, 5, 350, 1, 'Dieciocho de Septiembre 1924, Iquique, Región de Tarapacá, Chile', '-20.227036152695224', '-70.14356389941406', 1, 2, '2017-03-23 13:55:16', 2, '2017-03-23 13:55:16'),
+(6, 6, 350, 1, 'Dieciocho de Septiembre 1924, Iquique, Región de Tarapacá, Chile', '-20.227036152695224', '-70.14356389941406', 1, 2, '2017-03-23 13:55:28', 2, '2017-03-23 13:55:28'),
+(7, 7, 350, 1, 'Dieciocho de Septiembre 1924, Iquique, Región de Tarapacá, Chile', '-20.227036152695224', '-70.14356389941406', 1, 2, '2017-03-23 14:05:19', 2, '2017-03-23 14:05:19'),
+(8, 8, 355, 1, 'Blanco Encalada, Pica, Región de Tarapacá, Chile', '-20.489724202015143', '-69.32716360314936', 1, 13, '2017-03-23 14:13:07', 13, '2017-03-23 14:13:07'),
+(9, 9, 349, 1, '', '', '', 0, 2, '2017-03-23 15:25:02', 2, '2017-03-23 14:58:06'),
+(10, 9, 349, 1, '', '', '', 1, 2, '2017-03-23 15:25:02', 2, '2017-03-23 15:25:02');
 
 -- --------------------------------------------------------
 
@@ -4006,7 +5282,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_estado` (
   `id_paciente_estado` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_estado_caso` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_paciente_estado`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
@@ -4035,6 +5311,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_examen` (
   `id_empa` int(11) DEFAULT NULL,
   `id_laboratorio` int(11) DEFAULT NULL,
   `id_usuario_toma` int(11) DEFAULT NULL,
+  `bo_activo` int(1) DEFAULT '1',
   `gl_rut_persona_toma` varchar(11) DEFAULT NULL,
   `gl_nombre_persona_toma` varchar(255) DEFAULT NULL,
   `json_resultado` longtext,
@@ -4046,20 +5323,48 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_examen` (
   `gl_resultado` char(1) DEFAULT NULL,
   `gl_resultado_descripcion` longtext,
   `gl_resultado_indicacion` longtext,
+  `gl_pas` varchar(100) DEFAULT NULL,
+  `gl_pad` varchar(100) DEFAULT NULL,
+  `gl_glicemia` varchar(100) DEFAULT NULL,
+  `gl_colesterol` varchar(100) DEFAULT NULL,
+  `id_usuario_actualiza` int(11) DEFAULT NULL,
+  `fc_actualiza` timestamp NULL DEFAULT NULL ,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  `id_usuario_act` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_paciente_examen`),
   KEY `IDX_id_laboratorio` (`id_laboratorio`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
-  KEY `IDX_id_usuario_act` (`id_usuario_act`),
+  KEY `IDX_id_usuario_act` (`id_usuario_actualiza`),
   KEY `IDX_id_paciente` (`id_paciente`),
   KEY `IDX_id_tipo_examen` (`id_tipo_examen`),
   KEY `IDX_id_empa` (`id_empa`),
   KEY `IDX_id_usuario_toma` (`id_usuario_toma`),
   KEY `IDX_gl_rut_persona_toma` (`gl_rut_persona_toma`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_examen`
+--
+
+INSERT INTO `pre_paciente_examen` (`id_paciente_examen`, `id_tipo_examen`, `id_paciente`, `id_empa`, `id_laboratorio`, `id_usuario_toma`, `bo_activo`, `gl_rut_persona_toma`, `gl_nombre_persona_toma`, `json_resultado`, `gl_folio`, `fc_toma`, `gl_hora_toma`, `gl_observacion_toma`, `fc_resultado`, `gl_resultado`, `gl_resultado_descripcion`, `gl_resultado_indicacion`, `gl_pas`, `gl_pad`, `gl_glicemia`, `gl_colesterol`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
+(7, 9, 8, 15, 1, NULL, 1, '13225524-5', 'Administrador Prevención', NULL, '2', '2017-03-25', '12:50:00', 'asd', '2017-03-31', 'N', 'DESC 2', 'INDIC 2', '1234', '1234', NULL, NULL, 1, '2017-03-24 19:48:59', 13, '2017-03-23 11:03:11'),
+(8, 1, 8, 15, 1, NULL, 1, '13225524-5', 'Administrador Prevención', NULL, '1', '2017-03-29', '23:00:00', 'glicemia', '2017-03-31', 'N', 'DESC 1', 'INDIC 1', NULL, NULL, '124', NULL, 1, '2017-03-24 19:46:19', 13, '2017-03-24 00:00:00'),
+(9, 2, 8, 15, 1, NULL, 1, '13225524-5', 'Administrador Prevención', NULL, '4', '2017-03-29', '06:30:00', 'vdrl sifilis', '2017-03-31', 'N', 'DESC 5', 'INDIC 5', NULL, NULL, NULL, NULL, 1, '2017-03-24 19:55:32', 2, '2017-03-23 12:03:26'),
+(10, 5, 1, 1, 1, NULL, 1, '13225524-5', 'Administrador Prevención', NULL, '5', '2017-03-24', '15:00:00', 'Revisar', '2017-03-31', 'A', 'DESC 6', 'INDIC 6', NULL, NULL, NULL, NULL, 1, '2017-03-24 19:57:00', 13, '2017-03-23 15:03:34'),
+(11, 6, 1, 1, 1, NULL, 1, '1-9', 'Administrador ', NULL, '452345', '2017-03-24', '11:30:00', 'ok', '2017-03-28', 'N', 'Todo ok', 'ok', NULL, NULL, NULL, NULL, 2, '2017-03-28 20:41:54', 13, '2017-03-23 16:03:26'),
+(12, 8, 1, 1, 1, NULL, 1, '13225524-5', 'Administrador Prevención', NULL, '', '2017-03-25', '09:00:00', 'ok', '2017-03-31', 'N', 'DESC 7', 'INDIC 7', NULL, NULL, NULL, NULL, 1, '2017-03-24 19:57:32', 13, '2017-03-23 16:03:56'),
+(13, 7, 8, NULL, 9, NULL, 1, '13225524-5', 'Administrador Prevención', NULL, '3', '2017-03-27', NULL, 'Sin Observación.', '2017-03-31', 'N', 'DESC 3', 'INDIC 3', NULL, NULL, NULL, '250', 1, '2017-03-24 19:51:29', 1, '2017-03-24 10:03:34'),
+(14, 9, 1, NULL, 7, NULL, 1, '13225524-5', 'Administrador Prevención', NULL, '44444', '2017-03-31', NULL, 'Prueba.', '2017-03-27', 'N', '44444', '44444', '101', '86', NULL, NULL, 1, '2017-03-24 21:16:48', 1, '2017-03-24 11:03:15'),
+(15, 9, 5, 9, 1, NULL, 1, '1-9', 'Administrador ', NULL, '7777', '2017-03-24', '09:15:00', 'Tomar Examen', '2017-03-26', 'N', 'Todo ok', 'Sin indicación.', '100', '80', NULL, NULL, 2, '2017-03-24 20:28:51', 2, '2017-03-24 18:03:22'),
+(16, 2, 5, 9, 1, NULL, 1, '13225524-5', 'Administrador Prevención', NULL, '11111', '2017-03-24', '10:00:00', 'ok', '2017-03-31', 'N', '11111', '11111', NULL, NULL, NULL, NULL, 1, '2017-03-24 21:11:45', 2, '2017-03-24 18:03:05'),
+(17, 3, 5, 9, 1, NULL, 1, '13225524-5', 'Administrador Prevención', NULL, '22222', '2017-03-24', '11:00:00', 'ok', '2017-03-31', 'N', '22222', '22222', NULL, NULL, NULL, NULL, 1, '2017-03-24 21:13:55', 2, '2017-03-24 18:03:26'),
+(18, 4, 5, 9, 1, NULL, 1, '13225524-5', 'Administrador Prevención', NULL, '33333', '2017-03-24', '12:00:00', 'ok', '2017-03-31', 'N', '33333', '33333', NULL, NULL, NULL, NULL, 1, '2017-03-24 21:14:55', 2, '2017-03-24 18:03:41'),
+(19, 6, 5, 9, 1, NULL, 1, '13225524-5', 'Administrador Prevención', NULL, '555555', '2017-03-25', '09:00:00', 'ok', '2017-04-03', 'N', '55555', '55555', NULL, NULL, NULL, NULL, 1, '2017-03-24 21:20:25', 2, '2017-03-24 18:03:57'),
+(20, 7, 5, NULL, 9, NULL, 1, NULL, NULL, NULL, NULL, '2017-03-27', '08:00:00', 'Prueba Ingresa Examen desde Laboratorio.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-24 18:03:47'),
+(21, 8, 1, 1, 1, 24, 1, '7-1', 'Laboratorista Uno LABORATORIO 1 Tarapacá', NULL, '777', '2017-03-25', '09:00:00', 'ok', '2017-03-31', 'N', 'desc prueba', 'indic prueba', NULL, NULL, NULL, NULL, 24, '2017-03-27 16:04:24', 13, '2017-03-23 16:03:56'),
+(22, 5, 8, NULL, 9, NULL, 1, NULL, NULL, NULL, NULL, '2017-03-28', '08:00:00', 'Prueba ingresa desde Lab', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-27 11:03:44'),
+(23, 3, 8, NULL, 1, NULL, 0, NULL, NULL, NULL, NULL, '2017-03-29', '12:00:00', 'RPR.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 24, '2017-03-28 15:18:41', 1, '2017-03-27 12:03:10'),
+(29, 3, 8, 15, 1, 24, 1, '7-1', 'Laboratorista Uno LABORATORIO 1 Tarapacá', NULL, NULL, '2017-03-31', '14:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-28 15:18:41', 24, '2017-03-28 15:18:41');
 
 -- --------------------------------------------------------
 
@@ -4075,12 +5380,28 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_registro` (
   `gl_hora_ingreso` time DEFAULT NULL,
   `gl_motivo_consulta` longtext,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_registro`),
   KEY `IDX_id_institucion` (`id_institucion`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
   KEY `IDX_id_paciente` (`id_paciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+--
+-- Volcado de datos para la tabla `pre_paciente_registro`
+--
+
+INSERT INTO `pre_paciente_registro` (`id_registro`, `id_paciente`, `id_institucion`, `fc_ingreso`, `gl_hora_ingreso`, `gl_motivo_consulta`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 1, 2462, '2017-03-23', '10:27:00', 'fractura de femur', 2, '2017-03-23 13:33:02'),
+(2, 2, 2462, '2017-03-23', '10:27:00', 'fractura de femur', 2, '2017-03-23 13:33:11'),
+(3, 3, 2462, '2017-03-23', '10:27:00', 'fractura de femur', 2, '2017-03-23 13:35:26'),
+(4, 4, 2462, '2017-03-23', '10:48:00', 'contusión en hombro', 2, '2017-03-23 13:53:07'),
+(5, 5, 2462, '2017-03-23', '10:51:00', '', 2, '2017-03-23 13:55:16'),
+(6, 6, 2462, '2017-03-23', '10:51:00', '', 2, '2017-03-23 13:55:28'),
+(7, 7, 2462, '2017-03-23', '10:51:00', '', 2, '2017-03-23 14:05:19'),
+(8, 8, 2462, '2017-03-23', '11:10:00', 'contusión en rostro', 13, '2017-03-23 14:13:07'),
+(9, 9, 2462, '2017-03-23', '12:55:00', '', 2, '2017-03-23 14:58:05'),
+(10, 9, 2462, '2017-03-23', '13:23:00', '', 2, '2017-03-23 15:25:02');
 
 -- --------------------------------------------------------
 
@@ -4089,12 +5410,13 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_registro` (
 --
 
 CREATE TABLE IF NOT EXISTS `pre_pais` (
-  `id_pais` int(11) NOT NULL,
+  `id_pais` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_pais` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_pais`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Listado de Paises';
+  `fc_crea` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_pais`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Listado de Paises' AUTO_INCREMENT=888 ;
 
 --
 -- Volcado de datos para la tabla `pre_pais`
@@ -4343,12 +5665,13 @@ INSERT INTO `pre_pais` (`id_pais`, `gl_nombre_pais`, `id_usuario_crea`, `fc_crea
 CREATE TABLE IF NOT EXISTS `pre_perfil` (
   `id_perfil` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_perfil` varchar(150) DEFAULT NULL,
-  `bo_estado` tinyint(1) DEFAULT '1',
+  `bo_estado` int(1) DEFAULT '1',
   `gl_descripcion` varchar(250) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_perfil`),
-  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
+  KEY `IDX_bo_estado` (`bo_estado`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
@@ -4374,11 +5697,11 @@ CREATE TABLE IF NOT EXISTS `pre_perfil_opcion` (
   `id_perfil` int(11) NOT NULL,
   `id_opcion` int(11) NOT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_perfil`,`id_opcion`),
-  KEY `id_perfil` (`id_perfil`),
-  KEY `id_opcion` (`id_opcion`),
-  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
+  KEY `IDX_id_perfil` (`id_perfil`),
+  KEY `IDX_id_opcion` (`id_opcion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4393,8 +5716,8 @@ INSERT INTO `pre_perfil_opcion` (`id_perfil`, `id_opcion`, `id_usuario_crea`, `f
 (1, 8, NULL, '2017-03-08 21:11:22'),
 (1, 9, 1, '2017-03-07 00:00:00'),
 (1, 11, 2, '2017-03-13 13:51:55'),
-(1, 12, 2, '2017-03-13 13:51:55'),
 (1, 13, 2, '2017-03-13 15:40:47'),
+(1, 14, NULL, '2017-03-27 20:40:16'),
 (1, 8000, 2, '2017-03-06 20:31:28'),
 (1, 8001, NULL, NULL),
 (1, 8002, 2, '2017-03-13 15:40:47'),
@@ -4428,6 +5751,7 @@ INSERT INTO `pre_perfil_opcion` (`id_perfil`, `id_opcion`, `id_usuario_crea`, `f
 (6, 10000, NULL, '2017-03-17 19:03:20'),
 (7, 1, 2, '2017-03-13 14:14:09'),
 (7, 9, 1, '2017-03-07 00:00:00'),
+(7, 14, NULL, '2017-03-23 15:51:50'),
 (7, 9998, 2, '2017-03-13 14:13:52'),
 (7, 9999, 2, '2017-03-13 14:13:52'),
 (7, 10000, NULL, '2017-03-17 19:03:24');
@@ -4442,7 +5766,7 @@ CREATE TABLE IF NOT EXISTS `pre_prevision` (
   `id_prevision` int(11) NOT NULL,
   `gl_nombre_prevision` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_prevision`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -4470,8 +5794,9 @@ CREATE TABLE IF NOT EXISTS `pre_prevision_ley` (
   `id_prevision_ley` int(11) NOT NULL,
   `gl_nombre_prevision_ley` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_prevision_ley`)
+  `fc_crea` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_prevision_ley`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista de Otras Leyes Previsionales';
 
 --
@@ -4499,7 +5824,7 @@ CREATE TABLE IF NOT EXISTS `pre_provincia` (
   `id_region` int(11) NOT NULL,
   `gl_nombre_provincia` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_provincia`),
   KEY `IDX_id_region` (`id_region`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
@@ -4580,7 +5905,7 @@ CREATE TABLE IF NOT EXISTS `pre_region` (
   `gl_longitud` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `gl_path_logo` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_region`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
@@ -4617,7 +5942,7 @@ CREATE TABLE IF NOT EXISTS `pre_servicio_salud` (
   `id_region` int(11) NOT NULL,
   `gl_nombre_servicio` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_servicio`),
   KEY `IDX_id_region` (`id_region`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
@@ -4669,8 +5994,9 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_actividad_economica` (
   `gl_codigo_actividad` varchar(100) DEFAULT NULL,
   `gl_nombre_actividad` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_actividad_economica`)
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_actividad_economica`),
+  KEY `id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=701 ;
 
 --
@@ -5383,56 +6709,17 @@ INSERT INTO `pre_tipo_actividad_economica` (`id_actividad_economica`, `gl_codigo
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pre_tipo_agresor`
---
-
-CREATE TABLE IF NOT EXISTS `pre_tipo_agresor` (
-  `id_tipo_agresor` int(11) NOT NULL AUTO_INCREMENT,
-  `gl_tipo_agresor` varchar(50) DEFAULT NULL,
-  `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_agresor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pre_tipo_alarma`
---
-
-CREATE TABLE IF NOT EXISTS `pre_tipo_alarma` (
-  `id_tipo_alarma` int(11) NOT NULL AUTO_INCREMENT,
-  `gl_nombre_alarma` varchar(255) DEFAULT NULL,
-  `gl_detalle` text,
-  `bo_estado` int(11) NOT NULL DEFAULT '1' COMMENT '1=activo',
-  `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_alarma`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
---
--- Volcado de datos para la tabla `pre_tipo_alarma`
---
-
-INSERT INTO `pre_tipo_alarma` (`id_tipo_alarma`, `gl_nombre_alarma`, `gl_detalle`, `bo_estado`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'PAP Alterado', NULL, 1, 0, '2017-03-16 15:39:10'),
-(2, 'Mamografía Alterada', NULL, 1, 0, '2017-03-16 15:39:29'),
-(3, 'Reconoce Violencia de Género', NULL, 1, 0, '2017-03-16 15:40:34'),
-(4, 'No Asiste a hora Con Especialista', NULL, 1, 0, '2017-03-16 15:41:02');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `pre_tipo_area_urbano`
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_area_urbano` (
-  `id_area_urbano` int(11) NOT NULL,
+  `id_area_urbano` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_area_urbano` varchar(20) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_area_urbano`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Area Urbano Censal';
+  `fc_crea` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_area_urbano`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Area Urbano Censal' AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_area_urbano`
@@ -5445,52 +6732,23 @@ INSERT INTO `pre_tipo_area_urbano` (`id_area_urbano`, `gl_nombre_area_urbano`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pre_empa_audit_tipo`
---
-
-CREATE TABLE IF NOT EXISTS `pre_empa_audit_tipo` (
-  `id_audit_tipo` int(11) NOT NULL,
-  `gl_descripcion` varchar(250) DEFAULT NULL,
-  `nr_min` int(11) NOT NULL,
-  `nr_max` int(11) NOT NULL,
-  `gl_color` varchar(20) NOT NULL,
-  `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_audit_tipo`),
-  KEY `IDX_nr_min` (`nr_min`),
-  KEY `IDX_nr_max` (`nr_max`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `pre_empa_audit_tipo`
---
-
-INSERT INTO `pre_empa_audit_tipo` (`id_audit_tipo`, `gl_descripcion`, `nr_min`, `nr_max`, `gl_color`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'Bajo Riesgo', 0, 7, '#008000', NULL, NULL),
-(2, 'Riesgo', 8, 15, '#BDB76B', NULL, NULL),
-(3, 'Problema', 16, 19, '#FF8C00', NULL, NULL),
-(4, 'Problema o Dependencia', 20, 40, '#FF0000', NULL, NULL),
-(5, 'Overkill de Alcoholismo', 41, 2147483647, '#FF0040', NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `pre_tipo_direccion_complemento`
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_direccion_complemento` (
-  `id_tipo_direccion_complemento` int(11) NOT NULL,
-  `gl_nombre_tipo_direccion_complemento` varchar(50) DEFAULT NULL,
+  `id_direccion_complemento` int(11) NOT NULL AUTO_INCREMENT,
+  `gl_nombre_direccion_complemento` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_direccion_complemento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Tipos de Vía de Dirección';
+  `fc_crea` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_direccion_complemento`),
+  KEY `id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Lista Tipos de Vía de Dirección' AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_direccion_complemento`
 --
 
-INSERT INTO `pre_tipo_direccion_complemento` (`id_tipo_direccion_complemento`, `gl_nombre_tipo_direccion_complemento`, `id_usuario_crea`, `fc_crea`) VALUES
+INSERT INTO `pre_tipo_direccion_complemento` (`id_direccion_complemento`, `gl_nombre_direccion_complemento`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 'BLOCK', NULL, NULL),
 (2, 'DEPARTAMENTO', NULL, NULL),
 (3, 'VILLA', NULL, NULL),
@@ -5504,18 +6762,19 @@ INSERT INTO `pre_tipo_direccion_complemento` (`id_tipo_direccion_complemento`, `
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_direccion_via` (
-  `id_tipo_direccion_via` int(11) NOT NULL,
-  `gl_nombre_tipo_direccion_via` varchar(50) DEFAULT NULL,
+  `id_direccion_via` int(11) NOT NULL AUTO_INCREMENT,
+  `gl_nombre_direccion_via` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_direccion_via`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Tipos de Vía de Dirección';
+  `fc_crea` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_direccion_via`),
+  KEY `id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Lista Tipos de Vía de Dirección' AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_direccion_via`
 --
 
-INSERT INTO `pre_tipo_direccion_via` (`id_tipo_direccion_via`, `gl_nombre_tipo_direccion_via`, `id_usuario_crea`, `fc_crea`) VALUES
+INSERT INTO `pre_tipo_direccion_via` (`id_direccion_via`, `gl_nombre_direccion_via`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 'CALLE', NULL, NULL),
 (2, 'AVENIDA', NULL, NULL),
 (3, 'PASAJE', NULL, NULL),
@@ -5532,7 +6791,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_egreso` (
   `id_tipo_egreso` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_caso_egreso` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_egreso`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
@@ -5557,8 +6816,9 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_escolaridad` (
   `id_tipo_escolaridad` int(11) NOT NULL,
   `gl_tipo_escolaridad` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_escolaridad`)
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_tipo_escolaridad`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -5582,13 +6842,13 @@ INSERT INTO `pre_tipo_escolaridad` (`id_tipo_escolaridad`, `gl_tipo_escolaridad`
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_especialidad` (
-  `id_tipo_especialidad` int(11) NOT NULL,
+  `id_tipo_especialidad` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_especialidad` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_especialidad`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_especialidad`
@@ -5608,18 +6868,19 @@ INSERT INTO `pre_tipo_especialidad` (`id_tipo_especialidad`, `gl_nombre_especial
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_especialidad_medica` (
-  `id_tipo_especialidad_medica` int(11) NOT NULL,
+  `id_especialidad_medica` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_especialidad_medica` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_especialidad_medica`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_especialidad_medica`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=69 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_especialidad_medica`
 --
 
-INSERT INTO `pre_tipo_especialidad_medica` (`id_tipo_especialidad_medica`, `gl_nombre_especialidad_medica`, `id_usuario_crea`, `fc_crea`) VALUES
+INSERT INTO `pre_tipo_especialidad_medica` (`id_especialidad_medica`, `gl_nombre_especialidad_medica`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 'ANATOMÍA PATOLÓGICA', NULL, NULL),
 (2, 'ANESTESIOLOGÍA', NULL, NULL),
 (3, 'CARDIOLOGÍA', NULL, NULL),
@@ -5696,18 +6957,19 @@ INSERT INTO `pre_tipo_especialidad_medica` (`id_tipo_especialidad_medica`, `gl_n
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_especialidad_odontologica` (
-  `id_tipo_especialidad_odontologica` int(11) NOT NULL,
+  `id_especialidad_odontologica` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_especialidad_odontologica` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_especialidad_odontologica`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_especialidad_odontologica`),
+  KEY `id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_especialidad_odontologica`
 --
 
-INSERT INTO `pre_tipo_especialidad_odontologica` (`id_tipo_especialidad_odontologica`, `gl_nombre_especialidad_odontologica`, `id_usuario_crea`, `fc_crea`) VALUES
+INSERT INTO `pre_tipo_especialidad_odontologica` (`id_especialidad_odontologica`, `gl_nombre_especialidad_odontologica`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 'CIRUGÍA Y TRAUMATOLOGÍA BUCO MAXILOFACIAL', NULL, NULL),
 (2, 'CIRUGÍA BUCAL', NULL, NULL),
 (3, 'ENDODONCIA', NULL, NULL),
@@ -5733,8 +6995,9 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_estado_civil` (
   `id_estado_civil` int(11) NOT NULL,
   `gl_estado_civil` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_estado_civil`)
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_estado_civil`),
+  KEY `id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -5761,7 +7024,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_examen` (
   `gl_nombre_examen` varchar(255) DEFAULT NULL,
   `gl_descripción_examen` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_examen`),
   KEY `id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
@@ -5788,12 +7051,13 @@ INSERT INTO `pre_tipo_examen` (`id_tipo_examen`, `gl_nombre_examen`, `gl_descrip
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_fonasa_modalidad` (
-  `id_fonasa_modalidad` int(11) NOT NULL,
+  `id_fonasa_modalidad` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_fonasa_modalidad` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_fonasa_modalidad`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Tipos Modalidad Fonasa';
+  `fc_crea` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_fonasa_modalidad`),
+  KEY `id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Lista Tipos Modalidad Fonasa' AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_fonasa_modalidad`
@@ -5810,13 +7074,15 @@ INSERT INTO `pre_tipo_fonasa_modalidad` (`id_fonasa_modalidad`, `gl_nombre_fonas
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_fonasa_tramo` (
-  `id_fonasa_tramo` int(11) NOT NULL,
+  `id_fonasa_tramo` int(11) NOT NULL AUTO_INCREMENT,
   `cd_fonasa_tramo` char(1) DEFAULT NULL,
   `gl_nombre_fonasa_tramo` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_fonasa_tramo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Tramos Fonasa';
+  `fc_crea` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_fonasa_tramo`),
+  KEY `cd_fonasa_tramo` (`cd_fonasa_tramo`),
+  KEY `id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Lista Tramos Fonasa' AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_fonasa_tramo`
@@ -5835,21 +7101,23 @@ INSERT INTO `pre_tipo_fonasa_tramo` (`id_fonasa_tramo`, `cd_fonasa_tramo`, `gl_n
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_genero` (
-  `id_tipo_genero` int(11) NOT NULL,
+  `id_tipo_genero` int(11) NOT NULL AUTO_INCREMENT,
+  `cd_tipo_genero` char(1) DEFAULT NULL,
   `gl_tipo_genero` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_genero`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_tipo_genero`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_genero`
 --
 
-INSERT INTO `pre_tipo_genero` (`id_tipo_genero`, `gl_tipo_genero`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'MASCULINO', 1, '2017-03-07 00:00:00'),
-(2, 'FEMENINO', 1, '2017-03-07 00:00:00'),
-(3, 'TRANSGÉNERO', 1, '2017-03-07 00:00:00');
+INSERT INTO `pre_tipo_genero` (`id_tipo_genero`, `cd_tipo_genero`, `gl_tipo_genero`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'M', 'MASCULINO', 1, '2017-03-07 00:00:00'),
+(2, 'F', 'FEMENINO', 1, '2017-03-07 00:00:00'),
+(3, 'T', 'TRANSGÉNERO', 1, '2017-03-07 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -5861,7 +7129,7 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_grupo` (
   `id_tipo_grupo` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_tipo_grupo` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_grupo`),
   KEY `id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
@@ -5881,18 +7149,18 @@ INSERT INTO `pre_tipo_grupo` (`id_tipo_grupo`, `gl_nombre_tipo_grupo`, `id_usuar
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_imc` (
-  `id_tipo_imc` int(11) NOT NULL,
+  `id_tipo_imc` int(11) NOT NULL AUTO_INCREMENT,
   `gl_descripcion` varchar(250) DEFAULT NULL,
   `nr_min` decimal(10,2) DEFAULT NULL,
   `nr_max` decimal(10,2) DEFAULT NULL,
   `gl_color` varchar(20) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_imc`),
   KEY `IDX_nr_min` (`nr_min`),
   KEY `IDX_nr_max` (`nr_max`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_imc`
@@ -5911,18 +7179,72 @@ INSERT INTO `pre_tipo_imc` (`id_tipo_imc`, `gl_descripcion`, `nr_min`, `nr_max`,
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pre_tipo_ingreso_clasificacion`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_tipo_ingreso_clasificacion` (
+  `id_ingreso_clasificacion` int(11) NOT NULL AUTO_INCREMENT,
+  `gl_descripcion` varchar(150) DEFAULT NULL,
+  `gl_codigo` varchar(5) DEFAULT NULL,
+  `nr_minimo` varchar(100) DEFAULT NULL,
+  `nr_maximo` varchar(100) DEFAULT NULL,
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_ingreso_clasificacion`),
+  KEY `IDX_nr_minimo` (`nr_minimo`),
+  KEY `IDX_nr_maximo` (`nr_maximo`),
+  KEY `IDX_gl_codigo` (`gl_codigo`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- Volcado de datos para la tabla `pre_tipo_ingreso_clasificacion`
+--
+
+INSERT INTO `pre_tipo_ingreso_clasificacion` (`id_ingreso_clasificacion`, `gl_descripcion`, `gl_codigo`, `nr_minimo`, `nr_maximo`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'Pobres', 'E', '0', '158.000', NULL, '2017-03-24 13:25:06'),
+(2, 'Vulnerables', 'D', '158.001', '307.000', NULL, '2017-03-24 13:26:18'),
+(3, 'Clase Media Baja', 'C3', '307.001', '503.000', NULL, '2017-03-24 13:27:11'),
+(4, 'Clase Media Típica', 'C2', '503.001', '810.000', NULL, '2017-03-24 13:28:08'),
+(5, 'Clase Media Emergente', 'C1b', '810.001', '1.374.000', NULL, '2017-03-24 13:29:04'),
+(6, 'Clase Media Acomodada', 'C1a', '1.374.001', '2.175.000', NULL, '2017-03-24 13:29:42'),
+(7, 'Clase Alta', 'AB', '2.175.001', 'o más', NULL, '2017-03-24 13:36:38');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pre_tipo_ingreso_mensual`
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_ingreso_mensual` (
-  `id_ingreso_mensual` int(11) NOT NULL,
-  `gl_ingreso_descripcion` varchar(150) DEFAULT NULL,
-  `nr_ingreso_minimo` int(11) DEFAULT NULL,
-  `nr_ingreso_maximo` int(11) DEFAULT NULL,
+  `id_ingreso_mensual` int(11) NOT NULL AUTO_INCREMENT,
+  `gl_descripcion` varchar(150) DEFAULT NULL,
+  `nr_minimo` varchar(100) DEFAULT NULL,
+  `nr_maximo` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_ingreso_mensual`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_ingreso_mensual`),
+  KEY `IDX_nr_minimo` (`nr_minimo`),
+  KEY `IDX_nr_maximo` (`nr_maximo`),
+  KEY `id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+
+--
+-- Volcado de datos para la tabla `pre_tipo_ingreso_mensual`
+--
+
+INSERT INTO `pre_tipo_ingreso_mensual` (`id_ingreso_mensual`, `gl_descripcion`, `nr_minimo`, `nr_maximo`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, NULL, '0', '200.000', NULL, '2017-03-24 12:58:03'),
+(2, NULL, '200.001', '300.000', NULL, '2017-03-24 12:59:15'),
+(3, NULL, '300.001', '400.000', NULL, '2017-03-24 12:59:29'),
+(4, NULL, '400.001', '500.000', NULL, '2017-03-24 12:59:42'),
+(5, NULL, '500.001', '600.000', NULL, '2017-03-24 12:59:53'),
+(6, NULL, '700.001', '800.000', NULL, '2017-03-24 13:00:02'),
+(7, NULL, '800.001', '1.000.000', NULL, '2017-03-24 13:10:48'),
+(8, NULL, '1.000.001', '1.200.000', NULL, '2017-03-24 13:11:31'),
+(9, NULL, '1.200.001', '1.500.000', NULL, '2017-03-24 13:11:45'),
+(10, NULL, '1.500.001', '2.000.000', NULL, '2017-03-24 13:12:34'),
+(11, NULL, '2.000.001', 'o más', NULL, '2017-03-24 13:14:33');
 
 -- --------------------------------------------------------
 
@@ -5934,8 +7256,9 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_ocupacion` (
   `id_tipo_ocupacion` int(11) NOT NULL,
   `gl_tipo_ocupacion` varchar(300) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_ocupacion`)
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_tipo_ocupacion`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -5965,8 +7288,9 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_ocupacion_categoria` (
   `id_ocupacion_categoria` int(11) NOT NULL,
   `gl_nombre_ocupacion_categoria` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_ocupacion_categoria`)
+  `fc_crea` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_ocupacion_categoria`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista de Categoría Ocupacional';
 
 --
@@ -5989,8 +7313,9 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_ocupacion_detalle` (
   `id_ocupacion_detalle` int(11) NOT NULL,
   `gl_nombre_ocupacion_detalle` varchar(300) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_ocupacion_detalle`)
+  `fc_crea` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_ocupacion_detalle`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista de Ocupaciones Detallada';
 
 --
@@ -6418,12 +7743,13 @@ INSERT INTO `pre_tipo_ocupacion_detalle` (`id_ocupacion_detalle`, `gl_nombre_ocu
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_orientacion_sexual` (
-  `id_orientacion_sexual` int(11) NOT NULL,
+  `id_orientacion_sexual` int(11) NOT NULL AUTO_INCREMENT,
   `gl_orientacion_sexual` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_orientacion_sexual`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_orientacion_sexual`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_orientacion_sexual`
@@ -6451,8 +7777,9 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_pueblo_indigena` (
   `id_pueblo_indigena` int(11) NOT NULL,
   `gl_nombre_pueblo_indigena` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_pueblo_indigena`)
+  `fc_crea` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_pueblo_indigena`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista de Pueblos Indígenas';
 
 --
@@ -6481,27 +7808,30 @@ INSERT INTO `pre_tipo_pueblo_indigena` (`id_pueblo_indigena`, `gl_nombre_pueblo_
 CREATE TABLE IF NOT EXISTS `pre_tipo_religion` (
   `id_religion` int(11) NOT NULL DEFAULT '0',
   `gl_nombre_religion` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_religion`)
+  `id_usuario_crea` int(11) DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_religion`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista de Religiones';
 
 --
 -- Volcado de datos para la tabla `pre_tipo_religion`
 --
 
-INSERT INTO `pre_tipo_religion` (`id_religion`, `gl_nombre_religion`) VALUES
-(1, 'CATOLICÍSMO'),
-(2, 'EVANGÉLICA O PROTESTANTE'),
-(3, 'JUDAÍSMO'),
-(4, 'ISLAM'),
-(5, 'MORMONISMO'),
-(6, 'ORTODOXA'),
-(7, 'BUDISMO'),
-(8, 'FE BAHÁ''Í'),
-(9, 'TESTIGO DE JEHOVÁ'),
-(10, 'ESPIRITUALIDAD INDÍGENA'),
-(11, 'OTRA RELIGIÓN O CREDO'),
-(96, 'NINGUNA'),
-(99, 'DESCONOCIDO');
+INSERT INTO `pre_tipo_religion` (`id_religion`, `gl_nombre_religion`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'CATOLICÍSMO', NULL, NULL),
+(2, 'EVANGÉLICA O PROTESTANTE', NULL, NULL),
+(3, 'JUDAÍSMO', NULL, NULL),
+(4, 'ISLAM', NULL, NULL),
+(5, 'MORMONISMO', NULL, NULL),
+(6, 'ORTODOXA', NULL, NULL),
+(7, 'BUDISMO', NULL, NULL),
+(8, 'FE BAHÁ''Í', NULL, NULL),
+(9, 'TESTIGO DE JEHOVÁ', NULL, NULL),
+(10, 'ESPIRITUALIDAD INDÍGENA', NULL, NULL),
+(11, 'OTRA RELIGIÓN O CREDO', NULL, NULL),
+(96, 'NINGUNA', NULL, NULL),
+(99, 'DESCONOCIDO', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -6510,13 +7840,14 @@ INSERT INTO `pre_tipo_religion` (`id_religion`, `gl_nombre_religion`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_riesgo` (
-  `id_tipo_riesgo` int(11) NOT NULL,
+  `id_tipo_riesgo` int(11) NOT NULL AUTO_INCREMENT,
   `gl_tipo_riesgo` varchar(50) DEFAULT NULL,
   `color_riesgo` varchar(100) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_riesgo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_tipo_riesgo`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_riesgo`
@@ -6538,8 +7869,9 @@ CREATE TABLE IF NOT EXISTS `pre_tipo_sexo` (
   `id_tipo_sexo` int(11) NOT NULL,
   `gl_tipo_sexo` varchar(150) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_sexo`)
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_tipo_sexo`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -6559,12 +7891,13 @@ INSERT INTO `pre_tipo_sexo` (`id_tipo_sexo`, `gl_tipo_sexo`, `id_usuario_crea`, 
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_vinculo` (
-  `id_tipo_vinculo` int(11) NOT NULL,
+  `id_tipo_vinculo` int(11) NOT NULL AUTO_INCREMENT,
   `gl_tipo_vinculo` varchar(50) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_vinculo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_tipo_vinculo`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_vinculo`
@@ -6588,16 +7921,17 @@ INSERT INTO `pre_tipo_vinculo` (`id_tipo_vinculo`, `gl_tipo_vinculo`, `id_usuari
 --
 
 CREATE TABLE IF NOT EXISTS `pre_tipo_violencia` (
-  `id_tipo_violencia` int(11) NOT NULL,
+  `id_tipo_violencia` int(11) NOT NULL AUTO_INCREMENT,
   `gl_tipo_violencia` varchar(50) DEFAULT NULL,
   `gl_respuesta_1` int(11) DEFAULT NULL,
   `gl_respuesta_2` int(11) DEFAULT NULL,
   `gl_respuesta_3` int(11) DEFAULT NULL,
   `gl_respuesta_4` int(11) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_violencia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_tipo_violencia`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_violencia`
@@ -6617,17 +7951,18 @@ INSERT INTO `pre_tipo_violencia` (`id_tipo_violencia`, `gl_tipo_violencia`, `gl_
 
 CREATE TABLE IF NOT EXISTS `pre_titulo_profesional` (
   `id_titulo_profesional` int(11) NOT NULL,
-  `gl_nombre_titulo_profesional` varchar(100) DEFAULT NULL,
+  `gl_nombre_titulo` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_titulo_profesional`)
+  `fc_crea` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_titulo_profesional`),
+  KEY `id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Lista Título Profesional';
 
 --
 -- Volcado de datos para la tabla `pre_titulo_profesional`
 --
 
-INSERT INTO `pre_titulo_profesional` (`id_titulo_profesional`, `gl_nombre_titulo_profesional`, `id_usuario_crea`, `fc_crea`) VALUES
+INSERT INTO `pre_titulo_profesional` (`id_titulo_profesional`, `gl_nombre_titulo`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 'MÉDICO CIRUJANO', NULL, NULL),
 (2, 'CIRUJANO DENTISTA', NULL, NULL),
 (3, 'ENFERMERAS(OS)', NULL, NULL),
@@ -6667,10 +8002,11 @@ INSERT INTO `pre_titulo_profesional` (`id_titulo_profesional`, `gl_nombre_titulo
 
 CREATE TABLE IF NOT EXISTS `pre_transaccion_tipo` (
   `id_transaccion_tipo` int(11) NOT NULL AUTO_INCREMENT,
-  `gl_nombre_transaccion_tipo` varchar(255) DEFAULT NULL,
+  `gl_nombre_transaccion` varchar(255) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_transaccion_tipo`)
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_transaccion_tipo`),
+  KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -6698,9 +8034,9 @@ CREATE TABLE IF NOT EXISTS `pre_usuario` (
   `bo_activo` int(1) DEFAULT '1',
   `fc_ultimo_login` datetime DEFAULT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` datetime DEFAULT NULL,
+  `fc_actualiza` timestamp NULL DEFAULT NULL ,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `UNIQ_gl_rut` (`gl_rut`),
   KEY `IDX_id_institucion` (`id_institucion`),
@@ -6708,9 +8044,11 @@ CREATE TABLE IF NOT EXISTS `pre_usuario` (
   KEY `IDX_id_perfil` (`id_perfil`),
   KEY `IDX_id_region` (`id_region`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
-  KEY `IDX_id_usuario_act` (`id_usuario_actualiza`),
   KEY `IDX_bo_activo` (`bo_activo`),
-  KEY `IDX_gl_password` (`gl_password`)
+  KEY `IDX_gl_password` (`gl_password`),
+  KEY `IDX_id_usuario_actualiza` (`id_usuario_actualiza`),
+  KEY `IDX_id_laboratorio` (`id_laboratorio`),
+  KEY `IDX_id_tipo_grupo` (`id_tipo_grupo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=59 ;
 
 --
@@ -6718,17 +8056,17 @@ CREATE TABLE IF NOT EXISTS `pre_usuario` (
 --
 
 INSERT INTO `pre_usuario` (`id_usuario`, `id_perfil`, `gl_rut`, `gl_password`, `id_institucion`, `id_laboratorio`, `id_tipo_grupo`, `gl_nombres`, `gl_apellidos`, `id_region`, `id_comuna`, `gl_direccion`, `gl_email`, `gl_fono`, `gl_celular`, `bo_activo`, `fc_ultimo_login`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 1, '13225524-5', '7c63b8135f73d87fbd3ac01623823633c54f0cf2c320bbaf463d4d275d498060fcc6e5c40f2b49aaab881e4064c0d2803c5361a9eabe157ab1cf4d1da19120d3', 2462, NULL, '2', 'Administrador', 'Prevención', 1, 349, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, NULL, '2017-03-22 17:43:34', NULL, '2017-03-17 16:07:14', 1, '2017-02-09 10:30:00'),
-(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', '', 5, 349, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-23 12:59:33', NULL, '2017-03-17 16:07:14', 1, '2017-02-09 10:30:00'),
+(1, 1, '13225524-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', 'Prevención', 1, 349, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, 1, '2017-03-28 12:45:42', NULL, '2017-03-28 12:45:42', 1, '2017-02-09 10:30:00'),
+(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', '', 5, 349, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-28 18:00:19', NULL, '2017-03-28 18:00:19', 1, '2017-02-09 10:30:00'),
 (3, 5, '0-0', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'David', 'Guzmán', 1, 349, NULL, 'david.guzman@cosof.cl', NULL, NULL, NULL, '2017-03-20 13:37:43', NULL, '2017-03-17 16:07:14', 1, '2017-02-09 10:30:00'),
 (6, 1, '1-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', '', 1, 349, NULL, 'ovazquez.gonzalez@gmail.com', NULL, NULL, NULL, '2017-03-18 01:33:13', NULL, '2017-03-17 16:07:14', 1, NULL),
 (7, 2, '1-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1, NULL, '1', 'Médico', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'medicoarica@mail.cl', NULL, NULL, NULL, '2017-03-20 13:36:31', 2, '2017-03-17 16:07:14', NULL, NULL),
 (8, 3, '1-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1, NULL, '1', 'Enfermera', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'enfermeraarica@mail.cl', NULL, NULL, NULL, '2017-03-17 17:29:45', 2, '2017-03-17 16:07:14', 2, '2017-03-13 14:44:38'),
 (9, 4, '1-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, NULL, NULL, 'Gestor', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'gestorarica@mail.cl', NULL, NULL, 0, '2017-03-21 18:57:22', 2, '2017-03-17 16:07:14', 2, '2017-03-17 16:00:39'),
-(10, 5, '1-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1564, NULL, '1', 'Gestor', 'Nacional', 13, 631, 'Calle Camino San Manuel S/N', 'gestornacional@mail.cl', NULL, NULL, 1, '2017-03-22 14:18:29', 2, '2017-03-17 16:07:14', 2, '2017-03-13 14:54:23'),
+(10, 5, '1-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1564, NULL, '1', 'Gestor', 'Nacional', 13, 631, 'Calle Camino San Manuel S/N', 'gestornacional@mail.cl', NULL, NULL, 1, '2017-03-27 18:26:10', 2, '2017-03-27 18:26:10', 2, '2017-03-13 14:54:23'),
 (11, 7, '1-6', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, NULL, '1', 'Laboratorio', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'Laboratorio Arica', NULL, NULL, NULL, '2017-03-20 19:22:06', 2, '2017-03-17 16:07:14', 2, '2017-03-13 14:54:23'),
-(12, 3, '3-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2457, NULL, '1', 'Enfermera', '(C) Tarapacá\r\n', 1, 349, 'Pasaje Chintaguay S/N\r\n', NULL, NULL, NULL, 1, '2017-03-22 22:19:50', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(13, 3, '3-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Enfermera', '(T) Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 21:56:29', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(12, 3, '3-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2457, NULL, '1', 'Enfermera', '(C) Tarapacá\r\n', 1, 349, 'Pasaje Chintaguay S/N\r\n', NULL, NULL, NULL, 1, '2017-03-23 13:28:49', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(13, 3, '3-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Enfermera', '(T) Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 14:11:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (14, 3, '3-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2327, NULL, '1', 'Enfermera', '(C) Coquimbo', 4, 374, NULL, NULL, NULL, NULL, NULL, '2017-03-22 14:00:13', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (15, 3, '3-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Enfermera', '(T) Coquimbo', 4, 375, NULL, NULL, NULL, NULL, NULL, '2017-03-21 19:19:45', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (16, 3, '3-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 24, NULL, '1', 'Enfermera', '(C) Magallanes', 12, 578, NULL, NULL, NULL, NULL, 0, '2017-03-16 20:09:56', NULL, '2017-03-17 16:07:14', NULL, NULL),
@@ -6736,27 +8074,27 @@ INSERT INTO `pre_usuario` (`id_usuario`, `id_perfil`, `gl_rut`, `gl_password`, `
 (18, 2, '2-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Médico', 'Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 21:54:27', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (19, 2, '2-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Médico', 'Coquimbo', 4, 375, NULL, NULL, NULL, NULL, 0, '2017-03-21 19:20:35', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (20, 2, '2-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 18, NULL, '2', 'Médico', 'Magallanes', 12, 578, NULL, NULL, NULL, NULL, 0, '2017-03-16 20:09:56', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(21, 4, '4-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Gestor', 'Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 21:21:46', NULL, '2017-03-17 16:07:14', NULL, '2017-03-17 16:00:39'),
+(21, 4, '4-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Gestor', 'Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 13:29:12', NULL, '2017-03-17 16:07:14', NULL, '2017-03-17 16:00:39'),
 (22, 4, '4-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Gestor', 'Coquimbo', 4, 375, NULL, NULL, NULL, NULL, 0, '2017-03-21 18:57:33', NULL, '2017-03-17 16:07:14', NULL, '2017-03-17 16:00:39'),
 (23, 4, '4-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 18, NULL, '2', 'Gestor', 'Magallanes', 12, 578, NULL, NULL, NULL, NULL, 0, '2017-03-16 20:16:26', NULL, '2017-03-17 16:07:14', NULL, '2017-03-17 16:00:39'),
-(24, 7, '7-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 1, '1', 'Laboratorista Uno', 'LABORATORIO 1 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 21:55:32', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(25, 7, '7-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 1, '1', 'Laboratorista Dos', 'LABORATORIO 1 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-21 14:34:43', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(26, 7, '7-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 2, '2', 'Laboratorista Uno', 'LABORATORIO 2 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-17 14:37:45', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(27, 7, '7-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 2, '2', 'Laboratorista Dos', 'LABORATORIO 2 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-22 21:39:57', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(24, 7, '7-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 1, '1', 'Laboratorista Uno', 'LABORATORIO 1 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-27 15:30:33', NULL, '2017-03-27 15:30:33', NULL, NULL),
+(25, 7, '7-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 1, '1', 'Laboratorista Dos', 'LABORATORIO 1 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 0, '2017-03-27 17:57:19', NULL, '2017-03-27 20:25:26', NULL, NULL),
+(26, 7, '7-3', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 2, '2', 'Laboratorista Uno', 'LABORATORIO 2 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 0, '2017-03-17 14:37:45', NULL, '2017-03-27 20:29:02', NULL, NULL),
+(27, 7, '7-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 2, '2', 'Laboratorista Dos', 'LABORATORIO 2 Tarapacá', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 13:29:00', NULL, '2017-03-27 20:26:40', NULL, NULL),
 (28, 7, '7-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 3, '1', 'Laboratorista Uno', 'Coquimbo', 4, 374, NULL, NULL, NULL, NULL, 0, '2017-03-21 19:21:33', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (31, 7, '7-6', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 4, '2', 'Laboratorista Uno', 'Coquimbo', 4, 375, NULL, NULL, NULL, NULL, 0, '2017-03-16 21:38:58', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (32, 7, '7-7', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 5, '1', 'Laboratorista Uno', 'Magallanes', 12, 578, NULL, NULL, NULL, NULL, 0, '2017-03-16 21:41:58', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (33, 7, '7-8', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', NULL, 6, '2', 'Laboratorista Uno', 'Magallanes', 12, 578, NULL, NULL, NULL, NULL, 0, '2017-03-16 21:41:58', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(34, 6, '61-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista ', 'Tarapacá Odontólogo Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 12:43:25', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(34, 6, '61-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista ', 'Tarapacá Odontólogo Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 15:08:31', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (35, 6, '62-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psicólogo Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-20 13:37:27', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(36, 6, '63-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psiquiatra Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 12:43:09', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(36, 6, '63-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psiquiatra Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-23 15:09:31', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (37, 6, '64-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Dentista Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:25:03', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (38, 6, '65-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Nutricionista Uno', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:25:03', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(39, 6, '612-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista ', 'Tarapacá Odontólogo Dos', 1, 349, 'Nutricionista', NULL, NULL, NULL, 1, '2017-03-16 22:27:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(40, 6, '622-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psicólogo Dos', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:27:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(41, 6, '632-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psiquiatra Dos', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:27:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(42, 6, '642-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Dentista Dos', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:27:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
-(43, 6, '652-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Nutricionista Dos', 1, 349, NULL, NULL, NULL, NULL, 1, '2017-03-16 22:27:46', NULL, '2017-03-17 16:07:14', NULL, NULL),
+(39, 6, '612-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista ', 'Tarapacá Odontólogo Dos', 1, 349, 'Nutricionista', NULL, NULL, NULL, 0, '2017-03-16 22:27:46', NULL, '2017-03-27 20:28:11', NULL, NULL),
+(40, 6, '622-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psicólogo Dos', 1, 349, NULL, NULL, NULL, NULL, 0, '2017-03-16 22:27:46', NULL, '2017-03-27 20:28:04', NULL, NULL),
+(41, 6, '632-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Psiquiatra Dos', 1, 349, NULL, NULL, NULL, NULL, 0, '2017-03-16 22:27:46', NULL, '2017-03-27 20:27:54', NULL, NULL),
+(42, 6, '642-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Dentista Dos', 1, 349, NULL, NULL, NULL, NULL, 0, '2017-03-16 22:27:46', NULL, '2017-03-27 20:27:16', NULL, NULL),
+(43, 6, '652-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Especialista', 'Tarapacá Nutricionista Dos', 1, 349, NULL, NULL, NULL, NULL, 0, '2017-03-23 15:15:25', NULL, '2017-03-27 20:27:03', NULL, NULL),
 (44, 6, '61-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Especialista', 'Coquimbo Odontólogo', 4, 375, NULL, NULL, NULL, NULL, 0, '2017-03-16 22:33:37', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (45, 6, '62-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Especialista', 'Coquimbo Psicólogo', 4, 375, NULL, NULL, NULL, NULL, 0, '2017-03-21 19:22:09', NULL, '2017-03-17 16:07:14', NULL, NULL),
 (46, 6, '63-4', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2310, NULL, '2', 'Especialista', 'Coquimbo Psiquiatra', 4, 375, NULL, NULL, NULL, NULL, 0, '2017-03-16 22:33:37', NULL, '2017-03-17 16:07:14', NULL, NULL),
@@ -6784,7 +8122,7 @@ CREATE TABLE IF NOT EXISTS `pre_usuario_especialidad` (
   `id_tipo_especialidad` int(11) DEFAULT NULL,
   `gl_descripcion` varchar(250) DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
-  `fc_crea` datetime DEFAULT NULL,
+  `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_usuario_especialidad`),
   KEY `IDX_id_usuario` (`id_usuario`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`),
@@ -6828,31 +8166,37 @@ INSERT INTO `pre_usuario_especialidad` (`id_usuario_especialidad`, `id_usuario`,
 CREATE TABLE IF NOT EXISTS `pre_web_service` (
   `id_web_service` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `gl_nombre` varchar(100) DEFAULT NULL,
-  `gl_descripcion` varchar(255) NOT NULL,
-  `gl_ambiente` enum('test','qa','dev','prod') NOT NULL DEFAULT 'test',
-  `sistema_wsdl` varchar(500) DEFAULT NULL,
-  `sistema_url` varchar(255) NOT NULL,
-  `key_public` varchar(255) NOT NULL,
-  `key_private` varchar(255) NOT NULL,
-  `bo_estado` int(1) NOT NULL DEFAULT '1',
-  `id_usuario_creador` int(11) NOT NULL DEFAULT '0',
-  `fc_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `gl_descripcion` varchar(255) DEFAULT NULL,
+  `gl_ambiente` enum('test','qa','dev','prod') DEFAULT 'test',
+  `gl_wsdl` varchar(255) DEFAULT NULL,
+  `gl_url_sistema` varchar(255) DEFAULT NULL,
+  `gl_key_public` varchar(255) DEFAULT NULL,
+  `gl_key_private` varchar(255) DEFAULT NULL,
+  `bo_estado` int(1) DEFAULT '1',
+  `id_usuario_actualiza` int(11) DEFAULT NULL,
+  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `id_usuario_creador` int(11) DEFAULT '0',
+  `fc_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_web_service`),
-  KEY `sistema_nombre` (`gl_nombre`),
-  KEY `ambiente` (`gl_ambiente`)
+  KEY `IDX_gl_nombre` (`gl_nombre`),
+  KEY `IDX_gl_ambiente` (`gl_ambiente`),
+  KEY `IDX_gl_wsdl` (`gl_wsdl`),
+  KEY `IDX_gl_key_public` (`gl_key_public`),
+  KEY `IDX_bo_estado` (`bo_estado`),
+  KEY `IDX_gl_key_private` (`gl_key_private`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `pre_web_service`
 --
 
-INSERT INTO `pre_web_service` (`id_web_service`, `gl_nombre`, `gl_descripcion`, `gl_ambiente`, `sistema_wsdl`, `sistema_url`, `key_public`, `key_private`, `bo_estado`, `id_usuario_creador`, `fc_creacion`) VALUES
-(1, 'SOPORTES', 'Crear y Obtener Soportes', 'prod', 'https://midas.minsal.cl/soporte/ws/wsSoporte.php?wsdl', 'https://midas.minsal.cl/soporte/', '16R4Fe4T4kYbcP9qOxU54YjL1NbVI8AtRiPkAqChUnM5', '', 1, 0, '2017-01-06 15:12:45'),
-(2, 'SOPORTES', 'Crear y Obtener Soportes', 'test', 'https://midas.minsal.cl/soporte_test/ws/wsSoporte.php?wsdl', 'https://midas.minsal.cl/soporte_test/', '16R4Fe4T4kYbcP9qOxU54YjL1NbVI8AtRiPkAqChUnM5', '', 1, 0, '2017-01-06 15:12:45'),
-(3, 'SOPORTES', 'Crear y Obtener Soportes', 'dev', 'https://midas.minsal.cl/soporte_test/ws/wsSoporte.php?wsdl', 'https://midas.minsal.cl/soporte_test/', '16R4Fe4T4kYbcP9qOxU54YjL1NbVI8AtRiPkAqChUnM5', '', 1, 0, '2017-01-06 15:12:45'),
-(4, 'SOPORTES', 'Crear y Obtener Soportes', 'qa', 'https://midas.minsal.cl/soporte_test/ws/wsSoporte.php?wsdl', 'https://midas.minsal.cl/soporte_test/', '16R4Fe4T4kYbcP9qOxU54YjL1NbVI8AtRiPkAqChUnM5', '', 1, 0, '2017-01-06 15:12:45'),
-(5, 'MIDAS', 'Validar Login desde MIDAS', 'prod', 'https://midas.minsal.cl/ws/wsMIDAS.php?wsdl', 'https://midas.minsal.cl/', '', '', 1, 0, '2017-01-17 20:09:33'),
-(6, 'MIDAS', 'Validar Login desde MIDAS', 'test', 'https://midas.minsal.cl/midas_prueba/ws/wsMIDAS.php?wsdl', 'https://midas.minsal.cl/midas_prueba/', '', '', 1, 0, '2017-01-17 20:12:00');
+INSERT INTO `pre_web_service` (`id_web_service`, `gl_nombre`, `gl_descripcion`, `gl_ambiente`, `gl_wsdl`, `gl_url_sistema`, `gl_key_public`, `gl_key_private`, `bo_estado`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_creador`, `fc_creacion`) VALUES
+(1, 'SOPORTES', 'Crear y Obtener Soportes', 'prod', 'https://midas.minsal.cl/soporte/ws/wsSoporte.php?wsdl', 'https://midas.minsal.cl/soporte/', '16R4Fe4T4kYbcP9qOxU54YjL1NbVI8AtRiPkAqChUnM5', '', 1, NULL, NULL, 0, '2017-01-06 15:12:45'),
+(2, 'SOPORTES', 'Crear y Obtener Soportes', 'test', 'https://midas.minsal.cl/soporte_test/ws/wsSoporte.php?wsdl', 'https://midas.minsal.cl/soporte_test/', '16R4Fe4T4kYbcP9qOxU54YjL1NbVI8AtRiPkAqChUnM5', '', 1, NULL, NULL, 0, '2017-01-06 15:12:45'),
+(3, 'SOPORTES', 'Crear y Obtener Soportes', 'dev', 'https://midas.minsal.cl/soporte_test/ws/wsSoporte.php?wsdl', 'https://midas.minsal.cl/soporte_test/', '16R4Fe4T4kYbcP9qOxU54YjL1NbVI8AtRiPkAqChUnM5', '', 1, NULL, NULL, 0, '2017-01-06 15:12:45'),
+(4, 'SOPORTES', 'Crear y Obtener Soportes', 'qa', 'https://midas.minsal.cl/soporte_test/ws/wsSoporte.php?wsdl', 'https://midas.minsal.cl/soporte_test/', '16R4Fe4T4kYbcP9qOxU54YjL1NbVI8AtRiPkAqChUnM5', '', 1, NULL, NULL, 0, '2017-01-06 15:12:45'),
+(5, 'MIDAS', 'Validar Login desde MIDAS', 'prod', 'https://midas.minsal.cl/ws/wsMIDAS.php?wsdl', 'https://midas.minsal.cl/', '', '', 1, NULL, NULL, 0, '2017-01-17 20:09:33'),
+(6, 'MIDAS', 'Validar Login desde MIDAS', 'test', 'https://midas.minsal.cl/midas_prueba/ws/wsMIDAS.php?wsdl', 'https://midas.minsal.cl/midas_prueba/', '', '', 1, NULL, NULL, 0, '2017-01-17 20:12:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
