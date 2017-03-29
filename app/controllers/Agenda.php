@@ -407,7 +407,7 @@ class Agenda extends Controller {
         if (!is_null($arrHoraEspecialista)) {
             foreach($arrHoraEspecialista as $item){
                 if ($item->id_agenda_especialista != 0) {
-                    $descripcion = "Toma Examen ". $item->gl_especialidad;
+                    $descripcion = "Cita con ". $item->gl_especialidad;
                     $fecha       = $item->fecha_agenda_calendar;
 
                     if (!is_null($item->hora_agenda)){

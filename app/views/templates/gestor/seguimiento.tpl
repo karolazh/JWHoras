@@ -1,6 +1,9 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
+<link href='{$static}template/plugins/fullcalendar/fullcalendar.min.css' rel='stylesheet' />
+<link href='{$static}template/plugins/fullcalendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+
 <section class="content-header">
     <h1><i class="fa fa-cogs"></i> Seguimiento</h1>
     {*<div class="col-md-12 text-right">
@@ -126,15 +129,33 @@
 				</div>
             </div>
         </div>
-
+					
         <div class="top-spaced"></div>
 
 				<!-- Agenda Especialista -->
 		<div class="panel panel-primary">
 			<div class="panel-heading">Agenda Especialista</div>
 			<div class="panel-body">
-
-
+				<div class="form-group">
+					<div class="box-body">
+						<div id="div_tabla" class="table-responsive small col-lg-12">
+							<label class="control-label"><h5>Horas con Especialistas</h5></label>
+						</div>
+					</div>
+					{include file='agenda/grillaHoraEspecialista.tpl'}
+				</div>
+				
+				<div class="form-group">
+					<input type="text" value="{$arrAgenda}" id="arrAgenda" name="arrAgenda" class="hidden" />
+					<div class="panel-heading">
+						Calendario
+					</div>
+				</div>
+					
+				<div class="form-group">
+					<div id='calendar'></div>
+				</div>
+					
 				<div class="form-group col-sm-11" align="right">
 					<button type="button" id="guardar" class="btn btn-success">
 						<i class="fa fa-save"></i>  Guardar
