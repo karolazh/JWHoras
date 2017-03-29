@@ -113,11 +113,12 @@ class DAOPacienteAgendaEspecialista extends Model{
      * @param   array   $parametros
 	 */
 	public function insertAgenda($parametros){
-		//id_estado e id_tipo_especialidad faltan
+		//id_estado = 3 (Finalizado)
         $query	= "	INSERT INTO pre_paciente_agenda_especialista (
 						id_especialista,
 						id_paciente,
 						id_empa,
+						id_estado,
 						id_cie10_capitulo,
 						id_cie10_seccion,
 						id_cie10_grupo,
@@ -131,6 +132,7 @@ class DAOPacienteAgendaEspecialista extends Model{
 						".$_SESSION['id'].",
 						".$parametros['id_paciente'].",
 						".$parametros['id_empa'].",
+						3,
 						".$parametros['capitulo_cie10'].",
 						".$parametros['seccion_cie10'].",
 						".$parametros['grupo_cie10'].",

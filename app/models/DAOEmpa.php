@@ -8,7 +8,7 @@
 * Creacion          : 22/02/2017
 * @name             DAOEmpa.php
 * @version          1.0
-* @author           David Gusman <david.guzman@cosof.cl>
+* @author           David Guzman <david.guzman@cosof.cl>
 *=============================================================================
 *!ControlCambio
 *--------------
@@ -129,14 +129,12 @@ class DAOEmpa extends Model{
 
     /**
 	 * Descripción : Actualiza tabla "pre_empa"
-	 * @author  S/N
+	 * @author  David Guzman <david.guzman@cosof.cl>
      * @param   array  $parametros
 	 */
     public function updateEmpa($parametros){
         $query = "  UPDATE pre_empa SET
-						id_comuna						= ".$parametros['id_comuna'].",
 						gl_sector						= ".$parametros['gl_sector'].",
-						id_institucion					= ".$parametros['id_institucion'].",
 						nr_ficha						= ".$parametros['nr_ficha'].",
 						fc_empa							= ".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_empa'])).",
 						bo_embarazo						= ".$parametros['bo_embarazo'].",
@@ -242,7 +240,7 @@ class DAOEmpa extends Model{
 	
     /**
 	 * Descripción : Actualiza estado de Empa (Finalizado)
-	 * @author  S/N
+	 * @author  David Guzman <david.guzman@cosof.cl>
      * @param   array  $parametros
 	 */
 	public function updateFinalizado($parametros){

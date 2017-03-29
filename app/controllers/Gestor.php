@@ -14,7 +14,7 @@
 * --------------
 * !cProgramador				!cFecha		!cDescripcion 
 * -----------------------------------------------------------------------------
-*<david.guzman@cosof.cl>		16-03-2017	nacional
+*<david.guzman@cosof.cl>		29-03-2017	seguimiento
 * -----------------------------------------------------------------------------
 *******************************************************************************
 */
@@ -81,7 +81,7 @@ class Gestor extends Controller {
 	}
 	
 	/**
-	* Descripción: Cargar Grilla Gestor Regional
+	* Descripción: Seguimiento Paciente
 	* @author: David Guzmán <david.guzman@cosof.cl>
 	*/
 	public function seguimiento() {
@@ -89,6 +89,29 @@ class Gestor extends Controller {
 		
 		$parametros		= $this->request->getParametros();
 		$id_paciente	= $parametros[0];
+		$mostrar_agenda_paciente = 1;
+		
+        //Grilla Horas Especialistas x Paciente
+        $arrHoraEspecialista = $this->_DAOPacienteAgendaEspecialista->getAllByIdPaciente($id_paciente);
+		
+		//Genera string de fechas pa calendario
+        $arrAgenda   = "";
+        if (!is_null($arrHoraEspecialista)) {
+            foreach($arrHoraEspecialista as $item){
+                if ($item->id_agenda_especialista != 0) {
+                    $descripcion = "Cita con ". $item->gl_especialidad;
+                    $fecha       = $item->fecha_agenda_calendar;
+
+                    if (!is_null($item->hora_agenda)){
+                        $hora = $item->hora_agenda;                    
+                    } else {
+                        $hora = "";
+                    }
+					$id_agenda_especialista	= $item->id_agenda_especialista;
+                    $arrAgenda   = "$arrAgenda $descripcion,$fecha,$hora,$id_agenda_especialista;";
+                }
+			}
+        }
 		
 		//Cargar Datos Paciente
 		$id_empa		= $this->_DAOEmpa->getByIdPaciente($id_paciente);
@@ -102,9 +125,9 @@ class Gestor extends Controller {
                 $pacientes = $this->_DAOPaciente->getListaDetalle(array('paciente.id_region' => $_SESSION['id_region']));
             }
 		
-		$fc_nacimiento = date("d/m/Y", strtotime($registro->fc_nacimiento));
+		$fc_nac = date("d/m/Y", strtotime($registro->fc_nacimiento));
 		//calculo edad
-		$fc_nacimiento = str_replace("'","",Fechas::formatearBaseDatos($fc_nacimiento));
+		$fc_nacimiento = str_replace("'","",Fechas::formatearBaseDatos($fc_nac));
 		list($Y, $m, $d ) = explode("-", $fc_nacimiento);
 		$edad = ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );
 		
@@ -117,16 +140,22 @@ class Gestor extends Controller {
 		$this->smarty->assign("id_empa", $id_empa->id_empa);
 		$this->smarty->assign("gl_nombres", $registro->gl_nombres);
 		$this->smarty->assign("gl_apellidos", $registro->gl_apellidos);
-		$this->smarty->assign("fc_nacimiento", $fc_nacimiento);
+		$this->smarty->assign("fc_nacimiento", $fc_nac);
 		$this->smarty->assign("edad", $edad);
 		$this->smarty->assign("gl_fono", $registro->gl_fono);
 		$this->smarty->assign("gl_celular", $registro->gl_celular);
 		$this->smarty->assign("gl_email", $registro->gl_email);
 		$this->smarty->assign("gl_direccion", $direccion->gl_direccion);
 		$this->smarty->assign("alarmas", $alarmas);
-		
+		$this->smarty->assign('mostrar_agenda_paciente', $mostrar_agenda_paciente);
+		$this->smarty->assign('arrHoraEspecialista', $arrHoraEspecialista);
+        $this->smarty->assign('arrAgenda', $arrAgenda);
 		
 		$this->_display('gestor/seguimiento.tpl');
+		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
+		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/fullcalendar.min.js");
+		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/locale/es.js");
+		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/lib/moment.min.js");
 	}
 	
 }
