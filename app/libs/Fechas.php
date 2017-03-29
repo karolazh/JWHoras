@@ -33,6 +33,19 @@ class Fechas{
 			return "'".$fecha[2] . $separador . $fecha[1] . $separador . $fecha[0]."'";
 		}
 	}
+	
+	public static function formatearBaseDatosSinComilla($fecha,$separador="-"){
+		if(empty($fecha) || is_null($fecha) || $fecha == "NULL"){
+			return 'NULL';
+		}
+		if (strpos($fecha, " ") !== false){
+			$time	= explode(" ",$fecha);
+			return self::formatearBaseDatos($time[0]) . " " . $time[1];
+		}else{
+			$fecha	= explode("/",$fecha);
+			return $fecha[2] . $separador . $fecha[1] . $separador . $fecha[0];
+		}
+	}
 
 	public static function formatearHtml($fecha,$separador="/"){
 		if(empty($fecha)){
