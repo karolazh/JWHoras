@@ -779,7 +779,7 @@
                                 <i class="fa fa-remove"></i>  Cancelar
                             </button>
                         </div>
-						{if $smarty.session.perfil != 2}
+						{if $smarty.session.perfil != 1 && $smarty.session.perfil != 2}
 						<div class="form-group col-sm-11" align="right" id="btn_aceptar" style="display: none">
                             <button type="button" id="aceptar" class="btn btn-default"
 									onclick="history.back(-1)">
@@ -793,7 +793,7 @@
         </div> 
     </section>
 </form>
-	{* $plan_tratamiento *}
-	{if $smarty.session.perfil == 1 || $smarty.session.perfil == 2}
+
+	{if ($smarty.session.perfil == 1 || $smarty.session.perfil == 2) && $bo_finalizado == 1}
 		{include file='medico/tratamiento.tpl'}
 	{/if}
