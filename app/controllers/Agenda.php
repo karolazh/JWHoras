@@ -27,6 +27,7 @@ class Agenda extends Controller {
     protected $_DAOPacienteDireccion;
     protected $_DAOLaboratorio;
     protected $_DAOTipoExamen;
+    protected $_DAOPacienteAgendaEspecialista;
 
 	function __construct() {
 		parent::__construct();
@@ -42,6 +43,7 @@ class Agenda extends Controller {
         $this->_DAOPacienteDireccion	= $this->load->model("DAOPacienteDireccion");
         $this->_DAOLaboratorio			= $this->load->model("DAOLaboratorio");
         $this->_DAOTipoExamen			= $this->load->model("DAOTipoExamen");
+        $this->_DAOPacienteAgendaEspecialista			= $this->load->model("DAOPacienteAgendaEspecialista");
 	}
 
     public function index() {
@@ -348,4 +350,141 @@ class Agenda extends Controller {
 
         echo $json;
     }
+	
+	/**
+	 * Descripción: Agenda Especialista
+	 * @author David Guzmán <david.guzman@cosof.cl>
+	 */
+    public function especialista() {
+        Acceso::redireccionUnlogged($this->smarty);
+        $id_especialista	= $_SESSION['id'];
+        
+        //Grilla Hora Especialista x Paciente
+        $arrHoraEspecialista = $this->_DAOPacienteAgendaEspecialista->getAllByIdEspecialista($id_especialista); // Obtener por Especialista
+		//print_r($arrHoraEspecialista); die;
+        $arrAgenda		= "";
+        if (!is_null($arrHoraEspecialista)) {
+            foreach($arrHoraEspecialista as $item){
+                if ($item->id_agenda_especialista != 0) {
+                    $descripcion = "Cita con ". $item->gl_especialidad;
+                    $fecha = $item->fecha_agenda_calendar;
+
+                    if (!is_null($item->hora_agenda)){
+                        $hora = $item->hora_agenda;                    
+                    } else {
+                        $hora = "";
+                    }
+					$id_agenda_especialista	= $item->id_agenda_especialista;
+                    $arrAgenda = "$arrAgenda $descripcion,$fecha,$hora,$id_agenda_especialista;";
+                }
+			}
+        }
+        
+        $this->smarty->assign('arrHoraEspecialista', $arrHoraEspecialista);
+        $this->smarty->assign('arrAgenda', $arrAgenda);
+        $this->_display('agenda/agendaEspecialista.tpl');
+		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
+		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/fullcalendar.min.js");
+		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/locale/es.js");
+		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/lib/moment.min.js");
+	}
+	
+	/**
+	 * Descripción: Ver Agenda de Horas Especialistas x Paciente
+	 * @author David Guzmán <david.guzman@cosof.cl>
+	 */
+    public function verEspecialista() {
+        Acceso::redireccionUnlogged($this->smarty);
+        
+        $parametros  = $this->request->getParametros();
+        $id_paciente = $parametros[0];
+        $mostrar_agenda_paciente = 1;
+        //Grilla Horas Especialistas x Paciente
+        $arrHoraEspecialista = $this->_DAOPacienteAgendaEspecialista->getAllByIdPaciente($id_paciente);
+        
+        //Genera string de fechas pa calendario
+        $arrAgenda   = "";
+        if (!is_null($arrHoraEspecialista)) {
+            foreach($arrHoraEspecialista as $item){
+                if ($item->id_agenda_especialista != 0) {
+                    $descripcion = "Toma Examen ". $item->gl_especialidad;
+                    $fecha       = $item->fecha_agenda_calendar;
+
+                    if (!is_null($item->hora_agenda)){
+                        $hora = $item->hora_agenda;                    
+                    } else {
+                        $hora = "";
+                    }
+					$id_agenda_especialista	= $item->id_agenda_especialista;
+                    $arrAgenda   = "$arrAgenda $descripcion,$fecha,$hora,$id_agenda_especialista;";
+                }
+			}
+        }
+        
+        //Datos de Paciente
+        $detPaciente = $this->_DAOPaciente->getByIdPaciente($id_paciente);
+        if (!is_null($detPaciente)) {            
+            $run = "";
+            if ($detPaciente->bo_extranjero == 0) {
+                $run = $detPaciente->gl_rut;
+            } else {
+                $run = $detPaciente->gl_run_pass;
+            }
+            $nombres = $detPaciente->gl_nombres.' '.$detPaciente->gl_apellidos;
+            $edad = Fechas::calcularEdadInv($detPaciente->fc_nacimiento);
+            if ($detPaciente->gl_sexo == "F") {
+                $sexo = "FEMENINO";
+            } else {
+                $sexo = $detPaciente->gl_sexo;
+            }
+            $reconoce = "NO";
+            if (!is_null($detPaciente->bo_reconoce)) {
+                if ($detPaciente->bo_reconoce) {
+                    $reconoce = "SI";
+                }
+            }
+            $acepta = "NO";
+            if (!is_null($detPaciente->bo_acepta_programa)) {
+                if ($detPaciente->bo_acepta_programa) {
+                    $acepta = "SI";
+                }
+            }
+            //Dirección Vigente de Paciente
+            $detDireccion = $this->_DAOPacienteDireccion->getDireccionVigenteById($id_paciente);
+            if (!is_null($detDireccion)) {
+                $direccion = $detDireccion->gl_direccion;
+                $comuna    = $detDireccion->gl_nombre_comuna;
+                $provincia = $detDireccion->gl_nombre_provincia;
+                $region    = $detDireccion->gl_nombre_region;
+            }
+            
+            $this->smarty->assign("id_paciente", $id_paciente);
+            $this->smarty->assign("run", $run);
+            $this->smarty->assign("nombres", $nombres);
+            $this->smarty->assign("fc_nacimiento", $detPaciente->fc_nacimiento);
+            $this->smarty->assign("edad", $edad);
+            $this->smarty->assign("gl_sexo", $sexo);
+            $this->smarty->assign("gl_nombre_estado_caso", $detPaciente->gl_nombre_estado_caso);
+            $this->smarty->assign("gl_nombre_prevision", $detPaciente->gl_nombre_prevision);
+            $this->smarty->assign("gl_grupo_tipo", $detPaciente->gl_grupo_tipo);
+            $this->smarty->assign("gl_fono", $detPaciente->gl_fono);
+            $this->smarty->assign("gl_celular", $detPaciente->gl_celular);
+            $this->smarty->assign("gl_email", $detPaciente->gl_email);
+            $this->smarty->assign("fc_crea", $detPaciente->fc_crea);
+            $this->smarty->assign("bo_reconoce", $reconoce);
+            $this->smarty->assign("bo_acepta_programa", $acepta);
+            $this->smarty->assign("gl_nombre_comuna", $comuna);
+            $this->smarty->assign("gl_nombre_provincia", $provincia);
+            $this->smarty->assign("gl_nombre_region", $region);
+            $this->smarty->assign("gl_direccion", $direccion);            
+        }
+        
+        $this->smarty->assign('mostrar_agenda_paciente', $mostrar_agenda_paciente);
+        $this->smarty->assign('arrHoraEspecialista', $arrHoraEspecialista);
+        $this->smarty->assign('arrAgenda', $arrAgenda);
+        $this->smarty->display('agenda/verEspecialista.tpl');
+		//$this->load->javascript(STATIC_FILES . "js/templates/especialista/agenda.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
+	}
+	
 }
