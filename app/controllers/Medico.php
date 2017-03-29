@@ -102,14 +102,15 @@ class Medico extends Controller {
 	public function GuardarPlan(){
 		$parametros						= $this->_request->getParams();
 		$parametros['id_usuario_crea']	= $_SESSION['id'];
+		$parametros['id_especialista']	= $_SESSION['id'];
+		$parametros['fecha_agenda']		= Fechas::formatearBaseDatosSinComilla($parametros['fecha_agenda']);
 		$correcto						= false;
 		$id_paciente					= $parametros['id_paciente'];
-		
-		$id_plan						= $this->_DAOPacienteAgendaEspecialista->insert($parametros);
+
+		$id_plan		= $this->_DAOPacienteAgendaEspecialista->insert($parametros);
 		if($id_plan) {
-			$correcto			= true;
-			$arrEspecialidad	= $this->_DAOTipoEspecialidad->getById($parametros['id_tipo_especialidad']);
-			$resp				= $this->_Evento->guardarMostrarUltimo(20,0,$id_paciente,"Plan de Tratamiento con ".$arrEspecialidad->gl_nombre_especialidad." Iniciado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
+			$correcto	= true;
+			$resp		= $this->_Evento->guardarMostrarUltimo(20,0,$id_paciente,"Plan de Tratamiento Iniciado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 		}
 			
 		$salida			= array("correcto" => $correcto);

@@ -36,7 +36,7 @@
                     <label class="control-label col-sm-3">Comuna</label>
                     <div class="col-sm-3">
                         <input type="text" name="gl_comuna" id="gl_comuna" value="{$gl_comuna}" 
-                               placeholder="Comuna" class="form-control" readonly/>
+                               placeholder="Comuna" class="form-control" readonly />
                         <span class="help-block hidden"></span>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     <label for="gl_institucion" class="control-label col-sm-3">Centro de Salud (*)</label>
                     <div class="col-sm-3">
                         <input type="text" name="gl_institucion" id="gl_institucion" value="{$gl_institucion}"
-                               placeholder="Institución" class="form-control" readonly/>
+                               placeholder="Institución" class="form-control" readonly />
                         <span class="help-block hidden"></span>
                     </div>
                     <label for="nr_ficha" class="control-label col-sm-1">N° de Ficha (*)</label>

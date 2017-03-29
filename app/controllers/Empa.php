@@ -69,11 +69,13 @@ class Empa extends Controller{
 		$parametros			= $this->request->getParametros();
 		$id_paciente		= $parametros[0];
 
-		$arrEspecialidad	= $this->_DAOTipoEspecialidad->getLista();
-		$arr_agenda			= $this->_DAOPacienteAgendaEspecialista->getByIdPaciente($id_paciente);
+		$arrEspecialidad	= $this->_DAOTipoEspecialidad->getByMostrar();
+		$arr_agenda			= $this->_DAOPacienteAgendaEspecialista->getPlan($id_paciente);
+		$arr_plan			= $this->_DAOPacienteAgendaEspecialista->getPlan($id_paciente,1);
 
 		//$resp = $this->_Evento->guardarMostrarUltimo(21,0,$id_paciente,"Plan tratamiento Modificado el : " . Fechas::fechaHoyVista(),1,1,$_SESSION['id']);
 
+		$this->smarty->assign("arr_plan", $arr_plan);
 		$this->smarty->assign("arr_agenda", $arr_agenda);
 		$this->smarty->assign("arrEspecialidad", $arrEspecialidad);
 		$this->smarty->assign("botonAyudaTratamiento", Boton::botonAyuda('Ingrese Datos del Tratamiento.', '', 'pull-right'));

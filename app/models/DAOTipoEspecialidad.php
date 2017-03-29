@@ -55,6 +55,21 @@ class DAOTipoEspecialidad extends Model{
         }
     }
 
+    public function getByMostrar(){
+        $query	= " SELECT 
+						esp.*
+					FROM pre_tipo_especialidad esp
+					WHERE esp.bo_mostrar = 1";
+
+        $result	= $this->db->getQuery($query);
+		
+        if($result->numRows > 0){
+            return $result->rows;
+        }else{
+            return NULL;
+        }
+    }
+
 }
 
 ?>

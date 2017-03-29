@@ -27,7 +27,7 @@
 				<div class="form-group">
 					<label for="nombres" class="control-label col-sm-2 ">Plan de Tratamiento (*)</label>
 					<div class="col-sm-6">
-						<textarea type="text" class="form-control" rows="5" id="gl_observacion" name="gl_observacion"
+						<textarea type="text" class="form-control" rows="5" id="gl_agenda_observacion" name="gl_agenda_observacion"
 							onblur="validarVacio(this, 'Por favor Ingrese una Observación')" 
 							placeholder="Ingrese una Observación" style="resize: none"></textarea>
 						<span class="help-block hidden fa fa-warning"></span>
@@ -55,14 +55,20 @@
 				<div class="form-group">
 					<label for="nombres" class="control-label col-sm-2 ">Profesional (*)</label>
 					<div class="col-sm-4">
-						<select for="region" class="form-control" id="id_tipo_especialidad" name="id_tipo_especialidad" onblur="validarVacio(this, 'Por favor Seleccione una Profesional')">
-							<option value="0">Seleccione</option>
-							{foreach $arrEspecialidad as $item}
-								<option value="{$item->id_tipo_especialidad}" >
-									{$item->gl_nombre_especialidad}
-								</option>
-							{/foreach}
-						</select>
+							{if count($arr_plan) == 0}
+								<select for="region" class="form-control" id="id_tipo_especialidad" name="id_tipo_especialidad" disabled >
+									<option value="1" selected  >Médico Revisor</option>
+								</select>
+							{else}
+								<select for="region" class="form-control" id="id_tipo_especialidad" name="id_tipo_especialidad" onblur="validarVacio(this, 'Por favor Seleccione una Profesional')">
+									<option value="0">Seleccione</option>
+									{foreach $arrEspecialidad as $item}
+										<option value="{$item->id_tipo_especialidad}" >
+											{$item->gl_nombre_especialidad}
+										</option>
+									{/foreach}
+								</select>
+							{/if}
 						<span class="help-block hidden fa fa-warning"></span>
 					</div>
 					<div class="col-sm-1"></div>
@@ -70,20 +76,20 @@
 				
 				<div class="top-spaced"></div>
                 <div class="form-group">
-                    <label class="control-label required col-sm-2">Fecha Cita</label>
+                    <label class="control-label required col-sm-2">Fecha Cita (*)</label>
 					<div class='col-sm-2'>
                         <div class="input-group">
-							<input type='text' class="form-control datepicker" id='fc_toma' name='fc_toma' value="{$smarty.now|date_format:"%d/%m/%Y"}" />
+							<input type='text' class="form-control datepicker" id='fecha_agenda' name='fecha_agenda' value="{$smarty.now|date_format:"%d/%m/%Y"}" />
 							<span class="help-block hidden fa fa-warning"></span>
-							<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_toma').focus();"></i></span>
+							<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fecha_agenda').focus();"></i></span>
                         </div>
                     </div>
                 </div>
 				<div class="top-spaced"></div>
                 <div class="form-group">
-                    <label for="fc_nacimiento" class="control-label col-sm-2 ">Hora Cita</label>
+                    <label for="fc_nacimiento" class="control-label col-sm-2 ">Hora Cita (*)</label>
 					<div class="col-sm-2">
-                        <input type="time" name="gl_hora_toma" id="gl_hora_toma" class="form-control" value="" />
+                        <input type="time" name="hora_agenda" id="hora_agenda" class="form-control" value="" />
                     </div>
                 </div>
 

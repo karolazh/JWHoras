@@ -80,6 +80,34 @@ class DAOPacienteAgendaEspecialista extends Model{
     }
 
     /**
+	 * Descripción : Obtiene Plan de Tratamiento por Id de Paciente
+	 * @author  Victor Retamal <victor.retamal@cosof.cl>
+     * @param   int $id_paciente
+	 */
+    public function getPlan($id_paciente,$id_tipo_especialidad=0){
+        $query	= "  SELECT 
+						agenda.*,
+						e.gl_nombre_especialidad
+					FROM pre_paciente_agenda_especialista agenda
+					LEFT JOIN pre_tipo_especialidad e ON e.id_tipo_especialidad = agenda.id_tipo_especialidad
+					WHERE agenda.bo_activo = 1
+					AND agenda.id_paciente = ?";
+		
+		if($id_tipo_especialidad != 0){
+			$query	.= ' AND agenda.id_tipo_especialidad = 1';
+		}
+
+		$param	= array($id_paciente);
+        $result	= $this->db->getQuery($query,$param);
+		
+        if($result->numRows > 0){
+            return $result->rows;
+        }else{
+            return NULL;
+        }
+    }
+
+    /**
 	 * Descripción : Inserta en tabla "pre_paciente_agenda_especialista"
 	 * @author  David Guzmán <david.guzman@cosof.cl>
      * @param   array   $parametros
