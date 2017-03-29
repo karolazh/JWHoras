@@ -87,23 +87,23 @@ Class Boton{
 					</button>";
 	}
 
-	public static function getBotonAgendaExamen($id_paciente='0'){
+	public static function getBotonAgendaExamen($id_paciente='0', $texto=''){
 		return	"	<button type='button' 
 						onClick=\"xModal.open('".BASE_URI."/Agenda/ver/$id_paciente', 'Agenda Examen Paciente', 85)\" 
 						data-toggle='tooltip' 
 						class='btn btn-xs btn-info'
 						data-title='Ver Agenda Examen'>
-						<i class='fa fa-calendar'></i>
+						<i class='fa fa-calendar'></i> $texto
 					</button>";
 	}
 
-	public static function getBotonAgendaEspecialista($id_paciente='0'){
+	public static function getBotonAgendaEspecialista($id_paciente='0', $texto=''){
 		return	"	<button type='button' 
 						onClick=\"xModal.open('".BASE_URI."/Agenda/verEspecialista/$id_paciente', 'Agenda Especialista', 85)\" 
 						data-toggle='tooltip' 
 						class='btn btn-xs btn-primary'
 						data-title='Ver Agenda Especialista'>
-						<i class='fa fa-calendar'></i>
+						<i class='fa fa-calendar'></i> $texto
 					</button>";
 	}
 

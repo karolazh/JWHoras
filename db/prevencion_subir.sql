@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 192.168.0.200
--- Tiempo de generación: 28-03-2017 a las 21:13:37
+-- Tiempo de generación: 29-03-2017 a las 15:54:21
 -- Versión del servidor: 5.6.10
 -- Versión de PHP: 5.6.26
 
@@ -101,7 +101,21 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria` (
   KEY `IDX_id_usuario` (`id_usuario`),
   KEY `IDX_gl_ip` (`gl_ip`),
   KEY `IDX_gl_tiempo` (`gl_tiempo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Volcado de datos para la tabla `pre_auditoria`
+--
+
+INSERT INTO `pre_auditoria` (`id_auditoria`, `id_usuario`, `gl_tipo`, `gl_query`, `gl_ip`, `gl_tiempo`, `fc_crea`) VALUES
+(1, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0016939640045166', '2017-03-29 12:19:21'),
+(2, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''2''', '::1', '0.0011529922485352', '2017-03-29 12:19:21'),
+(3, 2, 'INSERT', 'INSERT INTO pre_auditoria_login \r\n						(\r\n							id_usuario,\r\n							gl_rut,\r\n							gl_origen,\r\n							gl_token,\r\n							ip_privada,\r\n							ip_publica\r\n						)\r\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.002000093460083', '2017-03-29 13:03:13'),
+(4, 2, 'UPDATE', 'UPDATE pre_usuario\r\n					SET fc_ultimo_login = now()\r\n					WHERE id_usuario = ''2''', '::1', '0.002000093460083', '2017-03-29 13:03:13'),
+(5, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \n						(\n							id_usuario,\n							gl_rut,\n							gl_origen,\n							gl_token,\n							ip_privada,\n							ip_publica\n						)\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0011129379272461', '2017-03-29 13:04:03'),
+(6, 0, 'UPDATE', 'UPDATE pre_usuario\n					SET fc_ultimo_login = now()\n					WHERE id_usuario = ''2''', '::1', '0.001129150390625', '2017-03-29 13:04:03'),
+(7, 0, 'INSERT', 'INSERT INTO pre_auditoria_login \r\n						(\r\n							id_usuario,\r\n							gl_rut,\r\n							gl_origen,\r\n							gl_token,\r\n							ip_privada,\r\n							ip_publica\r\n						)\r\n						VALUES (''2'',''1-9'',''login'','''',''0.0.0'',''::1'')', '::1', '0.0010001659393311', '2017-03-29 13:13:57'),
+(8, 0, 'UPDATE', 'UPDATE pre_usuario\r\n					SET fc_ultimo_login = now()\r\n					WHERE id_usuario = ''2''', '::1', '0.00099992752075195', '2017-03-29 13:13:57');
 
 -- --------------------------------------------------------
 
@@ -124,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `pre_auditoria_login` (
   KEY `IDX_ip_privada` (`ip_privada`),
   KEY `IDX_ip_publica` (`ip_publica`),
   KEY `IDX_gl_origen` (`gl_origen`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
 --
 -- Volcado de datos para la tabla `pre_auditoria_login`
@@ -181,7 +195,11 @@ INSERT INTO `pre_auditoria_login` (`id_auditoria_login`, `id_usuario`, `gl_rut`,
 (48, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-28 12:25:43'),
 (49, 2, '1-9', 'login', '', '0.0.0', '127.0.0.1', '2017-03-28 12:39:15'),
 (50, 1, '13225524-5', 'login', '', '0.0.0', '127.0.0.1', '2017-03-28 12:45:42'),
-(51, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-28 18:00:19');
+(51, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-28 18:00:19'),
+(52, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-29 12:19:21'),
+(53, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-29 13:03:13'),
+(54, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-29 13:04:03'),
+(55, 2, '1-9', 'login', '', '0.0.0', '::1', '2017-03-29 13:13:57');
 
 -- --------------------------------------------------------
 
@@ -3960,7 +3978,7 @@ CREATE TABLE IF NOT EXISTS `pre_diagnostico` (
   `id_paciente` int(11) NOT NULL,
   `gl_diagnostico` longtext,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `fc_actualiza` timestamp NULL DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_diagnostico`),
@@ -4035,7 +4053,7 @@ CREATE TABLE IF NOT EXISTS `pre_empa` (
   `id_examen_mamografia` int(11) DEFAULT NULL,
   `gl_observaciones_empa` varchar(2000) DEFAULT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `fc_actualiza` timestamp NULL DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT '0',
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_empa`),
@@ -4845,7 +4863,7 @@ CREATE TABLE IF NOT EXISTS `pre_opcion` (
   `gl_url` varchar(255) DEFAULT NULL,
   `bo_activo` int(1) DEFAULT '1',
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `fc_actualiza` timestamp NULL DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_opcion`),
@@ -4870,6 +4888,7 @@ INSERT INTO `pre_opcion` (`id_opcion`, `id_opcion_padre`, `bo_tiene_hijo`, `gl_n
 (12, 0, 0, 'Gestor', 'fa fa-bar-chart fa-2x', '/Gestor/regional/', 1, 2, '2017-03-28 18:16:20', 2, '2017-03-13 13:27:12'),
 (13, 0, 0, 'Especialista', 'fa fa-user-md fa-2x', '/Especialista/', 1, NULL, NULL, 3, '2017-03-16 18:22:58'),
 (14, 0, 0, 'Agenda Laboratorio', 'fa fa-calendar fa-2x', '/Agenda/agendaLaboratorio/', 1, NULL, '2017-03-28 15:25:12', NULL, '2017-03-23 15:51:37'),
+(15, 0, 0, 'Agenda Especialista', 'fa fa-calendar fa-2x', '/Agenda/especialista/', 1, NULL, '2017-03-29 13:31:02', NULL, '2017-03-29 13:05:22'),
 (8000, 0, 1, 'Mantenedor', 'fa fa-cog fa-2x', NULL, 1, NULL, '2017-03-28 15:50:47', 2, '2017-02-23 15:51:17'),
 (8001, 8000, 0, 'Usuario', 'fa fa-group', '/Mantenedor/usuario/', 1, NULL, '2017-03-28 15:26:33', 2, '2017-02-23 15:55:19'),
 (8002, 8000, 0, 'Perfil', 'fa fa-plus-circle', '/Mantenedor/perfil/', 1, 2, '2017-03-28 15:26:40', 2, '2017-03-13 15:34:54'),
@@ -4921,7 +4940,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente` (
   `gl_latitud` varchar(30) DEFAULT NULL,
   `gl_longitud` varchar(30) DEFAULT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `fc_actualiza` timestamp NULL DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_paciente`),
@@ -4967,6 +4986,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agenda_especialista` (
   `id_empa` int(11) DEFAULT NULL,
   `id_tipo_especialidad` int(11) DEFAULT NULL,
   `id_estado` int(11) DEFAULT '1',
+  `bo_activo` int(1) NOT NULL DEFAULT '1',
   `fecha_agenda` date DEFAULT NULL,
   `hora_agenda` time DEFAULT NULL,
   `gl_agenda_observacion` longtext,
@@ -4979,7 +4999,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agenda_especialista` (
   `fecha_diagnostico` date DEFAULT NULL,
   `hora_diagnostico` time DEFAULT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `fc_actualiza` timestamp NULL DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_agenda_especialista`),
@@ -4997,10 +5017,10 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agenda_especialista` (
 -- Volcado de datos para la tabla `pre_paciente_agenda_especialista`
 --
 
-INSERT INTO `pre_paciente_agenda_especialista` (`id_agenda_especialista`, `id_especialista`, `id_paciente`, `id_empa`, `id_tipo_especialidad`, `id_estado`, `fecha_agenda`, `hora_agenda`, `gl_agenda_observacion`, `id_cie10_capitulo`, `id_cie10_seccion`, `id_cie10_grupo`, `id_cie10`, `gl_observacion_diagnostico`, `gl_diagnostico`, `fecha_diagnostico`, `hora_diagnostico`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
-(2, 24, 8, 15, 1, 1, NULL, NULL, NULL, 22, 282, 0, 0, 'observacion prueba', 'diagnostico prueba', '2017-03-28', '17:24:08', NULL, NULL, 24, '2017-03-28 17:24:08'),
-(3, NULL, 8, NULL, 5, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'necesita buena alimentacion', NULL, NULL, NULL, 38, '2017-03-28 20:44:18', 18, '2017-03-28 17:43:47'),
-(4, 38, 8, 15, 5, 1, '2017-03-31', '15:40:00', 'prueba observacion', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 38, '2017-03-28 20:44:18');
+INSERT INTO `pre_paciente_agenda_especialista` (`id_agenda_especialista`, `id_especialista`, `id_paciente`, `id_empa`, `id_tipo_especialidad`, `id_estado`, `bo_activo`, `fecha_agenda`, `hora_agenda`, `gl_agenda_observacion`, `id_cie10_capitulo`, `id_cie10_seccion`, `id_cie10_grupo`, `id_cie10`, `gl_observacion_diagnostico`, `gl_diagnostico`, `fecha_diagnostico`, `hora_diagnostico`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
+(2, 24, 8, 15, 1, 1, 1, NULL, NULL, NULL, 22, 282, 0, 0, 'observacion prueba', 'diagnostico prueba', '2017-03-28', '17:24:08', NULL, NULL, 24, '2017-03-28 17:24:08'),
+(3, NULL, 8, NULL, 5, 4, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'necesita buena alimentacion', NULL, NULL, NULL, 38, '2017-03-29 12:49:35', 18, '2017-03-28 17:43:47'),
+(4, 38, 8, 15, 5, 1, 1, '2017-03-31', '15:40:00', 'prueba observacion', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 38, '2017-03-28 20:44:18');
 
 -- --------------------------------------------------------
 
@@ -5059,7 +5079,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_agresor` (
   `nr_hijos_en_comun` int(11) DEFAULT NULL,
   `nr_denuncias_por_violencia` int(11) DEFAULT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `fc_actualiza` timestamp NULL DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_agresor`),
@@ -5131,7 +5151,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_alarma` (
   `bo_apagar` int(11) DEFAULT '0' COMMENT '1=SI',
   `bo_mostrar` int(1) DEFAULT '1' COMMENT '1=SI',
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `fc_actualiza` timestamp NULL DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_alarma`),
@@ -5218,7 +5238,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_derivar` (
   `id_empa` int(11) DEFAULT NULL,
   `id_profesional` int(11) DEFAULT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `fc_actualiza` timestamp NULL DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_derivar`),
@@ -5244,7 +5264,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_direccion` (
   `gl_longitud` varchar(30) NOT NULL,
   `bo_estado` tinyint(1) NOT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `fc_actualiza` timestamp NULL DEFAULT NULL,
   `id_usuario_crea` int(11) NOT NULL,
   `fc_crea` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_paciente_direccion`),
@@ -5328,7 +5348,7 @@ CREATE TABLE IF NOT EXISTS `pre_paciente_examen` (
   `gl_glicemia` varchar(100) DEFAULT NULL,
   `gl_colesterol` varchar(100) DEFAULT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `fc_actualiza` timestamp NULL DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_paciente_examen`),
@@ -5718,6 +5738,7 @@ INSERT INTO `pre_perfil_opcion` (`id_perfil`, `id_opcion`, `id_usuario_crea`, `f
 (1, 11, 2, '2017-03-13 13:51:55'),
 (1, 13, 2, '2017-03-13 15:40:47'),
 (1, 14, NULL, '2017-03-27 20:40:16'),
+(1, 15, NULL, '2017-03-29 13:10:36'),
 (1, 8000, 2, '2017-03-06 20:31:28'),
 (1, 8001, NULL, NULL),
 (1, 8002, 2, '2017-03-13 15:40:47'),
@@ -5748,6 +5769,7 @@ INSERT INTO `pre_perfil_opcion` (`id_perfil`, `id_opcion`, `id_usuario_crea`, `f
 (5, 10000, NULL, '2017-03-17 19:03:15'),
 (6, 1, NULL, NULL),
 (6, 13, NULL, NULL),
+(6, 15, NULL, '2017-03-29 13:09:41'),
 (6, 10000, NULL, '2017-03-17 19:03:20'),
 (7, 1, 2, '2017-03-13 14:14:09'),
 (7, 9, 1, '2017-03-07 00:00:00'),
@@ -6844,22 +6866,24 @@ INSERT INTO `pre_tipo_escolaridad` (`id_tipo_escolaridad`, `gl_tipo_escolaridad`
 CREATE TABLE IF NOT EXISTS `pre_tipo_especialidad` (
   `id_tipo_especialidad` int(11) NOT NULL AUTO_INCREMENT,
   `gl_nombre_especialidad` varchar(150) DEFAULT NULL,
+  `bo_mostrar` int(1) DEFAULT '1',
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tipo_especialidad`),
   KEY `IDX_id_usuario_crea` (`id_usuario_crea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `pre_tipo_especialidad`
 --
 
-INSERT INTO `pre_tipo_especialidad` (`id_tipo_especialidad`, `gl_nombre_especialidad`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 'Odontólogo', NULL, '0000-00-00 00:00:00'),
-(2, 'Psicólogo', NULL, '0000-00-00 00:00:00'),
-(3, 'Psiquiatra', NULL, '0000-00-00 00:00:00'),
-(4, 'Dentista', NULL, '2017-03-09 00:00:00'),
-(5, 'Nutricionista', NULL, '2017-03-09 00:00:00');
+INSERT INTO `pre_tipo_especialidad` (`id_tipo_especialidad`, `gl_nombre_especialidad`, `bo_mostrar`, `id_usuario_crea`, `fc_crea`) VALUES
+(1, 'Médico Revisor', 0, NULL, '0000-00-00 00:00:00'),
+(2, 'Psicólogo', 1, NULL, '0000-00-00 00:00:00'),
+(3, 'Psiquiatra', 1, NULL, '0000-00-00 00:00:00'),
+(4, 'Dentista', 1, NULL, '2017-03-09 00:00:00'),
+(5, 'Nutricionista', 1, NULL, '2017-03-09 00:00:00'),
+(6, 'Odontólogo', 1, NULL, '2017-03-29 14:42:09');
 
 -- --------------------------------------------------------
 
@@ -8034,7 +8058,7 @@ CREATE TABLE IF NOT EXISTS `pre_usuario` (
   `bo_activo` int(1) DEFAULT '1',
   `fc_ultimo_login` datetime DEFAULT NULL,
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `fc_actualiza` timestamp NULL DEFAULT NULL,
   `id_usuario_crea` int(11) DEFAULT NULL,
   `fc_crea` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_usuario`),
@@ -8057,7 +8081,7 @@ CREATE TABLE IF NOT EXISTS `pre_usuario` (
 
 INSERT INTO `pre_usuario` (`id_usuario`, `id_perfil`, `gl_rut`, `gl_password`, `id_institucion`, `id_laboratorio`, `id_tipo_grupo`, `gl_nombres`, `gl_apellidos`, `id_region`, `id_comuna`, `gl_direccion`, `gl_email`, `gl_fono`, `gl_celular`, `bo_activo`, `fc_ultimo_login`, `id_usuario_actualiza`, `fc_actualiza`, `id_usuario_crea`, `fc_crea`) VALUES
 (1, 1, '13225524-5', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', 'Prevención', 1, 349, NULL, 'carolina.zamora@cosof.cl', NULL, NULL, 1, '2017-03-28 12:45:42', NULL, '2017-03-28 12:45:42', 1, '2017-02-09 10:30:00'),
-(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', '', 5, 349, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-28 18:00:19', NULL, '2017-03-28 18:00:19', 1, '2017-02-09 10:30:00'),
+(2, 1, '1-9', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', '', 5, 349, NULL, 'orlando.vazquez@cosof.cl', '563214', '+569912345678', 1, '2017-03-29 13:13:57', NULL, '2017-03-29 13:13:57', 1, '2017-02-09 10:30:00'),
 (3, 5, '0-0', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'David', 'Guzmán', 1, 349, NULL, 'david.guzman@cosof.cl', NULL, NULL, NULL, '2017-03-20 13:37:43', NULL, '2017-03-17 16:07:14', 1, '2017-02-09 10:30:00'),
 (6, 1, '1-1', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 2462, NULL, '2', 'Administrador', '', 1, 349, NULL, 'ovazquez.gonzalez@gmail.com', NULL, NULL, NULL, '2017-03-18 01:33:13', NULL, '2017-03-17 16:07:14', 1, NULL),
 (7, 2, '1-2', '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a', 1, NULL, '1', 'Médico', 'Arica', 15, 653, 'Calle 18 de Septiembre 1000', 'medicoarica@mail.cl', NULL, NULL, NULL, '2017-03-20 13:36:31', 2, '2017-03-17 16:07:14', NULL, NULL),
@@ -8134,12 +8158,11 @@ CREATE TABLE IF NOT EXISTS `pre_usuario_especialidad` (
 --
 
 INSERT INTO `pre_usuario_especialidad` (`id_usuario_especialidad`, `id_usuario`, `id_tipo_especialidad`, `gl_descripcion`, `id_usuario_crea`, `fc_crea`) VALUES
-(1, 7, 2, 'Jefe de la Facultad de psicología.', 2, '2017-03-13 15:04:16'),
-(2, 7, 3, 'Profesional Médico Psiquiatra Adulto', 2, '2017-03-13 15:07:35'),
-(3, 34, 1, 'Odontólogo ', NULL, '2017-03-16 22:50:39'),
-(4, 39, 1, 'Odontólogo', NULL, '2017-03-16 22:50:39'),
-(5, 44, 1, 'Odontólogo', NULL, '2017-03-16 22:50:39'),
-(6, 49, 1, 'Odontólogo', NULL, '2017-03-16 22:50:39'),
+(1, 18, 1, 'Médico Revisor', 2, '2017-03-13 15:04:16'),
+(3, 34, 3, 'Odontólogo ', NULL, '2017-03-16 22:50:39'),
+(4, 39, 6, 'Odontólogo', NULL, '2017-03-16 22:50:39'),
+(5, 44, 6, 'Odontólogo', NULL, '2017-03-16 22:50:39'),
+(6, 49, 6, 'Odontólogo', NULL, '2017-03-16 22:50:39'),
 (7, 35, 2, 'Psicólogo', 2, '2017-03-16 22:53:11'),
 (8, 40, 2, 'Psicólogo', 2, '2017-03-16 22:53:11'),
 (9, 45, 2, 'Psicólogo', 2, '2017-03-16 22:53:11'),
@@ -8174,7 +8197,7 @@ CREATE TABLE IF NOT EXISTS `pre_web_service` (
   `gl_key_private` varchar(255) DEFAULT NULL,
   `bo_estado` int(1) DEFAULT '1',
   `id_usuario_actualiza` int(11) DEFAULT NULL,
-  `fc_actualiza` timestamp NULL DEFAULT NULL ,
+  `fc_actualiza` timestamp NULL DEFAULT NULL,
   `id_usuario_creador` int(11) DEFAULT '0',
   `fc_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_web_service`),

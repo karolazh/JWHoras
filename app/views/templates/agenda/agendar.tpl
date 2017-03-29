@@ -85,10 +85,7 @@
                     <label class="control-label required col-sm-3">Fecha toma de examen</label>
 					<div class='col-sm-2'>
                         <div class="input-group">
-                                <input type='text' class="form-control datepicker"
-                                           id='fc_toma' 
-                                           name='fc_toma'
-                                           />
+                                <input type='text' class="form-control datepicker" id='fc_toma' name='fc_toma' />
                                 <span class="help-block hidden fa fa-warning"></span>
                                 <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_toma').focus();"></i></span>
                         </div>
