@@ -46,52 +46,46 @@ Class Boton{
 		$id_institucion	= $_SESSION['id_institucion'];
 		$id_laboratorio = $_SESSION['id_laboratorio'];
 
-		//if $mostrar_especialista != 1 and $mostrar_gestor != 1 Enfermera/Medico
 		$empa 	= "	<button type='button' 
-						onClick=\"location.href=('".BASE_URI."/Empa/nuevo/$id_paciente'\" 
+						onClick=\"location.href=('".BASE_URI."/Empa/nuevo/$id_paciente')\" 
 						data-toggle='tooltip' 
 						class='btn btn-xs btn-success'
 						data-title='Formulario EMPA'>
 						<i class='fa fa-book'></i>
 					</button>";
 
-		//Medico - Incluir en el EMPA
 		$plan 	= "	<button type='button' 
-						onClick=\"location.href=('".BASE_URI."/Medico/plan_tratamiento/$id_paciente'\" 
+						onClick=\"location.href=('".BASE_URI."/Medico/plan_tratamiento/$id_paciente')\" 
 						data-toggle='tooltip' 
 						class='btn btn-xs btn-default'
 						data-title='Plan Tratamiento'>
 						<i class='fa fa-medkit'></i>
 					</button>";
 
-		//{if $mostrar_especialista == 1} Especialista
 		$diagnostico 	= "	<button type='button' 
-								onClick=\"location.href=('".BASE_URI."/Especialista/diagnostico/$id_paciente'\" 
+								onClick=\"location.href=('".BASE_URI."/Especialista/diagnostico/$id_paciente')\" 
 								data-toggle='tooltip' 
 								class='btn btn-xs btn-default'
 								data-title='Diagnóstico'>
 								<i class='fa fa-user-md'></i>
 							</button>";
 
-		//{if $mostrar_gestor == 1} Gestor
 		$seguimiento 	= "	<button type='button' 
-								onClick=\"location.href=('".BASE_URI."/Gestor/seguimiento/$id_paciente'\" 
+								onClick=\"location.href=('".BASE_URI."/Gestor/seguimiento/$id_paciente')\" 
 								data-toggle='tooltip' 
-								class='btn btn-xs btn-danger'
+								class='btn btn-xs btn-warning'
 								data-title='Seguimiento'>
 								<i class='fa fa-eye'></i>
 							</button>";
 
-		// Laboratorio
 		$examen 	= "	<button type='button' 
-								onClick=\"location.href=('".BASE_URI."/Laboratorio/ver/$id_paciente'\" 
+								onClick=\"location.href=('".BASE_URI."/Laboratorio/ver/$id_paciente')\" 
 								data-toggle='tooltip' 
 								class='btn btn-xs btn-success'
 								data-title='Formulario Examen'>
 								<i class='fa fa-file-text-o'></i>
 							</button>";
 
-		//Enfermera - Especialista - Medico
 		$agendaExamen 	= "	<button type='button' 
 								onClick=\"xModal.open('".BASE_URI."/Agenda/ver/$id_paciente', 'Agenda Examen Paciente', 85)\" 
 								data-toggle='tooltip' 
@@ -99,10 +93,8 @@ Class Boton{
 								data-title='Ver Agenda Examen'>
 								<i class='fa fa-calendar'></i>
 							</button>";
-
 		// Falta Ver Agenda Especialista
 
-		//Todos
 		$ver	= "	<button type='button' 
 						onClick=\"xModal.open('".BASE_URI."/Paciente/ver/$id_paciente', 'Detalle Paciente', 85)\" 
 						data-toggle='tooltip' 
@@ -111,7 +103,6 @@ Class Boton{
 						<i class='fa fa-search'></i>
 					</button>";
 
-		//Todos
 		$bitacora	= "	<button type='button' 
 						onClick=\"xModal.open('".BASE_URI."/Bitacora/ver/$id_paciente', 'Bitácora Paciente', 85)\" 
 						data-toggle='tooltip' 
@@ -120,7 +111,6 @@ Class Boton{
 						<i class='fa fa-info-circle'></i>
 					</button>";
 
-		//$botones	= $empa.$plan.$diagnostico.$seguimiento.$examen.$agendaExamen.$ver.$bitacora;
 		$botones	= $agendaExamen.$ver.$bitacora;
 
 		if($bandeja == 'Paciente'){
@@ -129,6 +119,10 @@ Class Boton{
 			$botones	= $empa.$plan.$agendaExamen.$ver.$bitacora;
 		}else if($bandeja == 'Laboratorio'){
 			$botones	= $examen.$agendaExamen.$ver.$bitacora;
+		}else if($bandeja == 'Especialista'){
+			$botones	= $diagnostico.$agendaExamen.$ver.$bitacora;
+		}else if($bandeja == 'Gestor'){
+			$botones	= $seguimiento.$agendaExamen.$ver.$bitacora;
 		}
 		
 		return $botones;

@@ -76,7 +76,7 @@ class Especialista extends Controller {
 		$this->smarty->assign('mostrar_especialista', 1);
 		$this->smarty->assign('arrResultado', $arr);
 		$this->smarty->assign('bandeja', 'Especialista');
-		$this->smarty->assign('origen', 'Pacientes derivados a Especialista');
+		$this->smarty->assign('origen', 'Pacientes Derivados.');
 
 		$this->_display('grilla/pacientes.tpl');
 	}
