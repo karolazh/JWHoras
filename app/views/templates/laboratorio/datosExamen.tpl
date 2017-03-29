@@ -44,6 +44,14 @@
                     </div>
                     <div class="col-sm-12"></div>
                 </div>
+            </div>
+        </div>
+
+        <!-- DATOS TOMA DE EXAMEN -->
+        <div class="box box-success">
+            
+            <div class="box-body">
+				{if $rut_lab}
                 <div class="form-group">
                     <label class="control-label required col-sm-3">RUT persona toma examen</label>
                     <div class="col-sm-2">
@@ -54,20 +62,13 @@
                                {if $perfil == "7" or $accion == "1" or $accion == "3"}readonly{/if} />
                     </div>
                     <label class="control-label required col-sm-3">Nombre persona toma examen</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <input type="text" name="gl_nombre_toma" id="gl_nombre_toma" maxlength="" 
                                value="{$nombre_lab}" class="form-control"
                                {if $perfil == "7" or $accion == "1" or $accion == "3"}readonly{/if} />
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- DATOS TOMA DE EXAMEN -->
-        <div class="box box-success">
-            <div class="box-header with-border"><h3 class="box-title">
-                    <i class="fa fa-sticky-note"></i> Datos de Examen</h3></div>
-            <div class="box-body">
+				{/if}
                 <div class="form-group">
                     <label for="fc_toma" class="control-label col-sm-3">Fecha toma de examen</label>
                     <div class='col-sm-2'>
@@ -85,19 +86,21 @@
                         <input type="date" class="form-control col-sm-2" 
                                name="fc_toma" id="fc_toma" value="{$fc_toma}" readonly />
                     </div>-->
-					{if $accion != 3}
-                    <label for="fc_resultado" class="control-label col-sm-3">Fecha resultado de examen</label>
-                    <div class='col-sm-2'>
-                        <div class="input-group">
-                            <input type='text' class="form-control datepicker" 
-                                   id='fc_resultado' 
-                                   name='fc_resultado'
-                                   value="{$fc_resultado|date_format:"%d/%m/%Y"}"
-                                   {if $accion == "1"}readonly{/if} />
-                            <span class="help-block hidden fa fa-warning"></span>
-                            <span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_resultado').focus();"></i></span>
-                        </div>
-                    </div>
+					{if $rut_lab}
+						{if $accion != 3}
+						<label for="fc_resultado" class="control-label col-sm-3">Fecha resultado de examen</label>
+						<div class='col-sm-2'>
+							<div class="input-group">
+								<input type='text' class="form-control datepicker" 
+									   id='fc_resultado' 
+									   name='fc_resultado'
+									   value="{$fc_resultado|date_format:"%d/%m/%Y"}"
+									   {if $accion == "1"}readonly{/if} />
+								<span class="help-block hidden fa fa-warning"></span>
+								<span class="input-group-addon"><i class="fa fa-calendar" onClick="$('#fc_resultado').focus();"></i></span>
+							</div>
+						</div>
+						{/if}
 					{/if}
                     <!-- <div class="col-sm-2">
                         <input type="date" class="form-control col-sm-2"
@@ -111,16 +114,27 @@
                         <input type="time" class="form-control col-sm-2"                                
                                name="gl_hora_toma" id="gl_hora_toma" value="{$gl_hora_toma}" {if $accion != 3}readonly{/if} />
                     </div>
-					{if $accion != 3}
-                    <label class="control-label required col-sm-3">Folio examen</label>
-                    <div class="col-sm-2">
-                        <input type="text" name="gl_folio" id="gl_folio" maxlength="" 
-                               onKeyPress="return soloNumeros(event)"
-                               value="{$gl_folio}" placeholder="" class="form-control"
-                               {if $accion == "1"}readonly{/if}/>
-                    </div>
+					{if $rut_lab}
+						{if $accion != 3}
+						<label class="control-label required col-sm-3">Folio examen</label>
+						<div class="col-sm-2">
+							<input type="text" name="gl_folio" id="gl_folio" maxlength="" 
+								   onKeyPress="return soloNumeros(event)"
+								   value="{$gl_folio}" placeholder="" class="form-control"
+								   {if $accion == "1"}readonly{/if}/>
+						</div>
+						{/if}
 					{/if}
                 </div>
+				
+				{if !$rut_lab}
+				<div class="form-group">&nbsp;</div>
+				<div class="form-group">
+						<label class="control-label required col-sm-3"></label>&nbsp;&nbsp;
+						<label><span class="label label-warning">Aún no se registra Resultado</span></label>
+				</div>
+				{/if}
+				
 				{if $accion != 3}
                 <div class="form-group">
                     <label class="control-label required col-sm-3">&nbsp;</label>
@@ -143,6 +157,7 @@
                         {/if}
                     {/if}
                 </div>
+				
                 <div class="form-group">
                     {if $id_tipo_examen == "1" or $id_tipo_examen == "7" or $id_tipo_examen == "9"}
                         <label class="control-label required col-sm-3">&nbsp;</label>
@@ -150,6 +165,7 @@
                         {include file='laboratorio/selectNormalAlterado.tpl'}
                     {/if}
                 </div>
+				
             </div>
         </div>
 
