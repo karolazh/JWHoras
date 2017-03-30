@@ -129,7 +129,7 @@ class Gestor extends Controller {
 		if ($registro->gl_rut != ""){
 			$this->smarty->assign("gl_rut", $registro->gl_rut);
 		} else {
-		$this->smarty->assign("gl_rut", $registro->gl_run_pass);
+			$this->smarty->assign("gl_rut", $registro->gl_run_pass);
 		}
 		$this->smarty->assign("id_paciente", $id_paciente);
 		$this->smarty->assign("id_empa", $id_empa->id_empa);
@@ -151,6 +151,7 @@ class Gestor extends Controller {
 		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/fullcalendar.min.js");
 		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/locale/es.js");
 		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/lib/moment.min.js");
+		$this->load->javascript(STATIC_FILES.'js/templates/home/home.js');
 	}
 	
 }

@@ -401,7 +401,7 @@ class Empa extends Controller{
 		$edad = Fechas::calcularEdadInv($registro->fc_nacimiento);
 		$this->smarty->assign("edad", $edad);
 		//Mostrar/Ocultar Panel Dislipidemia segun Edad
-		if ($edad > 40) {
+		if ($edad >= 40) {
 			$dislipidemia = "display: block";
 		} else {
 			$dislipidemia = "display: none";

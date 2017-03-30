@@ -24,6 +24,7 @@
     <input type="text" value="{$id_empa}" id="id_empa" name="id_empa" class="hidden">
     <input type="text" value="{$bo_finalizado}" id="bo_finalizado" name="bo_finalizado" class="hidden">
     <input type="text" value="{$id_centro_salud}" id="id_centro_salud" name="id_centro_salud" class="hidden">
+    <input type="text" value="1" id="seguimiento" name="seguimiento" class="hidden">
     <section class="content">
 
 
@@ -105,7 +106,7 @@
 								<th>Tipo de Alarma</th>
 								<th>Perfil</th>
 								<th>Estado Alarma</th>
-								<th>Apagar Alarma</th>
+								<th>Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -134,37 +135,98 @@
 
 				<!-- Agenda Especialista -->
 		<div class="panel panel-primary">
-			<div class="panel-heading">Agenda Especialista</div>
+			<div class="panel-heading">Agenda Paciente</div>
 			<div class="panel-body">
-				<div class="form-group">
-					<div class="box-body">
-						<div id="div_tabla" class="table-responsive small col-lg-12">
-							<label class="control-label"><h5>Horas con Especialistas</h5></label>
+			<div class="row">
+
+				<div role="tabpanel">
+
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active">
+							<a href="#agendaespecialistas" aria-controls="agendaespecialistas" role="tab" data-toggle="tab">Agenda Especialista</a>
+						</li>
+						<li role="presentation">
+							<a href="#agendaexamenes" aria-controls="agendaexamenes" role="tab" data-toggle="tab">Agenda Exámenes</a>
+						</li>
+						<li role="presentation">
+							<a href="#mapa" aria-controls="mapa" role="tab" data-toggle="tab" onclick="Home.initMapaGestor();">Mapa</a>
+						</li>
+					</ul>
+					
+					
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="agendaespecialistas">
+
+							<div class="col-xs-12">
+								<legend>Agenda Especialista</legend>
+								<div class="row">
+									<div class="form-group">
+										{include file='agenda/grillaHoraEspecialista.tpl'}
+									</div>
+
+									<div class="form-group">
+										<input type="text" value="{$arrAgenda}" id="arrAgenda" name="arrAgenda" class="hidden" />
+										<div class="panel-heading">
+											Calendario
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div id='calendar'></div>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
-					{include file='agenda/grillaHoraEspecialista.tpl'}
+
+						<div role="tabpanel" class="tab-pane" id="agendaexamenes">
+
+							<div class="col-xs-12">
+								<legend>Agenda Exámenes</legend>
+								<div class="row">
+									<div class="form-group">
+										{include file='agenda/grillaHoraEspecialista.tpl'}
+									</div>
+
+									<div class="form-group">
+										<input type="text" value="{$arrAgenda}" id="arrAgenda" name="arrAgenda" class="hidden" />
+										<div class="panel-heading">
+											Calendario
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div id='calendar'></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div role="tabpanel" class="tab-pane" id="mapa">
+							<div class="col-xs-12">
+								<legend>Mapa</legend>
+								<div id="mapa_gestor" style="height: 600px;" class="col-xs-12"></div>
+								<input type="hidden" name="latitud" id="latitud" value="-33.04864"/>
+								<input type="hidden" name="longitud" id="longitud" value="-71.613353"/>
+							</div>
+						</div>
+
+					</div>		
+							
+							
 				</div>
-				
-				<div class="form-group">
-					<input type="text" value="{$arrAgenda}" id="arrAgenda" name="arrAgenda" class="hidden" />
-					<div class="panel-heading">
-						Calendario
-					</div>
-				</div>
-					
-				<div class="form-group">
-					<div id='calendar'></div>
-				</div>
-					
-				<div class="form-group col-sm-11" align="right">
-					<button type="button" id="guardar" class="btn btn-success">
-						<i class="fa fa-save"></i>  Guardar
-					</button>&nbsp;
-					<button type="button" id="cancelar"  class="btn btn-default" 
-							onclick="location.href = history.back()">
-						<i class="fa fa-remove"></i>  Cancelar
-					</button>
-				</div>
+			</div>
+						
+						<div class="form-group col-sm-11" align="right">
+							<button type="button" id="guardar" class="btn btn-success">
+								<i class="fa fa-save"></i>  Guardar
+							</button>&nbsp;
+							<button type="button" id="cancelar"  class="btn btn-default" 
+									onclick="location.href = history.back()">
+								<i class="fa fa-remove"></i>  Cancelar
+							</button>
+						</div>	
 			</div>
 		</div>
 
