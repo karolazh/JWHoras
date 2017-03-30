@@ -88,7 +88,11 @@ class Bitacora extends Controller {
 			}
 
 			$nombres = $detPaciente->gl_nombres . ' ' . $detPaciente->gl_apellidos;
-			$edad = Fechas::calcularEdadInv($detPaciente->fc_nacimiento);
+            if (!is_null($detPaciente->fc_nacimiento)) {
+                $edad = Fechas::calcularEdadInv($detPaciente->fc_nacimiento);
+            } else {
+                $edad = "";
+            }
 
             $cod_gen = $detPaciente->gl_sexo;
             /* OJO que busca detalle en "Tipo de Género" 
