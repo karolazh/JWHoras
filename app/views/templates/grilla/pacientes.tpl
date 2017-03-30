@@ -41,7 +41,8 @@
 							<input type="text" value="{$item->id_paciente}" id="id_paciente" name="id_paciente" class="hidden">
 							{assign var="color" value=""}
 							{assign var="alarmaExamen" value="<span class='label label-success'> No </span>"}
-							{if $item->nr_examen_alterado > 0 or $item->gl_examen_alterado_externo > 0 or ($item->bo_reconoce == 1 and $mostrar_gestor == 1)}
+							{* if $item->nr_examen_alterado > 0 or $item->gl_examen_alterado_externo > 0 or ($item->bo_reconoce == 1 and $mostrar_gestor == 1) *}
+							{if $item->nr_examen_alterado > 0 or $item->gl_examen_alterado_externo > 0 }
 								{* assign var="color" value="color:#ff0000; background: #F7D3D2;" *}
 								{assign var="alarmaExamen" value="<span class='label label-danger'> Si </span>"}
 							{/if}
