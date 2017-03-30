@@ -1,4 +1,4 @@
-{if $rut_lab}
+{if $fc_resultado}
 <label class="control-label required col-sm-3">Glicemia (mg/dl)</label>
 <div class="col-sm-2">
     <input type="text" name="gl_glicemia" id="gl_glicemia" maxlength="4" 

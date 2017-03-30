@@ -51,7 +51,7 @@
         <div class="box box-success">
             
             <div class="box-body">
-				{if $rut_lab}
+				{if $fc_resultado}
                 <div class="form-group">
                     <label class="control-label required col-sm-3">RUT persona toma examen</label>
                     <div class="col-sm-2">
@@ -86,7 +86,7 @@
                         <input type="date" class="form-control col-sm-2" 
                                name="fc_toma" id="fc_toma" value="{$fc_toma}" readonly />
                     </div>-->
-					{if $rut_lab}
+					{if $fc_resultado}
 						{if $accion != 3}
 						<label for="fc_resultado" class="control-label col-sm-3">Fecha resultado de examen</label>
 						<div class='col-sm-2'>
@@ -114,7 +114,7 @@
                         <input type="time" class="form-control col-sm-2"                                
                                name="gl_hora_toma" id="gl_hora_toma" value="{$gl_hora_toma}" {if $accion != 3}readonly{/if} />
                     </div>
-					{if $rut_lab}
+					{if $fc_resultado}
 						{if $accion != 3}
 						<label class="control-label required col-sm-3">Folio examen</label>
 						<div class="col-sm-2">
@@ -127,7 +127,7 @@
 					{/if}
                 </div>
 				
-				{if !$rut_lab}
+				{if !$fc_resultado}
 				<div class="form-group">&nbsp;</div>
 				<div class="form-group">
 						<label class="control-label required col-sm-3"></label>&nbsp;&nbsp;
