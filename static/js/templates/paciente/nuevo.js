@@ -13,7 +13,9 @@ $("#guardar").on('click', function (e) {
 		xModal.danger('Debe seleccionar la region del Paciente.');
 	} else if ($( "#comuna option:selected" ).val() === "0"){
 		xModal.danger('Debe seleccionar la comuna del Paciente.');
-	} 
+	} else if ($( "#centrosalud option:selected" ).val() === "0"){
+		xModal.danger('Debe seleccionar un Centro de Salud del Paciente.');
+	}
 	
 		else {
 		if ($('#chkextranjero').is(':checked')) {
