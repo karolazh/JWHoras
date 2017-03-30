@@ -202,9 +202,7 @@ class Empa extends Controller{
 		
 		$this->smarty->assign("gl_nombres", $registro->gl_nombres);
 		$this->smarty->assign("gl_apellidos", $registro->gl_apellidos);
-		$fc_nacimiento = $registro->fc_nacimiento;
-		$fc_nacimiento = date("d/m/Y", strtotime($fc_nacimiento));
-		$this->smarty->assign("fc_nacimiento", $fc_nacimiento);
+		$this->smarty->assign("fc_nacimiento", $registro->fc_nacimiento);
 		$reconoce = $registro->bo_reconoce;
         /* Caro 17-03-2017: guarda centro de salud para carga de laboratorios */
         $this->smarty->assign("id_centro_salud", $registro->id_centro_salud);
@@ -400,10 +398,8 @@ class Empa extends Controller{
 		}
 		$this->smarty->assign("check", $check);
 		//calculo edad
-		$fc_nacimiento = str_replace("'","",Fechas::formatearBaseDatos($fc_nacimiento));
-		list($Y, $m, $d ) = explode("-", $fc_nacimiento);
-		$edad = ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );
-		$this->smarty->assign("edad", $edad);
+		$edad = Fechas::calcularEdadInv($registro->fc_nacimiento);
+		
 		//Mostrar/Ocultar Panel Dislipidemia segun Edad
 		if ($edad > 40) {
 			$dislipidemia = "display: block";
@@ -441,7 +437,7 @@ class Empa extends Controller{
         $this->smarty->assign("id_mamografia", "8");
         $this->smarty->assign("id_hipertension", "9");
         /* Fin Caro */
-		
+		$this->smarty->assign("edad", $edad);
 		$this->smarty->assign("bo_finalizado", $empa->bo_finalizado);
 		$this->smarty->assign("mamografia", $mamografia);
 		$this->smarty->assign("pap", $pap);

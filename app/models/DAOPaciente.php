@@ -50,7 +50,9 @@ class DAOPaciente extends Model{
     }
 
     public function getById($id){
-        $query		= "	SELECT * FROM ".$this->_tabla."
+        $query		= "	SELECT	*,
+								date_format(fc_nacimiento,'%d-%m-%Y') as fc_nacimiento
+						FROM ".$this->_tabla."
 						WHERE ".$this->_primaria." = ?";
 
 		$param		= array($id);
