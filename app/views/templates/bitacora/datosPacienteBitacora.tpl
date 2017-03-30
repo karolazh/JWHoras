@@ -50,30 +50,10 @@
 
     <div class="clearfix col-md-6">
         <div class="col-md-4">
-            <label class="control-label">Estado Caso : </label>
-        </div>
-        <div class="col-md-8">
-            <input type="text" value="{$gl_nombre_estado_caso}" class="form-control" readonly>
-        </div>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="clearfix col-md-6">
-        <div class="col-md-4">
             <label class="control-label">Previsi&oacute;n : </label>
         </div>
         <div class="col-md-8">
             <input type="text" value="{$gl_nombre_prevision}" class="form-control" readonly>
-        </div>
-    </div>
-
-    <div class="clearfix col-md-6">
-        <div class="col-md-4">
-            <label class="control-label">Grupo : </label>
-        </div>
-        <div class="col-md-8">
-            <input type="text" value="{$gl_grupo_tipo}" class="form-control" readonly>
         </div>
     </div>
 </div>
