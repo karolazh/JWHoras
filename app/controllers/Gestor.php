@@ -124,8 +124,9 @@ class Gestor extends Controller {
             }else{
                 $pacientes = $this->_DAOPaciente->getListaDetalle(array('paciente.id_region' => $_SESSION['id_region']));
             }
-		
-		$edad = Fechas::calcularEdadInv($registro->fc_nacimiento);
+		if(!empty($registro->fc_nacimiento)){
+		   $edad = Fechas::calcularEdadInv($registro->fc_nacimiento);
+		}
 		
 		if ($registro->gl_rut != ""){
 			$this->smarty->assign("gl_rut", $registro->gl_rut);
