@@ -383,21 +383,39 @@ class Laboratorio extends Controller {
         echo $json;
     }
 	
+	/**
+	 * Descripción: Re Agendar y asociar id_examen a Empa respectivo
+	 * @author David Guzmán <david.guzman@cosof.cl>
+     * @return JSON
+	 */
 	public function reAgendar() {
 		header('Content-type: application/json');
 		
         $parametros		= $this->_request->getParams();
-        $id_empa		= $this->_DAOEmpa->getByIdPaciente($parametros['id_paciente']);
+        $empa			= $this->_DAOEmpa->getByIdPaciente($parametros['id_paciente']);
+        $examenAnterior = $this->_DAOPacienteExamen->getById($parametros['id_paciente_examen']);
 		$bool_insert	= FALSE;
 		$bool_update	= FALSE;
-		
-		$parametros['id_empa']			= $id_empa->id_empa;
-		$parametros['id_laboratorio']	= $_SESSION['id_laboratorio'];
-		
 		$correcto		= FALSE;
 		$error			= FALSE;
+		
+		$parametros['gl_observacion_toma']	= $examenAnterior->gl_observacion_toma;
+		$parametros['id_empa']				= $empa->id_empa;
+		$parametros['id_laboratorio']		= $_SESSION['id_laboratorio'];
+		$id_examen							= $parametros['id_tipo_examen'];
 		$bool_insert	= $this->_DAOPacienteExamen->insertExamen($parametros);
 		if ($bool_insert) {
+		
+			//Asociar id_examen a respectivo id_examen EMPA
+			if ($id_examen == 1) { $resp = $this->_DAOEmpa->update(array('id_examen_glicemia'     => $bool_insert), $empa->id_empa, 'id_empa'); }
+			if ($id_examen == 2) { $resp = $this->_DAOEmpa->update(array('id_examen_vdrl'         => $bool_insert), $empa->id_empa, 'id_empa'); }
+			if ($id_examen == 3) { $resp = $this->_DAOEmpa->update(array('id_examen_rpr'          => $bool_insert), $empa->id_empa, 'id_empa'); }
+			if ($id_examen == 4) { $resp = $this->_DAOEmpa->update(array('id_examen_vih'          => $bool_insert), $empa->id_empa, 'id_empa'); }
+			if ($id_examen == 5) { $resp = $this->_DAOEmpa->update(array('id_examen_baciloscopia' => $bool_insert), $empa->id_empa, 'id_empa'); }
+			if ($id_examen == 6) { $resp = $this->_DAOEmpa->update(array('id_examen_pap'          => $bool_insert), $empa->id_empa, 'id_empa'); }
+			if ($id_examen == 7) { $resp = $this->_DAOEmpa->update(array('id_examen_colesterol'   => $bool_insert), $empa->id_empa, 'id_empa'); }
+			if ($id_examen == 8) { $resp = $this->_DAOEmpa->update(array('id_examen_mamografia'   => $bool_insert), $empa->id_empa, 'id_empa'); }
+			if ($id_examen == 9) { $resp = $this->_DAOEmpa->update(array('id_examen_hipertension' => $bool_insert), $empa->id_empa, 'id_empa'); }
 			$bool_update	= $this->_DAOPacienteExamen->updateExamenReAgendado($parametros);
 		}
 		

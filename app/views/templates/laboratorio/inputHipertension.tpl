@@ -1,4 +1,4 @@
-{if $rut_lab}
+{if $fc_resultado}
 <label class="control-label required col-sm-3">PAS (mm/Hg)</label>
 <div class="col-sm-2">
     <input type="text" name="gl_pas" id="gl_pas" maxlength="4" 

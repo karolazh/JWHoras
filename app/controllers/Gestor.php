@@ -124,12 +124,9 @@ class Gestor extends Controller {
             }else{
                 $pacientes = $this->_DAOPaciente->getListaDetalle(array('paciente.id_region' => $_SESSION['id_region']));
             }
-		
-		$fc_nac = date("d/m/Y", strtotime($registro->fc_nacimiento));
-		//calculo edad
-		$fc_nacimiento = str_replace("'","",Fechas::formatearBaseDatos($fc_nac));
-		list($Y, $m, $d ) = explode("-", $fc_nacimiento);
-		$edad = ( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );
+		if(!empty($registro->fc_nacimiento)){
+		   $edad = Fechas::calcularEdadInv($registro->fc_nacimiento);
+		}
 		
 		if ($registro->gl_rut != ""){
 			$this->smarty->assign("gl_rut", $registro->gl_rut);
@@ -140,7 +137,7 @@ class Gestor extends Controller {
 		$this->smarty->assign("id_empa", $id_empa->id_empa);
 		$this->smarty->assign("gl_nombres", $registro->gl_nombres);
 		$this->smarty->assign("gl_apellidos", $registro->gl_apellidos);
-		$this->smarty->assign("fc_nacimiento", $fc_nac);
+		$this->smarty->assign("fc_nacimiento", $registro->fc_nacimiento);
 		$this->smarty->assign("edad", $edad);
 		$this->smarty->assign("gl_fono", $registro->gl_fono);
 		$this->smarty->assign("gl_celular", $registro->gl_celular);

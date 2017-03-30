@@ -184,7 +184,7 @@ $("#reagendar").on('click', function (e) {
 						if (data.correcto) {
 							xModal.success('Éxito: Fecha y Hora ReAgendada!');
 							setTimeout(function () {
-								location.href = BASE_URI + "index.php/Laboratorio/ver";
+								location.href = BASE_URI + "index.php/Laboratorio/ver/"+$("#id_paciente").val();
 							}, 2000);
 						} else {
 							xModal.info('Error: No se pudo ReAgendar!');
