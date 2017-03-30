@@ -1,18 +1,21 @@
 /* global BASE_URI */
 $("#guardar").on('click', function (e) {
-	var button_process = buttonStartProcess($(this), e);
-	var parametros = $("#form").serializeArray();
-	var region = $("#region").val();
-	var gl_rut = $("#rut").val();
+	var button_process	= buttonStartProcess($(this), e);
+	var parametros		= $("#form").serializeArray();
+	var region			= $("#region").val();
+	var gl_rut			= $("#rut").val();
+
 	if (gl_rut == '' && !$('#chkextranjero').is(':checked')) {
 		xModal.danger('- El campo RUT es Obligatorio');
-	} else if ($('#chkextranjero').is(':checked') && $('#opcionPrevision').val() === "1" && $('#gl_codigo_fonasa').val() === "") {
-		xModal.danger('Si eres extranjero afiliado en FONASA, deber ingresar tu código fonasa y subir tu certifiado de afiliación');
+	} else if ($('#chkextranjero').is(':checked') && $('#opcionPrevision option:selected').val() === "1" && $('#gl_codigo_fonasa').val() === "") {
+		xModal.danger('Si es extranjero afiliado en FONASA, debe ingresar Código Fonasa y Adjuntar Certifiado.');
 	} else if ($( "#region option:selected" ).val() === "0"){
-		xModal.danger('Debe seleccionar la region del paciente.');
+		xModal.danger('Debe seleccionar la region del Paciente.');
 	} else if ($( "#comuna option:selected" ).val() === "0"){
-		xModal.danger('Debe seleccionar la comuna del paciente.');
-	} 
+		xModal.danger('Debe seleccionar la comuna del Paciente.');
+	} else if ($( "#centrosalud option:selected" ).val() === "0"){
+		xModal.danger('Debe seleccionar un Centro de Salud del Paciente.');
+	}
 	
 		else {
 		if ($('#chkextranjero').is(':checked')) {

@@ -1,6 +1,7 @@
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="{$smarty.const.STATIC_FILES}template/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
+{if $origen != 'Buscar'}
 <section class="content-header">
     <h1><i class="fa fa-book"></i>&nbsp; {$origen} </h1>
     <div class="col-md-12 text-right">
@@ -13,6 +14,7 @@
     </div>
     <br/><br/>
 </section>
+{/if}
 
 <section class="content">
     <div class="box box-primary">

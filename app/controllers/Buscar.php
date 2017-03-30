@@ -112,10 +112,11 @@ class Buscar extends Controller {
 		$this->smarty->assign("arrRegiones", $arrRegiones);
 		$this->smarty->assign("arrCentroSalud", $arrCentroSalud);
 		$this->smarty->assign('mostrar',$mostrar);
+		$this->smarty->assign('origen', 'Buscar');
 
 		$this->_display('buscar/paciente.tpl');
 		$this->load->javascript(STATIC_FILES . "js/regiones.js");
 		$this->load->javascript(STATIC_FILES . "js/templates/buscar/buscar.js");
 	}
-	
+
 }
