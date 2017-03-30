@@ -122,15 +122,20 @@ class Fechas{
 	 * @return [type]                   [description]
 	 */
 	public static function calcularEdadInv($fecha_nacimiento){
-		list($dia,$mes,$ano)	= explode("-",$fecha_nacimiento);
-	    $ano_diferencia			= date("Y") - $ano;
-	    $mes_diferencia			= date("m") - $mes;
-	    $dia_diferencia			= date("d") - $dia;
-	   
-		if ($dia_diferencia < 0 || $mes_diferencia < 0){
-			$ano_diferencia--;
+		if(!empty($fecha_nacimiento)){
+			list($dia,$mes,$ano)	= explode("-",$fecha_nacimiento);
+			$ano_diferencia			= date("Y") - $ano;
+			$mes_diferencia			= date("m") - $mes;
+			$dia_diferencia			= date("d") - $dia;
+
+			if ($dia_diferencia < 0 || $mes_diferencia < 0){
+				$ano_diferencia--;
+			}
+			return $ano_diferencia;
+			
+		} else {
+			return null;
 		}
-	    return $ano_diferencia;
 	}
         
 	public static function calcularEdad($fecha_nacimiento){

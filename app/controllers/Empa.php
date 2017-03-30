@@ -398,30 +398,25 @@ class Empa extends Controller{
 		}
 		$this->smarty->assign("check", $check);
 		//calculo edad
-		if (!empty($registro->fc_nacimiento)) {
-			$edad = Fechas::calcularEdadInv($registro->fc_nacimiento);
-			$this->smarty->assign("edad", $edad);
-			//Mostrar/Ocultar Panel Dislipidemia segun Edad
-			if ($edad > 40) {
-				$dislipidemia = "display: block";
-			} else {
-				$dislipidemia = "display: none";
-			}
-			$this->smarty->assign("dislipidemia", $dislipidemia);
-			//Mostrar/Ocultar Diabetes segun Edad y datos Glicemia
-			if ($edad > 40 || $empa->gl_glicemia) {
-				$diabetes = "display: block";
-			} else {
-				$diabetes = "display: none";
-			}
-			$this->smarty->assign("diabetes", $diabetes);
-			//Mostrar/Ocultar PAP segun edad
-			if (!($edad > 24 && $edad < 65) || ($empa->bo_embarazo == 1)) {
-				$pap = "display: none";
-			} else {
-				$pap = "display: block";
-			}
-			$this->smarty->assign("pap", $pap);
+		$edad = Fechas::calcularEdadInv($registro->fc_nacimiento);
+		$this->smarty->assign("edad", $edad);
+		//Mostrar/Ocultar Panel Dislipidemia segun Edad
+		if ($edad > 40) {
+			$dislipidemia = "display: block";
+		} else {
+			$dislipidemia = "display: none";
+		}
+		//Mostrar/Ocultar Diabetes segun Edad y datos Glicemia
+		if ($edad > 40 || $empa->gl_glicemia) {
+			$diabetes = "display: block";
+		} else {
+			$diabetes = "display: none";
+		}
+		//Mostrar/Ocultar PAP segun edad
+		if (!($edad > 24 && $edad < 65) || ($empa->bo_embarazo == 1)) {
+			$pap = "display: none";
+		} else {
+			$pap = "display: block";
 		}
 
 			//Mostrar/Ocultar MAMOGRAFIA segun embarazada
@@ -443,6 +438,9 @@ class Empa extends Controller{
         $this->smarty->assign("id_mamografia", "8");
         $this->smarty->assign("id_hipertension", "9");
         /* Fin Caro */
+		$this->smarty->assign("dislipidemia", $dislipidemia);
+		$this->smarty->assign("diabetes", $diabetes);
+		$this->smarty->assign("pap", $pap);
 		$this->smarty->assign("bo_finalizado", $empa->bo_finalizado);
 		$this->smarty->assign("mamografia", $mamografia);
 		$this->smarty->assign("gl_fono", $registro->gl_fono);
