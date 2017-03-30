@@ -15,7 +15,7 @@
         <!-- TIPO DE EXAMEN -->
 		{if $reagendar != 1}
                         
-        <!-- LABORATORIOS -->
+        <!-- DATOS DEL EXAMEN -->
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
                     <i class="fa fa-sticky-note"></i> Datos del Examen</h3>

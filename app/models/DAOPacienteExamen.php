@@ -431,7 +431,7 @@ class DAOPacienteExamen extends Model{
 	
     /**
 	 * Descripción: Inserta registro en tabla "pre_paciente_examen"
-	 * @author S/N
+	 * @author David Guzmán <david.guzman@cosof.cl>
      * @param  array   $parametros
 	 */
 	public function insertExamen($parametros){
@@ -444,6 +444,7 @@ class DAOPacienteExamen extends Model{
 						id_usuario_toma,
 						gl_rut_persona_toma,
 						gl_nombre_persona_toma,
+						gl_observacion_toma,
 						fc_toma,
 						gl_hora_toma,
 						fc_actualiza,
@@ -456,6 +457,7 @@ class DAOPacienteExamen extends Model{
 						'".$_SESSION['id']."',
 						'".$parametros['gl_rut_toma']."',
 						'".$parametros['gl_nombre_toma']."',
+						'".$parametros['gl_observacion_toma']."',
 						".Fechas::formatearBaseDatos(str_replace("'","",$parametros['fc_toma'])).",
 						'".$parametros['gl_hora_toma']."',
 						now(),
@@ -463,7 +465,7 @@ class DAOPacienteExamen extends Model{
 						)";
         
         if ($this->db->execQuery($query)) {
-            return TRUE;
+            return $this->db->getLastId();
         } else {
             return FALSE;
         }
@@ -471,7 +473,7 @@ class DAOPacienteExamen extends Model{
 	
     /**
 	 * Descripción: Actualiza registro en tabla "pre_paciente_examen"
-	 * @author S/N
+	 * @author David Guzmán <david.guzman@cosof.cl>
      * @param  array   $parametros
 	 */
 	public function updateExamenReAgendado($parametros){
