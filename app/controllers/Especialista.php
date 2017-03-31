@@ -256,7 +256,6 @@ class Especialista extends Controller {
         $parametros		= $this->_request->getParams();
 		$bool_insert	= FALSE;
 		$bool_update	= FALSE;
-		//print_r($_SESSION); die;
 		$parametros['id_laboratorio']	= $_SESSION['id_laboratorio'];
 		$parametros['id_tipo_especialidad']	= $_SESSION['id_tipo_especialidad'];
 		
