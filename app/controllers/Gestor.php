@@ -118,20 +118,18 @@ class Gestor extends Controller {
 		$registro		= $this->_DAOPaciente->getById($id_paciente);
 		$direccion		= $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
 		$alarmas		= $this->_DAOPacienteAlarma->getByIdPaciente($id_paciente);
+		$edad			= Fechas::calcularEdadInv($registro->fc_nacimiento);
 		
 		if($_SESSION['perfil'] == 5){
                 $pacientes = $this->_DAOPaciente->getListaDetalle();    
             }else{
                 $pacientes = $this->_DAOPaciente->getListaDetalle(array('paciente.id_region' => $_SESSION['id_region']));
             }
-		if(!empty($registro->fc_nacimiento)){
-		   $edad = Fechas::calcularEdadInv($registro->fc_nacimiento);
-		}
 		
 		if ($registro->gl_rut != ""){
 			$this->smarty->assign("gl_rut", $registro->gl_rut);
 		} else {
-		$this->smarty->assign("gl_rut", $registro->gl_run_pass);
+			$this->smarty->assign("gl_rut", $registro->gl_run_pass);
 		}
 		$this->smarty->assign("id_paciente", $id_paciente);
 		$this->smarty->assign("id_empa", $id_empa->id_empa);
@@ -153,6 +151,7 @@ class Gestor extends Controller {
 		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/fullcalendar.min.js");
 		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/locale/es.js");
 		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/lib/moment.min.js");
+		$this->load->javascript(STATIC_FILES.'js/templates/home/home.js');
 	}
 	
 }

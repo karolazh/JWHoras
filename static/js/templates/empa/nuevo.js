@@ -210,6 +210,7 @@ $(".bo_antecedente").on('change', function (e) {
 	if ($('#bo_antecedente_0').is(':checked') && $('#gl_imc').val() < 30 && $('#nr_edad').val() < 41) {
 		$('#glicemia').hide();
         $('#group_glicemia').hide();
+		$('#gl_glicemia').val("");
 	} else {
 		$('#glicemia').show();
         $('#group_glicemia').show();

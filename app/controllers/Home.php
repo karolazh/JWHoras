@@ -238,14 +238,19 @@ class Home extends Controller{
 	 */
     public function pacientesMapaDashboard(){
         $daoPacientes = $this->load->model('DAOPaciente');
-
+		$parametros		= $this->_request->getParams();
+		//print_r($parametros['seguimiento']); die();
         $response = array();
 
         if($_SESSION['perfil'] == 5){
-            $pacientes =  $daoPacientes->getLista();
-        }else{
-            $id_region = $_SESSION['id_region'];
-            $pacientes =  $daoPacientes->getLista(array('region' => $id_region));
+			$pacientes =  $daoPacientes->getLista();
+        } else if ($parametros['seguimiento']){
+			//$pacientes = $daoPacientes->getByIdPaciente($parametros['id_paciente']);
+			$id_region = $_SESSION['id_region'];
+			$pacientes =  $daoPacientes->getLista(array('region' => $id_region));
+		}else{
+			$id_region = $_SESSION['id_region'];
+			$pacientes =  $daoPacientes->getLista(array('region' => $id_region));
         }
 
         if($pacientes){

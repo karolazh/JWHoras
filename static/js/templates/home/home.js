@@ -244,7 +244,7 @@ var Home = {
     },
 
     initMapaGestor : function(){
-        
+        var parametros = $("#form").serializeArray();
         if(cargar_mapa){
           var mapa = new MapaFormulario('mapa_gestor');
 
@@ -256,6 +256,7 @@ var Home = {
           cargar_mapa = false;
 
           $.ajax({
+			data : parametros,
             url : BASE_URI + 'index.php/Home/pacientesMapaDashboard',
             type : 'post',
             dataType : 'json',
