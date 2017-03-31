@@ -1,25 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_tipo_vinculo
-* Plataforma        : !PHP
-* Creacion          : 07/03/2017
-* @name             DAOTipoVinculo.php
-* @version          1.0
-* @author           David Guzmán <david.guzman@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<david.guzman@cosof.cl>	07-03-2017	Creacion DAOTipoVinculo y respectivas funciones
-* 
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_tipo_vinculo
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 07/03/2017
+ * 
+ * @name             DAOTipoVinculo.php
+ * 
+ * @version          1.0
+ *
+ * @author           David Guzmán <david.guzman@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <david.guzman@cosof.cl>	07-03-2017	Creacion DAOTipoVinculo y respectivas funciones
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOTipoVinculo extends Model{
 
     protected $_tabla			= "pre_tipo_vinculo";

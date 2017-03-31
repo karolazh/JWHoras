@@ -1,26 +1,33 @@
 <?php
-
 /**
-******************************************************************************
-* Sistema			: PREVENCION DE FEMICIDIOS
-* Descripcion		: Controller para Registro de Paciente
-* Plataforma		: !PHP
-* Creacion			: 14/02/2017
-* @name				Paciente.php
-* @version			1.0
-* @author			Victor Retamal <victor.retamal@cosof.co>
-* =============================================================================
-* !ControlCambio
-* --------------
-* !cProgramador				!cFecha		!cDescripcion 
-* -----------------------------------------------------------------------------
-* <david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
-* <orlando.vazquez@cosof.co> 06-03-2017  Adaptacion a nueva BD de DAO's y funciones
-* <victor.retamal@cosof.co> 07-03-2017  fix GuardarRegistro() para nueva BD
-* -----------------------------------------------------------------------------
-*******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controller para Registro de Paciente
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 14/02/2017
+ * 
+ * @name             Paciente.php
+ * 
+ * @version          1.0
+ *
+ * @author           Victor Retamal <victor.retamal@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
+ * 
+ * <orlando.vazquez@cosof.co> 06-03-2017  Adaptacion a nueva BD de DAO's y funciones
+ * 
+ * <victor.retamal@cosof.co> 07-03-2017  fix GuardarRegistro() para nueva BD
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Paciente extends Controller {
 
 	protected $_Evento;

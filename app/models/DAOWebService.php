@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_adjunto
-* Plataforma        : !PHP
-* Creacion          : 15/03/2017
-* @name             DAOAdjunto.php
-* @version          1.0
-* @author           Victor Retamal <victor.retamal@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_web_service
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 15/03/2017
+ * 
+ * @name             DAOWebService.php
+ * 
+ * @version          1.0
+ *
+ * @author           Victor Retamal <victor.retamal@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOWebService extends Model{
 
     protected $_tabla           = "pre_web_service";

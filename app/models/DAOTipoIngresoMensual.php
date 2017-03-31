@@ -1,25 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_tipo_ingreso_mensual
-* Plataforma        : !PHP
-* Creacion          : 06/03/2017
-* @name             DAOTipoIngresoMensual.php
-* @version          1.0
-* @author           David Guzmán <david.guzman@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*
-* 
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_tipo_ingreso_mensual
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 06/03/2017
+ * 
+ * @name             DAOTipoIngresoMensual.php
+ * 
+ * @version          1.0
+ *
+ * @author           David Guzmán <david.guzman@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOTipoIngresoMensual extends Model{
 
     protected $_tabla			= "pre_tipo_ingreso_mensual";

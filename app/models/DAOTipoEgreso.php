@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_tipo_egreso
-* Plataforma        : !PHP
-* Creacion          : 01/03/2017
-* @name             DAOTipoEgreso.php
-* @version          1.0
-* @author           Victor Retamal <victor.retamal@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_tipo_egreso
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 01/03/2017
+ * 
+ * @name             DAOTipoEgreso.php
+ * 
+ * @version          1.0
+ *
+ * @author           Victor Retamal <victor.retamal@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOTipoEgreso extends Model{
 
     protected $_tabla			= "pre_tipo_egreso";

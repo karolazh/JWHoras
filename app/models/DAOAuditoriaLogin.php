@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_auditoria_login
-* Plataforma        : !PHP
-* Creacion          : 03/03/2017
-* @name             DAOAuditoriaLogin.php
-* @version          1.0
-* @author           Victor Retamal <victor.retamal@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_auditoria_login
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 03/03/2017
+ * 
+ * @name             DAOAuditoriaLogin.php
+ * 
+ * @version          1.0
+ *
+ * @author           Victor Retamal <victor.retamal@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOAuditoriaLogin extends Model {
 
     protected $_tabla			= "pre_auditoria_login";

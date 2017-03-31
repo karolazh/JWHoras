@@ -1,25 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_empa
-* Plataforma        : !PHP
-* Creacion          : 22/02/2017
-* @name             DAOEmpa.php
-* @version          1.0
-* @author           David Guzman <david.guzman@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a campos de la BD antigua
-* 
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_empa
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 22/02/2017
+ * 
+ * @name             DAOEmpa.php
+ * 
+ * @version          1.0
+ *
+ * @author           David Guzman <david.guzman@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a campos de la BD antigua
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOEmpa extends Model{
 
     protected $_tabla		= "pre_empa";

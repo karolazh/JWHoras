@@ -1,24 +1,29 @@
 <?php
-
 /**
-*******************************************************************************
-* Sistema          : PREVENCION DE FEMICIDIOS
-* Descripcion      : Controller para Exámenes de Pacientes
-* Plataforma       : !PHP
-* Creacion         : 15/03/2017
-* @name            Agenda.php
-* @version         1.0
-* @author          Carolina Zamora <carolina.zamora@cosof.cl>
-* =============================================================================
-* !ControlCambio
-* --------------
-* !cProgramador				!cFecha		!cDescripcion 
-* -----------------------------------------------------------------------------
-* 
-* -----------------------------------------------------------------------------
-*******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controller para Exámenes de Pacientes
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 15/03/2017
+ * 
+ * @name             Agenda.php
+ * 
+ * @version          1.0
+ *
+ * @author           Carolina Zamora <carolina.zamora@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Agenda extends Controller {
     
     protected $_DAOEmpa;

@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_opcion
-* Plataforma        : !PHP
-* Creacion          : 06/05/2017
-* @name             DAOOpcion.php
-* @version          1.0
-* @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_opcion
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 06/05/2017
+ * 
+ * @name             DAOMes.php
+ * 
+ * @version          1.0
+ *
+ * @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOOpcion extends Model {
 
     protected $_tabla			= "pre_opcion";

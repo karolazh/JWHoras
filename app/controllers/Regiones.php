@@ -1,24 +1,29 @@
 <?php
-
 /**
-******************************************************************************
-* Sistema			: PREVENCION DE FEMICIDIOS
-* Descripcion		: Controller para Region
-* Plataforma		: !PHP
-* Creacion			: 14/02/2017
-* @name             Paciente.php
-* @version			1.0
-* @author			Carolina Zamora <carolina.zamora@cosof.cl>
-* =============================================================================
-* !ControlCambio
-* --------------
-* !cProgramador				!cFecha		!cDescripcion 
-* -----------------------------------------------------------------------------
-*
-* -----------------------------------------------------------------------------
-*******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controller para Region
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 14/02/2017
+ * 
+ * @name             Paciente.php
+ * 
+ * @version          1.0
+ *
+ * @author           Carolina Zamora <carolina.zamora@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Regiones extends Controller{
 
 	protected $_DAORegion;

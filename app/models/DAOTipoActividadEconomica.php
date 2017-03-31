@@ -1,25 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_tipo_actividad_economica
-* Plataforma        : !PHP
-* Creacion          : 06/03/2017
-* @name             DAOTipoActividadEconomica.php
-* @version          1.0
-* @author           David Gusmán <david.guzman@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<david.guzman@cosof.cl>	07-03-2017	Cambio de clave primaria para que funcione correctamente
-* 
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_tipo_actividad_economica
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 06/03/2017
+ * 
+ * @name             DAOTipoActividadEconomica.php
+ * 
+ * @version          1.0
+ *
+ * @author           David Gusmán <david.guzman@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <david.guzman@cosof.cl>	07-03-2017	Cambio de clave primaria para que funcione correctamente
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOTipoActividadEconomica extends Model{
 
     protected $_tabla			= "pre_tipo_actividad_economica";

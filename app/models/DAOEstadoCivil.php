@@ -1,25 +1,31 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_tipo_estado_civil
-* Plataforma        : !PHP
-* Creacion          : 06/03/2017
-* @name             DAOEstadoCivil.php
-* @version          1.0
-* @author           David Gusman <david.guzman@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a campos de la BD antigua
-*<david.guzman@cosof.cl>	07-03-2017	Modificada clave primaria por nombre original
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_tipo_estado_civil
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 06/03/2017
+ * 
+ * @name             DAOEstadoCivil.php
+ * 
+ * @version          1.0
+ *
+ * @author           David Gusman <david.guzman@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <orlando.vazquez@cosof.cl>   05-06-2017  Modificadas referencias a campos de la BD antigua
+ * 
+ * <david.guzman@cosof.cl>      07-03-2017  Modificada clave primaria por nombre original
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOEstadoCivil extends Model{
 
     protected $_tabla			= "pre_tipo_estado_civil";

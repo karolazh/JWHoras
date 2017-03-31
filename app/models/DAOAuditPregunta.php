@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_empa_audit_pregunta
-* Plataforma        : !PHP
-* Creacion          : 25/02/2017
-* @name             DAOAuditPregunta.php
-* @version          1.0
-* @author           Victor Retamal <victor.retamal@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_empa_audit_pregunta
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 25/02/2017
+ * 
+ * @name             DAOAuditPregunta.php
+ * 
+ * @version          1.0
+ *
+ * @author           Victor Retamal <victor.retamal@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOAuditPregunta extends Model{
 
     protected $_tabla           = "pre_empa_audit_pregunta";

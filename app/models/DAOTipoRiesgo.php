@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_tipo_riesgo
-* Plataforma        : !PHP
-* Creacion          : 06/03/2017
-* @name             DAOTipoRiesgo.php
-* @version          1.0
-* @author           David Gusmán <david.guzman@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_tipo_riesgo
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 06/03/2017
+ * 
+ * @name             DAOTipoRiesgo.php
+ * 
+ * @version          1.0
+ *
+ * @author           David Guzmán <david.guzman@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOTipoRiesgo extends Model{
 
     protected $_tabla			= "pre_tipo_riesgo";

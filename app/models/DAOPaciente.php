@@ -1,25 +1,31 @@
  <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_paciente
-* Plataforma        : !PHP
-* Creacion          : 22/02/2017
-* @name             DAOPaciente.php
-* @version          1.0
-* @author           Victor Retamal <victor.retamal@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a BD antigua
-*<david.guzman@cosof.cl>	07-03-2017	updatePaciente()
-*-----------------------------------------------------------------------------
-*****************************************************************************
-**/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_paciente
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 22/02/2017
+ * 
+ * @name             DAOPaciente.php
+ * 
+ * @version          1.0
+ *
+ * @author           Victor Retamal <victor.retamal@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <orlando.vazquez@cosof.cl>   05-06-2017  Modificadas referencias a BD antigua
+ * 
+ * <david.guzman@cosof.cl>      07-03-2017  updatePaciente()
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOPaciente extends Model{
 
     protected $_tabla			= "pre_paciente";

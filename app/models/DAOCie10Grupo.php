@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_cie10_3_grupo
-* Plataforma        : !PHP
-* Creacion          : 21/03/2017
-* @name             DAOCie10Grupo.php
-* @version          1.0
-* @author           David Guzmán <david.guzman@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<david.guzman@cosof.cl>	22/03/2017	DAOCie10Grupo
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_cie10_3_grupo
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 21/03/2017
+ * 
+ * @name             DAOCie10Grupo.php
+ * 
+ * @version          1.0
+ *
+ * @author           David Guzmán <david.guzman@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <david.guzman@cosof.cl>      22/03/2017  DAOCie10Grupo
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOCie10Grupo extends Model{
 
     protected $_tabla           = "pre_cie10_3_grupo";

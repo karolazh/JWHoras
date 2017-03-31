@@ -1,25 +1,31 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Controlador para el formulario EMPA
-* Plataforma        : !PHP
-* Creacion          : 16/02/2017
-* @name             Empa.php
-* @version          1.0
-* @author           Carolina Zamora <carolina.zamora@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<orlando.vazquez@cosof.cl>	05-06-2017	Modificadas referencias a DAO's
-*<david.guzman@cosof.cl>	03-07-2017	Modificacion en funcion nuevo
-*-----------------------------------------------------------------------------
-******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controlador para el formulario EMPA
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 16/02/2017
+ * 
+ * @name             Empa.php
+ * 
+ * @version          1.0
+ *
+ * @author           Carolina Zamora <carolina.zamora@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <orlando.vazquez@cosof.cl>   05-06-2017  Modificadas referencias a DAO's
+ * 
+ * <david.guzman@cosof.cl>      03-07-2017  Modificacion en funcion nuevo
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Empa extends Controller{
 	
     protected $_DAOEmpa;
