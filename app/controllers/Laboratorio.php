@@ -175,6 +175,10 @@ class Laboratorio extends Controller {
     public function buscar() {
         $parametros			= $this->request->getParametros();
         $accion				= $parametros[0]; //1="Ver" //2="Editar" //3="ReAgendar"
+		if ($parametros[0] == 4){
+			$accion = 1;
+			$verEmpa = 1;
+		}
         $perfil				= $_SESSION['perfil'];
         
 		if (!empty($parametros[1])){
@@ -260,6 +264,7 @@ class Laboratorio extends Controller {
 			}
 		}
 		$this->smarty->assign("perfil", $perfil);
+		$this->smarty->assign("verEmpa", $verEmpa);
 		$this->smarty->assign("accion", $accion);
         $this->smarty->display("laboratorio/datosExamen.tpl");
         $this->load->javascript(STATIC_FILES . "js/templates/laboratorio/ver.js");

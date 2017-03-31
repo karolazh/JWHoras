@@ -594,7 +594,7 @@
 							{/if}
 							<input type="text" value="{$id_paciente_examen_pap}" id="id_paciente_examen_pap" name="id_paciente_examen_pap" class="hidden">
 							<button type="button" id="verExamen_{$id_pap}" style="{if $bo_finalizado != 1 and $examen_pap == 0}display: none{/if}" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/'+$('#id_paciente_examen_pap').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/4/'+$('#id_paciente_examen_pap').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-eye"></i> Ver Examen</button>
 							</div>
