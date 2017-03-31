@@ -125,8 +125,9 @@ class Reconoce extends Controller {
         $this->smarty->assign('gl_nombres', $paciente->gl_nombres);
         $this->smarty->assign('gl_apellidos', $paciente->gl_apellidos);
         $this->smarty->assign('fc_nacimiento', $paciente->fc_nacimiento);
+		$edad = Fechas::calcularEdadInv($paciente->fc_nacimiento);
         $this->smarty->assign('gl_direccion', $direccion->gl_direccion);
-        $this->smarty->assign('edad', $paciente->edad);
+        $this->smarty->assign('edad', $edad);
         $this->smarty->assign('fc_reconoce', Fechas::fechaHoy());
         $this->smarty->assign('fc_hora', date('h:i'));
         $this->smarty->assign('arrIngresosMensuales', $arrIngresosMensuales);

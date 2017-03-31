@@ -114,7 +114,7 @@
                         <input type="time" class="form-control col-sm-2"                                
                                name="gl_hora_toma" id="gl_hora_toma" value="{$gl_hora_toma}" {if $accion != "3"}readonly{/if} />
                     </div>
-					{if $fc_resultado or $perfil != "3"}
+					{if $fc_resultado or $verEmpa != "1"}
 						{if $accion != "3"}
 						<label class="control-label required col-sm-3">Folio examen</label>
 						<div class="col-sm-2">
@@ -135,7 +135,7 @@
 				</div>
 				{/if}
 				
-				{if $accion != "3"}
+		{if $accion != "3" and $verEmpa != "1"}
                 <div class="form-group">
                     <label class="control-label required col-sm-3">&nbsp;</label>
                     <div class="col-sm-2">&nbsp;</div>
@@ -165,7 +165,7 @@
                         {include file='laboratorio/selectNormalAlterado.tpl'}
                     {/if}
                 </div>
-				
+		{/if}
             </div>
         </div>
 
@@ -184,6 +184,7 @@
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
+				{if $accion != "3" and $verEmpa != "1"}	
                 <div class="form-group">
                     <label class="control-label required col-sm-3">Descripción</label>
                     <div class="col-sm-6">
@@ -194,10 +195,12 @@
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
+				{/if}
             </div>
         </div>
 
         <!-- INDICACIONES -->
+		{if $accion != "3" and $verEmpa != "1"}
         <div class="box box-success">
             <div class="box-header with-border"><h3 class="box-title">
                     <i class="fa fa-sticky-note"></i> Indicaciones</h3></div>

@@ -351,7 +351,7 @@
 								{/if}
 								<input type="text" value="{$id_paciente_examen_hipertension}" id="id_paciente_examen_hipertension" name="id_paciente_examen_hipertension" class="hidden">
 								<button type="button" id="verExamen_{$id_hipertension}" style="{if $bo_finalizado != 1 and $examen_hipertension == 0}display: none{/if}" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/'+$('#id_paciente_examen_hipertension').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/4/'+$('#id_paciente_examen_hipertension').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">
                                     <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
@@ -399,7 +399,7 @@
 								{/if}
 								<input type="text" value="{$id_paciente_examen_glicemia}" id="id_paciente_examen_glicemia" name="id_paciente_examen_glicemia" class="hidden">
 								<button type="button" id="verExamen_{$id_glicemia}" style="{if $bo_finalizado != 1 and $examen_glicemia == 0}display: none{/if}" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/'+$('#id_paciente_examen_glicemia').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/4/'+$('#id_paciente_examen_glicemia').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
@@ -434,7 +434,7 @@
 								{/if}
 								<input type="text" value="{$id_paciente_examen_vdrl}" id="id_paciente_examen_vdrl" name="id_paciente_examen_vdrl" class="hidden">
 								<button type="button" id="verExamen_{$id_vdrl}" style="{if $bo_finalizado != 1 and $examen_vdrl == 0}display: none{/if}" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/'+$('#id_paciente_examen_vdrl').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/4/'+$('#id_paciente_examen_vdrl').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
@@ -452,7 +452,7 @@
 									{/if}
 									<input type="text" value="{$id_paciente_examen_rpr}" id="id_paciente_examen_rpr" name="id_paciente_examen_rpr" class="hidden">
 								<button type="button" id="verExamen_{$id_rpr}" style="{if $bo_finalizado != 1 and $examen_rpr == 0}display: none{/if}" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/'+$('#id_paciente_examen_rpr').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/4/'+$('#id_paciente_examen_rpr').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
@@ -470,7 +470,7 @@
 									{/if}
 									<input type="text" value="{$id_paciente_examen_vih}" id="id_paciente_examen_vih" name="id_paciente_examen_vih" class="hidden">
 								<button type="button" id="verExamen_{$id_vih}" style="{if $bo_finalizado != 1 and $examen_vih == 0}display: none{/if}" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/'+$('#id_paciente_examen_vih').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/4/'+$('#id_paciente_examen_vih').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
@@ -504,7 +504,7 @@
 								{/if}
 								<input type="text" value="{$id_paciente_examen_baciloscopia}" id="id_paciente_examen_baciloscopia" name="id_paciente_examen_baciloscopia" class="hidden">
 								<button type="button" id="verExamen_{$id_baciloscopia}" style="{if $bo_finalizado != 1 and $examen_baciloscopia == 0}display: none{/if}" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/'+$('#id_paciente_examen_baciloscopia').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/4/'+$('#id_paciente_examen_baciloscopia').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
@@ -594,7 +594,7 @@
 							{/if}
 							<input type="text" value="{$id_paciente_examen_pap}" id="id_paciente_examen_pap" name="id_paciente_examen_pap" class="hidden">
 							<button type="button" id="verExamen_{$id_pap}" style="{if $bo_finalizado != 1 and $examen_pap == 0}display: none{/if}" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/'+$('#id_paciente_examen_pap').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/4/'+$('#id_paciente_examen_pap').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-eye"></i> Ver Examen</button>
 							</div>
@@ -629,7 +629,7 @@
 									{/if}
 									<input type="text" value="{$id_paciente_examen_colesterol}" id="id_paciente_examen_colesterol" name="id_paciente_examen_colesterol" class="hidden">
 								<button type="button" id="verExamen_{$id_colesterol}" style="{if $bo_finalizado != 1 and $examen_colesterol == 0}display: none{/if}" 
-                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/'+$('#id_paciente_examen_colesterol').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
+                                        onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/4/'+$('#id_paciente_examen_colesterol').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
                                         class="btn btn-sm btn-info">                                        
                                     <i class="fa fa-eye"></i> Ver Examen</button>
                             </div>
@@ -723,7 +723,7 @@
 									{/if}
 									<input type="text" value="{$id_paciente_examen_mamografia}" id="id_paciente_examen_mamografia" name="id_paciente_examen_mamografia" class="hidden">
 									<button type="button" id="verExamen_{$id_mamografia}" style="{if $bo_finalizado != 1 and $examen_mamografia == 0}display: none{/if}" 
-											onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/1/'+$('#id_paciente_examen_mamografia').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
+											onClick="xModal.open('{$smarty.const.BASE_URI}/Laboratorio/buscar/4/'+$('#id_paciente_examen_mamografia').val()+'/', 'Agenda Examen número : {$id_paciente}', 85);" 
 											class="btn btn-sm btn-info">                                        
 										<i class="fa fa-eye"></i> Ver Examen</button>
 								</div>

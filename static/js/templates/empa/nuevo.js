@@ -547,6 +547,11 @@ $("#guardar").on('click', function (e) {
 			"name": 'gl_sector',
 			"value": 'NULL'
 		});
+	} else {
+		parametros.push({
+			"name": 'gl_sector',
+			"value": "'"+ $('#gl_sector').val() + "'"
+		});
 	}
 
 	if ($('#bo_embarazo_1').is(':checked')) {
