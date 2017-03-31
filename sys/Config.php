@@ -98,32 +98,38 @@ define('EMAIL_ADMIN','');
  * Credenciales para conexion a base de datos
  */
 
-if(ENVIROMENT == 'DEV'){//utilizando en ambniente DEV
+if(ENVIROMENT == 'DEV'){//utilizando en ambiente DEV
 	define('DB_HOST', '192.168.0.200');
 	define('DB_USER', 'usrmidas');
 	define('DB_PASS', 'Cosof20172017.,');
-        define('DB_NAME', 'prevencion');
+    define('DB_NAME', 'prevencion');
 	define('DB_PORT', '3306');
 }elseif(ENVIROMENT == 'LOCAL'){
 	define('DB_HOST', 'localhost');
 	define('DB_USER', 'root');
 	define('DB_PASS', '');
-//	define('DB_NAME', 'tickets2');
-        define('DB_NAME', 'prevencion');
+    define('DB_NAME', 'prevencion');
 	define('DB_PORT', '3306');
 }elseif(ENVIROMENT == 'TEST'){
-	define('DB_HOST', '192.168.10.113');
-	define('DB_USER', 'valparaiso');
-	define('DB_PASS', 'aSd452Fh67');
-	define('DB_NAME', 'finanzas_test');
+	define('DB_HOST', '');
+	define('DB_USER', '');
+	define('DB_PASS', '');
+	define('DB_NAME', '');
 	define('DB_PORT', '3306');
 }elseif(ENVIROMENT == 'PROD'){
-	define('DB_HOST', '192.168.10.113');
-	define('DB_USER', 'valparaiso');
-	define('DB_PASS', 'aSd452Fh67');
-	define('DB_NAME', 'finanzas');
+	define('DB_HOST', '');
+	define('DB_USER', '');
+	define('DB_PASS', '');
+	define('DB_NAME', 'prevencion');
 	define('DB_PORT', '3306');
 }
+//}elseif(ENVIROMENT == 'PROD'){
+//	define('DB_HOST', '192.168.10.113');
+//	define('DB_USER', 'valparaiso');
+//	define('DB_PASS', 'aSd452Fh67');
+//	define('DB_NAME', 'prevencion');
+//	define('DB_PORT', '3306');
+//}
 
 define('DB_CHAR', 'utf8');
 define('DB_TYPE', 'MYSQL');
