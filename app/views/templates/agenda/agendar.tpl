@@ -64,6 +64,7 @@
         <div class="box box-success">
 			
             <div class="box-body">
+				{if $reagendar == 1}
 				<div class="form-group">
                     <label class="control-label required col-sm-3">RUT persona toma examen</label>
                     <div class="col-sm-2">
@@ -80,6 +81,7 @@
                                {if $perfil == "7" or $accion == "1"}readonly{/if} />
                     </div>
                 </div>
+				{/if}
                 <div class="form-group">
                     <label class="control-label required col-sm-3">Fecha toma de examen</label>
 					<div class='col-sm-2'>

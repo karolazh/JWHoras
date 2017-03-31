@@ -3,7 +3,7 @@
 0 = POSITIVO
 1 = NEGATIVO
 -->
-{if $fc_resultado}
+{if $fc_resultado or $perfil != "3"}
 <label class="control-label required col-sm-3">Resultado examen</label>
 <label><input type="radio" name="gl_resultado" 
             id="gl_resultado_0" value="0" 
