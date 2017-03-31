@@ -30,7 +30,7 @@ var MantenedorEmt = Class({
             for (var i=0; i<arrayAgenda.length; i++) {
                 var subarrAgenda= arrayAgenda[i].split(',');
                 var titulo		= subarrAgenda[0];
-                var id			= subarrAgenda[3];
+                var id			= subarrAgenda[4];
                 var fecha		= "";
 
                 if (subarrAgenda[2] == "") {
@@ -39,7 +39,7 @@ var MantenedorEmt = Class({
                     fecha = subarrAgenda[1].toString() + 'T' + 
                             subarrAgenda[2].toString();
                 }
-                agenda[i] = { title: titulo, start: fecha, url: BASE_URI + "index.php/Laboratorio/buscar/4/"+id };
+                agenda[i] = { title: titulo, start: fecha, url: BASE_URI + "index.php/Especialista/ver/"+id };
             }
         }
         
@@ -56,7 +56,7 @@ var MantenedorEmt = Class({
             events		: agenda,
 			eventClick	: function(event) {
 				if (event.url) {
-					xModal.open(event.url, 'Agenda Examen', 85);
+					xModal.open(event.url, 'Agenda Especialista', 85);
 					return false;
 				}
 			}
@@ -75,7 +75,7 @@ var MantenedorEmt = Class({
             events		: agenda,
 			eventClick	: function(event) {
 				if (event.url) {
-					xModal.open(event.url, 'Agenda Examen', 85);
+					xModal.open(event.url, 'Agenda Especialista', 85);
 					return false;
 				}
 			},

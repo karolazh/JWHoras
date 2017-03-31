@@ -115,7 +115,8 @@ class Gestor extends Controller {
                         $hora = "";
                     }
 					$id_agenda_especialista	= $item->id_agenda_especialista;
-                    $arrAgendaEspecialista   = "$arrAgendaEspecialista $descripcion,$fecha,$hora,$id_agenda_especialista;";
+					$id_especialista	= $item->id_especialista;
+                    $arrAgendaEspecialista   = "$arrAgendaEspecialista $descripcion,$fecha,$hora,$id_agenda_especialista,$id_especialista;";
                 }
 			}
         }

@@ -422,7 +422,8 @@ class Agenda extends Controller {
                         $hora = "";
                     }
 					$id_agenda_especialista	= $item->id_agenda_especialista;
-                    $arrAgenda   = "$arrAgenda $descripcion,$fecha,$hora,$id_agenda_especialista;";
+					$id_especialista	= $item->id_especialista;
+                    $arrAgenda   = "$arrAgenda $descripcion,$fecha,$hora,$id_agenda_especialista,$id_especialista;";
                 }
 			}
         }
@@ -490,8 +491,8 @@ class Agenda extends Controller {
         $this->smarty->assign('arrHoraEspecialista', $arrHoraEspecialista);
         $this->smarty->assign('arrAgenda', $arrAgenda);
         $this->smarty->display('agenda/verEspecialista.tpl');
-		//$this->load->javascript(STATIC_FILES . "js/templates/especialista/agenda.js");
-		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/especialista/agenda.js");
+		//$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
 	}
 	
 }

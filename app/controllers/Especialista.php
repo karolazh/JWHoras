@@ -278,4 +278,16 @@ class Especialista extends Controller {
 		echo $json;
 	}
 	
+	public function ver(){
+		$parametros			= $this->request->getParametros();
+		$id_especialista	= $parametros[0];
+		$arrEspecialista = $this->_DAOPacienteAgendaEspecialista->getAllByIdEspecialista($id_especialista);
+		$this->smarty->assign('gl_nombre_toma', $arrEspecialista->row_0->gl_nombres_especialista);
+		$this->smarty->assign('gl_nombre_especialidad', $arrEspecialista->row_0->gl_especialidad);
+		$this->smarty->assign('fecha_agendada', $arrEspecialista->row_0->fecha_agenda);
+		$this->smarty->assign('hora_agendada', $arrEspecialista->row_0->hora_agenda);
+		$this->smarty->assign('gl_agenda_observacion', $arrEspecialista->row_0->gl_agenda_observacion);
+        $this->smarty->display('especialista/ver.tpl');
+	}
+	
 }
