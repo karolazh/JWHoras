@@ -173,89 +173,90 @@ class Laboratorio extends Controller {
     public function buscar() {
         $parametros			= $this->request->getParametros();
         $accion				= $parametros[0]; //1="Ver" //2="Editar" //3="ReAgendar"
-        $id_paciente_examen	= $parametros[1];
         $perfil				= $_SESSION['perfil'];
         
-        //Detalle de Examen
-        $detExamen = $this->_DAOPacienteExamen->getById($id_paciente_examen);
-        if (!is_null($detExamen)) {
-            $id_tipo_examen = $detExamen->id_tipo_examen;
-            $id_paciente    = $detExamen->id_paciente;
-            $id_laboratorio = $detExamen->id_laboratorio;
-            //guarda id_empa para validar origen de examen
-            if (!is_null($detExamen->id_empa)) {
-                $id_empa = $detExamen->id_empa;
-            } else {
-                $id_empa = "";
-            }
-            
-            if ($accion == "1") { //"Ver"
-                $rut_lab    = $detExamen->gl_rut_persona_toma;
-                $nombre_lab = $detExamen->gl_nombre_persona_toma;
-            } else if ($accion == "2" or $accion == "3"){ //"Editar" y "ReAgendar"
-                $rut_lab    = $_SESSION['rut'];
-                $nombre_lab = $_SESSION['nombre'];
-            }
-            
-            //Datos de Ingreso
-            $gl_folio            = $detExamen->gl_folio;
-            $fc_toma             = $detExamen->fc_toma;
-            $gl_hora_toma        = $detExamen->gl_hora_toma;
-            $gl_observacion_toma = $detExamen->gl_observacion_toma;
-            
-            //Datos de Registro
-            $gl_resultado_0 = "";
-            $gl_resultado_1 = "";
-            $fc_resultado   = $detExamen->fc_resultado;
-            if (($id_tipo_examen == 2) or ($id_tipo_examen == 3) or ($id_tipo_examen == 3)) {
-                if ($detExamen->gl_resultado == "P") {
-                    $gl_resultado_0 = "checked";
-                } else if ($detExamen->gl_resultado == "N") {
-                    $gl_resultado_1 = "checked";
-                }
-            } else {
-                if ($detExamen->gl_resultado == "N") {
-                    $gl_resultado_0 = "checked";
-                } else if ($detExamen->gl_resultado == "A") {
-                    $gl_resultado_1 = "checked";
-                }
-            }
-            $gl_resultado_descripcion = $detExamen->gl_resultado_descripcion;
-            $gl_resultado_indicacion  = $detExamen->gl_resultado_indicacion;
-            $gl_pad                   = $detExamen->gl_pad;
-            $gl_pas                   = $detExamen->gl_pas;
-            $gl_glicemia              = $detExamen->gl_glicemia;
-            $gl_colesterol            = $detExamen->gl_colesterol;
-			
-			//Combo Laboratorios
-			$arrLaboratorios = $this->_DAOLaboratorio->getLista();
-			//Combos Tipo Examen
-			$arrTipoExamen   = $this->_DAOTipoExamen->getLista();
-			
-			$this->smarty->assign("id_paciente_examen", $id_paciente_examen);
-			$this->smarty->assign("id_tipo_examen", $id_tipo_examen);
-			$this->smarty->assign("id_paciente", $id_paciente);
-			$this->smarty->assign("id_laboratorio", $id_laboratorio);
-            $this->smarty->assign("id_empa", $id_empa);
-			$this->smarty->assign("rut_lab", $rut_lab);
-			$this->smarty->assign("nombre_lab", $nombre_lab);
-			$this->smarty->assign("gl_folio", $gl_folio);
-			$this->smarty->assign("fc_toma", $fc_toma);
-			$this->smarty->assign("gl_hora_toma", $gl_hora_toma);
-			$this->smarty->assign("gl_observacion_toma", $gl_observacion_toma);
-			$this->smarty->assign("fc_resultado", $fc_resultado);
-			$this->smarty->assign("gl_resultado_0", $gl_resultado_0);
-			$this->smarty->assign("gl_resultado_1", $gl_resultado_1);
-			$this->smarty->assign("gl_resultado_descripcion", $gl_resultado_descripcion);
-			$this->smarty->assign("gl_resultado_indicacion", $gl_resultado_indicacion);
-            $this->smarty->assign("gl_pad", $gl_pad);
-            $this->smarty->assign("gl_pas", $gl_pas);
-            $this->smarty->assign("gl_glicemia", $gl_glicemia);
-            $this->smarty->assign("gl_colesterol", $gl_colesterol);
-			$this->smarty->assign("arrLaboratorios", $arrLaboratorios);
-			$this->smarty->assign("arrTipoExamen", $arrTipoExamen);
-        }
-        
+		if (!empty($parametros[1])){
+			$id_paciente_examen	= $parametros[1];
+			//Detalle de Examen
+			$detExamen = $this->_DAOPacienteExamen->getById($id_paciente_examen);
+			if (!is_null($detExamen)) {
+				$id_tipo_examen = $detExamen->id_tipo_examen;
+				$id_paciente    = $detExamen->id_paciente;
+				$id_laboratorio = $detExamen->id_laboratorio;
+				//guarda id_empa para validar origen de examen
+				if (!is_null($detExamen->id_empa)) {
+					$id_empa = $detExamen->id_empa;
+				} else {
+					$id_empa = "";
+				}
+
+				if ($accion == "1") { //"Ver"
+					$rut_lab    = $detExamen->gl_rut_persona_toma;
+					$nombre_lab = $detExamen->gl_nombre_persona_toma;
+				} else if ($accion == "2" or $accion == "3"){ //"Editar" y "ReAgendar"
+					$rut_lab    = $_SESSION['rut'];
+					$nombre_lab = $_SESSION['nombre'];
+				}
+
+				//Datos de Ingreso
+				$gl_folio            = $detExamen->gl_folio;
+				$fc_toma             = $detExamen->fc_toma;
+				$gl_hora_toma        = $detExamen->gl_hora_toma;
+				$gl_observacion_toma = $detExamen->gl_observacion_toma;
+
+				//Datos de Registro
+				$gl_resultado_0 = "";
+				$gl_resultado_1 = "";
+				$fc_resultado   = $detExamen->fc_resultado;
+				if (($id_tipo_examen == 2) or ($id_tipo_examen == 3) or ($id_tipo_examen == 3)) {
+					if ($detExamen->gl_resultado == "P") {
+						$gl_resultado_0 = "checked";
+					} else if ($detExamen->gl_resultado == "N") {
+						$gl_resultado_1 = "checked";
+					}
+				} else {
+					if ($detExamen->gl_resultado == "N") {
+						$gl_resultado_0 = "checked";
+					} else if ($detExamen->gl_resultado == "A") {
+						$gl_resultado_1 = "checked";
+					}
+				}
+				$gl_resultado_descripcion = $detExamen->gl_resultado_descripcion;
+				$gl_resultado_indicacion  = $detExamen->gl_resultado_indicacion;
+				$gl_pad                   = $detExamen->gl_pad;
+				$gl_pas                   = $detExamen->gl_pas;
+				$gl_glicemia              = $detExamen->gl_glicemia;
+				$gl_colesterol            = $detExamen->gl_colesterol;
+
+				//Combo Laboratorios
+				$arrLaboratorios = $this->_DAOLaboratorio->getLista();
+				//Combos Tipo Examen
+				$arrTipoExamen   = $this->_DAOTipoExamen->getLista();
+
+				$this->smarty->assign("id_paciente_examen", $id_paciente_examen);
+				$this->smarty->assign("id_tipo_examen", $id_tipo_examen);
+				$this->smarty->assign("id_paciente", $id_paciente);
+				$this->smarty->assign("id_laboratorio", $id_laboratorio);
+				$this->smarty->assign("id_empa", $id_empa);
+				$this->smarty->assign("rut_lab", $rut_lab);
+				$this->smarty->assign("nombre_lab", $nombre_lab);
+				$this->smarty->assign("gl_folio", $gl_folio);
+				$this->smarty->assign("fc_toma", $fc_toma);
+				$this->smarty->assign("gl_hora_toma", $gl_hora_toma);
+				$this->smarty->assign("gl_observacion_toma", $gl_observacion_toma);
+				$this->smarty->assign("fc_resultado", $fc_resultado);
+				$this->smarty->assign("gl_resultado_0", $gl_resultado_0);
+				$this->smarty->assign("gl_resultado_1", $gl_resultado_1);
+				$this->smarty->assign("gl_resultado_descripcion", $gl_resultado_descripcion);
+				$this->smarty->assign("gl_resultado_indicacion", $gl_resultado_indicacion);
+				$this->smarty->assign("gl_pad", $gl_pad);
+				$this->smarty->assign("gl_pas", $gl_pas);
+				$this->smarty->assign("gl_glicemia", $gl_glicemia);
+				$this->smarty->assign("gl_colesterol", $gl_colesterol);
+				$this->smarty->assign("arrLaboratorios", $arrLaboratorios);
+				$this->smarty->assign("arrTipoExamen", $arrTipoExamen);
+			}
+		}
 		$this->smarty->assign("perfil", $perfil);
 		$this->smarty->assign("accion", $accion);
         $this->smarty->display("laboratorio/datosExamen.tpl");
