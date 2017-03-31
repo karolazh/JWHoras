@@ -93,11 +93,8 @@ class Agenda extends Controller {
                 $run = $detPaciente->gl_run_pass;
             }
             $nombres = $detPaciente->gl_nombres.' '.$detPaciente->gl_apellidos;
-            if (!is_null($detPaciente->fc_nacimiento)) {
-                $edad = Fechas::calcularEdadInv($detPaciente->fc_nacimiento);
-            } else {
-                $edad = "";
-            }
+            $edad = Fechas::calcularEdadInv($detPaciente->fc_nacimiento);
+			
             if ($detPaciente->gl_sexo == "F") {
                 $sexo = "FEMENINO";
             } else {
@@ -435,11 +432,8 @@ class Agenda extends Controller {
                 $run = $detPaciente->gl_run_pass;
             }
             $nombres = $detPaciente->gl_nombres.' '.$detPaciente->gl_apellidos;
-            if (!is_null($detPaciente->fc_nacimiento)) {
-                $edad = Fechas::calcularEdadInv($detPaciente->fc_nacimiento);
-            } else {
-                $edad = "";
-            }
+            $edad = Fechas::calcularEdadInv($detPaciente->fc_nacimiento);
+            
             if ($detPaciente->gl_sexo == "F") {
                 $sexo = "FEMENINO";
             } else {
