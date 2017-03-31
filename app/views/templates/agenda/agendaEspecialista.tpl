@@ -34,7 +34,7 @@
         <div class="top-spaced"></div>
         
         <div class="panel-body">
-            <div id='calendar'></div>
+            <div id='calendarEspecialista'></div>
         </div>
 
         <div class="top-spaced"></div>

@@ -1,7 +1,27 @@
+
+var MantenedorEmt = Class({
+
+	loadGrid : function(){
+		setTimeout(this.bindMapa,1000);
+	},
+
+    bindMapa : function(){        
+		var mapa = new MapaFormulario("map");
+		mapa.seteaIcono("static/images/markers/femenino.png");
+		mapa.seteaZoom(17);
+		mapa.inicio();
+		mapa.cargaMapa();
+		mapa.setMarkerInputs();
+    }
+});
+
 	$(document).ready(function() {
         
+		var listado = new MantenedorEmt();
+		listado.loadGrid();
+		
         var agenda = new Array();
-        var arrAgenda = $('#arrAgendaExamenes').val();
+        var arrAgenda = $('#arrAgenda').val();
         
         if (arrAgenda != "") {
             arrAgenda = arrAgenda.substring(0,arrAgenda.length-1);
@@ -23,7 +43,7 @@
             }
         }
         
-        $('#calendarExamenes').fullCalendar({
+        $('#calendarEspecialista').fullCalendar({
 			header: {
 				left	: 'prev,next today',
 				center	: 'title',

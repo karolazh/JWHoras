@@ -148,7 +148,7 @@ class Agenda extends Controller {
         }
         
         $this->smarty->assign('arrExamenes', $arrExamenes);
-        $this->smarty->assign('arrAgenda', $arrAgenda);
+        $this->smarty->assign('arrAgendaExamenes', $arrAgenda);
         $this->smarty->display('agenda/ver.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
 	}
@@ -195,7 +195,7 @@ class Agenda extends Controller {
         }
         
         $this->smarty->assign('arrExamenes', $arrExamenes);
-        $this->smarty->assign('arrAgenda', $arrAgenda);
+        $this->smarty->assign('arrAgendaExamenes', $arrAgenda);
         $this->_display('agenda/agendaLaboratorio.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
 		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/fullcalendar.min.js");

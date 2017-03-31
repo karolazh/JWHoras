@@ -135,7 +135,7 @@
 				</div>
 				{/if}
 				
-		{if $accion != "3" and $verEmpa != "1"}
+		{if ($accion != "3" and $verEmpa != "1") or ($verEmpa == 1 and $fc_resultado)}
                 <div class="form-group">
                     <label class="control-label required col-sm-3">&nbsp;</label>
                     <div class="col-sm-2">&nbsp;</div>

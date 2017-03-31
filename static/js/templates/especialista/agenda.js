@@ -19,11 +19,11 @@
                     fecha = subarrAgenda[1].toString() + 'T' + 
                             subarrAgenda[2].toString();
                 }
-                agenda[i] = { title: titulo, start: fecha, url: BASE_URI + "index.php/Laboratorio/buscar/1/"+id };
+                agenda[i] = { title: titulo, start: fecha, url: BASE_URI + "index.php/Laboratorio/buscar/4/"+id };
             }
         }
         
-        $('#calendar').fullCalendar({
+        $('#calendarEspecialista').fullCalendar({
 			header: {
 				left	: 'prev,next today',
 				center	: 'title',

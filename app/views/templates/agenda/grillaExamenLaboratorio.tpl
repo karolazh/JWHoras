@@ -9,8 +9,10 @@
                     <th align="center" width="10%">Fecha Asignado</th>
                     <th align="center" width="10%">Fecha Toma</th>
                     <th align="center" width="30%">Examen</th>
+					{if $gestor != "1"}
                     <th align="center" width="30%">RUT / Pasaporte</th>
                     <th align="center" width="30%">Paciente</th>
+					{/if}
                     <th align="center" width="10%">Fecha Resultado Examen</th>
                     <th align="center" width="5%">Resultado</th>
                     <th align="center" width="5%">Acciones</th>
@@ -39,8 +41,10 @@
                         {/if}
                     </td>
                     <td style="{$color}">{$exa->gl_nombre_examen}</td>
+					{if $gestor != "1"}
                     <td style="{$color}">{$exa->gl_identificacion}</td>
                     <td style="{$color}">{$exa->gl_nombres} {$exa->gl_apellidos}</td>
+					{/if}
                     <td style="{$color}">{$exa->fc_resultado}</td>
                     <td style="{$color}" align="center">
 						{if $exa->gl_resultado == "N"}

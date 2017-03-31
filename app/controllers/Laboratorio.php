@@ -174,6 +174,7 @@ class Laboratorio extends Controller {
 	 */
     public function buscar() {
         $parametros			= $this->request->getParametros();
+		$verEmpa			= 0;
         $accion				= $parametros[0]; //1="Ver" //2="Editar" //3="ReAgendar"
 		if ($parametros[0] == 4){
 			$accion = 1;

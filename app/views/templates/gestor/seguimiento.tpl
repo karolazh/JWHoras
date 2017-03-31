@@ -150,7 +150,7 @@
 							<a href="#agendaexamenes" aria-controls="agendaexamenes" role="tab" data-toggle="tab">Agenda Exámenes</a>
 						</li>
 						<li role="presentation">
-							<a href="#mapa" aria-controls="mapa" role="tab" data-toggle="tab" onclick="Home.initMapaGestor();">Mapa</a>
+							<a href="#mapa" aria-controls="mapa" role="tab" data-toggle="tab">Mapa</a>
 						</li>
 					</ul>
 					
@@ -174,7 +174,7 @@
 									</div>
 
 									<div class="form-group">
-										<div id='calendar'></div>
+										<div id='calendarEspecialista'></div>
 									</div>
 								</div>
 							</div>
@@ -186,29 +186,36 @@
 								<legend>Agenda Exámenes</legend>
 								<div class="row">
 									<div class="form-group">
-										{include file='agenda/grillaHoraEspecialista.tpl'}
+										{include file='agenda/grillaExamenLaboratorio.tpl'}
 									</div>
 
 									<div class="form-group">
-										<input type="text" value="{$arrAgenda}" id="arrAgenda" name="arrAgenda" class="hidden" />
+										<input type="text" value="{$arrAgendaExamenes}" id="arrAgendaExamenes" name="arrAgendaExamenes" class="hidden" />
 										<div class="panel-heading">
 											Calendario
 										</div>
 									</div>
 
 									<div class="form-group">
-										<div id='calendar'></div>
+										<div id='calendarExamenes'></div>
 									</div>
 								</div>
 							</div>
 						</div>
 
 						<div role="tabpanel" class="tab-pane" id="mapa">
-							<div class="col-xs-12">
-								<legend>Mapa</legend>
-								<div id="mapa_gestor" style="height: 600px;" class="col-xs-12"></div>
-								<input type="hidden" name="latitud" id="latitud" value="-33.04864"/>
-								<input type="hidden" name="longitud" id="longitud" value="-71.613353"/>
+							<div class="col-md-3"></div>
+							<div class="col-md-6">
+								<div class="col-sm-6 col-md-12">
+									<div id="map" data-editable="0" style="width:100%;height:300px;"></div>
+									<div class="col-sm-3">
+										<input type="text" name="gl_latitud" id="gl_latitud" value="{$latitud}" placeholder="latitud" class="form-control hidden"/>
+									</div>
+									<div class="col-sm-3">
+										<input type="text" name="gl_longitud"  id="gl_longitud" value="{$longitud}" placeholder="Longitud" class="form-control hidden"/>
+									</div>					
+								</div>
+
 							</div>
 						</div>
 
@@ -216,18 +223,6 @@
 							
 							
 				</div>
-			</div>
-						
-						<div class="form-group col-sm-11" align="right">
-							<button type="button" id="guardar" class="btn btn-success">
-								<i class="fa fa-save"></i>  Guardar
-							</button>&nbsp;
-							<button type="button" id="cancelar"  class="btn btn-default" 
-									onclick="location.href = history.back()">
-								<i class="fa fa-remove"></i>  Cancelar
-							</button>
-						</div>	
-			</div>
 		</div>
 
 	</section>

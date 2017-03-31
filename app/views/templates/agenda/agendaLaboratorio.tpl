@@ -26,7 +26,7 @@
     <div class="top-spaced"></div>
     
     <div class="panel panel-primary">
-        <input type="text" value="{$arrAgenda}" id="arrAgenda" name="arrAgenda" class="hidden" />
+        <input type="text" value="{$arrAgendaExamenes}" id="arrAgendaExamenes" name="arrAgendaExamenes" class="hidden" />
         <div class="panel-heading">
             Calendario
         </div>
@@ -34,7 +34,7 @@
         <div class="top-spaced"></div>
         
         <div class="panel-body">
-            <div id='calendar'></div>
+            <div id='calendarExamenes'></div>
         </div>
 
         <div class="top-spaced"></div>

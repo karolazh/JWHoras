@@ -33,6 +33,7 @@ class Gestor extends Controller {
 	protected $_DAOPacienteAgendaEspecialista;
 	protected $_DAOPacienteDireccion;
 	protected $_DAOPacienteAlarma;
+	protected $_DAOPacienteExamen;
 
 	function __construct() {
 		parent::__construct();
@@ -48,6 +49,7 @@ class Gestor extends Controller {
 		$this->_DAOPacienteDireccion			= $this->load->model("DAOPacienteDireccion");
 		$this->_DAOPacienteAgendaEspecialista	= $this->load->model("DAOPacienteAgendaEspecialista");
 		$this->_DAOPacienteAlarma				= $this->load->model("DAOPacienteAlarma");
+		$this->_DAOPacienteExamen				= $this->load->model("DAOPacienteExamen");
 	}
 
 	/**
@@ -99,8 +101,8 @@ class Gestor extends Controller {
         //Grilla Horas Especialistas x Paciente
         $arrHoraEspecialista = $this->_DAOPacienteAgendaEspecialista->getAllByIdPaciente($id_paciente);
 		
-		//Genera string de fechas pa calendario
-        $arrAgenda   = "";
+		//Genera string de fechas para calendario Horas Especialistas
+        $arrAgendaEspecialista   = "";
         if (!is_null($arrHoraEspecialista)) {
             foreach($arrHoraEspecialista as $item){
                 if ($item->id_agenda_especialista != 0) {
@@ -113,14 +115,36 @@ class Gestor extends Controller {
                         $hora = "";
                     }
 					$id_agenda_especialista	= $item->id_agenda_especialista;
-                    $arrAgenda   = "$arrAgenda $descripcion,$fecha,$hora,$id_agenda_especialista;";
+                    $arrAgendaEspecialista   = "$arrAgendaEspecialista $descripcion,$fecha,$hora,$id_agenda_especialista;";
+                }
+			}
+        }
+		
+		//Grilla Examenes x Paciente
+		$arrExamenes     = $this->_DAOPacienteExamen->getByIdPaciente($id_paciente);
+        
+		//Genera string de fechas para calendario Examenes
+		$arrAgendaExamenes		= "";
+        if (!is_null($arrExamenes)) {
+            foreach($arrExamenes as $item){
+                if ($item->id_paciente_examen != 0) {
+                    $descripcion = "Toma Examen ". $item->gl_nombre_examen;
+                    $fecha = $item->fc_toma_calendar;
+
+                    if (!is_null($item->gl_hora_toma)){
+                        $hora = $item->gl_hora_toma;                    
+                    } else {
+                        $hora = "";
+                    }
+					$id_paciente_examen	= $item->id_paciente_examen;
+                    $arrAgendaExamenes = "$arrAgendaExamenes $descripcion,$fecha,$hora,$id_paciente_examen;";
                 }
 			}
         }
 		
 		//Cargar Datos Paciente
 		$id_empa		= $this->_DAOEmpa->getByIdPaciente($id_paciente);
-		$registro		= $this->_DAOPaciente->getById($id_paciente);
+		$registro		= $this->_DAOPaciente->verInfoById($id_paciente);
 		$direccion		= $this->_DAOPacienteDireccion->getByIdPaciente($id_paciente);
 		$alarmas		= $this->_DAOPacienteAlarma->getByIdPaciente($id_paciente);
 		$edad			= Fechas::calcularEdadInv($registro->fc_nacimiento);
@@ -136,6 +160,8 @@ class Gestor extends Controller {
 		} else {
 			$this->smarty->assign("gl_rut", $registro->gl_run_pass);
 		}
+		$this->smarty->assign('latitud', $registro->gl_latitud);
+        $this->smarty->assign('longitud', $registro->gl_longitud);
 		$this->smarty->assign("id_paciente", $id_paciente);
 		$this->smarty->assign("id_empa", $id_empa->id_empa);
 		$this->smarty->assign("gl_nombres", $registro->gl_nombres);
@@ -149,14 +175,17 @@ class Gestor extends Controller {
 		$this->smarty->assign("alarmas", $alarmas);
 		$this->smarty->assign('mostrar_agenda_paciente', $mostrar_agenda_paciente);
 		$this->smarty->assign('arrHoraEspecialista', $arrHoraEspecialista);
-        $this->smarty->assign('arrAgenda', $arrAgenda);
+        $this->smarty->assign('arrAgenda', $arrAgendaEspecialista);
+		$this->smarty->assign('arrExamenes', $arrExamenes);
+        $this->smarty->assign('arrAgendaExamenes', $arrAgendaExamenes);
+        $this->smarty->assign('gestor', 1);
 		
 		$this->_display('gestor/seguimiento.tpl');
 		$this->load->javascript(STATIC_FILES . "js/templates/agenda/agenda.js");
+		$this->load->javascript(STATIC_FILES . "js/templates/gestor/seguimiento.js");
 		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/fullcalendar.min.js");
 		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/locale/es.js");
 		$this->load->javascript(STATIC_FILES . "template/plugins/fullcalendar/lib/moment.min.js");
-		$this->load->javascript(STATIC_FILES.'js/templates/home/home.js');
 	}
 	
 }
