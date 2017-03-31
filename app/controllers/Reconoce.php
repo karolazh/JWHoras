@@ -1,25 +1,31 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Maneja los casos de violencia a la mujer
-* Plataforma        : !PHP
-* Creacion          : 03/03/2017
-* @name             Reconoce.php
-* @version          1.0
-* @author           David Guzmán <david.guzman@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<david.guzman@cosof.cl>	07-03-2017	Function identificarAgresor mejoras,
-*<orlando.vazquez@cosof.cl>	08-03-2017	Agregados Eventos
-*-----------------------------------------------------------------------------
-******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Maneja los casos de violencia a la mujer
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 03/03/2017
+ * 
+ * @name             Reconoce.php
+ * 
+ * @version          1.0
+ *
+ * @author           David Guzmán <david.guzman@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <david.guzman@cosof.cl>      07-03-2017  Function identificarAgresor mejoras,
+ * 
+ * <orlando.vazquez@cosof.cl>   08-03-2017  Agregados Eventos
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Reconoce extends Controller {
     
     protected $_DAOPaciente;

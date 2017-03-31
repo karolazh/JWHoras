@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_paciente_agresor
-* Plataforma        : !PHP
-* Creacion          : 01/03/2017
-* @name             DAOPacienteAgresor.php
-* @version          1.0
-* @author           David Guzmán <david.guzman@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<david.guzman@cosof.cl>	07-03-2017	insertarAgresor()
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_paciente_agresor
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 01/03/2017
+ * 
+ * @name             DAOPacienteAgresor.php
+ * 
+ * @version          1.0
+ *
+ * @author           David Guzmán <david.guzman@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <david.guzman@cosof.cl>      07-03-2017  insertarAgresor()
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOPacienteAgresor extends Model{
 
     protected $_tabla			= "pre_paciente_agresor";

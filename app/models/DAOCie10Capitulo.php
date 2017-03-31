@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_cie10_capitulo
-* Plataforma        : !PHP
-* Creacion          : 21/03/2017
-* @name             DAOCie10Capitulo.php
-* @version          1.0
-* @author           David Guzmán <david.guzman@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<david.guzman@cosof.cl>	21/03/2017	DAOCie10Capitulo
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_cie10_capitulo
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 21/03/2017
+ * 
+ * @name             DAOCie10Capitulo.php
+ * 
+ * @version          1.0
+ *
+ * @author           David Guzmán <david.guzman@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <david.guzman@cosof.cl>      21/03/2017  DAOCie10Capitulo
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOCie10Capitulo extends Model{
 
     protected $_tabla           = "pre_cie10_1_capitulo";

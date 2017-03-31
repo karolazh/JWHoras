@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_laboratorio
-* Plataforma        : !PHP
-* Creacion          : 13/03/2017
-* @name             DAOLaboratorio.php
-* @version          1.0
-* @author           Carolina Zamora H. <carolina.zamora@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_laboratorio
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 13/03/2017
+ * 
+ * @name             DAOLaboratorio.php
+ * 
+ * @version          1.0
+ *
+ * @author           Carolina Zamora H. <carolina.zamora@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOLaboratorio extends Model{
 
     protected $_tabla           = "pre_laboratorio";

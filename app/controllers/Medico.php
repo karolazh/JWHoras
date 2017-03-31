@@ -1,24 +1,29 @@
 <?php
-
 /**
-******************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Controller para las funciones del ROL Medico
-* Plataforma        : !PHP
-* Creacion          : 08/03/2017
-* @name             Medico.php
-* @version          1.0
-* @author           Victor Retamal <victor.retamal@cosof.cl>
-* =============================================================================
-* !ControlCambio
-* --------------
-* !cProgramador				!cFecha		!cDescripcion 
-* -----------------------------------------------------------------------------
-*<orlando.vazquez@cosof.cl>	08-03-2017	Agregado Evento
-* -----------------------------------------------------------------------------
-******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controller para las funciones del ROL Medico
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 08/03/2017
+ * 
+ * @name             Medico.php
+ * 
+ * @version          1.0
+ *
+ * @author           Victor Retamal <victor.retamal@cosof.co>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <orlando.vazquez@cosof.cl>	08-03-2017	Agregado Evento
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Medico extends Controller {
 
 	protected $_Evento;

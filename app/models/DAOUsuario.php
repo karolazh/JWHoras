@@ -1,25 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_usuario
-* Plataforma        : !PHP
-* Creacion          : 20/02/2017
-* @name             DAOUsuario.php
-* @version          1.0
-* @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<victor.retamal@cosof.cl>	27-02-2017	Add getLogin(), getLoginMidas() y registro_login()
-*
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_usuario
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 20/02/2017
+ * 
+ * @name             DAOUsuario.php
+ * 
+ * @version          1.0
+ *
+ * @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <victor.retamal@cosof.cl>	27-02-2017	Add getLogin(), getLoginMidas() y registro_login()
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOUsuario extends Model {
 
     protected $_tabla			= "pre_usuario";

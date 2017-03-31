@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_paciente_examen
-* Plataforma        : !PHP
-* Creacion          : 22/02/2017
-* @name             DAOPacienteExamen.php
-* @version          1.0
-* @author           Carolina Zamora <carolina.zamora@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_paciente_examen
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 22/02/2017
+ * 
+ * @name             DAOPacienteExamen.php
+ * 
+ * @version          1.0
+ *
+ * @author           Carolina Zamora <carolina.zamora@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOPacienteExamen extends Model{
 
     protected $_tabla           = "pre_paciente_examen";

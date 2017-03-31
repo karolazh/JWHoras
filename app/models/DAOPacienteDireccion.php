@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Modelo para Tabla pre_paciente_direccion
-* Plataforma        : !PHP
-* Creacion          : 07/03/2017
-* @name             DAOPacienteDireccion.php
-* @version          1.0
-* @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<david.guzman@cosof.cl>	07-03-2017	getByIdPaciente()
-*-----------------------------------------------------------------------------
-*****************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Modelo para Tabla pre_paciente_direccion
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 07/03/2017
+ * 
+ * @name             DAOPacienteDireccion.php
+ * 
+ * @version          1.0
+ *
+ * @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <david.guzman@cosof.cl>      07-03-2017  getByIdPaciente()
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class DAOPacienteDireccion extends Model {
 
     protected $_tabla			= "pre_paciente_direccion";

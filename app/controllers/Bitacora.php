@@ -1,24 +1,29 @@
 <?php
-
 /**
-*******************************************************************************
-* Sistema          : PREVENCION DE FEMICIDIOS
-* Descripcion      : Controller para Bitácora de Paciente
-* Plataforma       : !PHP
-* Creacion         : 09/03/2017
-* @name            Bitacora.php
-* @version         1.0
-* @author          Carolina Zamora <carolina.zamora@cosof.cl>
-* =============================================================================
-* !ControlCambio
-* --------------
-* !cProgramador				!cFecha		!cDescripcion 
-* -----------------------------------------------------------------------------
-* 
-* -----------------------------------------------------------------------------
-*******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controller para Bitácora de Paciente
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 09/03/2017
+ * 
+ * @name             Bitacora.php
+ * 
+ * @version          1.0
+ *
+ * @author           Carolina Zamora <carolina.zamora@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Bitacora extends Controller {
 
 	protected $_DAOPaciente;

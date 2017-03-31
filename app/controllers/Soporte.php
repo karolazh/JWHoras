@@ -1,24 +1,29 @@
 <?php
-
 /**
-******************************************************************************
-* Sistema			: PREVENCION DE FEMICIDIOS
-* Descripcion		: Controller para Registro de Soporte
-* Plataforma		: !PHP
-* Creacion			: 20/02/2017
-* @name				Soporte.php
-* @version			1.0
-* @author			Domingo Cortez <domingo.cortez@cosof.cl>
-* =============================================================================
-* !ControlCambio
-* --------------
-* !cProgramador				!cFecha		!cDescripcion 
-* -----------------------------------------------------------------------------
-* <david.guzman@cosof.cl>	25-02-2017	Enviar RUT del usuario
-* -----------------------------------------------------------------------------
-*******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controller para Registro de Soporte
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 20/02/2017
+ * 
+ * @name             Soporte.php
+ * 
+ * @version          1.0
+ *
+ * @author           Domingo Cortez <domingo.cortez@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <david.guzman@cosof.cl>	25-02-2017	Enviar RUT del usuario
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Soporte extends Controller{
 
     protected $_wsdl;

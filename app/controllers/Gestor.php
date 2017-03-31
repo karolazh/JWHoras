@@ -1,24 +1,29 @@
 <?php
-
 /**
-******************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Controller para las funciones del ROL Gestor
-* Plataforma        : !PHP
-* Creacion          : 20/03/2017
-* @name             Gestor.php
-* @version          1.0
-* @author           David Guzmán <david.guzman@cosof.cl>
-* =============================================================================
-* !ControlCambio
-* --------------
-* !cProgramador				!cFecha		!cDescripcion 
-* -----------------------------------------------------------------------------
-*<david.guzman@cosof.cl>		29-03-2017	seguimiento
-* -----------------------------------------------------------------------------
-*******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controller para las funciones del ROL Gestor
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 20/03/2017
+ * 
+ * @name             Gestor.php
+ * 
+ * @version          1.0
+ *
+ * @author           David Guzmán <david.guzman@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <david.guzman@cosof.cl>      29-03-2017	seguimiento
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Gestor extends Controller {
 
 	protected $_Evento;

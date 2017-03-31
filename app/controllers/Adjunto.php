@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Controlador de archivos adjuntos
-* Plataforma        : !PHP
-* Creacion          : 13/02/2017
-* @name             Adjunto.php
-* @version          1.0
-* @author           Victor Retamal <victor.retamal@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<orlando.vazquez@cosof.cl>	06-03-2017	Modificadas referencias de DAO's y agregada información de autor.
-*
-*-----------------------------------------------------------------------------
-******************************************************************************
-*/
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controlador de archivos adjuntos
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 13/02/2017
+ * 
+ * @name             Adjunto.php
+ * 
+ * @version          1.0
+ *
+ * @author           Victor Retamal <victor.retamal@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <orlando.vazquez@cosof.cl>	06-03-2017	Modificadas referencias de DAO's y agregada información de autor.
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Adjunto extends Controller{
 
     protected $_DAOAdjunto;

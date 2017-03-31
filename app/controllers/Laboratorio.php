@@ -1,24 +1,29 @@
 <?php
-
 /**
-*******************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Controller para Exámenes de Pacientes
-* Plataforma        : !PHP
-* Creacion          : 10/03/2017
-* @name             Laboratorio.php
-* @version          1.0
-* @author           Carolina Zamora <carolina.zamora@cosof.cl>
-* =============================================================================
-* !ControlCambio
-* --------------
-* !cProgramador				!cFecha		!cDescripcion 
-* -----------------------------------------------------------------------------
-* 
-* -----------------------------------------------------------------------------
-*******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controller para Laboratorio de Exámenes de Pacientes
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 10/03/2017
+ * 
+ * @name             Laboratorio.php
+ * 
+ * @version          1.0
+ *
+ * @author           Carolina Zamora <carolina.zamora@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Laboratorio extends Controller {
     
     protected $_Evento;

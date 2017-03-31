@@ -1,24 +1,29 @@
 <?php
-
 /**
-******************************************************************************
-* Sistema			: PREVENCION DE FEMICIDIOS
-* Descripcion		: Controller para Buscar dentro del sistema
-* Plataforma		: !PHP
-* Creacion			: 27/03/2017
-* @name				Buscar.php
-* @version			1.0
-* @author			Victor Retamal <victor.retamal@cosof.co>
-* =============================================================================
-* !ControlCambio
-* --------------
-* !cProgramador				!cFecha		!cDescripcion 
-* -----------------------------------------------------------------------------
-*
-* -----------------------------------------------------------------------------
-*******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controller para Buscar dentro del sistema
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 27/03/2017
+ * 
+ * @name             Buscar.php
+ * 
+ * @version          1.0
+ *
+ * @author           Victor Retamal <victor.retamal@cosof.co>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Buscar extends Controller {
 
 	protected $_Evento;

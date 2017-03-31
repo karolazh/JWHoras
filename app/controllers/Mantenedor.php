@@ -1,24 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Controlador de Mantenedor
-* Plataforma        : !PHP
-* Creacion          : 15/03/2017
-* @name             Mantenedor.php
-* @version          1.0
-* @author           Victor Retamal <victor.retamal@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*
-*-----------------------------------------------------------------------------
-******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controlador de Mantenedor
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 15/03/2017
+ * 
+ * @name             Mantenedor.php
+ * 
+ * @version          1.0
+ *
+ * @author           Victor Retamal <victor.retamal@cosof.co>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ *
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Mantenedor extends Controller{
 
     protected $_DAOPerfil;

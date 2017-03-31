@@ -1,25 +1,31 @@
 <?php
-
 /**
-******************************************************************************
-* Sistema			: PREVENCION DE FEMICIDIOS
-* Descripcion		: Controller para Login
-* Plataforma		: !PHP
-* Creacion			: 20/02/2017
-* @name				Login.php
-* @version			1.0
-* @author			Victor Retamal <victor.retamal@cosof.co>
-* =============================================================================
-* !ControlCambio
-* --------------
-* !cProgramador				!cFecha		!cDescripcion 
-* -----------------------------------------------------------------------------
-*<orlando.vazquezl@cosof.cl>	06-03-2017	Modificación referencias a DAO's de acuerdo a nueva estructura de BD.
-*<victor.retamal@cosof.cl>		17-03-2017	Add id_usuario_original e id_laboratorio a la session
-* -----------------------------------------------------------------------------
-*******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controller para Login
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 20/02/2017
+ * 
+ * @name             Login.php
+ * 
+ * @version          1.0
+ *
+ * @author           Victor Retamal <victor.retamal@cosof.co>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <orlando.vazquezl@cosof.cl>  06-03-2017  Modificación referencias a DAO's de acuerdo a nueva estructura de BD.
+ *
+ * <victor.retamal@cosof.cl>    17-03-2017  Add id_usuario_original e id_laboratorio a la session 
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 class Login extends Controller {
 
     protected $_DAOUsuario;

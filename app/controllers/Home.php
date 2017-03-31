@@ -1,25 +1,29 @@
 <?php
-
 /**
-*****************************************************************************
-* Sistema           : PREVENCION DE FEMICIDIOS
-* Descripcion       : Controller para Registro de Paciente
-* Plataforma        : !PHP
-* Creacion          : 14/02/2017
-* @name             Home.php
-* @version          1.0
-* @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
-*=============================================================================
-*!ControlCambio
-*--------------
-*!cProgramador				!cFecha		!cDescripcion 
-*-----------------------------------------------------------------------------
-*<david.guzman@cosof.cl>	06-03-2017	modificacion nombres DAO y funciones
-*
-*-----------------------------------------------------------------------------
-******************************************************************************
-*/
-
+ ******************************************************************************
+ * Sistema           : PREVENCION DE FEMICIDIOS
+ * 
+ * Descripcion       : Controller para Dashboard
+ *
+ * Plataforma        : !PHP
+ * 
+ * Creacion          : 14/02/2017
+ * 
+ * @name             Home.php
+ * 
+ * @version          1.0
+ *
+ * @author           Orlando Vazquez <orlando.vazquez@cosof.cl>
+ * 
+ ******************************************************************************
+ * !ControlCambio
+ * --------------
+ * !cProgramador				!cFecha		!cDescripcion 
+ * ----------------------------------------------------------------------------
+ * <david.guzman@cosof.cl>      06-03-2017	modificacion nombres DAO y funciones
+ * ----------------------------------------------------------------------------
+ * ****************************************************************************
+ */
 require_once(APP_PATH . "libs/Helpers/View/Grid.php");
 
 class Home extends Controller{
