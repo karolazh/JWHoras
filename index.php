@@ -27,7 +27,7 @@ require_once SYS_PATH . 'Model.php';
 //require_once SYS_PATH . 'View.php';
 require_once SYS_PATH . 'Database.php';
 require_once APP_PATH . 'libs/FirePHPCore/fb.php';
-require_once APP_PATH . 'libs/getData.php';
+//require_once APP_PATH . 'libs/getData.php';
 require_once APP_PATH . 'libs/encriptar.php';
 require_once APP_PATH . 'libs/gPoint.php';
 if (phpversion() < 5) {
